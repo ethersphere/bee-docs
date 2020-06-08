@@ -13,6 +13,11 @@ pygmentsUseClasses = true
 summaryLength = 30
 
 [[menu.main]]
+    name = "Bee Docs"
+    url = "/bee-docs/"
+    weight = 1
+
+[[menu.main]]
     name = "Home"
     url = "/"
     weight = 1
@@ -21,6 +26,7 @@ summaryLength = 30
     name = "Docs"
     url = "/docs/"
     weight = 2
+
 
 [params]
   google_analytics_id=""
