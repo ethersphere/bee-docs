@@ -1,5 +1,5 @@
 ---
-title: 'Running a node'
+title: 'Installation'
 weight: 2
 ---
 

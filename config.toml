@@ -17,15 +17,15 @@ summaryLength = 30
     url = "/bee-docs/"
     weight = 1
 
-[[menu.main]]
-    name = "Home"
-    url = "/"
-    weight = 1
+#[[menu.main]]
+#    name = "Home"
+#    url = "/"
+#    weight = 1
 
-[[menu.main]]
-    name = "Docs"
-    url = "/docs/"
-    weight = 2
+#[[menu.main]]
+#    name = "Docs"
+#    url = "/docs/"
+#    weight = 2
 
 
 [params]
