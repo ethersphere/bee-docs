@@ -51,4 +51,4 @@ summaryLength = 30
 
   [params.logo]
       mobile = "/images/logo-mobile.svg"
-      standard  = "/images/logo.svg"
+      standard  = "/swarm.png"
