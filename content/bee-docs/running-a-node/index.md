@@ -1,6 +1,7 @@
 ---
 title: 'Installation'
 weight: 2
+summary: "How to install client code to run a node."
 ---
 
 
