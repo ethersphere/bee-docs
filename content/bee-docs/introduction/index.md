@@ -17,13 +17,20 @@ API compatibility will be guaranteed when version 1.0 is released, but not befor
 ## Development status
 Uploaded **content is not guaranteed to persist on the network** until storage insurance is implemented. All participating nodes should consider participation a voluntary service with no formal obligation whatsoever and should be expected to delete content at their will. Therefore, users should under no circumstances regard Swarm as safe storage until the incentive system is functional.
 
-# TODO
 ## Background
-- TODO: synopsis from BOS - just a couple of paragraphs
+They say the Web is broken. Web 3.0 technologies offer a solution that allows for better connection between content providers and content consumer in a decentralized way, fairly compensating involved parties. Swarm addresses aspects that have not yet been addressed by peer-to-peer technologies, aiming to be the storage and communication layer for sovereign societies.  
 
 ## Basics
-- TODO: what are the benefits in a couple of paragraphs
-- TODO: what is the underlying tech in a couple of paragraphs
+The design principles guiding Swarm are to be:
+- stable,
+- scalable,
+- secure,
+- self-sustaining.
+
+Swarm has an overlay layer on top of an existing underlay p2p network. The overlay network has protocols powering a distributed immutable storage of chunks. Above that are components providing high level data access and defining APIs for base-layer features. These two layers are considered core Swarm. On top of these, applications can be built.
+
+A detailed description of design and architecture of Swarm can be found in the [Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm-viktor-tron-v0.1-pre-release.pdf).
+
 
 ## Community
 
