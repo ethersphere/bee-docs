@@ -1,6 +1,6 @@
 baseURL = "/"
 languageCode = "en-us"
-title = "Hugo Whisper Theme"
+title = "Swarm Bee Documentation"
 themesDir = "themes"
 theme = "hugo-whisper-theme"
 
