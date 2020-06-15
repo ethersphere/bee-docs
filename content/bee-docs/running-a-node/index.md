@@ -4,6 +4,9 @@ weight: 2
 summary: "How to install client code to run a node."
 ---
 
+## Supported platforms
+
+The client can be installed on MacOS and various Linux flavors.
 
 ## Installation from source
 <!-- https://raw.githubusercontent.com/ethersphere/bee/master/README.md -->
@@ -22,17 +25,3 @@ cd bee
 make binary
 cp dist/bee /usr/local/bin/bee
 ```
-
-
-
-# TODO
-
-## Supported platforms
-
-## Installation
-
-## Prerequisites
-
-## Installing from source
-
-## Running your client

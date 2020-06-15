@@ -1,9 +1,8 @@
 ---
 title: 'API'
 draft: false
-weight: 5
+weight: 7
 summary: "Bee API reference guide."
 ---
-# SWARM API DOC RENDERED
 
 {{< content "/bee-docs/API/README.md" >}}
