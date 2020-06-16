@@ -1,4 +1,6 @@
 baseURL = "/"
+relativeURLs = true
+uglyURLs = true
 languageCode = "en-us"
 title = "Swarm Bee Documentation"
 themesDir = "themes"
@@ -14,7 +16,7 @@ summaryLength = 30
 
 [[menu.main]]
     name = "Bee Docs"
-    url = "/bee-docs/"
+    url = "/bee-docs/introduction.html"
     weight = 1
 
 #[[menu.main]]
@@ -30,8 +32,8 @@ summaryLength = 30
 
 [params]
   google_analytics_id=""
-  homepage_button_link = '/bee-docs'
-  homepage_button_text = 'Read The Docs'
+  homepage_button_link = '/bee-docs/introduction.html'
+  homepage_button_text = 'Swarm Docs'
   homepage_intro = 'Whisper is a documentation theme built with Hugo. The design and functionality is intentionally minimal.'
   homepage_image = '/swarm-logo.jpg'
 
