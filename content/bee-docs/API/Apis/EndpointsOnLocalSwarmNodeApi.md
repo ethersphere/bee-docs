@@ -4,17 +4,67 @@ All URIs are relative to *http://localhost:8080/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bzzChunkAddrGet**](EndpointsOnLocalSwarmNodeApi.md#bzzChunkAddrGet) | **GET** /bzz-chunk/{addr} | Get Chunk
-[**bzzChunkPost**](EndpointsOnLocalSwarmNodeApi.md#bzzChunkPost) | **POST** /bzz-chunk | Upload Chunk
-[**bzzRawAddressGet**](EndpointsOnLocalSwarmNodeApi.md#bzzRawAddressGet) | **GET** /bzz-raw/{address} | Get addressed data
-[**bzzRawPost**](EndpointsOnLocalSwarmNodeApi.md#bzzRawPost) | **POST** /bzz-raw | Upload data
-[**bzzTagNameNamePost**](EndpointsOnLocalSwarmNodeApi.md#bzzTagNameNamePost) | **POST** /bzz-tag/name/{name} | Create Tag
-[**bzzTagUuidUuidGet**](EndpointsOnLocalSwarmNodeApi.md#bzzTagUuidUuidGet) | **GET** /bzz-tag/uuid/{uuid} | Get Tag information using UUid
+[**bytesAddressGet**](EndpointsOnLocalSwarmNodeApi.md#bytesAddressGet) | **GET** /bytes/{address} | Get addressed data
+[**bytesPost**](EndpointsOnLocalSwarmNodeApi.md#bytesPost) | **POST** /bytes | Upload data
+[**chunksAddrGet**](EndpointsOnLocalSwarmNodeApi.md#chunksAddrGet) | **GET** /chunks/{addr} | Get Chunk
+[**chunksAddrPost**](EndpointsOnLocalSwarmNodeApi.md#chunksAddrPost) | **POST** /chunks/{addr} | Upload Chunk
+[**filesAddressGet**](EndpointsOnLocalSwarmNodeApi.md#filesAddressGet) | **GET** /files/{address} | Get addressed data
+[**filesPost**](EndpointsOnLocalSwarmNodeApi.md#filesPost) | **POST** /files | Upload data
 
 
-<a name="bzzChunkAddrGet"></a>
-# **bzzChunkAddrGet**
-> File bzzChunkAddrGet(addr)
+<a name="bytesAddressGet"></a>
+# **bytesAddressGet**
+> File bytesAddressGet(address)
+
+Get addressed data
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **address** | **String**| Bzz address of content | [default to null]
+
+### Return type
+
+[**File**](..//Models/file.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/octet-stream, application/problem+json
+
+<a name="bytesPost"></a>
+# **bytesPost**
+> Reference bytesPost(body)
+
+Upload data
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **body** | **File**|  | [optional]
+
+### Return type
+
+[**Reference**](..//Models/Reference.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/octet-stream
+- **Accept**: application/json, application/problem+json
+
+<a name="chunksAddrGet"></a>
+# **chunksAddrGet**
+> File chunksAddrGet(addr)
 
 Get Chunk
 
@@ -37,9 +87,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/octet-stream, application/problem+json
 
-<a name="bzzChunkPost"></a>
-# **bzzChunkPost**
-> Hash bzzChunkPost(swarmTagUid, swarmPin, body)
+<a name="chunksAddrPost"></a>
+# **chunksAddrPost**
+> Hash chunksAddrPost(addr, swarmTagUid, swarmPin, body)
 
 Upload Chunk
 
@@ -47,6 +97,7 @@ Upload Chunk
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **addr** | **String**| Bzz address of chunk | [default to null]
  **swarmTagUid** | **String**| UUid of chunk | [optional] [default to null]
  **swarmPin** | **Boolean**| Represents the pinning state of the chunk | [optional] [default to null]
  **body** | **File**|  | [optional]
@@ -64,9 +115,9 @@ No authorization required
 - **Content-Type**: application/octet-stream
 - **Accept**: application/json, application/problem+json
 
-<a name="bzzRawAddressGet"></a>
-# **bzzRawAddressGet**
-> bzzRawAddressGet(address)
+<a name="filesAddressGet"></a>
+# **filesAddressGet**
+> Object filesAddressGet(address)
 
 Get addressed data
 
@@ -78,7 +129,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**Object**](..//Models/object.md)
 
 ### Authorization
 
@@ -87,11 +138,11 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/problem+json
+- **Accept**: multipart/form-data, file, application/problem+json
 
-<a name="bzzRawPost"></a>
-# **bzzRawPost**
-> Hash bzzRawPost(body)
+<a name="filesPost"></a>
+# **filesPost**
+> Reference filesPost(file)
 
 Upload data
 
@@ -99,11 +150,11 @@ Upload data
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | **File**|  | [optional]
+ **file** | **List**|  | [optional] [default to null]
 
 ### Return type
 
-[**Hash**](..//Models/Hash.md)
+[**Reference**](..//Models/Reference.md)
 
 ### Authorization
 
@@ -111,56 +162,6 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/octet-stream
-- **Accept**: application/json, application/problem+json
-
-<a name="bzzTagNameNamePost"></a>
-# **bzzTagNameNamePost**
-> NewTagResponse bzzTagNameNamePost(name)
-
-Create Tag
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **name** | **String**| Tagname | [default to null]
-
-### Return type
-
-[**NewTagResponse**](..//Models/NewTagResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/problem+json
-
-<a name="bzzTagUuidUuidGet"></a>
-# **bzzTagUuidUuidGet**
-> NewTagResponse bzzTagUuidUuidGet(uuid)
-
-Get Tag information using UUid
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **uuid** | **String**| UUid | [default to null]
-
-### Return type
-
-[**NewTagResponse**](..//Models/NewTagResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
+- **Content-Type**: multipart/form-data, file
 - **Accept**: application/json, application/problem+json
 
