@@ -7,19 +7,19 @@ All URIs are relative to *http://localhost:8080/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EndpointsOnLocalSwarmNodeApi* | [**bzzChunkAddrGet**](Apis/EndpointsOnLocalSwarmNodeApi.md#bzzchunkaddrget) | **GET** /bzz-chunk/{addr} | Get Chunk
-*EndpointsOnLocalSwarmNodeApi* | [**bzzChunkPost**](Apis/EndpointsOnLocalSwarmNodeApi.md#bzzchunkpost) | **POST** /bzz-chunk | Upload Chunk
-*EndpointsOnLocalSwarmNodeApi* | [**bzzRawAddressGet**](Apis/EndpointsOnLocalSwarmNodeApi.md#bzzrawaddressget) | **GET** /bzz-raw/{address} | Get addressed data
-*EndpointsOnLocalSwarmNodeApi* | [**bzzRawPost**](Apis/EndpointsOnLocalSwarmNodeApi.md#bzzrawpost) | **POST** /bzz-raw | Upload data
-*EndpointsOnLocalSwarmNodeApi* | [**bzzTagNameNamePost**](Apis/EndpointsOnLocalSwarmNodeApi.md#bzztagnamenamepost) | **POST** /bzz-tag/name/{name} | Create Tag
-*EndpointsOnLocalSwarmNodeApi* | [**bzzTagUuidUuidGet**](Apis/EndpointsOnLocalSwarmNodeApi.md#bzztaguuiduuidget) | **GET** /bzz-tag/uuid/{uuid} | Get Tag information using UUid
+*EndpointsOnLocalSwarmNodeApi* | [**bytesAddressGet**](Apis/EndpointsOnLocalSwarmNodeApi.md#bytesaddressget) | **GET** /bytes/{address} | Get addressed data
+*EndpointsOnLocalSwarmNodeApi* | [**bytesPost**](Apis/EndpointsOnLocalSwarmNodeApi.md#bytespost) | **POST** /bytes | Upload data
+*EndpointsOnLocalSwarmNodeApi* | [**chunksAddrGet**](Apis/EndpointsOnLocalSwarmNodeApi.md#chunksaddrget) | **GET** /chunks/{addr} | Get Chunk
+*EndpointsOnLocalSwarmNodeApi* | [**chunksAddrPost**](Apis/EndpointsOnLocalSwarmNodeApi.md#chunksaddrpost) | **POST** /chunks/{addr} | Upload Chunk
+*EndpointsOnLocalSwarmNodeApi* | [**filesAddressGet**](Apis/EndpointsOnLocalSwarmNodeApi.md#filesaddressget) | **GET** /files/{address} | Get addressed data
+*EndpointsOnLocalSwarmNodeApi* | [**filesPost**](Apis/EndpointsOnLocalSwarmNodeApi.md#filespost) | **POST** /files | Upload data
 
 
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
  - [Hash](.//Models/Hash.md)
- - [NewTagResponse](.//Models/NewTagResponse.md)
+ - [Reference](.//Models/Reference.md)
 
 
 <a name="documentation-for-authorization"></a>
