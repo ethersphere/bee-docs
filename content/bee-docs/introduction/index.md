@@ -6,8 +6,8 @@ summary: "Background and basic information about the project."
 
 **"Storage and communication infrastructure for a sovereign digital society."**
 
-# Compatibility
-<!-- https://raw.githubusercontent.com/ethersphere/bee/master/README.md -->
+Dear user, we are happy that you are here. Welcome to the Swarm! Whether you are hear to get all detailed intricacies of how Bee works under the hood, you just want to get to know how to start up your node or interact with other nodes; this is the place to start!
+We hope that you find what you seek. If not, please reach out to us.
 
 Ethereum Swarm Bee is the second official Ethereum Swarm implementation. This project is in very early stage and under active development.
 No compatibility with the first Ethereum Swarm implementation is provided, mainly because the change in underlying protocol from devp2p to libp2p. A Bee node cannot join first Swarm network and vice versa.
