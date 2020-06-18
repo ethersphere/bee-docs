@@ -1,6 +1,7 @@
 baseURL = "/"
 relativeURLs = true
 uglyURLs = true
+disablePathToLower = true
 languageCode = "en-us"
 title = "Swarm Bee Documentation"
 themesDir = "themes"
@@ -18,6 +19,16 @@ summaryLength = 30
     name = "Bee Docs"
     url = "/bee-docs/introduction.html"
     weight = 1
+
+[[menu.main]]
+    name = "Bee API"
+    url = "/bee-docs/API/README.html"
+    weight = 2
+
+[[menu.main]]
+    name = "Bee Debug API"
+    url = "/bee-docs/debugAPI/README.html"
+    weight = 3
 
 #[[menu.main]]
 #    name = "Home"

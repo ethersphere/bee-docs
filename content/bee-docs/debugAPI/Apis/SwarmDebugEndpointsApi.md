@@ -1,3 +1,7 @@
+---
+aliases:
+  - /bee-docs/debugAPI/Apis/SwarmDebugEndpointsApi.md
+---
 # SwarmDebugEndpointsApi
 
 All URIs are relative to *http://localhost:6060/v1*
@@ -16,7 +20,7 @@ Method | HTTP request | Description
 [**peersGet**](SwarmDebugEndpointsApi.md#peersGet) | **GET** /peers | Get a list of peers
 [**pingpongPeerIdPost**](SwarmDebugEndpointsApi.md#pingpongPeerIdPost) | **POST** /pingpong/{peer-id} | Try connection to node
 [**readinessGet**](SwarmDebugEndpointsApi.md#readinessGet) | **GET** /readiness | Get readiness state of node
-[**topologyGet**](SwarmDebugEndpointsApi.md#topologyGet) | **GET** /topology | 
+[**topologyGet**](SwarmDebugEndpointsApi.md#topologyGet) | **GET** /topology |
 
 
 <a name="addressesGet"></a>
@@ -327,4 +331,3 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
-
