@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /bee-docs/API/Models/Hash.md
+  - /bee-docs/API/Models/Hash.html
 ---
 
 # Hash
@@ -8,6 +8,6 @@ aliases:
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hash** | [**String**](string.md) |  | [optional] [default to null]
+**hash** | [**String**](string.html) |  | [optional] [default to null]
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[[Back to Model list]](../README.html#documentation-for-models) [[Back to API list]](../README.html#documentation-for-api-endpoints) [[Back to README]](../README.html)

@@ -1,12 +1,12 @@
 ---
 aliases:
-  - /bee-docs/debugAPI/Models/Address.md
+  - /bee-docs/debugAPI/Models/Address.html
 ---
 # Address
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | [**String**](string.md) |  | [optional] [default to null]
+**Address** | [**String**](string.html) |  | [optional] [default to null]
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[[Back to Model list]](../README.html#documentation-for-models) [[Back to API list]](../README.html#documentation-for-api-endpoints) [[Back to README]](../README.html)
