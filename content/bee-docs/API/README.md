@@ -1,3 +1,7 @@
+---
+aliases:
+  - /bee-docs/API/README.md
+---
 # Documentation for Swarm API
 
 <a name="documentation-for-api-endpoints"></a>

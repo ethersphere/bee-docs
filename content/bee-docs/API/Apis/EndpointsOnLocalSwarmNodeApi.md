@@ -1,3 +1,8 @@
+---
+aliases:
+  - /bee-docs/API/Apis/EndpointsOnLocalSwarmNodeApi.md
+---
+
 # EndpointsOnLocalSwarmNodeApi
 
 All URIs are relative to *http://localhost:8080/v1*
@@ -164,4 +169,3 @@ No authorization required
 
 - **Content-Type**: multipart/form-data, file
 - **Accept**: application/json, application/problem+json
-

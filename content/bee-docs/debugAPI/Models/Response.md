@@ -1,3 +1,7 @@
+---
+aliases:
+  - /bee-docs/debugAPI/Models/Response.md
+---
 # Response
 ## Properties
 
@@ -7,4 +11,3 @@ Name | Type | Description | Notes
 **code** | [**Integer**](integer.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-

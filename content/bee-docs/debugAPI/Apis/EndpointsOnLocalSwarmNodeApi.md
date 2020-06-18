@@ -1,3 +1,7 @@
+---
+aliases:
+  - /bee-docs/debugAPI/Apis/EndpointsOnLocalSwarmNodeApi.md
+---
 # EndpointsOnLocalSwarmNodeApi
 
 All URIs are relative to *http://localhost:6060/v1*
@@ -57,4 +61,3 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: application/json, application/problem+json
-

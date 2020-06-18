@@ -1,3 +1,8 @@
+---
+aliases:
+  - /bee-docs/debugAPI/Models/NewTagResponse.md
+---
+
 # NewTagResponse
 ## Properties
 
@@ -16,4 +21,3 @@ Name | Type | Description | Notes
 **startedAt** | [**Date**](DateTime.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
