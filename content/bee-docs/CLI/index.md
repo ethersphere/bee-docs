@@ -47,12 +47,13 @@ Usage:
 
 Flags:
       --api-addr string               HTTP API listen address (default ":8080")
-      --bootnode strings              initial nodes to connect to
-      --data-dir string               data directory (default "/home/crtah/.bee")
-      --db-capacity uint              db capacity in chunks (default 5000000)
+      --bootnode strings              initial nodes to connect to (default [/dnsaddr/bootnode.ethswarm.org])
+      --data-dir string               data directory (default "/home/user/.bee")
+      --db-capacity uint              db capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 5000000)
       --debug-api-addr string         debug HTTP API listen address (default ":6060")
       --enable-debug-api              enable debug HTTP API
   -h, --help                          help for start
+      --nat-addr string               NAT exposed address
       --network-id uint               ID of the Swarm network (default 1)
       --p2p-addr string               P2P listen address (default ":7070")
       --p2p-disable-quic              disable P2P QUIC protocol
