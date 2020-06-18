@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /bee-docs/debugAPI/Apis/SwarmDebugEndpointsApi.md
+  - /bee-docs/debugAPI/Apis/SwarmDebugEndpointsApi.html
 ---
 # SwarmDebugEndpointsApi
 
@@ -8,19 +8,19 @@ All URIs are relative to *http://localhost:6060/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addressesGet**](SwarmDebugEndpointsApi.md#addressesGet) | **GET** /addresses | Get overlay and underlay addresses of the node
-[**chunksAddressGet**](SwarmDebugEndpointsApi.md#chunksAddressGet) | **GET** /chunks/{address} | Get chunk address
-[**chunksPinAddressDelete**](SwarmDebugEndpointsApi.md#chunksPinAddressDelete) | **DELETE** /chunks-pin/{address} | Unpin chunk with given address
-[**chunksPinAddressGet**](SwarmDebugEndpointsApi.md#chunksPinAddressGet) | **GET** /chunks-pin/{address} | Get pinning status of chunk with given address
-[**chunksPinAddressPost**](SwarmDebugEndpointsApi.md#chunksPinAddressPost) | **POST** /chunks-pin/{address} | Pin chunk with given address
-[**chunksPinGet**](SwarmDebugEndpointsApi.md#chunksPinGet) | **GET** /chunks-pin/ | Get list of pinned chunks
-[**connectMultiAddressPost**](SwarmDebugEndpointsApi.md#connectMultiAddressPost) | **POST** /connect/{multiAddress} | Connect to address
-[**healthGet**](SwarmDebugEndpointsApi.md#healthGet) | **GET** /health | Get health of node
-[**peersAddressDelete**](SwarmDebugEndpointsApi.md#peersAddressDelete) | **DELETE** /peers/{address} | Remove peer
-[**peersGet**](SwarmDebugEndpointsApi.md#peersGet) | **GET** /peers | Get a list of peers
-[**pingpongPeerIdPost**](SwarmDebugEndpointsApi.md#pingpongPeerIdPost) | **POST** /pingpong/{peer-id} | Try connection to node
-[**readinessGet**](SwarmDebugEndpointsApi.md#readinessGet) | **GET** /readiness | Get readiness state of node
-[**topologyGet**](SwarmDebugEndpointsApi.md#topologyGet) | **GET** /topology |
+[**addressesGet**](SwarmDebugEndpointsApi.html#addressesGet) | **GET** /addresses | Get overlay and underlay addresses of the node
+[**chunksAddressGet**](SwarmDebugEndpointsApi.html#chunksAddressGet) | **GET** /chunks/{address} | Get chunk address
+[**chunksPinAddressDelete**](SwarmDebugEndpointsApi.html#chunksPinAddressDelete) | **DELETE** /chunks-pin/{address} | Unpin chunk with given address
+[**chunksPinAddressGet**](SwarmDebugEndpointsApi.html#chunksPinAddressGet) | **GET** /chunks-pin/{address} | Get pinning status of chunk with given address
+[**chunksPinAddressPost**](SwarmDebugEndpointsApi.html#chunksPinAddressPost) | **POST** /chunks-pin/{address} | Pin chunk with given address
+[**chunksPinGet**](SwarmDebugEndpointsApi.html#chunksPinGet) | **GET** /chunks-pin/ | Get list of pinned chunks
+[**connectMultiAddressPost**](SwarmDebugEndpointsApi.html#connectMultiAddressPost) | **POST** /connect/{multiAddress} | Connect to address
+[**healthGet**](SwarmDebugEndpointsApi.html#healthGet) | **GET** /health | Get health of node
+[**peersAddressDelete**](SwarmDebugEndpointsApi.html#peersAddressDelete) | **DELETE** /peers/{address} | Remove peer
+[**peersGet**](SwarmDebugEndpointsApi.html#peersGet) | **GET** /peers | Get a list of peers
+[**pingpongPeerIdPost**](SwarmDebugEndpointsApi.html#pingpongPeerIdPost) | **POST** /pingpong/{peer-id} | Try connection to node
+[**readinessGet**](SwarmDebugEndpointsApi.html#readinessGet) | **GET** /readiness | Get readiness state of node
+[**topologyGet**](SwarmDebugEndpointsApi.html#topologyGet) | **GET** /topology |
 
 
 <a name="addressesGet"></a>
@@ -34,7 +34,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Addresses**](..//Models/Addresses.md)
+[**Addresses**](..//Models/Addresses.html)
 
 ### Authorization
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response**](..//Models/Response.md)
+[**Response**](..//Models/Response.html)
 
 ### Authorization
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response**](..//Models/Response.md)
+[**Response**](..//Models/Response.html)
 
 ### Authorization
 
@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PinningState**](..//Models/PinningState.md)
+[**PinningState**](..//Models/PinningState.html)
 
 ### Authorization
 
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response**](..//Models/Response.md)
+[**Response**](..//Models/Response.html)
 
 ### Authorization
 
@@ -156,7 +156,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**BzzChunksPinned**](..//Models/BzzChunksPinned.md)
+[**BzzChunksPinned**](..//Models/BzzChunksPinned.html)
 
 ### Authorization
 
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Address**](..//Models/Address.md)
+[**Address**](..//Models/Address.html)
 
 ### Authorization
 
@@ -203,7 +203,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Status**](..//Models/Status.md)
+[**Status**](..//Models/Status.html)
 
 ### Authorization
 
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Response**](..//Models/Response.md)
+[**Response**](..//Models/Response.html)
 
 ### Authorization
 
@@ -250,7 +250,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Peers**](..//Models/Peers.md)
+[**Peers**](..//Models/Peers.html)
 
 ### Authorization
 
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RttMs**](..//Models/RttMs.md)
+[**RttMs**](..//Models/RttMs.html)
 
 ### Authorization
 
@@ -297,7 +297,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Status**](..//Models/Status.md)
+[**Status**](..//Models/Status.html)
 
 ### Authorization
 
@@ -321,7 +321,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**BzzTopology**](..//Models/BzzTopology.md)
+[**BzzTopology**](..//Models/BzzTopology.html)
 
 ### Authorization
 

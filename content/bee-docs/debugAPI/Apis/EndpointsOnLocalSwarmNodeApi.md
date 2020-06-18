@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /bee-docs/debugAPI/Apis/EndpointsOnLocalSwarmNodeApi.md
+  - /bee-docs/debugAPI/Apis/EndpointsOnLocalSwarmNodeApi.html
 ---
 # EndpointsOnLocalSwarmNodeApi
 
@@ -8,8 +8,8 @@ All URIs are relative to *http://localhost:6060/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**tagsPost**](EndpointsOnLocalSwarmNodeApi.md#tagsPost) | **POST** /tags | Create Tag
-[**tagsUuidGet**](EndpointsOnLocalSwarmNodeApi.md#tagsUuidGet) | **GET** /tags/{uuid} | Get Tag information using UUid
+[**tagsPost**](EndpointsOnLocalSwarmNodeApi.html#tagsPost) | **POST** /tags | Create Tag
+[**tagsUuidGet**](EndpointsOnLocalSwarmNodeApi.html#tagsUuidGet) | **GET** /tags/{uuid} | Get Tag information using UUid
 
 
 <a name="tagsPost"></a>
@@ -26,7 +26,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NewTagResponse**](..//Models/NewTagResponse.md)
+[**NewTagResponse**](..//Models/NewTagResponse.html)
 
 ### Authorization
 
@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NewTagResponse**](..//Models/NewTagResponse.md)
+[**NewTagResponse**](..//Models/NewTagResponse.html)
 
 ### Authorization
 

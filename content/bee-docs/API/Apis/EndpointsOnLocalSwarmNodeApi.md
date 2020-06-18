@@ -1,6 +1,6 @@
 ---
 aliases:
-  - /bee-docs/API/Apis/EndpointsOnLocalSwarmNodeApi.md
+  - /bee-docs/API/Apis/EndpointsOnLocalSwarmNodeApi.html
 ---
 
 # EndpointsOnLocalSwarmNodeApi
@@ -9,12 +9,12 @@ All URIs are relative to *http://localhost:8080/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bytesAddressGet**](EndpointsOnLocalSwarmNodeApi.md#bytesAddressGet) | **GET** /bytes/{address} | Get addressed data
-[**bytesPost**](EndpointsOnLocalSwarmNodeApi.md#bytesPost) | **POST** /bytes | Upload data
-[**chunksAddrGet**](EndpointsOnLocalSwarmNodeApi.md#chunksAddrGet) | **GET** /chunks/{addr} | Get Chunk
-[**chunksAddrPost**](EndpointsOnLocalSwarmNodeApi.md#chunksAddrPost) | **POST** /chunks/{addr} | Upload Chunk
-[**filesAddressGet**](EndpointsOnLocalSwarmNodeApi.md#filesAddressGet) | **GET** /files/{address} | Get addressed data
-[**filesPost**](EndpointsOnLocalSwarmNodeApi.md#filesPost) | **POST** /files | Upload data
+[**bytesAddressGet**](EndpointsOnLocalSwarmNodeApi.html#bytesAddressGet) | **GET** /bytes/{address} | Get addressed data
+[**bytesPost**](EndpointsOnLocalSwarmNodeApi.html#bytesPost) | **POST** /bytes | Upload data
+[**chunksAddrGet**](EndpointsOnLocalSwarmNodeApi.html#chunksAddrGet) | **GET** /chunks/{addr} | Get Chunk
+[**chunksAddrPost**](EndpointsOnLocalSwarmNodeApi.html#chunksAddrPost) | **POST** /chunks/{addr} | Upload Chunk
+[**filesAddressGet**](EndpointsOnLocalSwarmNodeApi.html#filesAddressGet) | **GET** /files/{address} | Get addressed data
+[**filesPost**](EndpointsOnLocalSwarmNodeApi.html#filesPost) | **POST** /files | Upload data
 
 
 <a name="bytesAddressGet"></a>
@@ -31,7 +31,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**File**](..//Models/file.md)
+[**File**](..//Models/file.html)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Reference**](..//Models/Reference.md)
+[**Reference**](..//Models/Reference.html)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**File**](..//Models/file.md)
+[**File**](..//Models/file.html)
 
 ### Authorization
 
@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Hash**](..//Models/Hash.md)
+[**Hash**](..//Models/Hash.html)
 
 ### Authorization
 
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Object**](..//Models/object.md)
+[**Object**](..//Models/object.html)
 
 ### Authorization
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Reference**](..//Models/Reference.md)
+[**Reference**](..//Models/Reference.html)
 
 ### Authorization
 
