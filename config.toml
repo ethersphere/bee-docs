@@ -15,21 +15,6 @@ pygmentsUseClasses = true
 # See https://gohugo.io/content-management/summaries/
 summaryLength = 30
 
-[[menu.main]]
-    name = "Bee Docs"
-    url = "/bee-docs/introduction.html"
-    weight = 1
-
-[[menu.main]]
-    name = "Bee API"
-    url = "/bee-docs/API/README.html"
-    weight = 2
-
-[[menu.main]]
-    name = "Bee Debug API"
-    url = "/bee-docs/debugAPI/README.html"
-    weight = 3
-
 #[[menu.main]]
 #    name = "Home"
 #    url = "/"
