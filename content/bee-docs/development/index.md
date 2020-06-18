@@ -4,7 +4,7 @@ weight: 5
 summary: "Information for client developers about development of Swarm."
 ---
 
-Installation from source is described in the [Using section](../running-a-node/).
+Installation from source is described in the [Installation](../installation/).
 
 ## Starting more bee nodes locally with debugging
 
