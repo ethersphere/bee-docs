@@ -1,6 +1,10 @@
 ---
+title: 'debugAPI'
+date: 2018-11-28T15:14:39+10:00
+weight: 6
+summary: "debug API of Bee"
 aliases:
-  - /bee-docs/debugAPI/README.html
+  - /bee-docs/API/README.html
 ---
 # Documentation for Swarm Debug API
 
@@ -43,6 +47,7 @@ Class | Method | HTTP request | Description
  - [Response](.//Models/Response.html)
  - [RttMs](.//Models/RttMs.html)
  - [Status](.//Models/Status.html)
+
 
 
 <a name="documentation-for-authorization"></a>
