@@ -28,7 +28,7 @@ You can pass several command-line arguments to the bee node upon startup. Run `b
 ### Environment variables
 Environment variables are set as variables in your operating systems session. To set an environment variable, type 
 
-`VARIABLE_NAME=variableValue`
+`export VARIABLE_NAME=variableValue`
 
 in your command line.
 
@@ -51,7 +51,7 @@ To make use of a configuration file, create a yaml file (template provided below
 `bee start --config ~/bee-config.yaml `
 
 #### Config file template
-This config file template, with arguments at their default value is provided here for your convenience. Note that the most-recent release of bee might have different configuration options than the one provided here. Please verify this before using the template.
+This configuration file template, with arguments at their default value is provided here for your convenience. Note that the most-recent release of bee might have different configuration options than the one provided here. Please verify this before using the template.
 
 ``` yaml
 # Bee config template
