@@ -20,15 +20,15 @@ summaryLength = 30
 #    url = "/"
 #    weight = 1
 
-[[menu.main]]
-    name = "API reference"
-    url = "/bee-docs/API/index.html"
-    weight = 2
+#[[menu.main]]
+#    name = "API reference"
+#    url = "/bee-docs/API/index.html"
+#    weight = 2
 
-[[menu.main]]
-    name = "API reference on Swarm"
-    url = "https://gateway.ethswarm.org/files/39b9e038943a0e1d45feb5712966a1f53699971a39d7bf1bffab5b7f2e055c6f"
-    weight = 3
+#[[menu.main]]
+#    name = "API reference on Swarm"
+#    url = "https://gateway.ethswarm.org/files/39b9e038943a0e1d45feb5712966a1f53699971a39d7bf1bffab5b7f2e055c6f"
+#    weight = 3
 
 [params]
   google_analytics_id=""
