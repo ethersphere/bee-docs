@@ -13,4 +13,4 @@ Generated API reference documentation is published for your convenience:
 - [API docs on web2](/bee-docs/API/index.html)
 - [API docs on Swarm](https://gateway.ethswarm.org/files/39b9e038943a0e1d45feb5712966a1f53699971a39d7bf1bffab5b7f2e055c6f)
 - [debug API docs on web2](/bee-docs/debugAPI/index.html)
-- TODO [debug API docs on Swarm](https://gateway.ethswarm.org/files/33b2a8d63e0685a0b40fdef1b019802ae7f66c5c74c38aef2d4413953191fd78)
+- [debug API docs on Swarm](https://gateway.ethswarm.org/files/11c0eb2ecb1f122755a9ae8c84cea46733b854d6f9de4d870f7a3afe1df35a5f)
