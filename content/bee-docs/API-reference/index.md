@@ -10,7 +10,7 @@ TODO: a short description of how API Docs generated, how the API works ... etc.
 
 Generated API reference documentation is published for your convenience:
 
-- [API docs on web2](/bee-docs/API/index.html)
-- [API docs on Swarm](https://gateway.ethswarm.org/files/39b9e038943a0e1d45feb5712966a1f53699971a39d7bf1bffab5b7f2e055c6f)
-- [debug API docs on web2](/bee-docs/debugAPI/index.html)
-- [debug API docs on Swarm](https://gateway.ethswarm.org/files/11c0eb2ecb1f122755a9ae8c84cea46733b854d6f9de4d870f7a3afe1df35a5f)
+- [API reference](/bee-docs/API/index.html)
+- [API reference (on Bee)](https://gateway.ethswarm.org/files/2630e9e454d7e0af2a3a0617ac5d6fbd3e3b66355c21e5ffcedc07335cbbb9b4)
+- [debug API reference](/bee-docs/debugAPI/index.html)
+- [debug API reference (on Bee)](https://gateway.ethswarm.org/files/c960770d544eaeddaa85bb34ffd85fd6ddb7c6876e998c84432008aa9ffc235d)
