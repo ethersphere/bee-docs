@@ -6,7 +6,7 @@ summary: "Reference documentation for API and debug API. "
 alias: "/bee-docs/API-reference.html"
 ---
 
-The Bee node exposes two HTTP API endpoints, `API` and `debugAPI`. These endpoints are the primary interface into a *running* bee node.
+The Bee node exposes two HTTP API endpoints, `API` and `debugAPI`. These endpoints are the primary interface into a *running* bee node. All API-endpoints will return a `JSON` formatted string upon success or an appropriate [HTTP-error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 
 ## API
 The API-endpoint exposes all functionality to upload and download content to/from the Swarm network. By default, default it runs on port `:8080`, which can be changed to any other unused port by using the `api-addr` flag upon startup (see [CLI](/bee-docs/CLI.html)).
