@@ -1,6 +1,6 @@
 ---
-title: 'Swarm Docs WIP'
+title: 'Swarm Bee Documentation'
 date: 2018-11-28T15:14:39+10:00
 ---
 
-Whisper is a documentation theme built with Hugo. The design and functionality is intentionally minimal.
+Storage and communication infrastructure for a sovereign digital society.
