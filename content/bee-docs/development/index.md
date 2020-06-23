@@ -9,7 +9,7 @@ Installation from source is described in the [Installation]("/bee-docs/installat
 
 ## Starting more bee nodes locally with debugging
 
-It is possible to start multiple, persistent, completely independent, bee nodes on a single running operating system. This can be achieved with less complexity with prepared configuration files for every node.
+It is possible to start multiple, persistent, completely independent, Bee nodes on a single running operating system. This can be achieved with less complexity with prepared configuration files for every node.
 
 An example configuration for the first node would be:
 
@@ -62,13 +62,13 @@ bee --config node4.yaml start --bootnode /ip4/127.0.0.1/tcp/7071/p2p/16Uiu2HAm2L
 
 ## Getting node addresses
 
+Debug API is not started by default and has to be explicitly enabled by using configuration YAML files or with `--enable-debug-api --debug-api-addr 127.0.0.1:6061` command line flags or options.
+
 Every node can provide its overlay address and underlay addresses by reading the logs when the node starts or through Debug API. For example, for the node 1 started with configuration above:
 
 ```sh
 curl localhost:6061/addresses
 ```
-
-Debug API is not started by default and has to be explicitly enabled with `--enable-debug-api --debug-api-addr 127.0.0.1:6061` command line flags or options.
 
 It will return a response with addresses:
 
