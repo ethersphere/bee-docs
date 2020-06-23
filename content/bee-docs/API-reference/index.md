@@ -3,9 +3,10 @@ title: 'API and debug API'
 date: 2018-11-28T15:14:39+10:00
 weight: 6
 summary: "Reference documentation for API and debug API. "
+alias: "/bee-docs/API-reference.html"
 ---
 
-The Bee node exposes two HTTP API endpoints, `API` and `debugAPI`. These endpoints are the primary interface into a *running* bee node.
+The Bee node exposes two HTTP API endpoints, `API` and `debugAPI`. These endpoints are the primary interface into a *running* bee node. All API-endpoints will return a [JSON](https://www.json.org/json-en.html) formatted string upon success or an appropriate [HTTP-error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
 
 ## API
 The API-endpoint exposes all functionality to upload and download content to/from the Swarm network. By default, default it runs on port `:8080`, which can be changed to any other unused port by using the `api-addr` flag upon startup (see [CLI](/bee-docs/CLI.html)).
@@ -31,7 +32,7 @@ A HTML representation thereof can be downloaded via:
 Interaction with the Swarm HTTP APIs can be done via many ways. Below, a few examples are listed, but these are by no means exhaustive!
 
 ### Command-line
-The HTML endpoints can be reached via the command-line, using [curl](https://curl.haxx.se/). As the returned answer is always in [json](https://www.json.org/json-en.html), you can make the output pretty to use in your terminal, using [jq](https://stedolan.github.io/jq/).
+The HTML endpoints can be reached via the command-line, using [curl](https://curl.haxx.se/). As the returned answer is always in `JSON`, you can make the output pretty to use in your terminal, using [jq](https://stedolan.github.io/jq/).
 
 As an example, you can inspect your topology, by calling `curl localhost:6060/topology | jq` (note that you must run a node with the `debug-api` endpoint enabled)
 

@@ -1,11 +1,12 @@
 ---
-title: 'CLI'
+title: 'Starting your node'
 date: 2018-11-28T15:14:39+10:00
 weight: 6
-summary: "Overview of CLI options."
+summary: "How to start and configure your node."
+alias: "/bee-docs/start.html"
 ---
 
-The Bee client CLI is used to start and configure your bee node *before* it starts. If you want to interact with you bee node after it is started, you can use the HTTP APIs (see sections [API](/API/) and [debugAPI](../debugAPI/))
+The Bee node binary (see [Installation]() on how to download this) is used to start and configure your bee node *before* it starts. If you want to interact with you bee node after it is started, you can use the HTTP APIs (see sections [API](/bee-docs/API-reference.html).
 
 ## Getting help
 The CLI has documentation build-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure you bee node via the command line arguments
