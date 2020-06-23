@@ -2,6 +2,7 @@
 title: 'Architecture'
 weight: 6
 summary: "Information for client developers about the design and architecture of Swarm."
+alisas: "/bee-docs/architecture.html"
 ---
 
 Developers who want to develop client implementations and others who want to understand the underlying concepts and design of Swarm are invited to read the 

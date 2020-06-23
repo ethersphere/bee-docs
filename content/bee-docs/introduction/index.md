@@ -2,6 +2,7 @@
 title: 'Introduction'
 weight: 1
 summary: "Background and basic information about the project."
+alias: "/bee-docs/introduction.html"
 ---
 
 **"Storage and communication infrastructure for a sovereign digital society."**

@@ -3,6 +3,7 @@ title: 'API and debug API'
 date: 2018-11-28T15:14:39+10:00
 weight: 6
 summary: "Reference documentation for API and debug API. "
+alias: "/bee-docs/API-reference.html"
 ---
 
 The Bee node exposes two HTTP API endpoints, `API` and `debugAPI`. These endpoints are the primary interface into a *running* bee node.

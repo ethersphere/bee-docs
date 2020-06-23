@@ -2,9 +2,10 @@
 title: 'Development'
 weight: 5
 summary: "Information for client developers about development of Swarm."
+alias: "/bee-docs/development.html"
 ---
 
-Installation from source is described in the [Installation](../installation/).
+Installation from source is described in the [Installation]("/bee-docs/installation.html").
 
 ## Starting more bee nodes locally with debugging
 

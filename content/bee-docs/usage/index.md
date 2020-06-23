@@ -2,6 +2,7 @@
 title: 'Usage'
 weight: 3
 summary: "How to run a node."
+alias: "/bee-docs/usage.html"
 ---
 
 ## Running the Bee node
