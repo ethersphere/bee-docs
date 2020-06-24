@@ -6,7 +6,7 @@ alias: "/bee-docs/introduction.html"
 ---
 
 Dear user, we are happy that you are here. Welcome to the Swarm! Whether you are hear to get all detailed intricacies of how Bee works under the hood, you just want to get to know how to start up your node or interact with other nodes; this is the place to start!
-We hope that you find what you seek. If not, please reach out to us.
+We hope that you find what you seek. If not, please reach out to us (see contact details in section bellow).
 
 ## Architecture and background
 They say the Web is broken. Web 3.0 technologies offer a solution that allows for better connection between content providers and content consumers in a decentralized way, fairly compensating involved parties. Swarm addresses aspects that have not yet been addressed by other peer-to-peer technologies, aiming to be the storage and communication layer for sovereign societies.  
