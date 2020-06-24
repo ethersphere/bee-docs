@@ -17,8 +17,8 @@ At every official release, we release the binary files of our software. You can 
 
 Prerequisites for installing Bee from source are:
 
-- Go - download the latest release from [https://golang.org/dl](https://golang.org/dl),
-- git - download from [https://git-scm.com/](https://git-scm.com/) or install with your package manager,
+- Go - download the latest release from [golang.org](https://golang.org/dl),
+- git - download from [git-scm.com](https://git-scm.com/) or install with your package manager,
 - make.
 
 1) Clone the repository:
