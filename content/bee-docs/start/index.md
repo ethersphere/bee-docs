@@ -5,16 +5,16 @@ summary: "How to start and configure your node."
 alias: "/bee-docs/start.html"
 ---
 
-The Bee node binary (see [Installation](/bee-docs/installation.html) on how to download this) is used to start and configure your bee node *before* it starts. If you want to interact with you Bee node after it is started, you can use the HTTP APIs (see sections [API](/bee-docs/API-reference.html).
+The Bee node binary (see [Installation](/bee-docs/installation.html) on how to download this) is used to start and configure your Bee node *before* it starts. If you want to interact with you Bee node after it is started, you can use the HTTP APIs (see sections [API](/bee-docs/API-reference.html).
 
 ## Getting help
-The CLI has documentation build-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure you bee node via the command line arguments
+The CLI has documentation build-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure you bee node via the command line arguments.
 
 ## Start a bee node
 Run `bee start`. This command starts your bee node with all configuration parameters on their default value.
 
 ## Configuring your bee node
-Bee can be configured with
+Bee can be configured with:
 
 * command line arguments;
 * environment variables;
