@@ -44,12 +44,12 @@ summaryLength = 30
     meta_description = "Swarm Bee - Storage and communication infrastructure for a sovereign digital society."
     meta_og_title = "Swarm Bee Documentation"
     meta_og_type = "website"
-    meta_og_url = "https://hugo-whisper.netlify.com"
-    meta_og_image = "https://raw.githubusercontent.com/JugglerX/hugo-whisper-theme/master/images/tn.png"
-    meta_og_description = "Hugo Whisper is a documentation theme built with Hugo."
+    meta_og_url = "https://docs.swarm.eth"
+    meta_og_image = "https://docs.swarm.eth/swarm-logo.jpg"
+    meta_og_description = "Swarm Bee - Storage and communication infrastructure for a sovereign digital society."
     meta_twitter_card = "summary"
     meta_twitter_site = "@ethswarm"
-    meta_twitter_creator = "@zerostaticio"
+    meta_twitter_creator = "@ethswarm"
 
   [params.logo]
       mobile = "/images/logo-mobile.svg"
