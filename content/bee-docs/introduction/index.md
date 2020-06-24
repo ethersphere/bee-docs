@@ -35,7 +35,7 @@ Ethereum Swarm Bee is the second official Ethereum Swarm implementation. No comp
 
 ## Community
 - [Swarm Website](http://swarm.ethereum.org).
-- The Swarm Website is also [served from Swarm itself](https://swarm-gateways.net/bzz:/theswarm.eth/).
+- The Swarm Website is also hosted on Swarm [https://swarm-gateways.net/bzz:/theswarm.eth/](https://swarm-gateways.net/bzz:/theswarm.eth/).
 - [Community Chat on Mattermost](https://beehive.ethswarm.org/).
 - [Twitter @ethswarm](https://twitter.com/ethswarm).
 - [reddit channel](https://www.reddit.com/r/ethswarm/).
