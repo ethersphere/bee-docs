@@ -23,6 +23,19 @@ jobs:
       - name: Build
         run: hugo --minify
 
+      - name: Setup swarm
+        run: |
+          printf ${{ secrets.KEY_PASS }} > password
+          mkdir -p ${HOME}/.ethereum/keystore
+          printf ${{ secrets.KEY_FILE }} > ${HOME}/.ethereum/keystore/UTC--2020-06-25T12-47-59.087770594Z--2d1e2e9fd4832675b3e19d1678b362b1fc9b3747
+          wget https://ethswarm.blob.core.windows.net/builds/swarm-linux-amd64-0.5.7-5ccfd995.tar.gz -O swarm.tar.gz
+          tar --strip-components 1 -xzf swarm.tar.gz
+      
+      - name: Swarm upload
+        run: |
+          FEED=$(./swarm --bzzapi https://swarm-public-0-swarm.prod.swarm-gateways.net --verbosity 6 --recursive --defaultpath ./public/index.html up ./public)
+          ./swarm --bzzapi https://swarm-gateways.net/ --verbosity 6 --password password feed update 0x"${FEED}"
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
