@@ -52,5 +52,5 @@ summaryLength = 30
     meta_twitter_creator = "@ethswarm"
 
   [params.logo]
-      mobile = "/images/logo-mobile.svg"
+      mobile = "/swarm.png"
       standard  = "/swarm.png"
