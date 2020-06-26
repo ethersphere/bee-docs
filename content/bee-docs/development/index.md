@@ -7,85 +7,7 @@ alias: "/bee-docs/development.html"
 
 Installation from source is described in the [Installation]("/bee-docs/installation.html").
 
-## Starting more bee nodes locally with debugging
-
-It is possible to start multiple, persistent, completely independent, Bee nodes on a single running operating system. This can be achieved with less complexity with prepared configuration files for every node.
-
-An example configuration for the first node would be:
-
-```yaml
-api-addr: :8081
-p2p-addr: :7071
-debug-api-addr: 127.0.0.1:6061
-enable-debug-api: true
-data-dir: /tmp/bee/node1
-password: some pass phze
-verbosity: trace
-tracing: true
-```
-
-Save a file named `node1.yaml` with this content, and create as many as you need by incrementing the number in in filename and `api-addr`, `p2p-addr`, `debug-api-addr` and `data-dir`.
-
-For example, file `node2.yaml` should have this content:
-
-```yaml
-api-addr: :8082
-p2p-addr: :7072
-debug-api-addr: 127.0.0.1:6062
-enable-debug-api: true
-data-dir: /tmp/bee/node2
-password: some pass phze
-verbosity: trace
-tracing: true
-```
-
-### Starting the first node
-
-The first node address will be used for other nodes to discover themselves. It is usually referred as the `bootnode address`.
-
-```sh
-bee --config node1.yaml start
-```
-
-When the node starts it will print out some of its `p2p addresses` in a multiaddress form like this: `/ip4/127.0.0.1/tcp/7071/p2p/16Uiu2HAm2LXfYsY9pXtgGdQ8oPb3bAkxwpfBE6AMzcscH1UkQLZM`. This address is the `bootnonde address`.
-
-### Starting other nodes
-
-Other nodes should be started by providing the bootnode address to them, so that they can connect to each other:
-
-```sh
-bee --config node2.yaml start --bootnode /ip4/127.0.0.1/tcp/7071/p2p/16Uiu2HAm2LXfYsY9pXtgGdQ8oPb3bAkxwpfBE6AMzcscH1UkQLZM
-bee --config node3.yaml start --bootnode /ip4/127.0.0.1/tcp/7071/p2p/16Uiu2HAm2LXfYsY9pXtgGdQ8oPb3bAkxwpfBE6AMzcscH1UkQLZM
-bee --config node4.yaml start --bootnode /ip4/127.0.0.1/tcp/7071/p2p/16Uiu2HAm2LXfYsY9pXtgGdQ8oPb3bAkxwpfBE6AMzcscH1UkQLZM
-...
-```
-
-## Getting node addresses
-
-Debug API is not started by default and has to be explicitly enabled by using configuration YAML files or with `--enable-debug-api --debug-api-addr 127.0.0.1:6061` command line flags or options.
-
-Every node can provide its overlay address and underlay addresses by reading the logs when the node starts or through Debug API. For example, for the node 1 started with configuration above:
-
-```sh
-curl localhost:6061/addresses
-```
-
-It will return a response with addresses:
-
-```json
-{
-  "overlay": "7ecf777fdab7553fbc4db7f265a7bd80d27b171babe931bc61e9d7966974ef47",
-  "underlay": [
-    "/ip6/::1/udp/7071/quic/p2p/16Uiu2HAm2LXfYsY9pXtgGdQ8oPb3bAkxwpfBE6AMzcscH1UkQLZM",
-    "/ip4/127.0.0.1/tcp/7071/p2p/16Uiu2HAm2LXfYsY9pXtgGdQ8oPb3bAkxwpfBE6AMzcscH1UkQLZM",
-    "/ip4/127.0.0.1/udp/7071/quic/p2p/16Uiu2HAm2LXfYsY9pXtgGdQ8oPb3bAkxwpfBE6AMzcscH1UkQLZM",
-    "/ip6/::1/tcp/7071/p2p/16Uiu2HAm2LXfYsY9pXtgGdQ8oPb3bAkxwpfBE6AMzcscH1UkQLZM",
-  ]
-}
-```
-
-
-## Testing a connection with PingPong protocol
+# Testing a connection with PingPong protocol
 
 To check if two nodes are connected and to see the round trip time for message exchange between them, get the overlay address from one node, for example local node 2:
 
@@ -101,7 +23,7 @@ And use that address in the Debug API call on another node, for example, local n
 curl -XPOST localhost:6061/pingpong/d4440baf2d79e481c3c6fd93a2014d2e6fe0386418829439f26d13a8253d04f1
 ```
 
-## Generating protobuf
+# Generating protobuf
 
 To process protocol buffer files and generate the Go code from it two tools are needed:
 
@@ -113,3 +35,16 @@ Makefile rule `protobuf` can be used to automate `protoc-gen-gogofaster` install
 ```sh
 make protobuf
 ```
+
+# Tracing
+Developers can gain an additional level of insight into the node by enabling `tracing`. To make use of Tracing, we advice to make use of [jaeger](https://www.jaegertracing.io/). 
+
+- Set up tracing by:
+  - Start jaeger:
+`docker run -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one:latest`
+
+  - start locally two bee nodes (different data dirs and ports) and connect them (see "Start a private network" in the [tutorial section](/bee-docs/tutorial)) with `--tracing` flag provided for both nodes
+
+- Make a call to the pinpong API on one of the two nodes (`curl -XPOST localhost:6061/pingpong/<overlay address other node>`).
+
+Validate tracing in the web interface (`http://localhost:16686/`).
