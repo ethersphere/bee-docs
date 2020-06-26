@@ -15,7 +15,7 @@ The API-endpoint is specified, using the [openAPI 3.0](https://github.com/OAI/Op
 A HTML representation thereof can be reached via:
 
 - [Web2](/bee-docs/API/index.html),
-- [Swarm](https://gateway.ethswarm.org/files/703b0b22760556dc4a8526a100b09541f3e4bb1c517a1b21e67feb0dce8a294f).
+- [Swarm Bee](https://gateway.ethswarm.org/files/55f2dc7b2670120a6f5cdfd90bed19f991f6d2f368f75936a3cbc5afc2b729f1).
 
 ## Debug API
 The debug-API is disabled by default and can be enabled by passing the `--enable-debug-api` flag upon startup. The debug-API exposes all functionality to inspect the state of your running bee node and experimental features. The debug-API run on port `:6060`, which can be changed by passing the `--debug-api-addr` flag to your node upon startup.
@@ -25,7 +25,7 @@ The debug-API endpoint is specified, using the [openAPI 3.0](https://github.com/
 A HTML representation thereof can be reached via:
 
 - [Web2](/bee-docs/debugAPI/index.html),
-- [Swarm](https://gateway.ethswarm.org/files/df08ab860a6d0f0ee5597d4eee97ca8315c918112f78a265761ec45856333bbd).
+- [Swarm Bee](https://gateway.ethswarm.org/files/08e7b21b427ec690f1dc80d79f8f377bae2e170adfc49357a5f479f1a015483c).
 
 ## Interaction
 Interaction with the Swarm HTTP APIs can be done via many ways. Below, a few examples are listed, but these are by no means exhaustive!
