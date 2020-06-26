@@ -1,6 +1,6 @@
 ---
 title: 'Tutorial'
-weight: 3
+weight: 4
 summary: "Several tutorials on how to use the Bee-node"
 alias: "/bee-docs/tutorial.html"
 ---

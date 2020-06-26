@@ -1,6 +1,6 @@
 ---
 title: 'Starting your node'
-weight: 6
+weight: 3
 summary: "How to start and configure your node."
 alias: "/bee-docs/start.html"
 ---
