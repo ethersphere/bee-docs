@@ -1,5 +1,8 @@
 {{$currentNode := .}}
 <div class="docs-menu">
+  <div class="logo" style="margin-bottom: 36px;">
+    <a href="{{ .Site.BaseURL }}"><img alt="Logo" src="{{ .Site.Params.logo.standard | relURL }}" /></a>
+  </div>
   <h4>{{ .Section | humanize }}</h4>
   <ul>
     {{ range where .Site.RegularPages "Section" .Section }}
