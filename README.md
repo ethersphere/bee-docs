@@ -1,5 +1,10 @@
 # Swarm Bee (technical) docs WIP
 
+This reposity holds the content of the Bee documentation, hosted at:
+
+- https://swarm-gateways.net/bzz:/docs.swarm.eth/
+- https://github.com/ethersphere/docs.github.io
+
 ## How to render the doc?
 
 1. [Install Hugo Extended version](https://gohugo.io/getting-started/installing/)
