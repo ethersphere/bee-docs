@@ -1,9 +1,9 @@
-# Swarm Bee (technical) docs WIP
+# Swarm Bee technical docs
 
 This reposity holds the content of the Bee documentation, hosted at:
 
 - https://swarm-gateways.net/bzz:/docs.swarm.eth/
-- https://github.com/ethersphere/docs.github.io
+- https://docs.ethswarm.org/
 
 ## How to render the doc?
 
