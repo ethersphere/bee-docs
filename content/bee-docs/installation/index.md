@@ -19,7 +19,7 @@ wget https://github.com/ethersphere/bee/releases/latest/download/bee-darwin-amd6
 chmod +x /usr/local/bin/bee
 ```
 
-Please change the last part of the url (`bee-darwin-amd64`), if you are not on a `darwin-amd64` system. A list of supported systems is available at[releases](https://github.com/ethersphere/bee/releases).
+Please change the last part of the url (`bee-darwin-amd64`), if you are not on a `darwin-amd64` system. A list of supported systems is available at [releases](https://github.com/ethersphere/bee/releases).
 
 ## Installing Bee with Docker
 Bee can be run as a docker container.
