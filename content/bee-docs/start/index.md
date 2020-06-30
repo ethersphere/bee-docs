@@ -67,7 +67,7 @@ data-dir: ~/.bee
 db-capacity: 5000000
 # debug HTTP API listen address (default ":6060")
 debug-api-addr: :6060
-# enable debug HTTP API
+# enable debug HTTP API (true / false)
 enable-debug-api : false
 # NAT exposed address
 nat-addr: ""
@@ -75,15 +75,15 @@ nat-addr: ""
 network-id: 1
 # P2P listen address (default ":7070")
 p2p-addr: :7070
-# disable P2P QUIC protocol
-p2p-disable-quic: false
-# disable P2P WebSocket protocol
-p2p-disable-ws: false
+# disable P2P QUIC protocol (enable / disable)
+p2p-disable-quic: disable
+# disable P2P WebSocket protocol (enable / disable)
+p2p-disable-ws: disable
 # password for decrypting keys
 password: ""
 # path to a file that contains password for decrypting keys
 password-file: ""
-# enable tracing
+# enable tracing (true / false)
 tracing: false
 # endpoint to send tracing data (default "127.0.0.1:6831")
 tracing-endpoint: 127.0.0.1:6831
