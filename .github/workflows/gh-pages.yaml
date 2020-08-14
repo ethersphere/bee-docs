@@ -2,8 +2,10 @@ name: github pages
 
 on:
   push:
-    branches:
-      - master
+    branches-ignore:
+      - '**'
+    tags:
+      - 'v*.*.*'
 
 jobs:
   deploy:
