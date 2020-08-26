@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Swarm Bee Node Client',
+  title: 'Swarm Bee Client',
   tagline: 'Welcome to the Swarm',
   url: 'https://bee.ethswarm.org',
   baseUrl: '/',

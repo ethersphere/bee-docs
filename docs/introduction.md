@@ -3,6 +3,8 @@ id: introduction
 title: Introduction
 ---
 
+## Welcome to the Swarm
+
 Dear user, we are happy that you are here. Welcome to the Swarm! Whether you are hear to get all detailed intricacies of how Bee works under the hood, you just want to get to know how to start up your node or interact with other nodes; this is the place to start!
 We hope that you find what you seek. If not, please reach out to us (see contact details in section bellow).
 
