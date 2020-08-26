@@ -21,6 +21,18 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
+        {
+          to: 'docs/',
+          activeBasePath: 'docs',
+          label: 'API',
+          position: 'left',
+        },
+        {
+          to: 'docs/',
+          activeBasePath: 'docs',
+          label: 'Debug API',
+          position: 'left',
+        },
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/ethersphere/bee',
