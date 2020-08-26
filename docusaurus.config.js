@@ -18,19 +18,25 @@ module.exports = {
         {
           to: 'docs/',
           activeBasePath: 'docs',
-          label: 'Docs',
+          label: 'Get Started',
           position: 'left',
         },
         {
-          to: 'docs/',
+          to: 'docs/installation/simple-node',
           activeBasePath: 'docs',
-          label: 'API',
+          label: 'Installation',
           position: 'left',
         },
         {
-          to: 'docs/',
+          to: 'docs/tutorial/start-your-node',
           activeBasePath: 'docs',
-          label: 'Debug API',
+          label: 'Starting Your Node',
+          position: 'left',
+        },
+        {
+          to: 'docs/api-reference/api-reference',
+          activeBasePath: 'docs',
+          label: 'API Reference',
           position: 'left',
         },
         // {to: 'blog', label: 'Blog', position: 'left'},
@@ -45,7 +51,7 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Swarm',
           items: [
             {
               label: 'Swarm',
