@@ -7,7 +7,8 @@ module.exports = {
     "Get Started": [
         'tutorial/start-your-node',
         'tutorial/starting-a-network',
-        'tutorial/upload-and-download'
+        'tutorial/upload-and-download',
+        'tutorial/tags'
     ],
     "DApps on Swarm": [
         'api-reference/api-reference'
