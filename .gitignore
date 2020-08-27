@@ -1,2 +1,4 @@
-/public
-/resources
+.docusaurus
+node_modules
+.DS_Store
+build
