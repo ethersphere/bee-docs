@@ -66,8 +66,7 @@ Which responds with all information that you need to follow the status of your t
   "sent": "the total number of chunks sent to the network",
   "synced": "the total number of receipts received",
   "uid": "the swarm-tag-uid",
-  "anonymous": "TODO",
-  "name": "TODO",
+  "name": "semantic name of the tag",
   "address": "the address of the root chunk. Only available if splitting is done",
   "startedAt": "when the upload started (ISO 8601 format)"
 ```
