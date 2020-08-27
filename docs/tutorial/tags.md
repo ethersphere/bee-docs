@@ -23,20 +23,24 @@ The tag label is only known to your node. It is **not** communicated to the netw
 :::
 
 ### Get the tag identifier
-To get the status of an upload, we can 
-1) Generate the tag before the upload and pass this tag upon upload
-2) Let the Bee node generate a tag automatically
+To get the status of an upload, we can:
+
+1. Generate the tag before the upload and pass this tag upon upload
+2. Let the Bee node generate a tag automatically
 
 The disadvantage of the second option is that you won't be able to follow the status of your upload while it is splitting (the tag-uid is communicated after splitting is done). To follow the status of splitting, you need to generate the tag yourself beforehand.
 
 Creating a tag is done by calling the `tag` API:
 
-`curl -XPOST http://localhost:8080/tags`
+```console
+curl -XPOST http://localhost:8080/tags`
+```
 
 Pass the returned uid to your next upload as:
 
-`curl -H "swarm-tag-uid: <tag-uid-here>"  -H "Content-Type: image/x-jpeg" --data-binary @kitten.jpg localhost:8080/files?name=cat.jpg`
-
+```console
+curl -H "swarm-tag-uid: <tag-uid-here>"  -H "Content-Type: image/x-jpeg" --data-binary @kitten.jpg localhost:8080/files?name=cat.jpg`
+```
 If don't want to create the tag yourself, you can just do your upload as you would normally do. The `swarm-tag-uid` is communicated as part of the response header.
 
 :::info
@@ -48,7 +52,9 @@ The swarm-tag-uid is used in the GET `tag/<swarm-tag-uid>` API endpoint to get t
 
 You can call into this endpoint by using cURL:
 
-`curl http://localhost:8080/tags/<swarm-tag-uid> | jq`
+```console
+curl http://localhost:8080/tags/<swarm-tag-uid> | jq
+```
 
 Which responds with all information that you need to follow the status of your tag.
 
