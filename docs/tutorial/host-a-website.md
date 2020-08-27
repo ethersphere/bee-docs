@@ -44,7 +44,7 @@ $ curl \
 When the upload is successful, Bee will return json containing a Swarm Reference.
 
 ```json
-{"reference":"3d0112a501f1b4a7b34dc79059d7039d294e15992c853ff1b0aedae648b39156"}
+{"reference":"ad4199b7286b44b1e94d46fa1ab7ad956b16b7a742c34b54b1a2b493b05cf542"}
 ```
 
 Now, navigate your browser to view the reference using the `bzz` reference and your directory will be served!
