@@ -9,6 +9,7 @@ module.exports = {
         'tutorial/starting-a-network',
         'tutorial/upload-and-download',
         'tutorial/host-a-website'
+        'tutorial/tags'
     ],
     "DApps on Swarm": [
         'api-reference/api-reference'

@@ -4,19 +4,38 @@ title: Installation
 
 ## Supported platforms
 
-The client can be installed on MacOS and various Linux flavors.
+The client can be installed on MacOS, Windows and various Linux flavors.
 
 ## Installing the Bee binary
-At every official release, we release the binary files of our software. You can download them by navigating to [releases](https://github.com/ethersphere/bee/releases).
+We provide a convenient [install script](https://github.com/ethersphere/bee/blob/637b67a8e0a2b15e707f510bb7f49aea4ef6c110/install.sh), which automatically detects the execution environment of your systemd and gets the correct binary.
+We advice to use the binary of the latest release, but you can also get the edge release (latest) master.
 
-A convenient way to download the binary is:
-
-```sh
-wget https://github.com/ethersphere/bee/releases/latest/download/bee-darwin-amd64 -O /usr/local/bin/bee
-chmod +x /usr/local/bin/bee
+#### Latest release
+- Using wget:
+```console
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.2.0 bash
 ```
+- Using curl:
+```console
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.2.0 bash
+```
+:::info
+Find the latest release of Bee by navigating to [bee](https://github.com/ethersphere/bee/releases/tag/) and use this release (e.g. v0.2.0) behind the TAG= in the commands above
+:::
 
-Please change the last part of the url (`bee-darwin-amd64`), if you are not on a `darwin-amd64` system. A list of supported systems is available at [releases](https://github.com/ethersphere/bee/releases).
+#### Edge
+- Using wget:
+ ```console
+ wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
+ ```
+
+ - Using curl:
+ ```console
+ curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
+ ```
+:::caution
+ If you use the latest master, this documentation is not guaranteed to be up-to-date
+:::
 
 ## Installing Bee with Docker
 Bee can be run as a docker container.
