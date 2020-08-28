@@ -11,7 +11,7 @@ module.exports = {
         'tutorial/store-with-encryption',
         'tutorial/host-a-website',
         'tutorial/tags',
-        'tutorial/host-a-website'
+        `tutorial/persistence`
     ],
     "DApps on Swarm": [
         'api-reference/api-reference'
