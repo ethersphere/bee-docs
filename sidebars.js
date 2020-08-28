@@ -8,6 +8,7 @@ module.exports = {
         'tutorial/start-your-node',
         'tutorial/starting-a-network',
         'tutorial/upload-and-download',
+        'tutorial/store-with-encryption',
         'tutorial/host-a-website',
         'tutorial/tags',
         `tutorial/persistence`
