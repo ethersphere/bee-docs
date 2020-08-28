@@ -32,5 +32,9 @@ Encryption is disabled by default on all Swarm Gateways to keep your data safe.
 To retreive your file, simply supply the full 64 byte string to the files endpoint, and the Bee client will download and decrypt all the relevant chunks and restore them to their original format.
 
 ```sh
-$ curl -OJ http://localhost:8083/files/d2baf779d7d6705880b50238358c8bc22e6ffca19995f3a0527c6fb263c5d860
+$ curl -OJ http://localhost:8083/files/9af0181735d4870589edc8748879dfd8898e0412eb63091c503212c4e23891823c484dcb8102baa7bd84117c5cc0176275efabaefccc9ac4a0e75ba3be9f1605
 ```
+
+:::caution
+Never send encrypted references to a Swarm Gateway, only to a privately hosted node. The reference also contains a key to decrypt your data and must be kept private and safe.
+:::
