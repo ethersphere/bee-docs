@@ -212,11 +212,35 @@ The path to a file that contains password for decrypting keys. The empty string 
 
 Custom welcome message to be displayed to peers on succesful connection.
 
-<!-- payment-threshold: "100000"
-payment-tolerance: "10000"
-tracing-enable: false
-tracing-endpoint: 127.0.0.1:6831
-tracing-service-name: bee -->
+#### --tracing-enable
+
+Send tracing spans to the tracing service. More information how to configure and visualize tracing data is available on /docs/bee-developers/useful-dev-info#tracing.
+
+*default* `false`
+
+#### --tracing-endpoint
+
+*default* `127.0.0.1:6831`
+
+The URL where the tracing service listens for Thrift protocol UDP messages.
+
+#### --tracing-service-name
+
+*default* `bee`
+
+Bee service identifier in tracing spans.
+
+#### --payment-threshold
+
+*default* `100000`
+
+The threshold in BZZ where you expect to get paid from your peers.
+
+#### --payment-tolerance
+
+*default* `10000`
+
+The excess debt above payment threshold in BZZ where you disconnect from your peer.
 
 
 ### Environment variables
