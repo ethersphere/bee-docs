@@ -13,17 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          fetch-depth: 0
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - uses: actions/setup-node@v1
         with:
-          hugo-version: '0.73.0'
-          extended: true
+          node-version: '12'
 
       - name: Build
-        run: hugo --minify
+        run: |
+          npm install
+          npm run-script build
 
       - name: Setup swarm
         run: |
@@ -32,14 +31,14 @@ jobs:
           printf ${{ secrets.KEY_FILE }} > ${HOME}/.ethereum/keystore/UTC--2020-06-25T12-47-59.087770594Z--2d1e2e9fd4832675b3e19d1678b362b1fc9b3747
           wget https://ethswarm.blob.core.windows.net/builds/swarm-linux-amd64-0.5.7-5ccfd995.tar.gz -O swarm.tar.gz
           tar --strip-components 1 -xzf swarm.tar.gz
-      
+
       - name: Swarm upload
         run: |
-          FEED=$(./swarm --bzzapi https://swarm-public-0-swarm.prod.swarm-gateways.net --verbosity 6 --recursive --defaultpath ./public/index.html up ./public)
+          FEED=$(./swarm --bzzapi https://swarm-public-0-swarm.prod.swarm-gateways.net --verbosity 6 --recursive --defaultpath ./build/index.html up ./build)
           ./swarm --bzzapi https://swarm-gateways.net/ --verbosity 6 --password password feed update 0x"${FEED}"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./build

@@ -3,7 +3,7 @@ module.exports = {
   tagline: 'Welcome to the Swarm',
   url: 'https://bee.ethswarm.org',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
   projectName: 'bee', // Usually your repo name.
