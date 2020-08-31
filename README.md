@@ -41,3 +41,7 @@ This command generates static content into the `build` directory and can be serv
 2. clone this repo
 3. run `hugo serve` in root folder of project
 4. see output for which port to point browser at (probably `http://localhost:1313`)
+
+## Where are the docs published to?
+- https://docs.ethswarm.org/bee-docs/introduction.html
+- https://swarm-gateways.net/bzz:/docs.swarm.eth/bee-docs/installation.html
