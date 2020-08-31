@@ -23,6 +23,7 @@ jobs:
         run: |
           npm install
           npm run-script build
+          rm ./build/.nojekyll
 
       - name: Setup swarm
         run: |
