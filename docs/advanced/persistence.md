@@ -32,7 +32,7 @@ To become a global pinner, you must:
 
 
 #### Start your node in global pinning mode
-Starting a node in global pinning mode is done with our standard configuration options (see [start](/docs/tutorial/start-your-node)). The flag which you pass to the command line is `--global-pinning-enable`.
+Starting a node in global pinning mode is done with our standard configuration options (see [start](/docs/getting-started/start-your-node)). The flag which you pass to the command line is `--global-pinning-enable`.
 
 This mode makes your node to listen to PSS (Postal Service over Swarm) messages, containing requests for repair. If your node receives a request for repair and you store the chunk for which repair is requested, your node will re-upload this chunk to its natural location in the network.
 

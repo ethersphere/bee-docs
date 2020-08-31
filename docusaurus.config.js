@@ -64,11 +64,11 @@ module.exports = {
           items: [
             {
               label: 'Mattermost',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              href: 'https://beehive.ethswarm.org/',
             },
             {
               label: 'Reddit',
-              href: 'https://discordapp.com/invite/docusaurus',
+              href: 'https://www.reddit.com/r/ethswarm',
             },
             {
               label: 'Twitter',
