@@ -3,45 +3,42 @@ id: introduction
 title: Introduction
 ---
 
-## Welcome to the Swarm
+Hello and welcome to the swarm! We are very happy to have you here with us! 🐝 
 
-Dear user, we are happy that you are here. Welcome to the Swarm! Whether you are hear to get all detailed intricacies of how Bee works under the hood, you just want to get to know how to start up your node or interact with other nodes; this is the place to start!
-We hope that you find what you seek. If not, please reach out to us (see contact details in section bellow).
+As soon as your Bee client is up and running you will begin to connect with peers all over the world to become a part of Swarm, a global p2p network tasked with storing and distributing all of the world's data.
 
-## Architecture and background
-They say the Web is broken. Web 3.0 technologies offer a solution that allows for better connection between content providers and content consumers in a decentralized way, fairly compensating involved parties. Swarm addresses aspects that have not yet been addressed by other peer-to-peer technologies, aiming to be the storage and communication layer for sovereign societies.  
-
-Swarm has an overlay layer on top of an existing underlay p2p network. The overlay network has protocols powering a distributed immutable storage of chunks. Above that are components providing high level data access and defining APIs for base-layer features. These two layers are considered core Swarm. On top of these, applications can be built.
-
-The design principles guiding Swarm are to be:
-- stable,
-- scalable,
-- secure,
-- self-sustaining.
-
-A detailed description of design and architecture of Swarm can be found in the [Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf) and on our [architecture](/bee-docs/architecture.html) page.
+Swarm is a decentralised data storage and distribution technology, ready to power the next generation of censorship resistant unstoppable serverless apps. It is the complement to blockchain based smart contracts originally envisiged by the Ethereum cryptocurrency and provides the mass storage piece in the Dapp building puzzle. Swarm is the hard drive of the world computer.
 
 ## Installation
-Don't have Bee installed yet? Head over to the [installation](/bee-docs/installation.html) section to dive into the world of Swarm!
+Don't have Bee installed yet? It's easy! Head over to the [installation](/docs/installation/quick-start) section to get Bee up and running on your computer.
 
 ## Usage
-Do you want to know how you can use your own Bee node, or interact with the Swarm without running your own node? Please head over to the [tutorial](/bee-docs/tutorial.html) chapter.
+To learn more about how to get the most out of Bee, head over to the [tutorials](/docs/getting-started/upload-and-download) section to find out how to share files with your friends, use Bee to host a website on a public Swarm Gateway, and much more...
+
+## Dapps
+Swarm is all about Dapps. We provide the most developer friendly environment to build Dapps on. Built on principles of functionality, flexibility and accessibility, Bee provides high level constructs for file storage, feeds and key-value stores, while also providing the low level access to other applications and libraries that create Single Owner and Trojan chunks clientside, with total e2e privacy.
+
+## Incentives
+Need even more incentive to get involved with the wonderful world of Swarm? Find out how you'll soon be earning BZZ tokens for storing and distributing your share of the worlds data, sharing is caring!
+
+## Find Out More
+What happens with your Bee node when you start it up? Want to know more about the amazing Swarm technology behind Bee? Want to make your own client? Read [The Book of Swarm](/docs/find-out-more/the-book-of-swarm), our 250 page epic guide to the future tech underpinning the Swarm network.
 
 ## Development
-Definitely read the [development](/bee-docs/development.html) section if you plan to develop on top of the Swarm network, want to contribute code to Bee or if you just want to experiment with the code and your node.
-
-## Compatiblity with the first Swarm
-Ethereum Swarm Bee is the second official Ethereum Swarm implementation. No compatibility on the network layer with the first Ethereum Swarm implementation can be provided, mainly because the change in underlying network protocol from devp2p to [libp2p](https://docs.libp2p.io/). This means that a Bee node cannot join first Swarm network and vice versa. Migrating data is possible possible; the easiest way is to download your files or chunks from the old Swarm and re-upload them to your Bee node. Currently, Bee provides the functionality to upload individual chunks and files.
+We'd love you to join us! Are you up to the challenge of helping us to create Bee and the other incredible technologies we're building on top of it? You are invited to contribute code to the Bee Client or any of the other projects in Swarm's [Ethersphere](https://github.com/ethersphere).
 
 ## Community
-- [Swarm Website](http://swarm.ethereum.org).
-- The Swarm Website is also hosted on Swarm [https://swarm-gateways.net/bzz:/theswarm.eth/](https://swarm-gateways.net/bzz:/theswarm.eth/).
-- [Community Chat on Mattermost](https://beehive.ethswarm.org/).
+There is a vibrant and buzzing community behind Swarm, get involved in one of our group channels.
+
+- [Swarm](http://swarm.ethereum.org).
+- [Beehive Chat on Mattermost](https://beehive.ethswarm.org/).
+- [Orange Lounge](https://t.me/joinchat/GoVG8RHYjUpD_-bEnLC4EQ).
 - [Twitter @ethswarm](https://twitter.com/ethswarm).
 - [reddit channel](https://www.reddit.com/r/ethswarm/).
-- [Research Forum](https://swarmresear.ch/) : Structured discussions about research and development.
 
-## Reporting a bug and contributing
-To report a bug, please use the projects [issue tracking](https://github.com/ethersphere/bee/issues).
+## Reporting a bug
+If your Bee isn't working, [get in touch and let us know!](https://github.com/ethersphere/bee/issues) Every Bee is important to us and we'll get right to work on fixing it for you as soon as possible. 🐝
 
-For contributing, please read the [coding guidelines](https://github.com/ethersphere/bee/blob/master/CODING.md).
+Thanks for being here, we wish you Love and Bees from the Swarm Team x
+
+

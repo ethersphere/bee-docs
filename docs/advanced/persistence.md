@@ -2,9 +2,7 @@
 title: Persistence
 id: persistence
 ---
-# Persistence
 
-## Why content slowly disappears from Swarm
 The storage capacity of the whole Swarm network equals the the sum of the storage capacity of all connected nodes. As nobody is restricted to upload content to Swarm, eventually the storage capacity of the Swarm network reaches its limits and nodes face the choice to either stop accepting new chunks or delete content which is there already for a while. 
 
 As Swarm nodes are programmed to behave economically, they won't stop accepting new chunks. The reasoning for this is that newly uploaded chunks are most likely to be accessed, offering the node an opportunity for profit. Instead, they will delete some chunks to make space for the new ones. The chunks that are deleted are the ones which were uploaded or accessed furthest away in the past.

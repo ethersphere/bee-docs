@@ -1,9 +1,17 @@
 ---
-title: Bee Developers
-id: bee-developers
+title: Useful Developer Info
+id: useful-dev-info
 ---
 
-Installation from source is described in the [Installation]("/bee-docs/installation.html").
+Welcome to the Dev area! We love PR's! 🐝 
+
+We would would love you to get involved with our [Github repo](https://github.com/ethersphere/bee).
+
+All the action can be found in our Mattermost instance, [The Beehive](https://beehive.ethswarm.org/). Sign up and get involved with our buzzing hive of daily dev chat.
+
+If you would like to contribute, please read the [coding guidelines](https://github.com/ethersphere/bee/blob/master/CODING.md) before you get started.
+
+Installation from source is described in the [Installation](/docs/installation/build-from-source).
 
 # Testing a connection with PingPong protocol
 
@@ -25,8 +33,8 @@ curl -XPOST localhost:6061/pingpong/d4440baf2d79e481c3c6fd93a2014d2e6fe038641882
 
 To process protocol buffer files and generate the Go code from it two tools are needed:
 
-- protoc - https://github.com/protocolbuffers/protobuf/releases
-- protoc-gen-gogofaster - https://github.com/gogo/protobuf
+- [protoc](https://github.com/protocolbuffers/protobuf/releases)
+- [protoc-gen-gogofaster](https://github.com/gogo/protobuf)
 
 Makefile rule `protobuf` can be used to automate `protoc-gen-gogofaster` installation and code generation:
 
@@ -41,8 +49,8 @@ Developers can gain an additional level of insight into the node by enabling `tr
   - Start jaeger:
 `docker run -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one:latest`
 
-  - start locally two bee nodes (different data dirs and ports) and connect them (see "Start a private network" in the [tutorial section](/bee-docs/tutorial)) with `--tracing` flag provided for both nodes
+  - start locally two bee nodes (different data dirs and ports) and connect them (see "Start a test network" in the [advanced section](/docs/advanced/starting-a-test-network)) with `--tracing` flag provided for both nodes
 
-- Make a call to the pinpong API on one of the two nodes (`curl -XPOST localhost:6061/pingpong/<overlay address other node>`).
+- Make a call to the PingPong API on one of the two nodes (`curl -XPOST localhost:6061/pingpong/<overlay address other node>`).
 
 Validate tracing in the web interface (`http://localhost:16686/`).

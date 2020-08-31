@@ -22,15 +22,15 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/installation/simple-node',
+          to: 'docs/installation/quick-start',
           activeBasePath: 'docs',
           label: 'Installation',
           position: 'left',
         },
         {
-          to: 'docs/tutorial/start-your-node',
+          to: 'docs/getting-started/start-your-node',
           activeBasePath: 'docs',
-          label: 'Starting Your Node',
+          label: 'Start Your Node',
           position: 'left',
         },
         {
