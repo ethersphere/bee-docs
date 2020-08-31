@@ -36,8 +36,3 @@ This command generates static content into the `build` directory and can be serv
 5. Upload the files also to Bee / Swarm network and get their hashes.
 6. Replace the reference to the hashes in the URLs in the `/bee-docs/API-reference/index.md`.
 7. Rebuild and redeploy docs.
-
-1. [Install Hugo Extended version](https://gohugo.io/getting-started/installing/)
-2. clone this repo
-3. run `hugo serve` in root folder of project
-4. see output for which port to point browser at (probably `http://localhost:1313`)
