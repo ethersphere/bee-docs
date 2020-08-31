@@ -2,9 +2,7 @@
 title: Persistence
 id: persistence
 ---
-# Persistence
 
-## Why content slowly disappears from Swarm
 The storage capacity of the whole Swarm network equals the the sum of the storage capacity of all connected nodes. As nobody is restricted to upload content to Swarm, eventually the storage capacity of the Swarm network reaches its limits and nodes face the choice to either stop accepting new chunks or delete content which is there already for a while. 
 
 As Swarm nodes are programmed to behave economically, they won't stop accepting new chunks. The reasoning for this is that newly uploaded chunks are most likely to be accessed, offering the node an opportunity for profit. Instead, they will delete some chunks to make space for the new ones. The chunks that are deleted are the ones which were uploaded or accessed furthest away in the past.
@@ -34,7 +32,7 @@ To become a global pinner, you must:
 
 
 #### Start your node in global pinning mode
-Starting a node in global pinning mode is done with our standard configuration options (see [start](/docs/tutorial/start-your-node)). The flag which you pass to the command line is `--global-pinning-enable`.
+Starting a node in global pinning mode is done with our standard configuration options (see [start](/docs/getting-started/start-your-node)). The flag which you pass to the command line is `--global-pinning-enable`.
 
 This mode makes your node to listen to PSS (Postal Service over Swarm) messages, containing requests for repair. If your node receives a request for repair and you store the chunk for which repair is requested, your node will re-upload this chunk to its natural location in the network.
 
