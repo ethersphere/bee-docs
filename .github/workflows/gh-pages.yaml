@@ -42,7 +42,7 @@ jobs:
       - name: Build for swarm
         run: |
           rm -rf build
-          sed -i "s/baseUrl: '\/'/baseUrl: '\/bzz:\/docs\.swarm\.eth'/g" docusaurus.config.js
+          sed -i "s/baseUrl: '\/'/baseUrl: '\/bzz:\/docs\.swarm\.eth\/'/g" docusaurus.config.js
           npm install
           npm run-script build
           rm ./build/.nojekyll
