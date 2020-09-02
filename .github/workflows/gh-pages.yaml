@@ -31,7 +31,7 @@ jobs:
         run: |
           npm install
           npm run-script build
-i         echo "docs.ethswarm.org" > ./build/CNAME
+          echo "docs.ethswarm.org" > ./build/CNAME
           rm ./build/.nojekyll
 
       - name: Deploy to gh-pages
