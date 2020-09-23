@@ -1,6 +1,6 @@
 # Website
 
-Documentation for the Swarm Bee Client built using [Docusaurus 2](https://v2.docusaurus.io/).
+Documentation for the [Swarm Bee Client](https://github.com/ethersphere/bee). View at [docs.ethswarm.org](https://docs.ethswarm.org).
 
 ### Installation
 
