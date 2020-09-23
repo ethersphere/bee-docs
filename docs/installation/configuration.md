@@ -82,7 +82,7 @@ Bee provides the following options to customise your node.
 
 *default* :8080
 
-The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all requests.
+The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all requests. Argument values are of the form '132.132.132.132:8080'.
 
 #### --bootnode
 
@@ -167,14 +167,19 @@ Enables the Global Pinning functionality when set to `true`.
 
 *default* `""`
 
+Sets the expected public IP. Normally this is generated automatically, but in certain circumstances it may be desirable to set it manually.
+
 #### --network-id
 
 *default* `1`
+
+The network ID for which to accept new connections. Set to 1 for mainnet.
 
 #### --p2p-addr
 
 *default* `:7070`
 
+The ip and port to listen for p2p protocol messages.
 
 #### --p2p-quic-enable
 
@@ -184,11 +189,13 @@ Enables the Global Pinning functionality when set to `true`.
 
 *default* `false`
 
+Enables web-sockets.
+
 #### --password
 
 *default* `""`
 
-The password to decrypt keys. 
+Password used to decrypt Swarm identity keys. 
 
 :::danger
 Passing passwords as command line arguments is insecure. Use a password file or environment variables in production environments.
