@@ -81,7 +81,7 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              to: 'blog',
+              href: 'https://medium.com/ethereum-swarm',
             },
             {
               label: 'GitHub',
