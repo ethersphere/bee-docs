@@ -13,7 +13,7 @@ module.exports = {
         'getting-started/working-with-your-node',
         'getting-started/upload-and-download',
         'getting-started/upload-a-directory',
-        'getting-started/host-your-website-using-ENS',
+        'getting-started/host-your-website-using-ens',
         // 'get-started/keep-your-data-available',
         'getting-started/store-with-encryption'
    ],

@@ -1,6 +1,6 @@
 ---
 title: Host Your Website Using ENS
-id: host-your-website-using-ENS
+id: host-your-website-using-ens
 ---
 
 Bee treats ENS as a first class citizen, wherever you can use a Swarm reference, you can also use an ENS domain where the `content` ENS Resolver record is set to be a `bzz://` reference.
