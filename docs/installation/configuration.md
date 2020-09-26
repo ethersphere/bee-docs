@@ -78,6 +78,16 @@ welcome-message: ""
 
 Bee provides the following options to customise your node.
 
+### Global
+
+#### --config
+
+*default* `/home/<user>/.bee.yaml`
+
+The location of a yaml configuration file containing configuration instructions. See [configuration](#configuration-file).
+
+### Start
+
 #### --api-addr
 
 *default* :8080
@@ -94,11 +104,17 @@ By default a node connects to the Swarm mainnet.  When using a private or test n
 
 Any Bee node in a network can act as a bootnode.
 
-#### --config
+#### --clef-signer-enable             
 
-*default* `/home/<user>/.bee.yaml`
+*default* `false`
 
-The location of a yaml configuration file containing configuration instructions. See [configuration](#configuration-file).
+Set this to true to enable signing using Ethereum's 'Clef' external signer.
+
+#### --clef-signer-endpoint
+
+*default* **default path for clef for each host operating system**
+
+You may also specify a custom ipc file path for your Clef signer.
 
 #### --cors-allowed-origins
 
@@ -157,6 +173,13 @@ Ommiting the IP part of the address will cause the server to listen to all reque
 
 Set this to `true` to enable access to the [Debug API](/docs/api-reference/api-reference)
 
+
+#### --gateway-mode 
+
+*default* `false`
+
+Set this to `true` to disable a set of sensitive features in the API to ensure that it is safe to expose your `api-addr` to the public internet.
+
 #### --global-pinning-enable
 
 *default* `false`
@@ -207,17 +230,35 @@ Passing passwords as command line arguments is insecure. Use a password file or 
 
 The path to a file that contains password for decrypting keys. The empty string assumes no file is presented.
 
-#### --verbosity
+#### --payment-early
 
-*default* `info`
+Amount in BZZ below the peers payment threshold which causes Bee to initiate settlement (default 10000)
 
-0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
+#### --payment-threshold
 
-#### --welcome-message
+*default* `100000`
 
-*default* `""`
+The threshold in BZZ where you expect to get paid from your peers.
 
-Custom welcome message to be displayed to peers on succesful connection.
+#### --payment-tolerance
+
+*default* `10000`
+
+The excess debt above payment threshold in BZZ where you disconnect from your peer.
+
+      --resolver-options strings       resolver connection string, see help for format
+
+#### --standalone
+
+*default* `false`
+
+Set this flag if we would like the node not to try to connect to the network. Useful for development.
+
+#### --swap-enable                    enable swap
+      --swap-endpoint string           swap ethereum blockchain endpoint (default "http://localhost:8545")
+      --swap-factory-address string    swap factory address
+      --swap-initial-deposit uint      initial deposit if deploying a new chequebook
+
 
 #### --tracing-enable
 
@@ -237,17 +278,17 @@ The URL where the tracing service listens for Thrift protocol UDP messages.
 
 Bee service identifier in tracing spans.
 
-#### --payment-threshold
+#### --verbosity
 
-*default* `100000`
+*default* `info`
 
-The threshold in BZZ where you expect to get paid from your peers.
+0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
 
-#### --payment-tolerance
+#### --welcome-message
 
-*default* `10000`
+*default* `""`
 
-The excess debt above payment threshold in BZZ where you disconnect from your peer.
+Custom welcome message to be displayed to peers on succesful connection.
 
 
 ### Environment variables
