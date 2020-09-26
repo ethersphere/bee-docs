@@ -16,12 +16,15 @@ module.exports = {
         'getting-started/host-your-website-using-ens',
         // 'get-started/keep-your-data-available',
         'getting-started/store-with-encryption'
-   ],
+    ],
     "Advanced Usage": [
         'advanced/tags',
         'advanced/persistence',
         'advanced/starting-a-test-network',
-        // 'advanced/bandwidth-incentives',
+    ],
+    "Experimental": [
+        'experimental/pss',
+        'experimental/swap',
     ],
     "API Reference": [
         'api-reference/api-reference'
