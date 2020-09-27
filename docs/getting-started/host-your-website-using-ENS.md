@@ -11,7 +11,7 @@ You may substitute ENS names for Swarm references in any of the [API methods](/d
 
 ### Enable ENS on Your Node
 
-In order to resolve ENS names using your API endpoints, you must specify a valid ENS resolver endpoint when starting your Bee node. Public gateways such as [gateway.ethswarm.org](https://gateway.ethswarm.org) will also usually provide ENS resolution.
+In order to resolve ENS names using your API endpoints, you must specify a valid ENS resolver endpoint when starting your Bee node. We recommend that users run their own Geth node, which can be trusted absolutely, however service providers such as [https://cloudflare-eth.com](https://cloudflare-eth.com) or [Infura](https://infura.io) may suffice. Public gateways such as [gateway.ethswarm.org](https://gateway.ethswarm.org) will also usually provide ENS resolution.
 
 ```sh
 bee start --resolver-options "https://cloudflare-eth.com"

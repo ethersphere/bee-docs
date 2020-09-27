@@ -246,7 +246,15 @@ The threshold in BZZ where you expect to get paid from your peers.
 
 The excess debt above payment threshold in BZZ where you disconnect from your peer.
 
-      --resolver-options strings       resolver connection string, see help for format
+### --resolver-options 
+
+*default* eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e
+
+ENS API endpoint for a TLD, with contract address. Multiple values can be provided. 
+
+Settings should be provided in the format `[tld:][contract-addr@]url`
+
+A default top level domain and resolver contract address are provided, but an ENS/Geth endpoint must be provided to enable this functionality.
 
 #### --standalone
 
