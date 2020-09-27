@@ -7,14 +7,6 @@ Out of the ashes of Ethereum's vision for a leak-proof decentralised anonymous m
 
 PSS provides a pub-sub facility that can be used for a variety of tasks. Nodes are able to listen to messages received for a specific topic in their nearest neighbourhood and create messages destined for another neighbourhood which are sent over the network using Swarm's usual data dissemination protocols.
 
-### Enable PSS On Your Node
-
-In order to receive PSS messages you must first enable the p2p websockets API when starting your node.
-
-```sh
-	bee start --p2p-ws-enable
-```
-
 ### Subscribe and Receive Messages
 
 Once your Bee node is up and running, you will be able to subscribe to feeds using websockets. For testing, it is useful to use the [websocat](https://docs.rs/crate/websocat/1.0.1) command line utility.
@@ -54,7 +46,6 @@ bee start \
     --debug-api-addr=:6062 \
     --data-dir=/tmp/bee2 \
     --bootnode="" \
-    --p2p-ws-enable \
     --p2p-addr=:7072
 ```
 
@@ -86,7 +77,6 @@ bee start \
     --debug-api-addr=:6063 \
     --data-dir=/tmp/bee3 \
     --bootnode="" \
-    --p2p-ws-enable \
     --p2p-addr=:7073
 ```
 

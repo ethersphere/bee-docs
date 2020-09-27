@@ -212,7 +212,7 @@ The ip and port to listen for p2p protocol messages.
 
 *default* `false`
 
-Enables web-sockets.
+Enables web-sockets transport for p2p communications.
 
 #### --password
 
