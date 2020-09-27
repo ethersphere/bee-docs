@@ -108,7 +108,7 @@ Any Bee node in a network can act as a bootnode.
 
 *default* `false`
 
-Set this to true to enable signing using Ethereum's 'Clef' external signer.
+Set this to true to enable signing using Ethereum's 'Clef' external signer. Clef is an new feature which requires a corresponding rules files or running in advanced mode to allow for auto-signing of handshakes and cheques.
 
 #### --clef-signer-endpoint
 
