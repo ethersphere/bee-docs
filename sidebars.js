@@ -18,12 +18,12 @@ module.exports = {
         'getting-started/store-with-encryption'
     ],
     "Advanced Usage": [
+        'advanced/pss',
         'advanced/tags',
         'advanced/persistence',
         'advanced/starting-a-test-network',
     ],
     "Experimental": [
-        'experimental/pss',
         'experimental/swap',
     ],
     "API Reference": [
