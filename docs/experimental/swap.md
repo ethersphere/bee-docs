@@ -9,7 +9,7 @@ Underpinning Swarm is a set of accounting protocols that have been developed and
 Learn more about how SWAP and the other accounting protocols work by reading the [Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
 :::
 
-To enable SWAP mode, you must include configuration paramaters `--swap-enabled`, and also a valid [Goerli Testnet](https://goerli.net/) RPC endpoint. An example of this is provided at [rpc.slock.it/goerli](https://rpc.slock.it/goerli), you may sign up for a free account at [Infura](https://infura.io/) run your [own node](https://github.com/goerli/testnet).
+To enable SWAP mode, you must include configuration paramaters `--swap-enabled`, and also a valid [Goerli Testnet](https://goerli.net/) RPC endpoint. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a RPC provider such as [rpc.slock.it/goerli](https://rpc.slock.it/goerli) or [Infura](https://infura.io/) .
 
 When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of GBZZ (Goerli BZZ tokens) in the chequebook contract so that it can pay other nodes in return for their services.
 
@@ -133,13 +133,43 @@ curl localhost:6062/settlements | jq
     },
     {
       "peer": "f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47",
-      "received": 0,
-      "sent": 89890
+      "received": 89890,
+      "sent": 0
     }
     // ...
   ]
 }
 ```
 
+As our node's participation in the network increases, we will begin to see more and more of these balances arriving. In the case that we have received a settlement from another peer, we can ask our node to perform the relevant transactions on the blockchain, and cash our earnings out.
 
+To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
 
+```sh
+curl -XPOST http://localhost:6062/chequebook/cashout/f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47
+```
+
+```json
+{"transactionHash":"0xcdf4be04e9be76b9e6f52fa52ebd147407211845cde84c7e5634a3a3604df8c4"}
+```
+
+Finally, we can see the status of the cashout transaction by sending a GET request to the same URL.
+
+```sh
+curl http://localhost:6062/chequebook/cashout/f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47 | jq
+```
+
+```json
+{
+  "peer": "f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47",
+  "chequebook": "0x5f50924f29b87440b230b2ee4cf288ebc133e235",
+  "cumulativePayout": 89890,
+  "beneficiary": "0x21b26864067deb88e2d5cdca512167815f2910d3",
+  "transactionHash": "0xcdf4be04e9be76b9e6f52fa52ebd147407211845cde84c7e5634a3a3604df8c4",
+  "recipient": "0xa16929f387f6934c5e5d4eca764c70500ca00298",
+  "lastPayout": 89890,
+  "bounced": false
+}
+```
+
+Success, we earned some BZZ!
