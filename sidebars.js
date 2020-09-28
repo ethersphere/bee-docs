@@ -23,9 +23,9 @@ module.exports = {
         'advanced/persistence',
         'advanced/starting-a-test-network',
     ],
-    "Experimental": [
-        'experimental/swap',
-    ],
+    // "Experimental": [
+    //     'experimental/swap',
+    // ],
     "API Reference": [
         'api-reference/api-reference'
     ],
