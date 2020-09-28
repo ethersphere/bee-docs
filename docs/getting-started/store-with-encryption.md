@@ -21,7 +21,11 @@ When successful, the Bee client will return a 64 byte reference, instead of the 
 {"reference":"f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3"}
 ```
 
-This consists of a 32 byte Swarm Reference, and a 32 byte decryption key.
+Here we see that, when using the Bee node's encryption function, the reference hash that is returned is 128 hex characters long. The first 64 characters of this are the familiar Swarm address - the reference that allows us to retrieve the data from the swarm - it is the same as the reference we would get uploading unencrypted files to using Bee it is safe to share.
+
+The second second part of the reference is a 64 character decryption key which is required to decrypt the referenced content and view the original data in the clear, this is sensitive key material and must be kept private.
+
+It is important that this data is not be sent in requests to a public gateway as this would mean that gateway would be able to decrypt your data. However, if you are running a node on your local machine, you may safely use the api bound to `localhost`. The key material is never exposed to the network so your data remains safe.
 
 :::info
 Encryption is disabled by default on all Swarm Gateways to keep your data safe. [Install Bee on your computer](/docs/installation/quick-start) to use the encryption feature.

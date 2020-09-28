@@ -2,7 +2,9 @@ module.exports = {
   title: 'Swarm Bee Client',
   tagline: 'Welcome to the Swarm',
   url: 'https://bee.ethswarm.org',
+  // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
+  // end
   onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
@@ -81,7 +83,7 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              to: 'blog',
+              href: 'https://medium.com/ethereum-swarm',
             },
             {
               label: 'GitHub',

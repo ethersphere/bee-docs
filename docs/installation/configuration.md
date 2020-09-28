@@ -1,4 +1,4 @@
----
+\---
 title: Configuring Your Bee Node
 id: configuration
 ---
@@ -78,11 +78,21 @@ welcome-message: ""
 
 Bee provides the following options to customise your node.
 
+### Global
+
+#### --config
+
+*default* `/home/<user>/.bee.yaml`
+
+The location of a yaml configuration file containing configuration instructions. See [configuration](#configuration-file).
+
+### Start
+
 #### --api-addr
 
 *default* :8080
 
-The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all requests.
+The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all requests. Argument values are of the form '132.132.132.132:8080'.
 
 #### --bootnode
 
@@ -94,11 +104,17 @@ By default a node connects to the Swarm mainnet.  When using a private or test n
 
 Any Bee node in a network can act as a bootnode.
 
-#### --config
+#### --clef-signer-enable             
 
-*default* `/home/<user>/.bee.yaml`
+*default* `false`
 
-The location of a yaml configuration file containing configuration instructions. See [configuration](#configuration-file).
+Set this to true to enable signing using Ethereum's 'Clef' external signer. Clef is an new feature which requires a corresponding rules files or running in advanced mode to allow for auto-signing of handshakes and cheques.
+
+#### --clef-signer-endpoint
+
+*default* **default path for clef for each host operating system**
+
+You may also specify a custom ipc file path for your Clef signer.
 
 #### --cors-allowed-origins
 
@@ -157,6 +173,13 @@ Ommiting the IP part of the address will cause the server to listen to all reque
 
 Set this to `true` to enable access to the [Debug API](/docs/api-reference/api-reference)
 
+
+#### --gateway-mode 
+
+*default* `false`
+
+Set this to `true` to disable a set of sensitive features in the API to ensure that it is safe to expose your `api-addr` to the public internet.
+
 #### --global-pinning-enable
 
 *default* `false`
@@ -167,14 +190,19 @@ Enables the Global Pinning functionality when set to `true`.
 
 *default* `""`
 
+Sets the expected public IP. Normally this is generated automatically, but in certain circumstances it may be desirable to set it manually.
+
 #### --network-id
 
 *default* `1`
+
+The network ID for which to accept new connections. Set to 1 for mainnet.
 
 #### --p2p-addr
 
 *default* `:7070`
 
+The ip and port to listen for p2p protocol messages.
 
 #### --p2p-quic-enable
 
@@ -184,11 +212,13 @@ Enables the Global Pinning functionality when set to `true`.
 
 *default* `false`
 
+Enables web-sockets transport for p2p communications.
+
 #### --password
 
 *default* `""`
 
-The password to decrypt keys. 
+Password used to decrypt Swarm identity keys. 
 
 :::danger
 Passing passwords as command line arguments is insecure. Use a password file or environment variables in production environments.
@@ -200,23 +230,61 @@ Passing passwords as command line arguments is insecure. Use a password file or 
 
 The path to a file that contains password for decrypting keys. The empty string assumes no file is presented.
 
-#### --verbosity
+#### --payment-early
 
-*default* `info`
+Amount in BZZ below the peers payment threshold which causes Bee to initiate settlement (default 10000)
 
-0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
+#### --payment-threshold
 
-#### --welcome-message
+*default* `100000`
 
-*default* `""`
+The threshold in BZZ where you expect to get paid from your peers.
 
-Custom welcome message to be displayed to peers on succesful connection.
+#### --payment-tolerance
+
+*default* `10000`
+
+The excess debt above payment threshold in BZZ where you disconnect from your peer.
+
+### --resolver-options 
+
+*default* eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e
+
+ENS API endpoint for a TLD, with contract address. Multiple values can be provided. 
+
+Settings should be provided in the format `[tld:][contract-addr@]url`
+
+A default top level domain and resolver contract address are provided, but an ENS/Geth endpoint must be provided to enable this functionality.
+
+#### --standalone
+
+*default* `false`
+
+Set this flag if we would like the node not to try to connect to the network. Useful for development.
+
+#### --swap-enable
+
+*default* `true`
+
+#### --swap-endpoint           
+
+*default* `http://localhost:8545`
+
+SWAP ethereum blockchain endpoint.
+
+#### --swap-factory-address
+
+*default* `anointed contract for the current blockchain id`
+
+#### --swap-initial-deposit
+
+*default* `100000000`
 
 #### --tracing-enable
 
-Send tracing spans to the tracing service. More information how to configure and visualize tracing data is available on /docs/bee-developers/useful-dev-info#tracing.
-
 *default* `false`
+
+Send tracing spans to the tracing service. More information how to configure and visualize tracing data is available on /docs/bee-developers/useful-dev-info#tracing.
 
 #### --tracing-endpoint
 
@@ -230,17 +298,17 @@ The URL where the tracing service listens for Thrift protocol UDP messages.
 
 Bee service identifier in tracing spans.
 
-#### --payment-threshold
+#### --verbosity
 
-*default* `100000`
+*default* `info`
 
-The threshold in BZZ where you expect to get paid from your peers.
+0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
 
-#### --payment-tolerance
+#### --welcome-message
 
-*default* `10000`
+*default* `""`
 
-The excess debt above payment threshold in BZZ where you disconnect from your peer.
+Custom welcome message to be displayed to peers on succesful connection.
 
 
 ### Environment variables

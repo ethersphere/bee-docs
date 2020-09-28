@@ -32,6 +32,10 @@ bee version
 > 0.2.0
 ```
 
+### Upgrading Bee
+
+To upgrade previous versions of Bee installed using the above method, simply re-run the installation command above.
+
 ### Edge (Unstable)
 
 To get a sneak preview of the latest features added to Bee, you may also install the Edge version, which tracks the master branch of the [Github respository](https://github.com/ethersphere/bee)
