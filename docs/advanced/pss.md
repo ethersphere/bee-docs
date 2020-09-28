@@ -55,7 +55,8 @@ bee start \
     --data-dir=/tmp/bee2 \
     --bootnode="" \
     --p2p-ws-enable \
-    --p2p-addr=:7072
+    --p2p-addr=:7072 \
+    --swap-enable=false
 ```
 
 We must make a note of the Swarm overlay address, underlay address and public key which are created once each node has started. We find this information from the addresses endpoint of the debug API.
@@ -87,7 +88,8 @@ bee start \
     --data-dir=/tmp/bee3 \
     --bootnode="" \
     --p2p-ws-enable \
-    --p2p-addr=:7073
+    --p2p-addr=:7073 \
+    --swap-enable=false
 ```
 
 ```sh

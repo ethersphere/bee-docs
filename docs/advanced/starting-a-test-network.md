@@ -19,6 +19,7 @@ debug-api-enable: true
 bootnode: ""
 data-dir: /tmp/bee/node1
 password: some pass phze
+swap-enable: false
 ```
 
 **config_2.yaml**
@@ -32,6 +33,7 @@ data-dir: /tmp/bee/node2
 bootnode: ""
 password: some pass phze
 welcome-message: "Bzz Bzz Bzz"
+swap-enable: false
 ```
 
 Note that for each node, we provide a different `api-addr`, `debug-api-addr`. If we had not specified different addresses here, we would get an `address already in use` error, as no two applications can listen to the same port. We also specify a different `p2p-addr`. If we had not, our nodes would not be able to communicate with each other. We also specify a separate `data-dir` for each node, as each node must have a it's own separate key and chunk data store.
@@ -98,6 +100,7 @@ data-dir: /tmp/bee/node2
 bootnode: "/ip4/127.0.0.1/tcp/7070/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs"
 password: some pass phze
 welcome-message: "Bzz Bzz Bzz"
+swap-enable: false
 ```
 
 Now, we can shut our second node and reboot with the new configuration.
