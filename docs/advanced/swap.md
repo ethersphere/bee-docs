@@ -3,7 +3,7 @@ title: SWAP Bandwidth Accounting
 id: swap
 ---
 
-Underpinning Swarm is a set of accounting protocols that have been developed and prototyped during over 5 years of R&D. Your Beta Bee node contains functionality giving it the ability to keep track of bandwidth exchanges with all it's peers, issue and cache cheques using smart contracts which live on EVM compatible blockchain. Currently we are in the testing phase using the Goerli testnet. We would love for you to get involved, help us try out these incentives and maybe even earn some GBZZ!
+Underpinning Swarm is a set of accounting protocols that have been developed and prototyped during over 5 years of R&D. Your Beta Bee node contains functionality giving it the ability to keep track of bandwidth exchanges with all it's peers, issue and cache cheques using smart contracts which live on EVM compatible blockchain. Currently we are in the testing phase using the Goerli testnet. We would love for you to get involved, help us try out these incentives and maybe even earn some gBZZ!
 
 :::info
 Learn more about how SWAP and the other accounting protocols work by reading the [Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
@@ -11,9 +11,9 @@ Learn more about how SWAP and the other accounting protocols work by reading the
 
 To enable SWAP mode, you must include configuration paramaters `--swap-enabled`, and also a valid [Goerli Testnet](https://goerli.net/) RPC endpoint. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a RPC provider such as [rpc.slock.it/goerli](https://rpc.slock.it/goerli) or [Infura](https://infura.io/) .
 
-When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of GBZZ (Goerli BZZ tokens) in the chequebook contract so that it can pay other nodes in return for their services.
+When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of gBZZ (Goerli BZZ tokens) in the chequebook contract so that it can pay other nodes in return for their services.
 
-In order to interact with the Goerli blockchain to deploy contracts and make payments, we must fund our account with Goerli ETH (GETH), and to make payments in return for services our account must also own some Goerli BZZ (GBZZ). We can get both tokens for trial purposes from the [Swarm Goerli Faucet](https://faucet.ethswarm.org/).
+In order to interact with the Goerli blockchain to deploy contracts and make payments, we must fund our account with Goerli ETH (GETH), and to make payments in return for services our account must also own some Goerli BZZ (gBZZ). We can get both tokens for trial purposes from the [Swarm Goerli Faucet](https://faucet.ethswarm.org/).
 
 To get the Ethereum address, we can simply run our Bee node with SWAP enabled and pointed at the Goerli rpc endpoint.
 
@@ -37,7 +37,7 @@ Since we haven't yet funded our account, we will also see an error protesting in
 Error: insufficient token for initial deposit	
 ```
 
-To resolve this, navigate to the [Swarm Goerli Faucet](https://faucet.ethswarm.org/) and submit your address, ensuring it is prepended with the characters `0x` to the faucet, fill out the recaptcha (sorry 🙈) and wait for confirmation that your GETH and GBZZ have been dispensed.
+To resolve this, navigate to the [Swarm Goerli Faucet](https://faucet.ethswarm.org/) and submit your address, ensuring it is prepended with the characters `0x` to the faucet, fill out the recaptcha (sorry 🙈) and wait for confirmation that your GETH and gBZZ have been dispensed.
 
 Now, we can run our Bee node and we will start to see Bee creating and waiting for transactions to complete. Please be patient this might take a few moments!
 
@@ -53,7 +53,7 @@ DEBU[2020-09-26T18:25:33+01:00] initializing NAT manager
 ...
 ```
 
-Now our chequebook is deployed, and credited with an initial deposit of GBZZ ready to be given to reward our fellow busy Bee nodes for their services. You will also provide services, and be rewarded by your peers for services you provide for them.
+Now our chequebook is deployed, and credited with an initial deposit of gBZZ ready to be given to reward our fellow busy Bee nodes for their services. You will also provide services, and be rewarded by your peers for services you provide for them.
 
 Let's upload a 20mb file to the network so we can see some traffic being generated as Bee begins to push chunks into the network. In order to do this, we will pay a forwarding cost in each node that passes the chunk on.
 
