@@ -1,4 +1,4 @@
----
+\---
 title: Configuring Your Bee Node
 id: configuration
 ---
@@ -262,17 +262,29 @@ A default top level domain and resolver contract address are provided, but an EN
 
 Set this flag if we would like the node not to try to connect to the network. Useful for development.
 
-#### --swap-enable                    enable swap
-      --swap-endpoint string           swap ethereum blockchain endpoint (default "http://localhost:8545")
-      --swap-factory-address string    swap factory address
-      --swap-initial-deposit uint      initial deposit if deploying a new chequebook
+#### --swap-enable
 
+*default* `true`
+
+#### --swap-endpoint           
+
+*default* `http://localhost:8545`
+
+SWAP ethereum blockchain endpoint.
+
+#### --swap-factory-address
+
+*default* `anointed contract for the current blockchain id`
+
+#### --swap-initial-deposit
+
+*default* `100000000`
 
 #### --tracing-enable
 
-Send tracing spans to the tracing service. More information how to configure and visualize tracing data is available on /docs/bee-developers/useful-dev-info#tracing.
-
 *default* `false`
+
+Send tracing spans to the tracing service. More information how to configure and visualize tracing data is available on /docs/bee-developers/useful-dev-info#tracing.
 
 #### --tracing-endpoint
 
