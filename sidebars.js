@@ -21,11 +21,9 @@ module.exports = {
         'advanced/pss',
         'advanced/tags',
         'advanced/persistence',
+        'advanced/swap',
         'advanced/starting-a-test-network',
     ],
-    // "Experimental": [
-    //     'experimental/swap',
-    // ],
     "API Reference": [
         'api-reference/api-reference'
     ],
