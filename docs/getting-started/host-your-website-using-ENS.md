@@ -21,13 +21,16 @@ bee start --resolver-options "https://cloudflare-eth.com"
 
 First we will need to upload the website assets to Swarm in order to get it's Swarm reference hash, see [uploading a directory](/docs/getting-started/upload-a-directory) for more information.
 
-This time we will also include the `Swarm-Index` header set to the `index.html`. This will cause Bee to serve each directories `index.html` file as default when browsing to the directory root `/` url.
+This time we will also include the `Swarm-Index-Document` header set to the `index.html`. This will cause Bee to serve each directories `index.html` file as default when browsing to the directory root `/` url. We will also provide a custom error page, using the `Swarm-Error-Document` header.
+
+In the case that your website is a single page app, where you would like to direct to the javascript history api powered router, you may provide the `index.html` page for both settings.
 
 ```bash
 curl \
 	-X POST \
 	-H "Content-Type: application/x-tar" \
 	-H "Swarm-Index-Document: index.html" \
+	-H "Swarm-Error-Document: index.html" \
 	--data-binary @my_website.tar http://localhost:8080/dirs
 ```
 
