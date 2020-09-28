@@ -9,72 +9,38 @@ Underpinning Swarm is a set of accounting protocols that have been developed and
 Learn more about how SWAP and the other accounting protocols work by reading the [Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
 :::
 
-To enable SWAP mode, you must include configuration paramaters `--swap-enabled`, and also a valid [Goerli Testnet](https://goerli.net/) RPC endpoint. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a RPC provider such as [rpc.slock.it/goerli](https://rpc.slock.it/goerli) or [Infura](https://infura.io/) .
 
-When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of gBZZ (Goerli BZZ tokens) in the chequebook contract so that it can pay other nodes in return for their services.
+To investigate our accounting, let's upload a 20mb file to the network so we can see some traffic being generated as Bee begins to push chunks into the network. In order to do this, we will pay a forwarding cost in each node that passes the chunk on.
 
-In order to interact with the Goerli blockchain to deploy contracts and make payments, we must fund our account with Goerli ETH (GETH), and to make payments in return for services our account must also own some Goerli BZZ (gBZZ). We can get both tokens for trial purposes from the [Swarm Goerli Faucet](https://faucet.ethswarm.org/).
-
-To get the Ethereum address, we can simply run our Bee node with SWAP enabled and pointed at the Goerli rpc endpoint.
+First, we will need to run our Bee node with a RPC endpoint, debug api enabled and verbosity set to TRACE.
 
 ```sh
 bee start \
-	--verbosity 5 \
-	--swap-enable \
-	--swap-endpoint https://rpc.slock.it/goerli \
-	--debug-api-enable
+  --verbosity 5 \
+  --swap-enable \
+  --swap-endpoint https://rpc.slock.it/goerli \
+  --debug-api-enable
 ```
-
-We will see the Ethereum address printed out in our logs.
-
-```
-INFO[2020-09-26T14:21:25+01:00] using ethereum address a16929f387f6934c5e5d4eca764c70500ca00298
-```
-
-Since we haven't yet funded our account, we will also see an error protesting insufficient funds.
-
-```
-Error: insufficient token for initial deposit	
-```
-
-To resolve this, navigate to the [Swarm Goerli Faucet](https://faucet.ethswarm.org/) and submit your address, ensuring it is prepended with the characters `0x` to the faucet, fill out the recaptcha (sorry 🙈) and wait for confirmation that your GETH and gBZZ have been dispensed.
-
-Now, we can run our Bee node and we will start to see Bee creating and waiting for transactions to complete. Please be patient this might take a few moments!
-
-```
-INFO[2020-09-26T14:52:23+01:00] deploying new chequebook
-TRAC[2020-09-26T14:52:24+01:00] waiting for transaction e9267f568fde587440873b906bc6328b12a6e6e618948a2130a5abfd02600152 to be mined: not found
-TRAC[2020-09-26T14:52:25+01:00] waiting for transaction e9267f568fde587440873b906bc6328b12a6e6e618948a2130a5abfd02600152 to be mined: not found
-INFO[2020-09-26T14:52:26+01:00] deployed chequebook at address 5f50924f29b87440b230b2ee4cf288ebc133e235
-INFO[2020-09-26T14:52:26+01:00] depositing into new chequebook
-TRAC[2020-09-26T14:52:27+01:00] waiting for transaction 3ae9bb1b01d6c203743e726b6f9732d41571c7a4e7cb2ce21a7b82ddbbe0bfd6 to be mined: not found
-INFO[2020-09-26T14:52:41+01:00] deposited to chequebook 5f50924f29b87440b230b2ee4cf288ebc133e235 in transaction 3ae9bb1b01d6c203743e726b6f9732d41571c7a4e7cb2ce21a7b82ddbbe0bfd6
-DEBU[2020-09-26T18:25:33+01:00] initializing NAT manager
-...
-```
-
-Now our chequebook is deployed, and credited with an initial deposit of gBZZ ready to be given to reward our fellow busy Bee nodes for their services. You will also provide services, and be rewarded by your peers for services you provide for them.
-
-Let's upload a 20mb file to the network so we can see some traffic being generated as Bee begins to push chunks into the network. In order to do this, we will pay a forwarding cost in each node that passes the chunk on.
 
 ```sh
 dd if=/dev/urandom of=/tmp/test.txt bs=1m count=20
-curl -F file=@/tmp/test.txt http://localhost:8082/files
+curl -F file=@/tmp/test.txt http://localhost:8080/files
 ```
 
-As we have set `--verbosity 5` in our Bee configuration, we will be able to see these individual transactions being recorded on our node's internal per peer ledgers.
+If we set `--verbosity 5` in our Bee configuration, we will be able to see these individual transactions being recorded on our node's internal per peer ledgers.
 
 ```
 ...
-TRAC[2020-09-26T18:31:30+01:00] pusher pushed chunk 67c091db09d25f9189c593656145944213eb7679121765cc9547fc3719b7cf0f
-TRAC[2020-09-26T18:31:30+01:00] crediting peer f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47 with price 110, new balance is -85130
-TRAC[2020-09-26T18:31:30+01:00] pusher pushed chunk f503b2feae7c0ced9ca786fa125e9798a3ce1ae1ac20c8c6ead6ecb786e8db23
-TRAC[2020-09-26T18:31:30+01:00] crediting peer f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47 with price 150, new balance is -85280
-TRAC[2020-09-26T18:31:30+01:00] pusher pushed chunk b68b01815a2d9b5ab59a0cf6452151ccec871a5195eb5cec96210c874a42d690
-TRAC[2020-09-26T18:31:30+01:00] crediting peer e00460ced3c509dfd72b6ce915c764b13669e65f95b3ba84dcb7d4b6d18a0b11 with price 150, new balance is -82920
-TRAC[2020-09-26T18:31:30+01:00] crediting peer 6a04f1f872da2d32a4597fad2323e8c5f4a00cb441c2bba2fa87f771dd358572 with price 130, new balance is -38230
-TRAC[2020-09-26T18:31:30+01:00] pusher pushed chunk a4b548a1426b47798c6d011d95ba2626a740aea49a26a1435210a307240c260e
-TRAC[2020-09-26T18:31:30+01:00] pusher pushed chunk 7243a785fa09e573f8db4f50ecfe2a1a67fe0d03fc94914e26d5cfec549331dc
+TRAC[2020-09-28T15:18:08+01:00] crediting peer f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47 with price 150, new balance is -2300
+TRAC[2020-09-28T15:18:08+01:00] crediting peer f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47 with price 150, new balance is -2450
+TRAC[2020-09-28T15:18:08+01:00] pusher pushed chunk bd638a8c58f48ca6729b6d86b7623c524f7c74e4ed9bc71712637b8b50234ce0
+TRAC[2020-09-28T15:18:08+01:00] pusher pushed chunk b06309f68a89f1a6513d3231ad2d5335b3c0309972513a4f28d949e7fc47e39d
+TRAC[2020-09-28T15:18:08+01:00] crediting peer e00460ced3c509dfd72b6ce915c764b13669e65f95b3ba84dcb7d4b6d18a0b11 with price 150, new balance is -8780
+TRAC[2020-09-28T15:18:08+01:00] pusher pushed chunk a81c8ee73284f8c0d1b7cfa0b0907c5b12c3b56d1accd08835543771e93c7fc5
+TRAC[2020-09-28T15:18:08+01:00] pusher pushed chunk 056f59ca65bdfb8b7499c44a7d8d8ed29d7b4eaa39621b468bdbb69fc2de4b87
+TRAC[2020-09-28T15:18:08+01:00] crediting peer e00460ced3c509dfd72b6ce915c764b13669e65f95b3ba84dcb7d4b6d18a0b11 with price 150, new balance is -8930
+TRAC[2020-09-28T15:18:08+01:00] pusher pushed chunk a3c6958271aab4e1ad53206898f045a169a57aeaab0531cbcf497c8ff10a7800
+TRAC[2020-09-28T15:18:08+01:00] crediting peer f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47 with price 120, new balance is -2570
 ...
 ```
 
@@ -94,7 +60,7 @@ curl localhost:6060/chequebook/balance | jq
 It is also possible to examine per-peer balances.
 
 ```sh
-curl localhost:6062/balances | jq
+curl localhost:6060/balances | jq
 ```
 
 ```json
@@ -117,7 +83,7 @@ curl localhost:6062/balances | jq
 In Swarm, these per-peer balances simply represent trustful agreements between nodes. Tokens only actually change hands when a node settles a cheque. This can either be triggered manually or when a certain threshold is reached with a peer. In this case, a settlement takes place. You may view these using the settlements endpoint.
 
 ```sh
-curl localhost:6062/settlements | jq
+curl localhost:6060/settlements | jq
 ```
 
 ```json
@@ -141,35 +107,61 @@ curl localhost:6062/settlements | jq
 }
 ```
 
-As our node's participation in the network increases, we will begin to see more and more of these balances arriving. In the case that we have received a settlement from another peer, we can ask our node to perform the relevant transactions on the blockchain, and cash our earnings out.
-
-To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
+More info can be found by using the chequebook api.
 
 ```sh
-curl -XPOST http://localhost:6062/chequebook/cashout/f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47
-```
-
-```json
-{"transactionHash":"0xcdf4be04e9be76b9e6f52fa52ebd147407211845cde84c7e5634a3a3604df8c4"}
-```
-
-Finally, we can see the status of the cashout transaction by sending a GET request to the same URL.
-
-```sh
-curl http://localhost:6062/chequebook/cashout/f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47 | jq
+curl localhost:6060/chequebook/cheque | jq
 ```
 
 ```json
 {
-  "peer": "f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47",
-  "chequebook": "0x5f50924f29b87440b230b2ee4cf288ebc133e235",
-  "cumulativePayout": 89890,
-  "beneficiary": "0x21b26864067deb88e2d5cdca512167815f2910d3",
-  "transactionHash": "0xcdf4be04e9be76b9e6f52fa52ebd147407211845cde84c7e5634a3a3604df8c4",
-  "recipient": "0xa16929f387f6934c5e5d4eca764c70500ca00298",
-  "lastPayout": 89890,
-  "bounced": false
+  "totalreceived": 0,
+  "totalsent": 718030,
+  "settlements": [
+    //...
+    {
+      "peer": "dce1833609db868e7611145b48224c061ea57fd14e784a278f2469f355292ca6",
+      "received": 0,
+      "sent": 89550
+    }
+    //...
+  ]
 }
 ```
 
-Success, we earned some BZZ!
+As our node's participation in the network increases, we will begin to see more and more of these balances arriving. In the case that we have *received* a settlement from another peer, we can ask our node to perform the relevant transactions on the blockchain, and cash our earnings out.
+
+To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
+
+```sh
+curl -XPOST http://localhost:6069/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
+```
+
+```json
+{"transactionHash":"0xba7b500e21fc0dc0d7163c13bb5fea235d4eb769d342e9c007f51ab8512a9a82"}
+```
+
+You may check the status of your transaction using [Goerli Etherscan](https://goerli.etherscan.io/)
+
+Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
+
+```sh
+curl http://localhost:6062/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq
+```
+
+```json
+{
+  "peer": "d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b",
+  "chequebook": "0xae315a9adf0920ba4f3353e2f011031ca701d247",
+  "cumulativePayout": 179160,
+  "beneficiary": "0x21b26864067deb88e2d5cdca512167815f2910d3",
+  "transactionHash": "0xba7b500e21fc0dc0d7163c13bb5fea235d4eb769d342e9c007f51ab8512a9a82",
+  "result": {
+    "recipient": "0x312fe7fde9e0768337c9b3e3462189ea6f9f9066",
+    "lastPayout": 179160,
+    "bounced": false
+  }
+}
+```
+
+Success, we earned our first gBZZ! 🐝

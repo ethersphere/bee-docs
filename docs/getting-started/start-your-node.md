@@ -31,6 +31,41 @@ bee start
 Password:
 ```
 
+## SWAP Bandwidth Incentives
+
+SWAP mode is now enabled by default for testing on Swarm mainnet, you must include configuration paramaters specifying a valid [Goerli Testnet](https://goerli.net/) RPC endpoint. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a RPC provider such as [rpc.slock.it/goerli](https://rpc.slock.it/goerli) or [Infura](https://infura.io/).
+
+When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of gBZZ (Goerli BZZ tokens) in the chequebook contract so that it can pay other nodes in return for their services.
+
+In order to interact with the Goerli blockchain to deploy contracts and make payments, we must fund our account with Goerli ETH (GETH), and to make payments in return for services our account must also own some Goerli BZZ (gBZZ). We can get both tokens for trial purposes from the [Swarm Goerli Faucet](https://faucet.ethswarm.org/).
+
+To find out your Ethereum address, we can simply run our Bee node and point it at the Goerli rpc endpoint.
+
+```sh
+bee start \
+  --verbosity 5 \
+  --swap-endpoint https://rpc.slock.it/goerli \
+  --debug-api-enable
+  --bootnode /dnsaddr/bootnode.staging.ethswarm.org
+```
+
+Since we haven't yet funded our account, we will see a message in our logs asking us to fund our Ethereum account. Navigate to the [Swarm Goerli Faucet](https://faucet.ethswarm.org/) and submit your address, ensuring it is prepended with the characters `0x` to the faucet, fill out the recaptcha and wait for confirmation that your GETH and gBZZ have been dispensed.
+
+Now, we can run our Bee node and we will start to see Bee creating and waiting for transactions to complete. Please be patient as this might take a few moments.
+
+```
+INFO[2020-09-28T14:59:38+01:00] no chequebook found, deploying new one.
+INFO[2020-09-28T14:59:39+01:00] deploying new chequebook in transaction 5c2949675b49d069c4c5755e1901aa59fa4224ea2a763efe78a5293f36e04370
+INFO[2020-09-28T14:59:57+01:00] deployed chequebook at address a22c864fe5bd53cc3ae130709647a0e60e67f714
+INFO[2020-09-28T14:59:57+01:00] depositing 100000000 token into new chequebook
+INFO[2020-09-28T14:59:57+01:00] sent deposit transaction c25714a0569131707513c68f6108553bb861131253230a606a26d390e790e0f1
+INFO[2020-09-28T15:00:12+01:00] successfully deposited to chequebook
+```
+
+Now our chequebook is deployed, and credited with an initial deposit of gBZZ ready to be given to reward our fellow busy Bee nodes for their services. You will also provide services, and be rewarded by your peers for services you provide for them.
+
+For more info on bandwidth accounting, see [SWAP Bandwidth Accounting](/docs/advanced/swap).
+
 ## Join the Swarm
 
 If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world. 
