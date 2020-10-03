@@ -24,6 +24,9 @@ $ npm run build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+## Bumping Version
+
+Don't forget to find and replace the version number for the whole of the docs folder. 
 
 ## How to generate / include the API reference html
 

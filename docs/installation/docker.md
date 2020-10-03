@@ -48,7 +48,7 @@ docker pull ethersphere/bee:alpha
 #### Specific Versions
 
 ```sh
-docker pull ethersphere/bee:0.2.0
+docker pull ethersphere/bee:0.3.0
 ```
 
 #### Edge

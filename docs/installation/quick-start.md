@@ -15,12 +15,12 @@ Simply run either one of the following commands in your Terminal...
 
 #### wget
 ```sh
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.2.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.3.0 bash
 ```
 
 #### curl
 ```sh
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.2.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.3.0 bash
 ```
 
 ### Run Bee
@@ -29,7 +29,7 @@ Once you have installed Bee, you can test that it has been successfully installe
 
 ```sh
 bee version
-> 0.2.0
+> 0.3.0
 ```
 
 ### Upgrading Bee
