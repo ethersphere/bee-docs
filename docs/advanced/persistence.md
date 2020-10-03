@@ -52,7 +52,7 @@ As a global pinner, you don't need to advertise your full overlay address. You o
 
 
 ### Request files which are globally pinned
-To make use of the global pinning feature (and request a repair if a chunk not found), you need to pass a `targets` query parameter to your upload request. The value of this parameter is a reference to the address of the global pinner node. You don't need to pass his whole address, just the first n characters is sufficient (where n increases if the number of nodes in the network increases). Please see "What is a target" below.
+To make use of the global pinning feature (and request a repair if a chunk not found), you need to pass a `targets` query parameter to your download request. The value of this parameter is a reference to the address of the global pinner node. You don't need to pass his whole address, just the first n characters is sufficient (where n increases if the number of nodes in the network increases). Please see "What is a target" below.
 
 An example of a request to download a file with the targets query parameter passed in:
 
