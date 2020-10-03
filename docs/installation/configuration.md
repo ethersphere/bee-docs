@@ -1,4 +1,4 @@
-\---
+---
 title: Configuring Your Bee Node
 id: configuration
 ---
