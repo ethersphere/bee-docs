@@ -49,3 +49,5 @@ wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh
 ```sh
 curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
 ```
+
+Now your Bee node is running, [get your node started](/docs/getting-started/start-your-node) and join us in the swarm! 🐝 🐝 🐝 🐝 🐝
