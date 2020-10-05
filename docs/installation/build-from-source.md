@@ -41,7 +41,7 @@ make binary
 5) Check you are able to run the `bee` command. Success can be verified by running:
 ```sh
 dist/bee version
-> 0.2.0
+> 0.3.0
 ```
 
 6) (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`

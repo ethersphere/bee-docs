@@ -49,7 +49,7 @@ bee start \
   --bootnode /dnsaddr/bootnode.staging.ethswarm.org
 ```
 
-Since we haven't yet funded our account, we will see a message in our logs asking us to fund our Ethereum account. Navigate to the [Swarm Goerli Faucet](https://faucet.ethswarm.org/) and submit your address, ensuring it is prepended with the characters `0x` to the faucet, fill out the recaptcha and wait for confirmation that your GETH and gBZZ have been dispensed.
+Since we haven't yet funded our account, we will see a message in our logs asking us to fund our Ethereum account. Navigate to the [Swarm Goerli Faucet](https://faucet.ethswarm.org/) and submit your address, ensuring it is prepended with the characters `0x` to the faucet, fill out the recaptcha and wait for confirmation that your gETH and gBZZ have been dispensed.
 
 Now, we can run our Bee node and we will start to see Bee creating and waiting for transactions to complete. Please be patient as this might take a few moments.
 
