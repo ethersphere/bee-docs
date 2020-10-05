@@ -1,6 +1,6 @@
 ---
 id: introduction
-title: Introduction
+title: Welcome!
 ---
 
 Hello and welcome to the swarm! We are very happy to have you here with us! 🐝 
