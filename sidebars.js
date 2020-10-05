@@ -1,37 +1,63 @@
 module.exports = {
-  someSidebar: {
-    "Welcome!": ['introduction'],
-    "Installation": [
+  Balls: [
+    'introduction',
+    {
+      type: 'category',
+      label: 'Installation',
+      items: [
         'installation/quick-start',
         'installation/configuration',
         'installation/build-from-source',
-        'installation/docker'
-        // 'installation/windows'
-    ],
-    "Getting Started": [
+        'installation/docker',
+        'installation/connectivity'
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Getting Started',
+      items: [
         'getting-started/start-your-node',
         'getting-started/working-with-your-node',
         'getting-started/upload-and-download',
         'getting-started/upload-a-directory',
         'getting-started/host-your-website-using-ens',
-        // 'get-started/keep-your-data-available',
         'getting-started/store-with-encryption'
-    ],
-    "Advanced Usage": [
+      ],
+      collapsed: false,
+    },
+    {
+      type: 'category',
+      label: 'Advanced Usage',
+      items: [
         'advanced/pss',
         'advanced/tags',
         'advanced/persistence',
         'advanced/swap',
-        'advanced/starting-a-test-network',
-    ],
-    "API Reference": [
+        'advanced/starting-a-test-network'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'API Reference',
+      items: [
         'api-reference/api-reference'
-    ],
-    "Bee Developers": [
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Bee Developers',
+      items: [
         'bee-developers/useful-dev-info'
-    ],
-    "Community": [
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Join Us',
+      items: [
         'community/community'
-    ]
-  },
+      ],
+      collapsed: false
+    }
+  ]
 };
