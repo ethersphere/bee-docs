@@ -48,7 +48,7 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 178.128.196.191  netmask 255.255.240.0  broadcast 178.128.207.255
 ```
 
-Here we can see our computer's **public IP** `178.128.196.191`. This is the address that is used by other computers we connect to over the internet. We can very this using a third party service such as *icanhazip*.
+Here we can see our computer's **public IP** `178.128.196.191`. This is the address that is used by other computers we connect to over the internet. We can verify this using a third party service such as *icanhazip*.
 
 ```sh
 curl icanhazip.com
@@ -107,9 +107,9 @@ If you start your Bee node in a private network with UPNP available, the output 
 
 ```json
 [
-  "/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
-  "/ip4/192.168.0.10/tcp/7072/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
-  "/ip6/::1/tcp/7072/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
+  "/ip4/127.0.0.1/tcp/7070/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
+  "/ip4/192.168.0.10/tcp/7070/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
+  "/ip6/::1/tcp/7070/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
   "/ip4/86.98.94.9/tcp/20529/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP"
 ]
 ```
