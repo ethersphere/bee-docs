@@ -30,8 +30,8 @@ module.exports = {
     "Bee Developers": [
         'bee-developers/useful-dev-info'
     ],
-    // "Community": [
-    //     'community/community'
-    // ]
+    "Community": [
+        'community/community'
+    ]
   },
 };

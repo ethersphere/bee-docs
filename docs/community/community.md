@@ -3,8 +3,10 @@ title: Community
 id: community
 ---
 
+Swarm is all about community. We want to make sure you have the best possible experience as you join and enjoy being a part of the our new internet.
 
-The Bee client has a vibrant community of developers and users who are ready to answer any questions and help you join the Swarm.
+Swarm has a vibrant community of wonderful individuals who are eager to answer any questions and graciously welcome you to our swarm.
 
-- Orange Lounge
-- Mattermost
+Join us at our self-sovereign [Bee Hive](https://beehive.ethswarm.org/) for peace, love, unity, respect, community, assistance and lots of highly obscure chat about cryptography.
+
+Thanks for being here with us, making a difference, we appreciate you! 🐝
