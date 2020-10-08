@@ -4,7 +4,7 @@ id: connectivity
 ---
 
 
-To connect to the outside world, your Bee node needs to be able to both send and receive messages from the outside world. Normally, your router will not allow other IP's on the internet to connect, unless you have connected to them first. In Swarm, we welcome newcomers, as long as they play by the rules. If a node misbehaves, we will simply add it to a list of blocked nodes and refuse future connections from them.
+To fully connect to the swarm, your Bee node needs to be able to both send and receive messages from the outside world. Normally, your router will not allow other IP's on the internet to connect, unless you have connected to them first. In Swarm, we welcome newcomers, as long as they play by the rules. If a node misbehaves, we will simply add it to a list of blocked nodes and refuse future connections from them.
 
 In Swarm, every Bee counts! To make sure all Bees can join the swarm, below you will find a detailed guide to navigating your way through your network and making out into the wild so you can buzz with the crowd. If you still have problems, join us in [The Beehive](http://beehive.ethswarm.org/) and we'll help you find the way! 🐝 🐝 🐝 🐝 🐝
 
@@ -216,6 +216,11 @@ This should be a no brainer, the connection between localhost in not normally me
 If there is a problem here, the problem is with some other software running on your operating system or your operating system itself. Try a different port, such as `7071` and turning off any unneccesary software. If this doesn't work, you may need to try a different operating system environment. Please get in touch and we'll try to help!
 
 If we were successful, let's move on to the next stage.
+
+:::info
+If you are not able to get access to some firewall settings, or otherwise debug incoming connectivity, don't worry! All is not lost. Bee can function just fine with just outgoing connections. However, if you can, it is worth the effort to allow incoming connections, as this benefits the whole of the swarm.
+:::
+
 
 Let's find out what our IP looks like to the internet.
 
