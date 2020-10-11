@@ -26,7 +26,7 @@ docker run\
 If starting your node for the first time, you will need to deploy a chequebook contract. See [Start Your Node](/docs/getting-started/start-your-node) for more info.
 :::
 
-To persist files mount a local directory as follows and enter the password used to encrypt your keyfiles. Note, Docker insists on absolute paths when mounting volumes, so you must replace `/path/to/.bee-docker` with a valid path from your local filesystem.
+To persist files, mount a local directory as follows and enter the password used to encrypt your keyfiles. Note, Docker insists on absolute paths when mounting volumes, so you must replace `/path/to/.bee-docker` with a valid path from your local filesystem.
 
 ```sh
 docker run\
@@ -59,7 +59,7 @@ docker run\
 
 ### Versions
 
-You other versions of the Bee container are also available.
+Other versions of the Bee container are also available.
 
 #### Latest beta Release
 
