@@ -14,7 +14,7 @@ module.exports = {
       title: 'Swarm Bee Documentation',
       logo: {
         alt: 'Swarm Logo',
-        src: 'img/swarm-logo.svg',
+        src: 'img/swarm-logo-2.svg',
       },
       items: [
         {

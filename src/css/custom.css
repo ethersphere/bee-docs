@@ -6,16 +6,39 @@
  * work well for content-centric websites.
  */
 
+@font-face {
+    font-family: "ibm-plex-mono";
+    src: url("/fonts/IBMPlexMono-SemiBold-Latin1.woff") format('woff');
+}
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #dd7200;
   --ifm-color-primary-dark: #242424;
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
+  --ifm-color-primary-darker: #242424;
+  --ifm-color-primary-darkest: #242424;
   --ifm-color-primary-light: #6a6a6a;
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary-lighter: #6a6a6a;
+  --ifm-color-primary-lightest: #6a6a6a;
   --ifm-code-font-size: 95%;
+  --ifm-footer-background-color: #242424 !important ;
+  --ifm-font-color-base-inverse: #fafafa !important;
+}
+
+#__docusaurus{
+  background: #fafafa !important;
+}
+
+header, h1, h2, h3, h4{
+  font-family: "ibm-plex-mono";
+}
+
+.menu__link, .navbar__link, .navbar__title{
+  font-family: "ibm-plex-mono";
+}
+
+.button--secondary{
+  color: #fafafa !important;
 }
 
 .docusaurus-highlight-code-line {
@@ -29,3 +52,24 @@
   margin: 20px 20%;
   font-weight: 700;
 }
+
+.footer{
+  background: #242424 !important;
+}
+
+.heroBanner_src-pages-{
+  background: url('/img/linkedin_header_b.png');
+}
+
+.alert--danger{
+  background: #D0131F;
+}
+
+.alert--info{
+  background: #2CAA5F;
+}
+
+.alert--tip{
+  background: #4AA8DF;
+}
+
