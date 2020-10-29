@@ -25,16 +25,24 @@
   --ifm-font-color-base-inverse: #fafafa !important;
 }
 
-#__docusaurus{
-  background: #fafafa !important;
-}
-
-header, h1, h2, h3, h4{
+header{
   font-family: "ibm-plex-mono";
 }
 
 .menu__link, .navbar__link, .navbar__title{
   font-family: "ibm-plex-mono";
+}
+
+header.hero{
+  padding: 6rem;
+}
+
+.hero__title{
+  margin-bottom: 2rem !important;
+}
+
+.hero__subtitle{
+  display: none !important;
 }
 
 .button--secondary{
@@ -58,7 +66,7 @@ header, h1, h2, h3, h4{
 }
 
 .heroBanner_src-pages-{
-  background: url('/img/linkedin_header_b.png');
+  background: #000000;
 }
 
 .alert--danger{
