@@ -70,7 +70,7 @@ docker pull ethersphere/bee:beta
 #### Specific Versions
 
 ```sh
-docker pull ethersphere/bee:0.3.0
+docker pull ethersphere/bee:0.3.1
 ```
 
 #### Edge
