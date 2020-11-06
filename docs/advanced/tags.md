@@ -32,7 +32,7 @@ To follow the status of your upload while it is splitting you must generate the 
 Create a tag by sending a POST request to the `tag` API endpoint:
 
 ```console
-curl -s -XPOST http://localhost:8083/tags | jq .uid
+curl -s -XPOST http://localhost:8080/tags | jq .uid
 > 4074122506
 ```
 
