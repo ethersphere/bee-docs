@@ -32,6 +32,9 @@ bee version
 > 0.3.0
 ```
 
+Now your Bee node is installed, fund you node with gBZZ, [get your node started](/docs/getting-started/start-your-node) and join us in the swarm! 🐝 🐝 🐝 🐝 🐝
+
+
 ### Upgrading Bee
 
 To upgrade previous versions of Bee installed using the above method, simply re-run the installation command above.
@@ -49,5 +52,3 @@ wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh
 ```sh
 curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
 ```
-
-Now your Bee node is running, [get your node started](/docs/getting-started/start-your-node) and join us in the swarm! 🐝 🐝 🐝 🐝 🐝
