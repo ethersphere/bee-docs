@@ -54,6 +54,7 @@ header{
 }
 
 header.hero{
+  background: #000000 !important;
   padding: 6rem;
 }
 
@@ -102,10 +103,6 @@ h1{
 
 .footer{
   background: #242424 !important;
-}
-
-.heroBanner_src-pages-{
-  background: #000000;
 }
 
 .alert--danger{
