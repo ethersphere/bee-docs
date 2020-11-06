@@ -4,7 +4,7 @@ module.exports = {
   url: 'https://bee.ethswarm.org',
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
-  // end
+  plugins: [require.resolve('docusaurus-lunr-search')],
   onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
