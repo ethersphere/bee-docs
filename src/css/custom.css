@@ -14,6 +14,7 @@
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #dd7200;
+  --ifm-color-black: #242424;
   --ifm-color-primary-dark: #242424;
   --ifm-color-primary-darker: #242424;
   --ifm-color-primary-darkest: #242424;
@@ -25,6 +26,25 @@
   --ifm-font-color-base-inverse: #fafafa !important;
 }
 
+/*html[data-theme='dark'] {
+    --ifm-color-emphasis-0: var(--ifm-color-gray-1000);
+    --ifm-color-emphasis-100: var(--ifm-color-gray-900);
+    --ifm-color-emphasis-200: var(--ifm-color-gray-800);
+    --ifm-color-emphasis-300: var(--ifm-color-gray-700);
+    --ifm-color-emphasis-400: var(--ifm-color-gray-600);
+    --ifm-color-emphasis-500: var(--ifm-color-gray-500);
+    --ifm-color-emphasis-600: var(--ifm-color-gray-400);
+    --ifm-color-emphasis-700: var(--ifm-color-gray-300);
+    --ifm-color-emphasis-800: var(--ifm-color-gray-200);
+    --ifm-color-emphasis-900: var(--ifm-color-gray-100);
+    --ifm-color-emphasis-1000: var(--ifm-color-gray-0);
+    --ifm-background-color: #18191a;
+    --ifm-background-surface-color: #242526;
+    --ifm-hover-overlay: rgba(255, 255, 255, 0.05);
+    --ifm-menu-link-sublist-icon: url(data:image/svg+xml;utf8,<svg alt="Arrow" xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgba(255,255,255,0.6)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>);
+    --ifm-color-content-secondary: rgba(255, 255, 255, 1);
+}*/
+
 header{
   font-family: "ibm-plex-mono";
 }
@@ -35,6 +55,25 @@ header{
 
 header.hero{
   padding: 6rem;
+}
+
+.hero h1{
+  font-size: 3rem !important;
+}
+
+.hero .button{
+  color: #dd7200 !important;
+  border-color: #dd7200 !important;
+}
+
+.hero .button:hover{
+  color: #ffffff !important;
+  background-color: #dd7200 !important;
+  border-color: #dd7200 !important;
+}
+
+h1{
+  font-size: 2.4rem !important;
 }
 
 .hero__title{
@@ -79,5 +118,13 @@ header.hero{
 
 .alert--tip{
   background: #4AA8DF;
+}
+
+code{
+  color: rgb(191, 199, 213);
+}
+
+code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-{
+  background: #242424 !important;
 }
 
