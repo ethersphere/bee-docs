@@ -105,7 +105,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/ethersphere/docs.github.io',
+            'https://github.com/ethersphere/docs.github.io/blob/master',
         },
         blog: {
           showReadingTime: false,
