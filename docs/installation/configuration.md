@@ -50,12 +50,15 @@ This produces the following file contents, showing the default configuration of 
 api-addr: :8080
 bootnode:
 - /dnsaddr/bootnode.ethswarm.org
+clef-signer-enable: false
+clef-signer-endpoint: ""
 config: /Users/sig/.bee.yaml
 cors-allowed-origins: []
 data-dir: /Users/sig/.bee
 db-capacity: "5000000"
 debug-api-addr: :6060
 debug-api-enable: false
+gateway-mode: false
 global-pinning-enable: false
 help: false
 nat-addr: ""
@@ -65,8 +68,15 @@ p2p-quic-enable: false
 p2p-ws-enable: false
 password: ""
 password-file: ""
+payment-early: "10000"
 payment-threshold: "100000"
 payment-tolerance: "10000"
+resolver-options: []
+standalone: false
+swap-enable: true
+swap-endpoint: http://localhost:8545
+swap-factory-address: ""
+swap-initial-deposit: "100000000"
 tracing-enable: false
 tracing-endpoint: 127.0.0.1:6831
 tracing-service-name: bee
