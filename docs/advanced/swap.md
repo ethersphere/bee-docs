@@ -134,7 +134,7 @@ As our node's participation in the network increases, we will begin to see more 
 To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
 
 ```sh
-curl -XPOST http://localhost:6069/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
+curl -XPOST http://localhost:6060/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
 ```
 
 ```json
@@ -146,7 +146,7 @@ You may check the status of your transaction using [Goerli Etherscan](https://go
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
 
 ```sh
-curl http://localhost:6062/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq
+curl http://localhost:6060/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq
 ```
 
 ```json
