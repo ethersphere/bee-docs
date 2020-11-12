@@ -26,6 +26,11 @@
   --ifm-font-color-base-inverse: #fafafa !important;
 }
 
+
+.menu--responsive .menu__button {
+    background: #dd7200;
+}
+
 /*html[data-theme='dark'] {
     --ifm-color-emphasis-0: var(--ifm-color-gray-1000);
     --ifm-color-emphasis-100: var(--ifm-color-gray-900);
