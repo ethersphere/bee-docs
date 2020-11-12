@@ -14,7 +14,7 @@ module.exports = {
       defaultMode: 'dark'
     },
     navbar: {
-      title: 'Swarm Bee Documentation',
+      title: 'Swarm Bee',
       logo: {
         alt: 'Swarm Logo',
         src: 'img/swarm-logo-2.svg',
