@@ -26,18 +26,18 @@ module.exports = {
           label: 'Get Started',
           position: 'left',
         },
-        {
-          to: 'docs/installation/quick-start',
-          activeBasePath: 'docs',
-          label: 'Installation',
-          position: 'left',
-        },
-        {
-          to: 'docs/getting-started/start-your-node',
-          activeBasePath: 'docs',
-          label: 'Start Your Node',
-          position: 'left',
-        },
+        // {
+        //   to: 'docs/installation/quick-start',
+        //   activeBasePath: 'docs',
+        //   label: 'Installation',
+        //   position: 'left',
+        // },
+        // {
+        //   to: 'docs/getting-started/start-your-node',
+        //   activeBasePath: 'docs',
+        //   label: 'Start Your Node',
+        //   position: 'left',
+        // },
         {
           to: 'docs/api-reference/api-reference',
           activeBasePath: 'docs',
