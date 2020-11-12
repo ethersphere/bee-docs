@@ -4,17 +4,20 @@ module.exports = {
   url: 'https://bee.ethswarm.org',
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
-  // end
+  plugins: [require.resolve('docusaurus-lunr-search')],
   onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
   projectName: 'bee', // Usually your repo name.
   themeConfig: {
+    colourMode: {
+      defaultMode: 'dark'
+    },
     navbar: {
       title: 'Swarm Bee Documentation',
       logo: {
         alt: 'Swarm Logo',
-        src: 'img/swarm-logo.svg',
+        src: 'img/swarm-logo-2.svg',
       },
       items: [
         {
