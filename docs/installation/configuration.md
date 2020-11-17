@@ -47,7 +47,7 @@ bee printconfig \
 This produces the following file contents, showing the default configuration of Bee, with some added log verbosity:
 
 ```yaml
-api-addr: :8080
+api-addr: :1633
 bootnode:
 - /dnsaddr/bootnode.ethswarm.org
 clef-signer-enable: false
@@ -56,14 +56,14 @@ config: /Users/sig/.bee.yaml
 cors-allowed-origins: []
 data-dir: /Users/sig/.bee
 db-capacity: "5000000"
-debug-api-addr: :6060
+debug-api-addr: :1635
 debug-api-enable: false
 gateway-mode: false
 global-pinning-enable: false
 help: false
 nat-addr: ""
 network-id: "1"
-p2p-addr: :7070
+p2p-addr: :1634
 p2p-quic-enable: false
 p2p-ws-enable: false
 password: ""
@@ -100,9 +100,9 @@ The location of a yaml configuration file containing configuration instructions.
 
 #### --api-addr
 
-*default* :8080
+*default* :1633
 
-The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all requests. Argument values are of the form '132.132.132.132:8080'.
+The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all requests. Argument values are of the form '132.132.132.132:1633'.
 
 #### --bootnode
 
@@ -169,7 +169,7 @@ Chunk database capacity in chunks. A chunk is 4096 kb in size, so the total data
 
 #### --debug-api-addr
 
-*default* `:6060`
+*default* `:1635`
 
 The IP and port the [Debug API](/docs/api-reference/api-reference) will serve http requests from. 
 
@@ -210,7 +210,7 @@ The network ID for which to accept new connections. Set to 1 for mainnet.
 
 #### --p2p-addr
 
-*default* `:7070`
+*default* `:1634`
 
 The ip and port to listen for p2p protocol messages.
 

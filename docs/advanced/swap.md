@@ -24,7 +24,7 @@ bee start \
 
 ```sh
 dd if=/dev/urandom of=/tmp/test.txt bs=1m count=20
-curl -F file=@/tmp/test.txt http://localhost:8080/files
+curl -F file=@/tmp/test.txt http://localhost:1633/files
 ```
 
 If we set `--verbosity 5` in our Bee configuration, we will be able to see these individual transactions being recorded on our node's internal per peer ledgers.
@@ -47,7 +47,7 @@ TRAC[2020-09-28T15:18:08+01:00] crediting peer f1e2872581de18bdc68060dc8edd3aa96
 We also have a rich set of features to be able to query the current accounting state of your node. For example, you may query your node's current balance by send a POST request to the balances endpoint.
 
 ```sh
-curl localhost:6060/chequebook/balance | jq
+curl localhost:1635/chequebook/balance | jq
 ```
 
 ```json
@@ -60,7 +60,7 @@ curl localhost:6060/chequebook/balance | jq
 It is also possible to examine per-peer balances.
 
 ```sh
-curl localhost:6060/balances | jq
+curl localhost:1635/balances | jq
 ```
 
 ```json
@@ -83,7 +83,7 @@ curl localhost:6060/balances | jq
 In Swarm, these per-peer balances simply represent trustful agreements between nodes. Tokens only actually change hands when a node settles a cheque. This can either be triggered manually or when a certain threshold is reached with a peer. In this case, a settlement takes place. You may view these using the settlements endpoint.
 
 ```sh
-curl localhost:6060/settlements | jq
+curl localhost:1635/settlements | jq
 ```
 
 ```json
@@ -110,7 +110,7 @@ curl localhost:6060/settlements | jq
 More info can be found by using the chequebook api.
 
 ```sh
-curl localhost:6060/chequebook/cheque | jq
+curl localhost:1635/chequebook/cheque | jq
 ```
 
 ```json
@@ -134,7 +134,7 @@ As our node's participation in the network increases, we will begin to see more 
 To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
 
 ```sh
-curl -XPOST http://localhost:6060/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
+curl -XPOST http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
 ```
 
 ```json
@@ -146,7 +146,7 @@ You may check the status of your transaction using [Goerli Etherscan](https://go
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
 
 ```sh
-curl http://localhost:6060/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq
+curl http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq
 ```
 
 ```json
