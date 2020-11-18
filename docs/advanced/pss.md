@@ -57,7 +57,7 @@ bee start \
     --data-dir=/tmp/bee2 \
     --bootnode="" \
     --p2p-addr=:7072 \
-    --swap-enable=false
+    --swap-endpoint=https://rpc.slock.it/goerli
 ```
 
 We must make a note of the Swarm overlay address, underlay address and public key which are created once each node has started. We find this information from the addresses endpoint of the Debug API.
@@ -68,14 +68,14 @@ curl -s localhost:6062/addresses | jq
 
 ```json
 {
-  "overlay": "7bc50a5d79cb69fa5a0df519c6cc7b420034faaa61c175b88fc4c683f7c79d96",
+  "overlay": "46275b02b644a81c8776e2459531be2b2f34a94d47947feb03bc1e209678176c",
   "underlay": [
-    "/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr",
-    "/ip4/192.168.0.10/tcp/7072/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr",
-    "/ip6/::1/tcp/7072/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr"
+    "/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq",
+    "/ip4/192.168.0.10/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq",
+    "/ip6/::1/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq"
   ],
-  "ethereum": "0x0000000000000000000000000000000000000000",
-  "public_key": "0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd"
+  "ethereum": "0x0b546f2817d0d889bd70e244c1227f331f2edf74",
+  "public_key": "03660e8dbcf3fda791e8e2e50bce658a96d766e68eb6caa00ce2bb87c1937f02a5"
 }
 ```
 
@@ -89,7 +89,7 @@ bee start \
     --data-dir=/tmp/bee3 \
     --bootnode="" \
     --p2p-addr=:7073 \
-    --swap-enable=false
+    --swap-endpoint=https://rpc.slock.it/goerli
 ```
 
 ```sh
@@ -98,15 +98,14 @@ curl -s localhost:6063/addresses | jq
 
 ```json
 {
-  "overlay": "a231764383d7c46c60a6571905e72021a90d506ef8db06750f8a708d93fe706e",
+  "overlay": "085b5cf15a08f59b9d64e8ce3722a95b2c150bb6a2cef4ac8b612ee8b7872253",
   "underlay": [
-    "/ip4/127.0.0.1/tcp/7073/p2p/16Uiu2HAmAqJkKJqZjNhuDtepc8eBANM9TvagaWUThfTN5NkfmKTq",
-    "/ip4/192.168.0.10/tcp/7073/p2p/16Uiu2HAmAqJkKJqZjNhuDtepc8eBANM9TvagaWUThfTN5NkfmKTq",
-    "/ip6/::1/tcp/7073/p2p/16Uiu2HAmAqJkKJqZjNhuDtepc8eBANM9TvagaWUThfTN5NkfmKTq",
-    "/ip4/81.98.94.4/tcp/25178/p2p/16Uiu2HAmAqJkKJqZjNhuDtepc8eBANM9TvagaWUThfTN5NkfmKTq"
+    "/ip4/127.0.0.1/tcp/7073/p2p/16Uiu2HAm5RwRgkZWxDMAff2io6L4Qd1uL9yNgZSNTCdPsukcg5Qr",
+    "/ip4/192.168.0.10/tcp/7073/p2p/16Uiu2HAm5RwRgkZWxDMAff2io6L4Qd1uL9yNgZSNTCdPsukcg5Qr",
+    "/ip6/::1/tcp/7073/p2p/16Uiu2HAm5RwRgkZWxDMAff2io6L4Qd1uL9yNgZSNTCdPsukcg5Qr"
   ],
-  "ethereum": "0x0000000000000000000000000000000000000000",
-  "public_key": "02d68d57d9f3fe539990cdf03e7de96d56a5c68b42515bc465acec4edc5cedfe35"
+  "ethereum": "0x9ec47bd86a82276fba57f3009c2f6b3ace4286bf",
+  "public_key": "0289634662d3ed7c9fb1d7d2a3690b69b4075cf138b683380023d2edc2e6847826"
 }
 ```
 
@@ -130,7 +129,7 @@ Let's connect node 2 to node 1 using the localhost (127.0.0.1) underlay address 
 
 ```sh
 curl -XPOST \
-  localhost:6063/connect/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr
+  localhost:6063/connect/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq
 ```
 
 Now, if we check our peers endpoint for node 1, we can see our nodes are now peered together.
@@ -177,7 +176,7 @@ Since our first node has a 2 byte address prefix of `a231`, we will specify this
 
 ```sh
 curl \
-  -XPOST "localhost:8083/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd"\
+  -XPOST "localhost:8083/pss/send/test-topic/4627?recipient=03660e8dbcf3fda791e8e2e50bce658a96d766e68eb6caa00ce2bb87c1937f02a5"\
   --data "Hello Swarm"
 ```
 
