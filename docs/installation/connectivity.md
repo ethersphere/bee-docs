@@ -14,10 +14,10 @@ In a network, each computer is assigned an IP. Each IP is then subdivided into t
 
 In a completely trusted network of computers, connections to or from any of these ports are allowed. However, to protect ourselves from nefarious actors when we join the wider internet, it is sometimes important to filter this traffic so that some of these ports are off limits to the public.
 
-In order to allow other Bee nodes we have previously not met to be able to send messages to our p2p port, usually `7070`, we must ensure that our network is set up to receive incoming connections.
+In order to allow other Bee nodes we have previously not met to be able to send messages to our p2p port, usually `1634`, we must ensure that our network is set up to receive incoming connections.
 
 :::info
-There are also some ports which you should never expose to the outside internet. Make sure that your `api-addr`, usually port `8080` is only exposed in `Gateway Mode` and your `--debug-api-addr`, usually `6060` is never exposed to the internet. It is good practice to employ one or more firewalls which block traffic on every port except for those for whom you are expecting it.
+There are also some ports which you should never expose to the outside internet. Make sure that your `api-addr`, usually port `1633` is only exposed in `Gateway Mode` and your `--debug-api-addr`, usually `1635` is never exposed to the internet. It is good practice to employ one or more firewalls which block traffic on every port except for those for whom you are expecting it.
 :::
 
 ## Your IP
@@ -101,20 +101,20 @@ UPNP can be considered a security risk as it exposes your (real) public IP to an
 
 Bee will use UPNP to determine your public IP, which is required for various internal processes.
 
-In addition to this, a request will be sent to your router to ask it to forward a random one of it's ports, which are exposed directly to the internet, to the Bee p2p port (usually `7070`) which your computer is exposing only to the private network. Doing this creates a tunnel through which other Bee's may connect to your computer safely.
+In addition to this, a request will be sent to your router to ask it to forward a random one of it's ports, which are exposed directly to the internet, to the Bee p2p port (usually `1634`) which your computer is exposing only to the private network. Doing this creates a tunnel through which other Bee's may connect to your computer safely.
 
 If you start your Bee node in a private network with UPNP available, the output of the addresses endpoint of your debug API will look something like this:
 
 ```json
 [
-  "/ip4/127.0.0.1/tcp/7070/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
-  "/ip4/192.168.0.10/tcp/7070/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
-  "/ip6/::1/tcp/7070/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
+  "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
+  "/ip4/192.168.0.10/tcp/1634/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
+  "/ip6/::1/tcp/1634/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP",
   "/ip4/86.98.94.9/tcp/20529/p2p/16Uiu2HAm5zcoBFWmqjDTwGy9RXepBFF8idy6Pr312obMwwxdJSUP"
 ]
 ```
 
-Note that the port in the external [multiaddress](https://docs.libp2p.io/concepts/addressing/) is the router's randomly selected `20529` which is forwarded by the router to `192.168.0.10:7070`.
+Note that the port in the external [multiaddress](https://docs.libp2p.io/concepts/addressing/) is the router's randomly selected `20529` which is forwarded by the router to `192.168.0.10:1634`.
 
 ##### Manual: Configure Your Router and Bee
 
@@ -122,9 +122,9 @@ Inspecting the underlay addresses in the output of the addresses endpoint our de
 
 ```sh
 [
-  "/ip4/127.0.0.1/tcp/7070/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
-  "/ip4/192.168.0.10/tcp/7070/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
-  "/ip6/::1/tcp/7070/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
+  "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
+  "/ip4/192.168.0.10/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
+  "/ip6/::1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
 ]
 ```
 
@@ -146,24 +146,24 @@ Each router is different, but the concept is usually the same. Log in to your ro
 
 Once logged in, find the interface to set up port forwarding. The [Port Forward](https://portforward.com/router.htm) website provides some good information, or you may refer to your router manual or provider.
 
-Here, we will then set up a rule that forwards port `7070` of our internal IP `192.168.0.10` to the same port `7070` of our external IP.
+Here, we will then set up a rule that forwards port `1634` of our internal IP `192.168.0.10` to the same port `1634` of our external IP.
 
-Now, when requests arrive at our external address `86.98.94.9:7070` they are modified by our router and forwarded to our internal IP and port `192.168.0.10:7070`.
+Now, when requests arrive at our external address `86.98.94.9:1634` they are modified by our router and forwarded to our internal IP and port `192.168.0.10:1634`.
 
 Sometimes this can be a little tricky, so let's verify we are able to make a TCP connection using [netcat](https://nmap.org/ncat/).
 
 First, with Bee **not** running, let's set up a simple TCP listener using Netcat on the same machine we would like to run Bee on.
 
 ```sh
-nc -l 0.0.0.0 7070
+nc -l 0.0.0.0 1634
 ```
 
 ```sh
-nc -zv 86.98.94.9 7070
+nc -zv 86.98.94.9 1634
 ```
 
 ```
-Connection to 86.98.94.9 port 7072 [tcp/*] succeeded!
+Connection to 86.98.94.9 port 1834 [tcp/*] succeeded!
 ```
 Success! ✨
 
@@ -172,17 +172,17 @@ If this didn't work for you, check out our [Debugging Connectivity]() guide belo
 If it did, let's start our Bee node with the `--nat-addr` configured.
 
 ```sh
-bee start --nat-addr 86.98.94.9:7070
+bee start --nat-addr 86.98.94.9:1634
 ```
 
 Checking our addresses endpoint again, we can now see that Bee has been able to successfully assign a public address! Congratulations, your Bee is now connected to the outside world!
 
 ```sh
 [
-  "/ip4/127.0.0.1/tcp/7070/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
-  "/ip4/192.168.0.10/tcp/7070/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
-  "/ip6/::1/tcp/7070/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
-  "/ip4/86.98.94.9/tcp/7070/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB"
+  "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
+  "/ip4/192.168.0.10/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
+  "/ip6/::1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
+  "/ip4/86.98.94.9/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB"
 ]
 ```
 
@@ -197,23 +197,23 @@ The above guide navigates your NAT, but there are still a few hurdles to overcom
 Let's set up a Netcat listener on all interfaces on the computer we'd like to run Bee on as we have above.
 
 ```sh
-nc -l 0.0.0.0 7070
+nc -l 0.0.0.0 1634
 ```
 
 Now, let's verify we're above to test this by checking the connection on our local machine.
 
 ```sh
-nc -zv 127.0.0.1 7070
+nc -zv 127.0.0.1 1634
 ```
 
 ```
-nc -zv 127.0.0.1 7070
-Connection to 127.0.0.1 port 7070 [tcp/*] succeeded!
+nc -zv 127.0.0.1 1634
+Connection to 127.0.0.1 port 1634 [tcp/*] succeeded!
 ```
 
 This should be a no brainer, the connection between localhost in not normally mediated. 
 
-If there is a problem here, the problem is with some other software running on your operating system or your operating system itself. Try a different port, such as `7071` and turning off any unneccesary software. If this doesn't work, you may need to try a different operating system environment. Please get in touch and we'll try to help!
+If there is a problem here, the problem is with some other software running on your operating system or your operating system itself. Try a different port, such as `1734` and turning off any unneccesary software. If this doesn't work, you may need to try a different operating system environment. Please get in touch and we'll try to help!
 
 If we were successful, let's move on to the next stage.
 
@@ -235,7 +235,7 @@ curl icanhazip.com
 Now try to connect to your port using the global IP.
 
 ```sh
-nc -zv 86.98.94.9 7070
+nc -zv 86.98.94.9 1634
 ```
 
 If this is successful, our Bee node's path is clear!
@@ -244,11 +244,11 @@ If not, we can try a few things to make sure there are no barriers stopping us f
 
 1. Check your computers firewall.
 
-Sometimes your computer is configured to prevent connections. If you are on a private network mediated by NAT, you can check if this is the problem by trying to connect from another device on your network using the local IP `nc -zv 192.168.0.10 7070`.
+Sometimes your computer is configured to prevent connections. If you are on a private network mediated by NAT, you can check if this is the problem by trying to connect from another device on your network using the local IP `nc -zv 192.168.0.10 1634`.
 
 Ubuntu uses [UFW](https://help.ubuntu.com/community/UFW), MacOS can be configured using the *Firewall* tab in the *Security & Privacy* section of *System Preferences*. Windows uses [Defender Firewall](https://support.microsoft.com/en-us/help/4028544/windows-10-turn-microsoft-defender-firewall-on-or-off).
 
-For each of these firewalls, set a special rule to allow UDP and TCP traffic to pass through on port `7070`. You may want to limit this traffic to the Bee application only.
+For each of these firewalls, set a special rule to allow UDP and TCP traffic to pass through on port `1634`. You may want to limit this traffic to the Bee application only.
 
 2. Check your ingress firewall.
 
@@ -256,13 +256,13 @@ For a datacenter hired server, this configuration will often take place in somew
 
 Similarly, if you are connecting from within a private network, you may find that the port is blocked by the router. Each router is different, so consult your router's firware documentation to make sure there are no firewalls in place blocking traffic on your Bee's designated p2p port.
 
-You may check this using Netcat by trying to connect using your computer's public IP, as above `nc -zv 86.98.94.9 7070`.
+You may check this using Netcat by trying to connect using your computer's public IP, as above `nc -zv 86.98.94.9 1634`.
 
 3. Docker
 
 Docker adds another level of complexity. 
 
-To debug docker connectivity issues, we may use netcat as above to check port connections are working as expected. Double check that you are exposing the right ports to your local network, either by using the command line flags or in your docker-compose.yaml. You should be able to successfully check the connection locally using eg. `nc -zv localhost 7070` then follow instructions above to make sure your local network has the correct ports exposed to the internet.
+To debug docker connectivity issues, we may use netcat as above to check port connections are working as expected. Double check that you are exposing the right ports to your local network, either by using the command line flags or in your docker-compose.yaml. You should be able to successfully check the connection locally using eg. `nc -zv localhost 1634` then follow instructions above to make sure your local network has the correct ports exposed to the internet.
 
 3. Something else entirely?
 

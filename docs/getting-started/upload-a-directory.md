@@ -37,7 +37,7 @@ Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking 
 curl \
 	-X POST \
 	-H "Content-Type: application/x-tar" \
-	--data-binary @my_website.tar http://localhost:8080/dirs
+	--data-binary @my_website.tar http://localhost:1633/dirs
 ```
 
 When the upload is successful, Bee will return a json document containing the Swarm Reference.
@@ -48,11 +48,11 @@ When the upload is successful, Bee will return a json document containing the Sw
 
 Now, simply navigate your browser to view the reference using the `bzz` endpoint and your website will be served!
 
-[http://localhost:8080/bzz/b25c89a...214917b/index.html](http://localhost:8080/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/index.html) 
+[http://localhost:1633/bzz/b25c89a...214917b/index.html](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/index.html) 
 
 Other files are served at their relative paths, e.g.
 
-[http://localhost:8080/bzz/b25c89a...214917b/assets/style.css](http://localhost:8080/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css) 
+[http://localhost:1633/bzz/b25c89a...214917b/assets/style.css](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css) 
 
 Once your data has been [fully processed into the network](/docs/advanced/tags), you will then be able to retrieve it from any Bee node.
 

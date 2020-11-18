@@ -12,14 +12,14 @@ Once your Bee node is running, a HTTP API is enabled for you to interact with. T
 First, let's check to see if the API is running as expected...
 
 ```sh
-curl http://localhost:8080
+curl http://localhost:1633
 > Ethereum Swarm Bee
 ```
 
 Once running, a file can be uploaded by making an HTTP POST request to the `files` endpoint of the Bee API. 
 
 ```sh
-curl -F file=@bee.jpg http://localhost:8080/files
+curl -F file=@bee.jpg http://localhost:1633/files
 ```
 where `bee.jpg` is the path to the file that you would like to upload.
 
@@ -49,12 +49,12 @@ Once your file is uploaded into Swarm, it can be retrieved with a simple HTTP GE
 Substitute the *hash* in the last part of the url to be the reference to your own data.
 
 ```sh
-curl -OJ http://localhost:8080/files/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4
+curl -OJ http://localhost:1633/files/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4
 ```
 
 You may even simply navigate to the URL in your browser:
 
-[http://localhost:8080/files/042d4fe...2291dd4](http://localhost:8080/files/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4)
+[http://localhost:1633/files/042d4fe...2291dd4](http://localhost:1633/files/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4)
 
 ## Public Gateways
 
