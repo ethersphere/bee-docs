@@ -29,7 +29,7 @@ git describe --tags
 3) Checkout the required version:
 
 ```sh
-git checkout master
+git checkout v0.4.0
 ```
 
 4) Build the binary:
@@ -41,7 +41,7 @@ make binary
 5) Check you are able to run the `bee` command. Success can be verified by running:
 ```sh
 dist/bee version
-> 0.3.1
+> 0.4.0
 ```
 
 6) (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`
