@@ -15,12 +15,12 @@ Simply run either one of the following commands in your Terminal...
 
 #### wget
 ```sh
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.3.1 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.4.0 bash
 ```
 
 #### curl
 ```sh
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.3.1 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.4.0 bash
 ```
 
 ### Run Bee
@@ -29,7 +29,7 @@ Once you have installed Bee, you can test that it has been successfully installe
 
 ```sh
 bee version
-> 0.3.1
+> 0.4.0
 ```
 
 Now your Bee node is installed, fund you node with gBZZ, [get your node started](/docs/getting-started/start-your-node) and join us in the swarm! 🐝 🐝 🐝 🐝 🐝
