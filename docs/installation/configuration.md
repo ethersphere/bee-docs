@@ -22,7 +22,7 @@ bee start \
 Bee can also be configured by providing a yaml configuration file using the `--config` flag.
 
 ```console
-bee start --config ~/bee-config.yaml 
+bee start --config /home/<user>/bee-config.yaml 
 ```
 
 :::tip
@@ -52,7 +52,6 @@ bootnode:
 - /dnsaddr/bootnode.ethswarm.org
 clef-signer-enable: false
 clef-signer-endpoint: ""
-config: /Users/sig/.bee.yaml
 cors-allowed-origins: []
 data-dir: /Users/sig/.bee
 db-capacity: "5000000"
@@ -60,7 +59,6 @@ debug-api-addr: :1635
 debug-api-enable: false
 gateway-mode: false
 global-pinning-enable: false
-help: false
 nat-addr: ""
 network-id: "1"
 p2p-addr: :1634
@@ -80,7 +78,7 @@ swap-initial-deposit: "100000000"
 tracing-enable: false
 tracing-endpoint: 127.0.0.1:6831
 tracing-service-name: bee
-verbosity: "5"
+verbosity: info
 welcome-message: ""
 ```
 
@@ -102,7 +100,7 @@ The location of a yaml configuration file containing configuration instructions.
 
 *default* :1633
 
-The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all requests. Argument values are of the form '132.132.132.132:1633'.
+The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all interfaces. Argument values are of the form '132.132.132.132:1633'.
 
 #### --bootnode
 
@@ -130,7 +128,7 @@ You may also specify a custom ipc file path for your Clef signer.
 
 *default* `[]`
 
-Http origin domains or wildcards defining these, which the API will allow responses to, e.g.
+Http/WS origin domains or wildcards defining these, which the API will allow responses to, e.g.
 
 ```console
 $ bee start --cors-allowed-origins="*"
@@ -141,7 +139,9 @@ $ bee start --cors-allowed-origins="https://website.ethswarm.org"
 
 *default* `/home/<user>/.bee`
 
-The location on your disk where Bee stores it's data. This consists of the following three types of data...
+The location on your disk where Bee stores it's data. This consists of the following three types of data.
+
+Data in this directory will be required to restore a node state using the same key.
 
 ##### 1. Chunk Data
 
@@ -149,7 +149,7 @@ This consists of chunks and files that you have pinned locally, cached chunks yo
 
 ##### 2. State Data
 
-This is information about the local state of your Bee node.
+This is information about the local state of your Bee node and should be backed up.
 
 ##### 3. Keystore Data
 
@@ -196,7 +196,7 @@ Set this to `true` to disable a set of sensitive features in the API to ensure t
 
 Enables the Global Pinning functionality when set to `true`.
 
-#### --nat-address
+#### --nat-addr
 
 *default* `""`
 
@@ -206,7 +206,7 @@ Sets the expected public IP. Normally this is generated automatically, but in ce
 
 *default* `1`
 
-The network ID for which to accept new connections. Set to 1 for mainnet.
+The network ID for which to accept new connections. Set to 1 for mainnet, 2 for testnet.
 
 #### --p2p-addr
 
@@ -231,7 +231,7 @@ Enables web-sockets transport for p2p communications.
 Password used to decrypt Swarm identity keys. 
 
 :::danger
-Passing passwords as command line arguments is insecure. Use a password file or environment variables in production environments.
+Passing passwords as command line arguments is insecure. Use a password file or environment variable in production environments.
 :::
 
 #### --password-file
@@ -256,7 +256,7 @@ The threshold in BZZ where you expect to get paid from your peers.
 
 The excess debt above payment threshold in BZZ where you disconnect from your peer.
 
-### --resolver-options 
+#### --resolver-options 
 
 *default* eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e
 
