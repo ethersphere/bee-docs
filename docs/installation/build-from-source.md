@@ -29,7 +29,7 @@ git describe --tags
 3) Checkout the required version:
 
 ```sh
-git checkout master
+git checkout v0.4.0
 ```
 
 4) Build the binary:
