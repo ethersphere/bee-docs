@@ -17,7 +17,7 @@ It is possible to instruct your node never to delete certain chunks, by locally 
 Locally pinning a chunk is best done upon upload by passing the `swarm-pin` header to the upload you are doing. As an example, you can upload a file and pin it at the same time by using
 
 ```sh
-curl -H "Content-Type: image/x-jpeg" -H "swarm-pin: true" --data-binary @kitten.jpg localhost:1633/files?name=cat.jpg
+curl -H "Content-Type: image/x-jpeg" -H "swarm-pin: true" --data-binary @kitten.jpg localhost:1633/files\?name=cat.jpg
 ```
 
 ## Persistence in the network by global pinning
