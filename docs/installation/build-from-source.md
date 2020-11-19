@@ -9,9 +9,9 @@ You may build the Bee client software directly from the [source](https://github.
 
 Prerequisites for installing direct from source are:
 
-- Go - download the latest release from [golang.org](https://golang.org/dl),
-- git - download from [git-scm.com](https://git-scm.com/),
-- make - usually included in most operating systems
+- **go** - download the latest release from [golang.org](https://golang.org/dl)
+- **git** - download from [git-scm.com](https://git-scm.com/)
+- **make** - usually included in most operating systems
 
 ### Build from Source
 
