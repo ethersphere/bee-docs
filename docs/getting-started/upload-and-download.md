@@ -22,6 +22,12 @@ Once running, a file can be uploaded by making an HTTP POST request to the `file
 curl -F file=@bee.jpg http://localhost:1633/files
 ```
 
+We may also pass the appropriate mime type in the `Content-Type` header, and a file name to the `name` query parameter so that the file will be correctly handled by web browsers and other applications.
+
+```sh
+curl --data-binary @bee.jpg  -H "Content-Type: video/jpg" "http://localhost:1633/files?name=bee.jpg"
+```
+
 :::danger
 Data uploaded to the swarm is always public. In Swarm, sensitive files must be [encrypted](/docs/getting-started/store-with-encryption) before uploading to ensure their contents always remains private.
 :::
