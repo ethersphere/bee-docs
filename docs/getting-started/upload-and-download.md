@@ -16,12 +16,11 @@ curl http://localhost:1633
 > Ethereum Swarm Bee
 ```
 
-Once running, a file can be uploaded by making an HTTP POST request to the `files` endpoint of the Bee API. 
+Once running, a file can be uploaded by making an HTTP POST request to the `files` endpoint of the Bee API.
 
 ```sh
 curl -F file=@bee.jpg http://localhost:1633/files
 ```
-where `bee.jpg` is the path to the file that you would like to upload.
 
 :::danger
 Data uploaded to the swarm is always public. In Swarm, sensitive files must be [encrypted](/docs/getting-started/store-with-encryption) before uploading to ensure their contents always remains private.

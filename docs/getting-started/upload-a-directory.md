@@ -12,7 +12,7 @@ If an uploaded directory contain an `index.html` file. When you navigate to the 
 This feature makes use of the [tar](https://www.gnu.org/software/tar/) command line utility to package the directory into a single file that can then uploaded to the Bee API for processing and distributed into the swarm for later retrieval.
 
 :::caution
-In the current version of Bee, g-zip compression in not supported, so make sure not to use the `-z` flag!
+G-zip compression is not supported the current version of Bee, so make sure not to use the `-z` flag when using the `tar` command!
 :::
 
 ## Upload the Directory Containing Your Website
