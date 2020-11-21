@@ -1,5 +1,5 @@
 ---
-title: Configuring Your Bee Node
+title: Configuration
 id: configuration
 ---
 
