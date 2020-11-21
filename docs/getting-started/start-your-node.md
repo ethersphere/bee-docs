@@ -46,7 +46,6 @@ bee start \
   --verbosity 5 \
   --swap-endpoint https://rpc.slock.it/goerli \
   --debug-api-enable
-  --bootnode /dnsaddr/bootnode.staging.ethswarm.org
 ```
 
 Since we haven't yet funded our account, we will see a message in our logs asking us to fund our Ethereum account. Navigate to the [Swarm Goerli Faucet](https://faucet.ethswarm.org/) and submit your address, ensuring it is prepended with the characters `0x` to the faucet, fill out the recaptcha and wait for confirmation that your gETH and gBZZ have been dispensed.
