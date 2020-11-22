@@ -7,9 +7,9 @@ Each Bee node is configured to reserve a certain amount of memory on your comput
 
 Each time a chunk is accessed, it is moved back to the end of the deletion queue, so that regularly accessed content stays alive in the network and is not deleted by a node's garbage collection routine.
 
-```info
+:::info
 While pinning files is a great solution for maintaining the persistence of your files in the network, Swarm will soon include storage incentives where files can be persisted simply by rewarding storer nodes with BZZ. Stay in touch for exciting developments soon!
-```
+:::
 
 This, however, presents a problem for content which is important, but accessed seldom requested. In order to keep this content alive, Bee nodes provide a facility to **pin** important content so that it is not deleted.
 
@@ -19,9 +19,9 @@ There are two flavours of pinning, *local* and *global*.
 
 If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or [Gateway](/docs/advanced/gateway), chunks can be *pinned* either during upload, or retrospectively using the Swarm reference.
 
-```caution
+:::caution
 Files pinned using local pinning will still not necessarily be available to the rest of the network. Read [global pinning]() to find out how to keep your files available to the whole of the swarm.
-```
+:::
 
 ### Pin During Upload
 
@@ -95,9 +95,9 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 {"address":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f","pinCounter":1}
 ```
 
-```warning
-It is recommended to pin content during upload for reliable pinning behaviour, as there is a chance some or all of your chunks may be deleted to free up space between uploading and pinning if pinned retrospectively.
-```
+:::warning
+We recommended that content is pinned during upload for reliable pinning behaviour, as there is a chance some or all of your chunks may be deleted to free up space between uploading and pinning if pinned retrospectively.
+:::
 
 ## Global Pinning
 

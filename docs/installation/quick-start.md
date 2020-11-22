@@ -9,13 +9,19 @@ The Bee client will happily run on MacOS, Windows and various Linux flavors.
 
 ### Package Managers
 
-Bee [packages](/docs/installation/package-managers) are provided for Ubuntu, Raspbian, Debian and CentOS based linux distributions.
+Bee [packages](/docs/installation/package-managers) are provided for Ubuntu, Raspbian, Debian and CentOS based Linux distributions.
 
-It is recommended and much easier for you to use a package manager to install Bee if possible.
+If a package is provided for your system it is **highly recommended** that Bee is installed using your package manager.
+
+See [package managers](/docs/installation/package-managers) for more information.
 
 ### Quick Install (Stable)
 
 We provide a convenient [installation script](https://github.com/ethersphere/bee/blob/637b67a8e0a2b15e707f510bb7f49aea4ef6c110/install.sh), which automatically detects your execution environment and installs the latest stable version of the Bee client on your computer.
+
+```warning
+Quick Install method is intended for users who only want to quickly try Bee out. For more serious, longer term installations, use your package manager if it's supported, or read [manual installation]()
+```
 
 Simply run either one of the following commands in your Terminal...
 

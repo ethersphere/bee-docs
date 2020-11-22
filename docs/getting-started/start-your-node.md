@@ -76,7 +76,7 @@ INFO[2020-08-29T11:55:16Z] greeting <Hi I am a very buzzy bee bzzzz bzzz bzz. ðŸ
 Now your node will begin to request chunks of data that fall within your *radius of responsibilty* - data that you will then serve to other p2p clients running in the swarm. Your node will then begin to respond to requests for these chunks from other peers, for which you will soon be rewarded in BZZ.
 
 :::tip Incentivisation
-In Swarm, storing chunks of data, serving and forwarding them to other nodes earns you rewards - get ready for exciting incentivisation features coming soon at Swarm Live!
+In Swarm, storing chunks of data, serving and forwarding them to other nodes earns you rewards! Read about incentives in [SWAP](/docs/advanced/swap) for more info.
 :::
 
 Your Bee client has now generated an elliptic curve keypair similar to an Ethereum wallet. These are stored in your [data directory](/docs/installation/configuration#--data-dir), in the `keys` folder.

@@ -7,9 +7,9 @@ Bee provides packages for installation of **Bee** and the [Bee Clef external sig
 
 Although it is possible to use Bee without Bee Clef, it is advised to use the external signer to keep the keys your Bee node uses to interact with the Ethereum blockchain safe. 
 
-```warning
+:::caution
 Clef will create a new Ethereum key pair for you during installation. Make sure you keep a [backup](/docs/maintainance/backups) of your key pair somewhere safe and secure!
-```
+:::
 
 ## Install Bee Clef
 
@@ -47,7 +47,7 @@ wget '...'
 sudo yum localinstall bee_0.4.0_arm.rpm
 ```
 
-## Interact With Clef
+### Interact With Clef
 
 Once Clef has been installed, it will begin running as a service using `systemd`.
 
@@ -142,7 +142,7 @@ Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg
 
 ### Fund Your Node
 
-When a Bee node is initialised for the first time with a new key, it will need to be funded with both gBZZ and GETH (Goerli BZZ and Goerli ETH). Swarm incentives are currently running on the Goerli testnet and tokens are availiable from the [Swarm faucet](https://faucet.ethswarm.org).
+When a Bee node is initialised with a new key, it will need to be funded with both gBZZ and GETH (Goerli BZZ and Goerli ETH). Swarm incentives are currently running on the Goerli testnet and tokens are availiable from the [Swarm faucet](https://faucet.ethswarm.org).
 
 We can find our our Bee node's Ethereum address either from the logs, as above, or by sending a request to our Bee node's *addresses* debug API endpoint.
 
@@ -172,13 +172,17 @@ Nov 20 23:52:44 sig-ln bee[55528]: time="2020-11-20T23:52:44Z" level=info msg="g
 
 If these messages are missing, check out our comprehensive guide to Bee [connectivity](/docs/installation/connectivity).
 
-## Updates
+## Updating Bee
 
 Your Bee and Bee-clef installations can be updated by repeating the install steps above. Bee sure to [backup](/docs/maintenance/backups) your clef key material and Bee data before applying updates.
 
 ## Uninstalling Bee
 
 If you need to remove Bee, you may simply run the below commands.
+
+:::danger
+Uninstalling Bee will delete your key pair! Make sure you back up from `/var/lib/bee` so you don't lose your data.
+:::
 
 ### Ubuntu / Debian / Raspbian
 
@@ -193,7 +197,7 @@ sudo apt-get remove --purge bee-clef
 
 ```
 
-## Data Location
+## Data Locations
 
 ### Bee-clef
 
