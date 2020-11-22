@@ -20,15 +20,15 @@ Before installing Bee, you may install the Bee clef package. This will set up a 
 #### AMD64
 
 ```sh
-wget '...'
-sudo dpkg -i bee-clef_0.3.0_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_amd64.deb
+sudo dpkg -i bee-clef_0.3.2_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
 
 ```sh
-wget '...'
-sudo dpkg -i bee_0.4.0_arm.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_armv7.deb
+sudo dpkg -i bee-clef_0.3.2_armv7.deb
 ```
 
 ### CentOS
@@ -36,15 +36,15 @@ sudo dpkg -i bee_0.4.0_arm.deb
 #### AMD64
 
 ```sh
-wget '...'
-sudo yum localinstall bee-clef_0.3.0_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_amd64.rpm
+sudo yum localinstall bee-clef_0.3.2_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
 
 ```sh
-wget '...'
-sudo yum localinstall bee_0.4.0_arm.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_armv7.rpm
+sudo yum localinstall bee-clef_0.3.2_armv7.rpm
 ```
 
 ## Interact With Clef
@@ -72,32 +72,37 @@ To install Bee itself, simply choose the appropriate command from the ones below
 #### AMD
 
 ```sh
-wget '...'
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_amd64.deb
 sudo dpkg -i bee_0.4.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
 
 ```sh
-wget '...'
-sudo dpkg -i bee_0.4.0_arm.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.deb
+sudo dpkg -i bee_0.4.0_armv7.deb
 ```
+
+SWAP is enabled by default, during instalation you will be asked to set ethereum endpoint and if you want to enable clef support (if you enable it make sure that you have bee-clef running already).
 
 ### CentOS
 
 #### AMD64
 
 ```sh
-wget '...'
-sudo yum localinstall bee-clef_0.3.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_amd64.rpm
+sudo dpkg -i bee_0.4.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
 
 ```sh
-wget '...'
-sudo yum localinstall bee_0.4.0_arm.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.rpm
+sudo dpkg -i bee_0.4.0_armv7.rpm
 ```
+
+When installed service will be stopped.
+SWAP is enabled by default, set ethereum endpoint `swap-endpoint` and enable clef support `clef-signer-enable` (if you enable it make sure that you have bee-clef running already) inside `/etc/bee/bee.yaml` and start the service `systemctl start bee`.
 
 ## Interact With Bee
 
@@ -126,7 +131,7 @@ systemctl status bee
 Logs are available using the `journalctl` command.
 
 ```sh
-journalctl -u bee -f
+journalctl -f -u bee
 ```
 
 ```text
@@ -159,7 +164,7 @@ Visit [https://faucet.ethswarm.org](https://faucet.ethswarm.org) and fill out th
 Once this has been credited, we can watch our logs and watch as Bee automatically deploys a chequebook and makes an initial deposit.
 
 ```sh
-journalctl -u bee -f
+journalctl -f -u bee
 ```
 
 Once this is complete, we should start to see our Bee node connect to other nodes in the network as it begins to take part in the swarm.
@@ -182,15 +187,30 @@ If you need to remove Bee, you may simply run the below commands.
 
 ### Ubuntu / Debian / Raspbian
 
+To uninstall bee run
+
 ```sh
-sudo apt-get remove --purge bee
-sudo apt-get remove --purge bee-clef
+sudo apt-get remove bee
+sudo apt-get remove bee-clef
+```
+
+**WARNING**
+To remove all bee data and bee user, keys included run
+
+```sh
+sudo apt-get purge bee
+sudo apt-get purge bee-clef
 ```
 
 ### Centos
 
-```sh
+To uninstall bee run
+**WARNING**
+You will delete all the data and keys.
 
+```sh
+sudo yum remove bee
+sudo yum remove bee-clef
 ```
 
 ## Data Location
