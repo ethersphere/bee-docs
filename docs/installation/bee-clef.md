@@ -8,7 +8,7 @@ Bee makes use of Go Ethereum's external signer, [Clef](https://geth.ethereum.org
 Because Bee must sign a lot of transactions automatically and quickly, a [Bee specific version of Clef, Bee-clef](https://github.com/ethersphere/bee-clef) has been packaged which includes all the relevant configuration and implements the specific configuration needed to make Clef work with Bee.
 
 :::caution
-Clef will create a new Ethereum key pair for you during installation. Make sure you keep a [backup](/docs/maintainance/backups) of your key pair somewhere safe and secure!
+Clef will create a new Ethereum key pair for you during installation. Make sure you keep a [backup](/docs/maintenance/backups) of your key pair somewhere safe and secure!
 :::
 
 ## Packages

@@ -3,7 +3,7 @@ title: Quick Start
 id: quick-start
 ---
 
-Bee is packaged for Ubuntu, Raspbian, Debian and CentOS based Linux distributions, and also for MacOS using Homebrew.
+Bee is packaged for Ubuntu, Raspbian, Debian and CentOS based Linux distributions.
 
 If your system is not supported, please see the [manual installation](/docs/installation/manual) section for information on how to install Bee.
 
@@ -98,7 +98,16 @@ Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg
 
 When a Bee node is initialised with a new key, it will need to be funded with both gBZZ and GETH (Goerli BZZ and Goerli ETH). Swarm incentives are currently running on the Goerli testnet and tokens are availiable from the [Swarm faucet](https://faucet.ethswarm.org).
 
-We can find our our Bee node's Ethereum address either from the logs, as above, or by sending a request to our Bee node's *addresses* [debug API](/docs/api-reference/api-reference) endpoint.
+We can find our our Bee node's Ethereum address either from the logs, as above, use the handy `bee-get-addr` utility or by sending a request to our Bee node's *addresses* [debug API](/docs/api-reference/api-reference) endpoint.
+
+```sh
+bee-get-addr
+```
+
+```
+Please make sure there is sufficient eth and bzz available on 06c5aefd35d85028d65554660f353defa5ba989 address.
+You can get both goerli eth and goerli bzz from https://faucet.ethswarm.org
+```
 
 :::info
 For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](http://localhost:3000/docs/installation/configuration#configuring-bee-installed-using-a-package-manager) and restart your Bee service.

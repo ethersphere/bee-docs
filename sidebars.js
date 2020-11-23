@@ -17,9 +17,15 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Maintainance',
       items: [
-        'getting-started/start-your-node',
+        'maintenance/backups'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Basic Usage',
+      items: [
         'getting-started/working-with-your-node',
         'getting-started/upload-and-download',
         'getting-started/upload-a-directory',

@@ -24,11 +24,15 @@ tree build
 my_website
 ├── assets
 │   └── style.css
-└── index.html
+├── index.html
+└── error.html
 ```
 
+Now, we `cd` into the directory and bundle the whole directory as a tar file. This strategy ensures that the tar package maintains the correct directory structure. You may also pass an absolute path instead of `../my_website.tar`
+
 ```bash
-$ tar -cf my_website.tar assets index.html
+cd my_website
+tar -cf ../my_website.tar *
 ```
 
 Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking care to include the header `Content Type: application/x-tar`.
@@ -37,8 +41,14 @@ Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking 
 curl \
 	-X POST \
 	-H "Content-Type: application/x-tar" \
+	-H "Swarm-Index-Document: index.html" \
+	-H "Swarm-Error-Document: error.html" 
 	--data-binary @my_website.tar http://localhost:1633/dirs
 ```
+
+:::info
+For instances where a Single Page App has a javascript router which handles url queries itself, simple pass `index.html` as the error document, and Bee will pass over control to the javascript served by the `index.html` file in the circumstance that a path does not yield a file from the manifest. 
+:::
 
 When the upload is successful, Bee will return a json document containing the Swarm Reference.
 

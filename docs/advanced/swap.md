@@ -165,3 +165,25 @@ curl http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4
 ```
 
 Success, we earned our first gBZZ! 🐝
+
+Now we have earnt tokens, to withdraw our gBZZ from the chequebook contract back into our node's own wallet, we simply POST a request to the chequebook withdraw endpoint.
+
+```sh
+curl -XPOST http://localhost:1635/chequebook/withdraw\?amount\=1000 | jq
+```
+
+And conversely, if we have used more services than we have provided, we may deposit extra gBZZ into the chequebook contract by sending a POST request to the deposit endpoint.
+
+```sh
+curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
+```
+
+```json
+{"transactionHash":"0x60fd4be6c1db4552ecb5cd3c99f6a4906089277f592593cccd1fee0dbf501085"}
+```
+
+You may use then Etherscan to track your transaction and make sure it completes successfully.
+
+[https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a`](https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a)
+
+
