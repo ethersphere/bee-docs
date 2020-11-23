@@ -21,7 +21,7 @@ To install Bee itself, simply choose the appropriate command from the ones below
 
 ### Ubuntu / Raspbian / Debian
 
-#### AMD
+#### AMD64
 
 ```sh
 wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_amd64.deb
@@ -30,9 +30,18 @@ sudo dpkg -i bee_0.4.0_amd64.deb
 
 #### ARM (Raspberry Pi)
 
+##### ARMv7
+
 ```sh
 wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.deb
 sudo dpkg -i bee_0.4.0_armv7.deb
+```
+
+##### ARM64
+
+```sh
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_arm64.deb
+sudo dpkg -i bee_0.4.0_arm64.deb
 ```
 
 SWAP is enabled by default, during instalation you will be asked to set ethereum endpoint and if you want to enable clef support (if you enable it make sure that you have bee-clef running already).
@@ -48,10 +57,30 @@ sudo dpkg -i bee_0.4.0_amd64.rpm
 
 #### ARM (Raspberry Pi)
 
+##### ARMv7
+
 ```sh
 wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.rpm
 sudo dpkg -i bee_0.4.0_armv7.rpm
 ```
+
+##### ARM64
+
+```sh
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_arm64.rpm
+sudo dpkg -i bee_0.4.0_arm64.rpm
+```
+
+### MacOS
+
+```sh
+brew tap ethersphere/tap
+brew install swarm-bee
+```
+
+:::info
+Follow post install guide in terminal for initial configuration and how to start `bee`.
+:::
 
 ## Interact With Bee
 
