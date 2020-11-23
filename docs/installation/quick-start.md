@@ -24,31 +24,33 @@ To install Bee itself, simply choose the appropriate command from the ones below
 #### AMD
 
 ```sh
-wget '...'
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_amd64.deb
 sudo dpkg -i bee_0.4.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
 
 ```sh
-wget '...'
-sudo dpkg -i bee_0.4.0_arm.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.deb
+sudo dpkg -i bee_0.4.0_armv7.deb
 ```
+
+SWAP is enabled by default, during instalation you will be asked to set ethereum endpoint and if you want to enable clef support (if you enable it make sure that you have bee-clef running already).
 
 ### CentOS
 
 #### AMD64
 
 ```sh
-wget '...'
-sudo yum localinstall bee-clef_0.3.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_amd64.rpm
+sudo dpkg -i bee_0.4.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
 
 ```sh
-wget '...'
-sudo yum localinstall bee_0.4.0_arm.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.rpm
+sudo dpkg -i bee_0.4.0_armv7.rpm
 ```
 
 ## Interact With Bee
@@ -78,7 +80,7 @@ systemctl status bee
 Logs are available using the `journalctl` command.
 
 ```sh
-journalctl -u bee -f
+journalctl -f -u bee
 ```
 
 ```text
@@ -136,22 +138,28 @@ Your Bee and Bee-clef installations can be updated by repeating the install step
 
 If you need to remove Bee, you may simply run the below commands.
 
+### Ubuntu / Debian / Raspbian
+
 :::danger
 Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups]() so you don't lose your keys and data.
 :::
 
-### Ubuntu / Debian / Raspbian
-
 ```sh
-sudo apt-get remove --purge bee
-sudo apt-get remove --purge bee-clef
+sudo apt-get remove bee
+sudo apt-get remove bee-clef
 ```
 
 ### Centos
 
-```sh
+:::danger
+Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups]() so you don't lose your keys and data.
+:::
 
+```sh
+sudo yum remove bee
+sudo yum remove bee-clef
 ```
+
 
 ## Data Locations
 

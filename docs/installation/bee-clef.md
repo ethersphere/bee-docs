@@ -20,15 +20,15 @@ Bee clef can be installed automatically using your system's package manager.
 #### AMD64
 
 ```sh
-wget '...'
-sudo dpkg -i bee-clef_0.3.0_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_amd64.deb
+sudo dpkg -i bee-clef_0.3.2_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
 
 ```sh
-wget '...'
-sudo dpkg -i bee_0.4.0_arm.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_armv7.deb
+sudo dpkg -i bee-clef_0.3.2_armv7.deb
 ```
 
 ### CentOS
@@ -36,15 +36,15 @@ sudo dpkg -i bee_0.4.0_arm.deb
 #### AMD64
 
 ```sh
-wget '...'
-sudo yum localinstall bee-clef_0.3.0_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_amd64.rpm
+sudo yum localinstall bee-clef_0.3.2_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
 
 ```sh
-wget '...'
-sudo yum localinstall bee_0.4.0_arm.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_armv7.rpm
+sudo yum localinstall bee-clef_0.3.2_armv7.rpm
 ```
 
 ### Interact With Clef
