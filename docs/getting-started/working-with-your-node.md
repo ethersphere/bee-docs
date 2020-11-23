@@ -42,7 +42,7 @@ We can gain even more insight into how your Bee client is becoming a part of the
 curl -X GET http://localhost:6060/topology | jq
 ```
 
-In this example, our node is beginning to form a healthy network. We hope to see our node adding and connecting to nodes in as many bins as possible. Learn more about promiximity order bins and how your Bee node becomes part of the ordered p2p network in [The Book of Swarm](/docs/find-out-more/the-book-of-swarm).
+In this example, our node is beginning to form a healthy network. We hope to see our node adding and connecting to nodes in as many bins as possible. Learn more about promiximity order bins and how your Bee node becomes part of the ordered p2p network in [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
 
 ```
 {
