@@ -7,10 +7,11 @@ module.exports = {
       items: [
         'installation/quick-start',
         'installation/configuration',
-        'installation/package-managers',
+        'installation/manual',
         'installation/build-from-source',
         'installation/docker',
-        'installation/connectivity'
+        'installation/connectivity',
+        'installation/bee-clef'
       ],
       collapsed: false
     },
