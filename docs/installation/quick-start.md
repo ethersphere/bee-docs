@@ -19,6 +19,10 @@ While it is not necessary that node operators make use of Go Ethereum's Clef ext
 
 To install Bee itself, simply choose the appropriate command from the ones below. This will set up Bee and start running it in the background as a service on your computer.
 
+:::info
+Follow post install guide in terminal for initial configuration and how to start `bee`.
+:::
+
 ### Ubuntu / Raspbian / Debian
 
 #### AMD64
@@ -43,8 +47,6 @@ sudo dpkg -i bee_0.4.0_armv7.deb
 wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_arm64.deb
 sudo dpkg -i bee_0.4.0_arm64.deb
 ```
-
-SWAP is enabled by default, during instalation you will be asked to set ethereum endpoint and if you want to enable clef support (if you enable it make sure that you have bee-clef running already).
 
 ### CentOS
 
@@ -78,9 +80,17 @@ brew tap ethersphere/tap
 brew install swarm-bee
 ```
 
-:::info
-Follow post install guide in terminal for initial configuration and how to start `bee`.
-:::
+To run Bee as a service now and on startup, run:
+
+```sh
+brew services start swarm-bee
+```
+
+## SWAP Blockchain Endpoint
+
+Your node must have access to a Goerli blockchain endpoint so that it can interact and deploy your chequebook contract. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a provider such as [rpc.slock.it/goerli](https://rpc.slock.it/goerli) or [Infura](https://infura.io/).
+
+By default, Bee expects a local Goerli node at `http://localhost:8545`. To use a provider instead, simply change your `--swap-endpoint` in your [configuration file](http://localhost:3000/docs/installation/configuration#configuring-bee-installed-using-a-package-manager).
 
 ## Interact With Bee
 
@@ -93,6 +103,7 @@ curl localhost:1633
 ```
 Ethereum Swarm Bee
 ```
+### Linux
 
 We can now manage the Bee service using `systemctl`.
 
@@ -121,6 +132,20 @@ Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=info msg="u
 Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=info msg="no chequebook found, deploying new one."
 Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg="please make sure there is sufficient eth and bzz available >
 Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg="on goerli you can get both goerli eth and goerli bzz from h>
+```
+
+### MacOS
+
+Services are managed using Homebrew services.
+
+```sh
+brew services restart bee
+```
+
+Logs are available at `/usr/local/var/log/swarm-bee/bee.log`
+
+```sh
+tail -f /usr/local/var/log/swarm-bee/bee.log
 ```
 
 ### Fund Your Node

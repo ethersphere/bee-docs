@@ -72,6 +72,12 @@ brew tap ethersphere/tap
 brew install swarm-clef
 ```
 
+To run Bee Clef as a service now and on startup, run:
+
+```sh
+brew services start swarm-bee
+```
+
 ### Interact With Clef
 
 Once Clef has been installed, it will begin running as a service using `systemd`.

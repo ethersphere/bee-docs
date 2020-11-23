@@ -36,9 +36,18 @@ Bee node's installed using package managers `apt-get` or `yum` are configured us
 
 To alter Bee's configuration, simply edit the configuration file as desired, and restart your Bee node using `systemctl`.
 
+#### Linux
+
 ```sh
 sudo vi /etc/bee/bee.yaml
 sudo systemctl restart bee
+```
+
+#### MacOS
+
+```sh
+vi /usr/local/etc/swarm-bee/bee.yaml
+brew services restart swarm-bee
 ```
 
 ### Automatically generate a config file
