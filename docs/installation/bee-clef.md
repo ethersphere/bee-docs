@@ -20,15 +20,24 @@ Bee clef can be installed automatically using your system's package manager.
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_amd64.deb
-sudo dpkg -i bee-clef_0.3.2_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_amd64.deb
+sudo dpkg -i bee-clef_0.4.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
 
+##### ARMv7
+
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_armv7.deb
-sudo dpkg -i bee-clef_0.3.2_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_armv7.deb
+sudo dpkg -i bee-clef_0.4.0_armv7.deb
+```
+
+##### ARM64
+
+```sh
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_arm64.deb
+sudo dpkg -i bee-clef_0.4.0_arm64.deb
 ```
 
 ### CentOS
@@ -36,16 +45,36 @@ sudo dpkg -i bee-clef_0.3.2_armv7.deb
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_amd64.rpm
-sudo yum localinstall bee-clef_0.3.2_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_amd64.rpm
+sudo yum localinstall bee-clef_0.4.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
 
+##### ARMv7
+
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.3.2/bee-clef_0.3.2_armv7.rpm
-sudo yum localinstall bee-clef_0.3.2_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_armv7.rpm
+sudo yum localinstall bee-clef_0.4.0_armv7.rpm
 ```
+
+##### ARM64
+
+```sh
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_arm64.rpm
+sudo yum localinstall bee-clef_0.4.0_arm64.rpm
+```
+
+### MacOS
+
+```sh
+brew tap ethersphere/tap
+brew install swarm-clef
+```
+
+:::info
+Follow post install guide in terminal for initial configuration and how to start `bee-clef`.
+:::
 
 ### Interact With Clef
 
