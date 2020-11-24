@@ -46,7 +46,7 @@ sudo dpkg -i bee-clef_0.4.0_arm64.deb
 
 ```sh
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_amd64.rpm
-sudo yum localinstall bee-clef_0.4.0_amd64.rpm
+sudo rpm -i bee-clef_0.4.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -55,14 +55,14 @@ sudo yum localinstall bee-clef_0.4.0_amd64.rpm
 
 ```sh
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_armv7.rpm
-sudo yum localinstall bee-clef_0.4.0_armv7.rpm
+sudo rpm -i bee-clef_0.4.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```sh
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.0/bee-clef_0.4.0_arm64.rpm
-sudo yum localinstall bee-clef_0.4.0_arm64.rpm
+sudo rpm -i bee-clef_0.4.0_arm64.rpm
 ```
 
 ### MacOS
@@ -75,7 +75,7 @@ brew install swarm-clef
 To run Bee Clef as a service now and on startup, run:
 
 ```sh
-brew services start swarm-bee
+brew services start swarm-clef
 ```
 
 ### Interact With Clef
