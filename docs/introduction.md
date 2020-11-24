@@ -22,6 +22,7 @@ Swarm is all about Dapps. We provide the most developer friendly environment to 
 Need even more incentive to get involved with the wonderful world of Swarm? Find out how you'll soon be earning BZZ tokens for storing and distributing your share of the worlds data, sharing is caring!
 
 ## Find Out More
+
 What happens with your Bee node when you start it up? Want to know more about the amazing Swarm technology behind Bee? Want to make your own client? Read [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf), our 250 page epic guide to the future tech underpinning the Swarm network.
 
 ## Development
