@@ -54,7 +54,7 @@ sudo dpkg -i bee_0.4.0_arm64.deb
 
 ```sh
 wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_amd64.rpm
-sudo dpkg -i bee_0.4.0_amd64.rpm
+sudo rpm -i bee_0.4.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -63,14 +63,14 @@ sudo dpkg -i bee_0.4.0_amd64.rpm
 
 ```sh
 wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.rpm
-sudo dpkg -i bee_0.4.0_armv7.rpm
+sudo rpm -i bee_0.4.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```sh
 wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_arm64.rpm
-sudo dpkg -i bee_0.4.0_arm64.rpm
+sudo rpm -i bee_0.4.0_arm64.rpm
 ```
 
 ### MacOS
