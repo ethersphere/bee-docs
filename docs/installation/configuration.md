@@ -185,7 +185,7 @@ They are the cryptographic proof of your network identity and cannot be recovere
 
 *default* `5000000`
 
-Chunk database capacity in chunks. A chunk is 4096 kb in size, so the total database capacity in kb can be estimated as `db-capacity * 4096`. The default 5,000,000 chunks is therefore approximately 20.5gb. We recommend a minimum of 2.5gb capacity for a node to be able to effectively function in the network. Light nodes that do not participate in storing may be able to specify less.
+Chunk database capacity in chunks. A chunk is 4096 bytes in size, so the total database capacity in kb can be estimated as `db-capacity * 4096`. The default 5,000,000 chunks is therefore approximately 20.5gb. We recommend a minimum of 2.5gb capacity for a node to be able to effectively function in the network. Light nodes that do not participate in storing may be able to specify less.
 
 #### --debug-api-addr
 
