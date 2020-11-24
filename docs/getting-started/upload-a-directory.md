@@ -12,7 +12,7 @@ If an uploaded directory contain an `index.html` file. When you navigate to the 
 This feature makes use of the [tar](https://www.gnu.org/software/tar/) command line utility to package the directory into a single file that can then uploaded to the Bee API for processing and distributed into the swarm for later retrieval.
 
 :::caution
-In the current version of Bee, g-zip compression in not supported, so make sure not to use the `-z` flag!
+G-zip compression is not supported the current version of Bee, so make sure not to use the `-z` flag when using the `tar` command!
 :::
 
 ## Upload the Directory Containing Your Website
@@ -24,11 +24,15 @@ tree build
 my_website
 ├── assets
 │   └── style.css
-└── index.html
+├── index.html
+└── error.html
 ```
 
+Now, we `cd` into the directory and bundle the whole directory as a tar file. This strategy ensures that the tar package maintains the correct directory structure. You may also pass an absolute path instead of `../my_website.tar`
+
 ```bash
-$ tar -cf my_website.tar assets index.html
+cd my_website
+tar -cf ../my_website.tar *
 ```
 
 Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking care to include the header `Content Type: application/x-tar`.
@@ -37,8 +41,14 @@ Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking 
 curl \
 	-X POST \
 	-H "Content-Type: application/x-tar" \
-	--data-binary @my_website.tar http://localhost:8080/dirs
+	-H "Swarm-Index-Document: index.html" \
+	-H "Swarm-Error-Document: error.html" 
+	--data-binary @my_website.tar http://localhost:1633/dirs
 ```
+
+:::info
+For instances where a Single Page App has a javascript router which handles url queries itself, simple pass `index.html` as the error document, and Bee will pass over control to the javascript served by the `index.html` file in the circumstance that a path does not yield a file from the manifest. 
+:::
 
 When the upload is successful, Bee will return a json document containing the Swarm Reference.
 
@@ -48,11 +58,11 @@ When the upload is successful, Bee will return a json document containing the Sw
 
 Now, simply navigate your browser to view the reference using the `bzz` endpoint and your website will be served!
 
-[http://localhost:8080/bzz/b25c89a...214917b/index.html](http://localhost:8080/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/index.html) 
+[http://localhost:1633/bzz/b25c89a...214917b/index.html](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/index.html) 
 
 Other files are served at their relative paths, e.g.
 
-[http://localhost:8080/bzz/b25c89a...214917b/assets/style.css](http://localhost:8080/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css) 
+[http://localhost:1633/bzz/b25c89a...214917b/assets/style.css](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css) 
 
 Once your data has been [fully processed into the network](/docs/advanced/tags), you will then be able to retrieve it from any Bee node.
 

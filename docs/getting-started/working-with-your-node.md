@@ -16,7 +16,7 @@ Never expose your Debug API to the public internet, make sure to use a firewall 
 To use the Debug API we must first configure Bee to enable it, as it is disabled by default.
 
 ```sh
-$ bee start --debug-api-enable --debug-api-addr=localhost:6060
+$ bee start --debug-api-enable --debug-api-addr=localhost:1635
 ```
 
 #### Checking Connectivity
@@ -24,7 +24,7 @@ $ bee start --debug-api-enable --debug-api-addr=localhost:6060
 First, let's check how many nodes we are currently connected to.
 
 ```sh
-curl -s http://localhost:6060/peers | jq '.peers | length'
+curl -s http://localhost:1635/peers | jq '.peers | length'
 23
 ```
 
@@ -39,10 +39,10 @@ Here we are using the `jq` command line utility to count the amount of objects i
 We can gain even more insight into how your Bee client is becoming a part of the global network your using the `topology` endpoint.
 
 ```sh
-curl -X GET http://localhost:6060/topology | jq
+curl -X GET http://localhost:1635/topology | jq
 ```
 
-In this example, our node is beginning to form a healthy network. We hope to see our node adding and connecting to nodes in as many bins as possible. Learn more about promiximity order bins and how your Bee node becomes part of the ordered p2p network in [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
+In this example, our node is beginning to form a healthy network. We hope to see our node adding and connecting to nodes in as many bins as possible. Learn more about promiximity order bins and how your Bee node becomes part of the ordered p2p network in [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf).
 
 ```
 {

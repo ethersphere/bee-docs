@@ -32,14 +32,14 @@ To follow the status of your upload while it is splitting you must generate the 
 Create a tag by sending a POST request to the `tag` API endpoint:
 
 ```console
-curl -s -XPOST http://localhost:8080/tags | jq .uid
+curl -s -XPOST http://localhost:1633/tags | jq .uid
 > 4074122506
 ```
 
 Use the returned UID to instruct your POST upload request to track this upload using the `Swarm-Tag-UID` header:
 
 ```console
-curl -F file=@bee.jpg -H "Swarm-Tag-UID: 4074122506" http://localhost:8080/files
+curl -F file=@bee.jpg -H "Swarm-Tag-UID: 4074122506" http://localhost:1633/files
 ```
 
 :::info
@@ -53,7 +53,7 @@ You can use `curl --verbose` to view the HTTP response headers such as the `Swar
 To get the current status of an upload, send a GET request to the `tag/<Swarm-Tag-UID>` API endpoint.
 
 ```console
-curl http://localhost:8080/tags/4074122506 | jq
+curl http://localhost:1633/tags/4074122506 | jq
 ```
 
 The response contains all the information that you need to follow the status of your file as it is synced with the network.

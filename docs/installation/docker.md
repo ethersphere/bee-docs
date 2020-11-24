@@ -12,9 +12,9 @@ Try Bee out by simply running the following command in your Terminal.
 ```sh
 docker run\
   -v /path/to/.bee-docker:/home/bee/.bee\
-  -p 6060:6060 \
-  -p 7070:7070 \
-  -p 8080:8080\
+  -p 1635:1635 \
+  -p 1634:1634 \
+  -p 1633:1633\
   --rm -it bee:v1\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
@@ -23,7 +23,7 @@ docker run\
 ```
 
 :::info
-If starting your node for the first time, you will need to deploy a chequebook contract. See [Start Your Node](/docs/getting-started/start-your-node) for more info.
+If starting your node for the first time, you will need to deploy a chequebook contract. See [Manual Installation](/docs/installation/manual) for more info.
 :::
 
 To persist files, mount a local directory as follows and enter the password used to encrypt your keyfiles. Note, Docker insists on absolute paths when mounting volumes, so you must replace `/path/to/.bee-docker` with a valid path from your local filesystem.
@@ -31,9 +31,9 @@ To persist files, mount a local directory as follows and enter the password used
 ```sh
 docker run\
   -v /path/to/.bee-docker:/home/bee/.bee\
-  -p 6060:6060 \
-  -p 7070:7070 \
-  -p 8080:8080\
+  -p 1635:1635 \
+  -p 1634:1634 \
+  -p 1633:1633\
   --rm -it bee:v1\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
@@ -47,9 +47,9 @@ Once you have generated your keys, leave Bee to run in the background...
 docker run\
   -d 
   -v /path/to/.bee-docker:/home/bee/.bee\
-  -p 6060:6060 \
-  -p 7070:7070 \
-  -p 8080:8080\
+  -p 1635:1635 \
+  -p 1634:1634 \
+  -p 1633:1633\
   --rm -it bee:v1\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
@@ -70,7 +70,7 @@ docker pull ethersphere/bee:beta
 #### Specific Versions
 
 ```sh
-docker pull ethersphere/bee:0.3.1
+docker pull ethersphere/bee:0.4.0
 ```
 
 #### Edge

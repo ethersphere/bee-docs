@@ -3,77 +3,148 @@ title: Persistence
 id: persistence
 ---
 
-The storage capacity of the whole Swarm network equals the the sum of the storage capacity of all connected nodes. As nobody is restricted to upload content to Swarm, eventually the storage capacity of the Swarm network reaches its limits and nodes face the choice to either stop accepting new chunks or delete content which is there already for a while. 
+Each Bee node is configured to reserve a certain amount of memory on your computer's hard drive to store and serve chunks within their *neighbourhood of responsibility* for other nodes in the Swarm network. Once this alloted space has been filled, each Bee node delete older chunks to make way for newer ones as they are uploaded by the network.
 
-As Swarm nodes are programmed to behave economically, they won't stop accepting new chunks. The reasoning for this is that newly uploaded chunks are most likely to be accessed, offering the node an opportunity for profit. Instead, they will delete some chunks to make space for the new ones. The chunks that are deleted are the ones which were uploaded or accessed furthest away in the past.
+Each time a chunk is accessed, it is moved back to the end of the deletion queue, so that regularly accessed content stays alive in the network and is not deleted by a node's garbage collection routine.
 
 :::info
-The garbage collection queue deletes chunks which were uploaded or **accessed** furthest away in the past. This means that you can persist your chunks by regularly accessing it (or making it super duper awesome, so other people access it)
+While pinning files is a great solution for maintaining the persistence of your files in the network, Swarm will soon include storage incentives where files can be persisted simply by rewarding storer nodes with BZZ. Stay in touch for exciting developments soon!
 :::
 
-## Persistence on your own node by local pinning
-It is possible to instruct your node never to delete certain chunks, by locally pinning the chunks. Locally pinning chunks means that you will always be able to access these chunks via your node. However, it doesn't does mean that those chunks always be available in the network.
+This, however, presents a problem for content which is important, but accessed seldom requested. In order to keep this content alive, Bee nodes provide a facility to **pin** important content so that it is not deleted.
 
-Locally pinning a chunk is best done upon upload by passing the `swarm-pin` header to the upload you are doing. As an example, you can upload a file and pin it at the same time by using
+There are two flavours of pinning, *local* and *global*.
+
+## Local Pinning
+
+If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or [Gateway](/docs/advanced/gateway), chunks can be *pinned* either during upload, or retrospectively using the Swarm reference.
+
+:::caution
+Files pinned using local pinning will still not necessarily be available to the rest of the network. Read [global pinning]() to find out how to keep your files available to the whole of the swarm.
+:::
+
+### Pin During Upload
+
+To store content so that it will persist even when Bee's garbage collection routine is deleting old chunks, we simply pass the `Swarm-Pin` header set to `true` when uploading.
 
 ```sh
-curl -H "Content-Type: image/x-jpeg" -H "swarm-pin: true" --data-binary @kitten.jpg localhost:8080/files?name=cat.jpg
+curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
 ```
 
-## Persistence in the network by global pinning
-Global pinning adds a mechanism such that chunks which are locally pinned become globally available to the network. 
+```json
+{"reference":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f"}
+```
 
-### Become a global pinner
-To become a global pinner, you must:
+### Administrating Pinned Content
 
-1. start your node in `global-pinning` mode;
-2. make sure that you persist the files. 
-3. advertise that you are a global pinner;
-
-
-#### Start your node in global pinning mode
-Starting a node in global pinning mode is done with our standard configuration options (see [start](/docs/getting-started/start-your-node)). The flag which you pass to the command line is `--global-pinning-enable`.
-
-This mode makes your node to listen to PSS (Postal Service over Swarm) messages, containing requests for repair. If your node receives a request for repair and you store the chunk for which repair is requested, your node will re-upload this chunk to its natural location in the network.
-
-#### Persist the files
-Persisting the files is advertised to be done in the `local pinning` feature. However, this is not obligatory; As long as you make sure that you persist the files and have them available at the moment that the recovery mechanism is set in motion (after receiving a PSS message) all is fine.
-
-#### Advertise as a global pinner
-By only starting your node in global pinning mode, nodes will still not know that they need to reach out to you for repair. You must somehow report that you are globally pinning the files (and this information must be picked up by any person who downloads the content you are globally pinning). 
-
-The Swarm team envisions multiple ways how this is possible: via smart-contracts, via special gateways to the Swarm network, via Manifests, as data in the root chunk, via a feed or many other ways. 
-
-We deliberately didn't force a specific pattern to the user, and we also don't aim to do so in the future. However, when a certain pattern to advertise yourself as a global pinner becomes the de-facto standard, we will report it here.
-
-:::info
-As a global pinner, you don't need to advertise your full overlay address. You only need to advertise your overlay addres as a *target* which is the first n characters of your overlay address, where n increases if the number of nodes in the network increases. (see "what is a target").
-:::
-
-
-### Request files which are globally pinned
-To make use of the global pinning feature (and request a repair if a chunk not found), you need to pass a `targets` query parameter to your download request. The value of this parameter is a reference to the address of the global pinner node. You don't need to pass his whole address, just the first n characters is sufficient (where n increases if the number of nodes in the network increases). Please see "What is a target" below.
-
-An example of a request to download a file with the targets query parameter passed in:
+Let's check to make sure this content was indeed pinned by querying the chunks api for the swarm reference to see whether the root chunk is currently pinned.
 
 ```sh
-curl http://localhost:8080/files/3b2791985f102fe645d1ebd7f51e522d277098fcd86526674755f762084b94ee?targets=<target comes here>
+curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ```
 
-If your chunk is not found in the network, but you sent a request to the passed-in target for repair then you get a `202` response back, indicating that the request has been accepted for processing.
+```json
+{"address":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f","pinCounter":1}
+```
 
-After few seconds, You can retry to download the chunk again and this time the network will respond back with the repaired chunk. If you still don't get the chunk back, try downloading the chunk with another target.
+Success! Our pin counter is set to `1`!
 
-#### How to find out which targets to pass
-Just as there is no set way how to advertise that your node is a global pinner, there is no set way on how to figure out which nodes are global pinners for which content. The burden to pass targets in a request should ultimately not be borne by the user; we envision that the code that interacts with the bee client handles finding the target and passing it in with the request.
+#### Unpinning Files 
 
-### What is a target
-A target is defined as the first n-characters of an overlay address. In order for PSS to guarantee delivery to the destination, the bit-length of the target must be longer than the neighborhood depth of the node. As the neighborhood depth is defined as log2(N/R), where N is the amount of nodes in the network and R is the neighborhood size or redundancy factor.
+If we later decide our content is no longer worth keeping, we can simply unpin it by sending a `DELETE` request to the files pinning endpoint using the same reference.
 
-:::info
-For a few hundred of nodes in the network, we advice the length of the target to be 2 bytes. From about 50000 nodes onwards, you should start considering a target length of 3 bytes. 
+```sh
+curl -XDELETE http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+``
+
+```json
+{"message":"OK","code":200}
+```
+
+Now, if we check again, we'll get a `404` error as the content is no longer pinned.
+
+```sh
+curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+```
+
+```json
+{"message":"Not Found","code":404}
+```
+
+#### Pinning Already Uploaded Content
+
+Content which already exists on the node can be repinned if it has not yet been garbage collected.
+
+To pin content existing on our node, we can send a `POST` request including the swarm reference to the files pinning endpoint.
+
+```sh
+curl -XPOST http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+``
+
+```json
+{"message":"OK","code":200}
+```
+
+Now, if we query our files pinning endpoint again, the pin counter will once again have been incremented.
+
+```sh
+curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+```
+
+```json
+{"address":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f","pinCounter":1}
+```
+
+:::warning
+We recommended that content is pinned during upload for reliable pinning behaviour, as there is a chance some or all of your chunks may be deleted to free up space between uploading and pinning if pinned retrospectively.
 :::
 
-To understand this a deeper, you should realize that a recipient node is only guaranteed to receive a message if the chunk, containing the message falls into the neighborhood of the recipient. Falling into the recipients's neighbourhood means the recipient's overlay address matches the chunk's address on a prefix with bit-length greater or equal to the neighbourhood depth of the recipient.  The neighbourhood depth is logarithmic in the network size.  Its expected value  is log2(N/R)  where R is the neighbourhood  size or redundancy factor. Now if the network has a thousand nodes (N=2^10) and a redundancy factor of 4 (R=4=2^2), the expected depth is 8. However, due to variance some nodes will have depth of 9, which means that a trojan generated with a one-byte target (guaranteed 8 bits matching) will only have 50% chance of hitting the node's neighbourhood.
+## Global Pinning
 
-The conclusion  is that already at a good few hundred  nodes, one needs  2-byte targets.
+While [local pinning]() ensures that your own node does not delete files you have uploaded, nodes which store your chunks because they fall within their *neighbourhood of responsibility* may have deleted content which has not been recently accessed to make way for new chunks.
+
+```info
+For more info on how chunks are distributed, persisted and stored within the network, read [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf).
+```
+
+To keep this content alive, your Bee node can be configured to refresh this content when it requested by other nodes in the network, using **global pinning**.
+
+First, we must start up our node with the `global-pinning-enable` flag set.
+
+```sh
+bee start\
+  --verbosity 5 \
+  --swap-endpoint https://rpc.slock.it/goerli \
+  --global-pinning-enable \
+  --debug-api-enable
+```
+
+Next, we pin our file locally, as shown above.
+
+```sh
+curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
+```
+
+```json
+{"reference":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f"}
+```
+
+Now, when we distribute links to our files, we must also include the first two bytes of our overlay address as the *target*. If a chunk that has already been garbage collected by it's storer nodes is requested, the storer node will send a message using [PSS](/docs/advanced/pss) to the Swarm neighbourhood defined by this prefix, of which our node is a member.
+
+Let's use the addresses API endpoint to find out our target prefix.
+
+```sh
+curl -s http://localhost:1635/addresses | jq .overlay
+```
+
+```sh
+"320ed0e01e6e3d06cab44c5ef85a0898e68f925a7ba3dc80ee614064bb7f9392"
+```
+
+Finally, we take the first two bytes of our overlay address, `320e` and include this when referencing our chunk.
+
+```sh
+curl http://localhost:1633/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f?targets=320e
+```
+
+Now, even if our chunks are deleted, they will be repaired in the network by our local Bee node and will always be available to the whole swarm!

@@ -3,7 +3,7 @@ title: Starting a Test Network
 id: starting-a-test-network
 ---
 
-A test network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can aslo do the same using flags or environment variables (see [Start your node](/docs/getting-started/start-your-node)). 
+A test network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](/docs/installation/configuration)). 
 
 ## Start a network on your own computer
 ### Configuration
@@ -12,9 +12,9 @@ Starting a network is easiest achieved by making use of configuration files. We 
 **config_1.yaml**
 ```yaml
 network-id: 7357
-api-addr: :8080
-p2p-addr: :7070
-debug-api-addr: 127.0.0.1:6060
+api-addr: :1633
+p2p-addr: :1634
+debug-api-addr: 127.0.0.1:1635
 debug-api-enable: true
 bootnode: ""
 data-dir: /tmp/bee/node1
@@ -25,9 +25,9 @@ swap-enable: false
 **config_2.yaml**
 ```yaml
 network-id: 7357
-api-addr: :8081
-p2p-addr: :7071
-debug-api-addr: 127.0.0.1:6061
+api-addr: :1733
+p2p-addr: :1734
+debug-api-addr: 127.0.0.1:1735
 debug-api-enable: true
 data-dir: /tmp/bee/node2
 bootnode: ""
@@ -49,12 +49,12 @@ We can now inspect the state of our network by sending HTTP requests to the [Deb
 
 
 ```sh
-curl -s http://localhost:6060/topology | jq .connected
+curl -s http://localhost:1635/topology | jq .connected
 > 0
 ```
 
 ```sh
-curl -s http://localhost:6061/topology | jq .connected
+curl -s http://localhost:1735/topology | jq .connected
 > 0
 ```
 
@@ -70,16 +70,16 @@ In order to create a network from our two isolated nodes, we must first instruct
 First, we will need to find out the network address of the first node. To do this, we send a HTTP request to the `addresses` endpoint of the Debug API. 
 
 ```sh
-curl localhost:6060/addresses | jq
+curl localhost:1635/addresses | jq
 ```
 
 ```json
 {
   "overlay": "f57a65207f5766084d3ebb6bea5e2e4a712504e54d86a00961136b514f07cdac",
   "underlay": [
-    "/ip4/127.0.0.1/tcp/7070/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs",
-    "/ip4/192.168.0.10/tcp/7070/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs",
-    "/ip6/::1/tcp/7070/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs",
+    "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs",
+    "/ip4/192.168.0.10/tcp/1634/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs",
+    "/ip6/::1/tcp/1634/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs",
     "/ip4/xx.xx.xx.xx/tcp/40317/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs"
   ]
 }
@@ -92,12 +92,12 @@ Note the addresses starting with an `/ip4`, followed by `127.0.0.1`, which is th
 **config_2.yaml**
 ```yaml
 network-id: 7357
-api-addr: :8081
-p2p-addr: :7071
-debug-api-addr: 127.0.0.1:6061
+api-addr: :1733
+p2p-addr: :1734
+debug-api-addr: 127.0.0.1:1735
 debug-api-enable: true
 data-dir: /tmp/bee/node2
-bootnode: "/ip4/127.0.0.1/tcp/7070/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs"
+bootnode: "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs"
 password: some pass phze
 welcome-message: "Bzz Bzz Bzz"
 swap-enable: false
@@ -110,11 +110,11 @@ Look at the the output for your first node, you should see our connection messag
 Let's also verify that we can see both nodes in using each other's Debug API's.
 
 ```sh
-curl -s http://localhost:6060/peers | jq
+curl -s http://localhost:1635/peers | jq
 ```
 
 ```sh
-curl -s http://localhost:6060/peers | jq
+curl -s http://localhost:1635/peers | jq
 ```
 
 Congratulations! You have made your own tiny two bee Swarm! 🐝 🐝

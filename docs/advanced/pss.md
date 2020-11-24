@@ -14,7 +14,7 @@ Once your Bee node is up and running, you will be able to subscribe to feeds usi
 Here we subscribe to the topic `test-topic`
 
 ```sh
-websocat ws://localhost:8080/pss/subscribe/test-topic
+websocat ws://localhost:1633/pss/subscribe/test-topic
 ```
 
 Our node is now watching for new messages received in it's nearest neighbourhood.
@@ -37,7 +37,7 @@ For example, if we want to send a PSS message with **topic** `test-topic` to a n
 
 ```sh
 curl -XPOST \
-localhost:8082/pss/send/test/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd \
+localhost:1833/pss/send/test/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd \
 --data "Hello Swarm"
 ```
 
@@ -51,31 +51,31 @@ Run the following command to start the first node. Note that we are passing `""`
 
 ```sh
 bee start \
-    --api-addr=:8082 \
+    --api-addr=:1833 \
     --debug-api-enable \
-    --debug-api-addr=:6062 \
+    --debug-api-addr=:1835 \
     --data-dir=/tmp/bee2 \
     --bootnode="" \
-    --p2p-addr=:7072 \
-    --swap-enable=false
+    --p2p-addr=:1834 \
+    --swap-endpoint=https://rpc.slock.it/goerli
 ```
 
 We must make a note of the Swarm overlay address, underlay address and public key which are created once each node has started. We find this information from the addresses endpoint of the Debug API.
 
 ```sh
-curl -s localhost:6062/addresses | jq
+curl -s localhost:1835/addresses | jq
 ```
 
 ```json
 {
-  "overlay": "7bc50a5d79cb69fa5a0df519c6cc7b420034faaa61c175b88fc4c683f7c79d96",
+  "overlay": "46275b02b644a81c8776e2459531be2b2f34a94d47947feb03bc1e209678176c",
   "underlay": [
-    "/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr",
-    "/ip4/192.168.0.10/tcp/7072/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr",
-    "/ip6/::1/tcp/7072/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr"
+    "/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq",
+    "/ip4/192.168.0.10/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq",
+    "/ip6/::1/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq"
   ],
-  "ethereum": "0x0000000000000000000000000000000000000000",
-  "public_key": "0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd"
+  "ethereum": "0x0b546f2817d0d889bd70e244c1227f331f2edf74",
+  "public_key": "03660e8dbcf3fda791e8e2e50bce658a96d766e68eb6caa00ce2bb87c1937f02a5"
 }
 ```
 
@@ -83,41 +83,40 @@ Now the same for the second node.
 
 ```sh
 bee start \
-    --api-addr=:8083 \
+    --api-addr=:1933 \
     --debug-api-enable \
-    --debug-api-addr=:6063 \
+    --debug-api-addr=:1935 \
     --data-dir=/tmp/bee3 \
     --bootnode="" \
-    --p2p-addr=:7073 \
-    --swap-enable=false
+    --p2p-addr=:1934 \
+    --swap-endpoint=https://rpc.slock.it/goerli
 ```
 
 ```sh
-curl -s localhost:6063/addresses | jq
+curl -s localhost:1935/addresses | jq
 ```
 
 ```json
 {
-  "overlay": "a231764383d7c46c60a6571905e72021a90d506ef8db06750f8a708d93fe706e",
+  "overlay": "085b5cf15a08f59b9d64e8ce3722a95b2c150bb6a2cef4ac8b612ee8b7872253",
   "underlay": [
-    "/ip4/127.0.0.1/tcp/7073/p2p/16Uiu2HAmAqJkKJqZjNhuDtepc8eBANM9TvagaWUThfTN5NkfmKTq",
-    "/ip4/192.168.0.10/tcp/7073/p2p/16Uiu2HAmAqJkKJqZjNhuDtepc8eBANM9TvagaWUThfTN5NkfmKTq",
-    "/ip6/::1/tcp/7073/p2p/16Uiu2HAmAqJkKJqZjNhuDtepc8eBANM9TvagaWUThfTN5NkfmKTq",
-    "/ip4/81.98.94.4/tcp/25178/p2p/16Uiu2HAmAqJkKJqZjNhuDtepc8eBANM9TvagaWUThfTN5NkfmKTq"
+    "/ip4/127.0.0.1/tcp/7073/p2p/16Uiu2HAm5RwRgkZWxDMAff2io6L4Qd1uL9yNgZSNTCdPsukcg5Qr",
+    "/ip4/192.168.0.10/tcp/7073/p2p/16Uiu2HAm5RwRgkZWxDMAff2io6L4Qd1uL9yNgZSNTCdPsukcg5Qr",
+    "/ip6/::1/tcp/7073/p2p/16Uiu2HAm5RwRgkZWxDMAff2io6L4Qd1uL9yNgZSNTCdPsukcg5Qr"
   ],
-  "ethereum": "0x0000000000000000000000000000000000000000",
-  "public_key": "02d68d57d9f3fe539990cdf03e7de96d56a5c68b42515bc465acec4edc5cedfe35"
+  "ethereum": "0x9ec47bd86a82276fba57f3009c2f6b3ace4286bf",
+  "public_key": "0289634662d3ed7c9fb1d7d2a3690b69b4075cf138b683380023d2edc2e6847826"
 }
 ```
 
 Because we configured the nodes to start with no bootnodes, neither node should have peers yet.
 
 ```sh
-curl -s localhost:6062/peers | jq
+curl -s localhost:1835/peers | jq
 ```
 
 ```sh
-curl -s localhost:6063/peers | jq
+curl -s localhost:1935/peers | jq
 ```
 
 ```json
@@ -130,13 +129,13 @@ Let's connect node 2 to node 1 using the localhost (127.0.0.1) underlay address 
 
 ```sh
 curl -XPOST \
-  localhost:6063/connect/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr
+  localhost:1935/connect/ip4/127.0.0.1/tcp/1834/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr
 ```
 
 Now, if we check our peers endpoint for node 1, we can see our nodes are now peered together.
 
 ```sh
-curl -s localhost:6062/peers | jq
+curl -s localhost:1835/peers | jq
 ```
 
 ```json
@@ -152,7 +151,7 @@ curl -s localhost:6062/peers | jq
 Of course, since we are p2p, node 2 will show node 1 as a peer too.
 
 ```sh
-curl -s localhost:6063/peers | jq
+curl -s localhost:1935/peers | jq
 ```
 
 ```json
@@ -168,7 +167,7 @@ curl -s localhost:6063/peers | jq
 We will use `websocat` to listen for PSS messages topic ID `test-topic` on our first node.
 
 ```sh
-websocat ws://localhost:8082/pss/subscribe/test-topic
+websocat ws://localhost:1833/pss/subscribe/test-topic
 ```
 
 Now we can use PSS to send a message from our second node to our first node. 
@@ -177,14 +176,14 @@ Since our first node has a 2 byte address prefix of `a231`, we will specify this
 
 ```sh
 curl \
-  -XPOST "localhost:8083/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd"\
+  -XPOST "localhost:1933/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd" \
   --data "Hello Swarm"
 ```
 
 The PSS API endpoint will now create a PSS message for it's recipient in the form of a 'Trojan Chunk' and send this into the network so that it may be pushed to the correct neighbourhood. Once it is received by it's destination target it will be decrypted and determined to be a message with the topic we are listening for. Our second node will decrypt the data and we'll see a message pop up in our `websocat` console!
 
 ```sh
-sig :: ~ » websocat ws://localhost:8082/pss/subscribe/test-topic
+sig :: ~ » websocat ws://localhost:1833/pss/subscribe/test-topic
 Hello Swarm
 ```
 
