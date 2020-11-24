@@ -45,7 +45,8 @@ To find out your Ethereum address, we can simply run our Bee node and point it a
 bee start \
   --verbosity 5 \
   --swap-endpoint https://rpc.slock.it/goerli \
-  --debug-api-enable
+  --debug-api-enable \
+  --network-id 2 \
   --bootnode /dnsaddr/bootnode.staging.ethswarm.org
 ```
 
