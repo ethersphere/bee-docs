@@ -104,7 +104,8 @@ We recommended that content is pinned during upload for reliable pinning behavio
 While [local pinning]() ensures that your own node does not delete files you have uploaded, nodes which store your chunks because they fall within their *neighbourhood of responsibility* may have deleted content which has not been recently accessed to make way for new chunks.
 
 ```info
-For more info on how chunks are distributed, persisted and stored within the network, read [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf).
+For more info on how chunks are distributed, persisted and stored within the network, read
+[The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
 ```
 
 To keep this content alive, your Bee node can be configured to refresh this content when it requested by other nodes in the network, using **global pinning**.
