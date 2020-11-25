@@ -31,7 +31,10 @@ Once you have installed Bee, you can test that it has been successfully installe
 
 ```sh
 bee version
-> 0.4.0
+```
+
+```
+0.4.0
 ```
 
 Now your Bee node is installed, you can fund your node with gBZZ join us in the swarm! 🐝 🐝 🐝 🐝 🐝
@@ -102,7 +105,7 @@ For more info on bandwidth accounting, see [SWAP Bandwidth Accounting](/docs/adv
 
 If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world. 
 
-```sh
+```
 INFO[2020-08-29T11:55:16Z] greeting <Hi I am a very buzzy bee bzzzz bzzz bzz. 🐝> from peer: b6ae5b22d4dc93ce5ee46a9799ef5975d436eb63a4b085bfc104fcdcbda3b82c
 ```
 

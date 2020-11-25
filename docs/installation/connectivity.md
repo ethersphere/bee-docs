@@ -120,7 +120,7 @@ Note that the port in the external [multiaddress](https://docs.libp2p.io/concept
 
 Inspecting the underlay addresses in the output of the addresses endpoint our debug API, we can see addresses only for *localhost* `127.0.0.1` and our *private network IP* `192.168.0.10`. Bee must be having trouble navigating our NAT.
 
-```sh
+```json
 [
   "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
   "/ip4/192.168.0.10/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
@@ -165,6 +165,7 @@ nc -zv 86.98.94.9 1634
 ```
 Connection to 86.98.94.9 port 1834 [tcp/*] succeeded!
 ```
+
 Success! ✨
 
 If this didn't work for you, check out our [Debugging Connectivity]() guide below.
@@ -177,7 +178,7 @@ bee start --nat-addr 86.98.94.9:1634
 
 Checking our addresses endpoint again, we can now see that Bee has been able to successfully assign a public address! Congratulations, your Bee is now connected to the outside world!
 
-```sh
+```json
 [
   "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
   "/ip4/192.168.0.10/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
@@ -207,7 +208,6 @@ nc -zv 127.0.0.1 1634
 ```
 
 ```
-nc -zv 127.0.0.1 1634
 Connection to 127.0.0.1 port 1634 [tcp/*] succeeded!
 ```
 

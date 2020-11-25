@@ -12,7 +12,7 @@ The Bee client provides a facility to encrypt files and directories while upload
 To encrypt a file simply include the `Swarm-Encrypt: true` header with your HTTP request.
 
 ```sh
-$ curl -F file=@bee.jpg -H "Swarm-Encrypt: true" http://localhost:1633/files
+curl -F file=@bee.jpg -H "Swarm-Encrypt: true" http://localhost:1633/files
 ```
 
 When successful, the Bee client will return a 64 byte reference, instead of the usual 32 bytes.
@@ -36,7 +36,7 @@ Encryption is disabled by default on all Swarm Gateways to keep your data safe. 
 To retrieve your file, simply supply the full 64 byte string to the files endpoint, and the Bee client will download and decrypt all the relevant chunks and restore them to their original format.
 
 ```sh
-$ curl -OJ http://localhost:1633/files/f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3
+curl -OJ http://localhost:1633/files/f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3
 ```
 
 :::danger

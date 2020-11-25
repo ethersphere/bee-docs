@@ -50,12 +50,18 @@ We can now inspect the state of our network by sending HTTP requests to the [Deb
 
 ```sh
 curl -s http://localhost:1635/topology | jq .connected
-> 0
+```
+
+```
+0
 ```
 
 ```sh
 curl -s http://localhost:1735/topology | jq .connected
-> 0
+```
+
+```
+0
 ```
 
 No connections yet? Right! Let's remedy that!

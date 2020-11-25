@@ -16,7 +16,7 @@ Never expose your Debug API to the public internet, make sure to use a firewall 
 To use the Debug API we must first configure Bee to enable it, as it is disabled by default.
 
 ```sh
-$ bee start --debug-api-enable --debug-api-addr=localhost:1635
+bee start --debug-api-enable --debug-api-addr=localhost:1635
 ```
 
 #### Checking Connectivity
@@ -25,6 +25,9 @@ First, let's check how many nodes we are currently connected to.
 
 ```sh
 curl -s http://localhost:1635/peers | jq '.peers | length'
+```
+
+```
 23
 ```
 
@@ -47,7 +50,7 @@ connecting to nodes in as many bins as possible. Learn more about promiximity or
 Bee node becomes part of the ordered p2p network in
 [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
 
-```
+```json
 {
   "baseAddr": "793cdae71d51b0ffc09fecd1c5b063560150cf2e1d55058bad4a659be5894ab1",
   "population": 159,

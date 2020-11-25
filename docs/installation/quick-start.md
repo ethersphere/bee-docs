@@ -171,7 +171,7 @@ For a new installation of Bee, the debug API endpoint is not yet exposed for sec
 curl -s localhost:1635/addresses | jq .ethereum
 ```
 
-```
+```json
 "0x97a472ff3a28a2e93ef4d2f523ff48e39c4bf579"
 ```
 
