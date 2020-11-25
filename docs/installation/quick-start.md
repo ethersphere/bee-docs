@@ -90,7 +90,7 @@ brew services start swarm-bee
 
 Your node must have access to a Goerli blockchain endpoint so that it can interact and deploy your chequebook contract. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a provider such as [rpc.slock.it/goerli](https://rpc.slock.it/goerli) or [Infura](https://infura.io/).
 
-By default, Bee expects a local Goerli node at `http://localhost:8545`. To use a provider instead, simply change your `--swap-endpoint` in your [configuration file](http://localhost:3000/docs/installation/configuration#configuring-bee-installed-using-a-package-manager).
+By default, Bee expects a local Goerli node at `http://localhost:8545`. To use a provider instead, simply change your `--swap-endpoint` in your [configuration file](/docs/installation/configuration#configuring-bee-installed-using-a-package-manager).
 
 ## Interact With Bee
 
@@ -164,7 +164,7 @@ You can get both goerli eth and goerli bzz from https://faucet.ethswarm.org
 ```
 
 :::info
-For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](http://localhost:3000/docs/installation/configuration#configuring-bee-installed-using-a-package-manager) and restart your Bee service.
+For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](/docs/installation/configuration#configuring-bee-installed-using-a-package-manager) and restart your Bee service.
 :::
 
 ```sh
