@@ -43,7 +43,7 @@ The Bee data directory contains three stores.
 
 ### Keystore
 
-The keystore contains your important key material. This is the most important data by far, and is produced and retained from Bee's initialisation procedure. If you have used **Bee-clef** to manage your key material and signing procedures, see [below]() for information on how to keep backups.
+The keystore contains your important key material. This is the most important data by far, and is produced and retained from Bee's initialisation procedure. If you have used **Bee-clef** to manage your key material and signing procedures, see below for information on how to keep backups.
 
 ### Statestore
 

@@ -67,4 +67,4 @@ To share files with someone who isn't running a Bee node yet, simply change the 
 
 [https://gateway.ethswarm.org/files/042d4fe...2291dd4](https://gateway.ethswarm.org/files/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4)
 
-<!-- If you are unable to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/troubleshooting/connectivitiy) for assistance. -->
+If you are unable to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/installation/connectivitiy) for assistance.

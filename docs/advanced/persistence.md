@@ -17,10 +17,10 @@ There are two flavours of pinning, *local* and *global*.
 
 ## Local Pinning
 
-If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or [Gateway](/docs/advanced/gateway), chunks can be *pinned* either during upload, or retrospectively using the Swarm reference.
+If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or Gateway, chunks can be *pinned* either during upload, or retrospectively using the Swarm reference.
 
 :::caution
-Files pinned using local pinning will still not necessarily be available to the rest of the network. Read [global pinning]() to find out how to keep your files available to the whole of the swarm.
+Files pinned using local pinning will still not necessarily be available to the rest of the network. Read global pinning to find out how to keep your files available to the whole of the swarm.
 :::
 
 ### Pin During Upload
@@ -101,7 +101,7 @@ We recommended that content is pinned during upload for reliable pinning behavio
 
 ## Global Pinning
 
-While [local pinning]() ensures that your own node does not delete files you have uploaded, nodes which store your chunks because they fall within their *neighbourhood of responsibility* may have deleted content which has not been recently accessed to make way for new chunks.
+While local pinning ensures that your own node does not delete files you have uploaded, nodes which store your chunks because they fall within their *neighbourhood of responsibility* may have deleted content which has not been recently accessed to make way for new chunks. -->
 
 ```info
 For more info on how chunks are distributed, persisted and stored within the network, read [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf).
