@@ -13,7 +13,10 @@ First, let's check to see if the API is running as expected...
 
 ```sh
 curl http://localhost:1633
-> Ethereum Swarm Bee
+```
+
+```
+Ethereum Swarm Bee
 ```
 
 Once running, a file can be uploaded by making an HTTP POST request to the `files` endpoint of the Bee API.

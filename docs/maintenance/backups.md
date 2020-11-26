@@ -3,7 +3,7 @@ title: Backups
 id: backups
 ---
 
-In order to ensure you are able to redeploy your Bee node in the event of a need for disaster, the contents of several directories must be retained.
+In order to ensure you are able to redeploy your Bee node in the event of a disaster, the contents of several directories must be retained.
 
 :::info
 Don't forget - it's not a backup until you have restored from it! Make sure to test your backups out so that you can be sure of recovery incase of data loss or data corruption.

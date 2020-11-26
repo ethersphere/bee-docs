@@ -180,10 +180,16 @@ curl \
   --data "Hello Swarm"
 ```
 
-The PSS API endpoint will now create a PSS message for it's recipient in the form of a 'Trojan Chunk' and send this into the network so that it may be pushed to the correct neighbourhood. Once it is received by it's destination target it will be decrypted and determined to be a message with the topic we are listening for. Our second node will decrypt the data and we'll see a message pop up in our `websocat` console!
+The PSS API endpoint will now create a PSS message for its recipient in the form of a 'Trojan Chunk' and send this
+into the network so that it may be pushed to the correct neighbourhood. Once it is received by its recipient
+it will be decrypted and determined to be a message with the topic we are listening for. Our second node
+will decrypt the data and we'll see a message pop up in our `websocat` console!
 
 ```sh
-sig :: ~ » websocat ws://localhost:1833/pss/subscribe/test-topic
+websocat ws://localhost:1833/pss/subscribe/test-topic
+```
+
+```
 Hello Swarm
 ```
 

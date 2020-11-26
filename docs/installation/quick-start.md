@@ -103,6 +103,7 @@ curl localhost:1633
 ```
 Ethereum Swarm Bee
 ```
+
 ### Linux
 
 We can now manage the Bee service using `systemctl`.
@@ -152,7 +153,7 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 
 When a Bee node is initialised with a new key, it will need to be funded with both gBZZ and GETH (Goerli BZZ and Goerli ETH). Swarm incentives are currently running on the Goerli testnet and tokens are availiable from the [Swarm faucet](https://faucet.ethswarm.org).
 
-We can find our our Bee node's Ethereum address either from the logs, as above, use the handy `bee-get-addr` utility or by sending a request to our Bee node's *addresses* [debug API](/docs/api-reference/api-reference) endpoint.
+We can find our Bee node's Ethereum address either from the logs, as above, use the handy `bee-get-addr` utility or by sending a request to our Bee node's *addresses* [debug API](/docs/api-reference/api-reference) endpoint.
 
 ```sh
 bee-get-addr
@@ -171,7 +172,7 @@ For a new installation of Bee, the debug API endpoint is not yet exposed for sec
 curl -s localhost:1635/addresses | jq .ethereum
 ```
 
-```
+```json
 "0x97a472ff3a28a2e93ef4d2f523ff48e39c4bf579"
 ```
 

@@ -18,7 +18,7 @@ G-zip compression is not supported the current version of Bee, so make sure not 
 ## Upload the Directory Containing Your Website
 First, use the `tar` command line utility to create an archive containing all the files of your directory. If uploading a website, we must take care to ensure that the `index.html` file is at the root of the directory tree.
 
-```bash
+```sh
 tree build
 > 
 my_website
@@ -30,14 +30,14 @@ my_website
 
 Now, we `cd` into the directory and bundle the whole directory as a tar file. This strategy ensures that the tar package maintains the correct directory structure. You may also pass an absolute path instead of `../my_website.tar`
 
-```bash
+```sh
 cd my_website
 tar -cf ../my_website.tar *
 ```
 
 Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking care to include the header `Content Type: application/x-tar`.
 
-```bash
+```sh
 curl \
 	-X POST \
 	-H "Content-Type: application/x-tar" \

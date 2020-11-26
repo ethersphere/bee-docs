@@ -25,7 +25,7 @@ This time we will also include the `Swarm-Index-Document` header set to the `ind
 
 In the case that your website is a single page app, where you would like to direct to the javascript history api powered router, you may provide the `index.html` page for both settings.
 
-```bash
+```sh
 curl \
 	-X POST \
 	-H "Content-Type: application/x-tar" \

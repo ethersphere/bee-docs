@@ -16,12 +16,14 @@ Prerequisites for installing direct from source are:
 ### Build from Source
 
 1) Clone the repository:
+
 ```sh
 git clone https://github.com/ethersphere/bee
 cd bee
 ```
 
 2) Use `git` to find the latest release:
+
 ```sh
 git describe --tags
 ```
@@ -39,12 +41,17 @@ make binary
 ```
 
 5) Check you are able to run the `bee` command. Success can be verified by running:
+
 ```sh
 dist/bee version
-> 0.4.0
+```
+
+```
+0.4.0
 ```
 
 6) (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`
+
 ```sh
 sudo cp dist/bee /usr/local/bin/bee
 ```

@@ -3,7 +3,11 @@ title: API and Debug API
 id: api-reference
 ---
 
-The Bee node exposes two HTTP API endpoints, the `API` and the `DebugAPI`. These endpoints are the your primary interfaces to a *running* Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with a semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
+The Bee node exposes two HTTP API endpoints, the `API` and the `DebugAPI`. These endpoints are the
+primary interfaces to a *running* Bee node. API-endpoints can be queried using familiar HTTP
+requests, and will respond with a semantically accurate
+[HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
 
 ## API
 The API-endpoint exposes all functionality to upload and download content to and from the Swarm network. By default, it runs on port `:1633`.
