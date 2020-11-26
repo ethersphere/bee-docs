@@ -168,7 +168,7 @@ Connection to 86.98.94.9 port 1834 [tcp/*] succeeded!
 
 Success! ✨
 
-If this didn't work for you, check out our [Debugging Connectivity]() guide below.
+If this didn't work for you, check out our Debugging Connectivity guide below.
 
 If it did, let's start our Bee node with the `--nat-addr` configured.
 
