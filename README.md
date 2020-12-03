@@ -1,4 +1,4 @@
-# Website
+# Bee Documentation Website
 
 Documentation for the [Swarm Bee Client](https://github.com/ethersphere/bee). View at [docs.ethswarm.org](https://docs.ethswarm.org).
 
