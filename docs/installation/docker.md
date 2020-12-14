@@ -11,7 +11,6 @@ Try Bee out by simply running the following command in your Terminal.
 
 ```sh
 docker run\
-  -v /path/to/.bee-docker:/home/bee/.bee\
   -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633\
