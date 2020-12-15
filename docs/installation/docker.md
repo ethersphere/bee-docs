@@ -126,13 +126,13 @@ With the configuration settings complete, run `docker-compose up` with the `-d` 
 docker-compose up -d
 ```
 
-:::info
+:::warning
 Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to use to [backup]() the contents of your Docker volume!
 :::
 
 Next we must fund our node using the [Swarm Goerli Faucet](https://faucet.ethswarm.org/). 
 
-To determine our address, we must check the logs for our Bee container.
+To determine our address to fund, we can check the logs for our Bee container. First, list let's list our running docker containers.
 
 ```sh
 docker ps -a
@@ -144,7 +144,7 @@ CONTAINER ID        IMAGE                    COMMAND                 CREATED    
 8f56a60b6b86        ethersphere/clef:0.4.4   "/entrypoint.sh full"   3 minutes ago       Up 3 minutes             8550/tcp                                                     bee_clef_1
 ```
 
-Here our container is called `bee_bee_1`. To check the logs, run:
+Here, if we scroll right, we'll see our container is called `bee_bee_1`. To check the logs, run:
 
 ```sh
 docker logs -f bee_bee_1
@@ -161,7 +161,7 @@ Now, naviate to the [faucet](https://faucet.ethswarm.org/), enter your Ethereum 
 
 After your transaction has been completed, your node should recognise that your wallet has been funded, and begin to deploy and fund your Bee chequebook!
 
-Once Bee has completed this procedure, you may query the [HTTP API](/docs/api-reference/api-reference) at location `http://localhost:1633`.
+Once Bee has completed this procedure, you may query the Bee [HTTP API](/docs/api-reference/api-reference) at `http://localhost:1633`.
 
 ```sh
 curl localhost:1633
@@ -171,15 +171,6 @@ curl localhost:1633
 Ethereum Swarm Bee
 ```
 
-#### Backups
-
-Docker Compose will create a volume for Bee and a volume for Bee Clef. These volumes contain important information, so be sure to make regular copies and keep them safe in case you need to recreate your Bee node in the event of disaster.
-
-We can use `docker cp` to retrieve the contents of these folders.
-
-```sh
-docker cp bee_bee_1:/home/bee/.bee/ bee
-docker cp bee_clef_1:/app clef
-```
+Congratulations! Your Bee is up and running! 🐝
 
 
