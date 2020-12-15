@@ -37,6 +37,17 @@ For a [manual installation](/docs/installation/manual) your data directory is no
 ~/.bee
 ```
 
+### Docker Compose
+
+When using our [Docker Compose](/docs/installation/docker) configuration files to run your node, Docker will create a volume for Bee and a volume for Bee Clef.
+
+You may use `docker cp` to retrieve the contents of these folders.
+
+```sh
+docker cp bee_bee_1:/home/bee/.bee/ bee
+docker cp bee_clef_1:/app clef
+```
+
 ## Data Types
 
 The Bee data directory contains three stores.
