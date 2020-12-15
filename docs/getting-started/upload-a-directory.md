@@ -28,11 +28,10 @@ my_website
 └── error.html
 ```
 
-Now, we `cd` into the directory and bundle the whole directory as a tar file. This strategy ensures that the tar package maintains the correct directory structure. You may also pass an absolute path instead of `../my_website.tar`
+Use the following command to ensure that the tar package maintains the correct directory structure.
 
 ```sh
-cd my_website
-tar -cf ../my_website.tar *
+tar -cfC my_website . > my_website.tar
 ```
 
 Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking care to include the header `Content Type: application/x-tar`.
@@ -68,4 +67,4 @@ Once your data has been [fully processed into the network](/docs/advanced/tags),
 
 [https://gateway.ethswarm.org/bzz/b25c89a...214917b/index.html](https://gateway.ethswarm.org/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/index.html)
 
-If you are not able to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/installation/connectivitiy) for assistance.
+If you are not able to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/installation/connectivity) for assistance.

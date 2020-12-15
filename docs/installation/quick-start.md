@@ -28,8 +28,8 @@ Follow post install guide in terminal for initial configuration and how to start
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_amd64.deb
-sudo dpkg -i bee_0.4.0_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_amd64.deb
+sudo dpkg -i bee_0.4.1_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -37,15 +37,15 @@ sudo dpkg -i bee_0.4.0_amd64.deb
 ##### ARMv7
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.deb
-sudo dpkg -i bee_0.4.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_armv7.deb
+sudo dpkg -i bee_0.4.1_armv7.deb
 ```
 
 ##### ARM64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_arm64.deb
-sudo dpkg -i bee_0.4.0_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_arm64.deb
+sudo dpkg -i bee_0.4.1_arm64.deb
 ```
 
 ### CentOS
@@ -53,8 +53,8 @@ sudo dpkg -i bee_0.4.0_arm64.deb
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_amd64.rpm
-sudo rpm -i bee_0.4.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_amd64.rpm
+sudo rpm -i bee_0.4.1_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -62,15 +62,15 @@ sudo rpm -i bee_0.4.0_amd64.rpm
 ##### ARMv7
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_armv7.rpm
-sudo rpm -i bee_0.4.0_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_armv7.rpm
+sudo rpm -i bee_0.4.1_armv7.rpm
 ```
 
 ##### ARM64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.0/bee_0.4.0_arm64.rpm
-sudo rpm -i bee_0.4.0_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_arm64.rpm
+sudo rpm -i bee_0.4.1_arm64.rpm
 ```
 
 ### MacOS
@@ -132,7 +132,8 @@ Nov 20 23:50:17 sig-ln bee[55528]: time="2020-11-20T23:50:17Z" level=info msg="u
 Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=info msg="using default factory address for chain id 5: a6b88705036f2a56>
 Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=info msg="no chequebook found, deploying new one."
 Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg="please make sure there is sufficient eth and bzz available >
-Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg="on goerli you can get both goerli eth and goerli bzz from h>
+Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg="on goerli you can get both goerli eth and goerli bzz from https://faucet.ethswarm.org?address=06c5aefd35d85028d65554660f353defa5ba989>
+
 ```
 
 ### MacOS

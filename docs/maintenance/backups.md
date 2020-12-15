@@ -15,7 +15,7 @@ To restore a Bee node you must have the following directories, all backed up in 
 
 All of this data is contained within the *data directory* specified in your Bee configuration. 
 
-## Ubuntu / Debian / Raspbian / CentOS Package Managers
+### Ubuntu / Debian / Raspbian / CentOS Package Managers
 
 For Linux installations from package managers *yum* or *apt*, your data directory is located at:
 
@@ -29,12 +29,23 @@ It may be also useful for you to retain your configuration files, which are held
 /etc/bee
 ```
 
-## Manual
+### Manual
 
 For a [manual installation](/docs/installation/manual) your data directory is normally located at:
 
 ```sh
 ~/.bee
+```
+
+### Docker Compose
+
+When using our [Docker Compose](/docs/installation/docker) configuration files to run your node, Docker will create a volume for Bee and a volume for Bee Clef.
+
+You may use `docker cp` to retrieve the contents of these folders.
+
+```sh
+docker cp bee_bee_1:/home/bee/.bee/ bee
+docker cp bee_clef_1:/app clef
 ```
 
 ## Data Types
@@ -57,7 +68,7 @@ The chunkstore contains chunks that are pinned in your node, or are in your neig
 
 It is also important to back up Clef's stored data. This includes your sensitive key material, so make sure to keep this private and safe!
 
-## Ubuntu / Debian / Raspbian / CentOS Package Managers
+### Ubuntu / Debian / Raspbian / CentOS Package Managers
 
 For Linux installations from package managers *yum* or *apt*, your Clef data directory is located at:
 
@@ -71,7 +82,7 @@ Configuration files are stored in:
 /etc/bee-clef/
 ```
 
-## Manual
+### Manual
 
 For a manual installation of Clef your data directory is normally located at:
 
