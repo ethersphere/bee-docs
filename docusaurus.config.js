@@ -100,7 +100,7 @@ module.exports = {
     announcementBar: {
       id: 'bee_announcements',
       content:
-        '🎅 Wishing you a very Merry Xmas from all at Swarm HQ! 🎅',
+        '🎅 Wishing you all a very Merry Xmas from all at Swarm HQ! 🎅',
       backgroundColor: '#dd7200', // Defaults to `#fff`.
       textColor: '#242424', // Defaults to `#000`.
     },
