@@ -5,7 +5,7 @@ id: docker
 
 Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee) for your convenience. 
 
-If running a full Bee node, it is recommended that you make use of Ethereum's external signer, [Clef](/docs/installation/bee-clef). See below for instructions on how to use [Docker Compose]() to easily set up Bee with persistent storage and integration with our Bee Clef container.
+If running a full Bee node, it is recommended that you make use of Ethereum's external signer, [Clef](/docs/installation/bee-clef). See below for instructions on how to use [Docker Compose](/docs/installation/docker#docker-compose) to easily set up Bee with persistent storage and integration with the Bee Clef container.
 
 ### Quick Start
 
@@ -127,7 +127,7 @@ docker-compose up -d
 ```
 
 :::warning
-Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to use to [backup]() the contents of your Docker volume!
+Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to use to [backup](/docs/maintenance/backups) the contents of your Docker volume!
 :::
 
 Next we must fund our node using the [Swarm Goerli Faucet](https://faucet.ethswarm.org/). 
