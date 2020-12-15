@@ -132,32 +132,20 @@ Docker Compose will create a Docker Volume called `bee` containing important key
 
 Next we must fund our node using the [Swarm Goerli Faucet](https://faucet.ethswarm.org/). 
 
-To determine our address to fund, we can check the logs for our Bee container. First, list let's list our running docker containers.
+To determine our address to fund, we can check the logs for our Bee container:
 
 ```sh
-docker ps -a
+docker-compose logs -f bee
 ```
 
-```
-CONTAINER ID        IMAGE                    COMMAND                 CREATED             STATUS                   PORTS                                                        NAMES
-0b69193e8fb5        ethersphere/bee:0.4.1    "bee start"             3 minutes ago       Up 18 seconds            0.0.0.0:1633-1634->1633-1634/tcp, 127.0.0.1:1635->1635/tcp   bee_bee_1
-8f56a60b6b86        ethersphere/clef:0.4.4   "/entrypoint.sh full"   3 minutes ago       Up 3 minutes             8550/tcp                                                     bee_clef_1
-```
-
-Here, if we scroll right, we'll see our container is called `bee_bee_1`. To check the logs, run:
-
-```sh
-docker logs -f bee_bee_1
-```
-
-And look for the lines including your automatically generated Ethereum address.
+And look for the lines including your automatically generated Ethereum address (scroll right).
 
 ```
-time="2020-12-15T18:43:14Z" level=warning msg="please make sure there is sufficient eth and bzz available on 7a977fa660e2e93e1eba40030c6b8da68d01971e"
+bee_1 | time="2020-12-15T18:43:14Z" level=warning msg="please make sure there is sufficient eth and bzz available on 7a977fa660e2e93e1eba40030c6b8da68d01971e"
 time="2020-12-15T18:43:14Z" level=warning msg="on goerli you can get both goerli eth and goerli bzz from https://faucet.ethswarm.org?address=7a977fa660e2e93e1eba40030c6b8da68d01971e"
 ```
 
-Now, naviate to the [faucet](https://faucet.ethswarm.org/), enter your Ethereum address and submit the form to receive a supply of test Goerli Eth and Goerli BZZ.
+Now, naviate to the [https://faucet.ethswarm.org](https://faucet.ethswarm.org/), enter your Ethereum address and submit the form to receive a supply of test Goerli Eth and Goerli BZZ.
 
 After your transaction has been completed, your node should recognise that your wallet has been funded, and begin to deploy and fund your Bee chequebook!
 
