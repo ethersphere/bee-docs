@@ -74,4 +74,4 @@ Done! 👏
 
 Now you will be able to see your website hosted using the ENS name instead of the Swarm Reference!
 
-![alt text](/img/ens-7.png "View your website using the ENS name.")
+![alt text](img/ens-7.png "View your website using the ENS name.")
