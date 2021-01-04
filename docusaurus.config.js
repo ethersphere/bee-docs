@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Swarm Bee Client',
   tagline: 'Welcome to the Swarm',
-  url: 'https://bee.ethswarm.org',
+  url: 'https://swarm-gateways.net',
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
   plugins: [require.resolve('docusaurus-lunr-search')],
@@ -100,7 +100,7 @@ module.exports = {
     announcementBar: {
       id: 'bee_announcements',
       content:
-        '🎅 &nbsp Wishing you all a Very Merry Xmas from all at Swarm HQ! &nbsp🎅',
+        '⭐️ Happy 2021 from all at Swarm HQ! ⭐️',
       backgroundColor: '#dd7200', // Defaults to `#fff`.
       textColor: '#242424', // Defaults to `#000`.
     },
