@@ -48,30 +48,30 @@ First, navigate to 'My Names', and select the name you would like to link your S
 
 Press 'Set' next to your resolver record.
 
-![alt text](img/ens-1.png "Press set resolver.")
+![alt text](/img/ens-1.png "Press set resolver.")
 
 Choose the public resolver.
 
-![alt text](img/ens-2.png "Choose the public resolver.")
+![alt text](/img/ens-2.png "Choose the public resolver.")
 
 Press add a record.
 
-![alt text](img/ens-3.png "Press add a record.")
+![alt text](/img/ens-3.png "Press add a record.")
 
 Choose the Content Record type from the drop down menu.
 
-![alt text](img/ens-4.png "Choose the content record type from the drop down menu.")
+![alt text](/img/ens-4.png "Choose the content record type from the drop down menu.")
 
 Add the Swarm reference you created earlier and press 'save'.
 
-![alt text](img/ens-5.png "Add the Swarm reference you created earlier and press 'save'.")
+![alt text](/img/ens-5.png "Add the Swarm reference you created earlier and press 'save'.")
 
 Verify the Content Record has been created!
 
-![alt text](img/ens-6.png "Add the Swarm reference you created earlier.")
+![alt text](/img/ens-6.png "Add the Swarm reference you created earlier.")
 
 Done! 👏 
 
 Now you will be able to see your website hosted using the ENS name instead of the Swarm Reference!
 
-![alt text](img/ens-7.png "View your website using the ENS name.")
+![alt text](/img/ens-7.png "View your website using the ENS name.")
