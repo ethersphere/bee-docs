@@ -19,6 +19,10 @@ websocat ws://localhost:8080/pss/subscribe/test-topic
 
 Our node is now watching for new messages received in it's nearest neighbourhood.
 
+:::info
+Because a message is disguised as a normal chunk in Swarm, you will receive the message upon syncing the chunk, even if your node is not online at the moment when the message was send to you.
+:::
+
 ### Send Messages
 
 Messages can be sent simply by sending a `POST` request to the PSS api endpoint.
