@@ -72,10 +72,9 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 ```
 
 #### Pinning Already Uploaded Content
+The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded.
 
-Content which already exists on the node can be repinned if it has not yet been garbage collected.
-
-To pin content existing on our node, we can send a `POST` request including the swarm reference to the files pinning endpoint.
+To do so, we can send a `POST` request including the swarm reference to the files pinning endpoint.
 
 ```sh
 curl -XPOST http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
@@ -84,6 +83,8 @@ curl -XPOST http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e
 ```json
 {"message":"OK","code":200}
 ```
+
+The `pin` operation will attempt to fetch the content from the network if it is not available on the local node. 
 
 Now, if we query our files pinning endpoint again, the pin counter will once again have been incremented.
 
@@ -96,8 +97,10 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 ```
 
 :::warning
-We recommended that content is pinned during upload for reliable pinning behaviour, as there is a chance some or all of your chunks may be deleted to free up space between uploading and pinning if pinned retrospectively.
+While the pin operation will fetch content from the network if it is not available locally, we advise you to ensure that the content is available locally before calling the pin operation. If the content, for whatever reason, is only fetched partially from the network, the pin operation only partly succeeds, which leaves the internal administration of pinning in an inconsistent state.
 :::
+
+
 
 ## Global Pinning
 
