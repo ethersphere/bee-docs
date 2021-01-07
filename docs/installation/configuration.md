@@ -159,7 +159,8 @@ bee start --cors-allowed-origins="https://website.ethswarm.org"
 
 *default* `/home/<user>/.bee`
 
-The location on your disk where Bee stores it's data. This consists of the following three types of data.
+The location on your disk where Bee stores its data. This consists of
+the following three types of data.
 
 Data in this directory will be required to restore a node state using the same key.
 

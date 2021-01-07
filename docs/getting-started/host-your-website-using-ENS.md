@@ -19,7 +19,10 @@ bee start --resolver-options "https://cloudflare-eth.com"
 
 ### Link an ENS domain to a website.
 
-First we will need to upload the website assets to Swarm in order to get it's Swarm reference hash, see [uploading a directory](/docs/getting-started/upload-a-directory) for more information.
+First we will need to upload the website assets to Swarm in order to
+get its Swarm reference hash, see
+[uploading a directory](/docs/getting-started/upload-a-directory)
+for more information.
 
 This time we will also include the `Swarm-Index-Document` header set to the `index.html`. This will cause Bee to serve each directories `index.html` file as default when browsing to the directory root `/` url. We will also provide a custom error page, using the `Swarm-Error-Document` header.
 

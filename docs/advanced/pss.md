@@ -17,7 +17,7 @@ Here we subscribe to the topic `test-topic`
 websocat ws://localhost:1633/pss/subscribe/test-topic
 ```
 
-Our node is now watching for new messages received in it's nearest neighbourhood.
+Our node is now watching for new messages received in its nearest neighbourhood.
 
 ### Send Messages
 
