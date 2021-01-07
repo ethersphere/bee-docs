@@ -187,4 +187,6 @@ You may use then Etherscan to track your transaction and make sure it completes 
 
 [https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a`](https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a)
 
-
+:::info
+Please find the officially deployed smart-contract by the Swarm team on the [swap-swear-and-swindle repository](https://github.com/ethersphere/swap-swear-and-swindle)
+:::
