@@ -72,7 +72,7 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 ```
 
 :::info
-Pinning and unpinning is possible file (as in the example), chunks, directories and bytes
+Pinning and unpinning is possible for files (as in the example), chunks, directories, and bytes
 :::
 
 #### Pinning Already Uploaded Content
