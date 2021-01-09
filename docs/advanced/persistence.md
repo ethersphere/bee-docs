@@ -49,7 +49,7 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 
 Success! Our pin counter is set to `1`!
 
-#### Unpinning content
+#### Unpinning Content
 
 If we later decide our content is no longer worth keeping, we can simply unpin it by sending a `DELETE` request to the pinning endpoint using the same reference.
 
@@ -72,7 +72,7 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 ```
 
 :::info
-Pinning and unpinning is possible for files (as in the example), chunks, directories, and bytes
+Pinning and unpinning is possible for files (as in the example) and also the chunks, directories, and bytes endpoints. See the [API](/docs/api-reference/api-reference) documentation for more details.
 :::
 
 #### Pinning Already Uploaded Content
