@@ -21,7 +21,7 @@ bee start --resolver-options "https://cloudflare-eth.com"
 Use the `resolver-options` flag to point the bee resolver to any ENS compatible smart-contract on any EVM compatible chain
 :::
 :::warn
-When your bee node, or the bee node of a gateway that you are interacting with, is not connected to the standard EVM contract on Ethereum mainnet, then familiar names (e.g. `swarm.eth`) may resolve to different content.
+Make sure you trust the gateway you are interacting with. To be sure you are retrieving the correct content run your own ENS resolver and Bee node. 
 :::
 ### Link an ENS domain to a website.
 
