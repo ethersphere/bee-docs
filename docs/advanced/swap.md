@@ -188,7 +188,7 @@ You may use then Etherscan to track your transaction and make sure it completes 
 [https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a`](https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a)
 
 # Managing uncashed cheques
-For the Bee process, the final state of earning (g)BZZ is a swap-cheque. It is worthy to note, however, that a cheque is not yet generally accepted currency. A swap-cheque is, just like a real cheque, a promise to hand over money upon request. In real life, you would present the cheque to a bank. In blockchain life, we are presenting the swap-cheque to a smart-contract. Holding on to a swap-cheque is risky; it is possible that the owner of the chequebook has written written cheques, worth more than there is money in the chequebook contract. Because of this reason you want to cash out your cheques with a certain frequency. With the set of API endpoints, as offered by Bee, it is possible to develop a script which fully manages the uncashed cheques for you. As an example, we offer you a [very basic script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh), where you can manually cash out all cheques with a worth above a certain value. To use the script:
+For the Bee process, the final step of earning BZZ is cashing a swap-cheque. It is worthy to note that a cheque is not yet generally accepted currency. A swap-cheque is, just like a real cheque, a promise to hand over money upon request. In real life, you would present the cheque to a bank. In blockchain life, we are presenting the swap-cheque to a smart-contract. Holding on to a swap-cheque is risky; it is possible that the owner of the chequebook has issued too many cheques, worth more than there is money in the chequebook contract. For this reason you want to cash out your cheques with a certain frequency. With the set of API endpoints, as offered by Bee, it is possible to develop a script that fully manages the uncashed cheques for you. As an example, we offer you a [very basic script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh), where you can manually cash out all cheques with a worth above a certain value. To use the script:
 1. Download and save the script:
 
 ```sh
@@ -219,4 +219,3 @@ If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
 :::info
 Are you a Windows-user and do you want to help us? We are currently missing a simple cashout script for Windows. Please see the [issue](https://github.com/ethersphere/bee/issues/1092)
 :::
-
