@@ -70,5 +70,9 @@ Once your data has been [fully processed into the network](/docs/advanced/tags),
 If you are not able to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/installation/connectivity) for assistance.
 
 :::warn
-Not all directory structures, as supported by tar, can be supported in Bee. The differences arises, as not all valid directory structures are valid paths for an HTTP router (e.g. paths which are in a parent directory to the root). Bee will accept and upload the invalid directory structures, but some of your content might not be accesible.
+Not all directory structures, as supported by tar, can be supported in Bee.
+The reason is that not all valid directory structures are valid paths
+for an HTTP router (e.g. paths that are in a parent directory to the root).
+Bee will accept and upload the invalid directory structures, but some of
+your content might not be accessible.
 :::
