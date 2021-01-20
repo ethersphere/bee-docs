@@ -49,9 +49,9 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 
 Success! Our pin counter is set to `1`!
 
-#### Unpinning Files 
+#### Unpinning Content
 
-If we later decide our content is no longer worth keeping, we can simply unpin it by sending a `DELETE` request to the files pinning endpoint using the same reference.
+If we later decide our content is no longer worth keeping, we can simply unpin it by sending a `DELETE` request to the pinning endpoint using the same reference.
 
 ```sh
 curl -XDELETE http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
@@ -70,6 +70,10 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 ```json
 {"message":"Not Found","code":404}
 ```
+
+:::info
+Pinning and unpinning is possible for files (as in the example) and also the chunks, directories, and bytes endpoints. See the [API](/docs/api-reference/api-reference) documentation for more details.
+:::
 
 #### Pinning Already Uploaded Content
 The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded.
