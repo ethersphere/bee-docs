@@ -217,5 +217,5 @@ If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
 ```
 
 :::info
-Are you a Windows-user and do you want to help us? We are currently missing a simple cashout script for Windows. Please see the [issue](https://github.com/ethersphere/bee/issues/1092)
+Are you a Windows-user who is willing to help us? We are currently missing a simple cashout script for Windows. Please see the [issue](https://github.com/ethersphere/bee/issues/1092)
 :::
