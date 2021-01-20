@@ -36,9 +36,23 @@ welcome-message: "Bzz Bzz Bzz"
 swap-enable: false
 ```
 
-Note that for each node, we provide a different `api-addr`, `debug-api-addr`. If we had not specified different addresses here, we would get an `address already in use` error, as no two applications can listen to the same port. We also specify a different `p2p-addr`. If we had not, our nodes would not be able to communicate with each other. We also specify a separate `data-dir` for each node, as each node must have a it's own separate key and chunk data store.
+Note that for each node, we provide a different `api-addr`,
+`debug-api-addr`. If we had not specified different addresses here, we
+would get an `address already in use` error, as no two applications
+can listen to the same port. We also specify a different
+`p2p-addr`. If we had not, our nodes would not be able to communicate
+with each other. We also specify a separate `data-dir` for each node,
+as each node must have its own separate key and chunk data store.
 
-We also provide a network-id, so that our network remains separate from the Swarm mainnet, which has network-id 1. Nodes will not connect to peers which have a different network id. We also set our bootnode to be the empty string `""`. A bootnode is responsible for bootstrapping the network so that a new node can find it's first few peers before it begins it's own journey to find friends in the Swarm. In Swarm any node can be used as a bootnode. Later, we will manually join our nodes together so in this case a bootnode isn't required.
+We also provide a network-id, so that our network remains separate
+from the Swarm mainnet, which has network-id 1. Nodes will not connect
+to peers which have a different network id.  We also set our bootnode
+to be the empty string `""`. A bootnode is responsible for
+bootstrapping the network so that a new node can find its first few
+peers before it begins its own journey to find friends in the
+Swarm. In Swarm any node can be used as a bootnode. Later, we will
+manually join our nodes together so in this case a bootnode isn't
+required.
 
 Finally, note the `welcome-message` in the first nodes configuration file. This is a friendly feature allowing you to send a message to peers that connect to you!
 

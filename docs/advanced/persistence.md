@@ -104,14 +104,17 @@ While the pin operation will fetch content from the network if it is not availab
 
 ## Global Pinning
 
-While [local pinning]() ensures that your own node does not delete files you have uploaded, nodes which store your chunks because they fall within their *neighbourhood of responsibility* may have deleted content which has not been recently accessed to make way for new chunks.
+[Local pinning]() ensures that your own node does not delete uploaded files. But other nodes that store your
+chunks (because they fall within their *neighbourhood of responsibility*) may have deleted content
+that has not been accessed recently to make room for new chunks.
 
 ```info
 For more info on how chunks are distributed, persisted and stored within the network, read
 [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
 ```
 
-To keep this content alive, your Bee node can be configured to refresh this content when it requested by other nodes in the network, using **global pinning**.
+To keep this content alive, your Bee node can be configured to refresh this content when it is
+requested by other nodes in the network, using **global pinning**.
 
 First, we must start up our node with the `global-pinning-enable` flag set.
 
@@ -133,7 +136,11 @@ curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
 {"reference":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f"}
 ```
 
-Now, when we distribute links to our files, we must also include the first two bytes of our overlay address as the *target*. If a chunk that has already been garbage collected by it's storer nodes is requested, the storer node will send a message using [PSS](/docs/advanced/pss) to the Swarm neighbourhood defined by this prefix, of which our node is a member.
+Now, when we distribute links to our files, we must also specify the first two bytes of our
+overlay address as the *target*. If a chunk that has already been garbage collected by
+its storer nodes is requested, the storer node will send a message using
+[PSS](/docs/advanced/pss) to the Swarm neighbourhood defined by this prefix,
+of which our node is a member.
 
 Let's use the addresses API endpoint to find out our target prefix.
 

@@ -101,7 +101,11 @@ UPNP can be considered a security risk as it exposes your (real) public IP to an
 
 Bee will use UPNP to determine your public IP, which is required for various internal processes.
 
-In addition to this, a request will be sent to your router to ask it to forward a random one of it's ports, which are exposed directly to the internet, to the Bee p2p port (usually `1634`) which your computer is exposing only to the private network. Doing this creates a tunnel through which other Bee's may connect to your computer safely.
+In addition to this, a request will be sent to your router to ask it
+to forward a random one of its ports, which are exposed directly to
+the internet, to the Bee p2p port (usually `1634`) which your computer
+is exposing only to the private network. Doing this creates a tunnel
+through which other Bee's may connect to your computer safely.
 
 If you start your Bee node in a private network with UPNP available, the output of the addresses endpoint of your debug API will look something like this:
 
@@ -188,7 +192,11 @@ Checking our addresses endpoint again, we can now see that Bee has been able to 
 ```
 
 :::info
-If you are regularly connecting and disconnecting to a network, you may also want to use your router's firmware to configure the router to reserve and only assign the same local network IP from it's DHCP pool to your computer's MAC address. This will ensure that your Bee seamlessly connects when you rejoin the network!
+If you are regularly connecting and disconnecting to a network, you
+may also want to use your router's firmware to configure the router to
+reserve and only assign the same local network IP from its DHCP pool
+to your computer's MAC address. This will ensure that your Bee
+seamlessly connects when you rejoin the network!
 :::
 
 ### Debugging Connectivity

@@ -17,7 +17,7 @@ Here we subscribe to the topic `test-topic`
 websocat ws://localhost:1633/pss/subscribe/test-topic
 ```
 
-Our node is now watching for new messages received in it's nearest neighbourhood.
+Our node is now watching for new messages received in its nearest neighbourhood.
 
 :::info
 Because a message is disguised as a normal chunk in Swarm, you will receive the message upon syncing the chunk, even if your node is not online at the moment when the message was send to you.

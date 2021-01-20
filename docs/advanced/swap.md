@@ -3,7 +3,14 @@ title: SWAP Bandwidth Accounting
 id: swap
 ---
 
-Underpinning Swarm is a set of accounting protocols that have been developed and prototyped during over 5 years of R&D. Your Beta Bee node contains functionality giving it the ability to keep track of bandwidth exchanges with all it's peers, issue and cache cheques using smart contracts which live on EVM compatible blockchain. Currently we are in the testing phase using the Goerli testnet. We would love for you to get involved, help us try out these incentives and maybe even earn some gBZZ!
+Underpinning Swarm is a set of accounting protocols that have been
+developed and prototyped during over 5 years of R&D. Your Beta Bee
+node contains functionality giving it the ability to keep track of
+bandwidth exchanges with all its peers, issue and cache cheques using
+smart contracts which live on EVM compatible blockchain. Currently we
+are in the testing phase using the Goerli testnet. We would love for
+you to get involved, help us try out these incentives and maybe even
+earn some gBZZ!
 
 :::info
 Learn more about how SWAP and the other accounting protocols work by reading
