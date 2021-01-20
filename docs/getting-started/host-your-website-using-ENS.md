@@ -18,7 +18,7 @@ bee start --resolver-options "https://cloudflare-eth.com"
 ```
 
 :::info
-Use the `resolver-options` flag to set point the bee resolver to any ens-compatible smart-contract on any evm-compatible chain
+Use the `resolver-options` flag to point the bee resolver to any ENS compatible smart-contract on any EVM compatible chain
 :::
 :::warn
 When your bee node, or the bee node of a gateway that you are interacting with is not connected to the standard EVM contract on Ethereum mainnet, familiar names (e.g. `swarm.eth`) may resolve to different content.
