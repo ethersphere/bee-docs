@@ -7,6 +7,11 @@ Bee is packaged for Ubuntu, Raspbian, Debian and CentOS based Linux distribution
 
 If your system is not supported, please see the [manual installation](/docs/installation/manual) section for information on how to install Bee.
 
+The overview of the installation process:
+ 1. set up an external signer for Bee (e.g. install *bee-clef*)
+ 2. install the Bee application package
+ 3. fund your node with ETH and BZZ
+
 ## Install Bee Clef
 
 Before installing Bee, it is recommended that you first [install the Bee clef package](/docs/installation/bee-clef). This will set up a Bee specific instance of the Go-Ethereum Clef signer which will be integrated with your Bee node.
