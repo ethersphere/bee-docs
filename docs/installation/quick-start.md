@@ -123,10 +123,10 @@ systemctl status bee
      Active: active (running) since Fri 2020-11-20 23:50:15 GMT; 6s ago
 ```
 
-Logs are available using the `journalctl` command.
+Logs are available using the `journalctl` command:
 
 ```sh
-journalctl -f -u bee
+journalctl --lines=100 --follow --unit bee
 ```
 
 ```text
@@ -187,7 +187,7 @@ Visit [https://faucet.ethswarm.org](https://faucet.ethswarm.org) and fill out th
 Once this has been credited, we can now watch our logs and watch as Bee automatically deploys a chequebook and makes an initial deposit.
 
 ```sh
-journalctl -u bee -f
+journalctl --lines=100 --follow --unit bee
 ```
 
 Once this is complete, we should start to see our Bee node connect to other nodes in the network as it begins to take part in the swarm.
