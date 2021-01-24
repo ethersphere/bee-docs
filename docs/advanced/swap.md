@@ -194,6 +194,39 @@ You may use then Etherscan to track your transaction and make sure it completes 
 
 [https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a`](https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a)
 
+# Managing uncashed cheques
+For the Bee process, the final step of earning BZZ is cashing a swap-cheque. It is worth noting that a cheque is not yet generally accepted currency. A swap-cheque is, just like a real cheque, a promise to hand over money upon request. In real life, you would present the cheque to a bank. In blockchain life, we are presenting the swap-cheque to a smart-contract. Holding on to a swap-cheque is risky; it is possible that the owner of the chequebook has issued too many cheques, worth more than there is money in the chequebook contract. For this reason you want to cash out your cheques with a certain frequency. With the set of API endpoints, as offered by Bee, it is possible to develop a script that fully manages the uncashed cheques for you. As an example, we offer you a [very basic script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh), where you can manually cash out all cheques with a worth above a certain value. To use the script:
+1. Download and save the script:
+
+```sh
+wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/7ba05095e0836735f4a648aefe52c584e18e065f/cashout.sh
+```
+
+2. Make the file executable
+
+```sh
+chmod +x cashout.sh
+```
+
+3. List all uncashed cheques and cash out your cheques above a certain value
+
+- List:
+```sh
+./cashout.sh
+```
+:::info
+If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
+:::
+
+- Cashout all cheques worth more than 5 BZZ
+```sh
+./cashout.sh cashout-all 5
+```
+
+:::info
+Are you a Windows-user who is willing to help us? We are currently missing a simple cashout script for Windows. Please see the [issue](https://github.com/ethersphere/bee/issues/1092)
+:::
+
 :::info
 Please find the officially deployed smart-contract by the Swarm team on the [swap-swear-and-swindle repository](https://github.com/ethersphere/swap-swear-and-swindle)
 :::
