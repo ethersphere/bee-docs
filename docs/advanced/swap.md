@@ -3,7 +3,14 @@ title: SWAP Bandwidth Accounting
 id: swap
 ---
 
-Underpinning Swarm is a set of accounting protocols that have been developed and prototyped during over 5 years of R&D. Your Beta Bee node contains functionality giving it the ability to keep track of bandwidth exchanges with all it's peers, issue and cache cheques using smart contracts which live on EVM compatible blockchain. Currently we are in the testing phase using the Goerli testnet. We would love for you to get involved, help us try out these incentives and maybe even earn some gBZZ!
+Underpinning Swarm is a set of accounting protocols that have been
+developed and prototyped during over 5 years of R&D. Your Beta Bee
+node contains functionality giving it the ability to keep track of
+bandwidth exchanges with all its peers, issue and cache cheques using
+smart contracts which live on EVM compatible blockchain. Currently we
+are in the testing phase using the Goerli testnet. We would love for
+you to get involved, help us try out these incentives and maybe even
+earn some gBZZ!
 
 :::info
 Learn more about how SWAP and the other accounting protocols work by reading
@@ -218,4 +225,8 @@ If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
 
 :::info
 Are you a Windows-user who is willing to help us? We are currently missing a simple cashout script for Windows. Please see the [issue](https://github.com/ethersphere/bee/issues/1092)
+:::
+
+:::info
+Please find the officially deployed smart-contract by the Swarm team on the [swap-swear-and-swindle repository](https://github.com/ethersphere/swap-swear-and-swindle)
 :::
