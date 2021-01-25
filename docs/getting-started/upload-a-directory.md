@@ -31,7 +31,8 @@ my_website
 Use the following command to ensure that the tar package maintains the correct directory structure.
 
 ```sh
-tar -cfC my_website . > my_website.tar
+cd my_website
+tar -cf tar -cf ../my_website.tar .
 ```
 
 Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking care to include the header `Content Type: application/x-tar`.
