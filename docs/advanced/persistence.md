@@ -112,10 +112,10 @@ While the pin operation will fetch content from the network if it is not availab
 chunks (because they fall within their *neighbourhood of responsibility*) may have deleted content
 that has not been accessed recently to make room for new chunks.
 
-```info
+:::info
 For more info on how chunks are distributed, persisted and stored within the network, read
 [The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
-```
+:::
 
 To keep this content alive, your Bee node can be configured to refresh this content when it is
 requested by other nodes in the network, using **global pinning**.
