@@ -7,6 +7,11 @@ Bee is packaged for Ubuntu, Raspbian, Debian and CentOS based Linux distribution
 
 If your system is not supported, please see the [manual installation](/docs/installation/manual) section for information on how to install Bee.
 
+The overview of the installation process:
+ 1. (Recommended) set up an external signer for Bee (i.e. install *bee-clef*)
+ 2. install the Bee application package
+ 3. fund your node with gETH and gBZZ
+
 ## Install Bee Clef
 
 Before installing Bee, it is recommended that you first [install the Bee clef package](/docs/installation/bee-clef). This will set up a Bee specific instance of the Go-Ethereum Clef signer which will be integrated with your Bee node.
@@ -88,13 +93,20 @@ brew services start swarm-bee
 
 ## SWAP Blockchain Endpoint
 
-Your node must have access to a Goerli blockchain endpoint so that it can interact and deploy your chequebook contract. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a provider such as [rpc.slock.it/goerli](https://rpc.slock.it/goerli) or [Infura](https://infura.io/).
+Your Bee node must have access to the Ethereum blockchain, so that it
+can interact and deploy your chequebook contract. You can run your
+[own Goerli node](https://github.com/goerli/testnet), or use a
+provider such as [rpc.slock.it/goerli](https://rpc.slock.it/goerli) or
+[Infura](https://infura.io/).
 
 By default, Bee expects a local Goerli node at `http://localhost:8545`. To use a provider instead, simply change your `--swap-endpoint` in your [configuration file](/docs/installation/configuration#configuring-bee-installed-using-a-package-manager).
 
 ## Interact With Bee
 
-Once Bee has been installed, it will begin running as a service using `systemd` and the [API](/docs/api-reference/api-reference) will be available at `localhost:1633`.
+Once Bee has been installed, it will start up as a `systemd` service,
+and once it has been funded, its HTTP based
+[API](/docs/api-reference/api-reference) will start listening at
+`localhost:1633`.
 
 ```sh
 curl localhost:1633
@@ -118,10 +130,10 @@ systemctl status bee
      Active: active (running) since Fri 2020-11-20 23:50:15 GMT; 6s ago
 ```
 
-Logs are available using the `journalctl` command.
+Logs are available using the `journalctl` command:
 
 ```sh
-journalctl -f -u bee
+journalctl --lines=100 --follow --unit bee
 ```
 
 ```text
@@ -152,9 +164,17 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 
 ### Fund Your Node
 
-When a Bee node is initialised with a new key, it will need to be funded with both gBZZ and GETH (Goerli BZZ and Goerli ETH). Swarm incentives are currently running on the Goerli testnet and tokens are availiable from the [Swarm faucet](https://faucet.ethswarm.org).
+A SWAP enabled Bee node requires both ETH and BZZ to begin
+operation. The current version of Swarm incentives is running on the
+Ethereum testnet called Goerli. You can acquire free Goerli tokens
+from the [Swarm faucet](https://faucet.ethswarm.org).
 
-We can find our Bee node's Ethereum address either from the logs, as above, use the handy `bee-get-addr` utility or by sending a request to our Bee node's *addresses* [debug API](/docs/api-reference/api-reference) endpoint.
+To find a Bee node's Ethereum address you can:
+ - look into its logs (see above),
+ - use the handy `bee-get-addr` utility,
+ - send a request to our Bee node's
+   [debug API](/docs/api-reference/api-reference) endpoint
+   called  *addresses*.
 
 ```sh
 bee-get-addr
@@ -182,7 +202,7 @@ Visit [https://faucet.ethswarm.org](https://faucet.ethswarm.org) and fill out th
 Once this has been credited, we can now watch our logs and watch as Bee automatically deploys a chequebook and makes an initial deposit.
 
 ```sh
-journalctl -u bee -f
+journalctl --lines=100 --follow --unit bee
 ```
 
 Once this is complete, we should start to see our Bee node connect to other nodes in the network as it begins to take part in the swarm.
@@ -239,4 +259,3 @@ Key material and other data is stored in `/var/lib/bee-clef/`
 Configuration files are stored in `/etc/bee/`
 
 State, chunks and other data is stored in `/var/lib/bee/`
-
