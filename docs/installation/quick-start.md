@@ -8,7 +8,7 @@ Bee is packaged for Ubuntu, Raspbian, Debian and CentOS based Linux distribution
 If your system is not supported, please see the [manual installation](/docs/installation/manual) section for information on how to install Bee.
 
 The overview of the installation process:
- 1. set up an external signer for Bee (e.g. install *bee-clef*)
+ 1. (Recommended) set up an external signer for Bee (i.e. install *bee-clef*)
  2. install the Bee application package
  3. fund your node with ETH and BZZ
 
@@ -259,4 +259,3 @@ Key material and other data is stored in `/var/lib/bee-clef/`
 Configuration files are stored in `/etc/bee/`
 
 State, chunks and other data is stored in `/var/lib/bee/`
-
