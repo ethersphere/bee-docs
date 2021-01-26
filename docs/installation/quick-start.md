@@ -10,7 +10,7 @@ If your system is not supported, please see the [manual installation](/docs/inst
 The overview of the installation process:
  1. (Recommended) set up an external signer for Bee (i.e. install *bee-clef*)
  2. install the Bee application package
- 3. fund your node with ETH and BZZ
+ 3. fund your node with gETH and gBZZ
 
 ## Install Bee Clef
 
