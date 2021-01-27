@@ -41,7 +41,7 @@ curl \
 	-X POST \
 	-H "Content-Type: application/x-tar" \
 	-H "Swarm-Index-Document: index.html" \
-	-H "Swarm-Error-Document: error.html" 
+	-H "Swarm-Error-Document: error.html" \
 	--data-binary @my_website.tar http://localhost:1633/dirs
 ```
 
