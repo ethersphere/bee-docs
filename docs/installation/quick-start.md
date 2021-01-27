@@ -3,7 +3,7 @@ title: Quick Start
 id: quick-start
 ---
 
-Bee is packaged for Ubuntu, Raspbian, Debian and CentOS based Linux distributions.
+Bee is packaged for MacOS and Ubuntu, Raspbian, Debian and CentOS based Linux distributions.
 
 If your system is not supported, please see the [manual installation](/docs/installation/manual) section for information on how to install Bee.
 
