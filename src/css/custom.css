@@ -126,7 +126,7 @@ code{
   color: rgb(191, 199, 213);
 }
 
-code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-{
+pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-{
   background: #242424 !important;
 }
 
