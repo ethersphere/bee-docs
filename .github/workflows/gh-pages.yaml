@@ -21,34 +21,37 @@ jobs:
 
       - name: Setup swarm
         run: |
-          printf ${{ secrets.KEY_PASS }} > password
-          mkdir -p ${HOME}/.ethereum/keystore
-          printf ${{ secrets.KEY_FILE }} > ${HOME}/.ethereum/keystore/UTC--2020-06-25T12-47-59.087770594Z--2d1e2e9fd4832675b3e19d1678b362b1fc9b3747
-          wget https://ethswarm.blob.core.windows.net/builds/swarm-linux-amd64-0.5.7-5ccfd995.tar.gz -O swarm.tar.gz
-          tar --strip-components 1 -xzf swarm.tar.gz
+          mkdir -p ${HOME}/.bee/keys
+          printf ${{ secrets.LIBP2P_KEY_FILE }} > ${HOME}/.bee/keys/libp2p.key
+          printf ${{ secrets.SWARM_KEY_FILE }} > ${HOME}/.bee/keys/swarm.key
+          wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.4.2 bash
+          bee --password="x" &
+          while ! nc -vz localhost 1633; do sleep 1; done
 
-      - name: Build for gh-pages
-        run: |
-          npm install
-          npm run-script build
-          echo "docs.ethswarm.org" > ./build/CNAME
-          rm ./build/.nojekyll
+      # - name: Build for gh-pages
+      #   run: |
+      #     npm install
+      #     npm run-script build
+      #     echo "docs.ethswarm.org" > ./build/CNAME
+      #     rm ./build/.nojekyll
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+      # - name: Deploy to gh-pages
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./build
 
       - name: Build for swarm
         run: |
           rm -rf build
-          sed -i "s/baseUrl: '\/'/baseUrl: '\/bzz:\/docs\.swarm\.eth\/'/g" docusaurus.config.js
-          npm install
+          sed -i "s/baseUrl: '\/'/baseUrl: '\/bzz\/docs\.swarm\.eth\/'/g" docusaurus.config.js
+          sed -i s/url: 'https:\/\/docs\.ethswarm\.org'/url: 'https:\/\/gateway\.ethswarm\.org'/g" docusaurus.config.js
           npm run-script build
           rm ./build/.nojekyll
 
       - name: Swarm upload
         run: |
-          FEED=$(./swarm --bzzapi https://swarm-public-0-swarm.prod.swarm-gateways.net --verbosity 6 --recursive --defaultpath index.html up ./build)
-          ./swarm --bzzapi https://swarm-gateways.net/ --verbosity 6 --password password feed update 0x"${FEED}"
+          tar -cvC build . >build.tar
+          REF=$(curl -s --max-time 900 -X POST -H "Content-Type: application/x-tar" -H "Swarm-Index-Document: index.html" -H "Swarm-Error-Document: index.html" --data-binary @./build.tar http://localhost:1633/dirs | jq .reference | tr -d \")
+          wget -e robots=off -r -np --page-requisites --no-check-certificate -T10000 -t1  https://gateway.swarm.eth/bzz/$REF
+          echo $REF
