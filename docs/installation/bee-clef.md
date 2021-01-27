@@ -20,8 +20,8 @@ Bee clef can be installed automatically using your system's package manager.
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.1/bee-clef_0.4.1_amd64.deb
-sudo dpkg -i bee-clef_0.4.1_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.2/bee-clef_0.4.2_amd64.deb
+sudo dpkg -i bee-clef_0.4.4_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -29,15 +29,15 @@ sudo dpkg -i bee-clef_0.4.1_amd64.deb
 ##### ARMv7
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.1/bee-clef_0.4.1_armv7.deb
-sudo dpkg -i bee-clef_0.4.1_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.2/bee-clef_0.4.2_armv7.deb
+sudo dpkg -i bee-clef_0.4.4_armv7.deb
 ```
 
 ##### ARM64
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.1/bee-clef_0.4.1_arm64.deb
-sudo dpkg -i bee-clef_0.4.1_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.2/bee-clef_0.4.2_arm64.deb
+sudo dpkg -i bee-clef_0.4.4_arm64.deb
 ```
 
 ### CentOS
@@ -45,8 +45,8 @@ sudo dpkg -i bee-clef_0.4.1_arm64.deb
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.1/bee-clef_0.4.1_amd64.rpm
-sudo rpm -i bee-clef_0.4.1_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.2/bee-clef_0.4.2_amd64.rpm
+sudo rpm -i bee-clef_0.4.4_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -54,15 +54,15 @@ sudo rpm -i bee-clef_0.4.1_amd64.rpm
 ##### ARMv7
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.1/bee-clef_0.4.1_armv7.rpm
-sudo rpm -i bee-clef_0.4.1_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.2/bee-clef_0.4.2_armv7.rpm
+sudo rpm -i bee-clef_0.4.4_armv7.rpm
 ```
 
 ##### ARM64
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.1/bee-clef_0.4.1_arm64.rpm
-sudo rpm -i bee-clef_0.4.1_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.2/bee-clef_0.4.2_arm64.rpm
+sudo rpm -i bee-clef_0.4.4_arm64.rpm
 ```
 
 ### MacOS

@@ -3,7 +3,7 @@ title: Quick Start
 id: quick-start
 ---
 
-Bee is packaged for Ubuntu, Raspbian, Debian and CentOS based Linux distributions.
+Bee is packaged for MacOS and Ubuntu, Raspbian, Debian and CentOS based Linux distributions.
 
 If your system is not supported, please see the [manual installation](/docs/installation/manual) section for information on how to install Bee.
 
@@ -33,8 +33,8 @@ Follow post install guide in terminal for initial configuration and how to start
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_amd64.deb
-sudo dpkg -i bee_0.4.1_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_amd64.deb
+sudo dpkg -i bee_0.4.2_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -42,15 +42,15 @@ sudo dpkg -i bee_0.4.1_amd64.deb
 ##### ARMv7
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_armv7.deb
-sudo dpkg -i bee_0.4.1_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_armv7.deb
+sudo dpkg -i bee_0.4.2_armv7.deb
 ```
 
 ##### ARM64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_arm64.deb
-sudo dpkg -i bee_0.4.1_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_arm64.deb
+sudo dpkg -i bee_0.4.2_arm64.deb
 ```
 
 ### CentOS
@@ -58,8 +58,8 @@ sudo dpkg -i bee_0.4.1_arm64.deb
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_amd64.rpm
-sudo rpm -i bee_0.4.1_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_amd64.rpm
+sudo rpm -i bee_0.4.2_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -67,15 +67,15 @@ sudo rpm -i bee_0.4.1_amd64.rpm
 ##### ARMv7
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_armv7.rpm
-sudo rpm -i bee_0.4.1_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_armv7.rpm
+sudo rpm -i bee_0.4.2_armv7.rpm
 ```
 
 ##### ARM64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.1/bee_0.4.1_arm64.rpm
-sudo rpm -i bee_0.4.1_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_arm64.rpm
+sudo rpm -i bee_0.4.2_arm64.rpm
 ```
 
 ### MacOS
@@ -226,7 +226,7 @@ If you need to remove Bee, you may simply run the below commands.
 ### Ubuntu / Debian / Raspbian
 
 :::danger
-Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups]() so you don't lose your keys and data.
+Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups](/docs/maintenance/backups) so you don't lose your keys and data.
 :::
 
 ```sh
@@ -237,7 +237,7 @@ sudo apt-get remove bee-clef
 ### Centos
 
 :::danger
-Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups]() so you don't lose your keys and data.
+Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups](/docs/maintenance/backups) so you don't lose your keys and data.
 :::
 
 ```sh
