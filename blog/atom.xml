@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://swarm-gateways.net/blog</id>
+    <title>Swarm Bee Client Blog</title>
+    <updated>2015-10-25T23:29:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://swarm-gateways.net/blog"/>
+    <subtitle>Swarm Bee Client Blog</subtitle>
+    <icon>https://swarm-gateways.net/img/favicon.ico</icon>
+</feed>
