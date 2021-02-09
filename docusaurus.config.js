@@ -100,7 +100,7 @@ module.exports = {
     announcementBar: {
       id: 'bee_announcements',
       content:
-        '⭐️ Happy 2021 from all at Swarm HQ! ⭐️',
+        '🐝 v0.5.0 is released feat. Swarm Feeds! Update your Bees now! 🐝',
       backgroundColor: '#dd7200', // Defaults to `#fff`.
       textColor: '#242424', // Defaults to `#000`.
     },
