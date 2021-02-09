@@ -10,7 +10,7 @@ If your system is not supported, please see the [manual installation](/docs/inst
 The overview of the installation process:
  1. (Recommended) set up an external signer for Bee (i.e. install *bee-clef*)
  2. install the Bee application package
- 3. fund your node with gETH and gBZZ
+ 3. [fund your node](/docs/installation/quick-start#fund-your-node) with gETH and gBZZ
 
 ## Install Bee Clef
 
@@ -33,8 +33,8 @@ Follow post install guide in terminal for initial configuration and how to start
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_amd64.deb
-sudo dpkg -i bee_0.4.2_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_amd64.deb
+sudo dpkg -i bee_0.5.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -42,15 +42,15 @@ sudo dpkg -i bee_0.4.2_amd64.deb
 ##### ARMv7
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_armv7.deb
-sudo dpkg -i bee_0.4.2_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_armv7.deb
+sudo dpkg -i bee_0.5.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_arm64.deb
-sudo dpkg -i bee_0.4.2_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_arm64.deb
+sudo dpkg -i bee_0.5.0_arm64.deb
 ```
 
 ### CentOS
@@ -58,8 +58,8 @@ sudo dpkg -i bee_0.4.2_arm64.deb
 #### AMD64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_amd64.rpm
-sudo rpm -i bee_0.4.2_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_amd64.rpm
+sudo rpm -i bee_0.5.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -67,15 +67,15 @@ sudo rpm -i bee_0.4.2_amd64.rpm
 ##### ARMv7
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_armv7.rpm
-sudo rpm -i bee_0.4.2_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_armv7.rpm
+sudo rpm -i bee_0.5.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.4.2/bee_0.4.2_arm64.rpm
-sudo rpm -i bee_0.4.2_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_arm64.rpm
+sudo rpm -i bee_0.5.0_arm64.rpm
 ```
 
 ### MacOS
@@ -137,14 +137,15 @@ journalctl --lines=100 --follow --unit bee
 ```
 
 ```text
-Nov 20 23:50:17 sig-ln bee[55528]: time="2020-11-20T23:50:17Z" level=info msg="using swarm network address through clef: 2c24e02f26f7fdd8c5c3>
-Nov 20 23:50:17 sig-ln bee[55528]: time="2020-11-20T23:50:17Z" level=info msg="swarm public key 0269fb8085bf4ac07a5f5050d7a5104a8e623e5379f64>
-Nov 20 23:50:17 sig-ln bee[55528]: time="2020-11-20T23:50:17Z" level=info msg="pss public key 02f32c79a2f314afd3263e3cf9478b076acf211be1bfd88>
-Nov 20 23:50:17 sig-ln bee[55528]: time="2020-11-20T23:50:17Z" level=info msg="using ethereum address 06c5aefd35d85028d65554660f353defa5ba989>
-Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=info msg="using default factory address for chain id 5: a6b88705036f2a56>
-Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=info msg="no chequebook found, deploying new one."
-Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg="please make sure there is sufficient eth and bzz available >
-Nov 20 23:50:18 sig-ln bee[55528]: time="2020-11-20T23:50:18Z" level=warning msg="on goerli you can get both goerli eth and goerli bzz from https://faucet.ethswarm.org?address=06c5aefd35d85028d65554660f353defa5ba989>
+INFO[2021-02-09T18:55:11Z] swarm public key 03379f7aa673b7f03737064fd23ba1453619924a4602e70bbccc133ba67d0968bd
+DEBU[2021-02-09T18:55:11Z] using existing libp2p key
+DEBU[2021-02-09T18:55:11Z] using existing pss key
+INFO[2021-02-09T18:55:11Z] pss public key 03bae655ce94431e1f2c2de8d017f88c8c5c293ef0057379223084aba9e318596e
+INFO[2021-02-09T18:55:11Z] using ethereum address 99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
+INFO[2021-02-09T18:55:14Z] using default factory address for chain id 5: f0277caffea72734853b834afc9892461ea18474
+INFO[2021-02-09T18:55:14Z] no chequebook found, deploying new one.
+WARN[2021-02-09T18:55:15Z] cannot continue until there is sufficient ETH (for Gas) and at least 10 BZZ available on 99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
+WARN[2021-02-09T18:55:15Z] get your Goerli ETH and Goerli BZZ now via the bzzaar at https://bzz.ethswarm.org/?transaction=buy&amount=10&slippage=30&receiver=0x99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
 
 ```
 
@@ -164,42 +165,70 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 
 ### Fund Your Node
 
-A SWAP enabled Bee node requires both ETH and BZZ to begin
+A SWAP enabled Bee node requires both gETH and gBZZ to begin
 operation. The current version of Swarm incentives is running on the
-Ethereum testnet called Goerli. You can acquire free Goerli tokens
-from the [Swarm faucet](https://faucet.ethswarm.org).
+Ethereum Goerli testnet. To acquire free gBZZ tokens
+visit the [Bzzaar](https://bzz.ethswarm.org) and follow the following steps!
+
+#### 1. Find your Bee node's address.
 
 To find a Bee node's Ethereum address you can:
  - look into its logs (see above),
  - use the handy `bee-get-addr` utility,
- - send a request to our Bee node's
-   [debug API](/docs/api-reference/api-reference) endpoint
-   called  *addresses*.
 
 ```sh
 bee-get-addr
 ```
 
 ```
-Please make sure there is sufficient eth and bzz available on 06c5aefd35d85028d65554660f353defa5ba989 address.
-You can get both goerli eth and goerli bzz from https://faucet.ethswarm.org
+WARN[2021-02-09T18:55:15Z] get your Goerli ETH and Goerli BZZ now via the bzzaar at https://bzz.ethswarm.org/?transaction=buy&amount=10&slippage=30&receiver=0x99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
 ```
-
-:::info
-For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](/docs/installation/configuration#configuring-bee-installed-using-a-package-manager) and restart your Bee service.
-:::
 
 ```sh
 curl -s localhost:1635/addresses | jq .ethereum
 ```
 
+ - send a request to our Bee node's
+   [debug API](/docs/api-reference/api-reference) endpoint
+   called  *addresses*.
+
 ```json
 "0x97a472ff3a28a2e93ef4d2f523ff48e39c4bf579"
 ```
 
-Visit [https://faucet.ethswarm.org](https://faucet.ethswarm.org) and fill out the form to receive your initial supply of gBZZ and GETH.
+#### 2. Come to the [Bzzaar](https://bzz.ethswarm.org) and buy some gBZZ! 
 
-Once this has been credited, we can now watch our logs and watch as Bee automatically deploys a chequebook and makes an initial deposit.
+*You can get to the Bzzaar by navigating to the link shown in your logs. It should look something like this, note that the Ethereum address of your node is prefilled in the `receiver` query parameter.*
+
+`https://bzz.ethswarm.org/?transaction=buy&amount=10&slippage=30&receiver=0xbee467355...`
+
+*Make sure that your Bee node's correct address is displayed above the transaction modal.*
+
+`You are minting to receiver - 0xbee467355...`
+
+#### 3. Connect your wallet, we recommend [Metamask](https://metamask.io/) or [Portis](https://www.portis.io/). 
+
+#### 3. Click the `GET G-ETH` button in the bottom left hand corner of your screen.
+
+#### 4. Wait for the Goerli ETH to arrive in your wallet.
+
+*We will send a small amount of gETH to both your connected wallet, and your Bee's wallet!*
+
+*This can take a couple of minutes, check the [faucet address on Etherscan](https://goerli.etherscan.io/address/0x44f9fda7a5bf504ddf16dd37b8411c3fba34461d) and look for the transactions to your addresses.*
+
+*You may need to reconnect your wallet to see your balance increase once the transaction has completed.*
+
+#### 5. Once you have balance, enter at least 10 in the `gBZZ` field, you may even have enough gETH to buy a little more!
+
+*This is another blockchain transaction, minutes check Metamask to see how your transaction is getting on.*
+
+#### 6. When your transaction is complete, your Bee node should be the proud owner of some freshly minted gBZZ!	
+
+#### 7. Check your Bee node, it should now begin deploying your checkbook contract.
+
+*If your node has stopped polling for updates, you may now need to restart it.*
+
+Once your Bee node is fully loaded with gBZZ, we can now watch our logs and watch as Bee automatically deploys a chequebook and makes an initial deposit.
 
 ```sh
 journalctl --lines=100 --follow --unit bee
@@ -212,6 +241,10 @@ Once this is complete, we should start to see our Bee node connect to other node
 Nov 20 23:52:44 sig-ln bee[55528]: time="2020-11-20T23:52:44Z" level=info msg="greeting <Welcome to the Swarm, you are Bee-ing connected!> from peer: a0c8fb41346b877b87e7aa31b109a9eef1f38f476304631f4962407b732e3db0"
 ...
 ```
+
+:::info
+The Bzzaar is brand new. If you have any issues, please [get in touch](/docs/#community) and let us know! You may also visit our legacy Goerli faucet at [https://faucet.ethswarm.org](https://faucet.ethswarm.org) and fill out the form with your Bee node's address to receive your nodes initial supply of gBZZ and GETH.
+:::
 
 If these messages are missing, check out our comprehensive guide to Bee [connectivity](/docs/installation/connectivity).
 
