@@ -42,7 +42,8 @@ module.exports = {
         'advanced/tags',
         'advanced/persistence',
         'advanced/swap',
-        'advanced/starting-a-test-network'
+        'advanced/starting-a-test-network',
+        'advanced/large-node-operators'
       ],
     },
     {
