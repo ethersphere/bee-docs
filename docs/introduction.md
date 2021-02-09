@@ -38,6 +38,7 @@ There is a vibrant and buzzing community behind Swarm, get involved in one of ou
 - [Orange Lounge](https://t.me/joinchat/GoVG8RHYjUpD_-bEnLC4EQ).
 - [Twitter @ethswarm](https://twitter.com/ethswarm).
 - [reddit channel](https://www.reddit.com/r/ethswarm/).
+- [Swarm Bee Support](https://t.me/joinchat/LTr8vBf8JshNlAD3m9BGJQ)
 
 ## Reporting a bug
 If your Bee isn't working, [get in touch and let us know!](https://github.com/ethersphere/bee/issues) Every Bee is important to us and we'll get right to work on fixing it for you as soon as possible. 🐝
