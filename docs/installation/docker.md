@@ -16,7 +16,7 @@ docker run\
   -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633\
-  --rm -it bee:v1\
+  --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --swap-endpoint https://rpc.slock.it/goerli \
@@ -35,7 +35,7 @@ docker run\
   -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633\
-  --rm -it bee:v1\
+  --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --swap-endpoint https://rpc.slock.it/goerli \
@@ -51,7 +51,7 @@ docker run\
   -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633\
-  --rm -it bee:v1\
+  --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --swap-endpoint https://rpc.slock.it/goerli \
