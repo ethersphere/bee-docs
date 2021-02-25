@@ -62,7 +62,7 @@ Now we have created our configuration files, let's start our nodes by running `b
 We can now inspect the state of our network by sending HTTP requests to the [Debug API](/docs/api-reference/api-reference)..
 
 
-```sh
+```bash
 curl -s http://localhost:1635/topology | jq .connected
 ```
 
@@ -70,7 +70,7 @@ curl -s http://localhost:1635/topology | jq .connected
 0
 ```
 
-```sh
+```bash
 curl -s http://localhost:1735/topology | jq .connected
 ```
 
@@ -89,7 +89,7 @@ In order to create a network from our two isolated nodes, we must first instruct
 
 First, we will need to find out the network address of the first node. To do this, we send a HTTP request to the `addresses` endpoint of the Debug API. 
 
-```sh
+```bash
 curl localhost:1635/addresses | jq
 ```
 
@@ -129,11 +129,11 @@ Look at the the output for your first node, you should see our connection messag
 
 Let's also verify that we can see both nodes in using each other's Debug API's.
 
-```sh
+```bash
 curl -s http://localhost:1635/peers | jq
 ```
 
-```sh
+```bash
 curl -s http://localhost:1635/peers | jq
 ```
 

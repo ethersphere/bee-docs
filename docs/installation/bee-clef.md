@@ -19,7 +19,7 @@ Bee clef can be installed automatically using your system's package manager.
 
 #### AMD64
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_amd64.deb
 sudo dpkg -i bee-clef_0.4.7_amd64.deb
 ```
@@ -28,14 +28,14 @@ sudo dpkg -i bee-clef_0.4.7_amd64.deb
 
 ##### ARMv7
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_armv7.deb
 sudo dpkg -i bee-clef_0.4.7_armv7.deb
 ```
 
 ##### ARM64
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_arm64.deb
 sudo dpkg -i bee-clef_0.4.7_arm64.deb
 ```
@@ -44,7 +44,7 @@ sudo dpkg -i bee-clef_0.4.7_arm64.deb
 
 #### AMD64
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_amd64.rpm
 sudo rpm -i bee-clef_0.4.7_amd64.rpm
 ```
@@ -53,28 +53,28 @@ sudo rpm -i bee-clef_0.4.7_amd64.rpm
 
 ##### ARMv7
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_armv7.rpm
 sudo rpm -i bee-clef_0.4.7_armv7.rpm
 ```
 
 ##### ARM64
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_arm64.rpm
 sudo rpm -i bee-clef_0.4.7_arm64.rpm
 ```
 
 ### MacOS
 
-```sh
+```bash
 brew tap ethersphere/tap
 brew install swarm-clef
 ```
 
 To run Bee Clef as a service now and on startup, run:
 
-```sh
+```bash
 brew services start swarm-clef
 ```
 
@@ -84,7 +84,7 @@ Once Clef has been installed, it will begin running as a service using `systemd`
 
 To check Clef is running ok, we may use `systemctl` to query the status of the `bee-clef` service.
 
-```sh
+```bash
 systemctl status bee-clef
 ```
 
@@ -113,4 +113,3 @@ Additionally, Clef requires transaction signatures for the Bee's chequebook inte
 A shell script automating the post-initialisation permission changing and including the Clef config, `clef-service`, as well as the `4byte.json` transaction signature file and `rules.js` file can all be found in the [Bee-clef repository](https://github.com/ethersphere/bee-clef/tree/master/packaging).
 
 Finally, once Clef is running, simply [configure your Bee node](/docs/installation/configuration) to enable Clef using `--clef-signer-enable` and point Bee to the correct ipc socket using `--clef-signer-endpoint`.
-

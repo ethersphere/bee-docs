@@ -15,7 +15,7 @@ Never expose your Debug API to the public internet, make sure to use a firewall 
 
 To use the Debug API we must first configure Bee to enable it, as it is disabled by default.
 
-```sh
+```bash
 bee start --debug-api-enable --debug-api-addr=localhost:1635
 ```
 
@@ -23,7 +23,7 @@ bee start --debug-api-enable --debug-api-addr=localhost:1635
 
 First, let's check how many nodes we are currently connected to.
 
-```sh
+```bash
 curl -s http://localhost:1635/peers | jq '.peers | length'
 ```
 
@@ -41,7 +41,7 @@ Here we are using the `jq` command line utility to count the amount of objects i
 
 We can gain even more insight into how your Bee client is becoming a part of the global network your using the `topology` endpoint.
 
-```sh
+```bash
 curl -X GET http://localhost:1635/topology | jq
 ```
 

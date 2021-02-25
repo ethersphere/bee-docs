@@ -13,7 +13,7 @@ Once your Bee node is up and running, you will be able to subscribe to feeds usi
 
 Here we subscribe to the topic `test-topic`
 
-```sh
+```bash
 websocat ws://localhost:1633/pss/subscribe/test-topic
 ```
 
@@ -39,7 +39,7 @@ For example, if we want to send a PSS message with **topic** `test-topic` to a n
 
 ...we must include the **target** `7bc5` and the public key itself as a query argument.
 
-```sh
+```bash
 curl -XPOST \
 localhost:1833/pss/send/test/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd \
 --data "Hello Swarm"
@@ -53,7 +53,7 @@ First start two Bee nodes. We will start them with distinct ports for the api, d
 
 Run the following command to start the first node. Note that we are passing `""` to the `--bootnode` argument so that our nodes will not connect to a network.
 
-```sh
+```bash
 bee start \
     --api-addr=:1833 \
     --debug-api-enable \
@@ -66,7 +66,7 @@ bee start \
 
 We must make a note of the Swarm overlay address, underlay address and public key which are created once each node has started. We find this information from the addresses endpoint of the Debug API.
 
-```sh
+```bash
 curl -s localhost:1835/addresses | jq
 ```
 
@@ -85,7 +85,7 @@ curl -s localhost:1835/addresses | jq
 
 Now the same for the second node.
 
-```sh
+```bash
 bee start \
     --api-addr=:1933 \
     --debug-api-enable \
@@ -96,7 +96,7 @@ bee start \
     --swap-endpoint=https://rpc.slock.it/goerli
 ```
 
-```sh
+```bash
 curl -s localhost:1935/addresses | jq
 ```
 
@@ -115,11 +115,11 @@ curl -s localhost:1935/addresses | jq
 
 Because we configured the nodes to start with no bootnodes, neither node should have peers yet.
 
-```sh
+```bash
 curl -s localhost:1835/peers | jq
 ```
 
-```sh
+```bash
 curl -s localhost:1935/peers | jq
 ```
 
@@ -131,14 +131,14 @@ curl -s localhost:1935/peers | jq
 
 Let's connect node 2 to node 1 using the localhost (127.0.0.1) underlay address for node 1 that we have noted earlier.
 
-```sh
+```bash
 curl -XPOST \
   localhost:1935/connect/ip4/127.0.0.1/tcp/1834/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr
 ```
 
 Now, if we check our peers endpoint for node 1, we can see our nodes are now peered together.
 
-```sh
+```bash
 curl -s localhost:1835/peers | jq
 ```
 
@@ -154,7 +154,7 @@ curl -s localhost:1835/peers | jq
 
 Of course, since we are p2p, node 2 will show node 1 as a peer too.
 
-```sh
+```bash
 curl -s localhost:1935/peers | jq
 ```
 
@@ -170,7 +170,7 @@ curl -s localhost:1935/peers | jq
 
 We will use `websocat` to listen for PSS messages topic ID `test-topic` on our first node.
 
-```sh
+```bash
 websocat ws://localhost:1833/pss/subscribe/test-topic
 ```
 
@@ -178,7 +178,7 @@ Now we can use PSS to send a message from our second node to our first node.
 
 Since our first node has a 2 byte address prefix of `a231`, we will specify this as the `targets` section in our POST request's URL. We must also include the public key of the recipient as a query parameter so that the message can be encrypted in a way only our recipient can decrypt.
 
-```sh
+```bash
 curl \
   -XPOST "localhost:1933/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd" \
   --data "Hello Swarm"
@@ -189,7 +189,7 @@ into the network so that it may be pushed to the correct neighbourhood. Once it 
 it will be decrypted and determined to be a message with the topic we are listening for. Our second node
 will decrypt the data and we'll see a message pop up in our `websocat` console!
 
-```sh
+```bash
 websocat ws://localhost:1833/pss/subscribe/test-topic
 ```
 

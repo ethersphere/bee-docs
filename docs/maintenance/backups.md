@@ -19,13 +19,13 @@ All of this data is contained within the *data directory* specified in your Bee 
 
 For Linux installations from package managers *yum* or *apt*, your data directory is located at:
 
-```sh
+```bash
 /var/lib/bee
 ```
 
 It may be also useful for you to retain your configuration files, which are held at:
 
-```sh
+```bash
 /etc/bee
 ```
 
@@ -33,7 +33,7 @@ It may be also useful for you to retain your configuration files, which are held
 
 For a [manual installation](/docs/installation/manual) your data directory is normally located at:
 
-```sh
+```bash
 ~/.bee
 ```
 
@@ -43,7 +43,7 @@ When using our [Docker Compose](/docs/installation/docker) configuration files t
 
 You may use `docker cp` to retrieve the contents of these folders.
 
-```sh
+```bash
 docker cp bee_bee_1:/home/bee/.bee/ bee
 docker cp bee_clef_1:/app clef
 ```
@@ -72,13 +72,13 @@ It is also important to back up Clef's stored data. This includes your sensitive
 
 For Linux installations from package managers *yum* or *apt*, your Clef data directory is located at:
 
-```sh
+```bash
 /var/lib/bee-clef/
 ```
 
 Configuration files are stored in:
 
-```sh
+```bash
 /etc/bee-clef/
 ```
 
@@ -86,6 +86,6 @@ Configuration files are stored in:
 
 For a manual installation of Clef your data directory is normally located at:
 
-```sh
+```bash
 ~/.clef
 ```
