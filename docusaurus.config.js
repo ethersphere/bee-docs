@@ -68,6 +68,10 @@ module.exports = {
           title: 'Community',
           items: [
             {
+              label: 'Discord',
+              href: 'https://discord.gg/ykCupZMuww',
+            },
+            {
               label: 'Mattermost',
               href: 'https://beehive.ethswarm.org/',
             },
@@ -78,6 +82,10 @@ module.exports = {
             {
               label: 'Twitter',
               href: 'https://twitter.com/ethswarm',
+            },
+            {
+              label: 'Medium',
+              href: 'https://ethswarm.medium.com/',
             },
           ],
         },

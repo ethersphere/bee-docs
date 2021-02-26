@@ -154,7 +154,7 @@ WARN[2021-02-09T18:55:15Z] get your Goerli ETH and Goerli BZZ now via the bzzaar
 Services are managed using Homebrew services.
 
 ```sh
-brew services restart bee
+brew services restart swarm-bee
 ```
 
 Logs are available at `/usr/local/var/log/swarm-bee/bee.log`
