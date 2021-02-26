@@ -23,7 +23,7 @@ curl -X POST http://localhost:8080/tags
 
 Pass the tag along the upload:
 ```console
-curl --data-binary @bee.jpg -H "SwarmTagHeader: 1278066217"  "http://localhost:1633/files?name=bee.jpg"
+curl --data-binary @bee.jpg -H "Swarm-Tag: 1278066217"  "http://localhost:1633/files?name=bee.jpg"
 ```
 
 :::info
