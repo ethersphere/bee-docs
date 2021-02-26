@@ -1,9 +1,9 @@
 module.exports = {
   title: 'Swarm Bee Client',
   tagline: 'Welcome to the Swarm',
-  url: 'https://docs.ethswarm.org',
+  url: 'https://gateway.ethswarm.org',
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
-  baseUrl: '/',
+  baseUrl: '/bzz/docs.swarm.eth/',
   plugins: [require.resolve('docusaurus-lunr-search')],
   onBrokenLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -97,13 +97,13 @@ module.exports = {
       ],
       copyright: `Copyleft © ${new Date().getFullYear()}.`,
     },
-    announcementBar: {
-      id: 'bee_announcements',
-      content:
-        '🐝 v0.5.0 is released feat. Swarm Feeds! Update your Bees now! 🐝',
-      backgroundColor: '#dd7200', // Defaults to `#fff`.
-      textColor: '#242424', // Defaults to `#000`.
-    },
+    // announcementBar: {
+    //   id: 'bee_announcements',
+    //   content:
+    //     '🐝 v0.5.0 is released feat. Swarm Feeds! Update your Bees now! 🐝',
+    //   backgroundColor: '#dd7200', // Defaults to `#fff`.
+    //   textColor: '#242424', // Defaults to `#000`.
+    // },
   },
   presets: [
     [
