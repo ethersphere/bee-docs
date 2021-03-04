@@ -17,13 +17,13 @@ While the automatically-generated tag is convenient, with big uploads it might t
 
 Generate a tag:
 ```console
-curl -X POST http://localhost:8080/tags
+curl -X POST http://localhost:1633/tags
 > {"uid":1278066217,"startedAt":"2021-02-04T15:10:47.260477637+01:00","total":0,"processed":0,"synced":0}
 ```
 
 Pass the tag along the upload:
 ```console
-curl --data-binary @bee.jpg -H ""  "http://localhost:1633/files?name=bee.jpg"
+curl --data-binary @bee.jpg -H "Swarm-Tag: 1278066217"  "http://localhost:1633/files?name=bee.jpg"
 ```
 
 :::info

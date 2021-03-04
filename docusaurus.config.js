@@ -5,7 +5,9 @@ module.exports = {
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
   plugins: [require.resolve('docusaurus-lunr-search')],
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'error',
+  onBrokenMarkdownLinks: 'error',
+  onDuplicateRoutes: 'error',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
   projectName: 'bee', // Usually your repo name.
@@ -68,6 +70,10 @@ module.exports = {
           title: 'Community',
           items: [
             {
+              label: 'Discord',
+              href: 'https://discord.gg/ykCupZMuww',
+            },
+            {
               label: 'Mattermost',
               href: 'https://beehive.ethswarm.org/',
             },
@@ -78,6 +84,10 @@ module.exports = {
             {
               label: 'Twitter',
               href: 'https://twitter.com/ethswarm',
+            },
+            {
+              label: 'Medium',
+              href: 'https://ethswarm.medium.com/',
             },
           ],
         },
@@ -97,13 +107,13 @@ module.exports = {
       ],
       copyright: `Copyleft © ${new Date().getFullYear()}.`,
     },
-    announcementBar: {
-      id: 'bee_announcements',
-      content:
-        '🐝 v0.5.0 is released feat. Swarm Feeds! Update your Bees now! 🐝',
-      backgroundColor: '#dd7200', // Defaults to `#fff`.
-      textColor: '#242424', // Defaults to `#000`.
-    },
+    // announcementBar: {
+    //   id: 'bee_announcements',
+    //   content:
+    //     '🐝 v0.5.0 is released feat. Swarm Feeds! Update your Bees now! 🐝',
+    //   backgroundColor: '#dd7200', // Defaults to `#fff`.
+    //   textColor: '#242424', // Defaults to `#000`.
+    // },
   },
   presets: [
     [
@@ -111,7 +121,6 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'introduction',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:

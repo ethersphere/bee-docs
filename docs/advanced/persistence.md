@@ -17,7 +17,7 @@ There are two flavours of pinning, *local* and *global*.
 
 ## Local Pinning
 
-If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or [Gateway](/docs/advanced/gateway), chunks can be *pinned* either during upload, or retrospectively using the Swarm reference.
+If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or Gateway, chunks can be *pinned* either during upload, or retrospectively using the Swarm reference.
 
 :::caution
 Files pinned using local pinning will still not necessarily be available to the rest of the network. Read [global pinning](/docs/advanced/persistence#global-pinning) to find out how to keep your files available to the whole of the swarm.

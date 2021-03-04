@@ -71,7 +71,7 @@ docker pull ethersphere/bee:beta
 #### Specific Versions
 
 ```bash
-docker pull ethersphere/bee:0.5.0
+docker pull ethersphere/bee:0.5.2
 ```
 
 #### Edge
@@ -91,13 +91,13 @@ Configuration files for Bee and Bee Clef are provided to enable quick and easy i
 First, retrieve the current `docker-compose.yaml` file.
 
 ```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.0/packaging/docker/docker-compose.yml
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.2/packaging/docker/docker-compose.yml=======
 ```
 
 Next, create a `.env` file using the example file provided. This file will be responsible for storing configuration and secrets for our Bee and Bee Clef applications.
 
 ```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.0/packaging/docker/env -O .env
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.2/packaging/docker/env -O .env=======
 ``` 
 
 There are some important configuration parameters which must be set in order for our projects to work. To affect configuration in the `.env` file, we first remove the `#` at the beginning of the line and then change the value after `=` to our desired config.
@@ -105,8 +105,8 @@ There are some important configuration parameters which must be set in order for
 For Bee, amend the following parameters:
 
 ```
-BEE_SWAP_ENDPOINT="https://rpc.slock.it/goerli"
-BEE_PASSWORD="my-password"
+BEE_SWAP_ENDPOINT=https://rpc.slock.it/goerli
+BEE_PASSWORD=my-password
 ```
 
 To enable Clef support, we must also change the following params: 
@@ -117,7 +117,7 @@ CLEF_CHAINID=5
 
 ```
 BEE_CLEF_SIGNER_ENABLE=true
-BEE_CLEF_SIGNER_ENDPOINT="http://clef:8550"
+BEE_CLEF_SIGNER_ENDPOINT=http://clef-1:8550
 ```
 
 With the configuration settings complete, run `docker-compose up` with the `-d` flag to run Bee and Bee Clef as a daemon.
@@ -135,7 +135,7 @@ Next we must fund our node using the [Swarm Goerli Faucet](https://faucet.ethswa
 To determine our address to fund, we can check the logs for our Bee container:
 
 ```bash
-docker-compose logs -f bee
+docker-compose logs -f bee-1
 ```
 
 And look for the lines including your automatically generated Ethereum address (scroll right).

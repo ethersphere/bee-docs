@@ -14,7 +14,7 @@ earn some gBZZ!
 
 :::info
 Learn more about how SWAP and the other accounting protocols work by reading
-[The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
+[The Book of Swarm](https://gateway.ethswarm.org/bzz/latest.bookofswarm.eth/).
 :::
 
 

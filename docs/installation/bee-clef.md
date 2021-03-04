@@ -20,8 +20,8 @@ Bee clef can be installed automatically using your system's package manager.
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_amd64.deb
-sudo dpkg -i bee-clef_0.4.7_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0.4.9_amd64.deb
+sudo dpkg -i bee-clef_0.4.9_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -29,15 +29,15 @@ sudo dpkg -i bee-clef_0.4.7_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_armv7.deb
-sudo dpkg -i bee-clef_0.4.7_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0.4.9_armv7.deb
+sudo dpkg -i bee-clef_0.4.9_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_arm64.deb
-sudo dpkg -i bee-clef_0.4.7_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0.4.9_arm64.deb
+sudo dpkg -i bee-clef_0.4.9_arm64.deb
 ```
 
 ### CentOS
@@ -45,8 +45,8 @@ sudo dpkg -i bee-clef_0.4.7_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_amd64.rpm
-sudo rpm -i bee-clef_0.4.7_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0.4.9_amd64.rpm
+sudo rpm -i bee-clef_0.4.9_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -54,15 +54,15 @@ sudo rpm -i bee-clef_0.4.7_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_armv7.rpm
-sudo rpm -i bee-clef_0.4.7_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0.4.9_armv7.rpm
+sudo rpm -i bee-clef_0.4.9_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.7/bee-clef_0.4.7_arm64.rpm
-sudo rpm -i bee-clef_0.4.7_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0.4.9_arm64.rpm
+sudo rpm -i bee-clef_0.4.9_arm64.rpm
 ```
 
 ### MacOS
@@ -77,6 +77,11 @@ To run Bee Clef as a service now and on startup, run:
 ```bash
 brew services start swarm-clef
 ```
+
+### Configuring Bee-clef
+Configuration files are stored in `/etc/bee-clef/`
+
+Under a normal/default package install, there wont be any configuration changes necessary to start using bee-clef.
 
 ### Interact With Clef
 
@@ -94,13 +99,53 @@ systemctl status bee-clef
      Active: active (running) since Fri 2020-11-20 23:45:16 GMT; 1min 29s ago
 ```
 
+And if you want to follow it's logs, you can use:
+```bash
+journalctl -f -u bee-clef.service
+```
+
+When Bee-clef first starts, you should see something very similar to the following:
+```log
+Feb 21 19:52:43 comp-name systemd[1]: Started Bee Clef.
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: WARNING!
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: Clef is an account management tool. It may, like any software, contain bugs.
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: Please take care to
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: - backup your keystore files,
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: - verify that the keystore(s) can be opened with your password.
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: Clef is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: PURPOSE. See the GNU General Public License for more details.
+Feb 21 19:52:43 comp-name bee-clef-service[494678]: INFO [02-21|19:52:43.862] Using stdin/stdout as UI-channel
+Feb 21 19:52:44 comp-name bee-clef-service[494678]: INFO [02-21|19:52:44.036] Loaded 4byte database                    embeds=146841 locals=3 local=/etc/bee-clef/4byte.json
+Feb 21 19:52:44 comp-name bee-clef-service[494678]: {"jsonrpc":"2.0","id":1,"method":"ui_onInputRequired","params":[{"title":"Master Password","prompt":"Please enter the password to decrypt the master seed","isPassword":true}]}
+Feb 21 19:54:25 comp-name bee-clef-service[494678]: INFO [02-21|19:54:25.048] Rule engine configured                   file=/etc/bee-clef/rules.js
+Feb 21 19:54:25 comp-name bee-clef-service[494678]: INFO [02-21|19:54:25.048] Starting signer                          chainid=5 keystore=/var/lib/bee-clef/keystore light-kdf=false advanced=false
+Feb 21 19:54:25 comp-name bee-clef-service[494678]: INFO [02-21|19:54:25.049] IPC endpoint opened                      url=/var/lib/bee-clef/clef.ipc
+Feb 21 19:54:25 comp-name bee-clef-service[494678]: {"jsonrpc":"2.0","method":"ui_onSignerStartup","params":[{"info":{"extapi_http":"n/a","extapi_ipc":"/var/lib/bee-clef/clef.ipc","extapi_version":"6.1.0","intapi_version":"7.0.1"}}]}
+```
+
+:::info
+This line can be safely ignored, there is no action required: `{"jsonrpc":"2.0","id":1,"method":"ui_onInputRequired","params":[{"title":"Master Password","prompt":"Please enter the password to decrypt the master seed","isPassword":true}]}`
+:::
+
+
+
+As soon as `bee` starts interacting with `bee-clef` you should start to see log messages populate, for a regularly active and connected node they will appear every few seconds:
+```
+Feb 24 22:29:15 comp-name bee-clef-service[1118]: INFO [02-24|22:29:15.118] Op approved
+Feb 24 22:30:17 comp-name bee-clef-service[1118]: INFO [02-24|22:30:17.371] Op approved
+Feb 24 22:30:19 comp-name bee-clef-service[1118]: INFO [02-24|22:30:19.344] Op approved
+...
+```
+
+
 ## Data Locations
 
-### Bee-clef
-
-Configuration files are stored in `/etc/bee-clef/`
-
 Key material and other data is stored in `/var/lib/bee-clef/`
+
+:::info
+Bee can communicate with Bee-clef in a variety of ways. The default way, if installed via the packages, will use an Inter-process communication (IPC) file. This is a special file that Bee-clef creates on startup that Bee will use to send requests back-and-forth. When the Bee-clef service is running you'll notice that a `/var/lib/bee-clef/clef.ipc` file is created.
+:::
 
 ## Manual Installation
 

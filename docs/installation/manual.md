@@ -13,12 +13,12 @@ To install the binary using our quick install script, run either one of the foll
 
 #### wget
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.5.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.5.2 bash
 ```
 
 #### curl
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.5.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.5.2 bash
 ```
 
 ### Bee Clef External Signer
@@ -34,7 +34,7 @@ bee version
 ```
 
 ```
-0.5.0
+0.5.2
 ```
 
 Now your Bee node is installed, you can fund your node with gBZZ join us in the swarm! 🐝 🐝 🐝 🐝 🐝
@@ -122,7 +122,7 @@ Your keys and password are very important, back these files up and store them in
 :::
 
 ## Getting help
-The CLI has documentation build-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure you bee node via the command line arguments.
+The CLI has documentation built-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure you bee node via the command line arguments.
 
 You may also check out the [configuration guide](/docs/installation/configuration), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
 

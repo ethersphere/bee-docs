@@ -33,8 +33,8 @@ Follow post install guide in terminal for initial configuration and how to start
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_amd64.deb
-sudo dpkg -i bee_0.5.0_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_amd64.deb
+sudo dpkg -i bee_0.5.2_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -42,15 +42,15 @@ sudo dpkg -i bee_0.5.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_armv7.deb
-sudo dpkg -i bee_0.5.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_armv7.deb
+sudo dpkg -i bee_0.5.2_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_arm64.deb
-sudo dpkg -i bee_0.5.0_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_arm64.deb
+sudo dpkg -i bee_0.5.2_arm64.deb
 ```
 
 ### CentOS
@@ -58,8 +58,8 @@ sudo dpkg -i bee_0.5.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_amd64.rpm
-sudo rpm -i bee_0.5.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_amd64.rpm
+sudo rpm -i bee_0.5.2_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -67,15 +67,15 @@ sudo rpm -i bee_0.5.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_armv7.rpm
-sudo rpm -i bee_0.5.0_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_armv7.rpm
+sudo rpm -i bee_0.5.2_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.5.0/bee_0.5.0_arm64.rpm
-sudo rpm -i bee_0.5.0_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_arm64.rpm
+sudo rpm -i bee_0.5.2_arm64.rpm
 ```
 
 ### MacOS

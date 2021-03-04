@@ -41,7 +41,7 @@ For example, if we want to send a PSS message with **topic** `test-topic` to a n
 
 ```bash
 curl -XPOST \
-localhost:1833/pss/send/test/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd \
+localhost:1833/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd \
 --data "Hello Swarm"
 ```
 
