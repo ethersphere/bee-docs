@@ -5,7 +5,9 @@ module.exports = {
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
   plugins: [require.resolve('docusaurus-lunr-search')],
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'error',
+  onBrokenMarkdownLinks: 'error',
+  onDuplicateRoutes: 'error',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
   projectName: 'bee', // Usually your repo name.
@@ -119,7 +121,6 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'introduction',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:

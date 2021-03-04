@@ -16,6 +16,9 @@ const Search = props => {
   const { siteConfig = {} } = useDocusaurusContext();
   const { baseUrl } = siteConfig;
   const initAlgolia = (searchDocs, searchIndex, DocSearch) => {
+      if(searchDocs.length === 0) {
+        return;
+      }
       new DocSearch({
         searchDocs,
         searchIndex,
