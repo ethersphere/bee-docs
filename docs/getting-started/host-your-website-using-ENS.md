@@ -13,7 +13,7 @@ You may substitute ENS names for Swarm references in any of the [API methods](/d
 
 In order to resolve ENS names using your API endpoints, you must specify a valid ENS resolver endpoint when starting your Bee node. We recommend that users run their own Geth node, which can be trusted absolutely, however service providers such as [https://cloudflare-eth.com](https://cloudflare-eth.com) or [Infura](https://infura.io) may suffice. Public gateways such as [gateway.ethswarm.org](https://gateway.ethswarm.org) will also usually provide ENS resolution.
 
-```sh
+```bash
 bee start --resolver-options "https://cloudflare-eth.com"
 ```
 
@@ -34,7 +34,7 @@ This time we will also include the `Swarm-Index-Document` header set to the `ind
 
 In the case that your website is a single page app, where you would like to direct to the javascript history api powered router, you may provide the `index.html` page for both settings.
 
-```sh
+```bash
 curl \
 	-X POST \
 	-H "Content-Type: application/x-tar" \

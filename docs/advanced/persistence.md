@@ -27,7 +27,7 @@ Files pinned using local pinning will still not necessarily be available to the 
 
 To store content so that it will persist even when Bee's garbage collection routine is deleting old chunks, we simply pass the `Swarm-Pin` header set to `true` when uploading.
 
-```sh
+```bash
 curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
 ```
 
@@ -39,7 +39,7 @@ curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
 
 Let's check to make sure this content was indeed pinned by querying the chunks api for the swarm reference to see whether the root chunk is currently pinned.
 
-```sh
+```bash
 curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ```
 
@@ -53,7 +53,7 @@ Success! Our pin counter is set to `1`!
 
 If we later decide our content is no longer worth keeping, we can simply unpin it by sending a `DELETE` request to the pinning endpoint using the same reference.
 
-```sh
+```bash
 curl -XDELETE http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ``
 
@@ -63,7 +63,7 @@ curl -XDELETE http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f
 
 Now, if we check again, we'll get a `404` error as the content is no longer pinned.
 
-```sh
+```bash
 curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ```
 
@@ -80,7 +80,7 @@ The previous example showed how we can pin content upon upload. It is also possi
 
 To do so, we can send a `POST` request including the swarm reference to the files pinning endpoint.
 
-```sh
+```bash
 curl -XPOST http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ``
 
@@ -92,7 +92,7 @@ The `pin` operation will attempt to fetch the content from the network if it is 
 
 Now, if we query our files pinning endpoint again, the pin counter will once again have been incremented.
 
-```sh
+```bash
 curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ```
 
@@ -122,7 +122,7 @@ requested by other nodes in the network, using **global pinning**.
 
 First, we must start up our node with the `global-pinning-enable` flag set.
 
-```sh
+```bash
 bee start\
   --verbosity 5 \
   --swap-endpoint https://rpc.slock.it/goerli \
@@ -132,7 +132,7 @@ bee start\
 
 Next, we pin our file locally, as shown above.
 
-```sh
+```bash
 curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
 ```
 
@@ -148,17 +148,17 @@ of which our node is a member.
 
 Let's use the addresses API endpoint to find out our target prefix.
 
-```sh
+```bash
 curl -s http://localhost:1635/addresses | jq .overlay
 ```
 
-```sh
+```bash
 "320ed0e01e6e3d06cab44c5ef85a0898e68f925a7ba3dc80ee614064bb7f9392"
 ```
 
 Finally, we take the first two bytes of our overlay address, `320e` and include this when referencing our chunk.
 
-```sh
+```bash
 curl http://localhost:1633/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f?targets=320e
 ```
 
