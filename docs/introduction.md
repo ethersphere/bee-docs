@@ -36,8 +36,6 @@ There is a vibrant and buzzing community behind Swarm, get involved in one of ou
 
 - [Swarm](http://swarm.ethereum.org)
 - [Discord](https://discord.gg/ykCupZMuww)
-- [Beehive Chat on Mattermost](https://beehive.ethswarm.org/)
-- [Orange Lounge](https://t.me/joinchat/GoVG8RHYjUpD_-bEnLC4EQ)
 - [Twitter @ethswarm](https://twitter.com/ethswarm)
 - [reddit channel](https://www.reddit.com/r/ethswarm/)
 - [Medium](https://ethswarm.medium.com/)
