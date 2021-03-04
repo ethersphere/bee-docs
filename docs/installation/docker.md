@@ -105,8 +105,8 @@ There are some important configuration parameters which must be set in order for
 For Bee, amend the following parameters:
 
 ```
-BEE_SWAP_ENDPOINT="https://rpc.slock.it/goerli"
-BEE_PASSWORD="my-password"
+BEE_SWAP_ENDPOINT=https://rpc.slock.it/goerli
+BEE_PASSWORD=my-password
 ```
 
 To enable Clef support, we must also change the following params: 
@@ -117,7 +117,7 @@ CLEF_CHAINID=5
 
 ```
 BEE_CLEF_SIGNER_ENABLE=true
-BEE_CLEF_SIGNER_ENDPOINT="http://clef:8550"
+BEE_CLEF_SIGNER_ENDPOINT=http://clef-1:8550
 ```
 
 With the configuration settings complete, run `docker-compose up` with the `-d` flag to run Bee and Bee Clef as a daemon.
@@ -135,7 +135,7 @@ Next we must fund our node using the [Swarm Goerli Faucet](https://faucet.ethswa
 To determine our address to fund, we can check the logs for our Bee container:
 
 ```sh
-docker-compose logs -f bee
+docker-compose logs -f bee-1
 ```
 
 And look for the lines including your automatically generated Ethereum address (scroll right).
