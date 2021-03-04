@@ -11,7 +11,7 @@ If running a full Bee node, it is recommended that you make use of Ethereum's ex
 
 Try Bee out by simply running the following command in your Terminal. 
 
-```sh
+```bash
 docker run\
   -p 1635:1635 \
   -p 1634:1634 \
@@ -29,7 +29,7 @@ If starting your node for the first time, you will need to deploy a chequebook c
 
 To persist files, mount a local directory as follows and enter the password used to encrypt your keyfiles. Note, Docker insists on absolute paths when mounting volumes, so you must replace `/path/to/.bee-docker` with a valid path from your local filesystem.
 
-```sh
+```bash
 docker run\
   -v /path/to/.bee-docker:/home/bee/.bee\
   -p 1635:1635 \
@@ -44,7 +44,7 @@ docker run\
 
 Once you have generated your keys, leave Bee to run in the background...
 
-```sh
+```bash
 docker run\
   -d 
   -v /path/to/.bee-docker:/home/bee/.bee\
@@ -64,19 +64,19 @@ Other versions of the Bee container are also available.
 
 #### Latest Beta Release
 
-```sh
+```bash
 docker pull ethersphere/bee:beta
 ```
 
 #### Specific Versions
 
-```sh
+```bash
 docker pull ethersphere/bee:0.5.2
 ```
 
 #### Edge
 
-```sh
+```bash
 docker pull ethersphere/bee:latest
 ```
 
@@ -90,14 +90,14 @@ Configuration files for Bee and Bee Clef are provided to enable quick and easy i
 
 First, retrieve the current `docker-compose.yaml` file.
 
-```sh
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.2/packaging/docker/docker-compose.yml
+```bash
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.2/packaging/docker/docker-compose.yml=======
 ```
 
 Next, create a `.env` file using the example file provided. This file will be responsible for storing configuration and secrets for our Bee and Bee Clef applications.
 
-```sh
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.2/packaging/docker/env -O .env
+```bash
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.2/packaging/docker/env -O .env=======
 ``` 
 
 There are some important configuration parameters which must be set in order for our projects to work. To affect configuration in the `.env` file, we first remove the `#` at the beginning of the line and then change the value after `=` to our desired config.
@@ -122,7 +122,7 @@ BEE_CLEF_SIGNER_ENDPOINT=http://clef-1:8550
 
 With the configuration settings complete, run `docker-compose up` with the `-d` flag to run Bee and Bee Clef as a daemon.
 
-```sh
+```bash
 docker-compose up -d
 ```
 
@@ -134,7 +134,7 @@ Next we must fund our node using the [Swarm Goerli Faucet](https://faucet.ethswa
 
 To determine our address to fund, we can check the logs for our Bee container:
 
-```sh
+```bash
 docker-compose logs -f bee-1
 ```
 
@@ -151,7 +151,7 @@ After your transaction has been completed, your node should recognise that your 
 
 Once Bee has completed this procedure, you may query the Bee [HTTP API](/docs/api-reference/api-reference) at `http://localhost:1633`.
 
-```sh
+```bash
 curl localhost:1633
 ```
 
@@ -160,5 +160,3 @@ Ethereum Swarm Bee
 ```
 
 Congratulations! Your Bee is up and running! 🐝
-
-

@@ -22,7 +22,7 @@ To investigate our accounting, let's upload a 20mb file to the network so we can
 
 First, we will need to run our Bee node with a RPC endpoint, debug api enabled and verbosity set to TRACE.
 
-```sh
+```bash
 bee start \
   --verbosity 5 \
   --swap-enable \
@@ -30,7 +30,7 @@ bee start \
   --debug-api-enable
 ```
 
-```sh
+```bash
 dd if=/dev/urandom of=/tmp/test.txt bs=1m count=20
 curl -F file=@/tmp/test.txt http://localhost:1633/files
 ```
@@ -54,7 +54,7 @@ TRAC[2020-09-28T15:18:08+01:00] crediting peer f1e2872581de18bdc68060dc8edd3aa96
 
 We also have a rich set of features to be able to query the current accounting state of your node. For example, you may query your node's current balance by send a POST request to the balances endpoint.
 
-```sh
+```bash
 curl localhost:1635/chequebook/balance | jq
 ```
 
@@ -67,7 +67,7 @@ curl localhost:1635/chequebook/balance | jq
 
 It is also possible to examine per-peer balances.
 
-```sh
+```bash
 curl localhost:1635/balances | jq
 ```
 
@@ -90,7 +90,7 @@ curl localhost:1635/balances | jq
 
 In Swarm, these per-peer balances simply represent trustful agreements between nodes. Tokens only actually change hands when a node settles a cheque. This can either be triggered manually or when a certain threshold is reached with a peer. In this case, a settlement takes place. You may view these using the settlements endpoint.
 
-```sh
+```bash
 curl localhost:1635/settlements | jq
 ```
 
@@ -117,7 +117,7 @@ curl localhost:1635/settlements | jq
 
 More info can be found by using the chequebook api.
 
-```sh
+```bash
 curl localhost:1635/chequebook/cheque | jq
 ```
 
@@ -141,7 +141,7 @@ As our node's participation in the network increases, we will begin to see more 
 
 To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
 
-```sh
+```bash
 curl -XPOST http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
 ```
 
@@ -153,7 +153,7 @@ You may check the status of your transaction using [Goerli Etherscan](https://go
 
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
 
-```sh
+```bash
 curl http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq
 ```
 
@@ -176,13 +176,13 @@ Success, we earned our first gBZZ! 🐝
 
 Now we have earnt tokens, to withdraw our gBZZ from the chequebook contract back into our node's own wallet, we simply POST a request to the chequebook withdraw endpoint.
 
-```sh
+```bash
 curl -XPOST http://localhost:1635/chequebook/withdraw\?amount\=1000 | jq
 ```
 
 And conversely, if we have used more services than we have provided, we may deposit extra gBZZ into the chequebook contract by sending a POST request to the deposit endpoint.
 
-```sh
+```bash
 curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
 ```
 
@@ -198,20 +198,20 @@ You may use then Etherscan to track your transaction and make sure it completes 
 For the Bee process, the final step of earning BZZ is cashing a swap-cheque. It is worth noting that a cheque is not yet generally accepted currency. A swap-cheque is, just like a real cheque, a promise to hand over money upon request. In real life, you would present the cheque to a bank. In blockchain life, we are presenting the swap-cheque to a smart-contract. Holding on to a swap-cheque is risky; it is possible that the owner of the chequebook has issued too many cheques, worth more than there is money in the chequebook contract. For this reason you want to cash out your cheques with a certain frequency. With the set of API endpoints, as offered by Bee, it is possible to develop a script that fully manages the uncashed cheques for you. As an example, we offer you a [very basic script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh), where you can manually cash out all cheques with a worth above a certain value. To use the script:
 1. Download and save the script:
 
-```sh
+```bash
 wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/7ba05095e0836735f4a648aefe52c584e18e065f/cashout.sh
 ```
 
 2. Make the file executable
 
-```sh
+```bash
 chmod +x cashout.sh
 ```
 
 3. List all uncashed cheques and cash out your cheques above a certain value
 
 - List:
-```sh
+```bash
 ./cashout.sh
 ```
 :::info
@@ -219,7 +219,7 @@ If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
 :::
 
 - Cashout all cheques worth more than 5 BZZ
-```sh
+```bash
 ./cashout.sh cashout-all 5
 ```
 

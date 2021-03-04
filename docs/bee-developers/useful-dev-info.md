@@ -17,7 +17,7 @@ Installation from source is described in the [Installation](/docs/installation/b
 
 To check if two nodes are connected and to see the round trip time for message exchange between them, get the overlay address from one node, for example local node 2:
 
-```sh
+```bash
 curl localhost:1835/addresses
 ```
 
@@ -25,7 +25,7 @@ Make sure that Debug API is enabled and address configured as in examples above.
 
 And use that address in the Debug API call on another node, for example, local node 1:
 
-```sh
+```bash
 curl -XPOST localhost:1735/pingpong/d4440baf2d79e481c3c6fd93a2014d2e6fe0386418829439f26d13a8253d04f1
 ```
 
@@ -38,7 +38,7 @@ To process protocol buffer files and generate the Go code from it two tools are 
 
 Makefile rule `protobuf` can be used to automate `protoc-gen-gogofaster` installation and code generation:
 
-```sh
+```bash
 make protobuf
 ```
 
