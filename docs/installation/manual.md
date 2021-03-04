@@ -12,12 +12,12 @@ If your system is not supported, you might want to try to [build directly from s
 To install the binary using our quick install script, run either one of the following commands in your Terminal...
 
 #### wget
-```sh
+```bash
 wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.5.2 bash
 ```
 
 #### curl
-```sh
+```bash
 curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.5.2 bash
 ```
 
@@ -29,7 +29,7 @@ We recommend that Swarm node implementations make use of Go Ethereum's Clef exte
 
 Once you have installed Bee, you can test that it has been successfully installed by running.
 
-```sh
+```bash
 bee version
 ```
 
@@ -77,7 +77,7 @@ In order to interact with the Goerli blockchain to deploy contracts and make pay
 
 To find out your Ethereum address, we can simply run our Bee node and point it at the Goerli rpc endpoint.
 
-```sh
+```bash
 bee start \
   --verbosity 5 \
   --swap-endpoint https://rpc.slock.it/goerli \
@@ -138,11 +138,11 @@ To upgrade previous versions of Bee installed using the above method, simply re-
 To get a sneak preview of the latest features added to Bee, you may also install the Edge version, which tracks the master branch of the [Github respository](https://github.com/ethersphere/bee)
 
 #### wget
-```sh
+```bash
 wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
 ```
 
 #### curl
-```sh
+```bash
 curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
 ```

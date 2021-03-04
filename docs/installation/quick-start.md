@@ -32,7 +32,7 @@ Follow post install guide in terminal for initial configuration and how to start
 
 #### AMD64
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_amd64.deb
 sudo dpkg -i bee_0.5.2_amd64.deb
 ```
@@ -41,14 +41,14 @@ sudo dpkg -i bee_0.5.2_amd64.deb
 
 ##### ARMv7
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_armv7.deb
 sudo dpkg -i bee_0.5.2_armv7.deb
 ```
 
 ##### ARM64
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_arm64.deb
 sudo dpkg -i bee_0.5.2_arm64.deb
 ```
@@ -57,7 +57,7 @@ sudo dpkg -i bee_0.5.2_arm64.deb
 
 #### AMD64
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_amd64.rpm
 sudo rpm -i bee_0.5.2_amd64.rpm
 ```
@@ -66,28 +66,28 @@ sudo rpm -i bee_0.5.2_amd64.rpm
 
 ##### ARMv7
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_armv7.rpm
 sudo rpm -i bee_0.5.2_armv7.rpm
 ```
 
 ##### ARM64
 
-```sh
+```bash
 wget https://github.com/ethersphere/bee/releases/download/v0.5.2/bee_0.5.2_arm64.rpm
 sudo rpm -i bee_0.5.2_arm64.rpm
 ```
 
 ### MacOS
 
-```sh
+```bash
 brew tap ethersphere/tap
 brew install swarm-bee
 ```
 
 To run Bee as a service now and on startup, run:
 
-```sh
+```bash
 brew services start swarm-bee
 ```
 
@@ -108,7 +108,7 @@ and once it has been funded, its HTTP based
 [API](/docs/api-reference/api-reference) will start listening at
 `localhost:1633`.
 
-```sh
+```bash
 curl localhost:1633
 ```
 
@@ -120,7 +120,7 @@ Ethereum Swarm Bee
 
 We can now manage the Bee service using `systemctl`.
 
-```sh
+```bash
 systemctl status bee
 ```
 
@@ -132,7 +132,7 @@ systemctl status bee
 
 Logs are available using the `journalctl` command:
 
-```sh
+```bash
 journalctl --lines=100 --follow --unit bee
 ```
 
@@ -153,13 +153,13 @@ WARN[2021-02-09T18:55:15Z] get your Goerli ETH and Goerli BZZ now via the bzzaar
 
 Services are managed using Homebrew services.
 
-```sh
+```bash
 brew services restart swarm-bee
 ```
 
 Logs are available at `/usr/local/var/log/swarm-bee/bee.log`
 
-```sh
+```bash
 tail -f /usr/local/var/log/swarm-bee/bee.log
 ```
 
@@ -176,7 +176,7 @@ To find a Bee node's Ethereum address you can:
  - look into its logs (see above),
  - use the handy `bee-get-addr` utility,
 
-```sh
+```bash
 bee-get-addr
 ```
 
@@ -184,7 +184,7 @@ bee-get-addr
 WARN[2021-02-09T18:55:15Z] get your Goerli ETH and Goerli BZZ now via the bzzaar at https://bzz.ethswarm.org/?transaction=buy&amount=10&slippage=30&receiver=0x99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
 ```
 
-```sh
+```bash
 curl -s localhost:1635/addresses | jq .ethereum
 ```
 
@@ -230,7 +230,7 @@ curl -s localhost:1635/addresses | jq .ethereum
 
 Once your Bee node is fully loaded with gBZZ, we can now watch our logs and watch as Bee automatically deploys a chequebook and makes an initial deposit.
 
-```sh
+```bash
 journalctl --lines=100 --follow --unit bee
 ```
 
@@ -262,7 +262,7 @@ If you need to remove Bee, you may simply run the below commands.
 Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups](/docs/maintenance/backups) so you don't lose your keys and data.
 :::
 
-```sh
+```bash
 sudo apt-get remove bee
 sudo apt-get remove bee-clef
 ```
@@ -273,7 +273,7 @@ sudo apt-get remove bee-clef
 Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups](/docs/maintenance/backups) so you don't lose your keys and data.
 :::
 
-```sh
+```bash
 sudo yum remove bee
 sudo yum remove bee-clef
 ```

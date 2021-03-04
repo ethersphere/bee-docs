@@ -31,13 +31,13 @@ If you are renting space in a datacenter, the chances are that your computer wil
 
 You can investigate this by running:
 
-```sh
+```bash
 ifconfig
 ```
 
 or 
 
-```sh
+```bash
 ip address
 ```
 
@@ -50,7 +50,7 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 Here we can see our computer's **public IP** `178.128.196.191`. This is the address that is used by other computers we connect to over the internet. We can verify this using a third party service such as *icanhazip*.
 
-```sh
+```bash
 curl icanhazip.com
 ```
 
@@ -66,7 +66,7 @@ To address the [scarcity of IP numbers](https://en.wikipedia.org/wiki/IPv4_addre
 
 If we run the above commands to find the computer's IP in this scenario, we will see a different output.
 
-```sh
+```bash
 ip address
 ```
 
@@ -134,7 +134,7 @@ Inspecting the underlay addresses in the output of the addresses endpoint our de
 
 To help fix the first problem, let's determine our public IP.
 
-```sh
+```bash
 curl icanhazip.com
 ```
 
@@ -158,11 +158,11 @@ Sometimes this can be a little tricky, so let's verify we are able to make a TCP
 
 First, with Bee **not** running, let's set up a simple TCP listener using Netcat on the same machine we would like to run Bee on.
 
-```sh
+```bash
 nc -l 0.0.0.0 1634
 ```
 
-```sh
+```bash
 nc -zv 86.98.94.9 1634
 ```
 
@@ -176,7 +176,7 @@ If this didn't work for you, check out our Debugging Connectivity guide below.
 
 If it did, let's start our Bee node with the `--nat-addr` configured.
 
-```sh
+```bash
 bee start --nat-addr 86.98.94.9:1634
 ```
 
@@ -205,13 +205,13 @@ The above guide navigates your NAT, but there are still a few hurdles to overcom
 
 Let's set up a Netcat listener on all interfaces on the computer we'd like to run Bee on as we have above.
 
-```sh
+```bash
 nc -l 0.0.0.0 1634
 ```
 
 Now, let's verify we're above to test this by checking the connection on our local machine.
 
-```sh
+```bash
 nc -zv 127.0.0.1 1634
 ```
 
@@ -232,7 +232,7 @@ If you are not able to get access to some firewall settings, or otherwise debug 
 
 Let's find out what our IP looks like to the internet.
 
-```sh
+```bash
 curl icanhazip.com
 ```
 
@@ -242,7 +242,7 @@ curl icanhazip.com
 
 Now try to connect to your port using the global IP.
 
-```sh
+```bash
 nc -zv 86.98.94.9 1634
 ```
 
@@ -275,5 +275,3 @@ To debug docker connectivity issues, we may use netcat as above to check port co
 3. Something else entirely?
 
 Networking is a complex topic, but it keeps us all together. If you still can't connect to your Bee, get in touch via [The Beehive](http://beehive.ethswarm.org/) and we'll do our best to get you connected. In the swarm, no Bee is left behind. 
-
-
