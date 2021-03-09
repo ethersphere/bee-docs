@@ -35,13 +35,13 @@ We'd love you to join us! Are you up to the challenge of helping us to create Be
 There is a vibrant and buzzing community behind Swarm, get involved in one of our group channels.
 
 - [Swarm](http://swarm.ethereum.org)
-- [Discord](https://discord.gg/ykCupZMuww)
+- [Discord](https://discord.gg/wdghaQsGq5)
 - [Twitter @ethswarm](https://twitter.com/ethswarm)
 - [reddit channel](https://www.reddit.com/r/ethswarm/)
 - [Medium](https://ethswarm.medium.com/)
 - [Swarm Bee Support](https://t.me/joinchat/LTr8vBf8JshNlAD3m9BGJQ)
 
 ## Reporting a bug
-If your Bee isn't working, get in touch with our [#bee-support channel on Discord](https://discord.gg/uwSqHG4WbJ) or [let us know on GitHub!](https://github.com/ethersphere/bee/issues) Every Bee is important to us and we'll get right to work on fixing it for you as soon as possible. 🐝
+If your Bee isn't working, get in touch with our [#bee-support channel on Discord](https://discord.gg/wdghaQsGq5) or [let us know on GitHub!](https://github.com/ethersphere/bee/issues) Every Bee is important to us and we'll get right to work on fixing it for you as soon as possible. 🐝
 
 Thanks for being here, we wish you Love and Bees from the Swarm Team x
