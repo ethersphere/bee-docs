@@ -71,7 +71,7 @@ module.exports = {
           items: [
             {
               label: 'Discord',
-              href: 'https://discord.gg/ykCupZMuww',
+              href: 'https://discord.gg/wdghaQsGq5',
             },
             {
               label: 'Mattermost',
