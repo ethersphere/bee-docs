@@ -3,6 +3,9 @@ title: Clef External Signer
 id: bee-clef
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Bee makes use of Go Ethereum's external signer, [Clef](https://geth.ethereum.org/docs/clef/tutorial).
 
 Because Bee must sign a lot of transactions automatically and quickly, a [Bee specific version of Clef, Bee-clef](https://github.com/ethersphere/bee-clef) has been packaged which includes all the relevant configuration and implements the specific configuration needed to make Clef work with Bee.
@@ -15,7 +18,17 @@ Clef will create a new Ethereum key pair for you during installation. Make sure 
 
 Bee clef can be installed automatically using your system's package manager.
 
-### Ubuntu / Raspbian / Debian
+
+
+
+<Tabs
+  defaultValue="debian"
+  values={[
+    {label: 'Ubuntu / Debian / Raspbian', value: 'debian'},
+    {label: 'CentOS', value: 'centos'},
+    {label: 'MacOS', value: 'macos'},
+  ]}>
+  <TabItem value="debian">
 
 #### AMD64
 
@@ -40,7 +53,8 @@ wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0
 sudo dpkg -i bee-clef_0.4.9_arm64.deb
 ```
 
-### CentOS
+  </TabItem>
+  <TabItem value="centos">
 
 #### AMD64
 
@@ -65,12 +79,17 @@ wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0
 sudo rpm -i bee-clef_0.4.9_arm64.rpm
 ```
 
-### MacOS
+  </TabItem>
+  <TabItem value="macos">
 
 ```bash
 brew tap ethersphere/tap
 brew install swarm-clef
 ```
+
+  </TabItem>
+</Tabs>
+
 
 To run Bee Clef as a service now and on startup, run:
 
@@ -85,9 +104,18 @@ Under a normal/default package install, there wont be any configuration changes 
 
 ### Interact With Clef
 
-Once Clef has been installed, it will begin running as a service using `systemd`.
+Once Clef has been installed, it will begin running as a service.
 
-To check Clef is running ok, we may use `systemctl` to query the status of the `bee-clef` service.
+To check Clef is running ok, we may use `systemctl` (on Linux) or `launchctl` (on MacOS) to query the status of the `bee-clef` service.
+
+
+<Tabs
+  defaultValue="linux"
+  values={[
+    {label: 'Linux', value: 'linux'},
+    {label: 'MacOS', value: 'macos'},
+  ]}>
+  <TabItem value="linux">
 
 ```bash
 systemctl status bee-clef
@@ -103,6 +131,16 @@ And if you want to follow it's logs, you can use:
 ```bash
 journalctl -f -u bee-clef.service
 ```
+
+</TabItem>
+  <TabItem value="macos">
+
+```bash
+launchctl list | grep swarm-clef
+```
+
+  </TabItem>
+</Tabs>
 
 When Bee-clef first starts, you should see something very similar to the following:
 ```log
