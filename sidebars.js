@@ -3,6 +3,14 @@ module.exports = {
     'introduction',
     {
       type: 'category',
+      label: 'The Basics',
+      items: [
+        'introduction/terminology',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
       label: 'Installation',
       items: [
         'installation/quick-start',
