@@ -114,7 +114,7 @@ that has not been accessed recently to make room for new chunks.
 
 :::info
 For more info on how chunks are distributed, persisted and stored within the network, read
-[The Book of Swarm](https://swarm-gateways.net/bzz:/latest.bookofswarm.eth/the-book-of-swarm.pdf).
+[The Book of Swarm](https://gateway.ethswarm.org/bzz/latest.bookofswarm.eth/the-book-of-swarm.pdf).
 :::
 
 To keep this content alive, your Bee node can be configured to refresh this content when it is
