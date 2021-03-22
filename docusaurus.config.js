@@ -74,6 +74,10 @@ module.exports = {
               href: 'https://discord.gg/wdghaQsGq5',
             },
             {
+              label: 'Mattermost',
+              href: 'https://beehive.ethswarm.org/',
+            },
+            {
               label: 'Reddit',
               href: 'https://www.reddit.com/r/ethswarm',
             },
