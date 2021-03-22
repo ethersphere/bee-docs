@@ -205,7 +205,7 @@ They are the cryptographic proof of your network identity and cannot be recovere
 
 Chunk database capacity in chunks. A chunk is 4096 bytes in size, so the total database capacity in kb can be estimated as `db-capacity * 4096`. The default 5,000,000 chunks is therefore approximately 20.5gb. We recommend a minimum of 2.5gb capacity for a node to be able to effectively function in the network. Light nodes that do not participate in storing may be able to specify less.
 
-*The below four options expose low-level configurations for [LevelDB](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb/opt#Options) method [Openfile](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb#OpenFile).*
+*The below four options expose low-level configurations for [LevelDB](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb/opt#Options) method [Openfile](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb#OpenFile). Please let us know how you get on with tweaking these settings on your hardware in the `#swarm-infrastructure` channel on our [Discord server](https://discord.gg/wdghaQsGq5)*
 
 #### --db-block-cache-capacity
 *default* `33554432`
@@ -219,6 +219,10 @@ Corresponds to LevelDB `DisableSeeksCompaction` (see above)
 
 #### --db-open-files-limit
 *default* `200`
+
+:::info
+To accomodate less powerful hardware and operating systems, the `open-files-limit` is set deliberately low. We recommend that you try to increase it to nearer `10000` or more if possible on your hardware.
+:::
 
 Corresponds to LevelDB `OpenFilesCacheCapacity` (see above)
 
