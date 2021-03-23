@@ -47,7 +47,7 @@ dist/bee version
 ```
 
 ```
-0.5.2
+0.5.3
 ```
 
 6) (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`
