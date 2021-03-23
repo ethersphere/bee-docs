@@ -221,7 +221,7 @@ Corresponds to LevelDB `DisableSeeksCompaction` (see above)
 *default* `200`
 
 :::info
-To accomodate less powerful hardware and operating systems, the `open-files-limit` is set deliberately low. We recommend that you try to increase it to nearer `10000` or more if possible on your hardware.
+To accomodate less powerful hardware and operating systems, the `open-files-limit` is set deliberately low. We recommend that you try to increase it to nearer `10000` or more if this is possible when using your hardware. *Please let us know how you get on with tweaking these settings on your hardware in the `#swarm-infrastructure` channel on our [Discord server](https://discord.gg/wdghaQsGq5)*
 :::
 
 Corresponds to LevelDB `OpenFilesCacheCapacity` (see above)
@@ -306,23 +306,25 @@ The path to a file that contains password for decrypting keys. The empty string 
 
 #### --payment-early
 
-Amount in BZZ below the peers payment threshold which causes Bee to initiate settlement (default 10000)
+*default* `1000000000000`
+
+Amount in BZZ below the peers payment threshold which causes Bee to initiate settlement.
 
 #### --payment-threshold
 
-*default* `100000`
+*default* `10000000000000`
 
 The threshold in BZZ where you expect to get paid from your peers.
 
 #### --payment-tolerance
 
-*default* `10000`
+*default* `50000000000000`
 
 The excess debt above payment threshold in BZZ where you disconnect from your peer.
 
 #### --resolver-options 
 
-*default* eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e
+*default* eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e@localhost:8545
 
 ENS API endpoint for a TLD, with contract address. Multiple values can be provided. 
 
@@ -352,7 +354,7 @@ SWAP ethereum blockchain endpoint.
 
 #### --swap-initial-deposit
 
-*default* `100000000`
+*default* `100000000000000000`
 
 #### --tracing-enable
 
