@@ -28,7 +28,7 @@ Bee clef can be installed automatically using your system's package manager.
     {label: 'CentOS', value: 'centos'},
     {label: 'MacOS', value: 'macos'},
   ]}>
-  <TabItem value="debian">
+<TabItem value="debian">
 
 #### AMD64
 
@@ -53,8 +53,8 @@ wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0
 sudo dpkg -i bee-clef_0.4.9_arm64.deb
 ```
 
-  </TabItem>
-  <TabItem value="centos">
+</TabItem>
+<TabItem value="centos">
 
 #### AMD64
 
@@ -79,23 +79,23 @@ wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef_0
 sudo rpm -i bee-clef_0.4.9_arm64.rpm
 ```
 
-  </TabItem>
-  <TabItem value="macos">
+</TabItem>
+<TabItem value="macos">
 
 ```bash
 brew tap ethersphere/tap
 brew install swarm-clef
 ```
 
-  </TabItem>
-</Tabs>
-
-
 To run Bee Clef as a service now and on startup, run:
 
 ```bash
 brew services start swarm-clef
 ```
+
+</TabItem>
+</Tabs>
+
 
 ### Configuring Bee-clef
 Configuration files are stored in `/etc/bee-clef/`

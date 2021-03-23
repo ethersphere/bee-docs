@@ -70,15 +70,22 @@ This produces the following file contents, showing the default configuration of 
 api-addr: :1633
 bootnode:
 - /dnsaddr/bootnode.ethswarm.org
+bootnode-mode: false
 clef-signer-enable: false
 clef-signer-endpoint: ""
+clef-signer-ethereum-address: ""
 cors-allowed-origins: []
 data-dir: /Users/sig/.bee
+db-block-cache-capacity: "33554432"
 db-capacity: "5000000"
+db-disable-seeks-compaction: false
+db-open-files-limit: "200"
+db-write-buffer-size: "33554432"
 debug-api-addr: :1635
 debug-api-enable: false
 gateway-mode: false
 global-pinning-enable: false
+help: false
 nat-addr: ""
 network-id: "1"
 p2p-addr: :1634
@@ -144,6 +151,16 @@ Set this to true to enable signing using Ethereum's 'Clef' external signer. Clef
 
 You may also specify a custom ipc file path for your Clef signer.
 
+#### --clef-signer-ethereum-address
+
+*default* **selects the clef address at index 0**
+
+Use this command to specify which Bee Clef address is used if you have imported multiple keys into Bee Clef.
+
+:::warning
+If you have multiple addresses imported into your instance of Bee Clef, you must specify your address for each node, including the first one, as addresses may been re-ordered during import.
+:::
+
 #### --cors-allowed-origins
 
 *default* `[]`
@@ -187,6 +204,32 @@ They are the cryptographic proof of your network identity and cannot be recovere
 *default* `5000000`
 
 Chunk database capacity in chunks. A chunk is 4096 bytes in size, so the total database capacity in kb can be estimated as `db-capacity * 4096`. The default 5,000,000 chunks is therefore approximately 20.5gb. We recommend a minimum of 2.5gb capacity for a node to be able to effectively function in the network. Light nodes that do not participate in storing may be able to specify less.
+
+*The below four options expose low-level configurations for [LevelDB](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb/opt#Options) method [Openfile](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb#OpenFile). Please let us know how you get on with tweaking these settings on your hardware in the `#swarm-infrastructure` channel on our [Discord server](https://discord.gg/wdghaQsGq5)*
+
+#### --db-block-cache-capacity
+*default* `33554432`
+
+Corresponds to LevelDB `BlockCacheCapacity` (see above)
+
+#### --db-disable-seeks-compaction
+*default* `false`
+
+Corresponds to LevelDB `DisableSeeksCompaction` (see above)
+
+#### --db-open-files-limit
+*default* `200`
+
+:::info
+To accomodate less powerful hardware and operating systems, the `open-files-limit` is set deliberately low. We recommend that you try to increase it to nearer `10000` or more if this is possible when using your hardware. *Please let us know how you get on with tweaking these settings on your hardware in the `#swarm-infrastructure` channel on our [Discord server](https://discord.gg/wdghaQsGq5)*
+:::
+
+Corresponds to LevelDB `OpenFilesCacheCapacity` (see above)
+
+#### --db-write-buffer-size
+*default* `33554432`
+
+Corresponds to LevelDB `WriteBuffer` (see above)
 
 #### --debug-api-addr
 
@@ -263,23 +306,25 @@ The path to a file that contains password for decrypting keys. The empty string 
 
 #### --payment-early
 
-Amount in BZZ below the peers payment threshold which causes Bee to initiate settlement (default 10000)
+*default* `1000000000000`
+
+Amount in BZZ below the peers payment threshold which causes Bee to initiate settlement.
 
 #### --payment-threshold
 
-*default* `100000`
+*default* `10000000000000`
 
 The threshold in BZZ where you expect to get paid from your peers.
 
 #### --payment-tolerance
 
-*default* `10000`
+*default* `50000000000000`
 
 The excess debt above payment threshold in BZZ where you disconnect from your peer.
 
 #### --resolver-options 
 
-*default* eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e
+*default* eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e@localhost:8545
 
 ENS API endpoint for a TLD, with contract address. Multiple values can be provided. 
 
@@ -309,7 +354,7 @@ SWAP ethereum blockchain endpoint.
 
 #### --swap-initial-deposit
 
-*default* `100000000`
+*default* `100000000000000000`
 
 #### --tracing-enable
 
