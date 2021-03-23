@@ -31,7 +31,7 @@ git describe --tags
 3) Checkout the required version:
 
 ```bash
-git checkout v0.5.2
+git checkout v0.5.3
 ```
 
 4) Build the binary:
