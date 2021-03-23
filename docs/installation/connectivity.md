@@ -95,9 +95,9 @@ Bee's solution to these problems come in two flavours, automatic and manual.
 
 UPNP is a protocol designed to simplify the administration of NAT and port forwarding by the end user by providing an API which software running within the network can use to ask the router for the external IP and to request for ports to be forwarded to the internal IP of the computer running the software.
 
-```danger
-UPNP can be considered a security risk as it exposes your (real) public IP to any processes running on your computer, and also allows them to open arbitrary ports which may be used to transfer malicious traffic, for example a [RAT](https://en.wikipedia.org/wiki/Remote_desktop_software#RAT). We recommend you disable UPNP on your router and use manual port forwarding as described below.
-```
+:::danger UPNP is a security risk!
+UPNP is a security risk as it allows any host or process inside (sometimes also outside) your network to open arbitrary ports which may be used to transfer malicious traffic, for example a [RAT](https://en.wikipedia.org/wiki/Remote_desktop_software#RAT). UPNP can also be used to determine your IP, and in the case of using Tor or a VPN, your *real* public IP. be We urge you to disable UPNP on your router and use manual port forwarding as described below.
+:::
 
 Bee will use UPNP to determine your public IP, which is required for various internal processes.
 
