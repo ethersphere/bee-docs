@@ -14,10 +14,14 @@ The overview of the installation process:
 
 ## Install Bee Clef
 
+:::info
+While it is not necessary that node operators make use of Go Ethereum's Clef external signer to manage your Ethereum key pair. Follow these instructions include and integrate Bee-clef alongside Bee to help keep your keys safe!
+:::
+
 Before installing Bee, it is recommended that you first [install the Bee clef package](/docs/installation/bee-clef). This will set up a Bee specific instance of the Go-Ethereum Clef signer which will be integrated with your Bee node.
 
-:::info
-While it is not necessary that node operators make use of Go Ethereum's Clef external signer to manage your Ethereum key pair. The following instructions include and integrate Bee-clef alongside Bee to help keep your keys safe!
+:::important
+If choosing to use Bee-clef, you must install this *before* you install Bee.
 :::
 
 ## Install Bee
@@ -28,7 +32,15 @@ To install Bee itself, simply choose the appropriate command from the ones below
 Follow post install guide in terminal for initial configuration and how to start `bee`.
 :::
 
-### Ubuntu / Raspbian / Debian
+
+<Tabs
+  defaultValue="debian"
+  values={[
+    {label: 'Ubuntu / Debian / Raspbian', value: 'debian'},
+    {label: 'CentOS', value: 'centos'},
+    {label: 'MacOS', value: 'macos'},
+  ]}>
+<TabItem value="debian">
 
 #### AMD64
 
@@ -52,6 +64,8 @@ sudo dpkg -i bee_0.5.2_armv7.deb
 wget https://github.com/ethersphere/bee/releases/download/v0.5.3/bee_0.5.2_arm64.deb
 sudo dpkg -i bee_0.5.2_arm64.deb
 ```
+</TabItem>
+<TabItem value="centos">
 
 ### CentOS
 
@@ -77,6 +91,8 @@ sudo rpm -i bee_0.5.2_armv7.rpm
 wget https://github.com/ethersphere/bee/releases/download/v0.5.3/bee_0.5.2_arm64.rpm
 sudo rpm -i bee_0.5.2_arm64.rpm
 ```
+</TabItem>
+<TabItem value="macos">
 
 ### MacOS
 
@@ -90,6 +106,9 @@ To run Bee as a service now and on startup, run:
 ```bash
 brew services start swarm-bee
 ```
+
+</TabItem>
+</Tabs>
 
 ## SWAP Blockchain Endpoint
 
@@ -248,9 +267,25 @@ The Bzzaar is brand new. If you have any issues, please [get in touch](/docs/#co
 
 If these messages are missing, check out our comprehensive guide to Bee [connectivity](/docs/installation/connectivity).
 
-## Updating Bee
+### Upgrading Bee
 
-Your Bee and Bee-clef installations can be updated by repeating the install steps above. Bee sure to [backup](/docs/maintenance/backups) your clef key material and Bee data before applying updates.
+#### Ubuntu / Debian / Raspbian
+
+To upgrade Bee, simply stop the Bee service.
+
+```sh
+sudo systemctl stop bee
+```
+
+Now follow the steps above to download the new package and install the new version, as usual.
+
+You may now start your node again.
+
+```sh
+sudo systemctl start bee
+```
+
+Bee sure to [backup](/docs/maintenance/backups) your clef key material and Bee data before applying updates.
 
 ## Uninstalling Bee
 
