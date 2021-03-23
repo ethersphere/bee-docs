@@ -3,6 +3,9 @@ title: Quick Start
 id: quick-start
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Bee is packaged for MacOS and Ubuntu, Raspbian, Debian and CentOS based Linux distributions.
 
 If your system is not supported, please see the [manual installation](/docs/installation/manual) section for information on how to install Bee.
@@ -20,7 +23,7 @@ While it is not necessary that node operators make use of Go Ethereum's Clef ext
 
 Before installing Bee, it is recommended that you first [install the Bee clef package](/docs/installation/bee-clef). This will set up a Bee specific instance of the Go-Ethereum Clef signer which will be integrated with your Bee node.
 
-:::important
+:::caution
 If choosing to use Bee-clef, you must install this *before* you install Bee.
 :::
 
@@ -31,6 +34,8 @@ To install Bee itself, simply choose the appropriate command from the ones below
 :::info
 Follow post install guide in terminal for initial configuration and how to start `bee`.
 :::
+
+
 
 
 <Tabs
