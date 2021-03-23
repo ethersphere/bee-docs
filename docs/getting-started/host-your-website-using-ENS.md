@@ -17,12 +17,24 @@ In order to resolve ENS names using your API endpoints, you must specify a valid
 bee start --resolver-options "https://cloudflare-eth.com"
 ```
 
+If specifying using your `bee.yaml` configuration file, the syntax is as follows.
+
+```bash
+resolver-options: [ "https://cloudflare-eth.com" ]
+```
+
+Once you have restarted your node, you should be able to see the Swarm homepage at:
+
+[http://localhost:1633/bzz/swarm.eth/](http://localhost:1633/bzz/swarm.eth/)
+
 :::info
 Use the `resolver-options` flag to point the bee resolver to any ENS compatible smart-contract on any EVM compatible chain
 :::
 :::warn
 Make sure you trust the gateway you are interacting with! To ensure that you are retrieving the correct content, run your own ENS resolver and Bee node.
 :::
+
+
 ### Link an ENS domain to a website.
 
 First we will need to upload the website assets to Swarm in order to
