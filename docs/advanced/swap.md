@@ -199,7 +199,7 @@ For the Bee process, the final step of earning BZZ is cashing a swap-cheque. It 
 1. Download and save the script:
 
 ```bash
-wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/7ba05095e0836735f4a648aefe52c584e18e065f/cashout.sh
+wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/b40510f1172b96c21d6d20558ca1e70d26d625c4/cashout.sh
 ```
 
 2. Make the file executable
