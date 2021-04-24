@@ -1,6 +1,6 @@
 ---
-title: Persistence
-id: persistence
+title: Pinning
+id: pinning
 ---
 
 Each Bee node is configured to reserve a certain amount of memory on your computer's hard drive to store and serve chunks within their *neighbourhood of responsibility* for other nodes in the Swarm network. Once this alloted space has been filled, each Bee node delete older chunks to make way for newer ones as they are uploaded by the network.
@@ -8,7 +8,7 @@ Each Bee node is configured to reserve a certain amount of memory on your comput
 Each time a chunk is accessed, it is moved back to the end of the deletion queue, so that regularly accessed content stays alive in the network and is not deleted by a node's garbage collection routine.
 
 :::info
-While pinning files is a great solution for maintaining the persistence of your files in the network, Swarm will soon include storage incentives where files can be persisted simply by rewarding storer nodes with BZZ. Stay in touch for exciting developments soon!
+In order to upload your data to swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an approriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
 :::
 
 This, however, presents a problem for content which is important, but accessed seldom requested. In order to keep this content alive, Bee nodes provide a facility to **pin** important content so that it is not deleted.
@@ -28,43 +28,49 @@ Files pinned using local pinning will still not necessarily be available to the 
 To store content so that it will persist even when Bee's garbage collection routine is deleting old chunks, we simply pass the `Swarm-Pin` header set to `true` when uploading.
 
 ```bash
-curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
+curl -H "swarm-pin: true" -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264"  --data-binary @bee.mp4 localhost:1633/bzz\?bee.mp4
 ```
 
 ```json
-{"reference":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f"}
+{"reference":"1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30"}
 ```
 
 ### Administrating Pinned Content
 
-Let's check to make sure this content was indeed pinned by querying the chunks api for the swarm reference to see whether the root chunk is currently pinned.
+To check what content is currently pinned on your node, query the `pins` endpoint of your Bee API.
 
 ```bash
-curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+curl localhost:1633/pins
 ```
 
 ```json
-{"address":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f","pinCounter":1}
+{"references":["1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30"]}
 ```
 
-Success! Our pin counter is set to `1`!
+or, to check for specific references
+
+```bash
+curl localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30
+```
+
+A `404` response indicates the content is not available.
 
 #### Unpinning Content
 
 If we later decide our content is no longer worth keeping, we can simply unpin it by sending a `DELETE` request to the pinning endpoint using the same reference.
 
 ```bash
-curl -XDELETE http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+curl -XDELETE http://localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30
 ``
 
 ```json
 {"message":"OK","code":200}
 ```
 
-Now, if we check again, we'll get a `404` error as the content is no longer pinned.
+Now, when check again, we will get a `404` error as the content is no longer pinned.
 
 ```bash
-curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+curl localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30
 ```
 
 ```json
@@ -76,7 +82,7 @@ Pinning and unpinning is possible for files (as in the example) and also the chu
 :::
 
 #### Pinning Already Uploaded Content
-The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded.
+The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded and present in the swarm.
 
 To do so, we can send a `POST` request including the swarm reference to the files pinning endpoint.
 
@@ -101,10 +107,8 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 ```
 
 :::warning
-While the pin operation will fetch content from the network if it is not available locally, we advise you to ensure that the content is available locally before calling the pin operation. If the content, for whatever reason, is only fetched partially from the network, the pin operation only partly succeeds, which leaves the internal administration of pinning in an inconsistent state.
+While the pin operation will attempt to fetch content from the network if it is not available locally, we advise you to ensure that the content is available locally before calling the pin operation. If the content, for whatever reason, is only fetched partially from the network, the pin operation only partly succeeds and leaves the internal administration of pinning in an inconsistent state.
 :::
-
-
 
 ## Global Pinning
 
@@ -125,7 +129,7 @@ First, we must start up our node with the `global-pinning-enable` flag set.
 ```bash
 bee start\
   --verbosity 5 \
-  --swap-endpoint https://rpc.slock.it/goerli \
+  --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
   --global-pinning-enable \
   --debug-api-enable
 ```

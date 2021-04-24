@@ -1,7 +1,11 @@
 ---
 title: Host Your Website on Swarm
-id: host-your-website-using-ens
+id: host-your-website
 ---
+
+:::tip
+Comfortable with nodeJS and javascript? Check out [swarm-cli](/docs/working-with-bee/bee-tools), a command line tool you can use to easily interact with your Bee node!
+:::
 
 Bee treats ENS as a first class citizen, wherever you can use a Swarm reference, you can also use an ENS domain where the `content` ENS Resolver record is set to be a `bzz://` reference.
 
@@ -39,7 +43,7 @@ Make sure you trust the gateway you are interacting with! To ensure that you are
 
 First we will need to upload the website assets to Swarm in order to
 get its Swarm reference hash, see
-[uploading a directory](/docs/getting-started/upload-a-directory)
+[uploading a directory](/docs/installation/upload-a-directory)
 for more information.
 
 This time we will also include the `Swarm-Index-Document` header set to the `index.html`. This will cause Bee to serve each directories `index.html` file as default when browsing to the directory root `/` url. We will also provide a custom error page, using the `Swarm-Error-Document` header.

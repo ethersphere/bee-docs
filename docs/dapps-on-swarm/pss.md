@@ -3,7 +3,7 @@ title: PSS Messaging
 id: pss
 ---
 
-Out of the ashes of Ethereum's vision for a leak-proof decentralised anonymous messaging system - Whisper - comes PSS. Swarm provides the ability to send messages that appear to be normal Swarm traffic, but are in fact messages that may be received and decrypted to reveal their content only by the specific nodes they were intended to be received by.
+Out of the ashes of Ethereum's vision for a leak-proof decentralised anonymous messaging system - Whisper - comes PSS (or BZZ, whispered! 🤫). Swarm provides the ability to send messages that appear to be normal Swarm traffic, but are in fact messages that may be received and decrypted to reveal their content only by the specific nodes they were intended to be received by.
 
 PSS provides a pub-sub facility that can be used for a variety of tasks. Nodes are able to listen to messages received for a specific topic in their nearest neighbourhood and create messages destined for another neighbourhood which are sent over the network using Swarm's usual data dissemination protocols.
 
@@ -61,7 +61,7 @@ bee start \
     --data-dir=/tmp/bee2 \
     --bootnode="" \
     --p2p-addr=:1834 \
-    --swap-endpoint=https://rpc.slock.it/goerli
+    --swap-endpoint=wss://goerli.infura.io/ws/v3/your-api-key
 ```
 
 We must make a note of the Swarm overlay address, underlay address and public key which are created once each node has started. We find this information from the addresses endpoint of the Debug API.
@@ -93,7 +93,7 @@ bee start \
     --data-dir=/tmp/bee3 \
     --bootnode="" \
     --p2p-addr=:1934 \
-    --swap-endpoint=https://rpc.slock.it/goerli
+    --swap-endpoint=wss://goerli.infura.io/ws/v3/your-api-key
 ```
 
 ```bash

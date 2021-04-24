@@ -6,44 +6,59 @@ module.exports = {
       label: 'Installation',
       items: [
         'installation/quick-start',
-        'installation/configuration',
+        'installation/install',
         'installation/manual',
         'installation/build-from-source',
+        'installation/rasp-bee-ry-pi',
+        'installation/hive',
         'installation/docker',
+        'installation/bee-clef',
         'installation/connectivity',
-        'installation/bee-clef'
+        'installation/fund-your-node'
       ],
-      collapsed: false
+      collapsed: true
     },
     {
       type: 'category',
-      label: 'Maintainance',
+      label: 'Working With Bee',
       items: [
-        'maintenance/backups'
+        'working-with-bee/configuration',
+        'working-with-bee/debug-api',
+        'working-with-bee/logs-and-files',
+        'working-with-bee/bee-tools',
+        'working-with-bee/cashing-out',
+        'working-with-bee/monitoring',
+        'working-with-bee/backups',
+        'working-with-bee/upgrading-bee',
+        'working-with-bee/uninstalling-bee'
       ],
+      collapsed: true
     },
     {
       type: 'category',
-      label: 'Basic Usage',
+      label: 'Access the Swarm',
       items: [
-        'getting-started/working-with-your-node',
-        'getting-started/upload-and-download',
-        'getting-started/upload-a-directory',
-        'getting-started/host-your-website-using-ens',
-        'getting-started/store-with-encryption'
+        'access-the-swarm/introduction',
+        'access-the-swarm/upload-and-download',
+        'access-the-swarm/upload-a-directory',
+        'access-the-swarm/host-your-website',
+        'access-the-swarm/syncing',
+        'access-the-swarm/keep-your-data-alive',
+        'access-the-swarm/pinning',
+        'access-the-swarm/light-nodes'
       ],
-      collapsed: false,
+      collapsed: true
     },
     {
       type: 'category',
-      label: 'Advanced Usage',
+      label: 'Dapps on Swarm',
       items: [
-        'advanced/pss',
-        'advanced/tags',
-        'advanced/persistence',
-        'advanced/swap',
-        'advanced/starting-a-test-network',
-        'advanced/large-node-operators'
+        'dapps-on-swarm/introduction',
+        'dapps-on-swarm/develop-on-bee',
+        'dapps-on-swarm/bee-js',
+        'dapps-on-swarm/chunk-types',
+        'dapps-on-swarm/feeds',
+        'dapps-on-swarm/pss'
       ],
     },
     {
@@ -62,9 +77,17 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'FAQ',
+      items: [
+        'FAQ'
+      ],
+    },
+    {
+      type: 'category',
       label: 'Join Us',
       items: [
-        'community/community'
+        'community/community',
+        'community/awesome-swarm'
       ],
       collapsed: false
     }
