@@ -24,7 +24,7 @@ The debug-API is disabled by default but be enabled by setting the `enable-debug
 For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](/docs/installation/configuration#configuring-bee-installed-using-a-package-manager) and restart your Bee service.
 :::
 
-- <a href="/debug-api" target="_blank" rel="noopener noreferrer">Debug API reference.</a>,
+- <a href="/debug-api" target="_blank" rel="noopener noreferrer">Debug API reference.</a>
 
 :::danger 
 Your Debug API should not be exposed to the public internet, make sure that your network has a firewall which blocks port `1635`, or bind the Debug API to `localhost`
