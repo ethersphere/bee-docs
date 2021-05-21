@@ -62,11 +62,11 @@ Click `copy` on the right hand side of the box containing the instructions, then
 You should see some output from the `wget` command which is a Linux utility this is used to download the correct Bee Clef 'package' from Github, where the development of the Bee utilities takes place.
 
 ```bash
-bee-clef_0.4.9_armv7.deb.1           100%[===================================================================>]   9.99M  8.21MB/s    in 1.2s    
+bee-clef_0.4.12_armv7.deb.1           100%[===================================================================>]   9.99M  8.21MB/s    in 1.2s    
 
-2021-05-15 17:34:02 (8.21 MB/s) - ‘bee-clef_0.4.9_armv7.deb’ saved [10473282/10473282]
+2021-05-15 17:34:02 (8.21 MB/s) - ‘bee-clef_0.4.12_armv7.deb’ saved [10473282/10473282]
 
-pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.4.9_armv7.deb
+pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.4.12_armv7.deb
 ```
 
 The other command will be left in your terminal, this uses the `dpkg` utility, the Debian Package Manager to install Bee Clef. Package Managers are used to conveniently install software on Linux systems.
@@ -74,12 +74,12 @@ The other command will be left in your terminal, this uses the `dpkg` utility, t
 Press enter to start the installation process. All being well, you will see some output like this:
 
 ```
-pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.4.9_armv7.deb
+pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.4.12_armv7.deb
 Selecting previously unselected package bee-clef.
 (Reading database ... 98610 files and directories currently installed.)
-Preparing to unpack bee-clef_0.4.9_armv7.deb ...
-Unpacking bee-clef (0.4.9) ...
-Setting up bee-clef (0.4.9) ...
+Preparing to unpack bee-clef_0.4.12_armv7.deb ...
+Unpacking bee-clef (0.4.12) ...
+Setting up bee-clef (0.4.12) ...
 Created symlink /etc/systemd/system/multi-user.target.wants/bee-clef.service → /lib/systemd/system/bee-clef.service.
 ```
 
@@ -132,7 +132,7 @@ Your output should looks something like this:
 ```bash
 -rw-r--r--  1 pi   pi       3523 Mar  4 22:47 .bashrc
 -rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_0.6.0_armv7.deb
--rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.9_armv7.deb
+-rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.12_armv7.deb
 drwxr-xr-x  2 pi   pi       4096 Mar  4 22:57 Bookshelf
 ```
 
@@ -151,7 +151,7 @@ ls -la | grep "bee"
 ```
 
 ```bash
--rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.9_armv7.deb
+-rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.12_armv7.deb
 ```
 
 Success! The Bee package file is deleted! Note at the command line there *is no undelete*. **With great power comes great resposibility**. Please use your new powers wisely, and only for the good of the Swarm as a whole. ;D
