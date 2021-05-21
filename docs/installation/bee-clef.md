@@ -100,7 +100,7 @@ brew services start swarm-clef
 ### Configuring Bee-clef
 Configuration files are stored in `/etc/bee-clef/`
 
-Under a normal/default package install, there wont be any configuration changes necessary to start using bee-clef.
+For a normal installation using a package manger, there should not be any configuration changes necessary to start using Bee Clef.
 
 ### Interact With Clef
 
@@ -187,7 +187,7 @@ Bee can communicate with Bee-clef in a variety of ways. The default way, if inst
 
 ## Manual Installation
 
-To install Clef manually, first retrieve the relevant Clef binary from Ethereum's [Geth & Tools](https://geth.ethereum.org/downloads/) download page, or build directly from the [source](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum).
+Try the [Github releases page](https://github.com/ethersphere/bee-clef/releases) for x-platform binaries or, to install Clef manually, first retrieve the relevant Clef binary from Ethereum's [Geth & Tools](https://geth.ethereum.org/downloads/) download page, or build directly from the [source](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum).
 
 Because Bee needs Clef to sign many transactions automatically, we must run Clef as a service with relaxed permissions and rules set. To ensure Clef only signs transactions from Bee, we must protect the `clef.ipc` file by **creating a Bee user and setting permissions so that it is only possible for this user to make use of the ipc socket.**
 

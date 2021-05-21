@@ -1,11 +1,9 @@
 ---
-title: Working With Your Node
-id: working-with-your-node
+title: Debug API
+id: debug-api
 ---
 
 Now that you have created your Swarm wallet and your Bee node has begun to participate in the global swarm network, we can use the Debug API to take a closer look at what's happening with your node.
-
-### Debug API
 
 The [Debug API](/docs/api-reference/api-reference) provides a privileged environment where you are able to interact with your Bee node to get more information about the status of your node.
 

@@ -17,7 +17,8 @@
     "clsx": "^1.1.1",
     "docusaurus-lunr-search": "^2.1.10",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "swarm-cli": "^1.2.2"
   },
   "browserslist": {
     "production": [

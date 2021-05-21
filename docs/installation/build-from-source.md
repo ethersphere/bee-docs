@@ -7,6 +7,10 @@ Bee is written using the [Go](https://golang.org) language.
 
 You may build the Bee client software directly from the [source](https://github.com/ethersphere/bee).
 
+:::caution
+While it is possible to run Bee without it, we recommend the use of Go Ethereum's Clef external signer. Instructions for installing and integrating this with Bee can be found [here](/docs/installation/bee-clef).
+:::
+
 Prerequisites for installing direct from source are:
 
 - **go** - download the latest release from [golang.org](https://golang.org/dl)
@@ -31,7 +35,7 @@ git describe --tags
 3) Checkout the required version:
 
 ```bash
-git checkout v0.5.3
+git checkout v0.6.0
 ```
 
 4) Build the binary:
@@ -47,7 +51,7 @@ dist/bee version
 ```
 
 ```
-0.5.3
+0.6.0
 ```
 
 6) (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`

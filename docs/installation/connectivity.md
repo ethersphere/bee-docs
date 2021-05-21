@@ -3,16 +3,19 @@ title: Connectivity
 id: connectivity
 ---
 
+To fully connect to the swarm, your Bee node needs to be able to both send and receive messages from the outside world. Normally, your router will not allow other IP's on the internet to connect, unless you have initiated the connection. In the swarm, we welcome newcomers, as long as they play by the rules! If a node misbehaves, we will simply add it to a list of blocked nodes and refuse future connections from them.
 
-To fully connect to the swarm, your Bee node needs to be able to both send and receive messages from the outside world. Normally, your router will not allow other IP's on the internet to connect, unless you have connected to them first. In Swarm, we welcome newcomers, as long as they play by the rules. If a node misbehaves, we will simply add it to a list of blocked nodes and refuse future connections from them.
+Here at Swarm, every Bee counts! To make sure all Bees can join the swarm, below you will find a detailed guide to navigating your way through your network and making out into the wild so you can buzz around with the crowd and maximise your chances of earning those gBZZs. If you still have problems, please join us in our [Discord server](https://discord.gg/wdghaQsGq5) and we'll help you find the way! 🐝 🐝 🐝 🐝 🐝
 
-In Swarm, every Bee counts! To make sure all Bees can join the swarm, below you will find a detailed guide to navigating your way through your network and making out into the wild so you can buzz with the crowd. If you still have problems, join us in [The Beehive](http://beehive.ethswarm.org/) and we'll help you find the way! 🐝 🐝 🐝 🐝 🐝
+:::info
+To ensure your Bee has the best chance of particpating in the Swarm, you must ensure your Bee is able to handle **both incoming and outgoing connections from the global internet to it's p2p port - usually `1634`**. See below for a detailed guide on how to make sure this is the case, or for the 1337: check your `http://localhost:1635/addresses` to see which public ip and port libp2p is advertising and verify it's connectivity to the rest of the internets! You may need to alter your Bee nodes `nat-addr` configuration. 🤓
+:::
 
 ### Networking Basics
 
 In a network, each computer is assigned an IP. Each IP is then subdivided into thousands of *sockets* or *ports*, each of which has an incoming and outgoing component.
 
-In a completely trusted network of computers, connections to or from any of these ports are allowed. However, to protect ourselves from nefarious actors when we join the wider internet, it is sometimes important to filter this traffic so that some of these ports are off limits to the public.
+In a completely trusted network of computers, any connections to or from any of these ports are allowed. However, to protect ourselves from nefarious actors when we join the wider internet, it is sometimes important to filter this traffic so that some of these ports are off limits to the public.
 
 In order to allow other Bee nodes we have previously not met to be able to send messages to our p2p port, usually `1634`, we must ensure that our network is set up to receive incoming connections.
 
@@ -22,7 +25,7 @@ There are also some ports which you should never expose to the outside internet.
 
 ## Your IP
 
-When you connect to the internet, you are assigned a unique number called an IP Address. IP stands for **Internet Protocol**. The most prevalent IP version used is *still* the archaic [IPv4](https://en.wikipedia.org/wiki/IPv4) which was invented way back in 1981. IPv6 is available but not well used. Due to the mitigation of the deficiencies within this standard, we may encounter some complications.
+When you connect to the internet, you are assigned a unique number called an IP Address. IP stands for **Internet Protocol**. The most prevalent IP version used is *still* the archaic [IPv4](https://en.wikipedia.org/wiki/IPv4) which was invented way back in 1981. IPv6 is available but not well used. Due to the mitigation of the deficiencies inherent in the IPv4 standard, we may encounter some complications.
 
 
 ### Datacenters and Computers Connected Directly to the Internet
@@ -58,7 +61,15 @@ curl icanhazip.com
 178.128.196.191
 ```
 
-If these numbers correspond, congratulations! You may skip the next section!
+With Bee running, try to connect to your port using the global IP from another computer.
+
+```bash
+nc -zv 178.128.196.191 1634
+```
+
+If you have success, congratulations!
+
+If this still doesn't work for you, see the last part of *Manual: Configure Your Router and Bee* section below, as you may need to configure your `nat-addr`.
 
 ### Home, Commercial and Business Networks and Other Networks Behind NAT
 

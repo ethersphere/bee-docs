@@ -7,16 +7,33 @@ Your Bee node can be configured by adding arguments terminal command on startup.
 
 Run `bee start --help` in your Terminal to get the list of available command line arguments.
 
-#### Example
+#### Important Configuration Changes
 
-In this example, we change the port that the Bee API runs on, enable the Debug API, and set it to listen on port 6666.
+:::important
+When you start up Bee for the first time, there is some configuration to do! Make sure you consider updating the following recommended settings!
+:::
 
-```bash
-bee start \
-  --api-addr=:8888 \
-  --debug-api-enable=true \
-  --debug-api-addr=:6666
-```
+### Full Node
+
+Bee runs as default in [Light Node](/docs/access-the-swarm/light-nodes) mode. To fully participate in the swarm, you must set your `--full-node` configuration to `true`.
+
+### Swap Endpoint
+
+In order to access the blockchain, your Bee must be connected to an Ethereum blockchain node on the Goerli network. We recommend running your own [Geth Goerli Node](https://geth.ethereum.org/), but if you prefer, you may also sign up to [Infura's](https://infura.io) API service and set your `wss://goerli.infura.io/ws/v3/your-api-key`
+
+### NAT Address
+
+To enable others to connect to your node, you must broadcast your public IP and ensure Bee is accessible on the right p2p port (usually `1634`). We recommend you [manually configure your external IP and check connectivity](/docs/installation/connectivity) to ensure your Bee is able to receive connections from other peers.
+
+### LevelDB Open File Descriptors Limit
+
+Bee is designed to work on a lot of different hardware. To facilitate the exploration of this during our beeta phase, we have given node operators access to leveldb's `--db-open-files-limit`. This helps determine the speed with which Bee can read and write to it's database, and therefore it's efficiency in forwarding and serving chunks. Some say setting this to much more than the default 200 leads to a much enhanced ability to participate in the swarm and get those gBZZ! Share your experience in the #node-operators channel of our [Discord server](https://discord.gg/wdghaQsGq5) to help us make this process more automated in the future!
+
+### ENS Endpoint
+
+The ENS domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to an Ethereum blockchain node on the main network. If you would like to [browse the swarm](/docs/access-the-swarm/browse-the-swarm) We recommend you sign up to [Infura's](https://infura.io) API service and set your `--resolver-options=https://mainnet.infura.io/v3/your-api-key`.
+
+## Specifying Configuration
 
 ### Configuration file
 Bee can also be configured by providing a yaml configuration file using the `--config` flag.
@@ -29,8 +46,31 @@ bee start --config /home/<user>/bee-config.yaml
 Run `bee printconfig &> bee-default.yaml` to print a default version of the configuration file.
 :::
 
+### Environment variables
 
-### Configuring Bee Installed Using a Package Manager
+Bee config may also be passed using environment variables.
+
+Environment variables are set as variables in your operating systems session or systemd configuration file. To set an environment variable, type the following in your terminal session.
+
+```bash
+export VARIABLE_NAME=variableValue
+```
+
+Verify if it is correctly set by running `echo $VARIABLE_NAME`.
+
+All available configuration options are also available as prefixed, captilised and underscored environment variables.
+
+e.g. `--api-addr` becomes `BEE_API_ADDR`.
+
+### Precedence Order of Configuration
+
+Configuration is processed in the following ascending priority order of preference:
+
+1. Command Line Variables
+2. Environment Variables
+3. Configuration File
+
+## Configuring Bee Installed Using a Package Manager
 
 Bee node's installed using package managers `apt-get` or `yum` are configured using a configuration file which is automatically generated during the installation process.
 
@@ -68,21 +108,23 @@ This produces the following file contents, showing the default configuration of 
 
 ```yaml
 api-addr: :1633
+block-time: "15"
 bootnode:
 - /dnsaddr/bootnode.ethswarm.org
 bootnode-mode: false
+cache-capacity: "1000000"
 clef-signer-enable: false
 clef-signer-endpoint: ""
 clef-signer-ethereum-address: ""
 cors-allowed-origins: []
 data-dir: /Users/sig/.bee
 db-block-cache-capacity: "33554432"
-db-capacity: "5000000"
 db-disable-seeks-compaction: false
 db-open-files-limit: "200"
 db-write-buffer-size: "33554432"
 debug-api-addr: :1635
 debug-api-enable: false
+full-node: false
 gateway-mode: false
 global-pinning-enable: false
 help: false
@@ -95,16 +137,19 @@ password: ""
 password-file: ""
 payment-early: "1000000000000"
 payment-threshold: "10000000000000"
-payment-tolerance: "50000000000000"
+payment-tolerance: "10000000000000"
+postage-stamp-address: ""
 resolver-options: []
 standalone: false
 swap-enable: true
-swap-endpoint: http://localhost:8545
+swap-endpoint: ws://localhost:8546
 swap-factory-address: ""
-swap-initial-deposit: "100000000000000000"
+swap-initial-deposit: "10000000000000000"
+swap-legacy-factory-addresses: []
 tracing-enable: false
 tracing-endpoint: 127.0.0.1:6831
 tracing-service-name: bee
+transaction: ""
 verbosity: info
 welcome-message: ""
 ```
@@ -129,6 +174,12 @@ The location of a yaml configuration file containing configuration instructions.
 
 The ip and port the API will serve http requests from. Ommiting the IP part of the address will cause the server to listen to all interfaces. Argument values are of the form '132.132.132.132:1633'.
 
+#### --block-time
+
+*default* 15
+
+The expected block time of the attached SWAP endpoint.
+
 #### --bootnode
 
 *default* `/dnsaddr/bootnode.ethswarm.org`
@@ -138,6 +189,12 @@ This is a [multiaddr](https://github.com/multiformats/multiaddr) specifying the 
 By default a node connects to the Swarm mainnet.  When using a private or test network, network specific bootnodes must be set. 
 
 Any Bee node in a network can act as a bootnode.
+
+#### --cache-capacity
+
+*default* `1000000`
+
+The amount of disk space, in chunks, that is used for forwarding and uploading chunks.
 
 #### --clef-signer-enable             
 
@@ -199,12 +256,6 @@ Keep the key files in your keystore data directory safe!
 They are the cryptographic proof of your network identity and cannot be recovered.
 :::
 
-#### --db-capacity 
-
-*default* `5000000`
-
-Chunk database capacity in chunks. A chunk is 4096 bytes in size, so the total database capacity in kb can be estimated as `db-capacity * 4096`. The default 5,000,000 chunks is therefore approximately 20.5gb. We recommend a minimum of 2.5gb capacity for a node to be able to effectively function in the network. Light nodes that do not participate in storing may be able to specify less.
-
 *The below four options expose low-level configurations for [LevelDB](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb/opt#Options) method [Openfile](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb#OpenFile). Please let us know how you get on with tweaking these settings on your hardware in the `#swarm-infrastructure` channel on our [Discord server](https://discord.gg/wdghaQsGq5)*
 
 #### --db-block-cache-capacity
@@ -247,6 +298,11 @@ Ommiting the IP part of the address will cause the server to listen to all reque
 
 Set this to `true` to enable access to the [Debug API](/docs/api-reference/api-reference)
 
+#### --full-node
+
+*default* false
+
+Enable this by setting it to `true` to fully participate in serving and forwarding chunks to the network.
 
 #### --gateway-mode 
 
@@ -318,9 +374,15 @@ The threshold in BZZ where you expect to get paid from your peers.
 
 #### --payment-tolerance
 
-*default* `50000000000000`
+*default* `10000000000000`
 
 The excess debt above payment threshold in BZZ where you disconnect from your peer.
+
+#### --postage-stamp-address
+
+*default* *automatically configured depending on network*
+
+The address of the postage stamp contract on the Ethereum blockchain, used for buying batches of stamps.
 
 #### --resolver-options 
 
@@ -344,9 +406,9 @@ Set this flag if we would like the node not to try to connect to the network. Us
 
 #### --swap-endpoint           
 
-*default* `http://localhost:8545`
+*default* `ws://localhost:8546`
 
-SWAP ethereum blockchain endpoint.
+SWAP ethereum blockchain endpoint. Must be equipped with websockets.
 
 #### --swap-factory-address
 
@@ -354,7 +416,7 @@ SWAP ethereum blockchain endpoint.
 
 #### --swap-initial-deposit
 
-*default* `100000000000000000`
+*default* `10000000000000000`
 
 #### --tracing-enable
 
@@ -385,28 +447,3 @@ Bee service identifier in tracing spans.
 *default* `""`
 
 Custom welcome message to be displayed to peers on succesful connection.
-
-
-### Environment variables
-
-Bee config may also be passed using environment variables.
-
-Environment variables are set as variables in your operating systems session or systemd configuration file. To set an environment variable, type the following in your terminal session.
-
-```bash
-export VARIABLE_NAME=variableValue
-```
-
-Verify if it is correctly set by running `echo $VARIABLE_NAME`.
-
-All available configuration options are also available as prefixed, captilised and underscored environment variables.
-
-e.g. `--api-addr` becomes `BEE_API_ADDR`.
-
-### Precedence Order of Configuration
-
-Configuration is processed in the following ascending priority order of preference:
-
-1. Command Line Variables
-2. Environment Variables
-3. Configuration File

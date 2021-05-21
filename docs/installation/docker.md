@@ -19,7 +19,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint https://rpc.slock.it/goerli \
+    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
     --debug-api-enable
 ```
 
@@ -38,7 +38,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint https://rpc.slock.it/goerli \
+    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
 	  --debug-api-enable
 ```
 
@@ -54,7 +54,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint https://rpc.slock.it/goerli \
+    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
 	  --debug-api-enable
 ```
 
@@ -71,7 +71,7 @@ docker pull ethersphere/bee:beta
 #### Specific Versions
 
 ```bash
-docker pull ethersphere/bee:0.5.3
+docker pull ethersphere/bee:0.6.0
 ```
 
 #### Edge
@@ -91,13 +91,13 @@ Configuration files for Bee and Bee Clef are provided to enable quick and easy i
 First, retrieve the current `docker-compose.yaml` file.
 
 ```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.3/packaging/docker/docker-compose.yml
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.6.0/packaging/docker/docker-compose.yml
 ```
 
 Next, create a `.env` file using the example file provided. This file will be responsible for storing configuration and secrets for our Bee and Bee Clef applications.
 
 ```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.5.3/packaging/docker/env -O .env
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.6.0/packaging/docker/env -O .env
 ``` 
 
 There are some important configuration parameters which must be set in order for our projects to work. To affect configuration in the `.env` file, we first remove the `#` at the beginning of the line and then change the value after `=` to our desired config.
@@ -105,7 +105,7 @@ There are some important configuration parameters which must be set in order for
 For Bee, amend the following parameters:
 
 ```
-BEE_SWAP_ENDPOINT=https://rpc.slock.it/goerli
+BEE_SWAP_ENDPOINT=wss://goerli.infura.io/ws/v3/your-api-key
 BEE_PASSWORD=my-password
 ```
 
@@ -127,10 +127,8 @@ docker-compose up -d
 ```
 
 :::warning
-Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to use to [backup](/docs/maintenance/backups) the contents of your Docker volume!
+Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to [backup](/docs/maintenance/backups) the contents of your Docker volume!
 :::
-
-Next we must fund our node using the [Swarm Goerli Faucet](https://faucet.ethswarm.org/). 
 
 To determine our address to fund, we can check the logs for our Bee container:
 
@@ -138,14 +136,13 @@ To determine our address to fund, we can check the logs for our Bee container:
 docker-compose logs -f bee-1
 ```
 
-And look for the lines including your automatically generated Ethereum address (scroll right).
-
 ```
-bee_1 | time="2020-12-15T18:43:14Z" level=warning msg="please make sure there is sufficient eth and bzz available on 7a977fa660e2e93e1eba40030c6b8da68d01971e"
-time="2020-12-15T18:43:14Z" level=warning msg="on goerli you can get both goerli eth and goerli bzz from https://faucet.ethswarm.org?address=7a977fa660e2e93e1eba40030c6b8da68d01971e"
+bee_1 | time="2020-12-15T18:43:14Z" level=warning msg="cannot continue until there is sufficient ETH (for Gas) and at least 1 BZZ available on 7a977fa660e2e93e1eba40030c6b8da68d01971e"
+time="2020-12-15T18:43:14Z" level=warning msg="learn how to fund your node by visiting our docs at https://docs.ethswarm.org/docs/installation/fund-your-node"
 ```
 
-Now, naviate to the [https://faucet.ethswarm.org](https://faucet.ethswarm.org/), enter your Ethereum address and submit the form to receive a supply of test Goerli Eth and Goerli BZZ.
+
+Once you have determined your Ethereum addresses, [fund your node](/docs/installation/fund-your-node)
 
 After your transaction has been completed, your node should recognise that your wallet has been funded, and begin to deploy and fund your Bee chequebook!
 
