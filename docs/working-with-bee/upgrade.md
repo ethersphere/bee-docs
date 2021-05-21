@@ -14,6 +14,10 @@ Bee sure to [backup](/docs/working-with-bee/backups) your clef key material and 
 
 Bee 0.6.0 contains a few breaking changes which mean a database migration must take place. We also intoduce [postage stamps](/docs/access-the-swarm/keep-your-data-alive) which must be attached to chunks of data so that they will be retained in the Swarm network.
 
+:::info
+Please take note that nodes which deployed their chequebook with bee v0.5.0 will have to be started with the --transaction TXHASH flag where TXHASH is any Ethereum transaction on goerli network sent from the bee node's Ethereum address. The hash of the chequebook deployment transaction can be used for this and can be looked up on etherscan. For nodes which first started with v0.5.1 or higher no action is necessary, as their chequebook deployment transaction will be automatically picked-up by the Bee node. 
+:::
+
 As part of these changes, if you have any **locally pinned content**, this must be manually migrated to the new data structure expected by the network of 0.6.0 clients, see below for information on how to proceed. 
 
 If you *do not* have any locally pinned content, your migration will be automatic and your update will proceed as normal.

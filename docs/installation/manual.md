@@ -34,7 +34,7 @@ bee version
 ```
 
 ```
-0.5.2
+0.6.0
 ```
 
 Now your Bee node is installed, you can fund your node with gBZZ join us in the swarm! 🐝 🐝 🐝 🐝 🐝

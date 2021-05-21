@@ -436,6 +436,12 @@ The URL where the tracing service listens for Thrift protocol UDP messages.
 
 Bee service identifier in tracing spans.
 
+#### --transaction
+
+*default* `""`
+
+As a spam prevention measure, for nodes which deployed their chequebook with v0.5.0 or before, specify `transaction` - the transaction of any Ethereum transaction on the Goerli network sent from the Bee node's Ethereum address.
+
 #### --verbosity
 
 *default* `info`
