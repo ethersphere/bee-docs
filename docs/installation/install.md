@@ -246,7 +246,7 @@ can interact with and deploy your chequebook contract. You can run your
 [own Goerli node](https://github.com/goerli/testnet) or, use a provider instead - we recommend
 [Infura](https://infura.io/).
 
-By default, Bee expects a local Goerli node at `ws://localhost:8545`. To use an Ethereum RPC provider instead, change your configuration as follows. We recommend Infura.
+By default, Bee expects a local Goerli node at `ws://localhost:8545`. To use an Ethereum RPC provider instead, change your configuration as follows.
 
 ```yaml
 swap-endpoint: wss://goerli.infura.io/ws/v3/your-api-key
