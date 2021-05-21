@@ -68,7 +68,7 @@ To upgrade Bee, simply stop the Bee service.
 sudo systemctl stop bee
 ```
 
-Now follow the steps above to download the new package and install the new version, as usual.
+Now follow the [installation instructions](/docs/installation/install) to download the new package and install the new version, as you would during a new installation.
 
 You will be greeted by the following prompt:
 

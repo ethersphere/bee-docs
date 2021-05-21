@@ -111,7 +111,7 @@ Here you must **type** (not copy paste) the following, replacing the address wit
 /faucet sprinkle 0xabeeecdef123452a40f6ea9f598596ca8556bd57
 ```
 
-After some time, you should receive a notification indicating your transaction has been successful. The faucet will have made a transfer of gETH (for gas), and gBZZ (so you can interact with the Swarm network). You can check out what's been going on in the blockchain by navigating to [https://goerli.etherscan.org](https://goerli.etherscan.org) and searching your address. All being well, you will see two succesfull transactions.
+After some time, you should receive a notification indicating your transaction has been successful. The faucet will have made a transfer of gETH (for gas), and gBZZ (so you can interact with the Swarm network). You can check out what's been going on in the blockchain by navigating to [https://goerli.etherscan.io](https://goerli.etherscan.io) and searching your address. All being well, you will see two succesfull transactions.
 
 ## Bee Tidy
 
