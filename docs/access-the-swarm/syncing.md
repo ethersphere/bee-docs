@@ -46,5 +46,5 @@ curl http://localhost:1633/tags/1278066217 | jq
 The response contains all the information that you need to follow the status of your file as it is synced with the network.
 
 :::info
-The number which the tags endpoint is returning under `total`, `processed` and `synced` are the number of chunks, Swarms canonical data unit of 4000kb
+The number which the tags endpoint is returning under `total`, `processed` and `synced` are the number of chunks, Swarms canonical data unit of 4kb
 :::
