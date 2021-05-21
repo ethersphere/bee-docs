@@ -141,8 +141,17 @@ The number of connected peers is determined by your node as it attempts to keep 
 
 ### What is the difference between "systemctl" and "bee start"?
 
-`bee start` and `systemctl start bee` actually run 2 different instances with 2 different `bee.yaml` files and two different data directories.
+*bee start* and *systemctl start bee* actually run 2 different instances with 2 different *bee.yaml* files and two different data directories.
 
-`bee start` uses `~/.bee.yaml` and the `~/.bee` directory for data
-`systemctl` uses `/etc/bee/bee.yaml` and (IIRC) `/var/lib/bee` for data
+*bee start* uses *~/.bee.yaml* and the *~/.bee* directory for data
+*systemctl* uses */etc/bee/bee.yaml* and (IIRC) */var/lib/bee* for data
 
+### How can I find a transaction hash for the --transaction configuration parameter?
+
+Use this cunning one liner - thanks [filoozom](https://github.com/beejeez/beejeez/commits?author=filoozom)
+
+Get your API key from [etherscan](https://etherscan.io)
+
+```
+curl "https://api-goerli.etherscan.io/api?module=account&action=txlist&address=$ADDRESS&startblock=0&endblock=99999999&sort=asc&apikey=$API_KEY" | jq -c 'first(.result[] | select(.to == "'$ADDRESS'")).hash'
+```
