@@ -20,7 +20,7 @@ There are two flavours of pinning, *local* and *global*.
 If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or Gateway, chunks can be *pinned* either during upload, or retrospectively using the Swarm reference.
 
 :::caution
-Files pinned using local pinning will still not necessarily be available to the rest of the network. Read [global pinning](/docs/advanced/persistence#global-pinning) to find out how to keep your files available to the whole of the swarm.
+Files pinned using local pinning will still not necessarily be available to the rest of the network. Read [global pinning](/docs/access-the-swarm/pinning#global-pinning) to find out how to keep your files available to the whole of the swarm.
 :::
 
 ### Pin During Upload
@@ -87,7 +87,7 @@ The previous example showed how we can pin content upon upload. It is also possi
 To do so, we can send a `POST` request including the swarm reference to the files pinning endpoint.
 
 ```bash
-curl -XPOST http://localhost:1633/pin/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+curl -XPOST http://localhost:1633/pin/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ``
 
 ```json
@@ -112,7 +112,7 @@ While the pin operation will attempt to fetch content from the network if it is 
 
 ## Global Pinning
 
-[Local pinning](/docs/advanced/persistence#local-pinning) ensures that your own node does not delete uploaded files. But other nodes that store your
+[Local pinning](/docs/access-the-swarm/pinning#global-pinning) ensures that your own node does not delete uploaded files. But other nodes that store your
 chunks (because they fall within their *neighbourhood of responsibility*) may have deleted content
 that has not been accessed recently to make room for new chunks.
 
@@ -137,7 +137,7 @@ bee start\
 Next, we pin our file locally, as shown above.
 
 ```bash
-curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
+curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/bzz\?bee.mp4
 ```
 
 ```json
@@ -147,7 +147,7 @@ curl -H "swarm-pin: true" --data-binary @bee.mp4 localhost:1633/files\?bee.mp4
 Now, when we distribute links to our files, we must also specify the first two bytes of our
 overlay address as the *target*. If a chunk that has already been garbage collected by
 its storer nodes is requested, the storer node will send a message using
-[PSS](/docs/advanced/pss) to the Swarm neighbourhood defined by this prefix,
+[PSS](/docs/dapps-on-swarm/pss) to the Swarm neighbourhood defined by this prefix,
 of which our node is a member.
 
 Let's use the addresses API endpoint to find out our target prefix.
@@ -163,7 +163,7 @@ curl -s http://localhost:1635/addresses | jq .overlay
 Finally, we take the first two bytes of our overlay address, `320e` and include this when referencing our chunk.
 
 ```bash
-curl http://localhost:1633/files/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f?targets=320e
+curl http://localhost:1633/bzz/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f?targets=320e
 ```
 
 Now, even if our chunks are deleted, they will be repaired in the network by our local Bee node and will always be available to the whole swarm!

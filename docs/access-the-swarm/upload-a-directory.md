@@ -76,7 +76,7 @@ Other files are served at their relative paths, e.g.
 
 [http://localhost:1633/bzz/b25c89a...214917b/assets/style.css](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css) 
 
-Once your data has been [fully processed into the network](/docs/advanced/tags), you will then be able to retrieve it from any Bee node.
+Once your data has been [fully processed into the network](/docs/access-the-swarm/syncing), you will then be able to retrieve it from any Bee node.
 
 [https://gateway.ethswarm.org/bzz/b25c89a...214917b/index.html](https://gateway.ethswarm.org/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/)
 

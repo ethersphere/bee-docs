@@ -50,7 +50,7 @@ Your Bee should start up as normal, and begin to connect to other Bees that are 
 
 1. [Cashout your node](/docs/working-with-bee/cashing-out) to make sure your gBZZs are safe. If you have cashed out recently, you can skip this step.
 2. [Backup your Bee](/docs/working-with-bee/backups) data, especially your keys folder!
-3. If you have pinned data, Download all your pinned data. Please use these to download all your data ready for re-upload with [postage stamps](/docs/working-with-bee/keep-your-data-alive).
+3. If you have pinned data, Download all your pinned data. Please use these to download all your data ready for re-upload with [postage stamps](/docs/access-the-swarm/keep-your-data-alive).
 4. Carefully, delete your `localstorage` folder **only**. *DO NOT DELETE* your `keys` or `statestore` folder. Your `localstorage` folder can be located by consulting your Bee's `data-dir` configuration parameter. If you are using Docker, please delete just the contents of the folder.
 5. Upgrade your node, as you normally would (see below).
 6. Adjust your configuration. Several configuration parameters have changed in 0.6.x - If you wish to continue running as a full node, you must set the new `full-node` flag to `true`. check out the [configuration](/docs/working-with-bee/configuration) guide for more info on how to update your configuration.

@@ -16,10 +16,10 @@ Swarm is economically self-sustaining due to a built-in incentive system enforce
 Don't have Bee installed yet? It's easy! Head over to the [installation](/docs/installation/quick-start) section to get Bee up and running.
 
 ## Usage
-To learn more about how to get the most out of Bee, head over to the [working with Bee](/docs/installation/upload-and-download) section to find out how to share files with your friends, use Bee to host a website on a public Swarm Gateway, and much more...
+To learn more about how to get the most out of Bee, head over to the [working with Bee](/docs/access-the-swarm/upload-and-download) section to find out how to share files with your friends, use Bee to host a website on a public Swarm Gateway, and much more...
 	
 ## Dapps
-Swarm is all about dapps. We strive to provide the most developer friendly environment in which to build dapps. Built on principles of functionality, flexibility and accessibility, Bee provides high level constructs for file storage, feeds and key-value stores, while also providing the low level access with libraries that create Single Owner and Trojan chunks clientside, with total e2e privacy. Learn more about how to [develop on Swarm](/docs/develop-on-swarm/introduction)
+Swarm is all about dapps. We strive to provide the most developer friendly environment in which to build dapps. Built on principles of functionality, flexibility and accessibility, Bee provides high level constructs for file storage, feeds and key-value stores, while also providing the low level access with libraries that create Single Owner and Trojan chunks clientside, with total e2e privacy. Learn more about how to [develop on Swarm](/docs/dapps-on-swarm/introduction)
 
 ## Incentives
 Need even more incentive to get involved with the wonderful world of Swarm? Find out how you'll soon be [earning gBZZ tokens](/docs/working-with-bee/cashing-out) for storing and distributing your share of the worlds data, sharing is caring!

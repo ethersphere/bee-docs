@@ -41,6 +41,7 @@ module.exports = {
         'access-the-swarm/introduction',
         'access-the-swarm/upload-and-download',
         'access-the-swarm/upload-a-directory',
+        'access-the-swarm/store-with-encryption',
         'access-the-swarm/host-your-website',
         'access-the-swarm/syncing',
         'access-the-swarm/keep-your-data-alive',

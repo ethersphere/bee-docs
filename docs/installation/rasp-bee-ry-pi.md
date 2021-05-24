@@ -53,7 +53,7 @@ We must install Bee Clef before Bee. To do so, open the browser (the 🌐 icon) 
 Click `Install > Bee Clef` and scroll down to find the installation commands for Bee Clef **ARM (Raspberry Pi) ARMv7**. These should look something like: 
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.6.0/bee_0.6.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_armv7.deb
 sudo dpkg -i bee_0.6.0_armv7.deb
 ```
 

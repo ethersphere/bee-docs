@@ -3,7 +3,7 @@ title: Starting a Test Network
 id: starting-a-test-network
 ---
 
-A test network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](/docs/installation/configuration)). 
+A test network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](/docs/working-with-bee/configuration)). 
 
 ## Start a network on your own computer
 ### Configuration

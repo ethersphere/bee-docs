@@ -5,7 +5,7 @@ id: bee-js
 
 Bee-js is Bee's complementary javascript library. It is the technology underpinning the [swarm-cli](/docs/working-with-bee/bee-tools) and [bee-dashboard](/docs/working-with-bee/bee-tools) tools and is a powerful tool for building completely decentralised apps.
 
-For more information on how to develop with Bee without blowing all your gBZZ, read [this guide](/docs/dapps-on-swarm/develop-on-swarm)
+For more information on how to develop with Bee without blowing all your gBZZ, read [this guide](/docs/dapps-on-swarm/develop-on-bee)
 
 See the [bee-js](https://bee-js.ethswarm.org/) documentation for detailed information on using and installing the library.
 

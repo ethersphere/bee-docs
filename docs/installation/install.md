@@ -22,7 +22,7 @@ If you would like to run a hive of many Bees, checkout the [node hive operators]
 
 To install Bee you will need to go through the following process.
 
- 1. Set up the external signer for Bee, [Bee Clef](/docs/tooling/bee-clef). (Recommended) 
+ 1. Set up the external signer for Bee, [Bee Clef](/docs/installation/bee-clef). (Recommended) 
  2. Install Bee and set it up to run as a service.
  3. Configure Bee.
  4. [fund your node](/docs/installation/fund-your-node) with gETH and gBZZ
@@ -158,7 +158,7 @@ Next, install Bee itself, simply choose the appropriate command from the ones be
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.0/bee_0.6.0_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_amd64.deb
 sudo dpkg -i bee_0.6.0_amd64.deb
 ```
 
@@ -167,14 +167,14 @@ sudo dpkg -i bee_0.6.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.0/bee_0.6.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_armv7.deb
 sudo dpkg -i bee_0.6.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.0/bee_0.6.0_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_arm64.deb
 sudo dpkg -i bee_0.6.0_arm64.deb
 ```
 </TabItem>
@@ -185,7 +185,7 @@ sudo dpkg -i bee_0.6.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.0/bee_0.6.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_amd64.rpm
 sudo rpm -i bee_0.6.0_amd64.rpm
 ```
 
@@ -194,14 +194,14 @@ sudo rpm -i bee_0.6.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.0/bee_0.6.0_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_armv7.rpm
 sudo rpm -i bee_0.6.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.0/bee_0.6.0_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_arm64.rpm
 sudo rpm -i bee_0.6.0_arm64.rpm
 ```
 </TabItem>
@@ -268,7 +268,7 @@ db-open-files-limit: 2000
 
 #### Debug API
 
-For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](/docs/installation/configuration#configuring-bee-installed-using-a-package-manager) and restart your Bee service.
+For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](/docs/working-with-bee/configuration) and restart your Bee service.
 
 ```yaml
 debug-api-enable: true
@@ -416,6 +416,6 @@ curl -s localhost:1635/peers | jq ".peers | length"
 6
 ```
 
-Perfect! We are accumulating peers, this means you are connected to the network, and ready to start [using Bee](/docs/access-the-swarm/install) to [upload and download](/docs/access-the-swarm/upload-and-download) content or host and browse [websites](/docs/access-the-swarm/host-your-website) hosted on the swarm network, and accumulating cheques which you can [cashout to get your gBZZ](/docs/working-with-bee/cashing-out).
+Perfect! We are accumulating peers, this means you are connected to the network, and ready to start [using Bee](/docs/access-the-swarm/introduction) to [upload and download](/docs/access-the-swarm/upload-and-download) content or host and browse [websites](/docs/access-the-swarm/host-your-website) hosted on the swarm network, and accumulating cheques which you can [cashout to get your gBZZ](/docs/working-with-bee/cashing-out).
 
 Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
