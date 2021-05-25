@@ -17,7 +17,7 @@ To upload data to Swarm, you must perform the following steps.
 
 ## Purchasing Your Batch of Stamps
 
-In order to upload your data to swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an approriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
+In order to upload your data to swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
 
 ### Upload
 
@@ -25,7 +25,7 @@ Once your Bee node is running, a HTTP API is enabled for you to interact with. T
 
 First, let's check to see if the API is running as expected...
 
-In order to upload your data to swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must [purchase an approriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive)
+In order to upload your data to swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive)
 ```bash
 curl http://localhost:1633
 ```
