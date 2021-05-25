@@ -42,7 +42,7 @@ The *amount* you specify will determine the amount of time your chunks live in t
 For now, we suggest you specify depth 20 and amount 100 for your batches. This should be ample to upload up quite some data, and to keep your files in the Swarm for the forseeable future.
 
 :::warning
-When you purchase a batch of stamps, you agree to burn gBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw gBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits together, read [The Book of Swarm](https://gateway.ethswarm.org/bzz/latest.bookofswarm.eth/).
+When you purchase a batch of stamps, you agree to burn gBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw gBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits together, read <a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 :::
 
 ```bash

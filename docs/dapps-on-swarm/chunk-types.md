@@ -3,7 +3,7 @@ title: Chunk Types
 id: chunk-types
 ---
 
-Swarm is home to many types of chunks, but these can be categoried into 4 broad categories. Read [The Book of Swarm](https://gateway.ethswarm.org/bzz/latest.bookofswarm.eth/) for more information on how swarm comes together.
+Swarm is home to many types of chunks, but these can be categoried into 4 broad categories. Read <a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a>  for more information on how swarm comes together.
 
 ## Content Addressed Chunks
 
@@ -19,7 +19,7 @@ Trojan chunks are a special version of content addressed chunks that have been '
 
 ## Single Owner Chunks
 
-Single Owner Chunks are distinct from Trojan and Content Addressed Chunks and are the only other type of chunk which is allowed in the Swarm. These chunks represent part of the swarm's address space which is reserved just for your personal Ethereum key pair! Here you can write whatever you'd please. Single Owner Chunks are the technology that powers Swarm's [feeds](/docs/dapps-on-swarm/feeds) but they are capable of much more! Look out for more chats about this soon and for more info, read [The Book of Swarm](https://gateway.ethswarm.org/bzz/latest.bookofswarm.eth/).
+Single Owner Chunks are distinct from Trojan and Content Addressed Chunks and are the only other type of chunk which is allowed in the Swarm. These chunks represent part of the swarm's address space which is reserved just for your personal Ethereum key pair! Here you can write whatever you'd please. Single Owner Chunks are the technology that powers Swarm's [feeds](/docs/dapps-on-swarm/feeds) but they are capable of much more! Look out for more chats about this soon and for more info, read <a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 
 ## Custom Chunk Types
 

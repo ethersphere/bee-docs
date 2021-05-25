@@ -32,7 +32,7 @@ Need even more incentive to get involved with the wonderful world of Swarm? Find
 
 ## Find Out More
 What happens with your Bee node when you start it up? Want to know more about the amazing Swarm technology behind Bee?
-Want to make your own client? Read [The Book of Swarm](https://gateway.ethswarm.org/bzz/latest.bookofswarm.eth/),
+Want to make your own client? Read <a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> ,
 our 250 page epic guide to the future tech underpinning the Swarm network.
 
 ## Development

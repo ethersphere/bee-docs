@@ -15,7 +15,7 @@ A feed is a collection of Single Owner Chunks with predicatable addresses. This 
 
 ### Creating and Updating a Feed
 
-In order to edit a feed, you will need to sign your chunks using an Ethereum keypair. For the intrepid, check out the [The Book of Swarm](https://gateway.ethswarm.org/bzz/latest.bookofswarm.eth/) on precise details on how to do this. For the rest of us, both [bee-js](/docs/dapps-on-swarm/bee-js) and [swarm-cli](/docs/working-with-bee/bee-tools) provide facilities to achieve this using javascript and a node-js powered command line tool respectively.
+In order to edit a feed, you will need to sign your chunks using an Ethereum keypair. For the intrepid, check out the <a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a>  on precise details on how to do this. For the rest of us, both [bee-js](/docs/dapps-on-swarm/bee-js) and [swarm-cli](/docs/working-with-bee/bee-tools) provide facilities to achieve this using javascript and a node-js powered command line tool respectively.
 
 ### No More ENS Transaction Charges
 
