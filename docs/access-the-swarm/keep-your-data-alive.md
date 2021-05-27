@@ -39,14 +39,14 @@ Right now, the easiest way to start uploading content, is to buy a large enough 
 
 The *amount* you specify will determine the amount of time your chunks live in the swarm. Because pricing is variable, it is not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the *current price* and the *remaining batch balance*.
 
-For now, we suggest you specify depth 20 and amount 100 for your batches. This should be ample to upload up quite some data, and to keep your files in the Swarm for the forseeable future.
+For now, we suggest you specify depth 20 and amount 10000000 for your batches. This should be ample to upload up quite some data, and to keep your files in the Swarm for the forseeable future.
 
 :::warning
 When you purchase a batch of stamps, you agree to burn gBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw gBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits together, read <a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 :::
 
 ```bash
-curl -s -XPOST http://localhost:1633/stamps/100/20
+curl -s -XPOST http://localhost:1633/stamps/10000000/20
 ```
 
 :::info
@@ -63,6 +63,6 @@ In order to make sure your *batch* has sufficient *remaining balance* to be stor
 curl localhost:1635/chainstate
 ```
 
-Shows the current price per chunk per block in GPLUR, the smallest unit of GBZZ
+Shows the current price per chunk per block in GPLUR, the smallest unit of GBZZ.
 
 Soon, functionality will be added to *top up* your batches balance. For now, you must reupload content with a newly created *stamp batch id*.
