@@ -25,6 +25,22 @@ In order to access the blockchain, your Bee must be connected to an Ethereum blo
 
 To enable others to connect to your node, you must broadcast your public IP and ensure Bee is accessible on the right p2p port (usually `1634`). We recommend you [manually configure your external IP and check connectivity](/docs/installation/connectivity) to ensure your Bee is able to receive connections from other peers.
 
+First determine your IP address.
+
+```bash
+curl icanhazip.com
+```
+
+```bash
+123.123.123.123
+```
+
+Then configure your node, including your p2p port (usually 1634).
+
+```yaml
+nat-addr: "123.123.123.123:1634"
+```
+
 ### LevelDB Open File Descriptors Limit
 
 Bee is designed to work on a lot of different hardware. To facilitate the exploration of this during our beeta phase, we have given node operators access to leveldb's `--db-open-files-limit`. This helps determine the speed with which Bee can read and write to it's database, and therefore it's efficiency in forwarding and serving chunks. Some say setting this to much more than the default 200 leads to a much enhanced ability to participate in the swarm and get those gBZZ! Share your experience in the #node-operators channel of our [Discord server](https://discord.gg/wdghaQsGq5) to help us make this process more automated in the future!

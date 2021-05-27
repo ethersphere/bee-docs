@@ -265,7 +265,25 @@ Bee is designed to work on a lot of different hardware configurations. To facili
 ```yaml
 db-open-files-limit: 2000
 ```
+### NAT Address
 
+To enable others to connect to your node, you must broadcast your public IP and ensure Bee is accessible on the right p2p port (usually `1634`). We recommend you [manually configure your external IP and check connectivity](/docs/installation/connectivity) to ensure your Bee is able to receive connections from other peers.
+
+First determine your IP address.
+
+```bash
+curl icanhazip.com
+```
+
+```bash
+123.123.123.123
+```
+
+Then configure your node, including your p2p port (usually 1634).
+
+```yaml
+nat-addr: "123.123.123.123:1634"
+```
 #### Debug API
 
 For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](/docs/working-with-bee/configuration) and restart your Bee service.
