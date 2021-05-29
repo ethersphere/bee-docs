@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "config": {
-    "linkchecker": "blc -ro --filter-level 0 --exclude libp2p.io --exclude twitter.com --exclude swarm.ethereum.org --exclude gateway.ethswarm.org --exclude discord.gg --exclude github.com --exclude reddit.com --exclude medium.com --exclude wikipedia.org --exclude etherscan.io --exclude awesome.re --exclude swarm.eth --exclude localhost:1633 --exclude localhost:9090 --exclude localhost:1635 --exclude 192.168.0.1 --exclude 127.0.0.1"
+    "linkchecker": "blc -ro --filter-level 0 --exclude swarm.ethereum.org --exclude gateway.ethswarm.org --exclude discord.gg --exclude etherscan.io --exclude awesome.re --exclude swarm.eth --exclude localhost:1633 --exclude localhost:9090 --exclude localhost:1635 --exclude 192.168.0.1 --exclude 127.0.0.1"
   },
   "scripts": {
     "docusaurus": "docusaurus",
