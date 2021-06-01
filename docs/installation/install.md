@@ -158,8 +158,8 @@ Next, install Bee itself, simply choose the appropriate command from the ones be
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_amd64.deb
-sudo dpkg -i bee_0.6.0_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_amd64.deb
+sudo dpkg -i bee_0.6.2_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -167,15 +167,15 @@ sudo dpkg -i bee_0.6.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_armv7.deb
-sudo dpkg -i bee_0.6.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_armv7.deb
+sudo dpkg -i bee_0.6.2_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_arm64.deb
-sudo dpkg -i bee_0.6.0_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_arm64.deb
+sudo dpkg -i bee_0.6.2_arm64.deb
 ```
 </TabItem>
 <TabItem value="centos">
@@ -185,8 +185,8 @@ sudo dpkg -i bee_0.6.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_amd64.rpm
-sudo rpm -i bee_0.6.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_amd64.rpm
+sudo rpm -i bee_0.6.2_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -194,15 +194,15 @@ sudo rpm -i bee_0.6.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_armv7.rpm
-sudo rpm -i bee_0.6.0_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_armv7.rpm
+sudo rpm -i bee_0.6.2_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_arm64.rpm
-sudo rpm -i bee_0.6.0_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_arm64.rpm
+sudo rpm -i bee_0.6.2_arm64.rpm
 ```
 </TabItem>
 <TabItem value="macos">
@@ -284,6 +284,7 @@ Then configure your node, including your p2p port (usually 1634).
 ```yaml
 nat-addr: "123.123.123.123:1634"
 ```
+
 #### Debug API
 
 For a new installation of Bee, the debug API endpoint is not yet exposed for security reasons. To enable the debug API endpoints, set `debug-api-enable` to `true` in your [configuration file](/docs/working-with-bee/configuration) and restart your Bee service.

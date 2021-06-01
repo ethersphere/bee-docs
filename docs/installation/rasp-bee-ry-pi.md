@@ -53,8 +53,8 @@ We must install Bee Clef before Bee. To do so, open the browser (the 🌐 icon) 
 Click `Install > Bee Clef` and scroll down to find the installation commands for Bee Clef **ARM (Raspberry Pi) ARMv7**. These should look something like: 
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.6.1/bee_0.6.0_armv7.deb
-sudo dpkg -i bee_0.6.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_armv7.deb
+sudo dpkg -i bee_0.6.2_armv7.deb
 ```
 
 Click `copy` on the right hand side of the box containing the instructions, then go back to your terminal on your Raspberry Pi, right click with your mouse and paste in the commands. The first one will execute immediately because there is a 'newline' or 'enter' character. 
@@ -131,7 +131,7 @@ Your output should looks something like this:
 
 ```bash
 -rw-r--r--  1 pi   pi       3523 Mar  4 22:47 .bashrc
--rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_0.6.0_armv7.deb
+-rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_0.6.2_armv7.deb
 -rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.12_armv7.deb
 drwxr-xr-x  2 pi   pi       4096 Mar  4 22:57 Bookshelf
 ```
@@ -141,7 +141,7 @@ For more information, you can use the `man` utility to read the manual. Type `ma
 Now, let's use the `rm` programme to remove the clutter and delete the `.deb` files we no longer need.
 
 ```bash
-rm bee_0.6.0_armv7.deb
+rm bee_0.6.2_armv7.deb
 ```
 
 The `rm` programme gives no output, so let's check it's dissapeared by checking the contents of the directory. This time we will also you the 'pipe' command, which passes the output of one command to the next, and the `grep` command which searches through the output and only prints lines that match the pattern.

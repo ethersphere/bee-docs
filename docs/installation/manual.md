@@ -17,12 +17,12 @@ To install the binary using our quick install script, run either one of the foll
 
 #### wget
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.6.1 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.6.2 bash
 ```
 
 #### curl
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.6.1 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.6.2 bash
 ```
 
 ### Run Bee
@@ -34,7 +34,7 @@ bee version
 ```
 
 ```
-0.6.0
+0.6.2
 ```
 
 Now your Bee node is installed, you can fund your node with gBZZ join us in the swarm! 🐝 🐝 🐝 🐝 🐝
