@@ -6,7 +6,13 @@ id: feeds
 Swarm feeds cleverly combine [single owner chunks](/docs/dapps-on-swarm/chunk-types) into a data structure which enables you to have static addresses for your mutable content. This means that you can signpost your data for other Bees, and then update at will.
 
 :::info
-Although it's possible to interact with feeds directly, it can be involve a little data juggling and crypto magic. For the easiest route, see [the bee-js feeds functionality](/docs/dapps-on-swarm/bee-js) and [swarm-cli](/docs/working-with-bee/bee-tools), or for the super 1337, share your implementations in other languages in the [#develop-on-swarm](https://discord.gg/C6dgqpxZkU) channel of our [Discord Server](https://discord.gg/wdghaQsGq5).
+Although it's possible to interact with feeds directly, it can involve
+a little data juggling and crypto magic. For the easiest route, see
+[the bee-js feeds functionality](/docs/dapps-on-swarm/bee-js) and
+[swarm-cli](/docs/working-with-bee/bee-tools), or for the super 1337,
+share your implementations in other languages in the
+[#develop-on-swarm](https://discord.gg/C6dgqpxZkU) channel of our
+[Discord Server](https://discord.gg/wdghaQsGq5).
 :::
 
 ### What are Feeds?

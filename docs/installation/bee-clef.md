@@ -127,7 +127,7 @@ systemctl status bee-clef
      Active: active (running) since Fri 2020-11-20 23:45:16 GMT; 1min 29s ago
 ```
 
-And if you want to follow it's logs, you can use:
+And if you want to follow its logs, you can use:
 ```bash
 journalctl -f -u bee-clef.service
 ```
