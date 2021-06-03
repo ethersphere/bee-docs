@@ -7,11 +7,11 @@ The swarm comprises the sum total of all storage space provided by all of our no
 
 ### Fund your node's wallet.
 
-To start up your node, you will already have provided your node with gETH for gas and gBZZ which was transferred into your chequebook when your node was initialised and will be used to interact with other nodes using the *SWAP* protocol. In order to access more funds to buy batches of stamps, go to the [#faucet](https://discord.gg/kfKvmZfVfe) channel on our [Discord Server](https://discord.gg/wdghaQsGq5).
+To start up your node, you will already have provided your node with gETH for gas and gBZZ which was transferred into your chequebook when your node was initialised and will be used to interact with other nodes using the *SWAP* protocol. In order to access more funds to buy batches of stamps, your wallet must be funded with gBZZ. The easiest way to acheive this is to withdrawal funds from your chequebook.
 
-`/faucet stamps 0xabeecde123...`
-
-You must *type* the commands, copy and paste will not work.
+```bash
+curl -XPOST "http://localhost:1635/chequebook/withdraw/?amount=1000"
+```
 
 ## Purchase a Batch of Stamps
 
