@@ -350,7 +350,8 @@ brew services restart swarm-bee
 
 ## Fund Your Bee
 
-In order to deploy it's chequebook and interact with the swarm, your Bee needs gBZZ and gETH.
+In order to deploy its chequebook and interact with the swarm, your
+Bee needs gBZZ and gETH.
 
 First, find out your Ethereum address.
 

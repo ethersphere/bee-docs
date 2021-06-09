@@ -8,7 +8,15 @@ To fully connect to the swarm, your Bee node needs to be able to both send and r
 Here at Swarm, every Bee counts! To make sure all Bees can join the swarm, below you will find a detailed guide to navigating your way through your network and making out into the wild so you can buzz around with the crowd and maximise your chances of earning those gBZZs. If you still have problems, please join us in our [Discord server](https://discord.gg/wdghaQsGq5) and we'll help you find the way! 🐝 🐝 🐝 🐝 🐝
 
 :::info
-To ensure your Bee has the best chance of particpating in the Swarm, you must ensure your Bee is able to handle **both incoming and outgoing connections from the global internet to it's p2p port - usually `1634`**. See below for a detailed guide on how to make sure this is the case, or for the 1337: check your `http://localhost:1635/addresses` to see which public ip and port libp2p is advertising and verify it's connectivity to the rest of the internets! You may need to alter your Bee nodes `nat-addr` configuration. 🤓
+To ensure your Bee has the best chance of particpating in the Swarm,
+you must ensure your Bee is able to handle **both incoming and
+outgoing connections from the global internet to its p2p port -
+usually `1634`**. See below for a detailed guide on how to make sure
+this is the case, or for the 1337: check your
+`http://localhost:1635/addresses` to see which public ip and port
+libp2p is advertising and verify its connectivity to the rest of the
+internets! You may need to alter your Bee nodes `nat-addr`
+configuration. 🤓
 :::
 
 ### Networking Basics

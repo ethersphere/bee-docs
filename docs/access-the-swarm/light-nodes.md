@@ -17,7 +17,10 @@ At present, light mode represents a pragmatic and elegant approach to improving 
 
 In general, *light mode* may be thought of as simply not participating in the activity of forwarding or storing chunks for other members of the swarm, these nodes are strictly consumers, who will pay gBZZ in return for services rendered by *full nodes* contributing towards moving data around the network.
 
-This means that, although the node will participate in the pull syncing protocol by filling up it's local storage with the chunks closets to it's overlay address, the node will not serve these chunks to other peers.
+This means that, although the node will participate in the pull
+syncing protocol by filling up its local storage with the chunks
+closets to its overlay address, the node will not serve these chunks
+to other peers.
 
 Additionally, a light node will not participate in the forwarding protocol, as it will not forward chunks to peers closer to the destination address.
 

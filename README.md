@@ -8,22 +8,27 @@ You must use **node 14** or above. We recommend [nvm](https://github.com/nvm-sh/
 
 ### Installation
 
+After the first checkout, or when the dependencies are updated in
+`package.json`, you need to run:
+
 ```
-$ npm i
+npm install
 ```
 
 ### Local Development
 
 ```
-$ npm start
+npm start
 ```
 
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
+This command starts a local development server and opens up a browser
+window. Most changes are reflected live without having to restart the
+server.
 
 ### Build
 
 ```
-$ npm run build
+npm run build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.

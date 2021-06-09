@@ -43,7 +43,16 @@ nat-addr: "123.123.123.123:1634"
 
 ### LevelDB Open File Descriptors Limit
 
-Bee is designed to work on a lot of different hardware. To facilitate the exploration of this during our beeta phase, we have given node operators access to leveldb's `--db-open-files-limit`. This helps determine the speed with which Bee can read and write to it's database, and therefore it's efficiency in forwarding and serving chunks. Some say setting this to much more than the default 200 leads to a much enhanced ability to participate in the swarm and get those gBZZ! Share your experience in the #node-operators channel of our [Discord server](https://discord.gg/wdghaQsGq5) to help us make this process more automated in the future!
+Bee is designed to work on a lot of different hardware. To facilitate
+the exploration of this during our beta phase, we have given node
+operators access to leveldb's `--db-open-files-limit`. This influences
+the speed with which Bee can read and write to its database, and
+therefore its performance in forwarding and serving chunks. Some say
+setting this to much more than the default 200 leads to a much
+enhanced ability to participate in the swarm and to get those gBZZ!
+Share your experience in the #node-operators channel of our [Discord
+server](https://discord.gg/wdghaQsGq5) to help us make this process
+more automated in the future!
 
 ### ENS Endpoint
 
