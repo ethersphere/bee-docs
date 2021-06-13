@@ -215,7 +215,7 @@ Ok! We're all set! Let's restart Bee and watch our logs as the chequebook transa
 systemctl restart bee
 ```
 
-There are many other configuration options available to fine tune Bee. Please check out the [configuration](/docs/docs/working-with-bee/configuration) section of the docs for more info.
+There are many other configuration options available to fine tune Bee. Please check out the [configuration](/docs/working-with-bee/configuration) section of the docs for more info.
 
 Now, in your other terminal window where Bee's logs are still being output, you should start to see transactions being submitted by Bee to the blockchain and processed. Eventually Bee will begin to connect to other Bee 'peers' in the Swarm.
 
