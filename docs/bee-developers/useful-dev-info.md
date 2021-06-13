@@ -7,7 +7,7 @@ Welcome to the Dev area! We love PR's! 🐝
 
 We would would love you to get involved with our [Github repo](https://github.com/ethersphere/bee).
 
-All the action can be found in our [Discord Server](https://discord.gg/wdghaQsGq5). Sign up and get involved with our buzzing hive of daily dev chat.
+All the action can be found on our [Discord Server](https://discord.gg/wdghaQsGq5). Sign up and get involved with our buzzing hive of daily dev chat.
 
 If you would like to contribute, please read the [coding guidelines](https://github.com/ethersphere/bee/blob/master/CODING.md) before you get started.
 
@@ -21,7 +21,7 @@ To check if two nodes are connected and to see the round trip time for message e
 curl localhost:1835/addresses
 ```
 
-Make sure that Debug API is enabled and address configured as in examples above.
+Make sure that Debug API is enabled and addresses configured as in examples above.
 
 And use that address in the Debug API call on another node, for example, local node 1:
 

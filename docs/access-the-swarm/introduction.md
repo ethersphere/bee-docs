@@ -3,7 +3,7 @@ title: Introduction
 id: introduction
 ---
 
-As well as earning gBZZ and supporting the network, Bee is our entrypoint to Swarm's unstoppable data storage and distribution system. Swarm is a distributed system designed to work together with smart contracts to enable the development and infrastructure for full service applications running entirely on the decentralised web.
+As well as earning gBZZ and supporting the network, Bee is our entrypoint to Swarm's unstoppable data storage and distribution system. Swarm is a distributed system designed to work together with smart contracts, powering the infrastructure that enables the development of full service applications running entirely on the decentralised web.
 
 Here's just a few of the amazing things you can do with Bee!
 
@@ -17,7 +17,7 @@ Find out how to [upload whole directories](/docs/access-the-swarm/upload-a-direc
 
 ### Host Your Website on the Decentralised Web
 
-Swarm is an distributed international network of nodes that provides hosting for your unstoppable websites. See this guide to [hosting your website on swarm](/docs/access-the-swarm/host-your-website)
+Swarm is a distributed international network of nodes that provides hosting for your unstoppable websites. See this guide to [hosting your website on swarm](/docs/access-the-swarm/host-your-website)
 
 ### Sync With the Network
 

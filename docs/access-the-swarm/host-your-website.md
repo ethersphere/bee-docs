@@ -4,7 +4,7 @@ id: host-your-website
 ---
 
 :::tip
-Comfortable with nodeJS and javascript? Check out [swarm-cli](/docs/working-with-bee/bee-tools), a command line tool you can use to easily interact with your Bee node!
+Comfortable with nodeJS and JavaScript? Check out [swarm-cli](/docs/working-with-bee/bee-tools), a command line tool you can use to easily interact with your Bee node!
 :::
 
 Bee treats ENS as a first class citizen, wherever you can use a Swarm reference, you can also use an ENS domain where the `content` ENS Resolver record is set to be a `bzz://` reference.
@@ -21,7 +21,7 @@ In order to resolve ENS names using your API endpoints, you must specify a valid
 bee start --resolver-options "https://cloudflare-eth.com"
 ```
 
-If specifying using your `bee.yaml` configuration file, the syntax is as follows.
+If specifying using your `bee.yaml` configuration file, the syntax is as follows:
 
 ```bash
 resolver-options: [ "https://cloudflare-eth.com" ]
@@ -32,7 +32,7 @@ Once you have restarted your node, you should be able to see the Swarm homepage 
 [http://localhost:1633/bzz/swarm.eth/](http://localhost:1633/bzz/swarm.eth/)
 
 :::info
-Use the `resolver-options` flag to point the bee resolver to any ENS compatible smart-contract on any EVM compatible chain
+Use the `resolver-options` flag to point the Bee resolver to any ENS compatible smart-contract on any EVM compatible chain
 :::
 :::warn
 Make sure you trust the gateway you are interacting with! To ensure that you are retrieving the correct content, run your own ENS resolver and Bee node.
@@ -48,7 +48,7 @@ for more information.
 
 This time we will also include the `Swarm-Index-Document` header set to the `index.html`. This will cause Bee to serve each directories `index.html` file as default when browsing to the directory root `/` url. We will also provide a custom error page, using the `Swarm-Error-Document` header.
 
-In the case that your website is a single page app, where you would like to direct to the javascript history api powered router, you may provide the `index.html` page for both settings.
+In the case that your website is a single page app, where you would like to direct to the JavaScript history API powered router, you may provide the `index.html` page for both settings.
 
 ```bash
 curl \
@@ -75,25 +75,25 @@ Press 'Set' next to your resolver record.
 
 ![alt text](/img/ens-1.png "Press set resolver.")
 
-Choose the public resolver.
+Select 'Use Public Resolver'.
 
-![alt text](/img/ens-2.png "Choose the public resolver.")
+![alt text](/img/ens-2.png "Use Public Resolver.")
 
-Press add a record.
+Select '+' to add a record.
 
 ![alt text](/img/ens-3.png "Press add a record.")
 
-Choose the Content Record type from the drop down menu.
+Choose the 'Content' record type from the drop down menu.
 
 ![alt text](/img/ens-4.png "Choose the content record type from the drop down menu.")
 
-Add the Swarm reference you created earlier and press 'save'.
+Add the Swarm reference you created earlier and press 'Save'.
 
-![alt text](/img/ens-5.png "Add the Swarm reference you created earlier and press 'save'.")
+![alt text](/img/ens-5.png "Add the Swarm reference you created earlier and press 'Save'.")
 
 Verify the Content Record has been created!
 
-![alt text](/img/ens-6.png "Add the Swarm reference you created earlier.")
+![alt text](/img/ens-6.png "Verify the Content Record has been created.")
 
 Done! 👏 
 
