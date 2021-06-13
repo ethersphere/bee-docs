@@ -3,14 +3,14 @@ title: Upload a Directory
 id: upload-a-directory
 ---
 
-It is possible to use Bee to upload directories of files at once. 
+It is possible to use Bee to upload directories of files all at once. 
 
 :::tip
-Comfortable with nodeJS and javascript? Check out [swarm-cli](https://github.com/ethersphere/swarm-cli), a command line tool you can use to easily interact with your Bee node!
+Comfortable with nodeJS and JavaScript? Check out [swarm-cli](https://github.com/ethersphere/swarm-cli), a command line tool you can use to easily interact with your Bee node!
 :::
 
 :::info
-If an uploaded directory contain an `index.html` file. When you navigate to the directory in a web browser, it will automatically be served to users from our [Swarm gateways](https://gateway.ethswarm.org) as if it were a website hosted by a normal web server. Use this feature to host your unstoppable website on Swarm!
+If an uploaded directory contains an `index.html` file, when you navigate to the directory in a web browser it will automatically be served to users from our [Swarm gateways](https://gateway.ethswarm.org) as if it were a website hosted by a normal web server. Use this feature to host your unstoppab le website on Swarm!
 :::
 
 This feature makes use of the [tar](https://www.gnu.org/software/tar/) command line utility to package the directory into a single file that can then uploaded to the Bee API for processing and distributed into the swarm for later retrieval.

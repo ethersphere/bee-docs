@@ -3,7 +3,7 @@ title: Community
 id: community
 ---
 
-Swarm is all about community. We want to make sure you have the best possible experience as you join and enjoy being a part of the new internet.
+Swarm is all about community. We want to make sure you have the best possible experience as you join and enjoy being a part of the new Internet.
 
 Swarm has a vibrant community of wonderful individuals who are eager to answer any questions and graciously welcome you to our swarm.
 

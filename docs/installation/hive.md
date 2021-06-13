@@ -4,10 +4,10 @@ id: hive
 ---
 
 :::tip
-We recommend even our most 1337 readers go through a [single installation](/docs/installation/install) first to get a flavour of Bee, and to understand the nuances of the implementations. 👾
+We recommend even our most 1337 readers go through a [single installation](/docs/installation/install) first to get a taste of Bee, and to understand the nuances of the implementations. 👾
 :::
 
-Because of how the swarm is structured, we recommend that users wishing to scale up their Bee operation, or set up a commercial Bee hive should seek to run many instances of Bee simulataneously. Read <a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a>  for more information on how the swarm comes together.
+Because of how the Swarm is structured, we recommend that users wishing to scale up their Bee operation, or set up a commercial Bee hive should seek to run many instances of Bee simulataneously. Read <a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a>  for more information on how the Swarm comes together.
 
 Swarm provides tooling to help you install many Bees at once.
 
@@ -17,7 +17,7 @@ Up to date [Docker images for Bee and Bee Clef](/docs/installation/docker) are p
 
 ### Docker-Compose
 
-It becomes easier to run multiple Bee nodes with `docker-compose`. Check out the Docker-Compose section of the [Docker README](https://github.com/ethersphere/bee/tree/master/packaging/docker).
+It becomes easier to run multiple Bee nodes with `docker-compose`. Check out the Docker compose section of the [Docker README](https://github.com/ethersphere/bee/tree/master/packaging/docker).
 
 ### Helm
 

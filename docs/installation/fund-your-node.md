@@ -17,4 +17,4 @@ Here you must **type** (not copy paste) the following, replacing the address wit
 
 If you have problems, please let us know by making a post in the [#faucet](https://discord.gg/kfKvmZfVfe) channel, we will do our best to provide tokens to everyone. 
 
-Transactions may take a while to complete, please be patient. We're also keen for you to join us in the swarm, and indeed you soon will! 🐝 &nbsp 🐝 &nbsp 🐝
+Transactions *may* take a while to complete, please be patient. We're also keen for you to join us in the Swarm, and indeed you soon will! 🐝 🐝 🐝

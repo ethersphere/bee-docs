@@ -3,7 +3,7 @@ title: Upload and Download Files
 id: upload-and-download
 ---
 
-When you upload your files to the swarm, they are split into 4kb chunks and then distributed to nodes in the network that are responsible for storing and serving these parts of your content. Each chunk has a *postage stamp* stuck to it which attaches a value in gBZZ to that chunk which you agree to burn when buying the batch. This signifies to storage nodes that this data is important, and supposed to be retained in the *DISC*.
+When you upload your files to the Swarm, they are split into 4kb chunks and then distributed to nodes in the network that are responsible for storing and serving these parts of your content. Each chunk has a *postage stamp* stuck to it which attaches a value in gBZZ to that chunk which you agree to *burn* when buying the batch. This signifies to storage nodes that this data is important, and supposed to be retained in the Distributable Immutable Store of Chunks *(DISC)*.
 
 ## Overview
 
@@ -11,13 +11,13 @@ To upload data to Swarm, you must perform the following steps.
 
 1. Fund your node's wallet with gBZZ.
 2. Purchase a *batch* of stamps and burn your gBZZ.
-3. Wait for the batch to propogate into the network.
+3. Wait for the batch to propagate into the network.
 4. Upload your content, specifying the *batch id* so that Bee can attach stamps to your chunks.
 5. Download your content using your content's hash.
 
 ## Purchasing Your Batch of Stamps
 
-In order to upload your data to swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
+In order to upload your data to Swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
 
 ### Upload
 
@@ -25,7 +25,6 @@ Once your Bee node is running, a HTTP API is enabled for you to interact with. T
 
 First, let's check to see if the API is running as expected...
 
-In order to upload your data to swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive)
 ```bash
 curl http://localhost:1633
 ```
@@ -36,7 +35,7 @@ Ethereum Swarm Bee
 
 Once running, a file can be uploaded by making an HTTP POST request to the `files` endpoint of the Bee API.
 
-Here, you must specify your *batch id* in the Swarm-Postage-Batch-Id header as follows.
+Here, you must specify your *batch id* in the `Swarm-Postage-Batch-Id` header as follows.
 
 ```bash
 curl -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -F file=@bee.jpg http://localhost:1633/bzz
@@ -49,10 +48,10 @@ curl --data-binary @bee.jpg  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea
 ```
 
 :::danger
-Data uploaded to the swarm is always public. In Swarm, sensitive files must be [encrypted](/docs/access-the-swarm/store-with-encryption) before uploading to ensure their contents always remains private.
+Data uploaded to the Swarm is always public. In Swarm, sensitive files must be [encrypted](/docs/access-the-swarm/store-with-encryption) before uploading to ensure their contents always remains private.
 :::
 
-When succesful, a json formatted response will be returned, containing a **swarm reference** or **hash** which is the *address* of the uploaded file, for example:
+When succesful, a JSON formatted response will be returned, containing a **Swarm reference** or **hash** which is the *address* of the uploaded file, for example:
 
 ```json
 {"reference":"042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4"}
@@ -71,7 +70,7 @@ Once your file has been **completely synced with the network**, you will be able
 
 Once your file is uploaded into Swarm, it can be retrieved with a simple HTTP GET request.
 
-Substitute the *hash* in the last part of the url to be the reference to your own data.
+Substitute the *hash* in the last part of the URL with the reference to your own data.
 
 ```bash
 curl -OJ http://localhost:1633/bzz/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4
