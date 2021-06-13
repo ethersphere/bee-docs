@@ -84,7 +84,7 @@ To do so, we can send a `POST` request including the swarm reference to the file
 
 ```bash
 curl -XPOST http://localhost:1633/pin/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
-``
+```
 
 ```json
 {"message":"OK","code":200}

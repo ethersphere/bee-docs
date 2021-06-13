@@ -9,7 +9,7 @@ When you are uploading data to Swarm, it can take some time until this is comple
 A tag identifier is automatically created for you on each upload. You can find the tag in the `Swarm-Tag` header response. You can view this header response with curl when passing the `--verbose` flag to an upload:
 
 ```console
-curl --data-binary @bee.jpg -verbose  "http://localhost:1633/files?name=bee.jpg"
+curl --data-binary @bee.jpg --verbose  "http://localhost:1633/files?name=bee.jpg"
 ```
 
 ### Generate the tag manually
