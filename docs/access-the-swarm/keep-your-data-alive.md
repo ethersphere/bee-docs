@@ -10,7 +10,7 @@ The Swarm comprises the sum total of all storage space provided by all of our no
 To start up your node, you will already have provided your node with gETH for gas and gBZZ which was transferred into your chequebook when your node was initialised. This will be used to interact with other nodes using the *SWAP* protocol. In order to access more funds to buy batches of stamps, your *wallet* must be funded with gBZZ. The easiest way to acheive this is to withdraw funds from your chequebook:
 
 ```bash
-curl -XPOST "http://localhost:1635/chequebook/withdraw/?amount=1000"
+curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000"
 ```
 
 ## Purchase a Batch of Stamps
@@ -65,4 +65,4 @@ curl localhost:1635/chainstate
 
 Shows the current price per chunk per block in GPLUR, the smallest unit of GBZZ.
 
-Soon, functionality will be added to *top up* your batches balance. For now, you must reupload content with a newly created *Stamp Batch ID*.
+Soon, functionality will be added to *top up* your batch's balance. For now, you must reupload content with a newly created *Stamp Batch ID*.

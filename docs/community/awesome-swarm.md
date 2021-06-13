@@ -23,7 +23,7 @@ https://github.com/ethersphere/bee-js
 
 #### Contracts
 
-https://github.com/ethersphere/swap-swear-swindle
+https://github.com/ethersphere/swap-swear-and-swindle
 https://github.com/ethersphere/storage-incentives
 
 #### The Book of Swarm
@@ -58,6 +58,6 @@ This is community generated software and come no guarantees. Use at your own ris
 - https://github.com/DigiDr/swarm-docker-python-tools
 - https://github.com/mfw78/apiarist
 - https://github.com/nnnggel/swam-base
-- https://github.com/jmozah/swarm-crawler
+- https://github.com/jmozah/bee-crawler
 - https://github.com/beejeez/beejeez 👀
 
