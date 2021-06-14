@@ -118,7 +118,7 @@ that has not been accessed recently to make room for new chunks.
 
 :::info
 For more info on how chunks are distributed, persisted and stored within the network, read
-<a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
+<a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 :::
 
 To keep this content alive, your Bee node can be configured to refresh this content when it is

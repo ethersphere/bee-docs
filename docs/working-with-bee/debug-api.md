@@ -46,7 +46,7 @@ curl -X GET http://localhost:1635/topology | jq
 In this example, our node is beginning to form a healthy network. We hope to see our node adding and
 connecting to nodes in as many bins as possible. Learn more about promiximity order bins and how your
 Bee node becomes part of the ordered p2p network in
-<a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
+<a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 
 ```json
 {

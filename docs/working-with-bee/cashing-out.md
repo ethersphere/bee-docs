@@ -15,7 +15,7 @@ PLEASE! Do not cash out your cheques too regularly! Once a week is more than suf
 
 :::info
 Learn more about how SWAP and other accounting protocols work by reading
-<a href="/the-book-of-swarm-viktor-tron-v1.0-pre-release7.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
+<a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 :::
 
 Bee contains a rich set of features to enable you to query the current accounting state of your node. First, let's query our node's current balance by sending a POST request to the balances endpoint.
