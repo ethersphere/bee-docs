@@ -9,20 +9,15 @@ Keep a close eye on the [#bee-node-updates](https://discord.gg/vQcngMzZ9c) chann
 Bee sure to [backup](/docs/working-with-bee/backups) your clef key material and [cashout your cheques](/docs/working-with-bee/cashing-out) to make sure your gBZZs are safe before applying updates.
 :::
 
+### Upgrading from a testnet 0.6.xs series to a testnet 1.0-rc series
 
-### Upgrading from 0.5.x Series to 0.6.x
+Bee 1.0-rc contains a few breaking changes which mean a database migration must take place.
 
-Bee 0.6.2 contains a few breaking changes which mean a database migration must take place. We also intoduce [postage stamps](/docs/access-the-swarm/keep-your-data-alive) which must be attached to chunks of data so that they will be retained in the Swarm network.
-
-:::info
-Please take note that nodes which deployed their chequebook with bee v0.5.0 will have to be started with the --transaction TXHASH flag where TXHASH is any Ethereum transaction on goerli network sent from the bee node's Ethereum address. The hash of the chequebook deployment transaction can be used for this and can be looked up on etherscan. For nodes which first started with v0.5.1 or higher no action is necessary, as their chequebook deployment transaction will be automatically picked-up by the Bee node. 
-:::
-
-As part of these changes, if you have any **locally pinned content**, this must be manually migrated to the new data structure expected by the network of 0.6.2 clients, see below for information on how to proceed. 
+As part of these changes, if you have any **locally pinned content**, this must be manually migrated to the new data structure expected by the network of 1.0 clients, see below for information on how to proceed. 
 
 If you *do not* have any locally pinned content, your migration will be automatic and your update will proceed as normal.
 
-To check if a 0.5.x has pinned content, query the `pin` api endpoint as follows:
+To check if a 0.6 node has pinned content, query the `pin` api endpoint as follows:
 
 ```bash
 curl -s localhost:1633/pin/chunks | jq ".chunks | length"
@@ -41,10 +36,10 @@ To update **without pinned content:**
 1. Optionally, [cashout your node's cheques](/docs/working-with-bee/cashing-out) to make sure your gBZZs are safe. If you have cashed out recently, you can skip this step.
 2. [Backup your Bee](/docs/working-with-bee/backups) data, especially your keys folder!
 3. Upgrade your node, as you normally would (see below).
-4. Adjust your configuration. Several configuration parameters have changed in 0.6.x - If you wish to continue running as a full node, you must set the new `full-node` flag to `true`. check out the [configuration](/docs/working-with-bee/configuration) guide for more info on how to update your configuration.
+4. Adjust your networkID in the configuration from `1` to `10` (the new networkID for the testnet). Check out the [configuration](/docs/working-with-bee/configuration) guide for more info on how to update your configuration.
 5. Restart your node.
 
-Your Bee should start up as normal, and begin to connect to other Bees that are running Bee 0.6.2 or later.
+Your Bee should start up as normal, and begin to connect to other Bees that are running Bee 1.0 or later.
 
 #### Manual Migration Procedure
 
@@ -53,7 +48,7 @@ Your Bee should start up as normal, and begin to connect to other Bees that are 
 3. If you have pinned data, Download all your pinned data. Please use these to download all your data ready for re-upload with [postage stamps](/docs/access-the-swarm/keep-your-data-alive).
 4. Carefully, delete your `localstorage` folder **only**. *DO NOT DELETE* your `keys` or `statestore` folder. Your `localstorage` folder can be located by consulting your Bee's `data-dir` configuration parameter. If you are using Docker, please delete just the contents of the folder.
 5. Upgrade your node, as you normally would (see below).
-6. Adjust your configuration. Several configuration parameters have changed in 0.6.x - If you wish to continue running as a full node, you must set the new `full-node` flag to `true`. check out the [configuration](/docs/working-with-bee/configuration) guide for more info on how to update your configuration.
+6. Adjust your networkID in the configuration from `1` to `10` (the new networkID for the testnet). Check out the [configuration](/docs/working-with-bee/configuration) guide for more info on how to update your configuration.
 7. Restart your node.
 
 Your Bee should start up as normal, and begin to connect to other Bees that are running Bee 0.6.2 or later.
