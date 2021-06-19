@@ -9,9 +9,9 @@ Keep a close eye on the [#bee-node-updates](https://discord.gg/vQcngMzZ9c) chann
 Bee sure to [backup](/docs/working-with-bee/backups) your clef key material and [cashout your cheques](/docs/working-with-bee/cashing-out) to make sure your gBZZs are safe before applying updates.
 :::
 
-### Upgrading from a testnet 0.6.xs series to a testnet 1.0-rc series
+### Upgrading from a testnet 0.6.xs series to a testnet 1.0-rc3 node
 
-Bee 1.0-rc contains a few breaking changes which mean a database migration must take place.
+Bee 1.0-rc3 contains a few breaking changes which mean a database migration must take place.
 
 As part of these changes, if you have any **locally pinned content**, this must be manually migrated to the new data structure expected by the network of 1.0 clients, see below for information on how to proceed. 
 
