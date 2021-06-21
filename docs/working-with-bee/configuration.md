@@ -133,9 +133,9 @@ This produces the following file contents, showing the default configuration of 
 
 ```yaml
 api-addr: :1633
+block-hash: ""
 block-time: "15"
-bootnode:
-- /dnsaddr/bootnode.ethswarm.org
+bootnode: []
 bootnode-mode: false
 cache-capacity: "1000000"
 clef-signer-enable: false
@@ -153,19 +153,22 @@ full-node: false
 gateway-mode: false
 global-pinning-enable: false
 help: false
+mainnet: false
 nat-addr: ""
-network-id: "1"
+network-id: "10"
 p2p-addr: :1634
 p2p-quic-enable: false
 p2p-ws-enable: false
 password: ""
 password-file: ""
-payment-early: "1000000000000"
-payment-threshold: "10000000000000"
-payment-tolerance: "10000000000000"
+payment-early: "10000000"
+payment-threshold: "100000000"
+payment-tolerance: "100000000"
 postage-stamp-address: ""
+price-oracle-address: ""
 resolver-options: []
 standalone: false
+swap-deployment-gas-price: ""
 swap-enable: true
 swap-endpoint: ws://localhost:8546
 swap-factory-address: ""
@@ -176,6 +179,7 @@ tracing-endpoint: 127.0.0.1:6831
 tracing-service-name: bee
 transaction: ""
 verbosity: info
+warmup-time: 20m0s
 welcome-message: ""
 ```
 
@@ -341,6 +345,10 @@ Set this to `true` to disable a set of sensitive features in the API to ensure t
 
 Enables the Global Pinning functionality when set to `true`.
 
+#### --mainnet
+
+*default* `false`
+
 #### --nat-addr
 
 *default* `""`
@@ -349,9 +357,9 @@ Sets the expected public IP. Normally this is generated automatically, but in ce
 
 #### --network-id
 
-*default* `1`
+*default* `10`
 
-The network ID for which to accept new connections. Set to 1 for mainnet, 2 for testnet.
+The network ID for which to accept new connections. Set to 1 for mainnet, 10 for testnet.
 
 #### --p2p-addr
 
