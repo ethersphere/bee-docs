@@ -9,6 +9,11 @@ Keep a close eye on the [#bee-node-updates](https://discord.gg/vQcngMzZ9c) chann
 Bee sure to [backup](/docs/working-with-bee/backups) your clef key material and [cashout your cheques](/docs/working-with-bee/cashing-out) to make sure your BZZs are safe before applying updates.
 :::
 
+### Upgrading to mainnet
+
+Mainnet is a totally new network - you can not upgrade a testnet node to a mainnet node. Please create a new Bee and join us in the swarm for real! 🐝
+
+
 ### Upgrading from a testnet 0.6.xs series to a testnet 1.0-rc series
 
 Bee 1.0-rc contains a few breaking changes which mean a database migration must take place.
