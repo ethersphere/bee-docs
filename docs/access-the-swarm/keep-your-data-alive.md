@@ -65,6 +65,6 @@ In order to make sure your *batch* has sufficient *remaining balance* to be stor
 curl localhost:1635/chainstate
 ```
 
-Shows the current price per chunk per block in GPLUR, the smallest unit of BZZ.
+Shows the current price per chunk per block in PLUR, the smallest unit of BZZ.
 
 Soon, functionality will be added to *top up* your batches balance. For now, you must reupload content with a newly created *stamp batch id*.
