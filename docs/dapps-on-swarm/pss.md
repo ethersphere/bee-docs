@@ -61,7 +61,7 @@ bee start \
     --data-dir=/tmp/bee2 \
     --bootnode="" \
     --p2p-addr=:1834 \
-    --swap-endpoint=wss://goerli.infura.io/ws/v3/your-api-key
+    --swap-endpoint=https://stake.getblock.io/mainnet/?api_key=your-api-key
 ```
 
 We must make a note of the Swarm overlay address, underlay address and public key which are created once each node has started. We find this information from the addresses endpoint of the Debug API.
@@ -93,7 +93,7 @@ bee start \
     --data-dir=/tmp/bee3 \
     --bootnode="" \
     --p2p-addr=:1934 \
-    --swap-endpoint=wss://goerli.infura.io/ws/v3/your-api-key
+    --swap-endpoint=https://stake.getblock.io/mainnet/?api_key=your-api-key
 ```
 
 ```bash

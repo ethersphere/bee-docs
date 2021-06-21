@@ -19,7 +19,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
     --debug-api-enable
 ```
 
@@ -38,7 +38,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
 	  --debug-api-enable
 ```
 
@@ -54,7 +54,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
 	  --debug-api-enable
 ```
 
@@ -105,7 +105,7 @@ There are some important configuration parameters which must be set in order for
 For Bee, amend the following parameters:
 
 ```
-BEE_SWAP_ENDPOINT=wss://goerli.infura.io/ws/v3/your-api-key
+BEE_SWAP_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=your-api-key
 BEE_PASSWORD=my-password
 ```
 

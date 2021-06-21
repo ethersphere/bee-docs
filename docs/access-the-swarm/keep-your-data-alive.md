@@ -25,7 +25,7 @@ When creating a batch you must specify two values, *batch depth* and *amount*.
 
 The *amount* represents the quantity of BZZ that is assigned to this batch. The total amount of BZZ that will be paid for the batch is calulated from this figure and the *batch depth*.
 
-The paid amount forms the *balance* of the *batch*. This *balance* is then slowly depleted as time ticks on and *blocks* are mined on the Goerli blockchain.
+The paid amount forms the *balance* of the *batch*. This *balance* is then slowly depleted as time ticks on and *blocks* are mined on the XDAI blockchain.
 
 ### Batch Depth
 

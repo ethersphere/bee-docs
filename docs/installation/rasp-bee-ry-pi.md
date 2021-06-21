@@ -111,7 +111,7 @@ Here you must **type** (not copy paste) the following, replacing the address wit
 /faucet sprinkle 0xabeeecdef123452a40f6ea9f598596ca8556bd57
 ```
 
-After some time, you should receive a notification indicating your transaction has been successful. The faucet will have made a transfer of XDAI (for gas), and BZZ (so you can interact with the Swarm network). You can check out what's been going on in the blockchain by navigating to [https://goerli.etherscan.io](https://goerli.etherscan.io) and searching your address. All being well, you will see two succesfull transactions.
+After some time, you should receive a notification indicating your transaction has been successful. The faucet will have made a transfer of XDAI (for gas), and BZZ (so you can interact with the Swarm network). You can check out what's been going on in the blockchain by navigating to [https://blockscout.com/xdai/mainnet](https://blockscout.com/xdai/mainnet) and searching your address. All being well, you will see two succesfull transactions.
 
 ## Bee Tidy
 
@@ -190,7 +190,7 @@ systemctl restart bee
 
 To restart the Bee process. You should see some activity in the logs as Bee shuts down and restarts.
 
-Now we need to specify some Bee configuration. In order to access the blockchain, your Bee needs to access an Ethereum blockchain node. We recommend running your own [XDAI Goerli Node](https://XDAI.ethereum.org/), but for now let's take the easy way and sign up to [Infura](https://infura.io). Once you have created an account, go to your dashboard and make a new project (you can call it whatever you'd like to). Then select 'Goerli' from the project's 'endpoints' drop down menu in the 'settings' tab. You should now see a url appear which looks something like `wss://goerli.infura.io/ws/v3/your-api-key`. Keep this open for later.
+Now we need to specify some Bee configuration. In order to access the blockchain, your Bee needs to access an Ethereum blockchain node. We recommend running your own [XDAI Node](https://XDAI.ethereum.org/), but for now let's take the easy way and sign up to [getblock.io](https://getblock.io). Once you have created an account, go to your dashboard and make a new project (you can call it whatever you'd like to). Then use the api key to create your api url as follows `https://stake.getblock.io/mainnet/?api_key=your-api-key`. Keep this open for later.
 
 Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those BZZ cheques from your peers! Type:
 
@@ -204,7 +204,7 @@ Hold down `ctrl` and press `w` to access the `where is?` functionality. Type `sw
 
 ```yaml
 ## swap ethereum blockchain endpoint (default "http://localhost:8545")
-swap-endpoint: wss://goerli.infura.io/ws/v3/your-api-key
+swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
 ```
 
 To save and exit, hold `ctrl` and press `x`, then `y` and finally `enter` to agree to write the file. You can see the different commands that are available listed at the bottom of the screen, for example `^X Exit`.

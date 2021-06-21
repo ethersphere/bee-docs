@@ -90,7 +90,7 @@ curl -XPOST http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451
 {"transactionHash":"0xba7b500e21fc0dc0d7163c13bb5fea235d4eb769d342e9c007f51ab8512a9a82"}
 ```
 
-You may check the status of your transaction using [Goerli Etherscan](https://goerli.etherscan.io/)
+You may check the status of your transaction using [XDAI Blockscout](https://blockscout.com/xdai/mainnet)
 
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
 
@@ -131,9 +131,7 @@ curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
 {"transactionHash":"0x60fd4be6c1db4552ecb5cd3c99f6a4906089277f592593cccd1fee0dbf501085"}
 ```
 
-You may then use Etherscan to track your transaction and make sure it completes successfully.
-
-[https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a`](https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a)
+You may then use [Blockscout](https://blockscout.com/xdai/mainnet) to track your transaction and make sure it completes successfully.
 
 # Managing uncashed cheques
 For the Bee process, the final step of earning BZZ is cashing a cheque. It is worth noting that a cheque is not yet actual BZZs. In Bee, a cheque, just like a real cheque, is a promise to hand over money upon request. In real life, you would present the cheque to a bank. In swarm life, we present the cheque to a smart-contract. Holding on to a swap-cheque is risky; it is possible that the owner of the chequebook has issued cheques worth more BZZ than is contained in their chequebook contract. For this reason, it is important to cash out your cheques every so often. With the set of API endpoints, as offered by Bee, it is possible to develop a script that fully manages the uncashed cheques for you. As an example, we offer you a [very basic script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh), where you can manually cash out all cheques with a worth above a certain value. To use the script:

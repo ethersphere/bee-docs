@@ -19,7 +19,7 @@ Bee runs as default in [Light Node](/docs/access-the-swarm/light-nodes) mode. To
 
 ### Swap Endpoint
 
-In order to access the blockchain, your Bee must be connected to an Ethereum blockchain node on the Goerli network. We recommend running your own [XDAI Goerli Node](https://XDAI.ethereum.org/), but if you prefer, you may also sign up to [Infura's](https://infura.io) API service and set your `wss://goerli.infura.io/ws/v3/your-api-key`
+In order to access the blockchain, your Bee must be connected to an XDAI blockchain node on the XDAI network. We recommend running your own XDAI Node, but if you prefer, you may also sign up to [getblock.io](https://getblock.io) API service and set your url to be `https://stake.getblock.io/mainnet/?api_key=your-api-key`
 
 ### NAT Address
 
@@ -465,7 +465,7 @@ Bee service identifier in tracing spans.
 
 *default* `""`
 
-As a spam prevention measure, for nodes which deployed their chequebook with v0.5.0 or before, specify `transaction` - [the transaction hash of any Ethereum transaction on the Goerli network](http://localhost:3000/docs/FAQ#how-can-i-find-a-transaction-hash-for-the---transaction-configuration-parameter) sent from the Bee node's Ethereum address.
+As a spam prevention measure, for nodes which deployed their chequebook with v0.5.0 or before, specify `transaction` - [the transaction hash of any transaction on the XDAI network](http://localhost:3000/docs/FAQ#how-can-i-find-a-transaction-hash-for-the---transaction-configuration-parameter) sent from the Bee node's Ethereum address.
 
 #### --verbosity
 

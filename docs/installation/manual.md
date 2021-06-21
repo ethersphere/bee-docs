@@ -69,16 +69,16 @@ Password:
 
 ## SWAP Bandwidth Incentives
 
-To participate in the swarm you must include configuration parameters specifying a valid [Goerli Testnet](https://goerli.net/) RPC endpoint. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a RPC provider such as [Infura](https://infura.io/).
+To participate in the swarm you must include configuration parameters specifying a valid [XDAI](https://www.xdaichain.com/) RPC endpoint. You can run your own XDAI node, or use a RPC provider such as [getblock.io](https://getblock.io/).
 
-When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of BZZ (Goerli BZZ tokens) in the chequebook contract so that it can pay other nodes in return for their services.
+When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of BZZ in the chequebook contract so that it can pay other nodes in return for their services.
 
-To find out your Ethereum address, we can simply run our Bee node and point it at the Goerli RPC endpoint.
+To find out your Ethereum address, we can simply run our Bee node and point it at the XDAI RPC endpoint.
 
 ```bash
 bee start \
   --verbosity 5 \
-  --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+  --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
   --debug-api-enable
 ```
 

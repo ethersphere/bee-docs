@@ -241,15 +241,15 @@ full-node: true
 
 #### Blockchain Endpoints
 
-Your Bee node must have access to the Ethereum Goerli testnet blockchain, so that it
+Your Bee node must have access to the XDAI blockchain, so that it
 can interact with and deploy your chequebook contract. You can run your
-[own Goerli node](https://github.com/goerli/testnet) or, use a provider instead - we recommend
-[Infura](https://infura.io/).
+[own XDAI node](https://www.xdaichain.com/) or, use a provider instead - we recommend
+[Getblock](https://getblock.io/).
 
-By default, Bee expects a local Goerli node at `ws://localhost:8545`. To use an Ethereum RPC provider instead, change your configuration as follows.
+By default, Bee expects a local XDAI node at `ws://localhost:8545`. To use an Ethereum RPC provider instead, change your configuration as follows.
 
 ```yaml
-swap-endpoint: wss://goerli.infura.io/ws/v3/your-api-key
+swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
 ```
 
 If you would like to use your node to resolve ENS domain names, you must also provide the endpoint for an Ethereum mainnet RPC provider.
@@ -399,7 +399,7 @@ If too much time has elapsed, you may need to restart your node at this point (s
 
 ## Wait for Initialisation
 
-When first started, Bee must deploy a chequebook to the Goerli blockchain, and sync the postage stamp batch store so that it can check chunks for validity when storing or forwarding them. This can take a while, so please be patient! Once this is completed, you will see Bee starting to add peers and connect to the network.
+When first started, Bee must deploy a chequebook to the XDAI blockchain, and sync the postage stamp batch store so that it can check chunks for validity when storing or forwarding them. This can take a while, so please be patient! Once this is completed, you will see Bee starting to add peers and connect to the network.
 
 While you are waiting for Bee to initalise, this is a great time to [back up your keys](/docs/working-with-bee/backups) so you can keep the tokens you earn safe.
 

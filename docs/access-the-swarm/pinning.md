@@ -129,7 +129,7 @@ First, we must start up our node with the `global-pinning-enable` flag set.
 ```bash
 bee start\
   --verbosity 5 \
-  --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+  --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
   --global-pinning-enable \
   --debug-api-enable
 ```
