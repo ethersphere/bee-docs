@@ -231,6 +231,14 @@ Because Bee has many use cases and may run on many different specifications of h
 
 Bee is a versatile piece of software with diverse use cases. When you start Bee for the first time, please consider changing the following configuration parameters. Read on for more info on how to change the configuration of your software and restart your Bee service.
 
+#### Mainnet Node or Testnet Node
+
+To connect to mainnet, set your `mainnet` flag to `true`.
+
+```yaml
+mainnet: true
+```
+
 #### Full Node or Light Node
 
 Since Bee can take a lot of resources when providing services to the network in exchange for BZZ, a Bee node starts off in Light Node mode by default. To allow your Bee to use your network bandwidth and computing resources to serve the network and start [cashing out](/docs/working-with-bee/cashing-out) cheques, set the `--full-node` flag to `true`.
