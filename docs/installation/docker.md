@@ -19,7 +19,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
     --debug-api-enable
 ```
 
@@ -38,7 +38,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
 	  --debug-api-enable
 ```
 
@@ -54,7 +54,7 @@ docker run\
   --rm -it ethersphere/bee:latest\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
 	  --debug-api-enable
 ```
 
@@ -71,7 +71,7 @@ docker pull ethersphere/bee:beta
 #### Specific Versions
 
 ```bash
-docker pull ethersphere/bee:0.6.2
+docker pull ethersphere/bee:1.0.0
 ```
 
 #### Edge
@@ -91,13 +91,13 @@ Configuration files for Bee and Bee Clef are provided to enable quick and easy i
 First, retrieve the current `docker-compose.yaml` file.
 
 ```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.6.2/packaging/docker/docker-compose.yml
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v1.0.0/packaging/docker/docker-compose.yml
 ```
 
 Next, create a `.env` file using the example file provided. This file will be responsible for storing configuration and secrets for our Bee and Bee Clef applications.
 
 ```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v0.6.2/packaging/docker/env -O .env
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v1.0.0/packaging/docker/env -O .env
 ``` 
 
 There are some important configuration parameters which must be set in order for our projects to work. To affect configuration in the `.env` file, we first remove the `#` at the beginning of the line and then change the value after `=` to our desired config.
@@ -105,7 +105,7 @@ There are some important configuration parameters which must be set in order for
 For Bee, amend the following parameters:
 
 ```
-BEE_SWAP_ENDPOINT=wss://goerli.infura.io/ws/v3/your-api-key
+BEE_SWAP_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=your-api-key
 BEE_PASSWORD=my-password
 ```
 

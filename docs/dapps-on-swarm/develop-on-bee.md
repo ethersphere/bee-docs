@@ -7,7 +7,7 @@ Bee is the first client to work with the swarm network.
 
 ## Setting Up Bee for Developing Dapps
 
-To develop apps on Bee, you might need to adjust the following settings. Check out the brand new [bee-factory](https://github.com/ethersphere/bee-factory) for information on how to run a self contained development environment so you can go wild in swarm without spending all your gBZZ on swap and stamps!
+To develop apps on Bee, you might need to adjust the following settings. Check out the brand new [bee-factory](https://github.com/ethersphere/bee-factory) for information on how to run a self contained development environment so you can go wild in swarm without spending all your BZZ on swap and stamps!
 
 ## Storing Your Dapps Data
 

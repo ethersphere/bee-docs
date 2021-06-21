@@ -5,7 +5,7 @@ id: connectivity
 
 To fully connect to the swarm, your Bee node needs to be able to both send and receive messages from the outside world. Normally, your router will not allow other IP's on the internet to connect, unless you have initiated the connection. In the swarm, we welcome newcomers, as long as they play by the rules! If a node misbehaves, we will simply add it to a list of blocked nodes and refuse future connections from them.
 
-Here at Swarm, every Bee counts! To make sure all Bees can join the swarm, below you will find a detailed guide to navigating your way through your network and making out into the wild so you can buzz around with the crowd and maximise your chances of earning those gBZZs. If you still have problems, please join us in our [Discord server](https://discord.gg/wdghaQsGq5) and we'll help you find the way! 🐝 🐝 🐝 🐝 🐝
+Here at Swarm, every Bee counts! To make sure all Bees can join the swarm, below you will find a detailed guide to navigating your way through your network and making out into the wild so you can buzz around with the crowd and maximise your chances of earning those BZZs. If you still have problems, please join us in our [Discord server](https://discord.gg/wdghaQsGq5) and we'll help you find the way! 🐝 🐝 🐝 🐝 🐝
 
 :::info
 To ensure your Bee has the best chance of particpating in the Swarm,

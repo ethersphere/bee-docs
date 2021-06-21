@@ -7,7 +7,7 @@ The swarm comprises the sum total of all storage space provided by all of our no
 
 ### Fund your node's wallet.
 
-To start up your node, you will already have provided your node with gETH for gas and gBZZ which was transferred into your chequebook when your node was initialised and will be used to interact with other nodes using the *SWAP* protocol. In order to access more funds to buy batches of stamps, your wallet must be funded with gBZZ. The easiest way to acheive this is to withdrawal funds from your chequebook.
+To start up your node, you will already have provided your node with XDAI for gas and BZZ which was transferred into your chequebook when your node was initialised and will be used to interact with other nodes using the *SWAP* protocol. In order to access more funds to buy batches of stamps, your wallet must be funded with BZZ. The easiest way to acheive this is to withdrawal funds from your chequebook.
 
 ```bash
 curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000"
@@ -23,9 +23,9 @@ When creating a batch you must specify two values, *batch depth* and *amount*.
 
 ### Amount
 
-The *amount* represents the quantity of gBZZ that is assigned to this batch. The total amount of gBZZ that will be paid for the batch is calulated from this figure and the *batch depth*.
+The *amount* represents the quantity of BZZ that is assigned to this batch. The total amount of BZZ that will be paid for the batch is calulated from this figure and the *batch depth*.
 
-The paid amount forms the *balance* of the *batch*. This *balance* is then slowly depleted as time ticks on and *blocks* are mined on the Goerli blockchain.
+The paid amount forms the *balance* of the *batch*. This *balance* is then slowly depleted as time ticks on and *blocks* are mined on the XDAI blockchain.
 
 ### Batch Depth
 
@@ -44,7 +44,7 @@ batches. This should be ample to upload quite some data, and to keep
 your files in the Swarm for the forseeable future.
 
 :::warning
-When you purchase a batch of stamps, you agree to burn gBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw gBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits together, read <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
+When you purchase a batch of stamps, you agree to burn BZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw BZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits toXDAIer, read <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 :::
 
 ```bash
@@ -65,6 +65,6 @@ In order to make sure your *batch* has sufficient *remaining balance* to be stor
 curl localhost:1635/chainstate
 ```
 
-Shows the current price per chunk per block in GPLUR, the smallest unit of GBZZ.
+Shows the current price per chunk per block in GPLUR, the smallest unit of BZZ.
 
 Soon, functionality will be added to *top up* your batches balance. For now, you must reupload content with a newly created *stamp batch id*.

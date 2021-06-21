@@ -17,12 +17,12 @@ To install the binary using our quick install script, run either one of the foll
 
 #### wget
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.6.2 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.0.0 bash
 ```
 
 #### curl
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v0.6.2 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.0.0 bash
 ```
 
 ### Run Bee
@@ -34,10 +34,10 @@ bee version
 ```
 
 ```
-0.6.2
+1.0.0
 ```
 
-Now your Bee node is installed, you can fund your node with gBZZ join us in the swarm! 🐝 🐝 🐝 🐝 🐝
+Now your Bee node is installed, you can fund your node with BZZ join us in the swarm! 🐝 🐝 🐝 🐝 🐝
 
 With Bee installed, simply type `bee start` in your Terminal. 
 
@@ -69,16 +69,16 @@ Password:
 
 ## SWAP Bandwidth Incentives
 
-To participate in the swarm you must include configuration parameters specifying a valid [Goerli Testnet](https://goerli.net/) RPC endpoint. You can run your [own Goerli node](https://github.com/goerli/testnet), or use a RPC provider such as [Infura](https://infura.io/).
+To participate in the swarm you must include configuration parameters specifying a valid [XDAI](https://www.xdaichain.com/) RPC endpoint. You can run your own XDAI node, or use a RPC provider such as [getblock.io](https://getblock.io/).
 
-When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of gBZZ (Goerli BZZ tokens) in the chequebook contract so that it can pay other nodes in return for their services.
+When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of BZZ in the chequebook contract so that it can pay other nodes in return for their services.
 
-To find out your Ethereum address, we can simply run our Bee node and point it at the Goerli RPC endpoint.
+To find out your Ethereum address, we can simply run our Bee node and point it at the XDAI RPC endpoint.
 
 ```bash
 bee start \
   --verbosity 5 \
-  --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+  --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
   --debug-api-enable
 ```
 
@@ -86,7 +86,7 @@ The ensuing logs will include your Ethereum addresses, use this to [fund your no
 
 Now, we can run our Bee node and we will start to see Bee creating and waiting for transactions to complete. Please be patient as this might take a while.
 
-Now our chequebook is deployed, and credited with an initial deposit of gBZZ ready to be given to reward our fellow busy Bee nodes for their services. You will also provide services, and be rewarded by your peers for services you provide for them.
+Now our chequebook is deployed, and credited with an initial deposit of BZZ ready to be given to reward our fellow busy Bee nodes for their services. You will also provide services, and be rewarded by your peers for services you provide for them.
 
 ## Join the Swarm
 
@@ -99,7 +99,7 @@ INFO[2020-08-29T11:55:16Z] greeting <Hi I am a very buzzy bee bzzzz bzzz bzz. �
 Now your node will begin to request chunks of data that fall within your *radius of responsibilty* - data that you will then serve to other p2p clients running in the swarm. Your node will then begin to respond to requests for these chunks from other peers, for which you will soon be rewarded in BZZ.
 
 :::tip Incentivisation
-In Swarm, storing chunks of data, serving and forwarding them to other nodes earns you rewards! Follow this guide to learn how to regularly [cashout](/docs/working-with-bee/cashing-out) cheques other nodes send you in return for your services, so that you can get your gBZZ!
+In Swarm, storing chunks of data, serving and forwarding them to other nodes earns you rewards! Follow this guide to learn how to regularly [cashout](/docs/working-with-bee/cashing-out) cheques other nodes send you in return for your services, so that you can get your BZZ!
 :::
 
 Your Bee client has now generated an elliptic curve keypair similar to an Ethereum wallet. These are stored in your [data directory](/docs/working-with-bee/configuration), in the `keys` folder.

@@ -19,7 +19,7 @@ Bee runs as default in [Light Node](/docs/access-the-swarm/light-nodes) mode. To
 
 ### Swap Endpoint
 
-In order to access the blockchain, your Bee must be connected to an Ethereum blockchain node on the Goerli network. We recommend running your own [Geth Goerli Node](https://geth.ethereum.org/), but if you prefer, you may also sign up to [Infura's](https://infura.io) API service and set your `wss://goerli.infura.io/ws/v3/your-api-key`
+In order to access the blockchain, your Bee must be connected to an XDAI blockchain node on the XDAI network. We recommend running your own XDAI Node, but if you prefer, you may also sign up to [getblock.io](https://getblock.io) API service and set your url to be `https://stake.getblock.io/mainnet/?api_key=your-api-key`
 
 ### NAT Address
 
@@ -49,7 +49,7 @@ operators access to leveldb's `--db-open-files-limit`. This influences
 the speed with which Bee can read and write to its database, and
 therefore its performance in forwarding and serving chunks. Some say
 setting this to much more than the default 200 leads to a much
-enhanced ability to participate in the swarm and to get those gBZZ!
+enhanced ability to participate in the swarm and to get those BZZ!
 Share your experience in the #node-operators channel of our [Discord
 server](https://discord.gg/wdghaQsGq5) to help us make this process
 more automated in the future!
@@ -465,7 +465,7 @@ Bee service identifier in tracing spans.
 
 *default* `""`
 
-As a spam prevention measure, for nodes which deployed their chequebook with v0.5.0 or before, specify `transaction` - [the transaction hash of any Ethereum transaction on the Goerli network](http://localhost:3000/docs/FAQ#how-can-i-find-a-transaction-hash-for-the---transaction-configuration-parameter) sent from the Bee node's Ethereum address.
+As a spam prevention measure, for nodes which deployed their chequebook with v0.5.0 or before, specify `transaction` - [the transaction hash of any transaction on the XDAI network](http://localhost:3000/docs/FAQ#how-can-i-find-a-transaction-hash-for-the---transaction-configuration-parameter) sent from the Bee node's Ethereum address.
 
 #### --verbosity
 

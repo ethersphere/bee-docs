@@ -25,7 +25,7 @@ To install Bee you will need to go through the following process.
  1. Set up the external signer for Bee, [Bee Clef](/docs/installation/bee-clef). (Recommended) 
  2. Install Bee and set it up to run as a service.
  3. Configure Bee.
- 4. [fund your node](/docs/installation/fund-your-node) with gETH and gBZZ
+ 4. [fund your node](/docs/installation/fund-your-node) with XDAI and BZZ
  5. Wait for your chequebook transactions to complete and batch store to update.
  6. Check Bee is working.
 
@@ -47,8 +47,8 @@ Because Bee must sign a lot of transactions automatically and quickly, a Bee spe
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_amd64.deb
-sudo dpkg -i bee-clef_0.4.12_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.deb
+sudo dpkg -i bee-clef_0.4.13_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -56,15 +56,15 @@ sudo dpkg -i bee-clef_0.4.12_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_armv7.deb
-sudo dpkg -i bee-clef_0.4.12_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.deb
+sudo dpkg -i bee-clef_0.4.13_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_arm64.deb
-sudo dpkg -i bee-clef_0.4.12_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.deb
+sudo dpkg -i bee-clef_0.4.13_arm64.deb
 ```
 
 </TabItem>
@@ -73,8 +73,8 @@ sudo dpkg -i bee-clef_0.4.12_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_amd64.rpm
-sudo rpm -i bee-clef_0.4.12_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.rpm
+sudo rpm -i bee-clef_0.4.13_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -82,15 +82,15 @@ sudo rpm -i bee-clef_0.4.12_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_armv7.rpm
-sudo rpm -i bee-clef_0.4.12_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.rpm
+sudo rpm -i bee-clef_0.4.13_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_arm64.rpm
-sudo rpm -i bee-clef_0.4.12_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.rpm
+sudo rpm -i bee-clef_0.4.13_arm64.rpm
 ```
 
 </TabItem>
@@ -158,8 +158,8 @@ Next, install Bee itself, simply choose the appropriate command from the ones be
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_amd64.deb
-sudo dpkg -i bee_0.6.2_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_amd64.deb
+sudo dpkg -i bee_1.0.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -167,15 +167,15 @@ sudo dpkg -i bee_0.6.2_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_armv7.deb
-sudo dpkg -i bee_0.6.2_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_armv7.deb
+sudo dpkg -i bee_1.0.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_arm64.deb
-sudo dpkg -i bee_0.6.2_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_arm64.deb
+sudo dpkg -i bee_1.0.0_arm64.deb
 ```
 </TabItem>
 <TabItem value="centos">
@@ -185,8 +185,8 @@ sudo dpkg -i bee_0.6.2_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_amd64.rpm
-sudo rpm -i bee_0.6.2_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_amd64.rpm
+sudo rpm -i bee_1.0.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -194,15 +194,15 @@ sudo rpm -i bee_0.6.2_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_armv7.rpm
-sudo rpm -i bee_0.6.2_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_armv7.rpm
+sudo rpm -i bee_1.0.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_arm64.rpm
-sudo rpm -i bee_0.6.2_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_arm64.rpm
+sudo rpm -i bee_1.0.0_arm64.rpm
 ```
 </TabItem>
 <TabItem value="macos">
@@ -233,7 +233,7 @@ Bee is a versatile piece of software with diverse use cases. When you start Bee 
 
 #### Full Node or Light Node
 
-Since Bee can take a lot of resources when providing services to the network in exchange for gBZZ, a Bee node starts off in Light Node mode by default. To allow your Bee to use your network bandwidth and computing resources to serve the network and start [cashing out](/docs/working-with-bee/cashing-out) cheques, set the `--full-node` flag to `true`.
+Since Bee can take a lot of resources when providing services to the network in exchange for BZZ, a Bee node starts off in Light Node mode by default. To allow your Bee to use your network bandwidth and computing resources to serve the network and start [cashing out](/docs/working-with-bee/cashing-out) cheques, set the `--full-node` flag to `true`.
 
 ```yaml
 full-node: true
@@ -241,15 +241,15 @@ full-node: true
 
 #### Blockchain Endpoints
 
-Your Bee node must have access to the Ethereum Goerli testnet blockchain, so that it
+Your Bee node must have access to the XDAI blockchain, so that it
 can interact with and deploy your chequebook contract. You can run your
-[own Goerli node](https://github.com/goerli/testnet) or, use a provider instead - we recommend
-[Infura](https://infura.io/).
+[own XDAI node](https://www.xdaichain.com/) or, use a provider instead - we recommend
+[Getblock](https://getblock.io/).
 
-By default, Bee expects a local Goerli node at `ws://localhost:8545`. To use an Ethereum RPC provider instead, change your configuration as follows.
+By default, Bee expects a local XDAI node at `ws://localhost:8545`. To use an Ethereum RPC provider instead, change your configuration as follows.
 
 ```yaml
-swap-endpoint: wss://goerli.infura.io/ws/v3/your-api-key
+swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
 ```
 
 If you would like to use your node to resolve ENS domain names, you must also provide the endpoint for an Ethereum mainnet RPC provider.
@@ -260,7 +260,7 @@ resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 
 #### Open File Descriptors
 
-Bee is designed to work on a lot of different hardware configurations. To facilitate the exploration of this, during our beeta phase, we have given node operators access to leveldb's `--db-open-files-limit`. This helps determine the speed with which Bee can read and write to its database, and therefore its efficiency in forwarding and serving chunks. Some say setting this to much more than the default 200 leads to a much enhanced ability to participate in the swarm and get those gBZZ! Share your experience in the #node-operators channel of our [Discord server](https://discord.gg/wdghaQsGq5) to help us make this process more automated in the future.
+Bee is designed to work on a lot of different hardware configurations. To facilitate the exploration of this, during our beeta phase, we have given node operators access to leveldb's `--db-open-files-limit`. This helps determine the speed with which Bee can read and write to its database, and therefore its efficiency in forwarding and serving chunks. Some say setting this to much more than the default 200 leads to a much enhanced ability to participate in the swarm and get those BZZ! Share your experience in the #node-operators channel of our [Discord server](https://discord.gg/wdghaQsGq5) to help us make this process more automated in the future.
 
 ```yaml
 db-open-files-limit: 2000
@@ -351,7 +351,7 @@ brew services restart swarm-bee
 ## Fund Your Bee
 
 In order to deploy its chequebook and interact with the swarm, your
-Bee needs gBZZ and gETH.
+Bee needs BZZ and XDAI.
 
 First, find out your Ethereum address.
 
@@ -391,7 +391,7 @@ head -18 $(brew --prefix)/var/log/swarm-bee/bee.log | grep ethereum
 </TabItem>
 </Tabs>
 
-Once you have determined your Ethereum address, [fund your node](/docs/installation/fund-your-node) with gETH and gBZZ
+Once you have determined your Ethereum address, [fund your node](/docs/installation/fund-your-node) with XDAI and BZZ
 
 :::info
 If too much time has elapsed, you may need to restart your node at this point (see above).
@@ -399,7 +399,7 @@ If too much time has elapsed, you may need to restart your node at this point (s
 
 ## Wait for Initialisation
 
-When first started, Bee must deploy a chequebook to the Goerli blockchain, and sync the postage stamp batch store so that it can check chunks for validity when storing or forwarding them. This can take a while, so please be patient! Once this is completed, you will see Bee starting to add peers and connect to the network.
+When first started, Bee must deploy a chequebook to the XDAI blockchain, and sync the postage stamp batch store so that it can check chunks for validity when storing or forwarding them. This can take a while, so please be patient! Once this is completed, you will see Bee starting to add peers and connect to the network.
 
 While you are waiting for Bee to initalise, this is a great time to [back up your keys](/docs/working-with-bee/backups) so you can keep the tokens you earn safe.
 
@@ -436,6 +436,6 @@ curl -s localhost:1635/peers | jq ".peers | length"
 6
 ```
 
-Perfect! We are accumulating peers, this means you are connected to the network, and ready to start [using Bee](/docs/access-the-swarm/introduction) to [upload and download](/docs/access-the-swarm/upload-and-download) content or host and browse [websites](/docs/access-the-swarm/host-your-website) hosted on the swarm network, and accumulating cheques which you can [cashout to get your gBZZ](/docs/working-with-bee/cashing-out).
+Perfect! We are accumulating peers, this means you are connected to the network, and ready to start [using Bee](/docs/access-the-swarm/introduction) to [upload and download](/docs/access-the-swarm/upload-and-download) content or host and browse [websites](/docs/access-the-swarm/host-your-website) hosted on the swarm network, and accumulating cheques which you can [cashout to get your BZZ](/docs/working-with-bee/cashing-out).
 
 Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝

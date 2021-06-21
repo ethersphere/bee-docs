@@ -8,7 +8,7 @@ Each Bee node is configured to reserve a certain amount of memory on your comput
 Each time a chunk is accessed, it is moved back to the end of the deletion queue, so that regularly accessed content stays alive in the network and is not deleted by a node's garbage collection routine.
 
 :::info
-In order to upload your data to swarm, you must agree to burn some of your gBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
+In order to upload your data to swarm, you must agree to burn some of your BZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
 :::
 
 This, however, presents a problem for content which is important, but accessed seldom requested. In order to keep this content alive, Bee nodes provide a facility to **pin** important content so that it is not deleted.
@@ -129,7 +129,7 @@ First, we must start up our node with the `global-pinning-enable` flag set.
 ```bash
 bee start\
   --verbosity 5 \
-  --swap-endpoint wss://goerli.infura.io/ws/v3/your-api-key \
+  --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
   --global-pinning-enable \
   --debug-api-enable
 ```

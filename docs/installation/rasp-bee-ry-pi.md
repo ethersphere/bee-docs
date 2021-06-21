@@ -53,8 +53,8 @@ We must install Bee Clef before Bee. To do so, open the browser (the 🌐 icon) 
 Click `Install > Bee Clef` and scroll down to find the installation commands for Bee Clef **ARM (Raspberry Pi) ARMv7**. These should look something like: 
 
 ```sh
-wget https://github.com/ethersphere/bee/releases/download/v0.6.2/bee_0.6.2_armv7.deb
-sudo dpkg -i bee_0.6.2_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_armv7.deb
+sudo dpkg -i bee_1.0.0_armv7.deb
 ```
 
 Click `copy` on the right hand side of the box containing the instructions, then go back to your terminal on your Raspberry Pi, right click with your mouse and paste in the commands. The first one will execute immediately because there is a 'newline' or 'enter' character. 
@@ -62,11 +62,11 @@ Click `copy` on the right hand side of the box containing the instructions, then
 You should see some output from the `wget` command which is a Linux utility this is used to download the correct Bee Clef 'package' from Github, where the development of the Bee utilities takes place.
 
 ```bash
-bee-clef_0.4.12_armv7.deb.1           100%[===================================================================>]   9.99M  8.21MB/s    in 1.2s    
+bee-clef_0.4.13_armv7.deb.1           100%[===================================================================>]   9.99M  8.21MB/s    in 1.2s    
 
-2021-05-15 17:34:02 (8.21 MB/s) - ‘bee-clef_0.4.12_armv7.deb’ saved [10473282/10473282]
+2021-05-15 17:34:02 (8.21 MB/s) - ‘bee-clef_0.4.13_armv7.deb’ saved [10473282/10473282]
 
-pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.4.12_armv7.deb
+pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.4.13_armv7.deb
 ```
 
 The other command will be left in your terminal, this uses the `dpkg` utility, the Debian Package Manager to install Bee Clef. Package Managers are used to conveniently install software on Linux systems.
@@ -74,12 +74,12 @@ The other command will be left in your terminal, this uses the `dpkg` utility, t
 Press enter to start the installation process. All being well, you will see some output like this:
 
 ```
-pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.4.12_armv7.deb
+pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.4.13_armv7.deb
 Selecting previously unselected package bee-clef.
 (Reading database ... 98610 files and directories currently installed.)
-Preparing to unpack bee-clef_0.4.12_armv7.deb ...
-Unpacking bee-clef (0.4.12) ...
-Setting up bee-clef (0.4.12) ...
+Preparing to unpack bee-clef_0.4.13_armv7.deb ...
+Unpacking bee-clef (0.4.13) ...
+Setting up bee-clef (0.4.13) ...
 Created symlink /etc/systemd/system/multi-user.target.wants/bee-clef.service → /lib/systemd/system/bee-clef.service.
 ```
 
@@ -101,7 +101,7 @@ learn how to fund your node by visiting our docs at https://docs.ethswarm.org/do
 Once the node's wallet has received the funds it will begin joining the Swarm network.
 ```
 
-Your Bee node needs gBZZ to be able to properly interact with the network. In order to receive these, you will need to sign into our Discord and request your gBZZ test tokens from our #faucet channel using the above Ethereum address.
+Your Bee node needs BZZ to be able to properly interact with the network. In order to receive these, you will need to sign into our Discord and request your BZZ test tokens from our #faucet channel using the above Ethereum address.
 
 Sign into Discord (make an account if you don't have one yet), join our Discord server, complete verification and go to the [#faucet](https://discord.gg/kfKvmZfVfe) channel.
 
@@ -111,7 +111,7 @@ Here you must **type** (not copy paste) the following, replacing the address wit
 /faucet sprinkle 0xabeeecdef123452a40f6ea9f598596ca8556bd57
 ```
 
-After some time, you should receive a notification indicating your transaction has been successful. The faucet will have made a transfer of gETH (for gas), and gBZZ (so you can interact with the Swarm network). You can check out what's been going on in the blockchain by navigating to [https://goerli.etherscan.io](https://goerli.etherscan.io) and searching your address. All being well, you will see two succesfull transactions.
+After some time, you should receive a notification indicating your transaction has been successful. The faucet will have made a transfer of XDAI (for gas), and BZZ (so you can interact with the Swarm network). You can check out what's been going on in the blockchain by navigating to [https://blockscout.com/xdai/mainnet](https://blockscout.com/xdai/mainnet) and searching your address. All being well, you will see two succesfull transactions.
 
 ## Bee Tidy
 
@@ -131,8 +131,8 @@ Your output should looks something like this:
 
 ```bash
 -rw-r--r--  1 pi   pi       3523 Mar  4 22:47 .bashrc
--rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_0.6.2_armv7.deb
--rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.12_armv7.deb
+-rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.0.0_armv7.deb
+-rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.13_armv7.deb
 drwxr-xr-x  2 pi   pi       4096 Mar  4 22:57 Bookshelf
 ```
 
@@ -141,7 +141,7 @@ For more information, you can use the `man` utility to read the manual. Type `ma
 Now, let's use the `rm` programme to remove the clutter and delete the `.deb` files we no longer need.
 
 ```bash
-rm bee_0.6.2_armv7.deb
+rm bee_1.0.0_armv7.deb
 ```
 
 The `rm` programme gives no output, so let's check it's dissapeared by checking the contents of the directory. This time we will also you the 'pipe' command, which passes the output of one command to the next, and the `grep` command which searches through the output and only prints lines that match the pattern.
@@ -151,7 +151,7 @@ ls -la | grep "bee"
 ```
 
 ```bash
--rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.12_armv7.deb
+-rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.4.13_armv7.deb
 ```
 
 Success! The Bee package file is deleted! Note at the command line there *is no undelete*. **With great power comes great resposibility**. Please use your new powers wisely, and only for the good of the Swarm as a whole. ;D
@@ -162,7 +162,7 @@ All that is left now is to delete the Bee package file, since we have completed 
 
 If all has gone to plan, by this point your Bee will have been funded by our faucet and you should bee ready to start up your client.
 
-The `dpkg` package manager has used our `.deb` package file to install Bee and set up the the `systemd` programme which will manage and control our `bee` programme as it runs happily in the background on our computers, mining `gBZZ` and serving and forwarding content to other bees all over the planet! 
+The `dpkg` package manager has used our `.deb` package file to install Bee and set up the the `systemd` programme which will manage and control our `bee` programme as it runs happily in the background on our computers, mining `BZZ` and serving and forwarding content to other bees all over the planet! 
 
 We can now use the `systemctl` utility to interact with `systemd`. For more info, you can type `man systemctl` to read about it.
 
@@ -190,9 +190,9 @@ systemctl restart bee
 
 To restart the Bee process. You should see some activity in the logs as Bee shuts down and restarts.
 
-Now we need to specify some Bee configuration. In order to access the blockchain, your Bee needs to access an Ethereum blockchain node. We recommend running your own [Geth Goerli Node](https://geth.ethereum.org/), but for now let's take the easy way and sign up to [Infura](https://infura.io). Once you have created an account, go to your dashboard and make a new project (you can call it whatever you'd like to). Then select 'Goerli' from the project's 'endpoints' drop down menu in the 'settings' tab. You should now see a url appear which looks something like `wss://goerli.infura.io/ws/v3/your-api-key`. Keep this open for later.
+Now we need to specify some Bee configuration. In order to access the blockchain, your Bee needs to access an Ethereum blockchain node. We recommend running your own [XDAI Node](https://XDAI.ethereum.org/), but for now let's take the easy way and sign up to [getblock.io](https://getblock.io). Once you have created an account, go to your dashboard and make a new project (you can call it whatever you'd like to). Then use the api key to create your api url as follows `https://stake.getblock.io/mainnet/?api_key=your-api-key`. Keep this open for later.
 
-Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those gBZZ cheques from your peers! Type:
+Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those BZZ cheques from your peers! Type:
 
 ```bash
 sudo nano /etc/bee/bee.yaml 
@@ -204,7 +204,7 @@ Hold down `ctrl` and press `w` to access the `where is?` functionality. Type `sw
 
 ```yaml
 ## swap ethereum blockchain endpoint (default "http://localhost:8545")
-swap-endpoint: wss://goerli.infura.io/ws/v3/your-api-key
+swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
 ```
 
 To save and exit, hold `ctrl` and press `x`, then `y` and finally `enter` to agree to write the file. You can see the different commands that are available listed at the bottom of the screen, for example `^X Exit`.

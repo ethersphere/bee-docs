@@ -38,14 +38,14 @@ The "context deadline exceeded" is a non critical warning. It means that a node 
 - If you use "bee start" 
     - you can set it in your bee configuration under --swap-endpoint or BEE_SWAP_ENDPOINT
     - open ~/.bee.yaml
-    - set `swap-endpoint: wss://goerli.infura.io/ws/v3/your-api-key`
+    - set `swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key`
 
 
 - If you use bee.service
     - you can set it in your bee configuration under --swap-endpoint or BEE_SWAP_ENDPOINT
     - open /etc/bee/bee.yaml
     - and then uncomment `swap-endpoint` configuration
-    - and set it to `wss://goerli.infura.io/ws/v3/your-api-key`
+    - and set it to `https://stake.getblock.io/mainnet/?api_key=your-api-key`
     - after that sudo systemctl restart bee
 
 
@@ -114,7 +114,7 @@ Most common use cases:
 - `curl http://localhost:1635/peers` - Shows you the currently connected peers
 - `curl http://localhost:1635/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connectd
 - `curl http://localhost:1635/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
-- `curl http://localhost:1635/chequebook/address` your checkbook contract to see the gBZZ.
+- `curl http://localhost:1635/chequebook/address` your checkbook contract to see the BZZ.
 
 
 ### How can I check how many cashed out cheques do I have?
@@ -124,20 +124,22 @@ Get your checkbook contract address with: `curl http://localhost:1635/chequebook
 
 ### I have compared transactions between my ethereum address and my chequebook address, the number are different, which is quite weird.
 
-Your checkbook will show OUT gBZZ transactions when your peers cash checks issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
+Your checkbook will show OUT BZZ transactions when your peers cash checks issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
 
 
-### How to set infura.io endpoint:
+### How to set getblock.io endpoint:
 
-You need to sign up for a free account at infura.io, set up an Ethereum project, and get the goerli test net URL which will include your personal API key.  Put that URL in your swap-endpoint and restart your node.
+You need to sign up for a free account at infura.io, set up an Ethereum project, and get the XDAI API key which will include your personal API key.  Put that URL in your swap-endpoint and restart your node.
 
-Be sure that you choose the right network:
-![](https://i.imgur.com/ev5Fwsm.png)
+```
+https://stake.getblock.io/mainnet/?api_key=my-api-key
+```
 
+```
 
-### Can I connect several nodes to infura endpoint?
+### Can I connect several nodes to getblock.io endpoint?
 
-Yes, but their free plan has limit 100k requests per day.
+Yes, but their free plan has limit 40k requests per day.
 
 
 ### Where can I find documents about the cashout commands?
@@ -162,17 +164,6 @@ The number of connected peers is determined by your node as it attempts to keep 
 
 *bee start* uses *~/.bee.yaml* and the *~/.bee* directory for data
 *systemctl* uses */etc/bee/bee.yaml* and (IIRC) */var/lib/bee* for data
-
-### How can I find a transaction hash for the --transaction configuration parameter?
-
-
-Use this cunning one liner - thanks [filoozom](https://github.com/beejeez/beejeez/commits?author=filoozom)
-
-Get your API key from [etherscan](https://etherscan.io)
-
-```
-curl "https://api-goerli.etherscan.io/api?module=account&action=txlist&address=$ADDRESS&startblock=0&endblock=99999999&sort=asc&apikey=$API_KEY" | jq -c 'first(.result[] | select(.to == "'$ADDRESS'")).hash'
-```
 
 
 ## Swarm Protocol
