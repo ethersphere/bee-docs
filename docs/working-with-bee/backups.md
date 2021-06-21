@@ -6,7 +6,7 @@ id: backups
 In order to ensure you are able to redeploy your Bee node in the event of a disaster, the contents of several directories must be retained.
 
 :::danger
-Your keys represent your ability to access your gBZZ. Make sure to back up your keys directory in multiple places, so you can keep your gBZZs safe! See below to discover the location of your keys.
+Your keys represent your ability to access your BZZ. Make sure to back up your keys directory in multiple places, so you can keep your BZZs safe! See below to discover the location of your keys.
 :::
 
 :::info
@@ -95,7 +95,7 @@ It is also important to back up Clef's stored data. This includes your sensitive
 ### Ubuntu / Debian / Raspbian / CentOS Package Managers
 
 :::danger
-Your keys represent your ability to access your gBZZ. Make sure to back up your keys directory in multiple places, so you can keep your gBZZs safe!
+Your keys represent your ability to access your BZZ. Make sure to back up your keys directory in multiple places, so you can keep your BZZs safe!
 :::
 
 For Linux installations from package managers *yum* or *apt*, your Clef data directory is located at.

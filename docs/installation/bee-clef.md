@@ -33,8 +33,8 @@ Bee clef can be installed automatically using your system's package manager.
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_amd64.deb
-sudo dpkg -i bee-clef_0.4.12_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.deb
+sudo dpkg -i bee-clef_0.4.13_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -42,15 +42,15 @@ sudo dpkg -i bee-clef_0.4.12_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_armv7.deb
-sudo dpkg -i bee-clef_0.4.12_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.deb
+sudo dpkg -i bee-clef_0.4.13_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_arm64.deb
-sudo dpkg -i bee-clef_0.4.12_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.deb
+sudo dpkg -i bee-clef_0.4.13_arm64.deb
 ```
 
 </TabItem>
@@ -59,8 +59,8 @@ sudo dpkg -i bee-clef_0.4.12_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_amd64.rpm
-sudo rpm -i bee-clef_0.4.12_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.rpm
+sudo rpm -i bee-clef_0.4.13_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -68,15 +68,15 @@ sudo rpm -i bee-clef_0.4.12_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_armv7.rpm
-sudo rpm -i bee-clef_0.4.12_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.rpm
+sudo rpm -i bee-clef_0.4.13_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.12/bee-clef_0.4.12_arm64.rpm
-sudo rpm -i bee-clef_0.4.12_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.rpm
+sudo rpm -i bee-clef_0.4.13_arm64.rpm
 ```
 
 </TabItem>
@@ -187,7 +187,7 @@ Bee can communicate with Bee-clef in a variety of ways. The default way, if inst
 
 ## Manual Installation
 
-Try the [Github releases page](https://github.com/ethersphere/bee-clef/releases) for x-platform binaries or, to install Clef manually, first retrieve the relevant Clef binary from Ethereum's [Geth & Tools](https://geth.ethereum.org/downloads/) download page, or build directly from the [source](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum).
+Try the [Github releases page](https://github.com/ethersphere/bee-clef/releases) for x-platform binaries or, to install Clef manually, first retrieve the relevant Clef binary from Ethereum's [XDAI & Tools](https://XDAI.ethereum.org/downloads/) download page, or build directly from the [source](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum).
 
 Because Bee needs Clef to sign many transactions automatically, we must run Clef as a service with relaxed permissions and rules set. To ensure Clef only signs transactions from Bee, we must protect the `clef.ipc` file by **creating a Bee user and setting permissions so that it is only possible for this user to make use of the ipc socket.**
 

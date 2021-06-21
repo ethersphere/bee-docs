@@ -3,7 +3,7 @@ title: Fund Your Node
 id: fund-your-node
 ---
 
-Your Bee node needs gBZZ to be able to properly interact with the network. In order to receive these, you will need to sign into our Discord and request your gBZZ test tokens from the [#faucet](https://discord.gg/kfKvmZfVfe) channel, using your node's Ethereum address.
+Your Bee node needs BZZ to be able to properly interact with the network. In order to receive these, you will need to sign into our Discord and request your BZZ test tokens from the [#faucet](https://discord.gg/kfKvmZfVfe) channel, using your node's Ethereum address.
 
 To work out what your node's Ethereum address is, please consult your relevant installation guide or check your logs!
 

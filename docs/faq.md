@@ -114,7 +114,7 @@ Most common use cases:
 - `curl http://localhost:1635/peers` - Shows you the currently connected peers
 - `curl http://localhost:1635/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connectd
 - `curl http://localhost:1635/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
-- `curl http://localhost:1635/chequebook/address` your checkbook contract to see the gBZZ.
+- `curl http://localhost:1635/chequebook/address` your checkbook contract to see the BZZ.
 
 
 ### How can I check how many cashed out cheques do I have?
@@ -124,7 +124,7 @@ Get your checkbook contract address with: `curl http://localhost:1635/chequebook
 
 ### I have compared transactions between my ethereum address and my chequebook address, the number are different, which is quite weird.
 
-Your checkbook will show OUT gBZZ transactions when your peers cash checks issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
+Your checkbook will show OUT BZZ transactions when your peers cash checks issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
 
 
 ### How to set infura.io endpoint:

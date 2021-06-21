@@ -4,7 +4,7 @@ id: cashing-out
 ---
 
 As your Bee forwards and serves chunks to its peers, it is rewarded in
-gBZZ in the form of cheques. Once these cheques accumulate sufficient
+BZZ in the form of cheques. Once these cheques accumulate sufficient
 value, you may *cash them out* using Bee's API. This process transfers
 money from your peer's chequebooks into your own, which you can then
 withdrawal to your wallet to do with as you please!
@@ -113,15 +113,15 @@ curl http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4
 }
 ```
 
-Success, we earned our first gBZZ! 🐝
+Success, we earned our first BZZ! 🐝
 
-Now we have earnt tokens, to withdraw our gBZZ from the chequebook contract back into our node's own wallet, we simply POST a request to the chequebook withdraw endpoint.
+Now we have earnt tokens, to withdraw our BZZ from the chequebook contract back into our node's own wallet, we simply POST a request to the chequebook withdraw endpoint.
 
 ```bash
 curl -XPOST http://localhost:1635/chequebook/withdraw\?amount\=1000 | jq
 ```
 
-And conversely, if we have used more services than we have provided, we may deposit extra gBZZ into the chequebook contract by sending a POST request to the deposit endpoint.
+And conversely, if we have used more services than we have provided, we may deposit extra BZZ into the chequebook contract by sending a POST request to the deposit endpoint.
 
 ```bash
 curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
@@ -136,7 +136,7 @@ You may then use Etherscan to track your transaction and make sure it completes 
 [https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a`](https://goerli.etherscan.io/tx/0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a)
 
 # Managing uncashed cheques
-For the Bee process, the final step of earning BZZ is cashing a cheque. It is worth noting that a cheque is not yet actual gBZZs. In Bee, a cheque, just like a real cheque, is a promise to hand over money upon request. In real life, you would present the cheque to a bank. In swarm life, we present the cheque to a smart-contract. Holding on to a swap-cheque is risky; it is possible that the owner of the chequebook has issued cheques worth more gBZZ than is contained in their chequebook contract. For this reason, it is important to cash out your cheques every so often. With the set of API endpoints, as offered by Bee, it is possible to develop a script that fully manages the uncashed cheques for you. As an example, we offer you a [very basic script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh), where you can manually cash out all cheques with a worth above a certain value. To use the script:
+For the Bee process, the final step of earning BZZ is cashing a cheque. It is worth noting that a cheque is not yet actual BZZs. In Bee, a cheque, just like a real cheque, is a promise to hand over money upon request. In real life, you would present the cheque to a bank. In swarm life, we present the cheque to a smart-contract. Holding on to a swap-cheque is risky; it is possible that the owner of the chequebook has issued cheques worth more BZZ than is contained in their chequebook contract. For this reason, it is important to cash out your cheques every so often. With the set of API endpoints, as offered by Bee, it is possible to develop a script that fully manages the uncashed cheques for you. As an example, we offer you a [very basic script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh), where you can manually cash out all cheques with a worth above a certain value. To use the script:
 
 1. Download and save the script:
 
