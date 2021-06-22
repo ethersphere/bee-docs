@@ -34,6 +34,7 @@ Once you have restarted your node, you should be able to see the Swarm homepage 
 :::info
 Use the `resolver-options` flag to point the bee resolver to any ENS compatible smart-contract on any EVM compatible chain
 :::
+
 :::warn
 Make sure you trust the gateway you are interacting with! To ensure that you are retrieving the correct content, run your own ENS resolver and Bee node.
 :::
