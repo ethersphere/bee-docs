@@ -3,7 +3,7 @@ title: Fund Your Node
 id: fund-your-node
 ---
 
-## Testnet
+## Mainnet
 
 Your Bee node needs BZZ to be able to properly interact with the network. In order to receive these, you will need to acquire BZZ, then bridge your BZZ to the XDAI chain.
 
