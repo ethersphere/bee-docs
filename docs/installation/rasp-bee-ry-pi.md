@@ -190,7 +190,15 @@ systemctl restart bee
 
 To restart the Bee process. You should see some activity in the logs as Bee shuts down and restarts.
 
-Now we need to specify some Bee configuration. In order to access the blockchain, your Bee needs to access an Ethereum blockchain node. We recommend running your own [XDAI Node](https://XDAI.ethereum.org/), but for now let's take the easy way and sign up to [getblock.io](https://getblock.io). Once you have created an account, go to your dashboard and make a new project (you can call it whatever you'd like to). Then use the api key to create your api url as follows `https://stake.getblock.io/mainnet/?api_key=your-api-key`. Keep this open for later.
+Now we need to specify some Bee configuration. In order to access the
+blockchain, your Bee needs to access an Ethereum blockchain node. We
+recommend running your own [XDAI Node](https://xdaichain.com/),
+but for now let's take the easy way and sign up to
+[getblock.io](https://getblock.io). Once you have created an account,
+go to your dashboard and make a new project (you can call it whatever
+you'd like to). Then use the api key to create your api url as follows
+`https://stake.getblock.io/mainnet/?api_key=your-api-key`. Keep this
+open for later.
 
 Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those BZZ cheques from your peers! Type:
 
