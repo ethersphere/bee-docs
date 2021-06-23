@@ -6,7 +6,7 @@ id: rasp-bee-ry-pi
 You will need:
 
 - Raspberry Pi 4
-- 32GB Micro SD Card
+- 128GB Micro SD Card
 - SD card reader or some way to write to your SD Card
 - Micro to Normal HDMI Cable (Male->Male)
 - USB keyboard and mouse
