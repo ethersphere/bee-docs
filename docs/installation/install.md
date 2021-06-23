@@ -233,10 +233,11 @@ Bee is a versatile piece of software with diverse use cases. When you start Bee 
 
 #### Mainnet Node or Testnet Node
 
-To connect to mainnet, set your `mainnet` flag to `true`.
+To connect to mainnet, set your `mainnet` flag to `true` and `network-id` flag to `1`.
 
 ```yaml
 mainnet: true
+network-id: 1
 ```
 
 #### Full Node or Light Node
