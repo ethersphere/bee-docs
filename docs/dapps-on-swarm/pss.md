@@ -9,7 +9,7 @@ PSS provides a pub-sub facility that can be used for a variety of tasks. Nodes a
 
 ### Subscribe and Receive Messages
 
-Once your Bee node is up and running, you will be able to subscribe to feeds using websockets. For testing, it is useful to use the [websocat](https://docs.rs/crate/websocat/1.0.1) command line utility.
+Once your Bee node is up and running, you will be able to subscribe to feeds using WebSockets. For testing, it is useful to use the [websocat](https://docs.rs/crate/websocat/1.0.1) command line utility.
 
 Here we subscribe to the topic `test-topic`
 
@@ -25,9 +25,15 @@ Because a message is disguised as a normal chunk in Swarm, you will receive the 
 
 ### Send Messages
 
-Messages can be sent simply by sending a `POST` request to the PSS api endpoint.
+Messages can be sent simply by sending a `POST` request to the PSS API endpoint.
 
-When sending messages, we must specify a 'target' prefix of the recipients swarm address, a partial address representing their neighbourhood. Currently the length of this prefix is recommended to be two bytes, which will work well until the network has grown to a size of ca. 20-50K nodes. We must also provide the public key, so that Bee can encrypt the message in such a way that it may only be read by the intended recipient.
+When sending messages, we must specify a 'target' prefix of the
+recipient's Swarm address, a partial address representing their
+neighbourhood. Currently the length of this prefix is recommended to
+be two bytes, which will work well until the network has grown to a
+size of ca. 20-50K nodes. We must also provide the public key, so that
+Bee can encrypt the message in such a way that it may only be read by
+the intended recipient.
 
 For example, if we want to send a PSS message with **topic** `test-topic` to a node with address...
 
@@ -49,7 +55,9 @@ localhost:1833/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072
 
 Now, let's see this in action by setting up two Bee nodes on a test network, connecting them, and sending PSS messages from one to the other.
 
-First start two Bee nodes. We will start them with distinct ports for the api, debug api and p2p port so that there are no conflicts, since they will be running on the same computer. 
+First start two Bee nodes. We will start them with distinct ports for
+the API, Debug API, and p2p port, since they will be running on the
+same computer.
 
 Run the following command to start the first node. Note that we are passing `""` to the `--bootnode` argument so that our nodes will not connect to a network.
 
@@ -168,7 +176,8 @@ curl -s localhost:1935/peers | jq
 }
 ```
 
-We will use `websocat` to listen for PSS messages topic ID `test-topic` on our first node.
+We will use `websocat` to listen for the PSS messages' Topic ID
+`test-topic` on our first node.
 
 ```bash
 websocat ws://localhost:1833/pss/subscribe/test-topic
@@ -184,10 +193,12 @@ curl \
   --data "Hello Swarm"
 ```
 
-The PSS API endpoint will now create a PSS message for its recipient in the form of a 'Trojan Chunk' and send this
-into the network so that it may be pushed to the correct neighbourhood. Once it is received by its recipient
-it will be decrypted and determined to be a message with the topic we are listening for. Our second node
-will decrypt the data and we'll see a message pop up in our `websocat` console!
+The PSS API endpoint will now create a PSS message for its recipient
+in the form of a 'Trojan Chunk' and send this into the network so that
+it may be pushed to the correct neighbourhood. Once it is received by
+its recipient it will be decrypted and determined to be a message with
+the topic we are listening for. Our second node will decrypt the data
+and we'll see a message pop up in our `websocat` console!
 
 ```bash
 websocat ws://localhost:1833/pss/subscribe/test-topic

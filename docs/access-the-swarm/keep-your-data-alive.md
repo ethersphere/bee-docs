@@ -3,11 +3,16 @@ title: Keep Your Data Alive
 id: keep-your-data-alive
 ---
 
-The swarm comprises the sum total of all storage space provided by all of our nodes, called the DISC (Distributed Immutable Store of Chunks). The *right to write* data into this distributed store is determined by the postage stamps that have attached.
+The swarm comprises the sum total of all storage space provided by all of our nodes, called the DISC (Distributed Immutable Store of Chunks). The *right to write* data into this distributed store is determined by the postage stamps that have been attached.
 
 ### Fund your node's wallet.
 
-To start up your node, you will already have provided your node with XDAI for gas and BZZ which was transferred into your chequebook when your node was initialised and will be used to interact with other nodes using the *SWAP* protocol. In order to access more funds to buy batches of stamps, your wallet must be funded with BZZ. The easiest way to acheive this is to withdrawal funds from your chequebook.
+To start up your node, you will already have provided your node with
+XDAI for gas and BZZ which was transferred into your chequebook when
+your node was initialised. This will be used to interact with other
+nodes using the *SWAP* protocol. In order to access more funds to buy
+batches of stamps, your wallet must be funded with BZZ. The easiest
+way to acheive this is to withdraw funds from your chequebook:
 
 ```bash
 curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000"
@@ -15,9 +20,14 @@ curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000"
 
 ## Purchase a Batch of Stamps
 
-Stamps are created in batches, so that storer nodes may calculate the validity of a chunk's stamp with only local knowledge. This enables the privacy you enjoy in the swarm.
+Stamps are created in batches, so that storer nodes may calculate the
+validity of a chunk's stamp with only local knowledge. This enables
+the privacy you enjoy in the swarm.
 
-Stamp batches are created in *buckets* with *depth* 16. The entire swarm *address space* is divided into into 2^16 = 65,536 different buckets. When uploaded, each of your file's are split into 4kb chunks is assigned to a specific bucket based on its address.
+Stamp batches are created in *buckets* with a *depth* 16. The entire
+swarm *address space* is divided into 2^16 = 65,536 different
+buckets. When uploaded, each of your file's are split into 4kb chunks
+and assigned to a specific bucket based on it's address.
 
 When creating a batch you must specify two values, *batch depth* and *amount*.
 
@@ -41,7 +51,7 @@ The *amount* you specify will determine the amount of time your chunks live in t
 
 For now, we suggest you specify depth 20 and amount 10000000 for your
 batches. This should be ample to upload quite some data, and to keep
-your files in the Swarm for the forseeable future.
+your files in the swarm for the forseeable future.
 
 :::warning
 When you purchase a batch of stamps, you agree to burn BZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw BZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits toXDAIer, read <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
@@ -52,7 +62,7 @@ curl -s -XPOST http://localhost:1633/stamps/10000000/20
 ```
 
 :::info
-Once your batch has been purchased, it will take a few minutes for other Bee nodes in the swarm to catch up and register your batch. Allow some time for your batch to propogate to the network before proceeding to the next step.
+Once your batch has been purchased, it will take a few minutes for other Bee nodes in the Swarm to catch up and register your batch. Allow some time for your batch to propagate in the network before proceeding to the next step.
 :::
 
 Look out for more ways to more accurately estimate the correct size of your batch coming soon!

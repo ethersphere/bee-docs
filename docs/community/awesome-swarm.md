@@ -44,7 +44,11 @@ https://github.com/ethersphere/swarm-bot
 
 ### Community
 
-Thanks so much to everyone in our wonderful community for getting involved with the project, submitting bugs and even PR's. Special thanks to those extra special individuals who have taken the time to create software that interacts with the swarm. We're overjoyed and humbled by your enthusiasm. Thanks for being part of the swarm! 🐝  🐝  🐝
+Thanks so much to everyone in our wonderful community for getting
+involved with the project, submitting bugs and even PR's. Special
+thanks to those extra special individuals who have taken the time to
+create software that interacts with Swarm. We're overjoyed and humbled
+by your enthusiasm. Thanks for being part of the swarm!  🐝 🐝 🐝
 
 In the spirit of inclusion, and because we are in the early days, some 'unfinished' gems will be included. And for the truly awesome, extra awesomeness will be indicated appropriately.
 

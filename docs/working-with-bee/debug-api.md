@@ -3,12 +3,15 @@ title: Debug API
 id: debug-api
 ---
 
-Now that you have created your Swarm wallet and your Bee node has begun to participate in the global swarm network, we can use the Debug API to take a closer look at what's happening with your node.
+Now that you have created your Swarm wallet and your Bee node has
+begun to participate in the global Swarm network, we can use the Debug
+API to take a closer look at what's happening with your node.
 
 The [Debug API](/docs/api-reference/api-reference) provides a privileged environment where you are able to interact with your Bee node to get more information about the status of your node.
 
 :::danger
-Never expose your Debug API to the public internet, make sure to use a firewall or bind to *localhost*, as we have in the example below.
+Never expose your Debug API to the public Internet, make sure to use a
+firewall or bind to *localhost*, as we have in the example below.
 :::
 
 To use the Debug API we must first configure Bee to enable it, as it is disabled by default.
@@ -37,7 +40,8 @@ Here we are using the `jq` command line utility to count the amount of objects i
 
 #### Inspect Network Topology
 
-We can gain even more insight into how your Bee client is becoming a part of the global network your using the `topology` endpoint.
+We can gain even more insight into how your Bee is becoming a part of
+the global network using the `topology` endpoint.
 
 ```bash
 curl -X GET http://localhost:1635/topology | jq

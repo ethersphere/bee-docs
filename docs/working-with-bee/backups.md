@@ -70,7 +70,11 @@ Your Bee data directory contains three stores.
 
 ### Keys
 
-The keys directory contains your important key material. This is the most important data by far, and is produced and retained from Bee's initialisation procedure. If you have used **Bee-clef** to manage your key material and signing procedures, see below for information on how to keep backups of your keys.
+The `keys` directory contains your important key material. This is the
+most important data by far, and is produced and retained from Bee's
+initialisation procedure. If you have used **bee-clef** to manage your
+key material and signing procedures, see below for information on how
+to keep backups of your keys.
 
 :::info
 If you are using Bee to manage your keys (not recommended - please use [Bee Clef](/docs/installation/bee-clef)!). You must convert your keys in order to import into Metamask and other Ethereum wallets. You may use [exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) to make the conversion.
@@ -78,7 +82,8 @@ If you are using Bee to manage your keys (not recommended - please use [Bee Clef
 
 ### Statestore
 
-The statestore directory retains information related to your node, including SWAP balances, info on peers, blocklisting and much more.
+The `statestore` directory retains information related to your node,
+including SWAP balances, info on peers, blocklisting, and more.
 
 :::info
 Although your statestore retains your node's state. It is only possible to restore from this if your node has not been connected in the meantime, as the blockchain and state may have desyncronised if your node was turned on in the meantime.
@@ -86,11 +91,14 @@ Although your statestore retains your node's state. It is only possible to resto
 
 ### Localstore
 
-The localstore directory contains chunks that are pinned in your node, or are in your neighbourhood of responsibility.
+The `localstore` directory contains chunks that your node is retaining
+locally, either because they are frequently requested, or they are
+pinned in your node, or they are in your neighbourhood of
+responsibility.
 
-## Clef
+## Bee Clef
 
-It is also important to back up Clef's stored data. This includes your sensitive key material, so make sure to keep this private and safe!
+It is also important to back up Bee Clef's stored data. This includes your sensitive key material, so make sure to keep this private and safe!
 
 ### Ubuntu / Debian / Raspbian / CentOS Package Managers
 
@@ -98,7 +106,8 @@ It is also important to back up Clef's stored data. This includes your sensitive
 Your keys represent your ability to access your BZZ. Make sure to back up your keys directory in multiple places, so you can keep your BZZs safe!
 :::
 
-For Linux installations from package managers *yum* or *apt*, your Clef data directory is located at.
+For Linux installations by the package managers *yum* or *apt*, your
+`bee-clef` data directory is located at:
 
 ```bash
 /var/lib/bee-clef/
@@ -112,7 +121,7 @@ Configuration files are stored in:
 
 ### Manual
 
-For a manual installation of Clef your data directory is normally located at:
+For a manual installation of Clef your default data directory is:
 
 ```bash
 ~/.clef

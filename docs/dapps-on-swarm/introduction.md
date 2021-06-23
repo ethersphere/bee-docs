@@ -11,16 +11,26 @@ Bee isn't just for mining BZZ - learn how to [use Bee for all your dapp developm
 
 ## Bee JS
 
-Our maverick javascript team, the Bee-Gees (🕺), have been working hard in the last months to build some impressive tools for all you budding dapp developer Bees to get stuck into! Find out how to use the [bee-js](/docs/dapps-on-swarm/bee-js) javascript library to start creating your own that live and work on swarm!
+Our maverick JavaScript team, the Bee-Gees (🕺), have been working hard in the last few months to build some impressive tools for all you budding dapp developer Bees to get stuck into! Find out how to use the [bee-js](/docs/dapps-on-swarm/bee-js) JavaScript library to start creating your own that live and work on Swarm!
 
 ## Chunk Types
 
-Swarm contains 3 types of chunks which enable us to build novel structures of how data can be stored in the swarm in a completely decentralised way. Learn more about [chunk types](/docs/dapps-on-swarm/chunk-types) to change the way you deal with data in your dapps forever!
+Swarm contains 3 types of chunks which enable us to build novel
+structures of how data can be stored in the swarm - in a completely
+decentralised way. Learn more about
+[chunk types](/docs/dapps-on-swarm/chunk-types)
+to change the way you deal with data in your dapps forever!
 
 ## Feeds
 
-Swarm's single owner chunks have been cleverly combined to create user generated [feeds](/docs/dapps-on-swarm/feeds) in the swarm, see this example of how chunks are combined into a useful data structure you can use to build amazing applications.
+Swarm's single owner chunks have been cleverly combined to create user
+generated [feeds](/docs/dapps-on-swarm/feeds) in the swarm, see this
+example of how chunks are combined into a useful data structure you
+can use to build amazing applications.
 
 ## PSS
 
- Hey there! Pss! 🤫 Swarm's trojan chunks are implemented in Bee to deliver [Postal Service on Swarm](/docs/dapps-on-swarm/pss) - a pub-sub system which provides totally leak proof communication message communication over the swarm.
+Hey there! Pss! 🤫 Swarm's trojan chunks are implemented in Bee to
+deliver [Postal Service on Swarm](/docs/dapps-on-swarm/pss) - a
+pub-sub system that provides a totally leak-proof messaging system
+over the swarm.
