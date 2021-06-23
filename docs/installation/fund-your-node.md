@@ -3,13 +3,14 @@ title: Fund Your Node
 id: fund-your-node
 ---
 
-## Testnet
+## Mainnet
 
 Your Bee node needs BZZ to be able to properly interact with the network. In order to receive these, you will need to acquire BZZ, then bridge your BZZ to the XDAI chain.
 
-To bridge your XDAI, you may use [omni bridge](https://omni.xdaichain.com/bridge).
+To bridge your xDai, you may use [omni bridge](https://omni.xdaichain.com/bridge). Please note that the address of the BZZ token contract on xDai chain ([`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://blockscout.com/xdai/mainnet/tokens/0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da/)) is different from that on the Ethereum chain.
 
 To work out what your node's Ethereum address is, please consult your relevant installation guide or check your logs!
+
 
 ## Testnet
 
