@@ -135,8 +135,6 @@ You need to sign up for a free account at infura.io, set up an Ethereum project,
 https://stake.getblock.io/mainnet/?api_key=my-api-key
 ```
 
-```
-
 ### Can I connect several nodes to getblock.io endpoint?
 
 Yes, but their free plan has limit 40k requests per day.
