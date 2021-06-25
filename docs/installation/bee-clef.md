@@ -33,7 +33,7 @@ Bee Clef can be installed automatically using your system's package manager.
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.4.13_amd64.deb
 sudo dpkg -i bee-clef_0.4.13_amd64.deb
 ```
 
@@ -42,14 +42,14 @@ sudo dpkg -i bee-clef_0.4.13_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.4.13_armv7.deb
 sudo dpkg -i bee-clef_0.4.13_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.4.13_arm64.deb
 sudo dpkg -i bee-clef_0.4.13_arm64.deb
 ```
 
@@ -59,7 +59,7 @@ sudo dpkg -i bee-clef_0.4.13_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.4.13_amd64.rpm
 sudo rpm -i bee-clef_0.4.13_amd64.rpm
 ```
 
@@ -68,14 +68,14 @@ sudo rpm -i bee-clef_0.4.13_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.4.13_armv7.rpm
 sudo rpm -i bee-clef_0.4.13_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.4.13_arm64.rpm
 sudo rpm -i bee-clef_0.4.13_arm64.rpm
 ```
 

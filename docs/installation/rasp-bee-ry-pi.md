@@ -64,7 +64,7 @@ Raspberry Pi [https://docs.ethswarm.org](https://docs.ethswarm.org).
 Click `Install > Bee Clef` and scroll down to find the installation commands for Bee Clef **ARM (Raspberry Pi) ARMv7**. These should look something like: 
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.4.13_armv7.deb
 sudo dpkg -i bee-clef_0.4.13_armv7.deb
 ```
 
