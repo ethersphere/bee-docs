@@ -26,8 +26,8 @@ curl localhost:1635/chequebook/balance | jq
 
 ```json
 {
-  "totalBalance": 10000000,
-  "availableBalance": 9640360
+  "totalBalance": "10000000",
+  "availableBalance": "9640360"
 }
 ```
 
@@ -43,11 +43,11 @@ curl localhost:1635/balances | jq
     //...
     {
       "peer": "d0bf001e05014fa036af97f3d226bee253d2b147f540b6c2210947e5b7b409af",
-      "balance": -85420
+      "balance": "-85420"
     },
     {
       "peer": "f1e2872581de18bdc68060dc8edd3aa96368eb341e915aba86b450486b105a47",
-      "balance": -75990
+      "balance": "-75990"
     }
     //...
   ]
@@ -56,7 +56,28 @@ curl localhost:1635/balances | jq
 
 In Swarm, these per-peer balances represent trustful agreements between nodes. Tokens only actually change hands when a node settles a cheque. This can either be triggered manually or when a certain threshold is reached with a peer. In this case, a settlement takes place. You may view these using the settlements endpoint.
 
-More info can be found by using the chequebook api.
+
+```bash
+curl localhost:1635/settlements| jq
+```
+
+```json
+{
+  "totalreceived": "718030",
+  "totalsent": "0",
+  "settlements": [
+    //...
+    {
+      "peer": "dce1833609db868e7611145b48224c061ea57fd14e784a278f2469f355292ca6",
+      "received": "8987000000000",
+      "sent": "0"
+    }
+    //...
+  ]
+}
+```
+
+More information about the current received or sent cheques can also be found using the chequebook api.
 
 ```bash
 curl localhost:1635/chequebook/cheque | jq
@@ -64,15 +85,16 @@ curl localhost:1635/chequebook/cheque | jq
 
 ```json
 {
-  "totalreceived": 0,
-  "totalsent": 718030,
-  "settlements": [
-    //...
+  "lastcheques": [
     {
       "peer": "dce1833609db868e7611145b48224c061ea57fd14e784a278f2469f355292ca6",
-      "received": 0,
-      "sent": 89550
-    }
+      "lastreceived": {
+        "beneficiary": "0x21b26864067deb88e2d5cdca512167815f2910d3",
+        "chequebook": "0x4A373Db93ba54cab999e2C757bF5ca0356B42a3f",
+        "payout": "8987000000000"
+      },
+      "lastsent": null
+    },
     //...
   ]
 }
@@ -102,12 +124,12 @@ curl http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4
 {
   "peer": "d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b",
   "chequebook": "0xae315a9adf0920ba4f3353e2f011031ca701d247",
-  "cumulativePayout": 179160,
+  "cumulativePayout": "179160",
   "beneficiary": "0x21b26864067deb88e2d5cdca512167815f2910d3",
   "transactionHash": "0xba7b500e21fc0dc0d7163c13bb5fea235d4eb769d342e9c007f51ab8512a9a82",
   "result": {
     "recipient": "0x312fe7fde9e0768337c9b3e3462189ea6f9f9066",
-    "lastPayout": 179160,
+    "lastPayout": "179160",
     "bounced": false
   }
 }
