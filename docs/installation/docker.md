@@ -121,7 +121,7 @@ BEE_PASSWORD=my-password
 To enable Clef support on mainnet, we must also change the following params: 
 
 ```
-BEE_CLEF_CHAIN_ID=100
+CLEF_CHAINID=100
 ```
 
 For testnet, use chain id `5`.
