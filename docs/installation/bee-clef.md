@@ -98,9 +98,11 @@ brew services start swarm-clef
 
 
 ### Configuring Bee Clef
-Configuration files are stored in `/etc/bee-clef/`
+Configuration files are stored in `/etc/default/bee-clef/` on Linux and `/usr/local/etc/swarm-clef/default` on MacOS.
 
-For a normal installation using a package manger, there should not be any configuration changes necessary to start using Bee Clef.
+To install clef for Swarm mainnet, change `BEE_CLEF_CHAIN_ID` to be `100` in order to interact with the XDAI network. For testnet, use chain id `5`.
+
+For a normal installation using a package manger, this should be the only configuration changes necessary to start using Bee Clef.
 
 ### Interact With Bee Clef
 

@@ -118,11 +118,13 @@ BEE_SWAP_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=your-api-key
 BEE_PASSWORD=my-password
 ```
 
-To enable Clef support, we must also change the following params: 
+To enable Clef support on mainnet, we must also change the following params: 
 
 ```
-CLEF_CHAINID=5
+BEE_CLEF_CHAIN_ID=100
 ```
+
+For testnet, use chain id `5`.
 
 ```
 BEE_CLEF_SIGNER_ENABLE=true
