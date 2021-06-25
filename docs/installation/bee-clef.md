@@ -33,8 +33,8 @@ Bee Clef can be installed automatically using your system's package manager.
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.deb
-sudo dpkg -i bee-clef_0.4.13_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_amd64.deb
+sudo dpkg -i bee-clef_0.5.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -42,15 +42,15 @@ sudo dpkg -i bee-clef_0.4.13_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.deb
-sudo dpkg -i bee-clef_0.4.13_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_armv7.deb
+sudo dpkg -i bee-clef_0.5.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.deb
-sudo dpkg -i bee-clef_0.4.13_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_arm64.deb
+sudo dpkg -i bee-clef_0.5.0_arm64.deb
 ```
 
 </TabItem>
@@ -59,8 +59,8 @@ sudo dpkg -i bee-clef_0.4.13_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.rpm
-sudo rpm -i bee-clef_0.4.13_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_amd64.rpm
+sudo rpm -i bee-clef_0.5.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -68,15 +68,15 @@ sudo rpm -i bee-clef_0.4.13_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.rpm
-sudo rpm -i bee-clef_0.4.13_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_armv7.rpm
+sudo rpm -i bee-clef_0.5.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.rpm
-sudo rpm -i bee-clef_0.4.13_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_arm64.rpm
+sudo rpm -i bee-clef_0.5.0_arm64.rpm
 ```
 
 </TabItem>
@@ -98,9 +98,11 @@ brew services start swarm-clef
 
 
 ### Configuring Bee Clef
-Configuration files are stored in `/etc/bee-clef/`
+Configuration files are stored in `/etc/default/bee-clef/` on Linux and `/usr/local/etc/swarm-clef/default` on MacOS.
 
-For a normal installation using a package manger, there should not be any configuration changes necessary to start using Bee Clef.
+To install clef for Swarm mainnet, change `BEE_CLEF_CHAIN_ID` to be `100` in order to interact with the XDAI network. For testnet, use chain id `5`.
+
+For a normal installation using a package manager, this should be the only configuration changes necessary to start using Bee Clef.
 
 ### Interact With Bee Clef
 
