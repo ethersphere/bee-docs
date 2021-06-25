@@ -102,7 +102,7 @@ Configuration files are stored in `/etc/default/bee-clef/` on Linux and `/usr/lo
 
 To install clef for Swarm mainnet, change `BEE_CLEF_CHAIN_ID` to be `100` in order to interact with the XDAI network. For testnet, use chain id `5`.
 
-For a normal installation using a package manger, this should be the only configuration changes necessary to start using Bee Clef.
+For a normal installation using a package manager, this should be the only configuration changes necessary to start using Bee Clef.
 
 ### Interact With Bee Clef
 
