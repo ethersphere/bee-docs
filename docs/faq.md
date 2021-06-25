@@ -8,7 +8,7 @@ id: FAQ
 
 ### Which p2p port does Bee use and which should I open in my router?
 
-The default p2p port for Bee in 1634, please forward this using your router and allow traffic over your firewall as necessary. Bee also supports UPNP but it is recommended you do not use this protocol as it lacks security. For more detailed information see the connectivity section in the docs. https://docs.ethswarm.org/docs/installation/connectivity
+The default p2p port for Bee in 1634, please forward this using your router and allow traffic over your firewall as necessary. Bee also supports UPnP but it is recommended you do not use this protocol as it lacks security. For more detailed information see the connectivity section in the docs. https://docs.ethswarm.org/docs/installation/connectivity
 
 
 ### How do I know if I am connected to other peers?
@@ -17,7 +17,7 @@ You may communicate with your Bee using it’s HTTP api. Type `curl http://local
 
 
 ### What does "Failed to connect to local host port 1635: Connection refused" mean?
-Your node is not listening on port 1635, either the debug-api is not enabled, or it is not executing on localhost. Make sure your bee.yaml file has `debug-api-enable: true`
+Your node is not listening on port 1635, either the debug-api is not enabled, or it is not listening on localhost. Make sure your bee.yaml file has `debug-api-enable: true`
 
 
 
@@ -114,18 +114,17 @@ Most common use cases:
 - `curl http://localhost:1635/peers` - Shows you the currently connected peers
 - `curl http://localhost:1635/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connectd
 - `curl http://localhost:1635/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
-- `curl http://localhost:1635/chequebook/address` your checkbook contract to see the BZZ.
+- `curl http://localhost:1635/chequebook/address` your chequebook contract to see the BZZ.
 
 
 ### How can I check how many cashed out cheques do I have?
-You can look at your checkbook contract at etherscan.  
-Get your checkbook contract address with: `curl http://localhost:1635/chequebook/address`
+You can look at your chequebook contract at etherscan.  
+Get your chequebook contract address with: `curl http://localhost:1635/chequebook/address`
 
 
 ### I have compared transactions between my ethereum address and my chequebook address, the number are different, which is quite weird.
 
-Your checkbook will show OUT BZZ transactions when your peers cash checks issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
-
+Your chequebook will show OUT BZZ transactions when your peers cash cheques issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
 
 ### How to set getblock.io endpoint:
 
@@ -147,8 +146,8 @@ https://docs.ethswarm.org/docs/working-with-bee/cashing-out
 
 ### When I run http://localhost:1635/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
 
-`totalBalance` is the balance on the blockchain, `availableBalance` is that balance minus the outstanding (non-cashed) checks that you have issued to your peers.  These latter checks do not show up on the blockchain.
-It's like what the bank thinks your balance is vs what your checkbook knows is actually available because of the checks you've written that are still "in the mail" and not yet cashed.
+`totalBalance` is the balance on the blockchain, `availableBalance` is that balance minus the outstanding (non-cashed) cheques that you have issued to your peers. These latter cheques do not show up on the blockchain.
+It's like what the bank thinks your balance is vs what your chequebook knows is actually available because of the cheques you've written that are still "in the mail" and not yet cashed.
 
 
 ### What determines the number of peers and how to influence their number? Why are there sometimes 300+ peers and sometimes 30?

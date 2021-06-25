@@ -3,7 +3,12 @@ title: Upgrading Bee
 id: upgrading-bee
 ---
 
-Keep a close eye on the [#bee-node-updates](https://discord.gg/vQcngMzZ9c) channel in our [Discord Server](https://discord.gg/wdghaQsGq5) for information on the latest software updates for Bee. It's very important to keep Bee up to date to benefit from security updates and ensure you are able to properly interact with the swarm. 
+Keep a close eye on the
+[#bee-node-updates](https://discord.gg/vQcngMzZ9c) channel in our
+[Discord Server](https://discord.gg/wdghaQsGq5) for information on the
+latest software updates for Bee. It's very important to keep Bee up to
+date to benefit from security updates and ensure you are able to
+properly interact with the Swarm.
 
 :::warning
 Bee sure to [backup](/docs/working-with-bee/backups) your clef key material and [cashout your cheques](/docs/working-with-bee/cashing-out) to make sure your BZZs are safe before applying updates.
@@ -13,14 +18,21 @@ Bee sure to [backup](/docs/working-with-bee/backups) your clef key material and 
 
 Mainnet is a totally new network - you can not upgrade a testnet node to a mainnet node. Please create a new Bee and join us in the swarm for real! 🐝
 
+### Upgrading from a testnet v0.6.x series to a testnet v1.0 series
 
-### Upgrading from a testnet 0.6.xs series to a testnet 1.0-rc series
+Bee v1.0 contains a few breaking changes which means that database
+migration must take place. We also introduced [postage
+stamps](/docs/access-the-swarm/keep-your-data-alive) which must be
+attached to chunks of data so that it will be retained in the Swarm
+network.
 
-Bee 1.0-rc contains a few breaking changes which mean a database migration must take place.
+As part of these changes, if you have any **locally pinned content**,
+this must be manually migrated to the new data structure expected by
+the network of 1.0 clients. See below for information on how to
+proceed.
 
-As part of these changes, if you have any **locally pinned content**, this must be manually migrated to the new data structure expected by the network of 1.0 clients, see below for information on how to proceed. 
-
-If you *do not* have any locally pinned content, your migration will be automatic and your update will proceed as normal.
+If you *do not* have any locally pinned content, your migration will
+be automatic and your update will proceed as normal.
 
 To check if a 0.6 node has pinned content, query the `pin` api endpoint as follows:
 
@@ -32,7 +44,10 @@ curl -s localhost:1633/pin/chunks | jq ".chunks | length"
 100
 ```
 
-If any non-zero values are returned, **you must** complete the manual migration procedure, automatic migration will be prevented and *you must* follow the Manual Migration Procedure detailed further down the page.
+If any non-zero values are returned, **you must** complete the manual
+migration procedure, automatic migration will be prevented and *you
+must* follow the [Manual Migration
+Procedure](#manual-migration-procedure).
 
 #### Automatic Migration Procedure
 
