@@ -69,7 +69,7 @@ a **swarm reference** or **hash** which is the *address* of the
 uploaded file, for example:
 
 ```json
-{"reference":"042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4"}
+{"reference":"22cbb9cedca08ca8d50b0319a32016174ceb8fbaa452ca5f0a77b804109baa00"}
 ```
 Keep this *address* safe, as we'll use it to retrieve our content later on.
 
@@ -95,12 +95,12 @@ curl -OJ http://localhost:1633/bzz/042d4fe94b946e2cb51196a8c136b8cc335156525bf1a
 
 You may even simply navigate to the URL in your browser:
 
-[http://localhost:1633/bzz/042d4fe...2291dd4](http://localhost:1633/bzz/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4)
+[http://localhost:1633/bzz/22cb...aa00](http://localhost:1633/bzz/22cbb9cedca08ca8d50b0319a32016174ceb8fbaa452ca5f0a77b804109baa00)
 
 ## Public Gateways
 
 To share files with someone who isn't running a Bee node yet, simply change the host in the link to be one of our public gateways. Send the link to your friends, and they will be able to download the file too!
 
-[https://gateway.ethswarm.org/bzz/042d4fe...2291dd4](https://gateway.ethswarm.org/bzz/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4)
+[https://download.gateway.ethswarm.org/bzz/22cb...aa00/](https://download.gateway.ethswarm.org/bzz/22cbb9cedca08ca8d50b0319a32016174ceb8fbaa452ca5f0a77b804109baa00/)
 
 <!-- If you are unable to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/troubleshooting/connectivitiy) for assistance. -->
