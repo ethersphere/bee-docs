@@ -14,7 +14,7 @@ Detailed information about Bee API endpoint can be found here:
 
 
 ## Debug API
-The Debug API is disabled by default but can be enabled by setting the `enable-debug-api` configuration option to `true`. The Debug API exposes functionality to inspect the state of your Bee node while it is running, as well as some other features that should not be exposed to the public Internet. The Debug API runs on port `:1635` by default.
+The Debug API is disabled by default but can be enabled by setting the `debug-api-enable` configuration option to `true`. The Debug API exposes functionality to inspect the state of your Bee node while it is running, as well as some other features that should not be exposed to the public Internet. The Debug API runs on port `:1635` by default.
 
 :::info
 For a new installation of Bee, the Debug API endpoint is not yet
