@@ -4,9 +4,9 @@ title: Welcome!
 slug: /
 ---
 
-Hello and welcome to the swarm! We are very happy to have you here with us! 🐝 
+Hello and welcome to Swarm! 🐝
 
-As soon as your Bee client is up and running you will begin to connect with peers all over the world to become a part of Swarm, a global p2p network tasked with storing and distributing all of the world's data.
+As soon as the Bee client is up and running it will begin to connect with peers all over the world to become part of Swarm, a global p2p network tasked with storing and distributing all of the world's data.
 
 Swarm is a decentralised data storage and distribution technology, ready to power the next generation of censorship resistant, unstoppable serverless apps.
 
@@ -15,7 +15,7 @@ Swarm is economically self-sustaining due to a built-in incentive system enforce
 # Swarm
 
 ## Swarm Whitepaper and The Book of Swarm
-What happens with your Bee node when you start it up? Want to know more about the Swarm technology behind Bee?
+What happens with a Bee node after startup? Want to know more about the Swarm technology behind Bee?
 Want to make your own client? Read the <a href="/swarm-whitepaper.pdf" target="_blank" rel="noopener noreferrer">Swarm Whitepaper</a> and for a deeper dive, <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> ,
 our 250 page guide to the tech underpinning the Swarm network.
 
@@ -29,7 +29,7 @@ Find more information on the bonding curve, including its [source code](https://
 Don't have Bee installed yet? It's easy! Head over to the [installation](/docs/installation/quick-start) section to get Bee up and running.
 
 ## Working With Bee
-Once you have Bee installed, find out how to configure your software, interact with the API, monitor what Bee is up to, and make those all important backups in the [working with Bee](/docs/working-with-bee/introduction) section.
+Once Bee is installed, find out how to configure the software, interact with the API, monitor what Bee is up to, and make those all important backups in the [working with Bee](/docs/working-with-bee/introduction) section.
 
 ## Access the Swarm
 To learn more about how to get the most out of Bee, find out how to [access the swarm](/docs/access-the-swarm/upload-and-download) section so you can share files with your friends, use Bee to host a website on a public Swarm Gateway, and much more!
@@ -39,9 +39,9 @@ To learn more about how to get the most out of Bee, find out how to [access the 
 
 ## Dapps
 
-Swarm is all about dapps. We strive to provide the most developer
-friendly environment on which to build your decentralised
-organisation. Built on the principles of functionality, flexibility
+Swarm is all about dapps. It strives to provide the most developer
+friendly environment on which to build decentralised
+organisations. Built on the principles of functionality, flexibility
 and accessibility, Bee provides high level constructs for file
 storage, feeds and key-value stores, while also providing the low
 level access with libraries that create Single Owner and Trojan chunks
@@ -51,23 +51,23 @@ on Swarm](/docs/dapps-on-swarm/introduction).
 ## Incentives
 
 Need even more incentive to get involved with the wonderful world of
-Swarm? Find out how you'll soon be [earning BZZ
+Swarm? Find out how you can [earn BZZ
 tokens](/docs/working-with-bee/cashing-out) for storing and
 distributing your share of the world's data - sharing is caring!
 
 ## Find Out More
 
-What happens with your Bee node when you start it up? Want to know
-more about the amazing Swarm technology behind Bee?  Want to make your
-own client? Read <a href="/the-book-of-swarm.pdf" target="_blank"
+Read <a href="/the-book-of-swarm.pdf" target="_blank"
 rel="noopener noreferrer">The Book of Swarm</a>, our 250 page epic
 guide to the future tech underpinning the Swarm network.
 
+For a lighter read, read the <a href="/swarm-whitepaper.pdf" target="_blank" rel="noopener noreferrer">Swarm Whitepaper</a>. 
+
 ## Development
 
-We'd love for you to join our efforts! Are you up to the challenge of
-helping us to create Bee and the other incredible technologies we're
-building on top of it? You are invited to contribute code to the Bee
+Join our efforts! Are you up to the challenge of
+helping to create Bee and the other incredible technologies that are
+being build on top of it? You are invited to contribute code to the Bee
 client or any of the other projects in Swarm's
 [Ethersphere](https://github.com/ethersphere).
 
@@ -85,4 +85,4 @@ in one of our group channels:
 ## Reporting a bug
 If your Bee isn't working, get in touch with the [#bee-support channel on Discord](https://discord.gg/wdghaQsGq5) or [let us know on GitHub!](https://github.com/ethersphere/bee/issues) 🐝
 
-Thanks for beeing here, we wish you Love and Bees from the Swarm Team x
+Thanks for beeing here, Love and Bees from the Swarm Team x
