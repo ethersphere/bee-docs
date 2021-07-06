@@ -17,7 +17,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: '14'
 
       - name: Setup swarm
         run: |
@@ -29,7 +29,7 @@ jobs:
 
       - name: Build for gh-pages
         run: |
-          npm install
+          npm ci
           npm run-script build
           echo "docs.ethswarm.org" > ./build/CNAME
           rm ./build/.nojekyll
@@ -44,7 +44,7 @@ jobs:
         run: |
           rm -rf build
           sed -i "s/baseUrl: '\/'/baseUrl: '\/bzz:\/docs\.swarm\.eth\/'/g" docusaurus.config.js
-          npm install
+          npm ci
           npm run-script build
           rm ./build/.nojekyll
 
