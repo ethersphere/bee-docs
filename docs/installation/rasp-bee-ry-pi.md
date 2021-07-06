@@ -287,7 +287,7 @@ systemctl restart bee
 
 There are many other configuration options available to fine tune
 Bee. Please check out the
-[configuration](/docs/docs/working-with-bee/configuration) section of
+[configuration](/docs/working-with-bee/configuration) section of
 the docs for more info.
 
 Now, in your other terminal window where Bee's logs are still being
