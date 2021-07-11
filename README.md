@@ -2,18 +2,35 @@
 
 Documentation for the [Swarm Bee Client](https://github.com/ethersphere/bee). View at [docs.ethswarm.org](https://docs.ethswarm.org).
 
+## Contributing
+
+Pull Requests are welcome, but please read our [CODING](CODING.md) guide!
+
 ### Node Version
 
 You must use **node 14** or above. We recommend [nvm](https://github.com/nvm-sh/nvm).
 
 ### Installation
 
-After the first checkout, or when the dependencies are updated in
-`package.json`, you need to run:
+After the initial cloning of the repo you need to run:
+
+```
+npm ci
+```
+
+to download the exact revisions of the dependencies captured in
+`package-lock.json`.
+
+If the dependencies are updated in `package.json`, or if you wish to
+test with the latest revisions of the dependencies, then you should
+run:
 
 ```
 npm install
 ```
+
+and then consider pushing the updated `package-lock.json` to the
+repository if everything works fine.
 
 ### Local Development
 
