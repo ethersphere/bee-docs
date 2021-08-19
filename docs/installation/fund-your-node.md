@@ -3,7 +3,18 @@ title: Fund Your Node
 id: fund-your-node
 ---
 
-Your Bee node needs gBZZ to be able to properly interact with the network. In order to receive these, you will need to sign into our Discord and request your gBZZ test tokens from the [#faucet](https://discord.gg/kfKvmZfVfe) channel, using your node's Ethereum address.
+## Mainnet
+
+Your Bee node needs BZZ to be able to properly interact with the network. In order to receive these, you will need to acquire BZZ, then bridge your BZZ to the XDAI chain.
+
+To bridge your xDai, you may use [omni bridge](https://omni.xdaichain.com/bridge). Please note that the address of the BZZ token contract on xDai chain ([`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://blockscout.com/xdai/mainnet/tokens/0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da/)) is different from that on the Ethereum chain.
+
+To work out what your node's Ethereum address is, please consult your relevant installation guide or check your logs!
+
+
+## Testnet
+
+Your Bee node needs gBZZ to be able to properly interact with the test network. In order to receive these, you will need to sign into our Discord and request your gBZZ test tokens from the [#faucet](https://discord.gg/kfKvmZfVfe) channel, using your node's Ethereum address.
 
 To work out what your node's Ethereum address is, please consult your relevant installation guide or check your logs!
 

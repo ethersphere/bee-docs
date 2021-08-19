@@ -32,8 +32,6 @@ INFO[2021-02-09T18:55:11Z] using ethereum address 99c9e7868d22244106a5ffbc2f5d6b
 INFO[2021-02-09T18:55:14Z] using default factory address for chain id 5: f0277caffea72734853b834afc9892461ea18474
 INFO[2021-02-09T18:55:14Z] no chequebook found, deploying new one.
 WARN[2021-02-09T18:55:15Z] cannot continue until there is sufficient ETH (for Gas) and at least 10 BZZ available on 99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
-WARN[2021-02-09T18:55:15Z] get your Goerli ETH and Goerli BZZ now via the bzzaar at https://bzz.ethswarm.org/?transaction=buy&amount=10&slippage=30&receiver=0x99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
-
 ```
 
 ### MacOS
