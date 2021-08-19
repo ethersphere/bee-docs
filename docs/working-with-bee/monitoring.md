@@ -13,7 +13,7 @@ In order to use these metrics and view, we need to keep a record of these metric
 
 To do this we will use [Prometheus](https://prometheus.io/docs/introduction/overview/). Simply install, configure as follows, and restart!
 
-For Ubuntu and other Debian based linux distributions install using `apt`.
+For Ubuntu and other Debian based Linux distributions install using `apt`:
 
 ```bash
 sudo apt install prometheus

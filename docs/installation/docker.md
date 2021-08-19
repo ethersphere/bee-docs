@@ -5,7 +5,12 @@ id: docker
 
 Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee) for your convenience. 
 
-If running a full Bee node, it is recommended that you make use of Ethereum's external signer, [Clef](/docs/installation/bee-clef). See below for instructions on how to use [Docker Compose](/docs/installation/docker#docker-compose) to easily set up Bee with persistent storage and integration with the Bee Clef container.
+If running a Bee *full node*, it is recommended that you make use of
+Ethereum's external signer, [Clef](/docs/installation/bee-clef). Skip
+ahead if you are comfortable with `docker` basics for instructions on
+how to use [docker-compose](/docs/installation/docker#docker-compose)
+to easily set up Bee with persistent storage and integration with the
+Bee Clef container.
 
 ### Quick Start
 
@@ -16,10 +21,10 @@ docker run\
   -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633\
-  --rm -it ethersphere/bee:latest\
+  --rm -it ethersphere/bee:stable\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
+    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=copy-your-api-key-here \
     --debug-api-enable
 ```
 
@@ -27,7 +32,10 @@ docker run\
 If starting your node for the first time, you will need to deploy a chequebook contract. See [Manual Installation](/docs/installation/manual) for more info.
 :::
 
-To persist files, mount a local directory as follows and enter the password used to encrypt your keyfiles. Note, Docker insists on absolute paths when mounting volumes, so you must replace `/path/to/.bee-docker` with a valid path from your local filesystem.
+To persist files, mount a local directory as follows and enter the
+password used to encrypt your keyfiles. Note, `docker` insists on
+absolute paths when mounting volumes, so you must replace
+`/path/to/.bee-docker` with a valid path from your local filesystem.
 
 ```bash
 docker run\
@@ -35,7 +43,7 @@ docker run\
   -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633\
-  --rm -it ethersphere/bee:latest\
+  --rm -it ethersphere/bee:stable\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
@@ -51,7 +59,7 @@ docker run\
   -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633\
-  --rm -it ethersphere/bee:latest\
+  --rm -it ethersphere/bee:stable\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
@@ -60,13 +68,10 @@ docker run\
 
 ### Versions
 
-Other versions of the Bee container are also available.
-
-#### Latest Beta Release
-
-```bash
-docker pull ethersphere/bee:beta
-```
+In order to avoid accidentally upgrading your Bee containers, or
+deadlocks resulting from Docker caching solutions, it is recommended
+to use best practices and pin the specific version of Bee that you
+want to run.
 
 #### Specific Versions
 
@@ -74,17 +79,21 @@ docker pull ethersphere/bee:beta
 docker pull ethersphere/bee:1.0.0
 ```
 
-#### Edge
+#### Using Tags
 
 ```bash
-docker pull ethersphere/bee:latest
+docker pull ethersphere/bee:beta
 ```
 
-Please see the [Docker Hub repository](https://hub.docker.com/r/ethersphere/bee) for more information.
+You may use the tags `beta`, `latest`, and `stable`, or find out more
+at the [Docker Hub repository](https://hub.docker.com/r/ethersphere/bee).
 
 ### Docker Compose
 
-Configuration files for Bee and Bee Clef are provided to enable quick and easy installation of both projects with persistent storage and secure secret management. To install Bee without Clef, simply omit the relevant steps.
+Configuration files for Bee and Bee Clef are provided to enable quick
+and easy installation of both programs with persistent storage and
+secure secret management. To install Bee without Clef, simply omit the
+relevant steps.
 
 #### Setup
 
@@ -109,28 +118,35 @@ BEE_SWAP_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=your-api-key
 BEE_PASSWORD=my-password
 ```
 
-To enable Clef support, we must also change the following params: 
+To enable Clef support on mainnet, we must also change the following params: 
 
 ```
-CLEF_CHAINID=5
+CLEF_CHAINID=100
 ```
+
+For testnet, use chain id `5`.
 
 ```
 BEE_CLEF_SIGNER_ENABLE=true
 BEE_CLEF_SIGNER_ENDPOINT=http://clef-1:8550
 ```
 
-With the configuration settings complete, run `docker-compose up` with the `-d` flag to run Bee and Bee Clef as a daemon.
+With the configuration settings complete, you can start your Bee and
+Clef nodes by running:
 
 ```bash
 docker-compose up -d
 ```
 
+:::tip
+By specifying the `-d` flag to `docker-compose` we run Bee and Bee Clef as a daemon.
+:::
+
 :::warning
 Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to [backup](/docs/working-with-bee/backups) the contents of your Docker volume!
 :::
 
-To determine our address to fund, we can check the logs for our Bee container:
+To determine the Bee node's address to fund, we can check the logs for our Bee *container*:
 
 ```bash
 docker-compose logs -f bee-1
@@ -142,7 +158,8 @@ time="2020-12-15T18:43:14Z" level=warning msg="learn how to fund your node by vi
 ```
 
 
-Once you have determined your Ethereum addresses, [fund your node](/docs/installation/fund-your-node)
+Once you have determined your Bee's Ethereum addresses,
+[fund your node](/docs/installation/fund-your-node).
 
 After your transaction has been completed, your node should recognise that your wallet has been funded, and begin to deploy and fund your Bee chequebook!
 
@@ -156,4 +173,24 @@ curl localhost:1633
 Ethereum Swarm Bee
 ```
 
-Congratulations! Your Bee is up and running! 🐝
+Once you start seeing messages in the `docker-compose logs -f bee-1`
+like:
+
+```
+successfully connected to peer 7fa40ce124d69ecf14d6f7806faaf9df5d639d339a9d343aa7004373f5c46b8f (outbound)
+```
+
+You're connected to the Swarm. Let's do a quick check to find out how
+many peers we have using the `curl` command line utility:
+
+```bash
+curl localhost:1635/peers
+```
+
+```json
+{"peers":[{"address":"339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"},{"address":"b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"} ]}
+
+```
+
+If you see peers listed here - congratulations! You have joined the
+swarm! Welcome! 🐝

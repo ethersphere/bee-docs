@@ -10,7 +10,9 @@ money from your peer's chequebooks into your own, which you can then
 withdrawal to your wallet to do with as you please!
 
 :::important
-PLEASE! Do not cash out your cheques too regularly! Once a week is more than sufficient! This prevents and relieves unneccesary congestion on the blockchain. 💩
+Do **not** cash out your cheques too regularly! Once a week is more
+than sufficient! Besides the transaction costs, this prevents and
+relieves unneccesary congestion on the blockchain. 💩
 :::
 
 :::info
@@ -56,6 +58,7 @@ curl localhost:1635/balances | jq
 
 In Swarm, these per-peer balances represent trustful agreements between nodes. Tokens only actually change hands when a node settles a cheque. This can either be triggered manually or when a certain threshold is reached with a peer. In this case, a settlement takes place. You may view these using the settlements endpoint.
 
+More info can be found by using the chequebook API.
 
 ```bash
 curl localhost:1635/settlements| jq
@@ -112,7 +115,8 @@ curl -XPOST http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451
 {"transactionHash":"0xba7b500e21fc0dc0d7163c13bb5fea235d4eb769d342e9c007f51ab8512a9a82"}
 ```
 
-You may check the status of your transaction using [XDAI Blockscout](https://blockscout.com/xdai/mainnet)
+You may check the status of your transaction using the [XDAI
+Blockscout](https://blockscout.com/xdai/mainnet).
 
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
 
@@ -150,45 +154,70 @@ curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
 ```
 
 ```json
-{"transactionHash":"0x60fd4be6c1db4552ecb5cd3c99f6a4906089277f592593cccd1fee0dbf501085"}
+{"transactionHash":"0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a"}
 ```
 
-You may then use [Blockscout](https://blockscout.com/xdai/mainnet) to track your transaction and make sure it completes successfully.
+You may then use [Blockscout](https://blockscout.com/xdai/mainnet) to
+track your transaction and make sure it completed successfully.
 
 # Managing uncashed cheques
-For the Bee process, the final step of earning BZZ is cashing a cheque. It is worth noting that a cheque is not yet actual BZZs. In Bee, a cheque, just like a real cheque, is a promise to hand over money upon request. In real life, you would present the cheque to a bank. In swarm life, we present the cheque to a smart-contract. Holding on to a swap-cheque is risky; it is possible that the owner of the chequebook has issued cheques worth more BZZ than is contained in their chequebook contract. For this reason, it is important to cash out your cheques every so often. With the set of API endpoints, as offered by Bee, it is possible to develop a script that fully manages the uncashed cheques for you. As an example, we offer you a [very basic script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh), where you can manually cash out all cheques with a worth above a certain value. To use the script:
+
+For the Bee process, the final step of earning BZZ is cashing a
+cheque. It is worth noting that a cheque is not yet actual BZZs. In
+Bee, a cheque, just like a real cheque, is a promise to hand over
+money upon request. In real life, you would present the cheque to a
+bank. In swarm life, we present the cheque to a smart-contract.
+
+Holding on to a swap-cheque is risky; it is possible that the owner of
+the chequebook has issued cheques worth more BZZ than is contained in
+their chequebook contract. For this reason, it is important to cash
+out your cheques every so often.
+
+With the set of API endpoints, as offered by Bee, it is possible to
+develop a script that fully manages the uncashed cheques for you. As
+an example, we offer you a [very basic
+script](https://gist.github.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975#file-cashout-sh),
+where you can manually cash out all cheques with a worth above a
+certain value. To use the script:
 
 1. Download and save the script:
 
-```bash
-wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/cashout.sh
-```
+  ```bash
+  wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/cashout.sh
+  ```
 
-2. Make the file executable
+2. Make the file executable:
 
-```bash
-chmod +x cashout.sh
-```
+  ```bash
+  chmod +x cashout.sh
+  ```
 
-3. List all uncashed cheques and cash out your cheques above a certain value
+3. List all uncashed cheques and cash out your cheques above a certain value:
 
-- List:
-```bash
-./cashout.sh
-```
+  - List:
+
+    ```bash
+    ./cashout.sh
+    ```
+  
+    :::info
+    If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
+    :::
+
+  - Cashout all cheques:
+
+    ```bash
+    ./cashout.sh cashout-all
+    ```
+
 :::info
-If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
+Are you a Windows-user who is willing to help us? We are currently
+missing a simple cashout script for Windows. Please see the
+[issue](https://github.com/ethersphere/bee/issues/1092).
 :::
 
-- Cashout all cheques worth more than 5 BZZ
-```bash
-./cashout.sh cashout-all 5
-```
-
 :::info
-Are you a Windows-user who is willing to help us? We are currently missing a simple cashout script for Windows. Please see the [issue](https://github.com/ethersphere/bee/issues/1092)
-:::
-
-:::info
-Please find the officially deployed smart-contract by the Swarm team in the [swap-swear-and-swindle repository](https://github.com/ethersphere/swap-swear-and-swindle)
+You can find the officially deployed smart-contract by the Swarm team
+in the [swap-swear-and-swindle
+repository](https://github.com/ethersphere/swap-swear-and-swindle).
 :::

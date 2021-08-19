@@ -8,15 +8,15 @@ import TabItem from '@theme/TabItem';
 
 Bee makes use of Go Ethereum's external signer, [Clef](https://geth.ethereum.org/docs/clef/tutorial).
 
-Because Bee must sign a lot of transactions automatically and quickly, a [Bee specific version of Clef, Bee-clef](https://github.com/ethersphere/bee-clef) has been packaged which includes all the relevant configuration and implements the specific configuration needed to make Clef work with Bee.
+Because Bee must sign a lot of transactions automatically and quickly, a [Bee specific version of Clef, Bee Clef](https://github.com/ethersphere/bee-clef) has been packaged which includes all the relevant configuration needed to make Clef work with Bee.
 
 :::caution
-Clef will create a new Ethereum key pair for you during installation. Make sure you keep a [backup](/docs/working-with-bee/backups) of your key pair somewhere safe and secure!
+Bee Clef will create a new Ethereum key pair for you during installation. Make sure you keep a [backup](/docs/working-with-bee/backups) of your key pair somewhere safe and secure!
 :::
 
 ## Packages
 
-Bee clef can be installed automatically using your system's package manager.
+Bee Clef can be installed automatically using your system's package manager.
 
 
 
@@ -33,8 +33,8 @@ Bee clef can be installed automatically using your system's package manager.
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.deb
-sudo dpkg -i bee-clef_0.4.13_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_amd64.deb
+sudo dpkg -i bee-clef_0.5.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -42,15 +42,15 @@ sudo dpkg -i bee-clef_0.4.13_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.deb
-sudo dpkg -i bee-clef_0.4.13_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_armv7.deb
+sudo dpkg -i bee-clef_0.5.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.deb
-sudo dpkg -i bee-clef_0.4.13_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_arm64.deb
+sudo dpkg -i bee-clef_0.5.0_arm64.deb
 ```
 
 </TabItem>
@@ -59,8 +59,8 @@ sudo dpkg -i bee-clef_0.4.13_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_amd64.rpm
-sudo rpm -i bee-clef_0.4.13_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_amd64.rpm
+sudo rpm -i bee-clef_0.5.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -68,15 +68,15 @@ sudo rpm -i bee-clef_0.4.13_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_armv7.rpm
-sudo rpm -i bee-clef_0.4.13_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_armv7.rpm
+sudo rpm -i bee-clef_0.5.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef_0.4.13_arm64.rpm
-sudo rpm -i bee-clef_0.4.13_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_arm64.rpm
+sudo rpm -i bee-clef_0.5.0_arm64.rpm
 ```
 
 </TabItem>
@@ -97,16 +97,18 @@ brew services start swarm-clef
 </Tabs>
 
 
-### Configuring Bee-clef
-Configuration files are stored in `/etc/bee-clef/`
+### Configuring Bee Clef
+Configuration files are stored in `/etc/default/bee-clef/` on Linux and `/usr/local/etc/swarm-clef/default` on MacOS.
 
-For a normal installation using a package manger, there should not be any configuration changes necessary to start using Bee Clef.
+To install clef for Swarm mainnet, change `BEE_CLEF_CHAIN_ID` to be `100` in order to interact with the XDAI network. For testnet, use chain id `5`.
 
-### Interact With Clef
+For a normal installation using a package manager, this should be the only configuration changes necessary to start using Bee Clef.
 
-Once Clef has been installed, it will begin running as a service.
+### Interact With Bee Clef
 
-To check Clef is running ok, we may use `systemctl` (on Linux) or `launchctl` (on MacOS) to query the status of the `bee-clef` service.
+Once Bee Clef has been installed, it will begin running as a service.
+
+To check Bee Clef is running ok, we may use `systemctl` (on Linux) or `launchctl` (on MacOS) to query the status of the `bee-clef` service.
 
 
 <Tabs
@@ -127,7 +129,8 @@ systemctl status bee-clef
      Active: active (running) since Fri 2020-11-20 23:45:16 GMT; 1min 29s ago
 ```
 
-And if you want to follow its logs, you can use:
+And if you want to get Bee Clef's logs, you can use:
+
 ```bash
 journalctl -f -u bee-clef.service
 ```
@@ -142,7 +145,7 @@ launchctl list | grep swarm-clef
   </TabItem>
 </Tabs>
 
-When Bee-clef first starts, you should see something very similar to the following:
+When Bee Clef first starts, you should see something very similar to the following:
 ```log
 Feb 21 19:52:43 comp-name systemd[1]: Started Bee Clef.
 Feb 21 19:52:43 comp-name bee-clef-service[494678]: WARNING!
@@ -182,17 +185,17 @@ Feb 24 22:30:19 comp-name bee-clef-service[1118]: INFO [02-24|22:30:19.344] Op a
 Key material and other data is stored in `/var/lib/bee-clef/`
 
 :::info
-Bee can communicate with Bee-clef in a variety of ways. The default way, if installed via the packages, will use an Inter-process communication (IPC) file. This is a special file that Bee-clef creates on startup that Bee will use to send requests back-and-forth. When the Bee-clef service is running you'll notice that a `/var/lib/bee-clef/clef.ipc` file is created.
+Bee can communicate with Bee Clef in a variety of ways. The default way, if installed via the packages, will use an Inter-process communication (IPC) file. This is a special file that `bee-clef` creates on startup that Bee will use to send requests back-and-forth. When the `bee-clef` service is running you'll notice that a `/var/lib/bee-clef/clef.ipc` file is created.
 :::
 
 ## Manual Installation
 
-Try the [Github releases page](https://github.com/ethersphere/bee-clef/releases) for x-platform binaries or, to install Clef manually, first retrieve the relevant Clef binary from Ethereum's [Geth & Tools](https://geth.ethereum.org/downloads/) download page, or build directly from the [source](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum).
+Try the [Github releases page](https://github.com/ethersphere/bee-clef/releases) for binaries for your platform. Otherwise to install Clef manually first retrieve the relevant Clef binary from Ethereum's [Geth & Tools](https://geth.ethereum.org/downloads/) download page, or build directly from the [source](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum).
 
 Because Bee needs Clef to sign many transactions automatically, we must run Clef as a service with relaxed permissions and rules set. To ensure Clef only signs transactions from Bee, we must protect the `clef.ipc` file by **creating a Bee user and setting permissions so that it is only possible for this user to make use of the ipc socket.**
 
 Additionally, Clef requires transaction signatures for the Bee's chequebook interaction.
 
-A shell script automating the post-initialisation permission changing and including the Clef config, `clef-service`, as well as the `4byte.json` transaction signature file and `rules.js` file can all be found in the [Bee-clef repository](https://github.com/ethersphere/bee-clef/tree/master/packaging).
+A shell script automating the post-initialisation permission changing and including the Clef config, `clef-service`, as well as the `4byte.json` transaction signature file and `rules.js` file can all be found in the [bee-clef repository](https://github.com/ethersphere/bee-clef/tree/master/packaging).
 
 Finally, once Clef is running, simply [configure your Bee node](/docs/working-with-bee/configuration) to enable Clef using `--clef-signer-enable` and point Bee to the correct ipc socket using `--clef-signer-endpoint`.

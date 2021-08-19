@@ -11,7 +11,7 @@ pkgs.mkShell {
     coreutils diffutils
     bash-completion less
     gitFull
-    nodejs
+    nodejs-14_x
 
     # keep this line if you use bash
     bashInteractive
@@ -23,6 +23,8 @@ pkgs.mkShell {
 
   shellHook =
   ''
+    # ideally, npm ci should be here, and it should run fast when it has nothing to do...
+    # npm ci 
     npm start
   '';
 }
