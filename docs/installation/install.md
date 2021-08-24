@@ -27,7 +27,7 @@ To install Bee you will need to go through the following process.
  1. Set up the external signer for Bee, [Bee Clef](/docs/installation/bee-clef). (Recommended) 
  2. Install Bee and set it up to run as a service.
  3. Configure Bee.
- 4. [Fund your node](/docs/installation/fund-your-node) with XDAI and BZZ
+ 4. [Fund your node](/docs/installation/fund-your-node) with XDAI and BZZ for the mainnet and gETH and gBZZ for our testnet.
  5. Wait for your chequebook transactions to complete and batch store to update.
  6. Check Bee is working.
 
@@ -245,6 +245,8 @@ more specific information on how to tune your Bee, and (re)start it's
 service.
 
 #### Mainnet Node or Testnet Node
+
+Bee is set up to connect automatically to our testnet, so you may leave the `mainnet` and `network-id` flag as is.
 
 To connect to mainnet, set your `mainnet` flag to `true` and `network-id` flag to `1`.
 
