@@ -35,17 +35,19 @@ The "context deadline exceeded" is a non critical warning. It means that a node 
 
 ### How do I set up a blockchain endpoint?
 
+We recommend you run your own [XDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
+
 - If you use "bee start" 
     - you can set it in your bee configuration under --swap-endpoint or BEE_SWAP_ENDPOINT
     - open ~/.bee.yaml
-    - set `swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key`
+    - set `swap-endpoint: http://localhost:8545`
 
 
 - If you use bee.service
     - you can set it in your bee configuration under --swap-endpoint or BEE_SWAP_ENDPOINT
     - open /etc/bee/bee.yaml
     - and then uncomment `swap-endpoint` configuration
-    - and set it to `https://stake.getblock.io/mainnet/?api_key=your-api-key`
+    - and set it to `http://localhost:8545`
     - after that sudo systemctl restart bee
 
 
@@ -125,18 +127,6 @@ Get your chequebook contract address with: `curl http://localhost:1635/chequeboo
 ### I have compared transactions between my ethereum address and my chequebook address, the number are different, which is quite weird.
 
 Your chequebook will show OUT BZZ transactions when your peers cash cheques issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
-
-### How to set getblock.io endpoint:
-
-You need to sign up for a free account at infura.io, set up an Ethereum project, and get the XDAI API key which will include your personal API key.  Put that URL in your swap-endpoint and restart your node.
-
-```
-https://stake.getblock.io/mainnet/?api_key=my-api-key
-```
-
-### Can I connect several nodes to getblock.io endpoint?
-
-Yes, but their free plan has limit 40k requests per day.
 
 
 ### Where can I find documents about the cashout commands?

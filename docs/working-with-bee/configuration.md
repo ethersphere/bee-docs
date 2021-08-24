@@ -23,7 +23,11 @@ the swarm, you must set the `--full-node` option to `true`.
 
 ### Swap Endpoint
 
-In order to access the blockchain, your Bee must be connected to an XDAI blockchain node on the XDAI network. We recommend running your own XDAI Node, but if you prefer, you may also sign up to [getblock.io](https://getblock.io) API service and set your url to be `https://stake.getblock.io/mainnet/?api_key=your-api-key`
+In order to access the blockchain, your Bee must be connected to an XDAI blockchain node on the XDAI network. We recommend running your own [XDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
+
+:::info
+The xDai chain will soon implement the London hardfork. Please stay informed and update your infrastructure accordingly as OpenEthereum clients are not guaranteed to be supported after the hardfork!
+:::
 
 ### NAT Address
 

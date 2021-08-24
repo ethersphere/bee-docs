@@ -249,7 +249,7 @@ but for now let's take the easy way and sign up to
 [getblock.io](https://getblock.io). Once you have created an account,
 go to your dashboard and make a new project (you can call it whatever
 you'd like to). Then use the api key to create your api url as follows
-`https://stake.getblock.io/mainnet/?api_key=copy-your-api-key-here`. Keep
+`http://localhost:8545`. Keep
 this open for later.
 
 Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those BZZ cheques from your peers! Type:

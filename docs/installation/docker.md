@@ -24,7 +24,7 @@ docker run\
   --rm -it ethersphere/bee:stable\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --swap-endpoint https://stake.getblock.io/mainnet/?api_key=copy-your-api-key-here \
+    --swap-endpoint http://localhost:8545 \
     --debug-api-enable
 ```
 
