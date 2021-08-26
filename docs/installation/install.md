@@ -244,15 +244,20 @@ following configuration parameters to suit your needs. Read on for
 more specific information on how to tune your Bee, and (re)start it's
 service.
 
-#### Mainnet Node or Testnet Node
+#### Testnet Node
+
+Thanks for helping by running a testnet node, you are helping to make the swarm stronger and better! Register your node at 
+
+
+
+#### Mainnet Node
 
 Bee is set up to connect automatically to our testnet, so you may leave the `mainnet` and `network-id` flag as is.
-
-To connect to mainnet, set your `mainnet` flag to `true` and `network-id` flag to `1`.
 
 ```yaml
 mainnet: true
 network-id: 1
+bootnode: [/dnsaddr/mainnet.ethswarm.org]
 ```
 
 #### Full Node or Light Node
@@ -272,14 +277,20 @@ full-node: true
 #### Blockchain Endpoints
 
 Your Bee node must have *stable* access to the XDAI blockchain, so that it
-can interact with and deploy your chequebook contract. You can run your
-[own XDAI node](https://www.xdaichain.com/) or, use a provider instead - we recommend
-[Getblock](https://getblock.io/).
+can interact with and deploy your chequebook contract. We recommend you run your own [XDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
 
 By default, Bee expects a local XDAI node at `ws://localhost:8545`. To use an Ethereum RPC provider instead, change your configuration as follows:
 
 ```yaml
-swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
+swap-endpoint: http://localhost:8545
+```
+
+#### Funding Your Chequebook
+
+You may select how much BZZ to fund your wallet with. We suggest 1 BZZ as a good starter amount, but you can start with more if you will be paying for a lot of interaction with the network, or even none at all if you will stay within the time based payment thresholds!
+
+```yaml
+swap-initial-deposit: 10000000000000000
 ```
 
 If you would like to use your node to resolve ENS domain names, you must also provide the endpoint for an Ethereum mainnet RPC provider.
@@ -295,6 +306,7 @@ Bee is designed to work on a lot of different hardware configurations. To facili
 ```yaml
 db-open-files-limit: 2000
 ```
+
 ### NAT Address
 
 Swarm is all about sharing and storing chunks of data. To enable other
