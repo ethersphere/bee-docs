@@ -67,6 +67,16 @@ Once your batch has been purchased, it will take a few minutes for other Bee nod
 
 Look out for more ways to more accurately estimate the correct size of your batch coming soon!
 
+To check on your stamps, send a GET request to the stamp endpoint.
+
+```sh
+curl http://localhost:1635/stamps
+```
+
+:::info
+When uploading content which is stamped using an already expired postage stamp, the node will not attempt to sync the content. You are advised to use longer-lived postage stamps and encrypt your content to work around this. It is not possible to reupload unencrypted content which was stamped using an expired postage stamp. We're working on improving on this.
+:::
+
 ### Calculating the Remaining Balance of Your Batch
 
 In order to make sure your *batch* has sufficient *remaining balance* to be stored and served by nodes in its *neighbourhood of responsibility*, you must regularly check on its *balance* and act accordingly. 

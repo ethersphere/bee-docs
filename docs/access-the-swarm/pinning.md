@@ -123,7 +123,7 @@ First, we must start up our node with the `global-pinning-enable` flag set.
 ```bash
 bee start\
   --verbosity 5 \
-  --swap-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
+  --swap-endpoint http://localhost:8545 \
   --global-pinning-enable \
   --debug-api-enable
 ```

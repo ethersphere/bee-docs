@@ -163,7 +163,7 @@ Your output should looks something like this:
 
 ```bash
 -rw-r--r--  1 pi   pi       3523 Mar  4 22:47 .bashrc
--rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.0.0_armv7.deb
+-rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.1.0_armv7.deb
 -rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.5.0_armv7.deb
 drwxr-xr-x  2 pi   pi       4096 Mar  4 22:57 Bookshelf
 ```
@@ -176,7 +176,7 @@ Now, let's use the `rm` program to remove the clutter and delete the
 `.deb` files we no longer need.
 
 ```bash
-rm bee_1.0.0_armv7.deb
+rm bee_1.1.0_armv7.deb
 ```
 
 The `rm` program gives no output, so let's check it's dissapeared by
@@ -249,7 +249,7 @@ but for now let's take the easy way and sign up to
 [getblock.io](https://getblock.io). Once you have created an account,
 go to your dashboard and make a new project (you can call it whatever
 you'd like to). Then use the api key to create your api url as follows
-`https://stake.getblock.io/mainnet/?api_key=copy-your-api-key-here`. Keep
+`http://localhost:8545`. Keep
 this open for later.
 
 Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those BZZ cheques from your peers! Type:

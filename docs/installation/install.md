@@ -27,7 +27,7 @@ To install Bee you will need to go through the following process.
  1. Set up the external signer for Bee, [Bee Clef](/docs/installation/bee-clef). (Recommended) 
  2. Install Bee and set it up to run as a service.
  3. Configure Bee.
- 4. [Fund your node](/docs/installation/fund-your-node) with XDAI and BZZ
+ 4. [Fund your node](/docs/installation/fund-your-node) with XDAI and BZZ for the mainnet and gETH and gBZZ for our testnet.
  5. Wait for your chequebook transactions to complete and batch store to update.
  6. Check Bee is working.
 
@@ -166,8 +166,8 @@ running in the background as a service on your computer.
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_amd64.deb
-sudo dpkg -i bee_1.0.0_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_amd64.deb
+sudo dpkg -i bee_1.1.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -175,15 +175,15 @@ sudo dpkg -i bee_1.0.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_armv7.deb
-sudo dpkg -i bee_1.0.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_armv7.deb
+sudo dpkg -i bee_1.1.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_arm64.deb
-sudo dpkg -i bee_1.0.0_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_arm64.deb
+sudo dpkg -i bee_1.1.0_arm64.deb
 ```
 </TabItem>
 <TabItem value="centos">
@@ -193,8 +193,8 @@ sudo dpkg -i bee_1.0.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_amd64.rpm
-sudo rpm -i bee_1.0.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_amd64.rpm
+sudo rpm -i bee_1.1.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -202,15 +202,15 @@ sudo rpm -i bee_1.0.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_armv7.rpm
-sudo rpm -i bee_1.0.0_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_armv7.rpm
+sudo rpm -i bee_1.1.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.0.0/bee_1.0.0_arm64.rpm
-sudo rpm -i bee_1.0.0_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_arm64.rpm
+sudo rpm -i bee_1.1.0_arm64.rpm
 ```
 </TabItem>
 <TabItem value="macos">
@@ -233,9 +233,8 @@ brew services start swarm-bee
 
 ## Configure Bee
 
-Because Bee has many use cases and may run on a wide range of
-hardware, it is important that you configure Bee for your specific use
-case. This will make sure that you get the most out of your Bee!
+To get the most out of your Bee it is important that you configure Bee for your specific use
+case!
 
 ### Important Configuration Parameters
 
@@ -245,13 +244,20 @@ following configuration parameters to suit your needs. Read on for
 more specific information on how to tune your Bee, and (re)start it's
 service.
 
-#### Mainnet Node or Testnet Node
+#### Testnet Node
 
-To connect to mainnet, set your `mainnet` flag to `true` and `network-id` flag to `1`.
+Thanks for helping by running a testnet node, you are helping to make the swarm stronger and better! Register your node at 
+
+
+
+#### Mainnet Node
+
+Bee is set up to connect automatically to our testnet, so you may leave the `mainnet` and `network-id` flag as is.
 
 ```yaml
 mainnet: true
 network-id: 1
+bootnode: [/dnsaddr/mainnet.ethswarm.org]
 ```
 
 #### Full Node or Light Node
@@ -271,14 +277,20 @@ full-node: true
 #### Blockchain Endpoints
 
 Your Bee node must have *stable* access to the XDAI blockchain, so that it
-can interact with and deploy your chequebook contract. You can run your
-[own XDAI node](https://www.xdaichain.com/) or, use a provider instead - we recommend
-[Getblock](https://getblock.io/).
+can interact with and deploy your chequebook contract. We recommend you run your own [XDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
 
 By default, Bee expects a local XDAI node at `ws://localhost:8545`. To use an Ethereum RPC provider instead, change your configuration as follows:
 
 ```yaml
-swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
+swap-endpoint: http://localhost:8545
+```
+
+#### Funding Your Chequebook
+
+You may select how much BZZ to fund your wallet with. We suggest 1 BZZ as a good starter amount, but you can start with more if you will be paying for a lot of interaction with the network, or even none at all if you will stay within the time based payment thresholds!
+
+```yaml
+swap-initial-deposit: 10000000000000000
 ```
 
 If you would like to use your node to resolve ENS domain names, you must also provide the endpoint for an Ethereum mainnet RPC provider.
@@ -294,6 +306,7 @@ Bee is designed to work on a lot of different hardware configurations. To facili
 ```yaml
 db-open-files-limit: 2000
 ```
+
 ### NAT Address
 
 Swarm is all about sharing and storing chunks of data. To enable other

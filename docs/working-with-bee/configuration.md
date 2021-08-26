@@ -23,7 +23,11 @@ the swarm, you must set the `--full-node` option to `true`.
 
 ### Swap Endpoint
 
-In order to access the blockchain, your Bee must be connected to an XDAI blockchain node on the XDAI network. We recommend running your own XDAI Node, but if you prefer, you may also sign up to [getblock.io](https://getblock.io) API service and set your url to be `https://stake.getblock.io/mainnet/?api_key=your-api-key`
+In order to access the blockchain, your Bee must be connected to an XDAI blockchain node on the XDAI network. We recommend running your own [XDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
+
+:::info
+The xDai chain will soon implement the London hardfork. Please stay informed and update your infrastructure accordingly as OpenEthereum clients are not guaranteed to be supported after the hardfork!
+:::
 
 ### NAT Address
 
@@ -123,9 +127,11 @@ configuration of Bee:
 api-addr: :1633
 block-hash: ""
 block-time: "15"
-bootnode: []
+bootnode:
+- /dnsaddr/testnet.ethswarm.org
 bootnode-mode: false
 cache-capacity: "1000000"
+cache-retrieval: true
 clef-signer-enable: false
 clef-signer-endpoint: ""
 clef-signer-ethereum-address: ""
@@ -156,7 +162,6 @@ payment-tolerance: "100000000"
 postage-stamp-address: ""
 price-oracle-address: ""
 resolver-options: []
-standalone: false
 swap-deployment-gas-price: ""
 swap-enable: true
 swap-endpoint: ws://localhost:8546
@@ -167,7 +172,7 @@ tracing-enable: false
 tracing-endpoint: 127.0.0.1:6831
 tracing-service-name: bee
 transaction: ""
-verbosity: "5"
+verbosity: info
 warmup-time: 20m0s
 welcome-message: ""
 ```
@@ -241,6 +246,12 @@ Any Bee node in a network can act as a bootnode.
 *default* `1000000`
 
 The amount of disk space, in chunks, that is used for forwarding and uploading chunks.
+
+#### --cache-retrieval
+
+*default* `true`
+
+Enable the caching of forwarded content.
 
 #### --clef-signer-enable             
 
@@ -459,12 +470,6 @@ ENS API endpoint for a TLD, with contract address. Multiple values can be provid
 Settings should be provided in the format `[tld:][contract-addr@]url`
 
 A default top level domain and resolver contract address are provided, but an ENS/Geth endpoint must be provided to enable this functionality.
-
-#### --standalone
-
-*default* `false`
-
-Set this flag if we would like the node not to try to connect to the network. Useful for development.
 
 #### --swap-enable
 

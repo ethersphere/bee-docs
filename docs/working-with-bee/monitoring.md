@@ -21,6 +21,10 @@ sudo apt install prometheus
 
 And configure `localhost:1635` as a `target` in the `static_configs`.
 
+```bash
+sudo vim /etc/prometheus/prometheus.yml
+```
+
 ```yaml
     static_configs:
             - targets: ['localhost:9090','localhost:1635']

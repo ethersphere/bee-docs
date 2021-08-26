@@ -24,6 +24,3 @@ jobs:
         run: |
           npm ci
           npm run build
-
-      - name: Check broken links
-        run: set -o pipefail; npm run linkchecker 2>/dev/null | grep "Getting links from\|BROKEN"
