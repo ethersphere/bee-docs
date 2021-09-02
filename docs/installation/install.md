@@ -116,6 +116,16 @@ brew services start swarm-clef
 </TabItem>
 </Tabs>
 
+If you are running a mainnet node, you must change the Bee clef configuration to use chainid `100`.
+
+```bash
+sudo vim /etc/default/bee-clef
+```
+
+```bash
+BEE_CLEF_CHAIN_ID=100
+```
+
 Finally, let's check Bee Clef is running.
 
 <Tabs
