@@ -20,12 +20,12 @@ server](https://discord.gg/wdghaQsGq5) and we'll help you find the
 way! 🐝 🐝 🐝 🐝 🐝
 
 :::info
-To ensure your Bee has the best chance of particpating in the swarm,
+To ensure your Bee has the best chance of participating in the swarm,
 you must ensure your Bee is able to handle **both incoming and
 outgoing connections from the global Internet to its p2p port
 (`1634` by default)**. See below for a detailed guide on how to make sure
 this is the case, or for the 1337: check your
-`http://localhost:1635/addresses` to see which public ip and port
+`http://localhost:1635/addresses` to see which public IP and port
 libp2p is advertising and verify its connectivity to the rest of the
 Internet! You may need to alter your Bee nodes `nat-addr`
 configuration. 🤓
@@ -92,12 +92,20 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 Here we can see our computer's **public IP address**
 `178.128.196.191`. This is the address that is used by other computers
 we connect to over the Internet. We can verify this using a third
-party service such as *icanhazip*.
+party service such as *icanhazip* or *ifconfig*.
 
 ```bash
-curl icanhazip.com
+curl icanhazip.com --ipv4
 ```
 
+or
+
+
+```bash
+curl ifconfig.co --ipv4
+```
+
+The response something contain something like:
 ```
 178.128.196.191
 ```
