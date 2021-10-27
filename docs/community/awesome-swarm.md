@@ -28,7 +28,7 @@ https://github.com/ethersphere/storage-incentives
 
 #### The Book of Swarm
 
-https://gateway.ethswarm.org/bzz/latest.bookofswarm.eth/
+https://docs.ethswarm.org/the-book-of-swarm.pdf
 
 ### Documentation
 
