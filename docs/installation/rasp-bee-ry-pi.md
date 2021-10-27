@@ -3,6 +3,10 @@ title: Rasp-bee-ry Pi
 id: rasp-bee-ry-pi
 ---
 
+:::danger
+It is not recommended to run a full node on a Raspberry Pi. Please ensure Bee is running in 'light-node' mode.
+:::
+
 You will need:
 
 - Raspberry Pi 4
