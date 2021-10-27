@@ -3,6 +3,10 @@ title: Rasp-bee-ry Pi
 id: rasp-bee-ry-pi
 ---
 
+:::danger
+It is not recommended to run a full node on a Raspberry Pi. Please ensure Bee is running in 'light-node' mode.
+:::
+
 You will need:
 
 - Raspberry Pi 4
@@ -61,11 +65,11 @@ We must install Bee Clef **before** Bee. To do so, open the browser
 (the 🌐 icon) and type the following to open these docs on your
 Raspberry Pi [https://docs.ethswarm.org](https://docs.ethswarm.org).
 
-Click `Install > Bee Clef` and scroll down to find the installation commands for Bee Clef **ARM (Raspberry Pi) ARMv7**. These should look something like: 
+Click `Install > Bee Clef` and scroll down to find the installation commands for Bee Clef **ARM (Raspberry Pi) ARMv7**. These should look something like:
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef_0.5.0_armv7.deb
-sudo dpkg -i bee-clef_0.5.0_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.6.0/bee-clef_0.6.0_armv7.deb
+sudo dpkg -i bee-clef_0.6.0_armv7.deb
 ```
 
 Click `Copy` on the right hand side of the box containing the
@@ -77,11 +81,11 @@ character.
 You should see some output from the `wget` command which is a Linux utility this is used to download the correct Bee Clef 'package' from Github, where the development of the Bee utilities takes place.
 
 ```bash
-bee-clef_0.5.0_armv7.deb.1           100%[===================================================================>]   9.99M  8.21MB/s    in 1.2s    
+bee-clef_0.6.0_armv7.deb.1           100%[===================================================================>]   9.99M  8.21MB/s    in 1.2s
 
-2021-05-15 17:34:02 (8.21 MB/s) - ‘bee-clef_0.5.0_armv7.deb’ saved [10473282/10473282]
+2021-05-15 17:34:02 (8.21 MB/s) - ‘bee-clef_0.6.0_armv7.deb’ saved [10473282/10473282]
 
-pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.5.0_armv7.deb
+pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.6.0_armv7.deb
 ```
 
 The other command will be left in your terminal, this uses the `dpkg` utility, the Debian Package Manager to install Bee Clef. Package Managers are used to conveniently install software on Linux systems.
@@ -89,12 +93,12 @@ The other command will be left in your terminal, this uses the `dpkg` utility, t
 Press enter to start the installation process. All being well, you will see some output like this:
 
 ```
-pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.5.0_armv7.deb
+pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.6.0_armv7.deb
 Selecting previously unselected package bee-clef.
 (Reading database ... 98610 files and directories currently installed.)
-Preparing to unpack bee-clef_0.5.0_armv7.deb ...
-Unpacking bee-clef (0.5.0) ...
-Setting up bee-clef (0.5.0) ...
+Preparing to unpack bee-clef_0.6.0_armv7.deb ...
+Unpacking bee-clef (0.6.0) ...
+Setting up bee-clef (0.6.0) ...
 Created symlink /etc/systemd/system/multi-user.target.wants/bee-clef.service → /lib/systemd/system/bee-clef.service.
 ```
 
@@ -163,8 +167,8 @@ Your output should looks something like this:
 
 ```bash
 -rw-r--r--  1 pi   pi       3523 Mar  4 22:47 .bashrc
--rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.1.0_armv7.deb
--rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.5.0_armv7.deb
+-rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.3.0_armv7.deb
+-rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.6.0_armv7.deb
 drwxr-xr-x  2 pi   pi       4096 Mar  4 22:57 Bookshelf
 ```
 
@@ -176,7 +180,7 @@ Now, let's use the `rm` program to remove the clutter and delete the
 `.deb` files we no longer need.
 
 ```bash
-rm bee_1.1.0_armv7.deb
+rm bee_1.3.0_armv7.deb
 ```
 
 The `rm` program gives no output, so let's check it's dissapeared by
@@ -190,11 +194,11 @@ ls -la | grep "bee"
 ```
 
 ```bash
--rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.5.0_armv7.deb
+-rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.6.0_armv7.deb
 ```
 
 Success! The Bee package file is deleted! Note at the command line
-there *is no undelete*. **With great power comes great
+there _is no undelete_. **With great power comes great
 resposibility**. Please use your new powers wisely, and only for the
 good of the swarm as a whole. 🐝🧡
 

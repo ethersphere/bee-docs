@@ -16,13 +16,15 @@ If your system is not supported, you might want to try to [build directly from s
 To install the binary using our quick install script, run either one of the following commands in your Terminal:
 
 #### wget
+
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.1.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.3.0 bash
 ```
 
 #### curl
+
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.1.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.3.0 bash
 ```
 
 ### Run Bee
@@ -34,14 +36,14 @@ bee version
 ```
 
 ```
-1.1.0
+1.3.0
 ```
 
 Now your Bee node is installed, you can [fund your
 node](/docs/installation/fund-your-node) with BZZ and join us in the
 swarm! 🐝 🐝 🐝 🐝 🐝
 
-With Bee installed, simply type `bee start` in your Terminal. 
+With Bee installed, simply type `bee start` in your Terminal.
 
 This command will start Bee for the first time and prompt you to create your Bee wallet.
 
