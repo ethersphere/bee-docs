@@ -176,8 +176,8 @@ running in the background as a service on your computer.
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_amd64.deb
-sudo dpkg -i bee_1.1.0_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.3.0/bee_1.3.0_amd64.deb
+sudo dpkg -i bee_1.3.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -185,16 +185,17 @@ sudo dpkg -i bee_1.1.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_armv7.deb
-sudo dpkg -i bee_1.1.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.3.0/bee_1.3.0_armv7.deb
+sudo dpkg -i bee_1.3.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_arm64.deb
-sudo dpkg -i bee_1.1.0_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.3.0/bee_1.3.0_arm64.deb
+sudo dpkg -i bee_1.3.0_arm64.deb
 ```
+
 </TabItem>
 <TabItem value="centos">
 
@@ -203,8 +204,8 @@ sudo dpkg -i bee_1.1.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_amd64.rpm
-sudo rpm -i bee_1.1.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.3.0/bee_1.3.0_amd64.rpm
+sudo rpm -i bee_1.3.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -212,16 +213,17 @@ sudo rpm -i bee_1.1.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_armv7.rpm
-sudo rpm -i bee_1.1.0_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.3.0/bee_1.3.0_armv7.rpm
+sudo rpm -i bee_1.3.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.1.0/bee_1.1.0_arm64.rpm
-sudo rpm -i bee_1.1.0_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.3.0/bee_1.3.0_arm64.rpm
+sudo rpm -i bee_1.3.0_arm64.rpm
 ```
+
 </TabItem>
 <TabItem value="macos">
 
