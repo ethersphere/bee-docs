@@ -47,8 +47,6 @@ The BZZ Token is built out of a smart contract that is specifically designed to 
 
 SWAP is the name of the system/rules applied to the exchange of data that results in the reward (or cost) of BZZ. As you contribute service to the swarm, you are awarded through the SWAP system with BZZ; but as you consume the service of the swarm, it costs you BZZ.
 
-Read more about [SWAP here](/docs/advanced/swap).
-
 ### Cheques & ChequeBook
 
 Settling transactions on the Ethereum network can be expensive and time-consuming, especially when there is a high-volume of transactions. If Bee nodes are transferring many blocks of files back-and-forth to feed the Swarm network demand, the amount of transactions can add up quickly.
@@ -64,7 +62,3 @@ Goerli is a Testnet, meaning that this is a safe environment to develop and test
 #### Faucet
 
 It takes BZZ tokens to seed your node so it can join the Swarm. Before it can start providing storage/network as a resource, it needs to receive data that the Swarm holds which costs BZZ. Since Goerli is a test network, there aren't marketplaces that you can "buy" BZZ, so a faucet is a pool of BZZ (and gEth) that will "sprinkle" (freely share/send) some of it to the address that you request. There is a #faucet-requset channel on the [Swarm Discord](https://discord.gg/wdghaQsGq5) which you may join and request.
-
-### Mainnet
-
-This is another name for the production 'official' Ethereum network that you use to buy/sell Ethereum (among many others). Bee will launch on this network once feature complete and stable.
