@@ -5,7 +5,7 @@ id: direct-upload
 
 :::caution
 We recommend turning the encryption *ON* when using this feature. Otherwise the uniformity assumption will be broken.
-If the encryption is *OFF* then uploading the same content multiple times using the same postage stamp will lead to its value decreasing faster.
+Please note that when uploading the same content multiple times using the same postage stamp without encryption will cause your postage stamp to fill-up faster than usual!
 :::
 
 #### Configuration
