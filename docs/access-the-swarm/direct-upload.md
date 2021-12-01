@@ -4,13 +4,13 @@ id: direct-upload
 ---
 
 :::caution
-We recomment turning the encryption *ON* when using this feature. Otherwise the uniformity assumption will be broken.
-If the encryption is *OFF* the stamp value will decrease faster.
+We recommend turning the encryption *ON* when using this feature. Otherwise the uniformity assumption will be broken.
+If the encryption is *OFF* then uploading the same content multiple times using the same postage stamp will lead to its value decreasing faster.
 :::
 
 #### Configuration
 
-By default your bee instace will handle uploads in a _deferred_ manner.
+By default your bee instance will handle uploads in a _deferred_ manner.
 If you want to upload directly to the network you have to set the `Swarm-Deferred-Upload` header value to "false" in your request.
 
 ```bash
