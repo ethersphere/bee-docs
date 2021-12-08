@@ -10,7 +10,7 @@ configuration in detail.
 ## Important Configuration Changes
 
 :::important
-Before starting Bee for the first time, there is *some* configuration
+Before starting Bee for the first time, there is _some_ configuration
 to do! Make sure you consider updating the following recommended
 settings!
 :::
@@ -104,12 +104,12 @@ capitalised, and underscored environment variables.
 
 e.g. `--api-addr` becomes `BEE_API_ADDR`.
 
-
 ### Configuration file
+
 Bee can also be configured by providing a YAML configuration file using the `--config` flag.
 
 ```bash
-bee start --config /home/<user>/bee-config.yaml 
+bee start --config /home/<user>/bee-config.yaml
 ```
 
 #### Automatically generate a config file
@@ -124,20 +124,22 @@ This produces the following file contents, showing the default
 configuration of Bee:
 
 ```yaml
+admin-password: ""
+allow-private-cidrs: false
 api-addr: :1633
 block-hash: ""
 block-time: "15"
 bootnode:
-- /dnsaddr/testnet.ethswarm.org
+    - /dnsaddr/testnet.ethswarm.org
 bootnode-mode: false
 cache-capacity: "1000000"
 cache-retrieval: true
 clef-signer-enable: false
 clef-signer-endpoint: ""
 clef-signer-ethereum-address: ""
-config: /home/user/.bee.yaml
+config: /home/ubuntu/.bee.yaml
 cors-allowed-origins: []
-data-dir: /home/user/.bee
+data-dir: /home/ubuntu/.bee
 db-block-cache-capacity: "33554432"
 db-disable-seeks-compaction: false
 db-open-files-limit: "200"
@@ -152,31 +154,37 @@ mainnet: false
 nat-addr: ""
 network-id: "10"
 p2p-addr: :1634
-p2p-quic-enable: false
 p2p-ws-enable: false
 password: ""
 password-file: ""
-payment-early: "10000000"
+payment-early-percent: 50
 payment-threshold: "100000000"
-payment-tolerance: "100000000"
+payment-tolerance-percent: 25
 postage-stamp-address: ""
+pprof-mutex: false
+pprof-profile: false
 price-oracle-address: ""
 resolver-options: []
+restricted: false
+resync: false
+static-nodes: []
 swap-deployment-gas-price: ""
 swap-enable: true
 swap-endpoint: ws://localhost:8546
 swap-factory-address: ""
 swap-initial-deposit: "10000000000000000"
 swap-legacy-factory-addresses: []
+token-encryption-key: ""
 tracing-enable: false
 tracing-endpoint: 127.0.0.1:6831
+tracing-host: ""
+tracing-port: ""
 tracing-service-name: bee
 transaction: ""
 verbosity: info
 warmup-time: 20m0s
 welcome-message: ""
 ```
-
 
 ## Configuring Bee Installed Using a Package Manager
 
@@ -209,15 +217,23 @@ Bee provides the following options to customise your node.
 
 #### --config
 
-*default* `/home/<user>/.bee.yaml`
+_default_ `/home/<user>/.bee.yaml`
 
 The location of a YAML configuration file containing configuration options. See [configuration](#configuration-file).
 
 ### Start
 
+#### admin-password
+
+_default_ : ""
+
+#### allow-private-cidrs: false
+
+_default_ : ""
+
 #### --api-addr
 
-*default* :1633
+_default_ :1633
 
 The IP and port the API will serve HTTP requests from. Omitting the IP
 part of the address will cause the server to listen to all
@@ -225,37 +241,37 @@ interfaces. Argument values are of the form '132.132.132.132:1633'.
 
 #### --block-time
 
-*default* 15
+_default_ 15
 
 The expected block time of the attached SWAP endpoint.
 
 #### --bootnode
 
-*default* `/dnsaddr/bootnode.ethswarm.org`
+_default_ `/dnsaddr/bootnode.ethswarm.org`
 
 This is a [multiaddr](https://github.com/multiformats/multiaddr)
 specifying the Bee bootnodes used for bootstrapping the network. It
 can be multiple values.
 
-By default a node connects to the Swarm mainnet.  When using a private or test network, network specific bootnodes must be set. 
+By default a node connects to the Swarm mainnet. When using a private or test network, network specific bootnodes must be set.
 
 Any Bee node in a network can act as a bootnode.
 
 #### --cache-capacity
 
-*default* `1000000`
+_default_ `1000000`
 
 The amount of disk space, in chunks, that is used for forwarding and uploading chunks.
 
 #### --cache-retrieval
 
-*default* `true`
+_default_ `true`
 
 Enable the caching of forwarded content.
 
-#### --clef-signer-enable             
+#### --clef-signer-enable
 
-*default* `false`
+_default_ `false`
 
 Set this to true to enable signing using Ethereum's Clef external
 signer. Clef is a new feature which requires a corresponding rules
@@ -264,13 +280,13 @@ handshakes and cheques.
 
 #### --clef-signer-endpoint
 
-*default* **default path for clef for each host operating system**
+_default_ **default path for clef for each host operating system**
 
 You may also specify a custom IPC file path for your Clef signer.
 
 #### --clef-signer-ethereum-address
 
-*default* **selects the clef address at index 0**
+_default_ **selects the clef address at index 0**
 
 Use this command to specify which Bee Clef address is used if you have imported multiple keys into Bee Clef.
 
@@ -280,7 +296,7 @@ If you have multiple addresses imported into your instance of Bee Clef, you must
 
 #### --cors-allowed-origins
 
-*default* `[]`
+_default_ `[]`
 
 HTTP/WS origin domains or wildcards defining these, which the API will
 allow responses to, e.g.
@@ -292,13 +308,12 @@ bee start --cors-allowed-origins="https://website.ethswarm.org"
 
 #### --data-dir
 
-*default* `/home/<user>/.bee`
+_default_ `/home/<user>/.bee`
 
 The location on your disk where Bee stores its data. Data in this
 directory will be required to restore a node state using the same key.
 
 This consists of the following three types of data.
-
 
 ##### 1. Chunk Data (localstore)
 
@@ -313,46 +328,50 @@ This is information about the local state of your Bee node and should be backed 
 These files contain encrypted versions of your private key and should be backed up and kept private.
 
 :::danger
-Keep the key files in your keystore data directory safe! 
+Keep the key files in your keystore data directory safe!
 
 They are the cryptographic proof of your network identity and cannot be recovered.
 :::
 
-*The next four options expose low-level configurations for
+_The next four options expose low-level configurations for
 [LevelDB](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb/opt#Options)'s
  [Openfile](https://pkg.go.dev/github.com/syndtr/goleveldb@v1.0.0/leveldb#OpenFile)
 method. Please let us know how you get on with tweaking these settings
 on your hardware in the
 [#node-operators](https://discord.gg/X3ph5yGRFU) channel on our
-[Discord server](https://discord.gg/wdghaQsGq5)*
+[Discord server](https://discord.gg/wdghaQsGq5)_
 
 #### --db-block-cache-capacity
-*default* `33554432`
+
+_default_ `33554432`
 
 Corresponds to LevelDB `BlockCacheCapacity` (see above)
 
 #### --db-disable-seeks-compaction
-*default* `false`
+
+_default_ `false`
 
 Corresponds to LevelDB `DisableSeeksCompaction` (see above)
 
 #### --db-open-files-limit
-*default* `200`
+
+_default_ `200`
 
 :::info
-To accomodate less powerful hardware and operating systems, the `db-open-files-limit` is set deliberately low. We recommend that you try to increase it to nearer to `10000` or more if this is possible when using your hardware. *Please let us know how you get on with tweaking these settings on your hardware in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel on our [Discord server](https://discord.gg/wdghaQsGq5)*
+To accomodate less powerful hardware and operating systems, the `db-open-files-limit` is set deliberately low. We recommend that you try to increase it to nearer to `10000` or more if this is possible when using your hardware. _Please let us know how you get on with tweaking these settings on your hardware in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel on our [Discord server](https://discord.gg/wdghaQsGq5)_
 :::
 
 Corresponds to LevelDB `OpenFilesCacheCapacity` (see above)
 
 #### --db-write-buffer-size
-*default* `33554432`
+
+_default_ `33554432`
 
 Corresponds to LevelDB `WriteBuffer` (see above)
 
 #### --debug-api-addr
 
-*default* `:1635`
+_default_ `:1635`
 
 The IP and port the [Debug API](/docs/api-reference/api-reference)
 will serve HTTP requests from.
@@ -364,19 +383,19 @@ all requests.
 
 #### --debug-api-enable
 
-*default* `false`
+_default_ `false`
 
 Set this to `true` to enable access to the [Debug API](/docs/api-reference/api-reference)
 
 #### --full-node
 
-*default* false
+_default_ false
 
 Enable this by setting it to `true` to fully participate in serving and forwarding chunks to the network.
 
-#### --gateway-mode 
+#### --gateway-mode
 
-*default* `false`
+_default_ `false`
 
 Set this to `true` to disable a set of sensitive features in the API
 to ensure that it is safe to expose your `api-addr` to the public
@@ -384,47 +403,47 @@ Internet.
 
 #### --global-pinning-enable
 
-*default* `false`
+_default_ `false`
 
 Enables the Global Pinning functionality when set to `true`.
 
 #### --mainnet
 
-*default* `false`
+_default_ `false`
 
 #### --nat-addr
 
-*default* `""`
+_default_ `""`
 
 Sets the expected public IP. Normally this is generated automatically, but in certain circumstances it may be desirable to set it manually.
 
 #### --network-id
 
-*default* `10`
+_default_ `10`
 
 The network ID for which to accept new connections. Set to 1 for mainnet, 10 for testnet.
 
 #### --p2p-addr
 
-*default* `:1634`
+_default_ `:1634`
 
 The IP and port to listen for p2p protocol messages.
 
 #### --p2p-quic-enable
 
-*default* `false`
+_default_ `false`
 
 #### --p2p-ws-enable
 
-*default* `false`
+_default_ `false`
 
 Enables web-sockets transport for p2p communications.
 
 #### --password
 
-*default* `""`
+_default_ `""`
 
-Password used to decrypt Swarm identity keys. 
+Password used to decrypt Swarm identity keys.
 
 :::danger
 Passing passwords as command line arguments is insecure. Use a password file or environment variable in production environments.
@@ -432,66 +451,83 @@ Passing passwords as command line arguments is insecure. Use a password file or 
 
 #### --password-file
 
-*default* `""`
+_default_ `""`
 
 The path to a file that contains password for decrypting keys. The empty string assumes no file is presented.
 
-#### --payment-early
+#### --payment-early-percent
 
-*default* `1000000000000`
+_default_ `50`
 
-Amount in BZZ below the peers payment threshold which causes Bee to
-initiate settlement.
+Percentage below the peers payment threshold when we initiate settlement.
 
 #### --payment-threshold
 
-*default* `10000000000000`
+_default_ `100000000`
 
 The threshold in BZZ where you expect to get paid from your peers.
 
-#### --payment-tolerance
+#### --payment-tolerance-percent
 
-*default* `10000000000000`
+_default_ `25`
 
-The excess debt above payment threshold in gBZZ where you disconnect from your peer.
+Excess debt above payment threshold as a percentage where you disconnect from your peer (default 25).
 
 #### --postage-stamp-address
 
-*default* *automatically configured depending on network*
+_default_ _automatically configured depending on network_
 
 The address of the postage stamp contract on the Ethereum blockchain, used for buying batches of stamps.
 
-#### --resolver-options 
+#### --resolver-options
 
-*default* eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e@localhost:8545
+_default_ eth:0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e@localhost:8545
 
-ENS API endpoint for a TLD, with contract address. Multiple values can be provided. 
+ENS API endpoint for a TLD, with contract address. Multiple values can be provided.
 
 Settings should be provided in the format `[tld:][contract-addr@]url`
 
 A default top level domain and resolver contract address are provided, but an ENS/Geth endpoint must be provided to enable this functionality.
 
+#### --restricted
+
+_default_: false
+
+Enable permission check on the http APIs
+
+#### --resync
+
+_default_: false
+
+Forces the node to resync postage contract data.
+
+#### static-nodes
+
+_default_: []
+
+Protect nodes from getting kicked out on bootnode
+
 #### --swap-enable
 
-*default* `true`
+_default_ `true`
 
-#### --swap-endpoint           
+#### --swap-endpoint
 
-*default* `ws://localhost:8546`
+_default_ `ws://localhost:8546`
 
 SWAP ethereum blockchain endpoint. Must be equipped with websockets.
 
 #### --swap-factory-address
 
-*default* `anointed contract for the current blockchain id`
+_default_ `anointed contract for the current blockchain id`
 
 #### --swap-initial-deposit
 
-*default* `10000000000000000`
+_default_ `10000000000000000`
 
 #### --tracing-enable
 
-*default* `false`
+_default_ `false`
 
 Send tracing spans to the tracing service. More information how to
 configure and visualize tracing data is available
@@ -499,19 +535,19 @@ configure and visualize tracing data is available
 
 #### --tracing-endpoint
 
-*default* `127.0.0.1:6831`
+_default_ `127.0.0.1:6831`
 
 The URL where the tracing service listens for Thrift protocol UDP messages.
 
 #### --tracing-service-name
 
-*default* `bee`
+_default_ `bee`
 
 Bee service identifier in tracing spans.
 
 #### --transaction
 
-*default* `""`
+_default_ `""`
 
 As a spam prevention measure, for nodes which deployed their
 chequebook with v0.5.0 or before, specify `transaction` - [the
@@ -521,12 +557,12 @@ sent from the Bee node's Ethereum address.
 
 #### --verbosity
 
-*default* `info`
+_default_ `info`
 
 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
 
 #### --welcome-message
 
-*default* `""`
+_default_ `""`
 
 Custom welcome message to be displayed to peers on succesful connection.
