@@ -71,7 +71,7 @@ Your Bee should start up as normal, and begin to connect to other Bees that are 
 6. Adjust your networkID in the configuration from `1` to `10` (the new networkID for the testnet). Check out the [configuration](/docs/working-with-bee/configuration) guide for more info on how to update your configuration.
 7. Restart your node.
 
-Your Bee should start up as normal, and begin to connect to other Bees that are running Bee 1.4.0 or later.
+Your Bee should start up as normal, and begin to connect to other Bees that are running Bee 1.4.1 or later.
 
 ## Upgrade Procedure
 
