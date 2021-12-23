@@ -9,21 +9,21 @@ It is not recommended to run a full node on a Raspberry Pi. Please ensure Bee is
 
 You will need:
 
-- Raspberry Pi 4
-- 128GB Micro SD Card
-- SD card reader or some way to write to your SD Card
-- Micro to Normal HDMI Cable (Male->Male)
-- USB keyboard and mouse
-- USB C power adapter suitiable for your Pi
-- A monitor or TV with a HDMI input
-- Another computer
-- The password for you WiFi network or an ethernet connection*
+-   Raspberry Pi 4
+-   128GB Micro SD Card
+-   SD card reader or some way to write to your SD Card
+-   Micro to Normal HDMI Cable (Male->Male)
+-   USB keyboard and mouse
+-   USB C power adapter suitiable for your Pi
+-   A monitor or TV with a HDMI input
+-   Another computer
+-   The password for you WiFi network or an ethernet connection\*
 
 ### Install Raspbian OS and Start Your Pi
 
 To get started download the [official SD card formatter](https://www.sdcard.org/downloads/formatter/) and format your card . A 'quick format' should suffice. You may try to skip this step, but completing it will ensure your best chance of success.
 
-Next download the official [Raspberry Pi Imager](https://www.raspberrypi.org/software/) and use it to image the *Raspberry Pi OS* on to your SD card. This is a port of the Debian Linux operating system which is designed to work well with your Raspberry Pi's hardware.
+Next download the official [Raspberry Pi Imager](https://www.raspberrypi.org/software/) and use it to image the _Raspberry Pi OS_ on to your SD card. This is a port of the Debian Linux operating system which is designed to work well with your Raspberry Pi's hardware.
 
 Once you have installed the operating system. Take your SD card and
 place it into your Raspbery Pi. Connect the HDMI cable to suitable
@@ -68,8 +68,8 @@ Raspberry Pi [https://docs.ethswarm.org](https://docs.ethswarm.org).
 Click `Install > Bee Clef` and scroll down to find the installation commands for Bee Clef **ARM (Raspberry Pi) ARMv7**. These should look something like:
 
 ```sh
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.6.0/bee-clef_0.6.0_armv7.deb
-sudo dpkg -i bee-clef_0.6.0_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.9.0/bee-clef_0.9.0_armv7.deb
+sudo dpkg -i bee-clef_0.9.0_armv7.deb
 ```
 
 Click `Copy` on the right hand side of the box containing the
@@ -81,11 +81,11 @@ character.
 You should see some output from the `wget` command which is a Linux utility this is used to download the correct Bee Clef 'package' from Github, where the development of the Bee utilities takes place.
 
 ```bash
-bee-clef_0.6.0_armv7.deb.1           100%[===================================================================>]   9.99M  8.21MB/s    in 1.2s
+bee-clef_0.9.0_armv7.deb.1           100%[===================================================================>]   9.99M  8.21MB/s    in 1.2s
 
-2021-05-15 17:34:02 (8.21 MB/s) - ‘bee-clef_0.6.0_armv7.deb’ saved [10473282/10473282]
+2021-05-15 17:34:02 (8.21 MB/s) - ‘bee-clef_0.9.0_armv7.deb’ saved [10473282/10473282]
 
-pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.6.0_armv7.deb
+pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.9.0_armv7.deb
 ```
 
 The other command will be left in your terminal, this uses the `dpkg` utility, the Debian Package Manager to install Bee Clef. Package Managers are used to conveniently install software on Linux systems.
@@ -93,12 +93,12 @@ The other command will be left in your terminal, this uses the `dpkg` utility, t
 Press enter to start the installation process. All being well, you will see some output like this:
 
 ```
-pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.6.0_armv7.deb
+pi@raspberrypi:~ $ sudo dpkg -i bee-clef_0.9.0_armv7.deb
 Selecting previously unselected package bee-clef.
 (Reading database ... 98610 files and directories currently installed.)
-Preparing to unpack bee-clef_0.6.0_armv7.deb ...
-Unpacking bee-clef (0.6.0) ...
-Setting up bee-clef (0.6.0) ...
+Preparing to unpack bee-clef_0.9.0_armv7.deb ...
+Unpacking bee-clef (0.9.0) ...
+Setting up bee-clef (0.9.0) ...
 Created symlink /etc/systemd/system/multi-user.target.wants/bee-clef.service → /lib/systemd/system/bee-clef.service.
 ```
 
@@ -110,7 +110,7 @@ BEE_CLEF_CHAIN_ID=100
 
 Congratulations! You just installed Bee Clef!
 
-Now to repeat the process for Bee itself. 
+Now to repeat the process for Bee itself.
 
 Go back to the [https://docs.ethswarm.org](https://docs.ethswarm.org) and click `Installation > Quick Start`. Scroll down and copy the commands for **ARM (Raspberry Pi) ARMv7**.
 
@@ -130,8 +130,8 @@ Your Bee node needs BZZ to be able to properly interact with the network. In ord
 
 Sign into Discord (make an account if you don't have one yet), join our Discord server, complete verification and go to the [#faucet](https://discord.gg/kfKvmZfVfe) channel.
 
-Here you must **type** (not copy paste) the following, *replacing the
-address with your own*:
+Here you must **type** (not copy paste) the following, _replacing the
+address with your own_:
 
 ```
 /faucet sprinkle 0xabeeecdef123452a40f6ea9f598596ca8556bd57
@@ -168,7 +168,7 @@ Your output should looks something like this:
 ```bash
 -rw-r--r--  1 pi   pi       3523 Mar  4 22:47 .bashrc
 -rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.4.1_armv7.deb
--rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.6.0_armv7.deb
+-rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.9.0_armv7.deb
 drwxr-xr-x  2 pi   pi       4096 Mar  4 22:57 Bookshelf
 ```
 
@@ -194,7 +194,7 @@ ls -la | grep "bee"
 ```
 
 ```bash
--rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.6.0_armv7.deb
+-rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.9.0_armv7.deb
 ```
 
 Success! The Bee package file is deleted! Note at the command line
@@ -259,7 +259,7 @@ this open for later.
 Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those BZZ cheques from your peers! Type:
 
 ```bash
-sudo nano /etc/bee/bee.yaml 
+sudo nano /etc/bee/bee.yaml
 ```
 
 To open the `nano` program which is a old time text editor, we're going to party like it's 1999. Note we're using the `sudo` command to wrap `nano`. This is short for `super user do` and gives us full permissions to do anything in our Raspberry Pi OS.
@@ -280,8 +280,7 @@ swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
 
 To save and exit, hold `Ctrl` and press `X`, then `Y` and finally
 `Enter` to agree to write the file. You can see the different commands
-that are available listed at the bottom of the screen, for example `^X
-Exit`.
+that are available listed at the bottom of the screen, for example `^X Exit`.
 
 Ok! We're all set! Let's restart Bee and watch our logs as the chequebook transactions begin to be processed.
 
@@ -313,8 +312,16 @@ curl localhost:1635/peers
 ```
 
 ```json
-{"peers":[{"address":"339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"},{"address":"b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"} ]}
-
+{
+	"peers": [
+		{
+			"address": "339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"
+		},
+		{
+			"address": "b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"
+		}
+	]
+}
 ```
 
 If you see peers listed here - congratulations! You have joined the swarm! Welcome! 🐝

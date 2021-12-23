@@ -18,23 +18,20 @@ Bee Clef will create a new Ethereum key pair for you during installation. Make s
 
 Bee Clef can be installed automatically using your system's package manager.
 
-
-
-
 <Tabs
-  defaultValue="debian"
-  values={[
-    {label: 'Ubuntu / Debian / Raspbian', value: 'debian'},
-    {label: 'CentOS', value: 'centos'},
-    {label: 'MacOS', value: 'macos'},
-  ]}>
+defaultValue="debian"
+values={[
+{label: 'Ubuntu / Debian / Raspbian', value: 'debian'},
+{label: 'CentOS', value: 'centos'},
+{label: 'MacOS', value: 'macos'},
+]}>
 <TabItem value="debian">
 
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.6.0/bee-clef_0.6.0_amd64.deb
-sudo dpkg -i bee-clef_0.6.0_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.9.0/bee-clef_0.9.0_amd64.deb
+sudo dpkg -i bee-clef_0.9.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -42,15 +39,15 @@ sudo dpkg -i bee-clef_0.6.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.6.0/bee-clef_0.6.0_armv7.deb
-sudo dpkg -i bee-clef_0.6.0_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.9.0/bee-clef_0.9.0_armv7.deb
+sudo dpkg -i bee-clef_0.9.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.6.0/bee-clef_0.6.0_arm64.deb
-sudo dpkg -i bee-clef_0.6.0_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.9.0/bee-clef_0.9.0_arm64.deb
+sudo dpkg -i bee-clef_0.9.0_arm64.deb
 ```
 
 </TabItem>
@@ -59,8 +56,8 @@ sudo dpkg -i bee-clef_0.6.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.6.0/bee-clef_0.6.0_amd64.rpm
-sudo rpm -i bee-clef_0.6.0_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.9.0/bee-clef_0.9.0_amd64.rpm
+sudo rpm -i bee-clef_0.9.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -68,15 +65,15 @@ sudo rpm -i bee-clef_0.6.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.6.0/bee-clef_0.6.0_armv7.rpm
-sudo rpm -i bee-clef_0.6.0_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.9.0/bee-clef_0.9.0_armv7.rpm
+sudo rpm -i bee-clef_0.9.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.6.0/bee-clef_0.6.0_arm64.rpm
-sudo rpm -i bee-clef_0.6.0_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.9.0/bee-clef_0.9.0_arm64.rpm
+sudo rpm -i bee-clef_0.9.0_arm64.rpm
 ```
 
 </TabItem>
@@ -96,8 +93,8 @@ brew services start swarm-clef
 </TabItem>
 </Tabs>
 
-
 ### Configuring Bee Clef
+
 Configuration files are stored in `/etc/default/bee-clef/` on Linux and `/usr/local/etc/swarm-clef/default` on MacOS.
 
 To install clef for Swarm mainnet, change `BEE_CLEF_CHAIN_ID` to be `100` in order to interact with the XDAI network. For testnet, use chain id `5`.
@@ -110,14 +107,13 @@ Once Bee Clef has been installed, it will begin running as a service.
 
 To check Bee Clef is running ok, we may use `systemctl` (on Linux) or `launchctl` (on MacOS) to query the status of the `bee-clef` service.
 
-
 <Tabs
-  defaultValue="linux"
-  values={[
-    {label: 'Linux', value: 'linux'},
-    {label: 'MacOS', value: 'macos'},
-  ]}>
-  <TabItem value="linux">
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS', value: 'macos'},
+]}>
+<TabItem value="linux">
 
 ```bash
 systemctl status bee-clef
@@ -146,6 +142,7 @@ launchctl list | grep swarm-clef
 </Tabs>
 
 When Bee Clef first starts, you should see something very similar to the following:
+
 ```log
 Feb 21 19:52:43 comp-name systemd[1]: Started Bee Clef.
 Feb 21 19:52:43 comp-name bee-clef-service[494678]: WARNING!
@@ -169,16 +166,14 @@ Feb 21 19:54:25 comp-name bee-clef-service[494678]: {"jsonrpc":"2.0","method":"u
 This line can be safely ignored, there is no action required: `{"jsonrpc":"2.0","id":1,"method":"ui_onInputRequired","params":[{"title":"Master Password","prompt":"Please enter the password to decrypt the master seed","isPassword":true}]}`
 :::
 
-
-
 As soon as `bee` starts interacting with `bee-clef` you should start to see log messages populate, for a regularly active and connected node they will appear every few seconds:
+
 ```
 Feb 24 22:29:15 comp-name bee-clef-service[1118]: INFO [02-24|22:29:15.118] Op approved
 Feb 24 22:30:17 comp-name bee-clef-service[1118]: INFO [02-24|22:30:17.371] Op approved
 Feb 24 22:30:19 comp-name bee-clef-service[1118]: INFO [02-24|22:30:19.344] Op approved
 ...
 ```
-
 
 ## Data Locations
 
