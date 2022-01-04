@@ -23,7 +23,7 @@ GZIP compression is not supported in the current version of Bee, so make sure no
 First, use the `tar` command line utility to create an archive containing all the files of your directory. If uploading a website, we must take care to ensure that the `index.html` file is at the root of the directory tree.
 
 ```bash
-tree build
+tree my_website
 > 
 my_website
 ├── assets
