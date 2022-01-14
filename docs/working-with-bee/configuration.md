@@ -223,11 +223,16 @@ The location of a YAML configuration file containing configuration options. See 
 
 ### Start
 
-#### admin-password
+#### --admin-password
+
+When the permission checks for the API is enabled then this option configure admin password that 
+is used to generate Bearer tokens.
+
+**Be aware that you need to pass a bcrypt hash of the password here not the actual plaintext password!**
 
 _default_ : ""
 
-#### allow-private-cidrs: false
+#### --allow-private-cidrs: false
 
 _default_ : ""
 
@@ -493,7 +498,9 @@ A default top level domain and resolver contract address are provided, but an EN
 
 _default_: false
 
-Enable permission check on the http APIs
+Enable permission check on the http APIs. 
+
+You should also specify admin password using the `--admin-password` option.
 
 #### --resync
 
@@ -501,7 +508,7 @@ _default_: false
 
 Forces the node to resync postage contract data.
 
-#### static-nodes
+#### --static-nodes
 
 _default_: []
 
