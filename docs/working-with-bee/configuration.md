@@ -134,6 +134,7 @@ bootnode:
 bootnode-mode: false
 cache-capacity: "1000000"
 cache-retrieval: true
+chain-enable: true
 clef-signer-enable: false
 clef-signer-endpoint: ""
 clef-signer-ethereum-address: ""

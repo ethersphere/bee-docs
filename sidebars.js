@@ -55,7 +55,8 @@ module.exports = {
         'access-the-swarm/syncing',
         'access-the-swarm/keep-your-data-alive',
         'access-the-swarm/pinning',
-        'access-the-swarm/light-nodes'
+        'access-the-swarm/light-nodes',
+        'access-the-swarm/ultra-light-nodes'
       ],
       collapsed: true
     },
