@@ -10,7 +10,7 @@ For convenience Bee also provides a method to generate and validate password has
 ```sh
 $ bee bcrypt super$ecret
 $2a$10$eZP5YuhJq2k8DFmj9UJGWOIjDtXu6NcAQMrz7Zj1bgIVBcHA3bU5u
-$ ./bee bcrypt --check super$ecret '$2a$10$eZP5YuhJq2k8DFmj9UJGWOIjDtXu6NcAQMrz7Zj1bgIVBcHA3bU5u'
+$ bee bcrypt --check super$ecret '$2a$10$eZP5YuhJq2k8DFmj9UJGWOIjDtXu6NcAQMrz7Zj1bgIVBcHA3bU5u'
 OK: password hash matches provided plain text
 ```
 
