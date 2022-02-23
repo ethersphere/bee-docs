@@ -44,11 +44,18 @@ Your key can be found within the keys folder of your datadir. For instance, on a
 sudo cat /var/lib/bee/keys/libp2p.key
 ```
 
-Once you have acquired your wallet file and it's password, you may use any Ethereum wallet software such as [Metamask](https://metamask.io/) to interact with your wallet.
+Once you have acquired your wallet file and it's password, you may use any
+Ethereum wallet software such as [MetaMask](https://metamask.io/) to interact
+with your wallet.
 
 # Configure Your Wallet
 
-To interact with the BZZ ecosystem, you will need to make a couple of small configuration additions to your wallet software. In the case of Metamask, you will need to [add the xDAI network](https://www.xdaichain.com/for-users/wallets/metamask/metamask-setup) then [add a custom token](https://metamask.zendesk.com/hc/en-us/articles/360015489031-How-to-add-unlisted-tokens-custom-tokens-in-MetaMask).
+To interact with the BZZ ecosystem, you will need to make a couple of small
+configuration additions to your wallet software. In the case of MetaMask, you
+will need to [add the xDAI
+network](https://www.xdaichain.com/for-users/wallets/metamask/metamask-setup)
+then [add a custom
+token](https://metamask.zendesk.com/hc/en-us/articles/360015489031-How-to-add-unlisted-tokens-custom-tokens-in-MetaMask).
 
 The canoncial addresses for the BZZ token are as follows:
 

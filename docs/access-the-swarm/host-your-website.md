@@ -66,9 +66,13 @@ curl \
 
 Next, we add a `Content` record to your ENS domain's resolver contract.
 
-We recommend the excellent [ENS Domains Dapp](https://app.ens.domains/) used with the [Metamask](https://metamask.io/) browser extension for registering and administrating your ENS domain.
+We recommend the excellent [ENS Domains Dapp](https://app.ens.domains/) used
+with the [MetaMask](https://metamask.io/) browser extension for registering and
+administrating your ENS domain.
 
-Once you have registered your name, and have connected Metamask with the relevant Ethereum account, you must first set the resolver to use the public ENS if you have not already done so.
+Once you have registered your name, and have connected MetaMask with the
+relevant Ethereum account, you must first set the resolver to use the public ENS
+if you have not already done so.
 
 First, navigate to 'My Names', and select the name you would like to link your Swarm content to.
 

@@ -66,7 +66,7 @@ This doesn't work for you? You get erorr -> `xclip: not found” or “Error: Ca
 Try running the command below:
 `sudo cat /var/lib/bee-clef/password`
 
-You can then use that to import to Metamask or any other web3 wallet provider.
+You can then use that to import to MetaMask or any other web3 wallet provider.
 
 
 ### How to export private keys from the node (without bee-clef)?
@@ -78,7 +78,7 @@ You can also follow to the mini-guide on the link below:
 https://pastebee.com/?3b2a4cecafa21a7afcdd4d4f3d74fef1d5551acd91eb2d3a5b750dc9a161fbcf
 
 
-### How to import bee node address to Metamask?
+### How to import bee node address to MetaMask?
 
 1. [export your bee node private keys](https://hackmd.io/tfKVeHaIQGewlGTC4ooESg#How-to-export-private-keys-from-the-node-with-bee-claf-installed)
 2. go to Metamask and click import account
