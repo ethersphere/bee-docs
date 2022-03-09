@@ -39,9 +39,46 @@ Ethereum provides a service known as "smart contracts" which, in basic terms, is
 
 With these two core concepts found, you have created the proper economic tools to build a strong distributed system (via BZZ) and to make it fast, efficient, and cheap (via Cheques).
 
+### Gnosis Chain
+
+[Gnosis Chain](https://www.xdaichain.com/) is an
+[EVM](https://ethereum.org/en/developers/docs/evm/) compatible
+[PoS](https://www.xdaichain.com/about-gc/features#posdao-green-consensus)
+blockchain (previously called the xDai chain).
+
+### Bridging Tokens
+
+It's a smart contract based setup whereby you can lock some tokens on one
+blockchain, and receive the same amount of the _bridged_ token on another
+blockchain.
+
 ### BZZ Token
 
-The BZZ Token is built out of a smart contract that is specifically designed to be the token of cost and reward that provides the incentive to provide computing, storage and network resources to the Swarm.
+BZZ is an
+[ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) token
+issued on the Ethereum mainnet. It is the unit of the traffic accounting between
+the nodes. It is used to incentivize nodes to provide resources to the Swarm.
+
+In order to upload content, or to pay for downloading more content than is
+allowed by the free tier threshold, your node must pay some xBZZ (and
+potentially receive xBZZ).
+
+### xBZZ Token
+
+xBZZ is BZZ bridged to the [Gnosis Chain](https://www.xdaichain.com/) using
+[OmniBridge](https://omni.xdaichain.com/bridge).
+
+### DAI Token
+
+[DAI](https://developer.makerdao.com/dai/1/) is an
+[ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
+stable token issued on the Ethereum blockchain, tracking USD.
+
+### xDai Token
+xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridging-tokens)
+to the [Gnosis Chain](https://www.xdaichain.com/) using
+[OmniBridge](https://omni.xdaichain.com/bridge). It's also the native token of
+the Gnosis Chain, i.e. transaction fees are paid in xDai.
 
 ### SWAP
 

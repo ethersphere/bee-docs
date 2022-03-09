@@ -77,7 +77,11 @@ key material and signing procedures, see below for information on how
 to keep backups of your keys.
 
 :::info
-If you are using Bee to manage your keys (not recommended - please use [Bee Clef](/docs/installation/bee-clef)!). You must convert your keys in order to import into Metamask and other Ethereum wallets. You may use [exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) to make the conversion.
+If you are using Bee to manage your keys (not recommended - please use [Bee
+Clef](/docs/installation/bee-clef)!). You must convert your keys in order to
+import into MetaMask and other Ethereum wallets. You may use
+[exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) to make the
+conversion.
 :::
 
 ### Statestore
