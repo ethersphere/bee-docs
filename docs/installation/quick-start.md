@@ -16,6 +16,10 @@ but not earn BZZ by storing or forwarding chunks, simply run a Bee
 your laptop or desktop computer. This will enable direct access to the
 swarm from your web browser and other applications.
 
+Or if you want to interact with the Bee ecosystem for a shorter period of
+time you can run Bee in [ultra light node](/docs/access-the-swarm/ultra-light-nodes)
+This will allow you to download data but otherwise it has very limited functionality.
+
 [Install Bee](/docs/installation/install)
 
 ### Support the Network and Earn BZZ by Running a Full Node
