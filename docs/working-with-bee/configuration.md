@@ -502,6 +502,8 @@ Enable permission check on the http APIs.
 
 You should also specify admin password using the `--admin-password` option.
 
+To generate a valid admin password use the provided [bcrypt utility](/docs/working-with-bee/bcrypt)
+
 #### --resync
 
 _default_: false
