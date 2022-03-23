@@ -18,13 +18,13 @@ To install the binary using our quick install script, run either one of the foll
 #### wget
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.4.3 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.5.0 bash
 ```
 
 #### curl
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.4.3 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.5.0 bash
 ```
 
 ### Run Bee
@@ -36,7 +36,7 @@ bee version
 ```
 
 ```
-1.4.3
+1.5.0
 ```
 
 Now your Bee node is installed, you can [fund your
@@ -53,7 +53,7 @@ It is strongly advised to use a service manager such as `systemctl` to run Bee i
 
 ## Create Your Wallet
 
-When you first run Bee, you will be asked to input a user password. It is important to choose a strong unique password, as this will protect your valuable **private key** which is generated during startup. 
+When you first run Bee, you will be asked to input a user password. It is important to choose a strong unique password, as this will protect your valuable **private key** which is generated during startup.
 
 This secret key is stored encrypted in your [Bee data
 directory](/docs/working-with-bee/configuration#--data-dir) (default
@@ -75,11 +75,11 @@ Welcome to the Swarm.... Bzzz Bzzzz Bzzzz
   \|/        '\<>/'/ | | :' :' :'
    |               \  \ \
    |                '  ' '
-	
-		   
-INFO[2021-06-09T01:37:19Z] version: 0.6.2-609fb12c                     
+
+
+INFO[2021-06-09T01:37:19Z] version: 0.6.2-609fb12c
 Bee node is booting up for the first time. Please provide a new password.
-Password: 
+Password:
 ```
 
 ## SWAP Bandwidth Incentives
@@ -104,19 +104,19 @@ Now, we can run our Bee node and we will start to see Bee creating and waiting f
 
 Now our chequebook is deployed and credited with an initial deposit of
 BZZ, ready to be used to reward our fellow busy Bee nodes for their
-services. As a *full-node* you too will be rewarded by your peers for
+services. As a _full-node_ you too will be rewarded by your peers for
 services you provide to them.
 
 ## Join the Swarm
 
-If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world. 
+If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world.
 
 ```
 INFO[2020-08-29T11:55:16Z] greeting <Hi I am a very buzzy bee bzzzz bzzz bzz. 🐝> from peer: b6ae5b22d4dc93ce5ee46a9799ef5975d436eb63a4b085bfc104fcdcbda3b82c
 ```
 
 Now your node will begin to request chunks of data that fall within
-your *radius of responsibilty* - data that you will then serve to
+your _radius of responsibilty_ - data that you will then serve to
 other p2p clients running in the swarm. Your node will then begin to
 respond to requests for these chunks from other peers, for which you
 will soon be rewarded in BZZ.
@@ -137,27 +137,27 @@ backups](/docs/working-with-bee/backups).
 :::
 
 ## Getting help
+
 The CLI has documentation built-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
 
 You may also check out the [configuration guide](/docs/working-with-bee/configuration), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
 
-
-
 ### Upgrading Bee
 
 To upgrade previous versions of Bee installed using the above method, simply re-run the installation command above.
-
 
 ### Edge (Unstable)
 
 To get a sneak preview of the latest features added to Bee, you may also install the Edge version, which tracks the master branch of the [Github respository](https://github.com/ethersphere/bee)
 
 #### wget
+
 ```bash
 wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
 ```
 
 #### curl
+
 ```bash
 curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | bash
 ```
