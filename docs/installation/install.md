@@ -126,6 +126,10 @@ sudo vim /etc/default/bee-clef
 BEE_CLEF_CHAIN_ID=100
 ```
 
+```bash
+systemctl restart bee-clef
+```
+
 Finally, let's check Bee Clef is running.
 
 <Tabs
@@ -142,8 +146,8 @@ systemctl status bee-clef
 
 ```
 ● bee-clef.service - Bee Clef
-     Loaded: loaded (/lib/systemd/system/bee-clef.service; enabled; vendor preset: enabled)
-     Active: active (running) since Fri 2020-11-20 23:45:16 GMT; 1min 29s ago
+   Loaded: loaded (/lib/systemd/system/bee-clef.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2022-03-23 13:44:13 UTC; 33s ago
 ```
 
 </TabItem>
