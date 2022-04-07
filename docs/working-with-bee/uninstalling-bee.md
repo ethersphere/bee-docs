@@ -29,7 +29,6 @@ sudo yum remove bee
 sudo yum remove bee-clef
 ```
 
-
 ## Data Locations
 
 ### Bee-clef

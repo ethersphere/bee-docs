@@ -6,7 +6,7 @@ id: quick-start
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Bee is a versatile piece of software that caters for a diverse array of use cases. 
+Bee is a versatile piece of software that caters for a diverse array of use cases.
 
 ### Access the Network
 

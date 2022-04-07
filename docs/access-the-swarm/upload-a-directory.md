@@ -3,7 +3,7 @@ title: Upload a Directory
 id: upload-a-directory
 ---
 
-It is possible to use Bee to upload directories of files all at once. 
+It is possible to use Bee to upload directories of files all at once.
 
 :::tip
 Comfortable with nodeJS and JavaScript? Check out [swarm-cli](https://github.com/ethersphere/swarm-cli), a command line tool you can use to easily interact with your Bee node!
@@ -20,11 +20,12 @@ GZIP compression is not supported in the current version of Bee, so make sure no
 :::
 
 ## Upload the Directory Containing Your Website
+
 First, use the `tar` command line utility to create an archive containing all the files of your directory. If uploading a website, we must take care to ensure that the `index.html` file is at the root of the directory tree.
 
 ```bash
 tree my_website
-> 
+>
 my_website
 ├── assets
 │   └── style.css
@@ -46,7 +47,6 @@ Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking 
 In order to upload your data to swarm, you must agree to burn some of your BZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
 :::
 
-
 ```bash
 curl \
 	-X POST \
@@ -59,22 +59,24 @@ curl \
 ```
 
 :::info
-For instances where a Single Page App has a JavaScript router that handles url queries itself, simply pass `index.html` as the error document. Bee will pass over control to the JavaScript served by the `index.html` file in the circumstance that a path does not yield a file from the manifest. 
+For instances where a Single Page App has a JavaScript router that handles url queries itself, simply pass `index.html` as the error document. Bee will pass over control to the JavaScript served by the `index.html` file in the circumstance that a path does not yield a file from the manifest.
 :::
 
 When the upload is successful, Bee will return a JSON document containing the Swarm Reference.
 
 ```json
-{"reference":"b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b"}
+{
+  "reference": "b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b"
+}
 ```
 
 Now, simply navigate your browser to view the reference using the `bzz` endpoint and your website will be served!
 
-[http://localhost:1633/bzz/b25c89a...214917b/](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/) 
+[http://localhost:1633/bzz/b25c89a...214917b/](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/)
 
 Other files are served at their relative paths, e.g:
 
-[http://localhost:1633/bzz/b25c89a...214917b/assets/style.css](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css) 
+[http://localhost:1633/bzz/b25c89a...214917b/assets/style.css](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css)
 
 Once your data has been [fully processed into the network](/docs/access-the-swarm/syncing), you will then be able to retrieve it from any Bee node.
 

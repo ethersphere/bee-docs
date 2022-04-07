@@ -3,7 +3,7 @@ title: Awesome Swarm
 id: awesome-swarm
 ---
 
-An [awesome list](https://awesome.re) on anything awesome related to the Swarm platform. 🐝  🐝  🐝
+An [awesome list](https://awesome.re) on anything awesome related to the Swarm platform. 🐝 🐝 🐝
 
 Swarm is a decentralised storage and communication system for a sovereign digital society.
 
@@ -48,7 +48,7 @@ Thanks so much to everyone in our wonderful community for getting
 involved with the project, submitting bugs and even PR's. Special
 thanks to those extra special individuals who have taken the time to
 create software that interacts with Swarm. We're overjoyed and humbled
-by your enthusiasm. Thanks for being part of the swarm!  🐝 🐝 🐝
+by your enthusiasm. Thanks for being part of the swarm! 🐝 🐝 🐝
 
 In the spirit of inclusion, and because we are in the early days, some 'unfinished' gems will be included. And for the truly awesome, extra awesomeness will be indicated appropriately.
 
@@ -64,4 +64,3 @@ This is community generated software and come no guarantees. Use at your own ris
 - https://github.com/nnnggel/swam-base
 - https://github.com/jmozah/bee-crawler
 - https://github.com/beejeez/beejeez 👀
-

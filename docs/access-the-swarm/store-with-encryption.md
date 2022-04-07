@@ -3,7 +3,7 @@ title: Store with Encryption
 id: store-with-encryption
 ---
 
-In Swarm, all data is *public* by default. To protect sensitive content, it must be encrypted so that only authorised users are able to decrypt and then view the plaintext content. 
+In Swarm, all data is _public_ by default. To protect sensitive content, it must be encrypted so that only authorised users are able to decrypt and then view the plaintext content.
 
 The Bee client provides a facility to encrypt files and directories while uploading which are only able to be read by users with access to the corresponding decryption key.
 
@@ -18,7 +18,9 @@ curl -F file=@bee.jpg -H "Swarm-Encrypt: true" http://localhost:1633/files
 When successful, the Bee client will return a 64 byte reference, instead of the usual 32 bytes.
 
 ```json
-{"reference":"f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3"}
+{
+  "reference": "f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3"
+}
 ```
 
 Here we see that, when using the Bee node's encryption function, the reference hash that is returned is 128 hex characters long. The first 64 characters of this is the familiar Swarm address - the reference that allows us to retrieve the data from the swarm. This is the same reference we would get uploading unencrypted files using Bee, so it is safe to share.

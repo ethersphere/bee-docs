@@ -9,15 +9,15 @@ It is not recommended to run a full node on a Raspberry Pi. Please ensure Bee is
 
 You will need:
 
--   Raspberry Pi 4
--   128GB Micro SD Card
--   SD card reader or some way to write to your SD Card
--   Micro to Normal HDMI Cable (Male->Male)
--   USB keyboard and mouse
--   USB C power adapter suitiable for your Pi
--   A monitor or TV with a HDMI input
--   Another computer
--   The password for you WiFi network or an ethernet connection\*
+- Raspberry Pi 4
+- 128GB Micro SD Card
+- SD card reader or some way to write to your SD Card
+- Micro to Normal HDMI Cable (Male->Male)
+- USB keyboard and mouse
+- USB C power adapter suitiable for your Pi
+- A monitor or TV with a HDMI input
+- Another computer
+- The password for you WiFi network or an ethernet connection\*
 
 ### Install Raspbian OS and Start Your Pi
 
@@ -167,7 +167,7 @@ Your output should looks something like this:
 
 ```bash
 -rw-r--r--  1 pi   pi       3523 Mar  4 22:47 .bashrc
--rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.5.0_armv7.deb
+-rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.5.1_armv7.deb
 -rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.12.0_armv7.deb
 drwxr-xr-x  2 pi   pi       4096 Mar  4 22:57 Bookshelf
 ```
@@ -180,7 +180,7 @@ Now, let's use the `rm` program to remove the clutter and delete the
 `.deb` files we no longer need.
 
 ```bash
-rm bee_1.5.0_armv7.deb
+rm bee_1.5.1_armv7.deb
 ```
 
 The `rm` program gives no output, so let's check it's dissapeared by
@@ -313,14 +313,14 @@ curl localhost:1635/peers
 
 ```json
 {
-	"peers": [
-		{
-			"address": "339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"
-		},
-		{
-			"address": "b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"
-		}
-	]
+  "peers": [
+    {
+      "address": "339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"
+    },
+    {
+      "address": "b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"
+    }
+  ]
 }
 ```
 

@@ -11,7 +11,7 @@ The [Debug API](/docs/api-reference/api-reference) provides a privileged environ
 
 :::danger
 Never expose your Debug API to the public Internet, make sure to use a
-firewall or bind to *localhost*, as we have in the example below.
+firewall or bind to _localhost_, as we have in the example below.
 :::
 
 To use the Debug API we must first configure Bee to enable it, as it is disabled by default.

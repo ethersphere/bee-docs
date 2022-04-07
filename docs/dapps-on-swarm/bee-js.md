@@ -11,7 +11,7 @@ See the [bee-js](https://bee-js.ethswarm.org/) documentation for detailed inform
 
 <!-- ## How to Use bee-js
 
-Bee-js is a versatile piece of software that can be used in many ways! Here's some ideas to get you started. Share what you've come up with and get help in the 
+Bee-js is a versatile piece of software that can be used in many ways! Here's some ideas to get you started. Share what you've come up with and get help in the
 
 ### Store Your Javascript's Data in Swarm
 
@@ -24,4 +24,3 @@ Bee-js is a versatile piece of software that can be used in many ways! Here's so
 
 ### Using Bee-js With Bee Gateway Mode
  -->
-

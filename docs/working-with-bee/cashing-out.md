@@ -5,7 +5,7 @@ id: cashing-out
 
 As your Bee forwards and serves chunks to its peers, it is rewarded in
 BZZ in the form of cheques. Once these cheques accumulate sufficient
-value, you may *cash them out* using Bee's API. This process transfers
+value, you may _cash them out_ using Bee's API. This process transfers
 money from your peer's chequebooks into your own, which you can then
 withdrawal to your wallet to do with as you please!
 
@@ -97,13 +97,13 @@ curl localhost:1635/chequebook/cheque | jq
         "payout": "8987000000000"
       },
       "lastsent": null
-    },
+    }
     //...
   ]
 }
 ```
 
-As our node's participation in the network increases, we will begin to see more and more of these balances arriving. In the case that we have *received* a settlement from another peer, we can ask our node to perform the relevant transactions on the blockchain, and cash our earnings out.
+As our node's participation in the network increases, we will begin to see more and more of these balances arriving. In the case that we have _received_ a settlement from another peer, we can ask our node to perform the relevant transactions on the blockchain, and cash our earnings out.
 
 To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
 
@@ -112,7 +112,9 @@ curl -XPOST http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451
 ```
 
 ```json
-{"transactionHash":"0xba7b500e21fc0dc0d7163c13bb5fea235d4eb769d342e9c007f51ab8512a9a82"}
+{
+  "transactionHash": "0xba7b500e21fc0dc0d7163c13bb5fea235d4eb769d342e9c007f51ab8512a9a82"
+}
 ```
 
 You may check the status of your transaction using the [XDAI
@@ -154,7 +156,9 @@ curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
 ```
 
 ```json
-{"transactionHash":"0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a"}
+{
+  "transactionHash": "0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a"
+}
 ```
 
 You may then use [Blockscout](https://blockscout.com/xdai/mainnet) to
@@ -182,33 +186,33 @@ certain value. To use the script:
 
 1. Download and save the script:
 
-  ```bash
-  wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/cashout.sh
-  ```
+```bash
+wget -O cashout.sh https://gist.githubusercontent.com/ralph-pichler/3b5ccd7a5c5cd0500e6428752b37e975/raw/cashout.sh
+```
 
 2. Make the file executable:
 
-  ```bash
-  chmod +x cashout.sh
-  ```
+```bash
+chmod +x cashout.sh
+```
 
 3. List all uncashed cheques and cash out your cheques above a certain value:
 
-  - List:
+- List:
 
-    ```bash
-    ./cashout.sh
-    ```
-  
-    :::info
-    If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
-    :::
+  ```bash
+  ./cashout.sh
+  ```
 
-  - Cashout all cheques:
+  :::info
+  If running ./cashout.sh returns nothing, you currently have no uncashed cheques.
+  :::
 
-    ```bash
-    ./cashout.sh cashout-all
-    ```
+- Cashout all cheques:
+
+  ```bash
+  ./cashout.sh cashout-all
+  ```
 
 :::info
 Are you a Windows-user who is willing to help us? We are currently

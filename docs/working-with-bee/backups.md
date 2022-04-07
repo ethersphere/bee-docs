@@ -17,11 +17,11 @@ Don't forget - it's not a backup until you have restored it! Make sure to test y
 
 To restore a Bee node you must have the following directories, all backed up in an atomic moment so that they are syncronised.
 
-All of this data is contained within the *data directory* specified in your Bee configuration. 
+All of this data is contained within the _data directory_ specified in your Bee configuration.
 
 ### Ubuntu / Debian / Raspbian / CentOS Package Managers
 
-For Linux installations from package managers *yum* or *apt*, your data directory is located at:
+For Linux installations from package managers _yum_ or _apt_, your data directory is located at:
 
 ```bash
 /var/lib/bee
@@ -110,7 +110,7 @@ It is also important to back up Bee Clef's stored data. This includes your sensi
 Your keys represent your ability to access your BZZ. Make sure to back up your keys directory in multiple places, so you can keep your BZZs safe!
 :::
 
-For Linux installations by the package managers *yum* or *apt*, your
+For Linux installations by the package managers _yum_ or _apt_, your
 `bee-clef` data directory is located at:
 
 ```bash

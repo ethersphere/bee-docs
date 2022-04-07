@@ -13,7 +13,7 @@ The Bee, also referred to as a 'node' or 'client' is the heart and work-horse of
 
 The Bee becomes the broker of data, storing and supplying blocks of data in a give-and-take exchange for BZZ tokens.
 
-* [Install Bee](/docs/installation/quick-start#install-bee)
+- [Install Bee](/docs/installation/quick-start#install-bee)
 
 ## Clef & Bee-Clef
 
@@ -23,7 +23,7 @@ Clef, by itself, is a tool built for the Ethereum blockchain. It is used to sign
 Currently, as of version 0.5.2, you must run one instance of Bee-clef for every instance of Bee.
 :::
 
-* [Install Bee-clef](/docs/installation/bee-clef)
+- [Install Bee-clef](/docs/installation/bee-clef)
 
 ## Swarm
 
@@ -75,6 +75,7 @@ xBZZ is BZZ bridged to the [Gnosis Chain](https://www.xdaichain.com/) using
 stable token issued on the Ethereum blockchain, tracking USD.
 
 ### xDai Token
+
 xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridging-tokens)
 to the [Gnosis Chain](https://www.xdaichain.com/) using
 [OmniBridge](https://omni.xdaichain.com/bridge). It's also the native token of

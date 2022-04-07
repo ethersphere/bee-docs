@@ -39,7 +39,6 @@ Use the `resolver-options` flag to point the Bee resolver to any ENS compatible 
 Make sure you trust the gateway you are interacting with! To ensure that you are retrieving the correct content, run your own ENS resolver and Bee node.
 :::
 
-
 ### Link an ENS domain to a website.
 
 First we will need to upload the website assets to Swarm in order to
@@ -61,7 +60,9 @@ curl \
 ```
 
 ```json
-{"reference":"b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b"}
+{
+  "reference": "b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b"
+}
 ```
 
 Next, we add a `Content` record to your ENS domain's resolver contract.
@@ -100,7 +101,7 @@ Verify the Content Record has been created!
 
 ![alt text](/img/ens-6.png "Verify the Content Record has been created.")
 
-Done! 👏 
+Done! 👏
 
 Now you will be able to see your website hosted using the ENS name instead of the Swarm Reference!
 

@@ -3,7 +3,7 @@ title: Working With Bee
 id: introduction
 ---
 
-For the most part, your Bee will happily run in the background, but there are some things we will occasionally need to do to ensure that your Bee stays healthy! In this section we will show you how to get the most out of your Bee, 
+For the most part, your Bee will happily run in the background, but there are some things we will occasionally need to do to ensure that your Bee stays healthy! In this section we will show you how to get the most out of your Bee,
 and to get more information on what your Bee is buzzing about.
 
 This section covers information relating to managing your node, ensuring everything is going well, and best practices for backups and upgrading. For information on using Bee to upload files, host your website on the unstoppable Swarm network and more, check out [Using Bee](/docs/access-the-swarm/introduction)

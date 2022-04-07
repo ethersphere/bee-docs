@@ -37,7 +37,7 @@ the intended recipient.
 
 For example, if we want to send a PSS message with **topic** `test-topic` to a node with address...
 
-`7bc50a5d79cb69fa5a0df519c6cc7b420034faaa61c175b88fc4c683f7c79d96` 
+`7bc50a5d79cb69fa5a0df519c6cc7b420034faaa61c175b88fc4c683f7c79d96`
 
 ...and public key...
 
@@ -183,7 +183,7 @@ We will use `websocat` to listen for the PSS messages' Topic ID
 websocat ws://localhost:1833/pss/subscribe/test-topic
 ```
 
-Now we can use PSS to send a message from our second node to our first node. 
+Now we can use PSS to send a message from our second node to our first node.
 
 Since our first node has a 2 byte address prefix of `a231`, we will specify this as the `targets` section in our POST request's URL. We must also include the public key of the recipient as a query parameter so that the message can be encrypted in a way only our recipient can decrypt.
 

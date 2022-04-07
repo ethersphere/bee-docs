@@ -3,7 +3,7 @@ title: Useful Developer Info
 id: useful-dev-info
 ---
 
-Welcome to the Dev area! We love PR's! 🐝 
+Welcome to the Dev area! We love PR's! 🐝
 
 We would would love you to get involved with our [Github repo](https://github.com/ethersphere/bee).
 
@@ -43,11 +43,13 @@ make protobuf
 ```
 
 # Tracing
-Developers can gain an additional level of insight into the node by enabling `tracing`. To make use of Tracing, we advice to make use of [jaeger](https://www.jaegertracing.io/). 
+
+Developers can gain an additional level of insight into the node by enabling `tracing`. To make use of Tracing, we advice to make use of [jaeger](https://www.jaegertracing.io/).
 
 - Set up tracing by:
+
   - Start jaeger:
-`docker run -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one:latest`
+    `docker run -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one:latest`
 
   - start locally two bee nodes (different data dirs and ports) and connect them (see "Start a test network" in the [advanced section](/docs/bee-developers/starting-a-test-network)) with `--tracing` flag provided for both nodes
 
