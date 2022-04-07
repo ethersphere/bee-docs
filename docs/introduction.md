@@ -81,11 +81,11 @@ client or any of the other projects in Swarm's
 There is a vibrant and buzzing community behind Swarm - get involved
 in one of our group channels:
 
-- [Swarm](http://ethswarm.org)
-- [Discord](https://discord.gg/wdghaQsGq5)
-- [Twitter @ethswarm](https://twitter.com/ethswarm)
-- [reddit channel](https://www.reddit.com/r/ethswarm/)
-- [Medium](https://ethswarm.medium.com/)
+-   [Swarm](http://ethswarm.org)
+-   [Discord](https://discord.gg/wdghaQsGq5)
+-   [Twitter @ethswarm](https://twitter.com/ethswarm)
+-   [reddit channel](https://www.reddit.com/r/ethswarm/)
+-   [Medium](https://ethswarm.medium.com/)
 
 ## Reporting a bug
 
