@@ -53,8 +53,8 @@ values={[
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.10.0/bee-clef_0.10.0_amd64.deb
-sudo dpkg -i bee-clef_0.10.0_amd64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.12.0/bee-clef_0.12.0_amd64.deb
+sudo dpkg -i bee-clef_0.12.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -62,15 +62,15 @@ sudo dpkg -i bee-clef_0.10.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.10.0/bee-clef_0.10.0_armv7.deb
-sudo dpkg -i bee-clef_0.10.0_armv7.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.12.0/bee-clef_0.12.0_armv7.deb
+sudo dpkg -i bee-clef_0.12.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.10.0/bee-clef_0.10.0_arm64.deb
-sudo dpkg -i bee-clef_0.10.0_arm64.deb
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.12.0/bee-clef_0.12.0_arm64.deb
+sudo dpkg -i bee-clef_0.12.0_arm64.deb
 ```
 
 </TabItem>
@@ -79,8 +79,8 @@ sudo dpkg -i bee-clef_0.10.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.10.0/bee-clef_0.10.0_amd64.rpm
-sudo rpm -i bee-clef_0.10.0_amd64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.12.0/bee-clef_0.12.0_amd64.rpm
+sudo rpm -i bee-clef_0.12.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -88,15 +88,15 @@ sudo rpm -i bee-clef_0.10.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.10.0/bee-clef_0.10.0_armv7.rpm
-sudo rpm -i bee-clef_0.10.0_armv7.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.12.0/bee-clef_0.12.0_armv7.rpm
+sudo rpm -i bee-clef_0.12.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee-clef/releases/download/v0.10.0/bee-clef_0.10.0_arm64.rpm
-sudo rpm -i bee-clef_0.10.0_arm64.rpm
+wget https://github.com/ethersphere/bee-clef/releases/download/v0.12.0/bee-clef_0.12.0_arm64.rpm
+sudo rpm -i bee-clef_0.12.0_arm64.rpm
 ```
 
 </TabItem>
@@ -126,6 +126,10 @@ sudo vim /etc/default/bee-clef
 BEE_CLEF_CHAIN_ID=100
 ```
 
+```bash
+systemctl restart bee-clef
+```
+
 Finally, let's check Bee Clef is running.
 
 <Tabs
@@ -142,8 +146,8 @@ systemctl status bee-clef
 
 ```
 ● bee-clef.service - Bee Clef
-     Loaded: loaded (/lib/systemd/system/bee-clef.service; enabled; vendor preset: enabled)
-     Active: active (running) since Fri 2020-11-20 23:45:16 GMT; 1min 29s ago
+   Loaded: loaded (/lib/systemd/system/bee-clef.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2022-03-23 13:44:13 UTC; 33s ago
 ```
 
 </TabItem>
@@ -174,8 +178,8 @@ values={[
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.4.3/bee_1.4.3_amd64.deb
-sudo dpkg -i bee_1.4.3_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.5.0/bee_1.5.0_amd64.deb
+sudo dpkg -i bee_1.5.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -183,15 +187,15 @@ sudo dpkg -i bee_1.4.3_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.4.3/bee_1.4.3_armv7.deb
-sudo dpkg -i bee_1.4.3_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.5.0/bee_1.5.0_armv7.deb
+sudo dpkg -i bee_1.5.0_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.4.3/bee_1.4.3_arm64.deb
-sudo dpkg -i bee_1.4.3_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.5.0/bee_1.5.0_arm64.deb
+sudo dpkg -i bee_1.5.0_arm64.deb
 ```
 
 </TabItem>
@@ -202,8 +206,8 @@ sudo dpkg -i bee_1.4.3_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.4.3/bee_1.4.3_amd64.rpm
-sudo rpm -i bee_1.4.3_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.5.0/bee_1.5.0_amd64.rpm
+sudo rpm -i bee_1.5.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -211,15 +215,15 @@ sudo rpm -i bee_1.4.3_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.4.3/bee_1.4.3_armv7.rpm
-sudo rpm -i bee_1.4.3_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.5.0/bee_1.5.0_armv7.rpm
+sudo rpm -i bee_1.5.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.4.3/bee_1.4.3_arm64.rpm
-sudo rpm -i bee_1.4.3_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.5.0/bee_1.5.0_arm64.rpm
+sudo rpm -i bee_1.5.0_arm64.rpm
 ```
 
 </TabItem>
