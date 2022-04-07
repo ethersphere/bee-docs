@@ -22,7 +22,7 @@ Running Bee without a connected blockchain backend, however, imposes some limita
 
 - we can't do overlay verification
 - we can't do settlements
-  
+
 Since we can't buy postage stamps - we can not:
 
 - send pss messages

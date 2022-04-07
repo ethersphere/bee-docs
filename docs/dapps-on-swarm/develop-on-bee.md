@@ -3,7 +3,7 @@ title: Develop on Bee
 id: develop-on-bee
 ---
 
-Bee is the first client to work with the Swarm network. 
+Bee is the first client to work with the Swarm network.
 
 ## Setting Up Bee for Developing Dapps
 
@@ -47,4 +47,3 @@ gateway mode. Join us in the
 [#develop-on-swarm](https://discord.gg/C6dgqpxZkU) room in our
 [Discord Server](https://discord.gg/wdghaQsGq5) for more information
 on how to allow your web app users to read and write to the swarm.
-

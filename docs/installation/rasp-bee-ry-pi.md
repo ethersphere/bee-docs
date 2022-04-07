@@ -9,15 +9,15 @@ It is not recommended to run a full node on a Raspberry Pi. Please ensure Bee is
 
 You will need:
 
--   Raspberry Pi 4
--   128GB Micro SD Card
--   SD card reader or some way to write to your SD Card
--   Micro to Normal HDMI Cable (Male->Male)
--   USB keyboard and mouse
--   USB C power adapter suitiable for your Pi
--   A monitor or TV with a HDMI input
--   Another computer
--   The password for you WiFi network or an ethernet connection\*
+- Raspberry Pi 4
+- 128GB Micro SD Card
+- SD card reader or some way to write to your SD Card
+- Micro to Normal HDMI Cable (Male->Male)
+- USB keyboard and mouse
+- USB C power adapter suitiable for your Pi
+- A monitor or TV with a HDMI input
+- Another computer
+- The password for you WiFi network or an ethernet connection\*
 
 ### Install Raspbian OS and Start Your Pi
 
@@ -313,14 +313,14 @@ curl localhost:1635/peers
 
 ```json
 {
-	"peers": [
-		{
-			"address": "339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"
-		},
-		{
-			"address": "b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"
-		}
-	]
+  "peers": [
+    {
+      "address": "339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"
+    },
+    {
+      "address": "b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"
+    }
+  ]
 }
 ```
 

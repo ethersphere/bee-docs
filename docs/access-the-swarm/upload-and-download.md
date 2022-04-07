@@ -4,22 +4,22 @@ id: upload-and-download
 ---
 
 When you upload your files to the swarm, they are split into 4kb
-*chunks* and then distributed to nodes in the network that are
+_chunks_ and then distributed to nodes in the network that are
 responsible for storing and serving these parts of your content. Each
-chunk has a *postage stamp* stuck to it which attaches a value in BZZ
-to that chunk which you agree to *burn* when buying the batch of stamps. This
+chunk has a _postage stamp_ stuck to it which attaches a value in BZZ
+to that chunk which you agree to _burn_ when buying the batch of stamps. This
 signifies to storage nodes that this data is important, and supposed
 to be retained in the Distributable Immutable Store of Chunks
-(*DISC*).
+(_DISC_).
 
 ## Overview
 
 To upload data to the swarm, you must perform the following steps:
 
 1. Fund your node's wallet with BZZ.
-2. Purchase a *batch* of stamps with your BZZ.
+2. Purchase a _batch_ of stamps with your BZZ.
 3. Wait for the batch to propogate into the network.
-4. Upload your content, specifying the *batch id* so that Bee can attach stamps to your chunks.
+4. Upload your content, specifying the _batch id_ so that Bee can attach stamps to your chunks.
 5. Download your content using your content's hash.
 
 ## Purchasing Your Batch of Stamps
@@ -46,7 +46,7 @@ Ethereum Swarm Bee
 
 Once running, a file can be uploaded by making an HTTP POST request to the `files` endpoint of the Bee API.
 
-Here, you must specify your *Batch ID* in the `Swarm-Postage-Batch-Id` header as follows.
+Here, you must specify your _Batch ID_ in the `Swarm-Postage-Batch-Id` header as follows.
 
 ```bash
 curl -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -F file=@bee.jpg http://localhost:1633/bzz
@@ -65,18 +65,21 @@ before uploading to ensure their contents always remains private.
 :::
 
 When succesful, a JSON formatted response will be returned, containing
-a **swarm reference** or **hash** which is the *address* of the
+a **swarm reference** or **hash** which is the _address_ of the
 uploaded file, for example:
 
 ```json
-{"reference":"22cbb9cedca08ca8d50b0319a32016174ceb8fbaa452ca5f0a77b804109baa00"}
+{
+  "reference": "22cbb9cedca08ca8d50b0319a32016174ceb8fbaa452ca5f0a77b804109baa00"
+}
 ```
-Keep this *address* safe, as we'll use it to retrieve our content later on.
 
-In Swarm, every piece of data has a unique *address* which is a unique and reproducible cryptographic hash digest. If you upload the same file twice, you will always receive the same hash. This makes working with data in Swarm super secure!
+Keep this _address_ safe, as we'll use it to retrieve our content later on.
+
+In Swarm, every piece of data has a unique _address_ which is a unique and reproducible cryptographic hash digest. If you upload the same file twice, you will always receive the same hash. This makes working with data in Swarm super secure!
 
 :::info
-If you are uploading a large file it is useful to track the status of your upload as it is processed into the network. To improve the user experience, learn how to [follow the status of your upload](/docs/access-the-swarm/syncing). 
+If you are uploading a large file it is useful to track the status of your upload as it is processed into the network. To improve the user experience, learn how to [follow the status of your upload](/docs/access-the-swarm/syncing).
 
 Once your file has been **completely synced with the network**, you will be able to turn off your computer and other nodes will take over to serve the data for you!
 :::
@@ -86,7 +89,7 @@ Once your file has been **completely synced with the network**, you will be able
 Once your file is uploaded into the swarm, it can be retrieved with a
 simple HTTP GET request.
 
-Substitute the *hash* in the last part of the URL with the reference
+Substitute the _hash_ in the last part of the URL with the reference
 to your own data.
 
 ```bash

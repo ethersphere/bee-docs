@@ -34,7 +34,7 @@ configuration. 🤓
 ### Networking Basics
 
 In a network, each computer is assigned an IP address. Each IP address
-is then subdivided into thousands of *sockets* or *ports*, each of
+is then subdivided into thousands of _sockets_ or _ports_, each of
 which has an incoming and outgoing component.
 
 In a completely trusted network of computers, any connections to or
@@ -60,7 +60,7 @@ are expecting to be open.
 
 When you connect to the Internet, you are assigned a unique number
 called an IP Address. IP stands for **Internet Protocol**. The most
-prevalent IP version used is *still* the archaic
+prevalent IP version used is _still_ the archaic
 [IPv4](https://en.wikipedia.org/wiki/IPv4) which was invented way back
 in 1981. IPv6 is available but not well used. Due to the mitigation of
 the deficiencies inherent in the IPv4 standard, we may encounter some
@@ -76,7 +76,7 @@ You can investigate this by running:
 ifconfig
 ```
 
-or 
+or
 
 ```bash
 ip address
@@ -92,7 +92,7 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 Here we can see our computer's **public IP address**
 `178.128.196.191`. This is the address that is used by other computers
 we connect to over the Internet. We can verify this using a third
-party service such as *icanhazip* or *ifconfig*.
+party service such as _icanhazip_ or _ifconfig_.
 
 ```bash
 curl icanhazip.com --ipv4
@@ -100,12 +100,12 @@ curl icanhazip.com --ipv4
 
 or
 
-
 ```bash
 curl ifconfig.co --ipv4
 ```
 
 The response something contain something like:
+
 ```
 178.128.196.191
 ```
@@ -118,7 +118,7 @@ nc -zv 178.128.196.191 1634
 
 If you have success, congratulations!
 
-If this still doesn't work for you, see the last part of *Manual: Configure Your Router and Bee* section below, as you may need to configure your `nat-addr`.
+If this still doesn't work for you, see the last part of _Manual: Configure Your Router and Bee_ section below, as you may need to configure your `nat-addr`.
 
 ### Home, Commercial and Business Networks and Other Networks Behind NAT
 
@@ -151,8 +151,8 @@ designated for
 [private networks](https://en.wikipedia.org/wiki/Private_network).
 
 As this IP won't work on the global Internet, our router remembers
-that our computer has been assigned this IP. It then uses *Network
-Address Translation* (NAT) to modify all requests from our computer to
+that our computer has been assigned this IP. It then uses _Network
+Address Translation_ (NAT) to modify all requests from our computer to
 another computer somewhere in the Internet. As the requests pass
 through the router it changes our local IP to the public IP of the
 router, and vice versa when the responses are sent back, from the
@@ -160,17 +160,17 @@ public IP to the local one.
 
 #### Navigating Through the NAT
 
-The presence of NAT presents two problems for p2p networking. 
+The presence of NAT presents two problems for p2p networking.
 
 The first is that it can be difficult for programs running on our computer to know our real public IP as it is not explicitly known by our computer's networking interface, which is configured with a private network IP. This is a relatively easy problem to solve as we can simply discover our public IP and then specify it in Bee's configuration, or indeed determine it using other means.
 
 The second issue is that our router has only 65535 ports to expose to
-the public network, however, *each device on your private network* is
-capable of exposing 65535 *each*. To the global Internet, it appears
+the public network, however, _each device on your private network_ is
+capable of exposing 65535 _each_. To the global Internet, it appears
 that there is only one set of ports to connect to, whereas, in actual
 fact, there is a full set of ports for each of the devices which are
 connected to the private network. To solve this second problem,
-routers commonly employ an approach known as *port forwarding*.
+routers commonly employ an approach known as _port forwarding_.
 
 Bee's solution to these problems come in two flavours, automatic and manual.
 
@@ -188,7 +188,7 @@ UPnP is a security risk as it allows any host or process inside
 may be used to transfer malicious traffic, for example a
 [RAT](https://en.wikipedia.org/wiki/Remote_desktop_software#RAT). UPnP
 can also be used to determine your IP, and in the case of using ToR or
-a VPN, your *real* public IP. We urge you to disable UPnP on your
+a VPN, your _real_ public IP. We urge you to disable UPnP on your
 router and use manual port forwarding as described below.
 :::
 
@@ -220,15 +220,15 @@ known as the underlay addresses.
 ##### Manual: Configure Your Router and Bee
 
 Inspecting the underlay addresses in the output of the addresses
-endpoint of our Debug API, we can see addresses only for *localhost*
-`127.0.0.1` and our *private network IP* `192.168.0.10`. Bee must be
+endpoint of our Debug API, we can see addresses only for _localhost_
+`127.0.0.1` and our _private network IP_ `192.168.0.10`. Bee must be
 having trouble navigating our NAT.
 
 ```json
 [
   "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
   "/ip4/192.168.0.10/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
-  "/ip6/::1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB",
+  "/ip6/::1/tcp/1634/p2p/16Uiu2HAm8Hs91MzWuXfUyKrYaj3h8K8gzvRqzSK5gP9TNCwypkJB"
 ]
 ```
 
@@ -316,7 +316,6 @@ nc -l 0.0.0.0 1634
 
 Now, let's verify we're able to connect to netcat by checking the connection from our local machine.
 
-
 ```bash
 nc -zv 127.0.0.1 1634
 ```
@@ -325,7 +324,7 @@ nc -zv 127.0.0.1 1634
 Connection to 127.0.0.1 port 1634 [tcp/*] succeeded!
 ```
 
-This should be a no brainer, the connection between localhost in not normally mediated. 
+This should be a no brainer, the connection between localhost in not normally mediated.
 
 If there is a problem here, the problem is with some other software running on your operating system or your operating system itself. Try a different port, such as `1734` and turning off any unneccesary software. If this doesn't work, you may need to try a different operating system environment. Please get in touch and we'll try to help!
 
@@ -339,7 +338,6 @@ connections. However, if you can, it is worth the effort to allow
 incoming connections, as the whole swarm will benefit from the
 increased connectivity.
 :::
-
 
 Let's find out what our IP looks like to the Internet.
 
@@ -363,52 +361,52 @@ If not, we can try a few things to make sure there are no barriers stopping us f
 
 1. Check your computer's firewall.
 
-  Sometimes your computer is configured to prevent connections. If you
-  are on a private network mediated by NAT, you can check if this is
-  the problem by trying to connect from another device on your network
-  using the local IP `nc -zv 192.168.0.10 1634`.
+Sometimes your computer is configured to prevent connections. If you
+are on a private network mediated by NAT, you can check if this is
+the problem by trying to connect from another device on your network
+using the local IP `nc -zv 192.168.0.10 1634`.
 
-  Ubuntu uses [UFW](https://help.ubuntu.com/community/UFW), MacOS can
-  be configured using the *Firewall* tab in the *Security & Privacy*
-  section of *System Preferences*. Windows uses
-  [Defender Firewall](https://support.microsoft.com/en-us/help/4028544/windows-10-turn-microsoft-defender-firewall-on-or-off).
+Ubuntu uses [UFW](https://help.ubuntu.com/community/UFW), MacOS can
+be configured using the _Firewall_ tab in the _Security & Privacy_
+section of _System Preferences_. Windows uses
+[Defender Firewall](https://support.microsoft.com/en-us/help/4028544/windows-10-turn-microsoft-defender-firewall-on-or-off).
 
-  For each of these firewalls, set a special rule to allow UDP and TCP
-  traffic to pass through on port `1634`. You may want to limit this
-  traffic to the Bee application only.
+For each of these firewalls, set a special rule to allow UDP and TCP
+traffic to pass through on port `1634`. You may want to limit this
+traffic to the Bee application only.
 
 2. Check your ingress' firewall.
 
-  For a datacenter hired server, this configuration will often take
-  place in somewhere in the web user interface. Refer to your server
-  hosting provider's documentation to work out how to open ports to
-  the open Internet. Ensure that both TCP and UDP traffic are allowed.
+For a datacenter hired server, this configuration will often take
+place in somewhere in the web user interface. Refer to your server
+hosting provider's documentation to work out how to open ports to
+the open Internet. Ensure that both TCP and UDP traffic are allowed.
 
-  Similarly, if you are connecting from within a private network, you
-  may find that the port is blocked by the router. Each router is
-  different, so consult your router's firware documentation to make
-  sure there are no firewalls in place blocking traffic on your Bee's
-  designated p2p port.
+Similarly, if you are connecting from within a private network, you
+may find that the port is blocked by the router. Each router is
+different, so consult your router's firware documentation to make
+sure there are no firewalls in place blocking traffic on your Bee's
+designated p2p port.
 
-  You may check this using netcat by trying to connect using your
-  computer's public IP, as above `nc -zv 86.98.94.9 1634`.
+You may check this using netcat by trying to connect using your
+computer's public IP, as above `nc -zv 86.98.94.9 1634`.
 
 3. Docker
 
-  Docker adds another level of complexity.
+Docker adds another level of complexity.
 
-  To debug docker connectivity issues, we may use netcat as above to
-  check port connections are working as expected. Double check that
-  you are exposing the right ports to your local network, either by
-  using the command line flags or in your docker-compose.yaml. You
-  should be able to successfully check the connection locally using
-  eg. `nc -zv localhost 1634` then follow instructions above to make
-  sure your local network has the correct ports exposed to the
-  Internet.
+To debug docker connectivity issues, we may use netcat as above to
+check port connections are working as expected. Double check that
+you are exposing the right ports to your local network, either by
+using the command line flags or in your docker-compose.yaml. You
+should be able to successfully check the connection locally using
+eg. `nc -zv localhost 1634` then follow instructions above to make
+sure your local network has the correct ports exposed to the
+Internet.
 
 3. Something else entirely?
 
-  Networking is a complex topic, but it keeps us all together. If you
-  still can't connect to your Bee, get in touch via [The
-  Beehive](http://beehive.ethswarm.org/) and we'll do our best to get
-  you connected. In the swarm, no Bee is left behind.
+Networking is a complex topic, but it keeps us all together. If you
+still can't connect to your Bee, get in touch via [The
+Beehive](http://beehive.ethswarm.org/) and we'll do our best to get
+you connected. In the swarm, no Bee is left behind.

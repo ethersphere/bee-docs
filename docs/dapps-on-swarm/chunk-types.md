@@ -13,7 +13,7 @@ more information on how swarm comes together.
 Content addressed chunks are chunks whose addresses are determined by the BMT hashing algorithm. This means you can be sure that all content addressed chunks content is already verified - no more need to check md5 hashes of your downloaded data!
 
 :::warning
-To be able trust your data, you must run your own Bee node that automatically verifies data, using gateways puts your trust in the gateway operators. 
+To be able trust your data, you must run your own Bee node that automatically verifies data, using gateways puts your trust in the gateway operators.
 :::
 
 ## Trojan Chunks
@@ -34,6 +34,6 @@ rel="noopener noreferrer">The Book of Swarm</a> .
 
 ## Custom Chunk Types
 
-Although all chunks must satisfy the constraints of either being addressed by the BMT hash of their payload, or assigned by the owner of an Ethereum private key pair, so much more is possible. How else can you use the DISC to distribute and store your data? We're excited to see what you come up with! 💡 
+Although all chunks must satisfy the constraints of either being addressed by the BMT hash of their payload, or assigned by the owner of an Ethereum private key pair, so much more is possible. How else can you use the DISC to distribute and store your data? We're excited to see what you come up with! 💡
 
 Share your creations in the [#develop-on-swarm](https://discord.gg/C6dgqpxZkU) channel of our [Discord Server](https://discord.gg/wdghaQsGq5).

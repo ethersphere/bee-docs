@@ -48,7 +48,6 @@ Logs are available at `/usr/local/var/log/swarm-bee/bee.log`
 tail -f /usr/local/var/log/swarm-bee/bee.log
 ```
 
-
 ## Data Locations
 
 ### Bee-clef

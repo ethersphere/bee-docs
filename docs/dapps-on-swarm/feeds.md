@@ -21,7 +21,7 @@ share your implementations in other languages in the
 
 ### What are Feeds?
 
-A feed is a collection of Single Owner Chunks with predicatable addresses. This enables creators to upload pointers to data so that consumers of the feed are able to find the data in Swarm using only an *Ethereum address* and *Topic ID*.
+A feed is a collection of Single Owner Chunks with predicatable addresses. This enables creators to upload pointers to data so that consumers of the feed are able to find the data in Swarm using only an _Ethereum address_ and _Topic ID_.
 
 ### Creating and Updating a Feed
 
@@ -36,7 +36,7 @@ tool respectively.
 
 ### No More ENS Transaction Charges
 
-Swarm's feeds provide the ability to update your immutable content in a mutable world. Simply reference your feed's `manifest address` as the `content hash` in your ENS domain's resolver, and Bee will automatically provide the latest version of your website. 
+Swarm's feeds provide the ability to update your immutable content in a mutable world. Simply reference your feed's `manifest address` as the `content hash` in your ENS domain's resolver, and Bee will automatically provide the latest version of your website.
 
 ### Use Cases for Feeds
 

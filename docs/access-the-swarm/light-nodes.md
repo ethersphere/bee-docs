@@ -4,7 +4,7 @@ id: light-nodes
 ---
 
 :::danger
-When a light node is requesting data from the network - it will not benefit from plausible deniability. This is because a light node does not forward on behalf of other nodes, and so it is always the *originator* of the request.
+When a light node is requesting data from the network - it will not benefit from plausible deniability. This is because a light node does not forward on behalf of other nodes, and so it is always the _originator_ of the request.
 :::
 
 #### Configuration
@@ -15,10 +15,10 @@ In order to configure light node mode, do not disable light mode in your Bee con
 
 At present, light mode represents a pragmatic and elegant approach to improving network stability, reliability and resiliance.
 
-In general, *light mode* may be thought of as simply not participating
+In general, _light mode_ may be thought of as simply not participating
 in the activity of forwarding or storing chunks for other members of
 the swarm, these nodes are strictly consumers, who will pay BZZ in
-return for services rendered by *full nodes* - those contributing
+return for services rendered by _full nodes_ - those contributing
 towards moving data around the network.
 
 This means that, although the node will participate in the pull

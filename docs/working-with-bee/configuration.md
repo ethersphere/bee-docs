@@ -130,7 +130,7 @@ api-addr: :1633
 block-hash: ""
 block-time: "15"
 bootnode:
-    - /dnsaddr/testnet.ethswarm.org
+  - /dnsaddr/testnet.ethswarm.org
 bootnode-mode: false
 cache-capacity: "1000000"
 cache-retrieval: true
@@ -226,7 +226,7 @@ The location of a YAML configuration file containing configuration options. See 
 
 #### --admin-password
 
-When the permission checks for the API is enabled then this option configure admin password that 
+When the permission checks for the API is enabled then this option configure admin password that
 is used to generate Bearer tokens.
 
 **Be aware that you need to pass a bcrypt hash of the password here not the actual plaintext password!**
@@ -499,7 +499,7 @@ A default top level domain and resolver contract address are provided, but an EN
 
 _default_: false
 
-Enable permission check on the http APIs. 
+Enable permission check on the http APIs.
 
 You should also specify admin password using the `--admin-password` option.
 

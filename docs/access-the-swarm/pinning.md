@@ -3,17 +3,17 @@ title: Pinning
 id: pinning
 ---
 
-Each Bee node is configured to reserve a certain amount of memory on your computer's hard drive to store and serve chunks within their *neighbourhood of responsibility* for other nodes in the Swarm network. Once this alloted space has been filled, each Bee node deletes older chunks to make way for newer ones as they are uploaded by the network.
+Each Bee node is configured to reserve a certain amount of memory on your computer's hard drive to store and serve chunks within their _neighbourhood of responsibility_ for other nodes in the Swarm network. Once this alloted space has been filled, each Bee node deletes older chunks to make way for newer ones as they are uploaded by the network.
 
 Each time a chunk is accessed, it is moved back to the end of the deletion queue, so that regularly accessed content stays alive in the network and is not deleted by a node's garbage collection routine.
 
 This, however, presents a problem for content which is important, but accessed seldom requested. In order to keep this content alive, Bee nodes provide a facility to **pin** important content so that it is not deleted.
 
-There are two flavours of pinning, *local* and *global*.
+There are two flavours of pinning, _local_ and _global_.
 
 ## Local Pinning
 
-If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or Gateway, chunks can be *pinned* either during upload, or retrospectively using the Swarm reference.
+If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or Gateway, chunks can be _pinned_ either during upload, or retrospectively using the Swarm reference.
 
 :::caution
 Files pinned using local pinning will still not necessarily be available to the rest of the network. Read [global pinning](/docs/access-the-swarm/pinning#global-pinning) to find out how to keep your files available to the whole of the swarm.
@@ -28,7 +28,9 @@ curl -H "Swarm-Pin: true" -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e4
 ```
 
 ```json
-{"reference":"1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30"}
+{
+  "reference": "1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30"
+}
 ```
 
 ### Administer Pinned Content
@@ -40,7 +42,11 @@ curl localhost:1633/pins
 ```
 
 ```json
-{"references":["1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30"]}
+{
+  "references": [
+    "1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30"
+  ]
+}
 ```
 
 or, to check for specific references:
@@ -55,13 +61,13 @@ A `404` response indicates the content is not available.
 
 If we later decide our content is no longer worth keeping, we can simply unpin it by sending a `DELETE` request to the pinning endpoint using the same reference:
 
-```bash
+````bash
 curl -XDELETE http://localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30
 ``
 
 ```json
 {"message":"OK","code":200}
-```
+````
 
 Now, when check again, we will get a `404` error as the content is no longer pinned.
 
@@ -70,7 +76,7 @@ curl localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a8782740
 ```
 
 ```json
-{"message":"Not Found","code":404}
+{ "message": "Not Found", "code": 404 }
 ```
 
 :::info
@@ -78,6 +84,7 @@ Pinning and unpinning is possible for files (as in the example) and also the chu
 :::
 
 #### Pinning Already Uploaded Content
+
 The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded and present in the swarm.
 
 To do so, we can send a `POST` request including the swarm reference to the files pinning endpoint.
@@ -87,10 +94,10 @@ curl -XPOST http://localhost:1633/pin/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 ```
 
 ```json
-{"message":"OK","code":200}
+{ "message": "OK", "code": 200 }
 ```
 
-The `pin` operation will attempt to fetch the content from the network if it is not available on the local node. 
+The `pin` operation will attempt to fetch the content from the network if it is not available on the local node.
 
 Now, if we query our files pinning endpoint again, the pin counter will once again have been incremented.
 
@@ -99,7 +106,10 @@ curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab5
 ```
 
 ```json
-{"address":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f","pinCounter":1}
+{
+  "address": "7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f",
+  "pinCounter": 1
+}
 ```
 
 :::warning
@@ -109,7 +119,7 @@ While the pin operation will attempt to fetch content from the network if it is 
 ## Global Pinning
 
 [Local pinning](/docs/access-the-swarm/pinning#local-pinning) ensures that your own node does not delete uploaded files. But other nodes that store your
-chunks (because they fall within their *neighbourhood of responsibility*) may have deleted content that has not been accessed recently to make room for new chunks.
+chunks (because they fall within their _neighbourhood of responsibility_) may have deleted content that has not been accessed recently to make room for new chunks.
 
 :::info
 For more info on how chunks are distributed, persisted and stored within the network, read
@@ -135,11 +145,13 @@ curl -H "Swarm-Pin: true" --data-binary @bee.mp4 localhost:1633/bzz\?bee.mp4
 ```
 
 ```json
-{"reference":"7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f"}
+{
+  "reference": "7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f"
+}
 ```
 
 Now, when we distribute links to our files, we must also specify the
-first two bytes of our overlay address as the *target*. If a chunk
+first two bytes of our overlay address as the _target_. If a chunk
 that has already been garbage collected by its storer nodes is
 requested, the storer node will send a message using
 [PSS](/docs/dapps-on-swarm/pss) to the swarm neighbourhood defined by

@@ -3,9 +3,9 @@ title: Bee Using Docker
 id: docker
 ---
 
-Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee) for your convenience. 
+Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee) for your convenience.
 
-If running a Bee *full node*, it is recommended that you make use of
+If running a Bee _full node_, it is recommended that you make use of
 Ethereum's external signer, [Clef](/docs/installation/bee-clef). Skip
 ahead if you are comfortable with `docker` basics for instructions on
 how to use [docker-compose](/docs/installation/docker#docker-compose)
@@ -14,7 +14,7 @@ Bee Clef container.
 
 ### Quick Start
 
-Try Bee out by simply running the following command in your Terminal. 
+Try Bee out by simply running the following command in your Terminal.
 
 ```bash
 docker run\
@@ -54,7 +54,7 @@ Once you have generated your keys, leave Bee to run in the background...
 
 ```bash
 docker run\
-  -d 
+  -d
   -v /path/to/.bee-docker:/home/bee/.bee\
   -p 1635:1635 \
   -p 1634:1634 \
@@ -118,7 +118,7 @@ BEE_SWAP_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=your-api-key
 BEE_PASSWORD=my-password
 ```
 
-To enable Clef support on mainnet, we must also change the following params: 
+To enable Clef support on mainnet, we must also change the following params:
 
 ```
 CLEF_CHAINID=100
@@ -146,7 +146,7 @@ By specifying the `-d` flag to `docker-compose` we run Bee and Bee Clef as a dae
 Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to [backup](/docs/working-with-bee/backups) the contents of your Docker volume!
 :::
 
-To determine the Bee node's address to fund, we can check the logs for our Bee *container*:
+To determine the Bee node's address to fund, we can check the logs for our Bee _container_:
 
 ```bash
 docker-compose logs -f bee-1
@@ -156,7 +156,6 @@ docker-compose logs -f bee-1
 bee_1 | time="2020-12-15T18:43:14Z" level=warning msg="cannot continue until there is sufficient ETH (for Gas) and at least 1 BZZ available on 7a977fa660e2e93e1eba40030c6b8da68d01971e"
 time="2020-12-15T18:43:14Z" level=warning msg="learn how to fund your node by visiting our docs at https://docs.ethswarm.org/docs/installation/fund-your-node"
 ```
-
 
 Once you have determined your Bee's Ethereum addresses,
 [fund your node](/docs/installation/fund-your-node).
@@ -188,8 +187,16 @@ curl localhost:1635/peers
 ```
 
 ```json
-{"peers":[{"address":"339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"},{"address":"b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"} ]}
-
+{
+  "peers": [
+    {
+      "address": "339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"
+    },
+    {
+      "address": "b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"
+    }
+  ]
+}
 ```
 
 If you see peers listed here - congratulations! You have joined the

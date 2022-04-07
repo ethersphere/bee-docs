@@ -6,10 +6,10 @@ id: fund-your-node
 In order to start your Bee node on the _mainnet_, its Ethereum wallet must be
 funded with:
 
-* 1 [xBZZ](/docs/introduction/terminology#xbzz-token), for traffic
+- 1 [xBZZ](/docs/introduction/terminology#xbzz-token), for traffic
   accounting (this is optional, [see below](#basic-deployment))
 
-* some [xDAI](/docs/introduction/terminology#xdai-token), to pay the gas fees of
+- some [xDAI](/docs/introduction/terminology#xdai-token), to pay the gas fees of
   a couple of transactions on the [Gnosis
   Chain](/docs/introduction/terminology#gnosis-chain).
 
@@ -90,11 +90,11 @@ and then
 The canoncial addresses for the BZZ token on the various blockchains are as
 follows:
 
-| Blockchain             | Contract address                             |
-|------------------------|----------------------------------------------|
-| Ethereum, BZZ          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb) |
+| Blockchain             | Contract address                                                                                                                       |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Ethereum, BZZ          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)                |
 | Gnosis Chain, xBZZ     | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://blockscout.com/xdai/mainnet/tokens/0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da/) |
-| Goerli (testnet), gBZZ | [`0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335`](https://goerli.etherscan.io/address/0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335) |
+| Goerli (testnet), gBZZ | [`0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335`](https://goerli.etherscan.io/address/0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335)         |
 
 # Accessing Your Node's Wallet
 
