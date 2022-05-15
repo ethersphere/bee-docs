@@ -3,7 +3,7 @@ title: Configuration
 id: configuration
 ---
 
-Bee is a very flexible program, and can be configured in a variety of
+Bee is a very flexible piece of software, and can be configured in a variety of
 ways depending on your use case. This expanded section will cover
 configuration in detail.
 
@@ -11,65 +11,9 @@ configuration in detail.
 
 :::important
 Before starting Bee for the first time, there is _some_ configuration
-to do! Make sure you consider updating the following recommended
-settings!
+to do! Make sure you consider updating the recommended
+settings in the [installation guide](/docs/installation/install)!
 :::
-
-### Full Node
-
-By default, Bee runs as a [light
-node](/docs/access-the-swarm/light-nodes). To fully participate in
-the swarm, you must set the `--full-node` option to `true`.
-
-### Swap Endpoint
-
-In order to access the blockchain, your Bee must be connected to an XDAI blockchain node on the XDAI network. We recommend running your own [XDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
-
-:::info
-The xDai chain will soon implement the London hardfork. Please stay informed and update your infrastructure accordingly as OpenEthereum clients are not guaranteed to be supported after the hardfork!
-:::
-
-### NAT Address
-
-To enable others to connect to your node, you must broadcast your
-public IP and ensure Bee is accessible on the correct p2p port
-(default `1634`). We recommend that you [manually configure your
-external IP and check connectivity](/docs/installation/connectivity)
-to ensure that your Bee is able to receive inbound connections from
-other peers.
-
-First determine your public IP address.
-
-```bash
-curl icanhazip.com
-```
-
-```bash
-123.123.123.123
-```
-
-Then configure your node, including your p2p port (default `1634`).
-
-```yaml
-nat-addr: "123.123.123.123:1634"
-```
-
-### LevelDB Open File Descriptors Limit
-
-Bee is designed to work on a lot of different hardware. To facilitate
-the exploration of this, we have given node
-operators access to leveldb's `--db-open-files-limit`. This influences
-the speed with which Bee can read and write to its database, and
-therefore its performance in forwarding and serving chunks. Some say
-setting this to much more than the default 200 leads to a much
-enhanced ability to participate in the swarm and get those BZZs!
-Share your experience in the #node-operators channel of our [Discord
-server](https://discord.gg/wdghaQsGq5) to help us make this process
-more automated in the future!
-
-### ENS Endpoint
-
-The ENS domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to an Ethereum blockchain node on the main network. If you would like to [browse the swarm](/docs/access-the-swarm/browse-the-swarm) We recommend you sign up to [Infura's](https://infura.io) API service and set your `--resolver-options=https://mainnet.infura.io/v3/your-api-key`.
 
 ## Specifying Configuration
 
@@ -129,18 +73,18 @@ allow-private-cidrs: false
 api-addr: :1633
 block-hash: ""
 block-time: "15"
-bootnode:
-  - /dnsaddr/testnet.ethswarm.org
+bootnode: []
 bootnode-mode: false
 cache-capacity: "1000000"
 cache-retrieval: true
 chain-enable: true
+chequebook-enable: true
 clef-signer-enable: false
 clef-signer-endpoint: ""
 clef-signer-ethereum-address: ""
-config: /home/ubuntu/.bee.yaml
+config: /root/.bee.yaml
 cors-allowed-origins: []
-data-dir: /home/ubuntu/.bee
+data-dir: /root/.bee
 db-block-cache-capacity: "33554432"
 db-disable-seeks-compaction: false
 db-open-files-limit: "200"
@@ -149,9 +93,8 @@ debug-api-addr: :1635
 debug-api-enable: false
 full-node: false
 gateway-mode: false
-global-pinning-enable: false
 help: false
-mainnet: false
+mainnet: true
 nat-addr: ""
 network-id: "10"
 p2p-addr: :1634
@@ -182,6 +125,7 @@ tracing-host: ""
 tracing-port: ""
 tracing-service-name: bee
 transaction: ""
+use-postage-snapshot: false
 verbosity: info
 warmup-time: 20m0s
 welcome-message: ""
@@ -194,7 +138,7 @@ configured using a configuration file which is automatically generated
 during the installation process.
 
 To alter Bee's configuration, simply edit the configuration file as
-desired, and restart your Bee node using `systemctl`.
+desired, and restart your Bee service.
 
 ### Linux
 
@@ -231,15 +175,15 @@ is used to generate Bearer tokens.
 
 **Be aware that you need to pass a bcrypt hash of the password here not the actual plaintext password!**
 
-_default_ : ""
+_default_ `""`
 
 #### --allow-private-cidrs: false
 
-_default_ : ""
+_default_ `""`
 
 #### --api-addr
 
-_default_ :1633
+_default_ `:1633`
 
 The IP and port the API will serve HTTP requests from. Omitting the IP
 part of the address will cause the server to listen to all
@@ -247,9 +191,15 @@ interfaces. Argument values are of the form '132.132.132.132:1633'.
 
 #### --block-time
 
-_default_ 15
+_default_ `15`
 
 The expected block time of the attached SWAP endpoint.
+
+#### --block-hash
+
+_default_ `""`
+
+The block hash of the block whose parent is the block that contains the transaction hash
 
 #### --bootnode
 
@@ -263,6 +213,12 @@ By default a node connects to the Swarm mainnet. When using a private or test ne
 
 Any Bee node in a network can act as a bootnode.
 
+#### --bootnode-mode
+
+_default_ `false`
+
+Cause the node to always accept incoming connections
+
 #### --cache-capacity
 
 _default_ `1000000`
@@ -274,6 +230,18 @@ The amount of disk space, in chunks, that is used for forwarding and uploading c
 _default_ `true`
 
 Enable the caching of forwarded content.
+
+#### --chain-enable
+
+_default_ `true`
+
+Use a blockchain backend, and hence participate in protocols requiring one.
+
+#### --chequebook-enable
+
+_default_ `true`
+
+Enable chequebook.
 
 #### --clef-signer-enable
 
@@ -417,15 +385,20 @@ Enables the Global Pinning functionality when set to `true`.
 
 _default_ `false`
 
+Set to true to connect to Swarm mainnet.
+
 #### --nat-addr
 
 _default_ `""`
 
 Sets the expected public IP. Normally this is generated automatically, but in certain circumstances it may be desirable to set it manually.
 
+Format is `123.123.123.123:1634` where the port number is your Bee p2p port.
+
 #### --network-id
 
-_default_ `10`
+_default_ `1`  if `--mainnet=true`
+_default_ `10` if `--mainnet=false`
 
 The network ID for which to accept new connections. Set to 1 for mainnet, 10 for testnet.
 
@@ -434,10 +407,6 @@ The network ID for which to accept new connections. Set to 1 for mainnet, 10 for
 _default_ `:1634`
 
 The IP and port to listen for p2p protocol messages.
-
-#### --p2p-quic-enable
-
-_default_ `false`
 
 #### --p2p-ws-enable
 
@@ -497,7 +466,7 @@ A default top level domain and resolver contract address are provided, but an EN
 
 #### --restricted
 
-_default_: false
+_default_ false
 
 Enable permission check on the http APIs.
 
@@ -507,15 +476,21 @@ To generate a valid admin password use the provided [bcrypt utility](/docs/worki
 
 #### --resync
 
-_default_: false
+_default_ false
 
 Forces the node to resync postage contract data.
 
 #### --static-nodes
 
-_default_: []
+_default_ []
 
 Protect nodes from getting kicked out on bootnode
+
+#### --swap-deployment-gas-price
+
+_default_ _determined automatically_
+
+Gas price in wei to use for deployment and funding
 
 #### --swap-enable
 
@@ -525,15 +500,21 @@ _default_ `true`
 
 _default_ `ws://localhost:8546`
 
-SWAP ethereum blockchain endpoint. Must be equipped with websockets.
+SWAP Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint.
 
 #### --swap-factory-address
 
-_default_ `anointed contract for the current blockchain id`
+_default_ _anointed contract for the current blockchain id_
 
 #### --swap-initial-deposit
 
 _default_ `10000000000000000`
+
+#### --token-encryption-key
+
+_default_
+
+Admin username to get the security token.
 
 #### --tracing-enable
 
@@ -548,6 +529,18 @@ configure and visualize tracing data is available
 _default_ `127.0.0.1:6831`
 
 The URL where the tracing service listens for Thrift protocol UDP messages.
+
+#### --tracing-host
+
+_default_ `""`
+
+Host to send tracing data.
+
+#### --tracing-port
+
+_default_ `""`
+
+Port to send tracing data.
 
 #### --tracing-service-name
 
@@ -570,6 +563,12 @@ sent from the Bee node's Ethereum address.
 _default_ `info`
 
 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
+
+#### --warmup-time
+
+_default_ `20m0s`
+
+Time to warmup the node before pull/push protocols can be kicked off.
 
 #### --welcome-message
 
