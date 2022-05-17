@@ -375,12 +375,6 @@ Set this to `true` to disable a set of sensitive features in the API
 to ensure that it is safe to expose your `api-addr` to the public
 Internet.
 
-#### --global-pinning-enable
-
-_default_ `false`
-
-Enables the Global Pinning functionality when set to `true`.
-
 #### --mainnet
 
 _default_ `false`
