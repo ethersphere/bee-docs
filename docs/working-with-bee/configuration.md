@@ -468,9 +468,10 @@ A default top level domain and resolver contract address are provided, but an EN
 
 _default_ false
 
-Enable permission check on the http APIs.
+Enable permission check on the http APIs. More information how to restrict the access
+to the APIs is available [here](/docs/working-with-bee/security).
 
-You should also specify admin password using the `--admin-password` option.
+If enabled - you must specify an admin password using the `--admin-password` option and a `--token-encryption-key` string value.
 
 To generate a valid admin password use the provided [bcrypt utility](/docs/working-with-bee/bcrypt)
 
