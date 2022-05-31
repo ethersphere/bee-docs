@@ -203,7 +203,7 @@ The block hash of the block whose parent is the block that contains the transact
 
 #### --bootnode
 
-_default_ `/dnsaddr/bootnode.ethswarm.org`
+_default_ `/dnsaddr/mainnet.ethswarm.org`
 
 This is a [multiaddr](https://github.com/multiformats/multiaddr)
 specifying the Bee bootnodes used for bootstrapping the network. It
