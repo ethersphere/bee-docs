@@ -100,3 +100,11 @@ Goerli is a Testnet, meaning that this is a safe environment to develop and test
 #### Faucet
 
 It takes BZZ tokens to seed your node so it can join the Swarm. Before it can start providing storage/network as a resource, it needs to receive data that the Swarm holds which costs BZZ. Since Goerli is a test network, there aren't marketplaces that you can "buy" BZZ, so a faucet is a pool of BZZ (and gEth) that will "sprinkle" (freely share/send) some of it to the address that you request. There is a #faucet-requset channel on the [Swarm Discord](https://discord.gg/wdghaQsGq5) which you may join and request.
+
+#### Libp2p
+
+An open source project provided by the IPFS project, the successor to Ethereum's devp2p. [libp2p](https://libp2p.io/) is a library that provides a p2p network stack. It allows software developers to more easily create p2p networks that interoperate over many languages by abstracting away the transport and handshake protocols.
+
+#### Time Based Settlements
+
+Nodes are each allocated a certain amount of bandwidth which each of their peers over time, this manifests as 'free usage limits'. As time passes, these debts are forgiven. If node continues to request bandwidth, they must pay in BZZ to correct the disparity. If they do not, they will be added to that node's blocklist.
