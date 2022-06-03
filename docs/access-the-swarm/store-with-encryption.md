@@ -12,10 +12,12 @@ The Bee client provides a facility to encrypt files and directories while upload
 To encrypt a file simply include the `Swarm-Encrypt: true` header with your HTTP request.
 
 ```bash
-curl -F file=@bee.jpg -H "Swarm-Encrypt: true" http://localhost:1633/files
+curl -F file=@bee.jpg -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -H "Swarm-Encrypt: true" http://localhost:1633/bzz
 ```
 
 When successful, the Bee client will return a 64 byte reference, instead of the usual 32 bytes.
+
+More information on how to buy a postage stamp batch and get its batch id can be found [here](/docs/access-the-swarm/keep-your-data-alive).
 
 ```json
 {
