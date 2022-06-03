@@ -46,10 +46,12 @@ For example, if we want to send a PSS message with **topic** `test-topic` to a n
 ...we must include the **target** `7bc5` and the public key itself as a query argument.
 
 ```bash
-curl -XPOST \
+curl  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -XPOST \
 localhost:1833/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd \
 --data "Hello Swarm"
 ```
+
+More information on how to buy a postage stamp batch and get it's batch id can be found [here](/docs/access-the-swarm/keep-your-data-alive).
 
 ### Send Messages in a Test Network
 
@@ -189,6 +191,7 @@ Since our first node has a 2 byte address prefix of `a231`, we will specify this
 
 ```bash
 curl \
+  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264"
   -XPOST "localhost:1933/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd" \
   --data "Hello Swarm"
 ```
