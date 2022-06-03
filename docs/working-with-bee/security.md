@@ -40,6 +40,11 @@ The `role` field can have one of the four values:
 
 The `expiry` field is a numeric value representing the lifetime of the token (in seconds)
 
+:::info
+There is an inheritance relationship between roles: consumer ⊆ creator ⊆ accountant ⊆ maintainer
+Maintainer role is universal - it's the superset of all permissions beloning to other roles.
+:::
+
 #### Example
 
 Let's say our password is `hello`
