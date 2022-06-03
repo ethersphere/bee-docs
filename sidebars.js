@@ -34,6 +34,7 @@ module.exports = {
         'working-with-bee/debug-api',
         'working-with-bee/logs-and-files',
         'working-with-bee/bee-tools',
+        'working-with-bee/security',
         'working-with-bee/cashing-out',
         'working-with-bee/monitoring',
         'working-with-bee/backups',
