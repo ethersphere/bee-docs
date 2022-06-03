@@ -27,7 +27,7 @@ For Dapp builders, the API Gateway provides limited access to some elements of a
 
 ### BZZ.link
 
-The [BZZ.link](https://bzz.link/) service allows you to access ENS domains with websites that are hosted on [Swarm](https://swarm.bzz.link/) such as `https://swarm.bzz.link. 
+The [BZZ.link](https://bzz.link/) service allows you to access ENS domains with websites that are hosted on [Swarm](https://swarm.bzz.link/) such as `https://swarm.bzz.link`. 
 
 BZZ link also provides limited access to a Swarm Gateway API.
 
