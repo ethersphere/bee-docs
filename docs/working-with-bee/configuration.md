@@ -203,7 +203,7 @@ The block hash of the block whose parent is the block that contains the transact
 
 #### --bootnode
 
-_default_ `/dnsaddr/bootnode.ethswarm.org`
+_default_ `/dnsaddr/mainnet.ethswarm.org`
 
 This is a [multiaddr](https://github.com/multiformats/multiaddr)
 specifying the Bee bootnodes used for bootstrapping the network. It
@@ -374,12 +374,6 @@ _default_ `false`
 Set this to `true` to disable a set of sensitive features in the API
 to ensure that it is safe to expose your `api-addr` to the public
 Internet.
-
-#### --global-pinning-enable
-
-_default_ `false`
-
-Enables the Global Pinning functionality when set to `true`.
 
 #### --mainnet
 

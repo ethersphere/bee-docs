@@ -84,7 +84,8 @@ module.exports = {
       type: 'category',
       label: 'Bee Developers',
       items: [
-        'bee-developers/useful-dev-info'
+        'bee-developers/useful-dev-info',
+        'bee-developers/bee-dev-mode'
       ],
     },
     {
