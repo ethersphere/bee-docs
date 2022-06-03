@@ -7,6 +7,10 @@ id: security
 The restricted APIs feature is experimental, further breaking changes might be introduced in the upcoming releases
 :::
 
+:::warning
+Only a subset of endpoints running on `:1633` can be restricted. This is subject to change in the future releases.
+:::
+
 Now that you decided to restrict the access to the APIs you should follow the next steps:
 
 * Pick a password that is strong enough.
@@ -35,6 +39,11 @@ The `role` field can have one of the four values:
 * consumer
 
 The `expiry` field is a numeric value representing the lifetime of the token (in seconds)
+
+:::info
+There is an inheritance relationship between roles: consumer ⊆ creator ⊆ accountant ⊆ maintainer
+Maintainer role is universal - it's the superset of all permissions belonging to other roles.
+:::
 
 #### Example
 
@@ -80,14 +89,3 @@ Authorization: Bearer A1UQrbNUK22otp50EsESoJNYkJfrK9H1D4ex4gSWUddx3H/A9VCu8ltS8l
 ```
 
 In the payload you can specify a different role and token lifetime.
-
-### Note
-
-Some of the API endpoints can not be restricted:
-
-* /health
-* /metrics
-* /readiness
-* /debug/*
-
-They are always going to be available for the user to call.
