@@ -42,7 +42,7 @@ The `expiry` field is a numeric value representing the lifetime of the token (in
 
 :::info
 There is an inheritance relationship between roles: consumer ⊆ creator ⊆ accountant ⊆ maintainer
-Maintainer role is universal - it's the superset of all permissions beloning to other roles.
+Maintainer role is universal - it's the superset of all permissions belonging to other roles.
 :::
 
 #### Example
