@@ -60,9 +60,9 @@ To upgrade your manual installation, simply stop Bee, replace the Bee binary and
 
 To upgrade your docker installation, simply increment the version number in your configurations and restart.
 
-### Upgrading from a mainnet v1.4.x series to a mainnet v1.5.x series
+### Upgrading from a mainnet v1.5.x series to a mainnet v1.6.x series
 
-Bee v1.6.0 contains a completely new data storage format called Sharky.
+Bee v1.6.x contains a completely new data storage format called Sharky.
 
 As part of these changes, existing data must be migrated to the new data structure expected by
 the 1.5.x client. This will happen automatically, but **may require extra space** and cause a spike in cpu requirements for the duration of the migration.
