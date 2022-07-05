@@ -10,7 +10,11 @@ When running without a blockchain we can't do settlements thus risking getting b
 #### Configuration
 
 In order to configure ultra light node mode use the same configurations as for the [light node](/docs/access-the-swarm/light-nodes)
-but `chain-enable: true` in your configuration.
+but leave the `swap-endpoint` configuration param value to empty (or just comment it out).
+
+:::caution
+Make sure you set the `swap-enable` configuration parameter to `false`, otherwise you will get an error.
+:::
 
 #### Mode of Operation
 
