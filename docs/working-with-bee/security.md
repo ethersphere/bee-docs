@@ -89,3 +89,87 @@ Authorization: Bearer A1UQrbNUK22otp50EsESoJNYkJfrK9H1D4ex4gSWUddx3H/A9VCu8ltS8l
 ```
 
 In the payload you can specify a different role and token lifetime.
+
+### A note on the HTTP endpoints
+
+There are three major groups:
+
+* technical debug endpoints
+  * /readiness
+  * /node
+  * /addresses
+  * /chainstate
+  * /debug/pprof
+  * /debug/vars
+  * /health
+* business related endpoints residing on the debug port
+  * /peers
+  * /pingpong/{peer-id}
+  * /reservestate
+  * /connect/{address}
+  * /blocklist
+  * /peers/{address}
+  * /chunks/{address}
+  * /topology
+  * /welcome-message
+  * /balances
+  * /balances/{peer}
+  * /consumed
+  * /consumed/{peer}
+  * /timesettlements
+  * /settlements
+  * /settlements/{peer}
+  * /chequebook/cheque/{peer}
+  * /chequebook/cheque
+  * /chequebook/cashout/{peer}
+  * /chequebook/balance
+  * /chequebook/address
+  * /chequebook/deposit
+  * /chequebook/withdraw
+  * /wallet
+  * /stamps
+  * /stamps/{id}
+  * /stamps/{id}/buckets
+  * /stamps/{amount}/{depth}
+  * /stamps/topup/{id}/{amount}
+  * /stamps/dilute/{id}/{depth}
+  * /batches
+  * /tags/{id}
+* API endpoints
+  * /bytes
+  * /bytes/{address}
+  * /chunks
+  * /chunks/stream
+  * /chunks/{address}
+  * /soc/{owner}/{id}
+  * /feeds/{owner}/{topic}
+  * /bzz
+  * /bzz/{address}
+  * /bzz/{address}/{path}
+  * /pss/send/{topic}/{targets}
+  * /pss/subscribe/{topic}
+  * /tags
+  * /tags/{id}
+  * /pins
+  * /pins/{reference}
+  * /stewardship/{address}
+  * /auth
+  * /refresh
+
+The user can toggle the debug port by setting the appropriate boolean value on `debug-api-enable` configuration parameter.
+If the value is `false` (default) then the first two groups of endpoints will not be available.
+
+Once we toggle the `restricted` flag to `true` - two things are going to happen:
+
+* it will expose the debug business related endpoints on the API port
+* it will restrict the access to them based on the security configuration provided.
+
+:::info
+Toggling the restricted flag ON will not remove the business related endpoints from the debug port, nor will it restrict them there.
+:::
+
+### the order in which HTTP endpoints become available
+
+The technical debug endpoints group will be the first to become available - as soon as its dependencies come online (within seconds).
+The other two groups will become available at a later stage, specifically after the postage syncing is done.
+Requests to a non technical debug endpoint before it becomes available will be rejected with a `404` http response code.
