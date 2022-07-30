@@ -77,7 +77,6 @@ bootnode: []
 bootnode-mode: false
 cache-capacity: "1000000"
 cache-retrieval: true
-chain-enable: true
 chequebook-enable: true
 clef-signer-enable: false
 clef-signer-endpoint: ""
@@ -114,7 +113,7 @@ resync: false
 static-nodes: []
 swap-deployment-gas-price: ""
 swap-enable: true
-swap-endpoint: ws://localhost:8546
+swap-endpoint: ""
 swap-factory-address: ""
 swap-initial-deposit: "10000000000000000"
 swap-legacy-factory-addresses: []
@@ -230,12 +229,6 @@ The amount of disk space, in chunks, that is used for forwarding and uploading c
 _default_ `true`
 
 Enable the caching of forwarded content.
-
-#### --chain-enable
-
-_default_ `true`
-
-Use a blockchain backend, and hence participate in protocols requiring one.
 
 #### --chequebook-enable
 
@@ -493,9 +486,9 @@ _default_ `true`
 
 #### --swap-endpoint
 
-_default_ `ws://localhost:8546`
+_default_ `""`
 
-SWAP Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint.
+SWAP Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint. Leave unset to boot in `ultra-light` (chainless) mode.
 
 #### --swap-factory-address
 
