@@ -78,7 +78,7 @@ stable token issued on the Ethereum blockchain, tracking USD.
 
 xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridging-tokens)
 to the [Gnosis Chain](https://www.xdaichain.com/) using
-[OmniBridge](https://omni.xdaichain.com/bridge). It's also the native token of
+[xDai Bridge](https://bridge.gnosischain.com/). It's also the native token of
 the Gnosis Chain, i.e. transaction fees are paid in xDai.
 
 ### SWAP
