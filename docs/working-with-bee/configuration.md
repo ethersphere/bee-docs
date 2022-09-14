@@ -95,7 +95,7 @@ gateway-mode: false
 help: false
 mainnet: true
 nat-addr: ""
-network-id: "10"
+network-id: "1"
 p2p-addr: :1634
 p2p-ws-enable: false
 password: ""
