@@ -43,8 +43,8 @@ values={[
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.7.0/bee_1.7.0_amd64.deb
-sudo dpkg -i bee_1.7.0_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.8.1/bee_1.8.1_amd64.deb
+sudo dpkg -i bee_1.8.1_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -52,15 +52,15 @@ sudo dpkg -i bee_1.7.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.7.0/bee_1.7.0_armv7.deb
-sudo dpkg -i bee_1.7.0_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.8.1/bee_1.8.1_armv7.deb
+sudo dpkg -i bee_1.8.1_armv7.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.7.0/bee_1.7.0_arm64.deb
-sudo dpkg -i bee_1.7.0_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.8.1/bee_1.8.1_arm64.deb
+sudo dpkg -i bee_1.8.1_arm64.deb
 ```
 
 </TabItem>
@@ -71,8 +71,8 @@ sudo dpkg -i bee_1.7.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.7.0/bee_1.7.0_amd64.rpm
-sudo rpm -i bee_1.7.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.8.1/bee_1.8.1_amd64.rpm
+sudo rpm -i bee_1.8.1_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -80,15 +80,15 @@ sudo rpm -i bee_1.7.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.7.0/bee_1.7.0_armv7.rpm
-sudo rpm -i bee_1.7.0_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.8.1/bee_1.8.1_armv7.rpm
+sudo rpm -i bee_1.8.1_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.7.0/bee_1.7.0_arm64.rpm
-sudo rpm -i bee_1.7.0_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.8.1/bee_1.8.1_arm64.rpm
+sudo rpm -i bee_1.8.1_arm64.rpm
 ```
 
 </TabItem>
@@ -117,7 +117,7 @@ If you would like to run a hive of many Bees, checkout the [node hive operators]
 ## 2. Configure Bee
 
 Bee is a versatile piece of software with diverse use cases. Before
-starting Bee for the first time you will need to configure it to suit your needs. 
+starting Bee for the first time you will need to configure it to suit your needs.
 
 
 ### Edit Config File
@@ -204,9 +204,9 @@ nat-addr: "123.123.123.123:1634"
 #### Blockchain RPC Endpoints
 
 Your Bee node must have _stable_ access to a Gnosis Chain RPC endpoint, so that it
-can interact with and deploy your chequebook contract, and see the latest view of the current postage batches, as well as to interact with and top up your own batches. 
+can interact with and deploy your chequebook contract, and see the latest view of the current postage batches, as well as to interact with and top up your own batches.
 
-We recommend you [run your own Gnosis Chain Node](https://docs.gnosischain.com/clients/gnosis-chain-node-openethereum-and-nethermind). 
+We recommend you [run your own Gnosis Chain Node](https://docs.gnosischain.com/clients/gnosis-chain-node-openethereum-and-nethermind).
 If you do not wish to sync your own nodes, and are willing to trust a third party, you may also like to consider using a RPC endpoint provider such as [GetBlock](https://getblock.io/).
 
 By default, Bee expects a local Gnosis Chain node at `ws://localhost:8545`. To use a Gnosis Chain RPC provider instead, change your configuration to use the API endpoint URL they provide, for example:
@@ -217,7 +217,7 @@ swap-endpoint: https://gno.getblock.io/mainnet/?api_key=b338ee33-b3e3-be33-bee5-
 
 #### Funding Your Chequebook (Optional)
 
-You may select how much BZZ to fund your wallet with. If you are happy to stay within the free usage limits initially, you may even select `0`. 
+You may select how much BZZ to fund your wallet with. If you are happy to stay within the free usage limits initially, you may even select `0`.
 
 ```yaml
 swap-initial-deposit: 0

@@ -76,7 +76,7 @@ want to run.
 #### Specific Versions
 
 ```bash
-docker pull ethersphere/bee:1.7.0
+docker pull ethersphere/bee:1.8.1
 ```
 
 #### Using Tags
