@@ -370,9 +370,11 @@ Internet.
 
 #### --mainnet
 
-_default_ `false`
+_default_ `true`
 
-Set to true to connect to Swarm mainnet.
+Set to `false` to connect to the Swarm testnet, or other
+networks. Note that if you do so then you'll need to specify some
+bootnodes using the [`--bootnode` argument](#--bootnode).
 
 #### --nat-addr
 
