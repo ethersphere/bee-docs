@@ -7,13 +7,8 @@ Each Bee node is configured to reserve a certain amount of memory on your comput
 
 Each time a chunk is accessed, it is moved back to the end of the deletion queue, so that regularly accessed content stays alive in the network and is not deleted by a node's garbage collection routine.
 
-This, however, presents a problem for content which is important, but accessed seldom requested. In order to keep this content alive, Bee nodes provide a facility to **pin** important content so that it is not deleted.
+Bee nodes provide a facility to **pin** important content so that it is not deleted by the node's garbage collection routine. Chunks can be _pinned_ either during upload, or retrospectively using the Swarm reference.
 
-If a node operator wants to keep content so that it can be accessed only by local users of that node, via the [APIs](/docs/api-reference/api-reference) or Gateway, chunks can be _pinned_ either during upload, or retrospectively using the Swarm reference.
-
-:::caution
-Files pinned using local pinning will still not necessarily be available to the rest of the network. Read [global pinning](/docs/access-the-swarm/pinning#global-pinning) to find out how to keep your files available to the whole of the swarm.
-:::
 
 ## Pin During Upload
 
@@ -55,7 +50,7 @@ A `404` response indicates the content is not available.
 
 ### Unpinning Content
 
-If we later decide our content is no longer worth keeping, we can simply unpin it by sending a `DELETE` request to the pinning endpoint using the same reference:
+We can unpin content by sending a `DELETE` request to the pinning endpoint using the same reference:
 
 ````bash
 curl -XDELETE http://localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a87827402f20cbb30
@@ -81,7 +76,7 @@ Pinning and unpinning is possible for files (as in the example) and also the chu
 
 ### Pinning Already Uploaded Content
 
-The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded and present in the swarm.
+The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded and present in the Swarm.
 
 To do so, we can send a `POST` request including the swarm reference to the files pinning endpoint.
 
