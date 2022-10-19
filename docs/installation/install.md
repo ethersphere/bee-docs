@@ -52,8 +52,8 @@ sudo dpkg -i bee_1.8.2_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.8.2/bee_1.8.2_armv7.deb
-sudo dpkg -i bee_1.8.2_armv7.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.8.2/bee_1.8.2_armhf.deb
+sudo dpkg -i bee_1.8.2_armhf.deb
 ```
 
 ##### ARM64
