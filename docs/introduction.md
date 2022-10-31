@@ -89,6 +89,6 @@ in one of our group channels:
 
 ## Reporting a bug
 
-If your Bee isn't working, get in touch with the [#bee-support channel on Discord](https://discord.gg/wdghaQsGq5) or [let us know on GitHub!](https://github.com/ethersphere/bee/issues) 🐝
+If your Bee isn't working, get in touch with the [#node-operators channel on Discord](https://discord.gg/wdghaQsGq5) or [let us know on GitHub!](https://github.com/ethersphere/bee/issues) 🐝
 
 Thanks for beeing here, Love and Bees from the Swarm Team x
