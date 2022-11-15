@@ -52,8 +52,8 @@ threshold.
 
 Since gas fees on the [Gnosis Chain](https://www.xdaichain.com/) are very low,
 you won't need much xDAI either to get started. You may acquire a small amount
-of it for free by using the [BAO Community xDAI
-Faucet](https://xdai-app.herokuapp.com/faucet). The required amount is a
+of it for free by using the [official xDAI faucet for
+Gnosis Chain](https://gnosisfaucet.com). The required amount is a
 function of the current transaction fee on the chain, but 0.01 xDAI should be
 more than enough to start up your node.
 
