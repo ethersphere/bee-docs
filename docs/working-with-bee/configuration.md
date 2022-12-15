@@ -208,7 +208,7 @@ The block hash of the block whose parent is the block that contains the transact
 
 _default_ `""`
 
-SWAP Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint. Leave unset to boot in `ultra-light` (chainless) mode.
+Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint. Leave unset to boot in `ultra-light` (chainless) mode.
 
 #### --bootnode
 
@@ -429,7 +429,7 @@ Percentage below the peers payment threshold when we initiate settlement.
 
 #### --payment-threshold
 
-_default_ `100000000`
+_default_ `13500000`
 
 The threshold in BZZ where you expect to get paid from your peers.
 
@@ -572,7 +572,7 @@ _default_ `info`
 
 #### --warmup-time
 
-_default_ `20m0s`
+_default_ `5m0s`
 
 Time to warmup the node before pull/push protocols can be kicked off.
 
