@@ -484,6 +484,12 @@ _default_ []
 
 Protect nodes from getting kicked out on bootnode
 
+#### --storage-incentives-enable
+
+_default_ false
+
+Enables the storage incentives feature.
+
 #### --swap-deployment-gas-price
 
 _default_ _determined automatically_
