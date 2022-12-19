@@ -10,7 +10,7 @@ In order to participate in redistribution, storers need to do the following:
 - Join the network and download all the data that the protocol assigns to them. They can only participate if they are fully synchronised with the network.
 - Deposit a stake with the staking contract. There is a minimum staking requirement, presently 10 BZZ. It can change in the future.
 - Stay online and fully synced, so that when a redistribution round comes, their node can check whether their neighbourhood (nodes that are assigned the same content to store) has been selected and if so, they can perform a certain calculation (a random sampling) on their content and submit the result to the redistribution contract. This happens in two phases (commit and reveal), so that the nodes cannot know the results of others’ calculations when committing to their own.
-- Round length is estimated around 15 minutes, though it can be extended.
+- Round length is estimated around 15 minutes (152 blocks to be precise), though it can be extended.
 
 Amongst the nodes that agree with the correct result, one is chosen — with a probability in proportion to their stake — as the winner. The winner must execute an on-chain transaction claiming their reward, which is the entire pot of storage rent paid since the previous round, or even more, if the previous pot has not been claimed at that time.
 
