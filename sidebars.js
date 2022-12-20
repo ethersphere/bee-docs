@@ -15,6 +15,7 @@ module.exports = {
       items: [
         'installation/quick-start',
         'installation/install',
+        'installation/staking',
         'installation/manual',
         'installation/build-from-source',
         'installation/rasp-bee-ry-pi',
