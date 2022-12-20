@@ -73,6 +73,7 @@ allow-private-cidrs: false
 api-addr: :1633
 block-hash: ""
 block-time: "15"
+blockchain-rpc-endpoint: ""
 bootnode: []
 bootnode-mode: false
 cache-capacity: "1000000"
@@ -91,7 +92,6 @@ db-write-buffer-size: "33554432"
 debug-api-addr: :1635
 debug-api-enable: false
 full-node: false
-gateway-mode: false
 help: false
 mainnet: true
 nat-addr: ""
@@ -101,21 +101,25 @@ p2p-ws-enable: false
 password: ""
 password-file: ""
 payment-early-percent: 50
-payment-threshold: "100000000"
+payment-threshold: "13500000"
 payment-tolerance-percent: 25
 postage-stamp-address: ""
+postage-stamp-start-block: "0"
 pprof-mutex: false
 pprof-profile: false
 price-oracle-address: ""
+redistribution-address: ""
 resolver-options: []
 restricted: false
 resync: false
+staking-address: ""
 static-nodes: []
+storage-incentives-enable: false
 swap-deployment-gas-price: ""
 swap-enable: true
 swap-endpoint: ""
 swap-factory-address: ""
-swap-initial-deposit: "10000000000000000"
+swap-initial-deposit: "0"
 swap-legacy-factory-addresses: []
 token-encryption-key: ""
 tracing-enable: false
@@ -126,7 +130,7 @@ tracing-service-name: bee
 transaction: ""
 use-postage-snapshot: false
 verbosity: info
-warmup-time: 20m0s
+warmup-time: 5m0s
 welcome-message: ""
 ```
 
@@ -199,6 +203,12 @@ The expected block time of the attached SWAP endpoint.
 _default_ `""`
 
 The block hash of the block whose parent is the block that contains the transaction hash
+
+#### --blockchain-rpc-endpoint
+
+_default_ `""`
+
+Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint. Leave unset to boot in `ultra-light` (chainless) mode.
 
 #### --bootnode
 
@@ -360,14 +370,6 @@ _default_ false
 
 Enable this by setting it to `true` to fully participate in serving and forwarding chunks to the network.
 
-#### --gateway-mode
-
-_default_ `false`
-
-Set this to `true` to disable a set of sensitive features in the API
-to ensure that it is safe to expose your `api-addr` to the public
-Internet.
-
 #### --mainnet
 
 _default_ `true`
@@ -427,7 +429,7 @@ Percentage below the peers payment threshold when we initiate settlement.
 
 #### --payment-threshold
 
-_default_ `100000000`
+_default_ `13500000`
 
 The threshold in BZZ where you expect to get paid from your peers.
 
@@ -436,6 +438,12 @@ The threshold in BZZ where you expect to get paid from your peers.
 _default_ `25`
 
 Excess debt above payment threshold as a percentage where you disconnect from your peer (default 25).
+
+#### --postage-stamp-start-block
+
+_default_ `0`
+
+The block number of the deployed postage stamp contract.
 
 #### --postage-stamp-address
 
@@ -476,6 +484,12 @@ _default_ []
 
 Protect nodes from getting kicked out on bootnode
 
+#### --storage-incentives-enable
+
+_default_ false
+
+Enables the storage incentives feature.
+
 #### --swap-deployment-gas-price
 
 _default_ _determined automatically_
@@ -490,6 +504,8 @@ _default_ `true`
 
 _default_ `""`
 
+deprecated, use `--blockchain-rpc-endpoint` instead
+
 SWAP Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint. Leave unset to boot in `ultra-light` (chainless) mode.
 
 #### --swap-factory-address
@@ -498,7 +514,7 @@ _default_ _anointed contract for the current blockchain id_
 
 #### --swap-initial-deposit
 
-_default_ `10000000000000000`
+_default_ `0`
 
 #### --token-encryption-key
 
@@ -556,7 +572,7 @@ _default_ `info`
 
 #### --warmup-time
 
-_default_ `20m0s`
+_default_ `5m0s`
 
 Time to warmup the node before pull/push protocols can be kicked off.
 
