@@ -233,14 +233,6 @@ The ENS domain resolution system is used to host websites on Bee, and in order t
 resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 ```
 
-#### Open File Descriptors (Optional)
-
-Bee is designed to work on a lot of different hardware configurations. To facilitate the exploration of this, during our beeta phase, we have given node operators access to leveldb's `--db-open-files-limit`. This helps determine the speed with which Bee can read and write to its database, and therefore its efficiency in forwarding and serving chunks. Some say setting this to much more than the default 200 leads to a much enhanced ability to participate in the swarm and get those BZZ! Share your experience in the #node-operators channel of our [Discord server](https://discord.gg/wdghaQsGq5) to help us make this process more automated in the future.
-
-```yaml
-db-open-files-limit: 2000
-```
-
 ## Fund Your Bee
 
 Your Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. To do that it XDAI and optionally [xBZZ](/docs/installation/fund-your-node).
@@ -348,7 +340,7 @@ values={[
 #### Linux
 
 ```bash
-journalctl --lines=100 --follow --unit bee
+sudo journalctl --lines=100 --follow --unit bee
 ```
 
 </TabItem>
@@ -357,7 +349,7 @@ journalctl --lines=100 --follow --unit bee
 ### CentOS ᙇ
 
 ```bash
-journalctl --lines=100 --follow --unit bee
+sudo journalctl --lines=100 --follow --unit bee
 ```
 
 </TabItem>
@@ -416,7 +408,17 @@ the network, and ready to start [using
 Bee](/docs/access-the-swarm/introduction) to [upload and
 download](/docs/access-the-swarm/upload-and-download) content or host
 and browse [websites](/docs/access-the-swarm/host-your-website) hosted
-on the Swarm network - and accumulating cheques tht you can [cashout
-to get your BZZ](/docs/working-with-bee/cashing-out).
+on the Swarm network.
 
 Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
+
+## Stake Your Node
+
+In order to start receiving rewards, you will need to [stake your node](/docs/installation/staking). To do this, send a minimum of 10 BZZ to your nodes wallet and run:
+
+```bash
+curl -XPOST localhost:1635/stake/100000000000000000
+```
+
+Rewards are only available for full nodes which are providing storage capacity to the network.
+

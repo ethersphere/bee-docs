@@ -31,5 +31,5 @@ It is possible to deposit more by repeatedly using the command above.
 You can also check the amount staked with the following command:
 
 ```bash
-curl localhost:1635/stake/
+curl localhost:1635/stake
 ```
