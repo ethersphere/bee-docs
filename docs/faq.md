@@ -33,14 +33,14 @@ We recommend you run your own [XDAI Node using Nethermind](https://www.xdaichain
 
 - If you use "bee start"
 
-  - you can set it in your bee configuration under --swap-endpoint or BEE_SWAP_ENDPOINT
+  - you can set it in your bee configuration under --blockchain-endpoint or BEE_BLOCKCHAIN_ENDPOINT
   - open ~/.bee.yaml
-  - set `swap-endpoint: http://localhost:8545`
+  - set `blockchain-endpoint: http://localhost:8545`
 
 - If you use bee.service
-  - you can set it in your bee configuration under --swap-endpoint or BEE_SWAP_ENDPOINT
+  - you can set it in your bee configuration under --blockchain-endpoint or BEE_BLOCKCHAIN_ENDPOINT
   - open /etc/bee/bee.yaml
-  - and then uncomment `swap-endpoint` configuration
+  - and then uncomment `blockchain-endpoint` configuration
   - and set it to `http://localhost:8545`
   - after that sudo systemctl restart bee
 
@@ -109,7 +109,7 @@ Most common use cases:
 
 ### How can I check how many cashed out cheques do I have?
 
-You can look at your chequebook contract at etherscan.  
+You can look at your chequebook contract at etherscan.
 Get your chequebook contract address with: `curl http://localhost:1635/chequebook/address`
 
 ### I have compared transactions between my ethereum address and my chequebook address, the number are different, which is quite weird.
