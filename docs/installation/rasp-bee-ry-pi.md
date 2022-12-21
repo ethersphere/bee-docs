@@ -265,7 +265,7 @@ sudo nano /etc/bee/bee.yaml
 To open the `nano` program which is a old time text editor, we're going to party like it's 1999. Note we're using the `sudo` command to wrap `nano`. This is short for `super user do` and gives us full permissions to do anything in our Raspberry Pi OS.
 
 Hold down `Ctrl` and press `W` to access the `where is?`
-functionality. Type `swap-endpoint` and press `Enter`. This will take
+functionality. Type `blockchain-endpoint` and press `Enter`. This will take
 you to the correct part of the config file. Here we will change the
 value to look like the following, using your Infura url from
 before. Most configuration at the command line is done by changing
@@ -275,7 +275,7 @@ character can cause issues. 🔍
 
 ```yaml
 ## swap ethereum blockchain endpoint (default "http://localhost:8545")
-swap-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
+blockchain-endpoint: https://stake.getblock.io/mainnet/?api_key=your-api-key
 ```
 
 To save and exit, hold `Ctrl` and press `X`, then `Y` and finally

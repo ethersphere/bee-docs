@@ -117,7 +117,7 @@ static-nodes: []
 storage-incentives-enable: false
 swap-deployment-gas-price: ""
 swap-enable: true
-swap-endpoint: ""
+blockchain-endpoint: ""
 swap-factory-address: ""
 swap-initial-deposit: "0"
 swap-legacy-factory-addresses: []
@@ -500,7 +500,7 @@ Gas price in wei to use for deployment and funding
 
 _default_ `true`
 
-#### --swap-endpoint
+#### --blockchain-endpoint
 
 _default_ `""`
 
