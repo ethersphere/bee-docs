@@ -167,7 +167,7 @@ Your output should looks something like this:
 
 ```bash
 -rw-r--r--  1 pi   pi       3523 Mar  4 22:47 .bashrc
--rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.10.0_armhf.deb
+-rw-r--r--  1 pi   pi   10787806 Mar 23 08:18 bee_1.11.1_armhf.deb
 -rw-r--r--  1 pi   pi   10473282 Feb 24 18:00 bee-clef_0.13.1_armhf.deb
 drwxr-xr-x  2 pi   pi       4096 Mar  4 22:57 Bookshelf
 ```
@@ -180,7 +180,7 @@ Now, let's use the `rm` program to remove the clutter and delete the
 `.deb` files we no longer need.
 
 ```bash
-rm bee_1.10.0_armhf.deb
+rm bee_1.11.1_armhf.deb
 ```
 
 The `rm` program gives no output, so let's check it's dissapeared by
