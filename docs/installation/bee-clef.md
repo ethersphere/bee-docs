@@ -6,7 +6,7 @@ id: bee-clef
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Bee makes use of Go Ethereum's external signer, [Clef](https://geth.ethereum.org/docs/clef/tutorial).
+Bee makes use of Go Ethereum's external signer, [Clef](https://geth.ethereum.org/docs/tools/clef/introduction).
 
 Because Bee must sign a lot of transactions automatically and quickly, a [Bee specific version of Clef, Bee Clef](https://github.com/ethersphere/bee-clef) has been packaged which includes all the relevant configuration needed to make Clef work with Bee.
 
