@@ -21,7 +21,7 @@ Find out how to [upload whole directories](/docs/access-the-swarm/upload-a-direc
 
 ### Host Your Website on the Decentralised Web
 
-Swarm is a distributed international network of nodes that provides hosting for your unstoppable websites. See this guide to [hosting your website on swarm](/docs/access-the-swarm/host-your-website)
+Swarm is a distributed international network of nodes that provides hosting for your unstoppable websites. See this guide to [hosting your website on swarm](/docs/access-the-swarm/host-your-website).
 
 ### Sync With the Network
 
