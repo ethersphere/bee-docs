@@ -168,7 +168,7 @@ Once we toggle the `restricted` flag to `true` - two things are going to happen:
 Toggling the restricted flag ON will not remove the business related endpoints from the debug port, nor will it restrict them there.
 :::
 
-### the order in which HTTP endpoints become available
+### The order in which HTTP endpoints become available
 
 The technical debug endpoints group will be the first to become available - as soon as its dependencies come online (within seconds).
 The other two groups will become available at a later stage, specifically after the postage syncing is done.

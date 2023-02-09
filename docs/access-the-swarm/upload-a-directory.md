@@ -59,7 +59,7 @@ curl \
 ```
 
 :::info
-For instances where a Single Page App has a JavaScript router that handles url queries itself, simply pass `index.html` as the error document. Bee will pass over control to the JavaScript served by the `index.html` file in the circumstance that a path does not yield a file from the manifest.
+For instances where a single page app has a JavaScript router that handles url queries itself, simply pass `index.html` as the error document. Bee will pass over control to the JavaScript served by the `index.html` file in the circumstance that a path does not yield a file from the manifest.
 :::
 
 When the upload is successful, Bee will return a JSON document containing the Swarm Reference.
