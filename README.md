@@ -4,7 +4,7 @@ Documentation for the [Swarm Bee Client](https://github.com/ethersphere/bee). Vi
 
 ## Contributing
 
-Pull Requests are welcome, but please read our [CODING](CODING.md) guide.
+Pull Requests are welcome, but please read our [CODING](CODING.md) guide!
 
 ### Node Version
 
