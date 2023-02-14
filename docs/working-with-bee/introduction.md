@@ -38,7 +38,7 @@ There is a lot going on inside Bee, we provide tools and metrics to help you [fi
 
 ## Upgrading
 
-Find out how to [keep your Bee up to date](/docs/working-with-bee/upgrading-bee) with the latest and greatest releases, and make sure you're tuned into our release announcments.
+Find out how to [keep your Bee up to date](/docs/working-with-bee/upgrading-bee) with the latest and greatest releases, and make sure you're tuned into our release announcements.
 
 ## Uninstalling Bee
 
