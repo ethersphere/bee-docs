@@ -7,12 +7,12 @@ As your Bee forwards and serves chunks to its peers, it is rewarded in
 BZZ in the form of cheques. Once these cheques accumulate sufficient
 value, you may _cash them out_ using Bee's API. This process transfers
 money from your peer's chequebooks into your own, which you can then
-withdrawal to your wallet to do with as you please!
+withdraw to your wallet to do with as you please!
 
 :::important
 Do **not** cash out your cheques too regularly! Once a week is more
 than sufficient! Besides the transaction costs, this prevents and
-relieves unneccesary congestion on the blockchain. 💩
+relieves unnecessary congestion on the blockchain. 💩
 :::
 
 :::info
