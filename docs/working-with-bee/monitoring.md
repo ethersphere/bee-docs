@@ -7,7 +7,7 @@ Your Bee node is equipped with tools to help you understand what your Bee has be
 
 Navigate to `http://localhost:1635/metrics`.
 
-This is the current state of Bee's metrics as they stand in this moment.
+This is the current state of Bee's metrics as they stand at this moment.
 
 In order to use these metrics and view, we need to keep a record of these metrics over time.
 
