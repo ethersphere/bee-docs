@@ -67,4 +67,4 @@ Bee v1.6.x contains a completely new data storage format called Sharky.
 As part of these changes, existing data must be migrated to the new data structure expected by
 the 1.5.x client. This will happen automatically, but **may require extra space** and cause a spike in cpu requirements for the duration of the migration.
 
-If you can not accomodate approximately 3x (2x might even be enough) as much disk space as is currently being used by your Bee `datadir`, you may want to run `bee db nuke` before upgrading (but after stopping the Bee service) to resync your nodes content from the network. If you have **locally pinned content** please ensure you have a local backup so that you can restamp and restore it to the network in case of disaster.
+If you can not accommodate approximately 3x (2x might even be enough) as much disk space as is currently being used by your Bee `datadir`, you may want to run `bee db nuke` before upgrading (but after stopping the Bee service) to resync your nodes content from the network. If you have **locally pinned content** please ensure you have a local backup so that you can restamp and restore it to the network in case of disaster.
