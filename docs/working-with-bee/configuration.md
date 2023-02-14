@@ -268,7 +268,7 @@ _default_ **selects the clef address at index 0**
 Use this command to specify which Bee Clef address is used if you have imported multiple keys into Bee Clef.
 
 :::warning
-If you have multiple addresses imported into your instance of Bee Clef, you must specify your address for each node, including the first one, as addresses may been re-ordered during import.
+If you have multiple addresses imported into your instance of Bee Clef, you must specify your address for each node, including the first one, as addresses may be re-ordered during import.
 :::
 
 #### --cors-allowed-origins
@@ -335,7 +335,7 @@ Corresponds to LevelDB `DisableSeeksCompaction` (see above)
 _default_ `200`
 
 :::info
-To accomodate less powerful hardware and operating systems, the `db-open-files-limit` is set deliberately low. We recommend that you try to increase it to nearer to `10000` or more if this is possible when using your hardware. _Please let us know how you get on with tweaking these settings on your hardware in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel on our [Discord server](https://discord.gg/wdghaQsGq5)_
+To accommodate less powerful hardware and operating systems, the `db-open-files-limit` is set deliberately low. We recommend that you try to increase it to nearer to `10000` or more if this is possible when using your hardware. _Please let us know how you get on with tweaking these settings on your hardware in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel on our [Discord server](https://discord.gg/wdghaQsGq5)_
 :::
 
 Corresponds to LevelDB `OpenFilesCacheCapacity` (see above)
@@ -465,7 +465,7 @@ A default top level domain and resolver contract address are provided, but an EN
 
 _default_ false
 
-Enable permission check on certain http APIs. More information how to restrict the access
+Enable permission check on certain http APIs. More information on how to restrict the access
 to the APIs is available [here](/docs/working-with-bee/security).
 
 If enabled - you must specify an admin password using the `--admin-password` option and a `--token-encryption-key` string value.
@@ -526,7 +526,7 @@ Admin username to get the security token.
 
 _default_ `false`
 
-Send tracing spans to the tracing service. More information how to
+Send tracing spans to the tracing service. More information on how to
 configure and visualize tracing data is available
 [here](/docs/bee-developers/useful-dev-info#tracing).
 
