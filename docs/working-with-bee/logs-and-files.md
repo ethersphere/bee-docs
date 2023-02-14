@@ -5,7 +5,7 @@ id: logs-and-files
 
 ### Linux
 
-If you have installed Bee on Linux using a package manager you will now be able to the manage your Bee service using `systemctl`.
+If you have installed Bee on Linux using a package manager you will now be able to manage your Bee service using `systemctl`.
 
 ```bash
 systemctl status bee
@@ -54,7 +54,7 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 
 Configuration files are stored in `/etc/bee-clef/`
 
-Key material and other data is stored in `/var/lib/bee-clef/`
+Key material and other data are stored in `/var/lib/bee-clef/`
 
 ### Bee
 
