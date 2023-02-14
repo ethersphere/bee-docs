@@ -18,7 +18,7 @@ To install Bee you will need to go through the following process.
 
 1.  Install Bee and set it up to run as a service.
 2.  Configure Bee.
-3.  [Fund your node](/docs/installation/fund-your-node) with XDAI and BZZ for the mainnet and gETH and gBZZ for our testnet.
+3.  [Fund your node](/docs/installation/fund-your-node) with xDAI and BZZ for the mainnet and gETH and gBZZ for our testnet.
 4.  Wait for your chequebook transactions to complete and batch store to update.
 5.  Back up your keys.
 6.  Check Bee is working.
