@@ -15,5 +15,5 @@ OK: password hash matches provided plain text
 ```
 
 :::info
-When validating a hash don't forget about quotes - the ($) hash prefix might interfere with you terminal.
+When validating a hash don't forget about quotes - the ($) hash prefix might interfere with your terminal.
 :::

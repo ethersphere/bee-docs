@@ -10,12 +10,12 @@ Your keys represent your ability to access your BZZ. Make sure to back up your k
 :::
 
 :::info
-Don't forget - it's not a backup until you have restored it! Make sure to test your backups out so that you can be sure of recovery incase of data loss or data corruption.
+Don't forget - it's not a backup until you have restored it! Make sure to test your backups out so that you can be sure of recovery in case of data loss or data corruption.
 :::
 
 ## Bee
 
-To restore a Bee node you must have the following directories, all backed up in an atomic moment so that they are syncronised.
+To restore a Bee node you must have the following directories, all backed up in an atomic moment so that they are synchronised.
 
 All of this data is contained within the _data directory_ specified in your Bee configuration.
 
@@ -90,7 +90,7 @@ The `statestore` directory retains information related to your node,
 including SWAP balances, info on peers, blocklisting, and more.
 
 :::info
-Although your statestore retains your node's state. It is only possible to restore from this if your node has not been connected in the meantime, as the blockchain and state may have desyncronised if your node was turned on in the meantime.
+Although your statestore retains your node's state. It is only possible to restore from this if your node has not been connected in the meantime, as the blockchain and state may have desynchronised if your node was turned on in the meantime.
 :::
 
 ### Localstore

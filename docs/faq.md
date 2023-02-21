@@ -7,11 +7,11 @@ id: FAQ
 
 ### Which p2p port does Bee use and which should I open in my router?
 
-The default p2p port for Bee in 1634, please forward this using your router and allow traffic over your firewall as necessary. Bee also supports UPnP but it is recommended you do not use this protocol as it lacks security. For more detailed information see the connectivity section in the docs. https://docs.ethswarm.org/docs/installation/connectivity
+The default p2p port for Bee is 1634, please forward this using your router and allow traffic over your firewall as necessary. Bee also supports UPnP but it is recommended you do not use this protocol as it lacks security. For more detailed information see the connectivity section in the docs. https://docs.ethswarm.org/docs/installation/connectivity
 
 ### How do I know if I am connected to other peers?
 
-You may communicate with your Bee using it’s HTTP api. Type `curl http://localhost:1635/peers` at your command line to see a list of your peers.
+You may communicate with your Bee using its HTTP api. Type `curl http://localhost:1635/peers` at your command line to see a list of your peers.
 
 ### What does "Failed to connect to local host port 1635: Connection refused" mean?
 
@@ -25,7 +25,7 @@ Your node is not listening on port 1635, either the debug-api is not enabled, or
 
 ### What does "context deadline exceeded" error mean?
 
-The "context deadline exceeded" is a non critical warning. It means that a node took unexpectedly long to respond a request from your node. Your node will automatically try again via another node.
+The "context deadline exceeded" is a non critical warning. It means that a node took unexpectedly long to respond to a request from your node. Your node will automatically try again via another node.
 
 ### How do I set up a blockchain endpoint?
 
@@ -63,7 +63,7 @@ You can then use that to import to MetaMask or any other web3 wallet provider.
 
 ### How to export private keys from the node (without bee-clef)?
 
-You can find insturction here in README section:
+You can find the instructions here in README section:
 https://github.com/ethersphere/exportSwarmKey
 
 You can also follow to the mini-guide on the link below:
@@ -103,7 +103,7 @@ Chunk: https://docs.ethswarm.org/debug-api/#tag/Chunk
 Most common use cases:
 
 - `curl http://localhost:1635/peers` - Shows you the currently connected peers
-- `curl http://localhost:1635/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connectd
+- `curl http://localhost:1635/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connected
 - `curl http://localhost:1635/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
 - `curl http://localhost:1635/chequebook/address` your chequebook contract to see the BZZ.
 
@@ -112,7 +112,7 @@ Most common use cases:
 You can look at your chequebook contract at etherscan.
 Get your chequebook contract address with: `curl http://localhost:1635/chequebook/address`
 
-### I have compared transactions between my ethereum address and my chequebook address, the number are different, which is quite weird.
+### I have compared transactions between my ethereum address and my chequebook address, the numbers are different, which is quite weird.
 
 Your chequebook will show OUT BZZ transactions when your peers cash cheques issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
 
@@ -127,7 +127,7 @@ It's like what the bank thinks your balance is vs what your chequebook knows is 
 
 ### What determines the number of peers and how to influence their number? Why are there sometimes 300+ peers and sometimes 30?
 
-The number of connected peers is determined by your node as it attempts to keep the distributed Kademlia well connected. As nodes come and go in the network your peer count will go up and down. If you watch bee's output logs for "successfully connected", there should be a mix of (inbound) and (outbound) at the end of those messages. If you only get (outbound) then you my need to get your p2p port opened through your firewall and/or forwarded by your router. Check out the connectivity section in the docs https://docs.ethswarm.org/docs/installation/connectivity.
+The number of connected peers is determined by your node as it attempts to keep the distributed Kademlia well connected. As nodes come and go in the network your peer count will go up and down. If you watch bee's output logs for "successfully connected", there should be a mix of (inbound) and (outbound) at the end of those messages. If you only get (outbound) then you may need to get your p2p port opened through your firewall and/or forwarded by your router. Check out the connectivity section in the docs https://docs.ethswarm.org/docs/installation/connectivity.
 
 ### What is the difference between "systemctl" and "bee start"?
 

@@ -17,7 +17,7 @@ Swarm is economically self-sustaining due to a built-in incentive system enforce
 ## Swarm Whitepaper and The Book of Swarm
 
 What happens with a Bee node after startup? Want to know more about the Swarm technology behind Bee?
-Want to make your own client? Read the <a href="/swarm-whitepaper.pdf" target="_blank" rel="noopener noreferrer">Swarm Whitepaper</a> and for a deeper dive, <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> ,
+Want to make your own client? Read the <a href="/swarm-whitepaper.pdf" target="_blank" rel="noopener noreferrer">Swarm Whitepaper</a> and for a deeper dive, <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a>,
 our 250 page guide to the tech underpinning the Swarm network.
 
 ## Bonding Curve

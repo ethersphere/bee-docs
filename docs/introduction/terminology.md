@@ -17,7 +17,7 @@ The Bee becomes the broker of data, storing and supplying blocks of data in a gi
 
 ## Clef & Bee-Clef
 
-Clef, by itself, is a tool built for the Ethereum blockchain. It is used to sign the transaction before they are placed (permanently) onto the blockchain. Think of this as a notary which has the power to make transactions binding and 'official'. Bee includes a specific version of Clef "Bee-clef" that is tailored and configured specific to Bee's needs. Therefor, if you are running a Bee node, you'll also want to run a Bee-clef instance.
+Clef, by itself, is a tool built for the Ethereum blockchain. It is used to sign the transaction before they are placed (permanently) onto the blockchain. Think of this as a notary which has the power to make transactions binding and 'official'. Bee includes a specific version of Clef "Bee-clef" that is tailored and configured specifically to Bee's needs. Therefore, if you are running a Bee node, you'll also want to run a Bee-clef instance.
 
 :::info
 Currently, as of version 0.5.2, you must run one instance of Bee-clef for every instance of Bee.
@@ -99,4 +99,4 @@ Goerli is a Testnet, meaning that this is a safe environment to develop and test
 
 #### Faucet
 
-It takes BZZ tokens to seed your node so it can join the Swarm. Before it can start providing storage/network as a resource, it needs to receive data that the Swarm holds which costs BZZ. Since Goerli is a test network, there aren't marketplaces that you can "buy" BZZ, so a faucet is a pool of BZZ (and gEth) that will "sprinkle" (freely share/send) some of it to the address that you request. There is a #faucet-requset channel on the [Swarm Discord](https://discord.gg/wdghaQsGq5) which you may join and request.
+It takes BZZ tokens to seed your node so it can join the Swarm. Before it can start providing storage/network as a resource, it needs to receive data that the Swarm holds which costs BZZ. Since Goerli is a test network, there aren't marketplaces where you can "buy" BZZ, so a faucet is a pool of BZZ (and gEth) that will "sprinkle" (freely share/send) some of it to the address that you request. There is a #faucet-requset channel on the [Swarm Discord](https://discord.gg/wdghaQsGq5) which you may join and request.
