@@ -31,6 +31,7 @@ module.exports = {
       type: 'category',
       label: 'Working With Bee',
       items: [
+        'working-with-bee/introduction',
         'working-with-bee/configuration',
         'working-with-bee/debug-api',
         'working-with-bee/logs-and-files',
