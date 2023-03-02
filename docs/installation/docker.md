@@ -5,11 +5,11 @@ id: docker
 
 Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee) for your convenience.
 
-If running a Bee _full node_, it is recommended that you make use of
-Ethereum's external signer, [Clef](/docs/installation/bee-clef). Skip
-ahead if you are comfortable with `docker` basics for instructions on
-how to use [docker-compose](/docs/installation/docker#docker-compose)
-to easily set up Bee with persistent storage and integration with the
+:::info
+Bee-clef is deprecated and is no longer under active development. It is not required for running a Bee node.
+:::
+
+If running a Bee _full node_, the [Bee Clef](/docs/installation/bee-clef) external signer may be used. Skip ahead if you are comfortable with `docker` basics for instructions on how to use [docker-compose](/docs/installation/docker#docker-compose) to easily set up Bee with persistent storage and integration with the
 Bee Clef container.
 
 ### Quick Start

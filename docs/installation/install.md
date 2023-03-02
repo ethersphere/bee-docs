@@ -24,8 +24,8 @@ Steps for running a Bee node:
 6.  Check if Bee is working.
 
 :::info
-  We recommend not holding a high value of BZZ or XDAI in your nodes' wallet. Please consider regularly removing accumulated funds. For added security, you may also want to consider running [Bee-Clef](/docs/installation/bee-clef)
-:::
+  Holding a high value of BZZ or XDAI in a node wallet is not recommended. Node operators should consider regularly removing accumulated funds.
+  :::
 
 ## 1. Install Bee
 

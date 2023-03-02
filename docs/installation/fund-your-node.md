@@ -106,7 +106,11 @@ the wallet file as follows.
 
 ## Debian/Ubuntu Installation
 
-### With Bee-Clef
+### With Bee Clef
+
+:::info
+Bee Clef is deprecated and is no longer under active development. It is not required for running a Bee node.
+:::
 
 Your encrypted wallet file can be found as in this example:
 
@@ -121,7 +125,7 @@ And decrypted using the automatically generated password found at:
 sudo cat /var/lib/bee-clef/password
 ```
 
-### Without Bee-Clef
+### Without Bee Clef
 
 Your key can be found within the `keys/` folder of your datadir. For instance,
 on a normal Ubuntu/Debian install you will find it at:

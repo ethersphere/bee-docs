@@ -13,12 +13,12 @@ properly interact with the swarm.
 ## Upgrade Procedure
 
 :::warning
-Bee sure to [back up](/docs/working-with-bee/backups) your clef key material and [cash out your cheques](/docs/working-with-bee/cashing-out) to make sure your BZZs are safe before applying updates.
+Bee sure to [back up](/docs/working-with-bee/backups) your clef key data and [cash out your cheques](/docs/working-with-bee/cashing-out) to make sure your BZZ are safe before applying updates.
 :::
 
 ### Ubuntu / Debian / Raspbian
 
-To upgrade Bee, simply stop the Bee and Bee-clef services.
+To upgrade Bee, first stop the Bee and Bee Clef services.
 
 ```sh
 sudo systemctl stop bee
@@ -44,7 +44,7 @@ Configuration file '/etc/bee/bee.yaml'
 
 Select `N` to keep your current data and keys.
 
-You may now start your node again, waiting for bee-clef to initialise before starting Bee.
+You may now start your node again by initialising Bee Clef first and then starting Bee.
 
 ```sh
 sudo systemctl start bee-clef

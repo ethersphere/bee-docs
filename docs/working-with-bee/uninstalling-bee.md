@@ -10,7 +10,7 @@ If you need to remove Bee, you may simply run the below commands.
 ### Ubuntu / Debian / Raspbian
 
 :::danger
-Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups](/docs/working-with-bee/backups) so you don't lose your keys and data.
+Uninstalling Bee will also delete Bee and Bee Clef data! Make sure you [make backups](/docs/working-with-bee/backups) so you don't lose your keys and data.
 :::
 
 ```bash
@@ -21,7 +21,7 @@ sudo apt-get remove bee-clef
 ### Centos
 
 :::danger
-Uninstalling Bee will also delete Bee and Bee-clef data! Make sure you [make backups](/docs/working-with-bee/backups) so you don't lose your keys and data.
+Uninstalling Bee will also delete Bee and Bee Clef data! Make sure you [make backups](/docs/working-with-bee/backups) so you don't lose your keys and data.
 :::
 
 ```bash
@@ -31,7 +31,7 @@ sudo yum remove bee-clef
 
 ## Data Locations
 
-### Bee-clef
+### Bee Clef
 
 Configuration files are stored in `/etc/bee-clef/`
 

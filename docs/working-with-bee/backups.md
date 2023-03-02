@@ -70,17 +70,13 @@ Your Bee data directory contains three stores.
 
 ### Keys
 
-The `keys` directory contains your important key material. This is the
+The `keys` directory contains important key material. This is the
 most important data by far, and is produced and retained from Bee's
-initialisation procedure. If you have used **bee-clef** to manage your
-key material and signing procedures, see below for information on how
-to keep backups of your keys.
+initialisation procedure. Bee Clef backup instructions can be found below.
 
 :::info
-If you are using Bee to manage your keys (not recommended - please use [Bee
-Clef](/docs/installation/bee-clef)!). You must convert your keys in order to
-import into MetaMask and other Ethereum wallets. You may use
-[exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) to make the
+To use Bee keys with MetaMask and other Ethereum wallets they must be converted to a compatible format. 
+[ExportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) can be used to make the
 conversion.
 :::
 
