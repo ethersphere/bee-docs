@@ -68,7 +68,13 @@ Bridged tokens are tokens from one blockchain which have been _bridged_ to anoth
 
 ### BZZ Token
 
-BZZ is Swarm's [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) token issued on Ethereum.   
+BZZ is Swarm's [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) token issued on Ethereum. It has a [bridged version](terminology#bridged-tokens) on Gnosis Chain with the [xBZZ](terminology#xbzz-token) symbol, and a testnet version on Goerli.   
+
+| Blockchain             | Contract address                                                                                                                       |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Ethereum, BZZ          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)                |
+| Gnosis Chain, xBZZ     | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://blockscout.com/xdai/mainnet/tokens/0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da/) |
+| Goerli (testnet), gBZZ | [`0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335`](https://goerli.etherscan.io/address/0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335)    
 
 ### xBZZ Token
 
