@@ -3,100 +3,93 @@ id: terminology
 title: Terminology
 ---
 
-import TOCInline from '@theme/TOCInline';
 
-<TOCInline toc={toc} />
+### Swarm
 
-## Bee
+The Swarm network consists of a collection of [Bee nodes](terminology#bee) which work together to enable decentralised data storage for the next generation of censorship-resistant, unstoppable, serverless dapps. 
 
-The Bee, also referred to as a 'node' or 'client' is the heart and work-horse of the swarm. This is the service that you will run on your devices, and once running it will join with other nodes over a Peer-to-peer (p2p) network to form the 'swarm'.
-
-The Bee becomes the broker of data, storing and supplying blocks of data in a give-and-take exchange for BZZ tokens.
-
-- [Install Bee](/docs/installation/quick-start#install-bee)
-
-## Clef & Bee-Clef
-
-Clef, by itself, is a tool built for the Ethereum blockchain. It is used to sign the transaction before they are placed (permanently) onto the blockchain. Think of this as a notary which has the power to make transactions binding and 'official'. Bee includes a specific version of Clef "Bee-clef" that is tailored and configured specifically to Bee's needs. Therefore, if you are running a Bee node, you'll also want to run a Bee-clef instance.
-
-:::info
-Currently, as of version 0.5.2, you must run one instance of Bee-clef for every instance of Bee.
-:::
-
-- [Install Bee-clef](/docs/installation/bee-clef)
-
-## Swarm
-
-Swarm is the collective term for all of the Bee nodes within the network. It is the system that, together, provides the distributed and decentralised storage and communication system accomplishing the overarching goal.
-
-Swarm is also the name of the core organization that oversees the development and success of the Bee Swarm as a whole. You can find them at [swarm.ethereum.org](https://swarm.ethereum.org/).
-
-## Ethereum / Blockchain
-
-Ethereum is most commonly known by its traded coin, ETH, but in actuality, the Ethereum blockchain framework provides other foundational services upon which makes the higher-level goals of Bee possible.
-
-Ethereum provides a service known as "smart contracts" which, in basic terms, is essentially the ability to publish rules or a binding digital code-of-conduct that establish the proper flow and exchange of data. Bee uses these contracts for two main purposes: To establish the Swarm incentivization token "BZZ", and to establish the concepts of Cheques and ChequeBooks.
-
-With these two core concepts found, you have created the proper economic tools to build a strong distributed system (via BZZ) and to make it fast, efficient, and cheap (via Cheques).
+Swarm is also the name of the core organization that oversees the development and success of the Bee Swarm as a whole. They can be found at [ethswarm.org](https://www.ethswarm.org/).
 
 ### Gnosis Chain
 
-[Gnosis Chain](https://www.xdaichain.com/) is an
-[EVM](https://ethereum.org/en/developers/docs/evm/) compatible
-[PoS](https://www.xdaichain.com/about-gc/features#posdao-green-consensus)
-blockchain (previously called the xDai chain).
+[Gnosis Chain](https://www.gnosis.io/) (previously known as xDai chain) is a [PoS](https://www.gnosis.io/validators), [EVM](https://ethereum.org/en/developers/docs/evm/) compatible Ethereum [sidechain](https://ethereum.org/en/developers/docs/scaling/sidechains/) which uses the same addressing scheme as Ethereum. Swarm's smart contracts have been issued on Gnosis Chain.
 
-### Bridging Tokens
+### Smart Contracts
 
-It's a smart contract based setup whereby you can lock some tokens on one
-blockchain, and receive the same amount of the _bridged_ token on another
-blockchain.
+Smart contracts are automatically executable code which can be published on a blockchain to ensure immutability. Swarm uses smart contracts on Gnosis Chain for a variety of key aspects of the network including [incentivization](terminology#xbzz-token), [inter-node accounting](terminology#swap), and [payments for storage](terminology#postage-stamps).
+
+### Bee
+
+Swarm nodes are referred to as "Bee" nodes. Bee nodes can run on a wide variety of computer types including desktop computers, hobbyist computers like Raspberry Pis, remotely hosted virtual machines, and much more. When running, Bee nodes interact with Swarm smart contracts on Gnosis Chain and connect with other Bee nodes to form the Swarm network.
+
+Bee nodes can act as both client and service provider, or solely as client or service provider, depending on the needs of the node operator. Bee nodes pay each other for services on the Swarm network with the xBZZ token.
+
+
+### Overlay and Underlay
+
+An overlay network is a virtual or logical network built on top of some lower level "underlay" network. Examples include the Internet as an overlay network built on top of the telephone network, and the p2p Bittorent network built on top of the Internet. 
+
+With Swarm, the overlay network is a [Kademlia DHT](https://en.wikipedia.org/wiki/Kademlia) with overlay addresses taken from each node's [Gnosis](terminology#gnosis-chain) address. Swarm's overlay network addresses are permanent identifiers for each node and do not change over time.
+
+An underlay network is the low level network on which an overlay network is built. It allows nodes to find each other, communicate, and transfer data. Swarm's underlay network is a p2p network built with [libp2p](https://libp2p.io/). Underlay address are not permanent and may change over time. Other networks may in theory be used as the underlay as long as they meet the Swarm protocol specifications, however at this time libp2p is the only implementation of the Swarm underlay network.
+
+### Swap
+
+Swap is the p2p accounting protocol used for Bee nodes. It allows for the automated accounting and settlement of services between Bee nodes in the Swarm network. In the case that services exchanged between nodes is balanced equally, no settlement is necessary. In the case that one node is unequally indebted to another, settlement is made to clear the node's debts. Two key elements of the Swap protocol are [cheques and the chequebook contract](terminology#cheques--chequebook).    
+
+### Cheques & Chequebook
+
+Cheques are the off-chain method of accounting used by the Swap protocol where the issuing node signs a cheque specifying a beneficiary, a date, and an amount, and gives it to the recipient node as a token of promise to pay at a later date. 
+
+The chequebook is the smart contract where the cheque issuer's funds are stored and where the beneficiary can cash the cheque received. 
+
+The cheque and chequebook system reduces the number of required on-chain transactions by allowing multiple cheques to accumulate and be settled together as a group, and in the case that the balance of cheques between nodes is equal, no settlement transaction is required at all. 
+
+### Postage Stamps
+
+Postage stamps can be purchased with [xBZZ](terminology#xbzz-token) and represent the right to store data on the Swarm network. In order to upload data to Swarm, a user must purchase a batch of stamps which they can then use to upload an equivalent amount of data to the network. 
+
+### Clef & Bee-Clef
+
+Clef is a tool for signing transactions and data in a secure local environment. It was originally developed for Ethereum.
+
+"Bee-clef" is a version of Clef that is tailored to Bee's needs and can be used together with a Bee node.
+:::info
+Bee-clef is currently deprecated and it is no longer under active development. It is not required for running a Bee node.
+:::
+
+### PLUR
+
+PLUR (name inspired by the [PLUR principles](https://en.wikipedia.org/wiki/PLUR)) is the smallest denomination of BZZ. 1 PLUR is equal to 1e16 BZZ, and 1 BZZ is equal to 10000000000000000 PLUR. 
+
+### Bridged Tokens
+
+Bridged tokens are tokens from one blockchain which have been _bridged_ to another chain through a smart contract powered bridge. For example, xDAI and xBZZ on Gnosis Chain are the bridged version of DAI and BZZ on Ethereum. 
 
 ### BZZ Token
 
-BZZ is an
-[ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) token
-issued on the Ethereum mainnet. It is the unit of the traffic accounting between
-the nodes. It is used to incentivize nodes to provide resources to the Swarm.
-
-In order to upload content, or to pay for downloading more content than is
-allowed by the free tier threshold, your node must pay some xBZZ (and
-potentially receive xBZZ).
+BZZ is Swarm's [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) token issued on Ethereum.   
 
 ### xBZZ Token
 
-xBZZ is BZZ bridged to the [Gnosis Chain](https://www.xdaichain.com/) using
-[OmniBridge](https://omni.xdaichain.com/bridge).
+xBZZ is BZZ bridged to to the [Gnosis Chain](https://www.gnosis.io/) using [OmniBridge](https://omni.gnosischain.com/bridge).
+
+It is used as payment for [postage stamps](terminology#postage-stamps) and as the unit of accounting between the nodes. It is used to incentivize nodes to provide resources to the Swarm.
 
 ### DAI Token
 
-[DAI](https://developer.makerdao.com/dai/1/) is an
-[ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
-stable token issued on the Ethereum blockchain, tracking USD.
+[DAI](https://developer.makerdao.com/dai/1/) is an [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) stable token issued on the Ethereum blockchain, tracking USD.
 
 ### xDai Token
 
-xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridging-tokens)
-to the [Gnosis Chain](https://www.xdaichain.com/) using
-[xDai Bridge](https://bridge.gnosischain.com/). It's also the native token of
-the Gnosis Chain, i.e. transaction fees are paid in xDai.
-
-### SWAP
-
-SWAP is the name of the system/rules applied to the exchange of data that results in the reward (or cost) of BZZ. As you contribute service to the swarm, you are awarded through the SWAP system with BZZ; but as you consume the service of the swarm, it costs you BZZ.
-
-### Cheques & ChequeBook
-
-Settling transactions on the Ethereum network can be expensive and time-consuming, especially when there is a high-volume of transactions. If Bee nodes are transferring many blocks of files back-and-forth to feed the Swarm network demand, the amount of transactions can add up quickly.
-
-To speed up this process cheques were created. They are an off-chain method of payment where issuer signs a cheque specifying a beneficiary, a date and an amount, gives it to the recipient as a token of promise to pay at a later date. The nice thing about this is that Cheques can 'stack-up' so that when you settle the exchange, by 'committing' the exchange of BZZ on the blockchain, many small cheques can be counted as one large payout.
-
-The ChequeBook is the smart contract that allows the beneficiary to choose when payments are to be processed. Which essentially means it's the address and logic mechanism that allows you to cash-out the cheques that you've received.
+xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridged-tokens) to the [Gnosis Chain](https://www.xdaichain.com/) using [xDai Bridge](https://bridge.gnosischain.com/). It is also the native token of the Gnosis Chain, i.e. transaction fees are paid in xDai.
 
 ### Goerli
 
-Goerli is a Testnet, meaning that this is a safe environment to develop and test Bee until it is mature enough to run in production. It's currently also being used as the community-building platform that will migrate to Mainnet once live. Tokens on this network are often prefixed with a lower-case 'g', example: 'gBZZ' and 'gETH' and because this is a test network, they carry no monetary value.
+Goerli is an Ethereum testnet. It is an environment where smart contracts can be developed and tested without spending cryptocurrency with real value, and without putting valuable assets at risk. Tokens on Goerli are often prefixed with a lower-case 'g', example: 'gBZZ' and 'gETH,' and because this is a test network carry no monetary value. It is an environment where Bee smart contracts can be tested and interacted with without any risk of monetary loss.
 
-#### Faucet
+### Faucet
 
-It takes BZZ tokens to seed your node so it can join the Swarm. Before it can start providing storage/network as a resource, it needs to receive data that the Swarm holds which costs BZZ. Since Goerli is a test network, there aren't marketplaces where you can "buy" BZZ, so a faucet is a pool of BZZ (and gEth) that will "sprinkle" (freely share/send) some of it to the address that you request. There is a #faucet-requset channel on the [Swarm Discord](https://discord.gg/wdghaQsGq5) which you may join and request.
+A cryptocurrency faucet supplies small amounts of cryptocurrency to requestors (typically for testing purposes).
+
+It supplies small amounts of gBZZ and gETH for anyone who submits a request at the [Swarm Discord](https://discord.gg/wdghaQsGq5) server by using the `/faucet` command in the #develop-on-swarm channel.
