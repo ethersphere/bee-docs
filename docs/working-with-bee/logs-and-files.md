@@ -50,7 +50,7 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 
 ## Data Locations
 
-### Bee-clef
+### Bee Clef
 
 Configuration files are stored in `/etc/bee-clef/`
 

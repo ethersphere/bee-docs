@@ -48,14 +48,15 @@ The cheque and chequebook system reduces the number of required on-chain transac
 
 Postage stamps can be purchased with [xBZZ](terminology#xbzz-token) and represent the right to store data on the Swarm network. In order to upload data to Swarm, a user must purchase a batch of stamps which they can then use to upload an equivalent amount of data to the network. 
 
-### Clef & Bee-Clef
+### Clef & Bee Clef
+
+:::info
+Bee Clef is deprecated and is no longer under active development. It is not required for running a Bee node.
+:::
 
 Clef is a tool for signing transactions and data in a secure local environment. It was originally developed for Ethereum.
 
-"Bee-clef" is a version of Clef that is tailored to Bee's needs and can be used together with a Bee node.
-:::info
-Bee-clef is currently deprecated and it is no longer under active development. It is not required for running a Bee node.
-:::
+"Bee Clef" is a version of Clef that is tailored to Bee's needs and can be used together with a Bee node.
 
 ### PLUR
 

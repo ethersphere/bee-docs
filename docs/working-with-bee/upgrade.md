@@ -18,7 +18,7 @@ Bee sure to [back up](/docs/working-with-bee/backups) your clef key material and
 
 ### Ubuntu / Debian / Raspbian
 
-To upgrade Bee, simply stop the Bee and Bee-clef services.
+To upgrade Bee, simply stop the Bee and Bee Clef services.
 
 ```sh
 sudo systemctl stop bee
