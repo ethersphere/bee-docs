@@ -117,7 +117,7 @@ static-nodes: []
 storage-incentives-enable: false
 swap-deployment-gas-price: ""
 swap-enable: true
-blockchain-endpoint: ""
+blockchain-rpc-endpoint: ""
 swap-factory-address: ""
 swap-initial-deposit: "0"
 swap-legacy-factory-addresses: []
@@ -482,7 +482,7 @@ Forces the node to resync postage contract data.
 
 _default_ []
 
-Protect nodes from getting kicked out on bootnode
+Protect nodes from getting kicked out on bootnode.
 
 #### --storage-incentives-enable
 
@@ -504,7 +504,7 @@ _default_ `true`
 
 _default_ `""`
 
-deprecated, use `--blockchain-rpc-endpoint` instead
+Deprecated, use `--blockchain-rpc-endpoint` instead.
 
 SWAP Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint. Leave unset to boot in `ultra-light` (chainless) mode.
 

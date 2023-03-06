@@ -213,7 +213,7 @@ By default, Bee expects a local Gnosis Chain node at `ws://localhost:8545`. To u
 
 ```yaml
 ## bee.yaml
-blockchain-endpoint: https://gno.getblock.io/mainnet/?api_key=b338ee33-b3e3-be33-bee5-b335b555b555
+blockchain-rpc-endpoint: https://gno.getblock.io/mainnet/?api_key=b338ee33-b3e3-be33-bee5-b335b555b555
 ```
 
 #### Funding Your Chequebook (Optional)

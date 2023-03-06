@@ -33,14 +33,14 @@ We recommend you run your own [XDAI Node using Nethermind](https://www.xdaichain
 
 - If you use "bee start"
 
-  - you can set it in your bee configuration under --blockchain-endpoint or BEE_BLOCKCHAIN_ENDPOINT
+  - you can set it in your bee configuration under --blockchain-rpc-endpoint or BEE_BLOCKCHAIN_RPC_ENDPOINT
   - open ~/.bee.yaml
-  - set `blockchain-endpoint: http://localhost:8545`
+  - set `blockchain-rpc-endpoint: http://localhost:8545`
 
 - If you use bee.service
-  - you can set it in your bee configuration under --blockchain-endpoint or BEE_BLOCKCHAIN_ENDPOINT
+  - you can set it in your bee configuration under --blockchain-rpc-endpoint or BEE_BLOCKCHAIN_RPC_ENDPOINT
   - open /etc/bee/bee.yaml
-  - and then uncomment `blockchain-endpoint` configuration
+  - and then uncomment `blockchain-rpc-endpoint` configuration
   - and set it to `http://localhost:8545`
   - after that sudo systemctl restart bee
 

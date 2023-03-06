@@ -24,7 +24,7 @@ docker run\
   --rm -it ethersphere/bee:stable\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --blockchain-endpoint http://localhost:8545 \
+    --blockchain-rpc-endpoint http://localhost:8545 \
     --debug-api-enable
 ```
 
@@ -46,7 +46,7 @@ docker run\
   --rm -it ethersphere/bee:stable\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --blockchain-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
+    --blockchain-rpc-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
 	  --debug-api-enable
 ```
 
@@ -62,7 +62,7 @@ docker run\
   --rm -it ethersphere/bee:stable\
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --blockchain-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
+    --blockchain-rpc-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
 	  --debug-api-enable
 ```
 
@@ -114,7 +114,7 @@ There are some important configuration parameters which must be set in order for
 For Bee, amend the following parameters:
 
 ```
-BEE_BLOCKCHAIN_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=your-api-key
+BEE_BLOCKCHAIN_RPC_ENDPOINT=https://stake.getblock.io/mainnet/?api_key=your-api-key
 BEE_PASSWORD=my-password
 ```
 
