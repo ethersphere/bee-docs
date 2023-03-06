@@ -44,15 +44,15 @@ We recommend you run your own [XDAI Node using Nethermind](https://www.xdaichain
   - and set it to `http://localhost:8545`
   - after that sudo systemctl restart bee
 
-### How to export private keys from the node with bee-clef installed
+### How to export private keys from the node with Bee Clef installed
 
-If you are running Bee together with the Bee-Clef, you can type in the command line `bee-clef-keys` and that will store the .JSON file into your home folder and copy the password in your clipboard.
+If you are running Bee together with the Bee Clef, you can type in the command line `bee-clef-keys` and that will store the .JSON file into your home folder and copy the password in your clipboard.
 
-### I have bee-clef installed but I can't export private keys.
+### I have Bee Clef installed but I can't export private keys.
 
-It happens quite a lot that bee-clef is installed, but getting the address from bee-clef-keys does not yield the same output as `:1635/addresses`
+It happens quite a lot that Bee Clef is installed, but getting the address from bee-clef-keys does not yield the same output as `:1635/addresses`
 
-In this case, the user most likely does not have clef enabled in the configuration of the bee node.
+In this case, the user most likely does not have Bee Clef enabled in the configuration of the bee node.
 
 This doesn't work for you? You get erorr -> `xclip: not found” or “Error: Can’t open display: (null)`
 

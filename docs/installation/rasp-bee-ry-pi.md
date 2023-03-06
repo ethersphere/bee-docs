@@ -59,6 +59,10 @@ PING wikipedia.org (91.198.174.192): 56 data bytes
 
 ### Install Bee Clef and Bee
 
+:::info
+Bee Clef is deprecated and is no longer under active development. It is not required for running a Bee node.
+:::
+
 Next we will install the Bee software, accompanied by a special port of Ethereum's Clef signer, [Bee Clef](/docs/installation/bee-clef).
 
 We must install Bee Clef **before** Bee. To do so, open the browser

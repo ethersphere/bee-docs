@@ -5,7 +5,11 @@ id: docker
 
 Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee) for your convenience.
 
-If running a Bee _full node_, it is recommended that you make use of
+:::info
+Bee Clef is deprecated and is no longer under active development. It is not required for running a Bee node.
+:::
+
+If running a Bee _full node_, you may make use of
 Ethereum's external signer, [Clef](/docs/installation/bee-clef). Skip
 ahead if you are comfortable with `docker` basics for instructions on
 how to use [docker-compose](/docs/installation/docker#docker-compose)
