@@ -71,7 +71,6 @@ configuration of Bee:
 admin-password: ""
 allow-private-cidrs: false
 api-addr: :1633
-block-hash: ""
 block-time: "15"
 blockchain-rpc-endpoint: ""
 bootnode: []
@@ -114,10 +113,10 @@ restricted: false
 resync: false
 staking-address: ""
 static-nodes: []
-storage-incentives-enable: false
+storage-incentives-enable: true
 swap-deployment-gas-price: ""
 swap-enable: true
-blockchain-rpc-endpoint: ""
+swap-endpoint: ""
 swap-factory-address: ""
 swap-initial-deposit: "0"
 swap-legacy-factory-addresses: []
@@ -127,7 +126,6 @@ tracing-endpoint: 127.0.0.1:6831
 tracing-host: ""
 tracing-port: ""
 tracing-service-name: bee
-transaction: ""
 use-postage-snapshot: false
 verbosity: info
 warmup-time: 5m0s
