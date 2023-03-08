@@ -81,9 +81,9 @@ chequebook-enable: true
 clef-signer-enable: false
 clef-signer-endpoint: ""
 clef-signer-ethereum-address: ""
-config: /root/.bee.yaml
+config: /etc/bee/bee.yaml
 cors-allowed-origins: []
-data-dir: /root/.bee
+data-dir: /var/lib/bee
 db-block-cache-capacity: "33554432"
 db-disable-seeks-compaction: false
 db-open-files-limit: "200"
