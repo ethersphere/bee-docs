@@ -27,7 +27,81 @@ Configuration is processed in the following ascending order of preference:
 
 ### Command Line Arguments
 
-Run `bee start --help` in your Terminal to get the list of available command line arguments.
+Run `bee start --help` in your Terminal to list the available command line arguments as follows:
+
+  ```
+  Start a Swarm node
+
+  Usage:
+    bee start [flags]
+
+  Flags:
+        --admin-password string                   bcrypt hash of the admin password to get the security token
+        --allow-private-cidrs                     allow to advertise private CIDRs to the public network
+        --api-addr string                         HTTP API listen address (default ":1633")
+        --block-time uint                         chain block time (default 15)
+        --blockchain-rpc-endpoint string          rpc blockchain endpoint
+        --bootnode strings                        initial nodes to connect to
+        --bootnode-mode                           cause the node to always accept incoming connections
+        --cache-capacity uint                     cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
+        --cache-retrieval                         enable forwarded content caching (default true)
+        --chequebook-enable                       enable chequebook (default true)
+        --clef-signer-enable                      enable clef signer
+        --clef-signer-endpoint string             clef signer endpoint
+        --clef-signer-ethereum-address string     ethereum address to use from clef signer
+        --cors-allowed-origins strings            origins with CORS headers enabled
+        --data-dir string                         data directory (default "/home/noah/.bee")
+        --db-block-cache-capacity uint            size of block cache of the database in bytes (default 33554432)
+        --db-disable-seeks-compaction             disables db compactions triggered by seeks
+        --db-open-files-limit uint                number of open files allowed by database (default 200)
+        --db-write-buffer-size uint               size of the database write buffer in bytes (default 33554432)
+        --debug-api-addr string                   debug HTTP API listen address (default ":1635")
+        --debug-api-enable                        enable debug HTTP API
+        --full-node                               cause the node to start in full mode
+    -h, --help                                    help for start
+        --mainnet                                 triggers connect to main net bootnodes. (default true)
+        --nat-addr string                         NAT exposed address
+        --network-id uint                         ID of the Swarm network (default 1)
+        --p2p-addr string                         P2P listen address (default ":1634")
+        --p2p-ws-enable                           enable P2P WebSocket transport
+        --password string                         password for decrypting keys
+        --password-file string                    path to a file that contains password for decrypting keys
+        --payment-early-percent int               percentage below the peers payment threshold when we initiate settlement (default 50)
+        --payment-threshold string                threshold in BZZ where you expect to get paid from your peers (default "13500000")
+        --payment-tolerance-percent int           excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
+        --postage-stamp-address string            postage stamp contract address
+        --postage-stamp-start-block uint          postage stamp contract start block number
+        --pprof-mutex                             enable pprof mutex profile
+        --pprof-profile                           enable pprof block profile
+        --price-oracle-address string             price oracle contract address
+        --redistribution-address string           redistribution contract address
+        --resolver-options strings                ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
+        --restricted                              enable permission check on the http APIs
+        --resync                                  forces the node to resync postage contract data
+        --staking-address string                  staking contract address
+        --static-nodes strings                    protect nodes from getting kicked out on bootnode
+        --storage-incentives-enable               enable storage incentives feature (default true)
+        --swap-deployment-gas-price string        gas price in wei to use for deployment and funding
+        --swap-enable                             enable swap (default true)
+        --swap-endpoint string                    swap blockchain endpoint
+        --swap-factory-address string             swap factory addresses
+        --swap-initial-deposit string             initial deposit if deploying a new chequebook (default "0")
+        --swap-legacy-factory-addresses strings   legacy swap factory addresses
+        --token-encryption-key string             admin username to get the security token
+        --tracing-enable                          enable tracing
+        --tracing-endpoint string                 endpoint to send tracing data (default "127.0.0.1:6831")
+        --tracing-host string                     host to send tracing data
+        --tracing-port string                     port to send tracing data
+        --tracing-service-name string             service name identifier for tracing (default "bee")
+        --use-postage-snapshot                    bootstrap node using postage snapshot from the network
+        --verbosity string                        log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
+        --warmup-time duration                    time to warmup the node before some major protocols can be kicked off. (default 5m0s)
+        --welcome-message string                  send a welcome message string during handshakes
+
+  Global Flags:
+        --config string   config file (default is $HOME/.bee.yaml)
+```
+
 
 ### Environment variables
 
@@ -44,16 +118,20 @@ export VARIABLE_NAME=variableValue
 Verify if it is correctly set by running `echo $VARIABLE_NAME`.
 
 All available configuration options are available as `BEE` prefixed,
-capitalised, and underscored environment variables.
-
-e.g. `--api-addr` becomes `BEE_API_ADDR`.
+capitalised, and underscored environment variables, e.g. `--api-addr` becomes `BEE_API_ADDR`.
 
 ### Configuration file
 
-Bee can also be configured by providing a YAML configuration file using the `--config` flag.
+A YAML file can also be used for configuration. 
+
+On a new install of Bee a config file will be generated at `/etc/bee/bee.yaml`. It is the default location for the config file when running Bee as a service with `systemctl`. 
+
+The default for the config file when using `bee start` is `/home/<user>/.bee.yaml`, however this config file is not generated at install so it must first be [created](configuration#automatically-generate-a-config-file).
+
+Add the `--config` flag to `bee start` to specify a config file with another location or file name.
 
 ```bash
-bee start --config /home/<user>/bee-config.yaml
+bee start --config /<path-to-config>/<config-filename>.yaml
 ```
 
 #### Automatically generate a config file
@@ -68,70 +146,92 @@ This produces the following file contents, showing the default
 configuration of Bee:
 
 ```yaml
-admin-password: ""
-allow-private-cidrs: false
-api-addr: :1633
-block-hash: ""
-block-time: "15"
-blockchain-rpc-endpoint: ""
-bootnode: []
-bootnode-mode: false
-cache-capacity: "1000000"
-cache-retrieval: true
-chequebook-enable: true
-clef-signer-enable: false
-clef-signer-endpoint: ""
-clef-signer-ethereum-address: ""
-config: /root/.bee.yaml
-cors-allowed-origins: []
-data-dir: /root/.bee
-db-block-cache-capacity: "33554432"
-db-disable-seeks-compaction: false
-db-open-files-limit: "200"
-db-write-buffer-size: "33554432"
-debug-api-addr: :1635
-debug-api-enable: false
-full-node: false
-help: false
-mainnet: true
-nat-addr: ""
-network-id: "1"
-p2p-addr: :1634
-p2p-ws-enable: false
-password: ""
-password-file: ""
-payment-early-percent: 50
-payment-threshold: "13500000"
-payment-tolerance-percent: 25
-postage-stamp-address: ""
-postage-stamp-start-block: "0"
-pprof-mutex: false
-pprof-profile: false
-price-oracle-address: ""
-redistribution-address: ""
-resolver-options: []
-restricted: false
-resync: false
-staking-address: ""
-static-nodes: []
-storage-incentives-enable: false
-swap-deployment-gas-price: ""
-swap-enable: true
-blockchain-endpoint: ""
-swap-factory-address: ""
-swap-initial-deposit: "0"
-swap-legacy-factory-addresses: []
-token-encryption-key: ""
-tracing-enable: false
-tracing-endpoint: 127.0.0.1:6831
-tracing-host: ""
-tracing-port: ""
-tracing-service-name: bee
-transaction: ""
-use-postage-snapshot: false
-verbosity: info
-warmup-time: 5m0s
-welcome-message: ""
+## Bee configuration - https://docs.ethswarm.org/docs/working-with-bee/configuration
+
+## HTTP API listen address (default ":1633")
+# api-addr: :1633
+## chain block time (default 15)
+# block-time: 15
+## initial nodes to connect to (default [/dnsaddr/testnet.ethswarm.org])
+# bootnode: [/dnsaddr/testnet.ethswarm.org]
+## cause the node to always accept incoming connections
+# bootnode-mode: false
+## enable clef signer
+# clef-signer-enable: false
+## clef signer endpoint
+clef-signer-endpoint: /var/lib/bee-clef/clef.ipc
+## config file (default is /home/<user>/.bee.yaml)
+config: /etc/bee/bee.yaml
+## origins with CORS headers enabled
+# cors-allowed-origins: []
+## data directory (default "/home/<user>/.bee")
+data-dir: /var/lib/bee
+## cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes
+# cache-capacity: 1000000
+## number of open files allowed by database
+# db-open-files-limit: 200
+## size of block cache of the database in bytes
+# db-block-cache-capacity: 33554432
+## size of the database write buffer in bytes
+# db-write-buffer-size: 33554432
+## disables db compactions triggered by seeks
+# db-disable-seeks-compaction: false
+## debug HTTP API listen address (default ":1635")
+debug-api-addr: 127.0.0.1:1635
+## enable debug HTTP API
+debug-api-enable: true
+## cause the node to start in full mode
+# full-node: false
+## NAT exposed address
+# nat-addr: ""
+## ID of the Swarm network (default 1)
+# network-id: 1
+## P2P listen address (default ":1634")
+# p2p-addr: :1634
+## enable P2P WebSocket transport
+# p2p-ws-enable: false
+## password for decrypting keys
+# password: ""
+## path to a file that contains password for decrypting keys
+password-file: /var/lib/bee/password
+## percentage below the peers payment threshold when we initiate settlement (default 50)
+# payment-early-percent: 50
+## threshold in BZZ where you expect to get paid from your peers (default 100000000)
+# payment-threshold: 100000000
+## excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
+# payment-tolerance-percent: 25
+## postage stamp contract address
+# postage-stamp-address: ""
+## ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
+# resolver-options: []
+## enable swap (default true)
+# swap-enable: true
+## swap blockchain endpoint (default "") [deprecated]
+# swap-endpoint: ""
+## blockchain endpoint (default "")
+# blockchain-rpc-endpoint: ""
+## swap factory address
+# swap-factory-address: ""
+## legacy swap factory addresses
+# swap-legacy-factory-addresses: ""
+## initial deposit if deploying a new chequebook (default 0)
+# swap-initial-deposit: 0
+## gas price in wei to use for deployment and funding (default "")
+# swap-deployment-gas-price: ""
+## enable tracing
+# tracing-enable: false
+## endpoint to send tracing data (default "127.0.0.1:6831")
+# tracing-endpoint: 127.0.0.1:6831
+## service name identifier for tracing (default "bee")
+# tracing-service-name: bee
+## proof-of-identity transaction hash
+# transaction: ""
+## log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
+# verbosity: info
+## send a welcome message string during handshakes
+# welcome-message: ""
+## triggers connection to main network
+# mainnet: false
 ```
 
 ## Configuring Bee Installed Using a Package Manager
@@ -482,7 +582,7 @@ Forces the node to resync postage contract data.
 
 _default_ []
 
-Protect nodes from getting kicked out on bootnode
+Protect nodes from getting kicked out on bootnode.
 
 #### --storage-incentives-enable
 
@@ -504,7 +604,7 @@ _default_ `true`
 
 _default_ `""`
 
-deprecated, use `--blockchain-rpc-endpoint` instead
+Deprecated, use `--blockchain-rpc-endpoint` instead.
 
 SWAP Gnosis Chain (mainnet) or Goerli (testnet) blockchain endpoint. Leave unset to boot in `ultra-light` (chainless) mode.
 

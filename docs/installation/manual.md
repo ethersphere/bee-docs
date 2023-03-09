@@ -89,7 +89,7 @@ To find out your Ethereum address, we can simply run our Bee node and point it a
 ```bash
 bee start \
   --verbosity 5 \
-  --blockchain-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
+  --blockchain-rpc-endpoint https://stake.getblock.io/mainnet/?api_key=your-api-key \
   --debug-api-enable
 ```
 
