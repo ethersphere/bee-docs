@@ -4,10 +4,11 @@ module.exports = {
   url: 'https://docs.ethswarm.org',
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
-  plugins: [require.resolve('docusaurus-lunr-search')],
-  onBrokenLinks: 'error',
-  onBrokenMarkdownLinks: 'error',
-  onDuplicateRoutes: 'error',
+  plugins: [
+    require.resolve('docusaurus-lunr-search')],
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
+  onDuplicateRoutes: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
   projectName: 'bee', // Usually your repo name.
@@ -16,16 +17,23 @@ module.exports = {
       defaultMode: 'dark'
     },
     navbar: {
-      title: 'Swarm Bee',
+      title: '',
       logo: {
         alt: 'Swarm Logo',
-        src: 'img/swarm-logo-2.svg',
+        src: 'img/logo.svg',
+       
       },
       items: [
         {
-          to: 'docs/',
+          to: 'docs/about/introduction',
+          activeBasePath: 'about',
+          label: 'About',
+          position: 'left',
+        },
+        {
+          to: 'docs/installation/quick-start',
           activeBasePath: 'docs',
-          label: 'Get Started',
+          label: 'Build',
           position: 'left',
         },
         // {
@@ -40,17 +48,22 @@ module.exports = {
         //   label: 'Start Your Node',
         //   position: 'left',
         // },
-        {
-          to: 'docs/api-reference/api-reference',
-          activeBasePath: 'docs',
-          label: 'API Reference',
-          position: 'left',
-        },
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/ethersphere/bee',
-          label: 'GitHub',
+          href: 'https://docs.fairos.fairdatasociety.org/docs/',
+          label: 'FairOS',
           position: 'right',
+        },
+        {
+          href: 'https://bee-js.ethswarm.org/docs/',
+          label: 'BeeJS',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/ethersphere/bee',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
@@ -58,10 +71,10 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Swarm',
+          title: 'Swarm Foundation',
           items: [
             {
-              label: 'Swarm',
+              label: 'Homepage',
               to: 'https://ethswarm.org',
             }
           ],

@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .features {
@@ -34,4 +35,46 @@
 .featureImage {
   height: 200px;
   width: 200px;
+}
+
+.panel {
+  border: solid 2px rgb(235, 237, 240);
+  border-radius: 5px;
+  padding: 10px;
+  width: 280px;
+  text-align: center;
+  color: rgb(235, 237, 240)
+}
+ 
+.panel:hover {
+  border-color: rgba(200, 205, 213, 1);
+}
+
+.description {
+  font-size: .8rem;
+}
+
+.container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 20px;
+  grid-auto-flow: row;
+  margin: auto;
+}
+
+a:hover {
+  color: rgba(200, 205, 213, 1);
+}
+
+@media (max-width: 1000px) {
+  .container {  display: grid;
+    grid-template-columns: 3fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-auto-columns: 3fr;
+    gap: 20px 0px;
+    grid-auto-flow: row;
+  }
+  
+  
 }

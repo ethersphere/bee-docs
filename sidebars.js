@@ -1,14 +1,5 @@
 module.exports = {
-  Balls: [
-    'introduction',
-    {
-      type: 'category',
-      label: 'The Basics',
-      items: [
-        'introduction/terminology',
-      ],
-      collapsed: false
-    },
+  docs: [
     {
       type: 'category',
       label: 'Installation',
@@ -90,13 +81,7 @@ module.exports = {
         'bee-developers/bee-dev-mode'
       ],
     },
-    {
-      type: 'category',
-      label: 'FAQ',
-      items: [
-        'FAQ'
-      ],
-    },
+    
     {
       type: 'category',
       label: 'Join Us',
@@ -106,5 +91,23 @@ module.exports = {
       ],
       collapsed: false
     }
+  ],
+  about: [
+    {
+      type: 'category',
+      label: 'The Basics',
+      items: [
+        'about/introduction',
+        'about/terminology'
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'FAQ',
+      items: [
+        'about/faq'
+      ],
+    },
   ]
 };
