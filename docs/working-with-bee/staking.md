@@ -68,4 +68,4 @@ curl -X GET http://localhost:1635/redistributionstate | jq
 * `"lastFrozenRound": <integer>` The number the round when node was last frozen. 
 * `"block": <integer>` - Gnosis block of the current redistribution game.
 * `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](/docs/introduction/terminology#plur).
-* `"fees": <string (BigInt)>` Record of total spent in 1E-18 xDAI on all redistribution related transactions.
+* `"fees": <string (BigInt)>` - Record of total spent in 1E-18 xDAI on all redistribution related transactions.
