@@ -1,6 +1,6 @@
 ---
 title: FAQ
-id: FAQ
+id: faq
 ---
 
 ## Connectivity

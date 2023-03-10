@@ -1,7 +1,6 @@
 ---
-id: introduction
 title: Welcome!
-slug: /
+id: introduction
 ---
 
 Hello and welcome to Swarm! 🐝

@@ -25,16 +25,23 @@ module.exports = {
       defaultMode: 'dark'
     },
     navbar: {
-      title: 'Swarm Bee',
+      title: '',
       logo: {
         alt: 'Swarm Logo',
-        src: 'img/swarm-logo-2.svg',
+        src: 'img/logo.svg',
+       
       },
       items: [
         {
-          to: 'docs/',
+          to: 'docs/about/introduction',
+          activeBasePath: 'about',
+          label: 'About',
+          position: 'left',
+        },
+        {
+          to: 'docs/installation/quick-start',
           activeBasePath: 'docs',
-          label: 'Get Started',
+          label: 'Build',
           position: 'left',
         },
         // {
@@ -49,17 +56,18 @@ module.exports = {
         //   label: 'Start Your Node',
         //   position: 'left',
         // },
+        // {to: 'blog', label: 'Blog', position: 'left'},
         {
           to: 'docs/api-reference/',
           activeBasePath: 'docs',
           label: 'API Reference',
           position: 'left',
         },
-        // {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/ethersphere/bee',
-          label: 'GitHub',
           position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
@@ -67,10 +75,10 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Swarm',
+          title: 'Swarm Foundation',
           items: [
             {
-              label: 'Swarm',
+              label: 'Homepage',
               to: 'https://ethswarm.org',
             }
           ],
