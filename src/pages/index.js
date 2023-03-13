@@ -15,19 +15,19 @@ function Home() {
       <div className={styles.container}>
         <a className={styles.panel} href="/docs/about/introduction">
           <div>
-            <h3 className={styles.buttonTitle}>About Swarm</h3>
+            <h3 className={styles.buttonTitle}>About</h3>
           </div>
           <p className={styles.description}>Learn more about the decentralised data storage and distribution technology which will power the next generation of censorship-resistant, unstoppable, serverless dapps.</p>
         </a> 
         <a className={styles.panel} href="/docs/installation/quick-start">
           <div>
-            <h3 className={styles.buttonTitle}>Run a Bee Node</h3>
+            <h3 className={styles.buttonTitle}>Stake</h3>
             <p className={styles.description}>Bee is a peer-to-peer client that connects you with other peers all over the world to become part of Swarm network, a global distributed p2p storage network that aims to store and distribute all of the world's data.</p>
           </div>
         </a>
         <a className={styles.panel} href="/docs/access-the-swarm/introduction">
           <div>
-            <h3 className={styles.buttonTitle}>Develop on Swarm</h3>
+            <h3 className={styles.buttonTitle}>Develop</h3>
             <p className={styles.description}>Swarm provides a complete stack of essential base layer components for developers to create and host decentralised dapps, NFT meta-data, media files, and anything else you can think of!</p>
           </div>
         </a>
