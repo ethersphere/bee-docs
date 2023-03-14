@@ -660,7 +660,7 @@ _default_ `""`
 
 As a spam prevention measure, for nodes which deployed their
 chequebook with v0.5.0 or before, specify `transaction` - [the
-transaction hash of any Ethereum transaction on the XDAI
+transaction hash of any Ethereum transaction on the xDAI
 network](/docs/FAQ#how-can-i-find-a-transaction-hash-for-the---transaction-configuration-parameter)
 sent from the Bee node's Ethereum address.
 

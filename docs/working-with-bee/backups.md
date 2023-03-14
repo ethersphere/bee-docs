@@ -6,7 +6,7 @@ id: backups
 In order to ensure you are able to redeploy your Bee node in the event of a disaster, the contents of several directories must be retained.
 
 :::danger
-Your keys represent your ability to access your BZZ. Make sure to back up your keys directory in multiple places, so you can keep your BZZs safe! See below to discover the location of your keys.
+Your keys represent your ability to access your xBZZ. Make sure to back up your keys directory in multiple places, so you can keep your xBZZ safe! See below to discover the location of your keys.
 :::
 
 :::info
@@ -107,7 +107,7 @@ It is also important to back up Bee Clef's stored data. This includes your sensi
 ### Ubuntu / Debian / Raspbian / CentOS Package Managers
 
 :::danger
-Your keys represent your ability to access your BZZ. Make sure to back up your keys directory in multiple places, so you can keep your BZZs safe!
+Your keys represent your ability to access your xBZZ. Make sure to back up your keys directory in multiple places, so you can keep your xBZZ safe!
 :::
 
 For Linux installations by the package managers _yum_ or _apt_, your

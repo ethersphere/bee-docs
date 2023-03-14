@@ -13,7 +13,7 @@ properly interact with the swarm.
 ## Upgrade Procedure
 
 :::warning
-Bee sure to [back up](/docs/working-with-bee/backups) your clef key material and [cash out your cheques](/docs/working-with-bee/cashing-out) to make sure your BZZs are safe before applying updates.
+Bee sure to [back up](/docs/working-with-bee/backups) your clef key material and [cash out your cheques](/docs/working-with-bee/cashing-out) to make sure your xBZZ is safe before applying updates.
 :::
 
 ### Ubuntu / Debian / Raspbian

@@ -56,7 +56,7 @@ on Swarm](/docs/dapps-on-swarm/introduction).
 ## Incentives
 
 Need even more incentive to get involved with the wonderful world of
-Swarm? Find out how you can [earn BZZ
+Swarm? Find out how you can [earn xBZZ
 tokens](/docs/working-with-bee/cashing-out) for storing and
 distributing your share of the world's data - sharing is caring!
 

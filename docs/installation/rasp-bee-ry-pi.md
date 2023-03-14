@@ -123,14 +123,14 @@ As before, right click and paste these into your terminal, `wget` will download 
 After download and installation are complete you will see output similar to the following:
 
 ```
-Please make sure there is sufficient ETH and BZZ available on the node's Ethereum address: 738853974f852a40f6ea9f598596ca8556bd578f.
+Please make sure there is sufficient xDAI and xBZZ available on the node's Ethereum address: 738853974f852a40f6ea9f598596ca8556bd578f.
 
 learn how to fund your node by visiting our docs at https://docs.ethswarm.org/docs/installation/fund-your-node
 
 Once the node's wallet has received the funds it will begin joining the Swarm network.
 ```
 
-Your Bee node needs BZZ to be able to properly interact with the network. In order to receive these, you will need to sign into our Discord and request your BZZ test tokens from our #faucet channel using the above Ethereum address.
+Your Bee node needs xBZZ to be able to properly interact with the network. In order to receive these, you will need to sign into our Discord and request your xBZZ test tokens from our #faucet channel using the above Ethereum address.
 
 Sign into Discord (make an account if you don't have one yet), join our Discord server, complete verification and go to the [#faucet](https://discord.gg/kfKvmZfVfe) channel.
 
@@ -143,7 +143,7 @@ address with your own_:
 
 After some time, you should receive a notification indicating your
 transaction has been successful. The faucet will have made a transfer
-of XDAI (for gas), and BZZ (so that you can interact with the Swarm
+of xDAI (for gas), and xBZZ (so that you can interact with the Swarm
 network). You can check out what's been going on in the blockchain by
 navigating to
 [https://blockscout.com/xdai/mainnet](https://blockscout.com/xdai/mainnet)
@@ -218,7 +218,7 @@ If all has gone to plan, by this point your Bee will have been funded by our fau
 The `dpkg` package manager has used our `.deb` package file to install
 Bee and set up the the `systemd` service which will manage and control
 our `bee` program as it runs happily in the background on our
-computers, earning `BZZ`, and serving and forwarding content to other
+computers, earning `xBZZ`, and serving and forwarding content to other
 bees all over the planet!
 
 We can now use the `systemctl` utility to interact with `systemd`. For more info, you can type `man systemctl` to read about it.
@@ -252,7 +252,7 @@ logs (journal) as Bee shuts down and restarts.
 
 Now we need to specify some Bee configuration. In order to access the
 blockchain, your Bee needs to access an Ethereum blockchain node. We
-recommend running your own [XDAI Node](https://www.xdaichain.com/),
+recommend running your own [xDAI Node](https://www.gnosis.io/),
 but for now let's take the easy way and sign up to
 [getblock.io](https://getblock.io). Once you have created an account,
 go to your dashboard and make a new project (you can call it whatever
@@ -260,7 +260,7 @@ you'd like to). Then use the api key to create your api url as follows
 `http://localhost:8545`. Keep
 this open for later.
 
-Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those BZZ cheques from your peers! Type:
+Now we will configure your Bee node so it can access the blockchain, deploy your chequebook and start making transactions to cash out those xBZZ cheques from your peers! Type:
 
 ```bash
 sudo nano /etc/bee/bee.yaml

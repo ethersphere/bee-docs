@@ -9,7 +9,7 @@ Our wonderful community (shout out to [matmertz25](https://github.com/matmertz25
 
 Use this tool to make sure your Bee is functioning correctly, keep an
 eye on cheques as they accumulate, and cash them out, withdraw your
-earned BZZ, and much more!
+earned xBZZ, and much more!
 
 Head over to the [Github repo](https://github.com/ethersphere/bee-dashboard) for more information on how to install and use _Bee Dashboard_.
 

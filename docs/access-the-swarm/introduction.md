@@ -3,7 +3,7 @@ title: Introduction
 id: introduction
 ---
 
-As well as earning BZZ and supporting the network, Bee is our
+As well as earning xBZZ and supporting the network, Bee is our
 entrypoint to Swarm's unstoppable data storage and distribution
 system. Swarm is a distributed system designed to work together with
 smart contracts, powering the infrastructure that enables the development of full
@@ -29,7 +29,7 @@ Watch as your uploaded data is [synced with the network](/docs/access-the-swarm/
 
 ### Keep Your Data Alive
 
-Learn how to assign BZZ to your data using postage stamps so that it remains [live on the Swarm network](/docs/access-the-swarm/keep-your-data-alive).
+Learn how to assign xBZZ to your data using postage stamps so that it remains [live on the Swarm network](/docs/access-the-swarm/keep-your-data-alive).
 
 ### Pinning
 

@@ -25,7 +25,7 @@ curl -X POST http://localhost:1633/tags
 ```
 
 :::info
-In order to upload your data to swarm, you must agree to burn some of your BZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
+In order to upload your data to swarm, you must agree to burn some of your xBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/access-the-swarm/keep-your-data-alive).
 :::
 
 Pass the tag along with the upload:
