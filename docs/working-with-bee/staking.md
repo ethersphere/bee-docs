@@ -33,3 +33,39 @@ You can also check the amount staked with the following command:
 ```bash
 curl localhost:1635/stake
 ```
+
+## Check redistribution status
+
+Use the <a href="/debug-api/#tag/RedistributionState" target="_blank" rel="noopener noreferrer">RedistributionState</a> endpoint of the API to get more information about the redistribution status of the node.
+
+```
+curl -X GET http://localhost:1635/redistributionstate | jq
+```
+
+```json
+{
+  "isFrozen": false,
+  "isFullySynced": true,
+  "phase": "commit",
+  "round": 176319,
+  "lastWonRound": 176024,
+  "lastPlayedRound": 176182,
+  "lastFrozenRound": 0,
+  "block": 26800488,
+  "reward": "10479124611072000",
+  "fees": "30166618102500000"
+}
+```
+
+* `"hasSufficientFunds": <bool>` - Shows whether the node has enough xDAI balance to submit at least five storage incentives redistribution related transactions.  If `false` the node will not be permitted to participate in next round.
+
+* `"isFrozen": <bool>` - Shows node frozen status.
+* `"isFullySynced": <bool>` - Shows whether node's localstore has completed full historical syncing with all connected peers.
+* `"phase": <string>` - Current phase of redistribution game.
+* `"round": <integer>` - Current round of redistribution game.
+* `"lastWonRound": <integer>` - Number of round last won by this node.
+* `"lastPlayedRound": <integer>` - Number of the last round where node's neighborhood was selected to participate in redistribution game.
+* `"lastFrozenRound": <integer>` The number the round when node was last frozen. 
+* `"block": <integer>` - Gnosis block of the current redistribution game.
+* `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](/docs/introduction/terminology#plur).
+* `"fees": <string (BigInt)>` - Record of total spent in 1E-18 xDAI on all redistribution related transactions.
