@@ -44,16 +44,17 @@ curl -X GET http://localhost:1635/redistributionstate | jq
 
 ```json
 {
+  "hasSufficientFunds": true,
   "isFrozen": false,
   "isFullySynced": true,
-  "phase": "commit",
-  "round": 176319,
-  "lastWonRound": 176024,
-  "lastPlayedRound": 176182,
+  "phase": "claim",
+  "round": 177886,
+  "lastWonRound": 0,
+  "lastPlayedRound": 177781,
   "lastFrozenRound": 0,
-  "block": 26800488,
-  "reward": "10479124611072000",
-  "fees": "30166618102500000"
+  "block": 27038752,
+  "reward": "0",
+  "fees": "14652524978000000"
 }
 ```
 
