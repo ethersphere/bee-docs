@@ -416,7 +416,7 @@ Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
 
 ## Deposit Stake for Your Node
 
-In order to start receiving rewards, you will need to [deposit xBZZ to the staking contract](/docs/installation/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
+In order to start receiving rewards, you will need to [deposit xBZZ to the staking contract](/docs/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
 ```bash
 curl -XPOST localhost:1635/stake/100000000000000000
