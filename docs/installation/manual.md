@@ -36,7 +36,7 @@ bee version
 ```
 
 Now your Bee node is installed, you can [fund your
-node](/docs/installation/fund-your-node) with BZZ and join us in the
+node](/docs/installation/fund-your-node) with xBZZ and join us in the
 swarm! 🐝 🐝 🐝 🐝 🐝
 
 With Bee installed, simply type `bee start` in your Terminal.
@@ -80,11 +80,11 @@ Password:
 
 ## SWAP Bandwidth Incentives
 
-To participate in the swarm you must include configuration parameters specifying a valid [XDAI](https://www.xdaichain.com/) RPC endpoint. You can run your own XDAI node, or use a RPC provider such as [getblock.io](https://getblock.io/).
+To participate in the swarm you must include configuration parameters specifying a valid [xDAI](https://www.xdaichain.com/) RPC endpoint. You can run your own xDAI node, or use a RPC provider such as [getblock.io](https://getblock.io/).
 
-When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of BZZ in the chequebook contract so that it can pay other nodes in return for their services.
+When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services.
 
-To find out your Ethereum address, we can simply run our Bee node and point it at the XDAI RPC endpoint.
+To find out your Ethereum address, we can simply run our Bee node and point it at the xDAI RPC endpoint.
 
 ```bash
 bee start \
@@ -99,7 +99,7 @@ The ensuing logs will include your Ethereum addresses - use this to
 Now, we can run our Bee node and we will start to see Bee creating and waiting for transactions to complete. Please be patient as this might take a while.
 
 Now our chequebook is deployed and credited with an initial deposit of
-BZZ, ready to be used to reward our fellow busy Bee nodes for their
+xBZZ, ready to be used to reward our fellow busy Bee nodes for their
 services. As a _full-node_ you too will be rewarded by your peers for
 services you provide to them.
 
@@ -115,10 +115,10 @@ Now your node will begin to request chunks of data that fall within
 your _radius of responsibilty_ - data that you will then serve to
 other p2p clients running in the swarm. Your node will then begin to
 respond to requests for these chunks from other peers, for which you
-will soon be rewarded in BZZ.
+will soon be rewarded in xBZZ.
 
 :::tip Incentivisation
-In Swarm, storing chunks of data, serving and forwarding them to other nodes earns you rewards! Follow this guide to learn how to regularly [cashout](/docs/working-with-bee/cashing-out) cheques other nodes send you in return for your services, so that you can get your BZZ!
+In Swarm, storing chunks of data, serving and forwarding them to other nodes earns you rewards! Follow this guide to learn how to regularly [cashout](/docs/working-with-bee/cashing-out) cheques other nodes send you in return for your services, so that you can get your xBZZ!
 :::
 
 Your Bee client has now generated an elliptic curve keypair similar to an Ethereum wallet. These are stored in your [data directory](/docs/working-with-bee/configuration), in the `keys` folder.

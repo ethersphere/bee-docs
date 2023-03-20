@@ -7,7 +7,7 @@ Swarm is designed with dapps in mind, and much time has been devoted to designin
 
 ## Developing on Bee
 
-Bee isn't just for mining BZZ - learn how to [use Bee for all your dapp development, production infrastructure and deployment needs](/docs/dapps-on-swarm/develop-on-bee)!
+Bee isn't just for mining xBZZ - learn how to [use Bee for all your dapp development, production infrastructure and deployment needs](/docs/dapps-on-swarm/develop-on-bee)!
 
 ## Bee JS
 

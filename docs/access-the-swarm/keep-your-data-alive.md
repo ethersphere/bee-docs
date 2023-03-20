@@ -8,10 +8,10 @@ The swarm comprises the sum total of all storage space provided by all of our no
 ### Fund your node's wallet.
 
 To start up your node, you will already have provided your node with
-XDAI for gas and BZZ which was transferred into your chequebook when
+xDAI for gas and xBZZ which was transferred into your chequebook when
 your node was initialised. This will be used to interact with other
 nodes using the _SWAP_ protocol. In order to access more funds to buy
-batches of stamps, your wallet must be funded with BZZ. The easiest
+batches of stamps, your wallet must be funded with xBZZ. The easiest
 way to acheive this is to withdraw funds from your chequebook:
 
 ```bash
@@ -33,9 +33,9 @@ When creating a batch you must specify two values, _batch depth_ and _amount_.
 
 ### Amount
 
-The _amount_ represents the quantity of BZZ that is assigned to this batch. The total amount of BZZ that will be paid for the batch is calulated from this figure and the _batch depth_.
+The _amount_ represents the quantity of xBZZ that is assigned to this batch. The total amount of xBZZ that will be paid for the batch is calulated from this figure and the _batch depth_.
 
-The paid amount forms the _balance_ of the _batch_. This _balance_ is then slowly depleted as time ticks on and _blocks_ are mined on the XDAI blockchain.
+The paid amount forms the _balance_ of the _batch_. This _balance_ is then slowly depleted as time ticks on and _blocks_ are mined on the xDAI blockchain.
 
 ### Batch Depth
 
@@ -54,7 +54,7 @@ batches. This should be ample to upload quite some data, and to keep
 your files in the swarm for the forseeable future.
 
 :::warning
-When you purchase a batch of stamps, you agree to burn BZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw BZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits together, read <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
+When you purchase a batch of stamps, you agree to burn xBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw xBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits together, read <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 :::
 
 ```bash

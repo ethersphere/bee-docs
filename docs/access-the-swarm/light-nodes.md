@@ -17,7 +17,7 @@ At present, light mode represents a pragmatic and elegant approach to improving 
 
 In general, _light mode_ may be thought of as simply not participating
 in the activity of forwarding or storing chunks for other members of
-the swarm, these nodes are strictly consumers, who will pay BZZ in
+the swarm, these nodes are strictly consumers, who will pay xBZZ in
 return for services rendered by _full nodes_ - those contributing
 towards moving data around the network.
 
