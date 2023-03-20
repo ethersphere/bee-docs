@@ -26,7 +26,7 @@ This will allow you to download data but otherwise it has very limited functiona
 
 Earn [BZZ](/docs/working-with-bee/cashing-out) and help keep the swarm
 strong by running your own **full node**. It's easy to set up your own
-Bee on a [Raspberry Pi](/docs/installation/rasp-bee-ry-pi), cloud
+Bee on a Raspberry Pi 4, cloud
 host, or any home computer that's connected to the internet.
 
 [Install Bee](/docs/installation/install)

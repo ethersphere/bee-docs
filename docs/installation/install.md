@@ -10,7 +10,7 @@ Swarm thrives on decentralisation, is designed so that it
 works best when many individuals contribute to the health and
 distributed nature of the network by running Bee nodes.
 
-It is easy to set up Bee on small and inexpensive computers, such as a [Raspberry Pi 4](/docs/installation/rasp-bee-ry-pi), spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations).
+It is easy to set up Bee on small and inexpensive computers, Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations).
 
 ## Installing Bee
 
