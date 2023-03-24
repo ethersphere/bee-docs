@@ -80,9 +80,9 @@ Password:
 
 ## SWAP Bandwidth Incentives
 
-To participate in the swarm you must include configuration parameters specifying a valid [xDAI](https://www.xdaichain.com/) RPC endpoint. You can run your own xDAI node, or use a RPC provider such as [getblock.io](https://getblock.io/).
+To participate in the swarm you must include configuration parameters specifying a valid [Gnosis Chain](https://www.gnosis.io/) RPC endpoint. You can run your own xDAI node, or use a RPC provider such as [getblock.io](https://getblock.io/).
 
-When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services.
+When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting. The initial deposit is optional. 
 
 To find out your Ethereum address, we can simply run our Bee node and point it at the xDAI RPC endpoint.
 
@@ -98,8 +98,8 @@ The ensuing logs will include your Ethereum addresses - use this to
 
 Now, we can run our Bee node and we will start to see Bee creating and waiting for transactions to complete. Please be patient as this might take a while.
 
-Now our chequebook is deployed and credited with an initial deposit of
-xBZZ, ready to be used to reward our fellow busy Bee nodes for their
+Now our chequebook is deployed and credited with an (optional) initial deposit of
+xBZZ, it is ready to be used to reward our fellow busy Bee nodes for their
 services. As a _full-node_ you too will be rewarded by your peers for
 services you provide to them.
 
