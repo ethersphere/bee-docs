@@ -6,7 +6,7 @@ id: install
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Swarm thrives on decentralisation, is designed so that it
+Swarm thrives on decentralisation. is designed so that it
 works best when many individuals contribute to the health and
 distributed nature of the network by running Bee nodes.
 
@@ -187,14 +187,14 @@ brew services restart swarm-bee
 
 See the [quick start guide](/docs/installation/quick-start) if you're not sure which type of node to run.
 
-To run Bee as a full node `full-node` must be set to `true`.
+To run Bee as a full node both `full-node` and `swap-enable` must be set to `true`, and a valid and stable Gnosis Chain RPC endpoint URL must be specified with `blockchain-rpc-endpoint`.
 
 ```yaml
 ## bee.yaml
 full-node: true
 ```
 
-To run Bee as a light node `full-node` must be set to `false`.
+To run Bee as a light node `full-node` must be set to `false` and `swap-enable` must both be set to `true`, and a valid and stable Gnosis Chain RPC endpoint URL must be specified with `blockchain-rpc-endpoint`.
 
 ```yaml
 ## bee.yaml
@@ -213,7 +213,7 @@ swap-enable: false
 
 Full and light nodes require a Gnosis Chain RPC endpoint so they can interact with and deploy their chequebook contract, see the latest view of the current postage stamp batches, and interact with and top up postage stamp batches. A blockchain RPC endpoint is not required for nodes running in ultra-light mode.
 
-We recommend you [run your own Gnosis Chain Node](https://docs.gnosischain.com/clients/gnosis-chain-node-openethereum-and-nethermind).
+We recommend you [run your own Gnosis Chain Node](https://docs.gnosischain.com/).
 
 If you do not wish to sync your own nodes, and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
 
@@ -221,7 +221,7 @@ By default, Bee expects a local Gnosis Chain node at `ws://localhost:8545`. To u
 
 ```yaml
 ## bee.yaml
-blockchain-rpc-endpoint: https://gno.getblock.io/mainnet/?api_key=b338ee33-b3e3-be33-bee5-b335b555b555
+blockchain-rpc-endpoint: https://gno.getblock.io/mainnet/?api_key=<<your-api-key>>
 ```
 
 ### NAT Address
@@ -321,11 +321,9 @@ As part of the process of starting a Bee full node or light node the node must i
          "time"="2023-03-23 21:10:50.761652" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x215693a6E6Cf0a27441075FD98c31d48E3a3a100
 
       The address shown there is the Gnosis Chain address for your node. Copy and save it for the next step.
-    1. Read the address directly from key file (don't forget to replace `<user>` with your user name):
+    1. Read the address directly from key file and save:
       ```bash
-      sudo chown -R <user>:<user> /var/lib/bee # Give ownership to current user
-      cat /var/lib/bee/keys/swarm.key # Read contents of key file
-      sudo chown -R <user>:<user> /var/lib/bee # Return ownership to bee
+      sudo cat /var/lib/bee/keys/swarm.key
       ``` 
       *Output from cat /var/lib/bee/keys/swarm.key*:
 
@@ -334,7 +332,7 @@ As part of the process of starting a Bee full node or light node the node must i
       ```
       The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix.
       :::danger
-        Do not share the contents of your `swarm.key` or any other kets with anyone, this example is for a throwaway account.
+        Do not share the contents of your `swarm.key` or any other keys with anyone, this example is for a throwaway account.
       :::
       
 ## 4. Fund Node
