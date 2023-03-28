@@ -21,9 +21,15 @@ Minimum recommended specifications for a single full node:
 
 HDD drives are strongly discouraged due to their low speeds.
 
+
+
 ## Note on Startup Methods
 :::caution
-  Startup methods may not be used interchangeably. See details below:
+  The `bee start` startup method *may not* be used interchangeably with running Bee as a service using `systemctl` or `brew services`. 
+  
+  It is strongly advised to use run Bee using a service manager such as `systemctl`. 
+  
+  Bee will be set up to run as a service automatically as part of the installation process if using one of the official Debian or RPM packages.    
 :::
 
 Bee may be operated either by using the `bee start` command within a terminal session or by running Bee as a service in the background using `systemctl` (Linux) and `brew services` (MacOS) commands. 
@@ -40,16 +46,19 @@ In general `bee start` may not be the best option for most users - especially if
 
 1.  [Install Bee](/docs/installation/install#1-install-bee) 
 1.  [Configure Bee](/docs/installation/install#2-configure-bee)
-1.  [Find Bee address](/docs/installation/install#3-find-bee-address)
+1.  [Find Bee Address](/docs/installation/install#3-find-bee-address)
 1.  [Fund node](/docs/installation/install#4-fund-node) (Not required for ultra-light nodes) 
-1.  [Start Bee and wait for initialisation](/docs/installation/install#5-wait-for-initialisation)
-1.  [Check if Bee is working](/docs/installation/install#6-check-if-bee-is-working)
-1.  [Back up keys](/docs/installation/install#7-back-up-keys)
+1.  [Wait for Initialisation](/docs/installation/install#5-wait-for-initialisation)
+1.  [Check Bee Status](/docs/installation/install#6-check-if-bee-is-working)
+1.  [Backup Keys](/docs/installation/install#7-backup-keys)
+1.  [Deposit Stake](/docs/installation/install#8-deposit-stake-optional) (Full node only, optional)
 
 
 ## 1. Install Bee
 
-Bee is available for Linux in .rpm and .deb package format for a variety of system architectures, and is available for MacOS through Homebrew. See the [releases](https://github.com/ethersphere/bee/releases) page of the Bee repo for all available packages.  
+### Package install (Recommended method)
+
+Bee is available for Linux in .rpm and .deb package format for a variety of system architectures, and is available for MacOS through Homebrew. See the [releases](https://github.com/ethersphere/bee/releases) page of the Bee repo for all available packages. One of the advantages of this method is that it automatically sets up Bee to run as a service as a part of the install process.
 
 <Tabs
 defaultValue="debian"
@@ -124,14 +133,37 @@ brew install swarm-bee
 </TabItem>
 </Tabs>
 
-If your system is not supported, please see the [manual installation](/docs/installation/manual) section for information on how to install Bee.
+### Shell script install (Alternate method)
 
-If you would like to run a hive of many Bees, check out the [node hive operators](/docs/installation/hive) section for information on how to operate and monitor many Bees at once.
+The [Bee install shell script](https://github.com/ethersphere/bee/blob/637b67a8e0a2b15e707f510bb7f49aea4ef6c110/install.sh) for Linux automatically detects its execution environment and installs the latest stable version of Bee.
+
+:::info
+Note that this install method copies precompiled binaries directly to the `/usr/local/bin` directory, so Bee installed through this method cannot be managed or uninstalled with package managers such as `dpkg` and `rpm`.
+
+Also note that unlike the package install method, this install method will not set up Bee to run as a service (such as with systemctl or brew services).
+:::
+
+Use either of the following commands to run the script and install Bee:
+
+#### wget
+
+```bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.13.0 bash
+```
+
+#### curl
+
+```bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.13.0 bash
+```
+### Build from source 
+If neither of the above methods works for your system, you can see our guide for [building directly from source](/docs/installation/build-from-source).
+
 
 ## 2. Configure Bee
 
 Bee is a versatile piece of software with diverse use cases. Before starting Bee for the first time you will need to configure it to suit your needs. The installation script should have generated a config file at
-`/etc/bee/bee.yaml` populated by the default configuration for the Bee service. 
+`/etc/bee/bee.yaml` populated by the default configuration for the Bee service. See the [configuration](/docs/working-with-bee/configuration#environment-variables) section for more details.
 
 Check that the file was successfully generated and contains the [default configuration](https://github.com/ethersphere/bee/blob/master/packaging/bee.yaml):
 
@@ -148,40 +180,7 @@ sudo touch /etc/bee/bee.yaml
 sudo vi /etc/bee/bee.yaml  
 ```
 
-
-### Edit Default Config
-
-To alter Bee's default configuration, simply edit the configuration file, and restart the node (default directory `/etc/bee/bee.yaml`). See the [configuration](/docs/working-with-bee/configuration#environment-variables) page for more details.
-
-<Tabs
-defaultValue="linux"
-values={[
-{label: 'Linux', value: 'linux'},
-{label: 'MacOS', value: 'macos'},
-]}>
-<TabItem value="linux">
-
-#### Linux
-
-```bash
-sudo vi /etc/bee/bee.yaml
-sudo systemctl restart bee
-```
-
-</TabItem>
-<TabItem value="macos">
-
-#### MacOS
-
-```bash
-vi /usr/local/etc/swarm-bee/bee.yaml
-brew services restart swarm-bee
-```
-
-</TabItem>
-</Tabs>
-
-### Set Node Type
+### Set node type
 
 #### Full Node, Light Node, Ultra-light Node
 
@@ -209,7 +208,7 @@ full-node: false
 swap-enable: false
 ```
 
-### Set Blockchain RPC Endpoint
+### Set blockchain RPC endpoint
 
 Full and light nodes require a Gnosis Chain RPC endpoint so they can interact with and deploy their chequebook contract, see the latest view of the current postage stamp batches, and interact with and top up postage stamp batches. A blockchain RPC endpoint is not required for nodes running in ultra-light mode.
 
@@ -223,8 +222,11 @@ By default, Bee expects a local Gnosis Chain node at `ws://localhost:8545`. To u
 ## bee.yaml
 blockchain-rpc-endpoint: https://gno.getblock.io/mainnet/?api_key=<<your-api-key>>
 ```
+### Configure Swap Initial Deposit (Optional)
 
-### NAT Address
+When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
+
+### NAT address
 
 Swarm is all about sharing and storing chunks of data. To enable other
 Bees (also known as _peers_) to connect to your Bee, you must
@@ -250,19 +252,7 @@ Then configure your node, including your p2p port (default 1634).
 ## bee.yaml
 nat-addr: "123.123.123.123:1634"
 ```
-
-#### Funding Your Chequebook (Optional)
-
-You may select how much xBZZ to fund your wallet with. If you are happy to stay within the free usage limits initially, you may select `0`.
-
-```yaml
-## bee.yaml
-swap-initial-deposit: 0
-```
-
-We recommend 1 BZZ as denominated in PLUR — `10000000000000000` — as a good starter amount, but you can start with more if you will be paying for a lot of interactions on the network.
-
-#### ENS Resolution (Optional)
+### ENS Resolution (Optional)
 
 The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you sign up to [Infura's](https://infura.io) API service and set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
 
@@ -275,36 +265,6 @@ resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 ## 3. Find Bee address
 
 As part of the process of starting a Bee full node or light node the node must issue a Gnosis Chain transaction to set up its chequebook contract. Therefore before starting the node's address must be found so that the node can be funded.
-
-1. Generate node keys by starting Bee service:
-
-  <Tabs
-  defaultValue="linux"
-  values={[
-  {label: 'Linux', value: 'linux'},
-  {label: 'MacOS', value: 'macos'},
-  ]}>
-  <TabItem value="linux">
-
-  #### Linux
-
-  ```bash
-  sudo systemctl start bee
-  ```
-
-  </TabItem>
-  <TabItem value="macos">
-
-  #### MacOS
-
-  ```bash
-  brew services start swarm-bee
-  ```
-
-  </TabItem>
-  </Tabs>
-
-  Running this command will start your node and generate a set of keys in the data directory at `/var/lib/bee`. The node will fail to start as it has not yet been funded.
 
 1. Find your node address
 
@@ -342,14 +302,15 @@ As part of the process of starting a Bee full node or light node the node must i
   We recommend not holding a high value of xBZZ or xDAI in your nodes' wallet. Please consider regularly removing accumulated funds. 
 :::
 
-Your Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. To do that you must deposit xDAI and optionally [xBZZ](/docs/installation/fund-your-node).
- 
+For full nodes and light nodes, Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. A small amount of xDAI must be deposited to the node's Gnosis Chain address in order to pay the transaction fees for the initial transaction. 1 xDAI is more than enough to get started.
 
-Once you have determined your Bee's Ethereum address, [fund your
-node](/docs/installation/fund-your-node) with xDAI and xBZZ
+For nodes which stake xBZZ and participate in the storage incentives system, very small amounts of xDAI will be used regularly to pay for staking related transactions on Gnosis Chain, so xDAI may need to be periodically topped up. See the [staking section](docs/working-with-bee/staking#check-redistribution-status) for more information.
 
-If too much time has elapsed, you may need to [restart your
-node](#edit-config-file) at this point.
+While depositing xBZZ is optional, node operators who intend to download or upload large amounts of data on Swarm may wish to deposit some xBZZ in order to pay for SWAP settlements. See the section on [node funding](/docs/installation/fund-your-node) for more information.
+
+
+After sending xDAI and optionally xBZZ to the Gnosis Chain address collected in the previous step, [restart the 
+node](#edit-config-file):
 
 <Tabs
 defaultValue="linux"
@@ -381,11 +342,7 @@ brew services restart swarm-bee
 
 ## 5. Wait for Initialisation
 
-When first started, Bee must deploy a chequebook to the Gnosis Chain
-blockchain, and sync the postage stamp batch store so that it can
-check chunks for validity when storing or forwarding them. This can
-take a while, so please be patient! Once this is complete, you will
-see Bee starting to add peers and connect to the network.
+When first started in full or light mode, Bee must deploy a chequebook to the Gnosis Chain blockchain, and sync the postage stamp batch store so that it can check chunks for validity when storing or forwarding them. This can take a while, so please be patient! Once this is complete, you will see Bee starting to add peers and connect to the network.
 
 You can keep an eye on progress by watching the logs while this is taking place.
 
@@ -416,11 +373,45 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 </Tabs>
 
 :::info
-While you are waiting for Bee to initalise, this is a great time to [back up your keys](/docs/working-with-bee/backups) so you can them safe.
+While you are waiting for Bee to initalise, this is a great time to [back up your keys and password](/docs/working-with-bee/backups) so you can them safe.
 :::
 
 
-## 6. Check If Bee Is Working
+If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world.
+
+```
+INFO[2020-08-29T11:55:16Z] greeting <Hi I am a very buzzy bee bzzzz bzzz bzz. 🐝> from peer: b6ae5b22d4dc93ce5ee46a9799ef5975d436eb63a4b085bfc104fcdcbda3b82c
+```
+
+Now your node will begin to request chunks of data that fall within your _radius of responsibilty_ - data that you will then serve to other p2p clients running in the swarm. Your node will then begin to
+respond to requests for these chunks from other peers.
+
+:::tip Incentivisation
+In Swarm, storing, serving and forwarding chunks of data to other nodes can earn you rewards! Follow [this guide](/docs/working-with-bee/cashing-out) to learn how to regularly cash out cheques other nodes send you in return for your services so that you can get your xBZZ!
+:::
+
+Your Bee client has now generated an elliptic curve keypair similar to an Ethereum wallet. These are stored in your [data directory](/docs/working-with-bee/configuration), in the `keys` folder.
+
+:::danger Keep Your Keys and Password Safe!
+Your keys and password are very important, backup these files and
+store them in a secure place that only you have access to. With great
+privacy comes great responsibility - while no-one will ever be able to
+guess your key - you will not be able to recover them if you lose them
+either, so be sure to look after them well and [keep secure
+backups](/docs/working-with-bee/backups).
+:::
+
+## 6. Check if Bee is Working
+
+First heck that the correct version of Bee is installed:
+
+```bash
+bee version
+```
+
+```
+1.13.0
+```
 
 Once Bee has been funded, the chequebook deployed, and postage stamp
 batch store synced, its HTTP [API](/docs/api-reference/api-reference)
@@ -439,7 +430,7 @@ Ethereum Swarm Bee
 Great! Our API is listening!
 
 Next, let's see if we have connected with any peers by querying our
-[Debug API](/docs/working-with-bee/debug-api).
+[Debug API](/docs/working-with-bee/debug-api). Note that the debug api listens at port 1635 by default (`localhost:1635`).
 
 :::info
 Here we are using the `jq` utility to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
@@ -462,13 +453,13 @@ on the Swarm network.
 
 Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
 
-## 7. Back up Keys
+## 7. Backup Keys
 
 Once your node is up and running, make sure to [back up your keys](/docs/working-with-bee/backups). 
 
-## Deposit Stake for Your Node
+## 8. Deposit Stake (Optional)
 
-In order to start receiving rewards, you will need to [deposit xBZZ to the staking contract](/docs/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
+While depositing stake is not required to run a Bee node, it is required in order for a node to receive rewards for sharing storage with the network. You will need to [deposit xBZZ to the staking contract](/docs/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
 ```bash
 curl -XPOST localhost:1635/stake/100000000000000000
@@ -476,5 +467,26 @@ curl -XPOST localhost:1635/stake/100000000000000000
 
 This will initiate a transaction on-chain which deposits the specified amount of xBZZ into the staking contract. 
 
-Rewards are only available for full nodes which are providing storage capacity to the network.
+Storage incentive rewards are only available for full nodes which are providing storage capacity to the network.
 
+Note that SWAP rewards are available to all full nodes, regardless of whether or not they stake xBZZ in order to participate in the storage incentives system.
+
+## Getting help
+
+The CLI has documentation built-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
+
+You may also check out the [configuration guide](/docs/working-with-bee/configuration), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
+
+## Next Steps to Consider
+
+### Access the Swarm
+If you'd like to start uploading or downloading files to Swarm, [start here](/docs/access-the-swarm/introduction).
+
+### Explore the API
+The [Bee API and Debug API](/docs/api-reference/api-reference) are the primary methods for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the APIs.
+
+### Run a hive! 
+If you would like to run a hive of many Bees, check out the [hive operators](/docs/installation/hive) section for information on how to operate and monitor many Bees at once.
+
+### Start building DAPPs on Swarm
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](docs/dapps-on-swarm/dapps-on-swarm).
