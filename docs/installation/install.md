@@ -49,13 +49,13 @@ In general `bee start` may not be the best option for most users - especially if
 
 ## 1. Install Bee
 
-Bee is available as a package for Debian (Ubuntu) and Centos from our GitHub, and is available for MacOS through Homebrew.
+Bee is available for Linux in .rpm and .deb package format for a variety of system architectures, and is available for MacOS through Homebrew. See the [releases](https://github.com/ethersphere/bee/releases) page of the Bee repo for all available packages.  
 
 <Tabs
 defaultValue="debian"
 values={[
-{label: 'Ubuntu / Debian / Raspbian', value: 'debian'},
-{label: 'CentOS', value: 'centos'},
+{label: 'Debian', value: 'debian'},
+{label: 'RPM', value: 'rpm'},
 {label: 'MacOS', value: 'macos'},
 ]}>
 <TabItem value="debian">
@@ -84,7 +84,7 @@ sudo dpkg -i bee_1.13.0_arm64.deb
 ```
 
 </TabItem>
-<TabItem value="centos">
+<TabItem value="rpm">
 
 #### CentOS
 
@@ -310,18 +310,19 @@ As part of the process of starting a Bee full node or light node the node must i
 
   There are two methods for finding your node address:
 
-    1. Review log messages:
+    1. Option One: Review log messages:
       ```bash
       sudo journalctl --lines=100 --follow --unit bee
       ```
       The output should look like this:
       ![Get address](/img/get-address.png)
 
-      Find the line which look like this:
+      Look for the line which look like this, and copy the value from the `"address"` field:
+      ```
          "time"="2023-03-23 21:10:50.761652" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x215693a6E6Cf0a27441075FD98c31d48E3a3a100
-
+      ```
       The address shown there is the Gnosis Chain address for your node. Copy and save it for the next step.
-    1. Read the address directly from key file and save:
+    1. Option Two: Read the address directly from key file and save:
       ```bash
       sudo cat /var/lib/bee/keys/swarm.key
       ``` 
