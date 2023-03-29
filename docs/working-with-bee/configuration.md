@@ -20,7 +20,7 @@ These two methods have [significant differences](/docs/installation/install#note
 
 ## Configuration for Bee Service
 
-*Note that Bee is only set up to run as a service by default when it is [installed using one of the officially supported](/docs/installation/install#package-install-recommended-method) Linux Debian or RPM packages or the Homebrew installer for MacOS.*
+*Note that Bee is only set up to run as a service by default when it is [installed using one of the officially supported](/docs/installation/install#package-manager-install-recommended-method) Linux Debian or RPM packages or the Homebrew installer for MacOS.*
 
 
 ### Default Data and Config Directories
