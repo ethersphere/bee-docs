@@ -56,7 +56,7 @@ In general `bee start` may not be the best option for most users - especially if
 
 ## 1. Install Bee
 
-### Package install (Recommended method)
+### Package manager install (Recommended method)
 
 Bee is available for Linux in .rpm and .deb package format for a variety of system architectures, and is available for MacOS through Homebrew. See the [releases](https://github.com/ethersphere/bee/releases) page of the Bee repo for all available packages. One of the advantages of this method is that it automatically sets up Bee to run as a service as a part of the install process.
 
@@ -304,7 +304,7 @@ As part of the process of starting a Bee full node or light node the node must i
 
 For full nodes and light nodes, Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. A small amount of xDAI must be deposited to the node's Gnosis Chain address in order to pay the transaction fees for the initial transaction. 1 xDAI is more than enough to get started.
 
-For nodes which stake xBZZ and participate in the storage incentives system, very small amounts of xDAI will be used regularly to pay for staking related transactions on Gnosis Chain, so xDAI may need to be periodically topped up. See the [staking section](docs/working-with-bee/staking#check-redistribution-status) for more information.
+For nodes which stake xBZZ and participate in the storage incentives system, very small amounts of xDAI will be used regularly to pay for staking related transactions on Gnosis Chain, so xDAI may need to be periodically topped up. See the [staking section](/docs/working-with-bee/staking#check-redistribution-status) for more information.
 
 While depositing xBZZ is optional, node operators who intend to download or upload large amounts of data on Swarm may wish to deposit some xBZZ in order to pay for SWAP settlements. See the section on [node funding](/docs/installation/fund-your-node) for more information.
 
@@ -489,4 +489,4 @@ The [Bee API and Debug API](/docs/api-reference/api-reference) are the primary m
 If you would like to run a hive of many Bees, check out the [hive operators](/docs/installation/hive) section for information on how to operate and monitor many Bees at once.
 
 ### Start building DAPPs on Swarm
-If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](docs/dapps-on-swarm/dapps-on-swarm).
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/dapps-on-swarm/introduction).

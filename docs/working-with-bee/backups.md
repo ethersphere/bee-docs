@@ -33,9 +33,9 @@ It may be also useful for you to retain your configuration files, which are held
 /etc/bee
 ```
 
-### Manual
+### Binary package install
 
-For a [manual installation](/docs/installation/manual) your data directory is normally located at:
+If you installed Bee using the [automated shell script](/docs/installation/install#shell-script-install-alternate-method) or by [building Bee from source](/docs/installation/build-from-source), your data directory will typically be located at:
 
 ```bash
 ~/.bee
