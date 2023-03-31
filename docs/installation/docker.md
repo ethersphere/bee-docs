@@ -166,7 +166,7 @@ Once you have determined your Bee's Ethereum addresses,
 
 After your transaction has been completed, your node should recognise that your wallet has been funded, and begin to deploy and fund your Bee chequebook!
 
-Once Bee has completed this procedure, you may query the Bee [HTTP API](/docs/api-reference/api-reference) at `http://localhost:1633`.
+Once Bee has completed this procedure, you may query the Bee [HTTP API](/docs/api-reference/) at `http://localhost:1633`.
 
 ```bash
 curl localhost:1633

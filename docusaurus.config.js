@@ -1,4 +1,13 @@
+const math = require('remark-math');
+const katex = require('rehype-katex');
+
 module.exports = {
+  scripts: [
+    {
+      src: "/matomo.js",
+      async: true,
+    }
+  ],
   title: 'Swarm Bee Client',
   tagline: 'Welcome to the Swarm',
   url: 'https://docs.ethswarm.org',
@@ -6,8 +15,8 @@ module.exports = {
   baseUrl: '/',
   plugins: [require.resolve('docusaurus-lunr-search')],
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'error',
-  onDuplicateRoutes: 'error',
+  onBrokenMarkdownLinks: 'throw',
+  onDuplicateRoutes: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
   projectName: 'bee', // Usually your repo name.
@@ -41,7 +50,7 @@ module.exports = {
         //   position: 'left',
         // },
         {
-          to: 'docs/api-reference/api-reference',
+          to: 'docs/api-reference/',
           activeBasePath: 'docs',
           label: 'API Reference',
           position: 'left',
@@ -125,6 +134,8 @@ module.exports = {
           // Please change this to your repo.
           editUrl:
             'https://github.com/ethersphere/docs.github.io/blob/master',
+          remarkPlugins: [math],
+          rehypePlugins: [katex],
         },
         blog: {
           showReadingTime: false,
@@ -137,5 +148,15 @@ module.exports = {
         },
       },
     ],
+    
+  ],
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
   ],
 };

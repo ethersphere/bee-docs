@@ -375,7 +375,7 @@ While you are waiting for Bee to initalise, this is a great time to [back up you
 ## Check If Bee Is Working
 
 Once Bee has been funded, the chequebook deployed, and postage stamp
-batch store synced, its HTTP [API](/docs/api-reference/api-reference)
+batch store synced, its HTTP [API](/docs/api-reference/)
 will start listening at `localhost:1633`.
 
 To check everything is working as expected, send a GET request to localhost port 1633.

@@ -7,7 +7,7 @@ Now that you have created your Swarm wallet and your Bee node has
 begun to participate in the global Swarm network, we can use the Debug
 API to take a closer look at what's happening with your node.
 
-The [Debug API](/docs/api-reference/api-reference) provides a privileged environment where you are able to interact with your Bee node to get more information about the status of your node.
+The [Debug API](/docs/api-reference/) provides a privileged environment where you are able to interact with your Bee node to get more information about the status of your node.
 
 :::danger
 Never expose your Debug API to the public Internet, make sure to use a
@@ -75,4 +75,4 @@ Bee node becomes part of the ordered p2p network in
 }
 ```
 
-Find out more about what you can do with the Debug API [here](/docs/api-reference/api-reference).
+Find out more about what you can do with the Debug API [here](/docs/api-reference/).
