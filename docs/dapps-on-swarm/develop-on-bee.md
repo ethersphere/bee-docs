@@ -34,8 +34,8 @@ With Bee running as a proxy in
 [Light Node](/docs/access-the-swarm/light-nodes) mode on your end-user's
 computers, your applications can have privileged access to all sorts
 of useful tools and ways to interact with the swarm. Check out the
-[API](/docs/api-reference/api-reference) and
-[Debug API](/docs/api-reference/api-reference) as well as
+[API](/docs/api-reference/) and
+[Debug API](/docs/api-reference/) as well as
 [bee-js](/docs/dapps-on-swarm/bee-js) for details on what you can do
 with your Bee!
 

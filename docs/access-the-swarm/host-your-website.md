@@ -10,7 +10,7 @@ Comfortable with nodeJS and JavaScript? Check out [swarm-cli](/docs/working-with
 Bee treats ENS as a first class citizen, wherever you can use a Swarm reference, you can also use an ENS domain where the `content` ENS Resolver record is set to be a `bzz://` reference.
 
 :::info
-You may substitute ENS names for Swarm references in any of the [API methods](/docs/api-reference/api-reference) where you would normally use a Swarm reference.
+You may substitute ENS names for Swarm references in any of the [API methods](/docs/api-reference/) where you would normally use a Swarm reference.
 :::
 
 ### Enable ENS on Your Node

@@ -71,7 +71,7 @@ curl localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a8782740
 ```
 
 :::info
-Pinning and unpinning is possible for files (as in the example) and also the chunks, directories, and bytes endpoints. See the [API](/docs/api-reference/api-reference) documentation for more details.
+Pinning and unpinning is possible for files (as in the example) and also the chunks, directories, and bytes endpoints. See the [API](/docs/api-reference/) documentation for more details.
 :::
 
 ### Pinning Already Uploaded Content
