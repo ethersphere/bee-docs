@@ -8,7 +8,7 @@ Pull Requests are welcome, but please read our [CODING](CODING.md) guide!
 
 ### Node Version
 
-You must use **node 14** or above. We recommend [nvm](https://github.com/nvm-sh/nvm).
+You must use **node 18** or above. We recommend [nvm](https://github.com/nvm-sh/nvm).
 
 ### Installation
 
