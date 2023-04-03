@@ -224,7 +224,6 @@ To set your RPC endpoint provider, specify it in configuration for the `blockcha
 ## bee.yaml
 blockchain-rpc-endpoint: https://gno.getblock.io/mainnet/?api_key=<<your-api-key>>
 ```
-
 ### Configure Swap Initial Deposit (Optional)
 
 When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
