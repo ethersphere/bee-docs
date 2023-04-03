@@ -91,13 +91,13 @@ module.exports = {
       collapsed: false
     }
   ],
-  about: [
+  learn: [
     {
       type: 'category',
       label: 'The Basics',
       items: [
-        'about/introduction',
-        'about/terminology'
+        'learn/introduction',
+        'learn/terminology'
       ],
       collapsed: false
     },
@@ -105,8 +105,37 @@ module.exports = {
       type: 'category',
       label: 'FAQ',
       items: [
-        'about/faq'
+        'learn/faq'
       ],
     },
+  ],
+  operate: [
+    {
+      type: 'category',
+      label: 'Operate',
+      items: [
+        'operate/introduction',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Installation',
+      items: [
+        'operate/installation/quick-start',
+      ],
+      collapsed: false
+    },
+  ],
+  develop: [
+    {
+      type: 'category',
+      label: 'Develop',
+      items: [
+        'develop/introduction',
+      ],
+      collapsed: false
+    },
+
   ]
 };

@@ -33,15 +33,21 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/about/introduction',
-          activeBasePath: 'about',
-          label: 'About',
+          to: 'docs/learn/introduction',
+          activeBasePath: 'docs/learn',
+          label: 'Learn',
           position: 'left',
         },
         {
-          to: 'docs/installation/quick-start',
-          activeBasePath: 'docs',
-          label: 'Build',
+          to: 'docs/operate/introduction',
+          activeBasePath: 'docs/operate',
+          label: 'Operate',
+          position: 'left',
+        },
+        {
+          to: 'docs/develop/introduction',
+          activeBasePath: 'docs/develop',
+          label: 'Develop',
           position: 'left',
         },
         // {
@@ -59,7 +65,7 @@ module.exports = {
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
           to: 'docs/api-reference/',
-          activeBasePath: 'docs',
+          activeBasePath: 'docs/api-reference',
           label: 'API Reference',
           position: 'left',
         },

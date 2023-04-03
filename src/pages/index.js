@@ -13,16 +13,16 @@ function Home() {
   return (
     <Layout title="Hello" description="Hello React Page">
       <div className={styles.container}>
-        <a className={styles.panel} href="/docs/about/introduction">
+        <a className={styles.panel} href="/docs/learn/introduction">
           <div>
-            <h3 className={styles.buttonTitle}>About</h3>
+            <h3 className={styles.buttonTitle}>Learn</h3>
           </div>
           <p className={styles.description}>Learn more about the decentralised data storage and distribution technology which will power the next generation of censorship-resistant, unstoppable, serverless dapps.</p>
         </a> 
         <a className={styles.panel} href="/docs/installation/quick-start">
           <div>
-            <h3 className={styles.buttonTitle}>Stake</h3>
-            <p className={styles.description}>Bee is a peer-to-peer client that connects you with other peers all over the world to become part of Swarm network, a global distributed p2p storage network that aims to store and distribute all of the world's data.</p>
+            <h3 className={styles.buttonTitle}>Operate</h3>
+            <p className={styles.description}>Operate a Bee node to connect with other peers all over the world to become part of Swarm network, a global distributed p2p storage network that aims to store and distribute all of the world's data.</p>
           </div>
         </a>
         <a className={styles.panel} href="/docs/access-the-swarm/introduction">
