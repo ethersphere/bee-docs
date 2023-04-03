@@ -9,9 +9,7 @@ A full Bee node backup includes the `keys`, `localstore`, `statestore`, and `pas
 
 Node key and state data is found in the data directory specified in its [configuration](configuration).
 
-:::danger
 Key data in backup files allows access to Bee node's Gnosis account. If lost or stolen it could lead to the loss of all assets in that account. Multiple backups should be kept in secure locations.
-:::
 
 :::info
 Don't forget - it's not a backup until you're sure the backup files work! Make sure to test restoring from backup files to prevent loss of assets due to data loss or corruption.
@@ -117,8 +115,8 @@ If Clef is used for key management and transaction signing then Clef data must b
 
 ### Ubuntu / Debian / Raspbian / CentOS Package Managers
 
-For Linux installations by the package managers _yum_ or _apt_, the
-`bee-clef` data directory is located at:
+
+For Linux installations by the package managers _yum_ or _apt_, the `bee-clef` data directory is located at:
 
 ```bash
 /var/lib/bee-clef/

@@ -64,7 +64,7 @@ Finally, note the `welcome-message` in the first nodes configuration file. This 
 
 Now we have created our configuration files, let's start our nodes by running `bee start --config config_1.yaml`, then in another Terminal session, run `bee start --config-file config_2.yaml`.
 
-We can now inspect the state of our network by sending HTTP requests to the [Debug API](/docs/api-reference/api-reference)..
+We can now inspect the state of our network by sending HTTP requests to the [Debug API](/docs/api-reference/)..
 
 ```bash
 curl -s http://localhost:1635/topology | jq .connected

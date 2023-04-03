@@ -13,9 +13,7 @@ funded with:
   a couple of transactions on the [Gnosis
   Chain](/docs/introduction/terminology#gnosis-chain).
 
-The reason BZZ must be [bridged](/docs/introduction/terminology#bridging-tokens)
-to the Gnosis Chain is that the transaction fees are currently too high on the
-Ethereum mainnet for Swarm's purposes.
+Take note that xBZZ is the [bridged](/docs/introduction/terminology#bridging-tokens) version of BZZ from Ethereum to the Gnosis Chain.
 
 ### A node's wallet
 
@@ -35,8 +33,8 @@ BZZ. This deployment happens when a node initialises for the first time. Your
 Bee node will warn you in its log if there aren't enough funds in its wallet for
 deploying the chequebook.
 
-You can [configure](/docs/working-with-bee/configuration) the amount of BZZ to
-be sent from the node's wallet. It is 1 BZZ by default, but it can be set to
+You can [configure](/docs/working-with-bee/configuration) the amount of xBZZ to
+be sent from the node's wallet. It is 1 xBZZ by default, but it can be set to
 zero.
 
 ## Joining the swarm (mainnet)
@@ -47,7 +45,7 @@ If you want to get your Bee node up and running as easily as possible, then you
 can set its
 [`--swap-initial-deposit`](/docs/working-with-bee/configuration#--swap-initial-deposit)
 value to zero. This means that your node's chequebook will not get funded with
-BZZ, meaning that other nodes will only serve it within the free tier bandwidth
+xBZZ, meaning that other nodes will only serve it within the free tier bandwidth
 threshold.
 
 Since gas fees on the [Gnosis Chain](https://www.xdaichain.com/) are very low,
@@ -68,7 +66,7 @@ network to xDAI using the
 or buy xDAI
 [directly using fiat](https://www.xdaichain.com/for-users/get-xdai-tokens/buying-xdai-with-fiat).
 
-You will also need to fund your node with more BZZ for full speed access, or to
+You will also need to fund your node with more xBZZ for full speed access, or to
 purchase postage stamps to upload content. To bridge BZZ from the Ethereum
 mainet to the [Gnosis Chain](https://www.xdaichain.com/), you may use
 [OmniBridge](https://omni.xdaichain.com/bridge).

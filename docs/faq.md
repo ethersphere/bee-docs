@@ -29,7 +29,7 @@ The "context deadline exceeded" is a non critical warning. It means that a node 
 
 ### How do I set up a blockchain endpoint?
 
-We recommend you run your own [XDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
+We recommend you run your own [xDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
 
 - If you use "bee start"
 
@@ -105,7 +105,7 @@ Most common use cases:
 - `curl http://localhost:1635/peers` - Shows you the currently connected peers
 - `curl http://localhost:1635/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connected
 - `curl http://localhost:1635/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
-- `curl http://localhost:1635/chequebook/address` your chequebook contract to see the BZZ.
+- `curl http://localhost:1635/chequebook/address` your chequebook contract to see the xBZZ.
 
 ### How can I check how many cashed out cheques do I have?
 
@@ -114,7 +114,7 @@ Get your chequebook contract address with: `curl http://localhost:1635/chequeboo
 
 ### I have compared transactions between my ethereum address and my chequebook address, the numbers are different, which is quite weird.
 
-Your chequebook will show OUT BZZ transactions when your peers cash cheques issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
+Your chequebook will show OUT xBZZ transactions when your peers cash cheques issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
 
 ### Where can I find documents about the cashout commands?
 

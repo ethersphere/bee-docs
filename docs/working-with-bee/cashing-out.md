@@ -117,7 +117,7 @@ curl -XPOST http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451
 }
 ```
 
-You may check the status of your transaction using the [XDAI
+You may check the status of your transaction using the [xDAI
 Blockscout](https://blockscout.com/xdai/mainnet).
 
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
@@ -141,15 +141,15 @@ curl http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4
 }
 ```
 
-Success, we earned our first BZZ! 🐝
+Success, we earned our first xBZZ! 🐝
 
-Now we have earnt tokens, to withdraw our BZZ from the chequebook contract back into our node's own wallet, we simply POST a request to the chequebook withdraw endpoint.
+Now we have earned tokens, to withdraw our xBZZ from the chequebook contract back into our node's own wallet, we simply POST a request to the chequebook withdraw endpoint.
 
 ```bash
 curl -XPOST http://localhost:1635/chequebook/withdraw\?amount\=1000 | jq
 ```
 
-And conversely, if we have used more services than we have provided, we may deposit extra BZZ into the chequebook contract by sending a POST request to the deposit endpoint.
+And conversely, if we have used more services than we have provided, we may deposit extra xBZZ into the chequebook contract by sending a POST request to the deposit endpoint.
 
 ```bash
 curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
@@ -166,14 +166,14 @@ track your transaction and make sure it completed successfully.
 
 # Managing uncashed cheques
 
-For the Bee process, the final step of earning BZZ is cashing a
-cheque. It is worth noting that a cheque is not yet actual BZZs. In
+For the Bee process, the final step of earning xBZZ is cashing a
+cheque. It is worth noting that a cheque is not yet actual xBZZ. In
 Bee, a cheque, just like a real cheque, is a promise to hand over
 money upon request. In real life, you would present the cheque to a
 bank. In swarm life, we present the cheque to a smart-contract.
 
 Holding on to a swap-cheque is risky; it is possible that the owner of
-the chequebook has issued cheques worth more BZZ than is contained in
+the chequebook has issued cheques worth more xBZZ than is contained in
 their chequebook contract. For this reason, it is important to cash
 out your cheques every so often.
 

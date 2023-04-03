@@ -10,7 +10,7 @@ Swarm thrives on decentralisation, is designed so that it
 works best when many individuals contribute to the health and
 distributed nature of the network by running Bee nodes.
 
-It is easy to set up Bee on small and inexpensive computers, such as a [Raspberry Pi 4](/docs/installation/rasp-bee-ry-pi), spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations).
+It is easy to set up Bee on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations).
 
 ## Installing Bee
 
@@ -18,13 +18,13 @@ Steps for running a Bee node:
 
 1.  Install Bee and set it up to run as a service.
 2.  Configure Bee.
-3.  [Fund your node](/docs/installation/fund-your-node) with XDAI and BZZ for the mainnet and gETH and gBZZ for our testnet.
+3.  [Fund your node](/docs/installation/fund-your-node) with xDAI and xBZZ for the mainnet and gETH and gBZZ for our testnet.
 4.  Wait for your chequebook transactions to complete and batch store to update.
 5.  Back up your keys.
 6.  Check if Bee is working.
 
 :::info
-  We recommend not holding a high value of BZZ or XDAI in your nodes' wallet. Please consider regularly removing accumulated funds. 
+  We recommend not holding a high value of xBZZ or xDAI in your nodes' wallet. Please consider regularly removing accumulated funds. 
   :::
 
 ## 1. Install Bee
@@ -167,7 +167,7 @@ brew services restart swarm-bee
 
 #### Full Node, Light Node
 
-Bee runs as a light node by default. If you want to run Bee as a full node in order to contribute your resources and provide services to the network in exchange for bandwidth in kind and perhaps even earn some BZZ, simply set the `--full-node` flag to `true`.
+Bee runs as a light node by default. If you want to run Bee as a full node in order to contribute your resources and provide services to the network in exchange for bandwidth in kind and perhaps even earn some xBZZ, simply set the `--full-node` flag to `true`.
 
 ```yaml
 ## bee.yaml
@@ -218,7 +218,7 @@ blockchain-rpc-endpoint: https://gno.getblock.io/mainnet/?api_key=b338ee33-b3e3-
 
 #### Funding Your Chequebook (Optional)
 
-You may select how much BZZ to fund your wallet with. If you are happy to stay within the free usage limits initially, you may select `0`.
+You may select how much xBZZ to fund your wallet with. If you are happy to stay within the free usage limits initially, you may select `0`.
 
 ```yaml
 ## bee.yaml
@@ -238,7 +238,7 @@ resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 
 ## Fund Your Bee
 
-Your Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. To do that you must deposit XDAI and optionally [xBZZ](/docs/installation/fund-your-node).
+Your Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. To do that you must deposit xDAI and optionally [xBZZ](/docs/installation/fund-your-node).
 
 First, find out your Bee's Ethereum address:
 
@@ -279,7 +279,7 @@ head -18 $(brew --prefix)/var/log/swarm-bee/bee.log | grep ethereum
 </Tabs>
 
 Once you have determined your Bee's Ethereum address, [fund your
-node](/docs/installation/fund-your-node) with XDAI and xBZZ
+node](/docs/installation/fund-your-node) with xDAI and xBZZ
 
 If too much time has elapsed, you may need to [restart your
 node](#edit-config-file) at this point.
@@ -375,7 +375,7 @@ While you are waiting for Bee to initalise, this is a great time to [back up you
 ## Check If Bee Is Working
 
 Once Bee has been funded, the chequebook deployed, and postage stamp
-batch store synced, its HTTP [API](/docs/api-reference/api-reference)
+batch store synced, its HTTP [API](/docs/api-reference/)
 will start listening at `localhost:1633`.
 
 To check everything is working as expected, send a GET request to localhost port 1633.
@@ -416,13 +416,13 @@ Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
 
 ## Deposit Stake for Your Node
 
-In order to start receiving rewards, you will need to [deposit BZZ to the staking contract](/docs/installation/staking) for your node. To do this, send a minimum of 10 BZZ to your nodes' wallet and run:
+In order to start receiving rewards, you will need to [deposit xBZZ to the staking contract](/docs/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
 ```bash
 curl -XPOST localhost:1635/stake/100000000000000000
 ```
 
-This will initiate a transaction on-chain which deposits the specified amount of BZZ into the staking contract. 
+This will initiate a transaction on-chain which deposits the specified amount of xBZZ into the staking contract. 
 
 Rewards are only available for full nodes which are providing storage capacity to the network.
 

@@ -11,13 +11,19 @@
     "serve": "docusaurus serve"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-beta.9",
-    "@docusaurus/preset-classic": "^2.0.0-beta.9",
+    "@docusaurus/core": "^2.4.0",
+    "@docusaurus/preset-classic": "^2.4.0",
     "@mdx-js/react": "^1.6.22",
-    "clsx": "^1.1.1",
-    "docusaurus-lunr-search": "^2.1.14",
+    "@saucelabs/theme-github-codeblock": "^0.1.1",
+    "clsx": "^1.2.1",
+    "docusaurus-lunr-search": "^2.3.2",
+    "docusaurus-plugin-matomo": "^0.0.6",
+    "hast-util-is-element": "^1.1.0",
+    "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "rehype-katex": "^5.0.0",
+    "remark-math": "^3.0.1"
   },
   "browserslist": {
     "production": [
@@ -32,7 +38,7 @@
     ]
   },
   "engines": {
-    "node": ">=14.0.0",
+    "node": ">=18.0.0",
     "npm": ">=6.0.0"
   }
 }

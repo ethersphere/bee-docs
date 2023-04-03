@@ -6,7 +6,7 @@ id: upload-and-download
 When you upload your files to the swarm, they are split into 4kb
 _chunks_ and then distributed to nodes in the network that are
 responsible for storing and serving these parts of your content. Each
-chunk has a _postage stamp_ stuck to it which attaches a value in BZZ
+chunk has a _postage stamp_ stuck to it which attaches a value in xBZZ
 to that chunk which you agree to _burn_ when buying the batch of stamps. This
 signifies to storage nodes that this data is important, and supposed
 to be retained in the Distributable Immutable Store of Chunks
@@ -16,8 +16,8 @@ to be retained in the Distributable Immutable Store of Chunks
 
 To upload data to the swarm, you must perform the following steps:
 
-1. Fund your node's wallet with BZZ.
-2. Purchase a _batch_ of stamps with your BZZ.
+1. Fund your node's wallet with xBZZ.
+2. Purchase a _batch_ of stamps with your xBZZ.
 3. Wait for the batch to propogate into the network.
 4. Upload your content, specifying the _batch id_ so that Bee can attach stamps to your chunks.
 5. Download your content using your content's hash.
@@ -25,7 +25,7 @@ To upload data to the swarm, you must perform the following steps:
 ## Purchasing Your Batch of Stamps
 
 In order to upload your data to swarm, you must agree to burn (spend)
-some of your BZZ to signify to storer and fowarder nodes that this
+some of your xBZZ to signify to storer and fowarder nodes that this
 content is valued. Before you proceed to the next step, you must buy
 stamps! See this guide on how to [purchase an appropriate batch of
 stamps](/docs/access-the-swarm/keep-your-data-alive).

@@ -450,7 +450,7 @@ Corresponds to LevelDB `WriteBuffer` (see above)
 
 _default_ `:1635`
 
-The IP and port the [Debug API](/docs/api-reference/api-reference)
+The IP and port the [Debug API](/docs/api-reference/)
 will serve HTTP requests from.
 
 Omitting the IP part of the address will cause the server to listen to
@@ -462,7 +462,7 @@ all requests.
 
 _default_ `false`
 
-Set this to `true` to enable access to the [Debug API](/docs/api-reference/api-reference)
+Set this to `true` to enable access to the [Debug API](/docs/api-reference/)
 
 #### --full-node
 
@@ -660,7 +660,7 @@ _default_ `""`
 
 As a spam prevention measure, for nodes which deployed their
 chequebook with v0.5.0 or before, specify `transaction` - [the
-transaction hash of any Ethereum transaction on the XDAI
+transaction hash of any Ethereum transaction on the xDAI
 network](/docs/FAQ#how-can-i-find-a-transaction-hash-for-the---transaction-configuration-parameter)
 sent from the Bee node's Ethereum address.
 

@@ -26,7 +26,7 @@ Find out where Bee stores your [logs and files](/docs/working-with-bee/logs-and-
 
 ## Cashing Out
 
-Get your cheques cashed and bank your BZZs. [See this guide](/docs/working-with-bee/cashing-out) to receiving payments from your peers.
+Get your cheques cashed and bank your xBZZ. [See this guide](/docs/working-with-bee/cashing-out) to receiving payments from your peers.
 
 ## Monitoring and Metrics
 

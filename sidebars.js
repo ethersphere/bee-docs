@@ -15,10 +15,8 @@ module.exports = {
       items: [
         'installation/quick-start',
         'installation/install',
-        'installation/staking',
         'installation/manual',
         'installation/build-from-source',
-        'installation/rasp-bee-ry-pi',
         'installation/hive',
         'installation/docker',
         'installation/bee-clef',
@@ -37,6 +35,7 @@ module.exports = {
         'working-with-bee/logs-and-files',
         'working-with-bee/bee-tools',
         'working-with-bee/security',
+        'working-with-bee/staking',
         'working-with-bee/cashing-out',
         'working-with-bee/monitoring',
         'working-with-bee/backups',

@@ -20,7 +20,7 @@ Smart contracts are automatically executable code which can be published on a bl
 
 ### Bee
 
-Swarm nodes are referred to as "Bee" nodes. Bee nodes can run on a wide variety of computer types including desktop computers, hobbyist computers like Raspberry Pis, remotely hosted virtual machines, and much more. When running, Bee nodes interact with Swarm smart contracts on Gnosis Chain and connect with other Bee nodes to form the Swarm network.
+Swarm nodes are referred to as "Bee" nodes. Bee nodes can run on a wide variety of computer types including desktop computers, hobbyist computers like Raspberry Pi 4, remotely hosted virtual machines, and much more. When running, Bee nodes interact with Swarm smart contracts on Gnosis Chain and connect with other Bee nodes to form the Swarm network.
 
 Bee nodes can act as both client and service provider, or solely as client or service provider, depending on the needs of the node operator. Bee nodes pay each other for services on the Swarm network with the xBZZ token.
 
@@ -28,7 +28,7 @@ Bee nodes can act as both client and service provider, or solely as client or se
 
 An overlay network is a virtual or logical network built on top of some lower level "underlay" network. Examples include the Internet as an overlay network built on top of the telephone network, and the p2p Bittorent network built on top of the Internet. 
 
-With Swarm, the overlay network is a [Kademlia DHT](https://en.wikipedia.org/wiki/Kademlia) with overlay addresses taken from each node's [Gnosis](terminology#gnosis-chain) address. Swarm's overlay network addresses are permanent identifiers for each node and do not change over time.
+With Swarm, the overlay network is a [Kademlia DHT](https://en.wikipedia.org/wiki/Kademlia) with overlay addresses derived from each node's [Gnosis](terminology#gnosis-chain) address. Swarm's overlay network addresses are permanent identifiers for each node and do not change over time.
 
 An underlay network is the low level network on which an overlay network is built. It allows nodes to find each other, communicate, and transfer data. Swarm's underlay network is a p2p network built with [libp2p](https://libp2p.io/). Underlay address are not permanent and may change over time. 
 
