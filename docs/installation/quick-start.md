@@ -6,7 +6,7 @@ id: quick-start
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes which each offer different features. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes.
+Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes which each offer different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes.
 
 ### Comparison of Node Types
 | Feature      | Full Node | Light Node |Ultra-light Node|
@@ -24,9 +24,9 @@ Bee is a versatile piece of software that caters to a diverse array of use cases
 :::info 
 The Swarm network includes two incentives protocols which each give Bee nodes incentives to participate in maintaining the network in a healthy way.
 1. **Storage incentives:**
-  By participating in this protocol full nodes which store and share data chunks with the network have a chance to earn xBZZ. Staked xBZZ is required to earn storage incentives. Learn more in the [staking section](/docs/working-with-bee/staking).
-1. **SWAP incentives: **
-  This incentives protocol encourages full or light nodes to share bandwidth with other nodes in exchange for payments from other nodes either [in kind](https://www.investopedia.com/terms/p/paymentinkind.asp) or as a cheque to be settled at a future date. SWAP requires a chequebook contract to be set up on Gnosis Chain for each participating node. 
+  By participating in the storage incentives protocol, full nodes which store and share data chunks with the network have a chance to earn xBZZ. Staked xBZZ is required to earn storage incentives. Learn more in the [staking section](/docs/working-with-bee/staking).
+1. **SWAP incentives:**
+  The SWAP incentives protocol encourages full or light (but not ultra-light) nodes to share bandwidth with other nodes in exchange for payments from other nodes either [in-kind](https://www.investopedia.com/terms/p/paymentinkind.asp) or as a cheque to be settled at a future date. SWAP requires a chequebook contract to be set up on Gnosis Chain for each participating node. 
 :::
 
 

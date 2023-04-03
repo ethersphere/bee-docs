@@ -13,15 +13,15 @@ distributed nature of the network by running Bee nodes.
 It is easy to set up Bee on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations).
 
 ## Recommended Hardware Specifications
-Minimum recommended specifications for a single full node:
+Minimum recommended specifications for each full node:
 
 - Dual core 2ghz processor 
 - 8gb RAM
-- 50gb SSD
+- 30gb SSD
 
-HDD drives are strongly discouraged due to their low speeds.
+HDD drives are very strongly discouraged due to their low speeds.
 
-
+Note that there are additional [hardware requirements](https://docs.gnosischain.com/node/#environment-and-hardware) if you choose to run your own Gnosis Chain node in order to provide your Bee node(s) with the required RPC endpoint. See [configuration step](/docs/installation/install#set-blockchain-rpc-endpoint) for more details.
 
 ## Note on Startup Methods
 :::caution
@@ -50,7 +50,7 @@ In general `bee start` may not be the best option for most users - especially if
 1.  [Fund node](/docs/installation/install#4-fund-node) (Not required for ultra-light nodes) 
 1.  [Wait for Initialisation](/docs/installation/install#5-wait-for-initialisation)
 1.  [Check Bee Status](/docs/installation/install#6-check-if-bee-is-working)
-1.  [Backup Keys](/docs/installation/install#7-backup-keys)
+1.  [Back Up Keys](/docs/installation/install#7-back-up-keys)
 1.  [Deposit Stake](/docs/installation/install#8-deposit-stake-optional) (Full node only, optional)
 
 
@@ -186,21 +186,21 @@ sudo vi /etc/bee/bee.yaml
 
 See the [quick start guide](/docs/installation/quick-start) if you're not sure which type of node to run.
 
-To run Bee as a full node both `full-node` and `swap-enable` must be set to `true`, and a valid and stable Gnosis Chain RPC endpoint URL must be specified with `blockchain-rpc-endpoint`.
+To run Bee as a full node both `full-node` and `swap-enable` must be set to `true`, and a valid and stable Gnosis Chain RPC endpoint must be specified with `blockchain-rpc-endpoint`.
 
 ```yaml
 ## bee.yaml
 full-node: true
 ```
 
-To run Bee as a light node `full-node` must be set to `false` and `swap-enable` must both be set to `true`, and a valid and stable Gnosis Chain RPC endpoint URL must be specified with `blockchain-rpc-endpoint`.
+To run Bee as a light node `full-node` must be set to `false` and `swap-enable` must both be set to `true`, and a valid and stable Gnosis Chain RPC endpoint must be specified with `blockchain-rpc-endpoint`.
 
 ```yaml
 ## bee.yaml
 full-node: false
 ```
 
-To run Bee as an ultra-light node `full-node` and `swap-enable` must both be set to `false`.
+To run Bee as an ultra-light node `full-node` and `swap-enable` must both be set to `false`. No Gnosis Chain endpoint is required, and `blockchain-rpc-endpoint` can be left to its default value of an empty string.
 
 ```yaml
 ## bee.yaml
@@ -210,18 +210,21 @@ swap-enable: false
 
 ### Set blockchain RPC endpoint
 
-Full and light nodes require a Gnosis Chain RPC endpoint so they can interact with and deploy their chequebook contract, see the latest view of the current postage stamp batches, and interact with and top up postage stamp batches. A blockchain RPC endpoint is not required for nodes running in ultra-light mode.
+Full and light Bee nodes require a Gnosis Chain RPC endpoint so they can interact with and deploy their chequebook contract, see the latest view of the current postage stamp batches, and interact with and top-up postage stamp batches. A blockchain RPC endpoint is not required for nodes running in ultra-light mode. 
 
-We recommend you [run your own Gnosis Chain Node](https://docs.gnosischain.com/).
+We strongly recommend you [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) if you are planning to run a full node, and especially if you plan to run a [hive of nodes](/docs/installation/hive). 
 
-If you do not wish to sync your own nodes, and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
+If you do not wish to run your own Gnosis Chain node and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
 
-By default, Bee expects a local Gnosis Chain node at `ws://localhost:8545`. To use a Gnosis Chain RPC provider instead, change your configuration to use the API endpoint URL they provide, for example:
+For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/rpc/) listed in the Gnosis Chain documentation. However the providers of these endpoints make no [SLA](https://business.adobe.com/blog/basics/service-level-agreements-slas-a-complete-guide#what-is-a-service-level-agreement-sla) or availability guarantees, and is therefore not recommended for full node operators.
+
+To set your RPC endpoint provider, specify it in configuration for the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
 
 ```yaml
 ## bee.yaml
 blockchain-rpc-endpoint: https://gno.getblock.io/mainnet/?api_key=<<your-api-key>>
 ```
+
 ### Configure Swap Initial Deposit (Optional)
 
 When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
@@ -264,37 +267,20 @@ resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 
 ## 3. Find Bee address
 
-As part of the process of starting a Bee full node or light node the node must issue a Gnosis Chain transaction to set up its chequebook contract. Therefore before starting the node's address must be found so that the node can be funded.
+As part of the process of starting a Bee full node or light node the node must issue a Gnosis Chain transaction which is paid for using xDAI. We therefore need to find our node's Gnosis Chain address. We can find it by reading it directly from our key file:  
 
-1. Find your node address
+```bash
+sudo cat /var/lib/bee/keys/swarm.key
+``` 
+*Output from cat /var/lib/bee/keys/swarm.key*:
 
-  There are two methods for finding your node address:
-
-    1. Option One: Review log messages:
-      ```bash
-      sudo journalctl --lines=100 --follow --unit bee
-      ```
-      The output should look like this:
-      ![Get address](/img/get-address.png)
-
-      Look for the line which look like this, and copy the value from the `"address"` field:
-      ```
-         "time"="2023-03-23 21:10:50.761652" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x215693a6E6Cf0a27441075FD98c31d48E3a3a100
-      ```
-      The address shown there is the Gnosis Chain address for your node. Copy and save it for the next step.
-    1. Option Two: Read the address directly from key file and save:
-      ```bash
-      sudo cat /var/lib/bee/keys/swarm.key
-      ``` 
-      *Output from cat /var/lib/bee/keys/swarm.key*:
-
-      ```bash    
-      {"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
-      ```
-      The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix.
-      :::danger
-        Do not share the contents of your `swarm.key` or any other keys with anyone, this example is for a throwaway account.
-      :::
+```bash    
+{"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
+```
+The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix.
+:::danger
+  Do not share the contents of your `swarm.key` or any other keys with anyone, this example is for a throwaway account.
+:::
       
 ## 4. Fund Node
 
@@ -302,15 +288,15 @@ As part of the process of starting a Bee full node or light node the node must i
   We recommend not holding a high value of xBZZ or xDAI in your nodes' wallet. Please consider regularly removing accumulated funds. 
 :::
 
-For full nodes and light nodes, Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. A small amount of xDAI must be deposited to the node's Gnosis Chain address in order to pay the transaction fees for the initial transaction. 1 xDAI is more than enough to get started.
+Before funding your node, you first need to get some xDAI. You can send it either from your own Gnosis Chain compatible wallet such as Metamask, or from a centralized exchange which supports xDAI withdrawals to Gnosis Chain. If you already have some DAI on Ethereum, you can use the [xDAI bridge](https://docs.gnosischain.com/bridges/tokenbridge/xdai-bridge/) to mint xDAI on Gnosis Chain. 
 
-For nodes which stake xBZZ and participate in the storage incentives system, very small amounts of xDAI will be used regularly to pay for staking related transactions on Gnosis Chain, so xDAI may need to be periodically topped up. See the [staking section](/docs/working-with-bee/staking#check-redistribution-status) for more information.
+Once you have some xDAI ready, you're ready to fund your Bee node. Send at least 1 xDAI to the address you found in the previous step to fund your node. You can optionally also send some xBZZ to your node which you can use to pay for storage on Swarm.
 
 While depositing xBZZ is optional, node operators who intend to download or upload large amounts of data on Swarm may wish to deposit some xBZZ in order to pay for SWAP settlements. See the section on [node funding](/docs/installation/fund-your-node) for more information.
 
+For nodes which stake xBZZ and participate in the storage incentives system, very small amounts of xDAI will be used regularly to pay for staking related transactions on Gnosis Chain, so xDAI may need to be periodically topped up. See the [staking section](/docs/working-with-bee/staking#check-redistribution-status) for more information.
 
-After sending xDAI and optionally xBZZ to the Gnosis Chain address collected in the previous step, [restart the 
-node](#edit-config-file):
+After sending xDAI and optionally xBZZ to the Gnosis Chain address collected in the previous step, [restart the node](#edit-config-file):
 
 <Tabs
 defaultValue="linux"
@@ -372,11 +358,6 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 </TabItem>
 </Tabs>
 
-:::info
-While you are waiting for Bee to initalise, this is a great time to [back up your keys and password](/docs/working-with-bee/backups) so you can them safe.
-:::
-
-
 If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world.
 
 ```
@@ -390,10 +371,10 @@ respond to requests for these chunks from other peers.
 In Swarm, storing, serving and forwarding chunks of data to other nodes can earn you rewards! Follow [this guide](/docs/working-with-bee/cashing-out) to learn how to regularly cash out cheques other nodes send you in return for your services so that you can get your xBZZ!
 :::
 
-Your Bee client has now generated an elliptic curve keypair similar to an Ethereum wallet. These are stored in your [data directory](/docs/working-with-bee/configuration), in the `keys` folder.
+Your Bee client has now generated an elliptic curve key pair similar to an Ethereum wallet. These are stored in your [data directory](/docs/working-with-bee/configuration), in the `keys` folder.
 
 :::danger Keep Your Keys and Password Safe!
-Your keys and password are very important, backup these files and
+Your keys and password are very important, back up these files and
 store them in a secure place that only you have access to. With great
 privacy comes great responsibility - while no-one will ever be able to
 guess your key - you will not be able to recover them if you lose them
@@ -413,7 +394,7 @@ bee version
 1.13.0
 ```
 
-Once Bee has been funded, the chequebook deployed, and postage stamp
+Once the Bee node has been funded, the chequebook deployed, and postage stamp
 batch store synced, its HTTP [API](/docs/api-reference/)
 will start listening at `localhost:1633`.
 
@@ -433,7 +414,7 @@ Next, let's see if we have connected with any peers by querying our
 [Debug API](/docs/working-with-bee/debug-api). Note that the debug api listens at port 1635 by default (`localhost:1635`).
 
 :::info
-Here we are using the `jq` utility to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
+Here we are using the `jq` [utility](https://stedolan.github.io/jq/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
 :::
 
 ```bash
@@ -453,7 +434,7 @@ on the Swarm network.
 
 Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
 
-## 7. Backup Keys
+## 7. Back Up Keys
 
 Once your node is up and running, make sure to [back up your keys](/docs/working-with-bee/backups). 
 

@@ -88,7 +88,7 @@ The `keys` directory contains three key files: `libp2p_v2.key`, `pss.key`, and `
 The `swarm.key` file allows access to Bee node's Gnosis account. If the key is lost or stolen it could lead to the loss of all assets secured by that key. Multiple backups should be kept in secure locations to prevent loss of assets or unauthorized access.
 :::
 
-If using **bee-clef**, see below for information on how to backup the node.
+If using **bee-clef**, see below for information on how to back up the node.
 
 :::info
 To use `swarm.key` to manage the Gnosis account for a node through Metamask or other wallets,[exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) can be used to
