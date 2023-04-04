@@ -21,8 +21,10 @@ module.exports = {
   organizationName: 'Swarm', // Usually your GitHub org/user name.
   projectName: 'bee', // Usually your repo name.
   themeConfig: {
-    colourMode: {
-      defaultMode: 'dark'
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: '',

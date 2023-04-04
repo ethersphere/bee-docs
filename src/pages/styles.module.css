@@ -37,54 +37,59 @@
   width: 200px;
 }
 
-.panel {
-  border-radius: 50px;
+.sectionButton {
+  border-radius: 30px;
   padding: 20px 20px 10px 20px;
   width: 300px;
   text-align: center;
-  color: rgb(235, 237, 240)
+  color: rgb(235, 237, 240);
+  border: solid 2px rgba(0,0,0,0);
 }
 
-[data-theme='light'] .panel {
+
+[data-theme='light'] .sectionButton {
   color: rgb(28, 30, 33);
-  border-color: rgb(28, 30, 33);
+  border-color: rgb(28, 30, 33);  
+  border: solid 2px rgba(0,0,0,0);
+
 }
 
-.panel:hover {
-  transform: translateY(-10px);
+[data-theme='dark'] .sectionButton:hover {
+  color: rgb(235, 237, 240);
+}
+
+.sectionButton:hover {
   -webkit-transition: transform 0.5s linear;
   -moz-transition: transform 0.5s linear;
   -ms-transition: transform 0.5s linear;
   -o-transition: transform 0.5s linear;
   transition: transform 0.5s linear;
-}
-
- 
-.panel:hover {
-  box-shadow: 0px 12px 50px 10px rgba(255,255,255,0.75);
-  -webkit-box-shadow: 0px 12px 50px 10px rgba(255,255,255,0.5);
-  -moz-box-shadow: 0px 12px 50px 10px rgba(255,255,255,0.5);
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -ms-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
-}
+  box-sizing: border-box;
+  box-shadow: rgba(221, 114, 0, 0.7) 0px 0px 0px 3px
 
-[data-theme='light'] .panel:hover {
-  box-shadow: 0px 12px 50px 15px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0px 12px 50px 15px rgba(0,0,0,0.5);
-  -moz-box-shadow: 0px 12px 50px 15px rgba(0,0,0,0.5);
-  -webkit-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -ms-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
+}
+  
+
+[data-theme='light'] .sectionButton:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 
+
+.ctaButton {
+  border: solid 2px rgba(0,0,0,0.75);
+  border-radius: 5px;
+  display: inline-block;
+  padding: 2px 6px;
+} 
 .description {
   font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .container {  
@@ -95,7 +100,8 @@
   gap: 0px 3rem;
   grid-auto-flow: row;
   margin: auto;
-  padding: 5rem 0 7rem 0;
+  padding: 5rem 2rem 7rem 2rem; 
+  overflow: hidden;
 }
 
 a.panel {
@@ -110,11 +116,25 @@ a.panel {
     gap: 20px 0px;
     grid-auto-flow: row;
   }
+  .sectionButton {
+    box-shadow: rgba(221, 114, 0, 0.7) 0px 0px 0px 3px;
+    margin-bottom: 40px;
+  }
+  [data-theme='light'] .sectionButton {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
 }
 
+.sectionImageLearn {
+  height: 90px;
+}
 
+.sectionImageOperate {
+  height: 90px;
+  margin-bottom: 5px;
+}
 
 .buttonTitle {
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-family: "IBMPlexMono500";
 }
