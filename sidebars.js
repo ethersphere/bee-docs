@@ -1,70 +1,6 @@
 module.exports = {
   docs: [
-    {
-      type: 'category',
-      label: 'Installation',
-      items: [
-        'installation/quick-start',
-        'installation/install',
-        'installation/manual',
-        'installation/build-from-source',
-        'installation/hive',
-        'installation/docker',
-        'installation/bee-clef',
-        'installation/connectivity',
-        'installation/fund-your-node'
-      ],
-      collapsed: true
-    },
-    {
-      type: 'category',
-      label: 'Working With Bee',
-      items: [
-        'working-with-bee/introduction',
-        'working-with-bee/configuration',
-        'working-with-bee/debug-api',
-        'working-with-bee/logs-and-files',
-        'working-with-bee/bee-tools',
-        'working-with-bee/security',
-        'working-with-bee/staking',
-        'working-with-bee/cashing-out',
-        'working-with-bee/monitoring',
-        'working-with-bee/backups',
-        'working-with-bee/upgrading-bee',
-        'working-with-bee/uninstalling-bee'
-      ],
-      collapsed: true
-    },
-    {
-      type: 'category',
-      label: 'Access the Swarm',
-      items: [
-        'access-the-swarm/introduction',
-        'access-the-swarm/upload-and-download',
-        'access-the-swarm/upload-a-directory',
-        'access-the-swarm/direct-upload',
-        'access-the-swarm/store-with-encryption',
-        'access-the-swarm/host-your-website',
-        'access-the-swarm/syncing',
-        'access-the-swarm/keep-your-data-alive',
-        'access-the-swarm/pinning',
-        'access-the-swarm/light-nodes',
-        'access-the-swarm/ultra-light-nodes'
-      ],
-      collapsed: true
-    },
-    {
-      type: 'category',
-      label: 'Dapps on Swarm',
-      items: [
-        'dapps-on-swarm/introduction',
-        'dapps-on-swarm/develop-on-bee',
-        'dapps-on-swarm/bee-js',
-        'dapps-on-swarm/chunk-types',
-        'dapps-on-swarm/feeds',
-        'dapps-on-swarm/pss'
-      ],
-    },
+   
     {
       type: 'category',
       label: 'API Reference',
@@ -72,15 +8,6 @@ module.exports = {
         'api-reference/api-reference'
       ],
     },
-    {
-      type: 'category',
-      label: 'Bee Developers',
-      items: [
-        'bee-developers/useful-dev-info',
-        'bee-developers/bee-dev-mode'
-      ],
-    },
-    
     {
       type: 'category',
       label: 'Join Us',
@@ -92,22 +19,9 @@ module.exports = {
     }
   ],
   learn: [
-    {
-      type: 'category',
-      label: 'The Basics',
-      items: [
-        'learn/introduction',
-        'learn/terminology'
-      ],
-      collapsed: false
-    },
-    {
-      type: 'category',
-      label: 'FAQ',
-      items: [
-        'learn/faq'
-      ],
-    },
+    'learn/introduction',
+    'learn/terminology',
+    'learn/faq' 
   ],
   operate: [
     {
@@ -123,6 +37,35 @@ module.exports = {
       label: 'Installation',
       items: [
         'operate/installation/quick-start',
+        'operate/installation/install',
+        'operate/installation/manual',
+        'operate/installation/build-from-source',
+        'operate/installation/hive',
+        'operate/installation/docker',
+        'operate/installation/bee-clef',
+        'operate/installation/connectivity',
+        'operate/installation/fund-your-node',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Working With Bee',
+      items: [
+        'operate/working-with-bee/introduction',
+        'operate/working-with-bee/configuration',
+        'operate/working-with-bee/debug-api',
+        'operate/working-with-bee/logs-and-files',
+        'operate/working-with-bee/bee-tools',
+        'operate/working-with-bee/security',
+        'operate/working-with-bee/staking',
+        'operate/working-with-bee/cashing-out',
+        'operate/working-with-bee/monitoring',
+        'operate/working-with-bee/backups',
+        'operate/working-with-bee/upgrading-bee',
+        'operate/working-with-bee/uninstalling-bee',
+        'operate/working-with-bee/light-nodes',
+        'operate/working-with-bee/ultra-light-nodes'
       ],
       collapsed: false
     },
@@ -135,6 +78,42 @@ module.exports = {
         'develop/introduction',
       ],
       collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Access the Swarm',
+      items: [
+        'develop/access-the-swarm/introduction',
+        'develop/access-the-swarm/upload-and-download',
+        'develop/access-the-swarm/upload-a-directory',
+        'develop/access-the-swarm/direct-upload',
+        'develop/access-the-swarm/store-with-encryption',
+        'develop/access-the-swarm/host-your-website',
+        'develop/access-the-swarm/syncing',
+        'develop/access-the-swarm/keep-your-data-alive',
+        'develop/access-the-swarm/pinning',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Dapps on Swarm',
+      items: [
+        'develop/dapps-on-swarm/introduction',
+        'develop/dapps-on-swarm/develop-on-bee',
+        'develop/dapps-on-swarm/bee-js',
+        'develop/dapps-on-swarm/chunk-types',
+        'develop/dapps-on-swarm/feeds',
+        'develop/dapps-on-swarm/pss'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Bee Developers',
+      items: [
+        'develop/bee-developers/useful-dev-info',
+        'develop/bee-developers/bee-dev-mode'
+      ],
     },
 
   ]

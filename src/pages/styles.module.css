@@ -137,4 +137,5 @@ a.panel {
 .buttonTitle {
   font-size: 1.5rem;
   font-family: "IBMPlexMono500";
+  margin-top: 16px;
 }

@@ -21,7 +21,7 @@ The Debug API is disabled by default but can be enabled by setting the `debug-ap
 For a new installation of Bee, the Debug API endpoint is not yet
 exposed for security reasons. To enable the Debug API endpoints, set
 `--debug-api-enable` to `true` in your [configuration
-file](/docs/working-with-bee/configuration) and restart your Bee.
+file](/docs/operate/working-with-bee/configuration) and restart your Bee.
 :::
 
 ### <a href="/debug-api" target="_blank" rel="noopener noreferrer">Debug API reference.</a>

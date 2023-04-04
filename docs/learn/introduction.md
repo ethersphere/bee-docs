@@ -27,15 +27,15 @@ Find more information on the bonding curve, including its [source code](https://
 
 ## Installation
 
-Don't have Bee installed yet? It's easy! Head over to the [installation](/docs/installation/quick-start) section to get Bee up and running.
+Don't have Bee installed yet? It's easy! Head over to the [installation](/docs/operate/installation/quick-start) section to get Bee up and running.
 
 ## Working With Bee
 
-Once Bee is installed, find out how to configure the software, interact with the API, monitor what Bee is up to, and make those all important backups in the [working with Bee](/docs/working-with-bee/introduction) section.
+Once Bee is installed, find out how to configure the software, interact with the API, monitor what Bee is up to, and make those all important backups in the [working with Bee](/docs/operate/working-with-bee/introduction) section.
 
 ## Access the Swarm
 
-To learn more about how to get the most out of Bee, find out how to [access the swarm](/docs/access-the-swarm/upload-and-download) section so you can share files with your friends, use Bee to host a website on a public Swarm Gateway, and much more!
+To learn more about how to get the most out of Bee, find out how to [access the swarm](/docs/develop/access-the-swarm/upload-and-download) section so you can share files with your friends, use Bee to host a website on a public Swarm Gateway, and much more!
 
 ## API Reference
 
@@ -50,13 +50,13 @@ and accessibility, Bee provides high level constructs for file
 storage, feeds and key-value stores, while also providing the low
 level access with libraries that create Single Owner and Trojan chunks
 clientside, with total e2e privacy. Learn more about how to [develop
-on Swarm](/docs/dapps-on-swarm/introduction).
+on Swarm](/docs/develop/dapps-on-swarm/introduction).
 
 ## Incentives
 
 Need even more incentive to get involved with the wonderful world of
 Swarm? Find out how you can [earn xBZZ
-tokens](/docs/working-with-bee/cashing-out) for storing and
+tokens](/docs/operate/working-with-bee/cashing-out) for storing and
 distributing your share of the world's data - sharing is caring!
 
 ## Find Out More

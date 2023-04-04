@@ -41,19 +41,19 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/operate/introduction',
+          to: 'docs/operate/installation/quick-start',
           activeBasePath: 'docs/operate',
           label: 'Operate',
           position: 'left',
         },
         {
-          to: 'docs/develop/introduction',
+          to: 'docs/develop/access-the-swarm/introduction',
           activeBasePath: 'docs/develop',
           label: 'Develop',
           position: 'left',
         },
         // {
-        //   to: 'docs/installation/quick-start',
+        //   to: 'docs/operate/installation/quick-start',
         //   activeBasePath: 'docs',
         //   label: 'Installation',
         //   position: 'left',
