@@ -1,6 +1,6 @@
 ---
-id: terminology
 title: Terminology
+id: terminology
 ---
 
 

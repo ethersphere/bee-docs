@@ -3,13 +3,21 @@ title: Welcome!
 id: introduction
 ---
 
-Hello and welcome to Swarm! 🐝
+Welcome to the Swarm documentation!
 
-As soon as the Bee client is up and running it will begin to connect with peers all over the world to become part of Swarm, a global p2p network tasked with storing and distributing all of the world's data.
+### What is Swarm?
 
-Swarm is a decentralised data storage and distribution technology, ready to power the next generation of censorship resistant, unstoppable serverless apps.
+Swarm is peer-to-peer network of Bee nodes that collectively provide censorship resistant decentralised storage and communication services. Swarm's mission is to shape the future towards a self-sovereign global society and permissionless open markets by providing scalable base-layer data storage infrastructure for the decentralised internet. Its incentive system is enforced through smart contracts on the Gnosis Chain blockchain and powered by the xBZZ token, making it economically self-sustaining.
 
-Swarm is economically self-sustaining due to a built-in incentive system enforced through smart contracts on the Ethereum blockchain. Swarm aspires to shape the future towards a self-sovereign global society and permissionless open markets. Applications can run autonomously yet securely in a planetary-scale deployment and execution environment.
+### Documentation Structure
+
+Whether you're a developer looking to build full-service applications on the decentralized web, a node operator interested in participating in maintaining the Swarm network, or just someone interested in learning more about these exciting technologies, this guide has got you covered. The documentation is divided into three main sections, "Learn," "Operate," and "Develop".
+
+In the "Learn" section of the documentation you will find general high-level information about the Swarm network and ecosystem, including an introduction to the Swarm network, the background and development of the project, and a broad overview of tools and resources available to developers and node operators. 
+
+The "Operate" section is aimed at Bee node operators. It provides instructions for installing and maintaining Bee nodes, including accessing the Bee API, participating in the storage incentives system, and details about different node types and configuration options.
+
+The "Develop" section is aimed at developers who want to build dApps using the Swarm network as a decentralized storage layer. It includes guides on how to upload and retrieve data from the Swarm network, how to purchase Postage Stamps and use them to rent storage, how to set up a test network for development purposes, and an overview of additional tools and resources for developers.  
 
 # Swarm
 

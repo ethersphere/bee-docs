@@ -20,18 +20,15 @@ module.exports = {
   ],
   learn: [
     'learn/introduction',
+    'learn/what-is-swarm',
+    'learn/book-of-swarm',
+    'learn/technology',
+    'learn/roadmap',
+    'learn/ecosystem',
     'learn/terminology',
-    'learn/faq' 
+    'learn/faq', 
   ],
   operate: [
-    {
-      type: 'category',
-      label: 'Operate',
-      items: [
-        'operate/introduction',
-      ],
-      collapsed: false
-    },
     {
       type: 'category',
       label: 'Installation',
