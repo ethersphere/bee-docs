@@ -20,11 +20,47 @@ module.exports = {
   ],
   learn: [
     'learn/introduction',
-    'learn/what-is-swarm',
-    'learn/book-of-swarm',
-    'learn/technology',
-    'learn/roadmap',
-    'learn/ecosystem',
+    {
+      type: 'category',
+      label: 'Technology',
+      items: [
+        'learn/technology/what-is-swarm',
+        'learn/technology/contracts/chequebook',
+        'learn/technology/kademlia',
+        'learn/technology/disc',
+        'learn/technology/price-oracle',
+        'learn/technology/postage-stamps',
+        'learn/technology/storage-incentives',
+        'learn/technology/swap',
+        'learn/technology/pss',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Swarm Desktop',
+      items: [
+        'learn/swarm-desktop/introduction',
+        'learn/swarm-desktop/install',
+        'learn/swarm-desktop/access-content',
+        'learn/swarm-desktop/upload-content',
+        'learn/swarm-desktop/backup',
+        'learn/swarm-desktop/postage-stamps',
+        'learn/swarm-desktop/publish-a-website',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Ecosystem',
+      items: [
+        'learn/ecosystem/community',
+        'learn/ecosystem/fair-data-society',
+        'learn/ecosystem/resources',
+        'learn/ecosystem/roadmap',
+      ],
+      collapsed: false
+    },
     'learn/terminology',
     'learn/faq', 
   ],
