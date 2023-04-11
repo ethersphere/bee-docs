@@ -18,7 +18,7 @@ Whether you're a developer looking to build full-service applications on the dec
 In the "Learn" section of the documentation you will find general high-level information about the Swarm network and ecosystem, including an introduction to the Swarm network, the background and development of the project, and a broad overview of tools and resources available to developers and node operators. 
 
 #### Learn Contents
-* **Swarm Desktop** - If you're looking for a quick and easy way to start interacting with the Swarm network, start with the [Swarm Desktop](/docs/learn/swarm-desktop/introduction.md) section. 
+* **Swarm Desktop** - If you're looking for a quick and easy way to start interacting with the Swarm network, start with the [Swarm Desktop](/docs/desktop/introduction.md) section. 
 
 The "Bee" section is aimed at Bee node operators. It provides instructions for installing and maintaining Bee nodes, including accessing the Bee API, participating in the storage incentives system, and details about different node types and configuration options. If you're looking to operate a Bee node, you can start from [here](/docs/bee/installation/quick-start.md).
 
