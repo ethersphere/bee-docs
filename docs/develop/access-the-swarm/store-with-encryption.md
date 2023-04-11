@@ -32,7 +32,7 @@ The second part of the reference is a 64 character decryption key which is requi
 It is important that this data not be sent in requests to a public gateway as this would mean that gateway would be able to decrypt your data. However, if you are running a node on your local machine, you may safely use the API bound to `localhost`. The key material is never exposed to the network so your data remains safe.
 
 :::info
-Encryption is disabled by default on all Swarm Gateways to keep your data safe. [Install Bee on your computer](/docs/operate/installation/quick-start) to use the encryption feature.
+Encryption is disabled by default on all Swarm Gateways to keep your data safe. [Install Bee on your computer](/docs/bee/installation/quick-start) to use the encryption feature.
 :::
 
 # Download and Decrypt a File
@@ -44,5 +44,5 @@ curl -OJ http://localhost:1633/files/f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c
 ```
 
 :::danger
-Never use public gateways when requesting full encrypted references. The hash contains sensitive key information which should be kept private. Run [your own node](/docs/operate/installation/quick-start) to use Bee's encryption features.
+Never use public gateways when requesting full encrypted references. The hash contains sensitive key information which should be kept private. Run [your own node](/docs/bee/installation/quick-start) to use Bee's encryption features.
 :::

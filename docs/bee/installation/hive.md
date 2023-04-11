@@ -4,7 +4,7 @@ id: hive
 ---
 
 :::tip
-We recommend even our most 1337 readers go through a [single installation](/docs/operate/installation/install) first to get a taste of Bee, and to understand the nuances of the implementations. 👾
+We recommend even our most 1337 readers go through a [single installation](/docs/bee/installation/install) first to get a taste of Bee, and to understand the nuances of the implementations. 👾
 :::
 
 Because of how the swarm is structured, we recommend that users
@@ -18,7 +18,7 @@ Swarm provides tooling to help you install many Bees at once.
 
 ### Docker
 
-Up to date [Docker images for Bee and Bee Clef](/docs/operate/installation/docker) are provided.
+Up to date [Docker images for Bee and Bee Clef](/docs/bee/installation/docker) are provided.
 
 ### Docker-Compose
 

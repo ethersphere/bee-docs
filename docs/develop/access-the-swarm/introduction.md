@@ -37,8 +37,8 @@ Learn how to [pin your data](/docs/develop/access-the-swarm/pinning) so it remai
 
 ### Light Nodes
 
-When accessing the Swarm network for certain use cases a Bee might not want to take part in forwarding and storing data. Find out how to use Bee in [Light Node](/docs/operate/working-with-bee/light-nodes) mode.
+When accessing the Swarm network for certain use cases a Bee might not want to take part in forwarding and storing data. Find out how to use Bee in [Light Node](/docs/bee/working-with-bee/light-nodes) mode.
 
 ### Ultra Light Nodes
 
-For the cases when we want to get started quickly we can run the Bee instance without a blockchain. Find out how to use Bee in [Ultra Light Node](/docs/operate/working-with-bee/ultra-light-nodes) mode.
+For the cases when we want to get started quickly we can run the Bee instance without a blockchain. Find out how to use Bee in [Ultra Light Node](/docs/bee/working-with-bee/ultra-light-nodes) mode.

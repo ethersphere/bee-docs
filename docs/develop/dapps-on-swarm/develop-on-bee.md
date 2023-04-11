@@ -31,7 +31,7 @@ you come up with in the
 ## Bee Proxy Mode
 
 With Bee running as a proxy in
-[Light Node](/docs/operate/working-with-bee/light-nodes) mode on your end-user's
+[Light Node](/docs/bee/working-with-bee/light-nodes) mode on your end-user's
 computers, your applications can have privileged access to all sorts
 of useful tools and ways to interact with the swarm. Check out the
 [API](/docs/api-reference/) and

@@ -20,7 +20,7 @@ Find more information on the bonding curve, including its [source code](https://
 
 ## Working With Bee
 
-Once Bee is installed, find out how to configure the software, interact with the API, monitor what Bee is up to, and make those all important backups in the [working with Bee](/docs/operate/working-with-bee/introduction) section.
+Once Bee is installed, find out how to configure the software, interact with the API, monitor what Bee is up to, and make those all important backups in the [working with Bee](/docs/bee/working-with-bee/introduction) section.
 
 ## Access the Swarm
 

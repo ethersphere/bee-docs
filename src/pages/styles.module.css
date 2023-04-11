@@ -39,8 +39,8 @@
 
 .sectionButton {
   border-radius: 30px;
-  padding: 20px 20px 10px 20px;
-  width: 300px;
+  padding: 10px;
+  width: 270px;
   text-align: center;
   color: rgb(235, 237, 240);
   border: solid 2px rgba(0,0,0,0);
@@ -88,19 +88,19 @@
   padding: 2px 6px;
 } 
 .description {
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.5rem;
 }
 
 .container {  
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   grid-auto-columns: 1fr;
-  gap: 0px 3rem;
+  gap: 0px 1.6rem;
   grid-auto-flow: row;
   margin: auto;
-  padding: 5rem 2rem 7rem 2rem; 
+  padding: 5rem 2rem; 
   overflow: hidden;
 }
 

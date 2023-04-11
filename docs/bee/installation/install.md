@@ -18,7 +18,7 @@ Steps for running a Bee node:
 
 1.  Install Bee and set it up to run as a service.
 2.  Configure Bee.
-3.  [Fund your node](/docs/operate/installation/fund-your-node) with xDAI and xBZZ for the mainnet and gETH and gBZZ for our testnet.
+3.  [Fund your node](/docs/bee/installation/fund-your-node) with xDAI and xBZZ for the mainnet and gETH and gBZZ for our testnet.
 4.  Wait for your chequebook transactions to complete and batch store to update.
 5.  Back up your keys.
 6.  Check if Bee is working.
@@ -110,9 +110,9 @@ brew services start swarm-bee
 </TabItem>
 </Tabs>
 
-If your system is not supported, please see the [manual installation](/docs/operate/installation/manual) section for information on how to install Bee.
+If your system is not supported, please see the [manual installation](/docs/bee/installation/manual) section for information on how to install Bee.
 
-If you would like to run a hive of many Bees, check out the [node hive operators](/docs/operate/installation/hive) section for information on how to operate and monitor many Bees at once.
+If you would like to run a hive of many Bees, check out the [node hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
 
 ## 2. Configure Bee
 
@@ -122,7 +122,7 @@ starting Bee for the first time you will need to configure it to suit your needs
 
 ### Edit Config File
 
-To alter Bee's configuration, edit the configuration file (default `/etc/bee/bee.yaml`), and then restart your Bee service. Configuration settings may also be set by modifying environment variables or with command line flags. See the [configuration](/docs/operate/working-with-bee/configuration#environment-variables) page for more details.
+To alter Bee's configuration, edit the configuration file (default `/etc/bee/bee.yaml`), and then restart your Bee service. Configuration settings may also be set by modifying environment variables or with command line flags. See the [configuration](/docs/bee/working-with-bee/configuration#environment-variables) page for more details.
 
 <Tabs
 defaultValue="debian"
@@ -181,7 +181,7 @@ Bees (also known as _peers_) to connect to your Bee, you must
 broadcast your public IP address in order to ensure that Bee is reachable on
 the correct p2p port (default `1634`). We recommend that you [manually
 configure your external IP and check
-connectivity](/docs/operate/installation/connectivity) to ensure your Bee is
+connectivity](/docs/bee/installation/connectivity) to ensure your Bee is
 able to receive connections from other peers.
 
 First determine your public IP address:
@@ -238,7 +238,7 @@ resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 
 ## Fund Your Bee
 
-Your Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. To do that you must deposit xDAI and optionally [xBZZ](/docs/operate/installation/fund-your-node).
+Your Bee must deploy a chequebook contract to keep track of its exchanges with other Bees in the Swarm. To do that you must deposit xDAI and optionally [xBZZ](/docs/bee/installation/fund-your-node).
 
 First, find out your Bee's Ethereum address:
 
@@ -279,7 +279,7 @@ head -18 $(brew --prefix)/var/log/swarm-bee/bee.log | grep ethereum
 </Tabs>
 
 Once you have determined your Bee's Ethereum address, [fund your
-node](/docs/operate/installation/fund-your-node) with xDAI and xBZZ
+node](/docs/bee/installation/fund-your-node) with xDAI and xBZZ
 
 If too much time has elapsed, you may need to [restart your
 node](#edit-config-file) at this point.
@@ -368,7 +368,7 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 </Tabs>
 
 :::info
-While you are waiting for Bee to initalise, this is a great time to [back up your keys](/docs/operate/working-with-bee/backups) so you can them safe.
+While you are waiting for Bee to initalise, this is a great time to [back up your keys](/docs/bee/working-with-bee/backups) so you can them safe.
 :::
 
 
@@ -391,7 +391,7 @@ Ethereum Swarm Bee
 Great! Our API is listening!
 
 Next, let's see if we have connected with any peers by querying our
-[Debug API](/docs/operate/working-with-bee/debug-api).
+[Debug API](/docs/bee/working-with-bee/debug-api).
 
 :::info
 Here we are using the `jq` utility to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
@@ -416,7 +416,7 @@ Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
 
 ## Deposit Stake for Your Node
 
-In order to start receiving rewards, you will need to [deposit xBZZ to the staking contract](/docs/operate/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
+In order to start receiving rewards, you will need to [deposit xBZZ to the staking contract](/docs/bee/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
 ```bash
 curl -XPOST localhost:1635/stake/100000000000000000

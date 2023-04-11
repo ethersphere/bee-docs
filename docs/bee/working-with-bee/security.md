@@ -14,7 +14,7 @@ Only a subset of endpoints running on `:1633` can be restricted. This is subject
 Now that you decided to restrict the access to the APIs you should follow the next steps:
 
 * Pick a password that is strong enough.
-* Use a bcrypt utility to hash it (you can use `bee bcrypt` command for this purpose [bcrypt utility](/docs/operate/working-with-bee/bcrypt)
+* Use a bcrypt utility to hash it (you can use `bee bcrypt` command for this purpose [bcrypt utility](/docs/bee/working-with-bee/bcrypt)
 * Pass the hash to the bee instance using the `--admin-password` command line option (or as a configuration parameter)
 * Pick a random string to be used for the `--token-encryption-key` (the same security token can be used against many instances sharing the same encryption key)
 

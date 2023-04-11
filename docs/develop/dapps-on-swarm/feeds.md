@@ -13,7 +13,7 @@ other Bees, and then update it at will.
 Although it's possible to interact with feeds directly, it can involve
 a little data juggling and crypto magic. For the easiest route, see
 [the bee-js feeds functionality](/docs/develop/dapps-on-swarm/bee-js) and
-[swarm-cli](/docs/operate/working-with-bee/bee-tools), or for the super 1337,
+[swarm-cli](/docs/bee/working-with-bee/bee-tools), or for the super 1337,
 share your implementations in other languages in the
 [#develop-on-swarm](https://discord.gg/C6dgqpxZkU) channel of our
 [Discord Server](https://discord.gg/wdghaQsGq5).
@@ -30,7 +30,7 @@ Ethereum keypair. For the intrepid, check out the <a
 href="/the-book-of-swarm.pdf" target="_blank" rel="noopener
 noreferrer">The Book of Swarm</a> on precise details on how to do
 this. For the rest of us, both [bee-js](/docs/develop/dapps-on-swarm/bee-js)
-and [swarm-cli](/docs/operate/working-with-bee/bee-tools) provide facilities
+and [swarm-cli](/docs/bee/working-with-bee/bee-tools) provide facilities
 to achieve this using JavaScript and a node-js powered command line
 tool respectively.
 
@@ -48,4 +48,4 @@ Use [bee-js](/docs/develop/dapps-on-swarm/bee-js) to use feeds to store values a
 
 #### Store the History of a File
 
-Use [swarm-cli](/docs/operate/working-with-bee/bee-tools) to store a file at the same location, and update whenever you like without changing the address.
+Use [swarm-cli](/docs/bee/working-with-bee/bee-tools) to store a file at the same location, and update whenever you like without changing the address.

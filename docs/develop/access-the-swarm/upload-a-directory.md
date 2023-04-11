@@ -82,4 +82,4 @@ Once your data has been [fully processed into the network](/docs/develop/access-
 
 [https://gateway.ethswarm.org/bzz/b25c89a...214917b/index.html](https://gateway.ethswarm.org/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/)
 
-If you are not able to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/operate/installation/connectivity) for assistance.
+If you are not able to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/bee/installation/connectivity) for assistance.

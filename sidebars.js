@@ -1,6 +1,5 @@
 module.exports = {
   docs: [
-   
     {
       type: 'category',
       label: 'API Reference',
@@ -38,25 +37,13 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Swarm Desktop',
-      items: [
-        'learn/swarm-desktop/introduction',
-        'learn/swarm-desktop/install',
-        'learn/swarm-desktop/access-content',
-        'learn/swarm-desktop/upload-content',
-        'learn/swarm-desktop/backup',
-        'learn/swarm-desktop/postage-stamps',
-        'learn/swarm-desktop/publish-a-website',
-      ],
-      collapsed: false
-    },
-    {
-      type: 'category',
       label: 'Ecosystem',
       items: [
         'learn/ecosystem/community',
         'learn/ecosystem/fair-data-society',
         'learn/ecosystem/resources',
+        'learn/ecosystem/grants-bounties',
+        'learn/ecosystem/showcase',
         'learn/ecosystem/roadmap',
       ],
       collapsed: false
@@ -64,20 +51,36 @@ module.exports = {
     'learn/terminology',
     'learn/faq', 
   ],
-  operate: [
+  desktop: [
+    {
+      type: 'category',
+      label: 'Swarm Desktop',
+      items: [
+        'desktop/introduction',
+        'desktop/install',
+        'desktop/access-content',
+        'desktop/upload-content',
+        'desktop/backup',
+        'desktop/postage-stamps',
+        'desktop/publish-a-website',
+      ],
+      collapsed: false
+    },
+  ],
+  bee: [
     {
       type: 'category',
       label: 'Installation',
       items: [
-        'operate/installation/quick-start',
-        'operate/installation/install',
-        'operate/installation/manual',
-        'operate/installation/build-from-source',
-        'operate/installation/hive',
-        'operate/installation/docker',
-        'operate/installation/bee-clef',
-        'operate/installation/connectivity',
-        'operate/installation/fund-your-node',
+        'bee/installation/quick-start',
+        'bee/installation/install',
+        'bee/installation/manual',
+        'bee/installation/build-from-source',
+        'bee/installation/hive',
+        'bee/installation/docker',
+        'bee/installation/bee-clef',
+        'bee/installation/connectivity',
+        'bee/installation/fund-your-node',
       ],
       collapsed: false
     },
@@ -85,20 +88,20 @@ module.exports = {
       type: 'category',
       label: 'Working With Bee',
       items: [
-        'operate/working-with-bee/introduction',
-        'operate/working-with-bee/configuration',
-        'operate/working-with-bee/debug-api',
-        'operate/working-with-bee/logs-and-files',
-        'operate/working-with-bee/bee-tools',
-        'operate/working-with-bee/security',
-        'operate/working-with-bee/staking',
-        'operate/working-with-bee/cashing-out',
-        'operate/working-with-bee/monitoring',
-        'operate/working-with-bee/backups',
-        'operate/working-with-bee/upgrading-bee',
-        'operate/working-with-bee/uninstalling-bee',
-        'operate/working-with-bee/light-nodes',
-        'operate/working-with-bee/ultra-light-nodes'
+        'bee/working-with-bee/introduction',
+        'bee/working-with-bee/configuration',
+        'bee/working-with-bee/debug-api',
+        'bee/working-with-bee/logs-and-files',
+        'bee/working-with-bee/bee-tools',
+        'bee/working-with-bee/security',
+        'bee/working-with-bee/staking',
+        'bee/working-with-bee/cashing-out',
+        'bee/working-with-bee/monitoring',
+        'bee/working-with-bee/backups',
+        'bee/working-with-bee/upgrading-bee',
+        'bee/working-with-bee/uninstalling-bee',
+        'bee/working-with-bee/light-nodes',
+        'bee/working-with-bee/ultra-light-nodes'
       ],
       collapsed: false
     },

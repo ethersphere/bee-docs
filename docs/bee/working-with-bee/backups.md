@@ -31,7 +31,7 @@ It may also be useful to include the `bee.yaml` config file in a backup so that 
 
 ### Shell Script Install
 
-For a [shell script installation](/docs/operate/installation/manual) the data directory by default is located at:
+For a [shell script installation](/docs/bee/installation/manual) the data directory by default is located at:
 
 ```bash
 /home/<user>/.bee
@@ -39,7 +39,7 @@ For a [shell script installation](/docs/operate/installation/manual) the data di
 
 ### Docker Compose
 
-When using [Docker Compose](/docs/operate/installation/docker) configuration files to run a node, Docker will create a volume for Bee and a volume for Bee Clef.
+When using [Docker Compose](/docs/bee/installation/docker) configuration files to run a node, Docker will create a volume for Bee and a volume for Bee Clef.
 
 Use `docker cp` to retrieve the contents of these folders:
 

@@ -209,7 +209,7 @@ You can find the password in the confing.yaml file in:
 
 ### Which p2p port does Bee use and which should I open in my router?
 
-The default p2p port for Bee is 1634, please forward this using your router and allow traffic over your firewall as necessary. Bee also supports UPnP but it is recommended you do not use this protocol as it lacks security. For more detailed information see the connectivity section in the docs. https://docs.ethswarm.org/docs/operate/installation/connectivity
+The default p2p port for Bee is 1634, please forward this using your router and allow traffic over your firewall as necessary. Bee also supports UPnP but it is recommended you do not use this protocol as it lacks security. For more detailed information see the connectivity section in the docs. https://docs.ethswarm.org/docs/bee/installation/connectivity
 
 ### How do I know if I am connected to other peers?
 
@@ -320,7 +320,7 @@ Your chequebook will show OUT xBZZ transactions when your peers cash cheques iss
 
 ### Where can I find documents about the cashout commands?
 
-https://docs.ethswarm.org/docs/operate/working-with-bee/cashing-out
+https://docs.ethswarm.org/docs/bee/working-with-bee/cashing-out
 
 ### When I run http://localhost:1635/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
 
@@ -329,7 +329,7 @@ It's like what the bank thinks your balance is vs what your chequebook knows is 
 
 ### What determines the number of peers and how to influence their number? Why are there sometimes 300+ peers and sometimes 30?
 
-The number of connected peers is determined by your node as it attempts to keep the distributed Kademlia well connected. As nodes come and go in the network your peer count will go up and down. If you watch bee's output logs for "successfully connected", there should be a mix of (inbound) and (outbound) at the end of those messages. If you only get (outbound) then you may need to get your p2p port opened through your firewall and/or forwarded by your router. Check out the connectivity section in the docs https://docs.ethswarm.org/docs/operate/installation/connectivity.
+The number of connected peers is determined by your node as it attempts to keep the distributed Kademlia well connected. As nodes come and go in the network your peer count will go up and down. If you watch bee's output logs for "successfully connected", there should be a mix of (inbound) and (outbound) at the end of those messages. If you only get (outbound) then you may need to get your p2p port opened through your firewall and/or forwarded by your router. Check out the connectivity section in the docs https://docs.ethswarm.org/docs/bee/installation/connectivity.
 
 ### What is the difference between "systemctl" and "bee start"?
 

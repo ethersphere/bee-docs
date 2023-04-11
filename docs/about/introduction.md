@@ -11,11 +11,11 @@ Swarm is peer-to-peer network of Bee nodes that collectively provide censorship 
 
 ### Documentation Structure
 
-Whether you're a developer looking to build full-service applications on the decentralized web, a node operator interested in participating in maintaining the Swarm network, or just someone interested in learning more about these exciting technologies, this guide has got you covered. The documentation is divided into three main sections, "Learn," "Operate," and "Develop".
+Whether you're a developer looking to build full-service applications on the decentralized web, a node operator interested in participating in maintaining the Swarm network, or just someone interested in learning more about these exciting technologies, this guide has got you covered. The documentation is divided into three main sections, "Learn," "Bee," and "Develop".
 
 In the "Learn" section of the documentation you will find general high-level information about the Swarm network and ecosystem, including an introduction to the Swarm network, the background and development of the project, and a broad overview of tools and resources available to developers and node operators. 
 
-The "Operate" section is aimed at Bee node operators. It provides instructions for installing and maintaining Bee nodes, including accessing the Bee API, participating in the storage incentives system, and details about different node types and configuration options.
+The "Bee" section is aimed at Bee node operators. It provides instructions for installing and maintaining Bee nodes, including accessing the Bee API, participating in the storage incentives system, and details about different node types and configuration options.
 
 The "Develop" section is aimed at developers who want to build dApps using the Swarm network as a decentralized storage layer. It includes guides on how to upload and retrieve data from the Swarm network, how to purchase Postage Stamps and use them to rent storage, how to set up a test network for development purposes, and an overview of additional tools and resources for developers.  
 
@@ -35,11 +35,11 @@ Find more information on the bonding curve, including its [source code](https://
 
 ## Installation
 
-Don't have Bee installed yet? It's easy! Head over to the [installation](/docs/operate/installation/quick-start) section to get Bee up and running.
+Don't have Bee installed yet? It's easy! Head over to the [installation](/docs/bee/installation/quick-start) section to get Bee up and running.
 
 ## Working With Bee
 
-Once Bee is installed, find out how to configure the software, interact with the API, monitor what Bee is up to, and make those all important backups in the [working with Bee](/docs/operate/working-with-bee/introduction) section.
+Once Bee is installed, find out how to configure the software, interact with the API, monitor what Bee is up to, and make those all important backups in the [working with Bee](/docs/bee/working-with-bee/introduction) section.
 
 ## Access the Swarm
 
@@ -64,7 +64,7 @@ on Swarm](/docs/develop/dapps-on-swarm/introduction).
 
 Need even more incentive to get involved with the wonderful world of
 Swarm? Find out how you can [earn xBZZ
-tokens](/docs/operate/working-with-bee/cashing-out) for storing and
+tokens](/docs/bee/working-with-bee/cashing-out) for storing and
 distributing your share of the world's data - sharing is caring!
 
 ## Find Out More

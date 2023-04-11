@@ -11,7 +11,7 @@ All the action can be found on our [Discord Server](https://discord.gg/wdghaQsGq
 
 If you would like to contribute, please read the [coding guidelines](https://github.com/ethersphere/bee/blob/master/CODING.md) before you get started.
 
-Installation from source is described in the [Installation](/docs/operate/installation/build-from-source).
+Installation from source is described in the [Installation](/docs/bee/installation/build-from-source).
 
 # Testing a connection with PingPong protocol
 

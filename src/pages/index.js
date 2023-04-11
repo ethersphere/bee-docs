@@ -18,9 +18,14 @@ function Home() {
           <h3 className={styles.buttonTitle}>Learn about Swarm</h3>
           <p className={styles.description}>Learn more about the decentralised data storage and distribution technology which will power the next generation of censorship-resistant, unstoppable, serverless dapps.</p>
         </a> 
-        <a className={styles.sectionButton} href="/docs/operate/installation/quick-start">
+        <a className={styles.sectionButton} href="/docs/desktop/introduction">
+          <img className={styles.sectionImageLearn} src="img/learn.svg"></img>
+          <h3 className={styles.buttonTitle}>Swarm Desktop</h3>
+          <p className={styles.description}>Install the Swarm Desktop client to quickly start interacting with the Swarm network. Swarm Desktop offers a user-friendly way to upload and download data from Swarm.</p>
+        </a> 
+        <a className={styles.sectionButton} href="/docs/bee/installation/quick-start">
           <img className={styles.sectionImageOperate} src="img/operate.svg"></img>
-            <h3 className={styles.buttonTitle}>Operate a Node</h3>
+            <h3 className={styles.buttonTitle}>Run a Bee Node</h3>
             <p className={styles.description}>Operate a Bee node to connect with other peers all over the world to become part of Swarm network, a global distributed p2p storage network that aims to store and distribute all of the world's data.</p>
         </a>
         <a className={styles.sectionButton} href="/docs/develop/access-the-swarm/introduction">

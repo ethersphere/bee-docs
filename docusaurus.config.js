@@ -41,9 +41,15 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/operate/installation/quick-start',
-          activeBasePath: 'docs/operate',
-          label: 'Operate',
+          to: 'docs/desktop/introduction',
+          activeBasePath: 'docs/desktop',
+          label: 'Desktop',
+          position: 'left',
+        },
+        {
+          to: 'docs/bee/installation/quick-start',
+          activeBasePath: 'docs/bee',
+          label: 'Bee',
           position: 'left',
         },
         {
@@ -53,7 +59,7 @@ module.exports = {
           position: 'left',
         },
         // {
-        //   to: 'docs/operate/installation/quick-start',
+        //   to: 'docs/bee/installation/quick-start',
         //   activeBasePath: 'docs',
         //   label: 'Installation',
         //   position: 'left',

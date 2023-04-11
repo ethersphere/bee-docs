@@ -13,7 +13,7 @@ properly interact with the swarm.
 ## Upgrade Procedure
 
 :::warning
-Bee sure to [back up](/docs/operate/working-with-bee/backups) your clef key material and [cash out your cheques](/docs/operate/working-with-bee/cashing-out) to make sure your xBZZ is safe before applying updates.
+Bee sure to [back up](/docs/bee/working-with-bee/backups) your clef key material and [cash out your cheques](/docs/bee/working-with-bee/cashing-out) to make sure your xBZZ is safe before applying updates.
 :::
 
 ### Ubuntu / Debian / Raspbian
@@ -25,7 +25,7 @@ sudo systemctl stop bee
 sudo systemctl stop bee-clef
 ```
 
-Now follow the [installation instructions](/docs/operate/installation/install) to download the new package and install the new version, as you would during a new installation.
+Now follow the [installation instructions](/docs/bee/installation/install) to download the new package and install the new version, as you would during a new installation.
 
 You will be greeted by the following prompt:
 

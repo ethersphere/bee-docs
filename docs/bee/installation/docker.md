@@ -10,9 +10,9 @@ Bee Clef is deprecated and is no longer under active development. It is not requ
 :::
 
 If running a Bee _full node_, you may make use of
-Ethereum's external signer, [Clef](/docs/operate/installation/bee-clef). Skip
+Ethereum's external signer, [Clef](/docs/bee/installation/bee-clef). Skip
 ahead if you are comfortable with `docker` basics for instructions on
-how to use [docker-compose](/docs/operate/installation/docker#docker-compose)
+how to use [docker-compose](/docs/bee/installation/docker#docker-compose)
 to easily set up Bee with persistent storage and integration with the
 Bee Clef container.
 
@@ -33,7 +33,7 @@ docker run\
 ```
 
 :::info
-If starting your node for the first time, you will need to deploy a chequebook contract. See [Manual Installation](/docs/operate/installation/manual) for more info.
+If starting your node for the first time, you will need to deploy a chequebook contract. See [Manual Installation](/docs/bee/installation/manual) for more info.
 :::
 
 To persist files, mount a local directory as follows and enter the
@@ -147,7 +147,7 @@ By specifying the `-d` flag to `docker-compose` we run Bee and Bee Clef as a dae
 :::
 
 :::warning
-Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to [backup](/docs/operate/working-with-bee/backups) the contents of your Docker volume!
+Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to [backup](/docs/bee/working-with-bee/backups) the contents of your Docker volume!
 :::
 
 To determine the Bee node's address to fund, we can check the logs for our Bee _container_:
@@ -158,11 +158,11 @@ docker-compose logs -f bee-1
 
 ```
 bee_1 | time="2020-12-15T18:43:14Z" level=warning msg="cannot continue until there is sufficient ETH (for Gas) and at least 1 xBZZ available on 7a977fa660e2e93e1eba40030c6b8da68d01971e"
-time="2020-12-15T18:43:14Z" level=warning msg="learn how to fund your node by visiting our docs at https://docs.ethswarm.org/docs/operate/installation/fund-your-node"
+time="2020-12-15T18:43:14Z" level=warning msg="learn how to fund your node by visiting our docs at https://docs.ethswarm.org/docs/bee/installation/fund-your-node"
 ```
 
 Once you have determined your Bee's Ethereum addresses,
-[fund your node](/docs/operate/installation/fund-your-node).
+[fund your node](/docs/bee/installation/fund-your-node).
 
 After your transaction has been completed, your node should recognise that your wallet has been funded, and begin to deploy and fund your Bee chequebook!
 

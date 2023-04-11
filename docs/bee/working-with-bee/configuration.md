@@ -12,7 +12,7 @@ configuration in detail.
 :::important
 Before starting Bee for the first time, there is _some_ configuration
 to do! Make sure you consider updating the recommended
-settings in the [installation guide](/docs/operate/installation/install)!
+settings in the [installation guide](/docs/bee/installation/install)!
 :::
 
 ## Specifying Configuration
@@ -146,7 +146,7 @@ This produces the following file contents, showing the default
 configuration of Bee:
 
 ```yaml
-## Bee configuration - https://docs.ethswarm.org/docs/operate/working-with-bee/configuration
+## Bee configuration - https://docs.ethswarm.org/docs/bee/working-with-bee/configuration
 
 ## HTTP API listen address (default ":1633")
 # api-addr: :1633
@@ -566,11 +566,11 @@ A default top level domain and resolver contract address are provided, but an EN
 _default_ false
 
 Enable permission check on certain http APIs. More information on how to restrict the access
-to the APIs is available [here](/docs/operate/working-with-bee/security).
+to the APIs is available [here](/docs/bee/working-with-bee/security).
 
 If enabled - you must specify an admin password using the `--admin-password` option and a `--token-encryption-key` string value.
 
-To generate a valid admin password use the provided [bcrypt utility](/docs/operate/working-with-bee/bcrypt)
+To generate a valid admin password use the provided [bcrypt utility](/docs/bee/working-with-bee/bcrypt)
 
 #### --resync
 
