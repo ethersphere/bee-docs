@@ -129,6 +129,11 @@ a.panel {
   height: 90px;
 }
 
+.sectionImageDesktop {
+  height: 90px;
+  padding: 10px;
+}
+
 .sectionImageOperate {
   height: 90px;
   margin-bottom: 5px;

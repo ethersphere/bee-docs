@@ -19,7 +19,7 @@ function Home() {
           <p className={styles.description}>Learn more about the decentralised data storage and distribution technology which will power the next generation of censorship-resistant, unstoppable, serverless dapps.</p>
         </a> 
         <a className={styles.sectionButton} href="/docs/desktop/introduction">
-          <img className={styles.sectionImageLearn} src="img/learn.svg"></img>
+          <img className={styles.sectionImageDesktop} src="img/desktop.svg"></img>
           <h3 className={styles.buttonTitle}>Swarm Desktop</h3>
           <p className={styles.description}>Install the Swarm Desktop client to quickly start interacting with the Swarm network. Swarm Desktop offers a user-friendly way to upload and download data from Swarm.</p>
         </a> 
