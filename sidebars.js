@@ -61,6 +61,7 @@ module.exports = {
         'desktop/access-content',
         'desktop/upload-content',
         'desktop/backup',
+        'desktop/configuration',
         'desktop/postage-stamps',
         'desktop/publish-a-website',
       ],
