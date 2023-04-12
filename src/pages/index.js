@@ -20,7 +20,7 @@ function Home() {
         </a> 
         <a className={styles.sectionButton} href="/docs/desktop/introduction">
           <img className={styles.sectionImageDesktop} src="img/desktop.svg"></img>
-          <h3 className={styles.buttonTitle}>Swarm Desktop</h3>
+          <h3 className={styles.buttonTitle}>Access the Swarm</h3>
           <p className={styles.description}>Install the Swarm Desktop client to quickly start interacting with the Swarm network. Swarm Desktop offers a user-friendly way to upload and download data from Swarm.</p>
         </a> 
         <a className={styles.sectionButton} href="/docs/bee/installation/quick-start">
