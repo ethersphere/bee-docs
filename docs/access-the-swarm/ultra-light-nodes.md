@@ -4,7 +4,7 @@ id: ultra-light-nodes
 ---
 
 :::danger
-When running without a blockchain connections, bandwidth payments cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
+When running without a blockchain connections, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
 :::
 
 #### Configuration
