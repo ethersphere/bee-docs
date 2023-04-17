@@ -73,8 +73,8 @@ values={[
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.13.0/bee_1.13.0_amd64.deb
-sudo dpkg -i bee_1.13.0_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.14.0/bee_1.14.0_amd64.deb
+sudo dpkg -i bee_1.14.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -82,15 +82,15 @@ sudo dpkg -i bee_1.13.0_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.13.0/bee_1.13.0_armhf.deb
-sudo dpkg -i bee_1.13.0_armhf.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.14.0/bee_1.14.0_armhf.deb
+sudo dpkg -i bee_1.14.0_armhf.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.13.0/bee_1.13.0_arm64.deb
-sudo dpkg -i bee_1.13.0_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.14.0/bee_1.14.0_arm64.deb
+sudo dpkg -i bee_1.14.0_arm64.deb
 ```
 
 </TabItem>
@@ -101,8 +101,8 @@ sudo dpkg -i bee_1.13.0_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.13.0/bee_1.13.0_amd64.rpm
-sudo rpm -i bee_1.13.0_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.14.0/bee_1.14.0_amd64.rpm
+sudo rpm -i bee_1.14.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -110,15 +110,15 @@ sudo rpm -i bee_1.13.0_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.13.0/bee_1.13.0_armv7.rpm
-sudo rpm -i bee_1.13.0_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.14.0/bee_1.14.0_armv7.rpm
+sudo rpm -i bee_1.14.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.13.0/bee_1.13.0_arm64.rpm
-sudo rpm -i bee_1.13.0_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.14.0/bee_1.14.0_arm64.rpm
+sudo rpm -i bee_1.14.0_arm64.rpm
 ```
 
 </TabItem>
