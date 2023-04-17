@@ -15,9 +15,10 @@ It is easy to set up Bee on small and inexpensive computers, such as a Raspberry
 ## Recommended Hardware Specifications
 Minimum recommended specifications for each full node:
 
-- Dual core 2ghz processor 
+- Dual core, recent generation, 2ghz processor 
 - 8gb RAM
 - 30gb SSD
+- Stable internet connection
 
 HDD drives are very strongly discouraged due to their low speeds.
 
@@ -383,7 +384,7 @@ backups](/docs/working-with-bee/backups).
 
 ## 6. Check if Bee is Working
 
-First heck that the correct version of Bee is installed:
+First check that the correct version of Bee is installed:
 
 ```bash
 bee version
@@ -449,7 +450,7 @@ This will initiate a transaction on-chain which deposits the specified amount of
 
 Storage incentive rewards are only available for full nodes which are providing storage capacity to the network.
 
-Note that SWAP rewards are available to all full nodes, regardless of whether or not they stake xBZZ in order to participate in the storage incentives system.
+Note that SWAP rewards are available to all full and light nodes, regardless of whether or not they stake xBZZ in order to participate in the storage incentives system.
 
 ## Getting help
 
