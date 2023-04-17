@@ -33,7 +33,7 @@ docker run\
 ```
 
 :::info
-If starting your node for the first time, you will need to deploy a chequebook contract. See [Manual Installation](/docs/installation/manual) for more info.
+If starting your node for the first time, you will need to deploy a chequebook contract. See [ installation](/docs/installation/install) section for more info.
 :::
 
 To persist files, mount a local directory as follows and enter the
