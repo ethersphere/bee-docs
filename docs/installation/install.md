@@ -149,13 +149,13 @@ Use either of the following commands to run the script and install Bee:
 #### wget
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.13.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.14.0 bash
 ```
 
 #### curl
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.13.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.14.0 bash
 ```
 ### Build from source 
 If neither of the above methods works for your system, you can see our guide for [building directly from source](/docs/installation/build-from-source).
@@ -391,7 +391,7 @@ bee version
 ```
 
 ```
-1.13.0
+1.14.0
 ```
 
 Once the Bee node has been funded, the chequebook deployed, and postage stamp
