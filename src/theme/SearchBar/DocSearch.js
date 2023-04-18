@@ -5,22 +5,13 @@ import templates from "./templates";
 import utils from "./utils";
 import $ from "autocomplete.js/zepto";
 
-/**
- * Adds an autocomplete dropdown to an input field
- * @function DocSearch
- * @param  {Object} options.searchDocs Search Documents
- * @param  {Object} options.searchIndex Lune searchIndexes
- * @param  {string} options.inputSelector  CSS selector that targets the input
- * value.
- * @param  {Object} [options.autocompleteOptions] Options to pass to the underlying autocomplete instance
- * @return {Object}
- */
 class DocSearch {
     constructor({
         searchDocs,
         searchIndex,
         inputSelector,
         debug = false,
+        baseUrl = '/',
         queryDataCallback = null,
         autocompleteOptions = {
             debug: false,
@@ -55,7 +46,7 @@ class DocSearch {
 
         this.isSimpleLayout = layout === "simple";
 
-        this.client = new LunrSearchAdapter(searchDocs, searchIndex);
+        this.client = new LunrSearchAdapter(searchDocs, searchIndex, baseUrl);
 
         if (enhancedSearchInput) {
             this.input = DocSearch.injectSearchBox(this.input);
