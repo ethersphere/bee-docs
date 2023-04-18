@@ -2,9 +2,10 @@ import lunr from "@generated/lunr.client";
 lunr.tokenizer.separator = /[\s\-/]+/;
 
 class LunrSearchAdapter {
-    constructor(searchDocs, searchIndex) {
+    constructor(searchDocs, searchIndex, baseUrl = '/') {
         this.searchDocs = searchDocs;
         this.lunrIndex = lunr.Index.load(searchIndex);
+        this.baseUrl = baseUrl;
     }
 
     getLunrResult(input) {

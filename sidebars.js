@@ -24,14 +24,22 @@ module.exports = {
       label: 'Technology',
       items: [
         'learn/technology/what-is-swarm',
-        'learn/technology/contracts/chequebook',
         'learn/technology/kademlia',
         'learn/technology/disc',
         'learn/technology/price-oracle',
-        'learn/technology/postage-stamps',
         'learn/technology/storage-incentives',
         'learn/technology/swap',
         'learn/technology/pss',
+        {
+          type: 'category',
+          label: 'Contracts',
+          items: [
+            'learn/technology/contracts/chequebook',
+            'learn/technology/contracts/postage-stamp',
+
+          ],
+          collapsed: false
+        },
       ],
       collapsed: false
     },
