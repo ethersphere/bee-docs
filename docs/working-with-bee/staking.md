@@ -43,7 +43,8 @@ curl -X GET http://localhost:1635/redistributionstate | jq
 ```
 
 ```json
-{
+{ 
+  "hasSufficientFunds": true,
   "isFrozen": false,
   "isFullySynced": true,
   "phase": "commit",
@@ -62,7 +63,7 @@ curl -X GET http://localhost:1635/redistributionstate | jq
 * `"isFrozen": <bool>` - Shows node frozen status.
 * `"isFullySynced": <bool>` - Shows whether node's localstore has completed full historical syncing with all connected peers.
 * `"phase": <string>` - Current phase of redistribution game.
-* `"round": <integer>` - Current round of redistribution game.
+* `"round": <integer>` - Current round of redistribution game. The round number is determined by dividing the current Gnosis Chain block height by the number of blocks in one round. One round takes 152 blocks, so using the "block" output from the example above we can confirm that the round number is 176319 (block 26800488 / 152 blocks = round 176319).   
 * `"lastWonRound": <integer>` - Number of round last won by this node.
 * `"lastPlayedRound": <integer>` - Number of the last round where node's neighborhood was selected to participate in redistribution game.
 * `"lastFrozenRound": <integer>` The number the round when node was last frozen. 
