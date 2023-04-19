@@ -5,17 +5,17 @@ id: what-is-swarm
 
 Swarm is a decentralised storage and communication infrastructure that provides a secure, reliable, and scalable platform for hosting, moving, and processing data in a peer-to-peer network. Swarm can be divided into four main parts:
 
-1. A peer-to-peer network protocol to serve as underlay transport.
-2. An overlay network with protocols powering a distributed immutable storage of chunks (fixed size data blocks).
-3. A component providing high-level data access and defining APIs for base-layer features.
-4. An application layer defining standards and outlining best practices for more elaborate use-cases.
+1. Underlay Network - A peer-to-peer network protocol to serve as underlay transport. 
+2. Overlay Network - An overlay network with protocols powering a distributed immutable storage of chunks (fixed size data blocks).
+3. Data Acccess Layer - A component providing high-level data access and defining APIs for base-layer features.
+4. Application Layer - An application layer defining standards and outlining best practices for more elaborate use-cases.
 
 
 ## 1. Underlay Network
 
 The first part of Swarm is a peer-to-peer network protocol that serves as the underlay transport. This protocol is responsible for establishing connections between nodes in the network and facilitating the transfer of data between them.
 
-Swarm is designed to be agnostic of the particular underlay transport used, as long as it satisfies certain requirements. These requirements include addressing and dialling. Nodes in the network are identified by their underlay address, which allows them to be located and connected to by other nodes. Nodes can initiate a direct connection to a peer by dialling them on their underlay address.
+Swarm is designed to be agnostic of the particular underlay transport used, as long as it satisfies certain requirements. The  These requirements include addressing and dialling. Nodes in the network are identified by their underlay address, which allows them to be located and connected to by other nodes. Nodes can initiate a direct connection to a peer by dialling them on their underlay address.
 
 The underlay transport layer is responsible for establishing connections between nodes in the network and routing data between them. It provides a low-level communication channel that enables nodes to communicate with each other directly, without relying on any centralised infrastructure.
 
