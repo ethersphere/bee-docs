@@ -44,6 +44,7 @@ curl -X GET http://localhost:1635/redistributionstate | jq
 
 ```json
 { 
+  "minimumFunds": "18750000000000000",
   "hasSufficientFunds": true,
   "isFrozen": false,
   "isFullySynced": true,
@@ -57,9 +58,8 @@ curl -X GET http://localhost:1635/redistributionstate | jq
   "fees": "30166618102500000"
 }
 ```
-
+* `"minimumFunds": <integer>` - The minimum xDAI needed to play a single round of the redistribution game.
 * `"hasSufficientFunds": <bool>` - Shows whether the node has enough xDAI balance to submit at least five storage incentives redistribution related transactions.  If `false` the node will not be permitted to participate in next round.
-
 * `"isFrozen": <bool>` - Shows node frozen status.
 * `"isFullySynced": <bool>` - Shows whether node's localstore has completed full historical syncing with all connected peers.
 * `"phase": <string>` - Current phase of redistribution game.
