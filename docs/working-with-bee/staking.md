@@ -100,23 +100,6 @@ Response:
 ```
 Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` before moving to the next step. If `hasSufficientFunds` if `false`, make sure to add at least the amount of xDAI shown in `minimumFunds` (unit of 1e-18 xDAI). If the node was recently installed and `isFullySynced` is `false`, wait for the node to fully sync before continuing. After confirming the node's status, continue to the next step.
 
-The `{anchor}` value can be set to any random string. To get the `{depth}` value, first call the `reservestate` debug API endpoint:
-
-```
-sudo curl -X GET http://localhost:1635/reservestate | jq
-```
-
-Response:
-
-```
-{
-  "radius": 13,
-  "storageRadius": 8,
-  "commitment": 17323130880
-}
-```
-Use the value of `storageRadius` for `{depth}` and then call the endpoint like so:
-
 ```
 sudo curl -X GET http://localhost:1633/rchash/8/randomstring | jq
 ```
