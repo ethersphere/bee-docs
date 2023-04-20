@@ -100,6 +100,23 @@ Response:
 ```
 Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` before moving to the next step. If `hasSufficientFunds` if `false`, make sure to add at least the amount of xDAI shown in `minimumFunds` (unit of 1e-18 xDAI). If the node was recently installed and `isFullySynced` is `false`, wait for the node to fully sync before continuing. After confirming the node's status, continue to the next step.
 
+The `{anchor}` value can be set to any random string. To get the `{depth}` value, first call the `topology` debug API endpoint using [jq](https://stedolan.github.io/jq/manual/#Basicfilters) to filter for the `depth` `value:
+
+```
+sudo curl -X GET http://localhost:1635/topology | jq '.depth'
+```
+
+Output:
+
+```
+% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                Dload  Upload   Total   Spent    Left  Speed
+100  948k    0  948k    0     0  21.5M      0 --:--:-- --:--:-- --:--:-- 21.5M
+8
+```
+
+Call the endpoint using the value returned (8 in our example) like so:
+
 ```
 sudo curl -X GET http://localhost:1633/rchash/8/randomstring | jq
 ```
