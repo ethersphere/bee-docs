@@ -12,6 +12,3 @@ However, once a limit is reached, the party in debt can either wait until their 
 SWAP uses built-in incentives to optimize the allocation of bandwidth and storage resources and render Swarm economically self-sustaining. Swarm nodes track their relative bandwidth contribution on each peer connection, and excess debt due to unequal consumption can be settled in BZZ. Publishers in Swarm must spend BZZ to purchase the right to write data to Swarm and prepay some rent for long-term storage.
 
 The SWAP protocol also includes some additional features to prevent abuse or fraud. For example, it can impose limits on how much debt a node can accumulate before requiring payment or require nodes to provide collateral before sending cheques.
-
-Overall, SWAP plays an important role in ensuring that resources are allocated efficiently on the Swarm network while also providing a secure and reliable way for nodes to exchange value with each other.
-
