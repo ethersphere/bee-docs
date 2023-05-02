@@ -73,8 +73,8 @@ values={[
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.14.1/bee_1.14.1_amd64.deb
-sudo dpkg -i bee_1.14.1_amd64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.15.0/bee_1.15.0_amd64.deb
+sudo dpkg -i bee_1.15.0_amd64.deb
 ```
 
 #### ARM (Raspberry Pi)
@@ -82,15 +82,15 @@ sudo dpkg -i bee_1.14.1_amd64.deb
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.14.1/bee_1.14.1_armhf.deb
-sudo dpkg -i bee_1.14.1_armhf.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.15.0/bee_1.15.0_armhf.deb
+sudo dpkg -i bee_1.15.0_armhf.deb
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.14.1/bee_1.14.1_arm64.deb
-sudo dpkg -i bee_1.14.1_arm64.deb
+wget https://github.com/ethersphere/bee/releases/download/v1.15.0/bee_1.15.0_arm64.deb
+sudo dpkg -i bee_1.15.0_arm64.deb
 ```
 
 </TabItem>
@@ -101,8 +101,8 @@ sudo dpkg -i bee_1.14.1_arm64.deb
 #### AMD64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.14.1/bee_1.14.1_amd64.rpm
-sudo rpm -i bee_1.14.1_amd64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.15.0/bee_1.15.0_amd64.rpm
+sudo rpm -i bee_1.15.0_amd64.rpm
 ```
 
 #### ARM (Raspberry Pi)
@@ -110,15 +110,15 @@ sudo rpm -i bee_1.14.1_amd64.rpm
 ##### ARMv7
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.14.1/bee_1.14.1_armv7.rpm
-sudo rpm -i bee_1.14.1_armv7.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.15.0/bee_1.15.0_armv7.rpm
+sudo rpm -i bee_1.15.0_armv7.rpm
 ```
 
 ##### ARM64
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.14.1/bee_1.14.1_arm64.rpm
-sudo rpm -i bee_1.14.1_arm64.rpm
+wget https://github.com/ethersphere/bee/releases/download/v1.15.0/bee_1.15.0_arm64.rpm
+sudo rpm -i bee_1.15.0_arm64.rpm
 ```
 
 </TabItem>
@@ -149,13 +149,13 @@ Use either of the following commands to run the script and install Bee:
 #### wget
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.14.1 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.15.0 bash
 ```
 
 #### curl
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.14.1 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.15.0 bash
 ```
 ### Build from source 
 If neither of the above methods works for your system, you can see our guide for [building directly from source](/docs/installation/build-from-source).
@@ -391,7 +391,7 @@ bee version
 ```
 
 ```
-1.14.1
+1.15.0
 ```
 
 Once the Bee node has been funded, the chequebook deployed, and postage stamp
