@@ -257,7 +257,7 @@ nat-addr: "123.123.123.123:1634"
 ```
 ### ENS Resolution (Optional)
 
-The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you sign up to [Infura's](https://infura.io) API service and set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
+The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you run your own ethereum node. An option for resource restricted devices is geth+nimbus and a guide can be found [here](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/). Other options include [dappnode](https://dappnode.io/), [nicenode](https://www.nicenode.xyz/), [stereum](https://stereum.net/) and [avado](https://ava.do/). 
 
 ```yaml
 ## bee.yaml
