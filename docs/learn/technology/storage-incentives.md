@@ -16,5 +16,3 @@ Storer nodes can use the xBZZ associated with postage stamps when selecting whic
 
 Swarm's storage incentives also include an opportunistic caching mechanism. Profit-maximising storage nodes serve chunks that are often requested from them, ensuring that popular content becomes widely distributed across the network and thus also reducing retrieval latency.
 
-Swarm's storage incentives ensure that there is sufficient storage capacity available in the network by providing economic incentives for users to participate in the network. Postage stamps serve as verifiable proof of payment associated with chunks witnessed by their owner's signature, and signal chunks' relative importance by ascribing them with xBZZ quantity which storer nodes can use when selecting which chunks to retain and serve or garbage collect during capacity shortage. Swarm's storage incentives also include an opportunistic caching mechanism in order to ensure that data remains available in the network and that reliable storage services are rewarded.
-

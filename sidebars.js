@@ -47,12 +47,11 @@ module.exports = {
       type: 'category',
       label: 'Ecosystem',
       items: [
-        'learn/ecosystem/community',
+        'learn/ecosystem/swarm-foundation',
         'learn/ecosystem/fair-data-society',
-        'learn/ecosystem/resources',
+        'learn/ecosystem/community',
         'learn/ecosystem/grants-bounties',
-        'learn/ecosystem/showcase',
-        'learn/ecosystem/roadmap',
+        'learn/ecosystem/awesome',
       ],
       collapsed: false
     },
