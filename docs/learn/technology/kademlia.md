@@ -3,9 +3,17 @@ title: Kademlia
 id: kademlia
 ---
 
-## What is Kademlia?
+### What is Kademlia?
 
 Kademlia is a distributed hash table (DHT) for decentralized peer-to-peer computer networks, which is designed to provide a more efficient and scalable means for node lookup and data storage across a distributed system. It was introduced by Petar Maymounkov and David Mazières in 2002 in a paper titled "Kademlia: A Peer-to-peer Information System Based on the XOR Metric."
+
+### Kademlia Distance
+
+Kademlia distance is a metric used to measure the "closeness" between nodes in a peer-to-peer network. Note Kademlia distance has no relation to geographical distance. Nodes which have a very small Kademlia distance may be very far from each other geographically. The distance is calculated using the bitwise exclusive or (XOR) operation on the node identifiers (IDs) and is crucial for organizing and searching the network efficiently.
+
+Node IDs are typically generated using a cryptographic hash function, resulting in a large fixed-size bit string (e.g., 160 bits for the original Kademlia implementation). To calculate the Kademlia distance between two nodes, their IDs are XOR'd bitwise, and the resulting bit string is treated as an integer. The integer value represents the distance between the nodes in the Kademlia DHT.
+
+By using this distance metric, Kademlia can quickly and efficiently locate nodes or data within the distributed network. When searching for a node or a piece of data, the algorithm proceeds iteratively, querying the closest known nodes to the target ID and refining the search with each iteration until the target is found.
 
 Kademlia relies on a unique distance metric based on the XOR operation (exclusive or) to organize nodes and data within the network. This metric provides several benefits, such as:
 
@@ -23,10 +31,3 @@ Kademlia has been used as the basis for various peer-to-peer applications, inclu
 
 While Kadamlia and other DHTs are commonly used by decentralized data storage networks, they typically are used only for storing references to the data which is stored. Swarm's implementation of Kademlia differs in one very significant way: rather than just storing references to the data stored on the network, the data itself is broken into chunks and stored in Swarm's Kademlia DHT. Swarm uses Kademlia as a key building block of its DISC storage model. For more details, see the [DISC](/docs/learn/technology/DISC) section.
 
-## What is Kademlia Distance?
-
-Kademlia distance is a metric used to measure the "closeness" between nodes in a peer-to-peer network. Note Kademlia distance has no relation to geographical distance. Nodes which have a very small Kademlia distance may be very far from each other geographically. The distance is calculated using the bitwise exclusive or (XOR) operation on the node identifiers (IDs) and is crucial for organizing and searching the network efficiently.
-
-Node IDs are typically generated using a cryptographic hash function, resulting in a large fixed-size bit string (e.g., 160 bits for the original Kademlia implementation). To calculate the Kademlia distance between two nodes, their IDs are XOR'd bitwise, and the resulting bit string is treated as an integer. The integer value represents the distance between the nodes in the Kademlia DHT.
-
-By using this distance metric, Kademlia can quickly and efficiently locate nodes or data within the distributed network. When searching for a node or a piece of data, the algorithm proceeds iteratively, querying the closest known nodes to the target ID and refining the search with each iteration until the target is found.

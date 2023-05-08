@@ -1,7 +1,21 @@
 ---
-title: SWAP
-id: swap
+title: Incentives
+id: incentives
 ---
+
+One of the key challenges in a decentralised data network is incentivising users to store data. Swarm's storage incentives are designed to address this challenge by providing economic and reputation-based incentives for users to participate in the network.
+
+
+### Storage Incentives
+
+Swarm's storage incentives are based on [postage stamps](/docs/learn/technology/contracts/postage-stamp), which serve as verifiable proof of payment associated with chunks witnessed by their owner's signature. Postage stamps signal chunks' relative importance by ascribing them with xBZZ quantity which storer nodes can use when selecting which chunks to retain and which to evict from their reserve when their reserve capacity is exceeded.
+
+The amount of xBZZ required for a postage stamp depends on the amount of data being stored and the duration for which it will be stored. The longer a chunk is stored, the more xBZZ is required for the postage stamp. This ensures that users are incentivised to store data for longer periods, which helps ensure that data remains available in the network.
+
+Storer nodes can use the xBZZ associated with postage stamps when selecting which chunks to retain and serve or garbage collect during capacity shortage. This means that popular content will be widely distributed across the network, reducing retrieval latency.
+
+
+### Bandwidth Incentives (SWAP)
 
 The Swarm Accounting Protocol (SWAP) is a protocol used in the Swarm network to manage the exchange of resources between nodes. SWAP ensures that node operators collaborate in routing messages and data while protecting the network against frivolous use of bandwidth.
 
