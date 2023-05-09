@@ -24,11 +24,10 @@ module.exports = {
       label: 'Technology',
       items: [
         'learn/technology/what-is-swarm',
+        'learn/technology/core-concepts',
         'learn/technology/kademlia',
         'learn/technology/disc',
-        'learn/technology/price-oracle',
-        'learn/technology/storage-incentives',
-        'learn/technology/swap',
+        'learn/technology/incentives',
         'learn/technology/pss',
         {
           type: 'category',
@@ -36,6 +35,7 @@ module.exports = {
           items: [
             'learn/technology/contracts/chequebook',
             'learn/technology/contracts/postage-stamp',
+            'learn/technology/contracts/price-oracle',
 
           ],
           collapsed: false
@@ -67,7 +67,7 @@ module.exports = {
         'desktop/install',
         'desktop/access-content',
         'desktop/upload-content',
-        'desktop/backup',
+        'desktop/backup-restore',
         'desktop/configuration',
         'desktop/postage-stamps',
         'desktop/publish-a-website',

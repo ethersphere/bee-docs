@@ -38,7 +38,7 @@ If the installation went smoothly, you should see the message "Your node is conn
 Running the Swarm Desktop app for the first time set up a new Bee node on your system. The installation process generated and save private keys for your node in the Swarm Desktop's data directory. Those keys were used to start up a new Bee node in ultra-light mode. 
 
 :::warning
-If your Swarm Desktop files are accidentally deleted or become corrupted you will lose access to any assets or data which are secured using those keys. Make sure to [backup your keys](/docs/desktop/backup).
+If your Swarm Desktop files are accidentally deleted or become corrupted you will lose access to any assets or data which are secured using those keys. Make sure to [backup your keys](/docs/desktop/backup-restore).
 :::
 
 ### "Ultra-light" and "Light" 

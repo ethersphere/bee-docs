@@ -3,7 +3,7 @@ title: Chequebook
 id: chequebook
 ---
 
-The [chequebook contract](https://github.com/ethersphere/swap-swear-and-swindle/blob/master/contracts/ERC20SimpleSwap.sol) is a smart contract used in the [Swarm Accounting Protocol (SWAP)](/docs/learn/technology/swap) to manage cheques that are sent between nodes on the network. The contract is responsible for keeping track of the balances of each node and ensuring that cheques are valid and can be cashed out correctly.
+The [chequebook contract](https://github.com/ethersphere/swap-swear-and-swindle/blob/master/contracts/ERC20SimpleSwap.sol) is a smart contract used in the [Swarm Accounting Protocol (SWAP)](/docs/learn/technology/incentives) to manage cheques that are sent between nodes on the network. The contract is responsible for keeping track of the balances of each node and ensuring that cheques are valid and can be cashed out correctly.
 
 When a node sends a cheque to another node, it includes a signed message that specifies the amount of xBZZ tokens being transferred and the recipient's address. The chequebook contract receives this message and verifies that it is valid by checking the signature and ensuring that the sender has enough funds to cover the transfer.
 
