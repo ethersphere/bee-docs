@@ -85,7 +85,8 @@ module.exports = {
       label: 'Bee Developers',
       items: [
         'bee-developers/useful-dev-info',
-        'bee-developers/bee-dev-mode'
+        'bee-developers/bee-dev-mode',
+        'bee-developers/advanced'
       ],
     },
     {
