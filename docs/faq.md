@@ -3,6 +3,105 @@ title: FAQ
 id: FAQ
 ---
 
+## Community
+
+### What are the Swarm Foundation's official channels?
+* [Website](https://ethswarm.org/)  
+* [Blog](https://blog.ethswarm.org/)  
+* [Github]( https://github.com/ethersphere)  
+* <a href="mailto:info@ethswarm.org">Email</a>  
+* [Discord](https://discord.ethswarm.org/)  
+* [Twitter](https://twitter.com/ethswarm)   
+* [Reddit](https://www.reddit.com/r/ethswarm)   
+* [YouTube](https://www.youtube.com/channel/UCu6ywn9MTqdREuE6xuRkskA)  
+
+### Where can I find technical support and get answers to my other questions?
+The Swarm community is centred around our Discord server where you will find many people willing and able to help with your every need! https://discord.ethswarm.org/
+
+### Where can I find support for running Bee node on DAppNode?
+You can find support for running Bee on DAppNode on the DappNode Discord server: https://discord.gg/dRd5CrjF
+
+### Who can I contact for other inquiries?
+For any other inquiries, you can contact us at info@ethswarm.org
+
+### What’s the relationship between Swarm and Ethereum?
+Swarm started in the first days of Ethereum as part of the original “world computer” vision, consisting of Ethereum (the processor), Whisper (messaging) and Swarm (storage). The project is the result of years of research and work by the Ethereum Foundation, the Swarm Foundation, teams, individuals across the ecosystem and the community.
+
+The conceptual idea for Swarm was started in the Ethereum team at the beginning, and the Ethereum Foundation incubated Swarm. After five years of research, Swarm and Ethereum are now two separate entities.
+
+## BZZ Token
+
+### What is the BZZ Token?
+
+Swarm's native token, BZZ, serves as a means of accessing the platform's data relay and storage services, while also providing compensation for node operators who provide these services. 
+
+### What is xBZZ?
+
+xBZZ is the term used to distinguish BZZ on Gnosis Chain (previously xDAI chain) from BZZ on Ethereum. It refers to BZZ what has been bridged from Ethereum to Gnosis Chain. Swarm protocol smart contracts are all deployed on Gnosis Chain, so xBZZ is the form of BZZ used for interacting with the Swarm protocol.
+
+### What is PLUR?
+1 PLUR is the atomic unit of BZZ, where BZZ then has 16 decimals (ie. 1 PLUR = 1^-16 BZZ)
+
+### Where can I buy BZZ Tokens?
+There are many ways to acquire BZZ token, either on custodial centralised exchanges where you can trade traditional currencies and cryptocurrency or through decentralised exchanges and protocols where you can trade between cryptocurrencies. For more information please visit the Get BZZ page.
+
+### What is the BZZ token address?
+The BZZ token address is https://etherscan.io/token/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb
+
+### What is the BZZ token supply?
+The BZZ token does not have a fixed supply, but instead, it can be minted by depositing collateral (DAI token) and burned which releases this collateral. The amount of collateral that needs to be deposited/withdrawn to mint/burn 1 BZZ token is defined by a token bonding curve in a smart contract.
+Current token supply: https://tokenservice.ethswarm.org/circulating_supply
+
+## BZZ token tokenomics
+
+Where can I find info about BZZ tokenomics?
+
+See [this blog post](https://blog.ethswarm.org/hive/2021/bzz-tokenomics/
+).
+
+### What is the bonding curve?
+A bonding curve is a mathematical function in the form of y=f(x) that determines the price of a single token, depending on the number of tokens currently in existence, or the market supply. The key difference is that with a traditional exchange platform market makers are required to provide liquidity to the market, whereas a bonding curve takes over the role of providing liquidity, negating the need for market makers. 
+
+### What is the “Bzzaar” bonding curve?
+Bzzaar is a unique exchange platform that enables users to buy and sell BZZ tokens. Unlike traditional exchange platforms, Bzzaar uses a bonding curve to instantly complete transactions without relying on market makers. The platform allows new projects to easily integrate Bzzaar's contracts into their own interfaces, creating a front-end interface for BZZ exchange. The bonding curve is community-owned and fuels all projects created on Swarm.
+
+Read more about the “Bzzaar” bonding curve: https://medium.com/ethereum-swarm/swarm-and-its-bzzaar-bonding-curve-ac2fa9889914
+
+Bzzaar contract information: https://github.com/ethersphere/bzzaar-contracts
+
+Bzzaar’s smart contract: https://etherscan.io/address/0x4f32ab778e85c4ad0cead54f8f82f5ee74d46904
+
+### Is Bzzaar's bonding curve audited?
+A full audit of Swarm was performed by QuantStamp and the final audit report has been made publicly available.
+
+
+## Running a Bee Node
+
+### How can I become part of the Swarm network?
+You can become part of the network by running a bee node. Bee is a peer-to-peer client that connects you with other peers all over the world to become part of Swarm network, a global distributed p2p storage network that aims to store and distribute all of the world's data
+Depending on your needs you can run ultra-light, light or full node.
+
+### What are the differences between Bee node types?
+See the Bee installation [quick start](/docs/installation/quick-start) page for an overview of the different node types. 
+
+### Can I run Bee on a Windows machine?
+
+A Windows executable version of the Bee software can be found on the Bee [releases page](https://github.com/ethersphere/bee/releases), and it can be run on Windows, however it is not the recommended method for running Bee and no Windows related support is provided.
+
+## Swarm Desktop App
+
+### How do I get the node wallet's private key (Desktop app)?
+You can find your private key in: 
+`/Users/username/Library/Application Support/Swarm Desktop/data-dir/swarm.key`
+
+### How do I import the swarm private key to metamask?
+You can import the `swarm.key` json file in MetaMask using the password you have set in your bee config file.
+
+### Where can I find the password?
+You can find the password in the config.yaml file in:
+`/Users/username/Library/Application Support/Swarm Desktop/config.yaml`
+
+
 ## Connectivity
 
 ### Which p2p port does Bee use and which should I open in my router?
@@ -92,13 +191,14 @@ If you use "bee start"
 - Stop: `ctrl + c` or `cmd + c` or close terminal to stop process
 
 ### Relevant endpoints and explanations
+See [api reference](/docs/api-reference/)  for more complete documentation. 
 
-Balances: https://docs.ethswarm.org/debug-api/#tag/Balance
-Chequebook: https://docs.ethswarm.org/debug-api/#tag/Chequebook
-Status: https://docs.ethswarm.org/debug-api/#tag/Status
-Connectivity: https://docs.ethswarm.org/debug-api/#tag/Connectivity
-Settlements: https://docs.ethswarm.org/debug-api/#tag/Settlements
-Chunk: https://docs.ethswarm.org/debug-api/#tag/Chunk
+* Balances: https://docs.ethswarm.org/debug-api/#tag/Balance
+* Chequebook: https://docs.ethswarm.org/debug-api/#tag/Chequebook
+* Status: https://docs.ethswarm.org/debug-api/#tag/Status
+* Connectivity: https://docs.ethswarm.org/debug-api/#tag/Connectivity
+* Settlements: https://docs.ethswarm.org/debug-api/#tag/Settlements
+* Chunk: https://docs.ethswarm.org/debug-api/#tag/Chunk
 
 Most common use cases:
 
