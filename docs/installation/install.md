@@ -13,6 +13,9 @@ distributed nature of the network by running Bee nodes.
 It is easy to set up Bee on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations).
 
 ## Recommended Hardware Specifications
+
+### Full Nodes
+
 Minimum recommended specifications for each full node:
 
 - Dual core, recent generation, 2ghz processor 
@@ -20,9 +23,15 @@ Minimum recommended specifications for each full node:
 - 30gb SSD
 - Stable internet connection
 
-HDD drives are very strongly discouraged due to their low speeds.
+HDD drives are very strongly discouraged for full nodes due to their low speeds.
 
 Note that there are additional [hardware requirements](https://docs.gnosischain.com/node/#environment-and-hardware) if you choose to run your own Gnosis Chain node in order to provide your Bee node(s) with the required RPC endpoint. See [configuration step](/docs/installation/install#set-blockchain-rpc-endpoint) for more details.
+
+In order to test whether a set of hardware specs is sufficient for running a full node and participating in the storage incentives redistribution, see [this guide](/docs/working-with-bee/staking#check-node-performance) on the staking page.
+
+### Light and UltraLight Nodes
+
+The minimum required hardware specifications for light and ultralight nodes are very low, and can be run on practically any commercially available computer or microcomputer such as a Raspberry Pi. 
 
 ## Note on Startup Methods
 :::caution
