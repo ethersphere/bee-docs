@@ -103,15 +103,12 @@ Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` befor
 The `{anchor}` value can be set to any random string. To get the `{depth}` value, first call the `topology` debug API endpoint using [jq](https://stedolan.github.io/jq/manual/#Basicfilters) to filter for the `depth` `value:
 
 ```
-sudo curl -X GET http://localhost:1635/topology | jq '.depth'
+sudo curl -sX GET http://localhost:1635/topology | jq '.depth'
 ```
 
 Output:
 
 ```
-% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                Dload  Upload   Total   Spent    Left  Speed
-100  948k    0  948k    0     0  21.5M      0 --:--:-- --:--:-- --:--:-- 21.5M
 8
 ```
 
