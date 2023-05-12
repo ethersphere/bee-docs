@@ -34,29 +34,113 @@ module.exports = {
        
       },
       items: [
-        {
-          to: 'docs/learn/introduction',
+        { 
+          type: 'dropdown',
           activeBasePath: 'docs/learn',
           label: 'Learn',
           position: 'left',
+          items: [
+            {
+              to: 'docs/learn/introduction',
+              label: 'Introduction',
+            },
+            {
+              to: 'docs/learn/technology/what-is-swarm',
+              label: 'Technology',
+            },
+            {
+              to: 'docs/learn/ecosystem/swarm-foundation',
+              label: 'Ecosystem',
+            },
+            {
+              to: 'docs/learn/terminology',
+              label: 'Terminology',
+            },
+            {
+              to: 'docs/learn/faq',
+              label: 'FAQ ',
+            }
+          ]
         },
         {
-          to: 'docs/desktop/introduction',
+          type: 'dropdown',
           activeBasePath: 'docs/desktop',
           label: 'Desktop',
           position: 'left',
+          items: [
+            {
+              to: 'docs/desktop/introduction',
+              label: 'Introduction'
+            },
+            {
+              to: 'docs/desktop/install',
+              label: 'Install'
+            },
+            {
+              to: 'docs/desktop/access-content',
+              label: 'Access Content'
+            },
+            {
+              to: 'docs/desktop/upload-content',
+              label: 'Upload Content'
+            },
+            {
+              to: 'docs/desktop/backup-restore',
+              label: 'Backup and Restore'
+            },
+            {
+              to: 'docs/desktop/configuration',
+              label: 'Configuration'
+            },
+            {
+              to: 'docs/desktop/postage-stamps',
+              label: 'Postage Stamps'
+            },
+            {
+              to: 'docs/desktop/publish-a-website',
+              label: 'Publish a Website'
+            }
+          ]
         },
         {
-          to: 'docs/bee/installation/quick-start',
+          type: 'dropdown',
           activeBasePath: 'docs/bee',
           label: 'Bee',
           position: 'left',
+          items: [
+            {
+              to: 'docs/bee/installation/quick-start',
+              label: 'Installation'
+            },
+            {
+              to: 'docs/bee/working-with-bee/introduction',
+              label: 'Working With Bee'
+            },
+          ]
         },
-        {
-          to: 'docs/develop/access-the-swarm/introduction',
+        { 
+          type: 'dropdown',
           activeBasePath: 'docs/develop',
           label: 'Develop',
           position: 'left',
+          items: [
+            {
+              to: 'docs/develop/introduction',
+              label: 'Introduction'
+            },
+            {
+              to: 'docs/develop/access-the-swarm/introduction',
+              label: 'Access the Swarm'
+            },
+            {
+              to: 'docs/develop/dapps-on-swarm/introduction',
+              label: 'Dapps on Swarm'
+            },
+            {
+              to: 'docs/develop/bee-developers/useful-dev-info',
+              label: 'Bee Developer Resources'
+            },
+          ]
         },
         // {
         //   to: 'docs/bee/installation/quick-start',

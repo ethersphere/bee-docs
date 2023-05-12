@@ -59,21 +59,14 @@ module.exports = {
     'learn/faq', 
   ],
   desktop: [
-    {
-      type: 'category',
-      label: 'Swarm Desktop',
-      items: [
-        'desktop/introduction',
-        'desktop/install',
-        'desktop/access-content',
-        'desktop/upload-content',
-        'desktop/backup-restore',
-        'desktop/configuration',
-        'desktop/postage-stamps',
-        'desktop/publish-a-website',
-      ],
-      collapsed: false
-    },
+    'desktop/introduction',
+    'desktop/install',
+    'desktop/access-content',
+    'desktop/upload-content',
+    'desktop/backup-restore',
+    'desktop/configuration',
+    'desktop/postage-stamps',
+    'desktop/publish-a-website',
   ],
   bee: [
     {

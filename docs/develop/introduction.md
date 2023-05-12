@@ -1,5 +1,5 @@
 ---
-title: Welcome!
+title: Introduction
 id: introduction
 ---
 
