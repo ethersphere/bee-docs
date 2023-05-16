@@ -60,7 +60,7 @@ Clef is a tool for signing transactions and data in a secure local environment. 
 
 ### PLUR
 
-PLUR (name inspired by the [PLUR principles](https://en.wikipedia.org/wiki/PLUR)) is the smallest denomination of BZZ. 1 PLUR is equal to 1e16 BZZ, and 1 BZZ is equal to 10000000000000000 PLUR. 
+PLUR (name inspired by the [PLUR principles](https://en.wikipedia.org/wiki/PLUR)) is the smallest denomination of BZZ. 1 PLUR is equal to 1e-16 BZZ, and 1 BZZ is equal to 10000000000000000 PLUR. 
 
 ### Bridged Tokens
 
