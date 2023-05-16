@@ -1,6 +1,6 @@
 ---
 title: What is Swarm?
-id: what-is-swarm
+id: what_is_swarm
 ---
 
 # What is Swarm?

@@ -1,6 +1,6 @@
 ---
 title: Core Concepts
-id: core-concepts
+id: core-concepts 
 ---
 
 The following is a list of key concepts and terms and explanations along with examples.  

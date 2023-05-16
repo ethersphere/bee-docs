@@ -1,0 +1,45 @@
+---
+title: Postage Stamps
+id: postage-stamps
+---
+
+:::info
+Swarm Desktop must be configured as a light node in order to access stamp related features. If you have not already upgraded from the default ultra-light configuration, complete the upgrade by following the ***[instructions here](/docs/desktop/configuration#upgrading-from-an-ultra-light-to-a-light-node)***.
+:::
+
+Postage stamps are required in order to upload data to Swarm. Postage stamps are purchased by interacting with the Swarm postage stamp smart contract on Gnosis Chain. Postage stamps are not purchased one by one, rather they are purchased in batches only. Stamps can be purchased by selecting ***Stamps*** from the ***Account*** tab:
+
+![](/img/stamps1.png)
+
+And then clicking the ***Buy New Postage Stamp*** button:
+
+![](/img/stamps2.png)
+
+## Depth and Amount
+
+Bacth depth and amount are the two required parameters which must be set when purchasing a postage stamp batch. Depth determines how many chunks can be stamped with a batch while amount determines how much xBZZ is assigned per chunk.
+
+![](/img/stamps3.png)
+
+### Depth
+
+The number of chunks in a batch is defined as $$2^{batchdepth}$$. Since we know that one chunk can store 4kb of data, we can easily calculate the maximum amount of data which can be stored by a batch from the batch depth"
+
+$$
+\text{Maximum data in a batch} = 2^{batchdepth} \times 4kb   
+$$
+
+For a batch of depth 16, for example, the maximum amount of data in kilobytes can be calculated like so:
+
+$$
+2^{16} \times 4kb = 65536 \text{ chunks} \times 4kb = 262144kb
+$$
+
+
+import DepthCalc from '@site/src/components/DepthCalc';
+
+<DepthCalc></DepthCalc>
+
+### Amount
+
+The batch amount determines how much xBZZ will be assigned to each chunk in a batch. Amount is denominated in PLUR (1<sup>-16</sup> xBZZ)
