@@ -40,7 +40,7 @@ Swarm's native token, BZZ, serves as a means of accessing the platform's data re
 xBZZ is the term used to distinguish BZZ on Gnosis Chain (previously xDAI chain) from BZZ on Ethereum. It refers to BZZ what has been bridged from Ethereum to Gnosis Chain. Swarm protocol smart contracts are all deployed on Gnosis Chain, so xBZZ is the form of BZZ used for interacting with the Swarm protocol.
 
 ### What is PLUR?
-1 PLUR is the atomic unit of BZZ, where BZZ then has 16 decimals (ie. 1 PLUR = 1^-16 BZZ)
+1 PLUR is the atomic unit of BZZ, where BZZ then has 16 decimals (ie. 1 PLUR = 1e-16 BZZ)
 
 ### Where can I buy BZZ Tokens?
 There are many ways to acquire BZZ token, either on custodial centralised exchanges where you can trade traditional currencies and cryptocurrency or through decentralised exchanges and protocols where you can trade between cryptocurrencies. For more information please visit the Get BZZ page.
