@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import React from 'react';
 
-export default function DepthCalc({children, color}) {
+export default function DepthCalc() {
   const [result, setResult] = useState("");
   const [depth, setDepth] = useState("");
   const handleChange = (e) => {
@@ -12,11 +12,11 @@ export default function DepthCalc({children, color}) {
   const handleClick = () => {
     console.log(depth)
     let userInput = Number(depth)
-    if (!Number.isInteger(userInput)){
-      setResult("Please input an integer number.")
+    if (!Number.isInteger(userInput) || userInput < 1){
+      setResult("Please input a positive integer.")
     } else {
       let formattedNum = Intl.NumberFormat().format(2**userInput * 4)
-      setResult(`${formattedNum}kb`)
+      setResult(`${formattedNum} kb`)
     }
   }
   

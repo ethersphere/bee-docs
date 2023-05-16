@@ -23,18 +23,19 @@ Bacth depth and amount are the two required parameters which must be set when pu
 
 ### Depth
 
-The number of chunks in a batch is defined as $$2^{batchdepth}$$. Since we know that one chunk can store 4kb of data, we can easily calculate the maximum amount of data which can be stored by a batch from the batch depth"
+The number of chunks in a batch is defined as $$2^{batchdepth}$$. Since we know that one chunk can store 4 kb of data, we can easily calculate the maximum amount of data (due to [the details of the Swarm protocol](/docs/learn/technology/contracts/postage-stamp), postage batches may be fully utilized before storing the maximum amount of data) which can be stored by a batch from the batch depth:
 
 $$
-\text{Maximum data in a batch} = 2^{batchdepth} \times 4kb   
+\text{Maximum data in a batch} = 2^{batchdepth} \times \text{4 kb}   
 $$
 
 For a batch of depth 16, for example, the maximum amount of data in kilobytes can be calculated like so:
 
 $$
-2^{16} \times 4kb = 65536 \text{ chunks} \times 4kb = 262144kb
+2^{16} \times \text{4 kb} = 65536 \text{ chunks} \times \text{4 kb} = \text{262144 kb}
 $$
 
+#### Depth to kb calculator:
 
 import DepthCalc from '@site/src/components/DepthCalc';
 
@@ -42,4 +43,21 @@ import DepthCalc from '@site/src/components/DepthCalc';
 
 ### Amount
 
-The batch amount determines how much xBZZ will be assigned to each chunk in a batch. Amount is denominated in PLUR (1<sup>-16</sup> xBZZ)
+The batch amount determines how much xBZZ will be assigned to each chunk in a batch. Amount is denominated in PLUR (1e-16 xBZZ). The total batch cost can be calculated like so:
+
+$$
+2^{batchdepth} \times amount
+$$
+
+For example, with a batch depth of 20 and an amount of 1000000000 PLUR:
+
+
+$$
+2^{20} \times 1000000000 = 1048576000000000 \text{ PLUR} = 0.1048576 \text{ xBZZ}
+$$
+
+#### Batch cost calculator
+
+import BatchCostCalc from '@site/src/components/BatchCostCalc';
+
+<BatchCostCalc></BatchCostCalc>
