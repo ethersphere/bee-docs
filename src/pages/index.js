@@ -28,7 +28,7 @@ function Home() {
             <h3 className={styles.buttonTitle}>Run a Bee Node</h3>
             <p className={styles.description}>Operate a Bee node to connect with other peers all over the world to become part of Swarm network.</p>
         </a>
-        <a className={styles.sectionButton} href="/docs/develop/access-the-swarm/introduction">
+        <a className={styles.sectionButton} href="/docs/develop/introduction">
           <img className={styles.sectionImageOperate} src="img/develop.svg"></img>
           <h3 className={styles.buttonTitle}>Develop on Swarm</h3>
           <p className={styles.description}>Swarm empowers developers to create and host decentralised dapps, NFT meta-data, media files, and much more!</p>
