@@ -21,11 +21,6 @@ Content-addressed chunks are useful for storing immutable data such as public do
 
 Single-owner chunks, on the other hand, are useful for storing data that needs to be updated frequently or that needs to be kept private. They are owned by a single user and can be updated only by that user.
 
-### Nodes
-
-### Network Topology (Neighborhoods)
-
-### Areas of Responsibility
 
 
 
