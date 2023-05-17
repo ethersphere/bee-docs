@@ -13,7 +13,10 @@ module.exports = {
   url: 'https://docs.ethswarm.org',
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
-  plugins: [require.resolve('docusaurus-lunr-search')],
+  plugins: [
+  require.resolve('docusaurus-lunr-search'),
+  'plugin-image-zoom'
+  ],
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'throw',
   onDuplicateRoutes: 'throw',

@@ -23,7 +23,7 @@ module.exports = {
       type: 'category',
       label: 'Technology',
       items: [
-        'learn/technology/what_is_swarm',
+        'learn/technology/what-is-swarm',
         'learn/technology/core-concepts',
         'learn/technology/kademlia',
         'learn/technology/disc',

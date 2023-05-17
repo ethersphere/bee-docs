@@ -19,13 +19,9 @@ export default function BatchCostCalc() {
     let userInputDepth = Number(depth)
     let userInputAmount = Number(amount)
 
-    console.log(userInputDepth)
-    console.log(userInputAmount)
-
     if ((!Number.isInteger(userInputDepth) || userInputDepth < 1 ) || (!Number.isInteger(userInputAmount) || userInputAmount < 1)){
       setResult("Please input positive integers for depth and amount.")
     } else {
-      console.log(2**userInputDepth*4)
       let formattedNum = Intl.NumberFormat().format(((2**userInputDepth) * userInputAmount)/1e16)
       setResult(`${formattedNum} xBZZ`)
     }

@@ -10,7 +10,6 @@ export default function DepthCalc() {
   }
 
   const handleClick = () => {
-    console.log(depth)
     let userInput = Number(depth)
     if (!Number.isInteger(userInput) || userInput < 1){
       setResult("Please input a positive integer.")
