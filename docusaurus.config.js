@@ -8,7 +8,7 @@ module.exports = {
       async: true,
     }
   ],
-  title: 'Swarm Bee Client',
+  title: 'Swarm Documentation',
   tagline: 'Welcome to the Swarm',
   url: 'https://docs.ethswarm.org',
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
