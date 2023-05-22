@@ -16,9 +16,9 @@ Thanks for being here with us, making a difference, we appreciate you! 🧡
 
 ## Links
 
-[Twitter](https://twitter.com/ethswarm)
-[Discord server](https://discord.gg/wdghaQsGq5)
-[Reddit](https://www.reddit.com/r/ethswarm/)
-[GitHub](https://github.com/ethersphere)
-[Medium](https://ethswarm.medium.com/)
-[Homepage](https://www.ethswarm.org/)
+[Twitter](https://twitter.com/ethswarm)  
+[Discord server](https://discord.gg/wdghaQsGq5)  
+[Reddit](https://www.reddit.com/r/ethswarm/)  
+[GitHub](https://github.com/ethersphere)  
+[Medium](https://ethswarm.medium.com/)  
+[Homepage](https://www.ethswarm.org/)  

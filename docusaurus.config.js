@@ -56,8 +56,8 @@ module.exports = {
               label: 'Ecosystem',
             },
             {
-              to: 'docs/learn/terminology',
-              label: 'Terminology',
+              to: 'docs/learn/glossary',
+              label: 'Glossary',
             },
             {
               to: 'docs/learn/faq',
@@ -80,8 +80,16 @@ module.exports = {
               label: 'Install'
             },
             {
+              to: 'docs/desktop/configuration',
+              label: 'Configuration'
+            },
+            {
               to: 'docs/desktop/access-content',
               label: 'Access Content'
+            },
+            {
+              to: 'docs/desktop/postage-stamps',
+              label: 'Postage Stamps'
             },
             {
               to: 'docs/desktop/upload-content',
@@ -90,14 +98,6 @@ module.exports = {
             {
               to: 'docs/desktop/backup-restore',
               label: 'Backup and Restore'
-            },
-            {
-              to: 'docs/desktop/configuration',
-              label: 'Configuration'
-            },
-            {
-              to: 'docs/desktop/postage-stamps',
-              label: 'Postage Stamps'
             },
             {
               to: 'docs/desktop/publish-a-website',

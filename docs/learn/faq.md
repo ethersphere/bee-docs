@@ -141,8 +141,6 @@ Due to its lightweight nature, an ultra- light and the light node can be run on 
 
 Typically, each node requires around 10 megabits per second (Mbps) of bandwidth during normal operation.
 
-####
-
 
 #### Setting up
 
@@ -169,22 +167,6 @@ It is also possible to build from the source.
 You can find your private key in:
 
 /Users/username/Library/Application Support/Swarm Desktop/data-dir/swarm.key
-
-#### Staking
-
-###
-
-
-###
-
-
-###
-
-
-###
-
-
-###
 
 
 ### Key Management
