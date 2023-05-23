@@ -8,13 +8,13 @@ id: advanced
 ## Abstract
 
 An attempt to describe the desired, theoretical behavior of the main DISC protocols.
-We'll begin with describing Retrieval, PushSync, PullSync and Kademlia communication protocols but eventually this should be expanded to cover all protocols fully.
+We'll begin by describing Retrieval, PushSync, PullSync and Kademlia communication protocols but eventually this should be expanded to cover all protocols fully.
 Ideally we should always think in terms of how we could design and implement the protocols in such a way that simultations could be written allowing us to validate the protocol rules and behaviour, as well as allow us to test any potential improvements.
 
 ## Introduction
 
 A communications protocol is a set of formal rules describing how to transmit or exchange data, especially across a network.
-While ideally specialized tools (TLA+ etc) could be employed to verify the correctness of the specifications, at this point in time, with the resources at hand we might want to limit ourselves with building some kind of a simultation framework that would allow us to validate how a collection of in-memory nodes talk to each-other using a given protocol.
+While ideally specialized tools (TLA+ etc) could be employed to verify the correctness of the specifications, at this point in time, with the resources at hand we might want to limit ourselves with building some kind of a simultation framework that would allow us to validate how a collection of in-memory nodes perform when collaborating via a given protocol.
 
 ## Proposal
 
@@ -47,6 +47,8 @@ Backwarding and Forwarding are both notions defined on a keep alive network of p
 
 The key elemement of these notions is that the decision about the next action is being done on the node level, which will select the next peers(s) and delegate them with handling the request.
 
+The simplest representation of this would be a recursive algoritm that with every iteration gets closer to the target address and stops when it runs out of peers.
+
 ### Requirements
 
 - We need a way to ensure that this request has not been received recently (enough) before. Are we dealing with a spamming attack?
@@ -56,7 +58,7 @@ The key elemement of these notions is that the decision about the next action is
 - In the case when we are a “backwarder” node, we might consider a decision strategy on whether we want to cache the chunk in the event of a repeated request.
 - To every forwarding/backwarding exchange we attach an incentivisation action that would take into account variables like the success of the action and the cost of performing the action.
 - We need to design the optimal incentivisation scheme, to determine the optimal payment/settlement frequency and correctness of computation of the payment/charged amount. This also applies to both chunk storage scheme and the relayed request-response scheme.
-- We need to have a sensible strategy when it comes to waiting for a node to respond to our request; as a backwarder, we want to make our best effort to retrieve the chunk but without waiting for an excessive amount of time, which would lead to waste of resources.
+- We need to have a sensible strategy when it comes to waiting for a peer to respond to our retrieval request; as a backwarder, we want to make our best effort to retrieve the chunk but without waiting for an excessive amount of time, which would lead to waste of resources.
 
 ### Protocol breach
 
@@ -89,11 +91,6 @@ step II
 6) if the peer times out responding to our request we log the attempt details and repeat step II against a new peer
 ```
 
-:::info
-To consider: using a ring buffer as the data structure for keeping track of the past retrieval request (requestLog).
-This would enable us to have a predictable memory allocation strategy.
-:::
-
 ### Simplified request chunk sequence diagram
 
 ```mermaid
@@ -124,6 +121,56 @@ flowchart TD
     K --> |Invalid chunk| N1(Punish peer) --> J
     K --> |Success| R(Return the chunk to the sender) --> S
 ```
+
+### Sample Implementation
+
+A node is comprised of:
+
+- a request log component.
+- a Kademlia table component.
+- a persistence component.
+- a component for collecting performance statistics.
+- a component responsible for accounting.
+  
+The request log component is something like a ring buffer data structure that captures last N requests with some aditional info like the time of the request and the result of the action.
+
+The Kademlia table is described in this chapter: <a href="/the-book-of-swarm.pdf#subsection.2.1.3" target="_blank" rel="noopener noreferrer">2.1.3 Kademlia routing</a>
+
+When a retrieval request is received it will check if the same exact request has been seen in the last `T` seconds, and depending on the result the request can be accepted, rejected and/or the requester can be punished.
+
+If the request is accepted then the request log is updated by overwriting its the oldest record with the data of the current request.
+
+Next, the persistence component will be invoked to fetch the given chunk from the local disk. If no such address was found, the chunk is requested from the network.
+
+A list of peers is requested from the Kademlia table following some criteria, for simplicity we could use the proximity order alone.
+
+Next we request the chunk from the peer whose address is closest to the chunk address.
+
+If the peer responds within given time and the response contains a valid chunk - we update the request log and return the chunk to the requester.
+
+If the peer fails to produce a valid chunk, we pick the next two peer in order of their closeness to the chunk and repeat the previous step towards each of them in parallel.
+
+If both of them fail to succeed within given time then we double the number of peers (4) and repeat the process.
+
+The process will stop when we run out of peers or one of them manages the return a valid chunk.
+
+Once the process stops the request log is updated once again with the result of the action.
+
+If the request was completed successfully the chunk can be stored in a 'cache' compartment of the persistence component, in the event of future requests of this sort.
+
+The performance statistics and accounting components can be implemented by using the adapter design pattern, where every retrieval request is wrapped in such a way that the low level logic does not known about higher level cross-cutting concerns.
+
+The aformentioned components collaborate with the persistence component to store the performance metrics as well as the accounting data on disk.
+
+Additionally, the Kademlia component can be wrapped in the performance module in such a way that the sole responsibility of the Kademlia table is to take care of the topology in terms of distances and saturation.
+
+So when we request a list of peers from the wrapped Kademlia, the returned list of peers is further sorted by the performance layer that has the knowledge about the reliability of the given peers.
+
+The output is a list of peers that has been sorted twice, first by their proximity to an address and then by their performance and reliability rating.
+
+The resulting component can be further wrapped in the accounting module, so that it removes the peers to whom we are over indebted.
+
+The resulting clean separation of concerns leeds to a code structure that is easier to read and scrutinize, and generally is a more 'future-proof' solution since each component can be changed and tested individually.
 
 ### Appendix
 
