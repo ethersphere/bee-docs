@@ -177,6 +177,16 @@ The resulting clean separation of concerns leeds to a code structure that is eas
 The protobuf definitions
 
 ```protobuf
+// Copyright 2020 The Swarm Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+package retrieval;
+
+option go_package = "pb";
+
 message Request {
   bytes Addr = 1;
 }
@@ -185,6 +195,7 @@ message Delivery {
   bytes Data = 1;
   bytes Stamp = 2;
 }
+
 ```
 
 ## Pushsync
