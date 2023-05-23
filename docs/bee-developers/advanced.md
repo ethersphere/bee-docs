@@ -124,7 +124,7 @@ flowchart TD
 
 ### Sample Implementation
 
-A node is comprised of:
+A node that complies with the simplest version of the retrival protocol is comprised of:
 
 - a request log component.
 - a Kademlia table component.
