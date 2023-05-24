@@ -108,7 +108,7 @@ Your key can be found within the `keys/` folder of your datadir. For instance,
 on a normal Ubuntu/Debian install you will find it at:
 
 ```sh
-sudo cat /var/lib/bee/keys/libp2p.key
+sudo cat /var/lib/bee/keys/swarm.key
 ```
 
 Once you have acquired your wallet file and its password, you may use any
