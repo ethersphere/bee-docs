@@ -94,10 +94,6 @@ follows:
 
 # Accessing Your Node's Wallet
 
-When your Bee node is installed, an Ethereum wallet is created. This wallet is
-used by Bee to interact with the blockchain (e.g. for sending and receiving
-cheques, or for making purchases of postage stamps, etc.).
-
 If you wish to interact with the node's wallet directly (e.g. by importing it
 into a wallet app like [MetaMask](https://metamask.io/)), then you can access
 the wallet file as follows.
