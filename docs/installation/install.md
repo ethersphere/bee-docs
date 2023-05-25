@@ -6,11 +6,7 @@ id: install
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Swarm thrives on decentralisation. is designed so that it
-works best when many individuals contribute to the health and
-distributed nature of the network by running Bee nodes.
-
-It is easy to set up Bee on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations).
+It is easy to set up a Bee light node on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations). When running a full node however, it's important to meet the minimum required specifications.
 
 ## Recommended Hardware Specifications
 
