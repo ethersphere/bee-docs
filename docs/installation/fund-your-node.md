@@ -109,17 +109,22 @@ sudo cat /var/lib/bee/password
 
 # Testnet
 
-Your Bee node needs gETH and gBZZ to be able to properly interact with the test network. In order to receive these, you will need to sign into our Discord and request your gETH and gBZZ test tokens from the [#faucet](https://discord.gg/TVgKhsGEbc) channel, using your node's Ethereum address.
+A Bee node needs gETH and gBZZ in its wallet to be able to properly
+interact with the test network. One way to acquire these funds is to
+sign into our Discord and request gETH and gBZZ test tokens from the
+*faucet bot* to your node's Ethereum address.
 
-To work out what your node's Ethereum address is, please consult your relevant installation guide or check your logs!
+To find out what your node's Ethereum address is, please consult the
+installation guide or check the logs!
 
-Once you have determined your Ethereum address, join our [Discord
-server](https://discord.gg/wdghaQsGq5) and navigate to the
-[#faucet](https://discord.gg/TVgKhsGEbc) channel. After you have [verified your
-username](https://discord.gg/tXGPdzZQaV) (and say hi! 👋), use our Faucet Bot
-to get your test tokens.
+Once you have the address:
 
-Here you must **type** (not copy paste) the following, replacing the address with your own:
+1. join our [Discord server](https://discord.gg/wdghaQsGq5)
+2. navigate to the [#faucet](https://discord.gg/TVgKhsGEbc) channel
+3. [verify your username](https://discord.gg/tXGPdzZQaV)
+4. request test tokens from the *faucet bot*
+
+To request the tokens you must **type** (not copy paste) the following, replacing the address with your own:
 
 ```
 /faucet sprinkle 0xabeeecdef123452a40f6ea9f598596ca8556bd57
