@@ -50,6 +50,17 @@ npm run build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+
+### Note about lunr search plugin
+
+The lunr search plugin relies on manual [swizzling](https://docusaurus.io/docs/next/swizzling), which ejects the SearchBar component from the theme to allow for customization. Upgrading the Docusaurus theme WILL NOT upgrade swizzled components. This means upgrading the theme could break the search bare. Therefore whenever you upgrade the theme, make sure to delete the old swizzleed SearchBar component at src/theme/SearchBar and swizzle it again using this command:
+
+```
+npm run swizzle docusaurus-lunr-search SearchBar -- --eject --danger
+```
+See the documentation for the above command and the plugin at its github repo [here](https://github.com/praveenn77/docusaurus-lunr-search).
+
+
 ## Bumping Version
 
 Don't forget to find and replace the version number for the whole of the docs folder. 

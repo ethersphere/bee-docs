@@ -23,6 +23,10 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
   projectName: 'bee', // Usually your repo name.
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
     colorMode: {
       defaultMode: 'dark',

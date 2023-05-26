@@ -94,61 +94,37 @@ follows:
 
 # Accessing Your Node's Wallet
 
-When your Bee node is installed, an Ethereum wallet is created. This wallet is
-used by Bee to interact with the blockchain (e.g. for sending and receiving
-cheques, or for making purchases of postage stamps, etc.).
+If you wish to interact with the node's wallet directly then you can
+import it into a wallet app like [MetaMask](https://metamask.io/). To
+do that you will need the wallet file and its password. A Bee node's
+wallet key is stored within the `keys/` folder in its datadir, in JSON
+format, and its password should be in a file nearby it.
 
-If you wish to interact with the node's wallet directly (e.g. by importing it
-into a wallet app like [MetaMask](https://metamask.io/)), then you can access
-the wallet file as follows.
-
-## Debian/Ubuntu Installation
-
-### With Bee Clef
-
-:::info
-Bee Clef is deprecated and is no longer under active development. It is not required for running a Bee node.
-:::
-
-Your encrypted wallet file can be found as in this example:
+For example on Debian or Ubuntu:
 
 ```sh
-sudo ls /var/lib/bee-clef/keystore
-sudo cat /var/lib/bee-clef/keystore/UTC--2021-10-08T11-23-20.885085712Z--8789eb182fb94741ef65e29e0879d5a8bb721b9b
+sudo cat /var/lib/bee/keys/swarm.key
+sudo cat /var/lib/bee/password
 ```
-
-And decrypted using the automatically generated password found at:
-
-```sh
-sudo cat /var/lib/bee-clef/password
-```
-
-### Without Bee Clef
-
-Your key can be found within the `keys/` folder of your datadir. For instance,
-on a normal Ubuntu/Debian install you will find it at:
-
-```sh
-sudo cat /var/lib/bee/keys/libp2p.key
-```
-
-Once you have acquired your wallet file and its password, you may use any
-Ethereum wallet software such as [MetaMask](https://metamask.io/) to interact
-with your wallet.
 
 # Testnet
 
-Your Bee node needs gETH and gBZZ to be able to properly interact with the test network. In order to receive these, you will need to sign into our Discord and request your gETH and gBZZ test tokens from the [#faucet](https://discord.gg/TVgKhsGEbc) channel, using your node's Ethereum address.
+A Bee node needs gETH and gBZZ in its wallet to be able to properly
+interact with the test network. One way to acquire these funds is to
+sign into our Discord and request gETH and gBZZ test tokens from the
+*faucet bot* to your node's Ethereum address.
 
-To work out what your node's Ethereum address is, please consult your relevant installation guide or check your logs!
+To find out what your node's Ethereum address is, please consult the
+installation guide or check the logs!
 
-Once you have determined your Ethereum address, join our [Discord
-server](https://discord.gg/wdghaQsGq5) and navigate to the
-[#faucet](https://discord.gg/TVgKhsGEbc) channel. After you have [verified your
-username](https://discord.gg/tXGPdzZQaV) (and say hi! 👋), use our Faucet Bot
-to get your test tokens.
+Once you have the address:
 
-Here you must **type** (not copy paste) the following, replacing the address with your own:
+1. join our [Discord server](https://discord.gg/wdghaQsGq5)
+2. navigate to the [#faucet](https://discord.gg/TVgKhsGEbc) channel
+3. [verify your username](https://discord.gg/tXGPdzZQaV)
+4. request test tokens from the *faucet bot*
+
+To request the tokens you must **type** (not copy paste) the following, replacing the address with your own:
 
 ```
 /faucet sprinkle 0xabeeecdef123452a40f6ea9f598596ca8556bd57
