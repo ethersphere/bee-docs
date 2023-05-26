@@ -9,7 +9,7 @@ When a light node is requesting data from the network - it will not benefit from
 
 #### Configuration
 
-To run Bee as a light node `full-node` must be set to `false` and `swap-enable` must be set to `true`, and a stable Gnosis Chain RPC endpoint URL must be specified with `blockchain-rpc-endpoint` in the [configuration](/docs/working-with-bee/configuration).
+To run Bee as a light node `full-node` must be set to `false` and `swap-enable` must be set to `true`, and a stable Gnosis Chain RPC endpoint URL must be specified with `blockchain-rpc-endpoint` in the [configuration](/docs/bee/working-with-bee/configuration).
 
 #### Mode of Operation
 

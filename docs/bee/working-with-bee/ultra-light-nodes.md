@@ -18,7 +18,7 @@ Make sure you set the `swap-enable` configuration parameter to `false`, otherwis
 #### Mode of Operation
 
 The target audience for this mode of operations are users who want to try out running a node but don't
-want to go through the hassle of blockchain onboarding. Ultra-light nodes will be able to download data as long as the data consumed does not exceed the payment threshold (`payment-threshold` in [configuration](/docs/working-with-bee/configuration)) set by peers they connect to.
+want to go through the hassle of blockchain onboarding. Ultra-light nodes will be able to download data as long as the data consumed does not exceed the payment threshold (`payment-threshold` in [configuration](/docs/bee/working-with-bee/configuration)) set by peers they connect to.
 
 Running Bee without a connected blockchain backend, however, imposes some limitations:
 
