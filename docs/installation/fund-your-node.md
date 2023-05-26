@@ -94,22 +94,18 @@ follows:
 
 # Accessing Your Node's Wallet
 
-If you wish to interact with the node's wallet directly (e.g. by importing it
-into a wallet app like [MetaMask](https://metamask.io/)), then you can access
-the wallet file as follows.
+If you wish to interact with the node's wallet directly then you can
+import it into a wallet app like [MetaMask](https://metamask.io/). To
+do that you will need the wallet file and its password. A Bee node's
+wallet key is stored within the `keys/` folder in its datadir, in JSON
+format, and its password should be in a file nearby it.
 
-## Debian/Ubuntu Installation
-
-Your key can be found within the `keys/` folder of your datadir. For instance,
-on a normal Ubuntu/Debian install you will find it at:
+For example on Debian or Ubuntu:
 
 ```sh
 sudo cat /var/lib/bee/keys/swarm.key
+sudo cat /var/lib/bee/password
 ```
-
-Once you have acquired your wallet file and its password, you may use any
-Ethereum wallet software such as [MetaMask](https://metamask.io/) to interact
-with your wallet.
 
 # Testnet
 
