@@ -5,40 +5,64 @@ id: uninstalling-bee
 
 ## Uninstalling Bee
 
-If you need to remove Bee, you may simply run the below commands.
+Choose the appropriate uninstall method based on the install method used:
 
-### Ubuntu / Debian / Raspbian
+### Package Manager Install
 
-:::danger
-Uninstalling Bee will also delete Bee and Bee Clef data! Make sure you [make backups](/docs/bee/working-with-bee/backups) so you don't lose your keys and data.
-:::
+This method can be used for package manager based [installs](/docs/bee/installation/install#package-manager-install-recommended-method) of the official Debian, RPM, and Homebrew packages.
+
+#### Debian
 
 ```bash
 sudo apt-get remove bee
+```
+
+If Clef (deprecated) was used, remove Clef.
+:::danger
+This will delete your keys, [make backups](/docs/bee/working-with-bee/backups).
+:::
+```bash
 sudo apt-get remove bee-clef
 ```
 
-### Centos
-
-:::danger
-Uninstalling Bee will also delete Bee and Bee Clef data! Make sure you [make backups](/docs/bee/working-with-bee/backups) so you don't lose your keys and data.
-:::
+#### RPM
 
 ```bash
 sudo yum remove bee
+```
+
+If Clef (deprecated) was used, remove Clef.
+:::danger
+This will delete your keys, [make backups](/docs/bee/working-with-bee/backups) .
+:::
+Remove Clef:
+```bash
 sudo yum remove bee-clef
 ```
 
-## Data Locations
+### Binary Install
+If Bee is installed using the [automated shell script](/docs/bee/installation/install#shell-script-install-alternate-method) or by [building from source](/docs/bee/installation/build-from-source), Bee can be uninstalled by directly removing the installed file.
 
-### Bee Clef
+```bash
+sudo rm `/usr/local/bin/bee`
+```
 
-Configuration files are stored in `/etc/bee-clef/`
+## Remove Bee Data Files
 
-Key material and other data is stored in `/var/lib/bee-clef/`
+To completely remove all Bee files from your system you will also need to remove the config and data files. 
+
+:::danger
+Node keys, password, chunks and state files are stored in the data folder. [Make backups](/docs/bee/working-with-bee/backups) of your data folder to prevent losing keys and data. 
+:::
 
 ### Bee
 
-Configuration files are stored in `/etc/bee/`
+**Config folder:** Configuration file is stored in `/etc/bee/`
 
-State, chunks and other data is stored in `/var/lib/bee/`
+**Data folder:** State, keys, chunks, and other data are stored in `/var/lib/bee/`
+
+### Bee Clef (Deprecated)
+
+**Config folder:** Configuration file is stored in `/etc/bee-clef/`
+
+**Data folder:** Key material and other data are stored in `/var/lib/bee-clef/`

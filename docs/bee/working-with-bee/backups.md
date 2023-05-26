@@ -29,9 +29,9 @@ It may also be useful to include the `bee.yaml` config file in a backup so that 
 /etc/bee
 ```
 
-### Shell Script Install
+### Binary package install
 
-For a [shell script installation](/docs/bee/installation/manual) the data directory by default is located at:
+If you installed Bee using the [automated shell script](/docs/bee/installation/install#shell-script-install-alternate-method) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
 
 ```bash
 /home/<user>/.bee
@@ -88,7 +88,7 @@ The `keys` directory contains three key files: `libp2p_v2.key`, `pss.key`, and `
 The `swarm.key` file allows access to Bee node's Gnosis account. If the key is lost or stolen it could lead to the loss of all assets secured by that key. Multiple backups should be kept in secure locations to prevent loss of assets or unauthorized access.
 :::
 
-If using **bee-clef**, see below for information on how to backup the node.
+If using **bee-clef**, see below for information on how to back up the node.
 
 :::info
 To use `swarm.key` to manage the Gnosis account for a node through Metamask or other wallets,[exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) can be used to
@@ -146,8 +146,8 @@ Before restoring, make sure to check for any old node data at `/var/lib/bee` fro
 1. Install Bee. See [install](../installation/install) page for more info:
 
     ```
-    wget https://github.com/ethersphere/bee/releases/download/v1.13.0/bee_1.13.0_amd64.deb
-    sudo dpkg -i bee_1.13.0_amd64.deb
+    wget https://github.com/ethersphere/bee/releases/download/v1.16.0/bee_1.16.0_amd64.deb
+    sudo dpkg -i bee_1.16.0_amd64.deb
     ```
     Edit `bee.yaml` to include Gnosis Chain RPC endpoint: 
     ```

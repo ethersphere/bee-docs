@@ -31,7 +31,7 @@ Prerequisites for installing direct from source are:
 3. Checkout the required version:
 
    ```bash
-   git checkout v1.13.0
+   git checkout v1.16.0
    ```
 
 4. Build the binary:
@@ -47,7 +47,7 @@ Prerequisites for installing direct from source are:
    ```
 
    ```
-   1.13.0
+   1.16.0
    ```
 
 6. (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`

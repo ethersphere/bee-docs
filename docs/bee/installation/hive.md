@@ -3,13 +3,9 @@ title: Hive
 id: hive
 ---
 
-:::tip
-We recommend even our most 1337 readers go through a [single installation](/docs/bee/installation/install) first to get a taste of Bee, and to understand the nuances of the implementations. 👾
-:::
-
 Because of how the swarm is structured, we recommend that users
 wishing to scale up their Bee operation, or set up a commercial Bee
-hive should seek to run many instances of Bee simulataneously. Read <a
+hive should seek to run many instances of Bee simultaneously. Read <a
 href="/the-book-of-swarm.pdf" target="_blank" rel="noopener
 noreferrer">The Book of Swarm</a> for more information on how the
 swarm comes together.
@@ -47,4 +43,4 @@ Configure your nodes as desired, but ensure that the values `api-addr`, `data-di
 
 ### Monitoring
 
-See the monitoring section on how to access Bee's internal metrics! Share your community creations (like [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel of our Discord server so we can add you to our list of all things that are [awesome](/docs/community/awesome-swarm) and Swarm. 🧡
+See the monitoring section on how to access Bee's internal metrics! Share your community creations (like [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel of our Discord server so we can add you to our list of all things that are [awesome](/docs/learn/ecosystem/awesome) and Swarm. 🧡

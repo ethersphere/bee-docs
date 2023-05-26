@@ -7,15 +7,6 @@ module.exports = {
         'api-reference/api-reference'
       ],
     },
-    {
-      type: 'category',
-      label: 'Join Us',
-      items: [
-        'community/community',
-        'community/awesome-swarm'
-      ],
-      collapsed: false
-    }
   ],
   learn: [
     'learn/introduction',
@@ -77,7 +68,6 @@ module.exports = {
       items: [
         'bee/installation/quick-start',
         'bee/installation/install',
-        'bee/installation/manual',
         'bee/installation/build-from-source',
         'bee/installation/hive',
         'bee/installation/docker',

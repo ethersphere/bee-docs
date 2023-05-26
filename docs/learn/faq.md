@@ -156,7 +156,7 @@ Please see the detailed instructions in the documentation. (https://docs.ethswar
 
 ##### How do I Install Bee on Windows?
 
-You can install Bee node on Windows but it is not mentioned in the documentation, however, the steps are the same as the manual installation https://docs.ethswarm.org/docs/installation/manual you can download the binary from here
+You can install Bee node on Windows but it is not mentioned in the documentation, however, the steps are the same as the manual installation https://docs.ethswarm.org/docs/bee/installation/manual you can download the binary from here
 
 https://github.com/ethersphere/bee/releases and download one of the Windows releases.
 

@@ -6,7 +6,7 @@ id: glossary
 
 ## Swarm
 
-The Swarm network consists of a collection of [Bee nodes](terminology#bee) which work together to enable decentralised data storage for the next generation of censorship-resistant, unstoppable, serverless dapps. 
+The Swarm network consists of a collection of [Bee nodes](glossary#bee) which work together to enable decentralised data storage for the next generation of censorship-resistant, unstoppable, serverless dapps. 
 
 Swarm is also the name of the core organization that oversees the development and success of the Bee Swarm as a whole. They can be found at [ethswarm.org](https://www.ethswarm.org/).
 
@@ -16,7 +16,7 @@ Swarm is also the name of the core organization that oversees the development an
 
 ## Smart Contracts
 
-Smart contracts are automatically executable code which can be published on a blockchain to ensure immutability. Swarm uses smart contracts on Gnosis Chain for a variety of key aspects of the network including [incentivization](terminology#xbzz-token), [inter-node accounting](terminology#swap), and [payments for storage](terminology#postage-stamps).
+Smart contracts are automatically executable code which can be published on a blockchain to ensure immutability. Swarm uses smart contracts on Gnosis Chain for a variety of key aspects of the network including [incentivization](glossary#xbzz-token), [inter-node accounting](glossary#swap), and [payments for storage](glossary#postage-stamps).
 
 ## Bee
 
@@ -28,7 +28,7 @@ Bee nodes can act as both client and service provider, or solely as client or se
 
 An overlay network is a virtual or logical network built on top of some lower level "underlay" network. Examples include the Internet as an overlay network built on top of the telephone network, and the p2p Bittorent network built on top of the Internet. 
 
-With Swarm, the overlay network is based on a [Kademlia DHT](https://en.wikipedia.org/wiki/Kademlia) with overlay addresses derived from each node's [Gnosis](terminology#gnosis-chain) address. Swarm's overlay network addresses are permanent identifiers for each node and do not change over time.
+With Swarm, the overlay network is based on a [Kademlia DHT](https://en.wikipedia.org/wiki/Kademlia) with overlay addresses derived from each node's [Gnosis](glossary#gnosis-chain) address. Swarm's overlay network addresses are permanent identifiers for each node and do not change over time.
 
 ## Overlay Address
 
@@ -40,7 +40,7 @@ An underlay network is the low level network on which an overlay network is buil
 
 ## Swap
 
-Swap is the p2p accounting protocol used for Bee nodes. It allows for the automated accounting and settlement of services between Bee nodes in the Swarm network. In the case that services exchanged between nodes is balanced equally, no settlement is necessary. In the case that one node is unequally indebted to another, settlement is made to clear the node's debts. Two key elements of the Swap protocol are [cheques and the chequebook contract](terminology#cheques--chequebook).    
+Swap is the p2p accounting protocol used for Bee nodes. It allows for the automated accounting and settlement of services between Bee nodes in the Swarm network. In the case that services exchanged between nodes is balanced equally, no settlement is necessary. In the case that one node is unequally indebted to another, settlement is made to clear the node's debts. Two key elements of the Swap protocol are [cheques and the chequebook contract](glossary#cheques--chequebook).    
 
 ## Cheques & Chequebook
 
@@ -52,7 +52,7 @@ The cheque and chequebook system reduces the number of required on-chain transac
 
 ## Postage Stamps
 
-Postage stamps can be purchased with [xBZZ](terminology#xbzz-token) and represent the right to store data on the Swarm network. In order to upload data to Swarm, a user must purchase a batch of stamps which they can then use to upload an equivalent amount of data to the network. 
+Postage stamps can be purchased with [xBZZ](glossary#xbzz-token) and represent the right to store data on the Swarm network. In order to upload data to Swarm, a user must purchase a batch of stamps which they can then use to upload an equivalent amount of data to the network. 
 
 
 ## Kademlia
@@ -178,7 +178,7 @@ BZZ is Swarm's [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens
 
 xBZZ is BZZ bridged to to the [Gnosis Chain](https://www.gnosis.io/) using [OmniBridge](https://omni.gnosischain.com/bridge).
 
-It is used as payment for [postage stamps](terminology#postage-stamps) and as the unit of accounting between the nodes. It is used to incentivize nodes to provide resources to the Swarm.
+It is used as payment for [postage stamps](glossary#postage-stamps) and as the unit of accounting between the nodes. It is used to incentivize nodes to provide resources to the Swarm.
 
 ## DAI Token
 

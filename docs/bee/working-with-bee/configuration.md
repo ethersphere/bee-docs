@@ -4,129 +4,30 @@ id: configuration
 ---
 
 Bee is a very flexible piece of software, and can be configured in a variety of
-ways depending on your use case. This expanded section will cover
-configuration in detail.
+ways depending on your use case. This expanded section will cover configuration in detail. The default methods for setting configuration vary depending on the install and startup method used. There are two main methods of installing and running Bee.
 
-## Important Configuration Changes
 
-:::important
-Before starting Bee for the first time, there is _some_ configuration
-to do! Make sure you consider updating the recommended
-settings in the [installation guide](/docs/bee/installation/install)!
+1. Installing Bee as a Debian or RPM package and running it as a background service with `systemctl` (Linux) or `brew services` (MacOS). This is the recommended method for most users:
+
+1. Installing Bee binaries and running using the `bee start` command directly. This method should be used if the recommended method does not work or for a customized non-default setup.
+
+
+
+:::caution
+These two methods have [significant differences](/docs/bee/installation/install#note-on-startup-methods) and cannot not be used interchangeably. 
 :::
 
-## Specifying Configuration
 
-### Configuration Priority
+## Configuration for Bee Service
 
-Configuration is processed in the following ascending order of preference:
-
-1. Command Line Arguments
-2. Environment Variables
-3. Configuration File
-
-### Command Line Arguments
-
-Run `bee start --help` in your Terminal to list the available command line arguments as follows:
-
-  ```
-  Start a Swarm node
-
-  Usage:
-    bee start [flags]
-
-  Flags:
-        --admin-password string                   bcrypt hash of the admin password to get the security token
-        --allow-private-cidrs                     allow to advertise private CIDRs to the public network
-        --api-addr string                         HTTP API listen address (default ":1633")
-        --block-time uint                         chain block time (default 15)
-        --blockchain-rpc-endpoint string          rpc blockchain endpoint
-        --bootnode strings                        initial nodes to connect to
-        --bootnode-mode                           cause the node to always accept incoming connections
-        --cache-capacity uint                     cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
-        --cache-retrieval                         enable forwarded content caching (default true)
-        --chequebook-enable                       enable chequebook (default true)
-        --clef-signer-enable                      enable clef signer
-        --clef-signer-endpoint string             clef signer endpoint
-        --clef-signer-ethereum-address string     ethereum address to use from clef signer
-        --cors-allowed-origins strings            origins with CORS headers enabled
-        --data-dir string                         data directory (default "/home/noah/.bee")
-        --db-block-cache-capacity uint            size of block cache of the database in bytes (default 33554432)
-        --db-disable-seeks-compaction             disables db compactions triggered by seeks
-        --db-open-files-limit uint                number of open files allowed by database (default 200)
-        --db-write-buffer-size uint               size of the database write buffer in bytes (default 33554432)
-        --debug-api-addr string                   debug HTTP API listen address (default ":1635")
-        --debug-api-enable                        enable debug HTTP API
-        --full-node                               cause the node to start in full mode
-    -h, --help                                    help for start
-        --mainnet                                 triggers connect to main net bootnodes. (default true)
-        --nat-addr string                         NAT exposed address
-        --network-id uint                         ID of the Swarm network (default 1)
-        --p2p-addr string                         P2P listen address (default ":1634")
-        --p2p-ws-enable                           enable P2P WebSocket transport
-        --password string                         password for decrypting keys
-        --password-file string                    path to a file that contains password for decrypting keys
-        --payment-early-percent int               percentage below the peers payment threshold when we initiate settlement (default 50)
-        --payment-threshold string                threshold in BZZ where you expect to get paid from your peers (default "13500000")
-        --payment-tolerance-percent int           excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
-        --postage-stamp-address string            postage stamp contract address
-        --postage-stamp-start-block uint          postage stamp contract start block number
-        --pprof-mutex                             enable pprof mutex profile
-        --pprof-profile                           enable pprof block profile
-        --price-oracle-address string             price oracle contract address
-        --redistribution-address string           redistribution contract address
-        --resolver-options strings                ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
-        --restricted                              enable permission check on the http APIs
-        --resync                                  forces the node to resync postage contract data
-        --staking-address string                  staking contract address
-        --static-nodes strings                    protect nodes from getting kicked out on bootnode
-        --storage-incentives-enable               enable storage incentives feature (default true)
-        --swap-deployment-gas-price string        gas price in wei to use for deployment and funding
-        --swap-enable                             enable swap (default true)
-        --swap-endpoint string                    swap blockchain endpoint
-        --swap-factory-address string             swap factory addresses
-        --swap-initial-deposit string             initial deposit if deploying a new chequebook (default "0")
-        --swap-legacy-factory-addresses strings   legacy swap factory addresses
-        --token-encryption-key string             admin username to get the security token
-        --tracing-enable                          enable tracing
-        --tracing-endpoint string                 endpoint to send tracing data (default "127.0.0.1:6831")
-        --tracing-host string                     host to send tracing data
-        --tracing-port string                     port to send tracing data
-        --tracing-service-name string             service name identifier for tracing (default "bee")
-        --use-postage-snapshot                    bootstrap node using postage snapshot from the network
-        --verbosity string                        log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
-        --warmup-time duration                    time to warmup the node before some major protocols can be kicked off. (default 5m0s)
-        --welcome-message string                  send a welcome message string during handshakes
-
-  Global Flags:
-        --config string   config file (default is $HOME/.bee.yaml)
-```
+*Note that Bee is only set up to run as a service by default when it is [installed using one of the officially supported](/docs/bee/installation/install#package-manager-install-recommended-method) Linux Debian or RPM packages or the Homebrew installer for MacOS.*
 
 
-### Environment variables
+### Default Data and Config Directories
 
-Bee config may also be passed using environment variables.
+When running Bee as a service `/etc/bee/bee.yaml` is used as the default config directory and `/var/lib/bee` as the default data directory. 
 
-Environment variables are set as variables in your operating system's
-session or systemd configuration file. To set an environment variable,
-type the following in your terminal session.
-
-```bash
-export VARIABLE_NAME=variableValue
-```
-
-Verify if it is correctly set by running `echo $VARIABLE_NAME`.
-
-All available configuration options are available as `BEE` prefixed,
-capitalised, and underscored environment variables, e.g. `--api-addr` becomes `BEE_API_ADDR`.
-
-### Configuration file
-
-A YAML file can also be used for configuration. 
-
-On a new install of Bee a config file will be generated at `/etc/bee/bee.yaml`. It is the default location for the config file when running Bee as a service with `systemctl`. 
-
-The default for the config file when using `bee start` is `/home/<user>/.bee.yaml`, however this config file is not generated at install so it must first be [created](configuration#automatically-generate-a-config-file).
+### Change Default Config Directory
 
 Add the `--config` flag to `bee start` to specify a config file with another location or file name.
 
@@ -134,13 +35,55 @@ Add the `--config` flag to `bee start` to specify a config file with another loc
 bee start --config /<path-to-config>/<config-filename>.yaml
 ```
 
-#### Automatically generate a config file
+### Change Default Config
 
-Configuration files can be easily generated by simply substituting the `start` command with `printconfig` when starting Bee using the command line.
+Configuration for the Bee service should not be set through command line arguments and environment variables as it is with the `bee start` command. 
+
+To change configuration, simply edit the yaml file and restart Bee: 
+
+#### Linux
 
 ```bash
-bee printconfig &> bee-config.yaml
+sudo vi /etc/bee/bee.yaml
+sudo systemctl restart bee
 ```
+
+#### MacOS
+
+```bash
+vi /usr/local/etc/swarm-bee/bee.yaml
+brew services restart swarm-bee
+```
+
+### Manually generate config for Bee service
+
+If the config file is accidentally deleted or missing, it can be manually generated:
+
+```bash
+bee printconfig
+```
+Copy the output and save in `/etc/bee/bee.yaml`:
+```bash
+sudo vi /etc/bee/bee.yaml
+```
+
+
+## Configuration for *bee start*
+
+### Default Data and Config Directories
+
+The `bee start` command uses `~/.bee.yaml` as the default config directory and `~/.bee` as the default data directory.
+
+
+### Manually generate config for *Bee start*
+
+No configuration file is generated automatically at the default config directory for `bee start` during the Bee installation process so it must be manually generated. It can be easily generated with the following command:
+
+For `bee start`:
+```bash
+bee printconfig &> $HOME/.bee.yaml
+```
+
 
 This produces the following file contents, showing the default
 configuration of Bee:
@@ -234,28 +177,108 @@ password-file: /var/lib/bee/password
 # mainnet: false
 ```
 
-## Configuring Bee Installed Using a Package Manager
+### Configuration Priority
 
-Bee node's installed using package managers `apt-get` or `yum` are
-configured using a configuration file which is automatically generated
-during the installation process.
+Configuration is processed in the following ascending order of preference when using `bee start` to run a Bee node:
 
-To alter Bee's configuration, simply edit the configuration file as
-desired, and restart your Bee service.
+1. Command Line Arguments
+2. Environment Variables
+3. Configuration File
 
-### Linux
+### Command Line Arguments
 
-```bash
-sudo vi /etc/bee/bee.yaml
-sudo systemctl restart bee
+Run `bee start --help` in your Terminal to list the available command line arguments as follows:
+
+  ```
+  Start a Swarm node
+
+  Usage:
+    bee start [flags]
+
+  Flags:
+        --admin-password string                   bcrypt hash of the admin password to get the security token
+        --allow-private-cidrs                     allow to advertise private CIDRs to the public network
+        --api-addr string                         HTTP API listen address (default ":1633")
+        --block-time uint                         chain block time (default 15)
+        --blockchain-rpc-endpoint string          rpc blockchain endpoint
+        --bootnode strings                        initial nodes to connect to
+        --bootnode-mode                           cause the node to always accept incoming connections
+        --cache-capacity uint                     cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
+        --cache-retrieval                         enable forwarded content caching (default true)
+        --chequebook-enable                       enable chequebook (default true)
+        --clef-signer-enable                      enable clef signer
+        --clef-signer-endpoint string             clef signer endpoint
+        --clef-signer-ethereum-address string     ethereum address to use from clef signer
+        --cors-allowed-origins strings            origins with CORS headers enabled
+        --data-dir string                         data directory (default "/home/noah/.bee")
+        --db-block-cache-capacity uint            size of block cache of the database in bytes (default 33554432)
+        --db-disable-seeks-compaction             disables db compactions triggered by seeks
+        --db-open-files-limit uint                number of open files allowed by database (default 200)
+        --db-write-buffer-size uint               size of the database write buffer in bytes (default 33554432)
+        --debug-api-addr string                   debug HTTP API listen address (default ":1635")
+        --debug-api-enable                        enable debug HTTP API
+        --full-node                               cause the node to start in full mode
+    -h, --help                                    help for start
+        --mainnet                                 triggers connect to main net bootnodes. (default true)
+        --nat-addr string                         NAT exposed address
+        --network-id uint                         ID of the Swarm network (default 1)
+        --p2p-addr string                         P2P listen address (default ":1634")
+        --p2p-ws-enable                           enable P2P WebSocket transport
+        --password string                         password for decrypting keys
+        --password-file string                    path to a file that contains password for decrypting keys
+        --payment-early-percent int               percentage below the peers payment threshold when we initiate settlement (default 50)
+        --payment-threshold string                threshold in BZZ where you expect to get paid from your peers (default "13500000")
+        --payment-tolerance-percent int           excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
+        --postage-stamp-address string            postage stamp contract address
+        --postage-stamp-start-block uint          postage stamp contract start block number
+        --pprof-mutex                             enable pprof mutex profile
+        --pprof-profile                           enable pprof block profile
+        --price-oracle-address string             price oracle contract address
+        --redistribution-address string           redistribution contract address
+        --resolver-options strings                ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
+        --restricted                              enable permission check on the http APIs
+        --resync                                  forces the node to resync postage contract data
+        --staking-address string                  staking contract address
+        --static-nodes strings                    protect nodes from getting kicked out on bootnode
+        --storage-incentives-enable               enable storage incentives feature (default true)
+        --swap-deployment-gas-price string        gas price in wei to use for deployment and funding
+        --swap-enable                             enable swap (default true)
+        --swap-endpoint string                    swap blockchain endpoint
+        --swap-factory-address string             swap factory addresses
+        --swap-initial-deposit string             initial deposit if deploying a new chequebook (default "0")
+        --swap-legacy-factory-addresses strings   legacy swap factory addresses
+        --token-encryption-key string             admin username to get the security token
+        --tracing-enable                          enable tracing
+        --tracing-endpoint string                 endpoint to send tracing data (default "127.0.0.1:6831")
+        --tracing-host string                     host to send tracing data
+        --tracing-port string                     port to send tracing data
+        --tracing-service-name string             service name identifier for tracing (default "bee")
+        --use-postage-snapshot                    bootstrap node using postage snapshot from the network
+        --verbosity string                        log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
+        --warmup-time duration                    time to warmup the node before some major protocols can be kicked off. (default 5m0s)
+        --welcome-message string                  send a welcome message string during handshakes
+
+  Global Flags:
+        --config string   config file (default is $HOME/.bee.yaml)
 ```
 
-### MacOS
+### Environment variables
+
+Bee config may also be passed using environment variables.
+
+Environment variables are set as variables in your operating system's
+session or systemd configuration file. To set an environment variable,
+type the following in your terminal session.
 
 ```bash
-vi /usr/local/etc/swarm-bee/bee.yaml
-brew services restart swarm-bee
+export VARIABLE_NAME=variableValue
 ```
+
+Verify if it is correctly set by running `echo $VARIABLE_NAME`.
+
+All available configuration options are available as `BEE` prefixed,
+capitalised, and underscored environment variables, e.g. `--api-addr` becomes `BEE_API_ADDR`.
+
 
 ## Configuration Options
 
@@ -628,7 +651,7 @@ _default_ `false`
 
 Send tracing spans to the tracing service. More information on how to
 configure and visualize tracing data is available
-[here](/docs/develop/bee-developers/useful-dev-info).
+[here](/docs/develop/bee-developers/useful-dev-info#tracing).
 
 #### --tracing-endpoint
 
@@ -659,9 +682,10 @@ Bee service identifier in tracing spans.
 _default_ `""`
 
 As a spam prevention measure, for nodes which deployed their
-chequebook with v0.5.0 or before, specify `transaction` - the
-transaction hash of any Ethereum transaction on the Gnosis Chain
-network sent from the Bee node's Ethereum address.
+chequebook with v0.5.0 or before, specify `transaction` - [the
+transaction hash of any Ethereum transaction on the xDAI
+network](/docs/learn/FAQ#how-can-i-find-a-transaction-hash-for-the---transaction-configuration-parameter)
+sent from the Bee node's Ethereum address.
 
 #### --verbosity
 

@@ -33,7 +33,7 @@ docker run\
 ```
 
 :::info
-If starting your node for the first time, you will need to deploy a chequebook contract. See [Manual Installation](/docs/bee/installation/manual) for more info.
+If starting your node for the first time, you will need to deploy a chequebook contract. See [ installation](/docs/bee/installation/install) section for more info.
 :::
 
 To persist files, mount a local directory as follows and enter the
@@ -80,7 +80,7 @@ want to run.
 #### Specific Versions
 
 ```bash
-docker pull ethersphere/bee:1.13.0
+docker pull ethersphere/bee:1.16.0
 ```
 
 #### Using Tags
