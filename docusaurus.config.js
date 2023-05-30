@@ -15,7 +15,20 @@ module.exports = {
   baseUrl: '/',
   plugins: [
   require.resolve('docusaurus-lunr-search'),
-  'plugin-image-zoom'
+  'plugin-image-zoom',
+  [
+    '@docusaurus/plugin-client-redirects',
+    {
+      redirects: [
+        // /docs/oldDoc -> /docs/newDoc
+        {
+          to: '/',
+          from: '/docs',
+        },
+       
+      ],
+    },
+  ],
   ],
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'throw',
@@ -214,7 +227,7 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              href: 'https://blog.ethswarm.org',
+              href: 'https://blog.ethswarm.org/',
             },
             {
               label: 'GitHub',

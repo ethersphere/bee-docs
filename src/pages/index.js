@@ -11,7 +11,7 @@ function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
   return (
-    <Layout title="Hello" description="Hello React Page">
+    <Layout title="Welcome" description="Hello and welcome to Swarm! 🐝">
       <div className={styles.container}>
         <a className={styles.sectionButton} href="/docs/learn/introduction">
           <img className={styles.sectionImageLearn} src="img/learn.svg"></img>
