@@ -72,7 +72,7 @@ in one of our group channels:
 -   [Discord](https://discord.gg/wdghaQsGq5)
 -   [Twitter @ethswarm](https://twitter.com/ethswarm)
 -   [reddit channel](https://www.reddit.com/r/ethswarm/)
--   [Medium](https://ethswarm.medium.com/)
+-   [Blog](https://blog.ethswarm.org)
 
 ## Reporting a bug
 
