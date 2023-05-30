@@ -135,6 +135,7 @@ module.exports = {
         'develop/dapps-on-swarm/feeds',
         'develop/dapps-on-swarm/pss'
       ],
+      collapsed: false
     },
     {
       type: 'category',
@@ -143,6 +144,7 @@ module.exports = {
         'develop/bee-developers/useful-dev-info',
         'develop/bee-developers/bee-dev-mode'
       ],
+      collapsed: false
     },
 
   ]
