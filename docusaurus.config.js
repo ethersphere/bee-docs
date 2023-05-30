@@ -15,7 +15,20 @@ module.exports = {
   baseUrl: '/',
   plugins: [
   require.resolve('docusaurus-lunr-search'),
-  'plugin-image-zoom'
+  'plugin-image-zoom',
+  [
+    '@docusaurus/plugin-client-redirects',
+    {
+      redirects: [
+        // /docs/oldDoc -> /docs/newDoc
+        {
+          to: '/',
+          from: '/docs',
+        },
+       
+      ],
+    },
+  ],
   ],
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'throw',
@@ -207,10 +220,6 @@ module.exports = {
               label: 'Twitter',
               href: 'https://twitter.com/ethswarm',
             },
-            {
-              label: 'Medium',
-              href: 'https://ethswarm.medium.com/',
-            },
           ],
         },
         {
@@ -218,7 +227,7 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              href: 'https://medium.com/ethereum-swarm',
+              href: 'https://blog.ethswarm.org/',
             },
             {
               label: 'GitHub',
