@@ -8,12 +8,15 @@ module.exports = {
       async: true,
     }
   ],
-  title: 'Swarm Bee Client',
+  title: 'Swarm Documentation',
   tagline: 'Welcome to the Swarm',
   url: 'https://docs.ethswarm.org',
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
-  plugins: [require.resolve('docusaurus-lunr-search')],
+  plugins: [
+  require.resolve('docusaurus-lunr-search'),
+  'plugin-image-zoom'
+  ],
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'throw',
   onDuplicateRoutes: 'throw',
@@ -25,24 +28,129 @@ module.exports = {
   },
   themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
-    colourMode: {
-      defaultMode: 'dark'
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Swarm Bee',
+      title: '',
       logo: {
         alt: 'Swarm Logo',
-        src: 'img/swarm-logo-2.svg',
+        src: 'img/logo.svg',
+       
       },
       items: [
-        {
-          to: 'docs/',
-          activeBasePath: 'docs',
-          label: 'Get Started',
+        { 
+          type: 'dropdown',
+          activeBasePath: 'docs/learn',
+          label: 'Learn',
           position: 'left',
+          items: [
+            {
+              to: 'docs/learn/introduction',
+              label: 'Introduction',
+            },
+            {
+              to: 'docs/learn/technology/what-is-swarm',
+              label: 'Technology',
+            },
+            {
+              to: 'docs/learn/ecosystem/swarm-foundation',
+              label: 'Ecosystem',
+            },
+            {
+              to: 'docs/learn/glossary',
+              label: 'Glossary',
+            },
+            {
+              to: 'docs/learn/faq',
+              label: 'FAQ ',
+            }
+          ]
+        },
+        {
+          type: 'dropdown',
+          activeBasePath: 'docs/desktop',
+          label: 'Desktop',
+          position: 'left',
+          items: [
+            {
+              to: 'docs/desktop/introduction',
+              label: 'Introduction'
+            },
+            {
+              to: 'docs/desktop/install',
+              label: 'Install'
+            },
+            {
+              to: 'docs/desktop/configuration',
+              label: 'Configuration'
+            },
+            {
+              to: 'docs/desktop/access-content',
+              label: 'Access Content'
+            },
+            {
+              to: 'docs/desktop/postage-stamps',
+              label: 'Postage Stamps'
+            },
+            {
+              to: 'docs/desktop/upload-content',
+              label: 'Upload Content'
+            },
+            {
+              to: 'docs/desktop/backup-restore',
+              label: 'Backup and Restore'
+            },
+            {
+              to: 'docs/desktop/publish-a-website',
+              label: 'Publish a Website'
+            }
+          ]
+        },
+        {
+          type: 'dropdown',
+          activeBasePath: 'docs/bee',
+          label: 'Bee',
+          position: 'left',
+          items: [
+            {
+              to: 'docs/bee/installation/quick-start',
+              label: 'Installation'
+            },
+            {
+              to: 'docs/bee/working-with-bee/introduction',
+              label: 'Working With Bee'
+            },
+          ]
+        },
+        { 
+          type: 'dropdown',
+          activeBasePath: 'docs/develop',
+          label: 'Develop',
+          position: 'left',
+          items: [
+            {
+              to: 'docs/develop/introduction',
+              label: 'Introduction'
+            },
+            {
+              to: 'docs/develop/access-the-swarm/introduction',
+              label: 'Access the Swarm'
+            },
+            {
+              to: 'docs/develop/dapps-on-swarm/introduction',
+              label: 'Dapps on Swarm'
+            },
+            {
+              to: 'docs/develop/bee-developers/useful-dev-info',
+              label: 'Bee Developer Resources'
+            },
+          ]
         },
         // {
-        //   to: 'docs/installation/quick-start',
+        //   to: 'docs/bee/installation/quick-start',
         //   activeBasePath: 'docs',
         //   label: 'Installation',
         //   position: 'left',
@@ -53,17 +161,18 @@ module.exports = {
         //   label: 'Start Your Node',
         //   position: 'left',
         // },
+        // {to: 'blog', label: 'Blog', position: 'left'},
         {
           to: 'docs/api-reference/',
-          activeBasePath: 'docs',
+          activeBasePath: 'docs/api-reference',
           label: 'API Reference',
           position: 'left',
         },
-        // {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/ethersphere/bee',
-          label: 'GitHub',
           position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
@@ -71,10 +180,10 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Swarm',
+          title: 'Swarm Foundation',
           items: [
             {
-              label: 'Swarm',
+              label: 'Homepage',
               to: 'https://ethswarm.org',
             }
           ],
