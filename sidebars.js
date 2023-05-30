@@ -140,10 +140,10 @@ module.exports = {
       label: 'Bee Developers',
       items: [
         'develop/bee-developers/useful-dev-info',
-        'develop/bee-developers/bee-dev-mode'
+        'develop/bee-developers/bee-dev-mode',
+        'develop/bee-developers/advanced'
       ],
       collapsed: false
     },
-
   ]
 };
