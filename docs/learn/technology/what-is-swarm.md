@@ -5,7 +5,7 @@ id: what-is-swarm
 
 # What is Swarm?
 
-The complete vision of Swarm is described in detail in [The Book of Swarm](https://www.ethswarm.org/The-Book-of-Swarm.pdf) written by Swarm founder Viktor Tron. This documentation contains a high level overview of Swarm as described in The Book of Swarm. 
+The complete vision of Swarm is described in detail in [The Book of Swarm](https://www.ethswarm.org/The-Book-of-Swarm.pdf) written by Swarm founder Viktor Tron.
 
 Swarm is peer-to-peer network of nodes which work together to provide decentralised storage and communication infrastructure.
 
@@ -61,10 +61,9 @@ Swarm's distributed immutable storage provides several benefits, including data 
 
 The third part of Swarm is a component that provides high-level data access and defines APIs for base-layer features. This layer is responsible for providing an easy-to-use interface for developers to interact with Swarm's underlying storage and communication infrastructure.
 
-Swarm's high-level data access component provides APIs that allow developers to perform various operations on the network, including uploading and downloading data and searching for content. These APIs are designed to be simple and intuitive, making it easy for developers to build decentralised applications on top of Swarm.
+Swarm's high-level data access component provides APIs that allow developers to perform various operations on the network, including [uploading and downloading data](/docs/develop/access-the-swarm/upload-and-download) and searching for content. These APIs are designed to be simple and intuitive, making it easy for developers to build decentralised applications on top of Swarm.
 
 ### 4. Application Layer 
 
-The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use-cases. This layer is responsible for providing guidance to developers on how to build complex applications on top of Swarm's underlying infrastructure. This layer is not discussed in detail in The Book of Swarm, however it is covered in detail in other sections of this documentation site.
-
+The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use-cases. This layer is responsible for providing guidance to developers on [how to build complex applications](/docs/develop/introduction) on top of Swarm's underlying infrastructure. 
 

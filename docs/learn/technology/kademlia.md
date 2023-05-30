@@ -5,7 +5,7 @@ id: kademlia
 
 ### What is Kademlia?
 
-Kademlia is a distributed hash table (DHT) for decentralized peer-to-peer computer networks, which is designed to provide a more efficient and scalable means for node lookup and data storage across a distributed system. It was introduced by Petar Maymounkov and David Mazières in 2002 in a paper titled "Kademlia: A Peer-to-peer Information System Based on the XOR Metric."
+Kademlia is a distributed hash table (DHT) for decentralized peer-to-peer computer networks, which is designed to provide a more efficient and scalable means for node lookup and data storage across a distributed system. It was introduced by Petar Maymounkov and David Mazières in 2002 in a paper titled "Kademlia: A Peer-to-peer Information System Based on the XOR Metric." A version of Kademlia which has been specialized for data storage forms the basis of Swarm's [DISC storage model](/docs/learn/technology/DISC).
 
 ### Kademlia Distance
 
@@ -29,5 +29,5 @@ Kademlia has been used as the basis for various peer-to-peer applications, inclu
 
 ## How Swarm Uses Kademlia
 
-While Kadamlia and other DHTs are commonly used by decentralized data storage networks, they typically are used only for storing references to the data which is stored. Swarm's implementation of Kademlia differs in one very significant way: rather than just storing references to the data stored on the network, the data itself is broken into chunks and stored in Swarm's Kademlia DHT. Swarm uses Kademlia as a key building block of its DISC storage model. For more details, see the [DISC](/docs/learn/technology/DISC) section.
+While Kadamlia and other DHTs are commonly used by decentralized data storage networks, they typically are used only for storing references to where the data is stored. Swarm's implementation differs in that the data is broken into chunks and stored in the Kademlia DHT itself. Swarm uses Kademlia as a key building block of its DISC storage model. For more details, see the [DISC](/docs/learn/technology/DISC) section.
 
