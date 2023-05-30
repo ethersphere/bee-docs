@@ -20,5 +20,5 @@ Thanks for being here with us, making a difference, we appreciate you! 🧡
 [Discord server](https://discord.gg/wdghaQsGq5)  
 [Reddit](https://www.reddit.com/r/ethswarm/)  
 [GitHub](https://github.com/ethersphere)  
-[Medium](https://ethswarm.medium.com/)  
+[Blog](https://blog.ethswarm.org)  
 [Homepage](https://www.ethswarm.org/)  

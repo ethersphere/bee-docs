@@ -207,10 +207,6 @@ module.exports = {
               label: 'Twitter',
               href: 'https://twitter.com/ethswarm',
             },
-            {
-              label: 'Medium',
-              href: 'https://ethswarm.medium.com/',
-            },
           ],
         },
         {
@@ -218,7 +214,7 @@ module.exports = {
           items: [
             {
               label: 'Blog',
-              href: 'https://medium.com/ethereum-swarm',
+              href: 'https://blog.ethswarm.org',
             },
             {
               label: 'GitHub',
