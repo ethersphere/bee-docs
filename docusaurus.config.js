@@ -25,6 +25,10 @@ module.exports = {
           to: '/',
           from: '/docs',
         },
+        {
+          to: '/docs/bee/installation/quick-start',
+          from: '/docs/installation/quick-start',
+        }
        
       ],
     },
