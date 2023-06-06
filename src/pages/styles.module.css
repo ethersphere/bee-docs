@@ -12,6 +12,20 @@
   overflow: hidden;
 }
 
+.mainTitle {
+  text-align: center;
+}
+
+.subTitle {
+  max-width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.titleContainer {
+  padding-top: 40px;
+}
+
 @media screen and (max-width: 1000px) {
   .heroBanner {
     padding: 2rem;

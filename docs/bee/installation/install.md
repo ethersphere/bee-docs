@@ -228,7 +228,7 @@ To set your RPC endpoint provider, specify it in configuration for the `blockcha
 
 ```yaml
 ## bee.yaml
-blockchain-rpc-endpoint: https://gno.getblock.io/mainnet/?api_key=<<your-api-key>>
+blockchain-rpc-endpoint: https://gno.getblock.io/<<your-api-key>>/mainnet/
 ```
 ### Configure Swap Initial Deposit (Optional)
 

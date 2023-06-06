@@ -3,13 +3,13 @@ title: Ultra Light Nodes
 id: ultra-light-nodes
 ---
 
-:::danger
-When running without a blockchain connections, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
+:::info
+When running without a blockchain connection, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
 :::
 
 #### Configuration
 
-In order to run an ultra-light node use the same configurations as for the [light node](/docs/bee/working-with-bee/light-nodes) but leave the `blockchain-rpc-endpoint` configuration param value to empty (or just comment it out).
+In order to run an ultra-light node use the same configuration as for the [light node](/docs/bee/working-with-bee/light-nodes) but leave the `blockchain-rpc-endpoint` parameter value to empty (or just comment it out).
 
 :::caution
 Make sure you set the `swap-enable` configuration parameter to `false`, otherwise you will get an error.

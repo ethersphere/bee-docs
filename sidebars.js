@@ -71,7 +71,6 @@ module.exports = {
         'bee/installation/build-from-source',
         'bee/installation/hive',
         'bee/installation/docker',
-        'bee/installation/bee-clef',
         'bee/installation/connectivity',
         'bee/installation/fund-your-node',
       ],
