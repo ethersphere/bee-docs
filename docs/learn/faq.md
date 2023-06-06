@@ -213,7 +213,7 @@ The "context deadline exceeded" is a non critical warning. It means that a node 
 
 ### How do I set up a blockchain endpoint?
 
-We recommend you run your own [xDAI Node using Nethermind](https://www.xdaichain.com/for-validators/new-validator-process-flow/nethermind-node-setup).
+We recommend you run your own [Gnosis Node using Nethermind](https://docs.gnosischain.com/node/tools/sedge).
 
 - If you use "bee start"
 

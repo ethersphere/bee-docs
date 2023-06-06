@@ -12,6 +12,10 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout title="Welcome" description="Hello and welcome to Swarm! 🐝">
+      <div className={styles.titleContainer}>
+        <h1 className={styles.mainTitle}>Swarm Documentation</h1>
+        <p className={styles.subTitle}>Official documentation of the decentralised data storage and distribution protocol built to power the next generation of censorship-resistant, unstoppable, serverless dapps.</p>
+      </div>
       <div className={styles.container}>
         <a className={styles.sectionButton} href="/docs/learn/introduction">
           <img className={styles.sectionImageLearn} src="img/learn.svg"></img>

@@ -3,7 +3,7 @@ title: Light Nodes
 id: light-nodes
 ---
 
-:::danger
+:::info
 When a light node is requesting data from the network - it will not benefit from plausible deniability. This is because a light node does not forward on behalf of other nodes, and so it is always the _originator_ of the request.
 :::
 

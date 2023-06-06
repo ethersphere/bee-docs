@@ -48,7 +48,7 @@ value to zero. This means that your node's chequebook will not get funded with
 xBZZ, meaning that other nodes will only serve it within the free tier bandwidth
 threshold.
 
-Since gas fees on the [Gnosis Chain](https://www.xdaichain.com/) are very low,
+Since gas fees on the [Gnosis Chain](https://www.gnosis.io/) are very low,
 you won't need much xDAI either to get started. You may acquire a small amount
 for free by using the official Gnosis Chain xDAI faucet [xDAI Faucet](https://gnosisfaucet.com/). The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be
 more than enough to start up your node.
@@ -62,14 +62,14 @@ Ethereum address.
 If you want to run a full node, or upload a lot of content, then you may need
 more xDAI for gas. To acquire this, you may convert DAI on the main Ethereum
 network to xDAI using the
-[xDAI bridge](https://www.xdaichain.com/for-users/bridges/converting-xdai-via-bridge),
+[xDAI bridge](https://docs.gnosischain.com/bridges/tokenbridge/xdai-bridge),
 or buy xDAI
-[directly using fiat](https://www.xdaichain.com/for-users/get-xdai-tokens/buying-xdai-with-fiat).
+[directly using fiat](https://buyxdai.com/).
 
 You will also need to fund your node with more xBZZ for full speed access, or to
 purchase postage stamps to upload content. To bridge BZZ from the Ethereum
-mainet to the [Gnosis Chain](https://www.xdaichain.com/), you may use
-[OmniBridge](https://omni.xdaichain.com/bridge).
+mainet to the [Gnosis Chain](https://www.gnosis.io/), you may use
+[OmniBridge](https://omni.gnosischain.com/).
 
 To find out what your node's Ethereum address is, please consult your relevant
 installation guide or check your logs!
@@ -79,11 +79,11 @@ installation guide or check your logs!
 To interact with the BZZ ecosystem, you will need to make a couple of small
 configuration additions to your wallet software. In the case of e.g. MetaMask,
 you'll need to
-[add the Gnosis Chain network](https://www.xdaichain.com/for-users/wallets/metamask),
+[add the Gnosis Chain network](https://docs.gnosischain.com/tools/wallets/metamask/),
 and then
 [add a custom token](https://metamask.zendesk.com/hc/en-us/articles/360015489031-How-to-add-unlisted-tokens-custom-tokens-in-MetaMask).
 
-The canoncial addresses for the BZZ token on the various blockchains are as
+The canonical addresses for the BZZ token on the various blockchains are as
 follows:
 
 | Blockchain             | Contract address                                                                                                                       |

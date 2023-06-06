@@ -186,7 +186,7 @@ It is used as payment for [postage stamps](glossary#postage-stamps) and as the u
 
 ## xDai Token
 
-xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridged-tokens) to the [Gnosis Chain](https://www.xdaichain.com/) using [xDai Bridge](https://bridge.gnosischain.com/). It is also the native token of the Gnosis Chain, i.e. transaction fees are paid in xDai.
+xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridged-tokens) to the [Gnosis Chain](https://www.gnosis.io) using [xDai Bridge](https://bridge.gnosischain.com/). It is also the native token of the Gnosis Chain, i.e. transaction fees are paid in xDai.
 
 ## Goerli
 
