@@ -1,5 +1,5 @@
 ---
-title: Dapps On Swarm
+title: Introduction
 id: introduction
 ---
 

@@ -57,7 +57,7 @@ Postage stamps can be purchased with [xBZZ](glossary#xbzz-token) and represent t
 
 ## Kademlia
 
-Kademlia is a distributed hash table (DHT) which is commonly used in distributed peer-to-peer networks. A hash table is a commonly used data structure where unique keys are mapped to values. A distributed hash table is a type of hash table which is designed to be stored across a decentralized group of nodes in order to be persistent and fault tolerant. It is designed so that each node is only required to store a subset of the total set of key / value pairs. One of the unique features of the Kademlia DHT design is a distance metric based on the XOR bitwise operation. It is referred to as "Kademlia distance" or just "distance". Swarm’s DISC uses a modified version of Kademlia which has been specialized for storage purposes, and understanding the concepts behind Kademlia is necessary for understanding Swarm.
+Kademlia is a distributed hash table (DHT) which is commonly used in distributed peer-to-peer networks. A distributed hash table is a type of hash table which is designed to be stored across a decentralized group of nodes in order to be persistent and fault tolerant. It is designed so that each node is only required to store a subset of the total set of key / value pairs. One of the unique features of the Kademlia DHT design is a distance metric based on the XOR bitwise operation. It is referred to as "Kademlia distance" or just "distance". Swarm’s DISC uses a modified version of Kademlia which has been specialized for storage purposes, and understanding the concepts behind Kademlia is necessary for understanding Swarm.
 
 ## Kademlia distance
 

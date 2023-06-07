@@ -8,9 +8,12 @@ id: introduction
 
 ## Swarm Whitepaper and The Book of Swarm
 
-What happens with a Bee node after startup? Want to know more about the Swarm technology behind Bee?
-Want to make your own client? Read the <a href="/swarm-whitepaper.pdf" target="_blank" rel="noopener noreferrer">Swarm Whitepaper</a> and for a deeper dive, <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a>,
-our 250 page guide to the tech underpinning the Swarm network.
+What happens with a Bee node after startup? Want to know more about the Swarm technology behind Bee? Want to make your own client? Head over to the [Learn section](/docs/learn/introduction) to start learning about the technology and concepts powering Swarm.
+
+
+For more in-depth documentation, you can get started with the <a href="/swarm-whitepaper.pdf" target="_blank" rel="noopener noreferrer">Swarm Whitepaper</a> and for an even deeper dive, <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a>, our 250 page guide to the tech underpinning the Swarm network.
+
+
 
 ## Bonding Curve
 
