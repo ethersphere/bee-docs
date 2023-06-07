@@ -9,7 +9,7 @@ DISC (Distributed Immutable Storage of Chunks) is a storage solution developed b
 
 Each node within Swarm connects to a certain number of its peers. When a chunk is first inserted into the network, the uploading node will send it to the peer which is closest (as measured by [proximity order](/docs/learn/glossary#proximity-order-po), which is based on a measure of [Kademlia distance](/docs/learn/glossary#kademlia-distance)) to the destination of the chunk, and then the recipient node will then forward the chunk on to its peer which is closest to the destination of the chunk, and so on until the chunk arrives at its destination. 
 
-One of the advantages of using Kademlia as a model for network topology is that both the number of forwarding "hops" required to to route a chunk to its destination and the number of peer connections required to maintain Kademlia topology are logarithmic to the size of the network (a minimum of two connections is required in order to maintain Kademlia topology in case of network churn - nodes dropping in and out of the network). This makes Swarm a highly scalable system which is efficient even at very large scales. 
+One of the advantages of using Kademlia as a model for network topology is that both the number of forwarding "hops" required to route a chunk to its destination and the number of peer connections required to maintain Kademlia topology are logarithmic to the size of the network (a minimum of two connections is required in order to maintain Kademlia topology in case of network churn - nodes dropping in and out of the network). This makes Swarm a highly scalable system which is efficient even at very large scales. 
 
 ### Neighborhoods
 
