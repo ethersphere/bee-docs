@@ -3,7 +3,7 @@ title: DISC
 id: disc
 ---
 
-DISC (Distributed Immutable Storage of Chunks) is a storage solution developed by Swarm based on a modified implementation of a [Kademlia DHT](/docs/learn/technology/kademlia  ) which has been specialized for data storage. DHTs are commonly used by decentralized p2p networks to store content ids mapped to a list of seeders who are able to serve that content. Swarm's implementation of a DHT differs significantly in that it stores the content in the DHT directly, rather than just storing a list of seeders who are able to serve the content. This approach allows for much faster and more efficient retrieval of data.
+DISC (Distributed Immutable Storage of Chunks) is a storage solution developed by Swarm based on a modified implementation of a [Kademlia DHT](/docs/learn/glossary#kademlia  ) which has been specialized for data storage. DHTs are commonly used by decentralized p2p networks to store content ids mapped to a list of seeders who are able to serve that content. Swarm's implementation of a DHT differs significantly in that it stores the content in the DHT directly, rather than just storing a list of seeders who are able to serve the content. This approach allows for much faster and more efficient retrieval of data.
 
 ### Chunks 
 
