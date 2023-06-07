@@ -9,7 +9,7 @@ To create a backup of your Bee node in Swarm Desktop, begin by navigating to the
 
 ![](/img/backup1.png)
 
-Navigate to the directory you just copied and create copies of the ***localstore***, ***statestore***, and ***keys*** folders and store them in a secure and private location. The ***keys*** folder is the most important folder as it contains the your Bee node's private keys, and you will lose access to your Bee node and its assets if those keys are lost.
+Navigate to the directory you just copied and create copies of the ***localstore***, ***statestore***, and ***keys*** folders and store them in a secure and private location. The ***keys*** folder is the most important folder as it contains your Bee node's private keys, and you will lose access to your Bee node and its assets if those keys are lost.
 
 ![](/img/backup7.png)
 
@@ -27,7 +27,7 @@ Your completed backup should have three folders and one file (***localstore***, 
 
 ## Restore from Backup
 
-To restore from backup, begin with a [new install](/docs/desktop/install) of Swarm Desktop. Once the installation process in finished, navigate to the ***Settings*** tab in the app and copy the install file directory as indicated in the ***Data DIR*** field:
+To restore from backup, begin with a [new install](/docs/desktop/install) of Swarm Desktop. Once the installation process is finished, navigate to the ***Settings*** tab in the app and copy the install file directory as indicated in the ***Data DIR*** field:
 
 ![](/img/backup1.png)
 
