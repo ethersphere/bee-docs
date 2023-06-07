@@ -154,7 +154,7 @@ module.exports = {
             },
             {
               to: 'docs/develop/dapps-on-swarm/introduction',
-              label: 'Dapps on Swarm'
+              label: 'Tools and Features'
             },
             {
               to: 'docs/develop/bee-developers/useful-dev-info',

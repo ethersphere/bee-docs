@@ -15,7 +15,6 @@ module.exports = {
       label: 'Technology',
       items: [
         'learn/technology/what-is-swarm',
-        'learn/technology/kademlia',
         'learn/technology/disc',
         'learn/technology/incentives',
         'learn/technology/pss',
@@ -125,7 +124,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Dapps on Swarm',
+      label: 'Tools and Features',
       items: [
         'develop/dapps-on-swarm/introduction',
         'develop/dapps-on-swarm/develop-on-bee',
