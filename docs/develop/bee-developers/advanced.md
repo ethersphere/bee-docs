@@ -89,8 +89,11 @@ Error states
 ### Incentivisation strategy
 
 An incentivisation strategy should be put in place in such way that it encourages honest collaboration between nodes.
+
 This implies that a given peer will make the best effort to satisfy any request while not allowing any abuse and waste of its resources.
+
 Having an accounting component that would keep track of the exchange activity between peers ensures that we do not allow excessive freeloading from the misbehaving peers.
+
 Having a granular punishment strategy ensures that the peers who misbehave perhaps due to network latencies will not be sanctioned to the same extent as peers who engage in grave protocol breaches, but are given a chance to "clean up their act"
 
 TBD
@@ -150,12 +153,48 @@ message Delivery {
 
 ## Pushsync
 
-Appendix: the protobuf definitions
+Pushsync protocol is responsible for ensuring delivery of the chunk to its prescribed storer after it has been uploaded to any arbitrary node.
+
+It works in a similar way to the Retrieval protocol in the sense that the chunk is being passed to a peer whose address is closest to the chunk address and a custody receipt is received in response.
+
+Then the same process is repeated until the chunk eventually reaches the storer node located in a certain "neighborhood".
+
+Since the Pushsync protocol is a "mirror" version of the Retrieval protocol - it ensures that a successfully uploaded chunk is retrievable from the same "neighborhood" by the virtue of the fact that nodes in a neighborhood are connected to each other.
+
+### Appendix: the protobuf definitions
 
 ## Pullsync
 
-Appendix: the protobuf definitions
+### Appendix: the protobuf definitions
 
 ## Kademlia
 
-Appendix: the protobuf definitions
+Kademlia topology is a critical component used by all DISC protocols whose purpose is to route messages between nodes in a network using overlay addressing.
+
+The message routing happens in such a fashion that with every network hop we will get closer to the target node, specifically at half of the distance covered by previous hop.
+
+Swarm uses the recursive/forwarding style of Kademlia. This approach implies that every forwarding node - once it received a request - will keep an in-memory record that captures the request related information (requester, time of the request etc.) until the request is satisfied, rejected or times out.
+
+Because a forwarder can not reliably tell how much time the downstream peer will need to satisfy the request - the choice of a resonable value for waiting period is a point of contention.
+
+It is constrained by these two factors:
+
+- if the peer decides to time out prematurely (while downstream peers are still processing the request) then the effort of all the downstream peers will be wasted.
+- keeping the in-memory record for too long means that there's going to be a limit on how many concurrent requests a peer can keep "in-flight", because memory is limited.
+
+TBC
+
+### Peer rating
+
+When choosing a peer in relation to a given address - in addition to the distance between them - the Kademlia component will take into account several other factors:
+
+- the historical performance of the given peer, both in terms of latencies and past occurences of protocol misalignments.
+- the accounting aspect, peers with whom we have higher credit will be preferred
+
+### Decision strategy
+
+An optimal decision strategy will take into account both proximity order and peer rating to select (out of all connected peers) the best one to pass down the request.
+
+At the implementation level the Kademlia component will offer (in exchange for a given address) a stateful iterator that the client (protocol) will use to get the "next-best" peer.
+
+TBD
