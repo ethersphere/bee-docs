@@ -61,7 +61,7 @@ The simplest representation of this would be a recursive algoritm that with ever
 
 ### Protocol breach
 
-- Receiving a repeated request for a non-existent chunk should leed to rate limiting in order to discourage resource wasteful actions.
+- Receiving a repeated request for a non-existent chunk should lead to rate limiting in order to discourage resource wasteful actions.
 - Receiving a response in the form of an invalid chunk constitutes a protocol breach and punishing measures are being taken against the peer at fault.
 - Receiving a response to an expired request, or we are unable to conclude if such a request has ever been issued - punishing measures should be imposed on the upstream peer.
 
@@ -165,6 +165,23 @@ Since the Pushsync protocol is a "mirror" version of the Retrieval protocol - it
 
 ## Pullsync
 
+While the other described protocols are request scoped, Pullsync is a subscription stype protocol.
+
+Pullsync's role is to help syncronization of the chunks between neighborhood nodes. It also bootstraps new nodes by filling up their storage with the chunks in range of their storage radius.
+
+There are two kinds of syncing:
+
+- historical syncing: catching up with content that arrived to relevant neighborhood before this session started (after an outage or for completely new nodes).
+- live syncing: fetching the chunks that are received after the session has started.
+
+The chunks are served in batches (ordered by timestamp) and they cover contigious ranges.
+
+The downstream peers coordinate their syncing by requesting ranges from the upstream with the help of the "interval store" - to remember which ranges are left to be syncronized.
+
+The point of the interval based approach is to cover those gaps that inevitably arise in between syncing sessions.
+
+TBC
+
 ### Appendix: the protobuf definitions
 
 ## Kademlia
@@ -177,19 +194,23 @@ Swarm uses the recursive/forwarding style of Kademlia. This approach implies tha
 
 Because a forwarder can not reliably tell how much time the downstream peer will need to satisfy the request - the choice of a resonable value for waiting period is a point of contention.
 
-It is constrained by these two factors:
+It is constrained by these factors:
 
-- if the peer decides to time out prematurely (while downstream peers are still processing the request) then the effort of all the downstream peers will be wasted.
 - keeping the in-memory record for too long means that there's going to be a limit on how many concurrent requests a peer can keep "in-flight", because memory is limited.
+- if the peer decides to time out prematurely (while downstream peers are still processing the request) then the effort of all the downstream peers will be wasted.
+- we should distinguish between unsolicited chunks and chunks that we received from the downstream after we stopped waiting for the response (timed out). After a certain period of time all responses will be treated the same because of the need to free the allocated resources (the in-memory record).
 
-TBC
+Conversely the downstream should be informed when the upstream is no longer interested in the previously sent request, so it could free the used resources. This way the downstream won't return the chunk after the request has timed out, risking being punished.
 
 ### Peer rating
 
-When choosing a peer in relation to a given address - in addition to the distance between them - the Kademlia component will take into account several other factors:
+When choosing a peer in relation to a given address - in addition to the distance between them - the Kademlia component will take into account two other factors:
 
 - the historical performance of the given peer, both in terms of latencies and past occurences of protocol misalignments.
-- the accounting aspect, peers with whom we have higher credit will be preferred
+- the accounting aspect, peers with whom we have higher credit will be preferred.
+- we should also prioritise those downstream peers that managed to produce responses in a previously computed amount of time (that would take into consideration the average time needed for a hop multiplied by the expected number of hops needed to reach a target neighborhood).
+
+Kademila should be indexing peers by their proximity order and peers rating in order to prioritize peers based on their expected performance.
 
 ### Decision strategy
 
