@@ -13,8 +13,8 @@ Swarm can be divided into four main parts:
 
 1. Underlay Network - A peer-to-peer network protocol to serve as underlay transport. 
 2. Overlay Network - An overlay network with protocols powering a distributed immutable storage of chunks (fixed size data blocks).
-3. Data Acccess Layer - A component providing high-level data access and defining APIs for base-layer features.
-4. Application Layer - An application layer defining standards and outlining best practices for more elaborate use-cases.
+3. Data Access Layer - A component providing high-level data access and defining APIs for base-layer features.
+4. Application Layer - An application layer defining standards and outlining best practices for more elaborate use cases.
 
 
 ### 1. Underlay Network
@@ -65,5 +65,5 @@ Swarm's high-level data access component provides APIs that allow developers to 
 
 ### 4. Application Layer 
 
-The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use-cases. This layer is responsible for providing guidance to developers on [how to build complex applications](/docs/develop/introduction) on top of Swarm's underlying infrastructure. 
+The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use cases. This layer is responsible for providing guidance to developers on [how to build complex applications](/docs/develop/introduction) on top of Swarm's underlying infrastructure. 
 

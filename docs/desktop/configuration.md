@@ -74,7 +74,7 @@ After the upgrade is complete, you will see several new sections within the ***A
  
 ##  Fund Chequebook
 
-After setting up your wallet you will have access to the ***Chequebook*** section from the ***Accounts*** tab. From here you can manage your the chequebook for your Swarm Desktop Bee node.
+After setting up your wallet you will have access to the ***Chequebook*** section from the ***Accounts*** tab. From here you can manage your chequebook for your Swarm Desktop Bee node.
 
 
 
