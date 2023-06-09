@@ -28,8 +28,11 @@ module.exports = {
         {
           to: '/docs/bee/installation/quick-start',
           from: '/docs/installation/quick-start',
-        }
-       
+        },
+        {
+          to: '/docs/develop/introduction',
+          from: '/docs/dapps-on-swarm/introduction',
+        },
       ],
     },
   ],
