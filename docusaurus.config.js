@@ -35,7 +35,7 @@ module.exports = {
         },
         {
           to: '/docs/develop/dapps-on-swarm/pss',
-          from: '/docs/dapps-on-swarm/pss/',
+          from: '/docs/dapps-on-swarm/pss',
         },
       ],
     },
