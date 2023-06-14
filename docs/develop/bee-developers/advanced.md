@@ -236,20 +236,28 @@ message Receipt {
 
 While the other described protocols are request scoped, Pullsync is a subscription stype protocol.
 
-Pullsync's role is to help syncronization of the chunks between neighborhood nodes. It also bootstraps new nodes by filling up their storage with the chunks in range of their storage radius.
+Pullsync's role is to help syncronization of the chunks between neighborhood nodes. It bootstraps new nodes by filling up their storage with the chunks in range of their storage radius and also ensures eventual consistency - by making sure that the chunks will gradually migrate to their storer nodes.
 
 There are two kinds of syncing:
 
 - historical syncing: catching up with content that arrived to relevant neighborhood before this session started (after an outage or for completely new nodes).
 - live syncing: fetching the chunks that are received after the session has started.
 
-The chunks are served in batches (ordered by timestamp) and they cover contigious ranges.
+The chunks are served in batches (ordered by timestamp) and they cover contiguous ranges.
 
 The downstream peers coordinate their syncing by requesting ranges from the upstream with the help of the "interval store" - to keep track of which ranges are left to be syncronized.
 
 The point of the interval based approach is to cover those gaps that inevitably arise in between syncing sessions.
 
-TBC
+To save bandwidth, before the contents of the chunk is being sent over the wire, the upstream will sent a set of chunk addresses for approval. If the downstream decides that some (or all) addresses are desired - a confirmation message is sent to the upstream, to which it responds with the chunks mentioned in the request.
+
+```mermaid
+sequenceDiagram
+    Downstream->>+Upstream: Subscribe
+    Upstream-->>-Downstream: Offer address range
+    Downstream->>+Upstream: Confirm address range
+    Upstream-->>-Downstream: Chunks contents
+```
 
 ### Appendix
 
