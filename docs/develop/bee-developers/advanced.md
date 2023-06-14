@@ -253,10 +253,10 @@ To save bandwidth, before the contents of the chunk is being sent over the wire,
 
 ```mermaid
 sequenceDiagram
-    Downstream->>+Upstream: Subscribe
+    Downstream->>+Upstream: Get
     Upstream-->>-Downstream: Offer address range
-    Downstream->>+Upstream: Confirm address range
-    Upstream-->>-Downstream: Chunks contents
+    Downstream->>+Upstream: Want address range
+    Upstream-->>-Downstream: Delivery
 ```
 
 ### Appendix
