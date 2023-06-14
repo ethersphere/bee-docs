@@ -148,7 +148,6 @@ message Delivery {
   bytes Data = 1;
   bytes Stamp = 2;
 }
-
 ```
 
 ## Pushsync
@@ -161,7 +160,33 @@ Then the same process is repeated until the chunk eventually reaches the storer 
 
 Since the Pushsync protocol is a "mirror" version of the Retrieval protocol - it ensures that a successfully uploaded chunk is retrievable from the same "neighborhood" by the virtue of the fact that nodes in a neighborhood are connected to each other.
 
-### Appendix: the protobuf definitions
+### Appendix
+
+The protobuf definitions
+
+```protobuf
+// Copyright 2020 The Swarm Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+package pushsync;
+
+option go_package = "pb";
+
+message Delivery {
+  bytes Address = 1;
+  bytes Data = 2;
+  bytes Stamp = 3;
+}
+
+message Receipt {
+  bytes Address = 1;
+  bytes Signature = 2;
+  bytes Nonce = 3;
+}
+```
 
 ## Pullsync
 
@@ -176,13 +201,59 @@ There are two kinds of syncing:
 
 The chunks are served in batches (ordered by timestamp) and they cover contigious ranges.
 
-The downstream peers coordinate their syncing by requesting ranges from the upstream with the help of the "interval store" - to remember which ranges are left to be syncronized.
+The downstream peers coordinate their syncing by requesting ranges from the upstream with the help of the "interval store" - to keep track of which ranges are left to be syncronized.
 
 The point of the interval based approach is to cover those gaps that inevitably arise in between syncing sessions.
 
 TBC
 
-### Appendix: the protobuf definitions
+### Appendix
+
+The protobuf definitions
+
+```protobuf
+// Copyright 2020 The Swarm Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+package pullsync;
+
+option go_package = "pb";
+
+message Syn {}
+
+message Ack {
+  repeated uint64 Cursors = 1;
+}
+
+message Get {
+  int32 Bin = 1;
+  uint64 Start = 2;
+}
+
+message Chunk {
+  bytes Address = 1;
+  bytes BatchID = 2;
+}
+
+message Offer {
+  uint64 Topmost = 1;
+  repeated Chunk Chunks = 2;
+}
+
+
+message Want {
+  bytes BitVector = 1;
+}
+
+message Delivery {
+  bytes Address = 1;
+  bytes Data = 2;
+  bytes Stamp = 3;
+}
+```
 
 ## Kademlia
 
