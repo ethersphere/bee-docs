@@ -81,25 +81,24 @@ The previous example showed how we can pin content upon upload. It is also possi
 To do so, we can send a `POST` request including the swarm reference to the files pinning endpoint.
 
 ```bash
-curl -XPOST http://localhost:1633/pin/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+curl -XPOST http://localhost:1633/pins/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ```
 
 ```json
 { "message": "OK", "code": 200 }
 ```
 
-The `pin` operation will attempt to fetch the content from the network if it is not available on the local node.
+The `pins` operation will attempt to fetch the content from the network if it is not available on the local node.
 
-Now, if we query our files pinning endpoint again, the pin counter will once again have been incremented.
+Now, if we query our files pinning endpoint again, the swarm reference will be returned.
 
 ```bash
-curl http://localhost:1633/pin/chunks/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+curl http://localhost:1633/pins/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ```
 
 ```json
 {
-  "address": "7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f",
-  "pinCounter": 1
+  "reference": "7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f"
 }
 ```
 

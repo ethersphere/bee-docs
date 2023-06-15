@@ -122,3 +122,27 @@ If your batch is starting to run out, or you would like to extend the life of yo
 ```bash
 curl -X PATCH "http://localhost:1635/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
 ```
+
+## Stewardship
+
+The <a href="/api/#tag/Stewardship" target="_blank">stewardship endpoint</a> in combination with [pinning](/docs/develop/access-the-swarm/pinning) can be used to guarantee that important content is always available. It is used for checking whether the content for a Swarm reference is retrievable and for re-uploading the content if it is not.
+
+An HTTP GET request to the `stewardship` endpoint checks to see whether the content for the specified Swarm reference is retrievable:
+
+```bash
+curl "http://localhost:1633/stewardship/c0c2b70b01db8cdfaf114cde176a1e30972b556c7e72d5403bea32e
+c0207136f"
+```
+```json
+{"isRetrievable":true}
+```
+
+If the content is not retrievable, an HTTP PUT request can be used to re-upload the content:
+
+```bash
+curl -X PUT "http://localhost:1633/stewardship/c0c2b70b01db8cdfaf114cde176a1e30972b556c7e72d5403bea32ec0207136f"
+```
+
+
+
+Note that for the re-upload to succeed, the associated content must be available locally, either pinned or cached. Since it isn't easy to predict if the content will be cached, for important content pinning is recommended. 
