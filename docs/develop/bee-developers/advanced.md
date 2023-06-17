@@ -21,15 +21,17 @@ The purpose of this document is to specify these concepts:
 
 ## Hive
 
-The Hive protocol defines how node exchange information about other peers in order to reach and maintain a saturated Kademlia connectivity.
+The Hive protocol defines how nodes exchange information about their peers in order to reach and maintain a saturated Kademlia connectivity.
 
 The exchange of this information happens upon connection, however nodes can broadcast newly received peers to their peers during the lifetime of connection.
 
-While the simplest approach is to share all known peers (during an exchange) it might be more optimal to narrow down to a useful subset of peers, for instance all the peers up to a certain depth or belonging to a certin bin.
+While the simplest approach is to share all known peers (during an exchange) it might be more optimal to narrow down to a useful subset of peers, for instance all the peers up to a certain depth or belonging to a certain bin.
 
-The exchanged information includes both overlay and underlay addreses of the known remote peers. The overlay address serves to select peers to achieve the connectivity pattern needed for the desired network topology, while the underlay address is needed to establish the peer connections by dialing selected peers.
+The exchanged information includes both overlay and underlay addreses of the known remote peers. 
 
-Upon receiving a peers message, nodes are meant to store the peer information in their address book, i.e., a data structure containing info about peers known to the node and is meant to be persisted across sessions.
+The overlay address serves to select peers to achieve the connectivity pattern needed for the desired network topology, while the underlay address is needed to establish the peer connections by dialing selected peers.
+
+Upon receiving a peers message, nodes should store the peer information in their address book, i.e., a data structure containing info about peers known to the node and is meant to be persisted across sessions.
 
 ### Appendix
 
@@ -64,7 +66,9 @@ Kademlia topology is a critical component used by all DISC protocols whose purpo
 
 The message routing happens in such a fashion that with every network hop we will get closer to the target node, specifically at half of the distance covered by previous hop.
 
-Swarm uses the recursive/forwarding style of Kademlia. This approach implies that every forwarding node - once it received a request - will keep an in-memory record that captures the request related information (requester, time of the request etc.) until the request is satisfied, rejected or times out.
+Swarm uses the recursive/forwarding style of Kademlia. 
+
+This approach implies that every forwarding node - once it received a request - will keep an in-memory record that captures the request related information (requester, time of the request etc.) until the request is satisfied, rejected or times out.
 
 Because a forwarder can not reliably tell how much time the downstream peer will need to satisfy the request - the choice of a resonable value for waiting period is a point of contention.
 
@@ -78,15 +82,25 @@ Conversely the downstream should be informed when the upstream is no longer inte
 
 ## Push and pull: chunk retrieval and syncing
 
-The retrieval of a chunk is a process which fetches a given chunk from the network by its address. Since Swarm involves a direct storage scheme of fixed size where chunks are stored on nodes with address corresponding to the chunk address the retrieval protocol involves reaching those neighborhoods wherever the request is initiated. Such a route is sure to exist as a result of the Kademlia topology of keep-alive connections between peers. The process of relaying the request from the initiator to the storer is called forwarding and also the process of passing the chunk data along the same path is called backwarding. If we zoom into a particular node in the forwarding path we see the following strategy:
+Swarm involves a direct storage scheme of fixed size where chunks are stored on nodes with address corresponding to the chunk address.
 
-- Receive a retrieve request
+The syncing protocols act in such a way that they reach those neighborhoods whenever a request is initiated.
+
+Such a route is sure to exist as a result of the Kademlia topology of keep-alive connections between peers.
+
+The process of relaying the request from the initiator to the storer is called forwarding and also the process of passing the chunk data along the same path is called backwarding.
+
+Conversely - Backwarding and Forwarding are both notions defined on a keep alive network of peers as strategies of reaching certain addresses.
+
+If we zoom into a particular node in the forwarding (or backwarding) path we see the following strategy:
+
+- Receive a request
 - Decide who to forward the request to (decision strategy)
-- Have a way to match the the response to the original request
+- Have a way to match the the response to the original request.
 
 The crucial step is the second one - strategy of choosing the peer to forward the request to and how they react to failure like stream closure or nodes dropping offline or closing the protocol connection and whether we proactively initiate several requests to peers.
 
-Backwarding and Forwarding are both notions defined on a keep alive network of peers as strategies of reaching certain addresses.
+The last step does not apply for the storer nodes, since they do not forward the request but they satisfy it.
 
 The key elemement of these notions is that the decision about the next action is being done on the node level, which will select the next peers(s) and delegate them with handling the request.
 
@@ -95,20 +109,34 @@ The simplest representation of this would be a recursive algoritm that with ever
 ### Requirements
 
 - We need a way to determine the "best" candidate peer to forward the request to, and if this option fails, continue with the "next-best" candidate until we exhaust available peers. The decision of picking the "best" peer is delegeate to an overlay driver that has the best knowledge of this peer's past history and performance and topology structure.
-- We need a strategy of parallelisation of retrieval requests that we pass downstream, where appropriate. Parallel requests to different peers allow us increase the chances of successfully retrieving the chunk but it comes with the cost of using our bandwidth allowance, so it's imperative to zoom in on an optimal balance between the two.
-- We need a way to ensure that when we issue a retrieval request we don’t end up in a situation when this request comes back around to us, wasting network resources.
-- In the case when we are a “backwarder” node, we might consider a decision strategy on whether we want to cache the chunk in the event of a repeated request.
+- We need a strategy of parallelisation of requests that we pass downstream, where appropriate. Parallel requests to different peers allow us increase the chances of successfully syncing the chunk but it comes with the cost of using our bandwidth allowance, so it's imperative to zoom in on an optimal balance between the two.
+- We need a way to ensure that when we issue a syncing request we don’t end up in a situation when this request comes back around to us, wasting network resources.
+- In the case when we are a "forwarder" node, we might consider a decision strategy on whether we want to cache the chunk in the event of a repeated request.
 - To every forwarding/backwarding exchange we attach an incentivisation action that would take into account variables like the success of the action and the cost of performing the action.
 - We need to design the optimal incentivisation scheme, to determine the optimal payment/settlement frequency and correctness of computation of the payment/charged amount. This also applies to both chunk storage scheme and the relayed request-response scheme.
-- We need to have a sensible strategy when it comes to waiting for a peer to respond to our retrieval request; as a backwarder, we want to make our best effort to retrieve the chunk but without waiting for an excessive amount of time, which would lead to waste of resources.
+- We need to have a sensible strategy when it comes to waiting for a peer to respond to our request; as a forwarder, we want to make our best effort to sync the chunk but without waiting for an excessive amount of time, which would lead to waste of resources.
+- When receiving a response to an expired request - or we are unable to conclude if such a request has ever been issued - punishing measures should be imposed on the upstream peer.
+
+### Incentivisation strategy
+
+An incentivisation strategy should be put in place in such way that it encourages honest collaboration between nodes.
+
+This implies that a given peer will make the best effort to satisfy any request while not allowing any abuse and waste of its resources.
+
+Having an accounting component that would keep track of the exchange activity between peers ensures that we do not allow excessive freeloading from the misbehaving peers.
+
+Having a granular punishment strategy ensures that the peers who misbehave (perhaps due to network latencies) will not be sanctioned to the same extent as peers who engage in grave protocol breaches, but are given a chance to "clean up their act".
+
+## Retrieval
+
+The retrieval of a chunk is a process which fetches a given chunk from the network by its address.
+
+It follows the general semantics of the chunk syncing described above and follows the same network path as the push sync protocol, but in reverse.
 
 ### Protocol breach
 
 - Receiving a repeated request for a non-existent chunk should lead to rate limiting in order to discourage resource wasteful actions.
 - Receiving a response in the form of an invalid chunk constitutes a protocol breach and punishing measures are being taken against the peer at fault.
-- Receiving a response to an expired request, or we are unable to conclude if such a request has ever been issued - punishing measures should be imposed on the upstream peer.
-
-### Retrieve request steps
 
 ```markdown
 step I
@@ -129,19 +157,7 @@ Error states
 - if the peer times out responding to our request we log the attempt details and repeat step II against a new peer
 ```
 
-### Incentivisation strategy
-
-An incentivisation strategy should be put in place in such way that it encourages honest collaboration between nodes.
-
-This implies that a given peer will make the best effort to satisfy any request while not allowing any abuse and waste of its resources.
-
-Having an accounting component that would keep track of the exchange activity between peers ensures that we do not allow excessive freeloading from the misbehaving peers.
-
-Having a granular punishment strategy ensures that the peers who misbehave (perhaps due to network latencies) will not be sanctioned to the same extent as peers who engage in grave protocol breaches, but are given a chance to "clean up their act".
-
-TBD
-
-### Simplified request chunk - sequence diagram
+### Request chunk - sequence diagram
 
 ```mermaid
 sequenceDiagram
@@ -154,7 +170,7 @@ sequenceDiagram
     Backwarder->>-Originator: Return chunk
 ```
 
-### Request chunk from downstream - flow diagram
+### Request chunk - flow diagram
 
 ```mermaid
 flowchart TD
@@ -165,12 +181,8 @@ flowchart TD
     M --> |No peers left to try| I
     K --> |Timeout| L(Update peer stats) --> A
     K --> |Invalid chunk| N1(Punish peer) --> A
-    K --> |Success| R(Return the chunk to the sender) --> S
+    K --> |Success| R(Return the chunk to the upstream peer) --> S
 ```
-
-## Retrieval
-
-// So here I'm going to describe retrieval specific, cachine, non existing chunks etc
 
 ### Appendix
 
@@ -213,13 +225,19 @@ Multiplexing is a recommended node strategy for the push sync protocol that invo
 
 #### Context
 
-The current implementation of the push sync protocol aims to push a chunk to the closest node in the neigbhourhood which is then supposed to give out a receipt. This is motivated by the  retrieval protocol that aims to find the chunk at this closest node.
+The current implementation of the push sync protocol aims to push a chunk to the closest node in the neigbhourhood which is then supposed to give out a receipt.
 
-When the closest node hands out a receipt, this node also replicates the chunk to 3 peers in the neigbourhood which are further away from the chunk than him. This replication takes place to ensure that the chunk is not lost when the closest node shuts down before the chunk is not pull-sync'ed and to speed up the spreading of the chunk in the neigbhourhood, in advance of pull sync.
+This is motivated by the  retrieval protocol that aims to find the chunk at this closest node.
+
+When the closest node hands out a receipt, this node also replicates the chunk to 3 peers in the neigbourhood which are further away from the chunk than him.
+
+This replication takes place to ensure that the chunk is not lost when the closest node shuts down before the chunk is not pull-sync'ed and to speed up the spreading of the chunk in the neigbhourhood, in advance of pull sync.
 
 #### Problem
 
-Treating the closest node as a single target of push sync is fragile. If this peer has a malperforming blockchain backend, slow or incomplete connectivity or is malicious, it may not spread the chunk and/or does not respond with a receipt. In this case, currently, the originator must retry the entire push-sync operation many times before the other peers within neigbhorhood recognise the improper behavior.
+Treating the closest node as a single target of push sync is fragile. If this peer has a malperforming blockchain backend, slow or incomplete connectivity or is malicious, it may not spread the chunk and/or does not respond with a receipt. 
+
+In this case, currently, the originator must retry the entire push-sync operation many times before the other peers within neigbhorhood recognise the improper behavior.
 
 In-neigbhorhood retries are ideally avoided because such retries might cause the downstream timeouts to expire.
 
@@ -296,11 +314,13 @@ The chunks are served in batches (ordered by timestamp) and they cover contiguou
 
 The downstream peers coordinate their syncing by requesting ranges from the upstream with the help of the "interval store" - to keep track of which ranges are left to be syncronized.
 
-// TODO explain how the gaps appear in between disconnects, two time stretches, history and live, two things to catch up (live/past)
+Because live syncing happens in sessions - it is inevitable that after a session is completed - the downstream peer disconnects and will be missing chunks that arrive later.
+
+For this purpose the downstream peer will make a note about the timestamp of the last synced chunk on disconnect.
 
 The point of the interval based approach is to cover those gaps that inevitably arise in between syncing sessions.
 
-To save bandwidth, before the contents of the chunk is being sent over the wire, the upstream will sent a set of chunk addresses for approval. If the downstream decides that some (or all) addresses are desired - a confirmation message is sent to the upstream, to which it responds with the chunks mentioned in the request.
+To save bandwidth, before the contents of the chunk is being sent over the wire, the upstream will sent a range of chunk addresses for approval. If the downstream decides that some (or all) addresses are desired - a confirmation message is sent to the upstream, to which it responds with the chunks mentioned in the request.
 
 ```mermaid
 sequenceDiagram
@@ -373,10 +393,10 @@ An optimal decision strategy will take into account both proximity order and pee
 
 At the implementation level the Kademlia component will offer (in exchange for a given address) a stateful iterator that the client (protocol) will use to get the "next-best" peer.
 
-TBD
-
 ### Transport
 
-A reliable network transport is required for the proper functionality of DISC protocols. It can be a distinct component whose responsibilityes would be ensuring delivery, re-tries on network issues and timeouts and optimal use of network related resources.
+A reliable network transport is required for the proper functionality of DISC protocols. 
+
+It can be a distinct component whose responsibilityes would be ensuring delivery, re-tries on network issues and timeouts and optimal use of network related resources.
 
 One example of usage for such a component could be embedding into the Kademlia driver so that the topology component is only concerned with overlay related operations, abstracting away any low level transport concerns.
