@@ -27,7 +27,7 @@ The exchange of this information happens upon connection, however nodes can broa
 
 While the simplest approach is to share all known peers (during an exchange) it might be more optimal to narrow down to a useful subset of peers, for instance all the peers up to a certain depth or belonging to a certain bin.
 
-The exchanged information includes both overlay and underlay addreses of the known remote peers. 
+The exchanged information includes both overlay and underlay addreses of the known remote peers.
 
 The overlay address serves to select peers to achieve the connectivity pattern needed for the desired network topology, while the underlay address is needed to establish the peer connections by dialing selected peers.
 
@@ -66,7 +66,7 @@ Kademlia topology is a critical component used by all DISC protocols whose purpo
 
 The message routing happens in such a fashion that with every network hop we will get closer to the target node, specifically at half of the distance covered by previous hop.
 
-Swarm uses the recursive/forwarding style of Kademlia. 
+Swarm uses the recursive/forwarding style of Kademlia.
 
 This approach implies that every forwarding node - once it received a request - will keep an in-memory record that captures the request related information (requester, time of the request etc.) until the request is satisfied, rejected or times out.
 
@@ -235,7 +235,7 @@ This replication takes place to ensure that the chunk is not lost when the close
 
 #### Problem
 
-Treating the closest node as a single target of push sync is fragile. If this peer has a malperforming blockchain backend, slow or incomplete connectivity or is malicious, it may not spread the chunk and/or does not respond with a receipt. 
+Treating the closest node as a single target of push sync is fragile. If this peer has a malperforming blockchain backend, slow or incomplete connectivity or is malicious, it may not spread the chunk and/or does not respond with a receipt.
 
 In this case, currently, the originator must retry the entire push-sync operation many times before the other peers within neigbhorhood recognise the improper behavior.
 
@@ -395,7 +395,7 @@ At the implementation level the Kademlia component will offer (in exchange for a
 
 ### Transport
 
-A reliable network transport is required for the proper functionality of DISC protocols. 
+A reliable network transport is required for the proper functionality of DISC protocols.
 
 It can be a distinct component whose responsibilityes would be ensuring delivery, re-tries on network issues and timeouts and optimal use of network related resources.
 
