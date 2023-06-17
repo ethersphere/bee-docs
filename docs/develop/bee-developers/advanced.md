@@ -3,37 +3,80 @@ title: Advanced
 id: advanced
 ---
 
-# Protocols specifications
+## Protocols specifications
 
-## Abstract
-
-An attempt to describe the desired, theoretical behavior of the main DISC protocols.
-We'll begin by describing Retrieval, PushSync, PullSync and Kademlia communication protocols but eventually this should be expanded to cover all protocols fully.
-Ideally we should always think in terms of how we could design and implement the protocols in such a way that simultations could be written allowing us to validate the protocol rules and behaviour, as well as allow us to test any potential improvements.
-
-## Introduction
+An attempt to describe the desired behavior of the main DISC protocols, which corresponds to the rational choice a node should make in order to maximize its profitability.
 
 A communications protocol is a set of formal rules describing how to transmit or exchange data, especially across a network.
-While ideally specialized tools (TLA+ etc) could be employed to verify the correctness of the specifications, at this point in time, with the resources at hand we might want to limit ourselves with building some kind of a simultation framework that would allow us to validate how a collection of in-memory nodes perform when collaborating via a given protocol.
+
+We'll begin by describing the Hive, Retrieval, PushSync, PullSync communication protocols as well as the Kademlia topology component.
 
 ## Proposal
 
-At the moment there isn’t a single source of truth about WHATs and HOWs of the DISC protocols.
-There is the observed behavior that is coded into the repository inherited from the previous iterations of the project - however - except for the high level description of the expectations that can be found in <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> - there’s no specific, tangible and actionable documentation that we can referred to when implementing and reasoning about specific protocols.
-This is not an optimal situation for successful development because on the code level an observer would look at both the WHYs and the HOWs, concepts that are easy to confuse and even easier to misinterpret in a multi-threaded environment like ours.
-
 The purpose of this document is to specify these concepts:
 
-- A pattern of exchange of messages which in semantic units correspons to the high level function of what a node accomplishes in an exchange.
+- A pattern of exchange of messages which in semantic units corresponds to the high level function of what a node accomplishes in an exchange.
 - Strategies of behavior that a node should adopt in situations like network disconects, timeouts, invalid chunks etc.
 - An incentivisation strategy such that constructive behavior should be rewarded and encoraged while deviating from the protocol rules should result in punishing measures.
 
-footnote --
-All of this above should resemble the functioning of an FSA
+## Hive
 
-# Protocols
+The Hive protocol defines how node exchange information about other peers in order to reach and maintain a saturated Kademlia connectivity.
 
-## Retrieval
+The exchange of this information happens upon connection, however nodes can broadcast newly received peers to their peers during the lifetime of connection.
+
+While the simplest approach is to share all known peers (during an exchange) it might be more optimal to narrow down to a useful subset of peers, for instance all the peers up to a certain depth or belonging to a certin bin.
+
+The exchanged information includes both overlay and underlay addreses of the known remote peers. The overlay address serves to select peers to achieve the connectivity pattern needed for the desired network topology, while the underlay address is needed to establish the peer connections by dialing selected peers.
+
+Upon receiving a peers message, nodes are meant to store the peer information in their address book, i.e., a data structure containing info about peers known to the node and is meant to be persisted across sessions.
+
+### Appendix
+
+The protobuf definitions
+
+```protobuf
+// Copyright 2020 The Swarm Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+syntax = "proto3";
+
+package hive;
+
+option go_package = "pb";
+
+message Peers {
+    repeated BzzAddress peers = 1;
+}
+
+message BzzAddress {
+    bytes Underlay = 1;
+    bytes Signature = 2;
+    bytes Overlay = 3;
+    bytes Nonce = 4;
+}
+```
+
+## Kademlia
+
+Kademlia topology is a critical component used by all DISC protocols whose purpose is to route messages between nodes in a network using overlay addressing.
+
+The message routing happens in such a fashion that with every network hop we will get closer to the target node, specifically at half of the distance covered by previous hop.
+
+Swarm uses the recursive/forwarding style of Kademlia. This approach implies that every forwarding node - once it received a request - will keep an in-memory record that captures the request related information (requester, time of the request etc.) until the request is satisfied, rejected or times out.
+
+Because a forwarder can not reliably tell how much time the downstream peer will need to satisfy the request - the choice of a resonable value for waiting period is a point of contention.
+
+It is constrained by these factors:
+
+- keeping the in-memory record for too long means that there's going to be a limit on how many concurrent requests a peer can keep "in-flight", because memory is limited.
+- if the peer decides to time out prematurely (while downstream peers are still processing the request) then the effort of all the downstream peers will be wasted.
+- we should distinguish between unsolicited chunks and chunks that we received from the downstream after we stopped waiting for the response (timed out). After a certain period of time all responses will be treated the same because of the need to free the allocated resources (the in-memory record).
+
+Conversely the downstream should be informed when the upstream is no longer interested in the previously sent request, so it could free the used resources. This way the downstream won't return the chunk after the request has timed out, risking being punished.
+
+## Push and pull: chunk retrieval and syncing
 
 The retrieval of a chunk is a process which fetches a given chunk from the network by its address. Since Swarm involves a direct storage scheme of fixed size where chunks are stored on nodes with address corresponding to the chunk address the retrieval protocol involves reaching those neighborhoods wherever the request is initiated. Such a route is sure to exist as a result of the Kademlia topology of keep-alive connections between peers. The process of relaying the request from the initiator to the storer is called forwarding and also the process of passing the chunk data along the same path is called backwarding. If we zoom into a particular node in the forwarding path we see the following strategy:
 
@@ -94,7 +137,7 @@ This implies that a given peer will make the best effort to satisfy any request 
 
 Having an accounting component that would keep track of the exchange activity between peers ensures that we do not allow excessive freeloading from the misbehaving peers.
 
-Having a granular punishment strategy ensures that the peers who misbehave perhaps due to network latencies will not be sanctioned to the same extent as peers who engage in grave protocol breaches, but are given a chance to "clean up their act"
+Having a granular punishment strategy ensures that the peers who misbehave (perhaps due to network latencies) will not be sanctioned to the same extent as peers who engage in grave protocol breaches, but are given a chance to "clean up their act".
 
 TBD
 
@@ -105,7 +148,7 @@ sequenceDiagram
     Originator->>+Backwarder: Request for chunk
     Backwarder->>+Backwarder: Have I seen this request before
     Backwarder->>-Originator: Reject duplicate request
-    Backwarder->>+Backwarder: Compute a list of candidate peers
+    Backwarder->>+Backwarder: Request next peer from the Kademlia iterator
     Backwarder->>+Storer: Request for chunk
     Storer->>-Backwarder: Success
     Backwarder->>-Originator: Return chunk
@@ -124,6 +167,10 @@ flowchart TD
     K --> |Invalid chunk| N1(Punish peer) --> A
     K --> |Success| R(Return the chunk to the sender) --> S
 ```
+
+## Retrieval
+
+// So here I'm going to describe retrieval specific, cachine, non existing chunks etc
 
 ### Appendix
 
@@ -193,7 +240,7 @@ We define the different roles peers have as part of the push sync forwarding cha
 - originator -- creator of the request
 - forwarder -- closer to the chunk than the originator, further away away than the 1-before node.
 - multiplexer -- first node in the forward chain who is in the neigbhorhood
-- closest nodes -- according to the downstream node (usually the multiplexer), within the n closest nodes to the chunks (not including self)
+- closest nodes -- according to the downstream node (usually the multiplexer), within the `n` closest nodes to the chunks (not including self)
 
 we describe the envisioned flow of push sync by describing the intended behaviour strategy of the various roles.
 
@@ -236,6 +283,8 @@ message Receipt {
 
 While the other described protocols are request scoped, Pullsync is a subscription stype protocol.
 
+It's worth mentioning that the chunks that are being syncronized between nodes always travel alongside their corresponding postage stamps.
+
 Pullsync's role is to help syncronization of the chunks between neighborhood nodes. It bootstraps new nodes by filling up their storage with the chunks in range of their storage radius and also ensures eventual consistency - by making sure that the chunks will gradually migrate to their storer nodes.
 
 There are two kinds of syncing:
@@ -246,6 +295,8 @@ There are two kinds of syncing:
 The chunks are served in batches (ordered by timestamp) and they cover contiguous ranges.
 
 The downstream peers coordinate their syncing by requesting ranges from the upstream with the help of the "interval store" - to keep track of which ranges are left to be syncronized.
+
+// TODO explain how the gaps appear in between disconnects, two time stretches, history and live, two things to catch up (live/past)
 
 The point of the interval based approach is to cover those gaps that inevitably arise in between syncing sessions.
 
@@ -306,24 +357,6 @@ message Delivery {
 }
 ```
 
-## Kademlia
-
-Kademlia topology is a critical component used by all DISC protocols whose purpose is to route messages between nodes in a network using overlay addressing.
-
-The message routing happens in such a fashion that with every network hop we will get closer to the target node, specifically at half of the distance covered by previous hop.
-
-Swarm uses the recursive/forwarding style of Kademlia. This approach implies that every forwarding node - once it received a request - will keep an in-memory record that captures the request related information (requester, time of the request etc.) until the request is satisfied, rejected or times out.
-
-Because a forwarder can not reliably tell how much time the downstream peer will need to satisfy the request - the choice of a resonable value for waiting period is a point of contention.
-
-It is constrained by these factors:
-
-- keeping the in-memory record for too long means that there's going to be a limit on how many concurrent requests a peer can keep "in-flight", because memory is limited.
-- if the peer decides to time out prematurely (while downstream peers are still processing the request) then the effort of all the downstream peers will be wasted.
-- we should distinguish between unsolicited chunks and chunks that we received from the downstream after we stopped waiting for the response (timed out). After a certain period of time all responses will be treated the same because of the need to free the allocated resources (the in-memory record).
-
-Conversely the downstream should be informed when the upstream is no longer interested in the previously sent request, so it could free the used resources. This way the downstream won't return the chunk after the request has timed out, risking being punished.
-
 ### Peer rating
 
 When choosing a peer in relation to a given address - in addition to the distance between them - the Kademlia component will take into account two other factors:
@@ -341,3 +374,9 @@ An optimal decision strategy will take into account both proximity order and pee
 At the implementation level the Kademlia component will offer (in exchange for a given address) a stateful iterator that the client (protocol) will use to get the "next-best" peer.
 
 TBD
+
+### Transport
+
+A reliable network transport is required for the proper functionality of DISC protocols. It can be a distinct component whose responsibilityes would be ensuring delivery, re-tries on network issues and timeouts and optimal use of network related resources.
+
+One example of usage for such a component could be embedding into the Kademlia driver so that the topology component is only concerned with overlay related operations, abstracting away any low level transport concerns.
