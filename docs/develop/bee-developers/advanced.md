@@ -31,7 +31,7 @@ The exchanged information includes both overlay and underlay addreses of the kno
 
 The overlay address serves to select peers to achieve the connectivity pattern needed for the desired network topology, while the underlay address is needed to establish the peer connections by dialing selected peers.
 
-Upon receiving a peers message, nodes should store the peer information in their address book, i.e., a data structure containing info about peers known to the node and is meant to be persisted across sessions.
+Upon receiving a peers message, nodes should store the peer information in their address book, i.e., a data structure containing info about peers known to the node that is meant to be persisted across sessions.
 
 ### Appendix
 
@@ -62,9 +62,9 @@ message BzzAddress {
 
 ## Kademlia
 
-Kademlia topology is a critical component used by all DISC protocols whose purpose is to route messages between nodes in a network using overlay addressing.
+Kademlia topology is a specific connectivity pattern used by all DISC protocols and its purpose is to route messages between nodes in a network using overlay addressing.
 
-The message routing happens in such a fashion that with every network hop we will get closer to the target node, specifically at half of the distance covered by previous hop.
+The message routing happens in such a fashion that with every network hop we will get closer to the target node, specifically at half of the distance covered by the previous hop.
 
 Swarm uses the recursive/forwarding style of Kademlia.
 
