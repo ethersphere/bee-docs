@@ -25,7 +25,7 @@ The Hive protocol defines how nodes exchange information about their peers in or
 
 The exchange of this information happens upon connection, however nodes can broadcast newly received peers to their peers during the lifetime of connection.
 
-While the simplest approach is to share all known peers (during an exchange) it might be more optimal to narrow down to a useful subset of peers, for instance all the peers up to a certain depth or belonging to a certain bin.
+While the simplest approach is to share all known peers (during an exchange) it might be more optimal to narrow down to a useful subset of peers - for instance all the peers up to a certain depth or belonging to a certain bin.
 
 The exchanged information includes both overlay and underlay addreses of the known remote peers.
 
