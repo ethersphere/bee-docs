@@ -30,7 +30,7 @@
 }
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #dd7200;
+  --ifm-color-primary: #FF7900;
   --ifm-color-black: #242424;
   --ifm-color-primary-dark: #242424;
   --ifm-color-primary-darker: #242424;
@@ -45,7 +45,7 @@
 
 
 .menu--responsive .menu__button {
-    background: #dd7200;
+    background: #FF7900;
 }
 
 /*html[data-theme='dark'] {
@@ -87,14 +87,14 @@ header.hero{
 }
 
 .hero .button{
-  color: #dd7200 !important;
-  border-color: #dd7200 !important;
+  color: #FF7900 !important;
+  border-color: #FF7900 !important;
 }
 
 .hero .button:hover{
-  color: #ffffff !important;
-  background-color: #dd7200 !important;
-  border-color: #dd7200 !important;
+  color: #F6F7F9 !important;
+  background-color: #FF7900 !important;
+  border-color: #FF7900 !important;
 }
 
 h1{
@@ -110,7 +110,7 @@ h1{
 }
 
 .button--secondary{
-  color: #fafafa !important;
+  color: #F6F7F9 !important;
 }
 
 .docusaurus-highlight-code-line {
@@ -126,9 +126,17 @@ h1{
 }
 
 .footer{
-  background: #242424 !important;
+  background: #000000 !important;
 }
 
+
+[data-theme='dark'] .navbar {
+  background: #000000 !important;
+}
+
+[data-theme='dark'] .main-wrapper {
+  background: #141516 !important;
+}
 .alert--danger{
   background: #D0131F;
 }
@@ -142,7 +150,7 @@ h1{
 }
 
 code{
-  color: rgb(191, 199, 213);
+  color: #F6F7F9;
 }
 
 pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-{
