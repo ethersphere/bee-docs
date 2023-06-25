@@ -5,6 +5,18 @@
  * and scoped locally.
  */
 
+
+
+
+* {
+  font-family: 'Inter';
+}
+
+.inter {
+  font-family: 'Inter';
+}
+.buttons
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
@@ -93,7 +105,57 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+.sectionImageLearnDark, .sectionImageLearnLight {
+  height: 90px;
+  display: inline-block;
+}
+[data-theme='light'] .sectionImageLearnLight {
+  height: 90px;
+  display: none;
+}
+[data-theme='dark'] .sectionImageLearnDark {
+  height: 90px;
+  display: none;
+}
 
+.sectionImageDesktopDark, .sectionImageDesktopLight {
+  height: 90px;
+  display: inline-block;
+}
+[data-theme='light'] .sectionImageDesktopLight {
+  height: 90px;
+  display: none;
+}
+[data-theme='dark'] .sectionImageDesktopDark {
+  height: 90px;
+  display: none;
+}
+
+.sectionImageDevelopDark, .sectionImageDevelopLight {
+  height: 90px;
+  display: inline-block;
+}
+[data-theme='light'] .sectionImageDevelopLight {
+  height: 90px;
+  display: none;
+}
+[data-theme='dark'] .sectionImageDevelopDark {
+  height: 90px;
+  display: none;
+}
+
+.sectionImageBeeDark, .sectionImageBeeLight {
+  height: 90px;
+  display: inline-block;
+}
+[data-theme='light'] .sectionImageBeeLight {
+  height: 90px;
+  display: none;
+}
+[data-theme='dark'] .sectionImageBeeDark {
+  height: 90px;
+  display: none;
+}
 
 .ctaButton {
   border: solid 2px rgba(0,0,0,0.75);
@@ -139,9 +201,6 @@ a.panel {
   }
 }
 
-.sectionImageLearn {
-  height: 90px;
-}
 
 .sectionImageDesktop {
   height: 90px;
@@ -155,6 +214,5 @@ a.panel {
 
 .buttonTitle {
   font-size: 1.5rem;
-  font-family: "IBMPlexMono500";
   margin-top: 16px;
 }
