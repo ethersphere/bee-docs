@@ -7,6 +7,9 @@
  * work well for content-centric websites.
  */
  
+html {
+  scroll-behavior: smooth
+}
 
 @font-face {
   font-family: 'Inter';
