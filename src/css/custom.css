@@ -189,7 +189,8 @@ pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-Cod
   width: 12px;
   height: 12px;
 }
-.dropdown > .navbar__link:hover:after {
+
+[data-theme='light'] .dropdown > .navbar__link:hover:after {
   filter: invert(43%) sepia(78%) saturate(1287%) hue-rotate(2deg) brightness(104%) contrast(103%);
 }
 
@@ -199,4 +200,28 @@ pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-Cod
 
 [data-theme='dark'] .dropdown > .navbar__link:hover:after {
   filter: invert(43%) sepia(78%) saturate(1287%) hue-rotate(2deg) brightness(104%) contrast(103%);
+}
+
+.footer__link-item, .footer__title {
+  color: #F6F7F9;
+}
+
+[data-theme='light'] .navbar__link {
+  color: #242424;
+}
+
+.dropdown__menu {
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
+}
+
+.menu__list {
+  -webkit-transition: height 0.2s linear !important;
+  -moz-transition: height 0.2s linear !important;
+  -ms-transition: height 0.2s linear !important;
+  -o-transition: height 0.2s linear !important;
+  transition: height 0.2s linear !important;
 }

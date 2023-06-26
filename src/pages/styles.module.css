@@ -79,7 +79,7 @@
 
 [data-theme='light'] .sectionButtonInner {
   padding: 20px;
-  color: #000000;
+  color: #242424;
 }
 
 .sectionButton:before {
@@ -99,11 +99,11 @@
      linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -ms-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 
 .sectionButton:hover:before {
@@ -112,7 +112,7 @@
 
 
 [data-theme='light'] .sectionButton {
-  color: rgb(28, 30, 33);
+  color: #242424;
   border-color: rgb(28, 30, 33);  
   border: solid 2px rgba(0,0,0,0);
 
