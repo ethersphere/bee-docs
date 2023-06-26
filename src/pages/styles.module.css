@@ -216,9 +216,6 @@ a.panel {
     opacity: 1;
     margin-bottom: 40px;
   }
-  [data-theme='light'] .sectionButton {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  }
 }
 
 
