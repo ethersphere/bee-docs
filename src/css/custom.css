@@ -221,6 +221,15 @@ pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-Cod
   transition: opacity 0.2s linear;
 }
 
+
+.navbar-sidebar {
+  -webkit-transition: transform 0.2s linear;
+  -moz-transition: transform 0.2s linear;
+  -ms-transition: transform 0.2s linear;
+  -o-transition: transform 0.2s linear;
+  transition: transform 0.2s linear;
+}
+
 .menu__list {
   -webkit-transition: height 0.2s linear !important;
   -moz-transition: height 0.2s linear !important;
