@@ -58,11 +58,11 @@ module.exports = {
       respectPrefersColorScheme: false,
     },
     navbar: {
+        
       title: '',
       logo: {
         alt: 'Swarm Logo',
         src: 'img/logo.svg',
-       
       },
       items: [
         { 
@@ -70,6 +70,7 @@ module.exports = {
           activeBasePath: 'docs/learn',
           label: 'Learn',
           position: 'left',
+          className: 'inter',
           items: [
             {
               to: 'docs/learn/introduction',

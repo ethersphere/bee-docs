@@ -5,6 +5,18 @@
  * and scoped locally.
  */
 
+
+
+
+* {
+  font-family: 'Inter';
+}
+
+.inter {
+  font-family: 'Inter';
+}
+.buttons
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
@@ -52,48 +64,117 @@
 }
 
 .sectionButton {
-  border-radius: 30px;
-  padding: 10px;
   width: 270px;
   text-align: center;
-  color: rgb(235, 237, 240);
-  border: solid 2px rgba(0,0,0,0);
+  color: #F6F7F9;
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+}
+
+[data-theme='dark'] .sectionButtonInner {
+  padding: 20px;
+  color: #F6F7F9;
+}
+
+[data-theme='light'] .sectionButtonInner {
+  padding: 20px;
+  color: #242424;
+}
+
+.sectionButton:before {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  padding: 3px;
+  border-radius: 15px;
+  background: linear-gradient(#FF7900, #FF5143);
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+          mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.sectionButton:hover:before {
+  opacity: 1;
 }
 
 
 [data-theme='light'] .sectionButton {
-  color: rgb(28, 30, 33);
+  color: #242424;
   border-color: rgb(28, 30, 33);  
   border: solid 2px rgba(0,0,0,0);
 
 }
 
 [data-theme='dark'] .sectionButton:hover {
-  color: rgb(235, 237, 240);
-}
-
-.sectionButton:hover {
-  -webkit-transition: transform 0.5s linear;
-  -moz-transition: transform 0.5s linear;
-  -ms-transition: transform 0.5s linear;
-  -o-transition: transform 0.5s linear;
-  transition: transform 0.5s linear;
-  -webkit-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -ms-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-  box-sizing: border-box;
-  box-shadow: rgba(221, 114, 0, 0.7) 0px 0px 0px 3px
-
-}
-  
-
-[data-theme='light'] .sectionButton:hover {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: #F6F7F9;
 }
 
 
+
+.sectionImageLearnDark, .sectionImageLearnLight {
+  height: 90px;
+  display: inline-block;
+}
+[data-theme='light'] .sectionImageLearnLight {
+  height: 90px;
+  display: none;
+}
+[data-theme='dark'] .sectionImageLearnDark {
+  height: 90px;
+  display: none;
+}
+
+.sectionImageDesktopDark, .sectionImageDesktopLight {
+  height: 90px;
+  display: inline-block;
+}
+[data-theme='light'] .sectionImageDesktopLight {
+  height: 90px;
+  display: none;
+}
+[data-theme='dark'] .sectionImageDesktopDark {
+  height: 90px;
+  display: none;
+}
+
+.sectionImageDevelopDark, .sectionImageDevelopLight {
+  height: 90px;
+  display: inline-block;
+}
+[data-theme='light'] .sectionImageDevelopLight {
+  height: 90px;
+  display: none;
+}
+[data-theme='dark'] .sectionImageDevelopDark {
+  height: 90px;
+  display: none;
+}
+
+.sectionImageBeeDark, .sectionImageBeeLight {
+  height: 90px;
+  display: inline-block;
+}
+[data-theme='light'] .sectionImageBeeLight {
+  height: 90px;
+  display: none;
+}
+[data-theme='dark'] .sectionImageBeeDark {
+  height: 90px;
+  display: none;
+}
 
 .ctaButton {
   border: solid 2px rgba(0,0,0,0.75);
@@ -102,7 +183,7 @@
   padding: 2px 6px;
 } 
 .description {
-  font-size: 0.9rem;
+  font-size: 14px;
   line-height: 1.5rem;
 }
 
@@ -123,25 +204,20 @@ a.panel {
 }
 
 @media (max-width: 1000px) {
-  .container {  display: grid;
-    grid-template-columns: 3fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-auto-columns: 3fr;
-    gap: 20px 0px;
-    grid-auto-flow: row;
+  .container {  
+    display: flex;  
+    flex-direction: column;
   }
   .sectionButton {
-    box-shadow: rgba(221, 114, 0, 0.7) 0px 0px 0px 3px;
-    margin-bottom: 40px;
+    padding: 26px 20px;
+    height: 100%;
   }
-  [data-theme='light'] .sectionButton {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  .sectionButton:before {
+    opacity: 1;
+    margin-bottom: 40px;
   }
 }
 
-.sectionImageLearn {
-  height: 90px;
-}
 
 .sectionImageDesktop {
   height: 90px;
@@ -155,6 +231,5 @@ a.panel {
 
 .buttonTitle {
   font-size: 1.5rem;
-  font-family: "IBMPlexMono500";
   margin-top: 16px;
 }
