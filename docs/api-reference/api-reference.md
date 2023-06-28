@@ -11,7 +11,7 @@ The API-endpoint exposes all functionality to upload and download content to and
 
 Detailed information about Bee API endpoint can be found here:
 
-### <a href="/api" target="_blank" rel="noopener noreferrer">Bee API reference.</a>
+### [Bee API reference](/api/)
 
 ## Debug API
 
@@ -24,7 +24,7 @@ exposed for security reasons. To enable the Debug API endpoints, set
 file](/docs/bee/working-with-bee/configuration) and restart your Bee.
 :::
 
-### <a href="/debug-api" target="_blank" rel="noopener noreferrer">Debug API reference.</a>
+### [Debug API Reference](/debug-api/)
 
 :::danger
 Your Debug API should not be exposed to the public Internet, make sure that your network has a firewall which blocks port `1635`, or bind the Debug API to `localhost`
