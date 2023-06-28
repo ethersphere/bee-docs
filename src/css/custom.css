@@ -237,3 +237,54 @@ pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-Cod
   -o-transition: height 0.2s linear !important;
   transition: height 0.2s linear !important;
 }
+
+[data-theme='dark'] .theme-admonition-note {
+  background-color: #465158;
+  border-color: #C1C9CF;
+}
+
+[data-theme='dark'] .theme-admonition-tip {
+  background-color: #0F6648;
+  border-color: #00DAA1;
+}
+
+[data-theme='dark'] .theme-admonition-info {
+  background-color: #264C6E;
+  border-color: #007FFF;
+}
+
+[data-theme='dark'] .theme-admonition-caution {
+  background-color: #784213;
+  border-color: #F37300;
+}
+
+[data-theme='dark'] .theme-admonition-danger {
+  background-color: #791112;
+  border-color: #F30000;
+}
+
+
+[data-theme='light'] .theme-admonition-note {
+  background-color: #E5E9EC;
+  border-color: #C1C9CF;
+}
+
+[data-theme='light'] .theme-admonition-tip {
+  background-color: #E0FFF4;
+  border-color: #00DAA1;
+}
+
+[data-theme='light'] .theme-admonition-info {
+  background-color: #E2F1FF;
+  border-color: #007FFF;
+}
+
+[data-theme='light'] .theme-admonition-caution {
+  background-color: #FDE9D7;
+  border-color: #F37300;
+}
+
+[data-theme='light'] .theme-admonition-danger {
+  background-color: #FECDCD;
+  border-color: #F30000;
+}
