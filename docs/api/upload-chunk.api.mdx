@@ -1,0 +1,62 @@
+---
+id: upload-chunk
+title: "Upload chunk"
+description: "Upload chunk"
+sidebar_label: "Upload chunk"
+hide_title: true
+hide_table_of_contents: true
+api: {"tags":["Chunk"],"parameters":[{"in":"header","name":"swarm-tag","schema":{"type":"integer","title":"Uid"},"required":false,"description":"Associate upload with an existing Tag UID","title":"SwarmTagParameter"},{"in":"header","name":"swarm-postage-batch-id","description":"ID of Postage Batch that is used to upload data with","required":true,"schema":{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"SwarmAddress"},"title":"SwarmPostageBatchId"}],"requestBody":{"description":"Chunk binary data that has to have at least 8 bytes.","content":{"application/octet-stream":{"schema":{"type":"string","format":"binary"}}}},"responses":{"201":{"description":"Ok","headers":{"swarm-tag":{"description":"Tag UID if it was passed to the request `swarm-tag` header.","schema":{"type":"integer","title":"Uid"}}},"content":{"application/json":{"schema":{"type":"object","properties":{"reference":{"oneOf":[{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"SwarmAddress"},{"type":"string","pattern":"^[A-Fa-f0-9]{128}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f2d2810619d29b5dbefd5d74abce25d58b81b251baddb9c3871cf0d6967deaae2","title":"SwarmEncryptedReference"},{"type":"string","pattern":"^[A-Za-z0-9]+\\.[A-Za-z0-9]+$","example":"swarm.eth","title":"DomainName"}],"title":"SwarmReference"}},"title":"ReferenceResponse"}}}},"400":{"description":"Bad request","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"402":{"description":"Payment Required","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"500":{"description":"Internal Server Error","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"default":{"description":"Default response"}},"description":"Upload chunk","method":"post","path":"/chunks","servers":[{"url":"http://{apiRoot}:{port}/v1","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}},{"url":"http://{apiRoot}:{port}","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}}],"security":[{}],"securitySchemes":{"basicAuth":{"type":"http","scheme":"basic"},"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"SecurityToken"}},"info":{"version":"5.0.0","title":"Bee API","description":"A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"},"postman":{"name":"Upload chunk","description":{"type":"text/plain"},"url":{"path":["chunks"],"host":["{{baseUrl}}"],"query":[],"variable":[]},"header":[{"disabled":false,"description":{"content":"Associate upload with an existing Tag UID","type":"text/plain"},"key":"swarm-tag","value":""},{"disabled":false,"description":{"content":"(Required) ID of Postage Batch that is used to upload data with","type":"text/plain"},"key":"swarm-postage-batch-id","value":""},{"key":"Content-Type","value":"application/octet-stream"},{"key":"Accept","value":"application/json"}],"method":"POST","body":{"mode":"file"}}}
+sidebar_class_name: "post api-method"
+info_path: docs/api/bee-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## Upload chunk
+
+
+
+Upload chunk
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Header Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"in":"header","name":"swarm-tag","schema":{"type":"integer","title":"Uid"},"required":false,"description":"Associate upload with an existing Tag UID","title":"SwarmTagParameter"}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"in":"header","name":"swarm-postage-batch-id","description":"ID of Postage Batch that is used to upload data with","required":true,"schema":{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"SwarmAddress"},"title":"SwarmPostageBatchId"}}></ParamsItem></ul></div></details><MimeTabs><TabItem label={"application/octet-stream"} value={"application/octet-stream-schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Request Body</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}><div style={{"marginTop":"1rem","marginBottom":"1rem"}}>
+
+Chunk binary data that has to have at least 8 bytes.
+
+</div></div><ul style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
+
+string
+
+</div></ul></details></TabItem></MimeTabs><div><ApiTabs><TabItem label={"201"} value={"201"}><div>
+
+Ok
+
+</div><details style={{"textAlign":"left","marginBottom":"1rem"}} data-collaposed={true} open={false}><summary style={{}}><strong>Response Headers</strong></summary><ul style={{"marginLeft":"1rem"}}><li className={"schemaItem"}><summary style={{}}><strong>swarm-tag</strong><span style={{"opacity":"0.6"}}> integer</span></summary><div><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Tag UID if it was passed to the request `swarm-tag` header.
+
+</div></div></li></ul></details><div><MimeTabs schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}}><summary style={{}}><strong>reference</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"string"} value={"0-property"}><p>string</p></TabItem><TabItem label={"string"} value={"1-property"}><p>string</p></TabItem><TabItem label={"string"} value={"2-property"}><p>string</p></TabItem></SchemaTabs></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"reference\": \"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+Bad request
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"402"} value={"402"}><div>
+
+Payment Required
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+Internal Server Error
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"default"} value={"default"}><div>
+
+Default response
+
+</div><div></div></TabItem></ApiTabs></div>
+      

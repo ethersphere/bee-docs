@@ -1,0 +1,38 @@
+---
+id: get-all-globally-available-batches-that-were-purchased-by-all-nodes
+title: "Get all globally available batches that were purchased by all nodes."
+description: "This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token."
+sidebar_label: "Get all globally available batches that were purchased by all nodes."
+hide_title: true
+hide_table_of_contents: true
+api: {"description":"This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token.","security":[{"bearerAuth":[]}],"tags":["Postage Stamps"],"responses":{"200":{"description":"Returns an array of all available and currently valid postage batches.","content":{"application/json":{"schema":{"type":"object","properties":{"batches":{"type":"array","nullable":false,"items":{"type":"object","properties":{"batchID":{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"BatchID"},"value":{"description":"Numeric string that represents integer which might exceeds `Number.MAX_SAFE_INTEGER` limit (2^53-1)","type":"string","example":"1000000000000000000","title":"BigInt"},"start":{"type":"integer"},"depth":{"type":"integer"},"bucketDepth":{"type":"integer"},"immutableFlag":{"type":"boolean"},"batchTTL":{"type":"integer"},"owner":{"type":"string","pattern":"^[A-Fa-f0-9]{40}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906","title":"EthereumAddress"},"storageRadius":{"type":"integer"}},"title":"PostageBatchShort"}}},"title":"DebugPostageAllBatchesResponse"}}}},"default":{"description":"Default response"}},"method":"get","path":"/batches","servers":[{"url":"http://{apiRoot}:{port}/v1","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}},{"url":"http://{apiRoot}:{port}","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}}],"securitySchemes":{"basicAuth":{"type":"http","scheme":"basic"},"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"SecurityToken"}},"info":{"version":"5.0.0","title":"Bee API","description":"A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"},"postman":{"name":"Get all globally available batches that were purchased by all nodes.","description":{"content":"This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token.","type":"text/plain"},"url":{"path":["batches"],"host":["{{baseUrl}}"],"query":[],"variable":[]},"header":[{"key":"Accept","value":"application/json"}],"method":"GET","auth":{"type":"bearer","bearer":[{"type":"any","value":"<Bearer Token>","key":"token"}]}}}
+sidebar_class_name: "get api-method"
+info_path: docs/api/bee-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## Get all globally available batches that were purchased by all nodes.
+
+
+
+This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token.
+
+<div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+Returns an array of all available and currently valid postage batches.
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}}><summary style={{}}><strong>batches</strong><span style={{"opacity":"0.6"}}> object[]</span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"batchID"} required={false} schemaName={"BatchID"} qualifierMessage={"**Possible values:** Value must match regular expression `^[A-Fa-f0-9]{64}$`"} schema={{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"BatchID"}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"BigInt"} qualifierMessage={undefined} schema={{"description":"Numeric string that represents integer which might exceeds `Number.MAX_SAFE_INTEGER` limit (2^53-1)","type":"string","example":"1000000000000000000","title":"BigInt"}}></SchemaItem><SchemaItem collapsible={false} name={"start"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"depth"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"bucketDepth"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"immutableFlag"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"batchTTL"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"owner"} required={false} schemaName={"EthereumAddress"} qualifierMessage={"**Possible values:** Value must match regular expression `^[A-Fa-f0-9]{40}$`"} schema={{"type":"string","pattern":"^[A-Fa-f0-9]{40}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906","title":"EthereumAddress"}}></SchemaItem><SchemaItem collapsible={false} name={"storageRadius"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"batches\": [\n    {\n      \"batchID\": \"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f\",\n      \"value\": \"1000000000000000000\",\n      \"start\": 0,\n      \"depth\": 0,\n      \"bucketDepth\": 0,\n      \"immutableFlag\": true,\n      \"batchTTL\": 0,\n      \"owner\": \"36b7efd913ca4cf880b8eeac5093fa27b0825906\",\n      \"storageRadius\": 0\n    }\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"default"} value={"default"}><div>
+
+Default response
+
+</div><div></div></TabItem></ApiTabs></div>
+      

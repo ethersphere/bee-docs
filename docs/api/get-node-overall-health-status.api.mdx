@@ -1,0 +1,41 @@
+---
+id: get-node-overall-health-status
+title: "Get node overall health Status"
+description: "Health Status will indicate node healthiness."
+sidebar_label: "Get node overall health Status"
+hide_title: true
+hide_table_of_contents: true
+api: {"description":"Health Status will indicate node healthiness.\n\nIf node is unhealthy please check node logs for errors.\n","tags":["Status"],"responses":{"200":{"description":"Health Status of node","content":{"application/json":{"schema":{"type":"object","properties":{"status":{"type":"string","enum":["ok","nok"],"description":"Indicates health state of node * `ok` - node is healthy * `nok` - node is not healthy\n"},"version":{"type":"string"},"apiVersion":{"type":"string","default":"0.0.0","description":"The default value is set in case the bee binary was not build correctly."},"debugApiVersion":{"type":"string","default":"0.0.0","description":"The default value is set in case the bee binary was not build correctly."}},"title":"HealthStatus"}}}},"default":{"description":"Default response"}},"method":"get","path":"/health","servers":[{"url":"http://{apiRoot}:{port}/v1","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}},{"url":"http://{apiRoot}:{port}","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}}],"security":[{}],"securitySchemes":{"basicAuth":{"type":"http","scheme":"basic"},"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"SecurityToken"}},"info":{"version":"5.0.0","title":"Bee API","description":"A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"},"postman":{"name":"Get node overall health Status","description":{"content":"Health Status will indicate node healthiness.\n\nIf node is unhealthy please check node logs for errors.\n","type":"text/plain"},"url":{"path":["health"],"host":["{{baseUrl}}"],"query":[],"variable":[]},"header":[{"key":"Accept","value":"application/json"}],"method":"GET"}}
+sidebar_class_name: "get api-method"
+info_path: docs/api/bee-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## Get node overall health Status
+
+
+
+Health Status will indicate node healthiness.
+
+If node is unhealthy please check node logs for errors.
+
+
+<div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+Health Status of node
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ok`, `nok`]"} schema={{"type":"string","enum":["ok","nok"],"description":"Indicates health state of node * `ok` - node is healthy * `nok` - node is not healthy\n"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"apiVersion"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","default":"0.0.0","description":"The default value is set in case the bee binary was not build correctly."}}></SchemaItem><SchemaItem collapsible={false} name={"debugApiVersion"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","default":"0.0.0","description":"The default value is set in case the bee binary was not build correctly."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": \"ok\",\n  \"version\": \"string\",\n  \"apiVersion\": \"0.0.0\",\n  \"debugApiVersion\": \"0.0.0\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"default"} value={"default"}><div>
+
+Default response
+
+</div><div></div></TabItem></ApiTabs></div>
+      

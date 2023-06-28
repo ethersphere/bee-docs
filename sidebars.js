@@ -103,6 +103,7 @@ module.exports = {
       label: 'Develop',
       items: [
         'develop/introduction',
+        'develop/api-ref',
       ],
       collapsed: false
     },
@@ -145,5 +146,21 @@ module.exports = {
       collapsed: false
     },
 
-  ]
+  ],
+  apiSidebar: [
+    {
+      type: "category",
+      label: "API",
+      link: {
+        type: "generated-index",
+        title: "Bee API",
+        description:
+          "This is the API reference for the Bee client API.",
+        slug: "/api-reference"
+      },
+      // @ts-ignore
+      items: require("./docs/api/sidebar.js")
+    }
+  ],
+
 };

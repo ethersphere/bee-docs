@@ -1,0 +1,46 @@
+---
+id: deposit-tokens-from-overlay-address-into-chequebook
+title: "Deposit tokens from overlay address into chequebook"
+description: "This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token."
+sidebar_label: "Deposit tokens from overlay address into chequebook"
+hide_title: true
+hide_table_of_contents: true
+api: {"description":"This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token.","security":[{"bearerAuth":[]}],"parameters":[{"in":"query","name":"amount","schema":{"type":"integer"},"required":true,"description":"amount of tokens to deposit"},{"in":"header","name":"gas-price","schema":{"description":"Gas price refers to the amount you’re willing to pay for every unit of gas.","type":"integer","title":"GasPrice"},"required":false,"description":"Gas price for transaction"}],"tags":["Chequebook"],"responses":{"201":{"description":"Transaction hash of the deposit transaction","content":{"application/json":{"schema":{"type":"object","properties":{"transactionHash":{"type":"string","pattern":"^0x[A-Fa-f0-9]{64}$","example":"0x780cb6a37d1946978087896e1e489c37e30fe3e329510fff8d97360f73529f5a","title":"TransactionHash"}},"title":"TransactionResponse"}}}},"400":{"description":"Not Found","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"500":{"description":"Internal Server Error","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"default":{"description":"Default response"}},"method":"post","path":"/chequebook/deposit","servers":[{"url":"http://{apiRoot}:{port}/v1","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}},{"url":"http://{apiRoot}:{port}","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}}],"securitySchemes":{"basicAuth":{"type":"http","scheme":"basic"},"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"SecurityToken"}},"info":{"version":"5.0.0","title":"Bee API","description":"A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"},"postman":{"name":"Deposit tokens from overlay address into chequebook","description":{"content":"This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token.","type":"text/plain"},"url":{"path":["chequebook","deposit"],"host":["{{baseUrl}}"],"query":[{"disabled":false,"description":{"content":"(Required) amount of tokens to deposit","type":"text/plain"},"key":"amount","value":""}],"variable":[]},"header":[{"disabled":false,"description":{"content":"Gas price for transaction","type":"text/plain"},"key":"gas-price","value":""},{"key":"Accept","value":"application/json"}],"method":"POST","auth":{"type":"bearer","bearer":[{"type":"any","value":"<Bearer Token>","key":"token"}]}}}
+sidebar_class_name: "post api-method"
+info_path: docs/api/bee-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## Deposit tokens from overlay address into chequebook
+
+
+
+This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token.
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Query Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"in":"query","name":"amount","schema":{"type":"integer"},"required":true,"description":"amount of tokens to deposit"}}></ParamsItem></ul></div></details><details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Header Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"in":"header","name":"gas-price","schema":{"description":"Gas price refers to the amount you’re willing to pay for every unit of gas.","type":"integer","title":"GasPrice"},"required":false,"description":"Gas price for transaction"}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"201"} value={"201"}><div>
+
+Transaction hash of the deposit transaction
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"transactionHash"} required={false} schemaName={"TransactionHash"} qualifierMessage={"**Possible values:** Value must match regular expression `^0x[A-Fa-f0-9]{64}$`"} schema={{"type":"string","pattern":"^0x[A-Fa-f0-9]{64}$","example":"0x780cb6a37d1946978087896e1e489c37e30fe3e329510fff8d97360f73529f5a","title":"TransactionHash"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"transactionHash\": \"0x780cb6a37d1946978087896e1e489c37e30fe3e329510fff8d97360f73529f5a\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+Not Found
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+Internal Server Error
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"default"} value={"default"}><div>
+
+Default response
+
+</div><div></div></TabItem></ApiTabs></div>
+      

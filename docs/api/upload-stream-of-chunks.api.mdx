@@ -1,0 +1,42 @@
+---
+id: upload-stream-of-chunks
+title: "Upload stream of chunks"
+description: "Returns a WebSocket connection on which stream of chunks can be uploaded. Each chunk sent is acknowledged using a binary response `0` which serves as confirmation of upload of single chunk. Chunks should be packaged as binary messages for uploading. If a tag is specified, the chunks will be streamed into the localstore and then uploaded to the network once the stream is closed. If a tag is not specified, the chunks will bypass the localstore and be directly uploaded to the network through the stream as they arrive."
+sidebar_label: "Upload stream of chunks"
+hide_title: true
+hide_table_of_contents: true
+api: {"description":"Returns a WebSocket connection on which stream of chunks can be uploaded. Each chunk sent is acknowledged using a binary response `0` which serves as confirmation of upload of single chunk. Chunks should be packaged as binary messages for uploading. If a tag is specified, the chunks will be streamed into the localstore and then uploaded to the network once the stream is closed. If a tag is not specified, the chunks will bypass the localstore and be directly uploaded to the network through the stream as they arrive.","tags":["Chunk"],"parameters":[{"in":"header","name":"swarm-tag","schema":{"type":"integer","title":"Uid"},"required":false,"description":"Associate upload with an existing Tag UID","title":"SwarmTagParameter"},{"in":"header","name":"swarm-postage-batch-id","description":"ID of Postage Batch that is used to upload data with","required":true,"schema":{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"SwarmAddress"},"title":"SwarmPostageBatchId"}],"responses":{"200":{"description":"Connection established"},"400":{"description":"Bad request","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"default":{"description":"Default response"}},"method":"get","path":"/chunks/stream","servers":[{"url":"http://{apiRoot}:{port}/v1","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}},{"url":"http://{apiRoot}:{port}","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}}],"security":[{}],"securitySchemes":{"basicAuth":{"type":"http","scheme":"basic"},"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"SecurityToken"}},"info":{"version":"5.0.0","title":"Bee API","description":"A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"},"postman":{"name":"Upload stream of chunks","description":{"content":"Returns a WebSocket connection on which stream of chunks can be uploaded. Each chunk sent is acknowledged using a binary response `0` which serves as confirmation of upload of single chunk. Chunks should be packaged as binary messages for uploading. If a tag is specified, the chunks will be streamed into the localstore and then uploaded to the network once the stream is closed. If a tag is not specified, the chunks will bypass the localstore and be directly uploaded to the network through the stream as they arrive.","type":"text/plain"},"url":{"path":["chunks","stream"],"host":["{{baseUrl}}"],"query":[],"variable":[]},"header":[{"disabled":false,"description":{"content":"Associate upload with an existing Tag UID","type":"text/plain"},"key":"swarm-tag","value":""},{"disabled":false,"description":{"content":"(Required) ID of Postage Batch that is used to upload data with","type":"text/plain"},"key":"swarm-postage-batch-id","value":""},{"key":"Accept","value":"application/problem+json"}],"method":"GET"}}
+sidebar_class_name: "get api-method"
+info_path: docs/api/bee-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## Upload stream of chunks
+
+
+
+Returns a WebSocket connection on which stream of chunks can be uploaded. Each chunk sent is acknowledged using a binary response `0` which serves as confirmation of upload of single chunk. Chunks should be packaged as binary messages for uploading. If a tag is specified, the chunks will be streamed into the localstore and then uploaded to the network once the stream is closed. If a tag is not specified, the chunks will bypass the localstore and be directly uploaded to the network through the stream as they arrive.
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Header Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"in":"header","name":"swarm-tag","schema":{"type":"integer","title":"Uid"},"required":false,"description":"Associate upload with an existing Tag UID","title":"SwarmTagParameter"}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"in":"header","name":"swarm-postage-batch-id","description":"ID of Postage Batch that is used to upload data with","required":true,"schema":{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"SwarmAddress"},"title":"SwarmPostageBatchId"}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+Connection established
+
+</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+Bad request
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"default"} value={"default"}><div>
+
+Default response
+
+</div><div></div></TabItem></ApiTabs></div>
+      

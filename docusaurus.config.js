@@ -17,6 +17,23 @@ module.exports = {
   require.resolve('docusaurus-lunr-search'),
   'plugin-image-zoom',
   [
+    "docusaurus-plugin-openapi-docs",
+    {
+      id: "api",
+      docsPluginId: "classic", // e.g. "classic" or the plugin-content-docs id
+      config: {
+        swarm: { 
+          specPath: "openapi/Swarm.yaml", // path or URL to the OpenAPI spec
+          outputDir: "docs/api", // output directory for generated *.mdx and sidebar.js files
+          sidebarOptions: {
+            groupPathsBy: "tag", // generate a sidebar.js slice that groups operations by tag
+          },
+        }
+      }
+    },
+    
+  ],
+  [
     '@docusaurus/plugin-client-redirects',
     {
       redirects: [
@@ -50,7 +67,7 @@ module.exports = {
   markdown: {
     mermaid: true,
   },
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ['@docusaurus/theme-mermaid', "docusaurus-theme-openapi-docs"],
   themeConfig: {
     colorMode: {
       defaultMode: 'dark',
@@ -270,6 +287,8 @@ module.exports = {
             'https://github.com/ethersphere/docs.github.io/blob/master',
           remarkPlugins: [math],
           rehypePlugins: [katex],
+          docLayoutComponent: "@theme/DocPage",
+          docItemComponent: "@theme/ApiItem" // add @theme/ApiItem here
         },
         blog: {
           showReadingTime: false,

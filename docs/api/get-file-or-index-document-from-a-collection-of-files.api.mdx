@@ -1,0 +1,54 @@
+---
+id: get-file-or-index-document-from-a-collection-of-files
+title: "Get file or index document from a collection of files"
+description: "Get file or index document from a collection of files"
+sidebar_label: "Get file or index document from a collection of files"
+hide_title: true
+hide_table_of_contents: true
+api: {"tags":["BZZ"],"parameters":[{"in":"path","name":"reference","schema":{"oneOf":[{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"SwarmAddress"},{"type":"string","pattern":"^[A-Fa-f0-9]{128}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f2d2810619d29b5dbefd5d74abce25d58b81b251baddb9c3871cf0d6967deaae2","title":"SwarmEncryptedReference"},{"type":"string","pattern":"^[A-Za-z0-9]+\\.[A-Za-z0-9]+$","example":"swarm.eth","title":"DomainName"}],"title":"SwarmReference"},"required":true,"description":"Swarm address of content"}],"responses":{"200":{"description":"Ok","content":{"application/octet-stream":{"schema":{"type":"string","format":"binary"}}}},"400":{"description":"Bad request","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"404":{"description":"Not Found","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"500":{"description":"Internal Server Error","content":{"application/problem+json":{"schema":{"type":"object","properties":{"code":{"type":"integer"},"message":{"type":"string"},"reasons":{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}},"title":"ProblemDetails"}}}},"default":{"description":"Default response"}},"description":"Get file or index document from a collection of files","method":"get","path":"/bzz/{reference}","servers":[{"url":"http://{apiRoot}:{port}/v1","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}},{"url":"http://{apiRoot}:{port}","variables":{"apiRoot":{"default":"localhost","description":"Base address of the local bee node main API"},"port":{"default":"1633","description":"Service port provided in bee node config"}}}],"security":[{}],"securitySchemes":{"basicAuth":{"type":"http","scheme":"basic"},"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"SecurityToken"}},"info":{"version":"5.0.0","title":"Bee API","description":"A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"},"postman":{"name":"Get file or index document from a collection of files","description":{"type":"text/plain"},"url":{"path":["bzz",":reference"],"host":["{{baseUrl}}"],"query":[],"variable":[{"disabled":false,"description":{"content":"(Required) Swarm address of content","type":"text/plain"},"type":"any","value":"","key":"reference"}]},"header":[{"key":"Accept","value":"application/octet-stream"}],"method":"GET"}}
+sidebar_class_name: "get api-method"
+info_path: docs/api/bee-api
+custom_edit_url: null
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## Get file or index document from a collection of files
+
+
+
+Get file or index document from a collection of files
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Path Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"in":"path","name":"reference","schema":{"oneOf":[{"type":"string","pattern":"^[A-Fa-f0-9]{64}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f","title":"SwarmAddress"},{"type":"string","pattern":"^[A-Fa-f0-9]{128}$","example":"36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f2d2810619d29b5dbefd5d74abce25d58b81b251baddb9c3871cf0d6967deaae2","title":"SwarmEncryptedReference"},{"type":"string","pattern":"^[A-Za-z0-9]+\\.[A-Za-z0-9]+$","example":"swarm.eth","title":"DomainName"}],"title":"SwarmReference"},"required":true,"description":"Swarm address of content"}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+Ok
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/octet-stream"} value={"application/octet-stream"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
+
+string
+
+</div></ul></details></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+Bad request
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+Not Found
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+Internal Server Error
+
+</div><div><MimeTabs schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"code"} required={false} schemaName={"integer"} qualifierMessage={undefined} schema={{"type":"integer"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"reasons"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","nullable":true,"description":"List of reasons for the error message.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"code\": 0,\n  \"message\": \"string\",\n  \"reasons\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"default"} value={"default"}><div>
+
+Default response
+
+</div><div></div></TabItem></ApiTabs></div>
+      
