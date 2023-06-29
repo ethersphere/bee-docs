@@ -300,6 +300,10 @@ module.exports = {
         theme: {
           // Change with your site colors
           primaryColor: '#1890ff',
+          options: {
+            requiredPropsFirst: true,
+            noAutoAuth: true
+          },
         },
       },
     ],
