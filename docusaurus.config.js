@@ -282,7 +282,27 @@ module.exports = {
         },
       },
     ],
-    
+    [
+      'redocusaurus',
+      {
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            spec: 'openapi/Swarm.yaml',
+            route: '/api/',
+          },
+          {
+            spec: 'openapi/SwarmDebug.yaml',
+            route: '/debug-api/',
+          },
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#1890ff',
+        },
+      },
+    ],
   ],
   stylesheets: [
     {
