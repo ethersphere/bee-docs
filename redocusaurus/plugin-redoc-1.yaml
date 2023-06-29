@@ -1,0 +1,1829 @@
+openapi: 3.0.3
+info:
+  version: 4.0.0
+  title: Bee Debug API
+  description: >-
+    A list of the currently provided debug interfaces to interact with the bee
+    node
+security:
+  - {}
+externalDocs:
+  description: Browse the documentation @ the Swarm Docs
+  url: https://docs.ethswarm.org
+servers:
+  - url: http://{apiRoot}:{port}
+    variables:
+      apiRoot:
+        default: localhost
+        description: Base address of the local bee node debug API
+      port:
+        default: '1635'
+        description: Service port provided in bee node config
+paths:
+  /addresses:
+    get:
+      summary: Get overlay and underlay addresses of the node
+      tags:
+        - Connectivity
+      responses:
+        '200':
+          description: Own node underlay and overlay addresses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Addresses'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /accounting:
+    get:
+      summary: Get all accounting associated values with all known peers
+      tags:
+        - Balance
+      responses:
+        '200':
+          description: Own accounting associated values with all known peers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeerAccountingData'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /balances:
+    get:
+      summary: Get the balances with all known peers including prepaid services
+      tags:
+        - Balance
+      responses:
+        '200':
+          description: Own balances with all known peers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balances'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /balances/{address}:
+    get:
+      summary: Get the balances with a specific peer including prepaid services
+      tags:
+        - Balance
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of peer
+      responses:
+        '200':
+          description: Balance with the specific peer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /blocklist:
+    get:
+      summary: Get a list of blocklisted peers
+      tags:
+        - Connectivity
+      responses:
+        '200':
+          description: Returns overlay addresses of blocklisted peers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Peers'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /consumed:
+    get:
+      summary: Get the past due consumption balances with all known peers
+      tags:
+        - Balance
+      responses:
+        '200':
+          description: Own past due consumption balances with all known peers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balances'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /consumed/{address}:
+    get:
+      summary: Get the past due consumption balance with a specific peer
+      tags:
+        - Balance
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of peer
+      responses:
+        '200':
+          description: Past-due consumption balance with the specific peer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /chequebook/address:
+    get:
+      summary: Get the address of the chequebook contract used
+      tags:
+        - Chequebook
+      responses:
+        '200':
+          description: Ethereum address of chequebook contract
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChequebookAddress'
+  /chequebook/balance:
+    get:
+      summary: Get the balance of the chequebook
+      tags:
+        - Chequebook
+      responses:
+        '200':
+          description: Balance of the chequebook
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChequebookBalance'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /chunks/{address}:
+    get:
+      summary: Check if chunk at address exists locally
+      tags:
+        - Chunk
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of chunk
+      responses:
+        '200':
+          description: Chunk exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        default:
+          description: Default response
+  /connect/{multiAddress}:
+    post:
+      summary: Connect to address
+      tags:
+        - Connectivity
+      parameters:
+        - in: path
+          allowReserved: true
+          name: multiAddress
+          schema:
+            $ref: '#/components/schemas/MultiAddress'
+          required: true
+          description: Underlay address of peer
+      responses:
+        '200':
+          description: Returns overlay address of connected peer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /reservestate:
+    get:
+      summary: Get reserve state
+      tags:
+        - Status
+      responses:
+        '200':
+          description: Reserve State
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReserveState'
+        default:
+          description: Default response
+  /chainstate:
+    get:
+      summary: Get chain state
+      tags:
+        - Status
+      responses:
+        '200':
+          description: Chain State
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainState'
+        default:
+          description: Default response
+  /node:
+    get:
+      summary: Get information about the node
+      tags:
+        - Status
+      responses:
+        '200':
+          description: Information about the node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        default:
+          description: Default response
+  /peers:
+    get:
+      summary: Get a list of peers
+      tags:
+        - Connectivity
+      responses:
+        '200':
+          description: Returns overlay addresses of connected peers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Peers'
+        default:
+          description: Default response
+  /peers/{address}:
+    delete:
+      summary: Remove peer
+      tags:
+        - Connectivity
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of peer
+      responses:
+        '200':
+          description: Disconnected peer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /pingpong/{address}:
+    post:
+      summary: Try connection to node
+      tags:
+        - Connectivity
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of peer
+      responses:
+        '200':
+          description: Returns round trip time for given peer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RttMs'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /health:
+    get:
+      summary: Get node overall health Status
+      description: |
+        Health Status will indicate node healthiness.
+
+        If node is unhealthy please check node logs for errors.
+      tags:
+        - Status
+      responses:
+        '200':
+          description: Health Status of node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        default:
+          description: Default response
+  /readiness:
+    get:
+      summary: Readiness endpoint indicates if node is ready to start accepting traffic
+      tags:
+        - Status
+      responses:
+        '200':
+          description: Indicates that node is ready
+          $ref: '#/components/responses/200'
+        '400':
+          description: Indicates that node is not ready
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response
+  /settlements/{address}:
+    get:
+      summary: Get amount of sent and received from settlements with a peer
+      tags:
+        - Settlements
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of peer
+      responses:
+        '200':
+          description: Amount of sent or received from settlements with a peer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlement'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /settlements:
+    get:
+      summary: Get settlements with all known peers and total amount sent or received
+      tags:
+        - Settlements
+      responses:
+        '200':
+          description: Settlements with all known peers and total amount sent or received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlements'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /timesettlements:
+    get:
+      summary: >-
+        Get time based settlements with all known peers and total amount sent or
+        received
+      tags:
+        - Settlements
+      responses:
+        '200':
+          description: >-
+            Time based settlements with all known peers and total amount sent or
+            received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settlements'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /topology:
+    get:
+      description: Get topology of known network
+      tags:
+        - Connectivity
+      responses:
+        '200':
+          description: Swarm topology of the bee node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BzzTopology'
+  /welcome-message:
+    get:
+      summary: Get configured P2P welcome message
+      tags:
+        - Connectivity
+      responses:
+        '200':
+          description: Welcome message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WelcomeMessage'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+    post:
+      summary: Set P2P welcome message
+      tags:
+        - Connectivity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WelcomeMessage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /chequebook/cashout/{peer-id}:
+    get:
+      summary: Get last cashout action for the peer
+      parameters:
+        - in: path
+          name: peer-id
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of peer
+      tags:
+        - Chequebook
+      responses:
+        '200':
+          description: Cashout status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwapCashoutStatus'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+    post:
+      summary: Cashout the last cheque for the peer
+      parameters:
+        - in: path
+          name: peer-id
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of peer
+        - $ref: '#/components/parameters/GasPriceParameter'
+        - $ref: '#/components/parameters/GasLimitParameter'
+      tags:
+        - Chequebook
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /chequebook/cheque/{peer-id}:
+    get:
+      summary: Get last cheques for the peer
+      parameters:
+        - in: path
+          name: peer-id
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of peer
+      tags:
+        - Chequebook
+      responses:
+        '200':
+          description: Last cheques
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChequePeerResponse'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /chequebook/cheque:
+    get:
+      summary: Get last cheques for all peers
+      tags:
+        - Chequebook
+      responses:
+        '200':
+          description: Last cheques
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChequeAllPeersResponse'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /chequebook/deposit:
+    post:
+      summary: Deposit tokens from overlay address into chequebook
+      parameters:
+        - in: query
+          name: amount
+          schema:
+            type: integer
+          required: true
+          description: amount of tokens to deposit
+        - $ref: '#/components/parameters/GasPriceParameter'
+      tags:
+        - Chequebook
+      responses:
+        '201':
+          description: Transaction hash of the deposit transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        '400':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /chequebook/withdraw:
+    post:
+      summary: Withdraw tokens from the chequebook to the overlay address
+      parameters:
+        - in: query
+          name: amount
+          schema:
+            type: integer
+          required: true
+          description: amount of tokens to withdraw
+        - $ref: '#/components/parameters/GasPriceParameter'
+      tags:
+        - Chequebook
+      responses:
+        '201':
+          description: Transaction hash of the withdraw transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        '400':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /redistributionstate:
+    get:
+      summary: Get current status of node in redistribution game
+      tags:
+        - RedistributionState
+      responses:
+        '200':
+          description: Redistribution status info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedistributionStatusResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /wallet:
+    get:
+      summary: Get wallet balance for BZZ and xDai
+      tags:
+        - Wallet
+      responses:
+        '200':
+          description: Wallet balance info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletResponse'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /transactions:
+    get:
+      summary: Get list of pending transactions
+      tags:
+        - Transaction
+      responses:
+        '200':
+          description: List of pending transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingTransactionsResponse'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /transactions/{txHash}:
+    get:
+      summary: Get information about a sent transaction
+      parameters:
+        - in: path
+          name: txHash
+          schema:
+            $ref: '#/components/schemas/TransactionHash'
+          required: true
+          description: Hash of the transaction
+      tags:
+        - Transaction
+      responses:
+        '200':
+          description: Get info about transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionInfo'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+    post:
+      summary: Rebroadcast existing transaction
+      parameters:
+        - in: path
+          name: txHash
+          schema:
+            $ref: '#/components/schemas/TransactionHash'
+          required: true
+          description: Hash of the transaction
+      tags:
+        - Transaction
+      responses:
+        '200':
+          description: Hash of the transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+    delete:
+      summary: Cancel existing transaction
+      parameters:
+        - in: path
+          name: txHash
+          schema:
+            $ref: '#/components/schemas/TransactionHash'
+          required: true
+          description: Hash of the transaction
+        - $ref: '#/components/parameters/GasPriceParameter'
+      tags:
+        - Transaction
+      responses:
+        '200':
+          description: Hash of the transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /stamps:
+    parameters:
+      - in: query
+        name: all
+        schema:
+          type: string
+          required: false
+        description: Gets all stamps. Default is null.
+    get:
+      summary: Get stamps for this node
+      tags:
+        - Postage Stamps
+      responses:
+        '200':
+          description: Returns an array of postage batches.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebugPostageBatchesResponse'
+        default:
+          description: Default response
+  /stamps/{batch_id}:
+    parameters:
+      - in: path
+        name: batch_id
+        schema:
+          $ref: '#/components/schemas/BatchID'
+        required: true
+        description: Swarm address of the stamp
+    get:
+      summary: Get an individual postage batch status
+      tags:
+        - Postage Stamps
+      responses:
+        '200':
+          description: Returns an individual postage batch state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebugPostageBatch'
+        '400':
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response
+  /stamps/{batch_id}/buckets:
+    parameters:
+      - in: path
+        name: batch_id
+        schema:
+          $ref: '#/components/schemas/BatchID'
+        required: true
+        description: Swarm address of the stamp
+    get:
+      summary: Get extended bucket data of a batch
+      tags:
+        - Postage Stamps
+      responses:
+        '200':
+          description: Returns extended bucket data of the provided batch ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostageStampBuckets'
+        '400':
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response
+  /stamps/{amount}/{depth}:
+    post:
+      summary: Buy a new postage batch.
+      description: >-
+        Be aware, this endpoint creates an on-chain transactions and transfers
+        BZZ from the node's Ethereum account and hence directly manipulates the
+        wallet balance!
+      tags:
+        - Postage Stamps
+      parameters:
+        - in: path
+          name: amount
+          schema:
+            $ref: '#/components/schemas/BigInt'
+          required: true
+          description: Amount of BZZ added that the postage batch will have.
+        - in: path
+          name: depth
+          schema:
+            type: integer
+          required: true
+          description: >-
+            Batch depth which specifies how many chunks can be signed with the
+            batch. It is a logarithm. Must be higher than default bucket depth
+            (16)
+        - in: query
+          name: label
+          schema:
+            type: string
+          required: false
+          description: An optional label for this batch
+        - in: header
+          name: immutable
+          schema:
+            type: boolean
+          required: false
+        - $ref: '#/components/parameters/GasPriceParameter'
+      responses:
+        '201':
+          description: Returns the newly created postage batch ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchIDResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /stamps/topup/{batch_id}/{amount}:
+    patch:
+      summary: Top up an existing postage batch.
+      description: >-
+        Be aware, this endpoint creates on-chain transactions and transfers BZZ
+        from the node's Ethereum account and hence directly manipulates the
+        wallet balance!
+      tags:
+        - Postage Stamps
+      parameters:
+        - in: path
+          name: batch_id
+          schema:
+            $ref: '#/components/schemas/BatchID'
+          required: true
+          description: Batch ID to top up
+        - in: path
+          name: amount
+          schema:
+            type: integer
+          required: true
+          description: Amount of BZZ per chunk to top up to an existing postage batch.
+      responses:
+        '202':
+          description: Returns the postage batch ID that was topped up
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchIDResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '402':
+          $ref: '#/components/responses/402'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /stamps/dilute/{batch_id}/{depth}:
+    patch:
+      summary: Dilute an existing postage batch.
+      description: >-
+        Be aware, this endpoint creates on-chain transactions and transfers BZZ
+        from the node's Ethereum account and hence directly manipulates the
+        wallet balance!
+      tags:
+        - Postage Stamps
+      parameters:
+        - in: path
+          name: batch_id
+          schema:
+            $ref: '#/components/schemas/BatchID'
+          required: true
+          description: Batch ID to dilute
+        - in: path
+          name: depth
+          schema:
+            type: integer
+          required: true
+          description: New batch depth. Must be higher than the previous depth.
+      responses:
+        '202':
+          description: Returns the postage batch ID that was diluted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchIDResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /batches:
+    get:
+      summary: Get all globally available batches that were purchased by all nodes.
+      tags:
+        - Postage Stamps
+      responses:
+        '200':
+          description: >-
+            Returns an array of all available and currently valid postage
+            batches.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebugPostageAllBatchesResponse'
+        default:
+          description: Default response
+  /stake/{amount}:
+    post:
+      summary: Deposit some amount for staking.
+      description: >-
+        Be aware, this endpoint creates an on-chain transactions and transfers
+        BZZ from the node's Ethereum account and hence directly manipulates the
+        wallet balance.
+      tags:
+        - Staking
+      parameters:
+        - in: path
+          name: amount
+          schema:
+            type: string
+          description: Amount of BZZ added that will be deposited for staking.
+        - $ref: '#/components/parameters/GasPriceParameter'
+        - $ref: '#/components/parameters/GasLimitParameter'
+      responses:
+        '200':
+          $ref: '#/components/responses/StakeDepositResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /stake:
+    get:
+      summary: Get the staked amount.
+      description: This endpoint fetches the staked amount from the blockchain.
+      tags:
+        - Staking
+      responses:
+        '200':
+          $ref: '#/components/responses/GetStakeResponse'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+    delete:
+      summary: Withdraw all staked amount.
+      description: >-
+        Be aware, this endpoint creates an on-chain transactions and transfers
+        BZZ from the node's Ethereum account and hence directly manipulates the
+        wallet balance.
+      tags:
+        - Staking
+      parameters:
+        - $ref: '#/components/parameters/GasPriceParameter'
+        - $ref: '#/components/parameters/GasLimitParameter'
+      responses:
+        '200':
+          $ref: '#/components/responses/WithdrawAllStakeResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /loggers:
+    get:
+      summary: Get all available loggers.
+      tags:
+        - Logging
+      responses:
+        '200':
+          description: >-
+            Returns an array of all available loggers, also represented in short
+            form in a tree.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggerResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response
+  /loggers/{exp}:
+    get:
+      summary: Get all available loggers that match the specified expression.
+      parameters:
+        - in: path
+          name: exp
+          schema:
+            $ref: '#/components/schemas/LoggerExp'
+          required: true
+          description: Regular expression or a subsystem that matches the logger(s).
+      tags:
+        - Logging
+      responses:
+        '200':
+          description: >-
+            Returns an array of all available loggers that matches given
+            expression, also represented in short form in a tree.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggerResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response
+    put:
+      summary: Set logger(s) verbosity level.
+      parameters:
+        - in: path
+          name: exp
+          schema:
+            $ref: '#/components/schemas/LoggerExp'
+          required: true
+          description: Regular expression or a subsystem that matches the logger(s).
+      tags:
+        - Logging
+      responses:
+        '200':
+          description: The verbosity was changed successfully.
+        '400':
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response
+  /status:
+    get:
+      summary: Get the current status snapshot of this node.
+      tags:
+        - Node Status
+      responses:
+        '200':
+          description: Returns the current node status snapshot.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusSnapshotResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response.
+  /status/peers:
+    get:
+      summary: Get the current status snapshot of this node connected peers.
+      tags:
+        - Node Status
+      responses:
+        '200':
+          description: Returns the status snapshot of this node connected peers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response.
+components:
+  schemas:
+    SwarmAddress:
+      type: string
+      pattern: ^[A-Fa-f0-9]{64}$
+      example: 36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f
+    P2PUnderlay:
+      type: string
+      example: >-
+        /ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAmTm17toLDaPYzRyjKn27iCB76yjKnJ5DjQXneFmifFvaX
+    EthereumAddress:
+      type: string
+      pattern: ^[A-Fa-f0-9]{40}$
+      example: 36b7efd913ca4cf880b8eeac5093fa27b0825906
+    PublicKey:
+      type: string
+      pattern: ^[A-Fa-f0-9]{66}$
+      example: 02ab7473879005929d10ce7d4f626412dad9fe56b0a6622038931d26bd79abf0a4
+    Addresses:
+      type: object
+      properties:
+        overlay:
+          $ref: '#/components/schemas/SwarmAddress'
+        underlay:
+          type: array
+          items:
+            $ref: '#/components/schemas/P2PUnderlay'
+        ethereum:
+          $ref: '#/components/schemas/EthereumAddress'
+        publicKey:
+          $ref: '#/components/schemas/PublicKey'
+        pssPublicKey:
+          $ref: '#/components/schemas/PublicKey'
+    ProblemDetails:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        reasons:
+          type: array
+          nullable: true
+          description: List of reasons for the error message.
+          items:
+            type: string
+    BigInt:
+      description: >-
+        Numeric string that represents integer which might exceeds
+        `Number.MAX_SAFE_INTEGER` limit (2^53-1)
+      type: string
+      example: '1000000000000000000'
+    AccountingInfo:
+      type: object
+      properties:
+        balance:
+          $ref: '#/components/schemas/BigInt'
+        thresholdReceived:
+          $ref: '#/components/schemas/BigInt'
+        thresholdGiven:
+          $ref: '#/components/schemas/BigInt'
+        surplusBalance:
+          $ref: '#/components/schemas/BigInt'
+        reservedBalance:
+          $ref: '#/components/schemas/BigInt'
+        shadowReservedBalance:
+          $ref: '#/components/schemas/BigInt'
+        ghostBalance:
+          $ref: '#/components/schemas/BigInt'
+    PeerAccountingData:
+      type: object
+      properties:
+        peerData:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AccountingInfo'
+    Balance:
+      type: object
+      properties:
+        peer:
+          $ref: '#/components/schemas/SwarmAddress'
+        balance:
+          $ref: '#/components/schemas/BigInt'
+    Balances:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+    Address:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/SwarmAddress'
+    Peers:
+      type: object
+      properties:
+        peers:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/Address'
+    ChequebookAddress:
+      type: object
+      properties:
+        chequebookAddress:
+          $ref: '#/components/schemas/EthereumAddress'
+    ChequebookBalance:
+      type: object
+      properties:
+        totalBalance:
+          $ref: '#/components/schemas/BigInt'
+        availableBalance:
+          $ref: '#/components/schemas/BigInt'
+    Response:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: integer
+    MultiAddress:
+      type: string
+    ReserveState:
+      type: object
+      properties:
+        radius:
+          type: integer
+        storageRadius:
+          type: integer
+        commitment:
+          type: integer
+    ChainState:
+      type: object
+      properties:
+        chainTip:
+          type: integer
+        block:
+          type: integer
+        totalAmount:
+          $ref: '#/components/schemas/BigInt'
+        currentPrice:
+          $ref: '#/components/schemas/BigInt'
+    Node:
+      type: object
+      properties:
+        beeMode:
+          type: string
+          enum:
+            - light
+            - full
+            - dev
+          description: >
+            Gives back in what mode the Bee client has been started. The modes
+            are mutually exclusive * `light` - light node; does not participate
+            in forwarding or storing chunks * `full` - full node * `dev` -
+            development mode; Bee client for development purposes, blockchain
+            operations are mocked
+        chequebookEnabled:
+          type: boolean
+        swapEnabled:
+          type: boolean
+    Duration:
+      description: Go time.Duration format
+      type: string
+      example: 5.0018ms
+    RttMs:
+      type: object
+      properties:
+        rtt:
+          $ref: '#/components/schemas/Duration'
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+            - nok
+          description: >
+            Indicates health state of node * `ok` - node is healthy * `nok` -
+            node is not healthy
+        version:
+          type: string
+        apiVersion:
+          type: string
+          default: 0.0.0
+          description: >-
+            The default value is set in case the bee binary was not build
+            correctly.
+        debugApiVersion:
+          type: string
+          default: 0.0.0
+          description: >-
+            The default value is set in case the bee binary was not build
+            correctly.
+    Settlement:
+      type: object
+      properties:
+        peer:
+          $ref: '#/components/schemas/SwarmAddress'
+        received:
+          type: integer
+        sent:
+          type: integer
+    Settlements:
+      type: object
+      properties:
+        totalReceived:
+          type: integer
+        totalSent:
+          type: integer
+        settlements:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/Settlement'
+    PeerMetricsView:
+      type: object
+      properties:
+        lastSeenTimestamp:
+          type: integer
+          nullable: false
+        sessionConnectionRetry:
+          type: integer
+          nullable: false
+        connectionTotalDuration:
+          type: number
+          nullable: false
+        sessionConnectionDuration:
+          type: number
+          nullable: false
+        sessionConnectionDirection:
+          type: string
+          nullable: false
+        latencyEWMA:
+          type: integer
+          nullable: false
+        reachability:
+          type: string
+        healthy:
+          type: boolean
+    BzzTopology:
+      type: object
+      properties:
+        baseAddr:
+          $ref: '#/components/schemas/SwarmAddress'
+        population:
+          type: integer
+        connected:
+          type: integer
+        timestamp:
+          type: string
+        nnLowWatermark:
+          type: integer
+        depth:
+          type: integer
+        reachability:
+          type: string
+          enum:
+            - Unknown
+            - Public
+            - Private
+        networkAvailability:
+          type: string
+          enum:
+            - Unknown
+            - Available
+            - Unavailable
+        bins:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              population:
+                type: integer
+              connected:
+                type: integer
+              disconnectedPeers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    address:
+                      $ref: '#/components/schemas/SwarmAddress'
+                    metrics:
+                      $ref: '#/components/schemas/PeerMetricsView'
+              connectedPeers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    address:
+                      $ref: '#/components/schemas/SwarmAddress'
+                    metrics:
+                      $ref: '#/components/schemas/PeerMetricsView'
+    WelcomeMessage:
+      type: object
+      properties:
+        welcomeMessage:
+          type: string
+    Cheque:
+      type: object
+      properties:
+        beneficiary:
+          $ref: '#/components/schemas/EthereumAddress'
+        chequebook:
+          $ref: '#/components/schemas/EthereumAddress'
+        payout:
+          $ref: '#/components/schemas/BigInt'
+    TransactionHash:
+      type: string
+      pattern: ^0x[A-Fa-f0-9]{64}$
+      example: '0x780cb6a37d1946978087896e1e489c37e30fe3e329510fff8d97360f73529f5a'
+    SwapCashoutResult:
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/EthereumAddress'
+        lastPayout:
+          $ref: '#/components/schemas/BigInt'
+        bounced:
+          type: boolean
+    SwapCashoutStatus:
+      type: object
+      properties:
+        peer:
+          $ref: '#/components/schemas/SwarmAddress'
+        lastCashedCheque:
+          $ref: '#/components/schemas/Cheque'
+        transactionHash:
+          $ref: '#/components/schemas/TransactionHash'
+        result:
+          $ref: '#/components/schemas/SwapCashoutResult'
+        uncashedAmount:
+          $ref: '#/components/schemas/BigInt'
+    GasPrice:
+      description: >-
+        Gas price refers to the amount you’re willing to pay for every unit of
+        gas.
+      type: integer
+    GasLimit:
+      description: >-
+        Gas limit refers to the maximum amount of gas you’re willing to spend on
+        a particular transaction.
+      type: integer
+      minimum: 0
+      maximum: 18446744073709552000
+    TransactionResponse:
+      type: object
+      properties:
+        transactionHash:
+          $ref: '#/components/schemas/TransactionHash'
+    ChequePeerResponse:
+      type: object
+      properties:
+        peer:
+          $ref: '#/components/schemas/SwarmAddress'
+        lastreceived:
+          $ref: '#/components/schemas/Cheque'
+        lastsent:
+          $ref: '#/components/schemas/Cheque'
+    ChequeAllPeersResponse:
+      type: object
+      properties:
+        lastcheques:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/ChequePeerResponse'
+    RedistributionStatusResponse:
+      type: object
+      properties:
+        minimumGasFunds:
+          $ref: '#/components/schemas/BigInt'
+        hasSufficientFunds:
+          type: boolean
+        isFrozen:
+          type: boolean
+        isFullySynced:
+          type: boolean
+        phase:
+          type: string
+        round:
+          type: integer
+        lastWonRound:
+          type: integer
+        lastPlayedRound:
+          type: integer
+        lastFrozenRound:
+          type: integer
+        lastSelectedRound:
+          type: integer
+        lastSampleDuration:
+          $ref: '#/components/schemas/Duration'
+        block:
+          type: integer
+        reward:
+          $ref: '#/components/schemas/BigInt'
+        fees:
+          $ref: '#/components/schemas/BigInt'
+    WalletResponse:
+      type: object
+      properties:
+        bzzBalance:
+          $ref: '#/components/schemas/BigInt'
+        nativeTokenBalance:
+          $ref: '#/components/schemas/BigInt'
+        chainID:
+          type: integer
+        chequebookContractAddress:
+          $ref: '#/components/schemas/EthereumAddress'
+        walletAddress:
+          $ref: '#/components/schemas/EthereumAddress'
+    DateTime:
+      type: string
+      format: date-time
+      example: '2020-06-11T11:26:42.6969797+02:00'
+    TransactionInfo:
+      type: object
+      properties:
+        transactionHash:
+          $ref: '#/components/schemas/TransactionHash'
+        to:
+          $ref: '#/components/schemas/EthereumAddress'
+        nonce:
+          type: integer
+        gasPrice:
+          $ref: '#/components/schemas/BigInt'
+        gasLimit:
+          type: integer
+        gasTipCap:
+          $ref: '#/components/schemas/BigInt'
+        gasTipBoost:
+          type: integer
+        gasFeeCap:
+          $ref: '#/components/schemas/BigInt'
+        data:
+          type: string
+        created:
+          $ref: '#/components/schemas/DateTime'
+        description:
+          type: string
+        value:
+          $ref: '#/components/schemas/BigInt'
+    PendingTransactionsResponse:
+      type: object
+      properties:
+        pendingTransactions:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/TransactionInfo'
+    BatchID:
+      type: string
+      pattern: ^[A-Fa-f0-9]{64}$
+      example: 36b7efd913ca4cf880b8eeac5093fa27b0825906c600685b6abdd6566e6cfe8f
+    PostageBatch:
+      type: object
+      properties:
+        batchID:
+          $ref: '#/components/schemas/BatchID'
+        utilization:
+          type: integer
+        usable:
+          description: >-
+            Indicate that the batch was discovered by the Bee node, but it
+            awaits enough on-chain confirmations before declaring the batch as
+            usable.
+          type: boolean
+        label:
+          type: string
+        depth:
+          type: integer
+        amount:
+          $ref: '#/components/schemas/BigInt'
+        bucketDepth:
+          type: integer
+        blockNumber:
+          type: integer
+        immutableFlag:
+          type: boolean
+        exists:
+          type: boolean
+        batchTTL:
+          type: integer
+        expired:
+          type: boolean
+    PostageBatchNoIssuer:
+      type: object
+      properties:
+        batchID:
+          $ref: '#/components/schemas/BatchID'
+        exists:
+          type: boolean
+        batchTTL:
+          type: integer
+    DebugPostageBatch:
+      anyOf:
+        - $ref: '#/components/schemas/PostageBatch'
+        - $ref: '#/components/schemas/PostageBatchNoIssuer'
+    DebugPostageBatchesResponse:
+      type: object
+      properties:
+        stamps:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/DebugPostageBatch'
+    StampBucketData:
+      type: object
+      properties:
+        bucketID:
+          type: integer
+        collisions:
+          type: integer
+    PostageStampBuckets:
+      type: object
+      properties:
+        depth:
+          type: integer
+        bucketDepth:
+          type: integer
+        bucketUpperBound:
+          type: integer
+        buckets:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/StampBucketData'
+    BatchIDResponse:
+      type: object
+      properties:
+        batchID:
+          $ref: '#/components/schemas/BatchID'
+        txHash:
+          $ref: '#/components/schemas/TransactionHash'
+    PostageBatchShort:
+      type: object
+      properties:
+        batchID:
+          $ref: '#/components/schemas/BatchID'
+        value:
+          $ref: '#/components/schemas/BigInt'
+        start:
+          type: integer
+        depth:
+          type: integer
+        bucketDepth:
+          type: integer
+        immutableFlag:
+          type: boolean
+        batchTTL:
+          type: integer
+        owner:
+          $ref: '#/components/schemas/EthereumAddress'
+        storageRadius:
+          type: integer
+    DebugPostageAllBatchesResponse:
+      type: object
+      properties:
+        batches:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/PostageBatchShort'
+    LoggerTreeNode:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/LoggerTreeData'
+    LoggerTreeData:
+      type: object
+      nullable: true
+      properties:
+        /:
+          $ref: '#/components/schemas/LoggerTreeNode'
+        +:
+          type: array
+          items:
+            type: string
+          description: >-
+            The combination of the logger verbosity and its subsystem separated
+            by |.
+          example: warning|one/name[0][]>>824634860360
+    Logger:
+      type: object
+      properties:
+        logger:
+          type: string
+        verbosity:
+          type: string
+        subsystem:
+          type: string
+        id:
+          type: string
+    LoggerResponse:
+      type: object
+      properties:
+        tree:
+          $ref: '#/components/schemas/LoggerTreeNode'
+        loggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Logger'
+    LoggerExp:
+      type: string
+      description: Base 64 encoded regular expression or subsystem string.
+      pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+      example: b25lL25hbWU=
+    StatusSnapshotResponse:
+      type: object
+      properties:
+        peer:
+          $ref: '#/components/schemas/SwarmAddress'
+        beeMode:
+          type: string
+          enum:
+            - light
+            - full
+            - ultra-light
+            - unknown
+        proximity:
+          type: integer
+        reserveSize:
+          type: integer
+        pullsyncRate:
+          type: number
+        storageRadius:
+          type: integer
+        connectedPeers:
+          type: integer
+        neighborhoodSize:
+          type: integer
+        requestFailed:
+          nullable: true
+          type: boolean
+        BatchCommitment:
+          type: integer
+        isReachable:
+          type: boolean
+    StatusResponse:
+      type: object
+      properties:
+        stamps:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/StatusSnapshotResponse'
+  responses:
+    '200':
+      description: OK.
+    '400':
+      description: Bad request
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    '402':
+      description: Payment Required
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    '404':
+      description: Not Found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    '429':
+      description: Too many requests
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    '500':
+      description: Internal Server Error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    StakeDepositResponse:
+      type: object
+      properties:
+        txHash:
+          $ref: '#/components/schemas/TransactionHash'
+    GetStakeResponse:
+      type: object
+      properties:
+        stakedAmount:
+          $ref: '#/components/schemas/BigInt'
+    WithdrawAllStakeResponse:
+      type: object
+      properties:
+        txHash:
+          $ref: '#/components/schemas/TransactionHash'
+  parameters:
+    GasPriceParameter:
+      in: header
+      name: gas-price
+      schema:
+        $ref: '#/components/schemas/GasPrice'
+      required: false
+      description: Gas price for transaction
+    GasLimitParameter:
+      in: header
+      name: gas-limit
+      schema:
+        $ref: '#/components/schemas/GasLimit'
+      required: false
+      description: Gas limit for transaction
