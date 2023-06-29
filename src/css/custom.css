@@ -285,3 +285,16 @@ pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-Cod
   background-color: #FECDCD;
   border-color: #F30000;
 }
+
+/**
+* Prevent redocusaurus from displaying html before its styles are fully
+* loaded. This prevents large icons from being displayed before they 
+* properly styled. 
+*/
+.redocusaurus {
+  display: none;
+}
+
+body[data-rh] .redocusaurus {
+  display: block;
+}
