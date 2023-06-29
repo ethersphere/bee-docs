@@ -11,14 +11,6 @@ externalDocs:
   description: Browse the documentation @ the Swarm Docs
   url: https://docs.ethswarm.org
 servers:
-  - url: http://{apiRoot}:{port}/v1
-    variables:
-      apiRoot:
-        default: localhost
-        description: Base address of the local bee node main API
-      port:
-        default: '1633'
-        description: Service port provided in bee node config
   - url: http://{apiRoot}:{port}
     variables:
       apiRoot:
