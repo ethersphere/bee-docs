@@ -303,7 +303,8 @@ module.exports = {
           options: {
             requiredPropsFirst: true,
             noAutoAuth: true,
-            expandDefaultServerVariables: true
+            expandDefaultServerVariables: true,
+            scrollYOffset: ".navbar"
           },
         },
       },
