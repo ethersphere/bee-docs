@@ -12,13 +12,13 @@ externalDocs:
   url: "https://docs.ethswarm.org"
 
 servers:
-  - url: "http://{apiRoot}:{port}"
+  - url: http://{apiRoot}:{port}
     variables:
       apiRoot:
-        default: "localhost"
+        default: localhost
         description: Base address of the local bee node debug API
       port:
-        default: "1635"
+        default: 1635
         description: Service port provided in bee node config
 
 paths:

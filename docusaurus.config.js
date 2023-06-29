@@ -302,7 +302,8 @@ module.exports = {
           primaryColor: '#1890ff',
           options: {
             requiredPropsFirst: true,
-            noAutoAuth: true
+            noAutoAuth: true,
+            expandDefaultServerVariables: true
           },
         },
       },
