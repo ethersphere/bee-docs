@@ -32,7 +32,11 @@ With Swarm, the overlay network is based on a [Kademlia DHT](https://en.wikipedi
 
 ## Overlay Address
 
-Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and the Swarm network ID (the Swarm network ID is included to prevent address collisions). The overlay address for a node does not change over time and is a permanent identifier for the node. If not otherwise specified, when referring to a "node address", it typically is referring to the overlay address, not the underlay address. The overlay address is the address used to determine which nodes connect to each other and which chunks nodes are responsible for.
+Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and the Swarm network ID (the Swarm network ID is included to prevent address collisions). The overlay address for a node does not change over time and is a permanent identifier for the node. Overlay addresses are used to group nodes into neighborhoods which are responsible for storing the same chunks of data. If not otherwise specified, when referring to a "node address", it typically is referring to the overlay address, not the underlay address. The overlay address is the address used to determine which nodes connect to each other and which chunks nodes are responsible for.
+
+## Neighborhood
+
+Neighborhoods are groups of nodes which are responsible for sharing the same chunks. The chunks which each neighborhood is responsible for storing is defined by the proximity order of the nodes and the chunks. See [DISC](/docs/learn/technology/DISC#neighborhoods) for more details.
 
 ## Underlay
 
