@@ -13,7 +13,7 @@ One of the advantages of using Kademlia as a model for network topology is that 
 
 ### Neighborhoods
 
-Neighborhoods are groups of nodes which are responsible for sharing the same chunks. The chunks which each neighborhood is responsible for storing is defined by the proximity order of the nodes and the chunks. In other words, each node is responsible for storing chunks with which their overlay addresses share a number of prefix bits up to a certain proximity order depth, and together with other nodes which share the same prefix bits, make up neighborhoods which share the responsibility for storing the same chunks. 
+Neighborhoods are groups of nodes which are responsible for sharing the same chunks. The chunks which each neighborhood is responsible for storing are defined by the proximity order of the nodes and the chunks. In other words, each node is responsible for storing chunks with which their overlay addresses share a certain number of prefix bits, and together with other nodes which share the same prefix bits, make up neighborhoods which share the responsibility for storing the same chunks. 
 
 
 ### Chunks 

@@ -49,13 +49,13 @@ Once running, a file can be uploaded by making an HTTP POST request to the `file
 Here, you must specify your _Batch ID_ in the `Swarm-Postage-Batch-Id` header as follows.
 
 ```bash
-curl --data-binary @bee.jpg -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264"   http://localhost:1633/bzz
+curl --data-binary "@bee.jpg" -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264"   http://localhost:1633/bzz
 ```
 
 We may also pass the appropriate mime type in the `Content-Type` header, and a file name to the `name` query parameter so that the file will be correctly handled by web browsers and other applications.
 
 ```bash
-curl --data-binary @bee.jpg -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -H "Content-Type: image/jpg" http://localhost:1633/bzz
+curl --data-binary "@bee.jpg" -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -H "Content-Type: image/jpg" http://localhost:1633/bzz
 ```
 
 :::danger
@@ -93,7 +93,7 @@ Substitute the _hash_ in the last part of the URL with the reference
 to your own data.
 
 ```bash
-curl -OJ http://localhost:1633/bzz/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4
+curl -OJL http://localhost:1633/bzz/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4/
 ```
 
 You may even simply navigate to the URL in your browser:
