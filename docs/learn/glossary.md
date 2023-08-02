@@ -36,15 +36,16 @@ Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and th
 
 ## Neighborhood
 
-Neighborhoods are groups of nodes which are responsible for sharing the same chunks. The chunks which each neighborhood is responsible for storing is defined by the proximity order of the nodes and the chunks. See [DISC](/docs/learn/technology/DISC#neighborhoods) for more details.
+Neighborhoods are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. See [DISC](/docs/learn/technology/DISC#neighborhoods) for more details.
 
 ## Underlay
 
-An underlay network is the low level network on which an overlay network is built. It allows nodes to find each other, communicate, and transfer data. Swarm's underlay network is a p2p network built with [libp2p](https://libp2p.io/). Underlay address are not permanent and may change over time. 
+An underlay network is the low level network on which an overlay network is built. It allows nodes to find each other, communicate, and transfer data. Swarm's underlay network is a p2p network built with [libp2p](https://libp2p.io/). Nodes are assigned underlay addresses which in contrast to their overlay addresses are not permanent and may change over time. 
 
 ## Swap
 
-Swap is the p2p accounting protocol used for Bee nodes. It allows for the automated accounting and settlement of services between Bee nodes in the Swarm network. In the case that services exchanged between nodes is balanced equally, no settlement is necessary. In the case that one node is unequally indebted to another, settlement is made to clear the node's debts. Two key elements of the Swap protocol are [cheques and the chequebook contract](glossary#cheques--chequebook).    
+Swap is the p2p accounting protocol used for Bee nodes. It allows for the automated accounting and settlement of services between Bee nodes in the Swarm network. In the case that services exchanged between nodes is balanced equally, no settlement is necessary. In the case that one node is unequally indebted to another, settlement is made to clear the node's debts. Two key elements of the Swap protocol are [cheques and the chequebook contract](glossary#cheques--chequebook).   
+
 
 ## Cheques & Chequebook
 
