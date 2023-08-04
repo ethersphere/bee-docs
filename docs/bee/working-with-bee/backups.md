@@ -146,8 +146,8 @@ Before restoring, make sure to check for any old node data at `/var/lib/bee` fro
 1. Install Bee. See [install](../installation/install) page for more info:
 
     ```
-    wget https://github.com/ethersphere/bee/releases/download/v1.16.1/bee_1.16.1_amd64.deb
-    sudo dpkg -i bee_1.16.1_amd64.deb
+    wget https://github.com/ethersphere/bee/releases/download/v1.17.1/bee_1.17.1_amd64.deb
+    sudo dpkg -i bee_1.17.1_amd64.deb
     ```
     Edit `bee.yaml` to include Gnosis Chain RPC endpoint: 
     ```
