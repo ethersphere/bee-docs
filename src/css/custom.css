@@ -286,9 +286,6 @@ pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-Cod
   border-color: #F30000;
 }
 
-.scrollbar-container div:first-of-type {
-  display: none;
-}
 
 /**
 * Prevent redocusaurus from displaying html before its styles are fully
