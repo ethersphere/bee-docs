@@ -3,7 +3,7 @@ title: Keep Your Data Alive
 id: keep-your-data-alive
 ---
 
-The swarm comprises the sum total of all storage space provided by all of our nodes, called the DISC (Distributed Immutable Store of Chunks). The _right to write_ data into this distributed store is determined by the postage stamps that have been attached.
+Swarm comprises the sum total of all storage space provided by all of our nodes, called the DISC (Distributed Immutable Store of Chunks). The _right to write_ data into this distributed store is determined by the postage stamps that have been attached.
 
 ### Fund your node's wallet.
 
@@ -12,7 +12,7 @@ xDAI for gas and xBZZ which was transferred into your chequebook when
 your node was initialised. This will be used to interact with other
 nodes using the _SWAP_ protocol. In order to access more funds to buy
 batches of stamps, your wallet must be funded with xBZZ. The easiest
-way to acheive this is to withdraw funds from your chequebook:
+way to achieve this is to withdraw funds from your chequebook:
 
 ```bash
 curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000"
@@ -20,45 +20,55 @@ curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000"
 
 ## Purchase a Batch of Stamps
 
-Stamps are created in batches, so that storer nodes may calculate the
+Stamps are created in batches so that storer nodes may calculate the
 validity of a chunk's stamp with only local knowledge. This enables
-the privacy you enjoy in the swarm.
+the privacy you enjoy with Swarm.
 
-Stamp batches are created in _buckets_ with a _depth_ 16. The entire
-swarm _address space_ is divided into 2^16 = 65,536 different
-buckets. When uploaded, each of your file's are split into 4kb chunks
-and assigned to a specific bucket based on it's address.
+Stamp batches are created in buckets with a `bucket depth` of 16. The entire
+Swarm address space is divided into $$2^{16} = 65,536$$ different
+buckets. When uploaded, each of your files are split into 4kb chunks
+and assigned to a specific bucket based on its address.
 
-When creating a batch you must specify two values, _batch depth_ and _amount_.
+When creating a batch you must specify two values, `batch depth` and `amount`.
 
 ### Amount
 
-The _amount_ represents the quantity of xBZZ that is assigned to this batch. The total amount of xBZZ that will be paid for the batch is calulated from this figure and the _batch depth_.
+The `amount` is the quantity of xBZZ in PLUR $$(1 \times 10^{16}PLUR = 1 \text{ xBZZ})$$ that is assigned per chunk in the batch. The total number of xBZZ that will be paid for the batch is calculated from this figure and the `batch depth` like so:
 
-The paid amount forms the _balance_ of the _batch_. This _balance_ is then slowly depleted as time ticks on and _blocks_ are mined on the xDAI blockchain.
+$$2^{batch \_ depth} \times {amount}$$
+
+The paid xBZZ forms the `balance` of the batch. This `balance` is then slowly depleted as time ticks on and blocks are mined on Gnosis Chain.
+
+
+For example, with a `batch depth` of 20 and an `amount` of 1000000000 PLUR:
+                                                    
+$$
+2^{20} \times 1000000000 = 1048576000000000 \text{ PLUR} = 0.1048576 \text{ xBZZ}
+$$
 
 ### Batch Depth
 
-The _batch depth_ determines _how many chunks_ are allowed to be in each _bucket_. The number of chunks allowed in each _bucket_ is calculated to be a `2^(batch depth - bucket depth) = 2^(batch depth - 16)`.
+The `batch depth` determines _how many chunks_ are allowed to be in each bucket. The number of chunks allowed in each bucket is calculated like so:
+$$2^{batch \_ depth - bucket \_ depth}$$  $$=$$ $$2^{batch \_ depth - 16}$$. With a minimum `batch depth` of 17.
+
 
 ### Calculating the Depth and Amount of Your Batch of Stamps
 
-_Postage Stamps_ are a brand new feature addition to Swarm, and it's early days in the conception of how to get the best out of the stamp batches.
+One notable aspect of batch utilization is that the entire batch is considered fully utilized as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
 
-Right now, the easiest way to start uploading content, is to buy a large enough batch so that it is incredibly unlikely you will end up with too many _chunks_ falling into the same _bucket_.
+Right now, the easiest way to start uploading content is to buy a large enough batch so that it is incredibly unlikely you will end up with too many chunks falling into the same bucket.
 
-The _amount_ you specify will determine the amount of time your chunks live in the swarm. Because pricing is variable, it is not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the _current price_ and the _remaining batch balance_.
+The `amount` you specify will govern the amount of time your chunks live in Swarm. Because pricing is variable, it is not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the current price and the remaining batch balance.
 
-For now, we suggest you specify depth 20 and amount 10000000 for your
-batches. This should be ample to upload quite some data, and to keep
-your files in the swarm for the forseeable future.
+For now, we suggest you specify `batch depth` 20 and `amount` 10000000000 for your
+batches just to get started. This should be enough to upload several GB of data for a few weeks.
 
 :::warning
-When you purchase a batch of stamps, you agree to burn xBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw xBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about how the swarm fits together, read <a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
+When you purchase a batch of stamps, you agree to burn xBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw xBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about the different components of Swarm fit together, read <a href="https://www.ethswarm.org/The-Book-of-Swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 :::
 
 ```bash
-curl -s -XPOST http://localhost:1635/stamps/1000000000/20
+curl -s -XPOST http://localhost:1635/stamps/10000000000/20
 ```
 
 :::info

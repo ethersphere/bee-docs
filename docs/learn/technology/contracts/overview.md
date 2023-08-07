@@ -7,7 +7,7 @@ id: overview
 |Contract|Blockchain | Address             | 
 | ---------------------- | ------------------------------- |--------- |
 |BZZ token| Ethereum          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)                |
-|xBZZ token | Gnosis Chain    | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://blockscout.com/xdai/mainnet/tokens/0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da/) |
+|xBZZ token | Gnosis Chain    | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://gnosisscan.io/token/0xdbf3ea6f5bee45c02255b2c26a16f300502f68da) |
 |gBZZ token| Goerli (Ethereum testnet) | [`0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335`](https://goerli.etherscan.io/address/0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335)         |
 |BZZ Bonding Curve| Ethereum|[`0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904`](https://etherscan.io/address/0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904)|[`0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904`](https://etherscan.io/address/0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904)|
 
