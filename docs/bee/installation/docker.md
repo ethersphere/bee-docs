@@ -80,7 +80,7 @@ want to run.
 #### Specific Versions
 
 ```bash
-docker pull ethersphere/bee:1.17.1
+docker pull ethersphere/bee:1.17.2
 ```
 
 #### Using Tags
