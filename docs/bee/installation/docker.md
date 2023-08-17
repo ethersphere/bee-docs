@@ -5,27 +5,16 @@ id: docker
 
 Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee) for your convenience.
 
-:::info
-Bee Clef is deprecated and is no longer under active development. It is not required for running a Bee node.
-:::
-
-If running a Bee _full node_, you may make use of
-Ethereum's external signer, [Clef](/docs/bee/installation/bee-clef). Skip
-ahead if you are comfortable with `docker` basics for instructions on
-how to use [docker-compose](/docs/bee/installation/docker#docker-compose)
-to easily set up Bee with persistent storage and integration with the
-Bee Clef container.
-
 ### Quick Start
 
-Try Bee out by simply running the following command in your Terminal.
+Try Bee out by simply running the following command in your terminal.
 
 ```bash
-docker run\
+docker run \
   -p 1635:1635 \
   -p 1634:1634 \
-  -p 1633:1633\
-  --rm -it ethersphere/bee:stable\
+  -p 1633:1633 \
+  --rm -it ethersphere/bee:stable \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint http://localhost:8545 \
@@ -33,37 +22,34 @@ docker run\
 ```
 
 :::info
-If starting your node for the first time, you will need to deploy a chequebook contract. See [ installation](/docs/bee/installation/install) section for more info.
+If starting your node for the first time, you will need to deploy a chequebook contract. See [installation](/docs/bee/installation/install) section for more info.
 :::
 
-To persist files, mount a local directory as follows and enter the
-password used to encrypt your keyfiles. Note, `docker` insists on
-absolute paths when mounting volumes, so you must replace
-`/path/to/.bee-docker` with a valid path from your local filesystem.
+To persist files, mount a local directory as follows and enter the password used to encrypt your keyfiles. Note, `docker` insists on absolute paths when mounting volumes, so you must replace `/path/to/.bee-docker` with a valid path from your local filesystem.
 
 ```bash
-docker run\
-  -v /path/to/.bee-docker:/home/bee/.bee\
+docker run \
+  -v /path/to/.bee-docker:/home/bee/.bee \
   -p 1635:1635 \
   -p 1634:1634 \
-  -p 1633:1633\
-  --rm -it ethersphere/bee:stable\
+  -p 1633:1633 \
+  --rm -it ethersphere/bee:stable \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint https://gno.getblock.io/<<your-api-key>>/mainnet/ \
 	  --debug-api-enable
 ```
 
-Once you have generated your keys, leave Bee to run in the background...
+Once you have generated your keys, use the `-d` flag to run in detached mode and leave Bee running in the background:
 
 ```bash
-docker run\
+docker run \
   -d
   -v /path/to/.bee-docker:/home/bee/.bee\
   -p 1635:1635 \
   -p 1634:1634 \
-  -p 1633:1633\
-  --rm -it ethersphere/bee:stable\
+  -p 1633:1633 \
+  --rm -it ethersphere/bee:stable \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint https://gno.getblock.io/<<your-api-key>>/mainnet/ \
@@ -72,10 +58,7 @@ docker run\
 
 ### Versions
 
-In order to avoid accidentally upgrading your Bee containers, or
-deadlocks resulting from Docker caching solutions, it is recommended
-to use best practices and pin the specific version of Bee that you
-want to run.
+In order to avoid accidentally upgrading your Bee containers, or deadlocks resulting from Docker caching solutions, it is recommended to use best practices and pin the specific version of Bee that you want to run.
 
 #### Specific Versions
 
@@ -94,10 +77,9 @@ at the [Docker Hub repository](https://hub.docker.com/r/ethersphere/bee).
 
 ### Docker Compose
 
-Configuration files for Bee and Bee Clef are provided to enable quick
-and easy installation of both programs with persistent storage and
-secure secret management. To install Bee without Clef, simply omit the
-relevant steps.
+Configuration files for Bee are provided to enable quick
+and easy installation with persistent storage and
+secure secret management. 
 
 #### Setup
 
@@ -107,7 +89,7 @@ First, retrieve the current `docker-compose.yaml` file.
 wget -q https://raw.githubusercontent.com/ethersphere/bee/v1.4.1/packaging/docker/docker-compose.yml
 ```
 
-Next, create a `.env` file using the example file provided. This file will be responsible for storing configuration and secrets for our Bee and Bee Clef applications.
+Next, create a `.env` file using the example file provided. This file will be responsible for storing configuration and secrets for our Bee node(s).
 
 ```bash
 wget -q https://raw.githubusercontent.com/ethersphere/bee/v1.4.1/packaging/docker/env -O .env
@@ -121,33 +103,20 @@ For Bee, amend the following parameters:
 BEE_BLOCKCHAIN_RPC_ENDPOINT=https://gno.getblock.io/<<your-api-key>>/mainnet/
 BEE_PASSWORD=my-password
 ```
-
-To enable Clef support on mainnet, we must also change the following params:
-
-```
-CLEF_CHAINID=100
 ```
 
-For testnet, use chain id `5`.
-
-```
-BEE_CLEF_SIGNER_ENABLE=true
-BEE_CLEF_SIGNER_ENDPOINT=http://clef-1:8550
-```
-
-With the configuration settings complete, you can start your Bee and
-Clef nodes by running:
+With the configuration settings complete, you can start your Bee node(s) by running:
 
 ```bash
 docker-compose up -d
 ```
 
 :::tip
-By specifying the `-d` flag to `docker-compose` we run Bee and Bee Clef as a daemon.
+By specifying the `-d` flag to `docker-compose` we run Bee in detached mode so that it continues running in the background.
 :::
 
 :::warning
-Docker Compose will create a Docker Volume called `bee` containing important key material. Make sure to [backup](/docs/bee/working-with-bee/backups) the contents of your Docker volume!
+Docker Compose will create a Docker volume called `bee` containing important key material. Make sure to [backup](/docs/bee/working-with-bee/backups) the contents of your Docker volume!
 :::
 
 To determine the Bee node's address to fund, we can check the logs for our Bee _container_:
@@ -203,5 +172,4 @@ curl localhost:1635/peers
 }
 ```
 
-If you see peers listed here - congratulations! You have joined the
-swarm! Welcome! 🐝
+If you see peers listed here - congratulations! You have joined the swarm! Welcome! 🐝
