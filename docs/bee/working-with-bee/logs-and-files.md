@@ -50,14 +50,6 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 
 ## Data Locations
 
-### Bee Clef
-
-Configuration files are stored in `/etc/bee-clef/`
-
-Key material and other data are stored in `/var/lib/bee-clef/`
-
 ### Bee
 
-Configuration files are stored in `/etc/bee/`
-
-State, chunks and other data is stored in `/var/lib/bee/`
+Configuration files are stored in `/etc/bee/`. State, chunks and other data are stored in `/var/lib/bee/`

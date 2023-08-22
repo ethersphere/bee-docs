@@ -228,24 +228,7 @@ We recommend you run your own [Gnosis Node using Nethermind](https://docs.gnosis
   - and set it to `http://localhost:8545`
   - after that sudo systemctl restart bee
 
-### How to export private keys from the node with Bee Clef installed
-
-If you are running Bee together with the Bee Clef, you can type in the command line `bee-clef-keys` and that will store the .JSON file into your home folder and copy the password in your clipboard.
-
-### I have Bee Clef installed but I can't export private keys.
-
-It happens quite a lot that Bee Clef is installed, but getting the address from bee-clef-keys does not yield the same output as `:1635/addresses`
-
-In this case, the user most likely does not have Bee Clef enabled in the configuration of the bee node.
-
-This doesn't work for you? You get erorr -> `xclip: not found” or “Error: Can’t open display: (null)`
-
-Try running the command below:
-`sudo cat /var/lib/bee-clef/password`
-
-You can then use that to import to MetaMask or any other web3 wallet provider.
-
-### How to export private keys from the node (without bee-clef)?
+### How can I export my private keys?
 
 You can find the instructions here in README section:
 https://github.com/ethersphere/exportSwarmKey
