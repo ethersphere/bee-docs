@@ -369,22 +369,19 @@ _default_ `true`
 
 Enable chequebook.
 
-#### --clef-signer-enable
+#### --clef-signer-enable (Deprecated)
 
 _default_ `false`
 
-Set this to true to enable signing using Ethereum's Clef external
-signer. Clef is a new feature which requires a corresponding rules
-files or running in advanced mode to allow for auto-signing of
-handshakes and cheques.
-
-#### --clef-signer-endpoint
+Set this to true to enable signing using Ethereum's Clef external signer. 
+ 
+#### --clef-signer-endpoint (Deprecated)
 
 _default_ **default path for clef for each host operating system**
 
 You may also specify a custom IPC file path for your Clef signer.
 
-#### --clef-signer-ethereum-address
+#### --clef-signer-ethereum-address (Deprecated)
 
 _default_ **selects the clef address at index 0**
 

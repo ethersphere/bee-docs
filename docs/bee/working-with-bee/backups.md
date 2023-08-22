@@ -39,13 +39,12 @@ If you installed Bee using the [automated shell script](/docs/bee/installation/i
 
 ### Docker Compose
 
-When using [Docker Compose](/docs/bee/installation/docker) configuration files to run a node, Docker will create a volume for Bee and a volume for Bee Clef.
+When using [Docker Compose](/docs/bee/installation/docker) configuration files to run a node, Docker will create a volume for Bee.
 
 Use `docker cp` to retrieve the contents of these folders:
 
 ```bash
 docker cp bee_bee_1:/home/bee/.bee/ bee
-docker cp bee_clef_1:/app clef
 ```
 
 ## Data Types
@@ -88,11 +87,8 @@ The `keys` directory contains three key files: `libp2p_v2.key`, `pss.key`, and `
 The `swarm.key` file allows access to Bee node's Gnosis account. If the key is lost or stolen it could lead to the loss of all assets secured by that key. Multiple backups should be kept in secure locations to prevent loss of assets or unauthorized access.
 :::
 
-If using **bee-clef**, see below for information on how to back up the node.
-
 :::info
-To use `swarm.key` to manage the Gnosis account for a node through Metamask or other wallets,[exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) can be used to
-convert `swarm.key` to a compatible format.
+To use `swarm.key` to manage the Gnosis account for a node through Metamask or other wallets, [exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) can be used to convert `swarm.key` to a compatible format.
 :::
 
 ### Statestore
@@ -106,35 +102,7 @@ As the data in `statestore` and `localstore` continually changes during normal o
 
 ### Localstore
 
-The `localstore` directory contains chunks locally which are frequently requested, 
-pinned in the node, or are in the node's neighbourhood of responsibility.
-
-## Bee Clef
-
-If Clef is used for key management and transaction signing then Clef data must be backed up and secured in a safe location to prevent loss of access to the node and its assets.
-
-### Ubuntu / Debian / Raspbian / CentOS Package Managers
-
-
-For Linux installations by the package managers _yum_ or _apt_, the `bee-clef` data directory is located at:
-
-```bash
-/var/lib/bee-clef/
-```
-
-Configuration files are stored in:
-
-```bash
-/etc/bee-clef/
-```
-
-### Manual
-
-For a manual installation of Clef the default data directory is:
-
-```bash
-~/.clef
-```
+The `localstore` directory contains chunks locally which are frequently requested, pinned in the node, or are in the node's neighbourhood of responsibility.
 
 ## Restore from Backup
 

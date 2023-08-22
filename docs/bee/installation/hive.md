@@ -14,7 +14,7 @@ Swarm provides tooling to help you install many Bees at once.
 
 ### Docker
 
-Up to date [Docker images for Bee and Bee Clef](/docs/bee/installation/docker) are provided.
+Up to date [Docker images for Bee](/docs/bee/installation/docker) are provided.
 
 ### Docker-Compose
 
@@ -33,13 +33,12 @@ If you just want to run a handful of bee nodes, you can run multiple bee nodes b
 Create your first configuration file by running
 
 ```console
-bee printconfig \
-  &> bee-config-1.yaml
+bee printconfig &> bee-config-1.yaml
 ```
 
 Make as many copies of bee-config-1.yaml as you want to run bee nodes. Increment the number in the name (`bee-config-1` to `bee-config-2`) for each new configuration file.
 
-Configure your nodes as desired, but ensure that the values `api-addr`, `data-dir`, `debug-api-addr`, `p2p-addr` and `clef-signer-endpoint` are unique for each configuration.
+Configure your nodes as desired, but ensure that the values `api-addr`, `data-dir`, `debug-api-addr`, and `p2p-addr` are unique for each configuration.
 
 ### Monitoring
 

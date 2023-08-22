@@ -19,8 +19,6 @@ Some software on this list is community created and has not been reviewed for fu
 
 [Bee](https://github.com/ethersphere/bee) - Also referred to as the _node_ or the _client_, this service allows you to join the Swarm network
 
-[Bee-Clef](https://github.com/ethersphere/bee-clef) - External signer service for transactions, suitable for Bee
-
 ### Libraries
 
 [Bee-JS](https://github.com/ethersphere/bee-js) - A high-level Javascript library to interact with Bee through its REST API

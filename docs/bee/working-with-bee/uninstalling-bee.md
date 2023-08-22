@@ -18,6 +18,7 @@ sudo apt-get remove bee
 ```
 
 If Clef (deprecated) was used, remove Clef.
+
 :::danger
 This will delete your keys, [make backups](/docs/bee/working-with-bee/backups).
 :::
@@ -35,6 +36,7 @@ If Clef (deprecated) was used, remove Clef.
 :::danger
 This will delete your keys, [make backups](/docs/bee/working-with-bee/backups) .
 :::
+
 Remove Clef:
 ```bash
 sudo yum remove bee-clef
