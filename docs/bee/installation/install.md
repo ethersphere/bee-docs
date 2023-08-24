@@ -62,7 +62,7 @@ In general `bee start` may not be the best option for most users - especially if
 
 ## 1. Install Bee
 
-### Package manager install (Recommended method)
+### Package manager install
 
 Bee is available for Linux in .rpm and .deb package format for a variety of system architectures, and is available for MacOS through Homebrew. See the [releases](https://github.com/ethersphere/bee/releases) page of the Bee repo for all available packages. One of the advantages of this method is that it automatically sets up Bee to run as a service as a part of the install process.
 
@@ -73,63 +73,50 @@ values={[
 {label: 'RPM', value: 'rpm'},
 {label: 'MacOS', value: 'macos'},
 ]}>
+
 <TabItem value="debian">
 
-#### AMD64
+Get GPG key:
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.17.2/bee_1.17.2_amd64.deb
-sudo dpkg -i bee_1.17.2_amd64.deb
+curl -fsSL https://repo.ethswarm.org/apt/gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/ethersphere-apt-keyring.gpg
 ```
 
-#### ARM (Raspberry Pi)
-
-##### ARMv7
+Set up repo inside apt-get sources:
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.17.2/bee_1.17.2_armhf.deb
-sudo dpkg -i bee_1.17.2_armhf.deb
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ethersphere-apt-keyring.gpg] https://repo.ethswarm.org/apt \
+  * *" | sudo tee /etc/apt/sources.list.d/ethersphere.list > /dev/null
 ```
 
-##### ARM64
+Install package:
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.17.2/bee_1.17.2_arm64.deb
-sudo dpkg -i bee_1.17.2_arm64.deb
+sudo apt-get update
+sudo apt-get install bee
 ```
 
 </TabItem>
+
 <TabItem value="rpm">
 
-#### CentOS
-
-#### AMD64
+Set up repo:
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.17.2/bee_1.17.2_amd64.rpm
-sudo rpm -i bee_1.17.2_amd64.rpm
+sudo echo "[ethersphere]
+name=Ethersphere Repo
+baseurl=https://repo.ethswarm.org/yum/
+enabled=1
+gpgcheck=0" > /etc/yum.repos.d/ethersphere.repo
 ```
-
-#### ARM (Raspberry Pi)
-
-##### ARMv7
+Install package:
 
 ```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.17.2/bee_1.17.2_armv7.rpm
-sudo rpm -i bee_1.17.2_armv7.rpm
+yum install bee
 ```
-
-##### ARM64
-
-```bash
-wget https://github.com/ethersphere/bee/releases/download/v1.17.2/bee_1.17.2_arm64.rpm
-sudo rpm -i bee_1.17.2_arm64.rpm
-```
-
 </TabItem>
 <TabItem value="macos">
-
-#### MacOS
 
 ```bash
 brew tap ethersphere/tap
