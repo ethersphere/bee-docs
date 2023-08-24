@@ -91,18 +91,16 @@ configuration of Bee:
 ```yaml
 ## Bee configuration - https://docs.ethswarm.org/docs/bee/working-with-bee/configuration
 
+## Bee configuration - https://docs.ethswarm.org/docs/working-with-bee/configuration
+
 ## HTTP API listen address (default ":1633")
 # api-addr: :1633
 ## chain block time (default 15)
 # block-time: 15
-## initial nodes to connect to (default [/dnsaddr/testnet.ethswarm.org])
-# bootnode: [/dnsaddr/testnet.ethswarm.org]
+## initial nodes to connect to (default [/dnsaddr/mainnet.ethswarm.org])
+# bootnode: [/dnsaddr/mainnet.ethswarm.org]
 ## cause the node to always accept incoming connections
 # bootnode-mode: false
-## enable clef signer
-# clef-signer-enable: false
-## clef signer endpoint
-clef-signer-endpoint: /var/lib/bee-clef/clef.ipc
 ## config file (default is /home/<user>/.bee.yaml)
 config: /etc/bee/bee.yaml
 ## origins with CORS headers enabled
@@ -174,7 +172,7 @@ password-file: /var/lib/bee/password
 ## send a welcome message string during handshakes
 # welcome-message: ""
 ## triggers connection to main network
-# mainnet: false
+# mainnet: true
 ```
 
 ### Configuration Priority
@@ -206,9 +204,6 @@ Run `bee start --help` in your Terminal to list the available command line argum
         --cache-capacity uint                     cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
         --cache-retrieval                         enable forwarded content caching (default true)
         --chequebook-enable                       enable chequebook (default true)
-        --clef-signer-enable                      enable clef signer
-        --clef-signer-endpoint string             clef signer endpoint
-        --clef-signer-ethereum-address string     ethereum address to use from clef signer
         --cors-allowed-origins strings            origins with CORS headers enabled
         --data-dir string                         data directory (default "/home/noah/.bee")
         --db-block-cache-capacity uint            size of block cache of the database in bytes (default 33554432)
@@ -368,28 +363,6 @@ Enable the caching of forwarded content.
 _default_ `true`
 
 Enable chequebook.
-
-#### --clef-signer-enable (Deprecated)
-
-_default_ `false`
-
-Set this to true to enable signing using Ethereum's Clef external signer. 
- 
-#### --clef-signer-endpoint (Deprecated)
-
-_default_ **default path for clef for each host operating system**
-
-You may also specify a custom IPC file path for your Clef signer.
-
-#### --clef-signer-ethereum-address (Deprecated)
-
-_default_ **selects the clef address at index 0**
-
-Use this command to specify which Bee Clef address is used if you have imported multiple keys into Bee Clef.
-
-:::warning
-If you have multiple addresses imported into your instance of Bee Clef, you must specify your address for each node, including the first one, as addresses may be re-ordered during import.
-:::
 
 #### --cors-allowed-origins
 
