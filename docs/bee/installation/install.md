@@ -126,6 +126,35 @@ brew install swarm-bee
 </TabItem>
 </Tabs>
 
+You should see the following output to your terminal after a successful install:
+
+```bash
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  bee
+0 upgraded, 1 newly installed, 0 to remove and 37 not upgraded.
+Need to get 0 B/27.2 MB of archives.
+After this operation, 50.8 MB of additional disk space will be used.
+Selecting previously unselected package bee.
+(Reading database ... 82381 files and directories currently installed.)
+Preparing to unpack .../archives/bee_1.17.2_amd64.deb ...
+Unpacking bee (1.17.2) ...
+Setting up bee (1.17.2) ...
+
+Logs:   journalctl -f -u bee.service
+Config: /etc/bee/bee.yaml
+
+Bee requires a Gnosis Chain RPC endpoint to function. By default this is expected to be found at ws://localhost:8546.
+
+Please see https://docs.ethswarm.org/docs/installation/install for more details on how to configure your node.
+
+After you finish configuration run 'sudo bee-get-addr' and fund your node with XDAI, and also XBZZ if so desired.
+
+Created symlink /etc/systemd/system/multi-user.target.wants/bee.service → /lib/systemd/system/bee.service.
+```
+
 ### Shell script install (Alternate method)
 
 The [Bee install shell script](https://github.com/ethersphere/bee/blob/637b67a8e0a2b15e707f510bb7f49aea4ef6c110/install.sh) for Linux automatically detects its execution environment and installs the latest stable version of Bee.
