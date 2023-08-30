@@ -101,7 +101,7 @@ The remaining *time to live* in seconds is shown in the returned json object as 
 	curl http://localhost:1635/stamps
 ```
 
-```bash
+```json
 {
   "stamps": [
     {
@@ -143,7 +143,7 @@ Here we call the `/stamps` endpoint and find a batch with `depth` 17 and a `batc
 curl  http://localhost:1635/stamps
 ```
 
-```
+```json
 {
     "stamps": [
         {
@@ -186,7 +186,7 @@ curl  http://localhost:1635/stamps
 
 We can see the new `depth` of 19 decreased `batchTTL` of 519265.
 
-```bash
+```json
 {
     "stamps": [
         {
@@ -217,7 +217,9 @@ curl "http://localhost:1633/stewardship/c0c2b70b01db8cdfaf114cde176a1e30972b556c
 c0207136f"
 ```
 ```json
-{"isRetrievable":true}
+{
+  "isRetrievable": true
+}
 ```
 
 If the content is not retrievable, an HTTP PUT request can be used to re-upload the content:
