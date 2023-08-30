@@ -33,7 +33,7 @@ Learn how to assign xBZZ to your data using postage stamps so that it remains [l
 
 ### Pinning
 
-Learn how to [pin your data](/docs/develop/access-the-swarm/pinning) so it remains available locally on your Bee node, and then repair the network in case your postage stamps run out, using _Global Pinning_.
+Learn how to [pin your data](/docs/develop/access-the-swarm/pinning) so that it always remains available locally on your Bee node.
 
 ### Light Nodes
 
