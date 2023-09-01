@@ -183,11 +183,12 @@ See the section on [backups](/docs/bee/working-with-bee/backups#files) for expor
 ### How to import bee node address to MetaMask?
 
 1. See the [backup section](/docs/bee/working-with-bee/backups/) for info on exporting keys.
-2. Go to Metamask and click import account
-3. Choose select type: JSON file
-4. Upload exported JSON file 
-5. Paste the password
+2. Go to Metamask and click "Account 1" --> "Import Account"
+3. Choose the "Select Type" dropdown menu and choose "JSON file"
+4. Paste the password (Make sure to do this first)
+5. Upload exported JSON file  
 6. Click "Import"
+
 
 ### What are the restart commands of bee?
 
