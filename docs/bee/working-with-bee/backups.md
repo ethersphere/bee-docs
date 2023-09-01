@@ -15,7 +15,7 @@ Key data in backup files allows access to Bee node's Gnosis account. If lost or 
 Don't forget - it's not a backup until you're sure the backup files work! Make sure to test restoring from backup files to prevent loss of assets due to data loss or corruption.
 :::
 
-### Ubuntu / Debian / Raspbian / CentOS Package Managers
+### Ubuntu / Debian / Raspbian / CentOS package managers
 
 For Linux installations from package managers _yum_ or _apt_, the data directory is located at:
 
@@ -47,7 +47,7 @@ Use `docker cp` to retrieve the contents of these folders:
 docker cp bee_bee_1:/home/bee/.bee/ bee
 ```
 
-## Data Types
+## Data types
 
 The data directory contains three directories. Its default location depends on the node install method used.
 
@@ -104,46 +104,67 @@ As the data in `statestore` and `localstore` continually changes during normal o
 
 The `localstore` directory contains chunks locally which are frequently requested, pinned in the node, or are in the node's neighbourhood of responsibility.
 
-## Restore from Backup
+## Backup Your node
+
+
+Copy entire `bee` data folder to fully backup node. This will do a full backup of `statestore`. `localstore`, and `key` files into the newly created `/backup` directory. Make sure to save the backup directory to a safe location.
+```
+mkdir backup
+sudo cp -r /var/lib/bee/ backup
+```
+    
+### Export keys
+
+If you only need to export your node's blockchain keys, you need to export the `swarm.key` UTC / JSON keystore file and the `password` file used to encrypt it. First create a directory for your keys and then export, make sure to save the newly created `keystore` directory in a safe location.  
+
+
+```bash
+mkdir keystore
+sudo cp -r /var/lib/bee/keys/swarm.key /var/lib/bee/password keystore    
+
+```
+
+### View key and password for wallet import 
+
+```bash
+sudo cat /var/lib/bee/keys/swarm.key 
+sudo cat /var/lib/bee/password
+```
+
+:::info
+Note that `swarm.key` is in UTC / JSON keystores format and is encrypted by default by your password file inside the `/bee` directory. Make sure to export both the `swarm.key` file and the `password` file in order to secure your wallet. If you need your private key exported from the keystore file, you may use one of a variety of Ethereum wallets which support exporting private keys from UTC files (such as [Metamask](https://metamask.io/), however we offer no guarantees for any software, make sure you trust it completely before using it). 
+:::
+
+## Restore from backup
 
 :::danger
-Before restoring, make sure to check for any old node data at `/var/lib/bee` from a previous node which has not yet been backed up.
+Before restoring, make sure to check for any old node data at `/var/lib/bee` from a previous node which has not yet been backed up, and back it up if needed.
 :::
 
 
-1. Install Bee. See [install](../installation/install) page for more info:
-
-    ```
-    wget https://github.com/ethersphere/bee/releases/download/v1.17.2/bee_1.17.2_amd64.deb
-    sudo dpkg -i bee_1.17.2_amd64.deb
-    ```
-    Edit `bee.yaml` to include Gnosis Chain RPC endpoint: 
-    ```
-    sudo vi /etc/bee/bee.yaml
-    ```
+1. Install Bee. See [install](/docs/bee/installation/install/) page for more info.
 
 1. Change ownership of `bee` data folder.
+
     ```
-    cd /var/lib/
-    sudo chown -R <user>:<user> bee
-    cd bee/
+    sudo chown -R /var/lib/bee
     ```
     
 1. Delete statestore, keys, localstore, and password files.
 
     ```
-    sudo rm -r keys password statestore localstore
+    sudo rm -r /var/lib/bee
     ```
 
 1. Navigate to backup directory and copy files to data folder.
 
-        ```
-        cp -r keys password statestore localstore /var/lib/bee
-        ```
+    ```
+    cp -r /<path-to-backup>/bee /var/lib/
+    ```
     
 1. Revert ownership of the data folder. 
     ```
-    sudo chown -R bee:bee bee
+    sudo chown -R bee:bee /var/lib/bee
     ```
 1. Start `bee` service and check logs to see if Bee node is running properly.
     ```

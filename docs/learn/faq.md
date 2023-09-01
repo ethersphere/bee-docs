@@ -230,11 +230,7 @@ We recommend you run your own [Gnosis Node using Nethermind](https://docs.gnosis
 
 ### How can I export my private keys?
 
-You can find the instructions here in README section:
-https://github.com/ethersphere/exportSwarmKey
-
-You can also follow to the mini-guide on the link below:
-https://pastebee.com/?3b2a4cecafa21a7afcdd4d4f3d74fef1d5551acd91eb2d3a5b750dc9a161fbcf
+See the section on [backups](/docs/bee/working-with-bee/backups#files) for exporting your keys.
 
 ### How to import bee node address to MetaMask?
 
