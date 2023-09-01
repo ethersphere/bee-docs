@@ -204,7 +204,12 @@ If you use "bee start"
 
 ### Relevant endpoints and explanations
 
-See the [API Reference](https://docs.ethswarm.org/docs/api-reference/) pages for details.
+Balances: https://docs.ethswarm.org/debug-api/#tag/Balance
+Chequebook: https://docs.ethswarm.org/debug-api/#tag/Chequebook
+Status: https://docs.ethswarm.org/debug-api/#tag/Status
+Connectivity: https://docs.ethswarm.org/debug-api/#tag/Connectivity
+Settlements: https://docs.ethswarm.org/debug-api/#tag/Settlements
+Chunk: https://docs.ethswarm.org/debug-api/#tag/Chunk
 
 Most common use cases:
 
