@@ -21,11 +21,11 @@ id: faq
 
 ### Where can I find technical support and get answers to my other questions?
 
-The Swarm community is centred around our Discord server where you will find many people willing and able to help with your every need! [https://discord.ethswarm.org/](https://discord.ethswarm.org/)
+The Swarm community is centered around our Discord server where you will find many people willing and able to help with your every need! [https://discord.ethswarm.org/](https://discord.ethswarm.org/)
 
-### Where can I find support for running Bee node on DAppNode?
+### Where can I find support for running Bee node on Dappnode?
 
-You can find support for running Bee on DAppNode on the DappNode Discord server: [https://discord.gg/dRd5CrjF](https://discord.gg/dRd5CrjF)
+You can find support for running Bee on Dappnode on the Dappnode Discord server: [https://discord.gg/dRd5CrjF](https://discord.gg/dRd5CrjF)
 
 ### Who can I contact for other inquiries?
 
@@ -41,19 +41,19 @@ The conceptual idea for Swarm was started in the Ethereum team at the beginning,
 
 ### What is BZZ Token?
 
-Swarm's native token, BZZ, serves as a means of accessing the platform's data relay and storage services, while also providing compensation for node operators who provide these services.
+Swarm's native token BZZ, was initially issued on Ethereum. It has been bridged over to Gnosis where it is referred to as xBZZ for differentiation, and serves as a means of accessing the platform's data relay and storage services, while also providing compensation for node operators who provide these services. 
 
 ### What is PLUR?
 
-1 PLUR is the atomic unit of BZZ, where BZZ then has 16 decimals (ie. 1 PLUR = 1^-16 BZZ)
+1 PLUR is the atomic unit of xBZZ, where xBZZ then has 16 decimals (ie. 1 PLUR = 1e-16 xBZZ)
 
 ### Where can I buy BZZ Token?
 
-There are many ways to acquire BZZ token, either on custodial centralised exchanges where you can trade traditional currencies and cryptocurrency or through decentralised exchanges and protocols where you can trade between cryptocurrencies. For more information please visit the Get BZZ page.
+There are many ways to acquire BZZ token, either on custodial centralised exchanges where you can trade traditional currencies and cryptocurrency or through decentralised exchanges and protocols where you can trade between cryptocurrencies. For more information please visit the [Get BZZ](https://www.ethswarm.org/get-bzz) page on the Ethswarm.org homepage.
 
-### What is BZZ token address?
+### What is the BZZ token address?
 
-The BZZ token address is [https://etherscan.io/token/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb](https://etherscan.io/token/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)
+See [this page](/docs/learn/technology/contracts/overview/#token-contracts) for a list of relevant token addresses. 
 
 ### What is the BZZ token supply?
 
@@ -69,7 +69,7 @@ More about BZZ token tokenomics: https://blog.ethswarm.org/hive/2021/bzz-tokenom
 
 A bonding curve is a mathematical function in the form of y=f(x) that determines the price of a single token, depending on the number of tokens currently in existence, or the market supply. The key difference is that with a traditional exchange platform market makers are required to provide liquidity to the market, whereas a bonding curve takes over the role of providing liquidity, negating the need for market makers.
 
-### What is "Bzzaar" bonding curve?
+### What is the "Bzzaar" bonding curve?
 
 Bzzaar is a unique exchange platform that enables users to buy and sell BZZ tokens. Unlike traditional exchange platforms, Bzzaar uses a bonding curve to instantly complete transactions without relying on market makers. The platform allows new projects to easily integrate Bzzaar's contracts into their own interfaces, creating a front-end interface for BZZ exchange. The bonding curve is community-owned and fuels all projects created on Swarm.
 
@@ -83,7 +83,7 @@ Is Bzzaar's bonding curve audited?
 
 A full [audit of Swarm](https://github.com/ethersphere/bzzaar-contracts/tree/v1.0.0) was performed by QuantStamp and the [final audit report](https://github.com/ethersphere/bzzaar-contracts/blob/v1.0.0/audit/Buzzar_final_audit_report.pdf) has been made publicly available.
 
-## Running Bee Node
+## Running a Bee Node
 
 ### How can I become part of the Swarm network?
 
@@ -93,41 +93,15 @@ Depending on your needs you can run ultra-light, light or full node.
 
 ### What are the differences between Bee node types?
 
-A bee node can be configured to run in various modes based on specific use cases and requirements.
+A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](/docs/bee/installation/quick-start) for an overview of the differences.
 
-![](/img/node-types.png)
+ 
+#### What are the requirements for running a Bee node?
 
-#### Ultra-light node
 
-Ultra-light node connects you to the swarm network and gives you limited access to data (download) from the network. With running an ultra-light node **you will not be able to store data** on the network. The ultra-light node can be upgraded to the Light node by topping up its wallet address.
+See the [install section](/docs/bee/installation/install/#1-install-bee) for more information about running a Bee node.
 
-With running a bee ultra-light node you will not earn storage or bandwidth incentives.
-
-#### Light node
-
-Light node allows you to receive and send PSS messages & download and upload files. Running a Light node is ideal for dApp developers, content creators, and consumers who want to actively build on Swarm and enjoy its full potential.
-
-The ultra-light node can be upgraded to the Light node by topping up its wallet address.
-
-With running a bee light node you will not earn storage or bandwidth incentives.
-
-#### Full node
-
-### Ultra-Light and Light bee node
-
-#### What is the easiest way to run an Ultra-light or Light bee node?
-
-The quickest and easiest way to run a lightweight bee node (ultra-light or light node) on your desktop is with the **Swarm Desktop app** - [https://www.ethswarm.org/build/desktop](https://www.ethswarm.org/build/desktop). The Swarm Desktop app starts a bee node in Ultra Light mode by default.
-
-#### What are the requirements for running an Ultra-Light or Light node?
-
-Due to its lightweight nature, an ultra- light and the light node can be run on most laptops and desktops and can be turned on or off without corrupting the node's state.
-
-### Full node
-
-#### Requirements
-
-##### What are the hardware requirements for running a full node?
+##### Full node
 
 - 20GB -30GB SSD (ideally nvme).
 - 8GB RAM
@@ -141,19 +115,6 @@ Due to its lightweight nature, an ultra- light and the light node can be run on 
 
 Typically, each node requires around 10 megabits per second (Mbps) of bandwidth during normal operation.
 
-
-#### Setting up
-
-##### Where can I find Bee Documentation?
-
-Bee Documentation: https://docs.ethswarm.org/docs/
-
-Book of Swarm: [https://www.ethswarm.org/The-Book-of-Swarm.pdf](https://www.ethswarm.org/The-Book-of-Swarm.pdf)
-
-##### How to Install Bee on Linux or OSX?
-
-Please see the detailed instructions in the documentation. (https://docs.ethswarm.org)
-
 ##### How do I Install Bee on Windows?
 
 You can install Bee node on Windows but it is not mentioned in the documentation, however, the steps are the same as the manual installation https://docs.ethswarm.org/docs/bee/installation/manual you can download the binary from here
@@ -164,28 +125,15 @@ It is also possible to build from the source.
 
 ##### How do I get the node's wallet's private key (use-case for Desktop app)?
 
-You can find your private key in:
-
-/Users/username/Library/Application Support/Swarm Desktop/data-dir/swarm.key
-
-
-### Key Management
-
-##### How do I get the node's wallet's private key (use-case for Desktop app)?
-
-You can find your private key in:
-
-/Users/username/Library/Application Support/Swarm Desktop/data-dir/swarm.key
+See the [backup section](/docs/bee/working-with-bee/backups/) for more info.
 
 ##### How do I import the swarm private key to metamask?
 
-You can import the `swarm.key` json file in MetaMask using the password you have set in your bee config file.
+You can import the `swarm.key` json file in MetaMask using your password file or the password you have set in your bee config file.
 
-##### Where can I find the password?
+##### Where can I find my password?
 
-You can find the password in the confing.yaml file in:
-
-`/Users/username/Library/Application Support/Swarm Desktop/confing.yaml`
+You can find the password in the root of your data directory. See the [backup section](/docs/bee/working-with-bee/backups/) for more info.
 
 ## Connectivity
 
@@ -234,12 +182,12 @@ See the section on [backups](/docs/bee/working-with-bee/backups#files) for expor
 
 ### How to import bee node address to MetaMask?
 
-1. [export your bee node private keys](https://hackmd.io/tfKVeHaIQGewlGTC4ooESg#How-to-export-private-keys-from-the-node-with-bee-claf-installed)
-2. go to Metamask and click import account
-3. choose select type: JSON file
-4. upload exported .JSON file (which contains your keys)
-5. paste the password
-6. click Import
+1. See the [backup section](/docs/bee/working-with-bee/backups/) for info on exporting keys.
+2. Go to Metamask and click import account
+3. Choose select type: JSON file
+4. Upload exported JSON file 
+5. Paste the password
+6. Click "Import"
 
 ### What are the restart commands of bee?
 
@@ -286,6 +234,7 @@ https://docs.ethswarm.org/docs/bee/working-with-bee/cashing-out
 ### When I run http://localhost:1635/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
 
 `totalBalance` is the balance on the blockchain, `availableBalance` is that balance minus the outstanding (non-cashed) cheques that you have issued to your peers. These latter cheques do not show up on the blockchain.
+
 It's like what the bank thinks your balance is vs what your chequebook knows is actually available because of the cheques you've written that are still "in the mail" and not yet cashed.
 
 ### What determines the number of peers and how to influence their number? Why are there sometimes 300+ peers and sometimes 30?
