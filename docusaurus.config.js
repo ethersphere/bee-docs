@@ -41,6 +41,10 @@ module.exports = {
           to: '/docs/develop/dapps-on-swarm/pss',
           from: '/docs/dapps-on-swarm/pss',
         },
+        {
+          to: '/docs/develop/access-the-swarm/buy-a-stamp-batch',
+          from: '/docs/develop/access-the-swarm/keep-your-data-alive',
+        },
       ],
     },
   ],
@@ -308,7 +312,8 @@ module.exports = {
             requiredPropsFirst: true,
             noAutoAuth: true,
             expandDefaultServerVariables: true,
-            scrollYOffset: 60
+            scrollYOffset: 60,
+            searchMaxDepth: 10
           },
         },
       },

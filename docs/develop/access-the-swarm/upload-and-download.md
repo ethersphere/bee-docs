@@ -28,7 +28,7 @@ In order to upload your data to swarm, you must agree to burn (spend)
 some of your xBZZ to signify to storer and fowarder nodes that this
 content is valued. Before you proceed to the next step, you must buy
 stamps! See this guide on how to [purchase an appropriate batch of
-stamps](/docs/develop/access-the-swarm/keep-your-data-alive).
+stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
 
 ### Upload
 

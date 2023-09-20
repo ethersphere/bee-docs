@@ -111,13 +111,13 @@ module.exports = {
       label: 'Access the Swarm',
       items: [
         'develop/access-the-swarm/introduction',
+        'develop/access-the-swarm/buy-a-stamp-batch',
         'develop/access-the-swarm/upload-and-download',
         'develop/access-the-swarm/upload-a-directory',
         'develop/access-the-swarm/direct-upload',
         'develop/access-the-swarm/store-with-encryption',
         'develop/access-the-swarm/host-your-website',
         'develop/access-the-swarm/syncing',
-        'develop/access-the-swarm/keep-your-data-alive',
         'develop/access-the-swarm/pinning',
       ],
       collapsed: false

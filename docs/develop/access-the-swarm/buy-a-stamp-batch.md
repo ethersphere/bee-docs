@@ -1,9 +1,9 @@
 ---
-title: Keep Your Data Alive
-id: keep-your-data-alive
+title: Buy a Batch of Stamps
+id: buy-a-stamp-batch
 ---
 
-Swarm comprises the sum total of all storage space provided by all of our nodes, called the DISC (Distributed Immutable Store of Chunks). The _right to write_ data into this distributed store is determined by the postage stamps that have been attached.
+Swarm comprises the sum total of all storage space provided by all of our nodes, called the DISC (Distributed Immutable Store of Chunks). The _right to write_ data into this distributed store is determined by the [postage stamps](/docs/learn/technology/contracts/postage-stamp) that have been attached.
 
 ### Fund your node's wallet.
 
