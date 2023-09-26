@@ -14,11 +14,11 @@ In order to participate in redistribution, storers need to do the following:
 
 Amongst the nodes that agree with the correct result, one is chosen — with a probability in proportion to their stake — as the winner. The winner must execute an on-chain transaction claiming their reward, which is the entire pot of storage rent paid since the previous round, or even more, if the previous pot has not been claimed at that time.
 
-## Stake your node with Bee
+## Adding stake
 
 Bee has builtin endpoints for depositing the stake. Currently the minimum staking requirement is 10 xBZZ, so make sure that there is enough tokens in the node's wallet and you must have some native token as well for paying the gas.
 
-Then you can run the following command to stake 10 xBZZ. The amount is given in PLURs which is the smallest denomination of xBZZ and `1 xBZZ == 1e16 PLUR`.
+Then you can run the following command to stake 10 xBZZ. The amount is given in PLUR which is the smallest denomination of xBZZ and `1 xBZZ == 1e16 PLUR`.
 
 ```bash
 curl -XPOST localhost:1635/stake/100000000000000000
@@ -62,7 +62,7 @@ curl -X GET http://localhost:1635/redistributionstate | jq
 * `"hasSufficientFunds": <bool>` - Shows whether the node has enough xDAI balance to submit at least five storage incentives redistribution related transactions.  If `false` the node will not be permitted to participate in next round.
 * `"isFrozen": <bool>` - Shows node frozen status.
 * `"isFullySynced": <bool>` - Shows whether node's localstore has completed full historical syncing with all connected peers.
-* `"phase": <string>` - Current phase of redistribution game.
+* `"phase": <string>` - Current phase of [redistribution game](/docs/learn/technology/incentives#storage-incentives-details) (`commit`, `reveal`, or `claim`).
 * `"round": <integer>` - Current round of redistribution game. The round number is determined by dividing the current Gnosis Chain block height by the number of blocks in one round. One round takes 152 blocks, so using the "block" output from the example above we can confirm that the round number is 176319 (block 26800488 / 152 blocks = round 176319).   
 * `"lastWonRound": <integer>` - Number of round last won by this node.
 * `"lastPlayedRound": <integer>` - Number of the last round where node's neighborhood was selected to participate in redistribution game.
@@ -70,6 +70,11 @@ curl -X GET http://localhost:1635/redistributionstate | jq
 * `"block": <integer>` - Gnosis block of the current redistribution game.
 * `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](/docs/learn/glossary#plur).
 * `"fees": <string (BigInt)>` - Record of total spent in 1E-18 xDAI on all redistribution related transactions.
+
+
+:::warning
+Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/debug-api/#tag/RedistributionState/paths/~1redistributionstate/get).
+:::
 
 ## Check node performance
 
