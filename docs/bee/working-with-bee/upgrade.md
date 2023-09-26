@@ -16,6 +16,11 @@ properly interact with the swarm.
 Bee sure to [back up](/docs/bee/working-with-bee/backups) your keys and [cash out your cheques](/docs/bee/working-with-bee/cashing-out) to make sure your xBZZ is safe before applying updates.
 :::
 
+:::warning
+Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/debug-api/#tag/RedistributionState/paths/~1redistributionstate/get). See staking section for more information on staking and troubleshooting.
+:::
+
+
 ### Ubuntu / Debian / Raspbian
 
 To upgrade Bee, simply stop the Bee service.
