@@ -120,7 +120,7 @@ $$
 Therefore we should use 50% the effective rate of usage for the stamp batch:
 
 $$
-\text{33,554,432 kb} \times{0.5} = \text{16,777,216 kb} = 16.77 gb
+\text{33,554,432 kb} \times{0.5} = \text{16,777,216 kb} = \text{16.77 gb}
 $$
 
 :::info
