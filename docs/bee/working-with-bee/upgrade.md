@@ -3,54 +3,57 @@ title: Upgrading Bee
 id: upgrading-bee
 ---
 
-Keep a close eye on the
-[#bee-node-updates](https://discord.gg/vQcngMzZ9c) channel in our
-[Discord Server](https://discord.gg/wdghaQsGq5) for information on the
-latest software updates for Bee. It's very important to keep Bee up to
-date to benefit from security updates and ensure you are able to
-properly interact with the swarm.
+Keep a close eye on the[#bee-node-updates](https://discord.gg/vQcngMzZ9c) channel in our [Discord Server](https://discord.gg/wdghaQsGq5) for information on the latest software updates for Bee. It's very important to keep Bee up to date to benefit from security updates and ensure you are able to properly interact with the Swarm network. The [#node-operators](https://discord.com/channels/799027393297514537/811553590170353685) channel is another excellent resource for any of your questions regarding node operation. 
 
-## Upgrade Procedure
+## Upgrade Procedure Warnings
 
 :::warning
-Bee sure to [back up](/docs/bee/working-with-bee/backups) your keys and [cash out your cheques](/docs/bee/working-with-bee/cashing-out) to make sure your xBZZ is safe before applying updates.
+Bee sure to [back up](/docs/bee/working-with-bee/backups) your keys and [cash out your cheques](/docs/bee/working-with-bee/cashing-out) to ensure your xBZZ is safe before applying updates.
 :::
 
 :::warning
-Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/debug-api/#tag/RedistributionState/paths/~1redistributionstate/get). See staking section for more information on staking and troubleshooting.
+Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/debug-api/#tag/RedistributionState/paths/~1redistributionstate/get). See [staking section](/docs/bee/working-with-bee/staking/) for more information on staking and troubleshooting.
 :::
 
 
-### Ubuntu / Debian / Raspbian
+### Ubuntu / Debian 
 
-To upgrade Bee, simply stop the Bee service.
+To upgrade Bee, first stop the Bee service: 
 
-```sh
+```bash
 sudo systemctl stop bee
 ```
 
-Now follow the [installation instructions](/docs/bee/installation/install) to download the new package and install the new version, as you would during a new installation.
+Next, upgrade the `bee` package:
 
-You will be greeted by the following prompt:
-
-```
-Configuration file '/etc/bee/bee.yaml'
- ==> Modified (by you or by a script) since installation.
- ==> Package distributor has shipped an updated version.
-   What would you like to do about it ?  Your options are:
-    Y or I  : install the package maintainer's version
-    N or O  : keep your currently-installed version
-      D     : show the differences between the versions
-      Z     : start a shell to examine the situation
- The default action is to keep your current version.
-*** bee.yaml (Y/I/N/O/D/Z) [default=N] ?
+```bash
+sudo apt-get upgrade bee
 ```
 
-Select `N` to keep your current data and keys.
+And will see output like this after a successful upgrade:
+```
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+  bee
+1 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 0 B/27.2 MB of archives.
+After this operation, 73.7 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+(Reading database ... 103686 files and directories currently installed.)
+Preparing to unpack .../archives/bee_1.17.4_amd64.deb ...
+Unpacking bee (1.17.4) over (1.17.3) ...
+Setting up bee (1.17.4) ...
+Installing new version of config file /etc/default/bee ...
+```
+
+Make sure to pay attention to any prompts, read them carefully, and respond to them with your preference.
 
 You may now start your node again:
 
-```sh
+```bash
 sudo systemctl start bee
 ```
 
@@ -60,13 +63,5 @@ To upgrade your manual installation, simply stop Bee, replace the Bee binary and
 
 #### Docker
 
-To upgrade your docker installation, simply increment the version number in your configurations and restart.
+To upgrade your Docker installation, simply increment the version number in your configuration and restart.
 
-### Upgrading from a mainnet v1.5.x series to a mainnet v1.6.x series
-
-Bee v1.6.x contains a completely new data storage format called Sharky.
-
-As part of these changes, existing data must be migrated to the new data structure expected by
-the 1.5.x client. This will happen automatically, but **may require extra space** and cause a spike in cpu requirements for the duration of the migration.
-
-If you can not accommodate approximately 3x (2x might even be enough) as much disk space as is currently being used by your Bee `datadir`, you may want to run `bee db nuke` before upgrading (but after stopping the Bee service) to resync your nodes content from the network. If you have **locally pinned content** please ensure you have a local backup so that you can restamp and restore it to the network in case of disaster.
