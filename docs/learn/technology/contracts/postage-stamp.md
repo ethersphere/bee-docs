@@ -136,7 +136,7 @@ This table is based on preliminary calculations and may be subject to change.
 
 The provided table shows the effective volume for each batch depth from 20 to 41. The "utilisation rate" is the rate of utilisation a stamp batch can reach with a 0.1% failure rate (that is, there is a 1/1000 chance the batch will become fully utilised before reaching that utilisation rate). The "effective volume" figure shows the actual amount of data which can be stored at the effective rate. The effective volume figure is the one which should be used as the de-facto maximum amount of data that a batch can store before becoming either fully utilised (for immutable batches), or start overwriting older chunks (mutable batches).
  
-| Batch Depth | Utilisation Rate | Effective Volume | Theoretical Max Volume |
+| Batch Depth | Utilisation Rate | Theoretical Max Volume | Effective Volume |
 |-------------|------------------|------------------|------------------------|
 | 20          | 0.00%            | 4.29 GB          | 0.00 B                 |
 | 21          | 0.00%            | 8.59 GB          | 0.00 B                 |
