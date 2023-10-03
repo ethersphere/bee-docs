@@ -8,7 +8,7 @@ import BatchCostCalc from '@site/src/components/BatchCostCalc';
 
 The [postage stamp contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PostageStamp.sol) is a smart contract which is a key part of Swarm's [storage incentives](/docs/learn/technology/incentives) which make up the foundation of Swarm's self-sustaining economic system. 
 
-When a node uploads data to Swarm, it attaches postage stamps to each [chunk](/docs/learn/technology/DISC) of data. Postage stamps are issued in batches rather than one by one. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
+When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/learn/technology/DISC) of data. Postage stamps are issued in batches rather than one by one. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
 
 The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. Once the value of a stamp is no longer sufficient, the associated chunk is evicted from the reserve.
 
@@ -20,16 +20,20 @@ Postage stamps are issued in batches with a certain number of storage slots divi
 
 Each bucket has a certain number of slots which can be "filled" by chunks (In other words, for each bucket, a certain number of chunks can be stamped). Once all the slots of a bucket are filled, the entire postage batch will be fully utilised and can no longer be used to upload additional data. Given the constant `bucket depth` of 16, for a `batch depth` of 20, the number of chunks per bucket is calculated like so:
 
-$$
-2^{(20 - 16)} = 16 \text{ chunks/bucket}
-$$
-
-
-`Batch depth` determines how many chunks are allowed in each bucket. The number of chunks allowed in each bucket is calculated like so:
+Together with `batch depth`, `bucket depth`determines how many chunks are allowed in each bucket. The number of chunks allowed in each bucket is calculated like so:
 
 $$
 2^{(batchDepth - bucketDepth)}
 $$
+
+So with a batch depth of 20 and a bucket depth of 16:
+
+$$
+2^{(20 - 16)} = 2^{4} = 16 \text{ chunks/bucket}
+$$
+
+
+
 
 
 ## Batch Depth and Batch Amount
