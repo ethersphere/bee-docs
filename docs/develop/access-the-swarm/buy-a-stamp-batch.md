@@ -40,16 +40,16 @@ $$2^{batch \_ depth} \times {amount}$$
 The paid xBZZ forms the `balance` of the batch. This `balance` is then slowly depleted as time ticks on and blocks are mined on Gnosis Chain.
 
 
-For example, with a `batch depth` of 20 and an `amount` of 1000000000 PLUR:
+For example, with a `batch depth` of 24 and an `amount` of 1000000000 PLUR:
                                                     
 $$
-2^{20} \times 1000000000 = 1048576000000000 \text{ PLUR} = 0.1048576 \text{ xBZZ}
+2^{24} \times 1000000000 = 16777216000000000 \text{ PLUR} = 1.6777216 \text{ xBZZ}
 $$
 
 ### Batch Depth
 
 The `batch depth` determines _how many chunks_ are allowed to be in each bucket. The number of chunks allowed in each bucket is calculated like so:
-$$2^{batch \_ depth - bucket \_ depth}$$  $$=$$ $$2^{batch \_ depth - 16}$$. With a minimum `batch depth` of 17.
+$$2^{batch \_ depth - bucket \_ depth}$$  $$=$$ $$2^{batch \_ depth - 16}$$. With a minimum `batch depth` of 24.
 
 
 ### Calculating the `depth` and `amount` of your batch of stamps
@@ -60,15 +60,12 @@ Right now, the easiest way to start uploading content is to buy a large enough b
 
 The `amount` you specify will govern the amount of time your chunks live in Swarm. Because pricing is variable, it is not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the current price and the remaining batch balance.
 
-For now, we suggest you specify `batch depth` 20 and `amount` 10000000000 for your
-batches just to get started. This should be enough to upload several GB of data for a few weeks.
-
 :::warning
 When you purchase a batch of stamps, you agree to burn xBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw xBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about the different components of Swarm fit together, read <a href="https://www.ethswarm.org/The-Book-of-Swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
 :::
 
 ```bash
-curl -s -XPOST http://localhost:1635/stamps/10000000000/20
+curl -s -XPOST http://localhost:1635/stamps/10000000000/24
 ```
 
 :::info
@@ -109,7 +106,7 @@ The remaining *time to live* in seconds is shown in the returned json object as 
       "utilization": 0,
       "usable": true,
       "label": "",
-      "depth": 20,
+      "depth": 24,
       "amount": "113314620",
       "bucketDepth": 16,
       "blockNumber": 19727733,
@@ -137,7 +134,7 @@ curl -X PATCH "http://localhost:1635/stamps/topup/6d32e6f1b724f8658830e51f8f57aa
 
 In order to store more data with a batch of stamps, you must "dilute" the batch. Dilution simply refers to increasing the depth of the batch, thereby allowing it to store a greater number of chunks. As dilution only increases the the depth of a batch and does not automatically top up the batch with more xBZZ, dilution will decrease the TTL of the batch. Therefore if you wish to store more with your batch but don't want to decrease its TTL, you will need to both dilute and top up your batch with more xBZZ.
 
-Here we call the `/stamps` endpoint and find a batch with `depth` 17 and a `batchTTL` of 2083223 which we wish to dilute:
+Here we call the `/stamps` endpoint and find a batch with `depth` 24 and a `batchTTL` of 2083223 which we wish to dilute:
 
 ```bash
 curl  http://localhost:1635/stamps
@@ -151,7 +148,7 @@ curl  http://localhost:1635/stamps
             "utilization": 0,
             "usable": true,
             "label": "",
-            "depth": 17,
+            "depth": 24,
             "amount": "10000000000",
             "bucketDepth": 16,
             "blockNumber": 29717348,
@@ -164,10 +161,10 @@ curl  http://localhost:1635/stamps
 }
 ```
 
-Next we call the [`dilute`](/api/#tag/Postage-Stamps/paths/~1stamps~1dilute~1{batch_id}~1{depth}/patch) endpoint to increase the `depth` of the batch using the `batchID` and our new `depth` of 19:
+Next we call the [`dilute`](/api/#tag/Postage-Stamps/paths/~1stamps~1dilute~1{batch_id}~1{depth}/patch) endpoint to increase the `depth` of the batch using the `batchID` and our new `depth` of 26:
 
 ```bash
-curl -s -XPATCH http://localhost:1635/stamps/dilute/0e4dd16cc435730a25ba662eb3da46e28d260c61c31713b6f4abf8f8c2548ae5/19
+curl -s -XPATCH http://localhost:1635/stamps/dilute/0e4dd16cc435730a25ba662eb3da46e28d260c61c31713b6f4abf8f8c2548ae5/26
 ```
 And a `txHash` of our successful transaction:
 
@@ -184,7 +181,7 @@ And finally we use the `/stamps` endpoint again to confirm the new `depth` and d
 curl  http://localhost:1635/stamps
 ```
 
-We can see the new `depth` of 19 decreased `batchTTL` of 519265.
+We can see the new `depth` of 26 and a decreased `batchTTL` of 519265.
 
 ```json
 {
@@ -194,7 +191,7 @@ We can see the new `depth` of 19 decreased `batchTTL` of 519265.
             "utilization": 0,
             "usable": true,
             "label": "",
-            "depth": 19,
+            "depth": 26,
             "amount": "10000000000",
             "bucketDepth": 16,
             "blockNumber": 29717348,
