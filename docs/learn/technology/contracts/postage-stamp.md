@@ -3,9 +3,6 @@ title: Postage Stamp
 id: postage-stamp
 ---
 
-import DepthCalc from '@site/src/components/DepthCalc';
-import BatchCostCalc from '@site/src/components/BatchCostCalc';
-
 The [postage stamp contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PostageStamp.sol) is a smart contract which is a key part of Swarm's [storage incentives](/docs/learn/technology/incentives) which make up the foundation of Swarm's self-sustaining economic system. 
 
 When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/learn/technology/DISC) of data. Postage stamps are issued in batches rather than one by one. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
