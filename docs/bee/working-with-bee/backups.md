@@ -141,7 +141,7 @@ There are many tools and wallets you may use to get your private key from your k
 
 To import to Metamask:
 
-1. Get your `swarm.key` and `keystore` as described in the section above.
+1. Get your `swarm.key` and `password` as described in the section above.
 2. Go to Metamask and click "Account 1" --> "Import Account"
 3. Choose the "Select Type" dropdown menu and choose "JSON file"
 4. Paste the password (Make sure to do this first)
