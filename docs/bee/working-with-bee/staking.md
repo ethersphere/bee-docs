@@ -158,3 +158,35 @@ error: "level"="error" "logger"="node/storageincentives" "msg"="make sample" "er
 While evictions are a normal part of Bee's standard operation, the event of an eviction will interrupt the sampler process.
 
 If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord). 
+
+
+## Maximizing Staking Rewards
+
+There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](/docs/learn/technology/incentives/) for more context.
+
+### Neighborhood Selection 
+
+By default when running a Bee node for the first time an overlay address will be generated and used to assign the node to a random [neighborhood](/docs/learn/technology/disc#neighborhoods). However, by using the `target-neighborhood` config option, a specific neighborhood can be selected in which to generate the node's overlay address. This is an excellent tool for maximizing reward chances as generally speaking running in a less populated neighborhood will increase the chances of winning a reward. See the [config section](/docs/bee/installation/install#set-target-neighborhood-optional) on the installation page for more information on how to set a target neighborhood.
+
+
+### Stake Density
+
+Stake density is defined as:
+
+$$
+\text{stake density} = \text{staked xBZZ} \times {2}^\text{storageDepth}
+$$
+  
+*To learn more about stake density and the mechanics of the incentives system, see the [incentives page](/docs/learn/technology/incentives/).*
+
+Stake density determines the weighted chances of nodes within a neighborhood of winning rewards. The chance of winning within a neighborhood corresponds to stake density. Stake density can be increased by depositing more xBZZ as stake (note that stake withdrawals are not currently possible, so any staked xBZZ is not currently recoverable). 
+
+Generally speaking, the minimum required stake of 10 xBZZ is sufficient, and rewards can be better maximized by operating more nodes over a greater range of neighborhoods rather than increasing stake. However this may not be true for all node operators depending on how many different neighborhoods they operate nodes in, and it also may change as network dynamics continue to evolve (join the `#node-operators` [Discord channel](https://discord.com/channels/799027393297514537/811553590170353685) to stay up to date with the latest discussions about staking and network dynamics).
+
+
+
+
+
+
+
+

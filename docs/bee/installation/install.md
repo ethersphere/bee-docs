@@ -288,14 +288,18 @@ If you do not wish to run your own Ethereum node you may use a blockchain API se
 resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 ```
 
-
 ### Set Target Neighborhood (Optional)
 
 When setting up a new Bee node, a randomly generated overlay address will determine the node's [neighborhood](/docs/learn/technology/disc#neighborhoods). By using the `target-neighborhood` config option, however, an overlay address will be generated which falls within a specific neighborhood. There are two good reasons for doing this. First, by choosing a lesser populated neighborhood, a node's chances of winning rewards can be increased. Second, choosing to set up a node in a less populated neighborhood will strengthen the resiliency of the Swarm network. Therefore it is recommended to use the `target-neighborhood` option.
 
-To use this option, it's first necessary to identify potential target neighborhoods. A convenient tool for finding underpopulated neighborhoods is available at the [Swarmscan website](https://swarmscan.io/neighborhoods). This tool returns the leading bits of target neighborhoods in order of least populated to most. Simply copy the leading bits from one of the least populated neighborhoods and use it to set `target-neighborhood`. After doing so, an overlay address within that neighborhood will be generated when starting Bee for the first time.
+To use this option, it's first necessary to identify potential target neighborhoods. A convenient tool for finding underpopulated neighborhoods is available at the [Swarmscan website](https://swarmscan.io/neighborhoods). This tool returns the leading binary bits of target neighborhoods in order of least populated to most. Simply copy the leading bits from one of the least populated neighborhoods (for example, `0010100001`) and use it to set `target-neighborhood`. After doing so, an overlay address within that neighborhood will be generated when starting Bee for the first time.
 
-See the [staking page](/docs/bee/working-with-bee/staking) for more information.
+```yaml
+## bee.yaml
+target-neighborhood: 0010100001
+```
+
+See the [staking section](/docs/bee/working-with-bee/staking) for more information.
 
 ## 3. Find Bee address
 
