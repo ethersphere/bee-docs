@@ -38,7 +38,7 @@ Each batch of stamps has two key parameters, `batch depth` and `amount`, which a
 
 `Batch depth` determines how much data can be stored by a batch. The number of chunks which can be stored (stamped) by a batch is equal to  $$2^{batchDepth}$$. 
 
-For a batch with a `batch depth` of 24, a maximum of $$2^{23} = 16,777,216$$ chunks can be stamped.   
+For a batch with a `batch depth` of 24, a maximum of $$2^{24} = 16,777,216$$ chunks can be stamped.   
 
 Since we know that one chunk can store 4 kb of data, we can calculate the theoretical maximum amount of data which can be stored by a batch from the `batch depth`. 
 
