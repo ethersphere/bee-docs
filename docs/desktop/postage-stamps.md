@@ -30,7 +30,7 @@ Batch [depth and amount](docs/learn/technology/contracts/postage-stamp) are the 
 Inputting a value for depth allows you to preview the upper limit of data which can be uploaded for that depth. 
 
 :::info
-Note that a batch will become fully utilized before the upper limit has been reached, so the actual amount of data which can be uploaded is lower than the limit. At higher depth values, this becomes less of a problem as batch utilization will come closer to the upper limit on average as the depth increases. For this reason, Swarm Desktop requires a minimum batch depth of 17.
+Note that a batch will become fully utilized before the upper limit has been reached, so the actual amount of data which can be uploaded is lower than the limit. At higher depth values, this becomes less of a problem as batch utilization will come closer to the upper limit on average as the depth increases. For this reason, Swarm Desktop requires a minimum batch depth of 24.
 :::
 
 Inputting a value for amount and depth together will allow you to also preview the total cost of the postage stamp batch as well as the TTL (time to live - how long the batch can store data on Swarm). Click the ***Buy New Stamp*** button to purchase the stamp batch.

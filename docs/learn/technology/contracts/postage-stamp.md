@@ -3,9 +3,6 @@ title: Postage Stamp
 id: postage-stamp
 ---
 
-import DepthCalc from '@site/src/components/DepthCalc';
-import BatchCostCalc from '@site/src/components/BatchCostCalc';
-
 The [postage stamp contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PostageStamp.sol) is a smart contract which is a key part of Swarm's [storage incentives](/docs/learn/technology/incentives) which make up the foundation of Swarm's self-sustaining economic system. 
 
 When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/learn/technology/DISC) of data. Postage stamps are issued in batches rather than one by one. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
@@ -18,7 +15,7 @@ Postage stamps are issued in batches with a certain number of storage slots divi
 
 ### Bucket Size
 
-Each bucket has a certain number of slots which can be "filled" by chunks (In other words, for each bucket, a certain number of chunks can be stamped). Once all the slots of a bucket are filled, the entire postage batch will be fully utilised and can no longer be used to upload additional data. Given the constant `bucket depth` of 16, for a `batch depth` of 20, the number of chunks per bucket is calculated like so:
+Each bucket has a certain number of slots which can be "filled" by chunks (In other words, for each bucket, a certain number of chunks can be stamped). Once all the slots of a bucket are filled, the entire postage batch will be fully utilised and can no longer be used to upload additional data. 
 
 Together with `batch depth`, `bucket depth`determines how many chunks are allowed in each bucket. The number of chunks allowed in each bucket is calculated like so:
 
@@ -26,14 +23,11 @@ $$
 2^{(batchDepth - bucketDepth)}
 $$
 
-So with a batch depth of 20 and a bucket depth of 16:
+So with a batch depth of 24 and a bucket depth of 16:
 
 $$
-2^{(20 - 16)} = 2^{4} = 16 \text{ chunks/bucket}
+2^{(24 - 16)} = 2^{8} = 256 \text{ chunks/bucket}
 $$
-
-
-
 
 
 ## Batch Depth and Batch Amount
@@ -42,9 +36,9 @@ Each batch of stamps has two key parameters, `batch depth` and `amount`, which a
 
 ### Batch Depth 
 
-`Batch depth` determines how much data can be stored by a batch. The number of chunks which can be stored (stamped) by a batch is equal to  $$2^{depth}$$. 
+`Batch depth` determines how much data can be stored by a batch. The number of chunks which can be stored (stamped) by a batch is equal to  $$2^{batchDepth}$$. 
 
-For a batch with a `batch depth` of 23, a maximum of $$2^{23} = 33,554,432$$ chunks can be stamped.   
+For a batch with a `batch depth` of 24, a maximum of $$2^{23} = 16,777,216$$ chunks can be stamped.   
 
 Since we know that one chunk can store 4 kb of data, we can calculate the theoretical maximum amount of data which can be stored by a batch from the `batch depth`. 
 
@@ -65,12 +59,8 @@ The paid xBZZ forms the `balance` of the batch. This `balance` is then slowly de
 For example, with a `batch depth` of 20 and an `amount` of 1000000000 PLUR:
 
 $$
-2^{20} \times 1000000000 = 1048576000000000 \text{ PLUR} = 0.1048576 \text{ xBZZ}
+2^{24} \times 1000000000 = 16777216000000000 \text{ PLUR} = 1.6777216 \text{ xBZZ}
 $$
-
-#### Batch cost calculator:
-
-<BatchCostCalc></BatchCostCalc>
 
 
 ## Batch Utilisation
@@ -83,7 +73,12 @@ Utilisation of an immutable batch is computed using a hash map of size $$2^{buck
 
 As chunks are uploaded to Swarm, each chunk is assigned to a bucket based the first 16 binary digits of the [chunk's hash](/docs/learn/technology/disc#chunks). The chunk will be assigned to whichever bucket's key matches the first 16 bits of its hash, and that bucket's counter will be incremented by 1. 
 
-The batch is deemed "full" when ANY of these counters reach a certain max value. The max value is computed from the batch depth as such: $$2^{(batchDepth-bucketDepth)}$$. For example if the batch depth is 21, then the max value is $$2^{(21-16)}$$ or 32. A bucket can be thought of as have a number of "slots" equal to this maximum value, and every time the bucket's counter is incremented, one of its slots gets filled. 
+The batch is deemed "full" when ANY of these counters reach a certain max value. The max value is computed from the batch depth as such: $$2^{(batchDepth-bucketDepth)}$$. For example with batch depth of 24, the max value is $$2^{(24-16)}$$ or 256. A bucket can be thought of as have a number of "slots" equal to this maximum value, and every time the bucket's counter is incremented, one of its slots gets filled. 
+
+
+:::info
+Note that 18 is below the minimum batch depth, but is used in these examples to simplify the explanation of batch utilisation.
+:::
 
 In the diagram below, the batch depth is 18, so there are $$2^{(18-16)}$$ or 4 slots for each bucket. The utilisation of a batch is simply the highest number of filled slots out of all 65536 entries or "buckets". In this batch, none of the slots in any of the buckets have yet been filled with 4 chunks, so the batch is not yet fully utilised. The most filled slots out of all buckets is 2, so the stamp batch's utilisation is 2 out of 4. 
 
@@ -113,18 +108,18 @@ The default batch type when unspecified is immutable. This can be modified throu
 
 ### Implications for Swarm Users
 
-Due to the nature of batch utilisation described above, batches are often fully utilised before reaching their theoretical maximum storage amount. However as the batch depth increases, the chance of a postage batch becoming fully utilised early decreases. At batch depth 23, there is a 0.1% chance that a batch will be fully utilised/start replacing old chunks before reaching 50% of its theoretical maximum.
+Due to the nature of batch utilisation described above, batches are often fully utilised before reaching their theoretical maximum storage amount. However as the batch depth increases, the chance of a postage batch becoming fully utilised early decreases. At batch depth 24, there is a 0.1% chance that a batch will be fully utilised/start replacing old chunks before reaching 64.33% of its theoretical maximum.
 
-Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](/docs/learn/technology/contracts/postage-stamp#batch-depth), we can see that for a batch depth of 23, the theoretical maximum amount which can be stored is 33,554,432 kb:
-
-$$
-2^{23} \times \text{4kb} = \text{33,554,432 kb}
-$$
-
-Therefore we should use 50% the effective rate of usage for the stamp batch:
+Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](/docs/learn/technology/contracts/postage-stamp#batch-depth), we can see that for a batch depth of 24, the theoretical maximum amount which can be stored is 68.72 gb:
 
 $$
-\text{33,554,432 kb} \times{0.5} = \text{16,777,216 kb} = \text{16.77 gb}
+2^{24+12} = \text{68,719,476,736 bytes} = \text{68.72 gb}
+$$
+
+Therefore we should use 64.33% the effective rate of usage for the stamp batch:
+
+$$
+\text{68.72 gb} \times{0.6433} =  \text{44.21 gb }
 $$
 
 :::info
@@ -142,10 +137,6 @@ The provided table shows the effective volume for each batch depth from 20 to 41
  
 | Batch Depth | Utilisation Rate | Theoretical Max Volume | Effective Volume |
 |-------------|------------------|------------------|------------------------|
-| 20          | 0.00%            | 4.29 GB          | 0.00 B                 |
-| 21          | 0.00%            | 8.59 GB          | 0.00 B                 |
-| 22          | 28.67%           | 17.18 GB         | 4.93 GB                |
-| 23          | 49.56%           | 34.36 GB         | 17.03 GB               |
 | 24          | 64.33%           | 68.72 GB         | 44.21 GB               |
 | 25          | 74.78%           | 137.44 GB        | 102.78 GB              |
 | 26          | 82.17%           | 274.88 GB        | 225.86 GB              |
