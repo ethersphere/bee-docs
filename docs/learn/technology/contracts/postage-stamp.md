@@ -10,11 +10,11 @@ The [postage stamp contract](https://github.com/ethersphere/storage-incentives/b
 
 When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/learn/technology/DISC) of data. Postage stamps are purchased in batches rather than one by one. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
 
-The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. We say that a stamp expires when the batch it is issued from has insufficient balance. a chunk with an expired stamp can not be used in the proof of entitlement storer nodes need to submit in order to get compensated for their contributed storage space, therefore such expired chunks are  evicted from the reserve from nodes' reserves and put into cache which leave their sustanance up to their popularity.
+The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. We say that a stamp expires when the batch it is issued from has insufficient balance. A chunk with an expired stamp can not be used in the proof of entitlement storer nodes need to submit in order to get compensated for their contributed storage space, therefore such expired chunks are evicted from nodes' reserves and put into the cache where their continued persistence depends on their popularity. 
 
 ## Batch Buckets
 
-Postage stamps are issued in batches with a certain number of storage slots partitioned into $$2^{bucketDepth}$$ equally sized address space buckets. Each bucket is responsible for storing chunks that fall within a certain range of the address space. When uploaded, files are split into 4kb chunks, each chunk is assigned a unique address, and each chunk is then assigned to the bucket in which its address falls. Falling into the same range means match on  `n` leading bits. This restriction is necessary to ensure (incentivise) uniform utilisation of the address space and is fair since the distribution of content addresses are uniform as well. Uniformity depth is the number of leading bits determining bucket membership  (also called `bucket depth`). The uniformity depth is set to 16, so there are a total of `2^16 = 65,536` buckets.
+Postage stamps are issued in batches with a certain number of storage slots partitioned into $$2^{bucketDepth}$$ equally sized address space buckets. Each bucket is responsible for storing chunks that fall within a certain range of the address space. When uploaded, files are split into 4kb chunks, each chunk is assigned a unique address, and each chunk is then assigned to the bucket in which its address falls. Falling into the same range means a match on `n` leading bits of the chunk and bucket. This restriction is necessary to ensure (incentivise) uniform utilisation of the address space and is fair since the distribution of content addresses are uniform as well. Uniformity depth is the number of leading bits determining bucket membership (also called `bucket depth`). The uniformity depth is set to 16, so there are a total of $$2^{16} = 65,536$$ buckets.
 
 ### Bucket Size
 
@@ -135,7 +135,10 @@ The details of how the effective rates of utilisation are calculated will be pub
 ### Effective Utilisation Table
 
 
+When a user buys a batch of stamps they may make the naive assumption that they will be able to upload data equal to the sum total size of the maximum capacity of the batch. However, in practice this assumption is incorrect, so it is essential that Swarm users understand the relationship between batch depth and the theoretical and effective volumes of a batch.
+
 The provided table shows the effective volume for each batch depth from 20 to 41. The "utilisation rate" is the rate of utilisation a stamp batch can reach with a 0.1% failure rate (that is, there is a 1/1000 chance the batch will become fully utilised before reaching that utilisation rate). The "effective volume" figure shows the actual amount of data which can be stored at the effective rate. The effective volume figure is the one which should be used as the de-facto maximum amount of data that a batch can store before becoming either fully utilised (for immutable batches), or start overwriting older chunks (mutable batches).
+
  
 | Batch Depth | Utilisation Rate | Theoretical Max Volume | Effective Volume |
 |-------------|------------------|------------------|------------------------|
@@ -166,5 +169,6 @@ The provided table shows the effective volume for each batch depth from 20 to 41
 This table is based on preliminary calculations and may be subject to change.
 :::
 
-Nodes' storage is actually calculated in the number of chunks, which we counted as 4k (2^12 bytes) each,but in fact some SOC chunks can be a few bytes longer, and some chunks can be smaller, so the conversion is not precise. On the other hand, when a user buys a capacity they usually expect to be able to upload files with a sum total size of that capacity. However, the way swarm represents files in a merkle tree, the intermediate chunks are additional overhead you need to calculate with. 
-Besides this, when the node stores the chunks it uses additional indexes therefore the disk space the maximally filled reserve would demand cannot be calculated with perfect accuracy.
+Nodes' storage is actually defined as a number of chunks with a size of 4kb (2^12 bytes) each, but in fact some [SOC](/docs/learn/technology/disc#content-addressed-chunks-and-single-owner-chunks) chunks can be a few bytes longer, and some chunks can be smaller, so the conversion is not precise. Furthermore, due to the way Swarm represents files in a merkle tree, the intermediate chunks are additional overhead which must also be accounted for. 
+
+Additionally, when a node stores chunks it uses additional indexes — therefore the disk space a maximally filled reserve would demand cannot be calculated with perfect accuracy.
