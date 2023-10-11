@@ -248,14 +248,10 @@ _systemctl_ uses _/etc/bee/bee.yaml_ and (IIRC) _/var/lib/bee_ for data
 
 ### Can I use one Ethereum Address/Wallet for many nodes?
 
-No, this violates the requirements of the Swarm Protocol. The Swarm
-Protocol relies upon the `Swarm Address`, also known as the `peer address`. This address is a **hash of the node's Ethereum address**,
-therefore it is deterministic. As all nodes must have a unique address,
-if you were to use the same wallet, it would violate the uniqueness
-constraint and result in malfunctioning nodes.
+No, this violates the requirements of the Swarm Protocol and will break critical node functions such as staking, purchasing stamp batches, and uploading data. 
 
 Therefore, the rule is, each node must have:
 
-- 1 Ethereum Address
+- 1 Ethereum address (this address, the Swarm network id, and a random nonce are used to determine the node's overlay address)
 - 1 Chequebook
-- 3 unique ports for API / p2p / Debug API.
+- 3 Unique ports for API / p2p / Debug API
