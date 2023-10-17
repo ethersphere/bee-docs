@@ -135,9 +135,11 @@ sudo cat /var/lib/bee/password
 Note that `swarm.key` is in UTC / JSON keystores format and is encrypted by default by your password file inside the `/bee` directory. Make sure to export both the `swarm.key` file and the `password` file in order to secure your wallet. If you need your private key exported from the keystore file, you may use one of a variety of Ethereum wallets which support exporting private keys from UTC files (such as [Metamask](https://metamask.io/), however we offer no guarantees for any software, make sure you trust it completely before using it). 
 :::
 
-### Get private key from keystore and password
+## Metamask Import
 
-There are many tools and wallets you may use to get your private key from your keystore and password. Most Ethereum wallets which support importing accounts by keystore also include the option to export your private key, and Metamask is one of the most popular wallets for doing so. 
+If you wish to import your blockchain account to a wallet such as Metamask, you can simply print out your keystore file and password and use those data to import into the wallet:
+
+### Get private key from keystore and password
 
 To import to Metamask:
 
@@ -156,6 +158,7 @@ To export your private key:
 4. Click "Show private key"
 5. Enter your Metamask password (not your keystore password)
 6. Copy your private key to a safe location
+
 
 ## Restore from backup
 
@@ -208,7 +211,7 @@ This is a throwaway account so we are sharing the keystore and password for this
 
 ![](/img/clef_import_01.png)
 
-Follow the steps shown in the screenshot to print out clef keystore.    
+Follow the steps shown in the screenshot above to print out clef keystore.    
 
 #### Keystore (throwaway example):
 Copy the output shown in the screenshot:
