@@ -34,7 +34,11 @@ $$
 
 ### Penalties
 
-During the `reveal` phase if a nodes' revealed hash does not match the honest nodes' hash, that node will be temporarily frozen and will not be able to participate in a number of upcoming rounds.
+During the `reveal` phase if a nodes' revealed hash does not match the honest nodes' hash, that node will be temporarily frozen and will not be able to participate in a number of upcoming rounds. Currently the freeze period is defined as:
+
+$$
+152 \times 2^{10} \text{ blocks (at 5s per block)} ≈ \text{ 9 days}
+$$
 
 ## Bandwidth Incentives (SWAP) 
 
