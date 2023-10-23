@@ -13,8 +13,14 @@ This method can be used for package manager based [installs](/docs/bee/installat
 
 #### Debian
 
+To uninstall Bee while preserving your Bee keys and configuration run:
+
 ```bash
 sudo apt-get remove bee
+```
+
+```bash
+sudo apt-get purge bee
 ```
 
 #### RPM

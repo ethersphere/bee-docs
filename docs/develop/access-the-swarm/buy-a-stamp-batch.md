@@ -5,7 +5,7 @@ id: buy-a-stamp-batch
 
 Swarm comprises the sum total of all storage space provided by all of our nodes, called the DISC (Distributed Immutable Store of Chunks). The _right to write_ data into this distributed store is determined by the [postage stamps](/docs/learn/technology/contracts/postage-stamp) that have been attached.
 
-### Fund your node's wallet.
+## Fund your node's wallet.
 
 To start up your node, you will already have provided your node with
 xDAI for gas and xBZZ which was transferred into your chequebook when
@@ -31,7 +31,7 @@ and assigned to a specific bucket based on its address.
 
 When creating a batch you must specify two values, `batch depth` and `amount`.
 
-### Amount
+## Amount
 
 The `amount` is the quantity of xBZZ in PLUR $$(1 \times 10^{16}PLUR = 1 \text{ xBZZ})$$ that is assigned per chunk in the batch. The total number of xBZZ that will be paid for the batch is calculated from this figure and the `batch depth` like so:
 
@@ -46,19 +46,44 @@ $$
 2^{24} \times 1000000000 = 16777216000000000 \text{ PLUR} = 1.6777216 \text{ xBZZ}
 $$
 
-### Batch Depth
+## Batch Depth
 
 The `batch depth` determines _how many chunks_ are allowed to be in each bucket. The number of chunks allowed in each bucket is calculated like so:
 $$2^{batch \_ depth - bucket \_ depth}$$  $$=$$ $$2^{batch \_ depth - 16}$$. With a minimum `batch depth` of 24.
 
 
-### Calculating the `depth` and `amount` of your batch of stamps
+## Calculating the `depth` and `amount` of your batch of stamps
 
 One notable aspect of batch utilization is that the entire batch is considered fully utilized as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
 
 Right now, the easiest way to start uploading content is to buy a large enough batch so that it is incredibly unlikely you will end up with too many chunks falling into the same bucket.
 
-The `amount` you specify will govern the amount of time your chunks live in Swarm. Because pricing is variable, it is not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the current price and the remaining batch balance.
+### Choosing a `depth`
+
+See the [postage stamp contract page](/docs/learn/technology/contracts/postage-stamp#batch-utilisation) for a more complete explanation of how batch utilisation works and a [table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) with the specific amounts of data which can be safely uploaded for each `depth` value. 
+
+### Calculating `amount` needed for desired TTL 
+
+The `amount` you specify will govern the amount of time your chunks live in Swarm. Because pricing is variable, it is not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the current price and the remaining batch balance. `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and stamp price of 24000 PLUR / chunk / block:
+
+$$
+(\text{stamp price} \div \text{block time in seconds}) \times \text{storage time in seconds}
+$$
+
+There are 1036800 seconds in 12 days, so the `amount` value required to store for 12 days can be calculated:
+
+$$
+(\text{24000} \div \text{5}) \times \text{1036800} = 4976640000
+$$
+
+So we can use 4976640000 as our `amount` value in order for our postage batch to store data for 12 days.
+ 
+:::info
+The postage stamp price is currently set at 24000 PLUR, but may change to a dynamic pricing model in the future. Once a dynamic pricing model has been implement, TTL values can only be taken as estimates and may change over time.
+:::
+
+
+## Buying a stamp batch
 
 :::warning
 When you purchase a batch of stamps, you agree to burn xBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw xBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about the different components of Swarm fit together, read <a href="https://www.ethswarm.org/The-Book-of-Swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
@@ -84,7 +109,7 @@ curl http://localhost:1635/stamps
 When uploading content which has been stamped using an already expired postage stamp, the node will not attempt to sync the content. You are advised to use longer-lived postage stamps and encrypt your content to work around this. It is not possible to reupload unencrypted content which was stamped using an expired postage stamp. We're working on improving on this.
 :::
 
-### Calculating the remaining TTL (time to live) of your batch
+## Checking the remaining TTL (time to live) of your batch
 
 :::info
 At present, TTL is a primitive calculation based on the current storage price and the assumption that storage price will remain static in the future. As more data is uploaded into Swarm, the price of storage will begin to increase. For data that it is important to keep alive, make sure your batches have plenty of time to live!
@@ -118,7 +143,7 @@ The remaining *time to live* in seconds is shown in the returned json object as 
 }
 ```
 
-### Top up your batch
+## Top up your batch
 
 :::danger
 Don't let your batch run out! If it does, you will need to restamp and resync your content.
@@ -130,7 +155,7 @@ If your batch is starting to run out, or you would like to extend the life of yo
 curl -X PATCH "http://localhost:1635/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
 ```
 
-### Dilute your batch
+## Dilute your batch
 
 In order to store more data with a batch of stamps, you must "dilute" the batch. Dilution simply refers to increasing the depth of the batch, thereby allowing it to store a greater number of chunks. As dilution only increases the the depth of a batch and does not automatically top up the batch with more xBZZ, dilution will decrease the TTL of the batch. Therefore if you wish to store more with your batch but don't want to decrease its TTL, you will need to both dilute and top up your batch with more xBZZ.
 
