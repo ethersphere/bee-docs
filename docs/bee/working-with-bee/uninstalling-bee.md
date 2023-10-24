@@ -11,13 +11,16 @@ Choose the appropriate uninstall method based on the install method used:
 
 This method can be used for package manager based [installs](/docs/bee/installation/install#package-manager-install-recommended-method) of the official Debian, RPM, and Homebrew packages.
 
+:::danger
+This will remove your keyfiles so make certain that you have a backup before running `purge`.
+:::
+
 #### Debian
 
 To uninstall Bee while preserving your Bee keys and configuration run:
 
-```bash
-sudo apt-get remove bee
-```
+To uninstall Bee and completely remove all associated files including keys and configuration, run: 
+
 
 ```bash
 sudo apt-get purge bee
