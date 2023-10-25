@@ -18,18 +18,15 @@ way to achieve this is to withdraw funds from your chequebook:
 curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000"
 ```
 
-## Purchase a batch of stamps
+## What is a stamp batch?
 
-Stamps are created in batches so that storer nodes may calculate the
-validity of a chunk's stamp with only local knowledge. This enables
-the privacy you enjoy with Swarm.
+Stamp batches must be purchased and then utilised in order to upload data to swarm. 
 
-Stamp batches are created in buckets with a `bucket depth` of 16. The entire
-Swarm address space is divided into $$2^{16} = 65,536$$ different
-buckets. When uploaded, each of your files are split into 4kb chunks
-and assigned to a specific bucket based on its address.
+Stamp batches are created in buckets with a `bucket depth` of 16. The entire Swarm address space is divided into $$2^{bucketDepth} = 2^{16} = 65,536$$ different buckets. When uploaded, each of your files are split into 4kb chunks and assigned to a specific bucket based on its address. When a chunk gets assigned to a bucket, we can say that the chunk has been 'stamped', and that one stamp has been utilized from the postage stamp batch.
 
-When creating a batch you must specify two values, `batch depth` and `amount`.
+ When creating a batch there are two required parameters, `batch depth` and `amount`, which are explained below. 
+
+You can learn more about stamp batches on the [postage stamp contract page](/docs/learn/technology/contracts/postage-stamp).
 
 ## Amount
 
@@ -49,22 +46,22 @@ $$
 ## Batch Depth
 
 The `batch depth` determines _how many chunks_ are allowed to be in each bucket. The number of chunks allowed in each bucket is calculated like so:
-$$2^{batch \_ depth - bucket \_ depth}$$  $$=$$ $$2^{batch \_ depth - 16}$$. With a minimum `batch depth` of 24.
+$$2^{batch \_ depth - bucket \_ depth}$$  $$=$$ $$2^{batch \_ depth - 16}$$. 
 
 
-## Calculating the `depth` and `amount` of your batch of stamps
+## Setting stamp batch parameters and options
 
-One notable aspect of batch utilization is that the entire batch is considered fully utilized as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
-
-Right now, the easiest way to start uploading content is to buy a large enough batch so that it is incredibly unlikely you will end up with too many chunks falling into the same bucket.
+When purchasing a batch of stamps there are several parameters and options which must be considered. The `depth` parameter will control how many chunks can be uploaded with a batch of stamps. The `amount` parameter determines how much xBZZ will be allocated per chunk, and therefore also controls how long the chunks will be stored. While the `immutable` header option sets the batch as either mutable or immutable, which can significantly alter the behavior of the batch utilisation (more details below).
 
 ### Choosing a `depth`
+
+One notable aspect of batch utilization is that the entire batch is considered fully utilized as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
 
 See the [postage stamp contract page](/docs/learn/technology/contracts/postage-stamp#batch-utilisation) for a more complete explanation of how batch utilisation works and a [table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) with the specific amounts of data which can be safely uploaded for each `depth` value. 
 
 ### Calculating `amount` needed for desired TTL 
 
-The `amount` you specify will govern the amount of time your chunks live in Swarm. Because pricing is variable, it is not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the current price and the remaining batch balance. `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and stamp price of 24000 PLUR / chunk / block:
+The `amount` you specify determines how much xBZZ denominated in PLUR will be assigned per chunk uploaded. This governs the amount of time your chunks live on Swarm. While stamp prices are currently set at 24000 PLUR / chunk / block, prices will become variable in the future. When this comes into effect it will not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the current price and the remaining batch balance. The desired `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and stamp price of 24000 PLUR / chunk / block:
 
 $$
 (\text{stamp price} \div \text{block time in seconds}) \times \text{storage time in seconds}
@@ -82,6 +79,9 @@ So we can use 4976640000 as our `amount` value in order for our postage batch to
 The postage stamp price is currently set at 24000 PLUR, but may change to a dynamic pricing model in the future. Once a dynamic pricing model has been implement, TTL values can only be taken as estimates and may change over time.
 :::
 
+### Mutable of Immutable?
+
+Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
 
 ## Buying a stamp batch
 
