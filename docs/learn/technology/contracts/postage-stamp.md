@@ -137,10 +137,10 @@ The provided table shows the effective volume for each batch depth from 20 to 41
  
 | Batch Depth | Utilisation Rate | Theoretical Max Volume | Effective Volume |
 |-------------|------------------|-------------------------|-------------------|
-| 20          | 0.00000          | 4.29 GB                 | 0.00 B            |
-| 21          | 0.00000          | 8.59 GB                 | 0.00 B            |
-| 22          | 0.28669          | 17.18 GB                | 4.93 GB           |
-| 23          | 0.49561          | 34.36 GB                | 17.03 GB          |
+| 20          | 0.00%          | 4.29 GB                 | 0.00 B            |
+| 21          | 0.00%          | 8.59 GB                 | 0.00 B            |
+| 22          | 28.67%          | 17.18 GB                | 4.93 GB           |
+| 23          | 49.56%          | 34.36 GB                | 17.03 GB          |
 | 24          | 64.33%           | 68.72 GB                | 44.21 GB          |
 | 25          | 74.78%           | 137.44 GB               | 102.78 GB         |
 | 26          | 82.17%           | 274.88 GB               | 225.86 GB         |
