@@ -1,9 +1,9 @@
 ---
-title: Awesome
+title: Awesome Swarm
 id: awesome
 ---
 
-# Awesome-Swarm
+# Awesome Swarm
 
 An [awesome list](https://awesome.re) on anything awesome related to the Swarm platform. 🐝 🐝 🐝
 
