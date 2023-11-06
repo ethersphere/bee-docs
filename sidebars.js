@@ -84,6 +84,7 @@ module.exports = {
         'bee/working-with-bee/debug-api',
         'bee/working-with-bee/logs-and-files',
         'bee/working-with-bee/bee-tools',
+        'bee/working-with-bee/swarm-cli',
         'bee/working-with-bee/security',
         'bee/working-with-bee/staking',
         'bee/working-with-bee/cashing-out',
