@@ -31,11 +31,14 @@ values={[
 #### API
 
 ```bash
-curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000"
+curl -XPOST "http://localhost:1635/chequebook/withdraw?amount=1000" 
 ```
 
 ```bash
-{"transactionHash":"0xce73b9962e41ee0adcf5926663312093a3c292a8338ff641a70224ac32a04945"}
+{
+  "transactionHash": "0xce73b9962e41ee0adcf5926663312093a3c292a8338ff641a70224ac32a04945"
+}
+
 ```
 
 </TabItem>
@@ -319,13 +322,78 @@ Don't let your batch run out! If it does, you will need to restamp and resync yo
 
 If your batch is starting to run out, or you would like to extend the life of your batch to protect against storage price rises, you can increase the batch TTL by topping up your batch using the stamps endpoint, passing in the relevant batchID into the HTTP PATCH request.
 
+
+
+<Tabs
+defaultValue="api"
+values={[
+{label: 'API', value: 'api'},
+{label: 'Swarm CLI', value: 'swarm-cli'},
+]}>
+<TabItem value="api">
+
+#### API
+
 ```bash
 curl -X PATCH "http://localhost:1635/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
 ```
 
+</TabItem>
+
+<TabItem value="swarm-cli">
+
+#### Swarm CLI
+
+List available stamps.
+
+```bash
+swarm-cli stamp list
+```
+
+Copy stamp ID.
+```bash
+Stamp ID: daa8c5b36e1cf481b10118a8b02430a6f22618deaa6ba5aa4ea660de66aa62db
+Usage: 13%
+Remaining Capacity: 3.50 GB
+TTL: 183 days 1 hour 37 minutes 8 seconds
+Expires: 2024-05-02
+```
+
+Use `swarm-cli stamp topup` with the `--amount` and `--stamp` parameters set with the amount to topup in PLUR and the stamp ID.
+
+```bash
+swarm-cli stamp topup --amount 10000000  --stamp daa8c5b36e1cf481b10118a8b02430a6f22618deaa6ba5aa
+4ea660de66aa62db
+```
+
+Wait for topup transaction to complete.
+```bash
+⬡ ⬡ ⬢ Topup in progress. This may take a while.
+Stamp ID: daa8c5b36e1cf481b10118a8b02430a6f22618deaa6ba5aa4ea660de66aa62db
+Depth: 20
+Amount: 100000001000
+```
+
+</TabItem>
+</Tabs>
+
+
 ## Dilute your batch
 
 In order to store more data with a batch of stamps, you must "dilute" the batch. Dilution simply refers to increasing the depth of the batch, thereby allowing it to store a greater number of chunks. As dilution only increases the the depth of a batch and does not automatically top up the batch with more xBZZ, dilution will decrease the TTL of the batch. Therefore if you wish to store more with your batch but don't want to decrease its TTL, you will need to both dilute and top up your batch with more xBZZ.
+
+
+
+<Tabs
+defaultValue="api"
+values={[
+{label: 'API', value: 'api'},
+{label: 'Swarm CLI', value: 'swarm-cli'},
+]}>
+<TabItem value="api">
+
+#### API
+
 
 Here we call the `/stamps` endpoint and find a batch with `depth` 24 and a `batchTTL` of 2083223 which we wish to dilute:
 
@@ -396,11 +464,62 @@ We can see the new `depth` of 26 and a decreased `batchTTL` of 519265.
     ]
 }
 ```
+
+</TabItem>
+
+<TabItem value="swarm-cli">
+
+#### Swarm CLI
+
+List available stamps, make sure to use the `--verbose` flag so that we can see the batch depth.
+
+```bash
+swarm-cli stamp list --verbose
+```
+
+We have a stamp batch with depth 20 we want to dilute. Copy stamp ID of that batch.
+
+```bash
+Listing postage stamps...
+Stamp ID: daa8c5b36e1cf481b10118a8b02430a6f22618deaa6ba5aa4ea660de66aa62db
+Usage: 13%
+Remaining Capacity: 3.50 GB
+Total Capacity (mutable): 4.00 GB
+TTL: 182 days 4 hours 39 minutes 47 seconds
+Expires: 2024-05-02
+Depth: 20
+Bucket Depth: 16
+Amount: 100010002000
+Usable: true
+Utilization: 2
+Block Number: 29734329
+```
+
+Use `swarm-cli stamp dilute` with the `--depth` and `--stamp` parameters set with the desired new depth and the stamp ID.
+
+```bash
+swarm-cli stamp dilute --depth 21 --stamp daa8c5b36e1cf481b10118a8b02430a6f22618deaa6ba5aa4ea660de66aa62db
+```
+
+```bash
+⬡ ⬡ ⬢ Dilute in progress. This may take a while.
+Stamp ID: daa8c5b36e1cf481b10118a8b02430a6f22618deaa6ba5aa4ea660de66aa62db
+Depth: 20
+Amount: 100010002000
+```
+
+</TabItem>
+</Tabs>
+
 ## Stewardship
 
 The <a href="/api/#tag/Stewardship" target="_blank">stewardship endpoint</a> in combination with [pinning](/docs/develop/access-the-swarm/pinning) can be used to guarantee that important content is always available. It is used for checking whether the content for a Swarm reference is retrievable and for re-uploading the content if it is not.
 
 An HTTP GET request to the `stewardship` endpoint checks to see whether the content for the specified Swarm reference is retrievable:
+
+:::info
+`stewardship` is not currently supported by Swarm CLI
+:::
 
 ```bash
 curl "http://localhost:1633/stewardship/c0c2b70b01db8cdfaf114cde176a1e30972b556c7e72d5403bea32e
