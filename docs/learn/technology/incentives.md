@@ -34,11 +34,19 @@ $$
 
 ### Penalties
 
-During the `reveal` phase if a nodes' revealed hash does not match the honest nodes' hash, that node will be temporarily frozen and will not be able to participate in a number of upcoming rounds. Currently the freeze period is defined as:
+During the `reveal` phase if a nodes' revealed hash does not match the honest nodes' hash, that node will be temporarily frozen and will not be able to participate in a number of upcoming rounds. Currently the freeze period is defined in the [redistribution smart contract](https://github.com/ethersphere/storage-incentives/blob/master/src/Redistribution.sol#L536C1-L536C100) as:
+
+
+$$
+152 \times 2^\text{storage radius} \text{ blocks (at 5s per block)}
+$$
+
+So for example at a storage radius of 10:
 
 $$
 152 \times 2^{10} \text{ blocks (at 5s per block)} ≈ \text{ 9 days}
 $$
+
 
 ## Bandwidth Incentives (SWAP) 
 
