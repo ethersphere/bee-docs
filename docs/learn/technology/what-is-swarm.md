@@ -22,24 +22,24 @@ Swarm serves as an underlay transport by establishing connections between nodes 
 
 Swarm is designed to be agnostic of the particular underlay transport used, as long as it satisfies the following requirements.
 
-1. Addressing – Nodes are identified by their underlay address.
-2. Dialling – Nodes can initiate a direct connection to a peer by dialing them on
-   their underlay address.
-3. Listening – Nodes can listen to other peers dialing them and can accept incoming
-   connections. Nodes that do not accept incoming connections are called light
-   nodes.
-4. Live connection – A node connection establishes a channel of communication which
-   is kept alive until explicit disconnection, so that the existence of a connection
-   means the remote peer is online and accepting messages.
-5. Channel security – The channel provides identity verification and implements
-   encrypted and authenticated transport resisting man in the middle attacks.
-6. Protocol multiplexing – The underlay network service can accommodate several
-   protocols running on the same connection.
-7. Delivery guarantees – Protocol messages have guaranteed delivery, i.e. delivery
-   failures due to network problems result in direct error response. Order of delivery
-   of messages within each protocol is guaranteed.
-8. Serialisation – The protocol message construction supports arbitrary data structure
-   serialisation conventions.
+- Addressing – Nodes are identified by their underlay address.
+- Dialling – Nodes can initiate a direct connection to a peer by dialing them on
+  their underlay address.
+- Listening – Nodes can listen to other peers dialing them and can accept incoming
+  connections. Nodes that do not accept incoming connections are called light
+  nodes.
+- Live connection – A node connection establishes a channel of communication which
+  is kept alive until explicit disconnection, so that the existence of a connection
+  means the remote peer is online and accepting messages.
+- Channel security – The channel provides identity verification and implements
+  encrypted and authenticated transport resisting man in the middle attacks.
+- Protocol multiplexing – The underlay network service can accommodate several
+  protocols running on the same connection.
+- Delivery guarantees – Protocol messages have guaranteed delivery, i.e. delivery
+  failures due to network problems result in direct error response. Order of delivery
+  of messages within each protocol is guaranteed.
+- Serialisation – The protocol message construction supports arbitrary data structure
+  serialisation conventions.
 
 As the [libp2p](https://libp2p.io/) library meets all these requirements it has been used to build the Swarm underlay network.
 
