@@ -11,39 +11,37 @@ Swarm is peer-to-peer network of nodes which work together to provide decentrali
 
 Swarm can be divided into four main parts:
 
-1. Underlay Network - A peer-to-peer network protocol to serve as underlay transport. 
+1. Underlay Network - A peer-to-peer network protocol to serve as underlay transport.
 2. Overlay Network - An overlay network with protocols powering a distributed immutable storage of chunks (fixed size data blocks).
 3. Data Access Layer - A component providing high-level data access and defining APIs for base-layer features.
 4. Application Layer - An application layer defining standards and outlining best practices for more elaborate use cases.
 
-
 ### 1. Underlay Network
 
-The first part of Swarm is a peer-to-peer network protocol that serves as the underlay transport. The underlay transport layer is responsible for establishing connections between nodes in the network and routing data between them. It provides a low-level communication channel that enables nodes to communicate with each other directly, without relying on any centralised infrastructure.
+Swarm serves as an underlay transport by establishing connections between nodes in the network and routing data between them. This provides a low-level communication channel that enables nodes to communicate with each other directly, without relying on any centralised infrastructure.
 
-Swarm is designed to be agnostic of the particular underlay transport used, as long as it satisfies certain requirements.  
+Swarm is designed to be agnostic of the particular underlay transport used, as long as it satisfies the following requirements.
 
 1. Addressing – Nodes are identified by their underlay address.
 2. Dialling – Nodes can initiate a direct connection to a peer by dialing them on
-their underlay address.
+   their underlay address.
 3. Listening – Nodes can listen to other peers dialing them and can accept incoming
-connections. Nodes that do not accept incoming connections are called light
-nodes.
+   connections. Nodes that do not accept incoming connections are called light
+   nodes.
 4. Live connection – A node connection establishes a channel of communication which
-is kept alive until explicit disconnection, so that the existence of a connection
-means the remote peer is online and accepting messages.
+   is kept alive until explicit disconnection, so that the existence of a connection
+   means the remote peer is online and accepting messages.
 5. Channel security – The channel provides identity verification and implements
-encrypted and authenticated transport resisting man in the middle attacks.
+   encrypted and authenticated transport resisting man in the middle attacks.
 6. Protocol multiplexing – The underlay network service can accommodate several
-protocols running on the same connection. 
+   protocols running on the same connection.
 7. Delivery guarantees – Protocol messages have guaranteed delivery, i.e. delivery
-failures due to network problems result in direct error response. Order of delivery
-of messages within each protocol is guaranteed. 
+   failures due to network problems result in direct error response. Order of delivery
+   of messages within each protocol is guaranteed.
 8. Serialisation – The protocol message construction supports arbitrary data structure
-serialisation conventions.
+   serialisation conventions.
 
 As the [libp2p](https://libp2p.io/) library meets all these requirements it has been used to build the Swarm underlay network.
-
 
 ### 2. Overlay Network
 
@@ -63,7 +61,6 @@ The third part of Swarm is a component that provides high-level data access and 
 
 Swarm's high-level data access component provides APIs that allow developers to perform various operations on the network, including [uploading and downloading data](/docs/develop/access-the-swarm/upload-and-download) and searching for content. These APIs are designed to be simple and intuitive, making it easy for developers to build decentralised applications on top of Swarm.
 
-### 4. Application Layer 
+### 4. Application Layer
 
-The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use cases. This layer is responsible for providing guidance to developers on [how to build complex applications](/docs/develop/introduction) on top of Swarm's underlying infrastructure. 
-
+The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use cases. This layer is responsible for providing guidance to developers on [how to build complex applications](/docs/develop/introduction) on top of Swarm's underlying infrastructure.
