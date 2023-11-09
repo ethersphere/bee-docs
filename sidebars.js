@@ -93,6 +93,7 @@ module.exports = {
         'bee/working-with-bee/upgrading-bee',
         'bee/working-with-bee/uninstalling-bee',
         'bee/working-with-bee/light-nodes',
+        'bee/working-with-bee/troubleshooting',
         'bee/working-with-bee/ultra-light-nodes'
       ],
       collapsed: false
