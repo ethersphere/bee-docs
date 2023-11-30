@@ -105,6 +105,47 @@ Mutable batches are great for data which needs to be frequently updated and does
 
 The default batch type when unspecified is immutable. This can be modified through the Bee api by setting the `immutable` header with the [`\stamps POST` endpoint](https://docs.ethswarm.org/api/#tag/Transaction/paths/~1transactions~1%7BtxHash%7D/post) to `false`.
  
+### Re-uploading 
+
+There are several nuances to how the re-uploading of previously uploaded data to Swarm affect stamp batch utilisation. For single chunks, the behaviour is relatively straightforward, however with files that must get split into multiple chunks, the behaviour is less straightforward.
+
+#### Single chunks
+
+When a chunk which has previously been uploaded to Swarm is re-uploaded from the same node while the initial postage batch it was stamped by is still valid, no additional stamp will be utilised from the batch. However if the chunk comes from a different node than the original node, then a stamp WILL be utilised, and as long as at least one of the batches the chunk was stamped by is still valid, the chunk will be retained by storer nodes in its neighbourhood.
+
+#### Files 
+
+When an identical file is re-uploaded then the stamp utilisation behaviour will be the same as with single chunks described in the section above. However, if part of the file has been modified and then re-uploaded, stamp utilisation behaviour will be different. This is due to how the chunking process works when a file is uploaded to Swarm. When uploaded to Swarm, files are split into 4kb sized chunks (2^12 bytes), and each chunk is assigned an address which is based on the content of the chunk. If even a single bit within the chunk is modified, then the address of the chunk will also be modified. 
+
+When a file which was previously uploaded with a single bit flipped is again split into chunks by a node before being uploaded to Swarm, then only the chunk with the flipped bit will have an updated address and require the utilisation of another stamp. The content of all the other chunks will remain the same, and therefore will not require new stamps to be utilised. 
+
+However, if rather than flipping a single bit we add some data to our file, this could cause changes in the content of every chunk of the file, meaning that every single chunk must be re-stamped. We can use a simplified example of why this is the case to more easily understand the stamp utilisation behaviour. Let us substitute a message containing letters of the alphabet rather than binary data.
+
+Our initial message consists of 16 letters:
+
+
+> abcdefghijklmnop 
+
+When initially uploaded, it will be split into four chunks of four letters each:
+
+> abcdefghijklmnop => abcd | efgh | ijkl | mnop
+
+Let us look at what happens when a single letter is changed (here we change a to z):
+
+> abcdefghijklmnop => zbcd | efgh | ijkl | mnop
+
+In this case, only the first chunk is affected, all the other chunks retain the same content.
+
+> Now let is examine the case where a new letter is added rather than simply modifying an already existing one. Here we add the number 1 at the start of the message: 
+
+> 1abcdefghijklmnop => 1abc | defg | hijk | lmno | p
+
+As you can see, by adding a single new letter at the start of the message, all the letters are shifted to the right by a single position, which a has caused EVERY chunk in the message to be modified rather than just a single chunk.
+
+#### Implications
+
+The implications of this behaviour are that even a small change to the data of a file may cause every single chunk from the file to be changed, meaning that new stamps must be utilised for every chunk from that file. In practice, this could lead to high costs in data which is frequently changed, since for even a small change, every chunk from the file must be re-stamped. One way to mitigate this behaviour is to limit the size of files which are uploaded. For example, when uploading a website, each file from the website should be uploaded and chunked separately, so that when an update is performed to the content of the website, we can specifically re-upload the file we are changing, rather than the entire website as a single file. 
+
 
 ### Implications for Swarm Users
 
