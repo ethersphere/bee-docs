@@ -142,7 +142,11 @@ module.exports = {
             },
             {
               to: 'docs/desktop/publish-a-website',
-              label: 'Publish a Website'
+              label: 'Publish a Static Website'
+            },
+            {
+              to: 'docs/desktop/start-a-blog',
+              label: 'Start a Blog'
             }
           ]
         },

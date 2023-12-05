@@ -3,7 +3,7 @@ title: Publish a Website
 id: publish-a-website
 ---
 
-## Publish a Website on Swarm - Step by Step Guide 
+## Step by Step Guide 
 
 
 ### Install Swarm Desktop and Deposit Funds
