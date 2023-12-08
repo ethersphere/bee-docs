@@ -59,6 +59,7 @@ module.exports = {
     'desktop/upload-content',
     'desktop/backup-restore',
     'desktop/publish-a-website',
+    'desktop/start-a-blog',
   ],
   bee: [
     {
