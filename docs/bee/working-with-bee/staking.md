@@ -105,19 +105,10 @@ Response:
 ```
 Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` before moving to the next step. If `hasSufficientFunds` if `false`, make sure to add at least the amount of xDAI shown in `minimumFunds` (unit of 1e-18 xDAI). If the node was recently installed and `isFullySynced` is `false`, wait for the node to fully sync before continuing. After confirming the node's status, continue to the next step.
 
-The `{anchor}` value can be set to any random hexadecimal string. To get the `{depth}` value, first call the `topology` debug API endpoint using [jq](https://stedolan.github.io/jq/manual/#Basicfilters) to filter for the `depth` `value:
+The `{anchor}` value can be set to any random hexadecimal string, while `{depth}` should be set to the current depth.
 
-```
-sudo curl -sX GET http://localhost:1635/topology | jq '.depth'
-```
 
-Output:
-
-```
-8
-```
-
-Call the endpoint using the value returned (8 in our example) like so:
+Call the endpoint like so:
 
 ```
 sudo curl -X GET http://localhost:1633/rchash/8/randomstring | jq
