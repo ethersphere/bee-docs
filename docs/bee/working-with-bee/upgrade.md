@@ -27,6 +27,7 @@ sudo systemctl stop bee
 Next, upgrade the `bee` package:
 
 ```bash
+sudo apt-get update
 sudo apt-get upgrade bee
 ```
 
