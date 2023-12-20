@@ -63,7 +63,7 @@ In order to avoid accidentally upgrading your Bee containers, or deadlocks resul
 #### Specific Versions
 
 ```bash
-docker pull ethersphere/bee:1.17.6
+docker pull ethersphere/bee:1.18.2
 ```
 
 #### Using Tags
