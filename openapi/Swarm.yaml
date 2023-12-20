@@ -1,7 +1,7 @@
 openapi: 3.0.3
 
 info:
-  version: 5.0.0
+  version: 5.2.0
   title: Bee API
   description: "A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"
 
@@ -13,14 +13,23 @@ externalDocs:
   url: "https://docs.ethswarm.org"
 
 servers:
-  - url: http://{apiRoot}:{port}
+  - url: "http://{apiRoot}:{port}/v1"
     variables:
       apiRoot:
-        default: localhost
+        default: "localhost"
         description: Base address of the local bee node main API
       port:
         default: "1633"
         description: Service port provided in bee node config
+  - url: "http://{apiRoot}:{port}"
+    variables:
+      apiRoot:
+        default: "localhost"
+        description: Base address of the local bee node main API
+      port:
+        default: "1633"
+        description: Service port provided in bee node config
+
 paths:
   "/auth":
     post:
@@ -111,6 +120,11 @@ paths:
             $ref: "SwarmCommon.yaml#/components/parameters/SwarmEncryptParameter"
           name: swarm-encrypt
           required: false
+        - in: header
+          schema:
+            $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyLevelParameter"
+          name: swarm-redundancy-level
+          required: false
 
       requestBody:
         content:
@@ -149,6 +163,10 @@ paths:
             $ref: "SwarmCommon.yaml#/components/schemas/SwarmReference"
           required: true
           description: Swarm address reference to content
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmCache"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyStrategyParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyFallbackModeParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmChunkRetrievalTimeoutParameter"
       responses:
         "200":
           description: Retrieved content specified by reference
@@ -201,7 +219,7 @@ paths:
   "/chunks/stream":
     get:
       summary: "Upload stream of chunks"
-      description: "Returns a WebSocket connection on which stream of chunks can be uploaded. Each chunk sent is acknowledged using a binary response `0` which serves as confirmation of upload of single chunk. Chunks should be packaged as binary messages for uploading. If a tag is specified, the chunks will be streamed into the localstore and then uploaded to the network once the stream is closed. If a tag is not specified, the chunks will bypass the localstore and be directly uploaded to the network through the stream as they arrive."
+      description: "Returns a WebSocket connection on which stream of chunks can be uploaded. Each chunk sent is acknowledged using a binary response `0` which serves as confirmation of upload of single chunk. Chunks should be packaged as binary messages for uploading. If a tag is specified, the chunks will be streamed into local storage and then be uploaded to the network once the stream is closed. If a tag is not specified, the chunks will bypass local storage and be directly uploaded to the network through the stream as they arrive."
       tags:
         - Chunk
       parameters:
@@ -240,6 +258,7 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmErrorDocumentParameter"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmPostageBatchId"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmDeferredUpload"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyLevelParameter"
       requestBody:
         content:
           multipart/form-data:
@@ -291,6 +310,10 @@ paths:
             $ref: "SwarmCommon.yaml#/components/schemas/SwarmReference"
           required: true
           description: Swarm address of content
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmCache"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyStrategyParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyFallbackModeParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmChunkRetrievalTimeoutParameter"
       responses:
         "200":
           description: Ok
@@ -328,6 +351,9 @@ paths:
             type: string
           required: true
           description: Path to the file in the collection.
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyStrategyParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyFallbackModeParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmChunkRetrievalTimeoutParameter"
       responses:
         "200":
           description: Ok
@@ -659,6 +685,14 @@ paths:
             $ref: "SwarmCommon.yaml#/components/parameters/SwarmPostageBatchId"
           name: swarm-postage-batch-id
           required: true
+      requestBody:
+        required: true
+        description: The SOC binary data is composed of the span (8 bytes) and the at most 4KB payload.
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
       responses:
         "201":
           description: Created
@@ -743,6 +777,12 @@ paths:
             type: integer
           required: false
           description: "Timestamp of the update (default: now)"
+        - in: query
+          name: after
+          schema:
+            type: integer
+          required: false
+          description: "Start index (default: 0)"
         - in: query
           name: type
           schema:
@@ -1041,6 +1081,11 @@ paths:
             $ref: "SwarmCommon.yaml#/components/schemas/SwarmReference"
           required: true
           description: Swarm address of chunk
+        - in: header
+          schema:
+            $ref: "SwarmCommon.yaml#/components/parameters/SwarmCache"
+          name: swarm-cache
+          required: false
       responses:
         "200":
           description: Retrieved chunk content
@@ -1636,12 +1681,6 @@ paths:
           description: Default response
 
   "/stamps":
-    parameters:
-      - in: query
-        name: all
-        schema:
-          type: string  
-        description: Gets all stamps. Default is null.
     get:
       summary: Get stamps for this node
       description: This endpoint is available on the main API only if the node is spawned with the `--restricted` flag along with a bearer authentication token.
@@ -1656,6 +1695,8 @@ paths:
             application/json:
               schema:
                 $ref: "SwarmCommon.yaml#/components/schemas/DebugPostageBatchesResponse"
+        "404":
+          $ref: "SwarmCommon.yaml#/components/responses/404"
 
         default:
           description: Default response
@@ -1682,6 +1723,8 @@ paths:
             application/json:
               schema:
                 $ref: "SwarmCommon.yaml#/components/schemas/DebugPostageBatch"
+        "404":
+          $ref: "SwarmCommon.yaml#/components/responses/404"
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         default:
@@ -1709,6 +1752,8 @@ paths:
             application/json:
               schema:
                 $ref: "SwarmCommon.yaml#/components/schemas/PostageStampBuckets"
+        "404":
+          $ref: "SwarmCommon.yaml#/components/responses/404"
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         default:
