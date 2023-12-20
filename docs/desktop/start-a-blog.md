@@ -18,33 +18,11 @@ There are many different approaches to starting a blog on Swarm, however the eas
 
 To get started you must first have installed Swarm Desktop and have it running on your computer with a [valid stamp batch](/docs/desktop/postage-stamps). Note that your blog will only stay online as long as the postage batch is still valid, therefore you must make sure to stay aware of the postage batch TTL (time to live), and [top up your batch](/docs/desktop/postage-stamps#top-up-a-batch) regularly in order to keep your content online.
 
-### Clone Etherjot Web
+### Open Etherjot
 
-:::info
-Note that Etherjot Web will soon be directly integrated into Swarm Desktop, after which time this step can be skipped.
-:::
+To open Etherjot, right click the Swarm Desktop icon in your dashboard and navigate to "Apps", and then click on "Etherjot".
 
-Navigate to the [etherjot-web repository](https://github.com/ethersphere/etherjot-web) in the Ethersphere Github organization.
-
-In your terminal of choice, clone the repository into a local directory of your choice and navigate into the `etherjot-web` project directory.
-
-```bash
-git clone git@github.com:ethersphere/etherjot-web.git
-cd etherjot-web
-```
-
-Install dependencies, the only needs to be done once the first time.  
-
-```bash
-npm install
-```
-
-Start the project.
-
-```bash
-npm start
-```
-
+![](/img/etherjot27.png)
 
 ## Initialize Your Blog
 
@@ -199,7 +177,11 @@ Click "Settings" to open up the Settings page. Note that any unpublished changes
 
 ![](/img/etherjot21.png)
 
-From here you can [back up](/docs/desktop/start-a-blog#back-up-your-blog) and restore blogs, and can set a variety of other options.
+From here you can [back up](/docs/desktop/start-a-blog#back-up-your-blog) and restore blogs, and can set a variety of other options. 
+
+### Setting Custom Text and Links
+
+Highlighted in this first screenshot you can see the options for setting custom text and links.
 
 ![](/img/etherjot26.png)
 
