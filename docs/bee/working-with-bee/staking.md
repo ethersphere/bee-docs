@@ -78,7 +78,7 @@ Nodes should not be shut down or updated in the middle of a round they are playi
 
 ## Check node performance
 
-One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash/{depth}/{anchor}` endpoint of the API may be used. 
+One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash/{depth}/{anchor_01}/{anchor_02}` endpoint of the API may be used. The `anchor_01` and `anchor_02` must be a hex string with an even number of digits. For simplicity, you can just use `aaaa` for both anchors as we do in the example further down. 
 
 Before proceeding, first check that the node is fully synced, is not frozen, and has sufficient funds to participate in staking. To check node sync status, call the `redistributionstate` endpoint:
 
@@ -111,7 +111,7 @@ The `{anchor}` value can be set to any random hexadecimal string, while `{depth}
 Call the endpoint like so:
 
 ```
-sudo curl -X GET http://localhost:1633/rchash/8/randomstring | jq
+sudo curl -X GET http://localhost:1635/rchash/8/aaaa/aaaa | jq
 ```
 
 If the sampler runs successfully, you should see output like this:
@@ -140,7 +140,7 @@ If the sampler runs successfully, you should see output like this:
 
 If the `Time` value is higher than 6 minutes, then the hardware specifications for the node may need to be upgraded. 
 
-If there is an evictions related error such as the one below, try running the call to the `/rchash/{depth}/{anchor}` endpoint again:
+If there is an evictions related error such as the one below, try running the call to the `/rchash/` endpoint again.
 
 ```
 error: "level"="error" "logger"="node/storageincentives" "msg"="make sample" "error"="sampler: failed creating sample: sampler stopped due to ongoing evictions"
