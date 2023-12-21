@@ -51,12 +51,7 @@ This time we will also include the `Swarm-Index-Document` header set to the `ind
 In the case that your website is a single page app, where you would like to direct to the JavaScript history API powered router, you may provide the `index.html` page for both settings.
 
 ```bash
-curl \
-	-X POST \
-	-H "Content-Type: application/x-tar" \
-	-H "Swarm-Index-Document: index.html" \
-	-H "Swarm-Error-Document: index.html" \
-	--data-binary @my_website.tar http://localhost:1633/bzz
+ curl -X POST -H "Content-Type: application/x-tar" -H "swarm-postage-batch-id: 81c4520b47a434738d14fd38053a32c20aaf1a36d7f35f0d86ef25c70403d7a8" -H "Swarm-Index-Document: index.html" -H "Swarm-Error-Document: index.html" --data-binary @website.tar http://localhost:1633/bzz
 ```
 
 ```json

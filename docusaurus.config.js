@@ -26,6 +26,10 @@ module.exports = {
           from: '/docs',
         },
         {
+          to: '/docs/develop/access-the-swarm/host-your-website',
+          from: '/docs/access-the-swarm/host-your-website',
+        },
+        {
           to: '/docs/bee/working-with-bee/configuration',
           from: '/docs/working-with-bee/configuration',
         },
