@@ -17,7 +17,7 @@ Bee provides several convenient ways to [upload your data into the Swarm](/docs/
 
 ### Upload Whole Directories
 
-Find out how to [upload whole directories](/docs/develop/access-the-swarm/upload-a-directory) at once using Bee's HTTP API.
+Find out how to [upload whole directories](/docs/develop/access-the-swarm/upload-and-download) at once using Bee's HTTP API.
 
 ### Host Your Website on the Decentralised Web
 
