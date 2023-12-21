@@ -43,7 +43,7 @@ Make sure you trust the gateway you are interacting with! To ensure that you are
 
 First we will need to upload the website assets to Swarm in order to
 get its Swarm reference hash, see
-[uploading a directory](/docs/develop/access-the-swarm/upload-a-directory)
+[uploading a directory](/docs/develop/access-the-swarm/upload-and-download)
 for more information.
 
 This time we will also include the `Swarm-Index-Document` header set to the `index.html`. This will cause Bee to serve each directories `index.html` file as default when browsing to the directory root `/` url. We will also provide a custom error page, using the `Swarm-Error-Document` header.
