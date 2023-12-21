@@ -28,7 +28,7 @@ There are three endpoints which can be used for uploading and downloading data f
 
 Generally speaking, the `/bzz` endpoint is appropriate for general common use cases such as uploading websites, sharing files, etc., while the `/chunks` and `bytes` endpoints allow for more complex uses cases. In this guide, we focus on the usage of the `/bzz` endpoint. 
 
-## Upload
+## Upload a File
 
 To upload data to the swarm, you must perform the following steps:
 
@@ -208,7 +208,7 @@ If you are uploading a large file it is useful to track the status of your uploa
 Once your file has been **completely synced with the network**, you will be able to turn off your computer and other nodes will take over to serve the data for you!
 :::
 
-## Download
+## Download a File
 
 Once your file is uploaded to Swarm it can be easily downloaded. 
 
