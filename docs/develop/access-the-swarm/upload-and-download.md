@@ -36,7 +36,7 @@ content is valued. Before you proceed to the next step, you must buy
 stamps! See this guide on how to [purchase an appropriate batch of
 stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
 
-### Upload
+## Upload
 
 Once your Bee node is running, a HTTP API is enabled for you to interact with. The command line utility [curl](https://ec.haxx.se/http/http-multipart) is a great way to interact with a Bee node's API. Swarm CLI alternative commands are also included as a more user-friendly way of interacting with your Bee node's API.
 
@@ -109,7 +109,7 @@ swarm-cli status
 
 ```bash
 Bee
-API: http://localhost:1633 [OK]
+API: http://localhost:1635 [OK]
 Debug API: http://localhost:1635 [OK]
 Version: 1.18.2-50fcec7b
 Mode: full
@@ -267,7 +267,7 @@ This feature makes use of the [tar](https://www.gnu.org/software/tar/) command l
 GZIP compression is not supported in the current version of Bee, so make sure not to use the `-z` flag when using the `tar` command!
 :::
 
-## Upload the Directory Containing Your Website
+### Upload the Directory Containing Your Website
 
 First, use the `tar` command line utility to create an archive containing all the files of your directory. If uploading a website, we must take care to ensure that the `index.html` file is at the root of the directory tree.
 
