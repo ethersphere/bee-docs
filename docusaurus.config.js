@@ -46,6 +46,10 @@ module.exports = {
           from: '/docs/develop/access-the-swarm/keep-your-data-alive',
         },
         {
+          to: '/docs/develop/access-the-swarm/upload-and-download',
+          from: '/docs/develop/access-the-swarm/upload-a-directory',
+        },
+        {
           to: '/docs/bee/installation/fund-your-node',
           from: '/docs/installation/fund-your-node',
         }

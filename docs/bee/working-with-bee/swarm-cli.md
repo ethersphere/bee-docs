@@ -483,4 +483,4 @@ See what "Maintainer" means [here](https://github.com/ethersphere/repo-maintaine
 
 # License
 
-[BSD-3-Clause](./LICENSE)
+[BSD-3-Clause](https://github.com/ethersphere/swarm-cli/blob/master/LICENSE)
