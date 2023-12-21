@@ -5,7 +5,7 @@ id: what-is-swarm
 
 # What is Swarm?
 
-The complete vision of Swarm is described in detail in [The Book of Swarm](https://www.ethswarm.org/The-Book-of-Swarm.pdf) written by Swarm founder Viktor Tron.
+The complete vision of Swarm is described in detail in [The Book of Swarm](https://papers.ethswarm.org/p/book-of-swarm/) written by Swarm founder Viktor Tron, with further high level details described in the [whitepaper](https://papers.ethswarm.org/p/whitepaper/). More in depth low level implementation details can be found in the [Swarm Specification paper](https://papers.ethswarm.org/p/swarm-specification/). To stay up to date with all the latest research and technical papers from Swarm, make sure to bookmark the [Papers section](https://papers.ethswarm.org/) of the Ethswarm homepage.
 
 Swarm is peer-to-peer network of nodes which work together to provide decentralised storage and communication infrastructure.
 
