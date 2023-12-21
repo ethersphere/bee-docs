@@ -7,7 +7,7 @@ Erasure coding is an advanced method for safeguarding data, offering robust prot
 
 ### Uploading With Erasure Coding
 
-Erasure coding is available for the [`/bytes`](/api/#tag/Bytes) and [`/bzz`](/api/#tag/BZZ) endpoints, however it is not available for the [`/chunks`](/api/#tag/Chunk) endpoint which deals with single chunks as erasure coding relies on splitting data into chunks, and in Swarm, a chunk is the smallest unit of data, and cannot be further divided for the purpose of erasure coding. 
+Erasure coding is available for the [`/bytes`](/api/#tag/Bytes) and [`/bzz`](/api/#tag/BZZ) endpoints, however it is not available for the [`/chunks`](/api/#tag/Chunk) endpoint which deals with single chunks. Since erasure coding relies on splitting data into chunks and the chunk is the smallest unit of data within Swarm which cannot be further subdivided, erasure coding is not applicable for the `/chunks` endpoint which deals with single chunks/
 
 To upload data to Swarm using erasure coding, the `swarm-redundancy-level: <integer>` header is used:
 
