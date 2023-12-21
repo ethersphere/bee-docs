@@ -18,7 +18,17 @@ you must first purchase [postage stamps](/docs/learn/technology/contracts/postag
 and then use those stamps to upload your data. Keep on reading 
 below to learn how.
 
-## Overview
+## Uploads and Download Endpoints Overview
+
+There are three endpoints which can be used for uploading and downloading data from Swarm, and each endpoint has different usage. 
+
+1. [`/bytes`](/api/#tag/Bytes) - Used for uploading raw data, lacks convenience features present in the `/bzz` endpoint but allows for greater customization for advanced use cases.
+1. [`/bzz`](/api/#tag/BZZ) - Used for general download and uploads of files or collections of files.
+1. [`/chunks`](/api/#tag/Chunk) - Used for downloading and uploading individual chunks, and also for uploading streams of chunks.
+
+Generally speaking, the `/bzz` endpoint is appropriate for general common use cases such as uploading websites, sharing files, etc., while the `/chunks` and `bytes` endpoints allow for more complex uses cases. In this guide, we focus on the usage of the `/bzz` endpoint. 
+
+## Upload
 
 To upload data to the swarm, you must perform the following steps:
 
@@ -33,10 +43,9 @@ To upload data to the swarm, you must perform the following steps:
 In order to upload your data to swarm, you must agree to burn (spend)
 some of your xBZZ to signify to storer and fowarder nodes that this
 content is valued. Before you proceed to the next step, you must buy
-stamps! See this guide on how to [purchase an appropriate batch of
-stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
+stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
 
-## Upload
+## Using Stamps to Upload a File
 
 Once your Bee node is running, a HTTP API is enabled for you to interact with. The command line utility [curl](https://ec.haxx.se/http/http-multipart) is a great way to interact with a Bee node's API. Swarm CLI alternative commands are also included as a more user-friendly way of interacting with your Bee node's API.
 
@@ -65,6 +74,7 @@ Once running, a file can be uploaded by making an HTTP POST request to the `bzz`
 
 Here, you must specify your _Batch ID_ in the `Swarm-Postage-Batch-Id` header, the file name in the `name` query parameter, and also pass the appropriate mime type in the `Content-Type` header.
 
+You may also wish to employ the erasure coding feature to add greater protection for your data, see [erasure coding page](/docs/develop/access-the-swarm/erasure-coding) for more details on its usage.
 
 ```bash
  curl -X POST http://localhost:1633/bzz?name=test.txt -H "swarm-postage-batch-id: 6544bebff0fcb7633e510e43efe2944aebbc2c5a556f8d27e00fba8a849a29a1" -H "Content-Type: text/plain"
