@@ -54,7 +54,7 @@ values={[
 First, let's check to see if the API is running as expected...
 
 ```bash
-curl http://localhost:1635
+curl http://localhost:1633
 ```
 
 ```
@@ -109,7 +109,7 @@ swarm-cli status
 
 ```bash
 Bee
-API: http://localhost:1635 [OK]
+API: http://localhost:1633 [OK]
 Debug API: http://localhost:1635 [OK]
 Version: 1.17.6-50fcec7b
 Mode: full
@@ -219,7 +219,7 @@ Substitute the _hash_ in the last part of the URL with the reference
 to your own data.
 
 ```bash
-curl -OJL http://localhost:1633/bzz/042d4fe94b946e2cb51196a8c136b8cc335156525bf1ad7e86356c2402291dd4/
+curl -OJL http://localhost:1633/bzz/c02e7d943fbc0e753540f377853b7181227a83e773870847765143681511c97d/
 ```
 
 You may even simply navigate to the URL in your browser:
