@@ -2754,7 +2754,7 @@ components:
           - 3
       required: false
       description: >
-        Specify the retrieve strategy on redundant data. The mumbers stand for
+        Specify the retrieve strategy on redundant data. The numbers stand for
         NONE, DATA, PROX and RACE, respectively. Strategy NONE means no
         prefetching takes place. Strategy DATA means only data chunks are
         prefetched. Strategy PROX means only chunks that are close to the node
