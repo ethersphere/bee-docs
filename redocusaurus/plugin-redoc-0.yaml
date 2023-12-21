@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 5.0.0
+  version: 5.2.0
   title: Bee API
   description: >-
     A list of the currently provided Interfaces to interact with the swarm,
@@ -11,6 +11,14 @@ externalDocs:
   description: Browse the documentation @ the Swarm Docs
   url: https://docs.ethswarm.org
 servers:
+  - url: http://{apiRoot}:{port}/v1
+    variables:
+      apiRoot:
+        default: localhost
+        description: Base address of the local bee node main API
+      port:
+        default: '1633'
+        description: Service port provided in bee node config
   - url: http://{apiRoot}:{port}
     variables:
       apiRoot:
@@ -107,6 +115,11 @@ paths:
             $ref: '#/components/schemas/SwarmEncryptParameter'
           name: swarm-encrypt
           required: false
+        - in: header
+          schema:
+            $ref: '#/components/schemas/SwarmRedundancyLevelParameter'
+          name: swarm-redundancy-level
+          required: false
       requestBody:
         content:
           application/octet-stream:
@@ -143,6 +156,10 @@ paths:
             $ref: '#/components/schemas/SwarmReference'
           required: true
           description: Swarm address reference to content
+        - $ref: '#/components/parameters/SwarmCache'
+        - $ref: '#/components/parameters/SwarmRedundancyStrategyParameter'
+        - $ref: '#/components/parameters/SwarmRedundancyFallbackModeParameter'
+        - $ref: '#/components/parameters/SwarmChunkRetrievalTimeoutParameter'
       responses:
         '200':
           description: Retrieved content specified by reference
@@ -198,9 +215,9 @@ paths:
         uploaded. Each chunk sent is acknowledged using a binary response `0`
         which serves as confirmation of upload of single chunk. Chunks should be
         packaged as binary messages for uploading. If a tag is specified, the
-        chunks will be streamed into the localstore and then uploaded to the
+        chunks will be streamed into local storage and then be uploaded to the
         network once the stream is closed. If a tag is not specified, the chunks
-        will bypass the localstore and be directly uploaded to the network
+        will bypass local storage and be directly uploaded to the network
         through the stream as they arrive.
       tags:
         - Chunk
@@ -244,6 +261,7 @@ paths:
         - $ref: '#/components/parameters/SwarmErrorDocumentParameter'
         - $ref: '#/components/parameters/SwarmPostageBatchId'
         - $ref: '#/components/parameters/SwarmDeferredUpload'
+        - $ref: '#/components/parameters/SwarmRedundancyLevelParameter'
       requestBody:
         content:
           multipart/form-data:
@@ -294,6 +312,10 @@ paths:
             $ref: '#/components/schemas/SwarmReference'
           required: true
           description: Swarm address of content
+        - $ref: '#/components/parameters/SwarmCache'
+        - $ref: '#/components/parameters/SwarmRedundancyStrategyParameter'
+        - $ref: '#/components/parameters/SwarmRedundancyFallbackModeParameter'
+        - $ref: '#/components/parameters/SwarmChunkRetrievalTimeoutParameter'
       responses:
         '200':
           description: Ok
@@ -328,6 +350,9 @@ paths:
             type: string
           required: true
           description: Path to the file in the collection.
+        - $ref: '#/components/parameters/SwarmRedundancyStrategyParameter'
+        - $ref: '#/components/parameters/SwarmRedundancyFallbackModeParameter'
+        - $ref: '#/components/parameters/SwarmChunkRetrievalTimeoutParameter'
       responses:
         '200':
           description: Ok
@@ -663,6 +688,16 @@ paths:
             $ref: '#/components/schemas/SwarmPostageBatchId'
           name: swarm-postage-batch-id
           required: true
+      requestBody:
+        required: true
+        description: >-
+          The SOC binary data is composed of the span (8 bytes) and the at most
+          4KB payload.
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
       responses:
         '201':
           description: Created
@@ -746,6 +781,12 @@ paths:
             type: integer
           required: false
           description: 'Timestamp of the update (default: now)'
+        - in: query
+          name: after
+          schema:
+            type: integer
+          required: false
+          description: 'Start index (default: 0)'
         - in: query
           name: type
           schema:
@@ -1054,6 +1095,11 @@ paths:
             $ref: '#/components/schemas/SwarmReference'
           required: true
           description: Swarm address of chunk
+        - in: header
+          schema:
+            $ref: '#/components/schemas/SwarmCache'
+          name: swarm-cache
+          required: false
       responses:
         '200':
           description: Retrieved chunk content
@@ -1679,12 +1725,6 @@ paths:
         default:
           description: Default response
   /stamps:
-    parameters:
-      - in: query
-        name: all
-        schema:
-          type: string
-        description: Gets all stamps. Default is null.
     get:
       summary: Get stamps for this node
       description: >-
@@ -1701,6 +1741,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DebugPostageBatchesResponse'
+        '404':
+          $ref: '#/components/responses/404'
         default:
           description: Default response
   /stamps/{batch_id}:
@@ -1729,6 +1771,8 @@ paths:
                 $ref: '#/components/schemas/DebugPostageBatch'
         '400':
           $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
         default:
           description: Default response
   /stamps/{batch_id}/buckets:
@@ -1757,6 +1801,8 @@ paths:
                 $ref: '#/components/schemas/PostageStampBuckets'
         '400':
           $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
         default:
           description: Default response
   /stamps/{amount}/{depth}:
@@ -1966,21 +2012,21 @@ components:
           description: List of reasons for the error message.
           items:
             type: string
-    SwarmPostageBatchId: &ref_1
+    SwarmPostageBatchId: &ref_2
       in: header
       name: swarm-postage-batch-id
       description: ID of Postage Batch that is used to upload data with
       required: true
       schema:
         $ref: '#/components/schemas/SwarmAddress'
-    SwarmTagParameter: &ref_0
+    SwarmTagParameter: &ref_1
       in: header
       name: swarm-tag
       schema:
         $ref: '#/components/schemas/Uid'
       required: false
       description: Associate upload with an existing Tag UID
-    SwarmPinParameter: &ref_2
+    SwarmPinParameter: &ref_3
       in: header
       name: swarm-pin
       schema:
@@ -1989,18 +2035,18 @@ components:
       description: >
         Represents if the uploaded data should be also locally pinned on the
         node.
-    SwarmDeferredUpload: &ref_4
+    SwarmDeferredUpload: &ref_5
       in: header
       name: swarm-deferred-upload
       schema:
         type: boolean
-        default: 'true'
+        default: 'false'
       required: false
       description: >
         Determines if the uploaded data should be sent to the network
         immediately or in a deferred fashion. By default the upload will be
-        deferred.
-    SwarmEncryptParameter: &ref_3
+        direct.
+    SwarmEncryptParameter: &ref_4
       in: header
       name: swarm-encrypt
       schema:
@@ -2008,6 +2054,22 @@ components:
       required: false
       description: |
         Represents the encrypting state of the file
+    SwarmRedundancyLevelParameter: &ref_6
+      in: header
+      name: swarm-redundancy-level
+      schema:
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+      required: false
+      description: >
+        Add redundancy to the data being uploaded so that downloaders can
+        download it with better UX. 0 value is default and does not add any
+        redundancy to the file.
     Uid:
       type: integer
     SwarmAddress:
@@ -2033,6 +2095,10 @@ components:
       properties:
         reference:
           $ref: '#/components/schemas/SwarmReference'
+    Duration:
+      description: Go time.Duration format
+      type: string
+      example: 5.0018ms
     FileName:
       type: string
     DateTime:
@@ -2227,6 +2293,16 @@ components:
           $ref: '#/components/schemas/BigInt'
         availableBalance:
           $ref: '#/components/schemas/BigInt'
+    SwarmCache: &ref_0
+      in: header
+      name: swarm-cache
+      schema:
+        type: boolean
+        default: 'true'
+      required: false
+      description: >-
+        Determines if the download data should be cached on the node. By default
+        the download will be cached
     MultiAddress:
       type: string
     ReserveState:
@@ -2276,10 +2352,6 @@ components:
           nullable: false
           items:
             $ref: '#/components/schemas/Address'
-    Duration:
-      description: Go time.Duration format
-      type: string
-      example: 5.0018ms
     RttMs:
       type: object
       properties:
@@ -2527,8 +2599,6 @@ components:
           type: boolean
         batchTTL:
           type: integer
-        expired:
-          type: boolean
     PostageBatchNoIssuer:
       type: object
       properties:
@@ -2671,10 +2741,50 @@ components:
       schema:
         $ref: '#/components/schemas/HexString'
   parameters:
-    SwarmTagParameter: *ref_0
-    SwarmPostageBatchId: *ref_1
-    SwarmPinParameter: *ref_2
-    SwarmEncryptParameter: *ref_3
+    SwarmCache: *ref_0
+    SwarmRedundancyStrategyParameter:
+      in: header
+      name: swarm-redundancy-strategy
+      schema:
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+      required: false
+      description: >
+        Specify the retrieve strategy on redundant data. The mumbers stand for
+        NONE, DATA, PROX and RACE, respectively. Strategy NONE means no
+        prefetching takes place. Strategy DATA means only data chunks are
+        prefetched. Strategy PROX means only chunks that are close to the node
+        are prefetched. Strategy RACE means all chunks are prefetched: n data
+        chunks and k parity chunks. The first n chunks to arrive are used to
+        reconstruct the file. Multiple strategies can be used in a fallback
+        cascade if the swarm redundancy fallback mode is set to true. The
+        default strategy is NONE, DATA, falling back to PROX, falling back to
+        RACE
+    SwarmRedundancyFallbackModeParameter:
+      in: header
+      name: swarm-redundancy-fallback-mode
+      schema:
+        type: boolean
+      required: false
+      description: >
+        Specify if the retrieve strategies (chunk prefetching on redundant data)
+        are used in a fallback cascade. The default is true.
+    SwarmChunkRetrievalTimeoutParameter:
+      in: header
+      name: swarm-chunk-retrieval-timeout
+      schema:
+        $ref: '#/components/schemas/Duration'
+      required: false
+      description: |
+        Specify the timeout for chunk retrieval. The default is 30 seconds.
+    SwarmTagParameter: *ref_1
+    SwarmPostageBatchId: *ref_2
+    SwarmPinParameter: *ref_3
+    SwarmEncryptParameter: *ref_4
     ContentTypePreserved:
       in: header
       name: Content-Type
@@ -2706,7 +2816,8 @@ components:
       description: >-
         Configure custom error document to be returned when a specified path can
         not be found in collection
-    SwarmDeferredUpload: *ref_4
+    SwarmDeferredUpload: *ref_5
+    SwarmRedundancyLevelParameter: *ref_6
     GasPriceParameter:
       in: header
       name: gas-price
