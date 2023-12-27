@@ -6,7 +6,7 @@ id: direct-upload
 
 #### Deferred and Direct Uploads
 
-By default your bee instance will handle uploads in a _deferred_ manner, meaning that the data will be completely uploaded to your node locally before being then being uploaded to the Swarm network. 
+By default your bee instance will handle uploads in a _deferred_ manner, meaning that the data will be completely uploaded to your node locally before being uploaded to the Swarm network. 
 
 In contrast, for a direct upload, the data will be completely uploaded to the Swarm network directly.
 
