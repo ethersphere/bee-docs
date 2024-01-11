@@ -107,19 +107,30 @@ Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` befor
 
 The `{anchor}` value can be set to any random hexadecimal string, while `{depth}` should be set to the current depth.
 
+To get the current depth, call the `/reservestate` endpoint
+
+```bash
+sudo curl -sX GET http://localhost:1635/reservestate | jq
+```
+Copy the `storageRadius` value from the output (this represents the ACTUAL depth for your node, in other words, the depth to which your node is responsible for storing files. The `radius` value is the hypothetical depth your node would be at if every postage batch was fully utilised.)
+
+```bash
+{
+  "radius": 15,
+  "storageRadius": 10,
+  "commitment": 128332464128
+}
+```
 
 Call the endpoint like so:
 
-```
-sudo curl -X GET http://localhost:1635/rchash/8/aaaa/aaaa | jq
+```bash
+sudo curl -sX GET http://localhost:1635/rchash/10/aaaa/aaaa | jq
 ```
 
 If the sampler runs successfully, you should see output like this:
 
-```
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   659  100   659    0     0      3      0  0:03:39  0:02:54  0:00:45   161
+```bash
 {
   "Sample": {
     "Items": [
