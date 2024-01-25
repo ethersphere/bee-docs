@@ -155,9 +155,9 @@ After you finish configuration run 'sudo bee-get-addr' and fund your node with X
 Created symlink /etc/systemd/system/multi-user.target.wants/bee.service → /lib/systemd/system/bee.service.
 ```
 
-### Shell script install (Alternate method)
+### Shell script install
 
-The [Bee install shell script](https://github.com/ethersphere/bee/blob/637b67a8e0a2b15e707f510bb7f49aea4ef6c110/install.sh) for Linux automatically detects its execution environment and installs the latest stable version of Bee.
+The [Bee install shell script](https://github.com/ethersphere/bee/blob/master/install.sh) for Linux automatically detects its execution environment and installs the latest stable version of Bee.
 
 :::info
 Note that this install method copies precompiled binaries directly to the `/usr/local/bin` directory, so Bee installed through this method cannot be managed or uninstalled with package managers such as `dpkg` and `rpm`.
