@@ -89,90 +89,134 @@ This produces the following file contents, showing the default
 configuration of Bee:
 
 ```yaml
-## Bee configuration - https://docs.ethswarm.org/docs/bee/working-with-bee/configuration
-
-## Bee configuration - https://docs.ethswarm.org/docs/working-with-bee/configuration
-
-## HTTP API listen address (default ":1633")
-# api-addr: :1633
-## chain block time (default 15)
-# block-time: 15
-## initial nodes to connect to (default [/dnsaddr/mainnet.ethswarm.org])
-# bootnode: [/dnsaddr/mainnet.ethswarm.org]
-## cause the node to always accept incoming connections
-# bootnode-mode: false
-## config file (default is /home/<user>/.bee.yaml)
-config: /etc/bee/bee.yaml
-## origins with CORS headers enabled
-# cors-allowed-origins: []
-## data directory (default "/home/<user>/.bee")
-data-dir: /var/lib/bee
-## cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes
-# cache-capacity: 1000000
-## number of open files allowed by database
-# db-open-files-limit: 200
-## size of block cache of the database in bytes
-# db-block-cache-capacity: 33554432
-## size of the database write buffer in bytes
-# db-write-buffer-size: 33554432
-## disables db compactions triggered by seeks
-# db-disable-seeks-compaction: false
-## debug HTTP API listen address (default ":1635")
-debug-api-addr: 127.0.0.1:1635
-## enable debug HTTP API
-debug-api-enable: true
-## cause the node to start in full mode
-# full-node: false
-## NAT exposed address
-# nat-addr: ""
-## ID of the Swarm network (default 1)
-# network-id: 1
-## P2P listen address (default ":1634")
-# p2p-addr: :1634
-## enable P2P WebSocket transport
-# p2p-ws-enable: false
-## password for decrypting keys
-# password: ""
-## path to a file that contains password for decrypting keys
-password-file: /var/lib/bee/password
-## percentage below the peers payment threshold when we initiate settlement (default 50)
-# payment-early-percent: 50
-## threshold in BZZ where you expect to get paid from your peers (default 100000000)
-# payment-threshold: 100000000
-## excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
-# payment-tolerance-percent: 25
-## postage stamp contract address
-# postage-stamp-address: ""
-## ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
-# resolver-options: []
-## enable swap (default true)
-# swap-enable: true
-## swap blockchain endpoint (default "") [deprecated]
-# swap-endpoint: ""
-## blockchain endpoint (default "")
-# blockchain-rpc-endpoint: ""
-## swap factory address
-# swap-factory-address: ""
-## legacy swap factory addresses
-# swap-legacy-factory-addresses: ""
-## initial deposit if deploying a new chequebook (default 0)
-# swap-initial-deposit: 0
-## gas price in wei to use for deployment and funding (default "")
-# swap-deployment-gas-price: ""
-## enable tracing
-# tracing-enable: false
-## endpoint to send tracing data (default "127.0.0.1:6831")
-# tracing-endpoint: 127.0.0.1:6831
-## service name identifier for tracing (default "bee")
-# tracing-service-name: bee
-## proof-of-identity transaction hash
-# transaction: ""
-## log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
-# verbosity: info
-## send a welcome message string during handshakes
-# welcome-message: ""
-## triggers connection to main network
-# mainnet: true
+# bcrypt hash of the admin password to get the security token
+admin-password: ""
+# allow to advertise private CIDRs to the public network
+allow-private-cidrs: false
+# HTTP API listen address
+api-addr: :1633
+# chain block time
+block-time: "15"
+# rpc blockchain endpoint
+blockchain-rpc-endpoint: ""
+# initial nodes to connect to
+bootnode: []
+# cause the node to always accept incoming connections
+bootnode-mode: false
+# cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes
+cache-capacity: "1000000"
+# enable forwarded content caching
+cache-retrieval: true
+# enable chequebook
+chequebook-enable: true
+# enable clef signer
+clef-signer-enable: false
+# clef signer endpoint
+clef-signer-endpoint: ""
+# blockchain address to use from clef signer
+clef-signer-ethereum-address: ""
+# config file (default is $HOME/.bee.yaml)
+config: /home/noah/.bee.yaml
+# origins with CORS headers enabled
+cors-allowed-origins: []
+# data directory
+data-dir: /home/noah/.bee
+# size of block cache of the database in bytes
+db-block-cache-capacity: "33554432"
+# disables db compactions triggered by seeks
+db-disable-seeks-compaction: true
+# number of open files allowed by database
+db-open-files-limit: "200"
+# size of the database write buffer in bytes
+db-write-buffer-size: "33554432"
+# debug HTTP API listen address
+debug-api-addr: :1635
+# enable debug HTTP API
+debug-api-enable: false
+# cause the node to start in full mode
+full-node: false
+# help for printconfig
+help: false
+# triggers connect to main net bootnodes.
+mainnet: true
+# NAT exposed address
+nat-addr: ""
+# ID of the Swarm network
+network-id: "1"
+# P2P listen address
+p2p-addr: :1634
+# enable P2P WebSocket transport
+p2p-ws-enable: false
+# password for decrypting keys
+password: ""
+# path to a file that contains password for decrypting keys
+password-file: ""
+# percentage below the peers payment threshold when we initiate settlement
+payment-early-percent: 50
+# threshold in BZZ where you expect to get paid from your peers
+payment-threshold: "13500000"
+# excess debt above payment threshold in percentages where you disconnect from your peer
+payment-tolerance-percent: 25
+# postage stamp contract address
+postage-stamp-address: ""
+# postage stamp contract start block number
+postage-stamp-start-block: "0"
+# enable pprof mutex profile
+pprof-mutex: false
+# enable pprof block profile
+pprof-profile: false
+# price oracle contract address
+price-oracle-address: ""
+# redistribution contract address
+redistribution-address: ""
+# ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
+resolver-options: []
+# enable permission check on the http APIs
+restricted: false
+# forces the node to resync postage contract data
+resync: false
+# staking contract address
+staking-address: ""
+# lru memory caching capacity in number of statestore entries
+statestore-cache-capacity: "100000"
+# protect nodes from getting kicked out on bootnode
+static-nodes: []
+# enable storage incentives feature
+storage-incentives-enable: true
+# gas price in wei to use for deployment and funding
+swap-deployment-gas-price: ""
+# enable swap
+swap-enable: false
+# swap blockchain endpoint
+swap-endpoint: ""
+# swap factory addresses
+swap-factory-address: ""
+# initial deposit if deploying a new chequebook
+swap-initial-deposit: "0"
+# legacy swap factory addresses
+swap-legacy-factory-addresses: []
+# neighborhood to target in binary format (ex: 111111001) for mining the initial overlay
+target-neighborhood: ""
+# admin username to get the security token
+token-encryption-key: ""
+# enable tracing
+tracing-enable: false
+# endpoint to send tracing data
+tracing-endpoint: 127.0.0.1:6831
+# host to send tracing data
+tracing-host: ""
+# port to send tracing data
+tracing-port: ""
+# service name identifier for tracing
+tracing-service-name: bee
+# bootstrap node using postage snapshot from the network
+use-postage-snapshot: false
+# log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
+verbosity: info
+# time to warmup the node before some major protocols can be kicked off
+warmup-time: 5m0s
+# send a welcome message string during handshakes
+welcome-message: ""
 ```
 
 ### Configuration Priority
@@ -190,71 +234,76 @@ Run `bee start --help` in your Terminal to list the available command line argum
   ```
   Start a Swarm node
 
-  Usage:
-    bee start [flags]
+Usage:
+  bee start [flags]
 
-  Flags:
-        --admin-password string                   bcrypt hash of the admin password to get the security token
-        --allow-private-cidrs                     allow to advertise private CIDRs to the public network
-        --api-addr string                         HTTP API listen address (default ":1633")
-        --block-time uint                         chain block time (default 15)
-        --blockchain-rpc-endpoint string          rpc blockchain endpoint
-        --bootnode strings                        initial nodes to connect to
-        --bootnode-mode                           cause the node to always accept incoming connections
-        --cache-capacity uint                     cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
-        --cache-retrieval                         enable forwarded content caching (default true)
-        --chequebook-enable                       enable chequebook (default true)
-        --cors-allowed-origins strings            origins with CORS headers enabled
-        --data-dir string                         data directory (default "/home/noah/.bee")
-        --db-block-cache-capacity uint            size of block cache of the database in bytes (default 33554432)
-        --db-disable-seeks-compaction             disables db compactions triggered by seeks
-        --db-open-files-limit uint                number of open files allowed by database (default 200)
-        --db-write-buffer-size uint               size of the database write buffer in bytes (default 33554432)
-        --debug-api-addr string                   debug HTTP API listen address (default ":1635")
-        --debug-api-enable                        enable debug HTTP API
-        --full-node                               cause the node to start in full mode
-    -h, --help                                    help for start
-        --mainnet                                 triggers connect to main net bootnodes. (default true)
-        --nat-addr string                         NAT exposed address
-        --network-id uint                         ID of the Swarm network (default 1)
-        --p2p-addr string                         P2P listen address (default ":1634")
-        --p2p-ws-enable                           enable P2P WebSocket transport
-        --password string                         password for decrypting keys
-        --password-file string                    path to a file that contains password for decrypting keys
-        --payment-early-percent int               percentage below the peers payment threshold when we initiate settlement (default 50)
-        --payment-threshold string                threshold in BZZ where you expect to get paid from your peers (default "13500000")
-        --payment-tolerance-percent int           excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
-        --postage-stamp-address string            postage stamp contract address
-        --postage-stamp-start-block uint          postage stamp contract start block number
-        --pprof-mutex                             enable pprof mutex profile
-        --pprof-profile                           enable pprof block profile
-        --price-oracle-address string             price oracle contract address
-        --redistribution-address string           redistribution contract address
-        --resolver-options strings                ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
-        --restricted                              enable permission check on the http APIs
-        --resync                                  forces the node to resync postage contract data
-        --staking-address string                  staking contract address
-        --static-nodes strings                    protect nodes from getting kicked out on bootnode
-        --storage-incentives-enable               enable storage incentives feature (default true)
-        --swap-deployment-gas-price string        gas price in wei to use for deployment and funding
-        --swap-enable                             enable swap (default true)
-        --swap-endpoint string                    swap blockchain endpoint
-        --swap-factory-address string             swap factory addresses
-        --swap-initial-deposit string             initial deposit if deploying a new chequebook (default "0")
-        --swap-legacy-factory-addresses strings   legacy swap factory addresses
-        --token-encryption-key string             admin username to get the security token
-        --tracing-enable                          enable tracing
-        --tracing-endpoint string                 endpoint to send tracing data (default "127.0.0.1:6831")
-        --tracing-host string                     host to send tracing data
-        --tracing-port string                     port to send tracing data
-        --tracing-service-name string             service name identifier for tracing (default "bee")
-        --use-postage-snapshot                    bootstrap node using postage snapshot from the network
-        --verbosity string                        log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
-        --warmup-time duration                    time to warmup the node before some major protocols can be kicked off. (default 5m0s)
-        --welcome-message string                  send a welcome message string during handshakes
+Flags:
+      --admin-password string                   bcrypt hash of the admin password to get the security token
+      --allow-private-cidrs                     allow to advertise private CIDRs to the public network
+      --api-addr string                         HTTP API listen address (default ":1633")
+      --block-time uint                         chain block time (default 15)
+      --blockchain-rpc-endpoint string          rpc blockchain endpoint
+      --bootnode strings                        initial nodes to connect to
+      --bootnode-mode                           cause the node to always accept incoming connections
+      --cache-capacity uint                     cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
+      --cache-retrieval                         enable forwarded content caching (default true)
+      --chequebook-enable                       enable chequebook (default true)
+      --clef-signer-enable                      enable clef signer
+      --clef-signer-endpoint string             clef signer endpoint
+      --clef-signer-ethereum-address string     blockchain address to use from clef signer
+      --cors-allowed-origins strings            origins with CORS headers enabled
+      --data-dir string                         data directory (default "/home/noah/.bee")
+      --db-block-cache-capacity uint            size of block cache of the database in bytes (default 33554432)
+      --db-disable-seeks-compaction             disables db compactions triggered by seeks (default true)
+      --db-open-files-limit uint                number of open files allowed by database (default 200)
+      --db-write-buffer-size uint               size of the database write buffer in bytes (default 33554432)
+      --debug-api-addr string                   debug HTTP API listen address (default ":1635")
+      --debug-api-enable                        enable debug HTTP API
+      --full-node                               cause the node to start in full mode
+  -h, --help                                    help for start
+      --mainnet                                 triggers connect to main net bootnodes. (default true)
+      --nat-addr string                         NAT exposed address
+      --network-id uint                         ID of the Swarm network (default 1)
+      --p2p-addr string                         P2P listen address (default ":1634")
+      --p2p-ws-enable                           enable P2P WebSocket transport
+      --password string                         password for decrypting keys
+      --password-file string                    path to a file that contains password for decrypting keys
+      --payment-early-percent int               percentage below the peers payment threshold when we initiate settlement (default 50)
+      --payment-threshold string                threshold in BZZ where you expect to get paid from your peers (default "13500000")
+      --payment-tolerance-percent int           excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
+      --postage-stamp-address string            postage stamp contract address
+      --postage-stamp-start-block uint          postage stamp contract start block number
+      --pprof-mutex                             enable pprof mutex profile
+      --pprof-profile                           enable pprof block profile
+      --price-oracle-address string             price oracle contract address
+      --redistribution-address string           redistribution contract address
+      --resolver-options strings                ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
+      --restricted                              enable permission check on the http APIs
+      --resync                                  forces the node to resync postage contract data
+      --staking-address string                  staking contract address
+      --statestore-cache-capacity uint          lru memory caching capacity in number of statestore entries (default 100000)
+      --static-nodes strings                    protect nodes from getting kicked out on bootnode
+      --storage-incentives-enable               enable storage incentives feature (default true)
+      --swap-deployment-gas-price string        gas price in wei to use for deployment and funding
+      --swap-enable                             enable swap
+      --swap-endpoint string                    swap blockchain endpoint
+      --swap-factory-address string             swap factory addresses
+      --swap-initial-deposit string             initial deposit if deploying a new chequebook (default "0")
+      --swap-legacy-factory-addresses strings   legacy swap factory addresses
+      --target-neighborhood string              neighborhood to target in binary format (ex: 111111001) for mining the initial overlay
+      --token-encryption-key string             admin username to get the security token
+      --tracing-enable                          enable tracing
+      --tracing-endpoint string                 endpoint to send tracing data (default "127.0.0.1:6831")
+      --tracing-host string                     host to send tracing data
+      --tracing-port string                     port to send tracing data
+      --tracing-service-name string             service name identifier for tracing (default "bee")
+      --use-postage-snapshot                    bootstrap node using postage snapshot from the network
+      --verbosity string                        log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
+      --warmup-time duration                    time to warmup the node before some major protocols can be kicked off (default 5m0s)
+      --welcome-message string                  send a welcome message string during handshakes
 
-  Global Flags:
-        --config string   config file (default is $HOME/.bee.yaml)
+Global Flags:
+      --config string   config file (default is $HOME/.bee.yaml)
 ```
 
 ### Environment variables
