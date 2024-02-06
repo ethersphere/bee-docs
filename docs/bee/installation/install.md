@@ -299,6 +299,17 @@ To use this option, it's first necessary to identify potential target neighborho
 target-neighborhood: 0010100001
 ```
 
+There is also a [Swarmscan API endpoint](https://api.swarmscan.io/#tag/Network/paths/~1v1~1network~1neighborhoods~1suggestion/get) which you can use to get a suggested neighborhood programmatically:
+
+```bash
+curl https://api.swarmscan.io/v1/network/neighborhoods/suggestion
+```
+A suggested neighborhood will be returned:
+
+```bash
+{"neighborhood":"1111110101"}
+```
+
 See the [staking section](/docs/bee/working-with-bee/staking) for more information.
 
 ## 3. Find Bee address
