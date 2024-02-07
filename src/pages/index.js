@@ -14,8 +14,8 @@ function Home() {
   return (
     <Layout title="Welcome" description="Hello and welcome to Swarm! 🐝">
       <Head>
-        <meta property="og:image" content="img/access1.png" />
-        <meta property="twitter:image" content="img/access1.png" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
+        <meta property="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
         <meta name="twitter:card" content="summary_large_image" />      
       </Head>
       <div className={styles.titleContainer}>
