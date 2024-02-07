@@ -13,8 +13,9 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout title="Welcome" description="Hello and welcome to Swarm! 🐝">
-         <Head>
+      <Head>
         <meta property="og:image" content="img/access1.png" />
+        <meta property="twitter:image" content="img/access1.png" />
         <meta name="twitter:card" content="summary_large_image" />      
       </Head>
       <div className={styles.titleContainer}>
