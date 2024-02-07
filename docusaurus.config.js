@@ -72,19 +72,6 @@ module.exports = {
   },
   themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
-     // Declare some <meta> tags
-     image: '/img/https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png',
-     metadata: [
-      {name: 'keywords', content: 'web3, gnosis, blockchain, storage'},
-      {name: 'og:image', content: 'https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png'},
-      {name: 'og:type', content: 'website'},
-      {name: 'twitter:image', content: 'https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png'},
-      {property:'og:title', content:'Swarm Bee official documentation'},
-      {property:'og:description', content:'The home of the official documentation for the Bee node client from Swarm'},
-      {property:'og:image', content:'https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png'},
-   
-
-    ],
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
