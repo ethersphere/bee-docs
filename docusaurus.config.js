@@ -72,11 +72,6 @@ module.exports = {
   },
   themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
-     // Declare some <meta> tags
-     metadata: [
-      {name: 'keywords', content: 'web3, gnosis, blockchain, storage'},
-      {name: 'og:image', content: 'img/preview-image.png'},
-    ],
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
