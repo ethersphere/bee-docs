@@ -6,6 +6,10 @@ id: install
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+<head>
+  <meta name="og:image" content="img/preview-image.png" />
+</head>
+
 It is easy to set up a Bee light node on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations). When running a full node however, it's important to meet the minimum required specifications.
 
 ## Recommended Hardware Specifications
