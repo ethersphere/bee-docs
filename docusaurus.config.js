@@ -73,10 +73,11 @@ module.exports = {
   themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
      // Declare some <meta> tags
+     image: '/img/preview-image.png',
      metadata: [
       {name: 'keywords', content: 'web3, gnosis, blockchain, storage'},
       {name: 'og:image', content: '/img/preview-image.png'},
-      {name: 'twitter:card', content: 'summary'},
+      {name: 'og:type', content: 'website'},
       {name: 'twitter:image', content: '/img/preview-image.png'},
       {property:'og:title', content:'Swarm Bee official documentation'},
       {property:'og:description', content:'The home of the official documentation for the Bee node client from Swarm'},
