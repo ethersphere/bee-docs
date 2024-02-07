@@ -1,7 +1,7 @@
 ---
 title: Install Bee
 id: install
-img: https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png
+img: img/preview-img.png
 ---
 
 import Tabs from '@theme/Tabs';
@@ -10,8 +10,8 @@ import TabItem from '@theme/TabItem';
 <head>
   <title>Head Metadata customized title!</title>
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png" />
-  <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png" />
+  <meta name="twitter:image" content="img/preview-img.png" />
+  <meta property="og:image" content="img/preview-img.png" />
   <meta property="og:title" content="Swarm Bee official documentation" />
   <meta property="og:description" content="The home of the official documentation for the Bee node client from Swarm" />
   <meta property="og:type" content="website" />
