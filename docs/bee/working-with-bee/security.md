@@ -14,7 +14,7 @@ Only a subset of endpoints running on `:1633` can be restricted. This is subject
 Now that you decided to restrict the access to the APIs you should follow the next steps:
 
 * Pick a password that is strong enough.
-* Use a bcrypt utility to hash it (you can use `bee bcrypt` command for this purpose [bcrypt utility](/docs/bee/working-with-bee/bcrypt)
+* Use a bcrypt utility to hash it (you can use `bee bcrypt` command for this purpose [bcrypt utility](/docs/bee/working-with-bee/bcrypt))
 * Pass the hash to the bee instance using the `--admin-password` command line option (or as a configuration parameter)
 * Pick a random string to be used for the `--token-encryption-key` (the same security token can be used against many instances sharing the same encryption key)
 
@@ -94,7 +94,9 @@ In the payload you can specify a different role and token lifetime.
 
 There are three major groups:
 
-* technical debug endpoints
+#### Technical debug endpoints:
+
+```bash
   * /readiness
   * /node
   * /addresses
@@ -102,7 +104,11 @@ There are three major groups:
   * /debug/pprof
   * /debug/vars
   * /health
-* business related endpoints residing on the debug port
+```
+
+#### Business related endpoints residing on the debug port
+
+```bash
   * /peers
   * /pingpong/{peer-id}
   * /reservestate
@@ -135,7 +141,10 @@ There are three major groups:
   * /stamps/dilute/{id}/{depth}
   * /batches
   * /tags/{id}
-* API endpoints
+```
+#### API endpoints
+
+```bash
   * /bytes
   * /bytes/{address}
   * /chunks
@@ -155,7 +164,7 @@ There are three major groups:
   * /stewardship/{address}
   * /auth
   * /refresh
-
+```
 The user can toggle the debug port by setting the appropriate boolean value on `debug-api-enable` configuration parameter.
 If the value is `false` (default) then the first two groups of endpoints will not be available.
 

@@ -13,7 +13,7 @@ funded with:
   a couple of transactions on the [Gnosis
   Chain](/docs/learn/glossary#gnosis-chain).
 
-Take note that xBZZ is the [bridged](/docs/learn/glossary#bridging-tokens) version of BZZ from Ethereum to the Gnosis Chain.
+Take note that xBZZ is the [bridged](/docs/learn/glossary#bridged-tokens) version of BZZ from Ethereum to the Gnosis Chain.
 
 ### A node's wallet
 

@@ -47,7 +47,7 @@ As the [libp2p](https://libp2p.io/) library meets all these requirements it has 
 
 ### 2. Overlay Network
 
-The second part of Swarm is an overlay network with protocols powering the [Distributed Immutable Store of Chunks (DISC)](/docs/learn/technology/DISC/). This layer is responsible for storing and retrieving data in a decentralised and secure manner.
+The second part of Swarm is an overlay network with protocols powering the [Distributed Immutable Store of Chunks (DISC)](/docs/learn/technology/disc/). This layer is responsible for storing and retrieving data in a decentralised and secure manner.
 
 Swarm's overlay network is built on top of the underlay transport layer and uses [Kademlia](/docs/learn/glossary#kademlia) overlay routing to enable efficient and scalable communication between nodes. Kademlia is a distributed hash table (DHT) algorithm that allows nodes to locate each other in the network based on their unique identifier or hash.
 

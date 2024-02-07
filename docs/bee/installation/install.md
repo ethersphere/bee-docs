@@ -343,7 +343,7 @@ While depositing xBZZ is optional, node operators who intend to download or uplo
 
 For nodes which stake xBZZ and participate in the storage incentives system, very small amounts of xDAI will be used regularly to pay for staking related transactions on Gnosis Chain, so xDAI may need to be periodically topped up. See the [staking section](/docs/bee/working-with-bee/staking#check-redistribution-status) for more information.
 
-After sending xDAI and optionally xBZZ to the Gnosis Chain address collected in the previous step, [restart the node](#edit-config-file):
+After sending xDAI and optionally xBZZ to the Gnosis Chain address collected in the previous step, restart the node:
 
 <Tabs
 defaultValue="linux"

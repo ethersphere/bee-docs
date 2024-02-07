@@ -23,7 +23,7 @@ And then clicking the ***Buy New Postage Stamp*** button:
 
 ### Depth and Amount
 
-Batch [depth and amount](docs/learn/technology/contracts/postage-stamp) are the two required parameters which must be set when purchasing a postage stamp batch. Depth determines how many chunks can be stamped with a batch while amount determines how much xBZZ is assigned per chunk.
+Batch [depth and amount](/docs/learn/technology/contracts/postage-stamp) are the two required parameters which must be set when purchasing a postage stamp batch. Depth determines how many chunks can be stamped with a batch while amount determines how much xBZZ is assigned per chunk.
 
 ![](/img/stamps3.png)
 

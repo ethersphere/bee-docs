@@ -29,7 +29,7 @@ Watch as your uploaded data is [synced with the network](/docs/develop/access-th
 
 ### Keep Your Data Alive
 
-Learn how to assign xBZZ to your data using postage stamps so that it remains [live on the Swarm network](/docs/develop/access-the-swarm/keep-your-data-alive).
+Learn how to assign xBZZ to your data using postage stamps so that it remains [live on the Swarm network](/docs/develop/access-the-swarm/buy-a-stamp-batch).
 
 ### Pinning
 

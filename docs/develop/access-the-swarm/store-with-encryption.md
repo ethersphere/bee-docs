@@ -17,7 +17,7 @@ curl -F file=@bee.jpg -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd
 
 When successful, the Bee client will return a 64 byte reference, instead of the usual 32 bytes.
 
-More information on how to buy a postage stamp batch and get its batch id can be found [here](/docs/develop/access-the-swarm/keep-your-data-alive).
+More information on how to buy a postage stamp batch and get its batch id can be found [here](/docs/develop/access-the-swarm/buy-a-stamp-batch).
 
 ```json
 {

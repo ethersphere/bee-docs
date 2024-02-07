@@ -5,7 +5,7 @@ id: postage-stamp
 
 The [postage stamp contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PostageStamp.sol) is one component in the suite of smart contract orchestrating Swarm's [storage incentives](/docs/learn/technology/incentives) which make up the foundation of Swarm's self-sustaining economic system. 
 
-When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/learn/technology/DISC) of data. Postage stamps are purchased in batches rather than one by one. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
+When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/learn/technology/disc) of data. Postage stamps are purchased in batches rather than one by one. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
 
 The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. We say that a stamp expires when the batch it is issued from has insufficient balance. A chunk with an expired stamp can not be used in the proof of entitlement storer nodes need to submit in order to get compensated for their contributed storage space, therefore such expired chunks are evicted from nodes' reserves and put into the cache where their continued persistence depends on their popularity. 
 
