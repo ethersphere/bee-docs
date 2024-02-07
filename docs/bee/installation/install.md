@@ -9,10 +9,12 @@ import TabItem from '@theme/TabItem';
 
 <head>
   <title>Head Metadata customized title!</title>
-  <meta name="twitter:card" content="img/https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png" />
-  <meta name="og:card" content="img/https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png" />
-  <meta name="og:title" content="Swarm Bee official documentation" />
-  <meta name="og:description" content="The home of the official documentation for the Bee node client from Swarm" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/master/static/img/etherjot1.png" />
+  <meta property="og:title" content="Swarm Bee official documentation" />
+  <meta property="og:description" content="The home of the official documentation for the Bee node client from Swarm" />
+  <meta property="og:type" content="website" />
 </head>
 
 It is easy to set up a Bee light node on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations). When running a full node however, it's important to meet the minimum required specifications.
