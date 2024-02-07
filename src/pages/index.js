@@ -14,7 +14,7 @@ function Home() {
   return (
     <Layout title="Welcome" description="Hello and welcome to Swarm! 🐝">
          <Head>
-        <meta property="og:image" content="access1.png" />
+        <meta property="og:image" content="img/access1.png" />
         <meta name="twitter:card" content="summary_large_image" />      
       </Head>
       <div className={styles.titleContainer}>
