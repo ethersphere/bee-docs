@@ -76,7 +76,12 @@ module.exports = {
      metadata: [
       {name: 'keywords', content: 'web3, gnosis, blockchain, storage'},
       {name: 'og:image', content: 'img/preview-image.png'},
-      {name: 'twitter:card', content: 'img/preview-image.png'},
+      {name: 'twitter:card', content: 'summary'},
+      {name: 'twitter:image', content: 'img/preview-image.png'},
+      {property:'og:title', content:'Swarm Bee official documentation'},
+      {property:'og:description', content:'The home of the official documentation for the Bee node client from Swarm'},
+      {property:'og:image', content:'img/preview-image.png'},
+   
 
     ],
     colorMode: {
