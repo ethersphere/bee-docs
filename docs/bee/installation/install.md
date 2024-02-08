@@ -12,6 +12,7 @@ import TabItem from '@theme/TabItem';
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
   <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
+  <meta property="og:image:alt" content="Front page of the Bee client docs site" />
   <meta property="og:title" content="Swarm Bee official documentation" />
   <meta property="og:description" content="The home of the official documentation for the Bee node client from Swarm" />
   <meta property="og:type" content="website" />

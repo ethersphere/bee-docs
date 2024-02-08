@@ -15,6 +15,10 @@ function Home() {
     <Layout title="Welcome" description="Hello and welcome to Swarm! 🐝">
       <Head>
         <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
+        <meta property="og:image:alt" content="Front page of the Bee client docs site" />
+        <meta property="og:title" content="Home of the official Bee client docs" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="How to operate and manage a Bee client for the Swarm network" />
         <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
         <meta name="twitter:card" content="summary_large_image" />      
       </Head>
