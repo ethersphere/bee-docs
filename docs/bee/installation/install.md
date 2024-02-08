@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
   <meta property="og:title" content="Home of the official Bee client docs" />
   <meta property="og:description" content="How to operate and manage a Bee client for the Swarm network" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tranquil-brioche-5442ce.netlify.app/" />
+  <meta property="og:url" content="https://test-twitter-preview-testing-2.netlify.app/docs/bee/installation/install" />
 </head>
 
 
