@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 <head>
   <title>Head Metadata customized title!</title>
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content=" " />
   <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
   <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
   <meta property="og:url " content="https://tranquil-brioche-5442ce.netlify.app/" />
