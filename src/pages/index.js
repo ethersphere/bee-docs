@@ -21,7 +21,7 @@ function Home() {
         <meta property="og:url" content="https://tranquil-brioche-5442ce.netlify.app/"/>
         <meta property="og:description" content="How to operate and manage a Bee client for the Swarm network" />
         <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
-        <meta name="twitter:card" content="summary" />      
+        <meta name="twitter:card" content="summary_large_image" />      
       </Head>
       <div className={styles.titleContainer}>
         <h1 className={styles.mainTitle}>Swarm Documentation</h1>
