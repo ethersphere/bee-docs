@@ -1,7 +1,6 @@
 ---
 title: Install Bee
 id: install
-img: img/preview-img.png
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,12 +11,13 @@ import TabItem from '@theme/TabItem';
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
   <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
-  <meta property="og:url " content="https://tranquil-brioche-5442ce.netlify.app/" />
   <meta property="og:image:alt" content="Front page of the Bee client docs site" />
-  <meta property="og:title" content="Swarm Bee official documentation" />
-  <meta property="og:description" content="The home of the official documentation for the Bee node client from Swarm" />
+  <meta property="og:title" content="Home of the official Bee client docs" />
+  <meta property="og:description" content="How to operate and manage a Bee client for the Swarm network" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tranquil-brioche-5442ce.netlify.app/" />
 </head>
+
 
 It is easy to set up a Bee light node on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations). When running a full node however, it's important to meet the minimum required specifications.
 
