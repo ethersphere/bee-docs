@@ -324,6 +324,26 @@ All available configuration options are available as `BEE` prefixed,
 capitalised, and underscored environment variables, e.g. `--api-addr` becomes `BEE_API_ADDR`.
 
 
+## Sepolia Testnet Configuration 
+
+In order to operate a Bee node on the Sepolia testnet, modify the following options in your configuration to the values below. Make sure that you replace the `blockchain-rpc-endpoint` option value with your own valid Sepolia RPC endpoint. If you choose to use [Infura](https://www.infura.io/) as in the example configuration below, make sure to [check in their docs](https://docs.infura.io/api/network-endpoints) that the endpoint format is up to date, and also make sure that you have filled in your own API key which you can find from the [Infura web app](https://app.infura.io). Besides Infura there are many other RPC providers you may wish to choose from.
+
+```yaml
+bootnode:
+- /ip4/3.122.234.225/tcp/31050/p2p/QmdSgC9yDsK2for1VSBgK4CdP3agt76NPuEBs2KCGAnfSQ
+data-dir: /home/username/bee/sepolia
+debug-api-enable: true
+full-node: true
+mainnet: false
+network-id: 10
+password: password
+blockchain-rpc-endpoint: wss://sepolia.infura.io/ws/v3/<API-KEY>
+swap-enable: true
+verbosity: 5
+welcome-message: "welcome-from-the-hive"
+warmup-time: 30s
+```
+
 ## Configuration Options
 
 Bee provides the following options to customise your node.
