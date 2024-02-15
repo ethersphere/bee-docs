@@ -17,7 +17,7 @@ id: overview
 
 |Contract|Blockchain | Address             | 
 | ---------------------- | ------------------------------- |--------- |
-|Postage Stamp|Gnosis Chain|[0x30d155478eF27Ab32A1D578BE7b84BC5988aF381](https://gnosisscan.io/address/0x30d155478eF27Ab32A1D578BE7b84BC5988aF381#code)|
+|Postage Stamp|Gnosis Chain|[0x45a1502382541Cd610CC9068e88727426b696293](https://gnosisscan.io/address/0x45a1502382541Cd610CC9068e88727426b696293#code)|
 |Staking|Gnosis Chain|[0x781c6D1f0eaE6F1Da1F604c6cDCcdB8B76428ba7](https://gnosisscan.io/address/0x781c6D1f0eaE6F1Da1F604c6cDCcdB8B76428ba7#code)|
-|Redistribution|Gnosis Chain|[0x1F9a1FDe5c6350E949C5E4aa163B4c97011199B4](https://gnosisscan.io/address/0x1F9a1FDe5c6350E949C5E4aa163B4c97011199B4#code)|
-|Price Oracle|Gnosis Chain|[0x344A2CC7304B32A87EfDC5407cD4bEC7cf98F035](https://gnosisscan.io/address/0x344A2CC7304B32A87EfDC5407cD4bEC7cf98F035#code)|
+|Redistribution|Gnosis Chain|[0x0964c834C660C44E0afd3B7F10F19f275ee31411](https://gnosisscan.io/address/0x0964c834C660C44E0afd3B7F10F19f275ee31411#code)|
+|Price Oracle|Gnosis Chain|[0x86DE783Bf23Bc13DaeF5A55ec531C198da8f10cF](https://gnosisscan.io/address/0x86DE783Bf23Bc13DaeF5A55ec531C198da8f10cF#code)|
