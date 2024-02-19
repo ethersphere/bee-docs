@@ -6,13 +6,26 @@ id: install
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+<head>
+  <title>Head Metadata customized title!</title>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
+  <meta property="og:image:alt" content="Front page of the Bee client docs site" />
+  <meta property="og:title" content="Home of the official Bee client docs" />
+  <meta property="og:description" content="How to operate and manage a Bee client for the Swarm network" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://test-twitter-preview-testing-3.netlify.app/docs/bee/installation/install" />
+</head>
+
+
 It is easy to set up a Bee light node on small and inexpensive computers, such as a Raspberry Pi 4, spare hardware you have lying around, or even a cheap cloud hosted VPS (we recommend small, independent providers and colocations). When running a full node however, it's important to meet the minimum required specifications.
 
 ## Recommended Hardware Specifications
 
 ### Full Nodes
 
-Minimum recommended specifications for each full node:
+Minimum recommended specificati ons for each full node:
 
 - Dual core, recent generation, 2ghz processor 
 - 8gb RAM

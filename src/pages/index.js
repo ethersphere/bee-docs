@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
+import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -12,6 +13,16 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout title="Welcome" description="Hello and welcome to Swarm! 🐝">
+      <Head>
+        <meta property="og:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
+        <meta property="og:image:alt" content="Front page of the Bee client docs site" />
+        <meta property="og:title" content="Home of the official Bee client docs" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://test-twitter-preview-testing-3.netlify.app/"/>
+        <meta property="og:description" content="How to operate and manage a Bee client for the Swarm network" />
+        <meta name="twitter:image" content="https://raw.githubusercontent.com/ethersphere/bee-docs/set-meta-tags/static/img/preview-image.png" />
+        <meta name="twitter:card" content="summary_large_image" />      
+      </Head>
       <div className={styles.titleContainer}>
         <h1 className={styles.mainTitle}>Swarm Documentation</h1>
         <p className={styles.subTitle}>Official documentation of the decentralised data storage and distribution protocol built to power the next generation of censorship-resistant, unstoppable, serverless dapps.</p>
