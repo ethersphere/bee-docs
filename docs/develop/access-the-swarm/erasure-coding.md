@@ -7,7 +7,7 @@ Erasure coding is an advanced method for safeguarding data, offering robust prot
 
 ### Uploading With Erasure Coding
 
-Erasure coding is available for the [`/bytes`](/api/#tag/Bytes) and [`/bzz`](/api/#tag/BZZ) endpoints, however it is not available for the [`/chunks`](/api/#tag/Chunk) endpoint which deals with single chunks. Since erasure coding relies on splitting data into chunks and the chunk is the smallest unit of data within Swarm which cannot be further subdivided, erasure coding is not applicable for the `/chunks` endpoint which deals with single chunks/
+Erasure coding is available for the [`/bytes`](/api/#tag/Bytes) and [`/bzz`](/api/#tag/BZZ) endpoints, however it is not available for the [`/chunks`](/api/#tag/Chunk) endpoint which deals with single chunks. Since erasure coding relies on splitting data into chunks and the chunk is the smallest unit of data within Swarm which cannot be further subdivided, erasure coding is not applicable for the `/chunks` endpoint which deals with single chunks.
 
 To upload data to Swarm using erasure coding, the `swarm-redundancy-level: <integer>` header is used:
 
@@ -41,7 +41,7 @@ When downloading erasure encoded data, there are three related headers which may
 
 * `swarm-redundancy-fallback-mode: <boolean>`: Enables the fallback feature for the redundancy strategies so that if one of the retrieval strategies fails, it will fallback to the more intensive strategy until retrieval is successful or retrieval fails. Default is `true`.
 
-* `swarm-chunk-retrieval-timeout: <boolean>`: Allows you to specify the timeout time for chunk retrieval with a default value of 30 seconds. 
+* `swarm-chunk-retrieval-timeout: <boolean>`: Allows you to specify the timeout time for chunk retrieval with a default value of 30 seconds. *(This is primarily used by the Bee development team for testing and it's recommended that Bee users do not need to use this option.)*
 
 An example download request may look something like this:
 
