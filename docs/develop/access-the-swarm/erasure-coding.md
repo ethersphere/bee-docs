@@ -3,7 +3,7 @@ title: Erasure Coding
 id: erasure-coding
 ---
 
-Erasure coding is an advanced method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. You can learn more about erasure coding and the benefits it brings to Swarm in [this article on the Swarm blog](https://blog.ethswarm.org/foundation/2023/erasure-coding-supercharges-swarm/).  
+Erasure coding is an advanced method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
 
 ### Uploading With Erasure Coding
 
@@ -31,13 +31,23 @@ The accepted values for the `swarm-redundancy-level` header range from the defau
 | 3                | Insane    | 10%                                 |
 | 4                | Paranoid  | 50%                                 |
 
-Do take note that any level of erasure encoding will increase the cost of uploaded, as with the additional parity chunks, there is a greater total number of chunks which must be stamped, and as the number of additional parity chunks increase with the redundancy level, so too does the additional cost.
+Do take note that any level of erasure encoding will increase the cost of uploads, as with additional parity chunks, there is a greater total number of chunks which must be stamped, and as the number of additional parity chunks increase with the redundancy level, so too does the additional cost.
 
 ### Downloading Erasure Encoded Data
 
 When downloading erasure encoded data, there are three related headers which may be used—`swarm-redundancy-strategy`, `swarm-redundancy-fallback-mode: <integer>`, and `swarm-chunk-retrieval-timeout`. 
 
-* `swarm-redundancy-strategy`:  This header allows you to set the retrieval strategy for fetching chunks. The accepted values range from 0 to 3. Each number corresponds to a different chunk retrieval strategy. The numbers stand for the NONE, DATA, PROX and RACE strategies respectively which are described in greater detail in [the API reference](/api/#tag/BZZ). With each increasing level, there will be a potentially greater bandwidth cost. Default is `NONE`.
+* `swarm-redundancy-strategy`:  This header allows you to set the retrieval strategy for fetching chunks. The accepted values range from 0 to 3. Each number corresponds to a different chunk retrieval strategy. The numbers stand for the NONE, DATA, PROX and RACE strategies respectively which are described in greater detail in [the API reference](/api/#tag/BZZ) (also see [the erasure code paper](https://papers.ethswarm.org/p/erasure/) for even more in-depth descriptions).  With each increasing level, there will be a potentially greater bandwidth cost. 
+
+The default strategy is NONE, see explanation of strategies below for details.
+
+:::info
+Strategies explained:
+0. NONE (cheapest): This strategy is based on direct retrieval of data chunks without pre-fetching, with parity chunks ignored. 
+1. DATA (cheap): The same as NONE, except that data chunks are pre-fetched.
+2. PROX (cheap): For this strategy, the chunks closest (in Kademlia distance) to the node are retrieved first. *(Not yet implemented.)*
+3. RACE (expensive): Initiates requests for all data and parity chunks and continues to retrieve chunks until enough chunks are retrieved that the original data can be reconstructed. 
+:::
 
 * `swarm-redundancy-fallback-mode: <boolean>`: Enables the fallback feature for the redundancy strategies so that if one of the retrieval strategies fails, it will fallback to the more intensive strategy until retrieval is successful or retrieval fails. Default is `true`.
 
@@ -47,12 +57,13 @@ An example download request may look something like this:
 
 ```bash
     curl -OJL \
-    -H "swarm-redundancy-strategy: 2" \
-    -H "swarm-redundancy-fallback-mode: false" \
-    -H "swarm-chunk-retrieval-timeout: 50000" \
+    -H "swarm-redundancy-strategy: 3" \
+    -H "swarm-redundancy-fallback-mode: true" \
      http://localhost:1633/bzz/c02e7d943fbc0e753540f377853b7181227a83e773870847765143681511c97d/
 
        % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 ```
+
+For this request, the redundancy strategy is set to 3 (RACE), which means that it will initiate a request for all data and parity chunks and continue to retrieve chunks until enough have been retrieved to reconstruct the source data. This is in contrast with the default strategy of NONE where only the data chunks will be retrieved without any parity chunks which can be used to reconstruct the source data if some original data chunks are lost. 
