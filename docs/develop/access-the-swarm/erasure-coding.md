@@ -39,15 +39,16 @@ When downloading erasure encoded data, there are three related headers which may
 
 * `swarm-redundancy-strategy`:  This header allows you to set the retrieval strategy for fetching chunks. The accepted values range from 0 to 3. Each number corresponds to a different chunk retrieval strategy. The numbers stand for the NONE, DATA, PROX and RACE strategies respectively which are described in greater detail in [the API reference](/api/#tag/BZZ) (also see [the erasure code paper](https://papers.ethswarm.org/p/erasure/) for even more in-depth descriptions).  With each increasing level, there will be a potentially greater bandwidth cost. 
 
-The default strategy is NONE, see explanation of strategies below for details.
+    The default strategy is NONE, see explanation of strategies below for details.
 
-:::info
-Strategies explained:
-0. NONE (cheapest): This strategy is based on direct retrieval of data chunks without pre-fetching, with parity chunks ignored. 
-1. DATA (cheap): The same as NONE, except that data chunks are pre-fetched.
-2. PROX (cheap): For this strategy, the chunks closest (in Kademlia distance) to the node are retrieved first. *(Not yet implemented.)*
-3. RACE (expensive): Initiates requests for all data and parity chunks and continues to retrieve chunks until enough chunks are retrieved that the original data can be reconstructed. 
-:::
+    :::info
+    Strategies explained:
+
+    0. NONE (cheapest): This strategy is based on direct retrieval of data chunks without pre-fetching, with parity chunks ignored. 
+    1. DATA (cheap): The same as NONE, except that data chunks are pre-fetched.
+    2. PROX (cheap): For this strategy, the chunks closest (in Kademlia distance) to the node are retrieved first. *(Not yet implemented.)*
+    3. RACE (expensive): Initiates requests for all data and parity chunks and continues to retrieve chunks until enough chunks are retrieved that the original data can be reconstructed. 
+    :::
 
 * `swarm-redundancy-fallback-mode: <boolean>`: Enables the fallback feature for the redundancy strategies so that if one of the retrieval strategies fails, it will fallback to the more intensive strategy until retrieval is successful or retrieval fails. Default is `true`.
 
