@@ -39,8 +39,6 @@ When downloading erasure encoded data, there are three related headers which may
 
 * `swarm-redundancy-strategy`:  This header allows you to set the retrieval strategy for fetching chunks. The accepted values range from 0 to 3. Each number corresponds to a different chunk retrieval strategy. The numbers stand for the NONE, DATA, PROX and RACE strategies respectively which are described in greater detail in [the API reference](/api/#tag/BZZ) (also see [the erasure code paper](https://papers.ethswarm.org/p/erasure/) for even more in-depth descriptions).  With each increasing level, there will be a potentially greater bandwidth cost. 
 
-    The default strategy is NONE, see explanation of strategies below for details.
-
     :::info
     Strategies explained:
 
