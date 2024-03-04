@@ -309,7 +309,7 @@ To use this option, it's first necessary to identify potential target neighborho
 
 ```yaml
 ## bee.yaml
-target-neighborhood: 0010100001
+target-neighborhood: "0010100001"
 ```
 
 There is also a [Swarmscan API endpoint](https://api.swarmscan.io/#tag/Network/paths/~1v1~1network~1neighborhoods~1suggestion/get) which you can use to get a suggested neighborhood programmatically:
