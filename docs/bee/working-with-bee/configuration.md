@@ -326,6 +326,10 @@ capitalised, and underscored environment variables, e.g. `--api-addr` becomes `B
 
 ## Sepolia Testnet Configuration 
 
+:::info
+Sepolia is supported only in Bee 2.0.0 and upwards.
+:::
+
 In order to operate a Bee node on the Sepolia testnet, modify the following options in your configuration to the values below. Make sure that you replace the `blockchain-rpc-endpoint` option value with your own valid Sepolia RPC endpoint. If you choose to use [Infura](https://www.infura.io/) as in the example configuration below, make sure to [check in their docs](https://docs.infura.io/api/network-endpoints) that the endpoint format is up to date, and also make sure that you have filled in your own API key which you can find from the [Infura web app](https://app.infura.io). Besides Infura there are many other RPC providers you may wish to choose from.
 
 Also make sure to fund your node with sETH rather than xDAI to pay for gas on the Sepolia testnet. There are many public faucets you can use to obtain sETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
