@@ -156,7 +156,11 @@ Let's take our previous example and adjust it slightly. Instead of a source data
 
 We've provided this convenient calculator widget for you to calculate the cost for any given number of chunks at your preferred redundancy level:
 
+:::info
+This calculator is for unencrypted uploads.
+:::
 <RedundancyCalc />
+
 
 
 ## Downloading Erasure Encoded Data
