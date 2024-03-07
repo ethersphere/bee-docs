@@ -5,8 +5,8 @@ export default function UploadCostCalc() {
   const [result, setResult] = useState("");
   const [kb, setKb] = useState("");
   const [redundancy, setRedundancy] = useState("");
-  const maxChunks = [119, 107, 97, 29]; // Maximum chunks for each redundancy level
-  const maxParities = [9, 21, 31, 76]; // Maximum parities for each redundancy level
+  const maxChunks = [119, 107, 97, 37]; // Maximum chunks for each redundancy level
+  const maxParities = [9, 21, 31, 89]; // Maximum parities for each redundancy level
 
   const handleKbChange = (e) => {
     setKb(e.target.value);

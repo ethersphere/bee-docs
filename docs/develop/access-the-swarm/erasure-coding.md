@@ -149,6 +149,14 @@ However, generally speaking uploads will not come in exact multiples of m, so we
 | Paranoid | 73       | 27     | 270.4%      | 13               | 561.5%            |
 | Paranoid | 75       | 28     | 267.9%      | 14               | 535.7%            |
 | Paranoid | 76       | 29     | 262.1%      | 14               | 542.9%            |
+| Paranoid  | 78      | 30      | 260%       | 15               | 520%              |               
+| Paranoid  | 80      | 31      | 258.1%     | 15               | 533.3%            |               
+| Paranoid  | 81      | 32      | 253.1%     | 16               | 506.2%            |               
+| Paranoid  | 83      | 33      | 251.5%     | 16               | 518.8%            |               
+| Paranoid  | 84      | 34      | 247.1%     | 17               | 494.1%            |               
+| Paranoid  | 86      | 35      | 245.7%     | 17               | 505.9%            |               
+| Paranoid  | 87      | 36      | 241.7%     | 18               | 483.3%            |               
+| Paranoid  | 89      | 37      | 240.5%     | 18               | 494.4%            |  
 
 Let's take our previous example and adjust it slightly. Instead of a source data consisting of 321 (3 * 107) chunks, we will add 19 chunks for a total of 340 chunks. Looking at our chart, we can see that at the Strong level for 19 data chunks we need 9 parity chunks. From this we can calculate the final percentage price: 72 / 340 = 21.17%. 
 
