@@ -162,7 +162,7 @@ Let's take our previous example and adjust it slightly. Instead of a source data
 
 ### Cost Calculator Widget
 
-We've provided this convenient calculator widget for you to calculate the cost for any given number of chunks at your preferred redundancy level:
+We've provided this convenient calculator widget for you to calculate the cost for any given amount of data at your preferred redundancy level:
 
 :::info
 This calculator is for unencrypted uploads.
@@ -226,4 +226,4 @@ This means that there is no need for you to inform downloaders that a file you h
 
 ### Default Download Behaviour Description
 
-The default download behaviour is to use the DATA strategy with fallback enabled. With these settings, first an attempt will be made to download the data chunks only. If any of the data chunks are missing, then the retrieval method will fall back to the RACE strategy (PROX is not currently implemented and so will be skipped). With the RACE strategy, an attempt will be made to download all data and parity chunks, and chunks will continue to be downloaded until enough have been retrieved to reconstruct the original data.
+Erasure coding retrieval for downloads is enabled by default, so there is no need for a downloader to explicitly enable the feature. The default download behaviour is to use the DATA strategy with fallback enabled. With these settings, first an attempt will be made to download the data chunks only. If any of the data chunks are missing, then the retrieval method will fall back to the RACE strategy (PROX is not currently implemented and so will be skipped). With the RACE strategy, an attempt will be made to download all data and parity chunks, and chunks will continue to be downloaded until enough have been retrieved to reconstruct the original data. 
