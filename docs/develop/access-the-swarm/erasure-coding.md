@@ -160,13 +160,11 @@ However, generally speaking uploads will not come in exact multiples of m, so we
 
 Let's take our previous example and adjust it slightly. Instead of a source data consisting of 321 (3 * 107) chunks, we will add 19 chunks for a total of 340 chunks. Looking at our chart, we can see that at the Strong level for 19 data chunks we need 9 parity chunks. From this we can calculate the final percentage price: 72 / 340 = 21.17%. 
 
-### Cost Calculator Widget
+## Cost Calculator Widget
 
-This calculator takes as input an amount of data in kilobytes and an erasure coding redundancy level, and outputs the number of additional parity chunks required to erasure code that amount of data as well as the increase in cost to upload vs a non-erasure encoded upload:
+This calculator takes as input an amount of data and an erasure coding redundancy level, and outputs the number of additional parity chunks required to erasure code that amount of data as well as the increase in cost to upload vs. a non-erasure encoded upload:
 
-:::info
-This calculator is for unencrypted uploads.
-:::
+
 <RedundancyCalc />
 
 
@@ -224,6 +222,6 @@ However, as noted above, it is recommended to not adjust the default settings fo
 
 This means that there is no need for you to inform downloaders that a file you have uploaded uses erasure coding, as even with the default download behaviour reconstruction of the source file will be attempted if any chunks are missing.
 
-### Default Download Behaviour Description
+### Default Download Behaviour
 
 Erasure coding retrieval for downloads is enabled by default, so there is no need for a downloader to explicitly enable the feature. The default download behaviour is to use the DATA strategy with fallback enabled. With these settings, first an attempt will be made to download the data chunks only. If any of the data chunks are missing, then the retrieval method will fall back to the RACE strategy (PROX is not currently implemented and so will be skipped). With the RACE strategy, an attempt will be made to download all data and parity chunks, and chunks will continue to be downloaded until enough have been retrieved to reconstruct the original data. 
