@@ -51,8 +51,8 @@ export default function UploadCostCalc() {
     const cost = (totalParities / totalChunks) * 100;
 
     console.log(`Redundancy Level: ${redundancy}, Quotient: ${quotient}, Remainder: ${remainder}, Total Chunks: ${totalChunks}, Max Chunks for ${redundancy}: ${maxChunks[redundancyLevel]}, Remainder Parities: ${remainderParities}, Cost: ${cost.toFixed(2)}%`);
+    setResult(`An additional ${totalParities} parity chunks will be required, increasing the cost by ${cost.toFixed(2)}%`);
 
-    setResult(`In order to upload ${kbValue} kb of data (equivalent to ${totalChunks} chunks) with redundancy level ${redundancy}, an additional ${totalParities} parity chunks are required, resulting in a ${cost.toFixed(2)}% increase in cost compared to not using erasure coding.`);
   };
 
   return (

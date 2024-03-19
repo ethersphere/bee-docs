@@ -162,7 +162,7 @@ Let's take our previous example and adjust it slightly. Instead of a source data
 
 ### Cost Calculator Widget
 
-We've provided this convenient calculator widget for you to calculate the cost for any given amount of data at your preferred redundancy level:
+This calculator takes as input an amount of data in kilobytes and an erasure coding redundancy level, and outputs the number of additional parity chunks required to erasure code that amount of data as well as the increase in cost to upload vs a non-erasure encoded upload:
 
 :::info
 This calculator is for unencrypted uploads.
