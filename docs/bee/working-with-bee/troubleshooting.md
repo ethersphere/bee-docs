@@ -3,11 +3,10 @@ title: Troubleshooting
 id: troubleshooting
 ---
 
-*Under construction - this troubleshooting guide is in the process of being developed, check back again for more information later*
 
-## Common Issues
+## Common Issues (*Under construction*)
 
-In this section we cover commonly seen problems encountered during the operation of a Bee node, and give an overview of suggested solutions
+In this section we cover commonly seen problems encountered during the operation of a Bee node, and give an overview of suggested solutions.
 
 ### Node occupies unusually large space on disk
 
@@ -17,25 +16,23 @@ During normal operation of a Bee node, it should not take up more than ~30 GB of
 To prevent any data loss, operators should run the compaction on a copy of the localstore directory and, if successful, replace the original localstore with the compacted copy. 
 ```
 
-The command is available as a sub-command under db as such:
+The command is available as a sub-command under db as such (make sure to replace the value for `--data-dir` with the correct path to your bee node's data folder if it differs from the path shown in the example):
 
 
 ```bash
-bee db compact --data-dir=
+bee db compact --data-dir=/home/bee/.bee
 ```
 
 
-## Health and Status API Guide
+## Node Health Guide: Bee API
 
 Your main tool for better understanding your node is the Bee API. The API has a handful of endpoints which will provide you with information relevant to detecting and diagnosing problems with your nodes.
 
-
-
 :::info
-Take note of the port numbers for each endpoint. Some endpoints are available from either the Bee API (port `1633` by default) or the Bee Debug API (port `1635` by default), while others are exclusively available to one endpoint.
+Some endpoints are disabled by default on the Bee API (port `1633` by default) unless [authentication is enabled](/docs/bee/working-with-bee/security). The endpoints which are disabled by default for the Bee API are listed in the Bee Debug API  (port `1635` by default) section below.
 :::
 
-### `http://localhost:1633/health`
+### `/health`
        
    The `/health` endpoint will report on the general health of the node by simply reporting if your node is healthy or not. If the value for `"status"` is not `"ok"`, your node has an issue which needs to be addressed.
    
@@ -61,7 +58,7 @@ Take note of the port numbers for each endpoint. Some endpoints are available fr
     * `"apiVersion"` 
     * `"debugApiVersion"`
 
-### `http://localhost:1633/status`
+### `/status`
 
     The `/status` endpoint will give you a bit more of a detailed view of the health of your node. It's a quick summary of some vital values for your node.
     ```bash
@@ -79,7 +76,7 @@ Take note of the port numbers for each endpoint. Some endpoints are available fr
     *    `"batchCommitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilized.
     *    `"isReachable"` - Whether or not your node is reachable on the p2p API by other nodes on the Swarm network (port 1634 by default).
 
-### `http://localhost:1633/status/peers`
+### `/status/peers`
 
 The `/status/peers` endpoint returns information about all the peers of the node making the request. The type of the object returned is the same as that returned from the `/status` endpoint. This endpoint is useful for diagnosing syncing / availability issues with your node. 
 
@@ -269,7 +266,7 @@ And we can compare these entries to our own node's `/status` results for diagnos
 From the results we can see that we have a healthy neighborhood size when compared with the other nodes in our neighborhood and also has the same `batchCommitment` value as it should.
 
 
-### `http://localhost:1633/reservestate`
+### `/reservestate`
     This endpoint shows key information about the reserve state of your node. You can use it to identify problems with your node related to its reserve (whether it is syncing chunks properly into its reserve for example).
 
     ```bash
@@ -287,7 +284,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods.
     * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilized.
     
-### `http://localhost:1633/chainstate`
+### `/chainstate`
 
     This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
     
@@ -306,7 +303,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"totalAmount"` - Cumulative value of all prices per chunk in PLUR for each block.
     * `"currentPrice"` - The price in PLUR to store a single chunk for each Gnosis Chain block.
     
-### `http://localhost:1633/node`
+### `/node`
     This API performs a simple check of node options related to your node type and also displays your current node type.
 
     ```bash
@@ -323,8 +320,9 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"swapEnabled"` - Whether or not your node's `swap-enable` option is set to `true`.
 
     If your node is not operating in the correct mode, this can help you to diagnose whether you have set your options correctly.
-    
-### `http://localhost:1635/redistributionstate`
+## Node Health Guide: Bee Debug API
+
+### `/redistributionstate`
     This endpoint provides an overview of values related to storage fee redistribution game (in other words, staking rewards). You can use this endpoint to check whether or not your node is participating properly in the redistribution game. 
     ```bash
     curl -s http://localhost:1635/redistributionstate | jq
@@ -363,7 +361,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
     * `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
 
-### `http://localhost:1635/topology`
+### `/topology`
     This endpoint allows you to explore the topology of your node within the Kademlia network. The results are split into 32 bins from bin_0 to bin_32. Each bin represents the nodes in the same neighborhood as your node at each proximity order from PO 0 to PO 32. 
     
     As the output of this file can be very large, we save it to the `topology.json` file for easier inspection:
