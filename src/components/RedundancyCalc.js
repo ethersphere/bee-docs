@@ -3,7 +3,8 @@ import parities from './parities';
 import paritiesEncrypted from './paritiesEncrypted';
 
 export default function UploadCostCalc() {
-  const [result, setResult] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [result, setResult] = useState([]);
   const [dataSize, setDataSize] = useState("");
   const [redundancy, setRedundancy] = useState("");
   const [isEncrypted, setIsEncrypted] = useState(false);
@@ -11,6 +12,13 @@ export default function UploadCostCalc() {
   const maxChunks = [119, 107, 97, 37];
   const maxParities = [9, 21, 31, 89];
   const maxChunksEncrypted = [59, 53, 48, 18];
+  const errorTolerances = {
+    Medium: "1%",
+    Strong: "5%",
+    Insane: "10%",
+    Paranoid: "50%"
+  };
+  
 
   const handleDataSizeChange = (e) => {
     setDataSize(e.target.value);
@@ -29,26 +37,31 @@ export default function UploadCostCalc() {
   };
 
   const calculateCost = () => {
+    setErrorMessage("");
+    setResult([]);
+  
     if (!redundancy) {
-      setResult("Please select a redundancy level.");
+      setErrorMessage("Please select a redundancy level.");
       return;
     }
-
-    let totalChunks;
+  
+    let totalChunks, sizeInKb;
     if (unit === "kb") {
       const kbValue = parseFloat(dataSize);
       if (isNaN(kbValue) || kbValue <= 0) {
-        setResult("Please input a valid kb value above 0.");
+        setErrorMessage("Please input a valid KB value above 0.");
         return;
       }
+      sizeInKb = kbValue;
       totalChunks = Math.ceil((kbValue * 1024) / (2 ** 12));
     } else {
       const chunksValue = parseFloat(dataSize);
       if (isNaN(chunksValue) || chunksValue <= 0) {
-        setResult("Please input a valid chunk amount above 0.");
+        setErrorMessage("Please input a valid chunk amount above 0.");
         return;
       }
       totalChunks = Math.ceil(chunksValue);
+      sizeInKb = (totalChunks * (2 ** 12)) / 1024;
     }
 
     const redundancyLevels = { Medium: 0, Strong: 1, Insane: 2, Paranoid: 3 };
@@ -63,20 +76,50 @@ export default function UploadCostCalc() {
     const remainderParities = selectedParities[redundancyLevel][remainderIndex] || 0;
 
     const totalParities = (quotient * maxParities[redundancyLevel]) + remainderParities;
-    const cost = (totalParities / totalChunks) * 100;
+    const totalDataWithParity = totalChunks + totalParities;
+    const percentDifference = ((totalDataWithParity - totalChunks) / totalChunks) * 100;
+    const parityDataInKb = (totalParities * (2 ** 12)) / 1024;
+    
+    const formatNumber = (num) => new Intl.NumberFormat('en-US').format(num);
 
-    setResult(`An additional ${totalParities} parity chunks will be required, increasing the cost by ${cost.toFixed(2)}%`);
+    const resultsArray = [
+      { name: "Source data size", value: `${formatNumber(sizeInKb.toFixed(0))} KB` },
+      { name: "Parity data size", value: `${formatNumber(parityDataInKb.toFixed(0))} KB` },
+      { name: "Source data in chunks", value: formatNumber(totalChunks) },
+      { name: "Additional parity chunks", value: formatNumber(totalParities) },
+      { name: "Percent cost increase", value: `${percentDifference.toFixed(2)}%` },
+      { name: "Selected redundancy level", value: `${redundancy}` },
+      { name: "Error tolerance", value: errorTolerances[redundancy] }
+    ];
+    
+    
+  
+    setResult(resultsArray);
+  
   };
 
 
   const styles = {
-    container: { padding: '20px', fontFamily: 'Arial', maxWidth: '600px', margin: '0 auto' },
+    container: { padding: '20px', fontFamily: 'Arial', maxWidth: '650px', margin: '0 auto' }, 
     title: { margin: '10px 0' },
-    input: { padding: '8px', margin: '5px 0', width: '100%' },
-    select: { padding: '8px', margin: '5px 0', width: '100%' },
+    input: { padding: '8px', margin: '5px 0', width: '50%' },
+    select: { padding: '8px', margin: '5px 0', width: '50%' },
     button: { padding: '10px 15px', margin: '10px 0', cursor: 'pointer' },
-    result: { margin: '10px 0', fontWeight: 'bold' }
+    result: { margin: '10px 0', fontWeight: 'bold' },
+    table: {
+      width: '100%',
+      borderCollapse: 'collapse',
+    },
+    td: {
+      border: '1px solid #ccc',
+      padding: '4px 8px', 
+      textAlign: 'left',
+    },
+    bold: { 
+      fontWeight: 'bold',
+    }
   };
+  
 
   return (
     <div style={styles.container}>
@@ -109,10 +152,20 @@ export default function UploadCostCalc() {
             onChange={handleEncryptionChange}
           /> Use Encryption?
         </div>
+        {errorMessage && <div style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</div>}
         <button onClick={calculateCost} style={styles.button}>Calculate</button>
       </div>
       <div style={styles.result}>
-        {result}
+        <table style={styles.table}>
+          <tbody>
+            {result.map((item, index) => (
+              <tr key={index}>
+                <td style={{...styles.td, ...styles.bold}}>{item.name}</td> {/* Apply bold style here */}
+                <td style={styles.td}>{item.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
