@@ -45,7 +45,7 @@ export default function UploadCostCalc() {
       return;
     }
   
-    let totalChunks, sizeInKb;
+    let totalChunks, sizeInKb, sizeInGb, parityDataInGb;
     if (unit === "kb") {
       const kbValue = parseFloat(dataSize);
       if (isNaN(kbValue) || kbValue <= 0) {
@@ -54,6 +54,15 @@ export default function UploadCostCalc() {
       }
       sizeInKb = kbValue;
       totalChunks = Math.ceil((kbValue * 1024) / (2 ** 12));
+    } else if (unit === "gb") {
+      const gbValue = parseFloat(dataSize);
+      if (isNaN(gbValue) || gbValue <= 0) {
+        setErrorMessage("Please input a valid GB value above 0.");
+        return;
+      }
+      sizeInGb = gbValue;
+      sizeInKb = gbValue * 1024 * 1024; // Convert GB to KB
+      totalChunks = Math.ceil((sizeInKb * 1024) / (2 ** 12));
     } else {
       const chunksValue = parseFloat(dataSize);
       if (isNaN(chunksValue) || chunksValue <= 0) {
@@ -63,39 +72,38 @@ export default function UploadCostCalc() {
       totalChunks = Math.ceil(chunksValue);
       sizeInKb = (totalChunks * (2 ** 12)) / 1024;
     }
-
+  
     const redundancyLevels = { Medium: 0, Strong: 1, Insane: 2, Paranoid: 3 };
     const redundancyLevel = redundancyLevels[redundancy];
-
+  
     const quotient = isEncrypted ? Math.floor(totalChunks / maxChunksEncrypted[redundancyLevel]) : Math.floor(totalChunks / maxChunks[redundancyLevel]);
     const remainder = isEncrypted ? totalChunks % maxChunksEncrypted[redundancyLevel] : totalChunks % maxChunks[redundancyLevel];
-
     const remainderIndex = (remainder - 1 < 0) ? 0 : (remainder - 1);
-
     const selectedParities = isEncrypted ? paritiesEncrypted : parities;
     const remainderParities = selectedParities[redundancyLevel][remainderIndex] || 0;
-
     const totalParities = (quotient * maxParities[redundancyLevel]) + remainderParities;
     const totalDataWithParity = totalChunks + totalParities;
     const percentDifference = ((totalDataWithParity - totalChunks) / totalChunks) * 100;
     const parityDataInKb = (totalParities * (2 ** 12)) / 1024;
-    
+  
+    // Convert parity data size to GB if input unit is GB
+    if (unit === "gb") {
+      parityDataInGb = parityDataInKb / (1024 * 1024); // Convert KB to GB
+    }
+  
     const formatNumber = (num) => new Intl.NumberFormat('en-US').format(num);
-
+  
     const resultsArray = [
-      { name: "Source data size", value: `${formatNumber(sizeInKb.toFixed(0))} KB` },
-      { name: "Parity data size", value: `${formatNumber(parityDataInKb.toFixed(0))} KB` },
+      { name: "Source data size", value: unit === "gb" ? `${formatNumber(sizeInGb.toFixed(2))} GB` : `${formatNumber(sizeInKb.toFixed(0))} KB` },
+      { name: "Parity data size", value: unit === "gb" ? `${formatNumber(parityDataInGb.toFixed(2))} GB` : `${formatNumber(parityDataInKb.toFixed(0))} KB` },
       { name: "Source data in chunks", value: formatNumber(totalChunks) },
       { name: "Additional parity chunks", value: formatNumber(totalParities) },
       { name: "Percent cost increase", value: `${percentDifference.toFixed(2)}%` },
       { name: "Selected redundancy level", value: `${redundancy}` },
       { name: "Error tolerance", value: errorTolerances[redundancy] }
     ];
-    
-    
   
     setResult(resultsArray);
-  
   };
 
 
@@ -141,6 +149,7 @@ export default function UploadCostCalc() {
         <select value={unit} onChange={handleUnitChange} style={styles.select}>
           <option value="chunks">Chunks</option>
           <option value="kb">KB</option>
+          <option value="gb">GB</option>
         </select>
         <div style={styles.title}>Redundancy Level:</div>
         <select value={redundancy} onChange={handleRedundancyChange} style={styles.select}>
