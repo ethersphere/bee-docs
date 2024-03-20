@@ -110,10 +110,15 @@ export default function UploadCostCalc() {
       width: '100%',
       borderCollapse: 'collapse',
     },
-    td: {
+    tdName: {
       border: '1px solid #ccc',
       padding: '4px 8px', 
       textAlign: 'left',
+    },
+    tdValue: {
+      border: '1px solid #ccc',
+      padding: '4px 8px', 
+      textAlign: 'right',
     },
     bold: { 
       fontWeight: 'bold',
@@ -160,8 +165,8 @@ export default function UploadCostCalc() {
           <tbody>
             {result.map((item, index) => (
               <tr key={index}>
-                <td style={{...styles.td, ...styles.bold}}>{item.name}</td> {/* Apply bold style here */}
-                <td style={styles.td}>{item.value}</td>
+                <td style={{...styles.tdName, ...styles.bold}}>{item.name}</td> {/* Apply bold style here */}
+                <td style={styles.tdValue}>{item.value}</td>
               </tr>
             ))}
           </tbody>
