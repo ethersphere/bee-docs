@@ -46,6 +46,14 @@ module.exports = {
       ],
       collapsed: false
     },
+    {
+      type: 'category',
+      label: 'Appendices',
+      items: [
+        'learn/appendices/erasure-cost-calculation',
+      ],
+      collapsed: false
+    },
     'learn/tokens',
     'learn/glossary',
     'learn/faq', 
