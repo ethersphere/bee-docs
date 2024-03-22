@@ -179,6 +179,26 @@ paths:
           $ref: "SwarmCommon.yaml#/components/responses/400"
         default:
           description: Default response
+    head:
+      summary: Requests the headers containing the content type and length for the reference
+      tags:
+        - Bytes
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: "SwarmCommon.yaml#/components/schemas/SwarmAddress"
+          required: true
+          description: Swarm address of chunk
+      responses:
+        "200":
+          description: Chunk exists
+        "400":
+          $ref: "SwarmCommon.yaml#/components/responses/400"
+        "404":
+          $ref: "SwarmCommon.yaml#/components/responses/404"
+        default:
+          description: Default response
 
   "/chunks":
     post:
@@ -330,6 +350,26 @@ paths:
           $ref: "SwarmCommon.yaml#/components/responses/404"
         "500":
           $ref: "SwarmCommon.yaml#/components/responses/500"
+        default:
+          description: Default response
+    head:
+      summary: Get the headers containing the content type and length for the reference
+      tags:
+        - BZZ
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: "SwarmCommon.yaml#/components/schemas/SwarmAddress"
+          required: true
+          description: Swarm address of chunk
+      responses:
+        "200":
+          description: Chunk exists
+        "400":
+          $ref: "SwarmCommon.yaml#/components/responses/400"
+        "404":
+          $ref: "SwarmCommon.yaml#/components/responses/404"
         default:
           description: Default response
 
@@ -593,6 +633,30 @@ paths:
             application/json:
               schema:
                 $ref: "SwarmCommon.yaml#/components/schemas/SwarmOnlyReferencesList"
+        "500":
+          $ref: "SwarmCommon.yaml#/components/responses/500"
+        default:
+          description: Default response
+
+  "/pins/check":
+    get:
+      summary: Validate pinned chunks integerity
+      tags:
+        - Pinning
+      parameters:
+        - in: query
+          name: ref
+          schema:
+            $ref: "SwarmCommon.yaml#/components/schemas/SwarmOnlyReference"
+          required: false
+          description: The number of items to skip before starting to collect the result set.
+      responses:
+        "200":
+          description: List of checked root hash references
+          content:
+            application/json:
+              schema:
+                $ref: "SwarmCommon.yaml#/components/schemas/PinCheckResponse"
         "500":
           $ref: "SwarmCommon.yaml#/components/responses/500"
         default:
@@ -1910,6 +1974,44 @@ paths:
               schema:
                 $ref: "SwarmCommon.yaml#/components/schemas/DebugPostageAllBatchesResponse"
 
+        default:
+          description: Default response
+
+  "/rchash/{depth}/{anchor1}/{anchor2}":
+    get:
+      summary: Get reserve commitment hash with sample proofs
+      tags:
+        - RChash
+      parameters:
+        - in: path
+          name: depth
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: true
+          description: The storage depth.
+        - in: path
+          name: anchor1
+          schema:
+            $ref: "#/components/schemas/HexString"
+          required: true
+          description: The first anchor.
+        - in: path
+          name: anchor2
+          schema:
+            $ref: "#/components/schemas/HexString"
+          required: true
+          description: The second anchor.
+      responses:
+        "200":
+          description: Reserve sample response
+          content:
+            application/json:
+              schema:
+                $ref: "SwarmCommon.yaml#/components/schemas/ApiRCHashResponse"
+        "500":
+          $ref: "SwarmCommon.yaml#/components/responses/500"
         default:
           description: Default response
 
