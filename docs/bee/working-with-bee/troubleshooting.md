@@ -22,41 +22,103 @@ The command is available as a sub-command under db as such (make sure to replace
 ```bash
 bee db compact --data-dir=/home/bee/.bee
 ```
+### Node not participating in redistribution
+
+First check that the node is fully synced, is not frozen, and has sufficient funds to participate in staking. To check node sync status, call the `redistributionstate` endpoint:
+
+```
+curl -X GET http://localhost:1635/redistributionstate | jq
+```
+Response:
+
+```json
+{ 
+  "minimumFunds": "18750000000000000",
+  "hasSufficientFunds": true,
+  "isFrozen": false,
+  "isFullySynced": true,
+  "phase": "commit",
+  "round": 176319,
+  "lastWonRound": 176024,
+  "lastPlayedRound": 176182,
+  "lastFrozenRound": 0,
+  "block": 26800488,
+  "reward": "10479124611072000",
+  "fees": "30166618102500000"
+}
+```
+Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` before moving to the next step. If `hasSufficientFunds` if `false`, make sure to add at least the amount of xDAI shown in `minimumFunds` (unit of 1e-18 xDAI). If the node was recently installed and `isFullySynced` is `false`, wait for the node to fully sync before continuing. After confirming the node's status, continue to the next step.
 
 
-## Node Health Guide: Bee API
+#### Run sampler process to benchmark performance
+
+One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash/{depth}/{anchor_01}/{anchor_02}` endpoint of the API may be used. The `anchor_01` and `anchor_02` must be a hex string with an even number of digits. For simplicity, you can just use `aaaa` for both anchors as we do in the example further down. 
+
+The `{anchor}` value can be set to any random hexadecimal string, while `{depth}` should be set to the current depth.
+
+To get the current depth, call the `/reservestate` endpoint
+
+```bash
+sudo curl -sX GET http://localhost:1635/reservestate | jq
+```
+Copy the `storageRadius` value from the output (this represents the ACTUAL depth for your node, in other words, the depth to which your node is responsible for storing files. The `radius` value is the hypothetical depth your node would be at if every postage batch was fully utilised.)
+
+```bash
+{
+  "radius": 15,
+  "storageRadius": 10,
+  "commitment": 128332464128
+}
+```
+
+Call the endpoint like so:
+
+```bash
+sudo curl -sX GET http://localhost:1635/rchash/10/aaaa/aaaa | jq
+```
+
+If the sampler runs successfully, you should see output like this:
+
+```bash
+{
+  "Sample": {
+    "Items": [
+      "000003dac2b2f75842e410474dfa4c1e6e0b9970d81b57b33564c5620667ba96",
+      "00000baace30916f7445dbcc44d9b55cb699925acfbe157e4498c63bde834f40",
+      "0000126f48fb1e99e471efc683565e4b245703c922b9956f89cbe09e1238e983",
+      "000012db04a281b7cc0e6436a49bdc5b06ff85396fcb327330ca307e409d2a04",
+      "000014f365b1a381dda85bbeabdd3040fb1395ca9e222e72a597f4cc76ecf6c2",
+      "00001869a9216b3da6814a877fdbc31f156fc2e983b52bc68ffc6d3f3cc79af0",
+      "0000198c0456230b555d5261091cf9206e75b4ad738495a60640b425ecdf408f",
+      "00001a523bd1b688472c6ea5a3c87c697db64d54744829372ac808de8ec1d427"
+    ],
+    "Hash": "7f7d93c6235855fedc34e32c6b67253e27910ca4e3b8f2d942efcd758a6d8829"
+  },
+  "Time": "2m54.087909745s"
+}
+```
+
+If the `Time` value is higher than 6 minutes, then the hardware specifications for the node may need to be upgraded. 
+
+If there is an evictions related error such as the one below, try running the call to the `/rchash/` endpoint again.
+
+```
+error: "level"="error" "logger"="node/storageincentives" "msg"="make sample" "error"="sampler: failed creating sample: sampler stopped due to ongoing evictions"
+```
+
+While evictions are a normal part of Bee's standard operation, the event of an eviction will interrupt the sampler process.
+
+If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord). 
+
+
+## Guide to Node Status Related API Endpoints
 
 Your main tool for better understanding your node is the Bee API. The API has a handful of endpoints which will provide you with information relevant to detecting and diagnosing problems with your nodes.
 
 :::info
-Some endpoints are disabled by default on the Bee API (port `1633` by default) unless [authentication is enabled](/docs/bee/working-with-bee/security). The endpoints which are disabled by default for the Bee API are listed in the Bee Debug API  (port `1635` by default) section below.
+Some endpoints are disabled by default on the Bee API (port `1633` by default) unless [authentication is enabled](/docs/bee/working-with-bee/security). They are available in the debug API however (port `1635` by default), so be mindful of which api you are using.  
 :::
 
-### `/health`
-       
-   The `/health` endpoint will report on the general health of the node by simply reporting if your node is healthy or not. If the value for `"status"` is not `"ok"`, your node has an issue which needs to be addressed.
-   
-    This endpoint will NOT detect issues related to redistribution (staking), topology (the peers you are connected to), and other higher level functions, so even if you see that the `"status"` is `"ok"`, that does not mean every feature of your node is operating properly, it simply means that the node's baseline functionalities are all working properly. 
-    
-    Whichever infrastructure system you are using (docker / kubernetes), it's the endpoint used to check node health statuses.
-
-    Therefore it's vital to not rely solely on this endpoint as a check of whether or not your node is working properly, and to also make use of the rest of the endpoints discussed below.
-       
-    ```bash
-        curl -s http://localhost:1633/health | jq
-        
-        {
-          "status": "ok",
-          "version": "1.18.2-759f56f7",
-          "apiVersion": "5.1.1",
-          "debugApiVersion": "0.0.0"
-        }           
-    ```
-
-    * `"status"` - A simple yes/no measure of node health.
-    * `"version"` - The version of your Bee node. You can find latest version by checking the [Bee github repo](https://github.com/ethersphere/bee).
-    * `"apiVersion"` 
-    * `"debugApiVersion"`
 
 ### `/status`
 
@@ -266,62 +328,6 @@ And we can compare these entries to our own node's `/status` results for diagnos
 From the results we can see that we have a healthy neighborhood size when compared with the other nodes in our neighborhood and also has the same `batchCommitment` value as it should.
 
 
-### `/reservestate`
-    This endpoint shows key information about the reserve state of your node. You can use it to identify problems with your node related to its reserve (whether it is syncing chunks properly into its reserve for example).
-
-    ```bash
-        curl -s  http://localhost:1635/reservestate | jq
-
-        {
-          "radius": 15,
-          "": 10,
-          "commitment": 134121783296
-        }
-    ```
-    
-    Let's take a look at each of these values:
-    * `"radius"` - is what the storage radius would be if every available batch was 100% utilized, it is essentially the radius needed for the network to handle all of the batches at 100% utilization. Radius is measured as a proximity order (PO).
-    * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods.
-    * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilized.
-    
-### `/chainstate`
-
-    This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
-    
-	```bash
-     curl -s http://localhost:1633/chainstate | jq
-
-    {
-      "chainTip": 32354482,
-      "block": 32354475,
-      "totalAmount": "25422512270",
-      "currentPrice": "24000"
-    }
-    ```
-    * `"chainTip"` - The latest Gnosis Chain block number. Should be as high as or almost as high as the block number shown at [GnosisScan](https://gnosisscan.io/).
-    * `"block"` - The block to which your node has synced data from Gnosis Chain. This may be far behind the `"chainTip"` when you first start up your node as it takes some time to sync all the data from the blockchain (especially if you are not using the `snapshot` option). Should be very close to `"chainTip"` if your node has already been operating for a while.
-    * `"totalAmount"` - Cumulative value of all prices per chunk in PLUR for each block.
-    * `"currentPrice"` - The price in PLUR to store a single chunk for each Gnosis Chain block.
-    
-### `/node`
-    This API performs a simple check of node options related to your node type and also displays your current node type.
-
-    ```bash
-    curl -s http://localhost:1633/node | jq
-    
-    {
-      "beeMode": "full",
-      "chequebookEnabled": true,
-      "swapEnabled": true
-    }
-    ```
-    * `"beeMode"` - The mode of your node, can be `"full"`, `"light"`, or `"ultraLight"`.
-    * `"chequebookEnabled"` - Whether or not your node's `chequebook-enable` option is set to `true`.
-    * `"swapEnabled"` - Whether or not your node's `swap-enable` option is set to `true`.
-
-    If your node is not operating in the correct mode, this can help you to diagnose whether you have set your options correctly.
-## Node Health Guide: Bee Debug API
-
 ### `/redistributionstate`
     This endpoint provides an overview of values related to storage fee redistribution game (in other words, staking rewards). You can use this endpoint to check whether or not your node is participating properly in the redistribution game. 
     ```bash
@@ -360,6 +366,43 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"reward"` - The total all-time reward in PLUR earned by your node.
     * `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
     * `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
+
+### `/reservestate`
+    This endpoint shows key information about the reserve state of your node. You can use it to identify problems with your node related to its reserve (whether it is syncing chunks properly into its reserve for example).
+
+    ```bash
+        curl -s  http://localhost:1635/reservestate | jq
+
+        {
+          "radius": 15,
+          "": 10,
+          "commitment": 134121783296
+        }
+    ```
+    
+    Let's take a look at each of these values:
+    * `"radius"` - is what the storage radius would be if every available batch was 100% utilized, it is essentially the radius needed for the network to handle all of the batches at 100% utilization. Radius is measured as a proximity order (PO).
+    * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods.
+    * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilized.
+    
+### `/chainstate`
+
+    This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
+    
+	```bash
+     curl -s http://localhost:1633/chainstate | jq
+
+    {
+      "chainTip": 32354482,
+      "block": 32354475,
+      "totalAmount": "25422512270",
+      "currentPrice": "24000"
+    }
+    ```
+    * `"chainTip"` - The latest Gnosis Chain block number. Should be as high as or almost as high as the block number shown at [GnosisScan](https://gnosisscan.io/).
+    * `"block"` - The block to which your node has synced data from Gnosis Chain. This may be far behind the `"chainTip"` when you first start up your node as it takes some time to sync all the data from the blockchain (especially if you are not using the `snapshot` option). Should be very close to `"chainTip"` if your node has already been operating for a while.
+    * `"totalAmount"` - Cumulative value of all prices per chunk in PLUR for each block.
+    * `"currentPrice"` - The price in PLUR to store a single chunk for each Gnosis Chain block.
 
 ### `/topology`
     This endpoint allows you to explore the topology of your node within the Kademlia network. The results are split into 32 bins from bin_0 to bin_32. Each bin represents the nodes in the same neighborhood as your node at each proximity order from PO 0 to PO 32. 
@@ -449,3 +492,43 @@ From the results we can see that we have a healthy neighborhood size when compar
       ]
     },
 ```
+    
+### `/node`
+    This API performs a simple check of node options related to your node type and also displays your current node type.
+
+    ```bash
+    curl -s http://localhost:1633/node | jq
+    
+    {
+      "beeMode": "full",
+      "chequebookEnabled": true,
+      "swapEnabled": true
+    }
+    ```
+    * `"beeMode"` - The mode of your node, can be `"full"`, `"light"`, or `"ultraLight"`.
+    * `"chequebookEnabled"` - Whether or not your node's `chequebook-enable` option is set to `true`.
+    * `"swapEnabled"` - Whether or not your node's `swap-enable` option is set to `true`.
+
+    If your node is not operating in the correct mode, this can help you to diagnose whether you have set your options correctly.
+
+
+### `/health`
+       
+  The /health endpoint is primarily used by infra tools such as Docker / Kubernetes to check whether the server is live, it's not an important diagnostic tool for node operators.
+      
+  ```bash
+      curl -s http://localhost:1633/health | jq
+      
+      {
+        "status": "ok",
+        "version": "1.18.2-759f56f7",
+        "apiVersion": "5.1.1",
+        "debugApiVersion": "0.0.0"
+      }           
+  ```
+
+  * `"status"` - "ok" if the server is responsive.
+  * `"version"` - The version of your Bee node. You can find latest version by checking the [Bee github repo](https://github.com/ethersphere/bee).
+  * `"apiVersion"` 
+  * `"debugApiVersion"`
+
