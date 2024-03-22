@@ -111,7 +111,7 @@ While evictions are a normal part of Bee's standard operation, the event of an e
 If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord). 
 
 
-## Guide to Node Status Related API Endpoints
+## Guide to Status Related Endpoints
 
 Your main tool for better understanding your node is the Bee API. The API has a handful of endpoints which will provide you with information relevant to detecting and diagnosing problems with your nodes.
 
