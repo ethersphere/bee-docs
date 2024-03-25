@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 4.1.0
+  version: 4.1.1
   title: Bee Debug API
   description: >-
     A list of the currently provided debug interfaces to interact with the bee
@@ -662,6 +662,41 @@ paths:
           $ref: '#/components/responses/500'
         default:
           description: Default response
+  /wallet/withdraw/{coin}:
+    post:
+      summary: Allows withdrawals of BZZ or xDAI to provided (whitelisted) address
+      tags:
+        - Wallet
+      parameters:
+        - in: query
+          name: amount
+          required: true
+          schema:
+            $ref: '#/components/schemas/BigInt'
+        - in: query
+          name: address
+          required: true
+          schema:
+            $ref: '#/components/schemas/EthereumAddress'
+        - in: path
+          name: coin
+          required: true
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletTxResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/400'
+          description: Amount greater than ballance or coin is other than BZZ/xDAI
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
   /transactions:
     get:
       summary: Get list of pending transactions
@@ -1115,6 +1150,11 @@ paths:
           description: Default response.
 components:
   schemas:
+    WalletTxResponse:
+      type: object
+      properties:
+        transactionHash:
+          $ref: '#/components/schemas/TransactionHash'
     SwarmAddress:
       type: string
       pattern: ^[A-Fa-f0-9]{64}$
@@ -1739,6 +1779,8 @@ components:
           type: integer
         reserveSize:
           type: integer
+        reserveSizeWithinRadius:
+          type: interger
         pullsyncRate:
           type: number
         storageRadius:

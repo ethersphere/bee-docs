@@ -172,6 +172,28 @@ paths:
           $ref: '#/components/responses/400'
         default:
           description: Default response
+    head:
+      summary: >-
+        Requests the headers containing the content type and length for the
+        reference
+      tags:
+        - Bytes
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of chunk
+      responses:
+        '200':
+          description: Chunk exists
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        default:
+          description: Default response
   /chunks:
     post:
       summary: Upload chunk
@@ -330,6 +352,26 @@ paths:
           $ref: '#/components/responses/404'
         '500':
           $ref: '#/components/responses/500'
+        default:
+          description: Default response
+    head:
+      summary: Get the headers containing the content type and length for the reference
+      tags:
+        - BZZ
+      parameters:
+        - in: path
+          name: address
+          schema:
+            $ref: '#/components/schemas/SwarmAddress'
+          required: true
+          description: Swarm address of chunk
+      responses:
+        '200':
+          description: Chunk exists
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
         default:
           description: Default response
   /bzz/{reference}/{path}:
@@ -595,6 +637,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SwarmOnlyReferencesList'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+  /pins/check:
+    get:
+      summary: Validate pinned chunks integerity
+      tags:
+        - Pinning
+      parameters:
+        - in: query
+          name: ref
+          schema:
+            $ref: '#/components/schemas/SwarmOnlyReference'
+          required: false
+          description: >-
+            The number of items to skip before starting to collect the result
+            set.
+      responses:
+        '200':
+          description: List of checked root hash references
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PinCheckResponse'
         '500':
           $ref: '#/components/responses/500'
         default:
@@ -1973,6 +2040,43 @@ paths:
                 $ref: '#/components/schemas/DebugPostageAllBatchesResponse'
         default:
           description: Default response
+  /rchash/{depth}/{anchor1}/{anchor2}:
+    get:
+      summary: Get reserve commitment hash with sample proofs
+      tags:
+        - RChash
+      parameters:
+        - in: path
+          name: depth
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          required: true
+          description: The storage depth.
+        - in: path
+          name: anchor1
+          schema:
+            $ref: '#/components/schemas/HexString'
+          required: true
+          description: The first anchor.
+        - in: path
+          name: anchor2
+          schema:
+            $ref: '#/components/schemas/HexString'
+          required: true
+          description: The second anchor.
+      responses:
+        '200':
+          description: Reserve sample response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiRCHashResponse'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
 components:
   securitySchemes:
     basicAuth:
@@ -2194,11 +2298,22 @@ components:
     SwarmOnlyReferencesList:
       type: object
       properties:
-        references:
+        reference:
           type: array
           nullable: false
           items:
             $ref: '#/components/schemas/SwarmOnlyReference'
+    PinCheckResponse:
+      type: object
+      properties:
+        reference:
+          $ref: '#/components/schemas/SwarmOnlyReference'
+        total:
+          type: integer
+        missing:
+          type: integer
+        invalid:
+          type: integer
     PssTopic:
       type: string
     PssTargets:
@@ -2677,6 +2792,78 @@ components:
           nullable: false
           items:
             $ref: '#/components/schemas/PostageBatchShort'
+    ApiPostageProof:
+      type: object
+      properties:
+        index:
+          type: string
+        postageId:
+          type: string
+        signature:
+          type: string
+        timeStamp:
+          type: string
+    ApiSOCProof:
+      type: object
+      properties:
+        chunkAddr:
+          type: string
+        identifier:
+          type: string
+        signature:
+          type: string
+        signer:
+          type: string
+    ApiChunkInclusionProof:
+      type: object
+      properties:
+        chunkSpan:
+          minimum: 0
+          type: integer
+        postageProof:
+          $ref: '#/components/schemas/ApiPostageProof'
+        proofSegments:
+          items:
+            type: string
+          nullable: true
+          type: array
+        proofSegments2:
+          items:
+            type: string
+          nullable: true
+          type: array
+        proofSegments3:
+          items:
+            type: string
+          nullable: true
+          type: array
+        proveSegment:
+          type: string
+        proveSegment2:
+          type: string
+        socProof:
+          items:
+            $ref: '#/components/schemas/ApiSOCProof'
+          nullable: true
+          type: array
+    ApiChunkInclusionProofs:
+      type: object
+      properties:
+        proof1:
+          $ref: '#/components/schemas/ApiChunkInclusionProof'
+        proof2:
+          $ref: '#/components/schemas/ApiChunkInclusionProof'
+        proofLast:
+          $ref: '#/components/schemas/ApiChunkInclusionProof'
+    ApiRCHashResponse:
+      type: object
+      properties:
+        duration:
+          type: integer
+        hash:
+          $ref: '#/components/schemas/SwarmAddress'
+        proofs:
+          $ref: '#/components/schemas/ApiChunkInclusionProofs'
   responses:
     '200':
       description: OK.
