@@ -48,9 +48,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Appendices',
+      label: 'Advanced',
       items: [
-        'learn/appendices/erasure-cost-calculation',
+        'learn/advanced/erasure-cost-calculation',
+        'learn/advanced/neighbourhoods',
       ],
       collapsed: false
     },

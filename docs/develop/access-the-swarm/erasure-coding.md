@@ -51,7 +51,7 @@ In the table below, the percent cost is displayed for each redundancy level. The
 
 For larger uploads (where the source data chunks are equal to or greater than the  "Data Chunks" for each redundancy level respectively) you can use the percent values shown in the "Percent" column as a general estimate of the percent cost of uploading. If the number of chunks is slightly less than the number shown in the "Data Chunks" column, you can also use the value in the "Percent" column as a good general estimate of the percent cost. 
 
-However, if the number of source data chunks are significantly less than the value in the "Data Chunks" column for each respective level, then the percent cost will differ significantly from the one shown in the "Percent" column. For more precise calculations, see the [relevant appendix](/docs/learn/appendices/erasure-cost-calculation).
+However, if the number of source data chunks are significantly less than the value in the "Data Chunks" column for each respective level, then the percent cost will differ significantly from the one shown in the "Percent" column. For more precise calculations, see the [relevant appendix](/docs/learn/advanced/erasure-cost-calculation).
 
 
 ## Cost Calculator Widget
