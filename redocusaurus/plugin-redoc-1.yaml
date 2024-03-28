@@ -1035,26 +1035,6 @@ paths:
           $ref: '#/components/responses/500'
         default:
           description: Default response
-    delete:
-      summary: Withdraw all staked amount.
-      description: >-
-        Be aware, this endpoint creates an on-chain transactions and transfers
-        BZZ from the node's Ethereum account and hence directly manipulates the
-        wallet balance.
-      tags:
-        - Staking
-      parameters:
-        - $ref: '#/components/parameters/GasPriceParameter'
-        - $ref: '#/components/parameters/GasLimitParameter'
-      responses:
-        '200':
-          $ref: '#/components/responses/WithdrawAllStakeResponse'
-        '400':
-          $ref: '#/components/responses/400'
-        '500':
-          $ref: '#/components/responses/500'
-        default:
-          description: Default response
   /loggers:
     get:
       summary: Get all available loggers.
@@ -1847,11 +1827,6 @@ components:
       properties:
         stakedAmount:
           $ref: '#/components/schemas/BigInt'
-    WithdrawAllStakeResponse:
-      type: object
-      properties:
-        txHash:
-          $ref: '#/components/schemas/TransactionHash'
   parameters:
     GasPriceParameter:
       in: header
