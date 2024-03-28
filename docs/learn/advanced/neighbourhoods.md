@@ -36,15 +36,16 @@ Since we are only concerned with the leading binary bits close to the neighbourh
 
 Chunks are assigned to neighbourhoods based on their addresses, which are in the same 256 bit format as node addresses. Here are two example chunks which fall within our example neighbourhood:
 
-> Chunk A address: `da49a42926015cd1e2bc552147c567b1ca13e8d4302c9e6026e79a24de328b65`
-> Chunk B address: `da696a3dfb0f7f952872eb33e0e2a1435c61f111ff361e64203b5348cc06dc8a`
+> Chunk A address: `da49a42926015cd1e2bc552147c567b1ca13e8d4302c9e6026e79a24de328b65`   
+> Chunk B address: `da696a3dfb0f7f952872eb33e0e2a1435c61f111ff361e64203b5348cc06dc8a`   
 
 As the address of the chunk shown above shares the same ten leading binary bits as the nodes in our example neighbourhood, it falls into that neighbourhood's [area of responsibility](/docs/learn/glossary#2-area-of-responsibility-related-depths), and all the nodes in that neighbourhood are required to store that chunk:
 
-> da49 --> <u>1101101001</u>001001
-> da69 --> <u>1101101001</u>101001
+> da49 --> <u>1101101001</u>001001  
+> da69 --> <u>1101101001</u>101001 
 
-*As with the nodes, we've abbreviated the chunk addresses to their leading four hexadecimal digits only in the example above.*
+
+*As with the example for nodes, we've abbreviated the chunk addresses to their leading four hexadecimal digits only and converted them to binary digits.*
 
 ### Neighbourhood Doubling 
 
