@@ -20,7 +20,7 @@ These two methods have [significant differences](/docs/bee/installation/install#
 
 ## Configuration for Bee Service
 
-*Note that Bee is only set up to run as a service by default when it is [installed using one of the officially supported](/docs/bee/installation/install#package-manager-install-recommended-method) Linux Debian or RPM packages or the Homebrew installer for MacOS.*
+*Note that Bee is only set up to run as a service by default when it is [installed using one of the officially supported](/docs/bee/installation/install#shell-script-install) Linux Debian or RPM packages or the Homebrew installer for MacOS.*
 
 
 ### Default Data and Config Directories
@@ -363,7 +363,7 @@ Bee provides the following options to customise your node.
 
 _default_ `/home/<user>/.bee.yaml`
 
-The location of a YAML configuration file containing configuration options. See [configuration](#configuration-file).
+The location of a YAML configuration file containing configuration options. See [configuration](/docs/bee/working-with-bee/configuration#default-data-and-config-directories-1).
 
 ### Start
 

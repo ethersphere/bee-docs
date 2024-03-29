@@ -53,7 +53,7 @@ There are many ways to acquire BZZ token, either on custodial centralised exchan
 
 ### What is the BZZ token address?
 
-See [this page](/docs/learn/technology/contracts/overview/#token-contracts) for a list of relevant token addresses. 
+See [this page](/docs/learn/technology/contracts/overview) for a list of relevant token addresses. 
 
 ### What is the BZZ token supply?
 
@@ -99,7 +99,7 @@ A bee node can be configured to run in various modes based on specific use cases
 #### What are the requirements for running a Bee node?
 
 
-See the [install section](/docs/bee/installation/install/#1-install-bee) for more information about running a Bee node.
+See the [install section](/docs/bee/installation/install) for more information about running a Bee node.
 
 ##### Full node
 

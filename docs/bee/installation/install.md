@@ -36,7 +36,7 @@ HDD drives are very strongly discouraged for full nodes due to their low speeds.
 
 Note that there are additional [hardware requirements](https://docs.gnosischain.com/node/#environment-and-hardware) if you choose to run your own Gnosis Chain node in order to provide your Bee node(s) with the required RPC endpoint. See [configuration step](/docs/bee/installation/install#set-blockchain-rpc-endpoint) for more details.
 
-In order to test whether a set of hardware specs is sufficient for running a full node and participating in the storage incentives redistribution, see [this guide](/docs/bee/working-with-bee/staking#check-node-performance) on the staking page.
+In order to test whether a set of hardware specs is sufficient for running a full node and participating in the storage incentives redistribution, see [this guide](/docs/bee/working-with-bee/troubleshooting#node-not-participating-in-redistribution).
 
 ### Light and UltraLight Nodes
 

@@ -9,7 +9,7 @@ Choose the appropriate uninstall method based on the install method used:
 
 ### Package Manager Install
 
-This method can be used for package manager based [installs](/docs/bee/installation/install#package-manager-install-recommended-method) of the official Debian, RPM, and Homebrew packages.
+This method can be used for package manager based [installs](/docs/bee/installation/install#shell-script-install) of the official Debian, RPM, and Homebrew packages.
 
 :::danger
 This will remove your keyfiles so make certain that you have a [full backup](/docs/bee/working-with-bee/backups#backup-your-node) of your keys and configuration before uninstalling.
@@ -30,7 +30,7 @@ sudo yum remove bee
 ```
 
 ### Binary Install
-If Bee is installed using the [automated shell script](/docs/bee/installation/install#shell-script-install-alternate-method) or by [building from source](/docs/bee/installation/build-from-source), Bee can be uninstalled by directly removing the installed file.
+If Bee is installed using the [automated shell script](/docs/bee/installation/install#shell-script-install) or by [building from source](/docs/bee/installation/build-from-source), Bee can be uninstalled by directly removing the installed file.
 
 ```bash
 sudo rm `/usr/local/bin/bee`
