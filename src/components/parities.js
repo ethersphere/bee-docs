@@ -62,6 +62,7 @@ let parities = [
       30, 30, 30, 30, 30,  // For chunks 88-92
       31, 31, 31, 31, 31  // For chunks 93-97
     ],
+    // Paranoid
     [
       19, // For chunk 1
       23, // For chunk 2
