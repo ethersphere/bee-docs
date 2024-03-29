@@ -39,25 +39,25 @@ export default function UploadCostCalc() {
   const calculateCost = () => {
     setErrorMessage("");
     setResult([]);
-  
+
     if (!redundancy) {
       setErrorMessage("Please select a redundancy level.");
       return;
     }
-  
+
     let totalChunks, sizeInKb, sizeInGb, parityDataInGb;
     if (unit === "kb") {
       const kbValue = parseFloat(dataSize);
-      if (isNaN(kbValue) || kbValue <= 0) {
-        setErrorMessage("Please input a valid KB value above 0.");
+      if (isNaN(kbValue) || kbValue < 1) { // Validate for KB
+        setErrorMessage("Please input a KB value of at least 1.");
         return;
       }
       sizeInKb = kbValue;
       totalChunks = Math.ceil((kbValue * 1024) / (2 ** 12));
     } else if (unit === "gb") {
       const gbValue = parseFloat(dataSize);
-      if (isNaN(gbValue) || gbValue <= 0) {
-        setErrorMessage("Please input a valid GB value above 0.");
+      if (isNaN(gbValue) || gbValue < 0.01) { // Validate for GB
+        setErrorMessage("Please input a GB value of at least 0.01.");
         return;
       }
       sizeInGb = gbValue;
@@ -65,8 +65,8 @@ export default function UploadCostCalc() {
       totalChunks = Math.ceil((sizeInKb * 1024) / (2 ** 12));
     } else {
       const chunksValue = parseFloat(dataSize);
-      if (isNaN(chunksValue) || chunksValue <= 0) {
-        setErrorMessage("Please input a valid chunk amount above 0.");
+      if (isNaN(chunksValue) || chunksValue < 1) { // Validate for chunks
+        setErrorMessage("Please input a chunk amount of at least 1.");
         return;
       }
       totalChunks = Math.ceil(chunksValue);
@@ -94,8 +94,8 @@ export default function UploadCostCalc() {
     const formatNumber = (num) => new Intl.NumberFormat('en-US').format(num);
   
     const resultsArray = [
-      { name: "Source data size", value: unit === "gb" ? `${formatNumber(sizeInGb.toFixed(2))} GB` : `${formatNumber(sizeInKb.toFixed(0))} KB` },
-      { name: "Parity data size", value: unit === "gb" ? `${formatNumber(parityDataInGb.toFixed(2))} GB` : `${formatNumber(parityDataInKb.toFixed(0))} KB` },
+      { name: "Source data size", value: unit === "gb" ? `${formatNumber(sizeInGb.toFixed(4))} GB` : `${formatNumber(sizeInKb.toFixed(4))} KB` },
+      { name: "Parity data size", value: unit === "gb" ? `${formatNumber(parityDataInGb.toFixed(4))} GB` : `${formatNumber(parityDataInKb.toFixed(4))} KB` },
       { name: "Source data in chunks", value: formatNumber(totalChunks) },
       { name: "Additional parity chunks", value: formatNumber(totalParities) },
       { name: "Percent cost increase", value: `${percentDifference.toFixed(2)}%` },
