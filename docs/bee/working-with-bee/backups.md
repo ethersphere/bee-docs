@@ -31,7 +31,7 @@ It may also be useful to include the `bee.yaml` config file in a backup so that 
 
 ### Binary package install
 
-If you installed Bee using the [automated shell script](/docs/bee/installation/install#shell-script-install-alternate-method) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
+If you installed Bee using the [automated shell script](/docs/bee/installation/install#shell-script-install) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
 
 ```bash
 /home/<user>/.bee
