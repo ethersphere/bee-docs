@@ -92,7 +92,15 @@ let parities = [
       71, // For chunk 26
       73, // For chunk 27
       75, // For chunk 28
-      76  // For chunk 29
+      76, // For chunk 29
+      78, // For chunk 30
+      80, // For chunk 31
+      81, // For chunk 32
+      83, // For chunk 33
+      84, // For chunk 34
+      86, // For chunk 35
+      87, // For chunk 36
+      89  // For chunk 37
     ]
 
 ]

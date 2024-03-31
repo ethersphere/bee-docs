@@ -20,6 +20,13 @@ export default function UploadCostCalc() {
   };
   
 
+  const formatNumberCustom = (num) => {
+    const isScientific = Math.abs(num) > 0 && Math.abs(num) < 0.0001;
+    let formattedNum = isScientific ? num.toExponential(2) : num.toFixed(2);
+
+    return formattedNum;
+  };
+
   const handleDataSizeChange = (e) => {
     setDataSize(e.target.value);
   };
@@ -65,8 +72,8 @@ export default function UploadCostCalc() {
       totalChunks = Math.ceil((sizeInKb * 1024) / (2 ** 12));
     } else {
       const chunksValue = parseFloat(dataSize);
-      if (isNaN(chunksValue) || chunksValue <= 0) {
-        setErrorMessage("Please input a valid chunk amount above 0.");
+      if (isNaN(chunksValue) || chunksValue <= 1 || chunksValue % 1 > 0) {
+        setErrorMessage("Please input an integer greater than 1 for chunk values");
         return;
       }
       totalChunks = Math.ceil(chunksValue);
@@ -94,13 +101,33 @@ export default function UploadCostCalc() {
     const formatNumber = (num) => new Intl.NumberFormat('en-US').format(num);
   
     const resultsArray = [
-      // { name: "Source data size", value: unit === "gb" ? `${formatNumber(sizeInGb.toFixed(2))} GB` : `${formatNumber(sizeInKb.toFixed(0))} KB` },
-      // { name: "Parity data size", value: unit === "gb" ? `${formatNumber(parityDataInGb.toFixed(2))} GB` : `${formatNumber(parityDataInKb.toFixed(0))} KB` },
-      { name: "Source data in chunks", value: formatNumber(totalChunks) },
-      { name: "Additional parity chunks", value: formatNumber(totalParities) },
-      { name: "Percent cost increase", value: `${percentDifference.toFixed(2)}%` },
-      { name: "Selected redundancy level", value: `${redundancy}` },
-      { name: "Error tolerance", value: errorTolerances[redundancy] }
+      {
+        name: "Source data size",
+        value: unit === "gb" ? `${formatNumberCustom(sizeInGb)} GB` : `${formatNumberCustom(sizeInKb)} KB`,
+      },
+      {
+        name: "Parity data size",
+        value: unit === "gb" ? `${formatNumberCustom(parityDataInGb)} GB` : `${formatNumberCustom(parityDataInKb)} KB`,
+      },
+      { 
+        name: "Source data in chunks", 
+        value: formatNumber(totalChunks) 
+      },
+      { 
+        name: "Additional parity chunks", 
+        value: formatNumber(totalParities) 
+      },
+      { 
+        name: "Percent cost increase", 
+        value: `${percentDifference.toFixed(2)}%` 
+      },
+      { 
+        name: "Selected redundancy level", 
+        value: `${redundancy}` },
+      { 
+        name: "Error tolerance", 
+        value: errorTolerances[redundancy] 
+      }
     ];
   
     setResult(resultsArray);
