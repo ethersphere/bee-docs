@@ -72,8 +72,8 @@ export default function UploadCostCalc() {
       totalChunks = Math.ceil((sizeInKb * 1024) / (2 ** 12));
     } else {
       const chunksValue = parseFloat(dataSize);
-      if (isNaN(chunksValue) || chunksValue <= 0) {
-        setErrorMessage("Please input a valid chunk amount above 0.");
+      if (isNaN(chunksValue) || chunksValue <= 1 || chunksValue % 1 > 0) {
+        setErrorMessage("Please input an integer greater than 1 for chunk values");
         return;
       }
       totalChunks = Math.ceil(chunksValue);
