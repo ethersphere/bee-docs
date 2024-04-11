@@ -521,7 +521,7 @@ From the results we can see that we have a healthy neighborhood size when compar
       
       {
         "status": "ok",
-        "version": "1.18.2-759f56f7",
+        "version": "2.0.0-759f56f7",
         "apiVersion": "5.1.1",
         "debugApiVersion": "0.0.0"
       }           
