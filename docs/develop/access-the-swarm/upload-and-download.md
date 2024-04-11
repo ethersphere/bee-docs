@@ -121,7 +121,7 @@ swarm-cli status
 Bee
 API: http://localhost:1633 [OK]
 Debug API: http://localhost:1635 [OK]
-Version: 1.18.2-50fcec7b
+Version: 2.0.0-50fcec7b
 Mode: full
 
 Topology

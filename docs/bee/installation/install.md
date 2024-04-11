@@ -152,9 +152,9 @@ Need to get 0 B/27.2 MB of archives.
 After this operation, 50.8 MB of additional disk space will be used.
 Selecting previously unselected package bee.
 (Reading database ... 82381 files and directories currently installed.)
-Preparing to unpack .../archives/bee_1.18.2_amd64.deb ...
-Unpacking bee (1.18.2) ...
-Setting up bee (1.18.2) ...
+Preparing to unpack .../archives/bee_2.0.0_amd64.deb ...
+Unpacking bee (2.0.0) ...
+Setting up bee (2.0.0) ...
 
 Logs:   journalctl -f -u bee.service
 Config: /etc/bee/bee.yaml
@@ -183,13 +183,13 @@ Use either of the following commands to run the script and install Bee:
 #### wget
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.18.2 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.0.0 bash
 ```
 
 #### curl
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v1.18.2 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.0.0 bash
 ```
 ### Build from source 
 If neither of the above methods works for your system, you can see our guide for [building directly from source](/docs/bee/installation/build-from-source).
@@ -451,7 +451,7 @@ bee version
 ```
 
 ```
-1.18.2
+2.0.0
 ```
 
 Once the Bee node has been funded, the chequebook deployed, and postage stamp
