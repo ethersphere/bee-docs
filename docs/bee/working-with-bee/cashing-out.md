@@ -43,7 +43,7 @@ curl -X POST "http://localhost:1635/wallet/withdraw/bzz?amount=1&address=0x62d04
 ## Cashing out Cheques (SWAP)
 
 As your Bee forwards and serves chunks to its peers, it is rewarded in
-BZZ in the form of cheques. Once these cheques accumulate sufficient
+xBZZ in the form of cheques. Once these cheques accumulate sufficient
 value, you may _cash them out_ using Bee's API. This process transfers
 money from your peer's chequebooks into your own, which you can then
 withdraw to your wallet to do with as you please!
