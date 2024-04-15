@@ -138,7 +138,7 @@ Available xBZZ: 0.0000000000018
 Total xBZZ: 0.0000000000018
 
 Staking
-Staked BZZ: 10
+Staked xBZZ: 10
 
 Redistribution
 Reward: 831386836533248000

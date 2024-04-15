@@ -47,9 +47,11 @@ Swarm's native token BZZ, was initially issued on Ethereum. It has been bridged 
 
 1 PLUR is the atomic unit of xBZZ, where xBZZ then has 16 decimals (ie. 1 PLUR = 1e-16 xBZZ)
 
-### Where can I buy BZZ Token?
+### Where can I buy BZZ tokens?
 
-There are many ways to acquire BZZ token, either on custodial centralised exchanges where you can trade traditional currencies and cryptocurrency or through decentralised exchanges and protocols where you can trade between cryptocurrencies. For more information please visit the [Get BZZ](https://www.ethswarm.org/get-bzz) page on the Ethswarm.org homepage.
+There are many ways to acquire BZZ tokens, either on custodial centralised exchanges where you can trade traditional currencies and cryptocurrency or through decentralised exchanges and protocols where you can trade between cryptocurrencies. For more information please visit the [Get BZZ](https://www.ethswarm.org/get-bzz) page on the Ethswarm.org homepage. 
+
+*Note that for use on Swarm for staking or purchasing postage stamps, you need the Gnosis Chain version of BZZ, commonly referred to as xBZZ.*
 
 ### What is the BZZ token address?
 

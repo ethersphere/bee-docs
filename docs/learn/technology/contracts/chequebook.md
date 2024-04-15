@@ -11,7 +11,7 @@ When a node sends a cheque to another node, it includes a signed message that sp
 Settlement of cheques is not enforced by smart contract. 
 :::
 
-If the cheque is valid, the contract updates the balances of both nodes accordingly. The recipient can then cash out their xBZZ tokens by sending a transaction to the blockchain that invokes a function in the chequebook contract. This function transfers the specified amount of BZZ tokens from the sender's account to the recipient's account.
+If the cheque is valid, the contract updates the balances of both nodes accordingly. The recipient can then cash out their xBZZ tokens by sending a transaction to the blockchain that invokes a function in the chequebook contract. This function transfers the specified amount of xBZZ tokens from the sender's account to the recipient's account.
 
 The chequebook contract also includes some additional features to prevent abuse. For example, it can impose limits on how much debt a node can accumulate before requiring payment.
 
