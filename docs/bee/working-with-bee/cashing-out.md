@@ -3,8 +3,47 @@ title: Cashing Out
 id: cashing-out
 ---
 
+There are two different types of cashing out. The first type is cashing out xBZZ rewards earned from staking and providing storage services (this method also allows for withdrawal of the native xDAI token). The second type is for the withdrawal of xBZZ earned through bandwidth incentives (SWAP). Both types are explained below: 
+
+## Withdrawing xBZZ Rewards and Native xDAI
+
+You can withdraw xBZZ rewards or native xDAI tokens using the `/wallet/withdraw/` endpoint. The endpoint allows you to withdraw tokens to any address which you have whitelisted using the `withdrawal-addresses-whitelist` option. 
+
+You can specify either a single address:
+
+```yaml
+# withdrawal target addresses
+withdrawal-addresses-whitelist: 0x62d04588e282849d391ebff1b9884cb921b9b94a
+```
+
+Or an array of addresses:
+
+```yaml
+# withdrawal target addresses
+withdrawal-addresses-whitelist: [ 0x62d04588e282849d391ebff1b9884cb921b9b94a, 0x71a5aae026e2ab87612a5824d492a095e7d790bf ]
+```
+
+The token you desire to withdraw is specified in the path directly:
+
+```bash
+http://localhost:1635/wallet/withdraw/{coin}
+```
+For `coin`, you can use the value `NativeToken` for xDAI or `BZZ` for xBZZ.
+
+The `amount` query parameter is used to specify how much of the token you wish to withdraw. The value should be specified in the lowest denomination for each token (wei for xDAI and PLUR for xBZZ).
+
+The `address` query parameter is used to specify the target address to withdraw to. This address must be specified using the `withdrawal-addresses-whitelist` option in your configuration.
+
+The following command will withdraw a single PLUR of xBZZ to address 0x62d04588e282849d391ebff1b9884cb921b9b94a:
+
+```bash
+curl -X POST "http://localhost:1635/wallet/withdraw/bzz?amount=1&address=0x62d04588e282849d391ebff1b9884cb921b9b94a"
+```
+
+## Cashing out Cheques (SWAP)
+
 As your Bee forwards and serves chunks to its peers, it is rewarded in
-BZZ in the form of cheques. Once these cheques accumulate sufficient
+xBZZ in the form of cheques. Once these cheques accumulate sufficient
 value, you may _cash them out_ using Bee's API. This process transfers
 money from your peer's chequebooks into your own, which you can then
 withdraw to your wallet to do with as you please!
@@ -164,7 +203,7 @@ curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
 You may then use [Blockscout](https://blockscout.com/xdai/mainnet) to
 track your transaction and make sure it completed successfully.
 
-# Managing uncashed cheques
+## Managing uncashed cheques
 
 For the Bee process, the final step of earning xBZZ is cashing a
 cheque. It is worth noting that a cheque is not yet actual xBZZ. In
