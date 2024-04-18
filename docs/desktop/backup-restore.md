@@ -61,18 +61,19 @@ Next open your file explorer and navigate to the directory you just copied. Dele
 
 ![](/img/backup7.png)
 
-Move up one directory from `Data DIR` to `Data`, and open the `config.yaml` file in a text editor such as VS Code or a plaintext editor:
+Move up one directory from `Data DIR` to `Data`, and replace delete the `config.yaml` file and replace it with the `config.yaml` file from your backup. 
+
+Alternatively if you have saved just the password and not the entire config file, open the default `config.yaml` file in a text editor such as VS Code or a plain text editor:
 
 ![](/img/backup4.png)
 
 ![](/img/backup5.png)
 
-Replace the `password` string with your own password from the `config.yaml` backup.
+Replace the `password` string with your own password which you saved from the `config.yaml` backup.
 
 Restart Swarm Desktop and check to see if the backup was restored successfully:
 
 ![](/img/backup6.png)
-
 
 ### Restore Gnosis Chain Account
 

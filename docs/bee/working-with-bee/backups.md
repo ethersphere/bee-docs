@@ -164,13 +164,7 @@ Before restoring, make sure to check for any old node data at `/var/lib/bee` fro
 
 1. Install Bee. See [install](/docs/bee/installation/install/) page for more info.
 
-1. Change ownership of `bee` data folder.
-
-    ```
-    sudo chown -R /var/lib/bee
-    ```
-    
-1. Delete statestore, keys, localstore, and password files.
+1. Delete `/bee` folder which was generated during install
 
     ```
     sudo rm -r /var/lib/bee
@@ -179,7 +173,7 @@ Before restoring, make sure to check for any old node data at `/var/lib/bee` fro
 1. Navigate to backup directory and copy files to data folder.
 
     ```
-    cp -r /<path-to-backup>/bee /var/lib/
+    sudo cp -r /<path-to-backup>/bee-backup/. /var/lib/bee
     ```
     
 1. Revert ownership of the data folder. 
@@ -191,67 +185,3 @@ Before restoring, make sure to check for any old node data at `/var/lib/bee` fro
     sudo systemctl restart bee
     sudo journalctl --lines=100 --follow --unit bee      
     ```
-
-## Import Clef Keys
-
-[Bee Clef](https://github.com/ethersphere/bee-clef) is the deprecated external signer for Bee. Node operators are recommended to remove Clef from their setup in order to ensure their nodes continue to operate smoothly through future updates. Below is a guide for importing Clef keys into a non-Clef setup. See the [#node-operators Discord channel](https://discord.com/channels/799027393297514537/811553590170353685) for more support from other node operators and channel admins. 
-
-### Step 1: From /bee-clef directory, print out keystore and password and keystore and save for the next step:
-
-*Notice: You may need to `sudo chown -R user:user /bee-clef` if you do not already have access*
-
-:::danger
-This is a throwaway account so we are sharing the keystore and password for this guide, never share your keystore or password like this!
-:::
-
-![](/img/clef_import_01.png)
-
-Follow the steps shown in the screenshot above to print out clef keystore.    
-
-#### Keystore (throwaway example):
-Copy the output shown in the screenshot:
-
-```json
-{"address":"1199e0674661ed795ead3182d5a5407e5d609612","crypto":{"cipher":"aes-128-ctr","ciphertext":"bcd47f40e970658f10be215833acebc60e5826935484be75009bb43c71472a7a","cipherparams":{"iv":"84137379119a5547888cfc8ea425ce7d"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":4096,"p":6,"r":8,"salt":"d555e66cbe0779d33eb088f50a345c6da5eed6f84ac6f418f9b0b731d721d2ac"},"mac":"48e7b3967d804ab54cd3610070d74a45f7f2eca4195eb6e82f289c4ce3332383"},"id":"e2e2eef3-8fd2-40f5-8f5d-a54c716110db","version":3}
-```
-
-#### Password
-
-Again copy the output, make sure you are printing the password file in `/passwords` whose title matches the address of the account you are exporting (i.e., after the `bee-0_` portion of the password file name the address of the wallet is printed starting with `1199e...` )
-
-`nd_UePSEWHLHa8drvl4TYR1W2QPNlKov`
-
-
-### Step 2: Import Clef Keys
-
-#### Check your settings
-
-Make sure you have removed clef related entries from your settings, such as `clef-signer-enable` and `clef-signer-endpoint` 
-
-#### Import keys
-
-Navigate to your bee install location. For our example it is installed at the default `/var/lib/bee`:
-
-*Notice: You may need to `sudo chown -R user:user /bee` if you do not already have access*
-
-:::danger
-From here you may have accounts here which you have not yet backed up. As the following steps to import your bee-clef keys will erase any keys you have currently, make sure to [backup](https://docs.ethswarm.org/docs/bee/working-with-bee/backups#keys) any keys you already have here.
-:::
-
-#### Import password
-
-From `/var/lib/bee` open your password file using `vi` and overwrite it with the password you copied from step 1, and save the changes. *(Make sure you have the original password backed up if you want to save the account already there.)*
-
-![](/img/clef_import_02.png)
-
-#### Import keystore
-
-First navigate to `/var/lib/bee/keys` and delete the `libp2p_v2.key` and `pss.key` files using `rm libp2p_v2.key pss.key`.
-
-Next, open the `swarm.key` file using `vi` and paste the keystore you copied from the first step, then save and close the file.
-
-Finally, give permissions back to `bee` with:
-```
-sudo chown -R bee:bee /bee
-```
-Now your import is complete, simply restart your bee to allow it to regenerate your `pss.key` and `libp2p_v2.key` files
