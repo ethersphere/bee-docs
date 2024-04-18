@@ -173,7 +173,7 @@ Before restoring, make sure to check for any old node data at `/var/lib/bee` fro
 1. Navigate to backup directory and copy files to data folder.
 
     ```
-    sudo cp -r /<path-to-backup>/bee-backup/. /var/lib/bee
+    sudo cp -r /<path-to-backup>/. /var/lib/bee
     ```
     
 1. Revert ownership of the data folder. 
