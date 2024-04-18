@@ -5,7 +5,14 @@ id: backup-restore
 
 ## Create a Backup
 
-To create a backup of your Bee node in Swarm Desktop, begin by navigating to the `Settings` tab in the app and copying the location of the data directory as indicated in the `Data DIR` field: 
+To create a backup of your Bee node in Swarm Desktop, start by shutting down your node.
+
+Right click the Bee icon in the System tray and select `Stop Bee` and then `Quit` to close and exit from Swarm Desktop:
+
+![](/img/backup2.png)
+
+
+Next navigate to the `Settings` tab in the app and copy the location of the data directory as indicated in the `Data DIR` field: 
 
 ![](/img/backup1.png)
 
@@ -24,6 +31,21 @@ Alternatively you may open the `config.yaml` and save the password as a text fil
 Your completed backup should contain all the files from your data directory as well as your password (either in your `config.yaml` file or as a separate file or written down.)
 
 ![](/img/backup8.png)
+
+### Back-up Gnosis Chain Key Only
+
+If you only wish to back-up your Gnosis Chain key, navigate to the `\data-dir\keys` directory, and copy the `swarm.key` to a safe location:
+
+![](/img/backup9.png)
+
+
+You also need the password found in the `config.yaml` file in order to access your Gnosis Chain account. Move up one directory from `Data DIR` to the `Data` directory, and create a copy of the `config.yaml` file and save it along with the other folders you just backed up:
+
+![](/img/backup4.png)
+
+Alternatively you may open the `config.yaml` and save the password as a text file along with the rest of your backup files:
+
+![](/img/backup5.png)
 
 ## Restore from Backup
 
@@ -50,3 +72,8 @@ Replace the `password` string with your own password from the `config.yaml` back
 Restart Swarm Desktop and check to see if the backup was restored successfully:
 
 ![](/img/backup6.png)
+
+
+### Restore Gnosis Chain Account
+
+If you only wish to access your Gnosis Chain account, you can [follow these instructions](/docs/bee/working-with-bee/backups#metamask-import) for exporting to Metamask in order to access your account.
