@@ -27,11 +27,11 @@ Note that the ticker symbol is the same BZZ for both Gnosis Chain and Ethereum v
 
 As with BZZ, PLUR is the smallest denomination of xBZZ. 1 PLUR is equal to 1e-16 xBZZ.
 
-### gBZZ
+### sBZZ
 
-gBZZ is the testnet version of BZZ on the Goerli Ethereum testnet. 
+sBZZ is the testnet version of BZZ on the Sepolia Ethereum testnet. 
 
-Goerli testnet address: [0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335](https://goerli.etherscan.io/address/0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335)
+Sepolia testnet address: [0x543dDb01Ba47acB11de34891cD86B675F04840db](https://sepolia.etherscan.io/address/0x543dDb01Ba47acB11de34891cD86B675F04840db)
 
 ### DAI 
 

@@ -177,7 +177,7 @@ BZZ is Swarm's [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | Ethereum, BZZ          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)                |
 | Gnosis Chain, xBZZ     | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://gnosisscan.io/token/0xdbf3ea6f5bee45c02255b2c26a16f300502f68da/) |
-| Goerli (testnet), gBZZ | [`0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335`](https://goerli.etherscan.io/address/0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335)         |
+| Sepolia (testnet), sBZZ | [`0x543dDb01Ba47acB11de34891cD86B675F04840db`](https://sepolia.etherscan.io/address/0x543dDb01Ba47acB11de34891cD86B675F04840db)         |
 
 ## xBZZ Token
 
@@ -193,12 +193,12 @@ It is used as payment for [postage stamps](glossary#postage-stamps) and as the u
 
 xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridged-tokens) to the [Gnosis Chain](https://www.gnosis.io) using [xDai Bridge](https://bridge.gnosischain.com/). It is also the native token of the Gnosis Chain, i.e. transaction fees are paid in xDai.
 
-## Goerli
+## Sepolia
 
-Goerli is an Ethereum testnet. It is an environment where smart contracts can be developed and tested without spending cryptocurrency with real value, and without putting valuable assets at risk. Tokens on Goerli are often prefixed with a lower-case 'g', example: 'gBZZ' and 'gETH,' and because this is a test network carry no monetary value. It is an environment where Bee smart contracts can be tested and interacted with without any risk of monetary loss.
+Sepolia is an Ethereum testnet. It is an environment where smart contracts can be developed and tested without spending cryptocurrency with real value, and without putting valuable assets at risk. Tokens on Sepolia are often prefixed with a lower-case 's', example: 'sBZZ' and because this is a test network carry no monetary value. It is an environment where Bee smart contracts can be tested and interacted with without any risk of monetary loss.
 
 ## Faucet
 
 A cryptocurrency faucet supplies small amounts of cryptocurrency to requestors (typically for testing purposes).
 
-It supplies small amounts of gBZZ and gETH for anyone who submits a request at the [Swarm Discord](https://discord.gg/wdghaQsGq5) server by using the `/faucet` command in the #develop-on-swarm channel.
+It supplies small amounts of sBZZ and Sepolia ETH for anyone who submits a request at the [Swarm Discord](https://discord.gg/wdghaQsGq5) server by using the `/faucet` command in the #develop-on-swarm channel.
