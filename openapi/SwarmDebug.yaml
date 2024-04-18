@@ -675,7 +675,7 @@ paths:
           description: Default response
   "/wallet":
     get:
-      summary: Get wallet balance for BZZ and xDai
+      summary: Get wallet balance for BZZ and xDAI
       tags:
         - Wallet
       responses:
@@ -700,16 +700,19 @@ paths:
         required: true
         schema:
           $ref: "#/components/schemas/BigInt"
+        description: Integer amount to withdraw specified in lowest denomination for each respective token (wei for xDAI and PLUR for BZZ).
       - in: query
         name: address
         required: true
         schema:
           $ref: "#/components/schemas/EthereumAddress"
+        description: Target Gnosis Chain address for withdrawal. Address must be whitelisted in node configuration through the `withdrawal-addresses-whitelist` option. 
       - in: path
         name: coin
         required: true
         schema:
-          $ref: "#/components/schemas/SwarmAddress"
+          type: string
+        description: Token to withdraw, accepted values include BZZ and NativeToken (for xDAI).
       responses:
         "200":
           content:
