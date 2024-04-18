@@ -90,7 +90,7 @@ follows:
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | Ethereum, BZZ          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)                |
 | Gnosis Chain, xBZZ     | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://blockscout.com/xdai/mainnet/tokens/0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da/) |
-| Goerli (testnet), gBZZ | [`0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335`](https://goerli.etherscan.io/address/0x2ac3c1d3e24b45c6c310534bc2dd84b5ed576335)         |
+| Sepolia (testnet), sBZZ | [`0x543dDb01Ba47acB11de34891cD86B675F04840db`](https://sepolia.etherscan.io/address/0x543dDb01Ba47acB11de34891cD86B675F04840db)         |
 
 # Accessing Your Node's Wallet
 
@@ -109,9 +109,9 @@ sudo cat /var/lib/bee/password
 
 # Testnet
 
-A Bee node needs gETH and gBZZ in its wallet to be able to properly
+A Bee node needs Sepolia ETH and sBZZ in its wallet to be able to properly
 interact with the test network. One way to acquire these funds is to
-sign into our Discord and request gETH and gBZZ test tokens from the
+sign into our Discord and request Sepolia ETH and sBZZ test tokens from the
 *faucet bot* to your node's Ethereum address.
 
 To find out what your node's Ethereum address is, please consult the
