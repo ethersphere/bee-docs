@@ -2,10 +2,150 @@
 title: Buy a Batch of Stamps
 id: buy-a-stamp-batch
 ---
-
+import VolumeAndDurationCalc from '@site/src/components/VolumeAndDurationCalc.js';
+import AmountAndDepthCalc from '@site/src/components/AmountAndDepthCalc.js';
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+
+
+## Buying a stamp batch
+
+A valid postage batch is required to upload data to Swarm. When purchasing a postage batch, the postage stamp batch purchase parameters can be adjusted to support the storage of differing amounts of data and duration. The parameters which control the duration and quantity of data that can be stored by a postage batch are the `depth` and `amount` parameters, with `depth` determining data size and `amount` determining storage duration. When interacting with the Bee API, a postage batch purchase follows this format:
+
+```bash
+curl -s -XPOST http://localhost:1635/stamps/<amount>/<depth>
+```
+
+
+<Tabs
+defaultValue="api"
+values={[
+{label: 'API', value: 'api'},
+{label: 'Swarm CLI', value: 'swarm-cli'},
+]}>
+<TabItem value="api">
+
+#### API
+
+```bash
+curl -s -XPOST http://localhost:1635/stamps/100000000/20
+```
+
+```bash
+{
+  "batchID": "8fcec40c65841e0c3c56679315a29a6495d32b9ed506f2757e03cdd778552c6b",
+  "txHash": "0x51c77ac171efd930eca8f3a77e3fcd5aca0a7353b84d5562f8e9c13f5907b675"
+}
+```
+
+</TabItem>
+
+<TabItem value="swarm-cli">
+
+#### Swarm CLI
+
+```bash
+swarm-cli stamp buy --depth 20 --amount 100000000
+```
+
+```bash
+Estimated cost: 0.010 BZZ
+Estimated capacity: 4.00 GB
+Estimated TTL: 5 hours 47 minutes 13 seconds
+Type: Mutable
+When a mutable stamp reaches full capacity, it still permits new content uploads. However, this comes with the caveat of overwriting previously uploaded content associated with the same stamp.
+? Confirm the purchase Yes
+Stamp ID: f4b9830676f4eeed4982c051934e64113dc348d7f5d2ab4398d371be0fbcdbf5
+```
+</TabItem>
+</Tabs>
+
+
+:::caution
+The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the `lastPrice` value from the postage stamp contract times 17280 (the number of blocks in 24 hours). This requirement is in place in order to prevent spamming the network.
+
+The minimum value for `depth` is 24. This requirement is in place due [the mechanics of batch utilisation](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table). 
+:::
+
+:::info
+Once your batch has been purchased, it will take a few minutes for other Bee nodes in the Swarm to catch up and register your batch. Allow some time for your batch to propagate in the network before proceeding to the next step.
+:::
+
+## Calculators
+
+<VolumeAndDurationCalc />
+
+<AmountAndDepthCalc />
+
+## Viewing Stamps
+
+To check on your stamps, send a GET request to the stamp endpoint.
+
+
+<Tabs
+defaultValue="api"
+values={[
+{label: 'API', value: 'api'},
+{label: 'Swarm CLI', value: 'swarm-cli'},
+]}>
+<TabItem value="api">
+
+#### API
+
+
+```bash
+curl http://localhost:1635/stamps
+```
+
+```bash
+{
+  "stamps": [
+    {
+      "batchID": "f4b9830676f4eeed4982c051934e64113dc348d7f5d2ab4398d371be0fbcdbf5",
+      "utilization": 0,
+      "usable": true,
+      "label": "",
+      "depth": 20,
+      "amount": "100000000",
+      "bucketDepth": 16,
+      "blockNumber": 30643611,
+      "immutableFlag": true,
+      "exists": true,
+      "batchTTL": 20588,
+      "expired": false
+    }
+  ]
+}
+```
+
+</TabItem>
+
+<TabItem value="swarm-cli">
+
+#### Swarm CLI
+
+```bash
+swarm-cli stamp list
+```
+
+```bash
+Stamp ID: f4b9830676f4eeed4982c051934e64113dc348d7f5d2ab4398d371be0fbcdbf5
+Usage: 0%
+Remaining Capacity: 4.00 GB
+TTL: 5 hours 42 minutes 18 seconds
+Expires: 2023-10-26
+
+```
+</TabItem>
+</Tabs>
+
+
+:::info
+When uploading content which has been stamped using an already expired postage stamp, the node will not attempt to sync the content. You are advised to use longer-lived postage stamps and encrypt your content to work around this. It is not possible to reupload unencrypted content which was stamped using an expired postage stamp. We're working on improving on this.
+:::
+
 
 Swarm comprises the sum total of all storage space provided by all of our nodes, called the DISC (Distributed Immutable Store of Chunks). The _right to write_ data into this distributed store is determined by the [postage stamps](/docs/learn/technology/contracts/postage-stamp) that have been attached.
 
@@ -76,6 +216,9 @@ $$2^{batch \_ depth} \times {amount}$$
 
 The paid xBZZ forms the `balance` of the batch. This `balance` is then slowly depleted as time ticks on and blocks are mined on Gnosis Chain.
 
+:::warning
+Although your stamp batch 'balance' slowly decrements as time goes on, there is no way to withdraw xBZZ from a batch.
+:::
 
 For example, with a `batch depth` of 24 and an `amount` of 1000000000 PLUR:
                                                     
@@ -123,128 +266,6 @@ The postage stamp price is currently set at 24000 PLUR, but may change to a dyna
 
 Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
 
-## Buying a stamp batch
-
-:::warning
-When you purchase a batch of stamps, you agree to burn xBZZ. Although your 'balance' slowly decrements as time goes on, there is no way to withdraw xBZZ from a batch. This is an outcome of Swarm's decentralised design, to read more about the different components of Swarm fit together, read <a href="https://www.ethswarm.org/The-Book-of-Swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
-:::
-
-<Tabs
-defaultValue="api"
-values={[
-{label: 'API', value: 'api'},
-{label: 'Swarm CLI', value: 'swarm-cli'},
-]}>
-<TabItem value="api">
-
-#### API
-
-```bash
-curl -s -XPOST http://localhost:1635/stamps/100000000/20
-```
-
-```bash
-{
-  "batchID": "8fcec40c65841e0c3c56679315a29a6495d32b9ed506f2757e03cdd778552c6b",
-  "txHash": "0x51c77ac171efd930eca8f3a77e3fcd5aca0a7353b84d5562f8e9c13f5907b675"
-}
-```
-
-</TabItem>
-
-<TabItem value="swarm-cli">
-
-#### Swarm CLI
-
-```bash
-swarm-cli stamp buy --depth 20 --amount 100000000
-```
-
-```bash
-Estimated cost: 0.010 BZZ
-Estimated capacity: 4.00 GB
-Estimated TTL: 5 hours 47 minutes 13 seconds
-Type: Mutable
-When a mutable stamp reaches full capacity, it still permits new content uploads. However, this comes with the caveat of overwriting previously uploaded content associated with the same stamp.
-? Confirm the purchase Yes
-Stamp ID: f4b9830676f4eeed4982c051934e64113dc348d7f5d2ab4398d371be0fbcdbf5
-```
-</TabItem>
-</Tabs>
-
-
-
-
-:::info
-Once your batch has been purchased, it will take a few minutes for other Bee nodes in the Swarm to catch up and register your batch. Allow some time for your batch to propagate in the network before proceeding to the next step.
-:::
-
-Look out for more ways to more accurately estimate the correct size of your batch coming soon!
-
-To check on your stamps, send a GET request to the stamp endpoint.
-
-
-<Tabs
-defaultValue="api"
-values={[
-{label: 'API', value: 'api'},
-{label: 'Swarm CLI', value: 'swarm-cli'},
-]}>
-<TabItem value="api">
-
-#### API
-
-
-```bash
-curl http://localhost:1635/stamps
-```
-
-```bash
-{
-  "stamps": [
-    {
-      "batchID": "f4b9830676f4eeed4982c051934e64113dc348d7f5d2ab4398d371be0fbcdbf5",
-      "utilization": 0,
-      "usable": true,
-      "label": "",
-      "depth": 20,
-      "amount": "100000000",
-      "bucketDepth": 16,
-      "blockNumber": 30643611,
-      "immutableFlag": true,
-      "exists": true,
-      "batchTTL": 20588,
-      "expired": false
-    }
-  ]
-}
-```
-
-</TabItem>
-
-<TabItem value="swarm-cli">
-
-#### Swarm CLI
-
-```bash
-swarm-cli stamp list
-```
-
-```bash
-Stamp ID: f4b9830676f4eeed4982c051934e64113dc348d7f5d2ab4398d371be0fbcdbf5
-Usage: 0%
-Remaining Capacity: 4.00 GB
-TTL: 5 hours 42 minutes 18 seconds
-Expires: 2023-10-26
-
-```
-</TabItem>
-</Tabs>
-
-
-:::info
-When uploading content which has been stamped using an already expired postage stamp, the node will not attempt to sync the content. You are advised to use longer-lived postage stamps and encrypt your content to work around this. It is not possible to reupload unencrypted content which was stamped using an expired postage stamp. We're working on improving on this.
-:::
 
 ## Checking the remaining TTL (time to live) of your batch
 

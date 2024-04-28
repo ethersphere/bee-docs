@@ -56,7 +56,7 @@ $$2^{batchDepth} \times {amount}$$
 
 The paid xBZZ forms the `balance` of the batch. This `balance` is then slowly depleted as time ticks on and blocks are mined on Gnosis Chain.
 
-For example, with a `batch depth` of 20 and an `amount` of 1000000000 PLUR:
+For example, with a `batch depth` of 24 and an `amount` of 1000000000 PLUR:
 
 $$
 2^{24} \times 1000000000 = 16777216000000000 \text{ PLUR} = 1.6777216 \text{ xBZZ}
