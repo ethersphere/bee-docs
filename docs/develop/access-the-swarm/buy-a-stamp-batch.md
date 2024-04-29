@@ -80,11 +80,6 @@ Stamp ID: f4b9830676f4eeed4982c051934e64113dc348d7f5d2ab4398d371be0fbcdbf5
 </Tabs>
 
 
-:::caution
-The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the `lastPrice` value from the postage stamp contract times 17280 (the number of blocks in 24 hours). This requirement is in place in order to prevent spamming the network.
-
-The minimum value for `depth` is 24. This requirement is in place due [the mechanics of batch utilisation](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table). 
-:::
 
 :::info
 Once your batch has been purchased, it will take a few minutes for other Bee nodes in the Swarm to catch up and register your batch. Allow some time for your batch to propagate in the network before proceeding to the next step.
