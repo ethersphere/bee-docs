@@ -83,7 +83,6 @@ function FetchPriceComponent() {
     setConvertedVolume(gigabytes);
     calculateDepth(gigabytes);
     calculateAmount(hours * 3600 / 5); // Convert hours to seconds and calculate blocks
-    setResult(`In order to store ${volume} ${volumeUnit} of data for ${time} ${timeUnit}, a depth of ${depth} and an value of ${amount} should be used.`);
     setShowResults(true);
   };
 
@@ -195,10 +194,11 @@ function FetchPriceComponent() {
     </button>
   </div>
   
-      {result && <div style={{ marginTop: '20px', fontSize: '16px' }}>
-        {result}
-      </div>}
       {showResults && !timeError && !volumeError && (
+       <div>
+        <div style={{ marginTop: '20px', fontSize: '16px' }}>
+          {`In order to store ${volume} ${volumeUnit} of data for ${time} ${timeUnit}, a depth of ${depth} and an amount value of ${amount} should be used.`}
+        </div>
         <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px'}}>
           <thead>
             <tr>
@@ -229,6 +229,7 @@ function FetchPriceComponent() {
             </tr>
           </tbody>
         </table>
+      </div>
       )}
     </div>
   );
