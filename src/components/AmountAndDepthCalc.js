@@ -46,7 +46,7 @@ function FetchPriceComponent() {
     if (depth !== null && amount !== null) {
       calculateStorageCost();
     }
-  }, [depth, amount]); // Recalculate storage cost when depth or amount changes
+  }, [depth, amount]); 
 
   const fetchPrice = async () => {
     try {
@@ -77,12 +77,12 @@ function FetchPriceComponent() {
     const hours = convertTimeToHours(time, timeUnit);
     const gigabytes = convertVolumeToGB(volume, volumeUnit);
   
-    if (!hours || !gigabytes) return; // Stop calculation if validation failed
+    if (!hours || !gigabytes) return; 
   
     setConvertedTime(hours);
     setConvertedVolume(gigabytes);
     calculateDepth(gigabytes);
-    calculateAmount(hours * 3600 / 5); // Convert hours to seconds and calculate blocks
+    calculateAmount(hours * 3600 / 5); 
     setShowResults(true);
   };
 

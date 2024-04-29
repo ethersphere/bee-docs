@@ -33,7 +33,7 @@ export default function DepthCalc() {
     41: "9.00 PB",
   };
 
-  // Fetch price on component mount
+
   useEffect(() => {
     fetchPrice();
   }, []);

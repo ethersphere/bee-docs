@@ -95,36 +95,15 @@ Once your batch has been purchased, it will take a few minutes for other Bee nod
 
 When purchasing a batch of stamps there are several parameters and options which must be considered. The `depth` parameter will control how many chunks can be uploaded with a batch of stamps. The `amount` parameter determines how much xBZZ will be allocated per chunk, and therefore also controls how long the chunks will be stored. While the `immutable` header option sets the batch as either mutable or immutable, which can significantly alter the behavior of the batch utilisation (more details below).
 
-### Choosing a `depth`
+### Choosing `depth`
 
 One notable aspect of batch utilization is that the entire batch is considered fully utilized as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
 
 See the [postage stamp contract page](/docs/learn/technology/contracts/postage-stamp#batch-utilisation) for a more complete explanation of how batch utilisation works and a [table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) with the specific amounts of data which can be safely uploaded for each `depth` value. 
 
-### Calculating `amount` needed for desired TTL 
+### Choosing `amount`
 
-The `amount` you specify determines how much xBZZ denominated in PLUR will be assigned per chunk uploaded. This governs the amount of time your chunks live on Swarm. While stamp prices are currently set at 24000 PLUR / chunk / block, prices will become variable in the future. When this comes into effect it will not possible to predict with accuracy exactly when your chunks will run out of balance, however, it can be estimated based on the current price and the remaining batch balance. The desired `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and stamp price of 24000 PLUR / chunk / block:
-
-$$
-(\text{stamp price} \div \text{block time in seconds}) \times \text{storage time in seconds}
-$$
-
-There are 1036800 seconds in 12 days, so the `amount` value required to store for 12 days can be calculated:
-
-$$
-(\text{24000} \div \text{5}) \times \text{1036800} = 4976640000
-$$
-
-So we can use 4976640000 as our `amount` value in order for our postage batch to store data for 12 days.
- 
-:::info
-The postage stamp price is dynamically determined according to a network utilization signal. You can view the current storage price at [Swarmscan.io](https://swarmscan.io/).
-:::
-
-### Mutable of Immutable?
-
-Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
-
+The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp batch contract page](/docs/learn/technology/contracts/postage-stamp#batch-amount--batch-cost) where a more complete description is included.
 
 ## Calculators
 
@@ -139,6 +118,11 @@ These calculators use the 'effective volume' (the volume of data that can be saf
 
 ### Time & Volume to Depth & Amount Calculator
 <AmountAndDepthCalc />
+
+### Mutable or Immutable?
+
+Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
+
 
 ## Viewing Stamps
 

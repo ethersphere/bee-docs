@@ -62,6 +62,27 @@ $$
 2^{24} \times 1000000000 = 16777216000000000 \text{ PLUR} = 1.6777216 \text{ xBZZ}
 $$
 
+### Calculating `amount` needed for desired TTL 
+
+The desired `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and the stamp price. For the example below we assume a stamp price of 24000 PLUR / chunk / block:
+
+:::info
+The postage stamp price is dynamically determined according to a network utilization signal. You can view the current storage price at [Swarmscan.io](https://swarmscan.io/).
+:::
+
+$$
+(\text{stamp price} \div \text{block time in seconds}) \times \text{storage time in seconds}
+$$
+
+There are 1036800 seconds in 12 days, so the `amount` value required to store for 12 days can be calculated:
+
+$$
+(\text{24000} \div \text{5}) \times \text{1036800} = 4976640000
+$$
+
+So we can use 4976640000 as our `amount` value in order for our postage batch to store data for 12 days.
+ 
+
 
 ## Batch Utilisation
 
