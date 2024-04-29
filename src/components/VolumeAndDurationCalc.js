@@ -13,6 +13,8 @@ export default function DepthCalc() {
 
 
   const depthToVolume = {
+    22: "4.93 GB", 
+    23: "17.03 GB",
     24: "44.21 GB",
     25: "102.78 GB",
     26: "225.86 GB",
@@ -32,6 +34,25 @@ export default function DepthCalc() {
     40: "4.50 PB",
     41: "9.00 PB",
   };
+
+
+  function formatBytes(bytes) {
+      const KB = 1000;
+      const MB = KB ** 2; // 1,000,000
+      const GB = KB ** 3; // 1,000,000,000
+      const TB = KB ** 4; // 1,000,000,000,000
+      const PB = KB ** 5; // 1,000,000,000,000,000
+
+      if (bytes < GB) { // Less than 1 GB
+          return (bytes / MB).toFixed(2) + ' MB';
+      } else if (bytes < TB) { // Less than 1 TB
+          return (bytes / GB).toFixed(2) + ' GB';
+      } else if (bytes < PB) { // Less than 1 PB
+          return (bytes / TB).toFixed(2) + ' TB';
+      } else { // 1 PB or more
+          return (bytes / PB).toFixed(2) + ' PB';
+      }
+  }
 
 
   useEffect(() => {
@@ -71,8 +92,8 @@ export default function DepthCalc() {
     const amountValue = Number(cleanedAmount);
     const minAmount = latestPrice * 17280;
 
-    if (!Number.isInteger(depthValue) || depthValue < 24 || depthValue > 41) {
-      localErrors.depth = "Depth must be an integer greater or equal to 24 and less than or equal to 41.";
+    if (!Number.isInteger(depthValue) || depthValue < 17 || depthValue > 41) {
+      localErrors.depth = "Depth must be an integer greater or equal to 17 and less than or equal to 41.";
     }
     if (!Number.isInteger(amountValue) || amountValue < minAmount) {
       localErrors.amount = `Amount must be a positive whole number and at least ${minAmount} PLUR given the current storage price of ${latestPrice} PLUR/chunk/block.`;
@@ -81,16 +102,19 @@ export default function DepthCalc() {
     setErrors(localErrors);
 
     if (Object.keys(localErrors).length === 0) {
-      const volume = depthToVolume[depthValue] || "Unavailable volume";
+      const effectiveVolume = depthToVolume[depthValue] || "0";
+      const theoreticalMaxVolume = formatBytes(2**(depthValue+12));
       const storageTimeInSeconds = (amountValue / latestPrice) * 5;
       const formattedTime = formatDuration(storageTimeInSeconds);
       const costInPLUR = (2 ** depthValue) * amountValue;
       const costInxBZZ = costInPLUR / 1e16;
 
-      setResult(`A depth of ${cleanedDepth} allows for storage of ${volume} of data. For an amount value of ${amountValue} PLUR/block/chunk it can be stored for ${formattedTime} at a cost of ${costInxBZZ.toFixed(2)} xBZZ.`);
+      setResult(`A 'depth' value of ${cleanedDepth} allows for an effective storage volume of ${effectiveVolume} and a theoretical max volume of ${theoreticalMaxVolume}. For an 'amount' value of ${amountValue} PLUR/block/chunk it can be stored for ${formattedTime} at a cost of ${costInxBZZ.toFixed(2)} xBZZ.`);
       setDetails({
         Depth: cleanedDepth,
-        Volume: volume,
+        Amount: amountValue,
+        "Effective Volume": effectiveVolume,
+        "Theoretical Max Volume": theoreticalMaxVolume,
         "Storage duration": formattedTime,
         Cost: `${costInxBZZ.toFixed(2)} xBZZ`
       });
@@ -124,7 +148,7 @@ export default function DepthCalc() {
         </label>
         <input
           id="depthInput"
-          placeholder="Input batch depth (24 to 41)"
+          placeholder="Input batch depth (17 to 41)"
           value={depth}
           onChange={e => setDepth(e.target.value)}
           style={{ display: 'block', marginBottom: '5px', padding: '8px' }}

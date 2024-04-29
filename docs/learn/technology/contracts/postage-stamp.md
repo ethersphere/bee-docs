@@ -29,6 +29,9 @@ $$
 2^{(24 - 16)} = 2^{8} = 256 \text{ chunks/bucket}
 $$
 
+:::info
+Note that due how buckets fill as described above, a batch can become fully utilised before its theoretical maximum volume has been reached. See [batch utilisation section below](/docs/learn/technology/contracts/postage-stamp#batch-utilisation) for more information.
+:::
 
 ## Batch Depth and Batch Amount
 
@@ -67,7 +70,7 @@ $$
 The desired `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and the stamp price. For the example below we assume a stamp price of 24000 PLUR / chunk / block:
 
 :::info
-The postage stamp price is dynamically determined according to a network utilization signal. You can view the current storage price at [Swarmscan.io](https://swarmscan.io/).
+The postage stamp price is dynamically determined according to a network utilisation signal. You can view the current storage price at [Swarmscan.io](https://swarmscan.io/).
 :::
 
 $$

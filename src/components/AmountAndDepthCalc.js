@@ -18,6 +18,8 @@ function FetchPriceComponent() {
 
 
   const volumeToDepth = {
+    "4.93" : 22,
+    "17.03": 23,
     "44.21": 24,
     "102.78": 25,
     "225.86": 26,
