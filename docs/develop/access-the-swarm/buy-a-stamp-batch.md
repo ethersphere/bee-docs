@@ -12,12 +12,19 @@ import TabItem from '@theme/TabItem';
 
 ## Buying a stamp batch
 
-A valid postage batch is required to upload data to Swarm. When purchasing a postage batch, the postage stamp batch purchase parameters can be adjusted to support the storage of differing amounts of data and duration. The parameters which control the duration and quantity of data that can be stored by a postage batch are the `depth` and `amount` parameters, with `depth` determining data size and `amount` determining storage duration. When interacting with the Bee API, a postage batch purchase follows this format:
+A valid postage batch is required to upload data to Swarm. The parameters which control the duration and quantity of data that can be stored by a postage batch are the `depth` and `amount` parameters, with `depth` determining data size and `amount` determining storage duration. 
+
+When interacting with the Bee API directly, `amount` and `depth` are passed as path parameters:
 
 ```bash
 curl -s -XPOST http://localhost:1635/stamps/<amount>/<depth>
 ```
 
+And with Swarm CLI, they are set using option flags:
+
+```bash
+swarm-cli stamp buy --depth <depth value> --amount <amount value>
+```
 
 <Tabs
 defaultValue="api"
@@ -75,8 +82,12 @@ Once your batch has been purchased, it will take a few minutes for other Bee nod
 
 ## Calculators
 
+The following postage batch calculators allow you to conveniently find the depth and amount values for a given storage duration and storage volume, or to find the storage duration and storage volume for a given depth and amount. The results will display the cost in xBZZ for the postage batch. The current pricing information is sourced from the Swarmscan API. 
+
+### Depth & Amount to Time & Volume Calculator
 <VolumeAndDurationCalc />
 
+### Time & Volume to Depth & Amount Calculator
 <AmountAndDepthCalc />
 
 ## Viewing Stamps

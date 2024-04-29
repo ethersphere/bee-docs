@@ -13,7 +13,9 @@ function FetchPriceComponent() {
   const [storageCost, setStorageCost] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [timeError, setTimeError] = useState('');
+  const [result, setResult] = useState('')
   const [volumeError, setVolumeError] = useState('');
+
 
   const volumeToDepth = {
     "44.21": 24,
@@ -61,7 +63,13 @@ function FetchPriceComponent() {
     }
   };
 
+
   const handleCalculate = () => {
+    if (!price) {
+      console.error("Price data not available");
+      return;
+    }
+
     setShowResults(false);
     setTimeError('');
     setVolumeError('');
@@ -75,8 +83,10 @@ function FetchPriceComponent() {
     setConvertedVolume(gigabytes);
     calculateDepth(gigabytes);
     calculateAmount(hours * 3600 / 5); // Convert hours to seconds and calculate blocks
+    setResult(`In order to store ${volume} ${volumeUnit} of data for ${time} ${timeUnit}, a depth of ${depth} and an value of ${amount} should be used.`);
     setShowResults(true);
   };
+
   
 
   const calculateDepth = (gigabytes) => {
@@ -88,13 +98,13 @@ function FetchPriceComponent() {
   const calculateAmount = (blocks) => {
     if (price !== null) {
       const totalAmount = blocks * price;
-      setAmount(totalAmount.toFixed(2));
+      setAmount(totalAmount);
     }
   };
 
   const calculateStorageCost = () => {
     if (depth !== null && amount !== null) {
-      const cost = (Math.pow(2, depth) * parseFloat(amount)) / 1e16;
+      const cost = ((2**depth) * amount) / 1e16;
       setStorageCost(cost.toFixed(2));
     }
   };
@@ -102,7 +112,7 @@ function FetchPriceComponent() {
   const convertTimeToHours = (time, unit) => {
     const num = parseFloat(time);
     if (isNaN(num) || num <= 0) {
-      setTimeError('Time must be a positive number.');
+      setTimeError('Time must be a positive number greater than 24 hrs.');
       return 0;
     }
     const hours = num * (unit === 'years' ? 8760 : unit === 'weeks' ? 168 : unit === 'days' ? 24 : 1);
@@ -121,8 +131,8 @@ function FetchPriceComponent() {
       return 0;
     }
     const gigabytes = num * (unit === 'TB' ? 1024 : unit === 'PB' ? 1048576 : 1);
-    if (gigabytes <= 44.21 || gigabytes >= 9437184) {
-      setVolumeError('Volume must be greater than 44.21 GB and less than 9 PB.');
+    if (gigabytes <= 0 || gigabytes >= 9437184) {
+      setVolumeError('Volume must be greater than 0 and less than 9 PB.');
       return 0;
     }
     return gigabytes;
@@ -130,62 +140,92 @@ function FetchPriceComponent() {
   
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '50%', margin: 'auto' }}>
-      <h2>Time & Volume to Depth & Amount Calculator</h2>
+    <div style={{alignItems: 'flex-start', width: 'auto'}}>
       <div>
-        <input style={{ marginRight: '5px', padding: '8px' }} value={time} onChange={e => setTime(e.target.value)} placeholder="Enter time" />
-        <select style={{ marginRight: '5px', padding: '8px' }} value={timeUnit} onChange={e => setTimeUnit(e.target.value)}>
-          <option value="hours">Hours</option>
-          <option value="days">Days</option>
-          <option value="weeks">Weeks</option>
-          <option value="years">Years</option>
+        <label htmlFor="timeInput" style={{ display: 'block', marginBottom: '5px' }}>
+            Time:
+        </label>
+        <input
+            id="timeInput"
+            style={{ marginRight: '5px', padding: '8px' }}
+            value={time}
+            onChange={e => setTime(e.target.value)}
+            placeholder="Enter time (>= 24 hrs)"
+        />
+        <select
+            style={{ marginRight: '5px', padding: '8px' }}
+            value={timeUnit}
+            onChange={e => setTimeUnit(e.target.value)}
+        >
+            <option value="hours">Hours</option>
+            <option value="days">Days</option>
+            <option value="weeks">Weeks</option>
+            <option value="years">Years</option>
         </select>
-        {timeError && <p style={{ color: 'red' }}>{timeError}</p>}
+        {timeError && <p style={{ color: 'red', marginBottom: '10px' }}>{timeError}</p>}
       </div>
-      <div>
-        <input style={{ marginRight: '5px', padding: '8px' }} value={volume} onChange={e => setVolume(e.target.value)} placeholder="Enter volume" />
-        <select style={{ marginRight: '5px', padding: '8px' }} value={volumeUnit} onChange={e => setVolumeUnit(e.target.value)}>
-          <option value="GB">Gigabytes</option>
-          <option value="TB">Terabytes</option>
-          <option value="PB">Petabytes</option>
-        </select>
-        {volumeError && <p style={{ color: 'red' }}>{volumeError}</p>}
-        <button style={{ padding: '10px 15px', cursor: 'pointer' }} onClick={handleCalculate}>Calculate</button>
-      </div>
+  <div style={{ marginBottom: '5px' }}>
+    <label htmlFor="volumeInput" style={{ display: 'block', marginBottom: '5px' }}>
+        Volume:
+    </label>
+    <input
+        id="volumeInput"
+        style={{ marginRight: '5px', padding: '8px' }}
+        value={volume}
+        onChange={e => setVolume(e.target.value)}
+        placeholder="Enter volume (<= 9 PB)"
+    />
+    <select
+        style={{ marginRight: '5px', padding: '8px' }}
+        value={volumeUnit}
+        onChange={e => setVolumeUnit(e.target.value)}
+    >
+        <option value="GB">Gigabytes</option>
+        <option value="TB">Terabytes</option>
+        <option value="PB">Petabytes</option>
+    </select>
+    {volumeError && <p style={{ color: 'red', marginBottom: "10px" }}>{volumeError}</p>}
+  </div>
+  <div>
+    <button
+        style={{ padding: '10px 15px', cursor: 'pointer', display: 'inline-block', width: 'auto' }}
+        onClick={handleCalculate}
+    >
+        Calculate
+    </button>
+  </div>
+  
+      {result && <div style={{ marginTop: '20px', fontSize: '16px' }}>
+        {result}
+      </div>}
       {showResults && !timeError && !volumeError && (
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px'}}>
           <thead>
             <tr>
               <th style={{ textAlign: 'left', padding: '8px', border: '1px solid' }}>Field</th>
               <th style={{ textAlign: 'left', padding: '8px', border: '1px solid' }}>Value</th>
-              <th style={{ textAlign: 'left', padding: '8px', border: '1px solid' }}>Units</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Time</td>
-              <td>{convertedTime}</td>
-              <td>hours</td>
+              <td>{convertedTime} hours</td>
             </tr>
             <tr>
               <td>Volume</td>
-              <td>{convertedVolume}</td>
-              <td>GB</td>
+              <td>{convertedVolume} GB</td>
             </tr>
             <tr>
               <td>Depth</td>
               <td>{depth}</td>
-              <td>levels</td>
             </tr>
             <tr>
               <td>Amount</td>
-              <td>{amount}</td>
-              <td>PLUR</td>
+              <td>{amount} PLUR</td>
             </tr>
             <tr>
               <td>Storage Cost</td>
-              <td>{storageCost}</td>
-              <td>PLUR</td>
+              <td>{storageCost} xBZZ</td>
             </tr>
           </tbody>
         </table>

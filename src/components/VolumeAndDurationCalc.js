@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function DepthCalc() {
   const [depth, setDepth] = useState("");
@@ -33,8 +33,12 @@ export default function DepthCalc() {
     41: "9.00 PB",
   };
 
-  const handleFetchPriceAndValidate = async () => {
-    setDetails(null);
+  // Fetch price on component mount
+  useEffect(() => {
+    fetchPrice();
+  }, []);
+
+  const fetchPrice = async () => {
     setLoading(true);
     setResult("");
     setErrors({});
@@ -45,9 +49,7 @@ export default function DepthCalc() {
       }
       const data = await response.json();
       if (data.events && data.events.length > 0) {
-        const newPrice = data.events[0].data.price;
-        setPrice(newPrice);
-        validateInputs(depth.trim(), amount.trim(), newPrice);
+        setPrice(parseFloat(data.events[0].data.price));
       } else {
         setResult("No price update available");
       }
@@ -59,27 +61,33 @@ export default function DepthCalc() {
     }
   }
 
+  const handleCalculate = () => {
+    validateInputs(depth.trim(), amount.trim(), price);
+  }
+
   const validateInputs = (cleanedDepth, cleanedAmount, latestPrice) => {
+    let localErrors = {};
     const depthValue = Number(cleanedDepth);
     const amountValue = Number(cleanedAmount);
-    let localErrors = {};
-
-    if (!Number.isInteger(depthValue) || !(depthValue >= 24)) {
-      localErrors.depth = "Depth must be a whole number greater than or equal to 24.";
-    }
-
     const minAmount = latestPrice * 17280;
-    if (!Number.isInteger(amountValue) || amountValue < minAmount) {
-      localErrors.amount = `Amount must be a positive whole number and at least ${minAmount} PLUR.`;
+
+    if (!Number.isInteger(depthValue) || depthValue < 24 || depthValue > 41) {
+      localErrors.depth = "Depth must be an integer greater or equal to 24 and less than or equal to 41.";
     }
+    if (!Number.isInteger(amountValue) || amountValue < minAmount) {
+      localErrors.amount = `Amount must be a positive whole number and at least ${minAmount} PLUR given the current storage price of ${latestPrice} PLUR/chunk/block.`;
+    }
+
+    setErrors(localErrors);
 
     if (Object.keys(localErrors).length === 0) {
-      const volume = depthToVolume[cleanedDepth] || "Unavailable volume";
+      const volume = depthToVolume[depthValue] || "Unavailable volume";
       const storageTimeInSeconds = (amountValue / latestPrice) * 5;
       const formattedTime = formatDuration(storageTimeInSeconds);
       const costInPLUR = (2 ** depthValue) * amountValue;
       const costInxBZZ = costInPLUR / 1e16;
-      setResult(`A depth of ${cleanedDepth} allows for storage of ${volume} of data. For an amount value of ${amountValue} it can be stored for ${formattedTime} at a cost of ${costInxBZZ.toFixed(2)} xBZZ.`);
+
+      setResult(`A depth of ${cleanedDepth} allows for storage of ${volume} of data. For an amount value of ${amountValue} PLUR/block/chunk it can be stored for ${formattedTime} at a cost of ${costInxBZZ.toFixed(2)} xBZZ.`);
       setDetails({
         Depth: cleanedDepth,
         Volume: volume,
@@ -87,7 +95,7 @@ export default function DepthCalc() {
         Cost: `${costInxBZZ.toFixed(2)} xBZZ`
       });
     } else {
-      setErrors(localErrors);
+      setResult("");
       setDetails(null);
     }
   }
@@ -95,7 +103,6 @@ export default function DepthCalc() {
   const formatDuration = (seconds) => {
     const secondsPerDay = 86400;
     const secondsPerHour = 3600;
-
     if (seconds > 365 * secondsPerDay) {
       return `${(seconds / (365 * secondsPerDay)).toFixed(2)} years`;
     } else if (seconds > 7 * secondsPerDay) {
@@ -110,27 +117,34 @@ export default function DepthCalc() {
   }
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', width: '50%', margin: '0 auto',  boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
-      <h2 style={{ marginBottom: '10px' }}>Depth & Amount to Time & Volume Calculator</h2>
+    <div style={{ fontFamily: 'Arial, sans-serif', width: 'auto', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
       <div style={{ marginBottom: '10px' }}>
+        <label htmlFor="depthInput" style={{ display: 'block', marginBottom: '5px' }}>
+          Depth:
+        </label>
         <input
-          placeholder="Input batch depth"
+          id="depthInput"
+          placeholder="Input batch depth (24 to 41)"
           value={depth}
-          style={{ display: 'block', marginBottom: '5px', padding: '8px' }}
           onChange={e => setDepth(e.target.value)}
+          style={{ display: 'block', marginBottom: '5px', padding: '8px' }}
         />
         {errors.depth && <div style={{ color: 'red', marginBottom: '10px' }}>{errors.depth}</div>}
+
+        <label htmlFor="amountInput" style={{ display: 'block', marginBottom: '5px' }}>Amount:</label>
         <input
-          placeholder="Input amount"
+          id="amountInput"
+          placeholder={`Input amount (> ${price * 17280})`}
           value={amount}
-          style={{ display: 'block', marginBottom: '5px', padding: '8px' }}
           onChange={e => setAmount(e.target.value)}
+          style={{ display: 'block', marginBottom: '5px', padding: '8px' }}
         />
-        {errors.amount && <div style={{ color: 'red', marginBottom: '10px' }}>{errors.amount}</div>}
-        <button onClick={handleFetchPriceAndValidate} disabled={loading} style={{ padding: '10px 15px', cursor: 'pointer' }}>
+        <button onClick={handleCalculate} disabled={loading} style={{ padding: '10px 15px', cursor: 'pointer' }}>
           {loading ? 'Loading...' : 'Calculate'}
         </button>
       </div>
+
+      {errors.amount && <div style={{ color: 'red', marginBottom: '10px' }}>{errors.amount}</div>}
       {result && <div style={{ color: errors.general ? 'red' : '', marginBottom: '20px', fontSize: '16px' }}>
         {result}
       </div>}
