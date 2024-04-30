@@ -104,7 +104,11 @@ See the [postage stamp contract page](/docs/learn/technology/contracts/postage-s
 
 ### Choosing `amount`
 
-The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp batch contract page](/docs/learn/technology/contracts/postage-stamp#batch-amount--batch-cost) where a more complete description is included.
+The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp batch contract page](/docs/learn/technology/contracts/postage-stamp#batch-amount--batch-cost) where a more complete description is inclu
+
+### Mutable or Immutable?
+
+Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
 
 ## Calculators
 
@@ -120,13 +124,9 @@ The 'effective volume' is the volume of data that can safely stored for each sto
 
 ### Time & Volume to Depth & Amount Calculator
 
-The recommended depth in this calculator's results is the lowest depth value whose effective volume is greater than the input volume.
+The recommended depth in this calculator's results is the lowest depth value whose [effective volume]((/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) is greater than the input volume.
 
 <AmountAndDepthCalc />
-
-### Mutable or Immutable?
-
-Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
 
 
 ## Viewing Stamps

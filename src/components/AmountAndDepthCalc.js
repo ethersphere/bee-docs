@@ -13,7 +13,6 @@ function FetchPriceComponent() {
   const [storageCost, setStorageCost] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [timeError, setTimeError] = useState('');
-  const [result, setResult] = useState('')
   const [volumeError, setVolumeError] = useState('');
 
 
