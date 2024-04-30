@@ -124,7 +124,7 @@ The 'effective volume' is the volume of data that can safely stored for each sto
 
 ### Time & Volume to Depth & Amount Calculator
 
-The recommended depth in this calculator's results is the lowest depth value whose [effective volume]((/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) is greater than the input volume.
+The recommended depth in this calculator's results is the lowest depth value whose [effective volume](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) is greater than the input volume.
 
 <AmountAndDepthCalc />
 
