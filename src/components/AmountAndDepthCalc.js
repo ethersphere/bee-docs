@@ -131,13 +131,14 @@ function FetchPriceComponent() {
       setVolumeError('Volume must be a positive number.');
       return 0;
     }
-    const gigabytes = num * (unit === 'TB' ? 1024 : unit === 'PB' ? 1048576 : 1);
+    const gigabytes = num * (unit === 'TB' ? 1024 : unit === 'PB' ? 1048576 : unit === 'MB' ? 1/1024 : 1);
     if (gigabytes <= 0 || gigabytes >= 9437184) {
       setVolumeError('Volume must be greater than 0 and less than 9 PB.');
       return 0;
     }
     return gigabytes;
   };
+  
   
 
   return (
@@ -177,14 +178,16 @@ function FetchPriceComponent() {
         placeholder="Enter volume (<= 9 PB)"
     />
     <select
-        style={{ marginRight: '5px', padding: '8px' }}
-        value={volumeUnit}
-        onChange={e => setVolumeUnit(e.target.value)}
+      style={{ marginRight: '5px', padding: '8px' }}
+      value={volumeUnit}
+      onChange={e => setVolumeUnit(e.target.value)}
     >
-        <option value="GB">Gigabytes</option>
-        <option value="TB">Terabytes</option>
-        <option value="PB">Petabytes</option>
+      <option value="MB">Megabytes</option>
+      <option value="GB">Gigabytes</option>
+      <option value="TB">Terabytes</option>
+      <option value="PB">Petabytes</option>
     </select>
+
     {volumeError && <p style={{ color: 'red', marginBottom: "10px" }}>{volumeError}</p>}
   </div>
   <div>

@@ -108,10 +108,10 @@ The `amount` parameter determines how much xBZZ is assigned per chunk for a post
 
 ## Calculators
 
-The following postage batch calculators allow you to conveniently find the depth and amount values for a given storage duration and storage volume, or to find the storage duration and storage volume for a given depth and amount. The results will display the cost in xBZZ for the postage batch. The current pricing information is sourced from the Swarmscan API. 
+The following postage batch calculators allow you to conveniently find the depth and amount values for a given storage duration and storage volume, or to find the storage duration and storage volume for a given depth and amount. The results will display the cost in xBZZ for the postage batch. The current pricing information is sourced from the Swarmscan API and will vary over time. 
 
 :::info
-The 'effective volume' is the volume of data that can be stored with 99.9999% safety for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. [Learn more here](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table).
+The 'effective volume' is the volume of data that can safely stored for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. [Learn more here](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table).
 :::
 
 ### Depth & Amount to Time & Volume Calculator
