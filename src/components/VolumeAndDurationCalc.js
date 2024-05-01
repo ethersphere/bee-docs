@@ -109,7 +109,7 @@ export default function DepthCalc() {
       const costInPLUR = (2 ** depthValue) * amountValue;
       const costInxBZZ = costInPLUR / 1e16;
 
-      setResult(`A 'depth' value of ${cleanedDepth} allows for an effective storage volume of ${effectiveVolume} and a theoretical max volume of ${theoreticalMaxVolume}. For an 'amount' value of ${amountValue} PLUR/block/chunk it can be stored for ${formattedTime} at a cost of ${costInxBZZ.toFixed(2)} xBZZ.`);
+      setResult(`A depth value of ${cleanedDepth} allows for an effective storage volume of ${effectiveVolume} and a theoretical max volume of ${theoreticalMaxVolume}. For an amount value of ${amountValue} PLUR / block / chunk it can be stored for ${formattedTime} at a cost of ${costInxBZZ.toFixed(2)} xBZZ.`);
       setDetails({
         Depth: cleanedDepth,
         Amount: amountValue,
@@ -155,10 +155,10 @@ export default function DepthCalc() {
         />
         {errors.depth && <div style={{ color: 'red', marginBottom: '10px' }}>{errors.depth}</div>}
 
-        <label htmlFor="amountInput" style={{ display: 'block', marginBottom: '5px' }}>Amount:</label>
+        <label htmlFor="amountInput" style={{ display: 'block', marginBottom: '5px' }}>Amount (current minimum is { loading ? 'Loading...' : price * 17280 } PLUR):</label>
         <input
           id="amountInput"
-          placeholder={`Input amount (> ${price * 17280})`}
+          placeholder={`Input amount`}
           value={amount}
           onChange={e => setAmount(e.target.value)}
           style={{ display: 'block', marginBottom: '5px', padding: '8px' }}
