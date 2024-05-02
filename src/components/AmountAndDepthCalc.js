@@ -15,7 +15,7 @@ function FetchPriceComponent() {
   const [timeError, setTimeError] = useState('');
   const [volumeError, setVolumeError] = useState('');
 
-
+  // Volume in GB
   const volumeToDepth = {
     "4.93" : 22,
     "17.03": 23,
@@ -38,6 +38,30 @@ function FetchPriceComponent() {
     "4718592.00": 40,
     "9437184.00": 41
   };
+
+  const depthToVolume = {
+    22: "4.93 GB", 
+    23: "17.03 GB",
+    24: "44.21 GB",
+    25: "102.78 GB",
+    26: "225.86 GB",
+    27: "480.43 GB",
+    28: "1.00 TB",
+    29: "2.06 TB",
+    30: "4.20 TB",
+    31: "8.52 TB",
+    32: "17.20 TB",
+    33: "34.63 TB",
+    34: "69.58 TB",
+    35: "139.63 TB",
+    36: "279.91 TB",
+    37: "560.73 TB",
+    38: "1.12 PB",
+    39: "2.25 PB",
+    40: "4.50 PB",
+    41: "9.00 PB",
+  };
+
 
   useEffect(() => {
     fetchPrice();
@@ -105,7 +129,7 @@ function FetchPriceComponent() {
   const calculateStorageCost = () => {
     if (depth !== null && amount !== null) {
       const cost = ((2**depth) * amount) / 1e16;
-      setStorageCost(cost.toFixed(2));
+      setStorageCost(cost.toFixed(4));
     }
   };
 
@@ -131,7 +155,7 @@ function FetchPriceComponent() {
       return 0;
     }
     const gigabytes = num * (unit === 'TB' ? 1024 : unit === 'PB' ? 1048576 : unit === 'MB' ? 1/1024 : 1);
-    if (gigabytes <= 0 || gigabytes >= 9437184) {
+    if (gigabytes <= 0 || gigabytes > 9437184) {
       setVolumeError('Volume must be greater than 0 and less than 9 PB.');
       return 0;
     }
@@ -217,11 +241,11 @@ function FetchPriceComponent() {
             </tr>
             <tr>
               <td>Volume</td>
-              <td>{convertedVolume} GB</td>
+              <td>{`${volume} ${volumeUnit}`}</td>
             </tr>
             <tr>
               <td>Depth</td>
-              <td>{depth}</td>
+              <td>{`${depth} (for an `}<a href="/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table">effective volume</a>{` of ${depthToVolume[depth]})`}</td>
             </tr>
             <tr>
               <td>Amount</td>

@@ -115,7 +115,7 @@ Depending on the use case, uploaders may desire to use mutable or immutable batc
 The following postage batch calculators allow you to conveniently find the depth and amount values for a given storage duration and storage volume, or to find the storage duration and storage volume for a given depth and amount. The results will display the cost in xBZZ for the postage batch. The current pricing information is sourced from the Swarmscan API and will vary over time. 
 
 :::info
-The 'effective volume' is the volume of data that can safely stored for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. [Learn more here](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table).
+The 'effective volume' is the volume of data that can safely stored for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. The lowest depth with an effective volume above zero is 22, with an effective depth of 4.93 GB. Lower depth values can be used for smaller uploads but do not come with the same effective depth guarantee. [Learn more here](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table). 
 :::
 
 ### Depth & Amount to Time & Volume Calculator
@@ -124,7 +124,7 @@ The 'effective volume' is the volume of data that can safely stored for each sto
 
 ### Time & Volume to Depth & Amount Calculator
 
-The recommended depth in this calculator's results is the lowest depth value whose [effective volume](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) is greater than the entered volume.
+The recommended depth in this calculator's results is the lowest depth value whose [effective volume](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) is greater than the entered volume. 
 
 <AmountAndDepthCalc />
 

@@ -116,7 +116,7 @@ export default function DepthCalc() {
         "Effective Volume": effectiveVolume,
         "Theoretical Max Volume": theoreticalMaxVolume,
         "Storage duration": formattedTime,
-        Cost: `${costInxBZZ.toFixed(2)} xBZZ`
+        Cost: `${costInxBZZ.toFixed(4)} xBZZ`
       });
     } else {
       setResult("");
