@@ -135,7 +135,7 @@ Some endpoints are disabled by default on the Bee API (port `1633` by default) u
     * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods.
     *  `"connectedPeers"` - The number of peers your node is connected to. A typical value is in the range of....
     *   `"neighborhoodSize"` - The number of total neighbors in your neighborhood, not including your own node. The more nodes in your neighborhood, the lower your chance of winning rewards as a staking node. 
-    *    `"batchCommitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilized.
+    *    `"batchCommitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
     *    `"isReachable"` - Whether or not your node is reachable on the p2p API by other nodes on the Swarm network (port 1634 by default).
 
 ### `/status/peers`
@@ -381,9 +381,9 @@ From the results we can see that we have a healthy neighborhood size when compar
     ```
     
     Let's take a look at each of these values:
-    * `"radius"` - is what the storage radius would be if every available batch was 100% utilized, it is essentially the radius needed for the network to handle all of the batches at 100% utilization. Radius is measured as a proximity order (PO).
+    * `"radius"` - is what the storage radius would be if every available batch was 100% utilised, it is essentially the radius needed for the network to handle all of the batches at 100% utilisation. Radius is measured as a proximity order (PO).
     * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods.
-    * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilized.
+    * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
     
 ### `/chainstate`
 

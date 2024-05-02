@@ -142,11 +142,11 @@ Area of responsibility refers to which chunks a node is responsible for storing.
  
 ### 2a. Reserve Depth
 
-The PO which measures the node’s area of responsibility based on the theoretical 100% utilization of all postage stamp batches (all the chunks which are eligible to be uploaded and stored are uploaded and stored). Has an inverse relationship with area of responsibility - as depth grows, area of responsibility gets smaller.
+The PO which measures the node’s area of responsibility based on the theoretical 100% utilisation of all postage stamp batches (all the chunks which are eligible to be uploaded and stored are uploaded and stored). Has an inverse relationship with area of responsibility - as depth grows, area of responsibility gets smaller.
 
 ### 2b. Storage Depth
 
-The PO which measures the node’s effective area of responsibility. Storage depth will equal reserve depth in the case of 100% utilization - however 100% utilization is uncommon. If after syncing all the chunks within the node’s area of responsibility at its reserve depth then node still has sufficient space left, then the storage depth will decrease so that the area of responsibility doubles. 
+The PO which measures the node’s effective area of responsibility. Storage depth will equal reserve depth in the case of 100% utilisation - however 100% utilisation is uncommon. If after syncing all the chunks within the node’s area of responsibility at its reserve depth then node still has sufficient space left, then the storage depth will decrease so that the area of responsibility doubles. 
 
 
 ### 3. Postage stamp batch and chunk related depths

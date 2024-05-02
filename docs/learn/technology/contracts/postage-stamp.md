@@ -29,6 +29,9 @@ $$
 2^{(24 - 16)} = 2^{8} = 256 \text{ chunks/bucket}
 $$
 
+:::info
+Note that due how buckets fill as described above, a batch can become fully utilised before its theoretical maximum volume has been reached. See [batch utilisation section below](/docs/learn/technology/contracts/postage-stamp#batch-utilisation) for more information.
+:::
 
 ## Batch Depth and Batch Amount
 
@@ -56,11 +59,32 @@ $$2^{batchDepth} \times {amount}$$
 
 The paid xBZZ forms the `balance` of the batch. This `balance` is then slowly depleted as time ticks on and blocks are mined on Gnosis Chain.
 
-For example, with a `batch depth` of 20 and an `amount` of 1000000000 PLUR:
+For example, with a `batch depth` of 24 and an `amount` of 1000000000 PLUR:
 
 $$
 2^{24} \times 1000000000 = 16777216000000000 \text{ PLUR} = 1.6777216 \text{ xBZZ}
 $$
+
+### Calculating `amount` needed for desired TTL 
+
+The desired `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and the stamp price. For the example below we assume a stamp price of 24000 PLUR / chunk / block:
+
+:::info
+The postage stamp price is dynamically determined according to a network utilisation signal. You can view the current storage price at [Swarmscan.io](https://swarmscan.io/).
+:::
+
+$$
+(\text{stamp price} \div \text{block time in seconds}) \times \text{storage time in seconds}
+$$
+
+There are 1036800 seconds in 12 days, so the `amount` value required to store for 12 days can be calculated:
+
+$$
+(\text{24000} \div \text{5}) \times \text{1036800} = 4976640000
+$$
+
+So we can use 4976640000 as our `amount` value in order for our postage batch to store data for 12 days.
+ 
 
 
 ## Batch Utilisation
@@ -173,7 +197,7 @@ The details of how the effective rates of utilisation are calculated will be pub
 
 When a user buys a batch of stamps they may make the naive assumption that they will be able to upload data equal to the sum total size of the maximum capacity of the batch. However, in practice this assumption is incorrect, so it is essential that Swarm users understand the relationship between batch depth and the theoretical and effective volumes of a batch.
 
-The provided table shows the effective volume for each batch depth from 20 to 41. The "utilisation rate" is the rate of utilisation a stamp batch can reach with a 0.1% failure rate (that is, there is a 1/1000 chance the batch will become fully utilised before reaching that utilisation rate). The "effective volume" figure shows the actual amount of data which can be stored at the effective rate. The effective volume figure is the one which should be used as the de-facto maximum amount of data that a batch can store before becoming either fully utilised (for immutable batches), or start overwriting older chunks (mutable batches).
+The provided table shows the effective volume for each batch depth from 20 to 41 (note that currently the minimum stamp batch depth is 17, however 22 is the first depth with an effective volume above zero). The utilisation rate is the rate of utilisation of the theoretical max volume that a stamp batch can reach with a 0.1% failure rate (that is, there is only a one-in-a-thousand chance that the difference between the actual effectively utilised volume and effective volume shown in the table is greater than 0.1%). The "effective volume" figure shows the actual amount of data which can be stored at the effective rate. The effective volume figure is the one which should be used as the de-facto maximum amount of data that a batch can store before becoming either fully utilised (for immutable batches), or start overwriting older chunks (mutable batches).
 
  
 | Batch Depth | Utilisation Rate | Theoretical Max Volume | Effective Volume |
