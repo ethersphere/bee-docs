@@ -7,7 +7,6 @@ function FetchPriceComponent() {
   const [volume, setVolume] = useState('');
   const [volumeUnit, setVolumeUnit] = useState('GB');
   const [convertedTime, setConvertedTime] = useState(null);
-  const [convertedVolume, setConvertedVolume] = useState(null);
   const [depth, setDepth] = useState(null);
   const [amount, setAmount] = useState(null);
   const [storageCost, setStorageCost] = useState(null);
@@ -105,7 +104,6 @@ function FetchPriceComponent() {
     if (!hours || !gigabytes) return; 
   
     setConvertedTime(hours);
-    setConvertedVolume(gigabytes);
     calculateDepth(gigabytes);
     calculateAmount(hours * 3600 / 5); 
     setShowResults(true);
