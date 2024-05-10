@@ -3,26 +3,25 @@ title: Introduction
 id: introduction
 ---
 
-For the most part, your Bee will happily run in the background, but there are some things we will occasionally need to do to ensure that your Bee stays healthy! In this section we will show you how to get the most out of your Bee,
-and to get more information on what your Bee is buzzing about.
-
-This section covers information relating to managing your node, ensuring everything is going well, and best practices for backups and upgrading. For information on using Bee to upload files, host your website on the unstoppable Swarm network and more, check out [Using Bee](/docs/develop/access-the-swarm/introduction)
+In this section we cover everything a node operator needs to know about working with Bee:
 
 ## Configuration
 
 Learn how to [configure your node](/docs/bee/working-with-bee/configuration), and the details behind all the configuration options Bee provides.
 
-### Debug API
+## Debug API
 
 Access the HTTP Debug API directly for [detailed information about your Bee](/docs/bee/working-with-bee/debug-api).
 
-### Logs and Files
+## Logs and Files
 
 Find out where Bee stores your [logs and files](/docs/bee/working-with-bee/logs-and-files).
 
 ## Bee Dashboard and Swarm CLI
 
-[Try out](/docs/bee/working-with-bee/bee-tools) our brand new Bee Dashboard app and `swarm-cli` tool to monitor your Bee's status, cash out your cheques, upload data to the swarm and more!
+Try out the [Bee Dashboard app](/docs/bee/working-with-bee/bee-dashboard) which offers an easy to use graphical interface for your Bee node.
+
+You can use the [`swarm-cli`command line tool](/docs/bee/working-with-bee/swarm-cli) to monitor your Bee's status, cash out your cheques, upload data to the swarm and more!
 
 ## Cashing Out
 

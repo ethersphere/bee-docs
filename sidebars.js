@@ -93,7 +93,7 @@ module.exports = {
         'bee/working-with-bee/configuration',
         'bee/working-with-bee/debug-api',
         'bee/working-with-bee/logs-and-files',
-        'bee/working-with-bee/bee-tools',
+        'bee/working-with-bee/bee-dashboard',
         'bee/working-with-bee/swarm-cli',
         'bee/working-with-bee/security',
         'bee/working-with-bee/staking',
@@ -139,8 +139,9 @@ module.exports = {
       label: 'Tools and Features',
       items: [
         'develop/dapps-on-swarm/introduction',
-        'develop/dapps-on-swarm/develop-on-bee',
+        'develop/dapps-on-swarm/develop-on-swarm',
         'develop/dapps-on-swarm/bee-js',
+        'develop/dapps-on-swarm/gateway-proxy',
         'develop/dapps-on-swarm/chunk-types',
         'develop/dapps-on-swarm/feeds',
         'develop/dapps-on-swarm/pss'
