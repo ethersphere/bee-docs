@@ -49,9 +49,7 @@ set up to receive incoming connections (on port `1634` by default).
 
 :::danger
 There are also some ports which you should never expose to the outside
-Internet. Make sure that your `api-addr` (default `1633`) is only ever
-exposed in `Gateway Mode` and your `debug-api-addr` (default `1635`)
-is never exposed to the Internet. It is good practice to employ one or
+Internet. Make sure that your `api-addr` (default `1633`) and `debug-api-addr` (default `1635`) are never exposed to the internet. It is good practice to employ one or
 more firewalls that block traffic on every port except for those you
 are expecting to be open.
 :::

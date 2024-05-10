@@ -1,13 +1,9 @@
 ---
-title: Develop on Bee
-id: develop-on-bee
+title: Develop on Swarm
+id: develop-on-swarm
 ---
 
 Bee is the first client to work with the Swarm network.
-
-## Setting Up Bee for Developing Dapps
-
-To develop apps on Bee, you might need to adjust the following settings. Check out the brand new [bee-factory](https://github.com/ethersphere/bee-factory) for information on how to run a self contained development environment so you can go wild in swarm without spending all your xBZZ on swap and stamps!
 
 ## Hosting Your Dapps & Storing Their Data
 
@@ -42,8 +38,7 @@ with your Bee!
 ## Dapps With Swarm Gateways
 
 If you want your users to be able to access Swarm without running
-their own Bee node, for the time being you will need to access Bee in
-gateway mode. Join us in the
+their own Bee node, for the time being you will need to make use of the [Gateway Proxy tool](https://github.com/ethersphere/gateway-proxy). Join us in the
 [#develop-on-swarm](https://discord.gg/C6dgqpxZkU) room in our
 [Discord Server](https://discord.gg/wdghaQsGq5) for more information
 on how to allow your web app users to read and write to the swarm.
