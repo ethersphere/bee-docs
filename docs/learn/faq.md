@@ -59,9 +59,7 @@ See [this page](/docs/learn/technology/contracts/overview) for a list of relevan
 
 ### What is the BZZ token supply?
 
-The BZZ token does not have a fixed supply, but instead, it can be minted by depositing collateral (DAI token) and burned which releases this collateral. The amount of collateral that needs to be deposited/withdrawn to mint/burn 1 BZZ token is defined by a token bonding curve in a smart contract.
-
-Current token supply: [https://tokenservice.ethswarm.org/circulating\_supply](https://tokenservice.ethswarm.org/circulating_supply)
+With the [shutdown of the bonding curve](https://blog.ethswarm.org/foundation/2024/bonding-curve-shutdown/) as a result of a [community vote](https://blog.ethswarm.org/foundation/2024/announcing-the-outcome-of-swarms-bonding-curve-vote/), the BZZ supply is now fixed at [63,149,437](https://etherscan.io/token/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb).
 
 ### BZZ token tokenomics
 
@@ -69,21 +67,14 @@ More about BZZ token tokenomics: https://blog.ethswarm.org/hive/2021/bzz-tokenom
 
 ### What is the bonding curve?
 
-A bonding curve is a mathematical function in the form of y=f(x) that determines the price of a single token, depending on the number of tokens currently in existence, or the market supply. The key difference is that with a traditional exchange platform market makers are required to provide liquidity to the market, whereas a bonding curve takes over the role of providing liquidity, negating the need for market makers.
+A bonding curve is a mathematical function in the form of y=f(x) that determines the price of a single token, depending on the number of tokens currently in existence, or the market supply. The key difference is that with a traditional exchange platform market makers are required to provide liquidity to the market, whereas a bonding curve takes over the role of providing liquidity, negating the need for market makers. 
 
 ### What is the "Bzzaar" bonding curve?
 
-Bzzaar is a unique exchange platform that enables users to buy and sell BZZ tokens. Unlike traditional exchange platforms, Bzzaar uses a bonding curve to instantly complete transactions without relying on market makers. The platform allows new projects to easily integrate Bzzaar's contracts into their own interfaces, creating a front-end interface for BZZ exchange. The bonding curve is community-owned and fuels all projects created on Swarm.
+During the first several years of the life of the BZZ token, the bonding curve mechanism played a critical role in maintaining liquidity and setting a transparent pricing model for BZZ tokens. 
 
-Read more about the "Bzzaar" bonding curve: [https://medium.com/ethereum-swarm/swarm-and-its-bzzaar-bonding-curve-ac2fa9889914](https://medium.com/ethereum-swarm/swarm-and-its-bzzaar-bonding-curve-ac2fa9889914)
+On May 4th of 2024, as a result of a [community vote](https://blog.ethswarm.org/foundation/2024/announcing-the-outcome-of-swarms-bonding-curve-vote/), the bonding curve was [shut down](https://blog.ethswarm.org/foundation/2024/bonding-curve-shutdown/) and the BZZ supply is now fixed at [63,149,437](https://etherscan.io/token/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb).
 
-Bzzaar contract[information](https://github.com/ethersphere/bzzaar-contracts): https://github.com/ethersphere/bzzaar-contracts
-
-[Bzzaar's smart contract](https://etherscan.io/address/0x4f32ab778e85c4ad0cead54f8f82f5ee74d46904): [https://etherscan.io/address/0x4f32ab778e85c4ad0cead54f8f82f5ee74d46904](https://etherscan.io/address/0x4f32ab778e85c4ad0cead54f8f82f5ee74d46904)
-
-Is Bzzaar's bonding curve audited?
-
-A full [audit of Swarm](https://github.com/ethersphere/bzzaar-contracts/tree/v1.0.0) was performed by QuantStamp and the [final audit report](https://github.com/ethersphere/bzzaar-contracts/blob/v1.0.0/audit/Buzzar_final_audit_report.pdf) has been made publicly available.
 
 ## Running a Bee Node
 

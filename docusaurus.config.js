@@ -97,6 +97,10 @@ module.exports = {
               label: 'Ecosystem',
             },
             {
+              to: 'docs/learn/tokens',
+              label: 'Tokens',
+            },
+            {
               to: 'docs/learn/glossary',
               label: 'Glossary',
             },
