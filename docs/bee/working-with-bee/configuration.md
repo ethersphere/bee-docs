@@ -699,7 +699,7 @@ _default_ `false`
 
 Send tracing spans to the tracing service. More information on how to
 configure and visualize tracing data is available
-[here](/docs/develop/bee-developers/useful-dev-info#tracing).
+[here](/docs/develop/contribute/introduction#tracing).
 
 #### --tracing-endpoint
 

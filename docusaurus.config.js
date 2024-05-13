@@ -185,8 +185,8 @@ module.exports = {
               label: 'Tools and Features'
             },
             {
-              to: 'docs/develop/bee-developers/useful-dev-info',
-              label: 'Bee Developer Resources'
+              to: 'docs/develop/contribute/introduction',
+              label: 'Contribute to Bee Development'
             },
           ]
         },
