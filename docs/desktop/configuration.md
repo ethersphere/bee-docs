@@ -25,12 +25,9 @@ Bee ultra-light nodes are limited to only downloading small amounts of data from
 
 ### Bridging Ethereum DAI to Gnosis Chain as xDAI
 
-If you already have some xDAI on a Gnosis Chain address, skip to the next step ***Funding Node with xDAI***. If you have DAI on Ethereum and need to swap it for xDAI, you can use one of the [two Gnosis Chain bridges](https://docs.gnosischain.com/bridges/) described in the Gnosis Chain documentation:
+If you already have some xDAI on a Gnosis Chain address, skip to the next step ***Funding Node with xDAI***. If you have DAI on Ethereum and need to swap it for xDAI, you can use one of the [Gnosis Chain Bridge](https://bridge.gnosischain.com/)
 
-* [Omnibridge](https://omni.gnosischain.com/bridge)
-* [xDAI Bridge](https://bridge.gnosischain.com/)
-
-See [this guide to Gnosis Chain bridges](https://honeyswap.org/gnosis-bridges.html) from the Honeyswap DEX for more detailed instructions on using each of these bridges. Five to ten xDAI is plenty to get started.
+Five to ten xDAI is plenty to get started.
 
 ### Funding Node with xDAI
 

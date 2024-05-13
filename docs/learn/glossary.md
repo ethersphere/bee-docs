@@ -181,7 +181,7 @@ BZZ is Swarm's [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens
 
 ## xBZZ Token
 
-xBZZ is BZZ bridged to the [Gnosis Chain](https://www.gnosis.io/) using [OmniBridge](https://omni.gnosischain.com/bridge).
+xBZZ is BZZ bridged to the [Gnosis Chain](https://www.gnosis.io/) using the [Gnosis Chain Bridge](https://bridge.gnosischain.com/).
 
 It is used as payment for [postage stamps](glossary#postage-stamps) and as the unit of accounting between the nodes. It is used to incentivize nodes to provide resources to the Swarm.
 

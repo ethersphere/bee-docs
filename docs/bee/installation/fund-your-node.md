@@ -62,14 +62,13 @@ Ethereum address.
 If you want to run a full node, or upload a lot of content, then you may need
 more xDAI for gas. To acquire this, you may convert DAI on the main Ethereum
 network to xDAI using the
-[xDAI bridge](https://docs.gnosischain.com/bridges/tokenbridge/xdai-bridge),
+[Gnosis Chain bridge](https://bridge.gnosischain.com/),
 or buy xDAI
 [directly using fiat](https://buyxdai.com/).
 
 You will also need to fund your node with more xBZZ for full speed access, or to
 purchase postage stamps to upload content. To bridge BZZ from the Ethereum
-mainet to the [Gnosis Chain](https://www.gnosis.io/), you may use
-[OmniBridge](https://omni.gnosischain.com/).
+mainet to the [Gnosis Chain](https://www.gnosis.io/), you may use the [Gnosis Chain Bridge](https://bridge.gnosischain.com/).
 
 To find out what your node's Ethereum address is, please consult your relevant
 installation guide or check your logs!

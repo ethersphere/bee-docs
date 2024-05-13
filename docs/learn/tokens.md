@@ -8,6 +8,10 @@ id: tokens
 
 ### BZZ
 
+:::info
+On May 4th of 2024, as a result of a [community vote](https://blog.ethswarm.org/foundation/2024/announcing-the-outcome-of-swarms-bonding-curve-vote/), the bonding curve was [shut down](https://blog.ethswarm.org/foundation/2024/bonding-curve-shutdown/) and the BZZ supply is now fixed at [63,149,437](https://etherscan.io/token/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb).
+:::
+
 BZZ is the original token issued from the [Ethswarm Bonding Curve contract](https://etherscan.io/address/0x4f32ab778e85c4ad0cead54f8f82f5ee74d46904) on the Ethereum blockchain. 
 
 BZZ Ethereum address: [0x19062190b1925b5b6689d7073fdfc8c2976ef8cb](
