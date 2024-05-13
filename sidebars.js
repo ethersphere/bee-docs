@@ -137,22 +137,22 @@ module.exports = {
       type: 'category',
       label: 'Tools and Features',
       items: [
-        'develop/dapps-on-swarm/introduction',
-        'develop/dapps-on-swarm/develop-on-swarm',
-        'develop/dapps-on-swarm/bee-js',
-        'develop/dapps-on-swarm/gateway-proxy',
-        'develop/dapps-on-swarm/chunk-types',
-        'develop/dapps-on-swarm/feeds',
-        'develop/dapps-on-swarm/pss'
+        'develop/tools-and-features/introduction',
+        'develop/tools-and-features/bee-js',
+        'develop/tools-and-features/gateway-proxy',
+        'develop/tools-and-features/chunk-types',
+        'develop/tools-and-features/feeds',
+        'develop/tools-and-features/pss',
+        'develop/tools-and-features/bee-dev-mode',
+        'develop/tools-and-features/starting-a-test-network'
       ],
       collapsed: false
     },
     {
       type: 'category',
-      label: 'Bee Developers',
+      label: 'Contribute',
       items: [
-        'develop/bee-developers/useful-dev-info',
-        'develop/bee-developers/bee-dev-mode'
+        'develop/contribute/introduction',
       ],
       collapsed: false
     },

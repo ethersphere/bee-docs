@@ -38,14 +38,6 @@ module.exports = {
           from: '/docs/installation/quick-start',
         },
         {
-          to: '/docs/develop/introduction',
-          from: '/docs/dapps-on-swarm/introduction',
-        },
-        {
-          to: '/docs/develop/dapps-on-swarm/pss',
-          from: '/docs/dapps-on-swarm/pss',
-        },
-        {
           to: '/docs/develop/access-the-swarm/buy-a-stamp-batch',
           from: '/docs/develop/access-the-swarm/keep-your-data-alive',
         },
@@ -189,7 +181,7 @@ module.exports = {
               label: 'Access the Swarm'
             },
             {
-              to: 'docs/develop/dapps-on-swarm/introduction',
+              to: 'docs/develop/tools-and-features/introduction',
               label: 'Tools and Features'
             },
             {

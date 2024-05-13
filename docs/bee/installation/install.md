@@ -530,4 +530,4 @@ The [Bee API and Debug API](/docs/api-reference/) are the primary methods for in
 If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
 
 ### Start building DAPPs on Swarm
-If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/dapps-on-swarm/introduction).
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/introduction).
