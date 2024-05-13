@@ -348,7 +348,7 @@ The `address` field contains the Gnosis Chain address of the node, simply add th
   We recommend not holding a high value of xBZZ or xDAI in your nodes' wallet. Please consider regularly removing accumulated funds. 
 :::
 
-Before funding your node, you first need to get some xDAI. You can send it either from your own Gnosis Chain compatible wallet such as Metamask, or from a centralized exchange which supports xDAI withdrawals to Gnosis Chain. If you already have some DAI on Ethereum, you can use the [xDAI bridge](https://docs.gnosischain.com/bridges/tokenbridge/xdai-bridge/) to mint xDAI on Gnosis Chain. 
+Before funding your node, you first need to get some xDAI. You can send it either from your own Gnosis Chain compatible wallet such as Metamask, or from a centralized exchange which supports xDAI withdrawals to Gnosis Chain. If you already have some DAI on Ethereum, you can use the [Gnosis Chain Bridge](https://bridge.gnosischain.com/) to mint xDAI on Gnosis Chain. 
 
 Once you have some xDAI ready, you're ready to fund your Bee node. Send at least 1 xDAI to the address you found in the previous step to fund your node. You can optionally also send some xBZZ to your node which you can use to pay for storage on Swarm.
 

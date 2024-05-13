@@ -189,9 +189,9 @@ It is used as payment for [postage stamps](glossary#postage-stamps) and as the u
 
 [DAI](https://developer.makerdao.com/dai/1/) is an [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) stable token issued on the Ethereum blockchain, tracking USD.
 
-## xDai Token
+## xDAI Token
 
-xDai is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridged-tokens) to the [Gnosis Chain](https://www.gnosis.io) using [xDai Bridge](https://bridge.gnosischain.com/). It is also the native token of the Gnosis Chain, i.e. transaction fees are paid in xDai.
+xDAI is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridged-tokens) to the [Gnosis Chain](https://www.gnosis.io) using [xDai Bridge](https://bridge.gnosischain.com/). It is also the native token of the Gnosis Chain, i.e. transaction fees are paid in xDai.
 
 ## Sepolia
 
