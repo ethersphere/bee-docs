@@ -126,7 +126,6 @@ module.exports = {
         'develop/access-the-swarm/buy-a-stamp-batch',
         'develop/access-the-swarm/upload-and-download',
         'develop/access-the-swarm/erasure-coding',
-        'develop/access-the-swarm/direct-upload',
         'develop/access-the-swarm/store-with-encryption',
         'develop/access-the-swarm/host-your-website',
         'develop/access-the-swarm/syncing',
