@@ -51,7 +51,7 @@ xDAI is the bridged version of DAI on Gnosis Chain and also serves as the native
 The Swarm official website has a page with [a list of resources for getting BZZ tokens](https://www.ethswarm.org/get-bzz). Be careful to check whether it is BZZ on Ethereum or Gnosis Chain.
 
 
-### Bridging BZZ or DAI
+### Bridging BZZ to xBZZ or DAI to xDAI
 
-If you already have DAI or BZZ on Ethereum then you can use one of the Gnosis Chain bridges to swap for the bridged version of each token on Gnosis Chain (or vice versa). You can use either [xDAI Bridge](https://bridge.gnosischain.com/) or [OmniBridge](https://omni.gnosischain.com/bridge) for swapping between DAI and xDAI or BZZ and xBZZ. 
+If you already have DAI or BZZ on Ethereum then you can use the [Gnosis Chain Bridge](https://bridge.gnosischain.com/) for swapping between DAI and xDAI or BZZ and xBZZ. 
 
