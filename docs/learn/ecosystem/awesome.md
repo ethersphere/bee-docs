@@ -71,7 +71,7 @@ Some software on this list is community created and has not been reviewed for fu
 
 ### Documentation
 
-[The Book of Swarm](https://docs.ethswarm.org/the-book-of-swarm.pdf) - Storage and communication infrastructure for self-sovereign digital society back-end stack for the decentralised web
+[The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) - Storage and communication infrastructure for self-sovereign digital society back-end stack for the decentralised web
 
 [Bee Docs](https://github.com/ethersphere/bee-docs) - Documentation for the Swarm Bee Client. View at [docs.ethswarm.org](https://docs.ethswarm.org/docs/).
 
