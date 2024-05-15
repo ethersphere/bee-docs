@@ -156,7 +156,7 @@ You're connected to the Swarm. Let's do a quick check to find out how
 many peers we have using the `curl` command line utility:
 
 ```bash
-curl localhost:1635/peers
+curl localhost:1633/peers
 ```
 
 ```json

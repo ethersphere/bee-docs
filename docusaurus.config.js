@@ -208,8 +208,8 @@ module.exports = {
         // },
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
-          to: 'docs/api-reference/',
-          activeBasePath: 'docs/api-reference',
+          to: '/api/',
+          activeBasePath: '/api/',
           label: 'API Reference',
           position: 'left',
         },

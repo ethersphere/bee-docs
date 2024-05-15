@@ -470,8 +470,7 @@ Ethereum Swarm Bee
 
 Great! Our API is listening!
 
-Next, let's see if we have connected with any peers by querying our
-[Debug API](/docs/bee/working-with-bee/debug-api). Note that the debug api listens at port 1635 by default (`localhost:1635`).
+Next, let's see if we have connected with any peers by querying the API which listens at port 1633 by default (`localhost:1633`).
 
 :::info
 Here we are using the `jq` [utility](https://stedolan.github.io/jq/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
