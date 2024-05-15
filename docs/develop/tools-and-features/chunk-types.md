@@ -4,8 +4,7 @@ id: chunk-types
 ---
 
 Swarm is home to many types of chunks, but these can be categoried
-into 4 broad categories. Read <a href="/the-book-of-swarm.pdf"
-target="_blank" rel="noopener noreferrer">The Book of Swarm</a> for
+into 4 broad categories. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for
 more information on how swarm comes together.
 
 ## Content Addressed Chunks
@@ -29,8 +28,7 @@ reserved just for your personal Ethereum key pair! Here you can write
 whatever you'd please. Single Owner Chunks are the technology that
 powers Swarm's [feeds](/docs/develop/tools-and-features/feeds), but they are
 capable of much more! Look out for more chats about this soon, and for
-more info read <a href="/the-book-of-swarm.pdf" target="_blank"
-rel="noopener noreferrer">The Book of Swarm</a> .
+more info read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf).
 
 ## Custom Chunk Types
 

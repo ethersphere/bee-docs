@@ -5,9 +5,7 @@ id: hive
 
 Because of how the swarm is structured, we recommend that users
 wishing to scale up their Bee operation, or set up a commercial Bee
-hive should seek to run many instances of Bee simultaneously. Read <a
-href="/the-book-of-swarm.pdf" target="_blank" rel="noopener
-noreferrer">The Book of Swarm</a> for more information on how the
+hive should seek to run many instances of Bee simultaneously. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for more information on how the
 swarm comes together.
 
 Swarm provides tooling to help you install many Bees at once.

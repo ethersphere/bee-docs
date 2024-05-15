@@ -56,7 +56,7 @@ relieves unnecessary congestion on the blockchain. 💩
 
 :::info
 Learn more about how SWAP and other accounting protocols work by reading
-<a href="/the-book-of-swarm.pdf" target="_blank" rel="noopener noreferrer">The Book of Swarm</a> .
+[The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf).
 :::
 
 Bee contains a rich set of features to enable you to query the current accounting state of your node. First, let's query our node's current balance by sending a POST request to the balances endpoint.
