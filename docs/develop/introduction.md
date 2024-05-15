@@ -12,10 +12,9 @@ Learn more about how to [upload and download](/docs/develop/access-the-swarm/upl
 
 Explore the tools and features available to help in your Swarm development journey. Learn more about [chunk types](/docs/develop/tools-and-features/chunk-types), the [bee-js Javascript library](/docs/develop/tools-and-features/bee-js) for Bee, prototyping with [bee dev mode](/docs/develop/tools-and-features/bee-dev-mode) and [test networks](/docs/develop/tools-and-features/starting-a-test-network), use [the Gateway Proxy tool](/docs/develop/tools-and-features/gateway-proxy) to make your decentralised applications available to anyone with an internet connection, and more.
 
-## Review the [API Reference Docs](/docs/api-reference/)
+## Review the [API Reference Docs](/api/)
 
-Find detailed information on all the endpoints available in the API reference and Debug API [reference documentation](/docs/api-reference/).
-
+Find detailed information on all the endpoints available in the API reference and Debug API [reference documentation](/api/).
 
 ## [Contribute](/docs/develop/contribute/introduction) to the Development of the Bee Client
 

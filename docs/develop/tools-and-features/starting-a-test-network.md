@@ -17,8 +17,6 @@ Starting a network is easiest achieved by making use of configuration files. We 
 network-id: 7357
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: 127.0.0.1:1635
-debug-api-enable: true
 bootnode: ""
 data-dir: /tmp/bee/node1
 password: some pass phze
@@ -64,10 +62,10 @@ Finally, note the `welcome-message` in the first nodes configuration file. This 
 
 Now we have created our configuration files, let's start our nodes by running `bee start --config config_1.yaml`, then in another Terminal session, run `bee start --config-file config_2.yaml`.
 
-We can now inspect the state of our network by sending HTTP requests to the [Debug API](/docs/api-reference/)..
+We can now inspect the state of our network by sending HTTP requests to the [API](/api/).
 
 ```bash
-curl -s http://localhost:1635/topology | jq .connected
+curl -s http://localhost:1633/topology | jq .connected
 ```
 
 ```
@@ -95,7 +93,7 @@ In order to create a network from our two isolated nodes, we must first instruct
 First, we will need to find out the network address of the first node. To do this, we send a HTTP request to the `addresses` endpoint of the Debug API.
 
 ```bash
-curl localhost:1635/addresses | jq
+curl localhost:1633/addresses | jq
 ```
 
 ```json
@@ -136,11 +134,11 @@ Look at the the output for your first node, you should see our connection messag
 Let's also verify that we can see both nodes in using each other's Debug API's.
 
 ```bash
-curl -s http://localhost:1635/peers | jq
+curl -s http://localhost:1633/peers | jq
 ```
 
 ```bash
-curl -s http://localhost:1635/peers | jq
+curl -s http://localhost:1633/peers | jq
 ```
 
 Congratulations! You have made your own tiny two bee Swarm! 🐝 🐝

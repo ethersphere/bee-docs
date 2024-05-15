@@ -167,6 +167,6 @@ The logger endpoint uses HTTP PUT requests to modify the verbosity of the logger
 
 Examples:
 
-`curl -XPUT http://localhost:1635/loggers/bm9kZS8q/none` - will disable all loggers; `bm9kZS8q` is base64 encoded `node/*` regular expression.
+`curl -XPUT http://localhost:1633/loggers/bm9kZS8q/none` - will disable all loggers; `bm9kZS8q` is base64 encoded `node/*` regular expression.
 
-`curl -XPUT http://localhost:1635/loggers/bm9kZS9hcGlbMV1bXT4-ODI0NjM0OTMzMjU2/error` - will set the verbosity of the logger with the subsystem `node/api[1][]>>824634933256` to `error`.
+`curl -XPUT http://localhost:1633/loggers/bm9kZS9hcGlbMV1bXT4-ODI0NjM0OTMzMjU2/error` - will set the verbosity of the logger with the subsystem `node/api[1][]>>824634933256` to `error`.

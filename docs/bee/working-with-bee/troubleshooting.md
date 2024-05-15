@@ -27,7 +27,7 @@ bee db compact --data-dir=/home/bee/.bee
 First check that the node is fully synced, is not frozen, and has sufficient funds to participate in staking. To check node sync status, call the `redistributionstate` endpoint:
 
 ```
-curl -X GET http://localhost:1635/redistributionstate | jq
+curl -X GET http://localhost:1633/redistributionstate | jq
 ```
 Response:
 
@@ -59,7 +59,7 @@ The `{anchor}` value can be set to any random hexadecimal string, while `{depth}
 To get the current depth, call the `/reservestate` endpoint
 
 ```bash
-sudo curl -sX GET http://localhost:1635/reservestate | jq
+sudo curl -sX GET http://localhost:1633/reservestate | jq
 ```
 Copy the `storageRadius` value from the output (this represents the ACTUAL depth for your node, in other words, the depth to which your node is responsible for storing files. The `radius` value is the hypothetical depth your node would be at if every postage batch was fully utilised.)
 
@@ -74,7 +74,7 @@ Copy the `storageRadius` value from the output (this represents the ACTUAL depth
 Call the endpoint like so:
 
 ```bash
-sudo curl -sX GET http://localhost:1635/rchash/10/aaaa/aaaa | jq
+sudo curl -sX GET http://localhost:1633/rchash/10/aaaa/aaaa | jq
 ```
 
 If the sampler runs successfully, you should see output like this:
@@ -116,7 +116,7 @@ If you are still experiencing problems, you can find more help in the [node-oper
 Your main tool for better understanding your node is the Bee API. The API has a handful of endpoints which will provide you with information relevant to detecting and diagnosing problems with your nodes.
 
 :::info
-Some endpoints are disabled by default on the Bee API (port `1633` by default) unless [authentication is enabled](/docs/bee/working-with-bee/security). They are available in the debug API however (port `1635` by default), so be mindful of which api you are using.  
+Some endpoints are disabled by default on the Bee API (port `1633` by default) unless [authentication is enabled](/docs/bee/working-with-bee/security). They are available in the debug API however (port `1633` by default), so be mindful of which api you are using.  
 :::
 
 
@@ -124,7 +124,7 @@ Some endpoints are disabled by default on the Bee API (port `1633` by default) u
 
     The `/status` endpoint will give you a bit more of a detailed view of the health of your node. It's a quick summary of some vital values for your node.
     ```bash
-     curl -s  http://localhost:1635/status | jq
+     curl -s  http://localhost:1633/status | jq
     
     ```
     * `"peer"` - Your node's overlay address.
@@ -147,7 +147,7 @@ The nodes are ordered by distance (Kademlia distance, not spatial / geographic d
 Here are the last 12 entries:
 
 ```bash
- curl -s http://localhost:1635/status/peers | jq
+ curl -s http://localhost:1633/status/peers | jq
 ```
 
 ```bash
@@ -307,7 +307,7 @@ You may notice that there is some variation in `neighborhoodSize`, however they 
 And we can compare these entries to our own node's `/status` results for diagnostic purposes:
 
 ```bash
- curl -s http://localhost:1635/status | jq
+ curl -s http://localhost:1633/status | jq
 ``` 
  
 ```bash 
@@ -331,7 +331,7 @@ From the results we can see that we have a healthy neighborhood size when compar
 ### `/redistributionstate`
     This endpoint provides an overview of values related to storage fee redistribution game (in other words, staking rewards). You can use this endpoint to check whether or not your node is participating properly in the redistribution game. 
     ```bash
-    curl -s http://localhost:1635/redistributionstate | jq
+    curl -s http://localhost:1633/redistributionstate | jq
     {
       "minimumGasFunds": "11080889201250000",
       "hasSufficientFunds": true,
@@ -371,7 +371,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     This endpoint shows key information about the reserve state of your node. You can use it to identify problems with your node related to its reserve (whether it is syncing chunks properly into its reserve for example).
 
     ```bash
-        curl -s  http://localhost:1635/reservestate | jq
+        curl -s  http://localhost:1633/reservestate | jq
 
         {
           "radius": 15,
@@ -410,7 +410,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     As the output of this file can be very large, we save it to the `topology.json` file for easier inspection:
     
     ```bash
-     curl -s http://localhost:1635/topology | jq '.' > topology.json
+     curl -s http://localhost:1633/topology | jq '.' > topology.json
     ```
     We open the file in vim for inspection:
     ```bash

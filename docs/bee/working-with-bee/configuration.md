@@ -129,10 +129,6 @@ db-disable-seeks-compaction: true
 db-open-files-limit: "200"
 # size of the database write buffer in bytes
 db-write-buffer-size: "33554432"
-# debug HTTP API listen address
-debug-api-addr: :1635
-# enable debug HTTP API
-debug-api-enable: false
 # cause the node to start in full mode
 full-node: false
 # help for printconfig
@@ -257,8 +253,6 @@ Flags:
       --db-disable-seeks-compaction             disables db compactions triggered by seeks (default true)
       --db-open-files-limit uint                number of open files allowed by database (default 200)
       --db-write-buffer-size uint               size of the database write buffer in bytes (default 33554432)
-      --debug-api-addr string                   debug HTTP API listen address (default ":1635")
-      --debug-api-enable                        enable debug HTTP API
       --full-node                               cause the node to start in full mode
   -h, --help                                    help for start
       --mainnet                                 triggers connect to main net bootnodes. (default true)
@@ -516,24 +510,6 @@ Corresponds to LevelDB `OpenFilesCacheCapacity` (see above)
 _default_ `33554432`
 
 Corresponds to LevelDB `WriteBuffer` (see above)
-
-#### --debug-api-addr
-
-_default_ `:1635`
-
-The IP and port the [Debug API](/docs/api-reference/)
-will serve HTTP requests from.
-
-Omitting the IP part of the address will cause the server to listen to
-all requests.
-
-`--debug-api-enable` must be set to `true`.
-
-#### --debug-api-enable
-
-_default_ `false`
-
-Set this to `true` to enable access to the [Debug API](/docs/api-reference/)
 
 #### --full-node
 

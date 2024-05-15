@@ -455,7 +455,7 @@ bee version
 ```
 
 Once the Bee node has been funded, the chequebook deployed, and postage stamp
-batch store synced, its HTTP [API](/docs/api-reference/)
+batch store synced, its HTTP [API](/docs/bee/working-with-bee/bee-api)
 will start listening at `localhost:1633`.
 
 To check everything is working as expected, send a GET request to localhost port 1633.
@@ -477,7 +477,7 @@ Here we are using the `jq` [utility](https://stedolan.github.io/jq/) to parse ou
 :::
 
 ```bash
-curl -s localhost:1635/peers | jq ".peers | length"
+curl -s localhost:1633/peers | jq ".peers | length"
 ```
 
 ```
@@ -502,7 +502,7 @@ Once your node is up and running, make sure to [back up your keys](/docs/bee/wor
 While depositing stake is not required to run a Bee node, it is required in order for a node to receive rewards for sharing storage with the network. You will need to [deposit xBZZ to the staking contract](/docs/bee/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
 ```bash
-curl -XPOST localhost:1635/stake/100000000000000000
+curl -XPOST localhost:1633/stake/100000000000000000
 ```
 
 This will initiate a transaction on-chain which deposits the specified amount of xBZZ into the staking contract. 
@@ -523,7 +523,7 @@ You may also check out the [configuration guide](/docs/bee/working-with-bee/conf
 If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/access-the-swarm/introduction).
 
 ### Explore the API
-The [Bee API and Debug API](/docs/api-reference/) are the primary methods for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the APIs.
+The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
 
 ### Run a hive! 
 If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
