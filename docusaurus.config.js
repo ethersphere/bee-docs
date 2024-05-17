@@ -48,7 +48,39 @@ module.exports = {
         {
           to: '/docs/bee/installation/fund-your-node',
           from: '/docs/installation/fund-your-node',
-        }
+        },
+        {
+          to: '/docs/develop/tools-and-features/introduction',
+          from: '/docs/dapps-on-swarm/introduction',
+        },
+        {
+          to: '/docs/develop/tools-and-features/introduction',
+          from: '/docs/develop/dapps-on-swarm/introduction',
+        },
+        {
+          to: '/docs/develop/tools-and-features/bee-js',
+          from: '/docs/develop/dapps-on-swarm/bee-js',
+        },
+        {
+          to: '/docs/develop/tools-and-features/chunk-types',
+          from: '/docs/develop/dapps-on-swarm/chunk-types',
+        },
+        {
+          to: '/docs/develop/tools-and-features/feeds',
+          from: '/docs/develop/dapps-on-swarm/feeds',
+        },
+        {
+          to: '/docs/develop/tools-and-features/pss',
+          from: '/docs/develop/dapps-on-swarm/pss',
+        },
+        {
+          to: '/docs/develop/tools-and-features/bee-dev-mode',
+          from: '/docs/develop/dapps-on-swarm/bee-dev-mode',
+        },
+        {
+          to: '/docs/develop/tools-and-features/starting-a-test-network',
+          from: '/docs/develop/dapps-on-swarm/starting-a-test-network',
+        },
       ],
     },
   ],
