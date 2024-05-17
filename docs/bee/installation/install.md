@@ -202,18 +202,92 @@ Bee is a versatile piece of software with diverse use cases. Before starting Bee
 
 Check that the file was successfully generated and contains the [default configuration](https://github.com/ethersphere/bee/blob/master/packaging/bee.yaml):
 
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS', value: 'macos'},
+]}>
+<TabItem value="linux">
+
+#### Linux
+
 ```bash
- test -f /etc/bee/bee.yaml && echo "$FILE exists."
- cat /etc/bee/bee.yaml
+  test -f /etc/bee/bee.yaml && echo "$FILE exists."
+  cat /etc/bee/bee.yaml
 ```
+
+</TabItem>
+
+<TabItem value="macos">
+
+#### MacOS (arm64 - M1/M2)
+
+```bash
+  test -f /opt/homebrew/etc/swarm-bee/bee.yaml && echo "$FILE exists."
+  cat /opt/homebrew/etc/swarm-bee/bee.yaml
+```
+
+</TabItem>
+
+<TabItem value="macos">
+
+#### MacOS (amd64 - Intel)
+
+```bash
+  test -f /usr/local/etc/swarm-bee/bee.yaml && echo "$FILE exists."
+  cat /usr/local/etc/swarm-bee/bee.yaml
+```
+</TabItem>
+</Tabs>
+
+
+
 The output should match the [default bee.yaml](https://github.com/ethersphere/bee/blob/master/packaging/bee.yaml) values.
 
-If your `bee.yaml` file is missing, create a new one and fill it in with the default configuration copied from the Ethswarm GitHub Bee repo.
+If your `bee.yaml` file is missing, create a new one and fill it in with the default configuration using the `bee printconfig` command to write the default options into your `bee.yaml` config file.
+
+
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS', value: 'macos'},
+]}>
+<TabItem value="linux">
+
+#### Linux
+
 
 ```bash
 sudo touch /etc/bee/bee.yaml
-sudo vi /etc/bee/bee.yaml  
+sudo sh -c 'bee printconfig > /etc/bee/bee.yaml 2>&1'
 ```
+
+</TabItem>
+
+<TabItem value="macos">
+
+#### MacOS (arm64 - M1/M2)
+
+```bash
+sudo touch /opt/homebrew/etc/swarm-bee/bee.yaml
+sudo sh -c 'bee printconfig &> /opt/homebrew/etc/swarm-bee/bee.yaml'
+```
+
+</TabItem>
+
+<TabItem value="macos">
+
+#### MacOS (amd64 - Intel)
+
+```bash
+sudo touch /usr/local/etc/swarm-bee/bee.yaml
+sudo sh -c 'bee printconfig &> /usr/local/etc/swarm-bee/bee.yaml'
+```
+</TabItem>
+
+</Tabs>
 
 ### Set node type
 
@@ -251,14 +325,15 @@ We strongly recommend you [run your own Gnosis Chain node](https://docs.gnosisch
 
 If you do not wish to run your own Gnosis Chain node and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
 
-For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/rpc/) listed in the Gnosis Chain documentation. However the providers of these endpoints make no [SLA](https://business.adobe.com/blog/basics/service-level-agreements-slas-a-complete-guide#what-is-a-service-level-agreement-sla) or availability guarantees, and is therefore not recommended for full node operators.
+For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/RPC%20Providers/) listed in the Gnosis Chain documentation. However the providers of these endpoints make no [SLA](https://business.adobe.com/blog/basics/service-level-agreements-slas-a-complete-guide#what-is-a-service-level-agreement-sla) or availability guarantees, and is therefore not recommended for full node operators.
 
 To set your RPC endpoint provider, specify it in configuration for the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
 
 ```yaml
 ## bee.yaml
-blockchain-rpc-endpoint: https://gno.getblock.io/<<your-api-key>>/mainnet/
+blockchain-rpc-endpoint: https://rpc.gnosis.gateway.fm
 ```
+
 ### Configure Swap Initial Deposit (Optional)
 
 When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
@@ -329,6 +404,18 @@ See the [staking section](/docs/bee/working-with-bee/staking) for more informati
 
 As part of the process of starting a Bee full node or light node the node must issue a Gnosis Chain transaction which is paid for using xDAI. We therefore need to find our node's Gnosis Chain address. We can find it by reading it directly from our key file:  
 
+
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS', value: 'macos'},
+]}>
+<TabItem value="linux">
+
+#### Linux
+
+
 ```bash
 sudo cat /var/lib/bee/keys/swarm.key
 ``` 
@@ -338,8 +425,46 @@ sudo cat /var/lib/bee/keys/swarm.key
 {"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
 ```
 The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix.
+
+</TabItem>
+
+<TabItem value="macos">
+
+#### MacOS (arm64 - M1/M2)
+
+```bash
+sudo cat /usr/local/var/lib/swarm-bee/keys/swarm.key
+``` 
+*Output from cat cat /usr/local/var/lib/swarm-bee/keys/swarm.key*:
+
+```bash    
+{"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
+```
+The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix.
+
+</TabItem>
+
+<TabItem value="macos">
+
+#### MacOS (amd64 - Intel)
+
+```bash
+sudo cat /usr/local/var/lib/swarm-bee/keys/swarm.key
+``` 
+*Output from cat cat /usr/local/var/lib/swarm-bee/keys/swarm.key*:
+
+```bash    
+{"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
+```
+The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix.
+
+</TabItem>
+</Tabs>
+
+
+
 :::danger
-  Do not share the contents of your `swarm.key` or any other keys with anyone, this example is for a throwaway account.
+  Do not share the contents of your `swarm.key` or any other keys with anyone as it controls access to your Gnosis Chain account and can be used to withdraw assets.
 :::
       
 ## 4. Fund Node
@@ -376,7 +501,7 @@ sudo systemctl restart bee
 
 <TabItem value="macos">
 
-#### MacOS
+#### MacOS 
 
 ```bash
 brew services restart swarm-bee
@@ -409,13 +534,23 @@ sudo journalctl --lines=100 --follow --unit bee
 </TabItem>
 <TabItem value="macos">
 
-#### MacOS
+#### MacOS (arm64 - M1/M2)
+
+```bash
+tail -f /opt/homebrew/var/log/swarm-bee/bee.log
+```
+
+</TabItem>
+
+<TabItem value="macos">
+
+#### MacOS (amd64 - Intel)
 
 ```bash
 tail -f /usr/local/var/log/swarm-bee/bee.log
 ```
-
 </TabItem>
+
 </Tabs>
 
 If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world.
