@@ -50,7 +50,7 @@ module.exports = {
           from: '/docs/installation/fund-your-node',
         },
         {
-          to: '/docs/develop/dapps-on-swarm/introduction',
+          to: '/docs/develop/develop-on-swarm/introduction',
           from: '/docs/develop/dapps-on-swarm/introduction',
         }
       ],
