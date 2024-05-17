@@ -36,7 +36,7 @@ curl localhost:1633/stake
 
 ## Check redistribution status
 
-Use the <a href="/debug-api/#tag/RedistributionState" target="_blank" rel="noopener noreferrer">RedistributionState</a> endpoint of the API to get more information about the redistribution status of the node.
+Use the <a href="/api/#tag/RedistributionState" target="_blank" rel="noopener noreferrer">RedistributionState</a> endpoint of the API to get more information about the redistribution status of the node.
 
 ```
 curl -X GET http://localhost:1633/redistributionstate | jq
@@ -73,7 +73,7 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 
 
 :::warning
-Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/debug-api/#tag/RedistributionState/paths/~1redistributionstate/get).
+Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get).
 :::
 
 For issues relating to your node not participating in redistribution properly, see the [troubleshooting section](troubleshooting).

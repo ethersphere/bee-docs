@@ -195,7 +195,7 @@ the Internet, to the Bee p2p port (default `1634`) which your computer
 is exposing only to the private network. Doing this creates a tunnel
 through which other Bee's may connect to your computer safely.
 
-If you start your Bee node in a private network with UPnP available, the output of the addresses endpoint of your Debug API will look something like this:
+If you start your Bee node in a private network with UPnP available, the output of the addresses endpoint of your API will look something like this:
 
 ```json
 [
@@ -215,7 +215,7 @@ known as the underlay addresses.
 ##### Manual: Configure Your Router and Bee
 
 Inspecting the underlay addresses in the output of the addresses
-endpoint of our Debug API, we can see addresses only for _localhost_
+endpoint of our API, we can see addresses only for _localhost_
 `127.0.0.1` and our _private network IP_ `192.168.0.10`. Bee must be
 having trouble navigating our NAT.
 

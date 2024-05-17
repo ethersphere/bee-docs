@@ -115,11 +115,6 @@ If you are still experiencing problems, you can find more help in the [node-oper
 
 Your main tool for better understanding your node is the Bee API. The API has a handful of endpoints which will provide you with information relevant to detecting and diagnosing problems with your nodes.
 
-:::info
-Some endpoints are disabled by default on the Bee API (port `1633` by default) unless [authentication is enabled](/docs/bee/working-with-bee/security). They are available in the debug API however (port `1633` by default), so be mindful of which api you are using.  
-:::
-
-
 ### `/status`
 
     The `/status` endpoint will give you a bit more of a detailed view of the health of your node. It's a quick summary of some vital values for your node.
@@ -523,12 +518,11 @@ From the results we can see that we have a healthy neighborhood size when compar
         "status": "ok",
         "version": "2.0.0-759f56f7",
         "apiVersion": "5.1.1",
-        "debugApiVersion": "0.0.0"
       }           
   ```
 
   * `"status"` - "ok" if the server is responsive.
   * `"version"` - The version of your Bee node. You can find latest version by checking the [Bee github repo](https://github.com/ethersphere/bee).
   * `"apiVersion"` 
-  * `"debugApiVersion"`
+
 

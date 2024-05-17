@@ -10,7 +10,7 @@ The Bee API-endpoint exposes all functionality to upload and download content to
 Detailed information about Bee API endpoints can be found in the [API reference docs](/api/).
 
 :::danger
-Your Debug API should not be exposed to the public Internet, make sure that your network has a firewall which blocks port `1633`. You may also consider using the 
+Your API should not be exposed to the public Internet, make sure that your network has a firewall which blocks port `1633`. You may also consider using the [Gateway Proxy tool](/docs/develop/tools-and-features/gateway-proxy) to protect your node's API endpoint.
 :::
 
 ## Exploring the API
@@ -30,7 +30,7 @@ curl -s http://localhost:1633/peers | jq '.peers | length'
 Great! We can see that we are currently connected and sharing data with 23 other nodes!
 
 :::info
-Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our Debug API, learn more about how to install and use `jq` [here](https://stedolan.github.io/jq/).
+Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://stedolan.github.io/jq/).
 :::
 
 #### Inspect Network Topology

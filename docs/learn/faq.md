@@ -243,4 +243,4 @@ Therefore, the rule is, each node must have:
 
 - 1 Ethereum address (this address, the Swarm network id, and a random nonce are used to determine the node's overlay address)
 - 1 Chequebook
-- 3 Unique ports for API / p2p / Debug API
+- 2 Unique ports for Bee API / p2p API

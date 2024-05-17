@@ -20,12 +20,12 @@ Installation from source is described in the [Installation](/docs/bee/installati
 To check if two nodes are connected and to see the round trip time for message exchange between them, get the overlay address from one node, for example local node 2:
 
 ```bash
-curl localhost:1835/addresses
+curl localhost:1833/addresses
 ```
 
-Make sure that Debug API is enabled and addresses configured as in examples above.
+Make sure addresses are configured as in examples above.
 
-And use that address in the Debug API call on another node, for example, local node 1:
+And use that address in the API call on another node, for example, local node 1:
 
 ```bash
 curl -XPOST localhost:1735/pingpong/d4440baf2d79e481c3c6fd93a2014d2e6fe0386418829439f26d13a8253d04f1

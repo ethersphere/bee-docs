@@ -167,8 +167,6 @@ price-oracle-address: ""
 redistribution-address: ""
 # ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
 resolver-options: []
-# enable permission check on the http APIs
-restricted: false
 # forces the node to resync postage contract data
 resync: false
 # staking contract address
@@ -272,7 +270,6 @@ Flags:
       --price-oracle-address string             price oracle contract address
       --redistribution-address string           redistribution contract address
       --resolver-options strings                ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
-      --restricted                              enable permission check on the http APIs
       --resync                                  forces the node to resync postage contract data
       --staking-address string                  staking contract address
       --statestore-cache-capacity uint          lru memory caching capacity in number of statestore entries (default 100000)
@@ -335,7 +332,6 @@ To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.
 bootnode:
 - /ip4/3.122.234.225/tcp/31050/p2p/QmdSgC9yDsK2for1VSBgK4CdP3agt76NPuEBs2KCGAnfSQ
 data-dir: /home/username/bee/sepolia
-debug-api-enable: true
 full-node: true
 mainnet: false
 network-id: 10
@@ -607,17 +603,6 @@ ENS API endpoint for a TLD, with contract address. Multiple values can be provid
 Settings should be provided in the format `[tld:][contract-addr@]url`
 
 A default top level domain and resolver contract address are provided, but an ENS/Geth endpoint must be provided to enable this functionality.
-
-#### --restricted
-
-_default_ false
-
-Enable permission check on certain http APIs. More information on how to restrict the access
-to the APIs is available [here](/docs/bee/working-with-bee/security).
-
-If enabled - you must specify an admin password using the `--admin-password` option and a `--token-encryption-key` string value.
-
-To generate a valid admin password use the provided [bcrypt utility](/docs/bee/working-with-bee/bcrypt)
 
 #### --resync
 

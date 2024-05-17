@@ -17,7 +17,6 @@ docker run \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint http://localhost:8545 \
-    --debug-api-enable
 ```
 
 :::info
@@ -35,7 +34,6 @@ docker run \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint https://gno.getblock.io/<<your-api-key>>/mainnet/ \
-	  --debug-api-enable
 ```
 
 Once you have generated your keys, use the `-d` flag to run in detached mode and leave Bee running in the background:
@@ -50,7 +48,6 @@ docker run \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint https://gno.getblock.io/<<your-api-key>>/mainnet/ \
-	  --debug-api-enable
 ```
 
 ### Versions

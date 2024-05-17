@@ -122,7 +122,7 @@ This depth is defined in relation to the connection topology of a single node as
 
 Connectivity depth refers to the saturation level of the node’s topology - the level to which the topology of a node’s connections has Kademlia connectivity. Defined as one level deeper than the deepest fully saturated level. A PO is defined as saturated if it has at least the minimum required level of connected nodes, which is set at 8 nodes in the current implementation of Swarm. 
 
-The output from the Bee debug API's `topology` endpoint:
+The output from the Bee API's `topology` endpoint:
 
 ![](/img/depths1.png)
 

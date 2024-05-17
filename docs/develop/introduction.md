@@ -14,7 +14,7 @@ Explore the tools and features available to help in your Swarm development journ
 
 ## Review the [API Reference Docs](/api/)
 
-Find detailed information on all the endpoints available in the API reference and Debug API [reference documentation](/api/).
+Find detailed information on all the endpoints available in the [API reference documentation](/api/).
 
 ## [Contribute](/docs/develop/contribute/introduction) to the Development of the Bee Client
 
