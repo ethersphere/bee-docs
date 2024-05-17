@@ -52,17 +52,33 @@ module.exports = {
         {
           to: '/docs/develop/tools-and-features/introduction',
           from: '/docs/develop/dapps-on-swarm/introduction',
-        }
+        },
+        // start
+        {
+          to: '/docs/develop/tools-and-features/bee-js',
+          from: '/docs/develop/dapps-on-swarm/bee-js',
+        },
+        {
+          to: '/docs/develop/tools-and-features/chunk-types',
+          from: '/docs/develop/dapps-on-swarm/chunk-types',
+        },
+        {
+          to: '/docs/develop/tools-and-features/feeds',
+          from: '/docs/develop/dapps-on-swarm/feeds',
+        },
+        {
+          to: '/docs/develop/tools-and-features/pss',
+          from: '/docs/develop/dapps-on-swarm/pss',
+        },
+        {
+          to: '/docs/develop/tools-and-features/bee-dev-mode',
+          from: '/docs/develop/dapps-on-swarm/bee-dev-mode',
+        },
+        {
+          to: '/docs/develop/tools-and-features/starting-a-test-network',
+          from: '/docs/develop/dapps-on-swarm/starting-a-test-network',
+        },
       ],
-      createRedirects(existingPath) {
-        if (existingPath.includes('/docs/develop/tools-and-features')) {
-          // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
-          return [
-            existingPath.replace('/docs/develop/tools-and-features', '/docs/develop/dapps-on-swarm'),
-          ];
-        }
-        return undefined; // Return a falsy value: no redirect created
-      },
     },
   ],
   ],
