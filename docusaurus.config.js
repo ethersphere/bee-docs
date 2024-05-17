@@ -54,15 +54,7 @@ module.exports = {
           from: '/docs/develop/dapps-on-swarm/introduction',
         }
       ],
-      createRedirects(existingPath) {
-        if (existingPath.includes('/docs/develop/tools-and-features/')) {
-          // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
-          return [
-            existingPath.replace('/docs/develop/dapps-on-swarm', '/docs/develop/dapps-on-swarm'),
-          ];
-        }
-        return undefined; // Return a falsy value: no redirect created
-      },
+    
     },
   ],
   ],
