@@ -51,9 +51,12 @@ module.exports = {
         },
         {
           to: '/docs/develop/tools-and-features/introduction',
+          from: '/docs/dapps-on-swarm/introduction',
+        },
+        {
+          to: '/docs/develop/tools-and-features/introduction',
           from: '/docs/develop/dapps-on-swarm/introduction',
         },
-        // start
         {
           to: '/docs/develop/tools-and-features/bee-js',
           from: '/docs/develop/dapps-on-swarm/bee-js',
