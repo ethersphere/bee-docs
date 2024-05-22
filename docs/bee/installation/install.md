@@ -569,7 +569,7 @@ A suggested neighborhood will be returned:
   In the following section we print our `swarm.key` file contents to the terminal. Do not share the contents of your `swarm.key` or any other keys with anyone as it controls access to your Gnosis Chain account and can be used to withdraw assets.
 :::
 
-As part of the process of starting a Bee full node or light node the node must issue a Gnosis Chain transaction which is paid for using xDAI. We therefore need to find our node's Gnosis Chain address. We can find it by reading it directly from our key file:  
+As part of the process of starting a Bee full or light node the node must issue a Gnosis Chain transaction to set up its chequebook contract. We need to find our node's Gnosis Chain address in order to deposit xDAI which will be used to pay for this initial Gnosis Chain transaction. We can find our node's address by reading it directly from our key file. The location for your key file will differ depending on your system and startup method:  
 
 ### Bee Service
 
@@ -628,7 +628,7 @@ The `address` field contains the Gnosis Chain address of the node, simply add th
 </Tabs>
 
 
-### `bee start`
+### For `bee start`
 
 The default keys directory when running Bee with the `bee start` command will depend on your operating system. Run the `bee printconfig` command to see the default config directory for your operating system, and look for the `data-dir` value. 
 
@@ -655,13 +655,13 @@ The `address` field contains the Gnosis Chain address of the node, simply add th
   We recommend not holding a high value of xBZZ or xDAI in your nodes' wallet. Please consider regularly removing accumulated funds. 
 :::
 
-Before funding your node, you first need to get some xDAI. You can send it either from your own Gnosis Chain compatible wallet such as Metamask, or from a centralized exchange which supports xDAI withdrawals to Gnosis Chain. If you already have some DAI on Ethereum, you can use the [Gnosis Chain Bridge](https://bridge.gnosischain.com/) to mint xDAI on Gnosis Chain. 
+To fund your node with xDAI you can use a Gnosis Chain compatible wallet such as Metamask, or a centralized exchange which supports xDAI withdrawals to Gnosis Chain. If you already have some DAI on Ethereum, you can use the [Gnosis Chain Bridge](https://bridge.gnosischain.com/) to mint xDAI on Gnosis Chain. 
 
-Once you have some xDAI ready, you're ready to fund your Bee node. Send at least 1 xDAI to the address you found in the previous step to fund your node. You can optionally also send some xBZZ to your node which you can use to pay for storage on Swarm.
+After acquiring some xDAI, you can fund your node by sending some xDAI to the address you saved from the previous step (1 xDAI is more sufficient).  You can optionally also send some xBZZ to your node which you can use to pay for storage on Swarm.
 
-While depositing xBZZ is optional, node operators who intend to download or upload large amounts of data on Swarm may wish to deposit some xBZZ in order to pay for SWAP settlements. See the section on [node funding](/docs/bee/installation/fund-your-node) for more information.
+While depositing xBZZ is optional, node operators who intend to download or upload large amounts of data on Swarm may wish to deposit some xBZZ in order to pay for SWAP settlements.
 
-For nodes which stake xBZZ and participate in the storage incentives system, very small amounts of xDAI will be used regularly to pay for staking related transactions on Gnosis Chain, so xDAI may need to be periodically topped up. See the [staking section](/docs/bee/working-with-bee/staking#check-redistribution-status) for more information.
+For nodes which stake xBZZ and participate in the storage incentives system, small amounts of xDAI are used regularly to pay for staking related transactions on Gnosis Chain, so xDAI must be periodically topped up. See the [staking section](/docs/bee/working-with-bee/staking#check-redistribution-status) for more information.
 
 After sending xDAI and optionally xBZZ to the Gnosis Chain address collected in the previous step, restart the node:
 
@@ -690,9 +690,9 @@ brew services restart swarm-bee
 </TabItem>
 </Tabs>
 
-### `bee start`
+### For `bee start`
 
-Simply run `bee start`:
+Restart your terminal and run `bee start`:
 
 ```bash
 bee start
@@ -703,7 +703,7 @@ bee start
 
 When first started in full or light mode, Bee must deploy a chequebook to the Gnosis Chain blockchain, and sync the postage stamp batch store so that it can check chunks for validity when storing or forwarding them. This can take a while, so please be patient! Once this is complete, you will see Bee starting to add peers and connect to the network.
 
-You can keep an eye on progress by watching the logs while this is taking place (if you've started your node with `bee start`, simply observe the logs printed to your terminal).
+You can keep an eye on progress by watching the logs while this is taking place.
 
 
 <Tabs
@@ -735,13 +735,14 @@ tail -f /opt/homebrew/var/log/swarm-bee/bee.log
 <TabItem value="macos-amd64">
 
 
-
 ```bash
 tail -f /usr/local/var/log/swarm-bee/bee.log
 ```
 </TabItem>
 
 </Tabs>
+
+*If you've started your node with `bee start`, simply observe the logs printed to your terminal.*
 
 If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world.
 
