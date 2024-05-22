@@ -7,9 +7,11 @@ function FetchPriceComponent() {
   const [volume, setVolume] = useState('');
   const [volumeUnit, setVolumeUnit] = useState('GB');
   const [convertedTime, setConvertedTime] = useState(null);
+  const [minimumDepth, setMinimumDepth] = useState(null);
   const [depth, setDepth] = useState(null);
   const [amount, setAmount] = useState(null);
   const [storageCost, setStorageCost] = useState(null);
+  const [minimumDepthStorageCost, setMinimumDepthStorageCost] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [timeError, setTimeError] = useState('');
   const [volumeError, setVolumeError] = useState('');
@@ -70,7 +72,10 @@ function FetchPriceComponent() {
     if (depth !== null && amount !== null) {
       calculateStorageCost();
     }
-  }, [depth, amount]); 
+    if (minimumDepth !== null && amount !== null) {
+      calculateMinimumDepthStorageCost();
+    }
+  }, [depth, amount, minimumDepth]); 
 
   const fetchPrice = async () => {
     try {
@@ -105,6 +110,7 @@ function FetchPriceComponent() {
   
     setConvertedTime(hours);
     calculateDepth(gigabytes);
+    setMinimumDepth(calculateMinimumDepth(gigabytes));
     calculateAmount(hours * 3600 / 5); 
     setShowResults(true);
   };
@@ -115,6 +121,15 @@ function FetchPriceComponent() {
     const keys = Object.keys(volumeToDepth).map(key => parseFloat(key)).sort((a, b) => a - b);
     let foundKey = keys.find(key => key >= gigabytes);
     setDepth(foundKey ? volumeToDepth[foundKey.toFixed(2)] : 'No suitable depth found');
+  };
+
+  const calculateMinimumDepth = (gigabytes) => {
+    for (let depth = 17; depth <= 41; depth++) {
+      if (gigabytes <= Math.pow(2, 12 + depth) / (1024 ** 3)) {
+        return depth;
+      }
+    }
+    return null;
   };
 
   const calculateAmount = (blocks) => {
@@ -128,6 +143,13 @@ function FetchPriceComponent() {
     if (depth !== null && amount !== null) {
       const cost = ((2**depth) * amount) / 1e16;
       setStorageCost(cost.toFixed(4));
+    }
+  };
+
+  const calculateMinimumDepthStorageCost = () => {
+    if (minimumDepth !== null && amount !== null) {
+      const cost = ((2**minimumDepth) * amount) / 1e16;
+      setMinimumDepthStorageCost(cost.toFixed(4));
     }
   };
 
@@ -242,16 +264,24 @@ function FetchPriceComponent() {
               <td>{`${volume} ${volumeUnit}`}</td>
             </tr>
             <tr>
-              <td>Depth</td>
-              <td>{`${depth} (for an `}<a href="/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table">effective volume</a>{` of ${depthToVolume[depth]})`}</td>
-            </tr>
-            <tr>
-              <td>Amount</td>
+              <td>Suggested Minimum Amount</td>
               <td>{amount} PLUR</td>
             </tr>
             <tr>
-              <td>Storage Cost</td>
+              <td>Suggested Safe Depth</td>
+              <td>{`${depth} (for an `}<a href="/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table">effective volume</a>{` of ${depthToVolume[depth]})`}</td>
+            </tr>
+            <tr>
+              <td>Suggested Minimum Depth</td>
+              <td>{minimumDepth} (see <a href="/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table">batch utilisation</a> - may require <a href="#top-up-your-batch">topups</a>)</td>
+            </tr>
+            <tr>
+              <td>Batch Cost for Safe Depth</td>
               <td>{storageCost} xBZZ</td>
+            </tr>
+            <tr>
+              <td>Batch Cost for Minimum Depth</td>
+              <td>{minimumDepthStorageCost} xBZZ</td>
             </tr>
           </tbody>
         </table>
