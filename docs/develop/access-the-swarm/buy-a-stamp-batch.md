@@ -90,13 +90,12 @@ Once your batch has been purchased, it will take a few minutes for other Bee nod
 
 When purchasing a batch of stamps there are several parameters and options which must be considered. The `depth` parameter will control how many chunks can be uploaded with a batch of stamps. The `amount` parameter determines how much xBZZ will be allocated per chunk, and therefore also controls how long the chunks will be stored. While the `immutable` header option sets the batch as either mutable or immutable, which can significantly alter the behavior of the batch utilisation (more details below).
 
-:::caution
-The minimum value for `depth` is 17, however a minimum depth of 23 is recommended for most use cases due to the [mechanics of stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#batch-utilisation). See [the depths utilisation table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) to help decide which depth is best for your use case.
-
-The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the lastPrice value from the postage stamp contract times 17280 (the number of blocks in 24 hours). This requirement is in place in order to prevent spamming the network.
-:::
 
 ### Choosing `depth`
+
+:::caution
+The minimum value for `depth` is 17, however a higher depth value is recommended for most use cases due to the [mechanics of stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#batch-utilisation). See [the depths utilisation table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) to help decide which depth is best for your use case.
+:::
 
 One notable aspect of batch utilisation is that the entire batch is considered fully utilised as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
 
@@ -104,7 +103,11 @@ See the [postage stamp contract page](/docs/learn/technology/contracts/postage-s
 
 ### Choosing `amount`
 
-The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp batch contract page](/docs/learn/technology/contracts/postage-stamp#batch-amount--batch-cost) where a more complete description is inclu
+:::caution
+The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the lastPrice value from the postage stamp contract times 17280 (the number of blocks in 24 hours). You can also use the [calculator](#calculators) below. This requirement is in place in order to prevent spamming the network.
+:::
+
+The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp batch contract page](/docs/learn/technology/contracts/postage-stamp#batch-amount--batch-cost) where a more complete description is included.
 
 ### Mutable or Immutable?
 
