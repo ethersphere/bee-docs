@@ -7,20 +7,18 @@ Bee is a very flexible piece of software, and can be configured in a variety of
 ways depending on your use case. This expanded section will cover configuration in detail. The default methods for setting configuration vary depending on the install and startup method used. There are two main methods of installing and running Bee.
 
 
-1. Installing Bee as a Debian or RPM package and running it as a background service with `systemctl` (Linux) or `brew services` (MacOS). This is the recommended method for most users:
+1. Installing Bee using a package manager on Linux or MacOS and running it as a background service with `systemctl` (Linux) or `brew services` (MacOS), which both use the `bee start` command under the hood. The `bee start` command can also be used to run Bee installed with a package manager, however it has a different default configuration location which we outline below.
 
-1. Installing Bee binaries and running using the `bee start` command directly. This method should be used if the recommended method does not work or for a customized non-default setup.
-
-
+1. Installing Bee [through a shell script](/docs/bee/installation/install#shell-script-install) or by [building from source](/docs/bee/installation/build-from-source). For these methods the `bee start` command is used directly and Bee will not be set up to run as a service out of the box. 
 
 :::caution
-These two methods have [significant differences](/docs/bee/installation/install#note-on-startup-methods) and cannot not be used interchangeably. 
+These two methods have [important differences](/docs/bee/installation/install#note-on-startup-methods) and cannot not be used interchangeably. 
 :::
 
 
 ## Package Manager Install Configuration 
 
-When Bee is [installed using one of the officially supported](/docs/bee/installation/install#package-manager-install) Linux Debian or RPM packages or the Homebrew installer for MacOS, it can be run as a service in the background using tools such as systemctl (Linux) or brew services (macOS). When running Bee as a service, a yaml file is used to specify the Bee node's configuration. 
+When Bee is [installed using one of the officially supported](/docs/bee/installation/install#package-manager-install) Linux Debian or RPM packages or the Homebrew installer for MacOS, it can be run as a service in the background using tools such as systemctl (Linux) or brew services (macOS). When running Bee as a service, a YAML file is used to specify the Bee node's configuration. 
 
 
 ### Default Data and Config Directories
@@ -39,7 +37,7 @@ bee start --config /<path-to-config>/<config-filename>.yaml
 
 Configuration for the Bee service should not be set through command line arguments and environment variables as it is with the `bee start` command. 
 
-To change configuration, simply edit the yaml file and restart Bee: 
+To change configuration, simply edit the YAML file and restart Bee: 
 
 #### Linux
 
