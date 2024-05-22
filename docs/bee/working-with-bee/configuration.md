@@ -3,55 +3,131 @@ title: Configuration
 id: configuration
 ---
 
-Bee is a very flexible piece of software, and can be configured in a variety of
-ways depending on your use case. This expanded section will cover configuration in detail. The default methods for setting configuration vary depending on the install and startup method used. There are two main methods of installing and running Bee.
 
+## Default Data and Config Directories
 
-1. Installing Bee using a package manager on Linux or MacOS and running it as a background service with `systemctl` (Linux) or `brew services` (MacOS), which both use the `bee start` command under the hood. The `bee start` command can also be used to run Bee installed with a package manager, however it has a different default configuration location which we outline below.
+Depending on the operating system and startup method used, the default data and configuration directories for your node will differ.
 
-1. Installing Bee [through a shell script](/docs/bee/installation/install#shell-script-install) or by [building from source](/docs/bee/installation/build-from-source). For these methods the `bee start` command is used directly and Bee will not be set up to run as a service out of the box. 
+### Bee Service Default Directories
 
-:::caution
-These two methods have [important differences](/docs/bee/installation/install#note-on-startup-methods) and cannot not be used interchangeably. 
-:::
+When installed using a package manager, Bee is set up to run as a service with default data and (`data-dir`) and configuration (`config`) directories set up during the installation. You can find the complete details of default directories for different operating systems in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging). 
 
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
+{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
+]}>
+<TabItem value="linux">
 
-## Package Manager Install Configuration 
+The default data folder and config file locations:
 
-When Bee is [installed using one of the officially supported](/docs/bee/installation/install#package-manager-install) Linux Debian or RPM packages or the Homebrew installer for MacOS, it can be run as a service in the background using tools such as systemctl (Linux) or brew services (macOS). When running Bee as a service, a YAML file is used to specify the Bee node's configuration. 
-
-
-### Default Data and Config Directories
-
-For a Linux package manager install, `/etc/bee/bee.yaml` is used as the default config directory and `/var/lib/bee` as the default data directory. 
-
-### Change Default Config Directory
-
-Add the `--config` flag to `bee start` to specify a config file with another location or file name.
-
-```bash
-bee start --config /<path-to-config>/<config-filename>.yaml
+```yaml
+data-dir: /var/lib/bee
+config: /etc/bee/bee.yaml
 ```
 
-### Change Default Config
+</TabItem>
 
-Configuration for the Bee service should not be set through command line arguments and environment variables as it is with the `bee start` command. 
+<TabItem value="macos-arm64">
 
-To change configuration, simply edit the YAML file and restart Bee: 
+The default data folder and config file locations:
 
-#### Linux
+```yaml
+data-dir: /opt/homebrew/var/lib/swarm-bee
+config: /opt/homebrew/etc/swarm-bee/bee.yaml
+```
+
+</TabItem>
+
+<TabItem value="macos-amd64">
+
+The default data folder and config file locations:
+
+```yaml
+data-dir: /usr/local/var/lib/swarm-bee/
+config: /usr/local/etc/swarm-bee/bee.yaml
+```
+
+</TabItem>
+</Tabs>
+
+### `bee start` Default Directories
+
+When Bee is installed using a package manager it will be set up to run as a service so that it can be run in the background using tools such as `systemctl` or `brew services`. It can also be started using the `bee start` command, however there are different default data and config directories for both startup methods.
+
+If installed using the [automated shell script](/docs/bee/installation/install#shell-script-install) or by [building Bee from source](/docs/bee/installation/build-from-source), ONLY the `bee start` startup method is available by default.
+
+For all operating systems, the default data and config directories for the `bee start` startup method can be found using the `bee printconfig` command:
+
+This will print out a complete default Bee node configuration file to the terminal, the `config` and `data-dir` values show the default directories for your system: 
+
+```yaml
+config: /root/.bee.yaml
+data-dir: /root/.bee
+```
+
+## Bee Service Configuration 
+
+When Bee is installed using one of the [officially supported package managers](/docs/bee/installation/install#package-manager-install), it can be run as a service in the background using tools such as `systemctl` (Linux) or `brew services` (macOS). When running Bee as a service, a YAML file is used to specify the Bee node's configuration. 
+
+To change your node's configuration, simply edit the YAML file and restart Bee: 
+
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
+{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
+]}>
+<TabItem value="linux">
+
+Open the config file for editing:
 
 ```bash
 sudo vi /etc/bee/bee.yaml
+```
+After saving your changes, restart your node:
+
+```bash
 sudo systemctl restart bee
 ```
 
-#### MacOS
+</TabItem>
+
+<TabItem value="macos-arm64">
+
+Open the config file for editing:
 
 ```bash
-vi /usr/local/etc/swarm-bee/bee.yaml
+sudo sudo vi /opt/homebrew/etc/swarm-bee/bee.yaml
+```
+
+After saving your changes, restart your node:
+
+```bash
 brew services restart swarm-bee
 ```
+
+</TabItem>
+
+<TabItem value="macos-amd64">
+
+Open the config file for editing:
+
+```bash
+sudo vi /usr/local/etc/swarm-bee/bee.yaml
+```
+
+After saving your changes, restart your node:
+
+```bash
+brew services restart swarm-bee
+```
+</TabItem>
+
+</Tabs>
 
 ### Manually generate config for Bee service
 
