@@ -39,6 +39,10 @@ Each batch of stamps has two key parameters, `batch depth` and `amount`, which a
 
 ### Batch Depth 
 
+:::caution
+The minimum value for `depth` is 17, however higher depths are recommended for most use cases due to the [mechanics of stamp batch utilisation](#batch-utilisation). See [the depths utilisation table](#effective-utilisation-table) to help decide which depth is best for your use case.
+:::
+
 `Batch depth` determines how much data can be stored by a batch. The number of chunks which can be stored (stamped) by a batch is equal to  $$2^{batchDepth}$$. 
 
 For a batch with a `batch depth` of 24, a maximum of $$2^{24} = 16,777,216$$ chunks can be stamped.   
