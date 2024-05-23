@@ -9,9 +9,6 @@ export default function DepthCalc() {
   const [price, setPrice] = useState(0);
   const [details, setDetails] = useState(null);
 
-
-
-
   const depthToVolume = {
     22: "4.93 GB", 
     23: "17.03 GB",
@@ -35,25 +32,23 @@ export default function DepthCalc() {
     41: "9.00 PB",
   };
 
-
   function formatBytes(bytes) {
-      const KB = 1000;
-      const MB = KB ** 2; // 1,000,000
-      const GB = KB ** 3; // 1,000,000,000
-      const TB = KB ** 4; // 1,000,000,000,000
-      const PB = KB ** 5; // 1,000,000,000,000,000
+    const KB = 1000;
+    const MB = KB ** 2; // 1,000,000
+    const GB = KB ** 3; // 1,000,000,000
+    const TB = KB ** 4; // 1,000,000,000,000
+    const PB = KB ** 5; // 1,000,000,000,000,000
 
-      if (bytes < GB) { // Less than 1 GB
-          return (bytes / MB).toFixed(2) + ' MB';
-      } else if (bytes < TB) { // Less than 1 TB
-          return (bytes / GB).toFixed(2) + ' GB';
-      } else if (bytes < PB) { // Less than 1 PB
-          return (bytes / TB).toFixed(2) + ' TB';
-      } else { // 1 PB or more
-          return (bytes / PB).toFixed(2) + ' PB';
-      }
+    if (bytes < GB) { // Less than 1 GB
+      return (bytes / MB).toFixed(2) + ' MB';
+    } else if (bytes < TB) { // Less than 1 TB
+      return (bytes / GB).toFixed(2) + ' GB';
+    } else if (bytes < PB) { // Less than 1 PB
+      return (bytes / TB).toFixed(2) + ' TB';
+    } else { // 1 PB or more
+      return (bytes / PB).toFixed(2) + ' PB';
+    }
   }
-
 
   useEffect(() => {
     fetchPrice();
@@ -181,12 +176,30 @@ export default function DepthCalc() {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(details).map(([key, value]) => (
-              <tr key={key}>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>{key}</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{value}</td>
-              </tr>
-            ))}
+            <tr>
+              <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Depth</td>
+              <td style={{ padding: '8px', border: '1px solid' }}>{details.Depth}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Amount</td>
+              <td style={{ padding: '8px', border: '1px solid' }}>{details.Amount}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Effective Volume <a href="/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table">(learn more)</a></td>
+              <td style={{ padding: '8px', border: '1px solid' }}>{details["Effective Volume"]}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Theoretical Max Volume</td>
+              <td style={{ padding: '8px', border: '1px solid' }}>{details["Theoretical Max Volume"]}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Storage duration</td>
+              <td style={{ padding: '8px', border: '1px solid' }}>{details["Storage duration"]}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Cost</td>
+              <td style={{ padding: '8px', border: '1px solid' }}>{details.Cost}</td>
+            </tr>
           </tbody>
         </table>
       )}
