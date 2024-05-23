@@ -273,7 +273,7 @@ function FetchPriceComponent() {
             </tr>
             <tr>
               <td>Suggested Minimum Depth</td>
-              <td>{minimumDepth} (see <a href="/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table">batch utilisation</a> - may require <a href="#top-up-your-batch">topups</a>)</td>
+              <td>{minimumDepth} (see <a href="/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table">batch utilisation</a> - may require <a href="#dilute-your-batch">dilution</a>)</td>
             </tr>
             <tr>
               <td>Batch Cost for Safe Depth</td>
