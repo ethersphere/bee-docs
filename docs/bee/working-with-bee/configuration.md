@@ -146,9 +146,15 @@ sudo vi /etc/bee/bee.yaml
 
 ## Configuration for *bee start*
 
-### Default Data and Config Directories
+While the `bee start` command uses `~/.bee.yaml` as the default config directory, no `~/.bee.yaml` file is generated during install, so it must be generated in the default directory in order to specify options using the YAML file.
 
-The `bee start` command uses `~/.bee.yaml` as the default config directory and `~/.bee` as the default data directory.
+### Configuration Methods and Priority
+
+There are three methods of configuration which each have different priority levels. Configuration is processed in the following ascending order of preference when using `bee start` to run a Bee node:
+
+1. Command Line Arguments
+2. Environment Variables
+3. Configuration File
 
 
 ### Manually generate config for *Bee start*
@@ -291,13 +297,7 @@ welcome-message: ""
 withdrawal-addresses-whitelist: []
 ```
 
-### Configuration Priority
 
-Configuration is processed in the following ascending order of preference when using `bee start` to run a Bee node:
-
-1. Command Line Arguments
-2. Environment Variables
-3. Configuration File
 
 ### Command Line Arguments
 
