@@ -17,8 +17,6 @@ Starting a network is easiest achieved by making use of configuration files. We 
 network-id: 7357
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: 127.0.0.1:1635
-debug-api-enable: true
 bootnode: ""
 data-dir: /tmp/bee/node1
 password: some pass phze
@@ -31,8 +29,6 @@ swap-enable: false
 network-id: 7357
 api-addr: :1733
 p2p-addr: :1734
-debug-api-addr: 127.0.0.1:1735
-debug-api-enable: true
 data-dir: /tmp/bee/node2
 bootnode: ""
 password: some pass phze
@@ -40,8 +36,7 @@ welcome-message: "Bzz Bzz Bzz"
 swap-enable: false
 ```
 
-Note that for each node, we provide a different `api-addr`,
-`debug-api-addr`. If we had not specified different addresses here, we
+Note that for each node, we provide a different `api-addr`. If we had not specified different addresses here, we
 would get an `address already in use` error, as no two applications
 can listen to the same port. We also specify a different
 `p2p-addr`. If we had not, our nodes would not be able to communicate
@@ -64,10 +59,10 @@ Finally, note the `welcome-message` in the first nodes configuration file. This 
 
 Now we have created our configuration files, let's start our nodes by running `bee start --config config_1.yaml`, then in another Terminal session, run `bee start --config-file config_2.yaml`.
 
-We can now inspect the state of our network by sending HTTP requests to the [Debug API](/docs/api-reference/)..
+We can now inspect the state of our network by sending HTTP requests to the [API](/api/).
 
 ```bash
-curl -s http://localhost:1635/topology | jq .connected
+curl -s http://localhost:1633/topology | jq .connected
 ```
 
 ```
@@ -75,7 +70,7 @@ curl -s http://localhost:1635/topology | jq .connected
 ```
 
 ```bash
-curl -s http://localhost:1735/topology | jq .connected
+curl -s http://localhost:1733/topology | jq .connected
 ```
 
 ```
@@ -85,17 +80,17 @@ curl -s http://localhost:1735/topology | jq .connected
 No connections yet? Right! Let's remedy that!
 
 :::info
-Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our Debug API, learn more about how to install and use `jq` [here](https://stedolan.github.io/jq/).
+Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://stedolan.github.io/jq/).
 :::
 
 ### Making a network
 
 In order to create a network from our two isolated nodes, we must first instruct our nodes to connect to each other. This step is not explicitly needed if you connect to the main Swarm network, as the default bootnodes in the Swarm network will automatically suggest peers.
 
-First, we will need to find out the network address of the first node. To do this, we send a HTTP request to the `addresses` endpoint of the Debug API.
+First, we will need to find out the network address of the first node. To do this, we send a HTTP request to the `addresses` endpoint of the API.
 
 ```bash
-curl localhost:1635/addresses | jq
+curl localhost:1633/addresses | jq
 ```
 
 ```json
@@ -120,8 +115,6 @@ Note the addresses starting with an `/ip4`, followed by `127.0.0.1`, which is th
 network-id: 7357
 api-addr: :1733
 p2p-addr: :1734
-debug-api-addr: 127.0.0.1:1735
-debug-api-enable: true
 data-dir: /tmp/bee/node2
 bootnode: "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs"
 password: some pass phze
@@ -133,14 +126,14 @@ Now, we can shut our second node and reboot with the new configuration.
 
 Look at the the output for your first node, you should see our connection message!
 
-Let's also verify that we can see both nodes in using each other's Debug API's.
+Let's also verify that we can see both nodes in using each other's API's.
 
 ```bash
-curl -s http://localhost:1635/peers | jq
+curl -s http://localhost:1633/peers | jq
 ```
 
 ```bash
-curl -s http://localhost:1635/peers | jq
+curl -s http://localhost:1733/peers | jq
 ```
 
 Congratulations! You have made your own tiny two bee Swarm! 🐝 🐝

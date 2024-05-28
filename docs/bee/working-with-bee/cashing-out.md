@@ -26,7 +26,7 @@ withdrawal-addresses-whitelist: [ 0x62d04588e282849d391ebff1b9884cb921b9b94a, 0x
 The token you desire to withdraw is specified in the path directly:
 
 ```bash
-http://localhost:1635/wallet/withdraw/{coin}
+http://localhost:1633/wallet/withdraw/{coin}
 ```
 For `coin`, you can use the value `NativeToken` for xDAI or `BZZ` for xBZZ.
 
@@ -37,7 +37,7 @@ The `address` query parameter is used to specify the target address to withdraw 
 The following command will withdraw a single PLUR of xBZZ to address 0x62d04588e282849d391ebff1b9884cb921b9b94a:
 
 ```bash
-curl -X POST "http://localhost:1635/wallet/withdraw/bzz?amount=1&address=0x62d04588e282849d391ebff1b9884cb921b9b94a"
+curl -X POST "http://localhost:1633/wallet/withdraw/bzz?amount=1&address=0x62d04588e282849d391ebff1b9884cb921b9b94a"
 ```
 
 ## Cashing out Cheques (SWAP)
@@ -62,7 +62,7 @@ Learn more about how SWAP and other accounting protocols work by reading
 Bee contains a rich set of features to enable you to query the current accounting state of your node. First, let's query our node's current balance by sending a POST request to the balances endpoint.
 
 ```bash
-curl localhost:1635/chequebook/balance | jq
+curl localhost:1633/chequebook/balance | jq
 ```
 
 ```json
@@ -75,7 +75,7 @@ curl localhost:1635/chequebook/balance | jq
 It is also possible to examine your per-peer balances.
 
 ```bash
-curl localhost:1635/balances | jq
+curl localhost:1633/balances | jq
 ```
 
 ```json
@@ -100,7 +100,7 @@ In Swarm, these per-peer balances represent trustful agreements between nodes. T
 More info can be found by using the chequebook API.
 
 ```bash
-curl localhost:1635/settlements| jq
+curl localhost:1633/settlements| jq
 ```
 
 ```json
@@ -122,7 +122,7 @@ curl localhost:1635/settlements| jq
 More information about the current received or sent cheques can also be found using the chequebook api.
 
 ```bash
-curl localhost:1635/chequebook/cheque | jq
+curl localhost:1633/chequebook/cheque | jq
 ```
 
 ```json
@@ -147,7 +147,7 @@ As our node's participation in the network increases, we will begin to see more 
 To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
 
 ```bash
-curl -XPOST http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
+curl -XPOST http://localhost:1633/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
 ```
 
 ```json
@@ -162,7 +162,7 @@ Blockscout](https://blockscout.com/xdai/mainnet).
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
 
 ```bash
-curl http://localhost:1635/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq
+curl http://localhost:1633/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq
 ```
 
 ```json
@@ -185,13 +185,13 @@ Success, we earned our first xBZZ! 🐝
 Now we have earned tokens, to withdraw our xBZZ from the chequebook contract back into our node's own wallet, we simply POST a request to the chequebook withdraw endpoint.
 
 ```bash
-curl -XPOST http://localhost:1635/chequebook/withdraw\?amount\=1000 | jq
+curl -XPOST http://localhost:1633/chequebook/withdraw\?amount\=1000 | jq
 ```
 
 And conversely, if we have used more services than we have provided, we may deposit extra xBZZ into the chequebook contract by sending a POST request to the deposit endpoint.
 
 ```bash
-curl -XPOST http://localhost:1635/chequebook/deposit\?amount\=1000 | jq
+curl -XPOST http://localhost:1633/chequebook/deposit\?amount\=1000 | jq
 ```
 
 ```json

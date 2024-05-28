@@ -27,7 +27,7 @@ xDAI can be obtained from a wide range of centralized and decentralized exchange
 When interacting with the Bee API directly, `amount` and `depth` are passed as path parameters:
 
 ```bash
-curl -s -XPOST http://localhost:1635/stamps/<amount>/<depth>
+curl -s -XPOST http://localhost:1633/stamps/<amount>/<depth>
 ```
 
 And with Swarm CLI, they are set using option flags:
@@ -47,7 +47,7 @@ values={[
 #### API
 
 ```bash
-curl -s -XPOST http://localhost:1635/stamps/100000000/20
+curl -s -XPOST http://localhost:1633/stamps/100000000/20
 ```
 
 ```bash
@@ -90,13 +90,12 @@ Once your batch has been purchased, it will take a few minutes for other Bee nod
 
 When purchasing a batch of stamps there are several parameters and options which must be considered. The `depth` parameter will control how many chunks can be uploaded with a batch of stamps. The `amount` parameter determines how much xBZZ will be allocated per chunk, and therefore also controls how long the chunks will be stored. While the `immutable` header option sets the batch as either mutable or immutable, which can significantly alter the behavior of the batch utilisation (more details below).
 
-:::caution
-The minimum value for `depth` is 17, however a minimum depth of 23 is recommended for most use cases due to the [mechanics of stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#batch-utilisation). See [the depths utilisation table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) to help decide which depth is best for your use case.
-
-The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the lastPrice value from the postage stamp contract times 17280 (the number of blocks in 24 hours). This requirement is in place in order to prevent spamming the network.
-:::
 
 ### Choosing `depth`
+
+:::caution
+The minimum value for `depth` is 17, however a higher depth value is recommended for most use cases due to the [mechanics of stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#batch-utilisation). See [the depths utilisation table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) to help decide which depth is best for your use case.
+:::
 
 One notable aspect of batch utilisation is that the entire batch is considered fully utilised as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
 
@@ -104,7 +103,11 @@ See the [postage stamp contract page](/docs/learn/technology/contracts/postage-s
 
 ### Choosing `amount`
 
-The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp batch contract page](/docs/learn/technology/contracts/postage-stamp#batch-amount--batch-cost) where a more complete description is inclu
+:::caution
+The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the lastPrice value from the postage stamp contract times 17280 (the number of blocks in 24 hours). You can also use the [calculator](#calculators) below. This requirement is in place in order to prevent spamming the network.
+:::
+
+The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp batch contract page](/docs/learn/technology/contracts/postage-stamp#batch-amount--batch-cost) where a more complete description is included.
 
 ### Mutable or Immutable?
 
@@ -146,7 +149,7 @@ values={[
 
 
 ```bash
-curl http://localhost:1635/stamps
+curl http://localhost:1633/stamps
 ```
 
 ```bash
@@ -220,7 +223,7 @@ values={[
 
 
 ```bash
-curl http://localhost:1635/stamps
+curl http://localhost:1633/stamps
 ```
 
 ```bash
@@ -285,7 +288,7 @@ values={[
 #### API
 
 ```bash
-curl -X PATCH "http://localhost:1635/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
+curl -X PATCH "http://localhost:1633/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
 ```
 
 </TabItem>
@@ -347,7 +350,7 @@ values={[
 Here we call the `/stamps` endpoint and find a batch with `depth` 24 and a `batchTTL` of 2083223 which we wish to dilute:
 
 ```bash
-curl  http://localhost:1635/stamps
+curl  http://localhost:1633/stamps
 ```
 
 ```json
@@ -374,7 +377,7 @@ curl  http://localhost:1635/stamps
 Next we call the [`dilute`](/api/#tag/Postage-Stamps/paths/~1stamps~1dilute~1{batch_id}~1{depth}/patch) endpoint to increase the `depth` of the batch using the `batchID` and our new `depth` of 26:
 
 ```bash
-curl -s -XPATCH http://localhost:1635/stamps/dilute/0e4dd16cc435730a25ba662eb3da46e28d260c61c31713b6f4abf8f8c2548ae5/26
+curl -s -XPATCH http://localhost:1633/stamps/dilute/0e4dd16cc435730a25ba662eb3da46e28d260c61c31713b6f4abf8f8c2548ae5/26
 ```
 And a `txHash` of our successful transaction:
 
@@ -388,7 +391,7 @@ And a `txHash` of our successful transaction:
 And finally we use the `/stamps` endpoint again to confirm the new `depth` and decreased `batchTTL`:
 
 ```bash
-curl  http://localhost:1635/stamps
+curl  http://localhost:1633/stamps
 ```
 
 We can see the new `depth` of 26 and a decreased `batchTTL` of 519265.

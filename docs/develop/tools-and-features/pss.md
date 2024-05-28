@@ -58,7 +58,7 @@ More information on how to buy a postage stamp batch and get its batch id can be
 Now, let's see this in action by setting up two Bee nodes on a test network, connecting them, and sending PSS messages from one to the other.
 
 First start two Bee nodes. We will start them with distinct ports for
-the API, Debug API, and p2p port, since they will be running on the
+the API and p2p ports, since they will be running on the
 same computer.
 
 Run the following command to start the first node. Note that we are passing `""` to the `--bootnode` argument so that our nodes will not connect to a network.
@@ -66,18 +66,16 @@ Run the following command to start the first node. Note that we are passing `""`
 ```bash
 bee start \
     --api-addr=:1833 \
-    --debug-api-enable \
-    --debug-api-addr=:1835 \
     --data-dir=/tmp/bee2 \
     --bootnode="" \
     --p2p-addr=:1834 \
     --blockchain-rpc-endpoint=http://localhost:8545
 ```
 
-We must make a note of the Swarm overlay address, underlay address and public key which are created once each node has started. We find this information from the addresses endpoint of the Debug API.
+We must make a note of the Swarm overlay address, underlay address and public key which are created once each node has started. We find this information from the `/addresses` endpoint of the API.
 
 ```bash
-curl -s localhost:1835/addresses | jq
+curl -s localhost:1833/addresses | jq
 ```
 
 ```json
@@ -98,8 +96,6 @@ Now the same for the second node.
 ```bash
 bee start \
     --api-addr=:1933 \
-    --debug-api-enable \
-    --debug-api-addr=:1935 \
     --data-dir=/tmp/bee3 \
     --bootnode="" \
     --p2p-addr=:1934 \
@@ -126,7 +122,7 @@ curl -s localhost:1935/addresses | jq
 Because we configured the nodes to start with no bootnodes, neither node should have peers yet.
 
 ```bash
-curl -s localhost:1835/peers | jq
+curl -s localhost:1833/peers | jq
 ```
 
 ```bash
@@ -149,7 +145,7 @@ curl -XPOST \
 Now, if we check our peers endpoint for node 1, we can see our nodes are now peered together.
 
 ```bash
-curl -s localhost:1835/peers | jq
+curl -s localhost:1833/peers | jq
 ```
 
 ```json

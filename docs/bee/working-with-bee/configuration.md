@@ -203,10 +203,6 @@ db-disable-seeks-compaction: true
 db-open-files-limit: "200"
 # size of the database write buffer in bytes
 db-write-buffer-size: "33554432"
-# debug HTTP API listen address
-debug-api-addr: :1635
-# enable debug HTTP API
-debug-api-enable: false
 # cause the node to start in full mode
 full-node: false
 # help for printconfig
@@ -247,8 +243,6 @@ price-oracle-address: ""
 redistribution-address: ""
 # ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
 resolver-options: []
-# enable permission check on the http APIs
-restricted: false
 # forces the node to resync postage contract data
 resync: false
 # staking contract address
@@ -328,7 +322,7 @@ Flags:
       --clef-signer-endpoint string              clef signer endpoint
       --clef-signer-ethereum-address string      blockchain address to use from clef signer
       --cors-allowed-origins strings             origins with CORS headers enabled
-      --data-dir string                          data directory (default "/root/.bee")
+      --data-dir string                          data directory (default "/home/noah/.bee")
       --db-block-cache-capacity uint             size of block cache of the database in bytes (default 33554432)
       --db-disable-seeks-compaction              disables db compactions triggered by seeks (default true)
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
@@ -418,7 +412,6 @@ To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.
 bootnode:
 - /ip4/3.122.234.225/tcp/31050/p2p/QmdSgC9yDsK2for1VSBgK4CdP3agt76NPuEBs2KCGAnfSQ
 data-dir: /home/username/bee/sepolia
-debug-api-enable: true
 full-node: true
 mainnet: false
 network-id: 10

@@ -65,21 +65,6 @@ See the documentation for the above command and the plugin at its github repo [h
 
 Don't forget to find and replace the version number for the whole of the docs folder. 
 
-## How to generate / include the API reference html
+## API Reference 
 
-**NOTE: when this is done, the docs will have to be rebuilt.**
-
-1. Get all the OpenAPI YAML source files from the [openapi folder of bee repo](https://github.com/ethersphere/bee/tree/master/openapi).
-1. Install [Redocly](https://redocly.com/docs/cli/installation/).
-  ```
-    npm i -g @redocly/cli@latest
-  ```
-1. Generate the `index.html` file for API docs: 
- ```
-    redocly build-docs Swarm.yaml --theme.openapi.expandDefaultServerVariables=true --disableGoogleFont -o static/api/index.html
-  ```
-1. Generate the `index.html` file for debug API docs: 
-  ```
-    redocly build-docs SwarmDebug.yaml --theme.openapi.expandDefaultServerVariables=true --disableGoogleFont -o static/debug-api/index.html
-  ```
-1. Rebuild and redeploy docs.
+The OpenAPI reference docs are compiled at build time from the OpenAPI yaml files in the `/openapi` directory using the [redocusaurus plugin](https://www.npmjs.com/package/redocusaurus) for Docusaurus. They must be manually updated to stay up to date with the [OpenAPI specs in the Bee repo](https://github.com/ethersphere/bee/tree/master/openapi).
