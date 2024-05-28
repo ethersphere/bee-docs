@@ -11,14 +11,12 @@ Try Bee out by simply running the following command in your terminal.
 
 ```bash
 docker run \
-  -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633 \
   --rm -it ethersphere/bee:stable \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint http://localhost:8545 \
-    --debug-api-enable
 ```
 
 :::info
@@ -30,14 +28,12 @@ To persist files, mount a local directory as follows and enter the password used
 ```bash
 docker run \
   -v /path/to/.bee-docker:/home/bee/.bee \
-  -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633 \
   --rm -it ethersphere/bee:stable \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint https://gno.getblock.io/<<your-api-key>>/mainnet/ \
-	  --debug-api-enable
 ```
 
 Once you have generated your keys, use the `-d` flag to run in detached mode and leave Bee running in the background:
@@ -46,14 +42,12 @@ Once you have generated your keys, use the `-d` flag to run in detached mode and
 docker run \
   -d
   -v /path/to/.bee-docker:/home/bee/.bee\
-  -p 1635:1635 \
   -p 1634:1634 \
   -p 1633:1633 \
   --rm -it ethersphere/bee:stable \
   start \
     --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
     --blockchain-rpc-endpoint https://gno.getblock.io/<<your-api-key>>/mainnet/ \
-	  --debug-api-enable
 ```
 
 ### Versions
@@ -135,7 +129,7 @@ Once you have determined your Bee's Ethereum addresses,
 
 After your transaction has been completed, your node should recognise that your wallet has been funded, and begin to deploy and fund your Bee chequebook!
 
-Once Bee has completed this procedure, you may query the Bee [HTTP API](/docs/api-reference/) at `http://localhost:1633`.
+Once Bee has completed this procedure, you may query the Bee [HTTP API](/docs/bee/working-with-bee/bee-api) at `http://localhost:1633`.
 
 ```bash
 curl localhost:1633
@@ -156,7 +150,7 @@ You're connected to the Swarm. Let's do a quick check to find out how
 many peers we have using the `curl` command line utility:
 
 ```bash
-curl localhost:1635/peers
+curl localhost:1633/peers
 ```
 
 ```json

@@ -136,11 +136,7 @@ The default p2p port for Bee is 1634, please forward this using your router and 
 
 ### How do I know if I am connected to other peers?
 
-You may communicate with your Bee using its HTTP api. Type `curl http://localhost:1635/peers` at your command line to see a list of your peers.
-
-### What does "Failed to connect to local host port 1635: Connection refused" mean?
-
-Your node is not listening on port 1635, either the debug-api is not enabled, or it is not listening on localhost. Make sure your bee.yaml file has `debug-api-enable: true`
+You may communicate with your Bee using its HTTP api. Type `curl http://localhost:1633/peers` at your command line to see a list of your peers.
 
 ## Errors
 
@@ -198,19 +194,19 @@ If you use "bee start"
 
 ### Relevant endpoints and explanations
 
-See the [API Reference](https://docs.ethswarm.org/docs/api-reference/) pages for details.
+See the [API Reference](https://docs.ethswarm.org/api/) pages for details.
 
 Most common use cases:
 
-- `curl http://localhost:1635/peers` - Shows you the currently connected peers
-- `curl http://localhost:1635/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connected
-- `curl http://localhost:1635/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
-- `curl http://localhost:1635/chequebook/address` your chequebook contract to see the xBZZ.
+- `curl http://localhost:1633/peers` - Shows you the currently connected peers
+- `curl http://localhost:1633/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connected
+- `curl http://localhost:1633/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
+- `curl http://localhost:1633/chequebook/address` your chequebook contract to see the xBZZ.
 
 ### How can I check how many cashed out cheques do I have?
 
 You can look at your chequebook contract at etherscan.
-Get your chequebook contract address with: `curl http://localhost:1635/chequebook/address`
+Get your chequebook contract address with: `curl http://localhost:1633/chequebook/address`
 
 ### I have compared transactions between my ethereum address and my chequebook address, the numbers are different, which is quite weird.
 
@@ -220,7 +216,7 @@ Your chequebook will show OUT xBZZ transactions when your peers cash cheques iss
 
 https://docs.ethswarm.org/docs/bee/working-with-bee/cashing-out
 
-### When I run http://localhost:1635/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
+### When I run http://localhost:1633/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
 
 `totalBalance` is the balance on the blockchain, `availableBalance` is that balance minus the outstanding (non-cashed) cheques that you have issued to your peers. These latter cheques do not show up on the blockchain.
 
@@ -247,4 +243,4 @@ Therefore, the rule is, each node must have:
 
 - 1 Ethereum address (this address, the Swarm network id, and a random nonce are used to determine the node's overlay address)
 - 1 Chequebook
-- 3 Unique ports for API / p2p / Debug API
+- 2 Unique ports for Bee API / p2p API

@@ -26,6 +26,10 @@ module.exports = {
           from: '/docs',
         },
         {
+          to: '/docs/bee/working-with-bee/bee-api',
+          from: '/docs/api-reference/',
+        },
+        {
           to: '/docs/develop/access-the-swarm/host-your-website',
           from: '/docs/access-the-swarm/host-your-website',
         },
@@ -240,8 +244,8 @@ module.exports = {
         // },
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
-          to: 'docs/api-reference/',
-          activeBasePath: 'docs/api-reference',
+          to: '/api/',
+          activeBasePath: '/api/',
           label: 'API Reference',
           position: 'left',
         },
@@ -342,10 +346,6 @@ module.exports = {
           {
             spec: 'openapi/Swarm.yaml',
             route: '/api/',
-          },
-          {
-            spec: 'openapi/SwarmDebug.yaml',
-            route: '/debug-api/',
           },
         ],
         // Theme Options for modifying how redoc renders them

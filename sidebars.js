@@ -1,13 +1,4 @@
 module.exports = {
-  docs: [
-    {
-      type: 'category',
-      label: 'API Reference',
-      items: [
-        'api-reference/api-reference'
-      ],
-    },
-  ],
   learn: [
     'learn/introduction',
     {
@@ -91,11 +82,10 @@ module.exports = {
       items: [
         'bee/working-with-bee/introduction',
         'bee/working-with-bee/configuration',
-        'bee/working-with-bee/debug-api',
+        'bee/working-with-bee/bee-api',
         'bee/working-with-bee/logs-and-files',
         'bee/working-with-bee/bee-dashboard',
         'bee/working-with-bee/swarm-cli',
-        'bee/working-with-bee/security',
         'bee/working-with-bee/staking',
         'bee/working-with-bee/cashing-out',
         'bee/working-with-bee/monitoring',

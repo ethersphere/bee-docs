@@ -27,7 +27,7 @@ xDAI can be obtained from a wide range of centralized and decentralized exchange
 When interacting with the Bee API directly, `amount` and `depth` are passed as path parameters:
 
 ```bash
-curl -s -XPOST http://localhost:1635/stamps/<amount>/<depth>
+curl -s -XPOST http://localhost:1633/stamps/<amount>/<depth>
 ```
 
 And with Swarm CLI, they are set using option flags:
@@ -47,7 +47,7 @@ values={[
 #### API
 
 ```bash
-curl -s -XPOST http://localhost:1635/stamps/100000000/20
+curl -s -XPOST http://localhost:1633/stamps/100000000/20
 ```
 
 ```bash
@@ -149,7 +149,7 @@ values={[
 
 
 ```bash
-curl http://localhost:1635/stamps
+curl http://localhost:1633/stamps
 ```
 
 ```bash
@@ -223,7 +223,7 @@ values={[
 
 
 ```bash
-curl http://localhost:1635/stamps
+curl http://localhost:1633/stamps
 ```
 
 ```bash
@@ -288,7 +288,7 @@ values={[
 #### API
 
 ```bash
-curl -X PATCH "http://localhost:1635/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
+curl -X PATCH "http://localhost:1633/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
 ```
 
 </TabItem>
@@ -350,7 +350,7 @@ values={[
 Here we call the `/stamps` endpoint and find a batch with `depth` 24 and a `batchTTL` of 2083223 which we wish to dilute:
 
 ```bash
-curl  http://localhost:1635/stamps
+curl  http://localhost:1633/stamps
 ```
 
 ```json
@@ -377,7 +377,7 @@ curl  http://localhost:1635/stamps
 Next we call the [`dilute`](/api/#tag/Postage-Stamps/paths/~1stamps~1dilute~1{batch_id}~1{depth}/patch) endpoint to increase the `depth` of the batch using the `batchID` and our new `depth` of 26:
 
 ```bash
-curl -s -XPATCH http://localhost:1635/stamps/dilute/0e4dd16cc435730a25ba662eb3da46e28d260c61c31713b6f4abf8f8c2548ae5/26
+curl -s -XPATCH http://localhost:1633/stamps/dilute/0e4dd16cc435730a25ba662eb3da46e28d260c61c31713b6f4abf8f8c2548ae5/26
 ```
 And a `txHash` of our successful transaction:
 
@@ -391,7 +391,7 @@ And a `txHash` of our successful transaction:
 And finally we use the `/stamps` endpoint again to confirm the new `depth` and decreased `batchTTL`:
 
 ```bash
-curl  http://localhost:1635/stamps
+curl  http://localhost:1633/stamps
 ```
 
 We can see the new `depth` of 26 and a decreased `batchTTL` of 519265.

@@ -9,9 +9,9 @@ In this section we cover everything a node operator needs to know about working 
 
 Learn how to [configure your node](/docs/bee/working-with-bee/configuration), and the details behind all the configuration options Bee provides.
 
-## Debug API
+## Bee API
 
-Access the HTTP Debug API directly for [detailed information about your Bee](/docs/bee/working-with-bee/debug-api).
+Access the HTTP API directly for [detailed information about your Bee](/docs/bee/working-with-bee/bee-api).
 
 ## Logs and Files
 

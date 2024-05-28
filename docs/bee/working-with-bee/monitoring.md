@@ -5,7 +5,7 @@ id: monitoring
 
 Your Bee node is equipped with tools to help you understand what your Bee has been up to!
 
-Navigate to `http://localhost:1635/metrics`.
+Navigate to `http://localhost:1633/metrics`.
 
 This is the current state of Bee's metrics as they stand at this moment.
 
@@ -19,7 +19,7 @@ For Ubuntu and other Debian based Linux distributions install using `apt`:
 sudo apt install prometheus
 ```
 
-And configure `localhost:1635` as a `target` in the `static_configs`.
+And configure `localhost:1633` as a `target` in the `static_configs`.
 
 ```bash
 sudo vim /etc/prometheus/prometheus.yml
@@ -27,7 +27,7 @@ sudo vim /etc/prometheus/prometheus.yml
 
 ```yaml
 static_configs:
-  - targets: ["localhost:9090", "localhost:1635"]
+  - targets: ["localhost:9090", "localhost:1633"]
 ```
 
 Navigate to [http://localhost:9090](http://localhost:9090) to see the Prometheus user interface.

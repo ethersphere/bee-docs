@@ -25,7 +25,7 @@ you must ensure your Bee is able to handle **both incoming and
 outgoing connections from the global Internet to its p2p port
 (`1634` by default)**. See below for a detailed guide on how to make sure
 this is the case, or for the 1337: check your
-`http://localhost:1635/addresses` to see which public IP and port
+`http://localhost:1633/addresses` to see which public IP and port
 libp2p is advertising and verify its connectivity to the rest of the
 Internet! You may need to alter your Bee nodes `nat-addr`
 configuration. 🤓
@@ -48,10 +48,7 @@ we have previously not connected, we must ensure that our network is
 set up to receive incoming connections (on port `1634` by default).
 
 :::danger
-There are also some ports which you should never expose to the outside
-Internet. Make sure that your `api-addr` (default `1633`) and `debug-api-addr` (default `1635`) are never exposed to the internet. It is good practice to employ one or
-more firewalls that block traffic on every port except for those you
-are expecting to be open.
+There are also some ports which you should never expose to the outside Internet. Make sure that your `api-addr` (default `1633`) is never exposed to the internet. It is good practice to employ one or more firewalls that block traffic on every port except for those you are expecting to be open.
 :::
 
 ## Your IP Address
@@ -198,7 +195,7 @@ the Internet, to the Bee p2p port (default `1634`) which your computer
 is exposing only to the private network. Doing this creates a tunnel
 through which other Bee's may connect to your computer safely.
 
-If you start your Bee node in a private network with UPnP available, the output of the addresses endpoint of your Debug API will look something like this:
+If you start your Bee node in a private network with UPnP available, the output of the addresses endpoint of your API will look something like this:
 
 ```json
 [
@@ -218,7 +215,7 @@ known as the underlay addresses.
 ##### Manual: Configure Your Router and Bee
 
 Inspecting the underlay addresses in the output of the addresses
-endpoint of our Debug API, we can see addresses only for _localhost_
+endpoint of our API, we can see addresses only for _localhost_
 `127.0.0.1` and our _private network IP_ `192.168.0.10`. Bee must be
 having trouble navigating our NAT.
 

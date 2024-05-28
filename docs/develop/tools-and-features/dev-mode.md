@@ -16,8 +16,3 @@ As a developer you interact with all the usual HTTP endpoints, for instance you 
 ## Configuration options
 
 It accepts the same configuration options as a normal bee but it will ignore the ones that are not relevant (accounting, networking, blockchain etc).
-
-:::info
-If you enable the `restricted` mode but don't provide an admin password it will use the default value 'hello'.
-Then you can use it in your header: `Authorization: Bearer OmhlbGxv`
-:::

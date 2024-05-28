@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 4.1.1
+  version: 4.1.2
   title: Bee Debug API
   description: "A list of the currently provided debug interfaces to interact with the bee node"
 
@@ -675,7 +675,7 @@ paths:
           description: Default response
   "/wallet":
     get:
-      summary: Get wallet balance for BZZ and xDAI
+      summary: Get wallet balance for BZZ and xDai
       tags:
         - Wallet
       responses:
@@ -699,26 +699,23 @@ paths:
         name: amount
         required: true
         schema:
-          $ref: "#/components/schemas/BigInt"
-        description: Integer amount to withdraw specified in lowest denomination for each respective token (wei for xDAI and PLUR for BZZ).
+          $ref: "SwarmCommon.yaml#/components/schemas/BigInt"
       - in: query
         name: address
         required: true
         schema:
-          $ref: "#/components/schemas/EthereumAddress"
-        description: Target Gnosis Chain address for withdrawal. Address must be whitelisted in node configuration through the `withdrawal-addresses-whitelist` option. 
+          $ref: "SwarmCommon.yaml#/components/schemas/EthereumAddress"
       - in: path
         name: coin
         required: true
         schema:
-          type: string
-        description: Token to withdraw, accepted values include BZZ and NativeToken (for xDAI).
+          $ref: "SwarmCommon.yaml#/components/schemas/SwarmAddress"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WalletTxResponse'
+                $ref: 'SwarmCommon.yaml#/components/schemas/WalletTxResponse'
           description: OK
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
@@ -1061,7 +1058,24 @@ paths:
           $ref: "SwarmCommon.yaml#/components/responses/500"
         default:
           description: Default response
-  
+    delete:
+      summary: Withdraw all staked amount.
+      description: Be aware, this endpoint creates an on-chain transactions and transfers BZZ from the node's Ethereum account and hence directly manipulates the wallet balance.
+      tags:
+        - Staking
+      parameters:
+        - $ref: "SwarmCommon.yaml#/components/parameters/GasPriceParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/GasLimitParameter"
+      responses:
+        "200":
+          $ref: "SwarmCommon.yaml#/components/schemas/WithdrawAllStakeResponse"
+        "400":
+          $ref: "SwarmCommon.yaml#/components/responses/400"
+        "500":
+          $ref: "SwarmCommon.yaml#/components/responses/500"
+        default:
+          description: Default response
+
   "/loggers":
     get:
       summary: Get all available loggers.
@@ -1154,11 +1168,3 @@ paths:
           $ref: "SwarmCommon.yaml#/components/responses/400"
         default:
           description: Default response.
-
-components:
-  schemas:
-    WalletTxResponse:
-      type: object
-      properties:
-        transactionHash:
-          $ref: "#/components/schemas/TransactionHash"
