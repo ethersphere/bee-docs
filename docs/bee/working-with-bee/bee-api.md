@@ -70,3 +70,10 @@ Bee node becomes part of the ordered p2p network in [The Book of Swarm](https://
 ```
 
 To learn more about how to use the API to better understand the state of your node and diagnose problems, see the [guide to status related endpoints](/docs/bee/working-with-bee/troubleshooting/#guide-to-status-related-endpoints) in the troubleshooting section.
+
+
+## Debug API Removal Notice
+
+:::info
+The Debug API endpoints have been merged into the Bee API in the Bee version 2.1.0 release, and will be fully removed in the 2.2.0 release. The [Debug API reference docs](/debug-api/) are still available until the 2.2.0 release for your reference.
+:::
