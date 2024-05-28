@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 3.2.7
+  version: 3.2.8
   title: Common Data Types
   description: |
     \*****bzzz*****
@@ -35,7 +35,7 @@ components:
           $ref: "#/components/schemas/PublicKey"
 
     BigInt:
-      description: Numeric string that represents integer which might exceed `Number.MAX_SAFE_INTEGER` limit (2^53-1)
+      description: Numeric string that represents integer which might exceeds `Number.MAX_SAFE_INTEGER` limit (2^53-1)
       type: string
       example: "1000000000000000000"
 
@@ -956,6 +956,11 @@ components:
         signer:
           type: string
 
+    WalletTxResponse:
+      type: object
+      properties:
+        transactionHash:
+          $ref: "#/components/schemas/TransactionHash"
   headers:
     SwarmTag:
       description: "Tag UID"
