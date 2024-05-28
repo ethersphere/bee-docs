@@ -3,6 +3,8 @@ title: Configuration
 id: configuration
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 ## Default Data and Config Directories
 
