@@ -57,7 +57,7 @@ In order to avoid accidentally upgrading your Bee containers, or deadlocks resul
 #### Specific Versions
 
 ```bash
-docker pull ethersphere/bee:2.0.0
+docker pull ethersphere/bee:2.1.0
 ```
 
 #### Using Tags
@@ -80,13 +80,13 @@ secure secret management.
 First, retrieve the current `docker-compose.yaml` file.
 
 ```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v2.0.0/packaging/docker/docker-compose.yml
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v2.1.0/packaging/docker/docker-compose.yml
 ```
 
 Next, create a `.env` file using the example file provided. This file will be responsible for storing configuration and secrets for our Bee node(s).
 
 ```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v2.0.0/packaging/docker/env -O .env
+wget -q https://raw.githubusercontent.com/ethersphere/bee/v2.1.0/packaging/docker/env -O .env
 ```
 
 There are some important configuration parameters which must be set in order for our projects to work. To affect configuration in the `.env` file, we first remove the `#` at the beginning of the line and then change the value after `=` to our desired config.
