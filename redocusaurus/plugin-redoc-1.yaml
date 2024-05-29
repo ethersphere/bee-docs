@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 4.1.1
+  version: 4.1.2
   title: Bee Debug API
   description: >-
     A list of the currently provided debug interfaces to interact with the bee
@@ -648,7 +648,7 @@ paths:
           description: Default response
   /wallet:
     get:
-      summary: Get wallet balance for BZZ and xDAI
+      summary: Get wallet balance for BZZ and xDai
       tags:
         - Wallet
       responses:
@@ -673,26 +673,16 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/BigInt'
-          description: >-
-            Integer amount to withdraw specified in lowest denomination for each
-            respective token (wei for xDAI and PLUR for BZZ).
         - in: query
           name: address
           required: true
           schema:
             $ref: '#/components/schemas/EthereumAddress'
-          description: >-
-            Target Gnosis Chain address for withdrawal. Address must be
-            whitelisted in node configuration through the
-            `withdrawal-addresses-whitelist` option.
         - in: path
           name: coin
           required: true
           schema:
-            type: string
-          description: >-
-            Token to withdraw, accepted values include BZZ and NativeToken (for
-            xDAI).
+            $ref: '#/components/schemas/SwarmAddress'
       responses:
         '200':
           content:
@@ -1045,6 +1035,26 @@ paths:
           $ref: '#/components/responses/500'
         default:
           description: Default response
+    delete:
+      summary: Withdraw all staked amount.
+      description: >-
+        Be aware, this endpoint creates an on-chain transactions and transfers
+        BZZ from the node's Ethereum account and hence directly manipulates the
+        wallet balance.
+      tags:
+        - Staking
+      parameters:
+        - $ref: '#/components/parameters/GasPriceParameter'
+        - $ref: '#/components/parameters/GasLimitParameter'
+      responses:
+        '200':
+          $ref: '#/components/responses/WithdrawAllStakeResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
   /loggers:
     get:
       summary: Get all available loggers.
@@ -1140,11 +1150,6 @@ paths:
           description: Default response.
 components:
   schemas:
-    WalletTxResponse:
-      type: object
-      properties:
-        transactionHash:
-          $ref: '#/components/schemas/TransactionHash'
     SwarmAddress:
       type: string
       pattern: ^[A-Fa-f0-9]{64}$
@@ -1191,7 +1196,7 @@ components:
             type: string
     BigInt:
       description: >-
-        Numeric string that represents integer which might exceed
+        Numeric string that represents integer which might exceeds
         `Number.MAX_SAFE_INTEGER` limit (2^53-1)
       type: string
       example: '1000000000000000000'
@@ -1560,6 +1565,11 @@ components:
           $ref: '#/components/schemas/EthereumAddress'
         walletAddress:
           $ref: '#/components/schemas/EthereumAddress'
+    WalletTxResponse:
+      type: object
+      properties:
+        transactionHash:
+          $ref: '#/components/schemas/TransactionHash'
     DateTime:
       type: string
       format: date-time
@@ -1837,6 +1847,11 @@ components:
       properties:
         stakedAmount:
           $ref: '#/components/schemas/BigInt'
+    WithdrawAllStakeResponse:
+      type: object
+      properties:
+        txHash:
+          $ref: '#/components/schemas/TransactionHash'
   parameters:
     GasPriceParameter:
       in: header
