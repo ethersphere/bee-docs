@@ -54,6 +54,13 @@ For larger uploads (where the source data chunks are equal to or greater than th
 However, if the number of source data chunks are significantly less than the value in the "Data Chunks" column for each respective level, then the percent cost will differ significantly from the one shown in the "Percent" column. For more precise calculations, see the [relevant appendix](/docs/learn/advanced/erasure-cost-calculation).
 
 
+## Cost Calculator Widget
+
+This calculator takes as input an amount of data and an erasure coding redundancy level, and outputs the number of additional parity chunks required to erasure code that amount of data as well as the increase in cost to upload vs. a non-erasure encoded upload:
+
+
+<RedundancyCalc />
+
 ## Downloading Erasure Encoded Data
 
 For a downloader, the process for downloading a file which has been erasure encoded does not require any changes from the [normal download process](/docs/develop/access-the-swarm/upload-and-download). There are several options for adjusting the default behaviour for erasure encoded downloads, however there is no need to adjust them.

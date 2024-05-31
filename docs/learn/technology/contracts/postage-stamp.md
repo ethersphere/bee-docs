@@ -40,6 +40,7 @@ Each batch of stamps has two key parameters, `batch depth` and `amount`, which a
 ### Batch Depth 
 
 :::caution
+The minimum value for `depth` is 17, however higher depths are recommended for most use cases due to the [mechanics of stamp batch utilisation](#batch-utilisation). See [the depths utilisation table](#effective-utilisation-table) to help decide which depth is best for your use case.
 The minimum value for `depth` is 17, however higher depths are recommended for most use cases due to the [mechanics of stamp batch utilisation](#batch-utilisation). 
 :::
 
@@ -195,3 +196,44 @@ $$
 The details of how the effective rates of utilisation are calculated will be published soon.
 :::
 
+### Effective Utilisation Table
+
+
+When a user buys a batch of stamps they may make the naive assumption that they will be able to upload data equal to the sum total size of the maximum capacity of the batch. However, in practice this assumption is incorrect, so it is essential that Swarm users understand the relationship between batch depth and the theoretical and effective volumes of a batch.
+
+The provided table shows the effective volume for each batch depth from 20 to 41 (note that currently the minimum stamp batch depth is 17, however 22 is the first depth with an effective volume above zero). The utilisation rate is the rate of utilisation of the theoretical max volume that a stamp batch can reach with a 0.1% failure rate (that is, there is only a one-in-a-thousand chance that the difference between the actual effectively utilised volume and effective volume shown in the table is greater than 0.1%). The "effective volume" figure shows the actual amount of data which can be stored at the effective rate. The effective volume figure is the one which should be used as the de-facto maximum amount of data that a batch can store before becoming either fully utilised (for immutable batches), or start overwriting older chunks (mutable batches).
+
+
+| Batch Depth | Utilisation Rate | Theoretical Max Volume | Effective Volume |
+|-------------|------------------|-------------------------|-------------------|
+| 20          | 0.00%          | 4.29 GB                 | 0.00 B            |
+| 21          | 0.00%          | 8.59 GB                 | 0.00 B            |
+| 22          | 28.67%          | 17.18 GB                | 4.93 GB           |
+| 23          | 49.56%          | 34.36 GB                | 17.03 GB          |
+| 24          | 64.33%           | 68.72 GB                | 44.21 GB          |
+| 25          | 74.78%           | 137.44 GB               | 102.78 GB         |
+| 26          | 82.17%           | 274.88 GB               | 225.86 GB         |
+| 27          | 87.39%           | 549.76 GB               | 480.43 GB         |
+| 28          | 91.08%           | 1.10 TB                 | 1.00 TB           |
+| 29          | 93.69%           | 2.20 TB                 | 2.06 TB           |
+| 30          | 95.54%           | 4.40 TB                 | 4.20 TB           |
+| 31          | 96.85%           | 8.80 TB                 | 8.52 TB           |
+| 32          | 97.77%           | 17.59 TB                | 17.20 TB          |
+| 33          | 98.42%           | 35.18 TB                | 34.63 TB          |
+| 34          | 98.89%           | 70.37 TB                | 69.58 TB          |
+| 35          | 99.21%           | 140.74 TB               | 139.63 TB         |
+| 36          | 99.44%           | 281.47 TB               | 279.91 TB         |
+| 37          | 99.61%           | 562.95 TB               | 560.73 TB         |
+| 38          | 99.72%           | 1.13 PB                 | 1.12 PB           |
+| 39          | 99.80%           | 2.25 PB                 | 2.25 PB           |
+| 40          | 99.86%           | 4.50 PB                 | 4.50 PB           |
+| 41          | 99.90%           | 9.01 PB                 | 9.00 PB           |
+
+
+:::info
+This table is based on preliminary calculations and may be subject to change.
+:::
+
+Nodes' storage is actually defined as a number of chunks with a size of 4kb (2^12 bytes) each, but in fact some [SOC](/docs/learn/technology/disc#content-addressed-chunks-and-single-owner-chunks) chunks can be a few bytes longer, and some chunks can be smaller, so the conversion is not precise. Furthermore, due to the way Swarm represents files in a Merkle tree, the intermediate chunks are additional overhead which must also be accounted for. 
+
+Additionally, when a node stores chunks it uses additional indexes — therefore the disk space a maximally filled reserve would demand cannot be calculated with perfect accuracy.
