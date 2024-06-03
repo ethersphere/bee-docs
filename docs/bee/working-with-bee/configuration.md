@@ -67,7 +67,7 @@ config: /root/.bee.yaml
 data-dir: /root/.bee
 ```
 
-:::information
+:::info
 The default directories for your system may differ from the example above, so make sure to run the `bee printconfig` command to view the default directories for your system.
 :::
 
@@ -79,7 +79,7 @@ There are three methods of configuration which each have different priority leve
 2. Environment Variables
 3. YAML Configuration File
 
-:::information
+:::info
 All three methods may be used when running Bee using `bee start`. 
 
 However when Bee is started as a service with tools like `systemctl` or `brew services`, only the YAML configuration file is supported by default.
@@ -318,7 +318,7 @@ welcome-message: ""
 withdrawal-addresses-whitelist: []
 ```
 
-:::information
+:::info
 Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](/docs/bee/working-with-bee/configuration). 
 :::
 
