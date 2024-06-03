@@ -166,9 +166,9 @@ In this case, only the first chunk is affected, all the other chunks retain the 
 
 As you can see, by adding a single new letter at the start of the message, all the letters are shifted to the right by a single position, which a has caused EVERY chunk in the message to be modified rather than just a single chunk.
 
-#### Implications
+#### Affect on Batch Utilisation
 
-The implications of this behaviour are that even a small change to the data of a file may cause every single chunk from the file to be changed, meaning that new stamps must be utilised for every chunk from that file. In practice, this could lead to high costs in data which is frequently changed, since for even a small change, every chunk from the file must be re-stamped. One way to mitigate this behaviour is to limit the size of files which are uploaded. For example, when uploading a website, each file from the website should be uploaded and chunked separately, so that when an update is performed to the content of the website, we can specifically re-upload the file we are changing, rather than the entire website as a single file. 
+The implications of this behaviour are that even a small change to the data of a file may cause every single chunk from the file to be changed, meaning that new stamps must be utilised for every chunk from that file. In practice, this could lead to high costs in data which is frequently changed, since for even a small change, every chunk from the file must be re-stamped. 
 
 
 ### Implications for Swarm Users
