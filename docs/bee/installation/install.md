@@ -44,20 +44,14 @@ The minimum required hardware specifications for light and ultralight nodes are 
 
 ## Note on Startup Methods
 :::caution
-  The `bee start` startup method *may not* be used interchangeably with running Bee as a service using `systemctl` or `brew services`. 
+  When a node is started using the `bee start` command the node process will be bound to the terminal session and will exit if the terminal is closed. 
   
-  Bee will be set up to run as a service automatically as part of the installation process if using one of the official Debian, Homebrew, or RPM packages.    
+  If Bee was installed using one of the supported package managers it is set up to run as a service in the background with tools such as `systemctl` or `brew services` (which also use the `bee start` command[under the hood](https://github.com/ethersphere/bee/blob/master/packaging/bee.service)). 
 
-  The default location for your node's YAML configuration file differs depending on the startup method used. 
+  Depending on which of these startup methods was used, the default Bee directories will be different. See the [configuration page](/docs/bee/working-with-bee/configuration) for more information about default data and config directories.
 :::
 
-Bee may be operated either by using the `bee start` command within a terminal session or by running Bee as a service in the background using `systemctl` (Linux) and `brew services` (MacOS) commands. 
 
-While the Bee service does use the `bee start` command [under the hood](https://github.com/ethersphere/bee/blob/master/packaging/bee.service), there are two important differences between these modes of operation in practice:
-
-1. When starting a node by directly using `bee start` after starting up a terminal session, the Bee node process is bound to that terminal session. When the session ends due to closing the terminal window or logging out from a remote ssh session, the node will stop running. When running bee as a service on the other hand, the node can continue to operate in the background even after the terminal session ends. 
-
-2. When running a Bee node using the `bee start` command, a separate instance of Bee using different default locations for the config and data folders from the Bee service is used. The `bee start` command uses `~/.bee.yaml` as the default config directory and `~/.bee` as the default data directory, while `systemctl` uses `/etc/bee/bee.yaml` as the default config directory and `/var/lib/bee` as the default data directory. See the [configuration page](/docs/bee/working-with-bee/configuration) for more details.
 
 ## Installation Steps
 
