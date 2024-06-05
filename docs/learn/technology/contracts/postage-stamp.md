@@ -139,7 +139,7 @@ When a chunk which has previously been uploaded to Swarm is re-uploaded from the
 
 #### Files 
 
-When an identical file is re-uploaded then the stamp utilisation behaviour will be the same as with single chunks described in the section above. However, if part of the file has been modified and then re-uploaded, stamp utilisation behaviour will be different. This is due to how the chunking process works when a file is uploaded to Swarm. When uploaded to Swarm, files are split into 4kb sized chunks (2^12 bytes), and each chunk is assigned an address which is based on the content of the chunk. If even a single bit within the chunk is modified, then the address of the chunk will also be modified. 
+When an identical file is re-uploaded then the stamp utilisation behaviour will be the same as with single chunks as described in the section above. However, if part of the file has been modified and then re-uploaded, stamp utilisation behaviour will be different. This is due to how the chunking process works when a file is uploaded to Swarm. When uploaded to Swarm, files are split into 4kb sized chunks (2^12 bytes), and each chunk is assigned an address which is based on the content of the chunk. If even a single bit within the chunk is modified, then the address of the chunk will also be modified. 
 
 When a file which was previously uploaded with a single bit flipped is again split into chunks by a node before being uploaded to Swarm, then only the chunk with the flipped bit will have an updated address and require the utilisation of another stamp. The content of all the other chunks will remain the same, and therefore will not require new stamps to be utilised. 
 
@@ -170,8 +170,12 @@ As you can see, by adding a single new letter at the start of the message, all t
 
 The implications of this behaviour are that even a small change to the data of a file may cause every single chunk from the file to be changed, meaning that new stamps must be utilised for every chunk from that file. In practice, this could lead to high costs in data which is frequently changed, since for even a small change, every chunk from the file must be re-stamped. 
 
+### Collections
 
-### Implications for Swarm Users
+
+
+
+### Effective vs Theoretical Utilisation Rates
 
 Due to the nature of batch utilisation described above, batches are often fully utilised before reaching their theoretical maximum storage amount. However as the batch depth increases, the chance of a postage batch becoming fully utilised early decreases. At batch depth 24, there is a 0.1% chance that a batch will be fully utilised/start replacing old chunks before reaching 64.33% of its theoretical maximum.
 
