@@ -77,7 +77,7 @@ Here, you must specify your _Batch ID_ in the `Swarm-Postage-Batch-Id` header, t
 You may also wish to employ the erasure coding feature to add greater protection for your data, see [erasure coding page](/docs/develop/access-the-swarm/erasure-coding) for more details on its usage.
 
 ```bash
- curl -XPOST -H "Swarm-Postage-Batch-Id: 54ba8e39a4f74ccfc7f903121e4d5d0fc40732b19efef5c8894d1f03bdd0f4c5" -H "Content-Type: text/plain" -H "Swarm-Encrypt: false" -v --data-binary @test.txt localhost:1633/bzz
+ curl -XPOST -H "Swarm-Postage-Batch-Id: 54ba8e39a4f74ccfc7f903121e4d5d0fc40732b19efef5c8894d1f03bdd0f4c5" -H "Content-Type: text/plain" -H "Swarm-Encrypt: false" -v --data-binary "@test.txt" localhost:1633/bzz
 ```
 
 :::danger
