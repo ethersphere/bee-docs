@@ -77,7 +77,7 @@ Here, you must specify your _Batch ID_ in the `Swarm-Postage-Batch-Id` header, t
 You may also wish to employ the erasure coding feature to add greater protection for your data, see [erasure coding page](/docs/develop/access-the-swarm/erasure-coding) for more details on its usage.
 
 ```bash
- curl -X POST http://localhost:1633/bzz?name=test.txt -H "swarm-postage-batch-id: 6544bebff0fcb7633e510e43efe2944aebbc2c5a556f8d27e00fba8a849a29a1" -H "Content-Type: text/plain"
+ curl -XPOST -H "Swarm-Postage-Batch-Id: 54ba8e39a4f74ccfc7f903121e4d5d0fc40732b19efef5c8894d1f03bdd0f4c5" -H "Content-Type: text/plain" -H "Swarm-Encrypt: false" -v --data-binary @test.txt localhost:1633/bzz
 ```
 
 :::danger
@@ -228,6 +228,9 @@ Uploaded files can be retrieved with a simple HTTP GET request.
 Substitute the _hash_ in the last part of the URL with the reference
 to your own data.
 
+:::tip
+Make sure to include the trailing slash after the hash.
+:::
 ```bash
 curl -OJL http://localhost:1633/bzz/c02e7d943fbc0e753540f377853b7181227a83e773870847765143681511c97d/
 ```
