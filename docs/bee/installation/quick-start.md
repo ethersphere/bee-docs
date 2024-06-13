@@ -23,9 +23,13 @@ Bee is a versatile piece of software that caters to a diverse array of use cases
 
 :::info 
 The Swarm network includes two incentives protocols which each give Bee nodes incentives to participate in maintaining the network in a healthy way.
-### Storage incentives:**
+
+**Storage incentives:**
+
   By participating in the storage incentives protocol, full nodes which store and share data chunks with the network have a chance to earn xBZZ. Staked xBZZ is required to earn storage incentives. Learn more in the [staking section](/docs/bee/working-with-bee/staking).
-### SWAP incentives:**
+
+**SWAP incentives:**
+
   The SWAP incentives protocol encourages full or light (but not ultra-light) nodes to share bandwidth with other nodes in exchange for payments from other nodes either [in-kind](https://www.investopedia.com/terms/p/paymentinkind.asp) or as a cheque to be settled at a future date. SWAP requires a chequebook contract to be set up on Gnosis Chain for each participating node. 
 :::
 
