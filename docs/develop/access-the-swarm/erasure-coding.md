@@ -15,13 +15,15 @@ To upload data to Swarm using erasure coding, the `swarm-redundancy-level: <inte
 
 ```bash
     curl \
-        -X POST http://localhost:1633/bzz?name=test.txt \
-        -H "swarm-redundancy-level: 4" \
-        -H "swarm-postage-batch-id: 27d1bbef6c01e266d3130c01c9be60fd76b4a69d6f8ea6291548e1644bcf9001" \
-        -H "Content-Type: text/plain" 
+    -X POST http://localhost:1633/bzz?name=test.txt \
+    -H "swarm-redundancy-level: 1" \
+    -H "swarm-postage-batch-id: 54ba8e39a4f74ccfc7f903121e4d5d0fc40732b19efef5c8894d1f03bdd0f4c5" \
+    -H "Content-Type: text/plain" \
+    --data-binary @test.txt
 
     {"reference":"c02e7d943fbc0e753540f377853b7181227a83e773870847765143681511c97d"}
 ```
+
 
 The accepted values for the `swarm-redundancy-level` header range from the default of 0 up to 4. Each level corresponds to a different level of data protection, with erasure coding turned off at 0, and at its maximum at 4. Each increasing level provides increasing amount of data redundancy offering greater protection against data loss. Each level has been formulated to guarantee against a certain percentage of chunk retrieval errors, shown in the table below. As long as the error rate is below the expected chunk retrieval rate for the given level, there is a less than 1 in a million chance of failure to retrieve the source data.
 
