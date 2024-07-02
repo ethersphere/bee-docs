@@ -370,7 +370,7 @@ From the results we can see that we have a healthy neighborhood size when compar
 
         {
           "radius": 15,
-          "": 10,
+          "storageRadius": 10,
           "commitment": 134121783296
         }
     ```
