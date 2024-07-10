@@ -42,22 +42,14 @@ The minimum required hardware specifications for light and ultralight nodes are 
 
 ## Note on Startup Methods
 :::caution
-  The `bee start` startup method *may not* be used interchangeably with running Bee as a service using `systemctl` or `brew services`. 
+  When a node is started using the `bee start` command the node process will be bound to the terminal session and will exit if the terminal is closed. 
   
-  It is strongly advised to use run Bee using a service manager such as `systemctl`. 
-  
-  Bee will be set up to run as a service automatically as part of the installation process if using one of the official Debian or RPM packages.    
+  If Bee was installed using one of the supported package managers it is set up to run as a service in the background with tools such as `systemctl` or `brew services` (which also use the `bee start` command[under the hood](https://github.com/ethersphere/bee/blob/master/packaging/bee.service)). 
+
+  Depending on which of these startup methods was used, the default Bee directories will be different. See the [configuration page](/docs/bee/working-with-bee/configuration) for more information about default data and config directories.
 :::
 
-Bee may be operated either by using the `bee start` command within a terminal session or by running Bee as a service in the background using `systemctl` (Linux) and `brew services` (MacOS) commands. 
 
-While the Bee service does use the `bee start` command [under the hood](https://github.com/ethersphere/bee/blob/master/packaging/bee.service), there are two important differences between these modes of operation in practice:
-
-1. When starting a node by directly using `bee start` after starting up a terminal session, the Bee node process is bound to that terminal session. When the session ends due to closing the terminal window or logging out from a remote ssh session, the node will stop running. When running bee as a service on the other hand, the node can continue to operate in the background even after the terminal session ends. 
-
-2. When running a Bee node using the `bee start` command, a separate instance of Bee using different default locations for the config and data folders from the Bee service is used. The `bee start` command uses `~/.bee.yaml` as the default config directory and `~/.bee` as the default data directory, while `systemctl` uses `/etc/bee/bee.yaml` as the default config directory and `/var/lib/bee` as the default data directory. See the [configuration page](/docs/bee/working-with-bee/configuration) for more details.
-
-In general `bee start` may not be the best option for most users - especially if operating a full node. 
 
 ## Installation Steps
 
@@ -137,7 +129,7 @@ brew install swarm-bee
 </TabItem>
 </Tabs>
 
-You should see the following output to your terminal after a successful install:
+You should see the following output to your terminal after a successful install (your default 'Config' location will vary depending on your operating system):
 
 ```bash
 Reading package lists... Done
@@ -171,9 +163,9 @@ Created symlink /etc/systemd/system/multi-user.target.wants/bee.service → /lib
 The [Bee install shell script](https://github.com/ethersphere/bee/blob/master/install.sh) for Linux automatically detects its execution environment and installs the latest stable version of Bee.
 
 :::info
-Note that this install method copies precompiled binaries directly to the `/usr/local/bin` directory, so Bee installed through this method cannot be managed or uninstalled with package managers such as `dpkg` and `rpm`.
+Note that this install method copies precompiled binaries directly to the `/usr/local/bin` directory, so Bee installed through this method cannot be managed or uninstalled with package manager command line tools like `dpkg`, `rpm`, and `brew`.
 
-Also note that unlike the package install method, this install method will not set up Bee to run as a service (such as with systemctl or brew services).
+Also note that unlike the package install method, this install method will not set up Bee to run as a service (such as with `systemctl` or `brew services`).
 :::
 
 Use either of the following commands to run the script and install Bee:
@@ -192,26 +184,255 @@ curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TA
 ### Build from source 
 If neither of the above methods works for your system, you can see our guide for [building directly from source](/docs/bee/installation/build-from-source).
 
-
 ## 2. Configure Bee
 
-Bee is a versatile piece of software with diverse use cases. Before starting Bee for the first time you will need to configure it to suit your needs. The installation script should have generated a config file at
-`/etc/bee/bee.yaml` populated by the default configuration for the Bee service. See the [configuration](/docs/bee/working-with-bee/configuration#environment-variables) section for more details.
+Before starting Bee for the first time you will need to make sure it is properly configured. 
 
-Check that the file was successfully generated and contains the [default configuration](https://github.com/ethersphere/bee/blob/master/packaging/bee.yaml):
+See the [configuration](/docs/bee/working-with-bee/configuration) section for more details.
+
+### Config for the Bee Service
+
+When installing Bee with a package manager the configuration file for the Bee service will be automatically generated. 
+
+Check that the file was successfully generated and contains the [default configuration](https://github.com/ethersphere/bee/blob/master/packaging) for your system:
+
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
+{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
+]}>
+<TabItem value="linux">
+
 
 ```bash
- test -f /etc/bee/bee.yaml && echo "$FILE exists."
- cat /etc/bee/bee.yaml
+  test -f /etc/bee/bee.yaml && echo "$FILE exists."
+  cat /etc/bee/bee.yaml
 ```
-The output should match the [default bee.yaml](https://github.com/ethersphere/bee/blob/master/packaging/bee.yaml) values.
 
-If your `bee.yaml` file is missing, create a new one and fill it in with the default configuration copied from the Ethswarm GitHub Bee repo.
+</TabItem>
+
+<TabItem value="macos-arm64">
+
+```bash
+  test -f /opt/homebrew/etc/swarm-bee/bee.yaml && echo "$FILE exists."
+  cat /opt/homebrew/etc/swarm-bee/bee.yaml
+```
+
+</TabItem>
+
+<TabItem value="macos-amd64">
+
+```bash
+  test -f /usr/local/etc/swarm-bee/bee.yaml && echo "$FILE exists."
+  cat /usr/local/etc/swarm-bee/bee.yaml
+```
+</TabItem>
+</Tabs>
+
+The configuration printed to the terminal should match the default configuration for your operating system. See the [the packaging section of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging) for the default configurations for a variety of systems. In particular, pay attention to the `config` and `data-dir` values, as these differ depending on your system. 
+
+If your config file is missing you will need to create it yourself.
+
+:::info
+You may be aware of the `bee printconfig` command which prints out a complete default Bee configuration. However, note that it outputs the default `data` and `config` directories for running Bee with `bee start`, and will need to be updated to use [the default locations for your system](https://github.com/ethersphere/bee/tree/master/packaging) if you plan on running Bee as a service with `systemctl` or `brew services`.
+:::
+
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
+{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
+]}>
+<TabItem value="linux">
+
+Create the `bee.yaml` config file and save it with the [the default configuration](https://github.com/ethersphere/bee/blob/master/packaging/bee.yaml).
 
 ```bash
 sudo touch /etc/bee/bee.yaml
-sudo vi /etc/bee/bee.yaml  
+sudo vi /etc/bee/bee.yaml
 ```
+
+</TabItem>
+
+<TabItem value="macos-arm64">
+
+Create the `bee.yaml` config file and save it with the [the default configuration](https://github.com/ethersphere/bee/blob/master/packaging/homebrew-arm64/bee.yaml).
+
+```bash
+sudo touch /opt/homebrew/etc/swarm-bee/bee.yaml
+sudo sudo vi /opt/homebrew/etc/swarm-bee/bee.yaml
+```
+
+</TabItem>
+
+<TabItem value="macos-amd64">
+
+Create the `bee.yaml` config file and save it with the [the default configuration](https://github.com/ethersphere/bee/blob/master/packaging/homebrew-amd64/bee.yaml).
+
+```bash
+sudo touch /usr/local/etc/swarm-bee/bee.yaml
+sudo vi /usr/local/etc/swarm-bee/bee.yaml
+```
+</TabItem>
+
+</Tabs>
+
+### Config for `bee start`
+
+When running your node using `bee start` you can set options using either command line flags, environment variables, or a YAML configuration file. See the configuration section for [more information on setting options for running a node with `bee start`](/docs/bee/working-with-bee/configuration#configuration-for-bee-start).
+
+No default YAML configuration file is generated to be used with the `bee start` command, so it must be generated and placed in the default config directory if you wish to use it to set your node's options. You can view the default configuration including the default config directory for your system with the `bee printconfig` command.
+
+```bash
+root@user-bee:~# bee printconfig
+```
+
+Check the configuration printed to your terminal. Note that the values for `config` and `data-dir` will vary slightly depending on your operating system.
+
+```bash
+# bcrypt hash of the admin password to get the security token
+admin-password: ""
+# allow to advertise private CIDRs to the public network
+allow-private-cidrs: false
+# HTTP API listen address
+api-addr: :1633
+# chain block time
+block-time: "15"
+# rpc blockchain endpoint
+blockchain-rpc-endpoint: ""
+# initial nodes to connect to
+bootnode: []
+# cause the node to always accept incoming connections
+bootnode-mode: false
+# cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes
+cache-capacity: "1000000"
+# enable forwarded content caching
+cache-retrieval: true
+# enable chequebook
+chequebook-enable: true
+# enable clef signer
+clef-signer-enable: false
+# clef signer endpoint
+clef-signer-endpoint: ""
+# blockchain address to use from clef signer
+clef-signer-ethereum-address: ""
+# config file (default is $HOME/.bee.yaml)
+config: /root/.bee.yaml
+# origins with CORS headers enabled
+cors-allowed-origins: []
+# data directory
+data-dir: /root/.bee
+# size of block cache of the database in bytes
+db-block-cache-capacity: "33554432"
+# disables db compactions triggered by seeks
+db-disable-seeks-compaction: true
+# number of open files allowed by database
+db-open-files-limit: "200"
+# size of the database write buffer in bytes
+db-write-buffer-size: "33554432"
+# debug HTTP API listen address
+debug-api-addr: :1635
+# enable debug HTTP API
+debug-api-enable: false
+# cause the node to start in full mode
+full-node: false
+# help for printconfig
+help: false
+# triggers connect to main net bootnodes.
+mainnet: true
+# NAT exposed address
+nat-addr: ""
+# suggester for target neighborhood
+neighborhood-suggester: https://api.swarmscan.io/v1/network/neighborhoods/suggestion
+# ID of the Swarm network
+network-id: "1"
+# P2P listen address
+p2p-addr: :1634
+# enable P2P WebSocket transport
+p2p-ws-enable: false
+# password for decrypting keys
+password: ""
+# path to a file that contains password for decrypting keys
+password-file: ""
+# percentage below the peers payment threshold when we initiate settlement
+payment-early-percent: 50
+# threshold in BZZ where you expect to get paid from your peers
+payment-threshold: "13500000"
+# excess debt above payment threshold in percentages where you disconnect from your peer
+payment-tolerance-percent: 25
+# postage stamp contract address
+postage-stamp-address: ""
+# postage stamp contract start block number
+postage-stamp-start-block: "0"
+# enable pprof mutex profile
+pprof-mutex: false
+# enable pprof block profile
+pprof-profile: false
+# price oracle contract address
+price-oracle-address: ""
+# redistribution contract address
+redistribution-address: ""
+# ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
+resolver-options: []
+# enable permission check on the http APIs
+restricted: false
+# forces the node to resync postage contract data
+resync: false
+# staking contract address
+staking-address: ""
+# lru memory caching capacity in number of statestore entries
+statestore-cache-capacity: "100000"
+# protect nodes from getting kicked out on bootnode
+static-nodes: []
+# enable storage incentives feature
+storage-incentives-enable: true
+# gas price in wei to use for deployment and funding
+swap-deployment-gas-price: ""
+# enable swap
+swap-enable: false
+# swap blockchain endpoint
+swap-endpoint: ""
+# swap factory addresses
+swap-factory-address: ""
+# initial deposit if deploying a new chequebook
+swap-initial-deposit: "0"
+# neighborhood to target in binary format (ex: 111111001) for mining the initial overlay
+target-neighborhood: ""
+# admin username to get the security token
+token-encryption-key: ""
+# enable tracing
+tracing-enable: false
+# endpoint to send tracing data
+tracing-endpoint: 127.0.0.1:6831
+# host to send tracing data
+tracing-host: ""
+# port to send tracing data
+tracing-port: ""
+# service name identifier for tracing
+tracing-service-name: bee
+# bootstrap node using postage snapshot from the network
+use-postage-snapshot: false
+# log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
+verbosity: info
+# time to warmup the node before some major protocols can be kicked off
+warmup-time: 5m0s
+# send a welcome message string during handshakes
+welcome-message: ""
+# withdrawal target addresses
+withdrawal-addresses-whitelist: []
+```
+
+If you do wish to use a YAML file to manage your configuration, simply generate a new file in the same directory as shown for `config` from the `bee printconfig` output. For us, that is `/root/.bee.yaml` (make sure to change this directory to match the value for the `config` directory which is output from `bee printconfig` on your system). 
+
+```bash
+touch /root/.bee.yaml
+vi /root/.bee.yaml
+```
+
+You can then populate your `.bee.yaml` file with the default config output from `bee printconfig` to get started and save the file.
 
 ### Set node type
 
@@ -249,17 +470,23 @@ We strongly recommend you [run your own Gnosis Chain node](https://docs.gnosisch
 
 If you do not wish to run your own Gnosis Chain node and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
 
-For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/rpc/) listed in the Gnosis Chain documentation. However the providers of these endpoints make no [SLA](https://business.adobe.com/blog/basics/service-level-agreements-slas-a-complete-guide#what-is-a-service-level-agreement-sla) or availability guarantees, and is therefore not recommended for full node operators.
+For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/RPC%20Providers/) listed in the Gnosis Chain documentation. However the providers of these endpoints make no [SLA](https://business.adobe.com/blog/basics/service-level-agreements-slas-a-complete-guide#what-is-a-service-level-agreement-sla) or availability guarantees, and is therefore not recommended for full node operators.
 
-To set your RPC endpoint provider, specify it in configuration for the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
+To set your RPC endpoint provider, specify it with the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
 
 ```yaml
 ## bee.yaml
-blockchain-rpc-endpoint: https://gno.getblock.io/<<your-api-key>>/mainnet/
+blockchain-rpc-endpoint: https://rpc.gnosis.gateway.fm
 ```
+
+:::info
+The gateway.fm RPC endpoint in the example is great for learning how to set up Bee, but for the sake of security and reliability it's recommended that you run your [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) rather than relying on a third party provider.
+:::
+
+
 ### Configure Swap Initial Deposit (Optional)
 
-When running your Bee node with SWAP enabled for the first time, your Bee node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. A factory is used to ensure every node is using legitimate and verifiable chequebook contracts. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
+When running your Bee node with SWAP enabled for the first time, your node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
 
 ### NAT address
 
@@ -301,9 +528,15 @@ resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 
 ### Set Target Neighborhood (Optional)
 
-When setting up a new Bee node, a randomly generated overlay address will determine the node's [neighborhood](/docs/learn/technology/disc#neighborhoods). By using the `target-neighborhood` config option, however, an overlay address will be generated which falls within a specific neighborhood. There are two good reasons for doing this. First, by choosing a lesser populated neighborhood, a node's chances of winning rewards can be increased. Second, choosing to set up a node in a less populated neighborhood will strengthen the resiliency of the Swarm network. Therefore it is recommended to use the `target-neighborhood` option.
+In older versions of Bee, [neighborhood](/docs/learn/technology/disc#neighborhoods) assignment was random by default. However, we can maximize a node's chances of winning xBZZ and also strengthen the resiliency of the network by strategically assigning neighborhoods to new nodes (see the [staking section](/docs/bee/working-with-bee/staking) for more details).
 
-To use this option, it's first necessary to identify potential target neighborhoods. A convenient tool for finding underpopulated neighborhoods is available at the [Swarmscan website](https://swarmscan.io/neighborhoods). This tool returns the leading binary bits of target neighborhoods in order of least populated to most. Simply copy the leading bits from one of the least populated neighborhoods (for example, `0010100001`) and use it to set `target-neighborhood`. After doing so, an overlay address within that neighborhood will be generated when starting Bee for the first time.
+Therefore the default Bee configuration now includes the `neighborhood-suggester` option which is set by default to to use the Swarmscan neighborhood suggester (`https://api.swarmscan.io/v1/network/neighborhoods/suggestion`). An alternative suggester URL could be used as long as it returns a JSON file in the same format `{"neighborhood":"101000110101"}`, however only the Swarmscan suggester is officially recommended. 
+
+#### Setting Neighborhood Manually
+
+It's recommended to use the default `neighborhood-suggester` configuration for choosing your node's neighborhood, however you may also set your node's neighborhood manually using the `target-neighborhood` option.
+
+To use this option, it's first necessary to identify potential target neighborhoods. A convenient tool for finding underpopulated neighborhoods is available at the [Swarmscan website](https://swarmscan.io/neighborhoods). This tool provides the leading binary bits of target neighborhoods in order of least populated to most. Simply copy the leading bits from one of the least populated neighborhoods (for example, `0010100001`) and use it to set `target-neighborhood`. After doing so, an overlay address within that neighborhood will be generated when starting Bee for the first time.
 
 ```yaml
 ## bee.yaml
@@ -321,24 +554,92 @@ A suggested neighborhood will be returned:
 {"neighborhood":"1111110101"}
 ```
 
-See the [staking section](/docs/bee/working-with-bee/staking) for more information.
 
 ## 3. Find Bee address
 
-As part of the process of starting a Bee full node or light node the node must issue a Gnosis Chain transaction which is paid for using xDAI. We therefore need to find our node's Gnosis Chain address. We can find it by reading it directly from our key file:  
+:::danger
+  In the following section we print our `swarm.key` file contents to the terminal. Do not share the contents of your `swarm.key` or any other keys with anyone as it controls access to your Gnosis Chain account and can be used to withdraw assets.
+:::
+
+As part of the process of starting a Bee full or light node the node must issue a Gnosis Chain transaction to set up its chequebook contract. We need to find our node's Gnosis Chain address in order to deposit xDAI which will be used to pay for this initial Gnosis Chain transaction. We can find our node's address by reading it directly from our key file. The location for your key file will differ depending on your system and startup method:  
+
+### Bee Service
+
+The default keys directory for a Bee node set up with a package manager to run as a service will differ depending on your system:
+
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
+{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
+]}>
+<TabItem value="linux">
+
 
 ```bash
 sudo cat /var/lib/bee/keys/swarm.key
 ``` 
-*Output from cat /var/lib/bee/keys/swarm.key*:
 
 ```bash    
 {"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
 ```
-The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix.
-:::danger
-  Do not share the contents of your `swarm.key` or any other keys with anyone, this example is for a throwaway account.
-:::
+The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix and save it for the next step (0x215693a6e6cf0a27441075fd98c31d48e3a3a100).
+
+
+
+</TabItem>
+
+<TabItem value="macos-arm64">
+
+
+```bash
+sudo cat /opt/homebrew/var/lib/swarm-bee/keys/swarm.key
+``` 
+
+```bash    
+{"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
+```
+The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix and save it for the next step (0x215693a6e6cf0a27441075fd98c31d48e3a3a100).
+
+</TabItem>
+
+<TabItem value="macos-amd64">
+
+
+```bash
+sudo cat /usr/local/var/lib/swarm-bee/keys/swarm.key
+``` 
+
+```bash    
+{"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
+```
+The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix and save it for the next step (0x215693a6e6cf0a27441075fd98c31d48e3a3a100).
+
+</TabItem>
+</Tabs>
+
+
+### For `bee start`
+
+The default keys directory when running Bee with the `bee start` command will depend on your operating system. Run the `bee printconfig` command to see the default config directory for your operating system, and look for the `data-dir` value. 
+
+```bash
+data-dir: /root/.bee
+```
+
+Your keys folder is found in the root of the `data-dir` directory. We can print our key data to the terminal to find our node's address:
+
+```bash
+sudo cat /root/.bee/keys/swarm.key
+```
+
+
+```bash    
+{"address":"215693a6e6cf0a27441075fd98c31d48e3a3a100","crypto":{"cipher":"aes-128-ctr","ciphertext":"9e2706f1ce135dde449af5c529e80d560fb73007f1edb1636efcf4572eed1265","cipherparams":{"iv":"64b6482b8e04881446d88f4f9003ec78"},"kdf":"scrypt","kdfparams":{"n":32768,"r":8,"p":1,"dklen":32,"salt":"3da537f2644274e3a90b1f6e1fbb722c32cbd06be56b8f55c2ff8fa7a522fb22"},"mac":"11b109b7267d28f332039768c4117b760deed626c16c9c1388103898158e583b"},"version":3,"id":"d4f7ee3e-21af-43de-880e-85b6f5fa7727"}
+```
+
+The `address` field contains the Gnosis Chain address of the node, simply add the `0x` prefix and save it for the next step (0x215693a6e6cf0a27441075fd98c31d48e3a3a100).
       
 ## 4. Fund Node
 
@@ -346,15 +647,17 @@ The `address` field contains the Gnosis Chain address of the node, simply add th
   We recommend not holding a high value of xBZZ or xDAI in your nodes' wallet. Please consider regularly removing accumulated funds. 
 :::
 
-Before funding your node, you first need to get some xDAI. You can send it either from your own Gnosis Chain compatible wallet such as Metamask, or from a centralized exchange which supports xDAI withdrawals to Gnosis Chain. If you already have some DAI on Ethereum, you can use the [Gnosis Chain Bridge](https://bridge.gnosischain.com/) to mint xDAI on Gnosis Chain. 
+To fund your node with xDAI you can use a Gnosis Chain compatible wallet such as Metamask, or a centralized exchange which supports xDAI withdrawals to Gnosis Chain. If you already have some DAI on Ethereum, you can use the [Gnosis Chain Bridge](https://bridge.gnosischain.com/) to mint xDAI on Gnosis Chain. 
 
-Once you have some xDAI ready, you're ready to fund your Bee node. Send at least 1 xDAI to the address you found in the previous step to fund your node. You can optionally also send some xBZZ to your node which you can use to pay for storage on Swarm.
+After acquiring some xDAI, you can fund your node by sending some xDAI to the address you saved from the previous step (1 xDAI is more sufficient).  You can optionally also send some xBZZ to your node which you can use to pay for storage on Swarm.
 
-While depositing xBZZ is optional, node operators who intend to download or upload large amounts of data on Swarm may wish to deposit some xBZZ in order to pay for SWAP settlements. See the section on [node funding](/docs/bee/installation/fund-your-node) for more information.
+While depositing xBZZ is optional, node operators who intend to download or upload large amounts of data on Swarm may wish to deposit some xBZZ in order to pay for SWAP settlements.
 
-For nodes which stake xBZZ and participate in the storage incentives system, very small amounts of xDAI will be used regularly to pay for staking related transactions on Gnosis Chain, so xDAI may need to be periodically topped up. See the [staking section](/docs/bee/working-with-bee/staking#check-redistribution-status) for more information.
+For nodes which stake xBZZ and participate in the storage incentives system, small amounts of xDAI are used regularly to pay for staking related transactions on Gnosis Chain, so xDAI must be periodically topped up. See the [staking section](/docs/bee/working-with-bee/staking#check-redistribution-status) for more information.
 
 After sending xDAI and optionally xBZZ to the Gnosis Chain address collected in the previous step, restart the node:
+
+### Bee Service
 
 <Tabs
 defaultValue="linux"
@@ -363,8 +666,6 @@ values={[
 {label: 'MacOS', value: 'macos'},
 ]}>
 <TabItem value="linux">
-
-#### Linux
 
 ```bash
 sudo systemctl restart bee
@@ -374,14 +675,20 @@ sudo systemctl restart bee
 
 <TabItem value="macos">
 
-#### MacOS
-
 ```bash
 brew services restart swarm-bee
 ```
 
 </TabItem>
 </Tabs>
+
+### For `bee start`
+
+Restart your terminal and run `bee start`:
+
+```bash
+bee start
+```
 
 
 ## 5. Wait for Initialisation
@@ -390,31 +697,44 @@ When first started in full or light mode, Bee must deploy a chequebook to the Gn
 
 You can keep an eye on progress by watching the logs while this is taking place.
 
+
 <Tabs
 defaultValue="linux"
 values={[
 {label: 'Linux', value: 'linux'},
-{label: 'MacOS', value: 'macos'},
+{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
+{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
 ]}>
 <TabItem value="linux">
 
-#### Linux
+
 
 ```bash
 sudo journalctl --lines=100 --follow --unit bee
 ```
 
 </TabItem>
-<TabItem value="macos">
+<TabItem value="macos-arm64">
 
-#### MacOS
+
+
+```bash
+tail -f /opt/homebrew/var/log/swarm-bee/bee.log
+```
+
+</TabItem>
+
+<TabItem value="macos-amd64">
+
 
 ```bash
 tail -f /usr/local/var/log/swarm-bee/bee.log
 ```
-
 </TabItem>
+
 </Tabs>
+
+*If you've started your node with `bee start`, simply observe the logs printed to your terminal.*
 
 If all goes well, you will see your node automatically begin to connect to other Bee nodes all over the world.
 

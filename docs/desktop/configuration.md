@@ -12,7 +12,7 @@ To modify the RPC endpoint, first navigate to the ***Settings*** tab:
 
 ![](/img/config1.png)
 
-From the ***Settings*** tab, expand the API Settings section and click the pen button next to Blockchain RPC URL to edit the default RPC. You can choose any valid Gnosis Chain RPC, either from your own Gnosis node or a service provider. You can find a list of paid and free RPC options from the [Gnosis Chain docs](https://docs.gnosischain.com/tools/rpc/). For this example we will use the free endpoint - *https://rpc.gnosischain.com/*.
+From the ***Settings*** tab, expand the API Settings section and click the pen button next to Blockchain RPC URL to edit the default RPC. You can choose any valid Gnosis Chain RPC, either from your own Gnosis node or a service provider. You can find a list of paid and free RPC options from the [Gnosis Chain docs](https://docs.gnosischain.com/tools/RPC%20Providers/). For this example we will use the free endpoint - *https://rpc.gnosischain.com/*.
 
 ![](/img/config2.png)
 
