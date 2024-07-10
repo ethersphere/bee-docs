@@ -25,18 +25,16 @@ It is easy to set up a Bee light node on small and inexpensive computers, such a
 
 ### Full Nodes
 
-Minimum recommended specificati ons for each full node:
+Minimum recommended specifications for each full node:
 
 - Dual core, recent generation, 2ghz processor 
 - 8gb RAM
 - 30gb SSD
 - Stable internet connection
 
-HDD drives are very strongly discouraged for full nodes due to their low speeds.
+HDD drives are discouraged for full nodes due to their low speeds.
 
 Note that there are additional [hardware requirements](https://docs.gnosischain.com/node/#environment-and-hardware) if you choose to run your own Gnosis Chain node in order to provide your Bee node(s) with the required RPC endpoint. See [configuration step](/docs/bee/installation/install#set-blockchain-rpc-endpoint) for more details.
-
-In order to test whether a set of hardware specs is sufficient for running a full node and participating in the storage incentives redistribution, see [this guide](/docs/bee/working-with-bee/troubleshooting#node-not-participating-in-redistribution).
 
 ### Light and UltraLight Nodes
 
