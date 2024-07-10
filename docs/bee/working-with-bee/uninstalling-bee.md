@@ -12,7 +12,7 @@ Choose the appropriate uninstall method based on the install method used:
 This method can be used for package manager based [installs](/docs/bee/installation/install#shell-script-install) of the official Debian, RPM, and Homebrew packages.
 
 :::danger
-This will remove your keyfiles so make certain that you have a [full backup](/docs/bee/working-with-bee/backups#backup-your-node) of your keys and configuration before uninstalling.
+This will remove your keyfiles so make certain that you have a [full backup](/docs/bee/working-with-bee/backups) of your keys and configuration before uninstalling.
 :::
 
 #### Debian
