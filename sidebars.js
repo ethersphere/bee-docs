@@ -9,6 +9,7 @@ module.exports = {
         'learn/technology/disc',
         'learn/technology/incentives',
         'learn/technology/pss',
+        'learn/technology/act',
         {
           type: 'category',
           label: 'Contracts',
