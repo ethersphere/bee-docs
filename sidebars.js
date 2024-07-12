@@ -143,6 +143,7 @@ module.exports = {
       label: 'Contribute',
       items: [
         'develop/contribute/introduction',
+        'develop/contribute/protocols',
       ],
       collapsed: false
     },
