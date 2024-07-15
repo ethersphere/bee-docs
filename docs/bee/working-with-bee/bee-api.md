@@ -436,7 +436,7 @@ From the results we can see that we have a healthy neighborhood size when compar
 ```
     
 ### `/node`
-    This API performs a simple check of node options related to your node type and also displays your current node type.
+    This calling this endpoint performs a simple check of node options related to your node type and also displays your current node type.
 
     ```bash
     curl -s http://localhost:1633/node | jq
@@ -453,6 +453,35 @@ From the results we can see that we have a healthy neighborhood size when compar
 
     If your node is not operating in the correct mode, this can help you to diagnose whether you have set your options correctly.
 
+
+### `/rchash`
+
+Calling the /rchash endpoint will make your node generate a reserve commitment hash (the hash used in the [redistribution game](/docs/learn/technology/incentives#storage-incentives-details)), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
+
+```bash
+sudo curl -sX GET http://localhost:1633/rchash/10/aaaa/aaaa | jq
+```
+It should not take much longer than 6 minutes at most for results to be returned:
+```bash
+{
+  "Sample": {
+    "Items": [
+      "000003dac2b2f75842e410474dfa4c1e6e0b9970d81b57b33564c5620667ba96",
+      "00000baace30916f7445dbcc44d9b55cb699925acfbe157e4498c63bde834f40",
+      "0000126f48fb1e99e471efc683565e4b245703c922b9956f89cbe09e1238e983",
+      "000012db04a281b7cc0e6436a49bdc5b06ff85396fcb327330ca307e409d2a04",
+      "000014f365b1a381dda85bbeabdd3040fb1395ca9e222e72a597f4cc76ecf6c2",
+      "00001869a9216b3da6814a877fdbc31f156fc2e983b52bc68ffc6d3f3cc79af0",
+      "0000198c0456230b555d5261091cf9206e75b4ad738495a60640b425ecdf408f",
+      "00001a523bd1b688472c6ea5a3c87c697db64d54744829372ac808de8ec1d427"
+    ],
+    "Hash": "7f7d93c6235855fedc34e32c6b67253e27910ca4e3b8f2d942efcd758a6d8829"
+  },
+  "Time": "2m54.087909745s"
+}
+```
+
+If the `Time` value is much longer than 6 minutes then it likely means that the node's hardware performance is not sufficient. Consider upgrading to use faster memory or processor.
 
 ### `/health`
        
