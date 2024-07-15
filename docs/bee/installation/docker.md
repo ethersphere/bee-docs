@@ -1,169 +1,403 @@
 ---
-title: Bee Using Docker
+title: Docker
 id: docker
 ---
 
-Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee) for your convenience.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-### Quick Start
+Docker along with Docker Compose offers a convenient solution for spinning up and managing a "hive" of Bee nodes. 
 
-Try Bee out by simply running the following command in your terminal.
+Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). The "stable" tag release is recommended for most use cases.
 
-```bash
-docker run \
-  -p 1634:1634 \
-  -p 1633:1633 \
-  --rm -it ethersphere/bee:stable \
-  start \
-    --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --blockchain-rpc-endpoint http://localhost:8545 \
-```
+## Install Docker and Docker Compose
 
 :::info
-If starting your node for the first time, you will need to deploy a chequebook contract. See [installation](/docs/bee/installation/install) section for more info.
+The steps for setting up Docker and Docker Compose may vary slightly from system to system, so take note system specific commands and make sure to modify them for your own operating system and processor architecture. 
 :::
 
-To persist files, mount a local directory as follows and enter the password used to encrypt your keyfiles. Note, `docker` insists on absolute paths when mounting volumes, so you must replace `/path/to/.bee-docker` with a valid path from your local filesystem.
+
+<Tabs
+defaultValue="debian"
+values={[
+{label: 'Debian', value: 'debian'},
+{label: 'RPM', value: 'rpm'},
+]}>
+
+<TabItem value="debian">
+
+### For Debian-based Systems (e.g., Ubuntu, Debian)
+
+#### Step 1: Install Docker
+
+1. **Update the package list:**
+
+   ```bash
+   sudo apt-get update
+   ```
+
+2. **Install necessary packages:**
+
+   ```bash
+   sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
+   ```
+
+3. **Add Docker’s official GPG key:**
+
+   ```bash
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   ```
+
+4. **Add Docker’s official repository to APT sources:**
+
+   ```bash
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   ```
+
+5. **Update the package list again:**
+
+   ```bash
+   sudo apt-get update
+   ```
+
+6. **Install Docker packages:**
+
+   ```bash
+   sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+   ```
+
+#### Step 2: Install Docker Compose Plugin
+
+1. **Update the package list:**
+
+   ```bash
+   sudo apt-get update
+   ```
+
+2. **Install the Docker Compose plugin:**
+
+   ```bash
+   sudo apt-get install docker-compose-plugin
+   ```
+
+3. **Verify the installation:**
+
+   ```bash
+   docker compose version
+   ```
+
+</TabItem>
+
+<TabItem value="rpm">
+
+### For RPM-based Systems (e.g., CentOS, Fedora)
+
+#### Step 1: Install Docker
+
+1. **Install necessary packages:**
+
+   ```bash
+   sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+   ```
+
+2. **Add Docker’s official repository:**
+
+   ```bash
+   sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+   ```
+
+3. **Install Docker packages:**
+
+   ```bash
+   sudo yum install -y docker-ce docker-ce-cli containerd.io
+   ```
+
+4. **Start and enable Docker:**
+
+   ```bash
+   sudo systemctl start docker
+   sudo systemctl enable docker
+   ```
+
+#### Step 2: Install Docker Compose Plugin
+
+1. **Update the package list:**
+
+   ```bash
+   sudo yum update
+   ```
+
+2. **Install the Docker Compose plugin:**
+
+   ```bash
+   sudo yum install docker-compose-plugin
+   ```
+
+3. **Verify the installation:**
+
+   ```bash
+   docker compose version
+   ```
+
+</TabItem>
+
+</Tabs>
+
+## Setup and configuration
+
+Next we will set up a directory for our node(s) and specify configuration files for Docker and Docker Compose:
+
+
+#### Step 1: Create directory for node(s)
 
 ```bash
-docker run \
-  -v /path/to/.bee-docker:/home/bee/.bee \
-  -p 1634:1634 \
-  -p 1633:1633 \
-  --rm -it ethersphere/bee:stable \
-  start \
-    --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --blockchain-rpc-endpoint https://gno.getblock.io/<<your-api-key>>/mainnet/ \
+mkdir bee-nodes
+cd bee-nodes
 ```
 
-Once you have generated your keys, use the `-d` flag to run in detached mode and leave Bee running in the background:
+#### Step 2: Create home directory
 
-```bash
-docker run \
-  -d
-  -v /path/to/.bee-docker:/home/bee/.bee\
-  -p 1634:1634 \
-  -p 1633:1633 \
-  --rm -it ethersphere/bee:stable \
-  start \
-    --welcome-message="Bzzzz bzzz bzz bzz. 🐝" \
-    --blockchain-rpc-endpoint https://gno.getblock.io/<<your-api-key>>/mainnet/ \
+```shell
+mkdir bee-home-dir
 ```
 
-### Versions
-
-In order to avoid accidentally upgrading your Bee containers, or deadlocks resulting from Docker caching solutions, it is recommended to use best practices and pin the specific version of Bee that you want to run.
-
-#### Specific Versions
-
-```bash
-docker pull ethersphere/bee:2.1.0
+#### Step 3: Create a data directory for bee
+```shell
+mkdir ./bee-home-dir/.bee
 ```
 
-#### Using Tags
+#### Step 4: Generate a random string and save it to a file. 
 
-```bash
-docker pull ethersphere/bee:beta
+This will be used as the password for Bee. 
+
+This command generates a password file containing the password for your node.
+Keep a copy of this password somewhere safe. It will be required for importing/exporting wallets (into Metamask for instance). 
+
+```shell
+openssl rand -base64 24 > ./bee-home-dir/password
 ```
 
-You may use the tags `beta`, `latest`, and `stable`, or find out more
-at the [Docker Hub repository](https://hub.docker.com/r/ethersphere/bee).
+#### Step 5: Docker configuration
 
-### Docker Compose
+Below are sample configurations for different node types. 
 
-Configuration files for Bee are provided to enable quick
-and easy installation with persistent storage and
-secure secret management. 
-
-#### Setup
-
-First, retrieve the current `docker-compose.yaml` file.
-
-```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v2.1.0/packaging/docker/docker-compose.yml
-```
-
-Next, create a `.env` file using the example file provided. This file will be responsible for storing configuration and secrets for our Bee node(s).
-
-```bash
-wget -q https://raw.githubusercontent.com/ethersphere/bee/v2.1.0/packaging/docker/env -O .env
-```
-
-There are some important configuration parameters which must be set in order for our projects to work. To affect configuration in the `.env` file, we first remove the `#` at the beginning of the line and then change the value after `=` to our desired config.
-
-For Bee, amend the following parameters:
-
-```
-BEE_BLOCKCHAIN_RPC_ENDPOINT=https://gno.getblock.io/<<your-api-key>>/mainnet/
-BEE_PASSWORD=my-password
-```
-```
-
-With the configuration settings complete, you can start your Bee node(s) by running:
-
-```bash
-docker-compose up -d
-```
-
-:::tip
-By specifying the `-d` flag to `docker-compose` we run Bee in detached mode so that it continues running in the background.
+:::info
+The `blockchain-rpc-endpoint` entry is set to use the free and public `https://xdai.fairdatasociety.org` RPC endpoint, which is fine for testing things out but may not be stable enough for extended use. If you are running your own Gnosis Node or using a RPC provider service, make sure to update this value with your own endpoint.
 :::
 
-:::warning
-Docker Compose will create a Docker volume called `bee` containing important key material. Make sure to [backup](/docs/bee/working-with-bee/backups) the contents of your Docker volume!
-:::
 
-To determine the Bee node's address to fund, we can check the logs for our Bee _container_:
+<Tabs
+defaultValue="full"
+values={[
+{label: 'Full Node', value: 'full'},
+{label: 'Light Node', value: 'light'},
+{label: 'Ultra Light Node', value: 'ultralight'},
+
+]}>
+
+<TabItem value="full">
+
+##### Full node sample configuration
+
+```yml
+# GENERAL BEE CONFIGURATION
+api-addr: :1633
+p2p-addr: :1634
+debug-api-addr: :1635
+password-file: /home/bee/password
+data-dir: /home/bee/.bee
+cors-allowed-origins: ["*"]
+
+# DEBUG CONFIGURATION
+debug-api-enable: true
+verbosity: 5
+
+# BEE MAINNET CONFIGURATION
+bootnode: /dnsaddr/mainnet.ethswarm.org
+
+# BEE MODE: FULL NODE CONFIGURATION
+full-node: true
+swap-enable: true
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+```
+
+</TabItem>
+
+<TabItem value="light">
+
+##### Light node sample configuration
+
+```yml
+# GENERAL BEE CONFIGURATION
+api-addr: :1633
+p2p-addr: :1634
+debug-api-addr: :1635
+password-file: /home/bee/password
+data-dir: /home/bee/.bee
+cors-allowed-origins: ["*"]
+
+# DEBUG CONFIGURATION
+debug-api-enable: true
+verbosity: 5
+
+# BEE MAINNET CONFIGURATION
+bootnode: /dnsaddr/mainnet.ethswarm.org
+
+# BEE MODE: LIGHT CONFIGURATION
+full-node: false
+swap-enable: true
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+```
+
+</TabItem>
+
+<TabItem value="ultralight">
+ 
+##### Ultra light node sample configuration
+
+```yml
+# GENERAL BEE CONFIGURATION
+api-addr: :1633
+p2p-addr: :1634
+debug-api-addr: :1635
+password-file: /home/bee/password
+data-dir: /home/bee/.bee
+cors-allowed-origins: ["*"]
+
+# DEBUG CONFIGURATION
+debug-api-enable: true
+verbosity: 5
+
+# BEE MAINNET CONFIGURATION
+bootnode: /dnsaddr/mainnet.ethswarm.org
+
+# BEE MODE: ULTRA LIGHT CONFIGURATION
+swap-enable: false
+full-node: false
+```
+
+</TabItem>
+
+</Tabs>
+
+Copy the Docker configuration for the node type you choose and save it into a YAML configuration file:
 
 ```bash
-docker-compose logs -f bee-1
+sudo vi ./bee-home-dir/.bee.yml
 ```
 
-```
-bee_1 | time="2020-12-15T18:43:14Z" level=warning msg="cannot continue until there is sufficient ETH (for Gas) and at least 1 xBZZ available on 7a977fa660e2e93e1eba40030c6b8da68d01971e"
-time="2020-12-15T18:43:14Z" level=warning msg="learn how to fund your node by visiting our docs at https://docs.ethswarm.org/docs/bee/installation/fund-your-node"
-```
-
-Once you have determined your Bee's Ethereum addresses,
-[fund your node](/docs/bee/installation/fund-your-node).
-
-After your transaction has been completed, your node should recognise that your wallet has been funded, and begin to deploy and fund your Bee chequebook!
-
-Once Bee has completed this procedure, you may query the Bee [HTTP API](/docs/bee/working-with-bee/bee-api) at `http://localhost:1633`.
+And print out the configuration to make sure it was properly saved:
 
 ```bash
-curl localhost:1633
+cat ./bee-home-dir/.bee.yml
 ```
 
-```
-Ethereum Swarm Bee
+#### Step 6: Docker Compose configuration
+
+You can use the same Docker Compose configuration for all the node types.
+
+```yml
+  services:
+      bee:
+          container_name: bee-node
+          image: ethersphere/bee:stable
+          command: start --config /home/bee/.bee.yml
+          volumes:
+              - ./bee-home-dir:/home/bee
+          ports:
+              - 1633:1633 # bee api port
+              - 1634:1634 # p2p port
+              - 1635:1635 # debug port
 ```
 
-Once you start seeing messages in the `docker-compose logs -f bee-1`
-like:
-
-```
-successfully connected to peer 7fa40ce124d69ecf14d6f7806faaf9df5d639d339a9d343aa7004373f5c46b8f (outbound)
-```
-
-You're connected to the Swarm. Let's do a quick check to find out how
-many peers we have using the `curl` command line utility:
+Copy the configuration and save it in a YAML file like we did in the previous step. Make sure that you are saving it to the root directory.
 
 ```bash
-curl localhost:1633/peers
+sudo vi ./docker-compose.yml
 ```
 
-```json
-{
-  "peers": [
-    {
-      "address": "339cf2ca75f154ffb8dd13de024c4a5c5b53827b8fd21f24bec05835e0cdc2e8"
-    },
-    {
-      "address": "b4e5df012cfc281e74bb517fcf87fc2c07cd787929c332fc805f8124401fabae"
-    }
-  ]
-}
+And print out the contents of the file to make sure it was saved properly:
+
+```bash
+cat ./docker-compose.yml
 ```
 
-If you see peers listed here - congratulations! You have joined the swarm! Welcome! 🐝
+Now check that you have everything set up properly:
+
+```bash 
+tree -a .
+```
+
+Your folder structure should look like this:
+
+```bash
+.
+├── bee-home-dir
+│   ├── .bee
+│   ├── .bee.yml
+│   └── password
+└── docker-compose.yml
+```
+
+Our project folder setup should now look like this:
+
+![image](https://github.com/rampall/docker-compose-bee-quickstart/assets/520570/8fcf825c-f4ff-4f34-aa75-ea26ca6d9df4)
+
+```
+tree -a .
+```
+```
+.
+├── bee-home-dir
+│   ├── .bee
+│   ├── .bee.yml
+│   └── password
+└── docker-compose.yml
+```
+
+
+#### Step 7: Run bee node with docker compose:
+
+```
+docker compose up -d
+```
+
+The node is started in detached mode by using the `-d` flag so that it will run in the background. 
+
+Check that node is running:
+
+```bash
+docker ps
+```
+
+If we did everything properly we should see our node listed here:
+
+```bash
+CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
+                                              NAMES
+3f99396ef480   ethersphere/bee:stable   "bee start --config …"   5 seconds ago   Up 5 seconds   0.0.0.0:1633-1635->1633-1635/tcp, :::1633-1635->1633-1635/tcp   bee-node
+```
+
+Now let's check our logs:
+
+```bash
+docker logs -f bee
+```
+
+If everything went smoothly, we should see the logs from our Bee node. Unless you are running a node in ultra light mode, you should see a warning message in your logs which looks like this:
+
+```bash
+"time"="2024-07-15 12:23:57.906429" "level"="warning" "logger"="node/chequebook" "msg"="cannot continue until there is at least min xDAI (for Gas) available on address" "min_amount"="0.0005750003895" "address"="0xf50Bae90a99cfD15Db5809720AC1390d09a25d60"
+```
+
+This is because in order for a light or full node to operate, your node is required to set up a chequebook contract on Gnosis Chain, which requires xDAI in order to pay for transaction fees. Find the `address` value and copy it for the next step:
+
+#### Step 8: xDAI funding (full and light nodes only)
+
+
+
+## Running a Hive
+
+
+
+
