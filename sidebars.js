@@ -98,6 +98,7 @@ module.exports = {
       ],
       collapsed: false
     },
+    'bee/bee-faq', 
   ],
   develop: [
     {

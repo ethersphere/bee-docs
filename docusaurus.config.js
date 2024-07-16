@@ -204,6 +204,10 @@ module.exports = {
               to: 'docs/bee/working-with-bee/introduction',
               label: 'Working With Bee'
             },
+            {
+              to: 'docs/bee/bee-faq',
+              label: 'Bee FAQ'
+            },
           ]
         },
         { 
