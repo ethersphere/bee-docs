@@ -395,7 +395,7 @@ You can find the default configurations for your system in the [packaging folder
 
 ## Sepolia Testnet Configuration 
 
-In order to operate a Bee node on the Sepolia testnet, modify the following options in your configuration to the values below. Make sure that you replace the `blockchain-rpc-endpoint` option value with your own valid Sepolia RPC endpoint. If you choose to use [Infura](https://www.infura.io/) as in the example configuration below, make sure to [check in their docs](https://docs.infura.io/api/network-endpoints) that the endpoint format is up to date, and also make sure that you have filled in your own API key which you can find from the [Infura web app](https://app.infura.io). Besides Infura there are many other RPC providers you may wish to choose from.
+In order to operate a Bee node on the Sepolia testnet, update your configuration to use the options shown in the example below. Make sure that you replace the `blockchain-rpc-endpoint` option value with your own valid Sepolia RPC endpoint. If you choose to use a 3rd party RPC provider like [Infura](https://www.infura.io/), make sure to [check in the docs](https://docs.infura.io/api/network-endpoints) that the endpoint format is up to date, and also make sure that you have filled in your own API key which you can find from the [Infura web app](https://app.infura.io). 
 
 Also make sure to fund your node with Sepolia ETH rather than xDAI to pay for gas on the Sepolia testnet. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
 
@@ -403,8 +403,7 @@ To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.
 
 
 ```yaml
-bootnode:
-- /ip4/3.122.234.225/tcp/31050/p2p/QmdSgC9yDsK2for1VSBgK4CdP3agt76NPuEBs2KCGAnfSQ
+bootnode: /dnsaddr/testnet.ethswarm.org
 data-dir: /home/username/bee/sepolia
 full-node: true
 mainnet: false
@@ -416,3 +415,5 @@ verbosity: 5
 welcome-message: "welcome-from-the-hive"
 warmup-time: 30s
 ```
+
+Here `bootnode` was changed to use the testnet bootnode, `mainnet` has been set to `false`, `network-id` has been changed from the default Swarm network id of 1 to the Swarm testnet id of 10, and `blockchain-rpc-endpoint` has been changed to use an RPC endpoint for the Sepolia testnet rather than Gnosis Chain.
