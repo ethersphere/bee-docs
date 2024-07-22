@@ -52,7 +52,7 @@ ensures that the security of the process and the data is always maintained.
 
 ## Tutorial
 
-In this section we'll provide information on how to use the **swarm-cli** to upload, download data with ACT or update the granee list.
+In this section we'll provide information on how to use the **swarm-cli** to upload, download data with ACT or update the grantee list.
 
 ### Upload
 
@@ -90,7 +90,7 @@ Updating a grantee list literally means patching a json file containing the list
 
 A brand new grantee list can be created using the following command:
 ```bash
-swarm-cli grantee add grantees.json --stamp $stamp_id
+swarm-cli grantee create grantees.json --stamp $stamp_id
 ```
 where **grantees.json** shall contain the key **grantees** with the list of public keys:
 ```json
@@ -120,6 +120,8 @@ where **grantees.json** shall contain the keys **add** and **revoke** with the l
 ```
 The **reference** flag indicates the already existing encrypted grantee list reference that needs to be updated.
 The **grantee_history_reference** indicates the reference of historical version of the list, where the encrpyted list reference is added as a metadata to the history entry with the key **"encryptedglref"**
+
+**Limitation**: If an update is called again within a second from the latest upload/update of a grantee list, then mantaray save fails with an invalid input error, because the key (timestamp) already exists, hence a new fork is not created.
 
 #### Get
 
