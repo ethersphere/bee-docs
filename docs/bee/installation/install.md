@@ -434,7 +434,7 @@ vi /root/.bee.yaml
 
 You can then populate your `.bee.yaml` file with the default config output from `bee printconfig` to get started and save the file.
 
-### Set Bee API
+### Set Bee API Address
 :::danger
 Make sure that your api-addr (default 1633) is never exposed to the internet. It is good practice to employ one or more firewalls that block traffic on every port except for those you are expecting to be open.
 :::
