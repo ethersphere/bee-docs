@@ -15,7 +15,7 @@ Starting a network is easiest achieved by making use of configuration files. We 
 
 ```yaml
 network-id: 7357
-api-addr: :1633
+api-addr: 127.0.0.1:1633
 p2p-addr: :1634
 bootnode: ""
 data-dir: /tmp/bee/node1
@@ -27,7 +27,7 @@ swap-enable: false
 
 ```yaml
 network-id: 7357
-api-addr: :1733
+api-addr: 127.0.0.1::1733
 p2p-addr: :1734
 data-dir: /tmp/bee/node2
 bootnode: ""
@@ -113,7 +113,7 @@ Note the addresses starting with an `/ip4`, followed by `127.0.0.1`, which is th
 
 ```yaml
 network-id: 7357
-api-addr: :1733
+api-addr: 127.0.0.1::1733
 p2p-addr: :1734
 data-dir: /tmp/bee/node2
 bootnode: "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk79337NfadKJEs"

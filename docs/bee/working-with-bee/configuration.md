@@ -197,7 +197,7 @@ admin-password: ""
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
-api-addr: :1633
+api-addr: 127.0.0.1:1633
 # chain block time
 block-time: "15"
 # rpc blockchain endpoint

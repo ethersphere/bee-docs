@@ -7,11 +7,13 @@ The Bee HTTP API is the primary interfaces to a running Bee node. API-endpoints 
 
 The Bee API-endpoint exposes all functionality to upload and download content to and from the Swarm network. By default, it runs on port `:1633`.
 
-Detailed information about Bee API endpoints can be found in the [API reference docs](/api/).
-
 :::danger
-Your API should not be exposed to the public Internet, make sure that your network has a firewall which blocks port `1633`. You may also consider using the [Gateway Proxy tool](/docs/develop/tools-and-features/gateway-proxy) to protect your node's API endpoint.
+Make sure that your api-addr (default 1633) is never exposed to the internet. If you are not using a firewall or other method to protect your node, make sure to change your Bee API address from the default `1633` to `127.0.0.1:1633` to ensure that it is not publicly exposed to the internet.
+
+You may also consider using the [Gateway Proxy tool](/docs/develop/tools-and-features/gateway-proxy) to protect your node's API endpoint.
 :::
+
+Detailed information about Bee API endpoints can be found in the [API reference docs](/api/).
 
 ## Interacting With the API
 

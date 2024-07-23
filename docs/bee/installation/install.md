@@ -298,7 +298,7 @@ admin-password: ""
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
-api-addr: :1633
+api-addr: 127.0.0.1:1633
 # chain block time
 block-time: "15"
 # rpc blockchain endpoint
@@ -334,7 +334,7 @@ db-open-files-limit: "200"
 # size of the database write buffer in bytes
 db-write-buffer-size: "33554432"
 # debug HTTP API listen address
-debug-api-addr: :1635
+debug-api-addr: 127.0.0.1:1635
 # enable debug HTTP API
 debug-api-enable: false
 # cause the node to start in full mode
@@ -433,6 +433,18 @@ vi /root/.bee.yaml
 ```
 
 You can then populate your `.bee.yaml` file with the default config output from `bee printconfig` to get started and save the file.
+
+### Set Bee API
+:::danger
+Make sure that your api-addr (default 1633) is never exposed to the internet. It is good practice to employ one or more firewalls that block traffic on every port except for those you are expecting to be open.
+:::
+
+If you are not using a firewall or other method to protect your node, it's recommended that you change your Bee API address from the default `1633` to `127.0.0.1:1633` to ensure that it is not publicly exposed to the internet.
+
+```yaml
+## HTTP API listen address (default ":1633")
+api-addr: 127.0.0.1:1633
+```
 
 ### Set node type
 
