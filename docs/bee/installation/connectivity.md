@@ -48,8 +48,9 @@ we have previously not connected, we must ensure that our network is
 set up to receive incoming connections (on port `1634` by default).
 
 :::danger
-There are also some ports which you should never expose to the outside Internet. Make sure that your `api-addr` (default `1633`) is never exposed to the internet. It is good practice to employ one or more firewalls that block traffic on every port except for those you are expecting to be open.
+There are also some ports which you should never expose to the outside Internet. Make sure that your `api-addr` (default `1633`) is never exposed to the internet. It is good practice to employ one or more firewalls that block traffic on every port except for those you are expecting to be open. If you do not use a firewall, make sure to change the default `api-addr` from `1633` to `127.0.0.1:1633` so that it is not publicly exposed.
 :::
+
 
 ## Your IP Address
 
