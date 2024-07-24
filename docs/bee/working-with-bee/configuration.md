@@ -351,7 +351,7 @@ sudo systemctl restart bee
 Open the config file for editing:
 
 ```bash
-sudo sudo vi /opt/homebrew/etc/swarm-bee/bee.yaml
+sudo vi /opt/homebrew/etc/swarm-bee/bee.yaml
 ```
 
 After saving your changes, restart your node:
@@ -403,11 +403,9 @@ To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.
 
 
 ```yaml
-bootnode: /dnsaddr/testnet.ethswarm.org
 data-dir: /home/username/bee/sepolia
 full-node: true
 mainnet: false
-network-id: 10
 password: password
 blockchain-rpc-endpoint: wss://sepolia.infura.io/ws/v3/<API-KEY>
 swap-enable: true
