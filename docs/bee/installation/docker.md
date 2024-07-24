@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 Docker along with Docker Compose offers a convenient solution for spinning up and managing a "hive" of Bee nodes. 
 
-Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). The "latest" tag release is recommended for most use cases.
+Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). 
 
 ## Install Docker and Docker Compose
 
@@ -291,11 +291,15 @@ cat ./node_01/bee.yml
 
 You can use the same Docker Compose configuration for all the node types.
 
+:::info
+Note that we have specified the exact version number of the image using the 2.1.0 tag. It's recommended to always specify the exact version number you need using the version tag. You can find all available tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags).
+:::
+
 ```yml
 services:
   bee_01:
     container_name: bee-node_01
-    image: ethersphere/bee:latest
+    image: ethersphere/bee:2.1.0
     command: start --config /home/bee/bee.yml
     volumes:
       - ./node_01/.bee:/home/bee/.bee
@@ -357,7 +361,7 @@ If we did everything properly we should see our node listed here:
 ```bash
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
                                               NAMES
-e53aaa4e76ec   ethersphere/bee:latest   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp, 127.0.0.1:1638->1635/tcp   bee-node_01
+e53aaa4e76ec   ethersphere/bee:2.1.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp, 127.0.0.1:1638->1635/tcp   bee-node_01
 ```
 
 Now let's check our logs:
@@ -465,7 +469,7 @@ Here is the Docker compose configuration for running a hive of two Bee nodes:
 services:
   bee_01:
     container_name: bee-node_01
-    image: ethersphere/bee:latest
+    image: ethersphere/bee:2.1.0
     command: start --config /home/bee/bee.yml
     volumes:
       - ./node_01/.bee:/home/bee/.bee
@@ -476,7 +480,7 @@ services:
       - 127.0.0.1:1635:1635 # debug port
   bee_02:
     container_name: bee-node_02
-    image: ethersphere/bee:latest
+    image: ethersphere/bee:2.1.0
     command: start --config /home/bee/bee.yml
     volumes: 
       - ./node_02/.bee:/home/bee/.bee
@@ -511,8 +515,8 @@ docker ps
 ```shell
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
                                               NAMES
-a62ec5143d30   ethersphere/bee:latest   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp, 127.0.0.1:1638->1635/tcp   bee-node_02
-a3496b9bb2c8   ethersphere/bee:latest   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1633->1633/tcp, 127.0.0.1:1635->1635/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-node_01
+a62ec5143d30   ethersphere/bee:2.1.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp, 127.0.0.1:1638->1635/tcp   bee-node_02
+a3496b9bb2c8   ethersphere/bee:2.1.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1633->1633/tcp, 127.0.0.1:1635->1635/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-node_01
 ```
 
 And we can also check the logs for each node:
@@ -546,7 +550,7 @@ Since you're running a hive, the [node-funder](https://github.com/ethersphere/no
 If you plan on staking, you will also want to [get some xBZZ](https://www.ethswarm.org/get-bzz) to stake. You will need 10 xBZZ for each node.
 
 
-### Step 6: Staking
+### Step 6: Add stake
 
 In order to stake you simply need to call the `/stake` endpoint with an amount of stake in PLUR as a parameter for each node.
 
