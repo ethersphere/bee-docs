@@ -388,6 +388,10 @@ You can also try the [node-funder](https://github.com/ethersphere/node-funder) t
 
 To add stake, make a POST request to the `/stake` endpoint and input the amount you wish to stake in PLUR as a parameter after `/stake`. In the example below we have input a PLUR value equal to 10 xBZZ. 
 
+:::info
+The Bee API will not be available while your node is warming up, so wait until your node is fully initialized before staking.
+:::
+
 ```bash
 curl -XPOST localhost:1633/stake/100000000000000000
 ```
@@ -551,6 +555,10 @@ If you plan on staking, you will also want to [get some xBZZ](https://www.ethswa
 
 
 ### Step 6: Add stake
+
+:::info
+The Bee API will not be available while your nodes are warming up, so wait until your nodes are fully initialized before staking.
+:::
 
 In order to stake you simply need to call the `/stake` endpoint with an amount of stake in PLUR as a parameter for each node.
 
