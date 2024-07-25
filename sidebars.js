@@ -49,7 +49,7 @@ module.exports = {
     },
     'learn/tokens',
     'learn/glossary',
-    'learn/faq', 
+    'learn/faq',
   ],
   desktop: [
     'desktop/introduction',
@@ -98,7 +98,7 @@ module.exports = {
       ],
       collapsed: false
     },
-    'bee/bee-faq', 
+    'bee/bee-faq',
   ],
   develop: [
     {
@@ -135,7 +135,8 @@ module.exports = {
         'develop/tools-and-features/feeds',
         'develop/tools-and-features/pss',
         'develop/tools-and-features/bee-dev-mode',
-        'develop/tools-and-features/starting-a-test-network'
+        'develop/tools-and-features/starting-a-test-network',
+        'develop/tools-and-features/act'
       ],
       collapsed: false
     },

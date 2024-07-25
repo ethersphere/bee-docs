@@ -1,5 +1,5 @@
 ---
-title: Access Control Tutorial
+title: Access Control
 id: act
 ---
 
