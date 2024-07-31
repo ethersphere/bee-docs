@@ -6,14 +6,19 @@ id: docker
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Docker along with Docker Compose offers a convenient solution for spinning up and managing a "hive" of Bee nodes. 
+Docker is one option for running a Bee node, and when combined with Docker Compose, it even offers a convenient solution for spinning up and managing a small "hive" of Bee nodes.  
 
 Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). 
+
+:::caution
+While it is possible to run multiple Bee nodes on a single machine, due to the high rate of I/O operations required by a full Bee node in operation, it is not recommended to run more than a handful of Bee nodes on the same physical disk (depending on the disk speed). 
+:::
+
 
 ## Install Docker and Docker Compose
 
 :::info
-The steps for setting up Docker and Docker Compose may vary slightly from system to system, so take note system specific commands and make sure to modify them for your own operating system and processor architecture. 
+The steps for setting up Docker and Docker Compose may vary slightly from system to system, so take note system specific commands and make sure to modify them for your own system as needed. 
 :::
 
 
@@ -67,6 +72,10 @@ values={[
    ```
 
 #### Step 2: Install Docker Compose Plugin
+
+:::info
+Skip this section if you are running Bee with Docker only.
+:::
 
 1. **Update the package list:**
 
@@ -143,10 +152,222 @@ values={[
 
 </Tabs>
 
-## Setup and configuration
 
-Next we will set up a directory for our node(s) and specify configuration files for Docker and Docker Compose:
+## Bee with Docker
 
+This section will guide you through setting up and running a single Bee node using Docker only without Docker Compose. 
+
+### Step 1: Create directories
+
+Create home directory:
+
+```bash
+mkdir bee-node
+cd bee-node
+```
+Create data directory and change permissions
+
+```bash
+mkdir .bee
+sudo chown -R 999:999 .bee
+```
+
+### Step 2: Bee Node Configuration
+
+Based on your preferred node type, copy one of the three sample configurations below:
+
+<Tabs
+defaultValue="full"
+values={[
+{label: 'Full Node', value: 'full'},
+{label: 'Light Node', value: 'light'},
+{label: 'Ultra Light Node', value: 'ultralight'},
+
+]}>
+
+<TabItem value="full">
+
+#### Full node sample configuration
+
+```yml
+# GENERAL BEE CONFIGURATION
+api-addr: :1633
+p2p-addr: :1634
+debug-api-addr: :1635
+password: aaa4eabb0813df71afa45d
+data-dir: /home/bee/.bee
+cors-allowed-origins: ["*"]
+
+# DEBUG CONFIGURATION
+debug-api-enable: true
+verbosity: 5
+
+# BEE MAINNET CONFIGURATION
+bootnode: /dnsaddr/mainnet.ethswarm.org
+
+# BEE MODE: FULL NODE CONFIGURATION
+full-node: true
+swap-enable: true
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+```
+
+</TabItem>
+
+<TabItem value="light">
+
+#### Light node sample configuration
+
+```yml
+# GENERAL BEE CONFIGURATION
+api-addr: :1633
+p2p-addr: :1634
+debug-api-addr: :1635
+password: aaa4eabb0813df71afa45d
+data-dir: /home/bee/.bee
+cors-allowed-origins: ["*"]
+
+# DEBUG CONFIGURATION
+debug-api-enable: true
+verbosity: 5
+
+# BEE MAINNET CONFIGURATION
+bootnode: /dnsaddr/mainnet.ethswarm.org
+
+# BEE MODE: LIGHT CONFIGURATION
+full-node: false
+swap-enable: true
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+```
+
+</TabItem>
+
+<TabItem value="ultralight">
+ 
+#### Ultra light node sample configuration
+
+```yml
+# GENERAL BEE CONFIGURATION
+api-addr: :1633
+p2p-addr: :1634
+debug-api-addr: :1635
+password: aaa4eabb0813df71afa45d
+data-dir: /home/bee/.bee
+cors-allowed-origins: ["*"]
+
+# DEBUG CONFIGURATION
+debug-api-enable: true
+verbosity: 5
+
+# BEE MAINNET CONFIGURATION
+bootnode: /dnsaddr/mainnet.ethswarm.org
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+
+# BEE MODE: ULTRA LIGHT CONFIGURATION
+swap-enable: false
+full-node: false
+```
+
+</TabItem>
+
+</Tabs>
+
+Save the configuration into a YAML configuration file:
+
+```bash
+sudo vi ./bee.yml
+```
+
+Print out the configuration to make sure it was properly saved:
+
+```bash
+cat ./bee.yml
+```
+
+### Step 3: Run Bee Node with Docker
+
+Use the following command to start up your node:
+
+```bash
+docker run -d --name bee-node \
+  -v "$(pwd)/.bee:/home/bee/.bee" \
+  -v "$(pwd)/bee.yml:/home/bee/bee.yml" \
+  -p 127.0.0.1:1633:1633 \
+  -p 1634:1634 \
+  -p 127.0.0.1:1635:1635 \
+  ethersphere/bee:2.1.0 start --config /home/bee/bee.yml
+```
+:::info
+Command breakdown:
+
+1. **`docker run`**: This is the command to start a new Docker container.
+
+1. **`-d`**: This flag runs the container in detached mode, meaning it runs in the background.
+
+1. **`--name bee-node`**: This sets the name of the container to `bee-node`. Naming containers can help manage and identify them easily.
+
+1. **`-v "$(pwd)/.bee:/home/bee/.bee"`**: This mounts a volume. It maps the `.bee` directory in your current working directory (`$(pwd)`) to the `/home/bee/.bee` directory inside the container. This allows the container to store and access persistent data on your host machine.
+
+1. **`-v "$(pwd)/bee.yml:/home/bee/bee.yml"`**: This mounts another volume. It maps the `bee.yml` file in your current working directory to the `/home/bee/bee.yml` file inside the container. This allows the container to use the configuration file from your host machine.
+
+1. **`-p 127.0.0.1:1633:1633`**: This maps port 1633 on `127.0.0.1` (localhost) of your host machine to port 1633 inside the container. This is used for the Bee API.
+
+1. **`-p 1634:1634`**: This maps port 1634 on all network interfaces of your host machine to port 1634 inside the container. This is used for P2P communication.
+
+1. **`-p 127.0.0.1:1635:1635`**: This maps port 1635 on `127.0.0.1` (localhost) of your host machine to port 1635 inside the container. This is used for the debug API.
+
+1. **`ethersphere/bee:2.1.0`**: This specifies the Docker image to use for the container. In this case, it is the `ethersphere/bee` image with the tag `2.1.0`.
+
+1. **`start --config /home/bee/bee.yml`**: This specifies the command to run inside the container. It starts the Bee node using the configuration file located at `/home/bee/bee.yml`.
+:::
+
+Note that we have mapped the Bee API and Debug API to 127.0.0.1 (localhost), this is to ensure that these APIs are not available publicly, as that would allow anyone to control our node. 
+
+Check that the node is running:
+
+```bash
+docker ps
+```
+
+If everything is set up correctly, you should see your Bee node listed:
+
+```bash
+CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
+                                              NAMES
+e53aaa4e76ec   ethersphere/bee:2.1.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp, 127.0.0.1:1635->1635/tcp   bee-node
+```
+
+And check the logs:
+
+```bash
+docker logs -f bee-node
+```
+
+The output should contain a line which prints the address of your node. Copy this address and save it for use in the next section.
+
+```bash
+"time"="2024-07-15 12:23:57.906429" "level"="warning" "logger"="node/chequebook" "msg"="cannot continue until there is at least min xDAI (for Gas) available on address" "min_amount"="0.0005750003895" "address"="0xf50Bae90a99cfD15Db5809720AC1390d09a25d60"
+```
+
+### Step 4: Funding (Full and Light Nodes Only)
+
+
+
+To obtain xDAI and fund your node, you can [follow the instructions](https://docs.ethswarm.org/docs/installation/install#4-fund-node) from the main install section.
+
+### Step 5: Add Stake
+
+To add stake, make a POST request to the `/stake` endpoint and input the amount you wish to stake in PLUR as a parameter after `/stake`. For example, to stake an amount equal to 10 xBZZ:
+
+```bash
+curl -XPOST localhost:1633/stake/100000000000000000
+```
+
+Note that since we have mapped our host and container to the same port, we can use the default `1633` port to make our request. If you are running multiple nodes, make sure to update this command for other nodes which will be mapped to different ports on the host machine.
+
+
+## Bee with Docker Compose
+
+By adding Docker Compose to our setup, we can simplify the management of our configuration by saving it in a `docker-compose.yml` file rather than specifying it all in the startup command. It also lays the foundation for running multiple nodes at once. First we will review how to run a single node with Docker Compose.
 
 ### Step 1: Create directory for node(s)
 
@@ -166,7 +387,6 @@ mkdir node_01
 ```shell
 mkdir node_01/.bee
 sudo chown -R 999:999 node_01/.bee
-sudo chmod -R 777 node_01/.bee
 ```
 
 Here we change ownership to match the UID and GID of the user specified in the [Bee Dockerfile](https://github.com/ethersphere/bee/blob/master/Dockerfile).
@@ -380,6 +600,8 @@ This is because in order for a light or full node to operate, your node is requi
 
 ### Step 7: xDAI funding (full and light nodes only)
 
+You can fund your node by transferring xDAI and xBZZ to the address you copied from the logs in the previous step.
+
 To obtain xDAI and fund your node, you can [follow the instructions](/docs/bee/installation/install#4-fund-node) from the main install section.
 
 You can also try the [node-funder](https://github.com/ethersphere/node-funder) tool, which is especially helpful when you are running multiple nodes, as is described in the next section.
@@ -422,7 +644,6 @@ We also create a new data directory and set ownership to match the user in the o
 ```shell
 mkdir node_02/.bee
 sudo chown -R 999:999 node_02/.bee
-sudo chmod -R 777 node_02/.bee
 ```
 
 Repeat this process for however many new nodes you want to add.
