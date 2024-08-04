@@ -438,7 +438,7 @@ From the results we can see that we have a healthy neighborhood size when compar
 ```
     
 ### `/node`
-    This calling this endpoint performs a simple check of node options related to your node type and also displays your current node type.
+    This endpoint returns info about options related to your node type and also displays your current node type.
 
     ```bash
     curl -s http://localhost:1633/node | jq
