@@ -146,7 +146,7 @@ The PO which measures the node’s area of responsibility based on the theoretic
 
 ### 2b. Storage Depth
 
-The PO which measures the node’s effective area of responsibility. Storage depth will equal reserve depth in the case of 100% utilisation - however 100% utilisation is uncommon. If after syncing all the chunks within the node’s area of responsibility at its reserve depth then node still has sufficient space left, then the storage depth will decrease so that the area of responsibility doubles. 
+The PO which measures the node’s effective area of responsibility. Storage depth will equal reserve depth in the case of 100% utilisation - however 100% utilisation is uncommon. If after syncing all the chunks within the node’s area of responsibility at its reserve depth and the node still has sufficient space left, then the storage depth will decrease so that the area of responsibility doubles. 
 
 
 ### 3. Postage stamp batch and chunk related depths
