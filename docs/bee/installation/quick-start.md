@@ -59,10 +59,7 @@ The [Swarm Desktop app](https://www.ethswarm.org/build/desktop) offers an easy w
 
 ### Support the Network and Earn xBZZ by Running a Full Node
 
-Earn [xBZZ](/docs/bee/working-with-bee/cashing-out) and help keep the swarm
-strong by running your own **full node**. It's easy to set up your own
-Bee on a small computer like a Raspberry Pi 4, cloud
-host, or any home computer that's connected to the internet.
+Earn [xBZZ](/docs/bee/working-with-bee/cashing-out) and help keep Swarm strong by running your own **full node**. It's easy to set up on a VPS, colocation, or any home computer that's connected to the internet.
 
 To run a full node [install Bee](/docs/bee/installation/install) with the recommended configuration settings for a full node.
 
