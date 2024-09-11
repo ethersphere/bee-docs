@@ -20,7 +20,7 @@ Smart contracts are automatically executable code which can be published on a bl
 
 ## Bee
 
-Swarm nodes are referred to as "Bee" nodes. Bee nodes can run on a wide variety of computer types including desktop computers, hobbyist computers like Raspberry Pi 4, remotely hosted virtual machines, and much more. When running, Bee nodes interact with Swarm smart contracts on Gnosis Chain and connect with other Bee nodes to form the Swarm network.
+Swarm nodes are referred to as "Bee" nodes. Bee nodes can run on a wide variety of computer types including desktop computers, hobbyist computers like Raspberry Pi 4 (for light or ultralight nodes), remotely hosted virtual machines, and much more. When running, Bee nodes interact with Swarm smart contracts on Gnosis Chain and connect with other Bee nodes to form the Swarm network.
 
 Bee nodes can act as both client and service provider, or solely as client or service provider, depending on the needs of the node operator. Bee nodes pay each other for services on the Swarm network with the xBZZ token.
 
