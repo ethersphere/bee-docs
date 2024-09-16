@@ -193,13 +193,11 @@ values={[
 # GENERAL BEE CONFIGURATION
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: :1635
 password: aaa4eabb0813df71afa45d
 data-dir: /home/bee/.bee
 cors-allowed-origins: ["*"]
 
 # DEBUG CONFIGURATION
-debug-api-enable: true
 verbosity: 5
 
 # BEE MAINNET CONFIGURATION
@@ -221,13 +219,11 @@ blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 # GENERAL BEE CONFIGURATION
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: :1635
 password: aaa4eabb0813df71afa45d
 data-dir: /home/bee/.bee
 cors-allowed-origins: ["*"]
 
 # DEBUG CONFIGURATION
-debug-api-enable: true
 verbosity: 5
 
 # BEE MAINNET CONFIGURATION
@@ -249,13 +245,11 @@ blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 # GENERAL BEE CONFIGURATION
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: :1635
 password: aaa4eabb0813df71afa45d
 data-dir: /home/bee/.bee
 cors-allowed-origins: ["*"]
 
 # DEBUG CONFIGURATION
-debug-api-enable: true
 verbosity: 5
 
 # BEE MAINNET CONFIGURATION
@@ -293,8 +287,7 @@ docker run -d --name bee-node \
   -v "$(pwd)/bee.yml:/home/bee/bee.yml" \
   -p 127.0.0.1:1633:1633 \
   -p 1634:1634 \
-  -p 127.0.0.1:1635:1635 \
-  ethersphere/bee:2.1.0 start --config /home/bee/bee.yml
+  ethersphere/bee:2.2.0 start --config /home/bee/bee.yml
 ```
 :::info
 Command breakdown:
@@ -312,8 +305,6 @@ Command breakdown:
 1. **`-p 127.0.0.1:1633:1633`**: This maps port 1633 on `127.0.0.1` (localhost) of your host machine to port 1633 inside the container. This is used for the Bee API.
 
 1. **`-p 1634:1634`**: This maps port 1634 on all network interfaces of your host machine to port 1634 inside the container. This is used for P2P communication.
-
-1. **`-p 127.0.0.1:1635:1635`**: This maps port 1635 on `127.0.0.1` (localhost) of your host machine to port 1635 inside the container. This is used for the debug API.
 
 1. **`ethersphere/bee:2.1.0`**: This specifies the Docker image to use for the container. In this case, it is the `ethersphere/bee` image with the tag `2.1.0`.
 
@@ -333,7 +324,7 @@ If everything is set up correctly, you should see your Bee node listed:
 ```bash
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
                                               NAMES
-e53aaa4e76ec   ethersphere/bee:2.1.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp, 127.0.0.1:1635->1635/tcp   bee-node
+e53aaa4e76ec   ethersphere/bee:2.1.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp,   bee-node
 ```
 
 And check the logs:
@@ -417,13 +408,11 @@ values={[
 # GENERAL BEE CONFIGURATION
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: :1635
 password: aaa4eabb0813df71afa45d
 data-dir: /home/bee/.bee
 cors-allowed-origins: ["*"]
 
 # DEBUG CONFIGURATION
-debug-api-enable: true
 verbosity: 5
 
 # BEE MAINNET CONFIGURATION
@@ -445,13 +434,11 @@ blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 # GENERAL BEE CONFIGURATION
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: :1635
 password: aaa4eabb0813df71afa45d
 data-dir: /home/bee/.bee
 cors-allowed-origins: ["*"]
 
 # DEBUG CONFIGURATION
-debug-api-enable: true
 verbosity: 5
 
 # BEE MAINNET CONFIGURATION
@@ -473,13 +460,11 @@ blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 # GENERAL BEE CONFIGURATION
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: :1635
 password: aaa4eabb0813df71afa45d
 data-dir: /home/bee/.bee
 cors-allowed-origins: ["*"]
 
 # DEBUG CONFIGURATION
-debug-api-enable: true
 verbosity: 5
 
 # BEE MAINNET CONFIGURATION
@@ -527,7 +512,6 @@ services:
     ports:
       - 127.0.0.1:1633:1633 # bee api port
       - 1634:1634 # p2p port
-      - 127.0.0.1:1635:1635 # debug port
 ```
 
 :::warning
@@ -581,7 +565,7 @@ If we did everything properly we should see our node listed here:
 ```bash
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
                                               NAMES
-e53aaa4e76ec   ethersphere/bee:2.1.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp, 127.0.0.1:1638->1635/tcp   bee-node_01
+e53aaa4e76ec   ethersphere/bee:2.1.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp,  bee-node_01
 ```
 
 Now let's check our logs:
@@ -656,13 +640,11 @@ And add a `bee.yml` configuration file. You can use the same configuration as fo
 # GENERAL BEE CONFIGURATION
 api-addr: :1633
 p2p-addr: :1634
-debug-api-addr: :1635
 password: aaa4eabb0813df71afa45d
 data-dir: /home/bee/.bee
 cors-allowed-origins: ["*"]
 
 # DEBUG CONFIGURATION
-debug-api-enable: true
 verbosity: 5
 
 # BEE MAINNET CONFIGURATION
@@ -702,7 +684,6 @@ services:
     ports:
       - 127.0.0.1:1633:1633 # bee api port
       - 1634:1634 # p2p port
-      - 127.0.0.1:1635:1635 # debug port
   bee_02:
     container_name: bee-node_02
     image: ethersphere/bee:2.1.0
@@ -713,7 +694,6 @@ services:
     ports:
       - 127.0.0.1:1636:1633 # bee api port
       - 1637:1634 # p2p port
-      - 127.0.0.1:1638:1635 # debug port
 ```
 
 Here is a list of the changes we made to extend our setup:
@@ -740,8 +720,8 @@ docker ps
 ```shell
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
                                               NAMES
-a62ec5143d30   ethersphere/bee:2.1.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp, 127.0.0.1:1638->1635/tcp   bee-node_02
-a3496b9bb2c8   ethersphere/bee:2.1.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1633->1633/tcp, 127.0.0.1:1635->1635/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-node_01
+a62ec5143d30   ethersphere/bee:2.1.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp,   bee-node_02
+a3496b9bb2c8   ethersphere/bee:2.1.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-node_01
 ```
 
 And we can also check the logs for each node:
