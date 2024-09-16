@@ -293,8 +293,6 @@ root@user-bee:~# bee printconfig
 Check the configuration printed to your terminal. Note that the values for `config` and `data-dir` will vary slightly depending on your operating system.
 
 ```bash
-# bcrypt hash of the admin password to get the security token
-admin-password: ""
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
@@ -313,12 +311,6 @@ cache-capacity: "1000000"
 cache-retrieval: true
 # enable chequebook
 chequebook-enable: true
-# enable clef signer
-clef-signer-enable: false
-# clef signer endpoint
-clef-signer-endpoint: ""
-# blockchain address to use from clef signer
-clef-signer-ethereum-address: ""
 # config file (default is $HOME/.bee.yaml)
 config: /root/.bee.yaml
 # origins with CORS headers enabled
@@ -333,10 +325,6 @@ db-disable-seeks-compaction: true
 db-open-files-limit: "200"
 # size of the database write buffer in bytes
 db-write-buffer-size: "33554432"
-# debug HTTP API listen address
-debug-api-addr: 127.0.0.1:1635
-# enable debug HTTP API
-debug-api-enable: false
 # cause the node to start in full mode
 full-node: false
 # help for printconfig
@@ -377,8 +365,6 @@ price-oracle-address: ""
 redistribution-address: ""
 # ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
 resolver-options: []
-# enable permission check on the http APIs
-restricted: false
 # forces the node to resync postage contract data
 resync: false
 # staking contract address

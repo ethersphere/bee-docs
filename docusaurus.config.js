@@ -351,10 +351,6 @@ module.exports = {
             spec: 'openapi/Swarm.yaml',
             route: '/api/',
           },
-          {
-            spec: 'openapi/SwarmDebug.yaml',
-            route: '/debug-api/',
-          },
         ],
         // Theme Options for modifying how redoc renders them
         theme: {

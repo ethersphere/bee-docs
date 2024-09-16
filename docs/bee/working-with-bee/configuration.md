@@ -97,9 +97,8 @@ Usage:
   bee start [flags]
 
 Flags:
-      --admin-password string                    bcrypt hash of the admin password to get the security token
       --allow-private-cidrs                      allow to advertise private CIDRs to the public network
-      --api-addr string                          HTTP API listen address (default ":1633")
+      --api-addr string                          HTTP API listen address (default "127.0.0.1:1633")
       --block-time uint                          chain block time (default 15)
       --blockchain-rpc-endpoint string           rpc blockchain endpoint
       --bootnode strings                         initial nodes to connect to
@@ -107,17 +106,12 @@ Flags:
       --cache-capacity uint                      cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
       --cache-retrieval                          enable forwarded content caching (default true)
       --chequebook-enable                        enable chequebook (default true)
-      --clef-signer-enable                       enable clef signer
-      --clef-signer-endpoint string              clef signer endpoint
-      --clef-signer-ethereum-address string      blockchain address to use from clef signer
       --cors-allowed-origins strings             origins with CORS headers enabled
       --data-dir string                          data directory (default "/home/noah/.bee")
       --db-block-cache-capacity uint             size of block cache of the database in bytes (default 33554432)
       --db-disable-seeks-compaction              disables db compactions triggered by seeks (default true)
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
       --db-write-buffer-size uint                size of the database write buffer in bytes (default 33554432)
-      --debug-api-addr string                    debug HTTP API listen address (default ":1635")
-      --debug-api-enable                         enable debug HTTP API
       --full-node                                cause the node to start in full mode
   -h, --help                                     help for start
       --mainnet                                  triggers connect to main net bootnodes. (default true)
@@ -138,7 +132,6 @@ Flags:
       --price-oracle-address string              price oracle contract address
       --redistribution-address string            redistribution contract address
       --resolver-options strings                 ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
-      --restricted                               enable permission check on the http APIs
       --resync                                   forces the node to resync postage contract data
       --staking-address string                   staking contract address
       --statestore-cache-capacity uint           lru memory caching capacity in number of statestore entries (default 100000)
@@ -212,10 +205,6 @@ cache-capacity: "1000000"
 cache-retrieval: true
 # enable chequebook
 chequebook-enable: true
-# enable clef signer
-clef-signer-enable: false
-# clef signer endpoint
-clef-signer-endpoint: ""
 # blockchain address to use from clef signer
 clef-signer-ethereum-address: ""
 # config file (default is $HOME/.bee.yaml)
