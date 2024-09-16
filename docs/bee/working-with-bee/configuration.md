@@ -185,8 +185,6 @@ bee printconfig
 ```
 
 ```yaml
-# bcrypt hash of the admin password to get the security token
-admin-password: ""
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
@@ -205,8 +203,6 @@ cache-capacity: "1000000"
 cache-retrieval: true
 # enable chequebook
 chequebook-enable: true
-# blockchain address to use from clef signer
-clef-signer-ethereum-address: ""
 # config file (default is $HOME/.bee.yaml)
 config: /root/.bee.yaml
 # origins with CORS headers enabled
