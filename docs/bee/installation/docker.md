@@ -10,11 +10,6 @@ Docker is one option for running a Bee node, and when combined with Docker Compo
 
 Docker containers for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). 
 
-:::caution
-While it is possible to run multiple Bee nodes on a single machine, due to the high rate of I/O operations required by a full Bee node in operation, it is not recommended to run more than a handful of Bee nodes on the same physical disk (depending on the disk speed). 
-:::
-
-
 ## Install Docker and Docker Compose
 
 :::info
@@ -607,6 +602,11 @@ Note that since we have mapped our host and container to the same port, we can u
 ## Running a Hive
 
 In order to run multiple Bee nodes as a "hive", all we need to do is repeat the process for running one node and then extend our Docker Compose configuration.
+
+:::caution
+While it is possible to run multiple Bee nodes on a single machine, due to the high rate of I/O operations required by a full Bee node in operation, it is not recommended to run more than a handful of Bee nodes on the same physical disk. 
+:::
+
 
 To start with, shut down your node from the first part of this guide if it is still running:
 
