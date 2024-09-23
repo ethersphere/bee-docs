@@ -506,5 +506,5 @@ If the `Time` value is much longer than 6 minutes then it likely means that the 
 ## Debug API Removal Notice
 
 :::info
-The Debug API endpoints have been merged into the Bee API in the Bee version 2.1.0 release, and will be fully removed in the 2.2.0 release. The [Debug API reference docs](/debug-api/) are still available until the 2.2.0 release for your reference.
+The Debug API endpoints have been merged into the Bee API in the Bee version 2.2.0 release, and will be fully removed in the 2.2.0 release. The [Debug API reference docs](/debug-api/) are still available until the 2.2.0 release for your reference.
 :::
