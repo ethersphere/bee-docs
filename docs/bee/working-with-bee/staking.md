@@ -21,7 +21,7 @@ Bee has builtin endpoints for depositing the stake. Currently the minimum stakin
 Then you can run the following command to stake 10 xBZZ. The amount is given in PLUR which is the smallest denomination of xBZZ and `1 xBZZ == 1e16 PLUR`.
 
 ```bash
-curl -XPOST localhost:1633/stake/100000000000000000
+curl -X POST localhost:1633/stake/100000000000000000
 ```
 
 If the command executed successfully it returns a transaction hash that you can use to verify on a block explorer.

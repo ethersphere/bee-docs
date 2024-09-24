@@ -147,7 +147,7 @@ As our node's participation in the network increases, we will begin to see more 
 To do this, we simply POST the relevant peer's address to the `cashout` endpoint.
 
 ```bash
-curl -XPOST http://localhost:1633/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
+curl -X POST http://localhost:1633/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b
 ```
 
 ```json
@@ -185,13 +185,13 @@ Success, we earned our first xBZZ! 🐝
 Now we have earned tokens, to withdraw our xBZZ from the chequebook contract back into our node's own wallet, we simply POST a request to the chequebook withdraw endpoint.
 
 ```bash
-curl -XPOST http://localhost:1633/chequebook/withdraw\?amount\=1000 | jq
+curl -X POST http://localhost:1633/chequebook/withdraw\?amount\=1000 | jq
 ```
 
 And conversely, if we have used more services than we have provided, we may deposit extra xBZZ into the chequebook contract by sending a POST request to the deposit endpoint.
 
 ```bash
-curl -XPOST http://localhost:1633/chequebook/deposit\?amount\=1000 | jq
+curl -X POST http://localhost:1633/chequebook/deposit\?amount\=1000 | jq
 ```
 
 ```json
