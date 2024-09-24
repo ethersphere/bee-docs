@@ -27,7 +27,7 @@ xDAI can be obtained from a wide range of centralized and decentralized exchange
 When interacting with the Bee API directly, `amount` and `depth` are passed as path parameters:
 
 ```bash
-curl -s -XPOST http://localhost:1633/stamps/<amount>/<depth>
+curl -s -X POST http://localhost:1633/stamps/<amount>/<depth>
 ```
 
 And with Swarm CLI, they are set using option flags:
@@ -47,7 +47,7 @@ values={[
 #### API
 
 ```bash
-curl -s -XPOST http://localhost:1633/stamps/100000000/20
+curl -s -X POST http://localhost:1633/stamps/100000000/20
 ```
 
 ```bash

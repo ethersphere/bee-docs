@@ -818,7 +818,7 @@ Once your node is up and running, make sure to [back up your keys](/docs/bee/wor
 While depositing stake is not required to run a Bee node, it is required in order for a node to receive rewards for sharing storage with the network. You will need to [deposit xBZZ to the staking contract](/docs/bee/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
 ```bash
-curl -XPOST localhost:1633/stake/100000000000000000
+curl -X POST localhost:1633/stake/100000000000000000
 ```
 
 This will initiate a transaction on-chain which deposits the specified amount of xBZZ into the staking contract. 

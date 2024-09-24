@@ -46,7 +46,7 @@ For example, if we want to send a PSS message with **topic** `test-topic` to a n
 ...we must include the **target** `7bc5` and the public key itself as a query argument.
 
 ```bash
-curl  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -XPOST \
+curl  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -X POST \
 localhost:1833/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd \
 --data "Hello Swarm"
 ```
@@ -138,7 +138,7 @@ curl -s localhost:1935/peers | jq
 Let's connect node 2 to node 1 using the localhost (127.0.0.1) underlay address for node 1 that we have noted earlier.
 
 ```bash
-curl -XPOST \
+curl -X POST \
   localhost:1935/connect/ip4/127.0.0.1/tcp/1834/p2p/16Uiu2HAmP9i7VoEcaGtHiyB6v7HieoiB9v7GFVZcL2VkSRnFwCHr
 ```
 
@@ -188,7 +188,7 @@ Since our first node has a 2 byte address prefix of `a231`, we will specify this
 ```bash
 curl \
   -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264"
-  -XPOST "localhost:1933/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd" \
+  -X POST "localhost:1933/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072014d27f56accd9a0e92b06fe8516e470d8dd" \
   --data "Hello Swarm"
 ```
 

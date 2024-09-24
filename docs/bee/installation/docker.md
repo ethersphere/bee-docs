@@ -350,7 +350,7 @@ To obtain xDAI and fund your node, you can [follow the instructions](https://doc
 To add stake, make a POST request to the `/stake` endpoint and input the amount you wish to stake in PLUR as a parameter after `/stake`. For example, to stake an amount equal to 10 xBZZ:
 
 ```bash
-curl -XPOST localhost:1633/stake/100000000000000000
+curl -X POST localhost:1633/stake/100000000000000000
 ```
 
 Note that since we have mapped our host and container to the same port, we can use the default `1633` port to make our request. If you are running multiple nodes, make sure to update this command for other nodes which will be mapped to different ports on the host machine.
@@ -599,7 +599,7 @@ The Bee API will not be available while your node is warming up, so wait until y
 :::
 
 ```bash
-curl -XPOST localhost:1633/stake/100000000000000000
+curl -X POST localhost:1633/stake/100000000000000000
 ```
 
 Note that since we have mapped our host and container to the same port, we can use the default `1633` port to make our request. If you are running multiple Bees, make sure to update this command for other nodes which will be mapped to different ports on the host machine.
@@ -767,13 +767,13 @@ In order to stake you simply need to call the `/stake` endpoint with an amount o
 For bee-node_01:
 
 ```bash
-curl -XPOST localhost:1633/stake/100000000000000000
+curl -X POST localhost:1633/stake/100000000000000000
 ```
 
 And for bee-node_02, note that we updated the port to match the one for the Bee API address we mapped to in the Docker Compose file:
 
 ```bash
-curl -XPOST localhost:1636/stake/100000000000000000
+curl -X POST localhost:1636/stake/100000000000000000
 ```
 
 You may also wish to make use of the [node-funder](https://github.com/ethersphere/node-funder) tool, which in addition to allowing you to fund multiple addresses at once, also allows you to stake multiple addresses at once.

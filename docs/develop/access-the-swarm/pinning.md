@@ -81,7 +81,7 @@ The previous example showed how we can pin content upon upload. It is also possi
 To do so, we can send a `POST` request including the swarm reference to the files pinning endpoint.
 
 ```bash
-curl -XPOST http://localhost:1633/pins/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
+curl -X POST http://localhost:1633/pins/7b344ea68c699b0eca8bb4cfb3a77eb24f5e4e8ab50d38165e0fb48368350e8f
 ```
 
 ```json
