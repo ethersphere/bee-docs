@@ -3,10 +3,6 @@ title: Access Control
 id: act
 ---
 
-:::warning  
-🚧 This guide is for a currently unreleased feature which will be included in the 2.2.0 update, so these features are not available on earlier client versions. Refer to the [Bee releases page](https://github.com/ethersphere/bee/releases) to check on the ongoing development. 🚧
-:::
-
 :::info
 This is guide contains a detailed explanation of how to use the ACT feature, but does not cover its higher level concepts. To better understand how ACT works and why to use it, read [the ACT page in the "Learn" section](/docs/learn/technology/act).
 :::
