@@ -80,6 +80,35 @@ Nodes should not be shut down or updated in the middle of a round they are playi
 If your node is not operating properly such as getting frozen or not participating in any rounds, see the [troubleshooting section](#troubleshooting).
 :::
 
+
+## Partial Stake Withdrawals
+
+In cases that the price of xBZZ rises so much that it is more than enough to act as collateral, a partial withdrawal will be allowed down to the minimum required stake:
+
+### Check for withdrawable stake
+
+
+
+```bash
+curl http://localhost:1633/stake/withdrawable | jq
+```
+If there is any stake available for withdrawal, the amount will be displayed in PLUR:
+
+```bash
+{
+  "withdrawableStake": "18411"
+}
+```
+
+### Withdraw available stake
+
+If there is any stake available for withdrawal, you can withdraw it using the `DELETE` method on `/stake/withdrawable`:
+
+```bash
+curl -X DELETE http://localhost:1633/stake/withdrawable
+```
+
+
 ## Maximize rewards
 
 There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](/docs/learn/technology/incentives/) for more context.
@@ -103,6 +132,65 @@ Stake density determines the weighted chances of nodes within a neighborhood of 
 
 Generally speaking, the minimum required stake of 10 xBZZ is sufficient, and rewards can be better maximized by operating more nodes over a greater range of neighborhoods rather than increasing stake. However this may not be true for all node operators depending on how many different neighborhoods they operate nodes in, and it also may change as network dynamics continue to evolve (join the `#node-operators` [Discord channel](https://discord.com/channels/799027393297514537/811553590170353685) to stay up to date with the latest discussions about staking and network dynamics).
 
+## Neighborhood Hopping
+
+:::warning 
+While you may update your neighborhood freely as you wish, it takes significant time for to fully sync chunks and become eligible for playing in the redistribution game, so it is not advised to hop too frequently. 
+:::
+
+You can use the option `target-neighborhood` to switch your node over to a new neighborhood. You may wish to use this option if your node's neighborhood becomes overpopulated. 
+
+
+### Checking neighborhood population
+
+For a quick check of your node's neighborhood population, we can use the `/status` endpoint: 
+
+```bash
+curl -s http://localhost:1633/status | jq
+{
+  "peer": "e7b5c1aac67693268fdec98d097a8ccee1aabcf58e26c4512ea888256d0e6dff",
+  "proximity": 0,
+  "beeMode": "full",
+  "reserveSize": 1055543,
+  "reserveSizeWithinRadius": 1039749,
+  "pullsyncRate": 42.67013868148148,
+  "storageRadius": 11,
+  "connectedPeers": 140,
+  "neighborhoodSize": 6,
+  "batchCommitment": 74463051776,
+  "isReachable": false
+}
+```
+
+Here we can see that at the current `storageRadius` of 11, our node is in a neighborhood with size 6 from the `neighborhoodSize` value.
+
+
+Using the [Swarmscan neighborhoods tool](https://swarmscan.io/neighborhoods) we can see there are many neighborhoods with fewer nodes, so it would benefit us to move to less populated neighborhood:
+
+![](/img/staking-swarmscan.png)
+ 
+While you might be tempted to simply pick one of these less populated neighborhoods, it is best practice to use the neighborhood suggester API instead, since it will help to prevent too many node operators rapidly moving to the same underpopulated neighborhoods, and also since the suggester takes a look at the next depth down to make sure that even in case of a neighborhood split, your node will end up in the smaller neighborhood. 
+
+```bash
+curl -s https://api.swarmscan.io/v1/network/neighborhoods/suggestion
+```
+
+Copy the binary number returned from the API:
+
+```bash
+{"neighborhood":"01100011110"}
+```
+
+Use the binary number you just copied and set it as a string value for the `target-neighborhood` option in your config. 
+
+```bash
+## bee.yaml
+target-neighborhood: "01100011110"
+```
+    
+:::info 
+Depending on your setup, you may need change the `target-neighborhood` option by updating your `bee.yaml` file, adding the `--target-neighborhood` command line flag, or edit a `.env` file, among several possible common options. 
+:::
 
 ## Troubleshooting
 
