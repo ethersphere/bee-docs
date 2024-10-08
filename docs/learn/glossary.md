@@ -173,11 +173,6 @@ Bridged tokens are tokens from one blockchain which have been _bridged_ to anoth
 
 BZZ is Swarm's [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) token issued on Ethereum.   
 
-| Blockchain             | Contract address                                                                                                       |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Ethereum, BZZ          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)                |
-| Gnosis Chain, xBZZ     | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://gnosisscan.io/token/0xdbf3ea6f5bee45c02255b2c26a16f300502f68da/) |
-| Sepolia (testnet), sBZZ | [`0x543dDb01Ba47acB11de34891cD86B675F04840db`](https://sepolia.etherscan.io/address/0x543dDb01Ba47acB11de34891cD86B675F04840db)         |
 
 ## xBZZ Token
 
