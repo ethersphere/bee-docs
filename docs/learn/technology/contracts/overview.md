@@ -12,12 +12,14 @@ id: overview
 |BZZ Bonding Curve| Ethereum|[`0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904`](https://etherscan.io/address/0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904)|[`0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904`](https://etherscan.io/address/0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904)|
 
 ### Storage Incentives Contracts
-[Storage Incentives Github Repo](https://github.com/ethersphere/storage-incentives
-).
+You can find the Solidity source code for each contract in the [storage incentives Github repo](https://github.com/ethersphere/storage-incentives 
+). 
+
+For a history of smart contract addresses, see the [storage incentives ABI repo history](https://github.com/ethersphere/go-storage-incentives-abi/commits/master/abi/abi_mainnet.go).
 
 |Contract|Blockchain | Address             | 
 | ---------------------- | ------------------------------- |--------- |
 |Postage Stamp|Gnosis Chain|[0x45a1502382541Cd610CC9068e88727426b696293](https://gnosisscan.io/address/0x45a1502382541Cd610CC9068e88727426b696293#code)|
-|Staking|Gnosis Chain|[0x781c6D1f0eaE6F1Da1F604c6cDCcdB8B76428ba7](https://gnosisscan.io/address/0x781c6D1f0eaE6F1Da1F604c6cDCcdB8B76428ba7#code)|
-|Redistribution|Gnosis Chain|[0x0964c834C660C44E0afd3B7F10F19f275ee31411](https://gnosisscan.io/address/0x0964c834C660C44E0afd3B7F10F19f275ee31411#code)|
+|Staking|Gnosis Chain|[0xBe212EA1A4978a64e8f7636Ae18305C38CA092Bd](https://gnosisscan.io/address/0xBe212EA1A4978a64e8f7636Ae18305C38CA092Bd#code)|
+|Redistribution|Gnosis Chain|[0xFfF73fd14537277B3F3807e1AB0F85E17c0ABea5](https://gnosisscan.io/address/0xFfF73fd14537277B3F3807e1AB0F85E17c0ABea5#code)|
 |Price Oracle|Gnosis Chain|[0x86DE783Bf23Bc13DaeF5A55ec531C198da8f10cF](https://gnosisscan.io/address/0x86DE783Bf23Bc13DaeF5A55ec531C198da8f10cF#code)|
