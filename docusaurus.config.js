@@ -125,7 +125,7 @@ module.exports = {
               label: 'Introduction',
             },
             {
-              to: 'docs/learn/technology/what-is-swarm',
+              to: 'docs/learn/what-is-swarm',
               label: 'Technology',
             },
             {

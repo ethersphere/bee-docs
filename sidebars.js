@@ -1,12 +1,23 @@
 module.exports = {
   learn: [
     'learn/introduction',
+    'learn/what-is-swarm',
+    
+    {
+      type: 'category',
+      label: 'DISC Storage',
+      items: [
+        'learn/DISC/disc',
+        'learn/DISC/erasure-cost-calculation',
+        'learn/DISC/neighbourhoods',
+        
+      ],
+      collapsed: false
+    },
     {
       type: 'category',
       label: 'Technology',
       items: [
-        'learn/technology/what-is-swarm',
-        'learn/technology/disc',
         'learn/technology/incentives',
         'learn/technology/pss',
         'learn/technology/act',
@@ -35,15 +46,6 @@ module.exports = {
         'learn/ecosystem/community',
         'learn/ecosystem/grants-bounties',
         'learn/ecosystem/awesome',
-      ],
-      collapsed: false
-    },
-    {
-      type: 'category',
-      label: 'Advanced',
-      items: [
-        'learn/advanced/erasure-cost-calculation',
-        'learn/advanced/neighbourhoods',
       ],
       collapsed: false
     },
