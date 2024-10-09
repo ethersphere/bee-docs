@@ -57,7 +57,7 @@ The cheque and chequebook system reduces the number of required on-chain transac
 
 ## Postage Stamps
 
-Postage stamps can be purchased with [xBZZ](glossary#xbzz-token) and represent the right to store data on the Swarm network. In order to upload data to Swarm, a user must purchase a batch of stamps which they can then use to upload an equivalent amount of data to the network. 
+Postage stamps can be purchased with [xBZZ](#xbzz-token) and represent the right to store data on the Swarm network. In order to upload data to Swarm, a user must purchase a batch of stamps which they can then use to upload an equivalent amount of data to the network. 
 
 
 ## Kademlia
