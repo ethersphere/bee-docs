@@ -5,7 +5,7 @@ id: erasure-coding
 
 import RedundancyCalc from '@site/src/components/RedundancyCalc.js';
 
-Erasure coding is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
+[Erasure coding](/docs/learn/DISC/erasure-coding) is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
 
 ## Uploading With Erasure Coding
 
@@ -27,15 +27,14 @@ To upload data to Swarm using erasure coding, the `swarm-redundancy-level: <inte
 
 The accepted values for the `swarm-redundancy-level` header range from the default of 0 up to 4. Each level corresponds to a different level of data protection, with erasure coding turned off at 0, and at its maximum at 4. Each increasing level provides increasing amount of data redundancy offering greater protection against data loss. Each level has been formulated to guarantee against a certain percentage of chunk retrieval errors, shown in the table below. As long as the error rate is below the expected chunk retrieval rate for the given level, there is a less than 1 in a million chance of failure to retrieve the source data.
 
-| Redundancy Level | Pseudonym | Expected Chunk Retrieval Error Rate |
-| ---------------- | --------- | ----------------------------------- |
-| 0                | None      | 0%                                  |
-| 1                | Medium    | 1%                                  |
-| 2                | Strong    | 5%                                  |
-| 3                | Insane    | 10%                                 |
-| 4                | Paranoid  | 50%                                 |
+| Redundancy Level Value | Level Name | Chunk Loss Tolerance         | Cost   |      
+| ---------------- | --------- | ----------------------------------- |--------|
+| 1                | Medium    | 1%                                  | 7.6%   |
+| 2                | Strong    | 5%                                  | 19.6%  |
+| 3                | Insane    | 10%                                 | 32%    |
+| 4                | Paranoid  | 50%                                 | 240.5% |
 
-
+For smaller uploads (less than a few hundred kb), the percent cost will be higher. The exact cost will depend on the chosen redundancy level and amount of data uploaded. 
 
 ### Redundancy Level Costs Explained 
 
@@ -46,14 +45,14 @@ In the table below, the percent cost is displayed for each redundancy level. The
 
 | Redundancy | Parities | Data Chunks | Percent | Chunks Encrypted | Percent Encrypted |
 |----------|----------|--------|---------|------------------|-------------------|
-| Medium   | 9        | 119 | *7.6%*  | 59            | 15%           |
-| Strong   | 21       | 107 | *19.6%* | 53            | 40%           |
+| Medium   | 9        | 119 | 7.6%  | 59            | 15%           |
+| Strong   | 21       | 107 | 19.6% | 53            | 40%           |
 | Insane   | 31       | 97   | 32%  | 48            | 65%            |
 | Paranoid | 89       | 37      | 240.5%    | 18               | 494%              |
 
 For larger uploads (where the source data chunks are equal to or greater than the  "Data Chunks" for each redundancy level respectively) you can use the percent values shown in the "Percent" column as a general estimate of the percent cost of uploading. If the number of chunks is slightly less than the number shown in the "Data Chunks" column, you can also use the value in the "Percent" column as a good general estimate of the percent cost. 
 
-However, if the number of source data chunks are significantly less than the value in the "Data Chunks" column for each respective level, then the percent cost will differ significantly from the one shown in the "Percent" column. For more precise calculations, see the [relevant appendix](/docs/learn/advanced/erasure-cost-calculation).
+However, if the number of source data chunks are significantly less than the value in the "Data Chunks" column for each respective level, the percent cost can differ significantly from the one shown in the "Percent" column. For more the specific costs of erasure coding for smaller numbers of chunks, see [here](/docs/learn/DISC/erasure-coding).
 
 
 ## Cost Calculator Widget

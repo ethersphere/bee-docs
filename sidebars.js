@@ -8,7 +8,7 @@ module.exports = {
       label: 'DISC Storage',
       items: [
         'learn/DISC/disc',
-        'learn/DISC/erasure-cost-calculation',
+        'learn/DISC/erasure-coding',
         'learn/DISC/neighbourhoods',
         
       ],

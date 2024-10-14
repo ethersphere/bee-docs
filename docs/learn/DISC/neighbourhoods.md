@@ -5,10 +5,17 @@ id: neighbourhoods
 
 A neighbourhood is a group of nodes which are responsible for storing the same chunks of data. The nodes which make up a neighbourhood and the chunks which they are responsible for storing are determined by the node and chunk addresses. Node and chunk addresses follow the same format of a 256 bit hexadecimal number. 
 
+:::info
+To see neighborhood populations and the current storage depth / storage radius navigate to the ["Neighborhoods" page of Swarmscan.io](https://swarmscan.io/neighborhoods).
+:::
+
+:::info
+The terms "depth" and "radius" are often used interchangeably when discussing neighborhoods. Both refer to number of shared leading bits of node and chunk addresses used to determine the nodes and chunks which fall into which neighborhoods.
+:::
 
 > Swarm address: `da7e5cc3ed9a46b6e7491d3bf738535d98112641380cbed2e9ddfe4cf4fc01c4`
 
-Neighbourhoods are formed by nodes which share a certain number of leading bits in their addresses. The number of leading bits is variable and can increase as more data enters the network, this number is referred to as the [storage depth](/docs/learn/glossary#2b-storage-depth) (the term "radius" is sometimes used as an alternative to depth, so you may see "storage radius" in some documentation). Nodes in a neighbourhood are responsible for storing chunks which share the same leading bits with the nodes in the neighbourhood up to the storage depth.
+Neighbourhoods are formed by nodes which share a certain number of leading bits in their addresses. The number of leading bits is variable and can increase as more data enters the network, this number is referred to as the [storage depth](/docs/learn/glossary#2b-storage-depth). Nodes in a neighbourhood are responsible for storing chunks which share the same leading bits with the nodes in the neighbourhood up to the storage depth.
 
 ### Example Neighbourhood
 
