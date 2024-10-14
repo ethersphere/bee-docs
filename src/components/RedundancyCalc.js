@@ -23,7 +23,6 @@ export default function UploadCostCalc() {
   const formatNumberCustom = (num) => {
     const isScientific = Math.abs(num) > 0 && Math.abs(num) < 0.0001;
     let formattedNum = isScientific ? num.toExponential(2) : num.toFixed(2);
-
     return formattedNum;
   };
 
@@ -43,6 +42,7 @@ export default function UploadCostCalc() {
     setUnit(e.target.value);
   };
 
+
   const calculateCost = () => {
     setErrorMessage("");
     setResult([]);
@@ -51,8 +51,15 @@ export default function UploadCostCalc() {
       setErrorMessage("Please select a redundancy level.");
       return;
     }
+
+    let parityDataInGb = 0;
+    let totalChunks, sizeInKb, sizeInGb;
   
-    let totalChunks, sizeInKb, sizeInGb, parityDataInGb;
+    if (!dataSize || isNaN(parseFloat(dataSize))) {
+      setErrorMessage("Please enter a valid data size.");
+      return;
+    }
+    
     if (unit === "kb") {
       const kbValue = parseFloat(dataSize);
       if (isNaN(kbValue) || kbValue <= 0) {
@@ -83,22 +90,28 @@ export default function UploadCostCalc() {
     const redundancyLevels = { Medium: 0, Strong: 1, Insane: 2, Paranoid: 3 };
     const redundancyLevel = redundancyLevels[redundancy];
   
-    const quotient = isEncrypted ? Math.floor(totalChunks / maxChunksEncrypted[redundancyLevel]) : Math.floor(totalChunks / maxChunks[redundancyLevel]);
-    const remainder = isEncrypted ? totalChunks % maxChunksEncrypted[redundancyLevel] : totalChunks % maxChunks[redundancyLevel];
-    const remainderIndex = (remainder - 1 < 0) ? 0 : (remainder - 1);
-    const selectedParities = isEncrypted ? paritiesEncrypted : parities;
-    const remainderParities = selectedParities[redundancyLevel][remainderIndex] || 0;
-    const totalParities = (quotient * maxParities[redundancyLevel]) + remainderParities;
+    const quotient = isEncrypted
+      ? Math.floor(totalChunks / maxChunksEncrypted[redundancyLevel])
+      : Math.floor(totalChunks / maxChunks[redundancyLevel]);
+    const remainder = isEncrypted
+      ? totalChunks % maxChunksEncrypted[redundancyLevel]
+      : totalChunks % maxChunks[redundancyLevel];
+  
+    let remainderParities = 0;
+    if (remainder > 0) {
+      const remainderIndex = remainder - 1 < 0 ? 0 : remainder - 1;
+      const selectedParities = isEncrypted ? paritiesEncrypted : parities;
+      remainderParities = selectedParities[redundancyLevel][remainderIndex] || 0;
+    }
+  
+    const totalParities = quotient * maxParities[redundancyLevel] + remainderParities;
     const totalDataWithParity = totalChunks + totalParities;
     const percentDifference = ((totalDataWithParity - totalChunks) / totalChunks) * 100;
     const parityDataInKb = (totalParities * (2 ** 12)) / 1024;
   
-    // Convert parity data size to GB if input unit is GB
     if (unit === "gb") {
       parityDataInGb = parityDataInKb / (1024 * 1024); // Convert KB to GB
     }
-  
-    const formatNumber = (num) => new Intl.NumberFormat('en-US').format(num);
   
     const resultsArray = [
       {
@@ -111,11 +124,11 @@ export default function UploadCostCalc() {
       },
       { 
         name: "Source data in chunks", 
-        value: formatNumber(totalChunks) 
+        value: formatNumberCustom(totalChunks) 
       },
       { 
         name: "Additional parity chunks", 
-        value: formatNumber(totalParities) 
+        value: formatNumberCustom(totalParities) 
       },
       { 
         name: "Percent cost increase", 
@@ -123,16 +136,17 @@ export default function UploadCostCalc() {
       },
       { 
         name: "Selected redundancy level", 
-        value: `${redundancy}` },
+        value: `${redundancy}` 
+      },
       { 
         name: "Error tolerance", 
         value: errorTolerances[redundancy] 
-      }
+      },
     ];
   
     setResult(resultsArray);
   };
-
+  
 
   const styles = {
     container: { padding: '20px', fontFamily: 'Arial', maxWidth: '650px', margin: '0 auto' }, 
