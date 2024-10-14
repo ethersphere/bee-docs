@@ -10,7 +10,7 @@ export default function UploadCostCalc() {
   const [isEncrypted, setIsEncrypted] = useState(false);
   const [unit, setUnit] = useState("chunks"); 
   const maxChunks = [119, 107, 97, 37];
-  const maxParities = [9, 21, 31, 89];
+  const maxParities = [9, 21, 31, 90];
   const maxChunksEncrypted = [59, 53, 48, 18];
   const errorTolerances = {
     Medium: "1%",
