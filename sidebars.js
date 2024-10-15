@@ -10,7 +10,7 @@ module.exports = {
         'learn/DISC/disc',
         'learn/DISC/erasure-coding',
         'learn/DISC/neighbourhoods',
-        
+        'learn/DISC/kademlia',
       ],
       collapsed: false
     },

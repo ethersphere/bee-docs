@@ -3,48 +3,37 @@ title: Erasure Coding
 id: erasure-coding
 ---
 
-# Erasure Coding on Swarm
-
 Erasure coding (also known as erasure code) is an efficient and flexible approach to data protection which is an optional feature for Swarm uploads. It is a technique that increases data protection by enabling the recovery of original data even when some encoded chunks are lost or corrupted. When used, it ensures that data on Swarm can always be accessed reliably, even if some nodes or entire neighborhoods go offline. 
 
-### How It Works
+## How It Works
 
 Erasure coding enhances data protection by dividing the source data into "chunks" and adding additional redundant chunks.
 
 Specifically, data is divided into **m** chunks, and **k** additional chunks are generated, resulting in **m + k** total chunks. The data is encoded across these chunks such that as long as **m** chunks are intact, the original data can be fully reconstructed. Chunks are then distributed across the network as with a standard upload. This approach provides a robust method for data recovery in distributed storage networks like Swarm.
 
-### Adjustability
-
-Erasure coding parameters can be adjusted in order to increase the strength of data protection, with a corresponding 
-
-
-#### Example
+### Example
 
 For an 8KB image, if we set **m = 2** and **k = 1**, we create 3 chunks (2 original + 1 redundant). As long as any 2 of these 3 chunks are available, we can reconstruct the original data. By increasing **k** to 4, we can tolerate the loss of up to 4 chunks while still recovering the original data.
 
 ![Erasure Code Example](https://www.ethswarm.org/uploads/erasure-coding-01.png)
 
-### General Benefits of Erasure Coding
-
-1. **Cost-Effective**: Erasure coding achieves data protection similar to or better than replication while requiring less storage space.
-   
-2. **Tolerates Data Loss**: Unlike traditional error correction codes, erasure coding can withstand the total loss of specific chunks, making it suitable for scenarios where data integrity is critical.
-
-## Implications for Swarm
-
-### Tailored Data Protection for Swarm
-
-Swarm’s existing architecture, which naturally divides files into chunks and distributes them across a network of nodes, aligns perfectly with the principles of erasure coding. This addition enhances the resilience of data storage, ensuring that data remains accessible even if entire neighborhoods of nodes go offline.
-
-### Enabling New Use-Cases
-
-The integration of erasure coding significantly increases the durability of data stored on Swarm. It allows Swarm to cater to enterprise users and scenarios requiring enhanced data protection, serving as insurance against potential outages or attacks.
 
 ## Usage
 
 For usage instructions, see the [erasure coding page in the "Develop" section](/docs/develop/access-the-swarm/erasure-coding).
 
 ## Cost Calculation
+
+In Swarm's implementation of erasure coding, there are four levels of protection: Medium, Strong, Insane, and Paranoid. Each level adds additional parity chunks for a corresponding increase in data protection (and also cost).
+
+The table below shows the number of parities and data chunks for each level, as well as the percent increase in cost vs a non-erasure coded upload. 
+
+| Redundancy | Parities | Data Chunks | Percent | Chunks Encrypted | Percent Encrypted |
+|----------|----------|--------|---------|------------------|-------------------|
+| Medium   | 9        | 119 | *7.6%*  | 59            | 15%           |
+| Strong   | 21       | 107 | *19.6%* | 53            | 40%           |
+| Insane   | 31       | 97   | 32%  | 48            | 65%            |
+| Paranoid | 90       | 38      | 240.5%    | 18               | 494%              |
 
 For each redundancy level, there are **m + k** = 128 chunks, where **m** are the data chunks (shown in column "Data Chunks") and **k** are the parity chunks (shown in column "Parities"). If the number of chunks in the data being uploaded are an exact multiple of **m**, then the percent cost of the upload will simply equal the one shown in the chart above in the "Percent" column for the corresponding redundancy level. 
 
