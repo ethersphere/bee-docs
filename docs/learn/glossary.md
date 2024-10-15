@@ -88,7 +88,7 @@ When data is uploaded to Swarm, it is broken down into 4kb sized pieces which ar
 
 ## Proximity Order (PO)
 
-Proximity Order is a concept defined in The Book of Swarm and is closely related to Kademlia distance. Proximity order is defined as the number of shared prefix bits of any two addresses. It is found by performing the XOR bitwise operation on the two addresses and counting how many leading 0 there are before the first 1. In other words, PO is equal to the number of shared binary prefix bits.
+Proximity Order is a concept defined in The Book of Swarm and is closely related to Kademlia distance. Proximity order is defined as the number of shared prefix bits of any two addresses. It is found by performing the XOR bitwise operation on the two addresses and counting how many leading 0 there are before the first 1. 
 
 Taking the previous example used in the Kademlia distance definition:
 
