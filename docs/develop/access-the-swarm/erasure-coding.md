@@ -49,7 +49,7 @@ In the table below, the percent cost is displayed for each redundancy level. The
 | Medium   | 9        | 119 | *7.6%*  | 59            | 15%           |
 | Strong   | 21       | 107 | *19.6%* | 53            | 40%           |
 | Insane   | 31       | 97   | 32%  | 48            | 65%            |
-| Paranoid | 89       | 37      | 240.5%    | 18               | 494%              |
+| Paranoid | 90       | 37      | 240.5%    | 18               | 494%              |
 
 For larger uploads (where the source data chunks are equal to or greater than the  "Data Chunks" for each redundancy level respectively) you can use the percent values shown in the "Percent" column as a general estimate of the percent cost of uploading. If the number of chunks is slightly less than the number shown in the "Data Chunks" column, you can also use the value in the "Percent" column as a good general estimate of the percent cost. 
 
