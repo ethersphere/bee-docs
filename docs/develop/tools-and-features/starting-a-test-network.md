@@ -1,9 +1,9 @@
 ---
-title: Starting a Test Network
+title: Starting a Private Network
 id: starting-a-test-network
 ---
 
-A test network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](/docs/bee/working-with-bee/configuration)).
+A private network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](/docs/bee/working-with-bee/configuration)).
 
 ## Start a network on your own computer
 
@@ -21,6 +21,10 @@ bootnode: ""
 data-dir: /tmp/bee/node1
 password: some pass phze
 swap-enable: false
+mainnet: false
+verbosity: 5
+full-node: true
+blockchain-rpc-endpoint: https://sepolia.dev.fairdatasociety.org/
 ```
 
 **config_2.yaml**
@@ -34,6 +38,10 @@ bootnode: ""
 password: some pass phze
 welcome-message: "Bzz Bzz Bzz"
 swap-enable: false
+mainnet: false
+verbosity: 5
+full-node: true
+blockchain-rpc-endpoint: https://sepolia.dev.fairdatasociety.org/
 ```
 
 Note that for each node, we provide a different `api-addr`. If we had not specified different addresses here, we
@@ -120,6 +128,10 @@ bootnode: "/ip4/127.0.0.1/tcp/1634/p2p/16Uiu2HAmUdCRWmyQCEahHthy7G4VsbBQ6dY9Hnk7
 password: some pass phze
 welcome-message: "Bzz Bzz Bzz"
 swap-enable: false
+mainnet: false
+verbosity: 5
+full-node: true
+blockchain-rpc-endpoint: https://sepolia.dev.fairdatasociety.org/
 ```
 
 Now, we can shut our second node and reboot with the new configuration.
