@@ -66,12 +66,17 @@ Kademlia is a distributed hash table (DHT) which is commonly used in distributed
 
 ## Kademlia distance
 
-Within Kademlia, nodes have numeric ids with the same length and format taken from the same namespace as the keys of the key/value pairs. Kademlia distance between node ids and keys is calculated through the XOR bitwise operation done over any ids or keys. 
-
+Kademlia introduces an XOR based distance metric to define the relatedness of two addresses. In Kademlia nodes have numeric ids with the same length and format taken from the same namespace as the keys of the key/value pairs. Kademlia distance between node ids and keys is calculated through the XOR bitwise operation done over any ids or keys. 
 
 Note: For a Kademlia DHT, any standardized numerical format can be used for ids. However, within Swarm, ids are derived from a Keccak256 digest and are represented as 256 bit hexadecimal numbers. They are referred to as addresses or hashes.
 
-Example:   We have a Kademlia DHT consisting of only ten nodes with ids of 1 - 10. We want to find the distance between node 4 and 7. In order to do that, we perform the XOR bitwise operation:
+Swarm hash: 
+
+> eada6722670c6de6da7d0470167bf14f6e4dc1b98476da94a7330041adec26a3
+
+In the examples which follow, we use short binary numbers to increase example clarity rather than the actual Swarm hash format.
+
+Example: We have a Kademlia DHT consisting of only ten nodes with ids of 1 - 10. We want to find the distance between node 4 and 7. In order to do that, we perform the XOR bitwise operation:
 
 4 | 0100   
 7 | 0111  
@@ -80,15 +85,15 @@ Example:   We have a Kademlia DHT consisting of only ten nodes with ids of 1 - 1
 
 And we find that the distance between the two nodes is 3. 
 
-
-
 ## Chunk
 
 When data is uploaded to Swarm, it is broken down into 4kb sized pieces which are each assigned an address in the same format as node’s overlay addresses. Chunk addresses are formed by taking the BMT hash of the chunk content along with an 8 byte measure of the number of the chunk’s child chunks, the `span`. The BMT hashing algorithm is based on the Keccac256 hashing algorithm, so it produces an address with the same format as that for the node overlay addresses.
 
 ## Proximity Order (PO)
 
-Proximity Order is a concept defined in The Book of Swarm and is closely related to Kademlia distance. Proximity order is defined as the number of shared prefix bits of any two addresses. It is found by performing the XOR bitwise operation on the two addresses and counting how many leading 0 there are before the first 1. 
+Proximity Order is a concept defined in The Book of Swarm and is closely related to Kademlia distance. In contrast to distance which is an exact measure of the relatedness of two nodes, PO is a discrete measure relatedness between two nodes. By "discrete", we mean that PO is a general measure of relatedness rather than an exact measure of relatedness like the XOR distance metric of Kademlia.
+
+Proximity order is defined as the number of shared prefix bits of any two addresses. It is found by performing the XOR bitwise operation on the two addresses and counting how many leading 0 there are before the first 1. 
 
 Taking the previous example used in the Kademlia distance definition:
 

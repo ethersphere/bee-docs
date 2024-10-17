@@ -8,9 +8,9 @@ module.exports = {
       label: 'DISC Storage',
       items: [
         'learn/DISC/disc',
-        'learn/DISC/erasure-coding',
-        'learn/DISC/neighbourhoods',
         'learn/DISC/kademlia',
+        'learn/DISC/neighbourhoods',
+        'learn/DISC/erasure-coding',
       ],
       collapsed: false
     },

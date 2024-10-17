@@ -3,7 +3,8 @@ title: Neighbourhoods
 id: neighbourhoods
 ---
 
-A neighbourhood is a group of nodes which are responsible for storing the same chunks of data. The nodes which make up a neighbourhood and the chunks which they are responsible for storing are determined by the node and chunk addresses. Node and chunk addresses follow the same format of a 256 bit hexadecimal number. 
+In Swarm, a neighbourhood refers to an area of responsibility within the network, where nodes in proximity to one another share the task of storing and maintaining data chunks. It is defined by the [proximity order (PO)](/docs/learn/glossary#proximity-order-po) of nodes' addresses. Nodes within a neighbourhood replicate data chunks to ensure that if one node goes offline, other nodes in the neighbourhood can still retrieve and serve the content.
+
 
 :::info
 To see neighborhood populations and the current storage depth / storage radius navigate to the ["Neighborhoods" page of Swarmscan.io](https://swarmscan.io/neighborhoods).
@@ -13,9 +14,9 @@ To see neighborhood populations and the current storage depth / storage radius n
 The terms "depth" and "radius" are often used interchangeably when discussing neighborhoods. Both refer to number of shared leading bits of node and chunk addresses used to determine the nodes and chunks which fall into which neighborhoods.
 :::
 
-> Swarm address: `da7e5cc3ed9a46b6e7491d3bf738535d98112641380cbed2e9ddfe4cf4fc01c4`
+## Neighborhood Formation
 
-Neighbourhoods are formed by nodes which share a certain number of leading bits in their addresses. The number of leading bits is variable and can increase as more data enters the network, this number is referred to as the [storage depth](/docs/learn/glossary#2b-storage-depth). Nodes in a neighbourhood are responsible for storing chunks which share the same leading bits with the nodes in the neighbourhood up to the storage depth.
+A Swarm neighborhood is determined by the [proximity order (PO)](/docs/learn/glossary#proximity-order-po) of node addresses, which is calculated based on the number of leading bits shared between the addresses of nodes in the network. Nodes in the same neighborhood share the same prefix of their addresses, and the neighborhood expands or contracts depending on the availability of nearby nodes. As a result, each node is responsible for interacting with other nodes within its neighborhood to store and replicate data chunks, ensuring data availability and redundancy. The neighborhood depth dynamically adjusts as peers join or leave the network, maintaining a healthy distribution of storage responsibility across nodes.
 
 ### Example Neighbourhood
 
