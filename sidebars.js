@@ -2,7 +2,6 @@ module.exports = {
   learn: [
     'learn/introduction',
     'learn/what-is-swarm',
-    
     {
       type: 'category',
       label: 'DISC Storage',
@@ -16,40 +15,29 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Technology',
+      label: 'Incentives',
       items: [
-        'learn/technology/incentives',
-        'learn/technology/pss',
-        'learn/technology/act',
-        {
-          type: 'category',
-          label: 'Contracts',
-          items: [
-
-            'learn/technology/contracts/overview',
-            'learn/technology/contracts/chequebook',
-            'learn/technology/contracts/postage-stamp',
-            'learn/technology/contracts/price-oracle',
-
-          ],
-          collapsed: false
-        },
+        'learn/incentives/overview',
+        'learn/incentives/redistribution-game',
+        'learn/incentives/postage-stamps',
+        'learn/incentives/bandwidth-incentives',
+        'learn/incentives/price-oracle',
       ],
       collapsed: false
     },
     {
       type: 'category',
-      label: 'Ecosystem',
+      label: 'Features',
       items: [
-        'learn/ecosystem/swarm-foundation',
-        'learn/ecosystem/fair-data-society',
-        'learn/ecosystem/community',
-        'learn/ecosystem/grants-bounties',
-        'learn/ecosystem/awesome',
+        'learn/features/pss',
+        'learn/features/access-control',
       ],
       collapsed: false
     },
+    'learn/smart-contracts',
     'learn/tokens',
+    'learn/ecosystem',
+    'learn/fair-data-society',
     'learn/glossary',
     'learn/faq',
   ],

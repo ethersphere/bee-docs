@@ -1,6 +1,6 @@
 ---
-title: Overview
-id: overview
+title: Smart Contracts
+id: smart-contracts
 ---
 
 ### Token Contracts
@@ -12,6 +12,7 @@ id: overview
 |BZZ Bonding Curve| Ethereum|[`0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904`](https://etherscan.io/address/0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904)|[`0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904`](https://etherscan.io/address/0x4F32Ab778e85C4aD0CEad54f8f82F5Ee74d46904)|
 
 ### Storage Incentives Contracts
+
 You can find the Solidity source code for each contract in the [storage incentives Github repo](https://github.com/ethersphere/storage-incentives 
 ). 
 

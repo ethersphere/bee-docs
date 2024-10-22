@@ -29,7 +29,9 @@ In Swarm's implementation of erasure coding, there are four named levels of prot
 | 3                | Insane    | 10%                                 | 
 | 4                | Paranoid  | 50%                                 | 
 
-The "Chunk Loss Tolerance" column corresponds to the exact level of data protection for each level, and is the maximum percent of erasure coded chunks which can be lost before the original data is no longer retrievable (with 99.9999% statistical certainty). Note that this guarantee of retrievability is for the data from each 128 chunk segment, and therefore does not correspond to retrievability of a whole file. The retrievability failure rate for any individual file depends on the size of the file, and increases with the size of the file. For a detailed explanation of how to calculate the retrievability of any sized file refer to [section 3 in the erasure coding paper](https://papers.ethswarm.org/erasure-coding.pdf).    
+The "Redundancy Level" is a numeric value for each level of protection, the "Level Name" is the official name for each level, and the "Chunk Loss Tolerance" column corresponds to the exact level of data protection for each level. For each redundancy level, the original data is retrievable with >=99.9999% statistical certainty given a percent chunk loss equal or less than the percent shown in the "Chunk Loss Tolerance" column. 
+
+Note that this guarantee of retrievability is for each 128 chunk segment, and therefore does not correspond to retrievability of a whole file. The retrievability failure rate for any individual file depends on the size of the file, and increases with the size of the file. For a detailed explanation of how to calculate the retrievability of any sized file refer to [section 3 in the erasure coding paper](https://papers.ethswarm.org/erasure-coding.pdf).    
 
 ## Usage
 

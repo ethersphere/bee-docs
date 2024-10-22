@@ -16,7 +16,7 @@ The terms "depth" and "radius" are often used interchangeably when discussing ne
 
 ## Neighborhood Formation
 
-A Swarm neighborhood is determined by the [proximity order (PO)](/docs/learn/glossary#proximity-order-po) of node addresses, which is calculated based on the number of leading bits shared between the addresses of nodes in the network. Nodes in the same neighborhood share the same prefix of their addresses, and the neighborhood expands or contracts depending on the availability of nearby nodes. As a result, each node is responsible for interacting with other nodes within its neighborhood to store and replicate data chunks, ensuring data availability and redundancy. The neighborhood depth dynamically adjusts as peers join or leave the network, maintaining a healthy distribution of storage responsibility across nodes.
+A Swarm neighborhood is determined by the proximity order (PO) of node addresses, which is calculated based on the number of leading bits shared between the addresses of nodes in the network. Nodes in the same neighborhood share the same prefix of their addresses, and the neighborhood expands or contracts depending on the availability of nearby nodes. As a result, each node is responsible for interacting with other nodes within its neighborhood to store and replicate data chunks, ensuring data availability and redundancy. The neighborhood depth dynamically adjusts as peers join or leave the network, maintaining a healthy distribution of storage responsibility across nodes.
 
 ### Example Neighbourhood
 
@@ -103,6 +103,6 @@ Each of our two example chunks will also be split amongst the two new neighbourh
 |da69 (chunk)| <u>11011010011</u>01001|
 
 
-### Doubling Implications for Node Operators
+#### Doubling Implications for Node Operators
 
 One of the implications of doubling for node operators is that the reward chances for a node depends in part on how many other nodes are in its neighbourhood. If it is in a neighbourhood with fewer nodes, its chances of winning rewards are greater. Therefore node operators should make certain to place their nodes into less populated neighbourhoods, and also should look ahead to neighbourhoods at the next depth after a doubling. For more details about how to adjust node placement, see [the section on setting a target neighbourhood](/docs/bee/installation/install#set-target-neighborhood-optional) in the installation guide.

@@ -3,11 +3,11 @@ title: DISC
 id: disc
 ---
 
-DISC (Distributed Immutable Storage of Chunks) is a storage solution developed by Swarm based on a modified implementation of a [Kademlia DHT](/docs/learn/glossary#kademlia  ) which has been specialized for data storage. Swarm's implementation of a DHT differs significantly in that it stores the content in the DHT directly, rather than just storing a list of seeders who are able to serve the content. This approach allows for much faster and more efficient retrieval of data.
+DISC (Distributed Immutable Storage of Chunks) is a storage solution developed by Swarm based on a modified implementation of a [Kademlia DHT](/docs/learn/DISC/kademlia) which has been specialized for data storage. Swarm's implementation of a DHT differs significantly in that it stores the content in the DHT directly, rather than just storing a list of seeders who are able to serve the content. This approach allows for much faster and more efficient retrieval of data.
 
 ### Kademlia Topology and Routing
 
-[Kademlia](/docs/learn/DISC/kademlia) is a distributed hash table (DHT) widely used in peer-to-peer networks such as Ethereum and Bittorent. It serves as the routing and topology foundation for communication between nodes in the Swarm netowrk. It organizes nodes based on their overlay addresses and ensures that messages are relayed efficiently, even in a dynamic, decentralized environment. 
+Kademlia is a distributed hash table (DHT) widely used in peer-to-peer networks such as Ethereum and Bittorent. It serves as the routing and topology foundation for communication between nodes in the Swarm netowrk. It organizes nodes based on their overlay addresses and ensures that messages are relayed efficiently, even in a dynamic, decentralized environment. 
 
 One of the advantages of using Kademlia as a model for network topology is that both the number of forwarding "hops" required to route a chunk to its destination and the number of peer connections required to maintain Kademlia topology are logarithmic to the size of the network (a minimum of two connections is required in order to maintain Kademlia topology in case of network churn - nodes dropping in and out of the network). This makes Swarm a highly scalable system which is efficient even at very large scales. 
 
