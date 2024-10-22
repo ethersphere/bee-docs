@@ -35,7 +35,7 @@ api-addr: 127.0.0.1::1733
 p2p-addr: :1734
 data-dir: /tmp/bee/node2
 bootnode: ""
-password: some pass phze
+password: set-a-strong-password
 welcome-message: "Bzz Bzz Bzz"
 swap-enable: false
 mainnet: false
@@ -130,7 +130,7 @@ api-addr: 127.0.0.1::1733
 p2p-addr: :1734
 data-dir: /tmp/bee/node2
 bootnode: "/ip4/127.0.0.1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ"
-password: some pass phze
+password: set-a-strong-password
 welcome-message: "Bzz Bzz Bzz"
 swap-enable: false
 blockchain-rpc-endpoint: https://sepolia.dev.fairdatasociety.org
