@@ -40,8 +40,6 @@ As mentioned above, Swarm's version of Kademlia differs from commonly used imple
 
 Swarm introduces the concept of [proximity order (PO)](/docs/learn/glossary#proximity-order-po) as a discrete measure of node relatedness between two addresses. In contrast with Kademlia distance which is an exact measure of relatedness, PO is a more general measure of the relatedness between two addresses based on their number of shared leading bits.
 
-
-
 In Swarm's version of Kademlia, nodes are grouped into neighborhoods of nodes based on PO (ie., all nodes in a neighborhood share the same leading binary prefix bits). Each neighborhood of nodes is responsible for storing the same set of chunks. 
 
 Neighborhoods are important for ensuring data redundancy, and they also play a role in the incentives system which guarantees nodes are rewarded for contributing resources to the network.
@@ -54,6 +52,6 @@ In contrast, Swarm makes use of forwarding Kademlia. Here each node forwards the
 
 The main advantage of forwarding Kademlia is that it maintains the anonymity of the node which initiated the request.
 
-### Incentives
+### Storage Incentives
 
-Swarm introduces an incentives layer on top of its Kademlia implementation in order to reward nodes for continuing to provide resources to the network. 
+Swarm introduces a storage incentives layer on top of its Kademlia implementation in order to reward nodes for continuing to provide resources to the network. Neighborhoods play a key role in the storage incentives mechanism. Storage incentives take the role of a "game" in which nodes play to win a reward for storing the correct data. Each round in the game, one neighborhood is chosen to play, and all nodes within the same neighborhood participate as a group. The nodes each compare the data they are storing with each other to make sure they are all storing the data they are responsible for, and one node is chosen to win from among the group. You can read more about how storage incentives work in the dedicated page for storage incentives. 
