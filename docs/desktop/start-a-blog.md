@@ -9,10 +9,7 @@ There are many different approaches to starting a blog on Swarm, however the eas
 
 ## Requirements
 
-* [npm](https://www.npmjs.com/) 
-* [Node.js](https://nodejs.org/en)
-* [git](https://git-scm.com/)
-* Swarm Desktop with a [valid postage stamp batch](/docs/desktop/postage-stamps)
+* [Swarm Desktop](/docs/desktop/install) with a [valid postage stamp batch](/docs/desktop/postage-stamps)
 
 ## Getting Started
 
