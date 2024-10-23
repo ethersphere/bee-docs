@@ -18,11 +18,10 @@ Find detailed information on all the endpoints available in the [API reference d
 
 ## [Contribute](/docs/develop/contribute/introduction) to the Development of the Bee Client
 
-Join our efforts! Are you up to the challenge of
-helping to create Bee and the other incredible technologies that are
-being build on top of it? You are invited to contribute code to the Bee
-client or any of the other projects in Swarm's
-[Ethersphere](https://github.com/ethersphere).
+Join our efforts! Are you up to the challenge of helping to create Bee and the other incredible technologies that are being built on top of it? You are invited to contribute code to the Bee client or any of the other projects in Swarm's [Ethersphere](https://github.com/ethersphere).
+
+Help shape the future of Swarm by contributing to our development efforts or by proposing a Swarm Improvement Proposal (SWIP). Whether you're inside or outside the organization, your ideas can drive the platform forward. Learn how to submit a SWIP [here](https://github.com/ethersphere/SWIPs).
+
 
 ## Community
 
