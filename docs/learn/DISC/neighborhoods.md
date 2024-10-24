@@ -1,5 +1,5 @@
 ---
-title: neighborhoods
+title: Neighborhoods
 id: neighborhoods
 ---
 

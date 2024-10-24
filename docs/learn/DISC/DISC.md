@@ -7,20 +7,21 @@ DISC (Distributed Immutable Storage of Chunks) is a storage solution developed b
 
 ### Kademlia Topology and Routing
 
-Kademlia is a distributed hash table (DHT) widely used in peer-to-peer networks such as Ethereum and Bittorent. It serves as the routing and topology foundation for communication between nodes in the Swarm netowrk. It organizes nodes based on their overlay addresses and ensures that messages are relayed efficiently, even in a dynamic, decentralized environment. 
+[Kademlia](/docs/learn/DISC/kademlia) is a distributed hash table (DHT) widely used in peer-to-peer networks such as Ethereum and Bittorent. It serves as the routing and topology foundation for communication between nodes in the Swarm netowrk. It organizes nodes based on their overlay addresses and ensures that messages are relayed efficiently, even in a dynamic, decentralized environment. 
 
 One of the advantages of using Kademlia as a model for network topology is that both the number of forwarding "hops" required to route a chunk to its destination and the number of peer connections required to maintain Kademlia topology are logarithmic to the size of the network (a minimum of two connections is required in order to maintain Kademlia topology in case of network churn - nodes dropping in and out of the network). This makes Swarm a highly scalable system which is efficient even at very large scales. 
 
 ### Neighborhoods
 
-Neighborhoods are groups of nodes which are responsible for sharing the same chunks. The chunks which each neighborhood is responsible for storing are defined by the proximity order of the nodes and the chunks. In other words, each node is responsible for storing chunks with which their overlay addresses share a certain number of prefix bits, and together with other nodes which share the same prefix bits, make up neighborhoods which share the responsibility for storing the same chunks. 
+[Neighborhoods](/docs/learn/DISC/neighborhoods) are groups of nodes which are responsible for sharing the same chunks. The chunks which each neighborhood is responsible for storing are defined by the proximity order of the nodes and the chunks. In other words, each node is responsible for storing chunks with which their overlay addresses share a certain number of prefix bits, and together with other nodes which share the same prefix bits, make up neighborhoods which share the responsibility for storing the same chunks. 
 
+Neighborhoods play a key role in providing data redundancy for chunks stored on Swarm since each node in a neighborhood will keep copies of the same chunks. The optional [erasure coding](/docs/learn/DISC/erasure-coding) feature can also be enabled for added redundancy and greater data protection.
 
 ### Chunks 
 
 In the DISC model, chunks are the canonical unit of data. When a file is uploaded to Swarm, it gets broken down into 4kb pieces with attached metadata. The pieces then get distributed amongst nodes in the Swarm network based on their [overlay addresses](/docs/learn/glossary#overlay). There are two fundamental chunk types: content-addressed chunks and single-owner chunks. 
 
-### Content-Addressed Chunks and Single-Owner Chunks
+#### Content-Addressed Chunks and Single-Owner Chunks
 
 Content-addressed chunks are chunks whose address is based on the hash digest of their data. Using a hash as the chunk address makes it possible to verify the integrity of chunk data. Swarm uses the BMT hash function based on a binary Merkle tree over small segments of the chunk data. A content-addressed chunk has an at most 4KB payload, and its address is calculated as the hash of the span (chunk metadata) and the Binary Merkle Tree hash of the payload.
 

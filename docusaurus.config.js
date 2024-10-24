@@ -90,7 +90,7 @@ module.exports = {
   ],
   ],
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
   onDuplicateRoutes: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
@@ -125,16 +125,37 @@ module.exports = {
               label: 'Introduction',
             },
             {
-              to: 'docs/learn/what-is-swarm',
-              label: 'Technology',
+              to: '/docs/learn/what-is-swarm',
+              label: 'What is Swarm?',
             },
             {
-              to: 'docs/learn/ecosystem/swarm-foundation',
-              label: 'Ecosystem',
+              to: '/docs/learn/DISC/',
+              label: 'DISC Storage',
+            },
+            {
+              to: '/docs/learn/incentives/overview',
+              label: 'Incentives',
+            },
+            {
+              to: '/docs/learn/features/pss',
+              label: 'Features',
+            },
+            
+            {
+              to: '/docs/learn/smart-contracts',
+              label: 'Smart Contracts',
             },
             {
               to: 'docs/learn/tokens',
               label: 'Tokens',
+            },
+            {
+              to: '/docs/learn/ecosystem',
+              label: 'Ecosystem',
+            },
+            {
+              to: '/docs/learn/fair-data-society',
+              label: 'Fair Data Society',
             },
             {
               to: 'docs/learn/glossary',

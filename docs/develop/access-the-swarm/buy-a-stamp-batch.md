@@ -10,9 +10,9 @@ import TabItem from '@theme/TabItem';
 
 
 
-A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](/docs/learn/technology/disc). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch. 
+A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](/docs/learn/DISC/). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch. 
 
-For a deeper understanding of how `depth` and `amount` parameters determine the data volume and storage duration of a postage batch, see the [postage stamp contract page](/docs/learn/technology/contracts/postage-stamp).
+For a deeper understanding of how `depth` and `amount` parameters determine the data volume and storage duration of a postage batch, see the [postage stamp page](/docs/learn/incentives/postage-stamps/).
 
 ## Fund your node's wallet.
 
@@ -94,12 +94,12 @@ When purchasing a batch of stamps there are several parameters and options which
 ### Choosing `depth`
 
 :::caution
-The minimum value for `depth` is 17, however a higher depth value is recommended for most use cases due to the [mechanics of stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#batch-utilisation). See [the depths utilisation table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) to help decide which depth is best for your use case.
+The minimum value for `depth` is 17, however a higher depth value is recommended for most use cases due to the [mechanics of stamp batch utilisation](/docs/learn/incentives/postage-stamps/#batch-utilisation). See [the depths utilisation table](/docs/learn/incentives/postage-stamps/#effective-utilisation-table) to help decide which depth is best for your use case.
 :::
 
 One notable aspect of batch utilisation is that the entire batch is considered fully utilised as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
 
-See the [postage stamp contract page](/docs/learn/technology/contracts/postage-stamp#batch-utilisation) for a more complete explanation of how batch utilisation works and a [table](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) with the specific amounts of data which can be safely uploaded for each `depth` value. 
+See the [postage stamp page](/docs/learn/incentives/postage-stamps) for a more complete explanation of how batch utilisation works and a [table](/docs/learn/incentives/postage-stamps#effective-utilisation-table) with the specific amounts of data which can be safely uploaded for each `depth` value. 
 
 ### Choosing `amount`
 
@@ -107,18 +107,18 @@ See the [postage stamp contract page](/docs/learn/technology/contracts/postage-s
 The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the lastPrice value from the postage stamp contract times 17280 (the number of blocks in 24 hours). You can also use the [calculator](#calculators) below. This requirement is in place in order to prevent spamming the network.
 :::
 
-The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp batch contract page](/docs/learn/technology/contracts/postage-stamp#batch-amount--batch-cost) where a more complete description is included.
+The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp](/docs/learn/incentives/postage-stamps#batch-depth-and-batch-amount) page where a more complete description is included.
 
 ### Mutable or Immutable?
 
-Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/learn/technology/contracts/postage-stamp#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
+Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/learn/incentives/postage-stamps#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
 
 ## Calculators
 
 The following postage batch calculators allow you to conveniently find the depth and amount values for a given storage duration and storage volume, or to find the storage duration and storage volume for a given depth and amount. The results will display the cost in xBZZ for the postage batch. The current pricing information is sourced from the Swarmscan API and will vary over time. 
 
 :::info
-The 'effective volume' is the volume of data that can safely stored for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. The lowest depth with an effective volume above zero is 22, with an effective depth of 4.93 GB. Lower depth values can be used for smaller uploads but do not come with the same storage guarantees. [Learn more here](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table). 
+The 'effective volume' is the volume of data that can safely stored for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. The lowest depth with an effective volume above zero is 22, with an effective depth of 4.93 GB. Lower depth values can be used for smaller uploads but do not come with the same storage guarantees. [Learn more here](/docs/learn/incentives/postage-stamps#effective-utilisation-table). 
 :::
 
 ### Depth & Amount to Time & Volume Calculator
@@ -127,7 +127,7 @@ The 'effective volume' is the volume of data that can safely stored for each sto
 
 ### Time & Volume to Depth & Amount Calculator
 
-The recommended depth in this calculator's results is the lowest depth value whose [effective volume](/docs/learn/technology/contracts/postage-stamp#effective-utilisation-table) is greater than the entered volume. 
+The recommended depth in this calculator's results is the lowest depth value whose [effective volume](/docs/learn/incentives/postage-stamps#effective-utilisation-table) is greater than the entered volume. 
 
 <AmountAndDepthCalc />
 
