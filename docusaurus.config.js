@@ -317,6 +317,23 @@ module.exports = {
     //   backgroundColor: '#dd7200', // Defaults to `#fff`.
     //   textColor: '#242424', // Defaults to `#000`.
     // },
+    algolia: {
+        
+      appId: "UAJRQL15I8",
+
+      apiKey: "7660a0b9a0f5aff5abd6c285b57f1e45",
+
+      indexName: "ethswarm",
+
+      // Optional: 
+      contextualSearch: false,
+
+      
+      replaceSearchResultPathname: {
+        from: "/docs/", // or as RegExp: /\/docs\//
+        to: "/",
+      },
+    }
   },
   presets: [
     [
