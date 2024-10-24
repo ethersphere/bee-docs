@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@cookbookdev/docsbot": "^4.21.23",
+    "@docsearch/js": "^3.6.2",
     "@docusaurus/core": "^3.1.1",
     "@docusaurus/plugin-client-redirects": "^3.1.1",
     "@docusaurus/preset-classic": "^3.1.1",
