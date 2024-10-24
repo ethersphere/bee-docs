@@ -8,7 +8,7 @@ module.exports = {
       items: [
         'learn/DISC/disc',
         'learn/DISC/kademlia',
-        'learn/DISC/neighborhood',
+        'learn/DISC/neighborhoods',
         'learn/DISC/erasure-coding',
       ],
       collapsed: false
