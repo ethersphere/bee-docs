@@ -458,7 +458,7 @@ From the results we can see that we have a healthy neighborhood size when compar
 
 ### `/rchash`
 
-Calling the /rchash endpoint will make your node generate a reserve commitment hash (the hash used in the [redistribution game](/docs/learn/technology/incentives#storage-incentives-details)), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
+Calling the /rchash endpoint will make your node generate a reserve commitment hash (the hash used in the [redistribution game](/docs/learn/incentives/redistribution-game)), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
 
 ```bash
 sudo curl -sX GET http://localhost:1633/rchash/10/aaaa/aaaa | jq
@@ -503,8 +503,3 @@ If the `Time` value is much longer than 6 minutes then it likely means that the 
   * `"version"` - The version of your Bee node. You can find latest version by checking the [Bee github repo](https://github.com/ethersphere/bee).
   * `"apiVersion"` 
 
-## Debug API Removal Notice
-
-:::info
-The Debug API endpoints have been merged into the Bee API in the Bee version 2.2.0 release, and will be fully removed in the 2.2.0 release. The [Debug API reference docs](/debug-api/) are still available until the 2.2.0 release for your reference.
-:::

@@ -43,7 +43,7 @@ zero.
 
 If you want to get your Bee node up and running as easily as possible, then you
 can set its
-[`--swap-initial-deposit`](/docs/bee/working-with-bee/configuration#--swap-initial-deposit)
+[`--swap-initial-deposit`](/docs/bee/working-with-bee/configuration)
 value to zero. This means that your node's chequebook will not get funded with
 xBZZ, meaning that other nodes will only serve it within the free tier bandwidth
 threshold.

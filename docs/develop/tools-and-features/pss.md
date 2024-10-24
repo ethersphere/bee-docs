@@ -5,7 +5,7 @@ id: pss
 
 Out of the ashes of Ethereum's vision for a leak-proof decentralised anonymous messaging system - Whisper - comes PSS (or BZZ, whispered! 🤫). Swarm provides the ability to send messages that appear to be normal Swarm traffic, but are in fact messages that may be received and decrypted to reveal their content only by the specific nodes they were intended to be received by.
 
-PSS provides a pub-sub facility that can be used for a variety of tasks. Nodes are able to listen to messages received for a specific topic in their nearest neighbourhood and create messages destined for another neighbourhood which are sent over the network using Swarm's usual data dissemination protocols.
+PSS provides a pub-sub facility that can be used for a variety of tasks. Nodes are able to listen to messages received for a specific topic in their nearest neighborhood and create messages destined for another neighborhood which are sent over the network using Swarm's usual data dissemination protocols.
 
 ### Subscribe and Receive Messages
 
@@ -17,7 +17,7 @@ Here we subscribe to the topic `test-topic`
 websocat ws://localhost:1633/pss/subscribe/test-topic
 ```
 
-Our node is now watching for new messages received in its nearest neighbourhood.
+Our node is now watching for new messages received in its nearest neighborhood.
 
 :::info
 Because a message is disguised as a normal chunk in Swarm, you will receive the message upon syncing the chunk, even if your node is not online at the moment when the message was send to you.
@@ -29,7 +29,7 @@ Messages can be sent simply by sending a `POST` request to the PSS API endpoint.
 
 When sending messages, we must specify a 'target' prefix of the
 recipient's Swarm address, a partial address representing their
-neighbourhood. Currently the length of this prefix is recommended to
+neighborhood. Currently the length of this prefix is recommended to
 be two bytes, which will work well until the network has grown to a
 size of ca. 20-50K nodes. We must also provide the public key, so that
 Bee can encrypt the message in such a way that it may only be read by
@@ -194,7 +194,7 @@ curl \
 
 The PSS API endpoint will now create a PSS message for its recipient
 in the form of a 'Trojan Chunk' and send this into the network so that
-it may be pushed to the correct neighbourhood. Once it is received by
+it may be pushed to the correct neighborhood. Once it is received by
 its recipient it will be decrypted and determined to be a message with
 the topic we are listening for. Our second node will decrypt the data
 and we'll see a message pop up in our `websocat` console!

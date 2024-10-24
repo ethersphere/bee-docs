@@ -4,7 +4,7 @@ id: act
 ---
 
 :::info
-This is guide contains a detailed explanation of how to use the ACT feature, but does not cover its higher level concepts. To better understand how ACT works and why to use it, read [the ACT page in the "Learn" section](/docs/learn/technology/act).
+This is guide contains a detailed explanation of how to use the ACT feature, but does not cover its higher level concepts. To better understand how ACT works and why to use it, read [the ACT page in the "Learn" section](/docs/learn/features/access-control).
 :::
 
 
