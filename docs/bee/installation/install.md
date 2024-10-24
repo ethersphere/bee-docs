@@ -282,7 +282,7 @@ sudo vi /usr/local/etc/swarm-bee/bee.yaml
 
 ### Config for `bee start`
 
-When running your node using `bee start` you can set options using either command line flags, environment variables, or a YAML configuration file. See the configuration section for [more information on setting options for running a node with `bee start`](/docs/bee/working-with-bee/configuration#configuration-for-bee-start).
+When running your node using `bee start` you can set options using either command line flags, environment variables, or a YAML configuration file. See the configuration section for [more information on setting options for running a node with `bee start`](/docs/bee/working-with-bee/configuration).
 
 No default YAML configuration file is generated to be used with the `bee start` command, so it must be generated and placed in the default config directory if you wish to use it to set your node's options. You can view the default configuration including the default config directory for your system with the `bee printconfig` command.
 
