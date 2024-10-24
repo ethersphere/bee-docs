@@ -17,7 +17,7 @@ To be able trust your data, you must run your own Bee node that automatically ve
 
 ## Trojan Chunks
 
-Trojan chunks are a special version of content addressed chunks that have been 'mined' so that their natural home is in a particular area of the Swarm. If the destination node is in the right neighbourhood, it will be able to receive and decrypt the message. See [PSS](/docs/develop/tools-and-features/pss) for more information, or check out the [bee-js](https://bee-js.ethswarm.org/docs/api/classes/Bee/#psssend) bindings.
+Trojan chunks are a special version of content addressed chunks that have been 'mined' so that their natural home is in a particular area of the Swarm. If the destination node is in the right neighborhood, it will be able to receive and decrypt the message. See [PSS](/docs/develop/tools-and-features/pss) for more information, or check out the [bee-js](https://bee-js.ethswarm.org/docs/api/classes/Bee/#psssend) bindings.
 
 ## Single Owner Chunks
 

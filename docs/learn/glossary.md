@@ -123,7 +123,7 @@ There are three fundamental categories of depth:
  
 ### 1. Topology related depth
 
-This depth is defined in relation to the connection topology of a single node as the subject in relation to all the other nodes it is connected to. It is referred to using several different terms which all refer to the same concept (Connectivity depth / Kademlia depth / neighbourhood depth / physical depth)
+This depth is defined in relation to the connection topology of a single node as the subject in relation to all the other nodes it is connected to. It is referred to using several different terms which all refer to the same concept (Connectivity depth / Kademlia depth / neighborhood depth / physical depth)
 
 Connectivity depth refers to the saturation level of the node’s topology - the level to which the topology of a node’s connections has Kademlia connectivity. Defined as one level deeper than the deepest fully saturated level. A PO is defined as saturated if it has at least the minimum required level of connected nodes, which is set at 8 nodes in the current implementation of Swarm. 
 

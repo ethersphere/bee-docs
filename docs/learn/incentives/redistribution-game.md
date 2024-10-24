@@ -10,7 +10,7 @@ The redistribution game is used to redistribute the xBZZ which is accumulated by
 
 ### Redistribution Game Details
 
-When someone wants to upload data to Swarm, they do so by buying postage stamp batches with xBZZ. The xBZZ is collected and later paid out to storage provider nodes as a part of the redistribution game. Every 152 Gnosis Chain blocks a single [neighborhood](/docs/learn/DISC/neighbourhoods) is selected to play the redistribution game. For each round of the game, one node from the selected neighborhood will have the chance to win a reward which is paid out from the accumulated xBZZ. 
+When someone wants to upload data to Swarm, they do so by buying postage stamp batches with xBZZ. The xBZZ is collected and later paid out to storage provider nodes as a part of the redistribution game. Every 152 Gnosis Chain blocks a single [neighborhood](/docs/learn/DISC/neighborhoods) is selected to play the redistribution game. For each round of the game, one node from the selected neighborhood will have the chance to win a reward which is paid out from the accumulated xBZZ. 
 
 The game has 3 phases, `commit`, `reveal`, and `claim`. In the `reveal` phase of a previous game, an "anchor" address is randomly generated and used to determine the neighborhood for the current round. 
 

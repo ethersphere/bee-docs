@@ -13,11 +13,11 @@ Postage stamp prices are dynamically set based on a utilization signal supplied 
 
 ## Batch Buckets
 
-Postage stamps are issued in batches with a certain number of storage slots partitioned into $$2^{bucketDepth}$$ equally sized address space buckets. Each bucket is responsible for storing chunks that fall within a certain range of the address space. When uploaded, files are split into 4kb chunks, each chunk is assigned a unique address, and each chunk is then assigned to the bucket in which its address falls. Falling into the same range means a match on `n` leading bits of the chunk and bucket. This restriction is necessary to ensure (incentivise) uniform utilisation of the address space and is fair since the distribution of content addresses are uniform as well. Uniformity depth is the number of leading bits determining bucket membership (also called `bucket depth`). The uniformity depth is set to 16, so there are a total of $$2^{16} = 65,536$$ buckets.
+Postage stamps are issued in batches with a certain number of storage slots partitioned into $$2^{bucketDepth}$$ equally sized address space buckets (bucket depth has a fixed value of 16). Each bucket is responsible for storing chunks that fall within a certain range of the address space. When uploaded, files are split into 4kb chunks, each chunk is assigned a unique address, and each chunk is then assigned to the bucket in which its address falls. 
 
 ### Bucket Size
 
-Each bucket has a certain number of slots which can be "filled" by chunks (In other words, for each bucket, a certain number of chunks can be stamped). Once all the slots of a bucket are filled, the entire postage batch will be fully utilised and can no longer be used to upload additional data. 
+Each bucket has a certain number of slots which can be "filled" by chunks (In other words, for each bucket, a certain number of chunks can be stamped). Once all the slots of any single bucket from the batch are filled, the entire postage batch will become fully utilised and can no longer be used to upload additional data. 
 
 Together with `batch depth`, `bucket depth`determines how many chunks are allowed in each bucket. The number of chunks allowed in each bucket is calculated like so:
 
@@ -136,7 +136,7 @@ There are several nuances to how the re-uploading of previously uploaded data to
 
 #### Single chunks
 
-When a chunk which has previously been uploaded to Swarm is re-uploaded from the same node while the initial postage batch it was stamped by is still valid, no additional stamp will be utilised from the batch. However if the chunk comes from a different node than the original node, then a stamp WILL be utilised, and as long as at least one of the batches the chunk was stamped by is still valid, the chunk will be retained by storer nodes in its neighbourhood.
+When a chunk which has previously been uploaded to Swarm is re-uploaded from the same node while the initial postage batch it was stamped by is still valid, no additional stamp will be utilised from the batch. However if the chunk comes from a different node than the original node, then a stamp WILL be utilised, and as long as at least one of the batches the chunk was stamped by is still valid, the chunk will be retained by storer nodes in its neighborhood.
 
 #### Files 
 

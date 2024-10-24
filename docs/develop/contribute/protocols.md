@@ -84,7 +84,7 @@ Conversely the downstream should be informed when the upstream is no longer inte
 
 Swarm involves a direct storage scheme of fixed size where chunks are stored on nodes with address corresponding to the chunk address.
 
-The syncing protocols act in such a way that they reach those neighbourhoods whenever a request is initiated.
+The syncing protocols act in such a way that they reach those neighborhoods whenever a request is initiated.
 
 Such a route is sure to exist as a result of the Kademlia topology of keep-alive connections between peers.
 
@@ -215,9 +215,9 @@ Pushsync protocol is responsible for ensuring delivery of the chunk to its presc
 
 It works in a similar way to the Retrieval protocol in the sense that the chunk is being passed to a peer whose address is closest to the chunk address and a custody receipt is received in response.
 
-Then the same process is repeated until the chunk eventually reaches the storer node located in a certain "neighbourhood".
+Then the same process is repeated until the chunk eventually reaches the storer node located in a certain "neighborhood".
 
-Since the Pushsync protocol is a "mirror" version of the Retrieval protocol - it ensures that a successfully uploaded chunk is retrievable from the same "neighbourhood" by the virtue of the fact that nodes in a neighbourhood are connected to each other.
+Since the Pushsync protocol is a "mirror" version of the Retrieval protocol - it ensures that a successfully uploaded chunk is retrievable from the same "neighborhood" by the virtue of the fact that nodes in a neighborhood are connected to each other.
 
 ### Multiplexing
 
@@ -225,29 +225,29 @@ Multiplexing is a recommended node strategy for the push sync protocol that invo
 
 #### Context
 
-The current implementation of the push sync protocol aims to push a chunk to the closest node in the neighbourhood which is then supposed to give out a receipt.
+The current implementation of the push sync protocol aims to push a chunk to the closest node in the neighborhood which is then supposed to give out a receipt.
 
 This is motivated by the  retrieval protocol that aims to find the chunk at this closest node.
 
-When the closest node hands out a receipt, this node also replicates the chunk to 3 peers in the neighbourhood which are further away from the chunk than him.
+When the closest node hands out a receipt, this node also replicates the chunk to 3 peers in the neighborhood which are further away from the chunk than him.
 
-This replication takes place to ensure that the chunk is not lost when the closest node shuts down before the chunk is not pull-sync'ed and to speed up the spreading of the chunk in the neighbourhood, in advance of pull sync.
+This replication takes place to ensure that the chunk is not lost when the closest node shuts down before the chunk is not pull-sync'ed and to speed up the spreading of the chunk in the neighborhood, in advance of pull sync.
 
 #### Problem
 
 Treating the closest node as a single target of push sync is fragile. If this peer has a badly-performing blockchain backend, slow or incomplete connectivity or is malicious, it may not spread the chunk and/or does not respond with a receipt.
 
-In this case, currently, the originator must retry the entire push-sync operation many times before the other peers within neighbourhood recognise the improper behaviour.
+In this case, currently, the originator must retry the entire push-sync operation many times before the other peers within neighborhood recognise the improper behaviour.
 
-In-neighbourhood retries are ideally avoided because such retries might cause the downstream timeouts to expire.
+In-neighborhood retries are ideally avoided because such retries might cause the downstream timeouts to expire.
 
-In case of incomplete connectivity, the push sync protocol can end at a different branch of the neighbourhood than the retrieval protocol--causing the chunk not to be retrievable.
+In case of incomplete connectivity, the push sync protocol can end at a different branch of the neighborhood than the retrieval protocol--causing the chunk not to be retrievable.
 
 It should be noted that the pull sync protocol (may?) remedies this problem with a small time-delay.
 
-#### Multiplexing: early replication within neighbourhood
+#### Multiplexing: early replication within neighborhood
 
-The first node in the push sync forward chain that falls within the neighbourhood acts as *multiplexer*, i.e., it forwards the request to a number of closest nodes and responds with a self-signed receipt.
+The first node in the push sync forward chain that falls within the neighborhood acts as *multiplexer*, i.e., it forwards the request to a number of closest nodes and responds with a self-signed receipt.
 
 Thus in achieving retrievability and security via early replication, we do not critically rely on the closest node to be available any more.
 
@@ -257,15 +257,15 @@ We define the different roles peers have as part of the push sync forwarding cha
 
 - originator -- creator of the request
 - forwarder -- closer to the chunk than the originator, further away away than the 1-before node.
-- multiplexer -- first node in the forward chain who is in the neighbourhood
+- multiplexer -- first node in the forward chain who is in the neighborhood
 - closest nodes -- according to the downstream node (usually the multiplexer), within the `n` closest nodes to the chunks (not including self)
 
 we describe the envisioned flow of push sync by describing the intended behaviour strategy of the various roles.
 
 1. originator sends chunk to a peer closer to the chunk.
-2. forwarder(s) forwards chunk that ends up with a node already within the neighbourhood that acts as multiplexer
+2. forwarder(s) forwards chunk that ends up with a node already within the neighborhood that acts as multiplexer
 3. The multiplexer concurrently sends the chunk to 3 closest nodes attaching a multiplexing-list as part of the protocol message. At the same time they respond to their upstream peer with a self-signed receipt (unless the multiplexer is itself the originator).
-4. Non-multiplexing closest nodes, i.e., nodes in the neighbourhood that receive the pushsync message from a not-closest neighbour with a multiplexing list included, validate whether, based on their view, the multiplexing list covers all 3 closest nodes (potentially including the peer and/or the upstream peer themselves). If not, the node forwards the chunk to the peers left out. These peers are also added to the multiplexing list received from upstream and the extended list is attached with the chunk pushed.
+4. Non-multiplexing closest nodes, i.e., nodes in the neighborhood that receive the pushsync message from a not-closest neighbour with a multiplexing list included, validate whether, based on their view, the multiplexing list covers all 3 closest nodes (potentially including the peer and/or the upstream peer themselves). If not, the node forwards the chunk to the peers left out. These peers are also added to the multiplexing list received from upstream and the extended list is attached with the chunk pushed.
 
 If the multiplexer node does not know a closest peer *p* but several of its chosen closest nodes do, then that node *p* will receive the same pushsynced chunk multiple times
 
@@ -303,11 +303,11 @@ While the other described protocols are request scoped, Pullsync is a subscripti
 
 It's worth mentioning that the chunks that are being synchronized between nodes always travel alongside their corresponding postage stamps.
 
-Pullsync's role is to help synchronization of the chunks between neighbourhood nodes. It bootstraps new nodes by filling up their storage with the chunks in range of their storage radius and also ensures eventual consistency - by making sure that the chunks will gradually migrate to their storer nodes.
+Pullsync's role is to help synchronization of the chunks between neighborhood nodes. It bootstraps new nodes by filling up their storage with the chunks in range of their storage radius and also ensures eventual consistency - by making sure that the chunks will gradually migrate to their storer nodes.
 
 There are two kinds of syncing:
 
-- historical syncing: catching up with content that arrived to relevant neighbourhood before this session started (after an outage or for completely new nodes).
+- historical syncing: catching up with content that arrived to relevant neighborhood before this session started (after an outage or for completely new nodes).
 - live syncing: fetching the chunks that are received after the session has started.
 
 The chunks are served in batches (ordered by timestamp) and they cover contiguous ranges.
@@ -383,7 +383,7 @@ When choosing a peer in relation to a given address - in addition to the distanc
 
 - the historical performance of the given peer, both in terms of latencies and past occurrences of protocol misalignments.
 - the accounting aspect, peers with whom we have higher credit will be preferred.
-- we should also prioritise those downstream peers that managed to produce responses in a previously computed amount of time (that would take into consideration the average time needed for a hop multiplied by the expected number of hops needed to reach a target neighbourhood).
+- we should also prioritise those downstream peers that managed to produce responses in a previously computed amount of time (that would take into consideration the average time needed for a hop multiplied by the expected number of hops needed to reach a target neighborhood).
 
 Kademila should be indexing peers by their proximity order and peers rating in order to prioritize peers based on their expected performance.
 
