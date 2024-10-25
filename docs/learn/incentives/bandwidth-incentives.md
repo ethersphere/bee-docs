@@ -1,5 +1,5 @@
 ---
-title: Bandwidth Incentives
+title: Bandwidth Incentives (SWAP)
 id: bandwidth-incentives
 ---
 
