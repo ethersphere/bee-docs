@@ -55,7 +55,7 @@ As the address of the chunk shown above shares the same ten leading binary bits 
 
 *As with the example for nodes, we've abbreviated the chunk addresses to their leading four hexadecimal digits only and converted them to binary digits.*
 
-### neighborhood Doubling 
+### Neighborhood Doubling 
 
 As more and more chunks are assigned to neighborhoods, the chunk reserves of the nodes in that neighborhood will begin to fill up. Once the nodes' reserves in a neighborhood become full and can no longer store additional chunks, that neighborhood will split, with each half of the neighborhood taking responsibility for half of the chunks. This event is referred to as a "doubling", as it results in double the number of neighborhoods. The split is done by increasing the storage depth by one, so that the number of shared leading bits is increased by one. This results in a binary splitting of the neighborhood and associated chunks into two new neighborhoods and respective groups of chunks.
 
