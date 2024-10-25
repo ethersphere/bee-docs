@@ -49,7 +49,7 @@ As the [libp2p](https://libp2p.io/) library meets all these requirements it has 
 
 The second part of Swarm is an overlay network with protocols powering the [Distributed Immutable Store of Chunks (DISC)](/docs/learn/DISC/). This layer is responsible for storing and retrieving data in a decentralised and secure manner.
 
-Swarm's overlay network is built on top of the underlay transport layer and uses [Kademlia](/docs/learn/glossary#kademlia) overlay routing to enable efficient and scalable communication between nodes. Kademlia is a distributed hash table (DHT) algorithm that allows nodes to locate each other in the network based on their unique identifier or hash.
+Swarm's overlay network is built on top of the underlay transport layer and uses [Kademlia](/docs/learn/DISC/kademlia) overlay routing to enable efficient and scalable communication between nodes. Kademlia is a distributed hash table (DHT) algorithm that allows nodes to locate each other in the network based on their unique identifier or hash.
 
 Swarm's DISC is an implementation of a Kademlia DHT optimized for storage. While the use of DHTs in distributed data storage protocols is common, for many implementations DHTs are used only for indexing of specific file locations. Swarm's DISC distinguishes itself from other implementations by instead breaking files into chunks and storing the chunks themselves directly within a Kademlia DHT.
 
