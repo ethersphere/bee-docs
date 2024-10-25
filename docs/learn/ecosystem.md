@@ -1,6 +1,6 @@
 ---
-title: Ecosystem
-id: ecosystem
+title: Community
+id: community
 ---
 
 

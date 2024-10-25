@@ -36,7 +36,7 @@ module.exports = {
     },
     'learn/smart-contracts',
     'learn/tokens',
-    'learn/ecosystem',
+    'learn/community',
     'learn/fair-data-society',
     'learn/glossary',
     'learn/faq',

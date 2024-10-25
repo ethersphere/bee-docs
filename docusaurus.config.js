@@ -150,8 +150,8 @@ module.exports = {
               label: 'Tokens',
             },
             {
-              to: '/docs/learn/ecosystem',
-              label: 'Ecosystem',
+              to: '/docs/learn/community',
+              label: 'Community',
             },
             {
               to: '/docs/learn/fair-data-society',
