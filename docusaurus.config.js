@@ -115,62 +115,39 @@ module.exports = {
       items: [
         { 
           type: 'dropdown',
-          activeBasePath: 'docs/learn',
-          label: 'Learn',
+          activeBasePath: 'docs/concepts',
+          label: 'Concepts',
           position: 'left',
           className: 'inter',
           items: [
             {
-              to: 'docs/learn/introduction',
+              to: 'docs/concepts/introduction',
               label: 'Introduction',
             },
             {
-              to: '/docs/learn/what-is-swarm',
+              to: '/docs/concepts/what-is-swarm',
               label: 'What is Swarm?',
             },
             {
-              to: '/docs/learn/DISC/',
+              to: '/docs/concepts/DISC/',
               label: 'DISC Storage',
             },
             {
-              to: '/docs/learn/incentives/overview',
+              to: '/docs/concepts/incentives/overview',
               label: 'Incentives',
             },
             {
-              to: '/docs/learn/features/pss',
-              label: 'Features',
+              to: '/docs/concepts/protocols/pss',
+              label: 'Protocols',
             },
             
-            {
-              to: '/docs/learn/smart-contracts',
-              label: 'Smart Contracts',
-            },
-            {
-              to: 'docs/learn/tokens',
-              label: 'Tokens',
-            },
-            {
-              to: '/docs/learn/community',
-              label: 'Community',
-            },
-            {
-              to: '/docs/learn/fair-data-society',
-              label: 'Fair Data Society',
-            },
-            {
-              to: 'docs/learn/glossary',
-              label: 'Glossary',
-            },
-            {
-              to: 'docs/learn/faq',
-              label: 'FAQ ',
-            }
+            
           ]
         },
         {
           type: 'dropdown',
           activeBasePath: 'docs/desktop',
-          label: 'Desktop',
+          label: 'Desktop App',
           position: 'left',
           items: [
             {
@@ -214,7 +191,7 @@ module.exports = {
         {
           type: 'dropdown',
           activeBasePath: 'docs/bee',
-          label: 'Bee',
+          label: 'Bee Client',
           position: 'left',
           items: [
             {
@@ -268,10 +245,39 @@ module.exports = {
         //   position: 'left',
         // },
         // {to: 'blog', label: 'Blog', position: 'left'},
+        { 
+          type: 'dropdown',
+          activeBasePath: 'docs/references',
+          label: 'References',
+          position: 'left',
+          items: [
+            {
+              to: 'docs/references/smart-contracts',
+              label: 'Smart Contracts'
+            },
+            {
+              to: 'docs/references/tokens',
+              label: 'Tokens'
+            },
+            {
+              to: '/docs/references/community',
+              label: 'Community',
+            },
+            {
+              to: 'docs/references/glossary',
+              label: 'Glossary'
+            },
+            {
+              to: 'docs/references/faq',
+              label: 'FAQ'
+            },
+          ]
+        },
+        
         {
           to: '/api/',
           activeBasePath: '/api/',
-          label: 'API Reference',
+          label: 'API Specification',
           position: 'left',
         },
         {

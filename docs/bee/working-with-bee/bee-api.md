@@ -458,7 +458,7 @@ From the results we can see that we have a healthy neighborhood size when compar
 
 ### `/rchash`
 
-Calling the /rchash endpoint will make your node generate a reserve commitment hash (the hash used in the [redistribution game](/docs/learn/incentives/redistribution-game)), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
+Calling the /rchash endpoint will make your node generate a reserve commitment hash (the hash used in the [redistribution game](/docs/concepts/incentives/redistribution-game)), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
 
 ```bash
 sudo curl -sX GET http://localhost:1633/rchash/10/aaaa/aaaa | jq

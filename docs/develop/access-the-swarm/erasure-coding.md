@@ -5,7 +5,7 @@ id: erasure-coding
 
 import RedundancyCalc from '@site/src/components/RedundancyCalc.js';
 
-[Erasure coding](/docs/learn/DISC/erasure-coding) is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
+[Erasure coding](/docs/concepts/DISC/erasure-coding) is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
 
 ## Uploading With Erasure Coding
 
@@ -33,7 +33,7 @@ The accepted values for the `swarm-redundancy-level` header range from the defau
 | 3                | Insane    | 
 | 4                | Paranoid  | 
 
-For more details about each level of protection refer to the [erasure coding page](/docs/learn/DISC/erasure-coding) in the learn section and refer to the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) for an even deeper dive.
+For more details about each level of protection refer to the [erasure coding page](/docs/concepts/DISC/erasure-coding) in the learn section and refer to the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) for an even deeper dive.
 
 ## Cost Calculator Widget
 
@@ -41,7 +41,7 @@ This calculator takes as input an amount of data and an erasure coding redundanc
 
 <RedundancyCalc />
 
-For more details of erasure coding costs, see [here](/docs/learn/DISC/erasure-coding).
+For more details of erasure coding costs, see [here](/docs/concepts/DISC/erasure-coding).
 
 ## Downloading Erasure Encoded Data
 

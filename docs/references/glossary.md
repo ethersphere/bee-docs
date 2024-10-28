@@ -36,7 +36,7 @@ Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and th
 
 ## Neighborhood
 
-[Neighborhoods](/docs/learn/DISC/neighborhoods) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
+[Neighborhoods](/docs/concepts/DISC/neighborhoods) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
 
 ## Underlay
 

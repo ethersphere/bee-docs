@@ -6,14 +6,14 @@ id: fund-your-node
 In order to start your Bee node on the _mainnet_, its Ethereum wallet must be
 funded with:
 
-- 1 [xBZZ](/docs/learn/glossary#xbzz-token), for traffic
+- 1 [xBZZ](/docs/references/glossary#xbzz-token), for traffic
   accounting (this is optional, [see below](#basic-deployment))
 
-- some [xDAI](/docs/learn/glossary#xdai-token), to pay the gas fees of
+- some [xDAI](/docs/references/glossary#xdai-token), to pay the gas fees of
   a couple of transactions on the [Gnosis
-  Chain](/docs/learn/glossary#gnosis-chain).
+  Chain](/docs/references/glossary#gnosis-chain).
 
-Take note that xBZZ is the [bridged](/docs/learn/glossary#bridged-tokens) version of BZZ from Ethereum to the Gnosis Chain.
+Take note that xBZZ is the [bridged](/docs/references/glossary#bridged-tokens) version of BZZ from Ethereum to the Gnosis Chain.
 
 ### A node's wallet
 

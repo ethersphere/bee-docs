@@ -28,7 +28,7 @@ function Home() {
         <p className={styles.subTitle}>Official documentation of the decentralised data storage and distribution protocol built to power the next generation of censorship-resistant, unstoppable, serverless dapps.</p>
       </div>
       <div className={styles.container}>
-        <a className={styles.sectionButton} href="/docs/learn/introduction">
+        <a className={styles.sectionButton} href="/docs/concepts/introduction">
           <div className={styles.sectionButtonInner}>
             <img className={styles.sectionImageLearnDark} src="img/learn-dark.svg"></img>
             <img className={styles.sectionImageLearnLight} src="img/learn-light.svg"></img>

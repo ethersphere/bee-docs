@@ -36,9 +36,9 @@ As mentioned above, Swarm's version of Kademlia differs from commonly used imple
 
 ### Proximity Order & Neighborhoods
 
-Swarm introduces the concept of [proximity order (PO)](/docs/learn/glossary#proximity-order-po) as a discrete measure of node relatedness between two addresses. In contrast with Kademlia distance which is an exact measure of relatedness, PO is used to measure the relatedness between two addresses on a discrete scale based on the number of shared leading bits. Since this metric ignores all the bits after the shared leading bits, it is not an exact measure of distance between any two addresses.
+Swarm introduces the concept of [proximity order (PO)](/docs/references/glossary#proximity-order-po) as a discrete measure of node relatedness between two addresses. In contrast with Kademlia distance which is an exact measure of relatedness, PO is used to measure the relatedness between two addresses on a discrete scale based on the number of shared leading bits. Since this metric ignores all the bits after the shared leading bits, it is not an exact measure of distance between any two addresses.
 
-In Swarm's version of Kademlia, nodes are grouped into [neighborhoods](/docs/learn/DISC/neighborhoods) of nodes based on PO (ie., neighborhood are composed of nodes which all share the same leading binary prefix bits). Each neighborhood of nodes is responsible for storing the same set of chunks. 
+In Swarm's version of Kademlia, nodes are grouped into [neighborhoods](/docs/concepts/DISC/neighborhoods) of nodes based on PO (ie., neighborhood are composed of nodes which all share the same leading binary prefix bits). Each neighborhood of nodes is responsible for storing the same set of chunks. 
 
 Neighborhoods are important for ensuring data redundancy, and they also play a role in the incentives system which guarantees nodes are rewarded for contributing resources to the network.
 

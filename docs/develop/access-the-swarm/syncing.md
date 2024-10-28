@@ -55,5 +55,5 @@ curl http://localhost:1633/tags/5 | jq
 The response contains all the information that you need to follow the status of your file as it is synced with the network.
 
 :::info
-The numbers that the `tags` endpoint returns under `total`, `processed` and `synced` are denominated in [*chunks*](/docs/learn/DISC/#chunks), i.e. Swarm's 4kb data units.
+The numbers that the `tags` endpoint returns under `total`, `processed` and `synced` are denominated in [*chunks*](/docs/concepts/DISC/#chunks), i.e. Swarm's 4kb data units.
 :::

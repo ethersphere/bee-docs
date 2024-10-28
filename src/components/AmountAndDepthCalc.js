@@ -269,11 +269,11 @@ function FetchPriceComponent() {
             </tr>
             <tr>
               <td>Suggested Safe Depth</td>
-              <td>{`${depth} (for an `}<a href="/docs/learn/incentives/postage-stamps#effective-utilisation-table">effective volume</a>{` of ${depthToVolume[depth]})`}</td>
+              <td>{`${depth} (for an `}<a href="/docs/concepts/incentives/postage-stamps#effective-utilisation-table">effective volume</a>{` of ${depthToVolume[depth]})`}</td>
             </tr>
             <tr>
               <td>Suggested Minimum Depth</td>
-              <td>{minimumDepth} (see <a href="/docs/learn/incentives/postage-stamps#effective-utilisation-table">batch utilisation</a> - may require <a href="#dilute-your-batch">dilution</a>)</td>
+              <td>{minimumDepth} (see <a href="/docs/concepts/incentives/postage-stamps#effective-utilisation-table">batch utilisation</a> - may require <a href="#dilute-your-batch">dilution</a>)</td>
             </tr>
             <tr>
               <td>Batch Cost for Safe Depth</td>

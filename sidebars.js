@@ -1,15 +1,15 @@
 module.exports = {
-  learn: [
-    'learn/introduction',
-    'learn/what-is-swarm',
+  concepts: [
+    'concepts/introduction',
+    'concepts/what-is-swarm',
     {
       type: 'category',
       label: 'DISC Storage',
       items: [
-        'learn/DISC/disc',
-        'learn/DISC/kademlia',
-        'learn/DISC/neighborhoods',
-        'learn/DISC/erasure-coding',
+        'concepts/DISC/disc',
+        'concepts/DISC/kademlia',
+        'concepts/DISC/neighborhoods',
+        'concepts/DISC/erasure-coding',
       ],
       collapsed: false
     },
@@ -17,29 +17,25 @@ module.exports = {
       type: 'category',
       label: 'Incentives',
       items: [
-        'learn/incentives/overview',
-        'learn/incentives/redistribution-game',
-        'learn/incentives/postage-stamps',
-        'learn/incentives/bandwidth-incentives',
-        'learn/incentives/price-oracle',
+        'concepts/incentives/overview',
+        'concepts/incentives/redistribution-game',
+        'concepts/incentives/postage-stamps',
+        'concepts/incentives/bandwidth-incentives',
+        'concepts/incentives/price-oracle',
       ],
       collapsed: false
     },
     {
       type: 'category',
-      label: 'Features',
+      label: 'Protocols',
       items: [
-        'learn/features/pss',
-        'learn/features/access-control',
+        'concepts/protocols/pss',
+        'concepts/protocols/access-control',
       ],
       collapsed: false
     },
-    'learn/smart-contracts',
-    'learn/tokens',
-    'learn/community',
-    'learn/fair-data-society',
-    'learn/glossary',
-    'learn/faq',
+    
+   
   ],
   desktop: [
     'desktop/introduction',
@@ -140,5 +136,13 @@ module.exports = {
       collapsed: false
     },
 
-  ]
+  ],
+  References: [
+    'references/smart-contracts',
+    'references/tokens',
+    'references/glossary',
+    'references/community',
+    'references/fair-data-society',
+    'references/faq'
+     ],
 };

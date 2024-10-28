@@ -3,7 +3,7 @@ title: Neighborhoods
 id: neighborhoods
 ---
 
-In Swarm, a neighborhood refers to an area of responsibility within the network, where nodes in proximity to one another share the task of storing and maintaining data chunks. It is defined by the [proximity order (PO)](/docs/learn/glossary#proximity-order-po) of nodes' addresses. Nodes within a neighborhood replicate data chunks to ensure that if one node goes offline, other nodes in the neighborhood can still retrieve and serve the content.
+In Swarm, a neighborhood refers to an area of responsibility within the network, where nodes in proximity to one another share the task of storing and maintaining data chunks. It is defined by the [proximity order (PO)](/docs/references/glossary#proximity-order-po) of nodes' addresses. Nodes within a neighborhood replicate data chunks to ensure that if one node goes offline, other nodes in the neighborhood can still retrieve and serve the content.
 
 
 :::info
@@ -47,7 +47,7 @@ Chunks are assigned to neighborhoods based on their addresses, which are in the 
 > Chunk A address: `da49a42926015cd1e2bc552147c567b1ca13e8d4302c9e6026e79a24de328b65`   
 > Chunk B address: `da696a3dfb0f7f952872eb33e0e2a1435c61f111ff361e64203b5348cc06dc8a`   
 
-As the address of the chunk shown above shares the same ten leading binary bits as the nodes in our example neighborhood, it falls into that neighborhood's [area of responsibility](/docs/learn/glossary#2-area-of-responsibility-related-depths), and all the nodes in that neighborhood are required to store that chunk:
+As the address of the chunk shown above shares the same ten leading binary bits as the nodes in our example neighborhood, it falls into that neighborhood's [area of responsibility](/docs/references/glossary#2-area-of-responsibility-related-depths), and all the nodes in that neighborhood are required to store that chunk:
 
 > da49 --> <u>1101101001</u>001001  
 > da69 --> <u>1101101001</u>101001 
