@@ -14,7 +14,6 @@ module.exports = {
   // note! we use SED to change this during automated builds, see ./.github/workflows/gh-pages.yml
   baseUrl: '/',
   plugins: [
-  require.resolve('docusaurus-lunr-search'),
   'plugin-image-zoom',
   [
     '@docusaurus/plugin-client-redirects',
@@ -317,6 +316,16 @@ module.exports = {
     //   backgroundColor: '#dd7200', // Defaults to `#fff`.
     //   textColor: '#242424', // Defaults to `#000`.
     // },
+    
+    algolia: {
+      appId: "UAJRQL15I8",
+
+      apiKey: "7660a0b9a0f5aff5abd6c285b57f1e45",
+
+      indexName: "ethswarm",
+
+      contextualSearch: false,
+    },
   },
   presets: [
     [
