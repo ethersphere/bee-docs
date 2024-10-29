@@ -146,50 +146,6 @@ module.exports = {
         },
         {
           type: 'dropdown',
-          activeBasePath: 'docs/desktop',
-          label: 'Desktop App',
-          position: 'left',
-          items: [
-            {
-              to: 'docs/desktop/introduction',
-              label: 'Introduction'
-            },
-            {
-              to: 'docs/desktop/install',
-              label: 'Install'
-            },
-            {
-              to: 'docs/desktop/configuration',
-              label: 'Configuration'
-            },
-            {
-              to: 'docs/desktop/access-content',
-              label: 'Access Content'
-            },
-            {
-              to: 'docs/desktop/postage-stamps',
-              label: 'Postage Stamps'
-            },
-            {
-              to: 'docs/desktop/upload-content',
-              label: 'Upload Content'
-            },
-            {
-              to: 'docs/desktop/backup-restore',
-              label: 'Backup and Restore'
-            },
-            {
-              to: 'docs/desktop/publish-a-website',
-              label: 'Publish a Static Website'
-            },
-            {
-              to: 'docs/desktop/start-a-blog',
-              label: 'Start a Blog'
-            }
-          ]
-        },
-        {
-          type: 'dropdown',
           activeBasePath: 'docs/bee',
           label: 'Bee Client',
           position: 'left',
@@ -232,19 +188,50 @@ module.exports = {
             },
           ]
         },
-        // {
-        //   to: 'docs/bee/installation/quick-start',
-        //   activeBasePath: 'docs',
-        //   label: 'Installation',
-        //   position: 'left',
-        // },
-        // {
-        //   to: 'docs/getting-started/start-your-node',
-        //   activeBasePath: 'docs',
-        //   label: 'Start Your Node',
-        //   position: 'left',
-        // },
-        // {to: 'blog', label: 'Blog', position: 'left'},
+        {
+          type: 'dropdown',
+          activeBasePath: 'docs/desktop',
+          label: 'Desktop App',
+          position: 'left',
+          items: [
+            {
+              to: 'docs/desktop/introduction',
+              label: 'Introduction'
+            },
+            {
+              to: 'docs/desktop/install',
+              label: 'Install'
+            },
+            {
+              to: 'docs/desktop/configuration',
+              label: 'Configuration'
+            },
+            {
+              to: 'docs/desktop/access-content',
+              label: 'Access Content'
+            },
+            {
+              to: 'docs/desktop/postage-stamps',
+              label: 'Postage Stamps'
+            },
+            {
+              to: 'docs/desktop/upload-content',
+              label: 'Upload Content'
+            },
+            {
+              to: 'docs/desktop/backup-restore',
+              label: 'Backup and Restore'
+            },
+            {
+              to: 'docs/desktop/publish-a-website',
+              label: 'Publish a Static Website'
+            },
+            {
+              to: 'docs/desktop/start-a-blog',
+              label: 'Start a Blog'
+            }
+          ]
+        },
         { 
           type: 'dropdown',
           activeBasePath: 'docs/references',
