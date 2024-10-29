@@ -255,6 +255,10 @@ module.exports = {
               label: 'Glossary'
             },
             {
+              to: 'docs/references/fair-data-society',
+              label: 'Fair Data Society'
+            },
+            {
               to: 'docs/references/faq',
               label: 'FAQ'
             },
