@@ -326,7 +326,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     
     Let's take a look at each of these values:
     * `"radius"` - is what the storage radius would be if every available batch was 100% utilised, it is essentially the radius needed for the network to handle all of the batches at 100% utilisation. Radius is measured as a proximity order (PO).
-    * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods.
+    * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods).
     * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
     
 ### `/chainstate`
