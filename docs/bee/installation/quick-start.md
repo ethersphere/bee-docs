@@ -14,7 +14,7 @@ Bee is a versatile piece of software that caters to a diverse array of use cases
 | Downloading  | ✅        |   ✅      |✅         |        |
 | Uploading     | ✅       |   ✅      |  ❌  |
 | Can exceed free download limits by paying xBZZ  | ✅       |   ✅      |❌ 
-|Storing & sharing data|✅|    ❌      |❌|
+|Sharing disk space with network|✅|    ❌      |❌|
 |Storage incentives|✅|        ❌      |❌|
 |SWAP incentives|✅|           ✅      |❌|
 |PSS messaging|✅|             ✅      |✅ |
