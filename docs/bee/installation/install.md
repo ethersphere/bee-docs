@@ -530,6 +530,11 @@ In older versions of Bee, [neighborhood](/docs/concepts/DISC/neighborhoods) assi
 
 Therefore the default Bee configuration now includes the `neighborhood-suggester` option which is set by default to to use the Swarmscan neighborhood suggester (`https://api.swarmscan.io/v1/network/neighborhoods/suggestion`). An alternative suggester URL could be used as long as it returns a JSON file in the same format `{"neighborhood":"101000110101"}`, however only the Swarmscan suggester is officially recommended. 
 
+
+:::info
+The Swarmscan neighborhood selector will return the least populated neighborhood (or its least populated sub-neighborhood in case the sub-neighborhoods are imbalanced). Furthermore, the suggester will temporarily de-prioritize previously suggested neighborhoods based on the assumption that a new node is being created in each suggested neighborhood so that multiple nodes do not simultaneously attempt to join the same neighborhood.
+:::
+
 #### Setting Neighborhood Manually
 
 It's recommended to use the default `neighborhood-suggester` configuration for choosing your node's neighborhood, however you may also set your node's neighborhood manually using the `target-neighborhood` option.
