@@ -22,18 +22,12 @@ module.exports = {
         'concepts/incentives/postage-stamps',
         'concepts/incentives/bandwidth-incentives',
         'concepts/incentives/price-oracle',
+        
       ],
       collapsed: false
     },
-    {
-      type: 'category',
-      label: 'Protocols',
-      items: [
-        'concepts/protocols/pss',
-        'concepts/protocols/access-control',
-      ],
-      collapsed: false
-    },
+    'concepts/pss',
+    'concepts/access-control',
     
    
   ],

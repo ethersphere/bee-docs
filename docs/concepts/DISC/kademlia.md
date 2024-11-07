@@ -3,6 +3,8 @@ title: Kademlia
 id: kademlia
 ---
 
+import bos_fig_2_3 from '/static/img/bos_fig_2_3.jpg';
+
 
 Kademlia is a distributed hash table (DHT) algorithm used in peer-to-peer networks to efficiently store and retrieve data without relying on centralized servers. It organizes nodes into an overlay network that ensures efficient routing using a binary tree structure.
 
@@ -49,6 +51,14 @@ Kademlia comes in two flavors, iterative and forwarding. In iterative Kademlia, 
 In contrast, Swarm makes use of forwarding Kademlia. Here each node forwards the query to the next closest node in the network, and this process continues until a node with the requested chunk is found. Once the chunk is found, it is sent back along the same chain of nodes rather than sent directly to the initiator of the request.
 
 The main advantage of forwarding Kademlia is that it maintains the anonymity of the node which initiated the request.
+
+<div style={{ textAlign: 'center' }}>
+  <img src={bos_fig_2_3} className="responsive-image" />
+  <p style={{ fontStyle: 'italic', marginTop: '0.5rem' }}>
+    Source: <a href="https://www.ethswarm.org/the-book-of-swarm-2.pdf#subsection.2.1.3" target="_blank">The Book of Swarm - Figure 2.3 - "Iterative and Forwarding Kademlia routing"</a>
+  </p>
+</div>
+
 
 ### Neighborhood Based Storage Incentives
 

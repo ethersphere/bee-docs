@@ -3,6 +3,9 @@ title: DISC
 id: disc
 ---
 
+import bos_fig_2_7 from '/static/img/bos_fig_2_7.jpg';
+
+
 DISC (Distributed Immutable Storage of Chunks) is a storage solution developed by Swarm based on a modified implementation of a [Kademlia DHT](/docs/concepts/DISC/kademlia) which has been specialized for data storage. Swarm's implementation of a DHT differs significantly in that it stores the content in the DHT directly, rather than just storing a list of seeders who are able to serve the content. This approach allows for much faster and more efficient retrieval of data.
 
 ### Kademlia Topology and Routing
@@ -24,6 +27,14 @@ In the DISC model, chunks are the canonical unit of data. When a file is uploade
 #### Content-Addressed Chunks and Single-Owner Chunks
 
 Content-addressed chunks are chunks whose address is based on the hash digest of their data. Using a hash as the chunk address makes it possible to verify the integrity of chunk data. Swarm uses the BMT hash function based on a binary Merkle tree over small segments of the chunk data. A content-addressed chunk has an at most 4KB payload, and its address is calculated as the hash of the span (chunk metadata) and the Binary Merkle Tree hash of the payload.
+
+<div style={{ textAlign: 'center' }}>
+  <img src={bos_fig_2_7} className="responsive-image" />
+  <p style={{ fontStyle: 'italic', marginTop: '0.5rem' }}>
+    Source: <a href="https://www.ethswarm.org/the-book-of-swarm-2.pdf#subsection.2.2.2" target="_blank">The Book of Swarm - Figure 2.7 - "Content addressed chunk"</a>
+  </p>
+</div>
+
 
 For single-owner chunks on the other hand, the address is calculated as the hash of a unique id and the owner's overlay address. The content consists of an arbitrary data payload along with required headers. Unlike a content-addressed chunk, the contents of a single-owner chunk may be updated while the address remains unchanged. Single owner chunks form the basis for feeds, which are data structures that allow for mutable content with a static address.
 

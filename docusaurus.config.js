@@ -136,10 +136,13 @@ module.exports = {
               label: 'Incentives',
             },
             {
-              to: '/docs/concepts/protocols/pss',
-              label: 'Protocols',
+              to: '/docs/concepts/pss',
+              label: 'PSS',
             },
-            
+            {
+              to: '/docs/concepts/access-control',
+              label: 'Access Control',
+            },
             
           ]
         },

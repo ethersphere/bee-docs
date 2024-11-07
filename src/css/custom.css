@@ -300,3 +300,15 @@ body[data-rh] .redocusaurus {
   display: block;
 }
 
+.responsive-image {
+  width: 90%;
+  display: block;
+  margin: auto;
+}
+
+/* Apply 50% width for screens larger than 768px (tablet and desktop) */
+@media (min-width: 768px) {
+  .responsive-image {
+    width: 60%;
+  }
+}
