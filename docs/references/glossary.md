@@ -38,6 +38,14 @@ Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and th
 
 [Neighborhoods](/docs/concepts/DISC/neighborhoods) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
 
+## Sister Neighborhood
+
+A sister neighborhood is composed of nodes in the other half of an old neighborhood after a neighborhood split. 
+
+## Parent Neighborhood
+
+A parent neighborhood is the neighborhood one proximity order shallower than the two sister neighborhoods it contains. For example, given a neighborhood at depth 5 of 01011 and its sister neighborhood of 01010, their parent neighborhood is 0101 at depth 4.
+
 ## Underlay
 
 An underlay network is the low level network on which an overlay network is built. It allows nodes to find each other, communicate, and transfer data. Swarm's underlay network is a p2p network built with [libp2p](https://libp2p.io/). Nodes are assigned underlay addresses which in contrast to their overlay addresses are not permanent and may change over time. 

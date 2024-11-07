@@ -16,15 +16,28 @@ The terms "depth" and "radius" are often used interchangeably when discussing ne
 ## Key Concepts
 
 ### Proximity Order (PO)
-The PO is a measure how close a node is to a particular chunk of data or other node. It is defined as the number of shared leading bits between two addresses. Nodes with equal or greater proximity order value relative to a chunk have equal responsibility for storing and maintaining it. Proximity order plays a role in how neighborhoods are defined, as a node’s neighborhood extends up to its storage depth, covering all nodes within that proximity​.
+The PO is a measure how close a node is to a particular chunk of data or other node. It is defined as the number of shared leading bits between two addresses. Proximity order plays a role in how neighborhoods are defined, as a node’s neighborhood extends up to its storage depth, covering all nodes within that proximity​.
+
+### Reserve Depth
+
+The reserve depth is the shallowest PO at which neighborhoods are able to store all of the chunks which have been paid for through [postage stamp batch](/docs/concepts/incentives/overview#postage-stamps) purchases.
 
 ### Storage Depth
 
-Storage depth represents the effective reach or area up measured in proximity order to which a node must synchronize and store chunks within its neighborhood. It is the proximity order of chunks for which a node is responsible for storing.
+Storage depth is the shallowest PO at which neighborhoods are able to store all the chunks which have been *uploaded*. If 100% of all all chunks which have been paid for have been stamped and uploaded to the network, then storage depth will equal reserve depth. However, it is common that stamp batches are not always fully utilized, meaning that it is possible for the storage depth to be shallower than the reserve depth.
+
+Storage depth is the proximity order of chunks for which a node must synchronize and store chunks, and it is determined by nodes' reserve sizes in combination with the amount of chunks actually uploaded. 
+
+### Neighborhood Depth
+
+Neigborhood depth for a node is the highest (deepest) PO *`d`* where the node has at least 3 peers which share the same *`d`* number of leading binary prefix bits in their addresses.
+
 
 ### Neighborhood
 
-A neighborhood is a set of nodes in close proximity to each other based on their Kademlia proximity order (PO). Each node in the network has a neighborhood determined by its storage depth, which defines the radius or boundary of responsibility for storing chunks. Each node in a neighborhood is responsible for interacting with other nodes within its neighborhood to store and replicate data chunks, ensuring data availability and redundancy. 
+A neighborhood is a set of nodes in close proximity to each other based on their proximity order (PO). Each node in the neighborhood defined by storage depth is responsible for interacting with other nodes within that neighborhood to store and replicate data chunks, ensuring data availability and redundancy. 
+
+
 
 ## Example neighborhood
 
