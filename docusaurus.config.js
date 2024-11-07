@@ -261,9 +261,14 @@ module.exports = {
               label: 'Fair Data Society'
             },
             {
+              to: 'docs/references/awesome-list',
+              label: 'Awesome List'
+            },
+            {
               to: 'docs/references/faq',
               label: 'FAQ'
             },
+            
           ]
         },
         

@@ -137,6 +137,7 @@ module.exports = {
     'references/glossary',
     'references/community',
     'references/fair-data-society',
-    'references/faq'
+    'references/faq',
+    'references/awesome-list',
      ],
 };

@@ -26,3 +26,9 @@ Swarm grants support many interesting projects that are already building their p
 If you have an idea for a project which uses Swarm's technology we welcome you to [apply for a grant](https://grants.ethswarm.org).
 
 Learn more about grants for building on Swarm at the [EthSwarm homepage](https://www.ethswarm.org/grants).
+
+## Fellowships
+
+[Swarm fellows](https://www.ethswarm.org/fellowships) work on items identified as needs for the Swarm network to evolve and grow but are not part of core Swarm development. Fellows are expected to pursue the goals supported by the fellowship in the long term as part of their career path. A fellowship helps them achieve results to a certain degree, but afterwards, the project should be sustainable and able to continue on its own.
+
+Current Swarm fellows include both [Datafund](https://datafund.io/) and [Solar Punk](https://solarpunk.buzz/). 
