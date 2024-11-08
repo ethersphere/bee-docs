@@ -1,20 +1,64 @@
 ---
-title: Erasure Cost Calculation
-id: erasure-cost-calculation
+title: Erasure Coding
+id: erasure-coding
 ---
 
-### Precise Cost Calculations
+Erasure coding (also known as erasure code) is an efficient and flexible approach to data protection which is an optional feature for Swarm uploads. It is a technique that increases data protection by enabling the recovery of original data even when some encoded chunks are lost or corrupted. When used, it ensures that data on Swarm can always be accessed reliably, even if some nodes or entire neighborhoods go offline. Refer to the [official erasure coding paper](https://papers.ethswarm.org/p/erasure/) for more in depth details. 
 
-For each redundancy level, there are m + k = 128 chunks, where m are the data chunks (shown in column "Data Chunks") and k are the parity chunks (shown in column "Parities"). If the number of chunks in the data being uploaded are an exact multiple of m, then the percent cost of the upload will simply equal the one shown in the chart above in the "Percent" column for the corresponding redundancy level. 
+## How It Works
 
-#### Exact Multiples
+Erasure coding enhances data protection by dividing the source data into "chunks" and adding additional redundant chunks.
 
-For example, if we are uploading with the Strong redundancy level, and our source data consists of 321 (3 * 107) chunks, then we can simply use the percentage from the "Percent" column for the Strong level - 19.6% (63 parities / 321 data chunks). 
+Specifically, data is divided into **m** chunks, and **k** additional chunks are generated, resulting in **m + k** total chunks. The data is encoded across these chunks such that as long as **m** chunks are intact, the original data can be fully reconstructed. Chunks are then distributed across the network as with a standard upload. This approach provides a robust method for data recovery in distributed storage networks like Swarm.
 
-#### With Remainders
+### Example
 
-However, generally speaking uploads will not come in exact multiples of m, so we need to adjust our calculations. To do so we need to use the table below which shows the number of parities for sets of chunks starting at a single chunk for each redundancy level up to the maximum number of data chunks for that level. Then we simply sum up the total parities and data chunks for the entire upload and calculate the resulting percentage. 
+For an 8KB image, if we set **m = 2** and **k = 1**, we create 3 chunks (2 original + 1 redundant). As long as any 2 of these 3 chunks are available, we can reconstruct the original data. By increasing **k** to 4, we can tolerate the loss of up to 4 chunks while still recovering the original data.
 
+![Erasure Code Example](https://www.ethswarm.org/uploads/erasure-coding-01.png)
+
+### Levels of Protection
+
+In Swarm's implementation of erasure coding, there are four named levels of protection, Medium, Strong, Insane, and Paranoid. For each level, the **m** and **k** values have been adjusted in order to meet a certain level of data protection:
+
+***Table A:***
+| Redundancy Level Value | Level Name | Chunk Loss Tolerance         |      
+| ---------------- | --------- | ----------------------------------- |
+| 1                | Medium    | 1%                                  | 
+| 2                | Strong    | 5%                                  |
+| 3                | Insane    | 10%                                 | 
+| 4                | Paranoid  | 50%                                 | 
+
+The "Redundancy Level" is a numeric value for each level of protection, the "Level Name" is the official name for each level, and the "Chunk Loss Tolerance" column corresponds to the exact level of data protection for each level. For each redundancy level, the original data is retrievable with >=99.9999% statistical certainty given a percent chunk loss equal or less than the percent shown in the "Chunk Loss Tolerance" column. 
+
+Note that this guarantee of retrievability is for each 128 chunk segment, and therefore does not correspond to retrievability of a whole file. The retrievability failure rate for any individual file depends on the size of the file, and increases with the size of the file. For a detailed explanation of how to calculate the retrievability of any sized file refer to [section 3 in the erasure coding paper](https://papers.ethswarm.org/erasure-coding.pdf).    
+
+## Usage
+
+For usage instructions, see the [erasure coding page in the "Develop" section](/docs/develop/access-the-swarm/erasure-coding).
+
+## Cost Calculation
+
+In Swarm's implementation of erasure coding, there are four levels of protection: Medium, Strong, Insane, and Paranoid. Each level adds additional parity chunks for a corresponding increase in data protection (and also cost).
+
+The table below shows the number of parities and data chunks for each level, as well as the percent increase in cost vs a non-erasure coded upload. 
+
+***Table B:***
+| Redundancy | Parities | Data Chunks | Percent | Chunks Encrypted | Percent Encrypted |
+|----------|----------|--------|---------|------------------|-------------------|
+| Medium   | 9        | 119 | *7.6%*  | 59            | 15%           |
+| Strong   | 21       | 107 | *19.6%* | 53            | 40%           |
+| Insane   | 31       | 97   | 32%  | 48            | 65%            |
+| Paranoid | 90       | 38      | 240.5%    | 18               | 494%              |
+
+For each redundancy level, there are **m + k** = 128 chunks, where **m** are the data chunks (shown in column "Data Chunks") and **k** are the parity chunks (shown in column "Parities"). The "Percent" and "Percent Encrypted" columns show percent of "parity overhead" cost increase from using erasure coding for normal and encrypted uploads respectively. 
+
+
+### Cost Calculation for Smaller Uploads
+
+To find the percent increase in cost for uploads of less than 128 chunks, refer to the table below:
+
+***Table C:***
 | Security | Parities | Chunks | Percent     | Chunks Encrypted | Percent Encrypted |
 |----------|----------|--------|-------------|------------------|-------------------|
 | Medium   | 2        | 1      | 200%        |                  |                   |
@@ -108,4 +152,19 @@ However, generally speaking uploads will not come in exact multiples of m, so we
 | Paranoid  | 87      | 36      | 241.7%     | 18               | 483.3%            |               
 | Paranoid  | 89      | 37      | 240.5%     | 18               | 494.4%            |  
 
-Let's take our previous example and adjust it slightly. Instead of a source data consisting of 321 (3 * 107) chunks, we will add 19 chunks for a total of 340 chunks. Looking at our chart, we can see that at the Strong level for 19 data chunks we need 9 parity chunks. From this we can calculate the final percentage price: 72 / 340 = 21.17%. 
+### Example Cost Calculation
+
+For each redundancy level, there are m + k = 128 chunks, where m are the data chunks (shown in column "Data Chunks") and k are the parity chunks. If the number of chunks in the data being uploaded are an exact multiple of m, then the percent cost of the upload will simply equal the one shown in table B from the section above in the "Percent" column for the corresponding redundancy level.
+
+#### Exact Multiples
+
+For example, if we are uploading with the Strong redundancy level, and our source data consists of 321 (3 * 107) chunks, then we can simply use the percentage from the "Percent" column for the Strong level - 19.6% (63 parities / 321 data chunks).
+
+#### With Remainders
+
+However, generally speaking uploads will not come in exact multiples of m, so we need to adjust our calculations. To do so we need to use table C from the section above which shows the number of parities for sets of chunks starting at a single chunk for each redundancy level up to the maximum number of data chunks for that level. Then we simply sum up the total parities and data chunks for the entire upload and calculate the resulting percentage.
+
+Let's say for example we have a source file of 340 chunks which we want to upload with the Strong level of protection. Referring to table B, we see for the Strong level there are 21 parity chunks for each 107 data chunks. 340 / 107 = ~3.177, meaning our upload will have three full sets of 128 chunks where m = 107 and k = 21. The remainder can be calculated from the modulus of 340 % 107 = 19
+
+
+Looking at our chart, we can see that at the Strong level for 19 data chunks we need 9 parity chunks. From this we can calculate the final percentage price: 72 / 340 = 21.17%.

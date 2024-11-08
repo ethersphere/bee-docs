@@ -3,13 +3,13 @@ title: Staking
 id: staking
 ---
 
-In order to participate in the redistribution of xBZZ from uploaders to storers, storers must first deposit a non-refundable xBZZ stake with a smart contract. Then, they are going to be chosen for payout with a probability proportional to their stake in their neighbourhood, as long as they can log storing the part of the content that they are supposed to be storing according to protocol rules.
+In order to participate in the redistribution of xBZZ from uploaders to storers, storers must first deposit a non-refundable xBZZ stake with a smart contract. Then, they are going to be chosen for payout with a probability proportional to their stake in their neighborhood, as long as they can log storing the part of the content that they are supposed to be storing according to protocol rules.
 
 In order to participate in redistribution, storers need to do the following:
 
 - Join the network and download all the data that the protocol assigns to them. They can only participate if they are fully synchronised with the network.
 - Deposit a stake with the staking contract. There is a minimum staking requirement, presently 10 xBZZ. It can change in the future.
-- Stay online and fully synced, so that when a redistribution round comes, their node can check whether their neighbourhood (nodes that are assigned the same content to store) has been selected and if so, they can perform a certain calculation (a random sampling) on their content and submit the result to the redistribution contract. This happens in two phases (commit and reveal), so that the nodes cannot know the results of others’ calculations when committing to their own.
+- Stay online and fully synced, so that when a redistribution round comes, their node can check whether their neighborhood (nodes that are assigned the same content to store) has been selected and if so, they can perform a certain calculation (a random sampling) on their content and submit the result to the redistribution contract. This happens in two phases (commit and reveal), so that the nodes cannot know the results of others’ calculations when committing to their own.
 - Round length is estimated around 15 minutes (152 blocks to be precise), though it can be extended.
 
 Amongst the nodes that agree with the correct result, one is chosen — with a probability in proportion to their stake — as the winner. The winner must execute an on-chain transaction claiming their reward, which is the entire pot of storage rent paid since the previous round, or even more, if the previous pot has not been claimed at that time.
@@ -62,13 +62,13 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 * `"hasSufficientFunds": <bool>` - Shows whether the node has enough xDAI balance to submit at least five storage incentives redistribution related transactions.  If `false` the node will not be permitted to participate in next round.
 * `"isFrozen": <bool>` - Shows node frozen status.
 * `"isFullySynced": <bool>` - Shows whether node's localstore has completed full historical syncing with all connected peers.
-* `"phase": <string>` - Current phase of [redistribution game](/docs/learn/technology/incentives#storage-incentives-details) (`commit`, `reveal`, or `claim`).
+* `"phase": <string>` - Current phase of [redistribution game](/docs/concepts/incentives/redistribution-game) (`commit`, `reveal`, or `claim`).
 * `"round": <integer>` - Current round of redistribution game. The round number is determined by dividing the current Gnosis Chain block height by the number of blocks in one round. One round takes 152 blocks, so using the "block" output from the example above we can confirm that the round number is 176319 (block 26800488 / 152 blocks = round 176319).   
 * `"lastWonRound": <integer>` - Number of round last won by this node.
 * `"lastPlayedRound": <integer>` - Number of the last round where node's neighborhood was selected to participate in redistribution game.
 * `"lastFrozenRound": <integer>` The number the round when node was last frozen. 
 * `"block": <integer>` - Gnosis block of the current redistribution game.
-* `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](/docs/learn/glossary#plur).
+* `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](/docs/references/glossary#plur).
 * `"fees": <string (BigInt)>` - Record of total spent in 1E-18 xDAI on all redistribution related transactions.
 
 
@@ -111,11 +111,11 @@ curl -X DELETE http://localhost:1633/stake/withdrawable
 
 ## Maximize rewards
 
-There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](/docs/learn/technology/incentives/) for more context.
+There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](/docs/concepts/incentives/redistribution-game) for more context.
 
 ### Neighborhood selection 
 
-By default when running a Bee node for the first time an overlay address will be generated and used to assign the node to a random [neighborhood](/docs/learn/technology/disc#neighborhoods). However, by using the `target-neighborhood` config option, a specific neighborhood can be selected in which to generate the node's overlay address. This is an excellent tool for maximizing reward chances as generally speaking running in a less populated neighborhood will increase the chances of winning a reward. See the [config section](/docs/bee/installation/install#set-target-neighborhood-optional) on the installation page for more information on how to set a target neighborhood.
+By default when running a Bee node for the first time an overlay address will be generated and used to assign the node to a random [neighborhood](/docs/concepts/DISC/neighborhoods). However, by using the `target-neighborhood` config option, a specific neighborhood can be selected in which to generate the node's overlay address. This is an excellent tool for maximizing reward chances as generally speaking running in a less populated neighborhood will increase the chances of winning a reward. See the [config section](/docs/bee/installation/install#set-target-neighborhood-optional) on the installation page for more information on how to set a target neighborhood.
 
 
 ### Stake density
@@ -126,7 +126,7 @@ $$
 \text{stake density} = \text{staked xBZZ} \times {2}^\text{storageDepth}
 $$
   
-*To learn more about stake density and the mechanics of the incentives system, see the [incentives page](/docs/learn/technology/incentives/).*
+*To learn more about stake density and the mechanics of the incentives system, see the [incentives page](/docs/concepts/incentives/redistribution-game).*
 
 Stake density determines the weighted chances of nodes within a neighborhood of winning rewards. The chance of winning within a neighborhood corresponds to stake density. Stake density can be increased by depositing more xBZZ as stake (note that stake withdrawals are not currently possible, so any staked xBZZ is not currently recoverable). 
 
@@ -198,7 +198,7 @@ In this section we cover several commonly seen issues encountered for staking no
 
 ### Frozen node
 
-A node will be frozen when the reserve commitment hash it submits in its [`commit` transaction](/docs/learn/technology/incentives#storage-incentives-details) does not match the correct hash. The reserve commitment hash is used as proof that a node is storing the chunks it is responsible for. It will not be able to play in the redistribution game during the freezing period. See the  [penalties](/docs/learn/technology/incentives#penalties) section for more information.
+A node will be frozen when the reserve commitment hash it submits in its [`commit` transaction](/docs/concepts/incentives/redistribution-game) does not match the correct hash. The reserve commitment hash is used as proof that a node is storing the chunks it is responsible for. It will not be able to play in the redistribution game during the freezing period. See the  [penalties](/docs/concepts/incentives/redistribution-game) section for more information.
 
 #### Check frozen status
 

@@ -36,7 +36,15 @@ Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and th
 
 ## Neighborhood
 
-Neighborhoods are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. See [DISC](/docs/learn/technology/disc#neighborhoods) for more details.
+[Neighborhoods](/docs/concepts/DISC/neighborhoods) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
+
+## Sister Neighborhood
+
+A sister neighborhood is composed of nodes in the other half of an old neighborhood after a neighborhood split. 
+
+## Parent Neighborhood
+
+A parent neighborhood is the neighborhood one proximity order shallower than the two sister neighborhoods it contains. For example, given a neighborhood at depth 5 of 01011 and its sister neighborhood of 01010, their parent neighborhood is 0101 at depth 4.
 
 ## Underlay
 
@@ -66,12 +74,17 @@ Kademlia is a distributed hash table (DHT) which is commonly used in distributed
 
 ## Kademlia distance
 
-Within Kademlia, nodes have numeric ids with the same length and format taken from the same namespace as the keys of the key/value pairs. Kademlia distance between node ids and keys is calculated through the XOR bitwise operation done over any ids or keys. 
-
+Kademlia introduces an XOR based distance metric to define the relatedness of two addresses. In Kademlia nodes have numeric ids with the same length and format taken from the same namespace as the keys of the key/value pairs. Kademlia distance between node ids and keys is calculated through the XOR bitwise operation done over any ids or keys. 
 
 Note: For a Kademlia DHT, any standardized numerical format can be used for ids. However, within Swarm, ids are derived from a Keccak256 digest and are represented as 256 bit hexadecimal numbers. They are referred to as addresses or hashes.
 
-Example:   We have a Kademlia DHT consisting of only ten nodes with ids of 1 - 10. We want to find the distance between node 4 and 7. In order to do that, we perform the XOR bitwise operation:
+Swarm hash: 
+
+> eada6722670c6de6da7d0470167bf14f6e4dc1b98476da94a7330041adec26a3
+
+In the examples which follow, we use short binary numbers to increase example clarity rather than the actual Swarm hash format.
+
+Example: We have a Kademlia DHT consisting of only ten nodes with ids of 1 - 10. We want to find the distance between node 4 and 7. In order to do that, we perform the XOR bitwise operation:
 
 4 | 0100   
 7 | 0111  
@@ -80,15 +93,15 @@ Example:   We have a Kademlia DHT consisting of only ten nodes with ids of 1 - 1
 
 And we find that the distance between the two nodes is 3. 
 
-
-
 ## Chunk
 
 When data is uploaded to Swarm, it is broken down into 4kb sized pieces which are each assigned an address in the same format as node’s overlay addresses. Chunk addresses are formed by taking the BMT hash of the chunk content along with an 8 byte measure of the number of the chunk’s child chunks, the `span`. The BMT hashing algorithm is based on the Keccac256 hashing algorithm, so it produces an address with the same format as that for the node overlay addresses.
 
 ## Proximity Order (PO)
 
-Proximity Order is a concept defined in The Book of Swarm and is closely related to Kademlia distance. Proximity order is defined as the number of shared prefix bits of any two addresses. It is found by performing the XOR bitwise operation on the two addresses and counting how many leading 0 there are before the first 1. In other words, PO is equal to the number of shared binary prefix bits.
+Proximity Order is a concept defined in The Book of Swarm and is closely related to Kademlia distance. In contrast to distance which is an exact measure of the relatedness of two nodes, PO is a discrete measure relatedness between two nodes. By "discrete", we mean that PO is a general measure of relatedness rather than an exact measure of relatedness like the XOR distance metric of Kademlia.
+
+Proximity order is defined as the number of shared prefix bits of any two addresses. It is found by performing the XOR bitwise operation on the two addresses and counting how many leading 0 there are before the first 1. 
 
 Taking the previous example used in the Kademlia distance definition:
 
@@ -118,7 +131,7 @@ There are three fundamental categories of depth:
  
 ### 1. Topology related depth
 
-This depth is defined in relation to the connection topology of a single node as the subject in relation to all the other nodes it is connected to. It is referred to using several different terms which all refer to the same concept (Connectivity depth / Kademlia depth / neighbourhood depth / physical depth)
+This depth is defined in relation to the connection topology of a single node as the subject in relation to all the other nodes it is connected to. It is referred to using several different terms which all refer to the same concept (Connectivity depth / Kademlia depth / neighborhood depth / physical depth)
 
 Connectivity depth refers to the saturation level of the node’s topology - the level to which the topology of a node’s connections has Kademlia connectivity. Defined as one level deeper than the deepest fully saturated level. A PO is defined as saturated if it has at least the minimum required level of connected nodes, which is set at 8 nodes in the current implementation of Swarm. 
 

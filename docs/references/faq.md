@@ -55,7 +55,7 @@ There are many ways to acquire BZZ tokens, either on custodial centralised excha
 
 ### What is the BZZ token address?
 
-See [this page](/docs/learn/technology/contracts/overview) for a list of relevant token addresses. 
+See [this page](/docs/references/smart-contracts) for a list of relevant token addresses. 
 
 ### What is the BZZ token supply?
 

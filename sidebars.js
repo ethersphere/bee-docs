@@ -1,55 +1,35 @@
 module.exports = {
-  learn: [
-    'learn/introduction',
+  concepts: [
+    'concepts/introduction',
+    'concepts/what-is-swarm',
     {
       type: 'category',
-      label: 'Technology',
+      label: 'DISC Storage',
       items: [
-        'learn/technology/what-is-swarm',
-        'learn/technology/disc',
-        'learn/technology/incentives',
-        'learn/technology/pss',
-        'learn/technology/act',
-        {
-          type: 'category',
-          label: 'Contracts',
-          items: [
-
-            'learn/technology/contracts/overview',
-            'learn/technology/contracts/chequebook',
-            'learn/technology/contracts/postage-stamp',
-            'learn/technology/contracts/price-oracle',
-
-          ],
-          collapsed: false
-        },
+        'concepts/DISC/disc',
+        'concepts/DISC/kademlia',
+        'concepts/DISC/neighborhoods',
+        'concepts/DISC/erasure-coding',
       ],
       collapsed: false
     },
     {
       type: 'category',
-      label: 'Ecosystem',
+      label: 'Incentives',
       items: [
-        'learn/ecosystem/swarm-foundation',
-        'learn/ecosystem/fair-data-society',
-        'learn/ecosystem/community',
-        'learn/ecosystem/grants-bounties',
-        'learn/ecosystem/awesome',
+        'concepts/incentives/overview',
+        'concepts/incentives/redistribution-game',
+        'concepts/incentives/postage-stamps',
+        'concepts/incentives/bandwidth-incentives',
+        'concepts/incentives/price-oracle',
+        
       ],
       collapsed: false
     },
-    {
-      type: 'category',
-      label: 'Advanced',
-      items: [
-        'learn/advanced/erasure-cost-calculation',
-        'learn/advanced/neighbourhoods',
-      ],
-      collapsed: false
-    },
-    'learn/tokens',
-    'learn/glossary',
-    'learn/faq',
+    'concepts/pss',
+    'concepts/access-control',
+    
+   
   ],
   desktop: [
     'desktop/introduction',
@@ -150,5 +130,14 @@ module.exports = {
       collapsed: false
     },
 
-  ]
+  ],
+  References: [
+    'references/smart-contracts',
+    'references/tokens',
+    'references/glossary',
+    'references/community',
+    'references/fair-data-society',
+    'references/faq',
+    'references/awesome-list',
+     ],
 };

@@ -282,7 +282,7 @@ sudo vi /usr/local/etc/swarm-bee/bee.yaml
 
 ### Config for `bee start`
 
-When running your node using `bee start` you can set options using either command line flags, environment variables, or a YAML configuration file. See the configuration section for [more information on setting options for running a node with `bee start`](/docs/bee/working-with-bee/configuration#configuration-for-bee-start).
+When running your node using `bee start` you can set options using either command line flags, environment variables, or a YAML configuration file. See the configuration section for [more information on setting options for running a node with `bee start`](/docs/bee/working-with-bee/configuration).
 
 No default YAML configuration file is generated to be used with the `bee start` command, so it must be generated and placed in the default config directory if you wish to use it to set your node's options. You can view the default configuration including the default config directory for your system with the `bee printconfig` command.
 
@@ -526,7 +526,7 @@ resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 
 ### Set Target Neighborhood (Optional)
 
-In older versions of Bee, [neighborhood](/docs/learn/technology/disc#neighborhoods) assignment was random by default. However, we can maximize a node's chances of winning xBZZ and also strengthen the resiliency of the network by strategically assigning neighborhoods to new nodes (see the [staking section](/docs/bee/working-with-bee/staking) for more details).
+In older versions of Bee, [neighborhood](/docs/concepts/DISC/neighborhoods) assignment was random by default. However, we can maximize a node's chances of winning xBZZ and also strengthen the resiliency of the network by strategically assigning neighborhoods to new nodes (see the [staking section](/docs/bee/working-with-bee/staking) for more details).
 
 Therefore the default Bee configuration now includes the `neighborhood-suggester` option which is set by default to to use the Swarmscan neighborhood suggester (`https://api.swarmscan.io/v1/network/neighborhoods/suggestion`). An alternative suggester URL could be used as long as it returns a JSON file in the same format `{"neighborhood":"101000110101"}`, however only the Swarmscan suggester is officially recommended. 
 

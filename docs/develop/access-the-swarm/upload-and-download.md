@@ -11,12 +11,11 @@ When you upload your files to the Swarm, they are split into 4kb
 _chunks_ and then distributed to nodes in the network that are
 responsible for storing and serving these parts of your content. 
 To learn more about how Swarm's decentralized storage solution works,
-check out the ["Learn" section](/docs/learn/technology/what-is-swarm).
+check out the ["Concepts" section](/docs/concepts/what-is-swarm).
 
 In order for you to be able to upload any data to the network,
-you must first purchase [postage stamps](/docs/learn/technology/contracts/postage-stamp)
-and then use those stamps to upload your data. Keep on reading 
-below to learn how.
+you must first purchase [postage stamps](/docs/concepts/incentives/postage-stamps)
+and then use those stamps to upload your data. Keep on reading below to learn how.
 
 ## Uploads and Download Endpoints Overview
 

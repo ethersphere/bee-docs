@@ -1,21 +1,23 @@
 ---
-title: Postage Stamp 
-id: postage-stamp
+title: Postage Stamps 
+id: postage-stamps
 ---
 
-The [postage stamp contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PostageStamp.sol) is one component in the suite of smart contract orchestrating Swarm's [storage incentives](/docs/learn/technology/incentives) which make up the foundation of Swarm's self-sustaining economic system. 
+Postage stamps are used to pay for storing data on Swarm. They are purchased in batches which represent the pre-paid right to store data on Swarm in the same way that real-life postage stamps represent the pre-paid right to send mail through the postal service.
 
-When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/learn/technology/disc) of data. Postage stamps are purchased in batches rather than one by one. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
+When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/concepts/DISC/) of data. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
 
-The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. We say that a stamp expires when the batch it is issued from has insufficient balance. A chunk with an expired stamp can not be used in the proof of entitlement storer nodes need to submit in order to get compensated for their contributed storage space, therefore such expired chunks are evicted from nodes' reserves and put into the cache where their continued persistence depends on their popularity. 
+The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. A stamp expires when the batch it is issued from has insufficient balance. A chunk with an expired stamp can not be used in the proof storer nodes need to submit in order to get compensated for their contributed storage space in the redistribution game, therefore such expired chunks are evicted from nodes' reserves and put into the cache where their continued persistence depends on their popularity. 
+
+Postage stamp prices are dynamically set based on a utilization signal supplied by the price oracle smart contract. Prices will automatically increase or decrease according to the level of utilization. 
 
 ## Batch Buckets
 
-Postage stamps are issued in batches with a certain number of storage slots partitioned into $$2^{bucketDepth}$$ equally sized address space buckets. Each bucket is responsible for storing chunks that fall within a certain range of the address space. When uploaded, files are split into 4kb chunks, each chunk is assigned a unique address, and each chunk is then assigned to the bucket in which its address falls. Falling into the same range means a match on `n` leading bits of the chunk and bucket. This restriction is necessary to ensure (incentivise) uniform utilisation of the address space and is fair since the distribution of content addresses are uniform as well. Uniformity depth is the number of leading bits determining bucket membership (also called `bucket depth`). The uniformity depth is set to 16, so there are a total of $$2^{16} = 65,536$$ buckets.
+Postage stamps are issued in batches with a certain number of storage slots partitioned into $$2^{bucketDepth}$$ equally sized address space buckets (bucket depth has a fixed value of 16). Each bucket is responsible for storing chunks that fall within a certain range of the address space. When uploaded, files are split into 4kb chunks, each chunk is assigned a unique address, and each chunk is then assigned to the bucket in which its address falls. 
 
 ### Bucket Size
 
-Each bucket has a certain number of slots which can be "filled" by chunks (In other words, for each bucket, a certain number of chunks can be stamped). Once all the slots of a bucket are filled, the entire postage batch will be fully utilised and can no longer be used to upload additional data. 
+Each bucket has a certain number of slots which can be "filled" by chunks (In other words, for each bucket, a certain number of chunks can be stamped). Once all the slots of any single bucket from the batch are filled, the entire postage batch will become fully utilised and can no longer be used to upload additional data. 
 
 Together with `batch depth`, `bucket depth`determines how many chunks are allowed in each bucket. The number of chunks allowed in each bucket is calculated like so:
 
@@ -30,12 +32,12 @@ $$
 $$
 
 :::info
-Note that due how buckets fill as described above, a batch can become fully utilised before its theoretical maximum volume has been reached. See [batch utilisation section below](/docs/learn/technology/contracts/postage-stamp#batch-utilisation) for more information.
+Note that due how buckets fill as described above, a batch can become fully utilised before its theoretical maximum volume has been reached. See [batch utilisation section below](/docs/concepts/incentives/postage-stamps#batch-utilisation) for more information.
 :::
 
 ## Batch Depth and Batch Amount
 
-Each batch of stamps has two key parameters, `batch depth` and `amount`, which are recorded on Gnosis Chain at issuance. Note that these "depths" do not refer to the depth terms used to describe topology which are outlined [here in the glossary](/docs/learn/glossary#depth-types).
+Each batch of stamps has two key parameters, `batch depth` and `amount`, which are recorded on Gnosis Chain at issuance. Note that these "depths" do not refer to the depth terms used to describe topology which are outlined [here in the glossary](/docs/references/glossary#depth-types).
 
 ### Batch Depth 
 
@@ -53,7 +55,7 @@ $$
 \text{Theoretical maximum batch volume} = 2^{batchDepth} \times \text{4 kb}   
 $$
 
-However, due to the way postage stamp batches are utilised, batches will become fully utilised before stamping the theoretical maximum number of chunks. Therefore when deciding which batch depth to use, it is important to consider the effective amount of data that can be stored by a batch, and not the theoretical maximum. The effective rate of utilisation increases along with the  batch depth. See [section on stamp batch utilisation below](/docs/learn/technology/contracts/postage-stamp#batch-utilisation) for more information.
+However, due to the way postage stamp batches are utilised, batches will become fully utilised before stamping the theoretical maximum number of chunks. Therefore when deciding which batch depth to use, it is important to consider the effective amount of data that can be stored by a batch, and not the theoretical maximum. The effective rate of utilisation increases along with the  batch depth. See [section on stamp batch utilisation below](/docs/concepts/incentives/postage-stamps#batch-utilisation) for more information.
 
 ### Batch Amount (& Batch Cost)
 
@@ -99,7 +101,7 @@ Utilisation of an immutable batch is computed using a hash map of size $$2^{buck
 
 ![](/img/batches_01.png)
 
-As chunks are uploaded to Swarm, each chunk is assigned to a bucket based the first 16 binary digits of the [chunk's hash](/docs/learn/technology/disc#chunks). The chunk will be assigned to whichever bucket's key matches the first 16 bits of its hash, and that bucket's counter will be incremented by 1. 
+As chunks are uploaded to Swarm, each chunk is assigned to a bucket based the first 16 binary digits of the [chunk's hash](/docs/concepts/DISC/#chunks). The chunk will be assigned to whichever bucket's key matches the first 16 bits of its hash, and that bucket's counter will be incremented by 1. 
 
 The batch is deemed "full" when ANY of these counters reach a certain max value. The max value is computed from the batch depth as such: $$2^{(batchDepth-bucketDepth)}$$. For example with batch depth of 24, the max value is $$2^{(24-16)}$$ or 256. A bucket can be thought of as have a number of "slots" equal to this maximum value, and every time the bucket's counter is incremented, one of its slots gets filled. 
 
@@ -134,7 +136,7 @@ There are several nuances to how the re-uploading of previously uploaded data to
 
 #### Single chunks
 
-When a chunk which has previously been uploaded to Swarm is re-uploaded from the same node while the initial postage batch it was stamped by is still valid, no additional stamp will be utilised from the batch. However if the chunk comes from a different node than the original node, then a stamp WILL be utilised, and as long as at least one of the batches the chunk was stamped by is still valid, the chunk will be retained by storer nodes in its neighbourhood.
+When a chunk which has previously been uploaded to Swarm is re-uploaded from the same node while the initial postage batch it was stamped by is still valid, no additional stamp will be utilised from the batch. However if the chunk comes from a different node than the original node, then a stamp WILL be utilised, and as long as at least one of the batches the chunk was stamped by is still valid, the chunk will be retained by storer nodes in its neighborhood.
 
 #### Files 
 
@@ -174,7 +176,7 @@ The implications of this behaviour are that even a small change to the data of a
 
 Due to the nature of batch utilisation described above, batches are often fully utilised before reaching their theoretical maximum storage amount. However as the batch depth increases, the chance of a postage batch becoming fully utilised early decreases. At batch depth 24, there is a 0.1% chance that a batch will be fully utilised/start replacing old chunks before reaching 64.33% of its theoretical maximum.
 
-Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](/docs/learn/technology/contracts/postage-stamp#batch-depth), we can see that for a batch depth of 24, the theoretical maximum amount which can be stored is 68.72 gb:
+Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](/docs/concepts/incentives/postage-stamps#batch-depth), we can see that for a batch depth of 24, the theoretical maximum amount which can be stored is 68.72 gb:
 
 $$
 2^{24+12} = \text{68,719,476,736 bytes} = \text{68.72 gb}
@@ -228,6 +230,6 @@ The provided table shows the effective volume for each batch depth from 20 to 41
 This table is based on preliminary calculations and may be subject to change.
 :::
 
-Nodes' storage is actually defined as a number of chunks with a size of 4kb (2^12 bytes) each, but in fact some [SOC](/docs/learn/technology/disc#content-addressed-chunks-and-single-owner-chunks) chunks can be a few bytes longer, and some chunks can be smaller, so the conversion is not precise. Furthermore, due to the way Swarm represents files in a Merkle tree, the intermediate chunks are additional overhead which must also be accounted for. 
+Nodes' storage is actually defined as a number of chunks with a size of 4kb (2^12 bytes) each, but in fact some [SOC](/docs/concepts/DISC/#chunks) chunks can be a few bytes longer, and some chunks can be smaller, so the conversion is not precise. Furthermore, due to the way Swarm represents files in a Merkle tree, the intermediate chunks are additional overhead which must also be accounted for. 
 
 Additionally, when a node stores chunks it uses additional indexes — therefore the disk space a maximally filled reserve would demand cannot be calculated with perfect accuracy.

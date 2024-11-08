@@ -5,7 +5,7 @@ id: erasure-coding
 
 import RedundancyCalc from '@site/src/components/RedundancyCalc.js';
 
-Erasure coding is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
+[Erasure coding](/docs/concepts/DISC/erasure-coding) is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
 
 ## Uploading With Erasure Coding
 
@@ -24,44 +24,24 @@ To upload data to Swarm using erasure coding, the `swarm-redundancy-level: <inte
     {"reference":"c02e7d943fbc0e753540f377853b7181227a83e773870847765143681511c97d"}
 ```
 
+The accepted values for the `swarm-redundancy-level` header range from the default of 0 up to 4. Each level corresponds to a different level of data protection, with erasure coding turned off at 0, and at its maximum at 4. Each increasing level provides increasing amount of data redundancy offering greater protection against data loss. 
 
-The accepted values for the `swarm-redundancy-level` header range from the default of 0 up to 4. Each level corresponds to a different level of data protection, with erasure coding turned off at 0, and at its maximum at 4. Each increasing level provides increasing amount of data redundancy offering greater protection against data loss. Each level has been formulated to guarantee against a certain percentage of chunk retrieval errors, shown in the table below. As long as the error rate is below the expected chunk retrieval rate for the given level, there is a less than 1 in a million chance of failure to retrieve the source data.
+| Redundancy Level Value | Level Name |       
+| ---------------- | --------- | 
+| 1                | Medium    |  
+| 2                | Strong    | 
+| 3                | Insane    | 
+| 4                | Paranoid  | 
 
-| Redundancy Level | Pseudonym | Expected Chunk Retrieval Error Rate |
-| ---------------- | --------- | ----------------------------------- |
-| 0                | None      | 0%                                  |
-| 1                | Medium    | 1%                                  |
-| 2                | Strong    | 5%                                  |
-| 3                | Insane    | 10%                                 |
-| 4                | Paranoid  | 50%                                 |
-
-
-
-### Redundancy Level Costs Explained 
-
-Erasure encoding is applied to sets of chunks of at most size 128 (including both data chunks and parity chunks). For higher levels of redundancy, the ratio of parity chunks to data chunks increases, increasing the percent cost of the upload compared to uploading at lower levels of redundancy. 
-
-In the table below, the percent cost is displayed for each redundancy level. The cost of encrypted uploads is also shown, and is double the cost of un-encrypted uploads.
-
-
-| Redundancy | Parities | Data Chunks | Percent | Chunks Encrypted | Percent Encrypted |
-|----------|----------|--------|---------|------------------|-------------------|
-| Medium   | 9        | 119 | *7.6%*  | 59            | 15%           |
-| Strong   | 21       | 107 | *19.6%* | 53            | 40%           |
-| Insane   | 31       | 97   | 32%  | 48            | 65%            |
-| Paranoid | 90       | 38      | 240.5%    | 18               | 494%              |
-
-For larger uploads (where the source data chunks are equal to or greater than the  "Data Chunks" for each redundancy level respectively) you can use the percent values shown in the "Percent" column as a general estimate of the percent cost of uploading. If the number of chunks is slightly less than the number shown in the "Data Chunks" column, you can also use the value in the "Percent" column as a good general estimate of the percent cost. 
-
-However, if the number of source data chunks are significantly less than the value in the "Data Chunks" column for each respective level, then the percent cost will differ significantly from the one shown in the "Percent" column. For more precise calculations, see the [relevant appendix](/docs/learn/advanced/erasure-cost-calculation).
-
+For more details about each level of protection refer to the [erasure coding page](/docs/concepts/DISC/erasure-coding) in the learn section and refer to the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) for an even deeper dive.
 
 ## Cost Calculator Widget
 
 This calculator takes as input an amount of data and an erasure coding redundancy level, and outputs the number of additional parity chunks required to erasure code that amount of data as well as the increase in cost to upload vs. a non-erasure encoded upload:
 
-
 <RedundancyCalc />
+
+For more details of erasure coding costs, see [here](/docs/concepts/DISC/erasure-coding).
 
 ## Downloading Erasure Encoded Data
 
@@ -118,5 +98,5 @@ However, as noted above, it is recommended to not adjust the default settings fo
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 ```
 
-This means that there is no need for you to inform downloaders that a file you have uploaded uses erasure coding, as even with the default download behaviour reconstruction of the source file will be attempted if any chunks are missing.
+This means that there is no need to inform downloaders that a file uses erasure coding, as even with the default download behaviour reconstruction of the source file will be attempted if any chunks are missing.
 

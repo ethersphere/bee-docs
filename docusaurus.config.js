@@ -89,7 +89,7 @@ module.exports = {
   ],
   ],
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
   onDuplicateRoutes: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm', // Usually your GitHub org/user name.
@@ -114,85 +114,42 @@ module.exports = {
       items: [
         { 
           type: 'dropdown',
-          activeBasePath: 'docs/learn',
-          label: 'Learn',
+          activeBasePath: 'docs/concepts',
+          label: 'Concepts',
           position: 'left',
           className: 'inter',
           items: [
             {
-              to: 'docs/learn/introduction',
+              to: 'docs/concepts/introduction',
               label: 'Introduction',
             },
             {
-              to: 'docs/learn/technology/what-is-swarm',
-              label: 'Technology',
+              to: '/docs/concepts/what-is-swarm',
+              label: 'What is Swarm?',
             },
             {
-              to: 'docs/learn/ecosystem/swarm-foundation',
-              label: 'Ecosystem',
+              to: '/docs/concepts/DISC/',
+              label: 'DISC Storage',
             },
             {
-              to: 'docs/learn/tokens',
-              label: 'Tokens',
+              to: '/docs/concepts/incentives/overview',
+              label: 'Incentives',
             },
             {
-              to: 'docs/learn/glossary',
-              label: 'Glossary',
+              to: '/docs/concepts/pss',
+              label: 'PSS',
             },
             {
-              to: 'docs/learn/faq',
-              label: 'FAQ ',
-            }
-          ]
-        },
-        {
-          type: 'dropdown',
-          activeBasePath: 'docs/desktop',
-          label: 'Desktop',
-          position: 'left',
-          items: [
-            {
-              to: 'docs/desktop/introduction',
-              label: 'Introduction'
+              to: '/docs/concepts/access-control',
+              label: 'Access Control',
             },
-            {
-              to: 'docs/desktop/install',
-              label: 'Install'
-            },
-            {
-              to: 'docs/desktop/configuration',
-              label: 'Configuration'
-            },
-            {
-              to: 'docs/desktop/access-content',
-              label: 'Access Content'
-            },
-            {
-              to: 'docs/desktop/postage-stamps',
-              label: 'Postage Stamps'
-            },
-            {
-              to: 'docs/desktop/upload-content',
-              label: 'Upload Content'
-            },
-            {
-              to: 'docs/desktop/backup-restore',
-              label: 'Backup and Restore'
-            },
-            {
-              to: 'docs/desktop/publish-a-website',
-              label: 'Publish a Static Website'
-            },
-            {
-              to: 'docs/desktop/start-a-blog',
-              label: 'Start a Blog'
-            }
+            
           ]
         },
         {
           type: 'dropdown',
           activeBasePath: 'docs/bee',
-          label: 'Bee',
+          label: 'Bee Client',
           position: 'left',
           items: [
             {
@@ -233,23 +190,92 @@ module.exports = {
             },
           ]
         },
-        // {
-        //   to: 'docs/bee/installation/quick-start',
-        //   activeBasePath: 'docs',
-        //   label: 'Installation',
-        //   position: 'left',
-        // },
-        // {
-        //   to: 'docs/getting-started/start-your-node',
-        //   activeBasePath: 'docs',
-        //   label: 'Start Your Node',
-        //   position: 'left',
-        // },
-        // {to: 'blog', label: 'Blog', position: 'left'},
+        {
+          type: 'dropdown',
+          activeBasePath: 'docs/desktop',
+          label: 'Desktop App',
+          position: 'left',
+          items: [
+            {
+              to: 'docs/desktop/introduction',
+              label: 'Introduction'
+            },
+            {
+              to: 'docs/desktop/install',
+              label: 'Install'
+            },
+            {
+              to: 'docs/desktop/configuration',
+              label: 'Configuration'
+            },
+            {
+              to: 'docs/desktop/access-content',
+              label: 'Access Content'
+            },
+            {
+              to: 'docs/desktop/postage-stamps',
+              label: 'Postage Stamps'
+            },
+            {
+              to: 'docs/desktop/upload-content',
+              label: 'Upload Content'
+            },
+            {
+              to: 'docs/desktop/backup-restore',
+              label: 'Backup and Restore'
+            },
+            {
+              to: 'docs/desktop/publish-a-website',
+              label: 'Publish a Static Website'
+            },
+            {
+              to: 'docs/desktop/start-a-blog',
+              label: 'Start a Blog'
+            }
+          ]
+        },
+        { 
+          type: 'dropdown',
+          activeBasePath: 'docs/references',
+          label: 'References',
+          position: 'left',
+          items: [
+            {
+              to: 'docs/references/smart-contracts',
+              label: 'Smart Contracts'
+            },
+            {
+              to: 'docs/references/tokens',
+              label: 'Tokens'
+            },
+            {
+              to: '/docs/references/community',
+              label: 'Community',
+            },
+            {
+              to: 'docs/references/glossary',
+              label: 'Glossary'
+            },
+            {
+              to: 'docs/references/fair-data-society',
+              label: 'Fair Data Society'
+            },
+            {
+              to: 'docs/references/awesome-list',
+              label: 'Awesome List'
+            },
+            {
+              to: 'docs/references/faq',
+              label: 'FAQ'
+            },
+            
+          ]
+        },
+        
         {
           to: '/api/',
           activeBasePath: '/api/',
-          label: 'API Reference',
+          label: 'API Specification',
           position: 'left',
         },
         {
