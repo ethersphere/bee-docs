@@ -262,7 +262,7 @@ module.exports = {
             },
             {
               to: 'docs/references/awesome-list',
-              label: 'Awesome List'
+              label: 'Awesome Swarm'
             },
             {
               to: 'docs/references/faq',
