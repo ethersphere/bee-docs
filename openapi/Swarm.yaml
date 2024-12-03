@@ -1,7 +1,7 @@
 openapi: 3.0.3
 
 info:
-  version: 7.1.0
+  version: 7.2.0
   title: Bee API
   description: "A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"
 
@@ -237,6 +237,7 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmCache"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyStrategyParameter"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyFallbackModeParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyLevelParameter"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmChunkRetrievalTimeoutParameter"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmActTimestamp"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmActPublisher"
@@ -269,7 +270,23 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmActHistoryAddress"
       responses:
         "200":
-          description: Chunk exists
+          description: The chunk exists.
+          headers:
+            Content-Type:
+              description: The MIME type of the resource (e.g., application/octet-stream).
+              schema:
+                type: string
+                example: application/octet-stream
+            Content-Length:
+              description: The size of the chunk in bytes.
+              schema:
+                type: integer
+                example: 1024
+            Access-Control-Expose-Headers:
+              description: Headers exposed for CORS.
+              schema:
+                type: string
+                example: Accept-Ranges, Content-Encoding
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         "404":
@@ -424,6 +441,7 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmCache"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyStrategyParameter"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyFallbackModeParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyLevelParameter"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmChunkRetrievalTimeoutParameter"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmActTimestamp"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmActPublisher"
@@ -816,6 +834,28 @@ paths:
         default:
           description: Default response
 
+  "/gsoc/subscribe/{address}":
+    get:
+      summary: Subscribe to GSOC payloads
+      tags:
+        - GSOC
+        - Subscribe
+        - Websocket
+      parameters:
+        - in: path
+          name: reference
+          schema:
+            $ref: "SwarmCommon.yaml#/components/schemas/SwarmReference"
+          required: true
+          description: "Single Owner Chunk address (which may have multiple payloads)"
+      responses:
+        "200":
+          description: Returns a WebSocket with a subscription for incoming message data on the requested SOC address.
+        "500":
+          $ref: "SwarmCommon.yaml#/components/responses/500"
+        default:
+          description: Default response
+
   "/soc/{owner}/{id}":
     post:
       summary: Upload single owner chunk
@@ -840,12 +880,11 @@ paths:
             $ref: "SwarmCommon.yaml#/components/schemas/HexString"
           required: true
           description: Signature
-        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmPinParameter"
         - in: header
           name: swarm-postage-batch-id
           schema:
             $ref: "SwarmCommon.yaml#/components/parameters/SwarmPostageBatchId"
-          required: false
+          required: true
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmPostageStamp"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmAct"
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmActHistoryAddress"
@@ -873,6 +912,47 @@ paths:
           $ref: "SwarmCommon.yaml#/components/responses/401"
         "402":
           $ref: "SwarmCommon.yaml#/components/responses/402"
+        "500":
+          $ref: "SwarmCommon.yaml#/components/responses/500"
+        default:
+          description: Default response
+    get:
+      summary: Resolve Single Owner Chunk data
+      tags:
+        - Single owner chunk
+      parameters:
+        - in: path
+          name: owner
+          schema:
+            $ref: "SwarmCommon.yaml#/components/schemas/EthereumAddress"
+          required: true
+          description: Ethereum address of the Owner of the SOC
+        - in: path
+          name: id
+          schema:
+            $ref: "SwarmCommon.yaml#/components/schemas/HexString"
+          required: true
+          description: Arbitrary identifier of the related data
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmOnlyRootChunkParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmCache"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyStrategyParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyFallbackModeParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmChunkRetrievalTimeoutParameter"
+      responses:
+        "200":
+          description: Related Single Owner Chunk data
+          headers:
+            "swarm-soc-signature":
+              $ref: "SwarmCommon.yaml#/components/headers/SwarmSocSignature"
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "400":
+          $ref: "SwarmCommon.yaml#/components/responses/400"
+        "401":
+          $ref: "SwarmCommon.yaml#/components/responses/401"
         "500":
           $ref: "SwarmCommon.yaml#/components/responses/500"
         default:
@@ -961,18 +1041,26 @@ paths:
             $ref: "SwarmCommon.yaml#/components/schemas/FeedType"
           required: false
           description: "Feed indexing scheme (default: sequence)"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmOnlyRootChunkParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmCache"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyStrategyParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmRedundancyFallbackModeParameter"
+        - $ref: "SwarmCommon.yaml#/components/parameters/SwarmChunkRetrievalTimeoutParameter"
       responses:
         "200":
           description: Latest feed update
           headers:
+            "swarm-soc-signature":
+              $ref: "SwarmCommon.yaml#/components/headers/SwarmSocSignature"
             "swarm-feed-index":
               $ref: "SwarmCommon.yaml#/components/headers/SwarmFeedIndex"
             "swarm-feed-index-next":
               $ref: "SwarmCommon.yaml#/components/headers/SwarmFeedIndexNext"
           content:
-            application/json:
+            application/octet-stream:
               schema:
-                $ref: "SwarmCommon.yaml#/components/schemas/ReferenceResponse"
+                type: string
+                format: binary
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         "401":
@@ -2391,6 +2479,23 @@ paths:
             application/json:
               schema:
                 $ref: "SwarmCommon.yaml#/components/schemas/StatusResponse"
+        "400":
+          $ref: "SwarmCommon.yaml#/components/responses/400"
+        default:
+          description: Default response.
+
+  "/status/neighborhoods":
+    get:
+      summary: Get the current neighborhoods status of this node.
+      tags:
+        - Node Status
+      responses:
+        "200":
+          description: Returns the neighborhoods status of this node
+          content:
+            application/json:
+              schema:
+                $ref: "SwarmCommon.yaml#/components/schemas/StatusNeighborhoodsResponse"
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         default:
