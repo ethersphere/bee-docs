@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 7.1.0
+  version: 7.2.0
   title: Bee API
   description: >-
     A list of the currently provided Interfaces to interact with the swarm,
@@ -230,6 +230,7 @@ paths:
         - $ref: '#/components/parameters/SwarmCache'
         - $ref: '#/components/parameters/SwarmRedundancyStrategyParameter'
         - $ref: '#/components/parameters/SwarmRedundancyFallbackModeParameter'
+        - $ref: '#/components/parameters/SwarmRedundancyLevelParameter'
         - $ref: '#/components/parameters/SwarmChunkRetrievalTimeoutParameter'
         - $ref: '#/components/parameters/SwarmActTimestamp'
         - $ref: '#/components/parameters/SwarmActPublisher'
@@ -264,7 +265,23 @@ paths:
         - $ref: '#/components/parameters/SwarmActHistoryAddress'
       responses:
         '200':
-          description: Chunk exists
+          description: The chunk exists.
+          headers:
+            Content-Type:
+              description: The MIME type of the resource (e.g., application/octet-stream).
+              schema:
+                type: string
+                example: application/octet-stream
+            Content-Length:
+              description: The size of the chunk in bytes.
+              schema:
+                type: integer
+                example: 1024
+            Access-Control-Expose-Headers:
+              description: Headers exposed for CORS.
+              schema:
+                type: string
+                example: Accept-Ranges, Content-Encoding
         '400':
           $ref: '#/components/responses/400'
         '404':
@@ -427,6 +444,7 @@ paths:
         - $ref: '#/components/parameters/SwarmCache'
         - $ref: '#/components/parameters/SwarmRedundancyStrategyParameter'
         - $ref: '#/components/parameters/SwarmRedundancyFallbackModeParameter'
+        - $ref: '#/components/parameters/SwarmRedundancyLevelParameter'
         - $ref: '#/components/parameters/SwarmChunkRetrievalTimeoutParameter'
         - $ref: '#/components/parameters/SwarmActTimestamp'
         - $ref: '#/components/parameters/SwarmActPublisher'
@@ -821,6 +839,29 @@ paths:
           $ref: '#/components/responses/500'
         default:
           description: Default response
+  /gsoc/subscribe/{address}:
+    get:
+      summary: Subscribe to GSOC payloads
+      tags:
+        - GSOC
+        - Subscribe
+        - Websocket
+      parameters:
+        - in: path
+          name: reference
+          schema:
+            $ref: '#/components/schemas/SwarmReference'
+          required: true
+          description: Single Owner Chunk address (which may have multiple payloads)
+      responses:
+        '200':
+          description: >-
+            Returns a WebSocket with a subscription for incoming message data on
+            the requested SOC address.
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
   /soc/{owner}/{id}:
     post:
       summary: Upload single owner chunk
@@ -845,12 +886,11 @@ paths:
             $ref: '#/components/schemas/HexString'
           required: true
           description: Signature
-        - $ref: '#/components/parameters/SwarmPinParameter'
         - in: header
           name: swarm-postage-batch-id
           schema:
             $ref: '#/components/schemas/SwarmPostageBatchId'
-          required: false
+          required: true
         - $ref: '#/components/parameters/SwarmPostageStamp'
         - $ref: '#/components/parameters/SwarmAct'
         - $ref: '#/components/parameters/SwarmActHistoryAddress'
@@ -880,6 +920,47 @@ paths:
           $ref: '#/components/responses/401'
         '402':
           $ref: '#/components/responses/402'
+        '500':
+          $ref: '#/components/responses/500'
+        default:
+          description: Default response
+    get:
+      summary: Resolve Single Owner Chunk data
+      tags:
+        - Single owner chunk
+      parameters:
+        - in: path
+          name: owner
+          schema:
+            $ref: '#/components/schemas/EthereumAddress'
+          required: true
+          description: Ethereum address of the Owner of the SOC
+        - in: path
+          name: id
+          schema:
+            $ref: '#/components/schemas/HexString'
+          required: true
+          description: Arbitrary identifier of the related data
+        - $ref: '#/components/parameters/SwarmOnlyRootChunkParameter'
+        - $ref: '#/components/parameters/SwarmCache'
+        - $ref: '#/components/parameters/SwarmRedundancyStrategyParameter'
+        - $ref: '#/components/parameters/SwarmRedundancyFallbackModeParameter'
+        - $ref: '#/components/parameters/SwarmChunkRetrievalTimeoutParameter'
+      responses:
+        '200':
+          description: Related Single Owner Chunk data
+          headers:
+            swarm-soc-signature:
+              $ref: '#/components/headers/SwarmSocSignature'
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
         '500':
           $ref: '#/components/responses/500'
         default:
@@ -967,18 +1048,26 @@ paths:
             $ref: '#/components/schemas/FeedType'
           required: false
           description: 'Feed indexing scheme (default: sequence)'
+        - $ref: '#/components/parameters/SwarmOnlyRootChunkParameter'
+        - $ref: '#/components/parameters/SwarmCache'
+        - $ref: '#/components/parameters/SwarmRedundancyStrategyParameter'
+        - $ref: '#/components/parameters/SwarmRedundancyFallbackModeParameter'
+        - $ref: '#/components/parameters/SwarmChunkRetrievalTimeoutParameter'
       responses:
         '200':
           description: Latest feed update
           headers:
+            swarm-soc-signature:
+              $ref: '#/components/headers/SwarmSocSignature'
             swarm-feed-index:
               $ref: '#/components/headers/SwarmFeedIndex'
             swarm-feed-index-next:
               $ref: '#/components/headers/SwarmFeedIndexNext'
           content:
-            application/json:
+            application/octet-stream:
               schema:
-                $ref: '#/components/schemas/ReferenceResponse'
+                type: string
+                format: binary
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -2385,6 +2474,22 @@ paths:
           $ref: '#/components/responses/400'
         default:
           description: Default response.
+  /status/neighborhoods:
+    get:
+      summary: Get the current neighborhoods status of this node.
+      tags:
+        - Node Status
+      responses:
+        '200':
+          description: Returns the neighborhoods status of this node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusNeighborhoodsResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        default:
+          description: Default response.
 components:
   securitySchemes:
     basicAuth:
@@ -2395,21 +2500,21 @@ components:
       scheme: bearer
       bearerFormat: SecurityToken
   schemas:
-    SwarmPostageBatchId: &ref_3
+    SwarmPostageBatchId: &ref_4
       in: header
       name: swarm-postage-batch-id
       description: ID of Postage Batch that is used to upload data with
       required: true
       schema:
         $ref: '#/components/schemas/SwarmAddress'
-    SwarmTagParameter: &ref_2
+    SwarmTagParameter: &ref_3
       in: header
       name: swarm-tag
       schema:
         $ref: '#/components/schemas/Uid'
       required: false
       description: Associate upload with an existing Tag UID
-    SwarmPinParameter: &ref_4
+    SwarmPinParameter: &ref_5
       in: header
       name: swarm-pin
       schema:
@@ -2418,7 +2523,7 @@ components:
       description: >
         Represents if the uploaded data should be also locally pinned on the
         node.
-    SwarmDeferredUpload: &ref_6
+    SwarmDeferredUpload: &ref_7
       in: header
       name: swarm-deferred-upload
       schema:
@@ -2429,7 +2534,7 @@ components:
         Determines if the uploaded data should be sent to the network
         immediately or in a deferred fashion. By default the upload will be
         direct.
-    SwarmActHistoryAddress: &ref_1
+    SwarmActHistoryAddress: &ref_2
       in: header
       name: swarm-act-history-address
       schema:
@@ -2485,7 +2590,7 @@ components:
           items:
             $ref: '#/components/schemas/PublicKey'
           description: List of grantees to revoke future access from
-    SwarmEncryptParameter: &ref_5
+    SwarmEncryptParameter: &ref_6
       in: header
       name: swarm-encrypt
       schema:
@@ -2493,7 +2598,7 @@ components:
       required: false
       description: |
         Represents the encrypting state of the file
-    SwarmRedundancyLevelParameter: &ref_7
+    SwarmRedundancyLevelParameter: &ref_1
       in: header
       name: swarm-redundancy-level
       schema:
@@ -3138,6 +3243,10 @@ components:
           nullable: false
           items:
             $ref: '#/components/schemas/PostageBatchShort'
+    Seconds:
+      description: Go time.Duration format in seconds
+      type: number
+      example: 30.5
     ApiPostageProof:
       type: object
       properties:
@@ -3204,8 +3313,8 @@ components:
     ApiRCHashResponse:
       type: object
       properties:
-        duration:
-          type: integer
+        durationSeconds:
+          $ref: '#/components/schemas/Seconds'
         hash:
           $ref: '#/components/schemas/SwarmAddress'
         proofs:
@@ -3364,6 +3473,8 @@ components:
           type: boolean
         lastSyncedBlock:
           type: integer
+        committedDepth:
+          type: integer
     StatusResponse:
       type: object
       properties:
@@ -3372,6 +3483,29 @@ components:
           nullable: false
           items:
             $ref: '#/components/schemas/StatusSnapshotResponse'
+    Neighborhood:
+      type: string
+      description: >-
+        Swarm address of a neighborhood in string binary format, usually limited
+        to as many bits as the current storage radius.
+      example: '011010111'
+    StatusNeighborhoodResponse:
+      type: object
+      properties:
+        neighborhood:
+          $ref: '#/components/schemas/Neighborhood'
+        reserveSizeWithinRadius:
+          type: integer
+        proximity:
+          type: integer
+    StatusNeighborhoodsResponse:
+      type: object
+      properties:
+        stamps:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/StatusNeighborhoodResponse'
   responses:
     '200':
       description: OK.
@@ -3447,6 +3581,10 @@ components:
         quoted string, possibly prefixed by a weakness indicator.
       schema:
         type: string
+    SwarmSocSignature:
+      description: Attached digital signature of the Single Owner Chunk
+      schema:
+        $ref: '#/components/schemas/HexString'
     SwarmFeedIndex:
       description: The index of the found update
       schema:
@@ -3488,6 +3626,7 @@ components:
       description: >
         Specify if the retrieve strategies (chunk prefetching on redundant data)
         are used in a fallback cascade. The default is true.
+    SwarmRedundancyLevelParameter: *ref_1
     SwarmChunkRetrievalTimeoutParameter:
       in: header
       name: swarm-chunk-retrieval-timeout
@@ -3511,8 +3650,8 @@ components:
         $ref: '#/components/schemas/PublicKey'
       required: false
       description: ACT content publisher's public key
-    SwarmActHistoryAddress: *ref_1
-    SwarmTagParameter: *ref_2
+    SwarmActHistoryAddress: *ref_2
+    SwarmTagParameter: *ref_3
     SwarmPostageStamp:
       in: header
       name: swarm-postage-stamp
@@ -3534,9 +3673,9 @@ components:
         default: 'false'
       required: false
       description: Determines if the uploaded data should be treated as ACT content
-    SwarmPostageBatchId: *ref_3
-    SwarmPinParameter: *ref_4
-    SwarmEncryptParameter: *ref_5
+    SwarmPostageBatchId: *ref_4
+    SwarmPinParameter: *ref_5
+    SwarmEncryptParameter: *ref_6
     ContentTypePreserved:
       in: header
       name: Content-Type
@@ -3568,8 +3707,14 @@ components:
       description: >-
         Configure custom error document to be returned when a specified path can
         not be found in collection
-    SwarmDeferredUpload: *ref_6
-    SwarmRedundancyLevelParameter: *ref_7
+    SwarmDeferredUpload: *ref_7
+    SwarmOnlyRootChunkParameter:
+      in: header
+      name: swarm-only-root-chunk
+      schema:
+        type: boolean
+      required: false
+      description: Returns only the root chunk of the content
     GasPriceParameter:
       in: header
       name: gas-price
