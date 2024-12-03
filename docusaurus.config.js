@@ -241,6 +241,10 @@ module.exports = {
           position: 'left',
           items: [
             {
+              to: 'docs/references/introduction',
+              label: 'Introduction'
+            },
+            {
               to: 'docs/references/smart-contracts',
               label: 'Smart Contracts'
             },
@@ -263,6 +267,10 @@ module.exports = {
             {
               to: 'docs/references/awesome-list',
               label: 'Awesome Swarm'
+            },
+            {
+              to: 'docs/references/papers',
+              label: 'Papers'
             },
             {
               to: 'docs/references/faq',

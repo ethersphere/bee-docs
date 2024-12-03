@@ -132,11 +132,13 @@ module.exports = {
 
   ],
   References: [
+    'references/introduction',
     'references/smart-contracts',
     'references/tokens',
     'references/glossary',
     'references/community',
     'references/fair-data-society',
+    'references/papers',
     'references/faq',
     'references/awesome-list',
      ],
