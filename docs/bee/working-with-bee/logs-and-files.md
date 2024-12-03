@@ -60,18 +60,14 @@ The Bee logs provide a robust information on the workings of a Bee node which ar
 
 ### Log Levels
 
-The log messages are divided into four basic levels:
-
-- `Error` - Errors in the node. Although the node operation may continue, the error indicates that it should be addressed.
-- `Warning` - Warnings should be checked in case the problem recurs to avoid potential damage.
-- `Info` - Informational messages useful for node operators that do not indicate any fault or error.
-- `Debug` - Information concerning program logic decisions, diagnostic information, internal state, etc. which is primarily useful for developers.
-
-There is a notion of `V-level` attached to the `Debug` level. `V-levels` provide a simple way of changing the verbosity of debug messages. `V-levels` provide a way for a given package to distinguish the relative importance or verbosity of a given log message. Then, if a particular logger or package logs too many messages, the package can simply change the `V` level for that logger.
+- **`Error`**: Logs critical issues that indicate a problem requiring attention. Node operation may continue but may be impaired.
+- **`Warning`**: Logs non-critical issues that may require user intervention to prevent further problems.
+- **`Info`**: Logs general operational information useful for monitoring node activity.
+- **`Debug`**: Logs detailed diagnostic and internal state information, useful primarily for developers.
 
 ### Logging API usage
 
-In the current Bee code base, it is possible to change the granularity of logging for some services on the fly without the need to restart the node. These services and their corresponding loggers can be found using the `/loggers` endpoint. Example of the output:
+The Bee node supports dynamically changing the log level for specific components using the `/loggers` API endpoint. This allows node operators to adjust logging verbosity without restarting the node.
 
 ```json
 {
@@ -161,12 +157,29 @@ In the current Bee code base, it is possible to change the granularity of loggin
 }
 ```
 
-The recorders come in two versions. The first is the tree version and the second is the flattened version. The `subsystem` field is the unique identifier of the logger. The `id` field is a version of the `subsystem` field encoded in base 64 for easier reference to a particular logger. The node name of the version tree is composed of the subsystem with the log level prefix and delimited by the `|` character. The number in the first square bracket indicates the logger's V-level.
 
-The logger endpoint uses HTTP PUT requests to modify the verbosity of the logger(s). The request must have the following parameters `/loggers/{subsystem}/{verbosity}`. The `{subsytem}` parameter is the base64 version of the subsytem field or regular expression corresponding to multiple subsystems. Since the loggers are arranged in tree structure, it is possible to turn on/off or change the logging level of the entire tree or just its branches with a single command. The verbosity can be one of `none`, `error`, `warning`, `info`, `debug` or a number in the range `1` to `1<<<31 - 1` to enable the verbosity of a particular V-level, if available for a given logger. A value of `all` will enable the highest verbosity of V-level.
+#### Modifying Log Levels
 
-Examples:
+Use the following endpoint format to change log levels dynamically:
+```
+PUT /loggers/{subsystem}/{verbosity}
+```
 
-`curl -XPUT http://localhost:1633/loggers/bm9kZS8q/none` - will disable all loggers; `bm9kZS8q` is base64 encoded `node/*` regular expression.
+- `{subsystem}`: Base64-encoded name of the logger.
+- `{verbosity}`: The desired log level (`none`, `error`, `warning`, `info`, `debug`).
 
-`curl -XPUT http://localhost:1633/loggers/bm9kZS9hcGlbMV1bXT4-ODI0NjM0OTMzMjU2/error` - will set the verbosity of the logger with the subsystem `node/api[1][]>>824634933256` to `error`.
+##### Examples
+1. Disable all logs:
+   ```bash
+   curl -X PUT http://localhost:1633/loggers/bm9kZS8q/none
+   ```
+2. Set `node/api` logs to `debug`:
+   ```bash
+   curl -X PUT http://localhost:1633/loggers/bm9kZS9hcGlbMF1bXT4-ODI0NjM0OTMzMjU2/debug
+   ```
+
+## Advanced: V-Levels
+
+V-levels are an advanced logging feature primarily used by Bee developers. They allow finer-grained control over debug-level messages by specifying verbosity levels numerically. Each V-level corresponds to progressively more detailed information.
+
+While V-levels can be set via the `/loggers` API (e.g., `PUT /loggers/{subsystem}/3`), most users will find named levels (`info`, `debug`) sufficient for all operational needs.
