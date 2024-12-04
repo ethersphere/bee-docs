@@ -108,6 +108,124 @@ If there is any stake available for withdrawal, you can withdraw it using the `D
 curl -X DELETE http://localhost:1633/stake/withdrawable
 ```
 
+## Reserve Doubling
+
+The reserve doubling feature enables nodes to store chunks from a neighboring "sister" area, effectively increasing their reserve capacity twofold. By maintaining chunks from this sister neighborhood, a node becomes eligible to join the redistribution game whenever the sister neighborhood is chosen, effectively doubling its chances of participating.
+
+Although reserve doubling demands twice the disk storage and increases bandwidth usage for chunk syncing (with no additional bandwidth needed for chunk forwarding), its effect on CPU and RAM consumption remains minimal. This feature provides node operators with greater flexibility to optimize their nodes, aiming to achieve a higher reward-to-resource usage ratio.
+
+### Step by Step Guide
+
+In order to double a node's reserve which has previously been operating without doubling, the `reserve-capacity-doubling` option must be updated from the default of `0` to `1` and restarted. There is also an increase in the xBZZ stake requirement from the minimum of 10 xBZZ to 20 xBZZ. 
+
+#### **Step 1**: Stake at least 20 xBZZ 
+
+For doubling the reserve of a node which was previously operating which already has 10 xBZZ staked, simply stake an additional 10 xBZZ for a total of 20 xBZZ stake:
+
+:::info
+As always, make sure that to properly convert the stake parameter to PLUR where 1 PLUR is equal to 1e-16 xBZZ. As in our example below, we have converted from 10 xBZZ to 100000000000000000  PLUR.
+:::
+
+```bash
+curl -X POST localhost:1633/stake/100000000000000000
+```
+
+Or for a new node with zero staked xBZZ, the entire 20 xBZZ can be staked at once:
+
+```bash
+curl -X POST localhost:1633/stake/200000000000000000
+```
+
+We can use the `GET /stake` endpoint to confirm the total stake for our node:
+
+```bash
+curl -s  http://localhost:1633/stake | jq
+```
+
+```bash
+{
+  "stakedAmount": "200000000000000000"
+}
+```
+#### **Step 2**: Set `reserve-capacity-doubling` to `1`.
+
+The reserve doubling feature can be enabled by setting the new `reserve-capacity-doubling` config option to `1`  using the [configuration method](/docs/bee/working-with-bee/configuration#configuration-methods-and-priority) of your choice. 
+
+#### **Step 3**: Restart node 
+
+After ensuring the node has at least 20 xBZZ staked and the `reserve-capacity-doubling` option has been set to `1`, restart the node.
+
+After restarting your node, it should then begin syncing chunks from its sister neighborhood. 
+
+The `/status/neighborhoods` endpoint can be used to confirm that the node has doubled its reserve and is now syncing with its sister neighborhood:
+
+```bash
+{
+  "neighborhoods": [
+    {
+      "neighborhood": "01111101011",
+      "reserveSizeWithinRadius": 1148351,
+      "proximity": 10
+    },
+    {
+      "neighborhood": "01111101010",
+      "reserveSizeWithinRadius": 1147423,
+      "proximity": 11
+    }
+  ]
+}
+```
+
+The expected output should contain two neighborhoods, the node's original neighborhood along with its sister neighborhood. 
+
+We can also check the `/status` endpoint to confirm our node is syncing new chunks:
+
+```bash
+curl -s  http://localhost:1633/status | jq
+```
+
+```bash
+{
+  "overlay": "be177e61b13b1caa20690311a909bd674a3c1ef5f00d60414f261856a8ad5c30",
+  "proximity": 256,
+  "beeMode": "full",
+  "reserveSize": 4192792,
+  "reserveSizeWithinRadius": 2295023,
+  "pullsyncRate": 1.3033333333333332,
+  "storageRadius": 10,
+  "connectedPeers": 18,
+  "neighborhoodSize": 1,
+  "batchCommitment": 388104192,
+  "isReachable": true,
+  "lastSyncedBlock": 6982430
+}
+```
+
+We can see that the `pullsyncRate` value is above zero, meaning that our node is currently syncing chunks, as expected.
+
+### Reserve Doubling Reversing & Withdrawable Stake
+
+Due to certain [implementation details](https://github.com/ethersphere/storage-incentives/blob/20bf3c0e3fcf1e98dedcbf16cd82fb4d337fdaf7/src/Staking.sol#L136), the order in which a node's reserve is doubled and then reversed can have an impact on the amount of withdrawable stake.
+
+When doubling a node's reserve, stake should be added AFTER 
+setting `reserve-capacity-doubling` to 1. If instead, xBZZ is first staked with `reserve-capacity-doubling` set to 0, and the reserve is then doubled by increasing from 0 to 1 without the addition of more stake, this will prevent stake from being withdrawable when the doubling is reversed.  
+
+In order to maximize the amount of withdrawable stake after reversing a reserve doubling, follow the step from the previous section in the exact order described when doubling.
+
+#### How to free up withdrawable stake from a node with >= 20 xBZZ stake that currently has zero withdrawable stake:
+
+In the case that a node with 20 xBZZ stake was doubled directly by increasing `reserve-capacity-doubling` from 0 to 1, the surplus xBZZ over the minimum required 10 xBZZ cannot be made withdrawable by simply reversing the `reserve-capacity-doubling` from 1 back to 0. 
+
+In this case, you will need to first send a very small staking transaction of a single PLUR while `reserve-capacity-doubling` is set to 1, and after that, change `reserve-capacity-doubling` from 1 to 0. This works because every time any amount of stake is added, it forces to staking contract to redo its calculations.  
+
+The detailed steps are:
+
+1. Issue a staking transaction for 1 PLUR while `reserve-capacity-doubling` is set to 1.
+    ```bash
+    curl -X POST localhost:1633/stake/1
+    ```
+2. Stop node and set `reserve-capacity-doubling` to 0.
+3. Restart node. The 10 xBZZ should now be withdrawable.
 
 ## Maximize rewards
 
