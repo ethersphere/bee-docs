@@ -84,6 +84,12 @@ module.exports = {
           to: '/docs/develop/tools-and-features/starting-a-test-network',
           from: '/docs/develop/dapps-on-swarm/starting-a-test-network',
         },
+        {
+          to: '/docs/concepts/incentives/postage-stamps',
+          from: '/docs/learn/technology/contracts/postage-stamp',
+        },
+        
+
       ],
     },
   ],
