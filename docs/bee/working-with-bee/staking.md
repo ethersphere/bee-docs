@@ -253,10 +253,10 @@ Generally speaking, the minimum required stake of 10 xBZZ is sufficient, and rew
 ## Neighborhood Hopping
 
 :::warning 
-While you may update your neighborhood freely as you wish, it takes significant time for to fully sync chunks and become eligible for playing in the redistribution game, so it is not advised to hop too frequently. 
+There is a 2 round delay (with 152 Gnosis Chain blocks per redistribution game round) every time a node's neighborhood or stake is changed before it can participate in the redistribution game, moreover a node must fully sync the chunks from its new neighborhood before it can participate in the redistribution game, so hopping too frequently is not advised. 
 :::
 
-You can use the option `target-neighborhood` to switch your node over to a new neighborhood. You may wish to use this option if your node's neighborhood becomes overpopulated. 
+You can use the config option `target-neighborhood` to switch your node over to a new neighborhood. You may wish to use this option if your node's neighborhood becomes overpopulated. 
 
 
 ### Checking neighborhood population
@@ -306,10 +306,6 @@ Use the binary number you just copied and set it as a string value for the `targ
 target-neighborhood: "01100011110"
 ```
     
-:::info 
-Depending on your setup, you may need change the `target-neighborhood` option by updating your `bee.yaml` file, adding the `--target-neighborhood` command line flag, or edit a `.env` file, among several possible common options. 
-:::
-
 ## Troubleshooting
 
 In this section we cover several commonly seen issues encountered for staking nodes participating in the redistribution game. If you don't see your issue covered here or require additional guidance, check out the `#node-operators` [Discord channel](https://discord.com/channels/799027393297514537/811553590170353685) where you will find support from other node operators and community members.
