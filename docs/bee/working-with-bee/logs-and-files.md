@@ -1,172 +1,184 @@
----
-title: Logs and Files
-id: logs-and-files
----
 
-### Linux
+# Logging in Bee
 
-If you have installed Bee on Linux using a package manager you will now be able to manage your Bee service using `systemctl`.
+This section introduces logging in Bee, detailing log locations, exporting logs, setting the general verbosity level, and setting fine-grained verbosity for individual loggers.
 
-```bash
-systemctl status bee
-```
+## Log Locations
 
-```
-● bee.service - Bee - Ethereum Swarm node
-     Loaded: loaded (/lib/systemd/system/bee.service; enabled; vendor preset: enabled)
-     Active: active (running) since Fri 2020-11-20 23:50:15 GMT; 6s ago
-```
+:::warning
+Bee logs by default can be quite verbose, and over time may occupy disk space in the gigabytes range. You may wish to practice log rotation to prevent excessive disk utilization.
+:::
 
-Logs are available using the `journalctl` command:
+### **Linux (Package Manager Installation)**
+When installed via a package manager (e.g., `APT`, `RPM`), Bee runs as a **systemd service**, and logs are managed by the system journal, **journalctl**.
 
+View logs using:
 ```bash
 journalctl --lines=100 --follow --unit bee
 ```
 
-```text
-INFO[2021-02-09T18:55:11Z] swarm public key 03379f7aa673b7f03737064fd23ba1453619924a4602e70bbccc133ba67d0968bd
-DEBU[2021-02-09T18:55:11Z] using existing libp2p key
-DEBU[2021-02-09T18:55:11Z] using existing pss key
-INFO[2021-02-09T18:55:11Z] pss public key 03bae655ce94431e1f2c2de8d017f88c8c5c293ef0057379223084aba9e318596e
-INFO[2021-02-09T18:55:11Z] using ethereum address 99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
-INFO[2021-02-09T18:55:14Z] using default factory address for chain id 5: f0277caffea72734853b834afc9892461ea18474
-INFO[2021-02-09T18:55:14Z] no chequebook found, deploying new one.
-WARN[2021-02-09T18:55:15Z] cannot continue until there is sufficient ETH (for Gas) and at least 10 BZZ available on 99c9e7868d22244106a5ffbc2f5d6b7c88e2c85a
-```
-
-### MacOS
-
-Services are managed using Homebrew services.
-
+Export all logs as JSON:
 ```bash
-brew services restart swarm-bee
+journalctl --unit bee --output=json > bee-logs.json
 ```
 
-Logs are available at `/usr/local/var/log/swarm-bee/bee.log`
+Export logs for a specific time range:
+```bash
+journalctl --since "1 hour ago" --output=json --unit bee > bee-logs.json
+```
 
+Learn more about `journalctl` usage and filtering logs in this [tutorial](https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs) from DigitalOcean.
+
+
+### **macOS (Homebrew Installation)**
+
+For a Homebrew installation on macOS, logs are saved to:
+```bash
+/usr/local/var/log/swarm-bee/bee.log
+```
+
+View logs in real time:
 ```bash
 tail -f /usr/local/var/log/swarm-bee/bee.log
 ```
 
-## Data Locations
 
-### Bee
+### **Docker**
 
-Configuration files are stored in `/etc/bee/`. State, chunks and other data are stored in `/var/lib/bee/`
+Docker saves **stdout** and **stderr** output as JSON files by default. The logs are stored under:
 
-## Logging Guidelines
+```
+/var/lib/docker/containers/<container-id>/<container-id>-json.log
+```
 
-The Bee logs provide a robust information on the workings of a Bee node which are useful both to node operators and to Bee developers. Log messages have four levels described below, and logs can be adjusted for verbosity and granularity to suit the needs of the user.
+View logs in real time:
+```bash
+docker logs -f <container-name>
+```
 
-### Log Levels
+Export logs to a file:
+```bash
+docker logs <container-name> > bee-logs.json
+```
 
-The log messages are divided into four basic levels:
+Export logs for a specific time range:
+```bash
+docker logs --since "30m" <container-name> > bee-logs.json
+```
 
-- `Error` - Errors in the node. Although the node operation may continue, the error indicates that it should be addressed.
-- `Warning` - Warnings should be checked in case the problem recurs to avoid potential damage.
-- `Info` - Informational messages useful for node operators that do not indicate any fault or error.
-- `Debug` - Information concerning program logic decisions, diagnostic information, internal state, etc. which is primarily useful for developers.
+See [Docker documentation](https://docs.docker.com/reference/cli/docker/container/logs/) for additional options.
 
-There is a notion of `V-level` attached to the `Debug` level. `V-levels` provide a simple way of changing the verbosity of debug messages. `V-levels` provide a way for a given package to distinguish the relative importance or verbosity of a given log message. Then, if a particular logger or package logs too many messages, the package can simply change the `V` level for that logger.
 
-### Logging API usage
+### **Shell Script**
 
-In the current Bee code base, it is possible to change the granularity of logging for some services on the fly without the need to restart the node. These services and their corresponding loggers can be found using the `/loggers` endpoint. Example of the output:
+For a shell script-installed Bee started using `bee start`, logs are sent to **stdout** and **stderr** by default, which means they will appear in the terminal. They are **not saved to disk by default**.
+
+To save logs to a file, redirect **stdout** and **stderr**:
+
+```bash
+bee start --password <password> > bee.log 2>&1 &
+```
+
+View recent logs and follow for updates:
+```bash
+tail -f bee.log
+```
+
+## Logging Levels
+
+Bee supports the following log levels:
+
+| Level       | Description                        |
+|-------------|------------------------------------|
+| `0=silent` | No logs.                           |
+| `1=error`  | Critical errors only.              |
+| `2=warn`   | Warnings and errors.               |
+| `3=info`   | General operational logs (default).|
+| `4=debug`  | Detailed diagnostic logs.          |
+| `5=trace`  | Highly granular logs for debugging.|
+
+### Behavior of Log Levels
+
+Log levels are cumulative: setting a higher verbosity includes all lower levels.  
+For example, `debug` will output logs at `debug`, `info`, `warn`, and `error` levels.
+
+
+## Setting Verbosity
+
+The general verbosity level can be set using the `verbosity` configuration option in order to display all log messages up to the selected level of verbosity. 
+
+### **YAML Config File**
+Set the `verbosity` parameter in `config.yaml`:
+
+```yaml
+# Log verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
+verbosity: debug
+```
+
+### **Command Line Flag**
+Specify verbosity when starting Bee:
+
+```bash
+bee start --verbosity debug
+```
+
+### **Environment Variable**
+Set `BEE_VERBOSITY` before starting Bee:
+
+```bash
+export BEE_VERBOSITY=debug
+bee start
+```
+
+
+## Fine-Grained Logging Control
+
+Bee allows fine-grained control of logging levels for specific subsystems using the **`/loggers` API endpoint**. This enables adjustments without restarting the node.
+
+### **1. Retrieving Loggers List**
+
+Retrieve the list of active loggers and their verbosity levels:
+```bash
+curl http://localhost:1633/loggers | jq
+```
+
+The list of loggers includes detailed entries for each subsystem. Below is an example for the `node/api` logger:
 
 ```json
 {
-  "tree": {
-    "node": {
-      "/": {
-        "api": {
-          "+": [
-            "info|node/api[0][]>>824634933256"
-          ]
-        },
-        "batchstore": {
-          "+": [
-            "info|node/batchstore[0][]>>824634933256"
-          ]
-        },
-        "leveldb": {
-          "+": [
-            "info|node/leveldb[0][]>>824634933256"
-          ]
-        },
-        "pseudosettle": {
-          "+": [
-            "info|node/pseudosettle[0][]>>824634933256"
-          ]
-        },
-        "pss": {
-          "+": [
-            "info|node/pss[0][]>>824634933256"
-          ]
-        },
-        "storer": {
-          "+": [
-            "info|node/storer[0][]>>824634933256"
-          ]
-        }
-      },
-      "+": [
-        "info|node[0][]>>824634933256"
-      ]
-    }
-  },
-  "loggers": [
-    {
-      "logger": "node/api",
-      "verbosity": "info",
-      "subsystem": "node/api[0][]>>824634933256",
-      "id": "bm9kZS9hcGlbMF1bXT4-ODI0NjM0OTMzMjU2"
-    },
-    {
-      "logger": "node/storer",
-      "verbosity": "info",
-      "subsystem": "node/storer[0][]>>824634933256",
-      "id": "bm9kZS9zdG9yZXJbMF1bXT4-ODI0NjM0OTMzMjU2"
-    },
-    {
-      "logger": "node/pss",
-      "verbosity": "info",
-      "subsystem": "node/pss[0][]>>824634933256",
-      "id": "bm9kZS9wc3NbMF1bXT4-ODI0NjM0OTMzMjU2"
-    },
-    {
-      "logger": "node/pseudosettle",
-      "verbosity": "info",
-      "subsystem": "node/pseudosettle[0][]>>824634933256",
-      "id": "bm9kZS9wc2V1ZG9zZXR0bGVbMF1bXT4-ODI0NjM0OTMzMjU2"
-    },
-    {
-      "logger": "node",
-      "verbosity": "info",
-      "subsystem": "node[0][]>>824634933256",
-      "id": "bm9kZVswXVtdPj44MjQ2MzQ5MzMyNTY="
-    },
-    {
-      "logger": "node/leveldb",
-      "verbosity": "info",
-      "subsystem": "node/leveldb[0][]>>824634933256",
-      "id": "bm9kZS9sZXZlbGRiWzBdW10-PjgyNDYzNDkzMzI1Ng=="
-    },
-    {
-      "logger": "node/batchstore",
-      "verbosity": "info",
-      "subsystem": "node/batchstore[0][]>>824634933256",
-      "id": "bm9kZS9iYXRjaHN0b3JlWzBdW10-PjgyNDYzNDkzMzI1Ng=="
-    }
-  ]
+  "logger": "node/api",
+  "verbosity": "info",
+  "subsystem": "node/api[0][]>>824634474528",
+  "id": "bm9kZS9hcGlbMF1bXT4-ODI0NjM0NDc0NTI4"
 }
 ```
 
-The recorders come in two versions. The first is the tree version and the second is the flattened version. The `subsystem` field is the unique identifier of the logger. The `id` field is a version of the `subsystem` field encoded in base 64 for easier reference to a particular logger. The node name of the version tree is composed of the subsystem with the log level prefix and delimited by the `|` character. The number in the first square bracket indicates the logger's V-level.
+- **`id`**: The Base64-encoded identifier used to adjust the logger’s verbosity.
+- **`verbosity`**: The current log level.
 
-The logger endpoint uses HTTP PUT requests to modify the verbosity of the logger(s). The request must have the following parameters `/loggers/{subsystem}/{verbosity}`. The `{subsytem}` parameter is the base64 version of the subsytem field or regular expression corresponding to multiple subsystems. Since the loggers are arranged in tree structure, it is possible to turn on/off or change the logging level of the entire tree or just its branches with a single command. The verbosity can be one of `none`, `error`, `warning`, `info`, `debug` or a number in the range `1` to `1<<<31 - 1` to enable the verbosity of a particular V-level, if available for a given logger. A value of `all` will enable the highest verbosity of V-level.
 
-Examples:
+### **2. Adjusting Logger Verbosity**
 
-`curl -XPUT http://localhost:1633/loggers/bm9kZS8q/none` - will disable all loggers; `bm9kZS8q` is base64 encoded `node/*` regular expression.
+You can dynamically adjust the log level for any logger without restarting Bee.
 
-`curl -XPUT http://localhost:1633/loggers/bm9kZS9hcGlbMV1bXT4-ODI0NjM0OTMzMjU2/error` - will set the verbosity of the logger with the subsystem `node/api[1][]>>824634933256` to `error`.
+**Syntax**:
+```bash
+curl -X PUT http://localhost:1633/loggers/<id>/<verbosity>
+```
+
+- **`<id>`**: The Base64-encoded logger name retrieved from `/loggers`.
+- **`<verbosity>`**: Desired log level (`none`, `error`, `warn`, `info`, `debug`, `trace`).
+
+**Example**: Set `node/api` to `debug`:
+```bash
+curl -X PUT http://localhost:1633/loggers/bm9kZS9hcGlbMF1bXT4-ODI0NjM0NDc0NTI4/debug
+```
+
+### Log Level Behavior Note
+
+Log levels are cumulative. When a logger is set to a specific level, it will include all log messages at that level and below.  
+
+For example:
+- Setting a logger to `info` will show logs at `info`, `warn`, and `error`.
+- Logs at higher levels (`debug` and `trace`) will **not** be displayed.
+
