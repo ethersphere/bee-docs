@@ -1,13 +1,18 @@
 
 # Logging in Bee
 
-This section introduces logging in Bee, detailing log locations, exporting logs, setting the general verbosity level, and setting fine-grained verbosity for individual loggers.
+This section provides an overview of logging in Bee, including log locations, exporting logs, managing verbosity levels, and using fine-grained control for specific loggers.
+
+:::info
+Bee uses a structured logging format compatible with popular tools such as [Grafana](https://grafana.com/) and [Elasticsearch](https://www.elastic.co/elasticsearch). Structured logging helps streamline log analysis and management by organizing data into machine-readable formats which enable easy integration with monitoring and debugging tools.
+:::
+
+:::warning  
+Bee logs can be verbose by default, potentially consuming significant disk space over time. Consider implementing [log rotation](https://en.wikipedia.org/wiki/Log_rotation) to prevent excessive disk utilization.
+:::
+
 
 ## Log Locations
-
-:::warning
-Bee logs by default can be quite verbose, and over time may occupy disk space in the gigabytes range. You may wish to practice log rotation to prevent excessive disk utilization.
-:::
 
 ### **Linux (Package Manager Installation)**
 When installed via a package manager (e.g., `APT`, `RPM`), Bee runs as a **systemd service**, and logs are managed by the system journal, **journalctl**.
