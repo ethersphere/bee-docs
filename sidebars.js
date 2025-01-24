@@ -48,10 +48,11 @@ module.exports = {
       label: 'Installation',
       items: [
         'bee/installation/quick-start',
-        'bee/installation/install',
+        'bee/installation/shell-script-install',
+        'bee/installation/docker',
+        'bee/installation/package-manager-install',
         'bee/installation/build-from-source',
         'bee/installation/hive',
-        'bee/installation/docker',
         'bee/installation/connectivity',
         'bee/installation/fund-your-node',
       ],

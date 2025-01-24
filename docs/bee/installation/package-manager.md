@@ -1,6 +1,6 @@
 ---
-title: Install Bee
-id: install
+title: Package Manager Install
+id: package-manager-install
 ---
 
 import Tabs from '@theme/Tabs';
