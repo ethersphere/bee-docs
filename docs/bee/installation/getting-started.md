@@ -1,13 +1,20 @@
 ---
 title: Getting Started
-id: quick-start
+id: getting-started
 ---
 
-To get started working with Swarm, first you need to learn about the different types of Bee nodes, the requirements for running each type, and then choose which type is right for you. 
+
+In this guide we cover the basic background information you need to know to get started running a Bee node:
+
+#### [A list of Bee node types and their various features.](/docs/bee/installation/getting-started#node-types)
+#### [General requirements for running Bee nodes.](/docs/bee/installation/getting-started#general-node-requirements)
+#### [Specific requirements base on node type.](/docs/bee/installation/getting-started#node-requirements-by-node-type)
+#### [How to choose the right node type.](/docs/bee/installation/getting-started#choosing-node-type-based-on-use-case)
+#### [How to choose the appropriate installation method.](/docs/bee/installation/getting-started#choosing-installation-method)
 
 ## Node Types
 
-Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes which each offer different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes.
+Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes which each offer different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes. Node type is set by modifying the appropriate configuration options during the setup process. For the details of how to configure each node type, refer to the [node installation guides](/docs/bee/installation/getting-started#choosing-installation-method).
 
 ### Ultra-Light Node
 
@@ -21,7 +28,7 @@ A light node can both download and upload data over the Swarm network. Light nod
 
 A full node can upload and download data over the Swarm network. Additionally, a full node can also share its disk space with the Swarm network where it will be employed by Swarm uploaders. Full nodes can earn storage incentives for sharing their disk space with the network, and can also earn bandwidth incentives just as light nodes can.
 
-## Features Comparison Chart
+### Features Comparison Chart
 
 | Feature      | Full Node | Light Node |Ultra-Light Node|
 |--------------|-----------|------------|------------|
@@ -48,28 +55,62 @@ By participating in the storage incentives protocol, full nodes which store data
 Bandwidth incentives (also referred to as the SWAP protocol) encourage full or light (but not ultra-light) nodes to share bandwidth with other nodes in exchange for payments from other nodes either [in-kind](https://www.investopedia.com/terms/p/paymentinkind.asp) or as a cheque to be settled at a future date. SWAP requires a chequebook contract to be set up on Gnosis Chain for each participating node. 
 :::
 
-## Node Requirements by Type
+
+## General Node Requirements
+
+### Software
+
+* [jq utility](https://jqlang.github.io/jq/) for formatting JSON API output (optional)
 
 :::info
-A note on RPC endpoints:
-
-Light and full Bee nodes require an RPC endpoint. An RPC endpoint is a "remote procedure call" endpoint that for blockchains like Ethereum or Gnosis Chain typically takes the form of an http or Websocket (wss) address. You will be able to use your own RPC endpoint if you are running your own Gnosis Chain node, however for many node operators it may be more convenient to use a third party provider such as [Infura](https://www.infura.io/).
+The [`jq` utility](https://jqlang.github.io/jq/) is widely used throughout the documentation to automatically format the output from calls to the Bee API. It can help make API output much more readable, however its usage is optional. 
 :::
+
+### Tokens
+
+* A small amount of xDAI to pay for Gnosis Chain transactions, 0.1 xDAI should be enough
+* 10 xBZZ (BZZ on Gnosis Chain) is required for staking
+* A small amount of xBZZ for downloading and uploading from Swarm. You can start with 1 xBZZ and add more according to your usage needs.
+
+### Network Considerations
+
+#### RPC Endpoints
+
+Both full and light nodes require a Gnosis Chain RPC endpoint which can be obtained either by running your own node or from an RPC endpoint 3rd party provider such as [Infura](https://www.infura.io). You can also find some free RPC endpoints such as [this one](https://xdai.fairdatasociety.org) offered by the Fair Data Society, or from one of the other free options available at the [Gnosis Chain docs](https://docs.gnosischain.com/tools/RPC%20Providers/). 
+
+
+#### NAT and Port Forwarding
+
+If you are running on a home network you may need to configure your router to use [port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) or take other steps to ensure your node is reachable by other nodes on the network. See [here](https://docs.ethswarm.org/docs/bee/installation/connectivity/#navigating-through-the-nat) for more guidance. If you are running on a VPS or cloud based server you will likely have no issues.
+
+## Node Requirements By Node Type
 
 
 ### Ultra-Light Node
+An ultra-light node has very minimal hardware requirements and can operate on practically any modern computer or VPS, including devices with baseline specs. It can even run on single-board computers like Raspberry Pi.
 
-A light node has very minimal requirements, it will run on essentially any modern hardware or VPS with baseline specs. It can even run even on small single-board computers like Raspberry Pi's. 
+**Average Specs for Ultra-Light Node:**
+- **Processor**: Single-core or dual-core processor, 1 GHz or higher (e.g., Intel Atom, ARM Cortex-A series).
+- **RAM**: 1 GB or higher.
+- **Storage**: 8 GB HDD or SSD.
+- **Internet Connection**: A stable internet connection with at least 1 Mbps download/upload speed.
 
-Your upload and download speeds will be limited by your internet connection speed of course, and exceedingly low RAM or processing power may also slow down your node - however this should not be an issue for practically any modern hardware. 
+No RPC endpoint is required for ultra-light nodes.
 
-An RPC endpoint is not required.
 
 ### Light Node
+A light node has slightly higher requirements than an ultra-light node due to the ability to upload and download data over the network. It consumes more bandwidth and requires a Gnosis Chain RPC endpoint for purchasing stamps and participating in bandwidth incentives.
 
-A light node's requirements will be similar to that of an ultra-light node, however since it can be used for uploading as well as downloading and in typical use cases will be consuming greater bandwidth, internet connections speeds will be a greater consideration. If you intend to use your light node for large amounts of uploads and downloads, you should make sure your internet connection is sufficiently fast and stable. Again, as with an ultra-light node, any modern commercially available hardware should be sufficient.
+**Average Specs for Light Node:**
+- **Processor**: Dual-core processor, 1.5 GHz or higher (e.g., Intel Celeron, AMD Athlon, or similar).
+- **RAM**: 2 GB or higher.
+- **Storage**: 16 GB SSD or HDD.
+- **Internet Connection**: A stable internet connection with at least 5 Mbps download/upload speed.
 
-A light node also has the additional requirement of an RPC endpoint so that it can purchase stamps to pay for uploads and so that it can participate in bandwidth incentives to earn xBZZ for data it forwards.
+These specs are achievable with most commercially available laptops, desktops, or low-cost servers. For users planning to handle high amounts of data transfers, faster internet connections and slightly more RAM (e.g., 4 GB) are recommended for optimal performance.
+
+
+These recommendations reflect the typical capabilities of affordable, readily available hardware suitable for running light and ultra-light nodes without significant bottlenecks.
 
 ### Full Node
 
@@ -91,8 +132,13 @@ Note that there are additional hardware requirements if you choose to [run your 
 Staking is not required to run a full node, but is necessary to earn storage incentives. An altruistic person may want to run a full node without putting up any stake, and in fact, could possibly earn enough xBZZ from bandwidth (swap/cheque) compensation to be able to stake at some point in the future. Learn more in the [staking section](/docs/bee/working-with-bee/staking)
 :::
 
+:::caution
+While it is possible to run multiple Bee nodes on a single machine, due to the high rate of I/O operations required by a full Bee node in operation, it is not recommended to run more than a handful of Bee nodes on the same physical disk (depending on the disk speed). 
+:::
 
-## Which type of node is the right choice?
+
+## Choosing Node Type Based on Use Case
+
 Different node types best suit different use cases:
 
 ### Basic Interactions with the Swarm network
@@ -120,25 +166,25 @@ Since each full Bee node shares up to 2^22 chunks (~16gb of data), and due to th
 
 You can interact with the Swarm network by installing the Bee client through a variety of different methods. Below is a (non-exhaustive) list of some of the most common methods for installing a Bee client.
 
-### Swarm Desktop
+### [Swarm Desktop](/docs/desktop/introduction)
 
 If you are looking to get started with exploring Swarm and interacting with the network in as simple and easy a way as possible, then [Swarm Desktop](/docs/desktop/introduction) is the way to go.
 
 Swarm Desktop offers an easy and convenient to use graphical user interface so that users can easily upload and download from the Swarm, host their websites, and access a variety of Swarm DAPPs which come pre-bundled with Swarm Desktop.
 
-### Shell Script Install
+### [Shell Script Install](/docs/bee/installation/shell-script-install)
 
 If you're ready to go beyond the GUI based Swarm Desktop, then [the shell script install](/docs/bee/installation/shell-script-install) method may be right for you. This method uses a simple shell script to detect your operating system and environment and install the correct version of Bee for your machine. It's a convenient and minimalistic way of getting started with Swarm.
 
 Because the shell script install is so minimalistic, it may require some additional tinkering to get it working the way you want it to. For example, it will not come set up to run in the background as a service out of the box, and logs will not be automatically saved. 
 
-### Docker Install
+### [Docker Install](/docs/bee/installation/docker)
 
 While the [Docker based installation](/docs/bee/installation/docker) method requires additional tooling not needed with the shell script install method, it also comes with several advantages which make it easier to operate your node across multiple different types of environments and also makes it easier to spin up multiple nodes at once. Combining it with tools like [Docker Compose](https://docs.docker.com/compose/) can open up even more options.
 
 Unlike the shell script install method, Docker already comes with easy to use tools for running your containerized Bee node as a background process and for dealing with logs from your node.
 
-### Package Manager Install
+### [Package Manager Install](/docs/bee/installation/package-manager-install)
 
 The Bee client can be [installed through a variety of package managers](/docs/bee/installation/package-manager-install) including [APT](https://en.wikipedia.org/wiki/APT_(software)), [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager), and [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)). 
 
@@ -146,6 +192,6 @@ In comparison with the shell script install, this installation method comes with
 
 One of the disadvantages is that it can be less flexible than either the Docker or shell script install methods.
 
-### Building From Source
+### [Building From Source](/docs/bee/installation/build-from-source)
 
 For the more advanced of users, you may wish to build from source. You can find instructions for doing so [here](/docs/bee/installation/build-from-source). While this may be the most flexible of all methods, it's also the most difficult and requires the most hands-on setup and so is recommended for more advanced users / use cases.

@@ -7,54 +7,32 @@ id: shell-script-install
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Swarm Quickstart Shell Script
+# Swarm Shell Script Installation Guide
 
-The following is a guide to get you started running a Bee full node with staking on Swarm using [the official shell script provided by Swarm](https://github.com/ethersphere/bee/blob/master/install.sh) which automatically detects your system and installs the correct version of Bee. 
-
+The following is a guide to get you started running a Bee node on Swarm using [the official shell script provided by Swarm](https://github.com/ethersphere/bee/blob/master/install.sh) which automatically detects your system and installs the correct version of Bee. This installation method is an excellent choice if you're looking for a minimalistic and flexible option for your Bee node installation.
 
 :::warning
 Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default), since we do not want to expose our Bee API endpoint to the public internet, as that would allow anyone to control our node. Make sure you do the same, and it's also recommended to use a  firewall to protect access to your node(s).
 :::
 
 :::info
-The guide below is for a full Bee node with staking. To run a light node (uploads and downloads only), set `--full-node` to false, or to run in ultra light (downloads only) mode you can set both `--full-node` and `--swap-enable` to false.
+This guide uses command line flag options in the node startup commands such as `--blockchain-rpc-endpoint`, however there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
 :::
-
-
-
-## Prerequisites
-
-### Hardware
-
-:::warning
-If you are running on a home Wi-Fi you may need to configure your router to use [port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) or take other steps to ensure your node is reachable by other nodes on the network. See [here](https://docs.ethswarm.org/docs/bee/installation/connectivity/#navigating-through-the-nat) for more guidance. If you are running on a VPS or cloud based server you will likely have no issues.
-:::
-
-:::caution
-While it is possible to run multiple Bee nodes on a single machine, due to the high rate of I/O operations required by a full Bee node in operation, it is not recommended to run more than a handful of Bee nodes on the same physical disk (depending on the disk speed). 
-:::
-
-
-### Software 
-
-* A computer running a supported version of Linux (almost all commonly used distros should work). macOS will also work but you may need to slightly modify some commands.
-* A Gnosis Chain RPC endpoint (either by running your own node or the [free RPC endpoint](https://xdai.fairdatasociety.org) offered from the Fair Data Society. Other free public options are available at the [Gnosis Chain docs](https://docs.gnosischain.com/tools/RPC%20Providers/). 
-* (Optional) [`jq` utility](https://jqlang.github.io/jq/) for formatting API output. 
-* (Optional) [`bashtop` utility](https://github.com/aristocratos/bashtop) for monitoring processes (such as our Bee node).
-
 
 :::info
-The [`jq` utility](https://jqlang.github.io/jq/) is used in this guide to automatically format the output from the Bee API. It can help make API output much more readable, however it is totally optional. 
+**Bee Modes**
 
-The [`bashtop` utility](https://github.com/aristocratos/bashtop) is similarly optional, it is however a useful tool for monitoring our node's process so we can see that it is running properly.
+Bee nodes can be run in multiple modes with different functionalities. To run a node in full mode, both `--full-node` and `--swap-enable` must be set to true. To run a light node (uploads and downloads only), set `--full-node` to false and `--swap-enable` to `true`, or to run in ultra light mode (free tier downloads only) set both `--full-node` and `--swap-enable` to false.
+
+For more information on the different functionalities of each mode, as well as their different system requirements, refer to the [Getting Started guide](/docs/bee/installation/getting-started).
 :::
 
-### Tokens
+ 
+## Install and Start Your Node 
+Below is a step by step guide for installing and setting up your Bee node using the shell script installation method.
 
-* A small amount of xDAI to pay for Gnosis Chain transactions, 0.1 xDAI should be enough
-* 10 xBZZ (BZZ on Gnosis Chain) is required for staking 
+### Run Shell Script 
 
-## Run setup script 
 
 Run the install shell script using either `curl` or `wget`:
 
@@ -81,7 +59,7 @@ curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TA
 **wget**
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.2.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.4.0 bash
 ```
 </TabItem>
 
@@ -352,8 +330,13 @@ version: 2.2.0-06a0aca7 - planned to be supported until 11 December 2024, please
 </Tabs>
 
 
+## Fund and Stake 
 
-### Fund node (full and light nodes only)
+Running a full node for the purpose of earning xBZZ by sharing disk space and participating in the redistribution game requires a minimum of 10 xBZZ and a small amount of xDAI (for initializing the chequebook contract and for paying for redistribution game related transactions). 
+
+While running a light note requires a small amount of xDAI to pay for initializing the chequebook contract and a smaller amount of xBZZ to pay for uploads and downloads.
+
+### Fund node 
 
 Check the logs from the previous step. Look for the line which says: 
 
@@ -361,6 +344,28 @@ Check the logs from the previous step. Look for the line which says:
 "time"="2024-09-24 18:15:34.520716" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x1A801dd3ec955E905ca424a85C3423599bfb0E66"
 ```
 That address is your node's address on Gnosis Chain which needs to be funded with xDAI and xBZZ. Copy it and save it for the next step.
+
+You can also use a `curl` command with the Bee API to find your node's address:
+
+```bash
+curl localhost:1633/addresses | jq
+```
+
+```json
+{
+  "overlay": "b1978be389998e8c8596ef3c3a54214e2d4db764898ec17ec1ad5f19cdf7cc59",
+  "underlay": [
+    "/ip4/127.0.0.1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ",
+    "/ip4/172.25.128.69/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ",
+    "/ip6/::1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ"
+  ],
+  "ethereum": "0xd22cc790e2aef341827e1e49cc631d2a16898cd9",
+  "publicKey": "023b26ce8b78ed8cdb07f3af3d284c95bee5e038e7c5d0c397b8a5e33424f5d790",
+  "pssPublicKey": "039ceb9c1f0afedf79991d86d89ccf4e96511cf656b43971dc3e878173f7462487"
+}
+```
+
+The `ethereum` address is your node's Gnosis Chain address (while Gnosis is a distinct chain from Ethereum, it uses the same address format and is sometimes referenced as such within the Bee API.)
 
 xDAI is widely available from many different centralized and decentralized exchanges, just make sure that you are getting xDAI on Gnosis Chain, and not DAI on some other chain. See [this page](https://www.ethswarm.org/get-bzz) for a list of resources for getting xBZZ (again, make certain that you are getting the Gnosis Chain version, and not BZZ on Ethereum).  
 
@@ -534,7 +539,16 @@ The results will be displayed in PLUR units (1 PLUR is equal to 1e-16 xBZZ). If 
  
 Congratulations! You have now installed your Bee node and are connected to the network as a full staking node. Your node will now be in the process of syncing chunks from the network. Once it is fully synced, your node will finally be eligible for earning staking rewards. 
 
+### Set Target Neighborhood
+
+When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](/docs/bee/installation/set-target-neighborhood).
+
+
 ### Logs and monitoring
+
+:::info
+You can learn more about Bee logs here.
+:::
 
 With our previously modified command, our Bee node will now be running in the background and the logs will be written to the `bee.log` file. To review our node's logs we can simply view the file contents:
 
@@ -597,3 +611,30 @@ Below is the output for a node which has been running for several days:
 For a complete breakdown of this output, check out [this section in the Bee docs](/docs/bee/working-with-bee/bee-api#redistributionstate).
 
 You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](/docs/bee/working-with-bee/bee-api), and you can find complete information about all available endpoints in [the API reference docs](/api/).
+
+
+## Back Up Keys
+
+Once your node is up and running, make sure to [back up your keys](/docs/bee/working-with-bee/backups).
+
+## Getting help
+
+The CLI has documentation built-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
+
+You may also check out the [configuration guide](/docs/bee/working-with-bee/configuration), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
+
+
+## Next Steps to Consider
+
+
+### Access the Swarm
+If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/access-the-swarm/introduction).
+
+### Explore the API
+The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
+
+### Run a hive! 
+If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
+
+### Start building DAPPs on Swarm
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/introduction).

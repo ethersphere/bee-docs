@@ -47,11 +47,12 @@ module.exports = {
       type: 'category',
       label: 'Installation',
       items: [
-        'bee/installation/quick-start',
+        'bee/installation/getting-started',
         'bee/installation/shell-script-install',
         'bee/installation/docker',
         'bee/installation/package-manager-install',
         'bee/installation/build-from-source',
+        'bee/installation/set-target-neighborhood',
         'bee/installation/hive',
         'bee/installation/connectivity',
         'bee/installation/fund-your-node',
