@@ -11,7 +11,7 @@ Prerequisites for installing direct from source are:
 
 -  **go** - download the latest release from [golang.org](https://golang.org/dl).
 -  **git** - download from [git-scm.com](https://git-scm.com/).
--  **make** - usually included in most operating systems.
+-  **make** - [make](https://www.gnu.org/software/make/) is usually included by default in most UNIX operating systems, and can be installed and used on almost any other operating system where it is not included by default.
 
 ### Build from Source
 
