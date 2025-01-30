@@ -4,17 +4,17 @@ id: getting-started
 ---
 
 
-In this guide we cover the basic background information you need to know to get started running a Bee node:
+In this guide we cover the basic background information you need to know to get started running a Bee node, such as:
 
-#### [A list of Bee node types and their various features.](/docs/bee/installation/getting-started#node-types)
-#### [General requirements for running Bee nodes.](/docs/bee/installation/getting-started#general-node-requirements)
-#### [Specific requirements base on node type.](/docs/bee/installation/getting-started#node-requirements-by-node-type)
-#### [How to choose the right node type.](/docs/bee/installation/getting-started#choosing-node-type-based-on-use-case)
-#### [How to choose the appropriate installation method.](/docs/bee/installation/getting-started#choosing-installation-method)
+* [A list of Bee node types and their various features.](/docs/bee/installation/getting-started#node-types)
+* [General requirements for running Bee nodes.](/docs/bee/installation/getting-started#general-node-requirements)
+* [Specific requirements base on node type.](/docs/bee/installation/getting-started#node-requirements-by-node-type)
+* [How to choose the right node type.](/docs/bee/installation/getting-started#choosing-node-type-based-on-use-case)
+* [How to choose the appropriate installation method.](/docs/bee/installation/getting-started#choosing-installation-method)
 
 ## Node Types
 
-Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes which each offer different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes. Node type is set by modifying the appropriate configuration options during the setup process. For the details of how to configure each node type, refer to the [node installation guides](/docs/bee/installation/getting-started#choosing-installation-method).
+Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes which each offer different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes. Node type is set by modifying the [appropriate configuration options](/docs/bee/working-with-bee/configuration#set-bee-node-type).  
 
 ### Ultra-Light Node
 
@@ -36,24 +36,11 @@ A full node can upload and download data over the Swarm network. Additionally, a
 | Uploading     | ✅       |   ✅      |  ❌  |
 | Can exceed free download limits by paying xBZZ  | ✅       |   ✅      |❌ 
 |Sharing disk space with network|✅|    ❌      |❌|
-|Storage incentives|✅|        ❌      |❌|
-|SWAP incentives|✅|           ✅      |❌|
-|PSS messaging|✅|             ✅      |✅ |
+|[Storage incentives](/docs/concepts/incentives/overview#storage-incentives)|✅|        ❌      |❌|
+|[SWAP incentives](/docs/concepts/incentives/bandwidth-incentives)|✅|           ✅      |❌|
+|[PSS messaging](/docs/concepts/pss/)|✅|             ✅      |✅ |
 |Gnosis Chain Connection|✅|             ✅      |❌  |
 
-
-:::info 
-#### **Swarm Incentives Types**
-In Swarm, there are two types of incentives for node operators, **storage incentives** which reward nodes for storing data chunks over time, and **bandwidth incentives** which reward nodes for transmitting data chunks across the network.
-
-**Storage incentives**
-
-By participating in the storage incentives protocol, full nodes which store data chunks with the network may join in the redistribution game for a chance to earn xBZZ. Staked xBZZ is required to earn storage incentives. Learn more in the [staking section](/docs/bee/working-with-bee/staking).
-
-**Bandwidth incentives (SWAP):**
-
-Bandwidth incentives (also referred to as the SWAP protocol) encourage full or light (but not ultra-light) nodes to share bandwidth with other nodes in exchange for payments from other nodes either [in-kind](https://www.investopedia.com/terms/p/paymentinkind.asp) or as a cheque to be settled at a future date. SWAP requires a chequebook contract to be set up on Gnosis Chain for each participating node. 
-:::
 
 
 ## General Node Requirements

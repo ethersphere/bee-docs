@@ -15,9 +15,7 @@ The Bee client can be [installed through a variety of package managers](/docs/be
 
   When a node is started using the `bee start` command the node process will be bound to the terminal session and will exit if the terminal is closed. 
   
-  Depending on which of these startup methods was used, *the default Bee directories will be different*. For each startup method, a different default data directory is used, so each startup method will essentially be spinning up a totally different node.
-  
-  See the [configuration page](/docs/bee/working-with-bee/configuration) for more information about default data and config directories.
+  Depending on which of these startup methods was used, [*the default Bee directories will be different*](/docs/bee/working-with-bee/configuration#default-data-and-config-directories). For each startup method, a different default data directory is used, so each startup method will essentially be spinning up a totally different node.
 :::
 
 

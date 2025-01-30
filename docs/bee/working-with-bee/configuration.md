@@ -323,7 +323,7 @@ You can find the default configurations for your system in the [packaging folder
 
 Depending on the operating system and startup method used, the default data and configuration directories for your node will differ. 
 
-### Bee Service Default Directories
+### Bee Service Default Directories (Package Manager Install)
 
 When installed using a package manager, Bee is set up to run as a service with default data and configuration  directories set up automatically during the installation. The examples below include default directories for Linux and macOS. You can find the complete details of default directories for different operating systems in the `bee.yaml` files included in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging). 
 
