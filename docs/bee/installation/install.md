@@ -41,9 +41,9 @@ The minimum required hardware specifications for light and ultralight nodes are 
 
 ## Note on Startup Methods
 :::caution
-  When a node is started using the `bee start` command the node process will be bound to the terminal session and will exit if the terminal is closed. 
+  When a node is started using the `bee start` command, the node process will be bound to the terminal session and will exit if the terminal is closed. 
   
-  If Bee was installed using one of the supported package managers it is set up to run as a service in the background with tools such as `systemctl` or `brew services` (which also use the `bee start` command[under the hood](https://github.com/ethersphere/bee/blob/master/packaging/bee.service)). 
+  If Bee was installed using one of the supported package managers, it is set up to run as a service in the background with tools such as `systemctl` or `brew services` (which also use the `bee start` command [under the hood](https://github.com/ethersphere/bee/blob/master/packaging/bee.service)). 
 
   Depending on which of these startup methods was used, the default Bee directories will be different. See the [configuration page](/docs/bee/working-with-bee/configuration) for more information about default data and config directories.
 :::
@@ -477,7 +477,7 @@ blockchain-rpc-endpoint: https://rpc.gnosis.gateway.fm
 ```
 
 :::info
-The gateway.fm RPC endpoint in the example is great for learning how to set up Bee, but for the sake of security and reliability it's recommended that you run your [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) rather than relying on a third party provider.
+The gateway.fm RPC endpoint in the example is great for learning how to set up Bee, but for the sake of security and reliability it's recommended that you run your own [Gnosis Chain node](https://docs.gnosischain.com/node/) rather than relying on a third party provider.
 :::
 
 
