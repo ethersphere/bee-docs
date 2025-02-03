@@ -45,6 +45,7 @@ A full node can upload and download data over the Swarm network. Additionally, a
 
 ## General Node Requirements
 
+
 ### Software Recommendations
 
 Bee is a very flexible piece of software and plays well with many different systems and tools. The recommendations below are not absolute requirements, but following them will likely make your journey with Bee a bit easier. 
@@ -78,17 +79,17 @@ Bee is a very flexible piece of software and plays well with many different syst
 
     *Swarm CLI is not generally recommended for Swarm Desktop users, but rather for node operators or developers who wish to interact directly with their Bee client*
 1. 
-    Speaking of [Bee JS](/docs/develop/tools-and-features/bee-js), it is another tool you may consider using as a developer working with Bee as it significantly simplifies the process of interacting with the Bee API.
-    
-    *The same as Swarm CLI, Bee JS is not generally recommended for Swarm Desktop users, but rather for node operators or developers who wish to interact directly with their Bee client*
+    [Bee JS](/docs/develop/tools-and-features/bee-js) is an npm package can you may consider using as a developer working with Bee as it significantly simplifies the process of interacting with the Bee API. It can be easily integrated into any NodeJS app as an easy method of integrating Swarm into your DAPP. 
 
-### Tokens
+    *The same as Swarm CLI, Bee JS is not generally recommended for Swarm Desktop users, but rather for developers who wish to interact directly with their Bee client*
+
+### Token Requirements
 
 * A small amount of xDAI to pay for Gnosis Chain transactions, 0.1 xDAI should be enough
 * 10 xBZZ (BZZ on Gnosis Chain) is required for staking
 * A small amount of xBZZ for downloading and uploading from Swarm. You can start with 1 xBZZ and add more according to your usage needs.
 
-### Network Considerations
+### Network Requirements
 
 #### RPC Endpoints
 
@@ -99,7 +100,7 @@ Both full and light nodes require a Gnosis Chain RPC endpoint which can be obtai
 
 If you are running on a home network you may need to configure your router to use [port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) or take other steps to ensure your node is reachable by other nodes on the network. See [here](https://docs.ethswarm.org/docs/bee/installation/connectivity/#navigating-through-the-nat) for more guidance. If you are running on a VPS or cloud based server you will likely have no issues.
 
-## Node Requirements By Node Type
+## Node Requirements By Specific Node Type
 
 
 ### Ultra-Light Node

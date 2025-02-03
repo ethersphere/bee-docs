@@ -40,6 +40,23 @@ Run the install shell script using either `curl` or `wget`:
 In the example below, the version is specified using `TAG=v2.4.0`, make sure that you [check if there is a newer tagged version of Bee](https://github.com/ethersphere/bee/tags) and if so, modify the commands below to use the most recent tag number so that you have the latest version of Bee.
 :::
 
+:::info
+Note that while this shell script supports many commonly used Unix-like systems, it is not quite a universal installer tool. The architectures it supports include:
+
+**1. Linux:**  
+- `linux-386` (32-bit x86)  
+- `linux-amd64` (64-bit x86)  
+- `linux-arm64` (64-bit ARM)  
+- `linux-armv6` (32-bit ARM v6)  
+
+**2. macOS (Darwin):**  
+- `darwin-arm64` (Apple Silicon, M1/M2/M3)  
+- `darwin-amd64` (Intel-based Mac)  
+
+This means the script should work on most modern Linux distributions and macOS versions that match the supported architectures.
+:::
+
+
 
 <Tabs
 defaultValue="curl"
@@ -547,7 +564,7 @@ When installing your Bee node it will automatically be assigned a neighborhood. 
 ### Logs and monitoring
 
 :::info
-You can learn more about Bee logs here.
+You can learn more about Bee logs [here](/docs/bee/working-with-bee/logs-and-files).
 :::
 
 With our previously modified command, our Bee node will now be running in the background and the logs will be written to the `bee.log` file. To review our node's logs we can simply view the file contents:
