@@ -53,10 +53,12 @@ Note that while this shell script supports many commonly used Unix-like systems,
 - `darwin-arm64` (Apple Silicon, M1/M2/M3)  
 - `darwin-amd64` (Intel-based Mac)  
 
-This means the script should work on most modern Linux distributions and macOS versions that match the supported architectures.
+This means the script should work on most modern Linux distributions and macOS versions that match the supported architectures, but not on Windows. However, you may consider using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) to run Linux on Windows as an alternative.
 :::
 
-
+:::caution
+You may need to install [`curl`](https://curl.se/) or [`wget`](https://www.gnu.org/software/wget/) if your system doesn't have one of them pre-installed and the shell script command fails to run.
+:::
 
 <Tabs
 defaultValue="curl"

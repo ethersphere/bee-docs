@@ -388,7 +388,7 @@ The default directories for your system may differ from the example above, so ma
 
 You can set your node's mode of operation by modifying its configuration options. There are three node types: `full`, `light`, and `ultra-light`. If you're not sure which type of node is right for you, check out the [Getting Started guide](/docs/bee/installation/getting-started).
 
-There are three configuration options that must be configured to set your node type. These options are:
+There are three configuration options that must be configured to set your node type. These options are listed below in each of the supported formats (command line flags, environment variables, and yaml values.):
 
 1. `--full-node` / `BEE_FULL_NODE` / `full-node`
 2. `--swap-enable` / `BEE_SWAP_ENABLE` / `swap-enable`

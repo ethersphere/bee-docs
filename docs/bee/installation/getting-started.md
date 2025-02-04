@@ -3,7 +3,6 @@ title: Getting Started
 id: getting-started
 ---
 
-
 In this guide we cover the basic background information you need to know to get started running a Bee node, such as:
 
 * [A list of Bee node types and their various features.](/docs/bee/installation/getting-started#node-types)
@@ -11,6 +10,8 @@ In this guide we cover the basic background information you need to know to get 
 * [Specific requirements base on node type.](/docs/bee/installation/getting-started#node-requirements-by-node-type)
 * [How to choose the right node type.](/docs/bee/installation/getting-started#choosing-node-type-based-on-use-case)
 * [How to choose the appropriate installation method.](/docs/bee/installation/getting-started#choosing-installation-method)
+
+This guide will walk you through how to choose the appropriate the node type, installation method, operating system, tools, and network setup for your particular needs. For new Bee users, it's recommended to read through this entire guide without skipping any sections before moving on to other pages. 
 
 ## Node Types
 
@@ -41,47 +42,68 @@ A full node can upload and download data over the Swarm network. Additionally, a
 |[PSS messaging](/docs/concepts/pss/)|✅|             ✅      |✅ |
 |Gnosis Chain Connection|✅|             ✅      |❌  |
 
+## General Node Requirements / Recommendations
 
+The requirements and recommendations outlined below all depend on your intended node type and intended use case. Review them carefully in order to determine with ones best suit your needs. 
 
-## General Node Requirements
+###  Recommended Operating Systems     
 
+Preferably use one of the officially supported operating systems. Refer to the [Bee repo releases section](https://github.com/ethersphere/bee/releases) for a list of releases for each supported operating system. It is also possible to [build Bee from source](/docs/bee/installation/build-from-source) for operating systems not included on the official release list in case you have this requirement. 
+
+If you are using [Swarm Desktop](/docs/desktop/introduction/) rather than running the core Bee client directly, any commonly available operating system is a good choice (macOS, Windows, Ubuntu, etc.).
+
+:::info
+A note on operating systems. While it is possible to run Bee on a wide variety of different operating system, much of the existing tooling and documentation is designed primarily for Unix based systems, so generally speaking, some flavor of Linux or macOS is probably the best choice.
+:::
+
+:::info
+In case you only have access to Windows, [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) is an excellent option which will allow you to run a Linux terminal which you can use to follow along with the guides in these docs.
+:::
 
 ### Software Recommendations
 
-Bee is a very flexible piece of software and plays well with many different systems and tools. The recommendations below are not absolute requirements, but following them will likely make your journey with Bee a bit easier. 
+Bee is a very flexible piece of software and plays well with many different systems and tools. The recommendations below are not absolute requirements, but following them will likely make your journey with Bee a bit easier. Some of them, such as `jq` and `curl`, will be required in order to follow along with the guides presented throughout these docs.  
 
-1. 
-    We recommend using the [jq utility](https://jqlang.github.io/jq/) for formatting JSON API output if you intend to interact directly with the Bee API(optional).
+:::info
+Working with the [Bee API](/api/) is a requirement for Swarm developers and node operators. Several of the tools listed below make working with the Bee API easier, so while not required, it's still strongly recommended to install and try out each of these tools in order to determine which ones are most suitable for your use case.  
+:::
 
-    :::info
-    The [`jq` utility](https://jqlang.github.io/jq/) is widely used throughout the documentation to automatically format the output from calls to the Bee API. It can help make API output much more readable, however its usage is optional. 
-    :::
-
-    *Recommended for anyone working directly with the Bee API.*
-1.     
-    Preferably use one of the officially supported operating systems. Refer to the [Bee repo releases section](https://github.com/ethersphere/bee/releases) for a list of releases for each supported operating system. It is also possible to [build Bee from source](/docs/bee/installation/build-from-source) for operating systems not included on the official release list in case you have this requirement. 
-
-    If you are using [Swarm Desktop](/docs/desktop/introduction/) rather than running the core Bee client directly, any commonly available operating system is a good choice (macOS, Windows, Ubuntu, etc.).
+#### 1. `jq` Utility
+ 
+   The [`jq` utility](https://jqlang.github.io/jq/) is widely used throughout the documentation to automatically format the output from calls to the Bee API. It can help make API output much more readable, however its usage is optional.
 
     :::info
-    A note on operating systems. While it is possible to run Bee on a wide variety of different operating system, much of the existing tooling and documentation is designed primarily for Unix based systems, so generally speaking, some flavor of Linux is probably the best choice.
+    ***STRONGLY*** recommended for anyone working directly with the Bee API.
     :::
 
-    *These recommendations apply to all Bee users*
-1. 
-    We recommend using [`curl`](https://curl.se/) for making http requests to the BEE api, and it is widely used throughout the documentation for example interactions with the Bee API. It comes installed by default on many UNIX based operating systems, and is even now available on newer versions of Windows by default. You can also install [`curl` for Windows](https://curl.se/windows/) on your machine if it isn't included by default. Another similar option you may consider is [`wget`](https://www.gnu.org/software/wget/).
+
+
+#### 2. `curl` for API Interaction
+
+    We recommend using [`curl`](https://curl.se/) for making http requests to the Bee API, and it is widely used throughout the documentation for example interactions with the Bee API. It comes installed by default on many UNIX based operating systems, and is even now available on newer versions of Windows by default. You can also install [`curl` for Windows](https://curl.se/windows/) on your machine if it isn't included by default. Another similar option you may consider is [`wget`](https://www.gnu.org/software/wget/).
 
     You may also wish to use more feature rich tools for interacting with the Bee API such as [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/). While they are not open source, they do offer free versions and come with some useful features such as the ability to save and organize your commonly used fully formatted API requests. 
 
     *These tools are not relevant for most Swarm Desktop users and are rather for users who wish to interact directly with their Bee client.*
-1. 
-    You may wish to use [Swarm CLI](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli/) for interacting with your Bee node from the command line rather than interacting directly with the Bee API through tools like `curl`, `wget`, `insomnia`, etc. Swarm CLI is built using [Bee JS](/docs/develop/tools-and-features/bee-js), a JavaScript library which greatly simplifies interaction with the Bee API.
 
-    *Swarm CLI is not generally recommended for Swarm Desktop users, but rather for node operators or developers who wish to interact directly with their Bee client*
-1. 
+    :::info
+    ***REQUIRED*** to use one of these tools or another tool with similar functionalities in order to send the the API requests required for working directly with the Bee API.
+    :::
+
+#### 3. Swarm CLI for Command Line Control
+    [Swarm CLI](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli/) is an excellent choice for interacting with your Bee node from the command line using simple terminal commands. Swarm CLI is built using [Bee JS](/docs/develop/tools-and-features/bee-js), a JavaScript library which greatly simplifies interaction with the Bee API.
+
+    :::info
+    Swarm CLI is not generally recommended for Swarm Desktop users, but rather for node operators or developers who wish to interact directly with their Bee client. It will allow you to access Bee node features using simple terminal commands as an alternative to formatting complete http requests with `curl` / `wget` / `insomnia`/ `postman`, etc.   
+    :::
+
+#### 4. Bee JS for App Integration
+
     [Bee JS](/docs/develop/tools-and-features/bee-js) is an npm package can you may consider using as a developer working with Bee as it significantly simplifies the process of interacting with the Bee API. It can be easily integrated into any NodeJS app as an easy method of integrating Swarm into your DAPP. 
 
-    *The same as Swarm CLI, Bee JS is not generally recommended for Swarm Desktop users, but rather for developers who wish to interact directly with their Bee client*
+    :::info 
+    As with the Swarm CLI, Bee JS is not generally recommended for Swarm Desktop users. Bee JS is ideal for NodeJS developers who wish to interact directly with a Bee client without the need to format http requests and send them with tools like `curl` / `wget` / `insomnia`/ `postman`, etc.
+    :::
 
 ### Token Requirements
 
@@ -171,6 +193,8 @@ The [Swarm Desktop app](https://www.ethswarm.org/build/desktop) offers an easy w
 ### Developing a DAPP on Swarm
 
 In order to develop a DAPP on Swarm, you will likely want to run either a ***light node*** or a ***full node***. For many use cases, a light node will be sufficient. However if you need to access certain features such as GSOC, then running a full node will be required.
+
+Depending on your specific needs as a developer, even the [Swarm Desktop app](https://www.ethswarm.org/build/desktop) may be sufficient. 
 
 ### Support the Network and Earn xBZZ by Running a Full Node
 
