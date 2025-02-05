@@ -287,7 +287,7 @@ docker run -d --name bee-node \
   -v "$(pwd)/bee.yml:/home/bee/bee.yml" \
   -p 127.0.0.1:1633:1633 \
   -p 1634:1634 \
-  ethersphere/bee:2.3.0 start --config /home/bee/bee.yml
+  ethersphere/bee:2.4.0 start --config /home/bee/bee.yml
 ```
 :::info
 Command breakdown:
@@ -306,7 +306,7 @@ Command breakdown:
 
 1. **`-p 1634:1634`**: This maps port 1634 on all network interfaces of your host machine to port 1634 inside the container. This is used for P2P communication.
 
-1. **`ethersphere/bee:2.3.0`**: This specifies the Docker image to use for the container. In this case, it is the `ethersphere/bee` image with the tag `2.3.0`.
+1. **`ethersphere/bee:2.4.0`**: This specifies the Docker image to use for the container. In this case, it is the `ethersphere/bee` image with the tag `2.4.0`.
 
 1. **`start --config /home/bee/bee.yml`**: This specifies the command to run inside the container. It starts the Bee node using the configuration file located at `/home/bee/bee.yml`.
 :::
@@ -324,7 +324,7 @@ If everything is set up correctly, you should see your Bee node listed:
 ```bash
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
                                               NAMES
-e53aaa4e76ec   ethersphere/bee:2.3.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp,   bee-node
+e53aaa4e76ec   ethersphere/bee:2.4.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp,   bee-node
 ```
 
 And check the logs:
@@ -497,14 +497,14 @@ cat ./node_01/bee.yml
 You can use the same Docker Compose configuration for all the node types.
 
 :::info
-Note that we have specified the exact version number of the image using the 2.3.0 tag. It's recommended to always specify the exact version number you need using the version tag. You can find all available tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags).
+Note that we have specified the exact version number of the image using the 2.4.0 tag. It's recommended to always specify the exact version number you need using the version tag. You can find all available tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags).
 :::
 
 ```yml
 services:
   bee_01:
     container_name: bee-node_01
-    image: ethersphere/bee:2.3.0
+    image: ethersphere/bee:2.4.0
     command: start --config /home/bee/bee.yml
     volumes:
       - ./node_01/.bee:/home/bee/.bee
@@ -565,7 +565,7 @@ If we did everything properly we should see our node listed here:
 ```bash
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
                                               NAMES
-e53aaa4e76ec   ethersphere/bee:2.3.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp,  bee-node_01
+e53aaa4e76ec   ethersphere/bee:2.4.0   "bee start --config …"   17 seconds ago   Up 16 seconds   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp,  bee-node_01
 ```
 
 Now let's check our logs:
@@ -676,7 +676,7 @@ Here is the Docker compose configuration for running a hive of two Bee nodes:
 services:
   bee_01:
     container_name: bee-node_01
-    image: ethersphere/bee:2.3.0
+    image: ethersphere/bee:2.4.0
     command: start --config /home/bee/bee.yml
     volumes:
       - ./node_01/.bee:/home/bee/.bee
@@ -686,7 +686,7 @@ services:
       - 1634:1634 # p2p port
   bee_02:
     container_name: bee-node_02
-    image: ethersphere/bee:2.3.0
+    image: ethersphere/bee:2.4.0
     command: start --config /home/bee/bee.yml
     volumes: 
       - ./node_02/.bee:/home/bee/.bee
@@ -720,8 +720,8 @@ docker ps
 ```shell
 CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
                                               NAMES
-a62ec5143d30   ethersphere/bee:2.3.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp,   bee-node_02
-a3496b9bb2c8   ethersphere/bee:2.3.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-node_01
+a62ec5143d30   ethersphere/bee:2.4.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1636->1633/tcp, 0.0.0.0:1637->1634/tcp, :::1637->1634/tcp,   bee-node_02
+a3496b9bb2c8   ethersphere/bee:2.4.0   "bee start --config …"   2 seconds ago   Up 1 second   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-node_01
 ```
 
 And we can also check the logs for each node:
