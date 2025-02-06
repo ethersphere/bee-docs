@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 The following is a guide to get you started running a Bee node on Swarm using [the official shell script provided by Swarm](https://github.com/ethersphere/bee/blob/master/install.sh) which automatically detects your system and installs the correct version of Bee. This installation method is an excellent choice if you're looking for a minimalistic and flexible option for your Bee node installation.
 
 :::warning
-Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default), since we do not want to expose our Bee API endpoint to the public internet, as that would allow anyone to control our node. Make sure you do the same, and it's also recommended to use a  firewall to protect access to your node(s).
+Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default), since we do not want to expose our Bee API endpoint to the public internet, as that would allow anyone to control our node. Make sure you do the same, and it's also recommended to use a  firewall to restrict access to your node(s).
 :::
 
 :::info
@@ -22,14 +22,14 @@ This guide uses command line flag options in the node startup commands such as `
 :::info
 **Bee Modes**
 
-Bee nodes can be run in multiple modes with different functionalities. To run a node in full mode, both `--full-node` and `--swap-enable` must be set to true. To run a light node (uploads and downloads only), set `--full-node` to false and `--swap-enable` to `true`, or to run in ultra light mode (free tier downloads only) set both `--full-node` and `--swap-enable` to false.
+Bee nodes can be run in multiple modes with different functionalities. To run a node in full mode, both `--full-node` and `--swap-enable` must be set to `true`. To run a light node (uploads and downloads only), set `--full-node` to false and `--swap-enable` to `true`, or to run in ultra-light mode (free tier downloads only) set both `--full-node` and `--swap-enable` to false.
 
 For more information on the different functionalities of each mode, as well as their different system requirements, refer to the [Getting Started guide](/docs/bee/installation/getting-started).
 :::
 
  
 ## Install and Start Your Node 
-Below is a step by step guide for installing and setting up your Bee node using the shell script installation method.
+Below is a step-by-step guide for installing and setting up your Bee node using the shell script installation method.
 
 ### Run Shell Script 
 
@@ -37,7 +37,7 @@ Below is a step by step guide for installing and setting up your Bee node using 
 Run the install shell script using either `curl` or `wget`:
 
 :::caution
-In the example below, the version is specified using `TAG=v2.4.0`, make sure that you [check if there is a newer tagged version of Bee](https://github.com/ethersphere/bee/tags) and if so, modify the commands below to use the most recent tag number so that you have the latest version of Bee.
+In the example below, the version is specified using `TAG=v2.4.0`. Make sure that you [check if there is a newer tagged version of Bee](https://github.com/ethersphere/bee/tags) and if so, modify the commands below to use the most recent tag number so that you have the latest version of Bee.
 :::
 
 :::info
@@ -120,7 +120,7 @@ Use "bee [command] --help" for more information about a command.
 
 ### Node Startup Commands
  
-Let's try starting up our node for the first time with the command below, make sure to pick a [strong password](https://xkcd.com/936/) of your own:
+Let's try starting up our node for the first time with the command below. Make sure to pick a [strong password](https://xkcd.com/936/) of your own:
 
 Below are startup commands configured for each of the three Bee node types.
 
@@ -133,7 +133,7 @@ values={[
 ]}>
 
 <TabItem value="full">
-For the full node, we have `--full-node` and `--swap-enable` both enabled, and we've used `--blockchain-rpc-endpoint` to set our RPC endpoint ass `https://xdai.fairdatasociety.org`. You RPC endpoint may differ depending on your setup
+For the full node, we have `--full-node` and `--swap-enable` both enabled, and we've used `--blockchain-rpc-endpoint` to set our RPC endpoint as `https://xdai.fairdatasociety.org`. Your RPC endpoint may differ depending on your setup.
 
 ```bash
 bee start \
@@ -156,7 +156,7 @@ bee start \
 ```
 </TabItem>
 <TabItem value="ultra-light">
- For the ultra-light node, we remove all three of the relevant settings to disable them (since they default to `false`), `--full-node`, `--swap-enable`, and `--blockchain-rpc-endpoint`.
+ For the ultra-light node, we omit all three of the relevant settings to disable them (since they default to `false`), `--full-node`, `--swap-enable`, and `--blockchain-rpc-endpoint`.
 
 ```bash
 bee start \
@@ -351,9 +351,9 @@ version: 2.2.0-06a0aca7 - planned to be supported until 11 December 2024, please
 
 ## Fund and Stake 
 
-Running a full node for the purpose of earning xBZZ by sharing disk space and participating in the redistribution game requires a minimum of 10 xBZZ and a small amount of xDAI (for initializing the chequebook contract and for paying for redistribution game related transactions). 
+Running a full node for the purpose of earning xBZZ by sharing disk space and participating in the redistribution game requires a minimum of 10 xBZZ and a small amount of xDAI (for initializing the chequebook contract and for paying for redistribution-related transactions). 
 
-While running a light note requires a small amount of xDAI to pay for initializing the chequebook contract and a smaller amount of xBZZ to pay for uploads and downloads.
+While running a light node requires a small amount of xDAI to pay for initializing the chequebook contract and a smaller amount of xBZZ to pay for uploads and downloads.
 
 ### Fund node 
 
@@ -392,7 +392,7 @@ After acquiring some xDAI and some xBZZ, send them to the address you copied abo
 
 ***How Much to Send?***
 
-Only a very small amount of xDAI is needed to get started, 0.1 is more than enough.
+Only a very small amount of xDAI is needed to get started, 0.1 xDAI is more than enough.
  
 You can start with just 2 or 3 xBZZ for uploading small amounts of data, but you will need at least 10 xBZZ if you plan on staking.
 
@@ -503,7 +503,7 @@ We can see that our node has not yet finished syncing chunks since the `pullsync
 
 ### Stake node
 
-Now we're ready to begin staking, we will slightly modify our startup command so that it now runs in the background instead of taking control of our terminal:
+Now we're ready to begin staking. We will slightly modify our startup command so that it now runs in the background instead of taking control of our terminal:
 
 ```bash
 nohup bee start \
@@ -556,7 +556,7 @@ The results will be displayed in PLUR units (1 PLUR is equal to 1e-16 xBZZ). If 
 {"stakedAmount":"100000000000000000"}
 ```
  
-Congratulations! You have now installed your Bee node and are connected to the network as a full staking node. Your node will now be in the process of syncing chunks from the network. Once it is fully synced, your node will finally be eligible for earning staking rewards. 
+Congratulations! You have now installed your Bee node and are connected to the network as a full staking node. Your node will now be in the process of syncing chunks from the network. Once the node is fully synced, your node will finally be eligible to earn staking rewards.
 
 ### Set Target Neighborhood
 
@@ -605,7 +605,7 @@ To check your node's status as a staking node, we can use the `/redistributionst
 curl -s http://localhost:1633/redistributionstate | jq
 ```
 
-Below is the output for a node which has been running for several days:
+Below is the output for a node that has been running for several days:
 
 ```bash
 {
@@ -638,7 +638,7 @@ Once your node is up and running, make sure to [back up your keys](/docs/bee/wor
 
 ## Getting help
 
-The CLI has documentation built-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
+The CLI has built-in documentation. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
 
 You may also check out the [configuration guide](/docs/bee/working-with-bee/configuration), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
 

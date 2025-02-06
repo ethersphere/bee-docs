@@ -7,7 +7,7 @@ In this guide we cover the basic background information you need to know to get 
 
 * [A list of Bee node types and their various features.](/docs/bee/installation/getting-started#node-types)
 * [General requirements for running Bee nodes.](/docs/bee/installation/getting-started#general-node-requirements)
-* [Specific requirements base on node type.](/docs/bee/installation/getting-started#node-requirements-by-node-type)
+* [Specific requirements based on node type.](/docs/bee/installation/getting-started#node-requirements-by-node-type)
 * [How to choose the right node type.](/docs/bee/installation/getting-started#choosing-node-type-based-on-use-case)
 * [How to choose the appropriate installation method.](/docs/bee/installation/getting-started#choosing-installation-method)
 
@@ -15,7 +15,7 @@ This guide will walk you through how to choose the appropriate the node type, in
 
 ## Node Types
 
-Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes which each offer different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes. Node type is set by modifying the [appropriate configuration options](/docs/bee/working-with-bee/configuration#set-bee-node-type).  
+Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes each of which offers different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes. Node type is set by modifying the [appropriate configuration options](/docs/bee/working-with-bee/configuration#set-bee-node-type).  
 
 ### Ultra-Light Node
 
@@ -44,7 +44,7 @@ A full node can upload and download data over the Swarm network. Additionally, a
 
 ## General Node Requirements / Recommendations
 
-The requirements and recommendations outlined below all depend on your intended node type and intended use case. Review them carefully in order to determine with ones best suit your needs. 
+The requirements and recommendations outlined below all depend on your intended node type and intended use case. Review them carefully in order to determine which ones best suit your needs. 
 
 ###  Recommended Operating Systems     
 
@@ -53,7 +53,7 @@ Preferably use one of the officially supported operating systems. Refer to the [
 If you are using [Swarm Desktop](/docs/desktop/introduction/) rather than running the core Bee client directly, any commonly available operating system is a good choice (macOS, Windows, Ubuntu, etc.).
 
 :::info
-A note on operating systems. While it is possible to run Bee on a wide variety of different operating system, much of the existing tooling and documentation is designed primarily for Unix based systems, so generally speaking, some flavor of Linux or macOS is probably the best choice.
+A note on operating systems. While it is possible to run Bee on a wide variety of different operating systems, much of the existing tooling and documentation is designed primarily for Unix-based systems. So generally speaking, some flavor of Linux or macOS is probably the best choice.
 :::
 
 :::info
@@ -70,7 +70,7 @@ Working with the [Bee API](/api/) is a requirement for Swarm developers and node
 
 #### 1. `jq` Utility
  
-   The [`jq` utility](https://jqlang.github.io/jq/) is widely used throughout the documentation to automatically format the output from calls to the Bee API. It can help make API output much more readable, however its usage is optional.
+   The [`jq` utility](https://jqlang.github.io/jq/) is widely used throughout the documentation to automatically format the output from calls to the Bee API. It can help make API output much more readable; however, its usage is optional.
 
     :::info
     ***STRONGLY*** recommended for anyone working directly with the Bee API.
@@ -82,12 +82,12 @@ Working with the [Bee API](/api/) is a requirement for Swarm developers and node
 
     We recommend using [`curl`](https://curl.se/) for making http requests to the Bee API, and it is widely used throughout the documentation for example interactions with the Bee API. It comes installed by default on many UNIX based operating systems, and is even now available on newer versions of Windows by default. You can also install [`curl` for Windows](https://curl.se/windows/) on your machine if it isn't included by default. Another similar option you may consider is [`wget`](https://www.gnu.org/software/wget/).
 
-    You may also wish to use more feature rich tools for interacting with the Bee API such as [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/). While they are not open source, they do offer free versions and come with some useful features such as the ability to save and organize your commonly used fully formatted API requests. 
+    You may also wish to use more feature rich tools for interacting with the Bee API such as [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/). While they are not open source, they do offer free versions and come with some useful features such as the ability to save and organize your commonly used, fully formatted API requests. 
 
     *These tools are not relevant for most Swarm Desktop users and are rather for users who wish to interact directly with their Bee client.*
 
     :::info
-    ***REQUIRED*** to use one of these tools or another tool with similar functionalities in order to send the the API requests required for working directly with the Bee API.
+    ***REQUIRED*** to use one of these tools or another tool with similar functionalities in order to send the API requests required for working directly with the Bee API.
     :::
 
 #### 3. Swarm CLI for Command Line Control
@@ -99,7 +99,7 @@ Working with the [Bee API](/api/) is a requirement for Swarm developers and node
 
 #### 4. Bee JS for App Integration
 
-    [Bee JS](/docs/develop/tools-and-features/bee-js) is an npm package can you may consider using as a developer working with Bee as it significantly simplifies the process of interacting with the Bee API. It can be easily integrated into any NodeJS app as an easy method of integrating Swarm into your DAPP. 
+    [Bee JS](/docs/develop/tools-and-features/bee-js) is an npm package you may consider using as a developer working with Bee as it significantly simplifies the process of interacting with the Bee API. It can be easily integrated into any NodeJS app as an easy method of integrating Swarm into your DAPP. 
 
     :::info 
     As with the Swarm CLI, Bee JS is not generally recommended for Swarm Desktop users. Bee JS is ideal for NodeJS developers who wish to interact directly with a Bee client without the need to format http requests and send them with tools like `curl` / `wget` / `insomnia`/ `postman`, etc.
@@ -120,13 +120,13 @@ Both full and light nodes require a Gnosis Chain RPC endpoint which can be obtai
 
 #### NAT and Port Forwarding
 
-If you are running on a home network you may need to configure your router to use [port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) or take other steps to ensure your node is reachable by other nodes on the network. See [here](https://docs.ethswarm.org/docs/bee/installation/connectivity/#navigating-through-the-nat) for more guidance. If you are running on a VPS or cloud based server you will likely have no issues.
+If you are running on a home network, you may need to configure your router to use [port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) or take other steps to ensure your node is reachable by other nodes on the network. See [here](https://docs.ethswarm.org/docs/bee/installation/connectivity/#navigating-through-the-nat) for more guidance. If you are running on a VPS or cloud based server you will likely have no issues.
 
 ## Node Requirements By Specific Node Type
 
 
 ### Ultra-Light Node
-An ultra-light node has very minimal hardware requirements and can operate on practically any modern computer or VPS, including devices with baseline specs. It can even run on single-board computers like Raspberry Pi.
+An ultra-light node has minimal hardware requirements and can operate on practically any modern computer or VPS, including devices with baseline specs. It can even run on single-board computers like Raspberry Pi.
 
 **Average Specs for Ultra-Light Node:**
 - **Processor**: Single-core or dual-core processor, 1 GHz or higher (e.g., Intel Atom, ARM Cortex-A series).
@@ -153,7 +153,7 @@ These recommendations reflect the typical capabilities of affordable, readily av
 
 ### Full Node
 
-A full node has significantly greater requirements since it is responsible for storing and syncing data from the Swarm network, and the requirements will be even higher in case that it is staking xBZZ and participating in the redistribution system for a chance to win xBZZ rewards.
+A full node has significantly greater requirements since it is responsible for storing and syncing data from the Swarm network, and the requirements will be even higher if it is staking xBZZ and participating in the redistribution system for a chance to win xBZZ rewards.
 
 The minimum recommended specifications for a full staking node are:
 
@@ -200,7 +200,7 @@ Depending on your specific needs as a developer, even the [Swarm Desktop app](ht
 
 If you wish to earn [xBZZ](/docs/bee/working-with-bee/cashing-out) storage and bandwidth incentives and contribute to the strength of the Swarm network, running a **full node** is the right choice for you. It's easy to set up on a VPS, colocation, or any home computer that's connected to the internet.
 
-Since each full Bee node shares up to 2^22 chunks (~16gb of data), and due to the economics of running a Bee node, serious node operators will likely wish to scale up their operations to run multiple Bee nodes together in a hive so that they can take advantage of all the available disk space they have to share and maximize their earnings. While there are many possible approaches to doing so, and there is no one officially recommended method, you may consider tools such as [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), or [Kubernetes](https://kubernetes.io/) in order to orchestrate the deployment of a larger number of Bee nodes.
+Since each full Bee node shares up to 2^22 chunks (~16GB of data), and due to the economics of running a Bee node, serious node operators will likely wish to scale up their operations to run multiple Bee nodes together in a hive so that they can take advantage of all the available disk space they have to share and maximize their earnings. While there are many possible approaches to doing so, and there is no one officially recommended method, you may consider tools such as [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), or [Kubernetes](https://kubernetes.io/) in order to orchestrate the deployment of a larger number of Bee nodes.
 
 
 ## Choosing Installation Method
@@ -211,19 +211,19 @@ You can interact with the Swarm network by installing the Bee client through a v
 
 If you are looking to get started with exploring Swarm and interacting with the network in as simple and easy a way as possible, then [Swarm Desktop](/docs/desktop/introduction) is the way to go.
 
-Swarm Desktop offers an easy and convenient to use graphical user interface so that users can easily upload and download from the Swarm, host their websites, and access a variety of Swarm DAPPs which come pre-bundled with Swarm Desktop.
+Swarm Desktop offers an easy and convenient-to-use graphical user interface so that users can easily upload and download from the Swarm, host their websites, and access a variety of Swarm DAPPs that come pre-bundled with Swarm Desktop.
 
 ### [Shell Script Install](/docs/bee/installation/shell-script-install)
 
 If you're ready to go beyond the GUI based Swarm Desktop, then [the shell script install](/docs/bee/installation/shell-script-install) method may be right for you. This method uses a simple shell script to detect your operating system and environment and install the correct version of Bee for your machine. It's a convenient and minimalistic way of getting started with Swarm.
 
-Because the shell script install is so minimalistic, it may require some additional tinkering to get it working the way you want it to. For example, it will not come set up to run in the background as a service out of the box, and logs will not be automatically saved. 
+Because the shell script installation is so minimalistic, it may require some additional tinkering to get it working the way you want it to. For example, it will not come set up to run in the background as a service out of the box, and logs will not be automatically saved. 
 
 ### [Docker Install](/docs/bee/installation/docker)
 
 While the [Docker based installation](/docs/bee/installation/docker) method requires additional tooling not needed with the shell script install method, it also comes with several advantages which make it easier to operate your node across multiple different types of environments and also makes it easier to spin up multiple nodes at once. Combining it with tools like [Docker Compose](https://docs.docker.com/compose/) can open up even more options.
 
-Unlike the shell script install method, Docker already comes with easy to use tools for running your containerized Bee node as a background process and for dealing with logs from your node.
+Unlike the shell script installation method, Docker already comes with easy-to-use tools for running your containerized Bee node as a background process and for dealing with logs from your node.
 
 ### [Package Manager Install](/docs/bee/installation/package-manager-install)
 
@@ -235,4 +235,4 @@ One of the disadvantages is that it can be less flexible than either the Docker 
 
 ### [Building From Source](/docs/bee/installation/build-from-source)
 
-For the more advanced of users, you may wish to build from source. You can find instructions for doing so [here](/docs/bee/installation/build-from-source). While this may be the most flexible of all methods, it's also the most difficult and requires the most hands-on setup and so is recommended for more advanced users / use cases.
+For more advanced users, you may wish to build from source. You can find instructions for doing so [here](/docs/bee/installation/build-from-source). While this may be the most flexible of all methods, it's also the most difficult and requires the most hands-on setup and so is recommended for more advanced users / use cases.
