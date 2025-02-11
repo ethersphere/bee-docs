@@ -3,7 +3,7 @@ title: Getting Started
 id: getting-started
 ---
 
-In this guide we cover the basic background information you need to know to get started running a Bee node, such as:
+In this guide, we cover the basic background information you need to know to start running a Bee node, such as:
 
 * [A list of Bee node types and their various features.](/docs/bee/installation/getting-started#node-types)
 * [General requirements for running Bee nodes.](/docs/bee/installation/getting-started#general-node-requirements)
@@ -15,11 +15,11 @@ This guide will walk you through how to choose the appropriate the node type, in
 
 ## Node Types
 
-Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes each of which offers different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes. Node type is set by modifying the [appropriate configuration options](/docs/bee/working-with-bee/configuration#set-bee-node-type).  
+Bee is a versatile piece of software that caters to a diverse array of use cases. It can be run in several different modes, each of which offers different features which are best suited for different users. There are three main categories of nodes: full nodes, light nodes, and ultra-light nodes. Node type is set by modifying the [appropriate configuration options](/docs/bee/working-with-bee/configuration#set-bee-node-type).  
 
 ### Ultra-Light Node
 
-The ultra-light configuration allows for limited access to the Swarm network and allows for a node to download only small amounts of data from the Swarm network. It does not allow for uploads. Ultra-light nodes may not earn any type of incentives.
+The ultra-light configuration allows for limited access to the Swarm network and enables a node to download only small amounts of data from the Swarm network. It does not allow for uploads. Ultra-light nodes may not earn any type of incentives.
 
 ### Light Node 
 
@@ -27,7 +27,7 @@ A light node can both download and upload data over the Swarm network. Light nod
 
 ### Full Node
 
-A full node can upload and download data over the Swarm network. Additionally, a full node can also share its disk space with the Swarm network where it will be employed by Swarm uploaders. Full nodes can earn storage incentives for sharing their disk space with the network, and can also earn bandwidth incentives just as light nodes can.
+Full nodes offer the highest potential for earning xBZZ rewards. Like light nodes, a full node can upload and download data over the Swarm network and earn bandwidth incentives. Additionally, a full node can also earn xBZZ by sharing its disk space with the network.
 
 ### Features Comparison Chart
 
@@ -44,11 +44,11 @@ A full node can upload and download data over the Swarm network. Additionally, a
 
 ## General Node Requirements / Recommendations
 
-The requirements and recommendations outlined below all depend on your intended node type and intended use case. Review them carefully in order to determine which ones best suit your needs. 
+The requirements and recommendations outlined below depend on your intended node type and intended use case. Review them carefully in order to determine which ones best suit your needs. 
 
 ###  Recommended Operating Systems     
 
-Preferably use one of the officially supported operating systems. Refer to the [Bee repo releases section](https://github.com/ethersphere/bee/releases) for a list of releases for each supported operating system. It is also possible to [build Bee from source](/docs/bee/installation/build-from-source) for operating systems not included on the official release list in case you have this requirement. 
+It is preferable to use one of the officially supported operating systems. Refer to the [Bee repo releases section](https://github.com/ethersphere/bee/releases) for a list of releases for each supported operating system. It is also possible to [build Bee from source](/docs/bee/installation/build-from-source) for operating systems not included on the official release list in case you have this requirement. 
 
 If you are using [Swarm Desktop](/docs/desktop/introduction/) rather than running the core Bee client directly, any commonly available operating system is a good choice (macOS, Windows, Ubuntu, etc.).
 
@@ -60,50 +60,47 @@ A note on operating systems. While it is possible to run Bee on a wide variety o
 In case you only have access to Windows, [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) is an excellent option which will allow you to run a Linux terminal which you can use to follow along with the guides in these docs.
 :::
 
-### Software Recommendations
 
-Bee is a very flexible piece of software and plays well with many different systems and tools. The recommendations below are not absolute requirements, but following them will likely make your journey with Bee a bit easier. Some of them, such as `jq` and `curl`, will be required in order to follow along with the guides presented throughout these docs.  
+### Essential Tools
 
-:::info
-Working with the [Bee API](/api/) is a requirement for Swarm developers and node operators. Several of the tools listed below make working with the Bee API easier, so while not required, it's still strongly recommended to install and try out each of these tools in order to determine which ones are most suitable for your use case.  
+While the tools listed below are not strictly required, they are highly recommended as they simplify interacting with Bee nodes. Some, like `jq` and `curl`, are essential for following the examples in these docs. Others, such as `swarm-cli` and `bee-js`, provide convenient ways to manage Bee nodes without manually constructing complex HTTP requests.
+
+#### 1. `jq` – JSON Formatting
+
+[`jq`](https://jqlang.github.io/jq/) is widely used in this documentation to format API responses, making them more readable.  
+
+:::caution
+***Strongly recommended*** for anyone working directly with the Bee API.
 :::
 
-#### 1. `jq` Utility
+#### 2. `curl` – API Requests
+
+[`curl`](https://curl.se/) is the primary tool used in this documentation for interacting with the Bee API. It is pre-installed on most UNIX-based systems and newer Windows versions. If unavailable, you can install [`curl for Windows`](https://curl.se/windows/).  
+
+An alternative is [`wget`](https://www.gnu.org/software/wget/), though feature-rich API clients like [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/) may also be useful for saving and organizing requests.  
+
+*These tools are generally not relevant for Swarm Desktop users but are essential for those interacting directly with their Bee client.*  
+
+:::caution
+`curl` or one of its alternatives is ***Required*** for sending API requests to the Bee client.
+:::
+
+#### 3. Swarm CLI – Command Line Control
+
+[Swarm CLI](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli/) provides an easy way to interact with Bee nodes via terminal commands. It is built on [Bee JS](/docs/develop/tools-and-features/bee-js) and serves as a simpler alternative to manually crafting HTTP requests.  
+
+:::info
+Recommended for node operators and developers, not Swarm Desktop users.
+:::
+
+#### 4. Bee JS – API Integration for Developers
+
+[Bee JS](/docs/develop/tools-and-features/bee-js) is an npm package for integrating Bee functionality into Node.js applications. It abstracts API interactions, eliminating the need for manual HTTP requests except for a small number of edge cases (such as new features which have not yet been added to `bee-js`).  
+
+:::info
+Best suited for Node.js developers who want to interact with Bee programmatically.
+:::
  
-   The [`jq` utility](https://jqlang.github.io/jq/) is widely used throughout the documentation to automatically format the output from calls to the Bee API. It can help make API output much more readable; however, its usage is optional.
-
-    :::info
-    ***STRONGLY*** recommended for anyone working directly with the Bee API.
-    :::
-
-
-
-#### 2. `curl` for API Interaction
-
-    We recommend using [`curl`](https://curl.se/) for making http requests to the Bee API, and it is widely used throughout the documentation for example interactions with the Bee API. It comes installed by default on many UNIX based operating systems, and is even now available on newer versions of Windows by default. You can also install [`curl` for Windows](https://curl.se/windows/) on your machine if it isn't included by default. Another similar option you may consider is [`wget`](https://www.gnu.org/software/wget/).
-
-    You may also wish to use more feature rich tools for interacting with the Bee API such as [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/). While they are not open source, they do offer free versions and come with some useful features such as the ability to save and organize your commonly used, fully formatted API requests. 
-
-    *These tools are not relevant for most Swarm Desktop users and are rather for users who wish to interact directly with their Bee client.*
-
-    :::info
-    ***REQUIRED*** to use one of these tools or another tool with similar functionalities in order to send the API requests required for working directly with the Bee API.
-    :::
-
-#### 3. Swarm CLI for Command Line Control
-    [Swarm CLI](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli/) is an excellent choice for interacting with your Bee node from the command line using simple terminal commands. Swarm CLI is built using [Bee JS](/docs/develop/tools-and-features/bee-js), a JavaScript library which greatly simplifies interaction with the Bee API.
-
-    :::info
-    Swarm CLI is not generally recommended for Swarm Desktop users, but rather for node operators or developers who wish to interact directly with their Bee client. It will allow you to access Bee node features using simple terminal commands as an alternative to formatting complete http requests with `curl` / `wget` / `insomnia`/ `postman`, etc.   
-    :::
-
-#### 4. Bee JS for App Integration
-
-    [Bee JS](/docs/develop/tools-and-features/bee-js) is an npm package you may consider using as a developer working with Bee as it significantly simplifies the process of interacting with the Bee API. It can be easily integrated into any NodeJS app as an easy method of integrating Swarm into your DAPP. 
-
-    :::info 
-    As with the Swarm CLI, Bee JS is not generally recommended for Swarm Desktop users. Bee JS is ideal for NodeJS developers who wish to interact directly with a Bee client without the need to format http requests and send them with tools like `curl` / `wget` / `insomnia`/ `postman`, etc.
-    :::
 
 ### Token Requirements
 

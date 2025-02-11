@@ -3,16 +3,120 @@ title: Fund Your Node
 id: fund-your-node
 ---
 
-In order to start your Bee node on the _mainnet_, its Gnosis Chain wallet must be
-funded with:
+Bee nodes require varying amounts of either [xDAI](/docs/references/tokens#xdai) or [xBZZ](/docs/references/tokens#xbzz) funds depending on the node type and use case. The amount and type of tokens required depend on these factors:
+  * Whether the node is an ultra-light, light, or full node
+  * Whether the node operator wishes to download or upload data, and how much data they wish to download or upload
+  * Whether the node operator wishes to participate in the storage incentives system and/or bandwidth incentives system 
 
-- 1 [xBZZ](/docs/references/glossary#xbzz-token), for traffic
-  accounting (this is optional, [see below](#basic-deployment))
+### **xDAI Requirements**  
+  
 
-- Some [xDAI](/docs/references/glossary#xdai-token), to pay the gas fees of
-  a couple of transactions on the [Gnosis Chain](/docs/references/glossary#gnosis-chain).
+xDAI is required to pay for gas fees on the Gnosis Chain. There are ***four categories of transactions*** which require xDAI for on-chain transactions:
+  
+  1.  **Buying postage stamp batches (light / full nodes):** 
+    
+      Postage stamp batches must be purchased in order to upload data to Swarm. Fees for issuing stamp batches are very low. For example, [this stamp batch creation transaction](https://gnosisscan.io/tx/0xdc350c059b7bfc10de3d71be71774dda395e2ff770ed6dc83a63c14a418d2be8) cost was only 0.00050416 xDAI. There will be an additional cost in xBZZ which will depend on the volume of storage purchased - see section below for details.
 
-Take note that xBZZ is the [bridged](/docs/references/glossary#bridged-tokens) version of BZZ from Ethereum to the Gnosis Chain.
+  1. **Stake management related transactions (full nodes only):** 
+
+      Transactions to manage stake require small amounts of xDAI. These types of transactions include adding stake, migrating stake, and withdrawing stake (partial stake withdrawal is only allowed [under certain conditions](/docs/bee/working-with-bee/staking/#partial-stake-withdrawals)). For example, this [staking transaction](https://gnosisscan.io/tx/0x3a3a5119e54c59f76b60c05bf434ef3d5ec1a3ec47875c3bf1da66dafccf5f72) was used to add 10 xBZZ stake (denominated in [PLUR](/docs/references/glossary/#plur) as 100000000000000000 PLUR). The xDAI cost for the transaction was very minimal, only 0.00026872 xDAI was spent. See section below which describes how much xBZZ stake is required. 
+
+  1. **Storage incentives related transactions (full nodes only):** 
+
+      Full nodes which have staked the minimum required 10 xBZZ stake are eligible to earn [storage incentives](/docs/concepts/incentives/overview). They may even choose to [double their reserve size and stake a total of 20 xBZZ](/docs/bee/working-with-bee/staking/#reserve-doubling) in order to maximize their node's earning potential. Participating in storage incentives requires that nodes wait for their neighborhood to be chosen, and then send the required on-chain transactions for a chance to win some xBZZ. There are three types of storage incentives related transactions, [commit, reveal, and claim](/docs/concepts/incentives/redistribution-game/#redistribution-game-details). Each of these transactions require only a small amount of xDAI and typically are required only several times per month based on the current network situation, however over time they may add up, and xDAI may need to be topped up if it runs out. These [claim](https://gnosisscan.io/tx/0x88f83b0267539c663461e449f87118864ff9b801eaf6ea0fedadc1d824685181), [commit](https://gnosisscan.io/tx/0x91bdf7363535fb405547c50742d6070cd249dd4c2fc00d494c79b3dbf516b1f3), and [reveal](https://gnosisscan.io/tx/0x625dd6cd3cf8f9c1dfe27335884994b43519b0a59e0bb3968bd663d200d1772b) transactions each require 0.0009953, 0.0002918, and 0.0002918 xDAI respectively. 
+
+  1. Bandwidth incentives related transactions (light and full nodes):
+
+      When a new light or full node is initialized, the deployment of a bandwidth incentives contract (AKA SWAP contract) is required. Again, the xDAI fees are very small. For example, [this SWAP contract deployment transaction](https://gnosisscan.io/tx/0xc17b023ba22a9b2c2c27a40ce88d68caf95eb02e17ae57e9c56810b7b33a6ebc) cost only 0.00058154 xDAI.
+
+### **xBZZ Requirements**  
+  
+
+xBZZ is required to purchase storage space on the Swarm network in the form of [postage stamps](/docs/concepts/incentives/postage-stamps).  
+  
+  1.  **Buying postage stamp batches (light / full nodes):** 
+    
+      Postage stamp batches must be purchased in order to upload data to Swarm. The amount of xBZZ required can vary widely depending on the amount storage volume required, as well as the required duration of storage time. Stamp batches have two inputs, `depth` and `amount`. The `depth` parameter determines how much data the batch can be used to upload while the `amount` parameter determines the duration of storage time. For example. 
+
+      :::info
+      The storage volume and duration are both non-deterministic. Volume is non-deterministic due to the details of how [postage stamp batch utilization](/docs/concepts/incentives/postage-stamps#batch-utilisation) works. While duration is non-deterministic due to price changes made by the [price oracle contract](/docs/concepts/incentives/price-oracle).
+
+      **Storage volume and `depth`:**
+
+      When purchasing stamp batches for larger volumes of data (by increasing the `depth` value), the amount of data which can be stored becomes increasingly more predictable. For example, at `depth` 22 a batch can store between 4.93 GB and 17.18 GB, while at `depth` 28, a batch can store between 1.0 and 1.1 TB of data, and at higher depths the difference between the minimum and maximum storage volumes approach the same value.
+
+      **Storage duration and `amount`:** 
+
+      The duration of time for which a batch can store data is also non-deterministic since the price of storage is automatically adjusted over time by the [price oracle contract](/docs/concepts/incentives/price-oracle). However, limits have been placed on how swiftly the price of storage can change, so there is no danger of a rapid change in price causing postage batches to unexpectedly expire due to a rapid increase in price.
+      :::
+
+  1. **Stake management related transactions (full nodes only):** 
+
+      Transactions to manage stake require small amounts of xDAI. These types of transactions include adding stake, migrating stake, and withdrawing stake (partial stake withdrawal is only allowed [under certain conditions](/docs/bee/working-with-bee/staking/#partial-stake-withdrawals)). For example, this [staking transaction](https://gnosisscan.io/tx/0x3a3a5119e54c59f76b60c05bf434ef3d5ec1a3ec47875c3bf1da66dafccf5f72) was used to add 10 xBZZ stake (denominated in [PLUR](/docs/references/glossary/#plur) as 100000000000000000 PLUR). The xDAI cost for the transaction was very minimal, only 0.00026872 xDAI was spent. See section below which describes how much xBZZ stake is required. 
+
+  1. **Storage incentives related transactions (full nodes only):** 
+
+      Full nodes which have staked the minimum required 10 xBZZ stake are eligible to earn [storage incentives](/docs/concepts/incentives/overview). They may even choose to [double their reserve size and stake a total of 20 xBZZ](/docs/bee/working-with-bee/staking/#reserve-doubling) in order to maximize their node's earning potential. Participating in storage incentives requires that nodes wait for their neighborhood to be chosen, and then send the required on-chain transactions for a chance to win some xBZZ. There are three types of storage incentives related transactions, [commit, reveal, and claim](/docs/concepts/incentives/redistribution-game/#redistribution-game-details). Each of these transactions require only a small amount of xDAI and typically are required only several times per month based on the current network situation, however over time they may add up, and xDAI may need to be topped up if it runs out. These [claim](https://gnosisscan.io/tx/0x88f83b0267539c663461e449f87118864ff9b801eaf6ea0fedadc1d824685181), [commit](https://gnosisscan.io/tx/0x91bdf7363535fb405547c50742d6070cd249dd4c2fc00d494c79b3dbf516b1f3), and [reveal](https://gnosisscan.io/tx/0x625dd6cd3cf8f9c1dfe27335884994b43519b0a59e0bb3968bd663d200d1772b) transactions each require 0.0009953, 0.0002918, and 0.0002918 xDAI respectively. 
+
+  1. Bandwidth incentives related transactions (light and full nodes):
+
+      When a new light or full node is initialized, the deployment of a bandwidth incentives contract (AKA SWAP contract) is required. Again, the xDAI fees are very small. For example, [this SWAP contract deployment transaction](https://gnosisscan.io/tx/0xc17b023ba22a9b2c2c27a40ce88d68caf95eb02e17ae57e9c56810b7b33a6ebc) cost only 0.00058154 xDAI.
+
+
+You can check exactly how much is required to get started from the `/redistributionstate` endpoint:
+
+```bash
+root@noah-bee:~#  curl localhost:1633/redistributionstate | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   304  100   304    0     0  15258      0 --:--:-- --:--:-- --:--:-- 16000
+{
+  "minimumGasFunds": "3750000030000000",
+  "hasSufficientFunds": true,
+  "isFrozen": false,
+  "isFullySynced": false,
+  "phase": "reveal",
+  "round": 253280,
+  "lastWonRound": 0,
+  "lastPlayedRound": 0,
+  "lastFrozenRound": 0,
+  "lastSelectedRound": 0,
+  "lastSampleDurationSeconds": 0,
+  "block": 38498620,
+  "reward": "0",
+  "fees": "0",
+  "isHealthy": true
+}
+```
+The `3750000030000000` value listed for `minimumGasFunds` is the minimum required amount of xDAI denominated in Wei ($1 \text{xDAI} = 10^{18} \text{ Wei}$
+)  required for staking
+
+- **For uploading/downloading**: Light and full nodes require xDAI for various transactions, such as issuing a chequebook contract and purchasing postage stamps. The required amount depends on usage.  
+
+### **xBZZ Requirements**  
+xBZZ is required for Swarm storage and bandwidth incentives.  
+- **For staking**: A minimum of **10 xBZZ** is required as a stake for a **full node** participating in storage incentives.  
+- **For basic uploads**: **0.1 xBZZ** is a reasonable minimum to get started, though it is possible to begin with even less. However, significantly more will be needed for frequent or large uploads.  
+- **For downloading**: Some xBZZ is required to exceed the free download limits.  
+
+
+
+## Token Requirements Based on Node Type and Use Case  
+
+The amount of **xDAI** and **xBZZ** required to run a Bee node depends on the node type and intended use case. While **no tokens** are required to run an **ultra-light node**, both **light and full nodes** require some **xDAI** for gas fees and **xBZZ** for data transactions.  
+
+### **Token Requirement Table**  
+
+| **Use Case**                         | **Supported Node Type**       | **xDAI Required**         | **xBZZ Required**          |  
+|--------------------------------------|--------------------|--------------------------|----------------------------|  
+| Free tier downloads (no uploads)    | All       | None                     | None                        |  
+| Downloading past free tier           | Light / Full      | None  | ~0.1 xBZZ to get started, amount scales up with amount of downloaded data.        |  
+| Basic uploading                      | Light / Full      | ~0.1 xDAI is plenty to get started. For example, this     | **~0.1 xBZZ**, [amount scales up with volume of uploaded data](/docs/develop/access-the-swarm/buy-a-stamp-batch).     |  
+| Frequent/Large uploads               | Light / Full      | More xDAI recommended    | **More xBZZ required**      |  
+| Staking                              | Full              | **0.1 xDAI** (minimum)   | **10 xBZZ** (required)      |  
+| Long-term staking                    | Full              | More xDAI recommended    | **10 xBZZ+**                |  
+
+This table provides a general guideline, but actual xDAI and xBZZ usage will depend on individual node activity and transaction fees at the time.
 
 ### A Node's Wallet
 
