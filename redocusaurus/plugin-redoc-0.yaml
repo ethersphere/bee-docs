@@ -663,7 +663,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HealthStatus'
+                $ref: '#/components/schemas/Response'
         '404':
           $ref: '#/components/responses/404'
         '500':
@@ -844,8 +844,6 @@ paths:
       summary: Subscribe to GSOC payloads
       tags:
         - GSOC
-        - Subscribe
-        - Websocket
       parameters:
         - in: path
           name: reference
@@ -2528,12 +2526,12 @@ components:
       name: swarm-deferred-upload
       schema:
         type: boolean
-        default: 'false'
+        default: 'true'
       required: false
       description: >
         Determines if the uploaded data should be sent to the network
         immediately or in a deferred fashion. By default the upload will be
-        direct.
+        deferred.
     SwarmActHistoryAddress: &ref_2
       in: header
       name: swarm-act-history-address
@@ -2698,30 +2696,6 @@ components:
       properties:
         address:
           $ref: '#/components/schemas/SwarmAddress'
-    HealthStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-            - ok
-            - nok
-            - unknown
-          description: >
-            Indicates health state of node * `ok` - node is healthy * `nok` -
-            node is not healthy * `unknown` - health status is unknown
-        version:
-          type: string
-        apiVersion:
-          type: string
-          default: 0.0.0
-          description: >-
-            The default value is set in case the bee binary was not build
-            correctly.
-    SwarmOnlyReference:
-      oneOf:
-        - $ref: '#/components/schemas/SwarmAddress'
-        - $ref: '#/components/schemas/SwarmEncryptedReference'
     Response:
       type: object
       properties:
@@ -2729,6 +2703,10 @@ components:
           type: string
         code:
           type: integer
+    SwarmOnlyReference:
+      oneOf:
+        - $ref: '#/components/schemas/SwarmAddress'
+        - $ref: '#/components/schemas/SwarmEncryptedReference'
     SwarmOnlyReferencesList:
       type: object
       properties:
@@ -2789,6 +2767,26 @@ components:
           $ref: '#/components/schemas/PublicKey'
         pssPublicKey:
           $ref: '#/components/schemas/PublicKey'
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+            - nok
+            - unknown
+          description: >
+            Indicates health state of node * `ok` - node is healthy * `nok` -
+            node is not healthy * `unknown` - health status is unknown
+        version:
+          type: string
+        apiVersion:
+          type: string
+          default: 0.0.0
+          description: >-
+            The default value is set in case the bee binary was not build
+            correctly.
     BigInt:
       description: >-
         Numeric string that represents integer which might exceed
