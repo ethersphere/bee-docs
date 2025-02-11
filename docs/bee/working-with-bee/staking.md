@@ -3,20 +3,59 @@ title: Staking
 id: staking
 ---
 
-In order to participate in the redistribution of xBZZ from uploaders to storers, storers must first deposit a non-refundable xBZZ stake with a smart contract. Then, they are going to be chosen for payout with a probability proportional to their stake in their neighborhood, as long as they can log storing the part of the content that they are supposed to be storing according to protocol rules.
+In order to earn storage incentives by participating in the redistribution of xBZZ from uploaders to storers, storers must first deposit a non-refundable xBZZ stake with a smart contract. Then, they are going to be chosen for payout with a probability proportional to their stake in their neighborhood, as long as they can log storing the part of the content that they are supposed to be storing according to protocol rules.
+
+:::danger
+Staked xBZZ CANNOT be withdrawn after being staked under typical circumstances. Only stake your xBZZ if you really plan on participating in staking as a full node, as you will not be able to withdraw it later.
+:::
 
 In order to participate in redistribution, storers need to do the following:
 
-- Join the network and download all the data that the protocol assigns to them. They can only participate if they are fully synchronised with the network.
+- Join the network and download all the data that the protocol assigns to them. They can only participate if they are fully synchronized with the network.
 - Deposit a stake with the staking contract. There is a minimum staking requirement, presently 10 xBZZ. It can change in the future.
 - Stay online and fully synced, so that when a redistribution round comes, their node can check whether their neighborhood (nodes that are assigned the same content to store) has been selected and if so, they can perform a certain calculation (a random sampling) on their content and submit the result to the redistribution contract. This happens in two phases (commit and reveal), so that the nodes cannot know the results of others’ calculations when committing to their own.
 - Round length is estimated around 15 minutes (152 blocks to be precise), though it can be extended.
 
 Amongst the nodes that agree with the correct result, one is chosen — with a probability in proportion to their stake — as the winner. The winner must execute an on-chain transaction claiming their reward, which is the entire pot of storage rent paid since the previous round, or even more, if the previous pot has not been claimed at that time.
 
+## Add xDAI 
+
+In order to stake and continue to participate in the storage incentives system your node will need to continually issue related transactions on the Gnosis Chain blockchain. Therefore you will need to fund your node with some xDAI before you can get started with staking. 
+
+:::info
+You can check exactly how much xDAI is required to get started with staking from the `/redistributionstate` endpoint:
+
+```bash
+root@noah-bee:~#  curl localhost:1633/redistributionstate | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   304  100   304    0     0  15258      0 --:--:-- --:--:-- --:--:-- 16000
+{
+  "minimumGasFunds": "3750000030000000",
+  "hasSufficientFunds": true,
+  "isFrozen": false,
+  "isFullySynced": false,
+  "phase": "reveal",
+  "round": 253280,
+  "lastWonRound": 0,
+  "lastPlayedRound": 0,
+  "lastFrozenRound": 0,
+  "lastSelectedRound": 0,
+  "lastSampleDurationSeconds": 0,
+  "block": 38498620,
+  "reward": "0",
+  "fees": "0",
+  "isHealthy": true
+}
+```
+The `"3750000030000000"` value listed for `"minimumGasFunds"`  is the minimum required amount of xDAI denominated in Wei ($1 \text{xDAI} = 10^{18} \text{ Wei}$) required for staking. That is equivalent to 0.00375000003 xDAI. However, it's recommended to add more than just the minimum amount, since it will quickly be used up by storage incentives related transaction fees. As little as a 1 xDAI should last for quite a while since an average incentives related transaction fee is as small as around 0.001 xDAI or even considerably less. 
+:::
+
+
 ## Add stake
 
-Bee has builtin endpoints for depositing the stake. Currently the minimum staking requirement is 10 xBZZ, so make sure that there is enough tokens in the node's wallet and you must have some native token as well for paying the gas.
+Bee has builtin endpoints for depositing the stake. Currently the minimum staking requirement is 10 xBZZ, so make sure that there is enough xBZZ tokens in the node's wallet. You must also have some native xDAI tokens as well for paying the gas fees for staking and storage incentives related transactions.
+
 
 Then you can run the following command to stake 10 xBZZ. The amount is given in PLUR which is the smallest denomination of xBZZ and `1 xBZZ == 1e16 PLUR`.
 
