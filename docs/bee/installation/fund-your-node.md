@@ -235,8 +235,13 @@ If you're a developer looked to get started developing on Swarm without spending
 
 When it comes to Sepolia ETH, some of the faucets may be unreliable, and faucets which work at one point may not work when you try them again later. At the time of this being written, here you can find [a list of faucets for Sepolia ETH](https://faucetlink.to/sepolia) to try.
 
-Unfortunately currently there are no existing faucets or reliable markets for sBZZ. 
+Unfortunately currently there are no existing faucets sBZZ, but you can purchase it on Uniswap using sETH. 
 
-The official Uniswap homepage does not support sBZZ, but you can try to get Sepolia BZZ (sBZZ) by using [this IPFS mirror Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet.
+Just make certain you have ***switched to Sepolia*** in Metamask, and ***enabled Testnet Mode*** in Uniswap.
 
-If the IPFS mirror above doesn't work for you please let us know by making a post in the [develop-on-swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel, and we will do our best to provide you with sBZZ.
+Check images below for reference: 
+
+*If you run into any problems getting testnet tokens, a join the [develop-on-swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel amd ask for help, and we will do our best to help.*
+
+![](/img/sbzz.png)
+![](/img/sepolia-metamask.png)
