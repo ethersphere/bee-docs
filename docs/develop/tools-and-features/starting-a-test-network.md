@@ -24,7 +24,7 @@ swap-enable: false
 mainnet: false
 blockchain-rpc-endpoint: https://sepolia.dev.fairdatasociety.org
 verbosity: 5
-full-node: true 
+full-node: true
 ```
 
 **config_2.yaml**
@@ -41,7 +41,7 @@ swap-enable: false
 mainnet: false
 blockchain-rpc-endpoint: https://sepolia.dev.fairdatasociety.org
 verbosity: 5
-full-node: true 
+full-node: true
 ```
 
 Note that for each node, we provide a different `api-addr`. If we had not specified different addresses here, we
@@ -106,15 +106,15 @@ curl localhost:1633/addresses | jq
 
 ```json
 {
-  "overlay": "b1978be389998e8c8596ef3c3a54214e2d4db764898ec17ec1ad5f19cdf7cc59",
-  "underlay": [
-    "/ip4/127.0.0.1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ",
-    "/ip4/172.25.128.69/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ",
-    "/ip6/::1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ"
-  ],
-  "ethereum": "0xd22cc790e2aef341827e1e49cc631d2a16898cd9",
-  "publicKey": "023b26ce8b78ed8cdb07f3af3d284c95bee5e038e7c5d0c397b8a5e33424f5d790",
-  "pssPublicKey": "039ceb9c1f0afedf79991d86d89ccf4e96511cf656b43971dc3e878173f7462487"
+	"overlay": "b1978be389998e8c8596ef3c3a54214e2d4db764898ec17ec1ad5f19cdf7cc59",
+	"underlay": [
+		"/ip4/127.0.0.1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ",
+		"/ip4/172.25.128.69/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ",
+		"/ip6/::1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ"
+	],
+	"ethereum": "0xd22cc790e2aef341827e1e49cc631d2a16898cd9",
+	"publicKey": "023b26ce8b78ed8cdb07f3af3d284c95bee5e038e7c5d0c397b8a5e33424f5d790",
+	"pssPublicKey": "039ceb9c1f0afedf79991d86d89ccf4e96511cf656b43971dc3e878173f7462487"
 }
 ```
 
@@ -135,7 +135,7 @@ welcome-message: "Bzz Bzz Bzz"
 swap-enable: false
 blockchain-rpc-endpoint: https://sepolia.dev.fairdatasociety.org
 verbosity: 5
-full-node: true 
+full-node: true
 ```
 
 Now, we can shut our second node and reboot with the new configuration.
@@ -154,13 +154,11 @@ curl -s http://localhost:1733/peers | jq
 
 Congratulations! You have made your own tiny two bee Swarm! 🐝 🐝
 
-
 ## Funding Nodes
 
-While you have successfully set up two nodes, they are currently unfunded with either sETH or sBZZ. Sepolia ETH (sETH) is required for issuing transactions on the Sepolia testnet, and Sepolia BZZ (sBZZ) is required for your node to operate as a full staking node. 
+While you have successfully set up two nodes, they are currently unfunded with either sETH or sBZZ. Sepolia ETH (sETH) is required for issuing transactions on the Sepolia testnet, and Sepolia BZZ (sBZZ) is required for your node to operate as a full staking node.
 
 To fund our nodes, we need to first collect the blockchain addresses for each node. We can use the `/addresses` endpoint for this:
-
 
 ```bash
 curl localhost:1633/addresses | jq
@@ -180,12 +178,12 @@ curl localhost:1633/addresses | jq
 }
 ```
 
-Then copy the address in the "ethereum" field. This is the address you need to send sETH and sBZZ to. There are many public faucets you can use to obtain Sepolia ETH, such as [this one](https://www.infura.io/faucet/sepolia) from Infura.
+Then copy the address in the "ethereum" field. This is the address you need to send sETH and sBZZ to. There are many public faucets you can use to obtain Sepolia ETH, [here is a curated list](https://faucetlink.to/sepolia).
 
 To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet.
 
 You will need to send only a very small amount of sETH such as 0.01 sETH, to get started. You will need 10 sBZZ to run a full node with staking.
 
-After sending sETH and sBZZ to your node's address which you copied above, restart your node and it should begin operating properly as a full node. 
+After sending sETH and sBZZ to your node's address which you copied above, restart your node and it should begin operating properly as a full node.
 
 Repeat these same steps with the other node in order to complete a private test network of two full nodes.

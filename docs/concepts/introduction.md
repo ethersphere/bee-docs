@@ -8,7 +8,7 @@ Swarm is a peer-to-peer network of Bee nodes that collectively provide censorshi
 
 ## Bee Client
 
-Bee is a Swarm client implemented in Go and is the basic building block for the Swarm network. Bee nodes collectively work together to form a private, decentralized, and self sustaining network for permissionless publishing and data storage. You can learn more about how Bee clients work by reading about the [concepts and protocols](/docs/concepts/what-is-swarm/) which underpin the Swarm network. To get hands on experience working with Swarm, you can start by learning how to [install and operate a Bee node](/docs/bee/installation/quick-start). 
+Bee is a Swarm client implemented in Go and is the basic building block for the Swarm network. Bee nodes collectively work together to form a private, decentralized, and self sustaining network for permissionless publishing and data storage. You can learn more about how Bee clients work by reading about the [concepts and protocols](/docs/concepts/what-is-swarm/) which underpin the Swarm network. To get hands on experience working with Swarm, you can start by learning how to [install and operate a Bee node](/docs/bee/installation/getting-started). 
 
 
 ## Swarm Foundation

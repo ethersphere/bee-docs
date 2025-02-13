@@ -6,85 +6,19 @@ id: configuration
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Default Data and Config Directories
-
-Depending on the operating system and startup method used, the default data and configuration directories for your node will differ. 
-
-### Bee Service Default Directories
-
-When installed using a package manager, Bee is set up to run as a service with default data and configuration  directories set up automatically during the installation. The examples below include default directories for Linux and macOS. You can find the complete details of default directories for different operating systems in the `bee.yaml` files included in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging). 
-
-
-<Tabs
-defaultValue="linux"
-values={[
-{label: 'Linux', value: 'linux'},
-{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
-{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
-]}>
-<TabItem value="linux">
-
-The default data folder and config file locations:
-
-```yaml
-data-dir: /var/lib/bee
-config: /etc/bee/bee.yaml
-```
-
-</TabItem>
-
-<TabItem value="macos-arm64">
-
-The default data folder and config file locations:
-
-```yaml
-data-dir: /opt/homebrew/var/lib/swarm-bee
-config: /opt/homebrew/etc/swarm-bee/bee.yaml
-```
-
-</TabItem>
-
-<TabItem value="macos-amd64">
-
-The default data folder and config file locations:
-
-```yaml
-data-dir: /usr/local/var/lib/swarm-bee/
-config: /usr/local/etc/swarm-bee/bee.yaml
-```
-
-</TabItem>
-</Tabs>
-
-### `bee start` Default Directories
-
-For all operating systems, the default data and config directories for the `bee start` startup method can be found using the `bee printconfig` command:
-
-This will print out a complete default Bee node configuration file to the terminal, the `config` and `data-dir` values show the default directories for your system: 
-
-```yaml
-config: /root/.bee.yaml
-data-dir: /root/.bee
-```
-
-:::info
-The default directories for your system may differ from the example above, so make sure to run the `bee printconfig` command to view the default directories for your system.
-:::
-
 ## Configuration Methods and Priority
 
 There are three methods of configuration which each have different priority levels. Configuration is processed in the following ascending order of preference:
 
-1. Command Line Arguments 
+1. Command Line Flags
 2. Environment Variables
 3. YAML Configuration File
 
 :::info
-All three methods may be used when running Bee using `bee start`. 
+All three methods may be used when running Bee using `bee start`.
 
 However when Bee is started as a service with tools like `systemctl` or `brew services`, only the YAML configuration file is supported by default.
 :::
-
 
 ### Command Line Arguments
 
@@ -156,7 +90,7 @@ Flags:
       --withdrawal-addresses-whitelist strings   withdrawal target addresses
 
 Global Flags:
-      --config string   config file (default is $HOME/.bee.yaml)  
+      --config string   config file (default is $HOME/.bee.yaml)
 ```
 
 ### Environment variables
@@ -304,10 +238,10 @@ withdrawal-addresses-whitelist: []
 ```
 
 :::info
-Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](/docs/bee/working-with-bee/configuration). 
+Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](/docs/bee/working-with-bee/configuration).
 :::
 
-To change your node's configuration, simply edit the YAML file and restart Bee: 
+To change your node's configuration, simply edit the YAML file and restart Bee:
 
 <Tabs
 defaultValue="linux"
@@ -323,6 +257,7 @@ Open the config file for editing:
 ```bash
 sudo vi /etc/bee/bee.yaml
 ```
+
 After saving your changes, restart your node:
 
 ```bash
@@ -360,29 +295,239 @@ After saving your changes, restart your node:
 ```bash
 brew services restart swarm-bee
 ```
+
 </TabItem>
 
 </Tabs>
 
-## Manually generating a config file for `bee start`
+## Manually generating YAML config file for `bee start`
 
-No YAML file is generated during installation in the default config directory used when Bee is started with `bee start`, so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
+No YAML file is generated during installation when using the [shell script install method](/docs/bee/installation/shell-script-install), so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
 
 ```bash
 bee printconfig &> $HOME/.bee.yaml
 ```
 
-## Restoring default config files for Bee service
+:::info
+Note that `bee printconfig` prints the default configuration for your node, not the current configuration including any changes.
+:::
+
+Moreover, when using `bee.yaml` together with the `bee start` command, you must use the `--config` flag to specify where you have saved your configuration file or else your node will ignore it. This can be a good option if you have changed many default options and want to have them cleanly organized in a file that can be used to specify options when running your node node directly with `bee start`.
+
+## Restoring default YAML config file
 
 You can find the default configurations for your system in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging). If your configuration file is missing you can simply copy the contents of the file into a new `bee.yaml` file in the default configuration directory shown in the `bee.yaml` file for your system.
 
+## Default Data and Config Directories
 
+Depending on the operating system and startup method used, the default data and configuration directories for your node will differ.
 
-## Sepolia Testnet Configuration 
+### Bee Service Default Directories (Package Manager Install)
 
-Connecting to the Swarm testnet is as simple as adding the flag `--mainnet false` to your bee commandline, or `mainnet: false` to your configuration file. Swarm testnet smart contracts are deployed on Sepolia, so if you want to run a light or full node you will need to add a Sepolia RPC to your configuration and fund your node with Sepolia ETH. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
+When installed using a package manager, Bee is set up to run as a service with default data and configuration directories set up automatically during the installation. The examples below include default directories for Linux and macOS. You can find the complete details of default directories for different operating systems in the `bee.yaml` files included in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging).
 
-To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH); just make sure that you've switched to the Sepolia network in your browser wallet. 
+<Tabs
+defaultValue="linux"
+values={[
+{label: 'Linux', value: 'linux'},
+{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
+{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
+]}>
+<TabItem value="linux">
+
+The default data folder and config file locations:
+
+```yaml
+data-dir: /var/lib/bee
+config: /etc/bee/bee.yaml
+```
+
+</TabItem>
+
+<TabItem value="macos-arm64">
+
+The default data folder and config file locations:
+
+```yaml
+data-dir: /opt/homebrew/var/lib/swarm-bee
+config: /opt/homebrew/etc/swarm-bee/bee.yaml
+```
+
+</TabItem>
+
+<TabItem value="macos-amd64">
+
+The default data folder and config file locations:
+
+```yaml
+data-dir: /usr/local/var/lib/swarm-bee/
+config: /usr/local/etc/swarm-bee/bee.yaml
+```
+
+</TabItem>
+</Tabs>
+
+### `bee start` Default Directories
+
+For all operating systems, the default data and config directories for the `bee start` startup method can be found using the `bee printconfig` command:
+
+This will print out a complete default Bee node configuration file to the terminal, the `config` and `data-dir` values show the default directories for your system:
+
+```yaml
+config: /root/.bee.yaml
+data-dir: /root/.bee
+```
+
+:::info
+The default directories for your system may differ from the example above, so make sure to run the `bee printconfig` command to view the default directories for your system.
+:::
+
+## Set Bee Node Type
+
+You can set your node's mode of operation by modifying its configuration options. There are three node types: `full`, `light`, and `ultra-light`. If you're not sure which type of node is right for you, check out the [Getting Started guide](/docs/bee/installation/getting-started).
+
+There are three configuration options that must be configured to set your node type. These options are listed below in each of the supported formats (command line flags, environment variables, and yaml values.):
+
+1. `--full-node` / `BEE_FULL_NODE` / `full-node`
+2. `--swap-enable` / `BEE_SWAP_ENABLE` / `swap-enable`
+3. `--blockchain-rpc-endpoint` / `BEE_BLOCKCHAIN_RPC_ENDPOINT` / `blockchain-rpc-endpoint`
+
+A `password` option is also required for all modes, and can either be set directly as a configuration option or alternatively a file can be used by setting the `password-file` option to the path where your password file is located.
+
+:::info
+In the list above, we've provided the configuration options for each node type in all three configuration formats.
+
+Note that configuration options are processed in this order, as mentioned above:
+
+1. Command Line Flags
+2. Environment Variables
+3. YAML Configuration File
+
+:::
+
+:::info
+In the examples below, the RPC endpoint is set as `https://xdai.fairdatasociety.org`. Your RPC endpoint may differ depending on whether you are running your own Gnosis Chain node or using a third-party provider. Free RPC providers are listed in the [Gnosis Chain docs](https://docs.gnosischain.com/node/), while commercial providers such as [Infura](https://www.infura.io/) offer more reliable options.
+:::
+
+<Tabs
+defaultValue="full"
+values={[
+{label: 'Full', value: 'full'},
+{label: 'Light', value: 'light'},
+{label: 'Ultra Light', value: 'ultra-light'},
+]}>
+
+<TabItem value="full">
+
+### Full Node Configuration
+
+**Command Line Flags:**
+
+```bash
+bee start \
+  --password flummoxedgranitecarrot \
+  --full-node \
+  --swap-enable \
+  --api-addr 127.0.0.1:1633 \
+  --blockchain-rpc-endpoint https://xdai.fairdatasociety.org
+```
+
+**Environment Variables:**
+
+```bash
+export BEE_PASSWORD=flummoxedgranitecarrot
+export BEE_FULL_NODE=true
+export BEE_SWAP_ENABLE=true
+export BEE_BLOCKCHAIN_RPC_ENDPOINT=https://xdai.fairdatasociety.org
+bee start
+```
+
+**YAML Configuration File:**
+
+```yaml
+password: flummoxedgranitecarrot
+full-node: true
+swap-enable: true
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+```
+
+</TabItem>
+
+<TabItem value="light">
+
+### Light Node Configuration
+
+**Command Line Flags:**
+
+```bash
+bee start \
+  --password flummoxedgranitecarrot \
+  --swap-enable \
+  --api-addr 127.0.0.1:1633 \
+  --blockchain-rpc-endpoint https://xdai.fairdatasociety.org
+```
+
+**Environment Variables:**
+
+```bash
+export BEE_PASSWORD=flummoxedgranitecarrot
+export BEE_FULL_NODE=false
+export BEE_SWAP_ENABLE=true
+export BEE_BLOCKCHAIN_RPC_ENDPOINT=https://xdai.fairdatasociety.org
+bee start
+```
+
+**YAML Configuration File:**
+
+```yaml
+password: flummoxedgranitecarrot
+full-node: false
+swap-enable: true
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+```
+
+</TabItem>
+
+<TabItem value="ultra-light">
+
+### Ultra-Light Node Configuration
+
+**Command Line Flags:**
+
+```bash
+bee start \
+  --password flummoxedgranitecarrot \
+  --api-addr 127.0.0.1:1633
+```
+
+**Environment Variables:**
+
+```bash
+export BEE_PASSWORD=flummoxedgranitecarrot
+export BEE_FULL_NODE=false
+export BEE_SWAP_ENABLE=false
+export BEE_BLOCKCHAIN_RPC_ENDPOINT=
+bee start
+```
+
+**YAML Configuration File:**
+
+```yaml
+password: flummoxedgranitecarrot
+full-node: false
+swap-enable: false
+blockchain-rpc-endpoint: ""
+```
+
+</TabItem>
+
+</Tabs>
+
+## Sepolia Testnet Configuration
+
+Connecting to the Swarm testnet is as simple as adding the flag `--mainnet false` to your bee commandline, or `mainnet: false` to your configuration file. Swarm testnet smart contracts are deployed on Sepolia, so if you want to run a light or full node you will need to add a Sepolia RPC to your configuration and fund your node with Sepolia ETH. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia).
+
+To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH); just make sure that you've switched to the Sepolia network in your browser wallet.
 
 Here is an example of a full configuration for a testnet full node:
 

@@ -13,7 +13,7 @@ Depending on your needs you can run ultra-light, light or full node.
 
 ### What are the differences between Bee node types?
 
-A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](/docs/bee/installation/quick-start) for an overview of the differences.
+A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](/docs/bee/installation/getting-started) for an overview of the differences.
 
 
 #### What are the requirements for running a Bee node?

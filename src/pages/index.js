@@ -44,7 +44,7 @@ function Home() {
             <p className={styles.description}>Install the Swarm Desktop client to quickly spin up a Bee node and start interacting with the Swarm network.</p>
           </div>
         </a> 
-        <a className={styles.sectionButton} href="/docs/bee/installation/quick-start">
+        <a className={styles.sectionButton} href="/docs/bee/installation/getting-started">
           <div className={styles.sectionButtonInner}>
             <img className={styles.sectionImageDevelopDark} src="img/bee-dark.svg"></img>
             <img className={styles.sectionImageDevelopLight} src="img/bee-light.svg"></img>            
