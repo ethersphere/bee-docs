@@ -33,7 +33,7 @@ sudo yum remove bee
 If Bee is installed using the [automated shell script](/docs/bee/installation/install#shell-script-install) or by [building from source](/docs/bee/installation/build-from-source), Bee can be uninstalled by directly removing the installed file.
 
 ```bash
-sudo rm `/usr/local/bin/bee`
+sudo rm "/usr/local/bin/bee"
 ```
 
 ## Remove Bee Data Files
