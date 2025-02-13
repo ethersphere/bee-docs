@@ -1,3 +1,7 @@
+---
+title: Logging in Bee
+id: logs-and-files
+---
 
 # Logging in Bee
 

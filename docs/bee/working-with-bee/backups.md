@@ -3,33 +3,54 @@ title: Backups
 id: backups
 ---
 
-## Files
+## Bee Files 
 
 A full Bee node backup includes the `kademlia-metrics`,  `keys`,  `localstore`,  `password`,  `stamperstore`,  `statestore`, and `password` files. The node should be stopped before taking a backup and not restarted until restoring the node from the backup to prevent the node from getting out of sync with the network.
 
-A node's data including keys and stamp data are found in the data directory specified in its [configuration](configuration).
-
-Key data in backup files allows access to Bee node's Gnosis account. If lost or stolen it could lead to the loss of all assets in that account. Furthermore the `stamperstore` contains postage stamp data, and postage stamps will not be recoverable if it is lost.
+Key data from the `keys` directory allows access to Bee node's Gnosis account (provided that you have also made sure to back the password for your keys). If your keys and password are lost or stolen it could lead to the loss of all assets in that account. Furthermore the `stamperstore` contains postage stamp data, and postage stamps will not be recoverable if it is lost.
 
 :::info
 Don't forget - it's not a backup until you're sure the backup files work! Make sure to test restoring from backup files to prevent loss of assets due to data loss or corruption.
 :::
 
-### Ubuntu / Debian / Raspbian / CentOS package managers
+## Package Manager Default Service File Locations
 
-For Linux installations from package managers _yum_ or _apt_, the data directory is located at:
+The default file locations for Bee nodes installed to run as a service through a package manager can all be found on GitHub in the Bee repo within the respective directories for each service manager within [packaging directory](https://github.com/ethersphere/bee/tree/master/packaging).
 
-```bash
-/var/lib/bee
-```
-
-It may also be useful to include the `bee.yaml` config file in a backup so that configuration can be easily restored. The default location of the config file is:
+The directory structure looks like this:
 
 ```bash
-/etc/bee
+noah@NoahM16:~/bee/packaging$ tree -L 2
+.
+├── bee-get-addr
+├── bee.service
+├── bee.yaml
+├── deb
+│   ├── postinst
+│   ├── postrm
+│   ├── preinst
+│   └── prerm
+├── default
+├── docker
+│   ├── docker-compose.yml
+│   ├── env
+│   └── README.md
+├── homebrew-amd64
+│   ├── bee-get-addr
+│   └── bee.yaml
+├── homebrew-arm64
+│   ├── bee-get-addr
+│   └── bee.yaml
+├── rpm
+│   ├── post
+│   ├── postun
+│   ├── pre
+│   └── preun
+└── scoop
+    └── bee.yaml
 ```
 
-This guide uses the default package manager location for the data folder, make sure to change the commands to match your data folder's location if it in a different directory.
+
 
 ### Binary package install
 
@@ -51,9 +72,9 @@ docker cp bee_bee_1:/home/bee/.bee/ bee
 
 ### Data types
 
-The data directory contains three directories. Its default location depends on the node install method used.
+The data directory contains three directories. Its default location depends on the node install method and startup method used.
 
-For shell script install the location is `/home/<user>/.bee` and for package manager installs it is `/var/lib/bee`. The directory structure is as follows:
+
 
 ```
 ├── kademlia-metrics
@@ -106,8 +127,11 @@ sudo cp -r /var/lib/bee/ backup
     
 ### Back-up your password 
 
-Depending on your configuration, your password may not be located in the `/bee` data directory which was copied in the previous step. If it has been specified in an environment variable or in your [`bee.yaml` configuration file](/docs/bee/working-with-bee/configuration#default-data-and-config-directories), make sure to copy it and save it together with the rest of your backup files or write it down in a safe place.
+Depending on your [configuration](/docs/bee/working-with-bee/configuration) method, your password may be located in a variety of different locations. If you use a `.yaml` file for your configuration, then it might be found directly under the `password` option, or it could be that the location of your password file is recorded by the `password-file` option. In either case, make sure to record the password or password file as a part of your backup.   
 
+The same holds true for the to other configuration methods. If you use environment variables for specifying your configuration options, your password itself will likely be specified in a `.env` file somewhere which contains either the password itself in the `BEE_PASSWORD` variable or the location of your password file in the `BEE_PASSWORD_FILE` variable. 
+
+The same again holds true for the command line flag method. Make sure you have the password you use with the `--password` command line flag or the password file specified by the `--password-file` flag saved in your backup. 
 
 ### Back-up blockchain keys only
 
