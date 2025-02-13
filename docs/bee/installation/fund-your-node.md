@@ -140,15 +140,10 @@ be sent from the node's wallet using the `swap-initial-deposit` option. It is 0 
 
 ### Basic Deployment
 
-If you want to get your Bee node up and running as easily as possible, then you
-can set its [`swap-initial-deposit`](/docs/bee/working-with-bee/configuration)
-value to zero. This means that your node's chequebook will not get funded with
-xBZZ, meaning that other nodes will only serve it within the free tier bandwidth
-threshold.
+If you want to get your Bee node up and running as easily as possible, then you can set its [`swap-initial-deposit`](/docs/bee/working-with-bee/configuration) value to zero. This means that your node's chequebook will not get funded with xBZZ, meaning that other nodes will only serve it within the free tier bandwidth threshold.
 
 Since gas fees on the [Gnosis Chain](https://www.gnosis.io/) are very low,
-you won't need much xDAI either to get started. You may acquire a small amount
-for free by using the official Gnosis Chain xDAI faucet [xDAI Faucet](https://gnosisfaucet.com/). The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be more than enough to start up your node.
+you won't need much xDAI either to get started. You may acquire a small amount for free by using one of the Gnosis Chain [xDAI faucets](https://docs.gnosischain.com/tools/Faucets) listed in the official Gnosis Chain docs. The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be more than enough to start up your node.
 
 You can use the [Blockscout](https://blockscout.com/xdai/mainnet/) block
 explorer to inspect what's going on with your wallet by searching for its
@@ -212,31 +207,36 @@ sudo cat /var/lib/bee/keys/swarm.key
 sudo cat /var/lib/bee/password
 ```
 
-# Testnet
 
-A Bee node needs Sepolia ETH and sBZZ in its wallet to be able to properly
-interact with the test network. One way to acquire these funds is to
-sign into our Discord and request Sepolia ETH and sBZZ test tokens from the
-*faucet bot* to your node's Ethereum address.
 
-To find out what your node's Ethereum address is, please consult the
-installation guide or check the logs!
+## Getting Mainnet Tokens
 
-Once you have the address:
+### xDAI Faucets
 
-1. join our [Discord server](https://discord.gg/wdghaQsGq5)
-2. navigate to the [#faucet](https://discord.gg/TVgKhsGEbc) channel
-3. [verify your username](https://discord.gg/tXGPdzZQaV)
-4. request test tokens from the *faucet bot*
+Since gas fees on the [Gnosis Chain](https://www.gnosis.io/) are very low,
+you won't need much xDAI either to get started. Check [the official Gnosis Chain docs](https://docs.gnosischain.com/tools/Faucets) for more information on faucets and where to find support if the faucets listed there don't work. The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be more than enough to start up your node.
 
-To request the tokens you must **type** (not copy paste) the following, replacing the address with your own:
+### Purchasing xDAI
 
-```
-/faucet sprinkle 0xabeeecdef123452a40f6ea9f598596ca8556bd57
-```
+xDAI is widely available from many different centralized and decentralized exchanges. Just make sure that you are getting the Gnosis Chain version of xDAI, as xDAI is available on several different networks. See the official Gnosis Chain docs for [more info on where to get xDAI](https://docs.gnosischain.com/about/tokens/xdai).
 
-If you have problems, please let us know by making a post in the [#faucet](https://discord.gg/TVgKhsGEbc) channel, we will do our best to provide tokens to everyone.
 
-Note that you should use a Chromium-based client (e.g., Chrome, native Discord client) to type the faucet command, as support for other browsers is spotty. It's reported to not work on Firefox, for example.
+### xBZZ Faucets
 
-Transactions may take a while to complete, please be patient. We're also keen for you to join us in the swarm, and indeed you soon will! 🐝 &nbsp 🐝 &nbsp 🐝
+Unfortunately, there are no longer any functioning xBZZ faucets. While there is no xBZZ faucet, if you are a legitimate developer looking to get started on Swarm, drop us a message in the [develop-on-swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel to let us know what you're working on, and we may be able to provide you with a small amount to get started.
+
+### Purchasing xBZZ
+
+xBZZ is available on a wide variety of centralized and decentralized exchanges. [See this page on the Ethswarm website](https://www.ethswarm.org/get-bzz#how-to-get-bzz) for a list of sources where you can purchase xBZZ.
+
+## Getting Testnet Tokens
+
+If you're a developer looked to get started developing on Swarm without spending real xDAI and xBZZ, you will need to get some Sepolia sDAI and sBZZ. A Bee node needs Sepolia ETH and sBZZ in its wallet to be able to properly interact with the test network.
+
+When it comes to Sepolia ETH, some of the faucets may be unreliable, and faucets which work at one point may not work when you try them again later. At the time of this being written, here you can find [a list of faucets for Sepolia ETH](https://faucetlink.to/sepolia) to try.
+
+Unfortunately currently there are no existing faucets or reliable markets for sBZZ. 
+
+The official Uniswap homepage does not support sBZZ, but you can try to get Sepolia BZZ (sBZZ) by using [this IPFS mirror Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet.
+
+If the IPFS mirror above doesn't work for you please let us know by making a post in the [develop-on-swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel, and we will do our best to provide you with sBZZ.
