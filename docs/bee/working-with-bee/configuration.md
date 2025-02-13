@@ -525,7 +525,7 @@ blockchain-rpc-endpoint: ""
 
 ## Sepolia Testnet Configuration
 
-Connecting to the Swarm testnet is as simple as adding the flag `--mainnet false` to your bee commandline, or `mainnet: false` to your configuration file. Swarm testnet smart contracts are deployed on Sepolia, so if you want to run a light or full node you will need to add a Sepolia RPC to your configuration and fund your node with Sepolia ETH. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia).
+Connecting to the Swarm testnet is as simple as adding the flag `--mainnet false` to your bee commandline, or `mainnet: false` to your configuration file. Swarm testnet smart contracts are deployed on Sepolia, so if you want to run a light or full node you will need to add a Sepolia RPC to your configuration and fund your node with Sepolia ETH. There are many public [faucets](https://faucetlink.to/sepolia)you can use to obtain Sepolia ETH.
 
 To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH); just make sure that you've switched to the Sepolia network in your browser wallet.
 
