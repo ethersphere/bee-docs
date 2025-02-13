@@ -6,21 +6,19 @@ id: configuration
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
 ## Configuration Methods and Priority
 
 There are three methods of configuration which each have different priority levels. Configuration is processed in the following ascending order of preference:
 
-1. Command Line Flags 
+1. Command Line Flags
 2. Environment Variables
 3. YAML Configuration File
 
 :::info
-All three methods may be used when running Bee using `bee start`. 
+All three methods may be used when running Bee using `bee start`.
 
 However when Bee is started as a service with tools like `systemctl` or `brew services`, only the YAML configuration file is supported by default.
 :::
-
 
 ### Command Line Arguments
 
@@ -92,7 +90,7 @@ Flags:
       --withdrawal-addresses-whitelist strings   withdrawal target addresses
 
 Global Flags:
-      --config string   config file (default is $HOME/.bee.yaml)  
+      --config string   config file (default is $HOME/.bee.yaml)
 ```
 
 ### Environment variables
@@ -240,10 +238,10 @@ withdrawal-addresses-whitelist: []
 ```
 
 :::info
-Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](/docs/bee/working-with-bee/configuration). 
+Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](/docs/bee/working-with-bee/configuration).
 :::
 
-To change your node's configuration, simply edit the YAML file and restart Bee: 
+To change your node's configuration, simply edit the YAML file and restart Bee:
 
 <Tabs
 defaultValue="linux"
@@ -259,6 +257,7 @@ Open the config file for editing:
 ```bash
 sudo vi /etc/bee/bee.yaml
 ```
+
 After saving your changes, restart your node:
 
 ```bash
@@ -296,6 +295,7 @@ After saving your changes, restart your node:
 ```bash
 brew services restart swarm-bee
 ```
+
 </TabItem>
 
 </Tabs>
@@ -318,15 +318,13 @@ Moreover, when using `bee.yaml` together with the `bee start` command, you must 
 
 You can find the default configurations for your system in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging). If your configuration file is missing you can simply copy the contents of the file into a new `bee.yaml` file in the default configuration directory shown in the `bee.yaml` file for your system.
 
-
 ## Default Data and Config Directories
 
-Depending on the operating system and startup method used, the default data and configuration directories for your node will differ. 
+Depending on the operating system and startup method used, the default data and configuration directories for your node will differ.
 
 ### Bee Service Default Directories (Package Manager Install)
 
-When installed using a package manager, Bee is set up to run as a service with default data and configuration  directories set up automatically during the installation. The examples below include default directories for Linux and macOS. You can find the complete details of default directories for different operating systems in the `bee.yaml` files included in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging). 
-
+When installed using a package manager, Bee is set up to run as a service with default data and configuration directories set up automatically during the installation. The examples below include default directories for Linux and macOS. You can find the complete details of default directories for different operating systems in the `bee.yaml` files included in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging).
 
 <Tabs
 defaultValue="linux"
@@ -373,7 +371,7 @@ config: /usr/local/etc/swarm-bee/bee.yaml
 
 For all operating systems, the default data and config directories for the `bee start` startup method can be found using the `bee printconfig` command:
 
-This will print out a complete default Bee node configuration file to the terminal, the `config` and `data-dir` values show the default directories for your system: 
+This will print out a complete default Bee node configuration file to the terminal, the `config` and `data-dir` values show the default directories for your system:
 
 ```yaml
 config: /root/.bee.yaml
@@ -396,13 +394,12 @@ There are three configuration options that must be configured to set your node t
 
 A `password` option is also required for all modes, and can either be set directly as a configuration option or alternatively a file can be used by setting the `password-file` option to the path where your password file is located.
 
-
 :::info
 In the list above, we've provided the configuration options for each node type in all three configuration formats.
 
 Note that configuration options are processed in this order, as mentioned above:
 
-1. Command Line Flags 
+1. Command Line Flags
 2. Environment Variables
 3. YAML Configuration File
 
@@ -425,6 +422,7 @@ values={[
 ### Full Node Configuration
 
 **Command Line Flags:**
+
 ```bash
 bee start \
   --password flummoxedgranitecarrot \
@@ -435,6 +433,7 @@ bee start \
 ```
 
 **Environment Variables:**
+
 ```bash
 export BEE_PASSWORD=flummoxedgranitecarrot
 export BEE_FULL_NODE=true
@@ -444,6 +443,7 @@ bee start
 ```
 
 **YAML Configuration File:**
+
 ```yaml
 password: flummoxedgranitecarrot
 full-node: true
@@ -458,6 +458,7 @@ blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 ### Light Node Configuration
 
 **Command Line Flags:**
+
 ```bash
 bee start \
   --password flummoxedgranitecarrot \
@@ -467,6 +468,7 @@ bee start \
 ```
 
 **Environment Variables:**
+
 ```bash
 export BEE_PASSWORD=flummoxedgranitecarrot
 export BEE_FULL_NODE=false
@@ -476,6 +478,7 @@ bee start
 ```
 
 **YAML Configuration File:**
+
 ```yaml
 password: flummoxedgranitecarrot
 full-node: false
@@ -490,6 +493,7 @@ blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 ### Ultra-Light Node Configuration
 
 **Command Line Flags:**
+
 ```bash
 bee start \
   --password flummoxedgranitecarrot \
@@ -497,6 +501,7 @@ bee start \
 ```
 
 **Environment Variables:**
+
 ```bash
 export BEE_PASSWORD=flummoxedgranitecarrot
 export BEE_FULL_NODE=false
@@ -506,6 +511,7 @@ bee start
 ```
 
 **YAML Configuration File:**
+
 ```yaml
 password: flummoxedgranitecarrot
 full-node: false
@@ -517,15 +523,13 @@ blockchain-rpc-endpoint: ""
 
 </Tabs>
 
+## Sepolia Testnet Configuration
 
-## Sepolia Testnet Configuration 
+In order to operate a Bee node on the Sepolia testnet, update your configuration to use the options shown in the example below. Make sure that you replace the `blockchain-rpc-endpoint` option value with your own valid Sepolia RPC endpoint. If you choose to use a 3rd party RPC provider like [Infura](https://www.infura.io/), make sure to [check in the docs](https://docs.infura.io/api/network-endpoints) that the endpoint format is up to date, and also make sure that you have filled in your own API key which you can find from the [Infura web app](https://app.infura.io).
 
-In order to operate a Bee node on the Sepolia testnet, update your configuration to use the options shown in the example below. Make sure that you replace the `blockchain-rpc-endpoint` option value with your own valid Sepolia RPC endpoint. If you choose to use a 3rd party RPC provider like [Infura](https://www.infura.io/), make sure to [check in the docs](https://docs.infura.io/api/network-endpoints) that the endpoint format is up to date, and also make sure that you have filled in your own API key which you can find from the [Infura web app](https://app.infura.io). 
+Also make sure to fund your node with Sepolia ETH rather than xDAI to pay for gas on the Sepolia testnet. There are many public faucets you can use to obtain Sepolia ETH, [here is a curated list](https://faucetlink.to/sepolia).
 
-Also make sure to fund your node with Sepolia ETH rather than xDAI to pay for gas on the Sepolia testnet. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
-
-To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet. 
-
+To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet.
 
 ```yaml
 data-dir: /home/username/bee/sepolia
@@ -543,9 +547,9 @@ Here `bootnode` was changed to use the testnet bootnode, `mainnet` has been set 
 
 ## Setting Blockchain RPC endpoint
 
-Full and light Bee nodes require a Gnosis Chain RPC endpoint so they can interact with and deploy their chequebook contract, see the latest view of the current postage stamp batches, and interact with and top-up postage stamp batches. A blockchain RPC endpoint is not required for nodes running in ultra-light mode. 
+Full and light Bee nodes require a Gnosis Chain RPC endpoint so they can interact with and deploy their chequebook contract, see the latest view of the current postage stamp batches, and interact with and top-up postage stamp batches. A blockchain RPC endpoint is not required for nodes running in ultra-light mode.
 
-We strongly recommend you [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) if you are planning to run a full node, and especially if you plan to run a [hive of nodes](/docs/bee/installation/hive). 
+We strongly recommend you [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) if you are planning to run a full node, and especially if you plan to run a [hive of nodes](/docs/bee/installation/hive).
 
 If you do not wish to run your own Gnosis Chain node and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
 
@@ -562,10 +566,9 @@ blockchain-rpc-endpoint: https://rpc.gnosis.gateway.fm
 The gateway.fm RPC endpoint in the example is great for learning how to set up Bee, but for the sake of security and reliability it's recommended that you run your [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) rather than relying on a third party provider.
 :::
 
-
 ## Configuring Swap Initial Deposit (Optional)
 
-When running your Bee node with SWAP enabled for the first time, your node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
+When running your Bee node with SWAP enabled for the first time, your node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out).
 
 ## NAT address
 
@@ -593,10 +596,10 @@ Then configure your node, including your p2p port (default 1634).
 ## bee.yaml
 nat-addr: "123.123.123.123:1634"
 ```
+
 ## ENS Resolution (Optional)
 
-The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you run your own ethereum node. An option for resource restricted devices is geth+nimbus and a guide can be found [here](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/). Other options include [dappnode](https://dappnode.io/), [nicenode](https://www.nicenode.xyz/), [stereum](https://stereum.net/) and [avado](https://ava.do/). 
-
+The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you run your own ethereum node. An option for resource restricted devices is geth+nimbus and a guide can be found [here](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/). Other options include [dappnode](https://dappnode.io/), [nicenode](https://www.nicenode.xyz/), [stereum](https://stereum.net/) and [avado](https://ava.do/).
 
 If you do not wish to run your own Ethereum node you may use a blockchain API service provider such as Infura. After signing up for [Infura's](https://infura.io) API service, simply set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
 
