@@ -300,7 +300,7 @@ brew services restart swarm-bee
 
 </Tabs>
 
-## Manually generating YAML config file for `bee start`
+## Manually generating YAML config file for *bee start*
 
 No YAML file is generated during installation when using the [shell script install method](/docs/bee/installation/shell-script-install), so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
 
@@ -369,7 +369,7 @@ config: /usr/local/etc/swarm-bee/bee.yaml
 </TabItem>
 </Tabs>
 
-### `bee start` Default Directories
+### *bee start* Default Directories
 
 For all operating systems, the default data and config directories for the `bee start` startup method can be found using the `bee printconfig` command:
 

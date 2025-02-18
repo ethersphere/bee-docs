@@ -48,7 +48,7 @@ Here we are using the `jq` command line utility to count the amount of objects i
 
 Let's review a handful of endpoints which will provide you with important information relevant to detecting and diagnosing problems with your nodes.
 
-### `/status`
+### */status*
 
   The `/status` endpoint returns a quick summary of some important metrics for your node.
 
@@ -82,7 +82,7 @@ Let's review a handful of endpoints which will provide you with important inform
   *    `"batchCommitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
   *    `"isReachable"` - Whether or not your node is reachable on the p2p API by other nodes on the Swarm network (port 1634 by default).
 
-### `/status/peers`
+### */status/peers*
 
 The `/status/peers` endpoint returns information about all the peers of the node making the request. The type of the object returned is the same as that returned from the `/status` endpoint. This endpoint is useful for diagnosing syncing / availability issues with your node. 
 
@@ -272,7 +272,7 @@ And we can compare these entries to our own node's `/status` results for diagnos
 From the results we can see that we have a healthy neighborhood size when compared with the other nodes in our neighborhood and also has the same `batchCommitment` value as it should.
 
 
-### `/redistributionstate`
+### */redistributionstate*
     This endpoint provides an overview of values related to storage fee redistribution game (in other words, staking rewards). You can use this endpoint to check whether or not your node is participating properly in the redistribution game. 
     ```bash
     curl -s http://localhost:1633/redistributionstate | jq
@@ -311,7 +311,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
     * `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
 
-### `/reservestate`
+### */reservestate*
     This endpoint shows key information about the reserve state of your node. You can use it to identify problems with your node related to its reserve (whether it is syncing chunks properly into its reserve for example).
 
     ```bash
@@ -329,7 +329,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods).
     * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
     
-### `/chainstate`
+### */chainstate*
 
     This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
     
@@ -348,7 +348,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"totalAmount"` - Cumulative value of all prices per chunk in PLUR for each block.
     * `"currentPrice"` - The price in PLUR to store a single chunk for each Gnosis Chain block.
 
-### `/topology`
+### */topology*
     This endpoint allows you to explore the topology of your node within the Kademlia network. The results are split into 32 bins from bin_0 to bin_32. Each bin represents the nodes in the same neighborhood as your node at each proximity order from PO 0 to PO 32. 
     
     As the output of this file can be very large, we save it to the `topology.json` file for easier inspection:
@@ -437,7 +437,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     },
 ```
     
-### `/node`
+### */node*
     This endpoint returns info about options related to your node type and also displays your current node type.
 
     ```bash
@@ -456,7 +456,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     If your node is not operating in the correct mode, this can help you to diagnose whether you have set your options correctly.
 
 
-### `/rchash`
+### */rchash*
 
 Calling the /rchash endpoint will make your node generate a reserve commitment hash (the hash used in the [redistribution game](/docs/concepts/incentives/redistribution-game)), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
 
@@ -485,7 +485,7 @@ It should not take much longer than 6 minutes at most for results to be returned
 
 If the `Time` value is much longer than 6 minutes then it likely means that the node's hardware performance is not sufficient. Consider upgrading to use faster memory or processor.
 
-### `/health`
+### */health*
        
   The /health endpoint is primarily used by infra tools such as Docker / Kubernetes to check whether the server is live.
       

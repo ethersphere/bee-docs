@@ -71,7 +71,7 @@ $$
 2^{24} \times 1000000000 = 16777216000000000 \text{ PLUR} = 1.6777216 \text{ xBZZ}
 $$
 
-### Calculating `amount` needed for desired TTL 
+### Calculating *amount* needed for desired TTL 
 
 The desired `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and the stamp price. For the example below we assume a stamp price of 24000 PLUR / chunk / block:
 
