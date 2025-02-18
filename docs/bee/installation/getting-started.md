@@ -169,7 +169,7 @@ Staking is not required to run a full node, but is necessary to earn storage inc
 :::
 
 :::caution
-While it is possible to run multiple Bee nodes on a single machine, due to the high rate of I/O operations required by a full Bee node in operation, it is not recommended to run more than a handful of Bee nodes on the same physical disk (depending on the disk speed). 
+While it is possible to run multiple Bee nodes on a single machine, due to the high rate of I/O (input/output) operations required by a full Bee node in active operation while syncing chunks, it is not recommended to run more than a handful of Bee nodes on the same physical disk (depending on the disk speed). 
 :::
 
 
