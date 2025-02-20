@@ -123,7 +123,7 @@ The config includes:
 - The Bee node's API endpoint (`BEE_API`).
 - The `GSOC_ID`, `TARGET_OVERLAY`, and `STORAGE_DEPTH` which are used to generate the GSOC address.
 
-### 3. Initialize `informationSignal` Object
+### 3. Initialize *informationSignal* Object
 
 Use the `InformationSignal` class we imported and the `BEE_API` and `GSOC_ID` values we just defined to initialize the `informationSignal` object:
 
@@ -149,7 +149,7 @@ const informationSignal = new InformationSignal(BEE_API, {
 
 Also note the `assertRecord` function. This optional function can be used to filter out updates by defining an accepted update format. If omitted, the default validation will enforce a string value for the payload.
 
-### 4. Mine `resourceId`
+### 4. Mine *resourceId*
 
 Use the `informationSignal` to mine a `resourceId` such that it can be used to derive a GSOC address which falls into our node's neighborhood:
 
