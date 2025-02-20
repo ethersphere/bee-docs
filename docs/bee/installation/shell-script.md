@@ -19,15 +19,6 @@ Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default
 This guide uses command line flag options in the node startup commands such as `--blockchain-rpc-endpoint`, however there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
 :::
 
-:::info
-**Bee Modes**
-
-Bee nodes can be run in multiple modes with different functionalities. To run a node in full mode, both `--full-node` and `--swap-enable` must be set to `true`. To run a light node (uploads and downloads only), set `--full-node` to false and `--swap-enable` to `true`, or to run in ultra-light mode (free tier downloads only) set both `--full-node` and `--swap-enable` to false.
-
-For more information on the different functionalities of each mode, as well as their different system requirements, refer to the [Getting Started guide](/docs/bee/installation/getting-started).
-:::
-
- 
 ## Install and Start Your Node 
 Below is a step-by-step guide for installing and setting up your Bee node using the shell script installation method.
 
@@ -122,7 +113,7 @@ Use "bee [command] --help" for more information about a command.
  
 Let's try starting up our node for the first time with the command below. Make sure to pick a [strong password](https://xkcd.com/936/) of your own:
 
-Below are startup commands configured for each of the three Bee node types.
+Below are startup commands configured for each of the three Bee [node types](/docs/bee/working-with-bee/configuration#set-bee-node-type).
 
 <Tabs
 defaultValue="full"

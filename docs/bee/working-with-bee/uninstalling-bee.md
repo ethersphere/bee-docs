@@ -3,11 +3,9 @@ title: Uninstalling Bee
 id: uninstalling-bee
 ---
 
-## Uninstalling Bee
-
 Choose the appropriate uninstall method based on the install method used:
 
-### Package Manager  
+## Package Manager  
 
 This method can be used for package manager based [installs](/docs/bee/installation/install#shell-script-install) of the official Debian, RPM, and Homebrew packages.
 
@@ -15,7 +13,7 @@ This method can be used for package manager based [installs](/docs/bee/installat
 This will remove your keyfiles so make certain that you have a [full backup](/docs/bee/working-with-bee/backups) of your keys and configuration before uninstalling.
 :::
 
-#### Debian
+### Debian
 
 To uninstall Bee and completely remove all associated files including keys and configuration, run: 
 
@@ -23,17 +21,16 @@ To uninstall Bee and completely remove all associated files including keys and c
 sudo apt-get purge bee
 ```
 
-#### RPM
+### RPM
 
 ```bash
 sudo yum remove bee
 ```
 
 
-## Uninstalling Bee (Shell Script / Binary Install)
+## Shell Script / Binary Install
 
 If Bee was installed using the [automated shell script](/docs/bee/installation/shell-script-install) or as a binary by [building from source](/docs/bee/installation/build-from-source), it can be uninstalled by manually removing the installed binary, configuration files, and data directories.
-
 
 ### Identify Data and Config Locations
 
@@ -54,7 +51,7 @@ config: /home/noah/.bee.yaml
 data-dir: /home/noah/.bee
 ```
 
-### Backup Files (Optional)
+## Backup Files (Optional)
 
 
 **1. Remove the Bee Binary**  

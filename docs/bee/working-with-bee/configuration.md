@@ -369,7 +369,7 @@ config: /usr/local/etc/swarm-bee/bee.yaml
 </TabItem>
 </Tabs>
 
-### *bee start* Default Directories
+### Shell Script Install Default Directories
 
 For all operating systems, the default data and config directories for the `bee start` startup method can be found using the `bee printconfig` command:
 
@@ -386,13 +386,20 @@ The default directories for your system may differ from the example above, so ma
 
 ## Set Bee Node Type
 
-You can set your node's mode of operation by modifying its configuration options. There are three node types: `full`, `light`, and `ultra-light`. If you're not sure which type of node is right for you, check out the [Getting Started guide](/docs/bee/installation/getting-started).
+Bee nodes can be run in multiple modes with different functionalities. To run a node in full mode, both `full-node` and `swap-enable` must be set to `true`. To run a light node (uploads and downloads only), set `full-node` to `false` and `swap-enable` to `true`, or to run in ultra light mode (free tier downloads only), set both `full-node` and `swap-enable` to `false`.
 
-There are three configuration options that must be configured to set your node type. These options are listed below in each of the supported formats (command line flags, environment variables, and yaml values.):
+Additionally, the `blockchain-rpc-endpoint` option must be [configured](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint) when running a node that interacts with the blockchain. This option specifies the Gnosis Chain RPC endpoint used for on-chain operations such as postage stamp purchases and storage incentives transactions. Full and light nodes require a properly configured `blockchain-rpc-endpoint`, while ultra-light nodes do not need blockchain access.
 
-1. `--full-node` / `BEE_FULL_NODE` / `full-node`
-2. `--swap-enable` / `BEE_SWAP_ENABLE` / `swap-enable`
-3. `--blockchain-rpc-endpoint` / `BEE_BLOCKCHAIN_RPC_ENDPOINT` / `blockchain-rpc-endpoint`
+| Node Type          | `full-node`  | `swap-enable` | `blockchain-rpc-endpoint` | Functionality |
+|--------------------|-------------|--------------|----------------------------|----------------|
+| Full Node         | `true`       | `true`       | Required                   | Full functionality, including uploads, downloads, and Swarm network participation. |
+| Light Node        | `false`      | `true`       | Required                   | Supports uploads and downloads only. |
+| Ultra Light Node  | `false`      | `false`      | Not required               | Free-tier downloads only. |
+
+
+See [here](/docs/bee/working-with-bee/node-types/) for more information about each node type and their individual characteristics.
+
+## Create Password
 
 A `password` option is also required for all modes, and can either be set directly as a configuration option or alternatively a file can be used by setting the `password-file` option to the path where your password file is located.
 

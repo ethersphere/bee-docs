@@ -20,18 +20,10 @@ This guide sets options using environment variables as a part of the Docker star
 :::
 
 
-:::info
-**Bee Modes:**
-
-Bee nodes can be run in multiple modes with different functionalities. To run a node in full mode, both `BEE_FULL_NODE` and `BEE_SWAP_ENABLE` must be set to `true`. To run a light node (uploads and downloads only), set `BEE_FULL_NODE` to `false` and `BEE_SWAP_ENABLE` to `true`, or to run in ultra light mode (free tier downloads only) set both `BEE_FULL_NODE` and `BEE_SWAP_ENABLE` to `false`.
-
-For more information on the different functionalities of each mode, as well as their different system requirements, refer to the [Getting Started guide](/docs/bee/installation/getting-started).
-:::
-
-
 ## Node setup process 
 
 This section will guide you through setting up and running a single full Bee node using Docker. In the guide, we use a single line command for running our Bee node, with the Bee config options being set through environment variables, and a single volume hosted for our node's data. 
+
 
 ### Start node
 
