@@ -114,6 +114,7 @@ module.exports = {
         'develop/tools-and-features/chunk-types',
         'develop/tools-and-features/feeds',
         'develop/tools-and-features/pss',
+        'develop/tools-and-features/gsoc',
         'develop/tools-and-features/bee-dev-mode',
         'develop/tools-and-features/starting-a-test-network',
         'develop/tools-and-features/act'
