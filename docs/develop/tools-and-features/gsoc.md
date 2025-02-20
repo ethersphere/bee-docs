@@ -5,10 +5,10 @@ id: gsoc
 
 ## Section 1: Introduction
 
-The GSOC (Graffiti Single Owner Chunk) feature allows for multiple Bee nodes to update the same [SOC (Single Owner Chunk)](https://docs.ethswarm.org/docs/develop/tools-and-features/chunk-types/#single-owner-chunks) as long as they follow the defined rules for updating that chunk. Essentially, GSOC is the many-to-one communication feature which complements SOC's one-to-many communication functionality. It works by emitting an event once a node with an established GSOC connection receives a matching SOC - allowing it to act as a many-to-one notification system.
+The GSOC (Graffiti Single Owner Chunk) feature allows for multiple Bee nodes to update the same [SOC (Single Owner Chunk)](/docs/develop/tools-and-features/chunk-types/#single-owner-chunks) as long as they follow the defined rules for updating that chunk. Essentially, GSOC is the many-to-one communication feature which complements SOC's one-to-many communication functionality. It works by emitting an event once a node with an established GSOC connection receives a matching SOC - allowing it to act as a many-to-one notification system.
 
 :::info
-GSOC grew out of the previously developed [Graffiti feeds](https://github.com/fairDataSociety/FIPs/blob/master/text/0062-graffiti-feed.md), and you may wish to familiarize yourself with them as well as [feeds](https://docs.ethswarm.org/docs/develop/tools-and-features/feeds/) in general for a better understanding of the background of GSOC's development.
+GSOC grew out of the previously developed [Graffiti feeds](https://github.com/fairDataSociety/FIPs/blob/master/text/0062-graffiti-feed.md), and you may wish to familiarize yourself with them as well as [feeds](docs/develop/tools-and-features/feeds/) in general for a better understanding of the background of GSOC's development.
 :::
 
 :::warning
@@ -85,7 +85,7 @@ The sections below describe how to use the GSOC library to set  up both a servic
 4. Mutable batches 
 
 :::warning
-***Mutable batches should be used with GSOC*** since every GSOC message will increment one slot of the postage batch *within the same [bucket](https://docs.ethswarm.org/docs/concepts/incentives/postage-stamps#batch-utilisation) each time*. In other words, when an immutable batch is used, the batch will become fully utilized very rapidly (for example, at batch depth 18, it would become fully utilized after 4 GSOC messages). With a mutable batch, you can continue to send GSOC messages indefinitely, as the newer updates will simply overwrite the older ones without causing the batch to become fully utilized and no longer usable.
+***Mutable batches should be used with GSOC*** since every GSOC message will increment one slot of the postage batch *within the same [bucket](/docs/concepts/incentives/postage-stamps#batch-utilisation) each time*. In other words, when an immutable batch is used, the batch will become fully utilized very rapidly (for example, at batch depth 18, it would become fully utilized after 4 GSOC messages). With a mutable batch, you can continue to send GSOC messages indefinitely, as the newer updates will simply overwrite the older ones without causing the batch to become fully utilized and no longer usable.
 :::
 
 ## Section 3A: Using GSOC - Service Node
@@ -211,7 +211,7 @@ const STORAGE_DEPTH = 16; // Number of leading bits to match
 const BATCH_ID = '17caba8ae704c356f50cb4f3e14568d3462423448334bd7df032298d88d83bb9';
 ```
 
-The only change is that we added a `BATCH_ID` for a valid mutable postage batch. [Buy a batch](https://docs.ethswarm.org/docs/develop/access-the-swarm/buy-a-stamp-batch) if you don't already have one. 
+The only change is that we added a `BATCH_ID` for a valid mutable postage batch. [Buy a batch](/docs/develop/access-the-swarm/buy-a-stamp-batch) if you don't already have one. 
 
 ### 2. Write Data to the GSOC
 
