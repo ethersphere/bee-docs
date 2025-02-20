@@ -279,8 +279,6 @@ swap-factory-address: ""
 swap-initial-deposit: "0"
 # neighborhood to target in binary format (ex: 111111001) for mining the initial overlay
 target-neighborhood: ""
-# admin username to get the security token
-token-encryption-key: ""
 # enable tracing
 tracing-enable: false
 # endpoint to send tracing data
