@@ -75,8 +75,7 @@ module.exports = {
         'bee/working-with-bee/backups',
         'bee/working-with-bee/upgrading-bee',
         'bee/working-with-bee/uninstalling-bee',
-        'bee/working-with-bee/light-nodes',
-        'bee/working-with-bee/ultra-light-nodes'
+        'bee/working-with-bee/node-types',
       ],
       collapsed: false
     },
