@@ -65,6 +65,7 @@ module.exports = {
       items: [
         'bee/working-with-bee/introduction',
         'bee/working-with-bee/configuration',
+        'bee/working-with-bee/node-types',
         'bee/working-with-bee/bee-api',
         'bee/working-with-bee/logs-and-files',
         'bee/working-with-bee/bee-dashboard',
@@ -75,7 +76,7 @@ module.exports = {
         'bee/working-with-bee/backups',
         'bee/working-with-bee/upgrading-bee',
         'bee/working-with-bee/uninstalling-bee',
-        'bee/working-with-bee/node-types',
+        
       ],
       collapsed: false
     },

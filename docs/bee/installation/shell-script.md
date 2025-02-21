@@ -113,7 +113,7 @@ Use "bee [command] --help" for more information about a command.
  
 Let's try starting up our node for the first time with the command below. Make sure to pick a [strong password](https://xkcd.com/936/) of your own:
 
-Below are startup commands configured for each of the three Bee [node types](/docs/bee/working-with-bee/configuration#set-bee-node-type).
+Below are startup commands configured for each of the three Bee node types, ***full***, ***light***, and ***ultra-light***. Refer to the [Node Types](/docs/bee/working-with-bee/node-types) page to learn more about each node type and decide which one best suits your needs.
 
 <Tabs
 defaultValue="full"
@@ -353,39 +353,27 @@ Check the logs from the previous step. Look for the line which says:
 ```
 "time"="2024-09-24 18:15:34.520716" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x1A801dd3ec955E905ca424a85C3423599bfb0E66"
 ```
-That address is your node's address on Gnosis Chain which needs to be funded with xDAI and xBZZ. Copy it and save it for the next step.
+That address is your node's address on Gnosis Chain which needs to be funded with xDAI (and also xBZZ if you plan on doing any uploading or on staking). Copy it and save it for the next step.
 
-You can also use a `curl` command with the Bee API to find your node's address:
+You can also use the following command:
 
 ```bash
-curl localhost:1633/addresses | jq
+curl -s localhost:1633/addresses | jq .ethereum
 ```
 
-```json
-{
-  "overlay": "b1978be389998e8c8596ef3c3a54214e2d4db764898ec17ec1ad5f19cdf7cc59",
-  "underlay": [
-    "/ip4/127.0.0.1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ",
-    "/ip4/172.25.128.69/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ",
-    "/ip6/::1/tcp/1634/p2p/QmQHgcpizgoybDtrQXCWRSGdTP526ufeMFn1PyeGd1zMEZ"
-  ],
-  "ethereum": "0xd22cc790e2aef341827e1e49cc631d2a16898cd9",
-  "publicKey": "023b26ce8b78ed8cdb07f3af3d284c95bee5e038e7c5d0c397b8a5e33424f5d790",
-  "pssPublicKey": "039ceb9c1f0afedf79991d86d89ccf4e96511cf656b43971dc3e878173f7462487"
-}
+Which will return your node's address:
+
+```bash
+"0x1A801dd3ec955E905ca424a85C3423599bfb0E66"
 ```
-
-The `ethereum` address is your node's Gnosis Chain address (while Gnosis is a distinct chain from Ethereum, it uses the same address format and is sometimes referenced as such within the Bee API.)
-
-xDAI is widely available from many different centralized and decentralized exchanges, just make sure that you are getting xDAI on Gnosis Chain, and not DAI on some other chain. See [this page](https://www.ethswarm.org/get-bzz) for a list of resources for getting xBZZ (again, make certain that you are getting the Gnosis Chain version, and not BZZ on Ethereum).  
-
-After acquiring some xDAI and some xBZZ, send them to the address you copied above.
 
 ***How Much to Send?***
 
 Only a very small amount of xDAI is needed to get started, 0.1 xDAI is more than enough.
  
-You can start with just 2 or 3 xBZZ for uploading small amounts of data, but you will need at least 10 xBZZ if you plan on staking.
+For very small short term uploads you can start with ~0.2 xBZZ, but the required amount will scale up with the volume and duration of storage required.
+
+You will also need at least 10 xBZZ if you plan on staking.
 
 
 ### Initialize full node
@@ -461,7 +449,7 @@ After your node finishes syncing postage stamp data it will start in full node m
 "time"="2024-09-24 22:30:33.610825" "level"="info" "logger"="node/kademlia" "msg"="disconnected peer" "peer_address"="6ceb30c7afc11716f866d19b7eeda9836757031ed056b61961e949f6e705b49e"
 ```
 
-This process can take a while, up to several hours depending on your system and network. You can check the progress of your node through the logs which print out to the Bee API:
+This process can take a while, even up to several hours depending on your system and network. You can check the progress of your node through the logs which print out to the Bee API:
 
 You check your node's progress with the `/status` endpoint:
 
@@ -490,7 +478,6 @@ curl -s  http://localhost:1633/status | jq
 }
 ```
 We can see that our node has not yet finished syncing chunks since the `pullsyncRate` is around 497 chunks per second. Once the node is fully synced, this value will go to zero. However, we do not need to wait until our node is fully synced in order to stake our node, so we can now move immediately to the next step.
-
 
 ### Stake node
 

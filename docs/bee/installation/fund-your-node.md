@@ -3,245 +3,78 @@ title: Fund Your Node
 id: fund-your-node
 ---
 
+## Overview
+Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidth). The amount needed depends on your node type and use case.
+
+### **xDAI is Required For:**
+- **Buying Postage Stamps** ([Uploading Data](/docs/develop/access-the-swarm/buy-a-stamp-batch))
+- **Stake Management Transactions** ([Staking](/docs/bee/working-with-bee/staking/))
+- **Storage Incentives Transactions** ([Redistribution Game](/docs/concepts/incentives/redistribution-game/) )
+- **Chequebook Deployment** ([Bandwidth Payments](/docs/concepts/incentives/bandwidth-incentives/))
+
+### **xBZZ is Required For:**
+- **Buying Postage Stamps** (scales with data size and duration)
+- **Staking** (Minimum **10 xBZZ**, **20 xBZZ** for reserve doubling)
+- **Bandwidth Payments** (~**0.5 xBZZ per GB downloaded**)
+
+## **Token Amounts by Use Case**
+
+| **Use Case** | **Node Type** | **xDAI Required** | **xBZZ Required** |
+|-------------|--------------|------------------|------------------|
+| Free tier downloads | Ultra-Light, Light, Full | None | None |
+| Downloading beyond free tier | Light, Full | None |Scales with volume - start with ~0.1 xBZZ, increase as needed  |
+| Uploading | Light, Full | None | Scales with volume - start with ~0.1 xBZZ, increase as needed |
+| Purchasing Postage Stamp Batches| Light, Full | < 0.01 xDAI / tx  | Scales with volume & duration. Can start with ~0.2 xBZZ for small uploads. |
+| Staking | Full | < 0.01 xDAI / tx | 10 xBZZ (minimum) |
+| Storage Incentives Transactions | Full | < 0.01 xDAI / tx - needs topups over time since these are reoccurring transactions | None |
+| Bandwidth Payments | Light, Full | None | Scales with bandwidth (~0.5 xBZZ/GB downloaded) |
+| Chequebook Deployment | Light, Full | < 0.001 xDAI  | None |
 
 
-## **Fund Your Node**
+## **Getting Tokens**
 
-Bee nodes require varying amounts of either [xDAI](/docs/references/tokens#xdai) or [xBZZ](/docs/references/tokens#xbzz) funds, depending on the node type and use case. The amount and type of tokens required depend on the following factors:
-
-- Whether the node is an [ultra-light, light, or full node](/docs/bee/installation/getting-started#node-types).
-- Whether the node operator wishes to [download](/docs/develop/access-the-swarm/upload-and-download/#download-a-file) or [upload data](/docs/develop/access-the-swarm/buy-a-stamp-batch) and how much data they intend to handle.
-- Whether the node operator wishes to participate in the [storage incentives system](/docs/bee/working-with-bee/staking/) and/or the [bandwidth incentives system](/docs/concepts/incentives/bandwidth-incentives/).
-
-
-## **xDAI Requirements**
-
-xDAI is required to pay for gas fees on the Gnosis Chain. There are ***four categories of transactions*** that require xDAI for on-chain interactions:
-  
-
-### **1. [Buying Postage Stamp Batches](/docs/concepts/incentives/postage-stamps) (Light / Full Nodes)**  
-
-Postage stamp batches must be purchased to upload data to Swarm. The fees for issuing stamp batches are minimal. For example, [this stamp batch creation transaction](https://gnosisscan.io/tx/0xdc350c059b7bfc10de3d71be71774dda395e2ff770ed6dc83a63c14a418d2be8) cost only **0.00050416 xDAI**.  
-
-Additionally, xBZZ is required based on the volume of storage purchased—see [the xBZZ section below](/docs/bee/installation/fund-your-node#xbzz-requirements) for details.
-
-### **2. [Stake Management Transactions](/docs/bee/working-with-bee/staking/#maximize-rewards) (Full Nodes Only)**  
-
-Stake management transactions include:
-
-- [Adding stake](/docs/bee/working-with-bee/staking/#add-stake).
-- [Partial stake withdrawals](/docs/bee/working-with-bee/staking/#partial-stake-withdrawals).
-- [Stake migration](/api/#tag/Staking/paths/~1stake/delete) when a new staking contract is deployed.
-
-Each of these transactions requires a small amount of xDAI to pay for Gnosis Chain gas fees. For example, this [staking transaction](https://gnosisscan.io/tx/0x3a3a5119e54c59f76b60c05bf434ef3d5ec1a3ec47875c3bf1da66dafccf5f72) added **10 xBZZ** in stake (denominated in [PLUR](/docs/references/glossary/#plur) as 1e16 PLUR (100,000,000,000,000,000 PLUR). The xDAI cost for the transaction was minimal—only **0.00026872 xDAI**.  
-
-See the section below for details on required xBZZ stake amounts.
-
-### **3. [Storage Incentives Transactions](/docs/concepts/incentives/overview) (Full Nodes Only)**  
-
-Full nodes with at least **10 xBZZ** in stake are eligible to earn storage incentives. They may choose to [double their reserve size and stake a total of 20 xBZZ](/docs/bee/working-with-bee/staking/#reserve-doubling) to maximize earning potential.  
-
-Participating in storage incentives requires nodes to wait for their neighborhood to be selected and then send on-chain transactions for a chance to earn xBZZ.  
-
-There are three types of storage incentive transactions: **commit, reveal, and claim** ([details here](/docs/concepts/incentives/redistribution-game/#redistribution-game-details)). Each requires only a small amount of xDAI and typically occurs a few times per month. However, over time, xDAI may need to be replenished if depleted.  
-
-As an example reference, the gas costs from several months ago were:
-
-- [Claim](https://gnosisscan.io/tx/0x88f83b0267539c663461e449f87118864ff9b801eaf6ea0fedadc1d824685181): **0.0009953 xDAI**
-- [Commit](https://gnosisscan.io/tx/0x91bdf7363535fb405547c50742d6070cd249dd4c2fc00d494c79b3dbf516b1f3): **0.0002918 xDAI**
-- [Reveal](https://gnosisscan.io/tx/0x625dd6cd3cf8f9c1dfe27335884994b43519b0a59e0bb3968bd663d200d1772b): **0.0002918 xDAI**
-
-*Note that while the gas costs today are roughly similar to the examples above, gas fees may change over time due to potential network congestion and a variety of other factors.*
-
-
-### **4. [Bandwidth Incentives Transactions](/docs/concepts/incentives/bandwidth-incentives) (Light and Full Nodes)**  
-
-When initializing a new light or full node, deploying a bandwidth incentives contract (also called a **SWAP contract**) is required. The xDAI gas fees for this are minimal.  
-
-For example, [this SWAP contract deployment transaction](https://gnosisscan.io/tx/0xc17b023ba22a9b2c2c27a40ce88d68caf95eb02e17ae57e9c56810b7b33a6ebc) cost only **0.00058154 xDAI**.
-
-
-## **xBZZ Requirements**  
-
-xBZZ is used to pay for storing and retrieving data on Swarm. It is required for ***three categories of transactions***:
-
-### **1. [Buying Postage Stamp Batches](/docs/concepts/incentives/postage-stamps) (Light / Full Nodes)**  
-
-To upload data, postage stamp batches must be purchased. The required xBZZ amount varies based on:
-
-- **Storage volume** needed.
-- **Storage duration** required.
-
-Stamp batches use two parameters: **depth** (determines data capacity) and **amount** (determines storage duration). See [this page](/docs/develop/access-the-swarm/buy-a-stamp-batch) for details on selecting appropriate values.
-
-### **2. [Staking](/docs/bee/working-with-bee/staking/) (Full Nodes Only)**  
-
-A **minimum stake of 10 xBZZ** is required to participate in storage incentives. Nodes opting for [reserve doubling](/docs/bee/working-with-bee/staking/#reserve-doubling) may stake **20 xBZZ** to optimize earnings.
-
-### **3. [Bandwidth (SWAP) Payments](/docs/concepts/incentives/bandwidth-incentives) (Light / Full Nodes)**  
-
-Bandwidth payments are required for downloading and uploading data.  
-
-- **Ultra-light nodes**: Free-tier downloads only; no uploads.
-- **Light and full nodes**: Must deploy a [SWAP contract](/docs/concepts/incentives/bandwidth-incentives) before making bandwidth payments.
-
-The **SWAP contract deployment fee** is minimal—for example, [this transaction](https://gnosisscan.io/tx/0x09438217f75516df1319eb772d503126ab38ecf52e6d9fd626411a238e0d687a) cost **0.00018542 xDAI**.  
-
-
-:::info
-**Cost Estimates for Bandwidth Payments**  
-
-- **Downloading 1GB**: ~**0.5 xBZZ** in SWAP payments.  
-- **Uploading**: Requires a funded SWAP contract.  
-
-Running a **full/light node** with `swap-enable` turned on allows nodes to **earn bandwidth incentives** by providing bandwidth to others. Actual xBZZ costs depend on network activity and should be actively monitored.
+### **How to Get xDAI**
+- **Free xDAI Faucets**: You may try one of the [Gnosis Chain faucets](https://docs.gnosischain.com/tools/Faucets) listed in the official Gnosis Chain documentation, however the amount offered may not meet your needs.
+- **Purchasing xDAI**: You can also purchase xDAI from [various exchanges](https://docs.gnosischain.com/about/tokens/xdai) listed in the Gnosis Chain documentation. xDAI is also widely available on most major cryptocurrency exchanges. 
+:::warning
+Make sure that you are withdrawing the Gnosis Chain version of xDAI, as xDAI has been bridged to several other chains as well.
 :::
-
-## Token Requirements Based on Node Type and Use Case  
-
-The amount of **xDAI** and **xBZZ** required to run a Bee node depends on the node type and intended use case. While **no tokens** are required to run an **ultra-light node**, both **light and full nodes** require some **xDAI** for gas fees and **xBZZ** for data transactions.  
-
-### **Token Requirement Table**  
+- **Bridging From Ethereum**: If you already have xDAI on Ethereum, you can also consider using the [Gnosis Chain bridge](https://bridge.gnosischain.com/) to transfer it over to Gnosis Chain.
 
 
-| **Use Case**                         | **Supported Node Type**       | **Amount of xDAI Required**                                   | **Amount of xBZZ Required**                                   |  
-|--------------------------------------|------------------------------|-----------------------------------------------------|-----------------------------------------------------|  
-| **Free tier downloads (no uploads)**    | Ultra-Light, Light, Full      | None                                                | None                                                |  
-| **Downloading  beyond free tier**       | Light, Full                   |  A small amount such as **~0.1 xDAI**  is more than enough to deploy the [SWAP/chequebook contract](/docs/concepts/incentives/bandwidth-incentives)      | **~0.1 xBZZ** is enough to get started uploading smaller amounts of data, but more will be required once entering the GB range    |  
-| **Uploading Data**                    | Light, Full                   | **~0.1 xDAI** is more than enough for both the initial SWAP/chequebook deployment transaction and the postage stamp batch purchase gas fees | **~0.1 xBZZ** will be enough to upload and store a small amount of data for a short period, but [considerably more xBZZ is required](/docs/develop/access-the-swarm/buy-a-stamp-batch#setting-stamp-batch-parameters-and-options) to store larger amounts of data for a longer time(scales with uploaded volume)        |  
-| **Staking**                            | Full                           | **0.1 xDAI** is a reasonable minimum for getting started, more is recommended for long term operation. Staking related transactions occur several times a month and can cost up to around 0.001 xBZZ per transaction.     | **10 xBZZ** (minimum required stake, **20 xBZZ** is required for staking with a [doubled reserve](/docs/bee/working-with-bee/staking/#reserve-doubling)). Stake is generally speaking not withdrawable.    |  
-| **Participating in storage incentives** | Full                           | **Small amount of xDAI** (for commit, reveal, claim transactions) | **10 xBZZ** (minimum required stake)               |  
-| **Bandwidth (SWAP) payments**          | Light, Full                   | **~0.0005 xDAI** (for initial SWAP contract deployment) | **Scales with bandwidth usage** (~0.5 xBZZ per GB downloaded) |           |  
 
-This table provides a general guideline, but actual xDAI and xBZZ usage will depend on individual node activity and transaction fees at the time.
+### **How to Get xBZZ**
+- **Buying xBZZ**: xBZZ can be purchased from a variety of [centralized & decentralized exchanges](https://www.ethswarm.org/get-bzz#how-to-get-bzz) listed on the official Ethswarm.org website.
 
-### A Node's Wallet
 
-When your Bee node is installed, a Gnosis Chain wallet is also created. This wallet
-is used by Bee to interact with the blockchain (e.g. for sending and receiving
-cheques, or for making purchases of postage stamps, etc.).
+### **Getting Testnet Tokens (Sepolia ETH & sBZZ)**
+- **Sepolia ETH**: Try [these faucets](https://faucetlink.to/sepolia).
+- **sBZZ**: Buy on [Uniswap](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH) (ensure **Sepolia testnet** is selected in MetaMask and **Testnet mode** is enabled in the Uniswap web app settings).
 
-### Chequebook
 
-When your node has downloaded enough content to exceed the free tier threshold,
-then _cheques_ are sent to peers to provide payment in return for their
-services.
+## **Node Wallet & Chequebook**
+- **Wallet Creation**: A Gnosis Chain wallet is auto-created when you install Bee.
+- **Chequebook Deployment**: A chequebook contract will be automatically deployed when a Bee node is configured to run as a light or full node and has been funded with sufficient xDAI to pay for the chequebook deployment transaction. Required for bandwidth payments.
+- **Wallet Access**: Found in `keys/` in Bee's `data-dir` (importable to MetaMask). Also requires a password which is specified through your node's configuration (either passed directly with the `password` option or as a password file specified with the `password-file` option).
 
-In order to send these cheques, a [_chequebook_](/docs/concepts/incentives/bandwidth-incentives#chequebook-contract) must be deployed on the
-blockchain for your node, and for full speed operation it can be funded with
-BZZ. This deployment happens when a node initialises for the first time. Your
-Bee node will warn you in its log if there aren't enough funds in its wallet for
-deploying the chequebook.
+## **Funding Your Wallet**
 
-You can [configure](/docs/bee/working-with-bee/configuration) the amount of xBZZ to
-be sent from the node's wallet using the `swap-initial-deposit` option. It is 0 xBZZ by default, but it is recommended to deposit more xBZZ it you intend to download / upload any significant amount of data, as your node will exceed its free bandwidth threshold otherwise.
-
-## Joining the Swarm (mainnet)
-
-### Basic Deployment
-
-If you want to get your Bee node up and running as easily as possible, then you can set its [`swap-initial-deposit`](/docs/bee/working-with-bee/configuration) value to zero. This means that your node's chequebook will not get funded with xBZZ, meaning that other nodes will only serve it within the free tier bandwidth threshold.
-
-Since gas fees on the [Gnosis Chain](https://www.gnosis.io/) are very low,
-you won't need much xDAI either to get started. You may acquire a small amount for free by using one of the Gnosis Chain [xDAI faucets](https://docs.gnosischain.com/tools/Faucets) listed in the official Gnosis Chain docs. The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be more than enough to start up your node.
-
-You can use the [Blockscout](https://blockscout.com/xdai/mainnet/) block
-explorer to inspect what's going on with your wallet by searching for its
-Gnosis Chain address.
-
-### Full node
-
-If you want to run a full node, or upload a lot of content, then you may need
-more xDAI for gas. To acquire this, you may convert DAI on the main Ethereum
-network to xDAI using the [Gnosis Chain bridge](https://bridge.gnosischain.com/),
-or buy xDAI [directly using fiat](https://buyxdai.com/).
-
-To find out what your node's Gnosis Chain address is, you can use the `/addresses` endpoint (the [jq](https://jqlang.github.io/jq/) part of the command is and optional but recommended tool to make it easier to read json output):
+In order to fund your wallet, first you need to identify your wallet address. The easiest way to do so is to first start your Bee node in ultra-light mode (Bee will start in ultra-light mode when started with the default settings) and then query the Bee API to find your address:
 
 ```bash
-curl -s localhost:1633/addresses | jq
+curl -s localhost:1633/addresses | jq .ethereum
 ```
 
-```json
-{
-  "overlay": "46275b02b644a81c8776e2459531be2b2f34a94d47947feb03bc1e209678176c",
-  "underlay": [
-    "/ip4/127.0.0.1/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq",
-    "/ip4/192.168.0.10/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq",
-    "/ip6/::1/tcp/7072/p2p/16Uiu2HAmTbaZndBa43PdBHEekjQQEdHqcyPgPc3oQwLoB2hRf1jq"
-  ],
-  "ethereum": "0x0b546f2817d0d889bd70e244c1227f331f2edf74",
-  "public_key": "03660e8dbcf3fda791e8e2e50bce658a96d766e68eb6caa00ce2bb87c1937f02a5"
-}
+```bash
+"0x9a73f283cd9212b99b5e263f9a81a0ddc847cd93"
 ```
 
-The value in the `ethereum` field is your Gnosis Chain address (the `ethereum` keyname is used as Gnosis Chain is an Ethereum sidechain and shares the same address format).
-
-# Configure Your Wallet App
-
-To interact with the BZZ ecosystem, you will need to make a couple of small
-configuration additions to your wallet software. In the case of e.g. MetaMask,
-you'll need to [add the Gnosis Chain network](https://docs.gnosischain.com/tools/wallets/metamask/), and then [add a custom token](https://support.metamask.io/manage-crypto/portfolio/how-to-import-a-token-in-metamask-portfolio/).
-
-The canonical addresses for the BZZ token on the various blockchains are as
-follows:
-
-| Blockchain             | Contract address                                                                                                                       |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Ethereum, BZZ          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)                |
-| Gnosis Chain, xBZZ     | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://blockscout.com/xdai/mainnet/tokens/0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da/) |
-| Sepolia (testnet), sBZZ | [`0x543dDb01Ba47acB11de34891cD86B675F04840db`](https://sepolia.etherscan.io/address/0x543dDb01Ba47acB11de34891cD86B675F04840db)         |
-
-# Accessing Your Node's Wallet
-
-If you wish to interact with the node's wallet directly then you can
-import it into a wallet app like [MetaMask](https://metamask.io/). To
-do that you will need the wallet file and its password. A Bee node's
-wallet key is stored within the `keys/` folder in its datadir, in JSON
-format, and its password should be in a file nearby it.
-
-For example on Debian or Ubuntu:
-
-```sh
-sudo cat /var/lib/bee/keys/swarm.key
-sudo cat /var/lib/bee/password
-```
+Fund your node with the appropriate amount of xDAI and xBZZ based on the recommended amounts specified in [the chart above](#token-requirements-by-use-case). 
 
 
 
-## Getting Mainnet Tokens
-
-### xDAI Faucets
-
-Since gas fees on the [Gnosis Chain](https://www.gnosis.io/) are very low,
-you won't need much xDAI either to get started. Check [the official Gnosis Chain docs](https://docs.gnosischain.com/tools/Faucets) for more information on faucets and where to find support if the faucets listed there don't work. The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be more than enough to start up your node.
-
-### Purchasing xDAI
-
-xDAI is widely available from many different centralized and decentralized exchanges. Just make sure that you are getting the Gnosis Chain version of xDAI, as xDAI is available on several different networks. See the official Gnosis Chain docs for [more info on where to get xDAI](https://docs.gnosischain.com/about/tokens/xdai).
+ 
 
 
-### xBZZ Faucets
+_For support, ask in the [Develop on Swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel._
 
-Unfortunately, there are no longer any functioning xBZZ faucets. While there is no xBZZ faucet, if you are a legitimate developer looking to get started on Swarm, drop us a message in the [develop-on-swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel to let us know what you're working on, and we may be able to provide you with a small amount to get started.
-
-### Purchasing xBZZ
-
-xBZZ is available on a wide variety of centralized and decentralized exchanges. [See this page on the Ethswarm website](https://www.ethswarm.org/get-bzz#how-to-get-bzz) for a list of sources where you can purchase xBZZ.
-
-## Getting Testnet Tokens
-
-If you're a developer looked to get started developing on Swarm without spending real xDAI and xBZZ, you will need to get some Sepolia sDAI and sBZZ. A Bee node needs Sepolia ETH and sBZZ in its wallet to be able to properly interact with the test network.
-
-When it comes to Sepolia ETH, some of the faucets may be unreliable, and faucets which work at one point may not work when you try them again later. At the time of this being written, here you can find [a list of faucets for Sepolia ETH](https://faucetlink.to/sepolia) to try.
-
-Unfortunately currently there are no existing faucets sBZZ, but you can purchase it on Uniswap using sETH. 
-
-Just make certain you have ***switched to Sepolia*** in Metamask, and ***enabled Testnet Mode*** in Uniswap.
-
-Check images below for reference: 
-
-*If you run into any problems getting testnet tokens, a join the [develop-on-swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel amd ask for help, and we will do our best to help.*
-
-![](/img/sbzz.png)
-![](/img/sepolia-metamask.png)

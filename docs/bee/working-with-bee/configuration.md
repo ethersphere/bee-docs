@@ -319,6 +319,122 @@ Moreover, when using `bee.yaml` together with the `bee start` command, you must 
 You can find the default configurations for your system in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging). If your configuration file is missing you can simply copy the contents of the file into a new `bee.yaml` file in the default configuration directory shown in the `bee.yaml` file for your system.
 
 
+## Node Types
+
+There are three node types which each offer varying levels of functionality - ***full***, ***light***, and ***ultra-light***. You can configure your node to run as any of these three types by setting the related options within your configuration. 
+
+For a deeper dive into each node type and its features and limitations, refer to the [Node Types](/docs/bee/working-with-bee/node-types) page.
+
+
+### How to Set Node Type
+
+There are three relevant options which are used to set your node type: `full-node`, `swap-enable`, and `blockchain-rpc-endpoint`. The required option values for each node type are outlined below:
+
+| Node Type        | `full-node` | `swap-enable` | `blockchain-rpc-endpoint` | Functionality                                                                      |
+| ---------------- | ----------- | ------------- | ------------------------- | ---------------------------------------------------------------------------------- |
+| Full Node        | `true`      | `true`        | Required                  | Full functionality, including uploads, downloads, and Swarm network participation. |
+| Light Node       | `false`     | `true`        | Required                  | Supports uploads and downloads only.                                               |
+| Ultra-Light Node | `false`     | `false`       | Not required              | Free-tier downloads only.                                                          |
+
+
+## Configuration Examples
+
+Bee nodes can be configured using command-line flags, environment variables, or a YAML configuration file:
+
+<Tabs
+  defaultValue="full"
+  values={[ 
+    {label: 'Full', value: 'full'},
+    {label: 'Light', value: 'light'},
+    {label: 'Ultra-Light', value: 'ultra-light'},
+  ]}>
+
+  <TabItem value="full">
+
+  ### Full Node Configuration
+
+  #### Using Command-Line Arguments
+  ```bash
+  bee start \
+    --password mypassword \
+    --full-node \
+    --swap-enable \
+    --blockchain-rpc-endpoint https://xdai.fairdatasociety.org
+  ```
+
+  #### Using Environment Variables
+  ```bash
+  export BEE_PASSWORD="mypassword"
+  export BEE_FULL_NODE="true"
+  export BEE_SWAP_ENABLE="true"
+  export BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org"
+  bee start
+  ```
+
+  #### Using YAML Configuration
+  ```yaml
+  password: mypassword
+  full-node: true
+  swap-enable: true
+  blockchain-rpc-endpoint: "https://xdai.fairdatasociety.org"
+  ```
+  </TabItem>
+
+  <TabItem value="light">
+
+  ### Light Node Configuration
+
+  #### Using Command-Line Arguments
+  ```bash
+  bee start \
+    --password mypassword \
+    --swap-enable \
+    --blockchain-rpc-endpoint https://xdai.fairdatasociety.org
+  ```
+
+  #### Using Environment Variables
+  ```bash
+  export BEE_PASSWORD="mypassword"
+  export BEE_SWAP_ENABLE="true"
+  export BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org"
+  bee start
+  ```
+
+  #### Using YAML Configuration
+  ```yaml
+  password: mypassword
+  swap-enable: true
+  blockchain-rpc-endpoint: "https://xdai.fairdatasociety.org"
+  ```
+  </TabItem>
+
+  <TabItem value="ultra-light">
+
+  ### Ultra-Light Node Configuration
+
+  #### Using Command-Line Arguments
+  ```bash
+  bee start \
+    --password mypassword
+  ```
+
+  #### Using Environment Variables
+  ```bash
+  export BEE_PASSWORD="mypassword"
+  bee start
+  ```
+
+  #### Using YAML Configuration
+  ```yaml
+  password: mypassword
+  ```
+  </TabItem>
+
+</Tabs>
+
+
+
+
 ## Default Data and Config Directories
 
 Depending on the operating system and startup method used, the default data and configuration directories for your node will differ. 
@@ -384,145 +500,10 @@ data-dir: /root/.bee
 The default directories for your system may differ from the example above, so make sure to run the `bee printconfig` command to view the default directories for your system.
 :::
 
-## Set Bee Node Type
-
-Bee nodes can be run in multiple modes with different functionalities. To run a node in full mode, both `full-node` and `swap-enable` must be set to `true`. To run a light node (uploads and downloads only), set `full-node` to `false` and `swap-enable` to `true`, or to run in ultra light mode (free tier downloads only), set both `full-node` and `swap-enable` to `false`.
-
-Additionally, the `blockchain-rpc-endpoint` option must be [configured](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint) when running a node that interacts with the blockchain. This option specifies the Gnosis Chain RPC endpoint used for on-chain operations such as postage stamp purchases and storage incentives transactions. Full and light nodes require a properly configured `blockchain-rpc-endpoint`, while ultra-light nodes do not need blockchain access.
-
-| Node Type          | `full-node`  | `swap-enable` | `blockchain-rpc-endpoint` | Functionality |
-|--------------------|-------------|--------------|----------------------------|----------------|
-| Full Node         | `true`       | `true`       | Required                   | Full functionality, including uploads, downloads, and Swarm network participation. |
-| Light Node        | `false`      | `true`       | Required                   | Supports uploads and downloads only. |
-| Ultra Light Node  | `false`      | `false`      | Not required               | Free-tier downloads only. |
-
-
-See [here](/docs/bee/working-with-bee/node-types/) for more information about each node type and their individual characteristics.
-
 ## Create Password
 
 A `password` option is also required for all modes, and can either be set directly as a configuration option or alternatively a file can be used by setting the `password-file` option to the path where your password file is located.
 
-
-:::info
-In the list above, we've provided the configuration options for each node type in all three configuration formats.
-
-Note that configuration options are processed in this order, as mentioned above:
-
-1. Command Line Flags 
-2. Environment Variables
-3. YAML Configuration File
-
-:::
-
-:::info
-In the examples below, the RPC endpoint is set as `https://xdai.fairdatasociety.org`. Your RPC endpoint may differ depending on whether you are running your own Gnosis Chain node or using a third-party provider. Free RPC providers are listed in the [Gnosis Chain docs](https://docs.gnosischain.com/node/), while commercial providers such as [Infura](https://www.infura.io/) offer more reliable options.
-:::
-
-<Tabs
-defaultValue="full"
-values={[
-{label: 'Full', value: 'full'},
-{label: 'Light', value: 'light'},
-{label: 'Ultra Light', value: 'ultra-light'},
-]}>
-
-<TabItem value="full">
-
-### Full Node Configuration
-
-**Command Line Flags:**
-```bash
-bee start \
-  --password flummoxedgranitecarrot \
-  --full-node \
-  --swap-enable \
-  --api-addr 127.0.0.1:1633 \
-  --blockchain-rpc-endpoint https://xdai.fairdatasociety.org
-```
-
-**Environment Variables:**
-```bash
-export BEE_PASSWORD=flummoxedgranitecarrot
-export BEE_FULL_NODE=true
-export BEE_SWAP_ENABLE=true
-export BEE_BLOCKCHAIN_RPC_ENDPOINT=https://xdai.fairdatasociety.org
-bee start
-```
-
-**YAML Configuration File:**
-```yaml
-password: flummoxedgranitecarrot
-full-node: true
-swap-enable: true
-blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
-```
-
-</TabItem>
-
-<TabItem value="light">
-
-### Light Node Configuration
-
-**Command Line Flags:**
-```bash
-bee start \
-  --password flummoxedgranitecarrot \
-  --swap-enable \
-  --api-addr 127.0.0.1:1633 \
-  --blockchain-rpc-endpoint https://xdai.fairdatasociety.org
-```
-
-**Environment Variables:**
-```bash
-export BEE_PASSWORD=flummoxedgranitecarrot
-export BEE_FULL_NODE=false
-export BEE_SWAP_ENABLE=true
-export BEE_BLOCKCHAIN_RPC_ENDPOINT=https://xdai.fairdatasociety.org
-bee start
-```
-
-**YAML Configuration File:**
-```yaml
-password: flummoxedgranitecarrot
-full-node: false
-swap-enable: true
-blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
-```
-
-</TabItem>
-
-<TabItem value="ultra-light">
-
-### Ultra-Light Node Configuration
-
-**Command Line Flags:**
-```bash
-bee start \
-  --password flummoxedgranitecarrot \
-  --api-addr 127.0.0.1:1633
-```
-
-**Environment Variables:**
-```bash
-export BEE_PASSWORD=flummoxedgranitecarrot
-export BEE_FULL_NODE=false
-export BEE_SWAP_ENABLE=false
-export BEE_BLOCKCHAIN_RPC_ENDPOINT=
-bee start
-```
-
-**YAML Configuration File:**
-```yaml
-password: flummoxedgranitecarrot
-full-node: false
-swap-enable: false
-blockchain-rpc-endpoint: ""
-```
-
-</TabItem>
-
-</Tabs>
 
 
 ## Sepolia Testnet Configuration 

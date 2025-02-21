@@ -31,7 +31,7 @@ Internet! You may need to alter your Bee nodes `nat-addr`
 configuration. 🤓
 :::
 
-### Networking Basics
+## Networking Basics
 
 In a network, each computer is assigned an IP address. Each IP address
 is then subdivided into thousands of _sockets_ or _ports_, each of
@@ -52,7 +52,7 @@ There are also some ports which you should never expose to the outside Internet.
 :::
 
 
-## Your IP Address
+### Your IP Address
 
 When you connect to the Internet, you are assigned a unique number
 called an IP Address. IP stands for **Internet Protocol**. The most
@@ -154,7 +154,7 @@ through the router it changes our local IP to the public IP of the
 router, and vice versa when the responses are sent back, from the
 public IP to the local one.
 
-#### Navigating Through the NAT
+## Navigating Through the NAT
 
 The presence of NAT presents two problems for p2p networking.
 
@@ -170,7 +170,7 @@ routers commonly employ an approach known as _port forwarding_.
 
 Bee's solution to these problems come in two flavours, automatic and manual.
 
-##### Automatic: Universal Plug and Play (UPnP)
+### Automatic: Universal Plug and Play (UPnP)
 
 UPnP is a protocol designed to simplify the administration of NAT and
 port forwarding for the end user by providing an API from which
@@ -213,7 +213,7 @@ router's randomly selected `20529` which is forwarded by the router to
 `192.168.0.10:1634`. These addresses in this multiaddress are also
 known as the underlay addresses.
 
-##### Manual: Configure Your Router and Bee
+### Manual: Configure Your Router and Bee
 
 Inspecting the underlay addresses in the output of the addresses
 endpoint of our API, we can see addresses only for _localhost_
@@ -403,6 +403,5 @@ Internet.
 3. Something else entirely?
 
 Networking is a complex topic, but it keeps us all together. If you
-still can't connect to your Bee, get in touch via [The
-Beehive](http://beehive.ethswarm.org/) and we'll do our best to get
-you connected. In the swarm, no Bee is left behind.
+still can't connect to your Bee, get in touch via the [official node operator's Discord channel](https://discord.gg/kHRyMNpw7t) and we'll do our best to get
+you connected. In Swarm, no Bee is left behind.

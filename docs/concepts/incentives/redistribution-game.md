@@ -3,9 +3,6 @@ title: Redistribution Game
 id: redistribution-game
 ---
 
-
-## Redistribution Game
-
 The redistribution game is used to redistribute the xBZZ which is accumulated by the [postage stamp](/docs/concepts/incentives/postage-stamps) contract when postage stamp batches are purchased in order to pay for uploading data to Swarm. The reward paid out in the redistribution game serve as incentive for nodes to continue providing their disk space to the network. The game is designed in such a way that the optimal strategy for participants is to honestly store the data for which they are responsible.
 
 ### Redistribution Game Details

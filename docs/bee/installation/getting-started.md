@@ -8,9 +8,9 @@ id: getting-started
 This guide provides the essential background information to help you start running a Bee node, including:
 
 - [Types of Bee nodes and their features.](/docs/bee/installation/getting-started#node-types)
+- [Choosing the right node type.](/docs/bee/installation/getting-started#choosing-node-type-based-on-use-case)
 - [General system requirements.](/docs/bee/installation/getting-started#general-node-requirements)
 - [Requirements based on node type.](/docs/bee/installation/getting-started#node-requirements-by-node-type)
-- [Choosing the right node type.](/docs/bee/installation/getting-started#choosing-node-type-based-on-use-case)
 - [Selecting an installation method.](/docs/bee/installation/getting-started#choosing-installation-method)
 
 
@@ -18,40 +18,22 @@ This guide provides the essential background information to help you start runni
 For new Bee users, it is very strongly recommended to read through this ***entire guide page*** before proceeding with installation and setup.
 :::
 
-
 ## Node Types
 
-Bee can operate in different modes, each tailored to specific use cases. There are three main node types. Each node type is briefly outlined below, for a deeper dive, refer to the [Node Types](/docs/bee/working-with-bee/node-types/) page, and refer to the [Configuration](/docs/bee/working-with-bee/configuration#set-bee-node-type) page for instructions on how to configure each node type.
+Bee nodes can be run in three different modes, ***full***, ***light***, or ***ultra-light***. Full nodes provide complete access to all of Swarm's features including downloads, uploads, full participation in Swarm's incentives systems, and advanced messaging features such as PSS and GSOC. Light nodes are primarily for downloading and uploading only. Ultra-light nodes are the most limited, and only allow users to download a small amount of data with the free-tier limits set by full node operators.
 
+The [Node Types](/docs/bee/working-with-bee/node-types) page provides you with a deep dive into the features and limitations of each node type along with instructions for how to set node options for all three types. 
 
-### Ultra-Light Node
-- Provides limited access to the Swarm network.
-- Can only download small amounts of data (no uploads).
-- Does not earn incentives.
+## Choosing a Node Type
+The type of node type you need to run will differ depending on your use-case:
 
-### Light Node
-- Can download and upload data.
-- Requires a [Gnosis Chain](https://docs.gnosischain.com/node/) RPC endpoint.
-- Does not earn incentives.
+| Use Case                     | Recommended Node Type(s) | Details |
+|------------------------------|-------------------------|---------|
+| **Basic Interaction with Swarm** | Ultra-Light, Light | Ultra-light nodes allow limited free-tier downloads. Light nodes support both uploads and downloads and run efficiently in the background. [Swarm Desktop](https://www.ethswarm.org/build/desktop) provides an easy way to set up either type. |
+| **DApp Development**          | Light, Full           | Light nodes are sufficient for many DApp use cases. Full nodes are required for advanced features like GSOC and PSS. |
+| **Earning xBZZ & Supporting the Network** | Full | Full nodes are necessary for storage incentives and long-term xBZZ earnings. Running multiple nodes? Consider using [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), or [Kubernetes](https://kubernetes.io/) for easier management. |
 
-### Full Node
-- Offers full upload and download functionality.
-- Can earn xBZZ incentives through storage and bandwidth contributions.
-- Requires disk space for chunk storage and a Gnosis Chain RPC endpoint.
-
-### Feature Comparison
-
-| Feature | Full Node | Light Node | Ultra-Light Node |
-|---------|----------|------------|-----------------|
-| Downloading | ✅ | ✅ | ✅ |
-| Uploading | ✅ | ✅ | ❌ |
-| Exceed free download limits (xBZZ) | ✅ | ✅ | ❌ |
-| Storage sharing | ✅ | ❌ | ❌ |
-| Storage incentives | ✅ | ❌ | ❌ |
-| Bandwidth incentives | ✅ | ❌ | ❌ |
-| PSS messaging | ✅ | ❌ | ❌ |
-| Gnosis Chain connection | ✅ | ✅ | ❌ |
-
+Refer to the [Node Types](/docs/bee/working-with-bee/node-types) page for deep dive into each node type, their features and limitations, and configuration instructions.
 
 ## General Node Requirements
 
@@ -71,26 +53,14 @@ While not strictly required, these tools will *greatly* simplify your experience
 - **[Swarm CLI](/docs/bee/working-with-bee/swarm-cli/)**: Terminal-based Bee node management.
 - **[Bee JS](/docs/develop/tools-and-features/bee-js)**: JavaScript library for programmatic API access.
 
-### Token Requirements
-Details on obtaining tokens are available [here](/docs/bee/installation/fund-your-node#getting-mainnet-tokens).
-
-The amount and type of tokens required depend on your specific use case:
-
-| Use Case                         | Node Type           | Requires xBZZ | Requires xDAI  | Details |
-|-----------------------------------|--------------------|--------------------------------|--------------------------------|---------|
-| **Free Tier Downloads**           | All Node Types     | ❌                              | ❌                              | Limited free downloads, no tokens required. |
-| **Downloading Beyond Free Tier**  | Light & Full      | ✅ (~0.1 xBZZ)                 | ✅ (~0.01 xDAI)                | Needed for downloads beyond the free limit. Start with ~0.1 xBZZ and increase as needed. A small amount of xDAI (~0.01) is required to set up [SWAP contract](/docs/concepts/incentives/bandwidth-incentives). |
-| **Uploading**                     | Light & Full      | ✅ (Varies)                    | ✅ (~0.1 xDAI)                 | Uploads require the purchase of [postage stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch/) with xBZZ, and xDAI to cover fees. Start with ~0.1 xBZZ for small uploads. The amount you need can [vary greatly](/docs/develop/access-the-swarm/buy-a-stamp-batch/#time--volume-to-depth--amount-calculator). ~0.1 xDAI is enough for initial transactions. |
-| **Staking & Storage Incentives**   | Full              | ✅ (10 xBZZ minimum)                  | ✅ (~0.1 xDAI) | A minimum 10 xBZZ deposit is required. Additional xBZZ is needed if using [the doubling feature](/docs/bee/working-with-bee/staking/#reserve-doubling). xDAI is needed for staking and [ongoing storage incentives](/docs/bee/working-with-bee/staking ) related transactions. Start with ~0.1 xDAI and add more as required. |
-
 
 ## Network Requirements
 
 A reliable, high-speed internet connection is recommended when running a full node, while ultra-light and light nodes will have lower requirements. The actual amount of bandwidth consumption depends on the node type and use-case:
 
-- **Ultra-Light Node**: Minimal usage, bandwidth utilization restricted based on free-tier download limits.
-- **Light Node**: Moderate usage, based on data transfer volume.
 - **Full Node**: High bandwidth usage due to constant chunk syncing, and even greater utilization if also used for uploads / downloads.
+- **Light Node**: Moderate usage, based on data transfer volume.
+- **Ultra-Light Node**: Minimal usage, bandwidth utilization restricted based on free-tier download limits.
 
 ### RPC Endpoint  
 
@@ -135,18 +105,6 @@ Requires significant storage and processing power:
 - **Internet**: High-speed and stable connection.
 
 For staking and storage incentives, test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash).
-
-
-## Choosing a Node Type
-The type of node type you need to run will differ depending on your use-case:
-
-
-| Use Case                     | Recommended Node Type(s) | Details |
-|------------------------------|-------------------------|---------|
-| **Basic Interaction with Swarm** | Ultra-Light, Light | Ultra-light nodes allow limited free-tier downloads. Light nodes support both uploads and downloads and run efficiently in the background. [Swarm Desktop](https://www.ethswarm.org/build/desktop) provides an easy way to set up either type. |
-| **DApp Development**          | Light, Full           | Light nodes are sufficient for many DApp use cases. Full nodes are required for advanced features like GSOC and PSS. |
-| **Earning xBZZ & Supporting the Network** | Full | Full nodes are necessary for storage incentives and long-term xBZZ earnings. Running multiple nodes? Consider using [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), or [Kubernetes](https://kubernetes.io/) for easier management. |
-
 
 
 ## Choosing an Installation Method
