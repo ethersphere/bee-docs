@@ -37,10 +37,6 @@ module.exports = {
           from: '/docs/working-with-bee/configuration',
         },
         {
-          to: '/docs/bee/installation/quick-start',
-          from: '/docs/installation/quick-start',
-        },
-        {
           to: '/docs/develop/access-the-swarm/buy-a-stamp-batch',
           from: '/docs/develop/access-the-swarm/keep-your-data-alive',
         },
@@ -159,7 +155,7 @@ module.exports = {
           position: 'left',
           items: [
             {
-              to: 'docs/bee/installation/quick-start',
+              to: 'docs/bee/installation/getting-started',
               label: 'Installation'
             },
             {
