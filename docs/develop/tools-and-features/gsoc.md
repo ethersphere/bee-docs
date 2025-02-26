@@ -3,7 +3,7 @@ title: GSOC
 id: gsoc
 ---
 
-## Section 1: Introduction
+## Introduction
 
 The Graffiti Single Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](/docs/develop/tools-and-features/chunk-types/#single-owner-chunks), but unlike a standard SOC, which can be updated only by a single owner, GSOC allows multiple nodes to make updates. The GSOC address is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process.  
 
@@ -19,7 +19,7 @@ GSOC was initially introduced in a [SWIP](https://github.com/ethersphere/SWIPs/b
 The GSOC feature was introduced in Bee v2.3.0, along with the experimental [GSOC JS library](https://www.npmjs.com/package/@anythread/gsoc). Both are still in development and not recommended for production use.  
 :::  
 
-## Section 3: GSOC Usage Guide
+## GSOC Usage Guide
 
 While GSOC can be used by interacting directly with the `/gsoc/subscribe/{address}` endpoint, most users should use the [experimental GSOC library](https://www.npmjs.com/package/@anythread/gsoc), which simplifies the process (GSOC support will soon be added to [bee-js](/docs/develop/tools-and-features/bee-js/) as well).  
 
@@ -46,7 +46,7 @@ Mutable batches allow updates to overwrite older ones, preventing full utilizati
 :::  
 
 
-### **GSOC Configuration**  
+### GSOC Configuration  
 
 A service node defines parameters for generating the GSOC private key. Writer nodes must use the same parameters to send GSOC messages.  
 
@@ -56,7 +56,7 @@ A service node defines parameters for generating the GSOC private key. Writer no
 
 Additionally, the service node may define a message format to filter out unwanted messages. Writer nodes must follow this format to ensure their updates are accepted. In the code examples below, the format is enforced via the `assertRecord` function.  
 
-## Section 3A: Using GSOC - Service Node
+## Service Node
 
 ✅ For your service node project, you must use a ***full node***.
 
@@ -180,7 +180,7 @@ This means the service node has successfully mined a GSOC chunk that it falls in
 Note that the first 3 leading digits of the GSOC overlay address ("757) matches our own node's address (the address specified in the `TARGET_OVERLAY` constant). With each hexadecimal digit equal to 4 bits, this means the GSOC will still fall within our node's own neighborhood even if the storage radius raises to 12, but may fall out of our own node's neighborhood if it raises any further.
 :::
 
-## Section 3B: Using GSOC - Writer Node
+## Writer Node
  
 ✅ For your writer node, either a light or a full node can be used 
 
