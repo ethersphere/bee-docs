@@ -36,10 +36,9 @@ The function returns a mined private key, which corresponds to a GSOC overlay ad
 
 #### Functionality:
 
-1. Mines a private key that generates a GSOC overlay address within the specified `proximity` of `targetOverlay`.
-2. Returns the mined private key, which can then be used for GSOC interactions.
-3. The service node uses this method to mine a GSOC chunk whose overlay falls within its own neighborhood, and shares the values used as input with the writer node (`targetOverlay`, `identifier`, and `proximity`). 
-4. The writer node uses this method with the input values shared from the service node to generate the private key that allows them to send messages as updates to the mined GSOC. 
+1. Mines a and returns a private key that generates a GSOC overlay address within the specified `proximity` of `targetOverlay`.
+2. The service node uses this method to mine a GSOC chunk whose overlay falls within its own neighborhood, and shares the values used as input with the writer node (`targetOverlay`, `identifier`, and `proximity`). 
+3. The writer node uses this method with the input values shared from the service node to generate the private key that allows it to send messages as updates to the mined GSOC. 
 
 This function allows users to derive a GSOC overlay address that aligns with a target node’s network neighborhood.
 
@@ -58,7 +57,7 @@ The `Bee.gsocSend` method is used by a writer node for sending GSOC messages. It
 
 #### Functionality:
 
-1. Used by the writer node to send a GSOC message (the `data` value) using the private key returned from the `gsocMine()` method .
+1. Used by the writer node to send a GSOC message using the private key returned from `gsocMine()`.t
 2. Requires the `postageBatchId` for a valid postage stamp batch (ideally [mutable](/docs/develop/tools-and-features/gsoc#script-requirements)) to send messages.
 
 
