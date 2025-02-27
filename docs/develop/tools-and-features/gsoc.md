@@ -21,7 +21,10 @@ While you can interact with GSOC directly via the `/gsoc/subscribe/{address}` en
 
 ### `Bee.gsocMine()`
 
-The `Bee.gsocMine` method allows you to mine a GSOC private key corresponding to a specific overlay address. 
+The `Bee.gsocMine` method mines a GSOC private key corresponding to a specific overlay address: 
+
+- The service node uses this method to generate the private key for a GSOC in its own neighborhood, and then uses it with the `gsocSubscribe` method to listen for updates from writer nodes. 
+- A writer node uses this method to generate the private key it uses to send messages to the service node with the `gsocSend()` method. 
 
 #### Parameters
 
@@ -33,49 +36,46 @@ The function returns a mined private key, which corresponds to a GSOC overlay ad
 
 #### Functionality:
 
-1. Mines a private key that generates a GSOC overlay address within the specified **neighborhood proximity** of `targetOverlay`.
-2. Iterates through possible private keys until it finds one that meets the proximity requirement.
-3. Returns the mined private key, which can then be used for GSOC interactions.
-4. Throws an error if no valid key is found. 
+1. Mines a private key that generates a GSOC overlay address within the specified `proximity` of `targetOverlay`.
+2. Returns the mined private key, which can then be used for GSOC interactions.
+3. The service node uses this method to mine a GSOC chunk whose overlay falls within its own neighborhood, and shares the values used as input with the writer node (`targetOverlay`, `identifier`, and `proximity`). 
+4. The writer node uses this method with the input values shared from the service node to generate the private key that allows them to send messages as updates to the mined GSOC. 
 
 This function allows users to derive a GSOC overlay address that aligns with a target node’s network neighborhood.
 
 ### `Bee.gsocSend()`
 
-The `Bee.gsocSend` method sends data using GSOC. It signs the data with a private key and uploads it to Swarm as a Single Owner Chunk (SOC). This method is asynchronous.
+The `Bee.gsocSend` method is used by a writer node for sending GSOC messages. It creates an update for the GSOC using the provided `data` as the message, signs the update with the private key mined by the `gsocMine()` method, and uploads it to Swarm. 
 
 #### Parameters:
 
 - **`postageBatchId`** (`BatchId | Uint8Array | string`) – The ID of the postage batch used to pay for the upload.
 - **`signer`** (`PrivateKey | Uint8Array | string`) – The private key used to sign the chunk.
-- **`identifier`** (`Identifier | Uint8Array | string`) – A unique identifier for the SOC.
+- **`identifier`** (`Identifier | Uint8Array | string`) – A unique identifier for the GSOC.
 - **`data`** (`string | Uint8Array`) – The payload to be sent.
 - **`options`** (`UploadOptions`, optional) – Additional upload configuration.
 - **`requestOptions`** (`BeeRequestOptions`, optional) – Custom request options.
 
 #### Functionality:
 
-1. The provided `data` is transformed into a Content Addressed Chunk (CAC).
-2. A Single Owner Chunk (SOC) is created using the `identifier` and `signer`.
-3. The SOC is sent via GSOC using the specified `postageBatchId`.
-
-The function returns a promise that resolves when the data is successfully sent.
+1. Used by the writer node to send a GSOC message (the `data` value) using the private key returned from the `gsocMine()` method .
+2. Requires the `postageBatchId` for a valid postage stamp batch (ideally [mutable](/docs/develop/tools-and-features/gsoc#script-requirements)) to send messages.
 
 
 ### `Bee.gsocSubscribe()`
 
-The `Bee.gsocSubscribe` method establishes a WebSocket connection to listen for GSOC messages. It subscribes to messages associated with a specific Ethereum address and identifier.
+The `Bee.gsocSubscribe` method is used by the service node to establish a WebSocket connection to listen for GSOC messages. It subscribes to messages associated with a specific `address` and `identifier`. 
 
 #### Parameters:
 
-- **`address`** (`EthAddress | Uint8Array | string`) – The Ethereum address associated with the subscription.
-- **`identifier`** (`Identifier | Uint8Array | string`) – A unique identifier used to track the messages (in our example script, `NULL_IDENTIFIER` is a constant `Uint8Array(32)` imported from `bee-js` to use as our default identifier so the user doesn't need to manually specify it).
+- **`address`** (`EthAddress | Uint8Array | string`) – The Gnosis Chain address associated with the private key returned by the `gsocMine()` function.
+- **`identifier`** (`Identifier | Uint8Array | string`) – A unique identifier used to track the messages.
 - **`handler`** (`GsocMessageHandler`) – A callback function to handle incoming messages.
 
 #### Functionality:
 
-1. The function constructs the SOC address using the provided `identifier` and `address`.
-2. A WebSocket connection is opened to subscribe to messages related to this SOC address.
+1. The function is used by the service node to construct a GSOC address using the provided `identifier` and `address`.
+2. A WebSocket connection is opened to subscribe to update events for this GSOC address.
 3. Incoming messages are processed by the `handler` function.
 4. The function returns a `GsocSubscription` object with a `cancel` method to terminate the subscription.
 
@@ -153,7 +153,7 @@ const BEE = new Bee(BEE_HOST, {});
 async function mineGsocKey() {
     console.log('Fetching node addresses...');
     const addresses = await BEE.getNodeAddresses();
-    const privateKey = BEE.gsocMine(addresses.overlay, NULL_IDENTIFIER, BEE_PROXIMITY);
+    const privateKey = BEE.gsocMine(addresses.overlay, NULL_IDENTIFIER, BEE_PROXIMITY); // `NULL_IDENTIFIER` is a constant `Uint8Array(32)` imported from `bee-js` for use as a default identifier
     console.log('Mining completed. Public Key Address:', uint8ArrayToHex(privateKey.publicKey().bytes));
     return privateKey;
 }
@@ -258,7 +258,7 @@ const BEE_PROXIMITY = 12  // Mining depth of the GSOC overlay - modified from th
 const BEE = new Bee(BEE_HOST, {});
 
 async function mineGsocKey() {
-    const privateKey = BEE.gsocMine(TARGET_OVERLAY, NULL_IDENTIFIER, BEE_PROXIMITY);
+    const privateKey = BEE.gsocMine(TARGET_OVERLAY, NULL_IDENTIFIER, BEE_PROXIMITY); // `NULL_IDENTIFIER` is a constant `Uint8Array(32)` imported from `bee-js` for use as a default identifier
     console.log('Mining completed. Public Key Address:', uint8ArrayToHex(privateKey.publicKey().bytes));
     return privateKey;
 }
@@ -275,7 +275,7 @@ async function sendGsocMessage(privateKey, name, body) {
     }
 
     const message = JSON.stringify({ name, body });
-    await BEE.gsocSend(BEE_BATCH, privateKey, NULL_IDENTIFIER, message);
+    await BEE.gsocSend(BEE_BATCH, privateKey, NULL_IDENTIFIER, message); 
     console.log('Message sent:', message);
 }
 
