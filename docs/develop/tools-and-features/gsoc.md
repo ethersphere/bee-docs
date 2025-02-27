@@ -193,7 +193,7 @@ If everything is working correctly, after a few seconds you should see output li
 ```bash
 Fetching node addresses...
 Node overlay address:  75703155f54cbb899a359a7e3daec75da7722baef9286522e58e86ccbfcd7f13
-Mining completed. Public Key Address: e82d2c98a92a3b0c690f6ba28070c59e3e0cd0a2a384d3b03cba9d1fded41a9831e73a3232d85b3614833d344c7d502dd09d7ecd0614b06095c86be0c8501460
+Mining completed. Public Key: e82d2c98a92a3b0c690f6ba28070c59e3e0cd0a2a384d3b03cba9d1fded41a9831e73a3232d85b3614833d344c7d502dd09d7ecd0614b06095c86be0c8501460
 Listening for GSOC updates...
 ```
 
@@ -248,7 +248,7 @@ const BEE = new Bee(BEE_HOST, {});
 
 async function mineGsocKey() {
     const privateKey = BEE.gsocMine(TARGET_OVERLAY, NULL_IDENTIFIER, BEE_PROXIMITY); // `NULL_IDENTIFIER` is a constant `Uint8Array(32)` imported from `bee-js` for use as a default identifier
-    console.log('Mining completed. Public Key Address:', privateKey.publicKey().toCompressedHex());
+    console.log('Mining completed. Public Key:', privateKey.publicKey().toCompressedHex());
     return privateKey;
 }
 
@@ -297,7 +297,7 @@ node index.js
 If everything is working correctly, after a few moments on your writer node you should see output like this:
 
 ```bash
-Mining completed. Public Key Address: e82d2c98a92a3b0c690f6ba28070c59e3e0cd0a2a384d3b03cba9d1fded41a9831e73a3232d85b3614833d344c7d502dd09d7ecd0614b06095c86be0c8501460
+Mining completed. Public Key: e82d2c98a92a3b0c690f6ba28070c59e3e0cd0a2a384d3b03cba9d1fded41a9831e73a3232d85b3614833d344c7d502dd09d7ecd0614b06095c86be0c8501460
 Message sent: {"name":"Alice","body":"Hello from Node.js!"}
 ```
 
