@@ -13,7 +13,7 @@ To learn more about Bee (including other installation methods, configuration, no
 
 ## Requirements  
 
-- **Linux or macOS** (The Bee shell script does **not** support Windows natively. Windows users can use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).)  
+- **Linux or macOS** (The shell script installation method does **not** support Windows natively. Windows users can use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).)  
 - [Node.js (v18 or higher)](https://nodejs.org/)
 - [npm (Node Package Manager)](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
 - [`curl`](https://curl.se/) or [`wget`](https://www.gnu.org/software/wget/) (Check with `curl --version` or `wget --version`)
