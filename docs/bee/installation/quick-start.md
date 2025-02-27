@@ -167,7 +167,7 @@ The "Swarm hash" returned here is the unique reference for our upload.
 
 You can share this hash with someone else and they can use it to download whatever you uploaded for as long as the stamp batch you used still has remaining TTL. 
 
-## 8. Download a File:
+## 8. Download a File
 
 Use the `swarm-cli download` command with the hash for our uploaded file to download it. We specify the output directory with as a second argument after the postage stamp hash with "./" to ensure the file is downloaded into our current directory (otherwise it will create a new directory with the hash itself as the filename and the `test.txt` file we uploaded inside that directory):  
 
