@@ -5,7 +5,7 @@ id: gsoc
 
 ## Introduction
 
-The Graffiti Single Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](/docs/develop/tools-and-features/chunk-types/#single-owner-chunks), but unlike a standard SOC, which can be updated only by a single owner, GSOC allows multiple nodes to make updates. The GSOC address is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process.  
+The Graffiti Single Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](/docs/develop/tools-and-features/chunk-types/#single-owner-chunks) with an address which is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process. 
 
 The service node determines the data used to derive the GSOC private key. Any node with access to this data can derive the same private key and update the GSOC in order to send messages to the service node. Since only full nodes sync neighborhood chunks, the service node *must be a full node to receive GSOC updates*.  
 
@@ -36,7 +36,7 @@ The function returns a mined private key, which corresponds to a GSOC overlay ad
 
 #### Functionality:
 
-1. Mines a and returns a private key that generates a GSOC overlay address within the specified `proximity` of `targetOverlay`.
+1. Mines and returns a private key that generates a GSOC overlay address within the specified `proximity` of `targetOverlay`.
 2. The service node uses this method to mine a GSOC chunk whose overlay falls within its own neighborhood, and shares the values used as input with the writer node (`targetOverlay`, `identifier`, and `proximity`). 
 3. The writer node uses this method with the input values shared from the service node to generate the private key that allows it to send messages as updates to the mined GSOC. 
 
@@ -57,7 +57,7 @@ The `Bee.gsocSend` method is used by a writer node for sending GSOC messages. It
 
 #### Functionality:
 
-1. Used by the writer node to send a GSOC message using the private key returned from `gsocMine()`.t
+1. Used by the writer node to send a GSOC message using the private key returned from `gsocMine()`.
 2. Requires the `postageBatchId` for a valid postage stamp batch (ideally [mutable](/docs/develop/tools-and-features/gsoc#script-requirements)) to send messages.
 
 
@@ -139,11 +139,6 @@ Read through the code and code comments for a more in-depth understanding of how
 ```javascript
 import { Bee, NULL_IDENTIFIER } from '@upcoming/bee-js';
 
-// Utility: Convert Uint8Array to Hex String
-function uint8ArrayToHex(uint8Array) {
-  return Array.from(uint8Array, byte => byte.toString(16).padStart(2, '0')).join('');
-}
-
 // Configuration
 const BEE_HOST = 'http://localhost:1633'; // Change this if necessary
 const BEE_PROXIMITY = 12 // Mining depth of the GSOC overlay - modified from the default of 16 for a shorter mining time
@@ -153,7 +148,7 @@ async function mineGsocKey() {
     console.log('Fetching node addresses...');
     const addresses = await BEE.getNodeAddresses();
     const privateKey = BEE.gsocMine(addresses.overlay, NULL_IDENTIFIER, BEE_PROXIMITY); // `NULL_IDENTIFIER` is a constant `Uint8Array(32)` imported from `bee-js` for use as a default identifier
-    console.log('Mining completed. Public Key Address:', uint8ArrayToHex(privateKey.publicKey().bytes));
+    console.log('Mining completed. Public Key:', privateKey.publicKey().toCompressedHex());
     return privateKey;
 }
 
@@ -243,11 +238,6 @@ Read through the code and code comments for a more in-depth understanding of how
 ```javascript
 import { Bee, NULL_IDENTIFIER } from '@upcoming/bee-js';
 
-// Utility: Convert Uint8Array to Hex String
-function uint8ArrayToHex(uint8Array) {
-  return Array.from(uint8Array, byte => byte.toString(16).padStart(2, '0')).join('');
-}
-
 // Configuration
 const BEE_HOST = 'http://localhost:1643'; // Change this if necessary
 const BEE_BATCH = '42a10176596ecc73dcd24b91a16fb77d874ebd108fe8bc7fb896c8e89e8cb06e'; // Ensure this is a valid hex string
@@ -258,7 +248,7 @@ const BEE = new Bee(BEE_HOST, {});
 
 async function mineGsocKey() {
     const privateKey = BEE.gsocMine(TARGET_OVERLAY, NULL_IDENTIFIER, BEE_PROXIMITY); // `NULL_IDENTIFIER` is a constant `Uint8Array(32)` imported from `bee-js` for use as a default identifier
-    console.log('Mining completed. Public Key Address:', uint8ArrayToHex(privateKey.publicKey().bytes));
+    console.log('Mining completed. Public Key Address:', privateKey.publicKey().toCompressedHex());
     return privateKey;
 }
 
