@@ -3,6 +3,8 @@ title: Getting Started
 id: getting-started
 ---
 
+*If you want to get a Bee node up and running ASAP, check out the [Quick Start](/docs/bee/installation/quick-start) guide.* 
+
 ## Overview
 
 This guide provides the essential background information to help you start running a Bee node, including:

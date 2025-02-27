@@ -48,6 +48,7 @@ module.exports = {
       label: 'Installation',
       items: [
         'bee/installation/getting-started',
+        'bee/installation/quick-start',
         'bee/installation/shell-script-install',
         'bee/installation/docker',
         'bee/installation/package-manager-install',

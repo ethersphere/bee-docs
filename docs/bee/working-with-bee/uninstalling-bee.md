@@ -51,58 +51,6 @@ config: /home/noah/.bee.yaml
 data-dir: /home/noah/.bee
 ```
 
-## Backup Files (Optional)
-
-
-**1. Remove the Bee Binary**  
-
-First, check if the Bee binary exists:
-
-```bash
-ls -l /usr/local/bin/bee
-```
-
-If it exists, remove it:
-
-```bash
-sudo rm -f /usr/local/bin/bee
-```
-
-Verify that the binary has been removed:
-
-```bash
-ls -l /usr/local/bin/bee
-```
-
-If Bee was built from source but not moved [as described in step 6](/docs/bee/installation/build-from-source) of the instructions for building from source, check the default build directory:
-
-```bash
-ls -l ~/bee
-```
-
-If it exists, remove it:
-
-```bash
-rm -rf ~/bee
-```
-
-Verify removal:
-
-```bash
-ls -l ~/bee
-```
-
-
-###  Backup Important Data First 
-
-Before proceeding, ensure you have backed up any necessary data.  
-
-Bee stores **node keys, passwords, chunks, and state files** in its data directory. Without a backup, you will lose access to any funds managed by your node’s **Gnosis Chain account**, and you will also lose any **postage stamps** you have purchased.  
-
-Follow the [official backup guide](https://docs.ethswarm.org/docs/bee/working-with-bee/backups) to avoid permanent data loss.
-
-
-
 ## Remove Configuration Files
 
 Bee does not automatically generate a configuration file, but it looks for one at **`$HOME/.bee.yaml`** by default. 

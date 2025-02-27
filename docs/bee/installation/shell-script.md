@@ -3,13 +3,12 @@ title: Shell Script Install
 id: shell-script-install
 ---
 
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Swarm Shell Script Installation Guide
 
-The following is a guide to get you started running a Bee node on Swarm using [the official shell script provided by Swarm](https://github.com/ethersphere/bee/blob/master/install.sh) which automatically detects your system and installs the correct version of Bee. This installation method is an excellent choice if you're looking for a minimalistic and flexible option for your Bee node installation.
+The official [shell script](https://github.com/ethersphere/bee/blob/master/install.sh) provided by Swarm automatically detects your system and installs the correct version of Bee. This installation method is an excellent choice if you're looking for a minimalistic and flexible option for your Bee node installation.
 
 :::warning
 Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default), since we do not want to expose our Bee API endpoint to the public internet, as that would allow anyone to control our node. Make sure you do the same, and it's also recommended to use a  firewall to restrict access to your node(s).
