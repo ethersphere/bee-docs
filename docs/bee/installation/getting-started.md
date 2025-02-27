@@ -7,11 +7,12 @@ id: getting-started
 
 This guide provides the essential background information to help you start running a Bee node, including:
 
-- [Types of Bee nodes and their features.](/docs/bee/installation/getting-started#node-types)
-- [Choosing the right node type.](/docs/bee/installation/getting-started#choosing-node-type-based-on-use-case)
-- [General system requirements.](/docs/bee/installation/getting-started#general-node-requirements)
-- [Requirements based on node type.](/docs/bee/installation/getting-started#node-requirements-by-node-type)
-- [Selecting an installation method.](/docs/bee/installation/getting-started#choosing-installation-method)
+- [Types of Bee nodes and their features](/docs/bee/installation/getting-started#node-types)
+- [Choosing the right node type](/docs/bee/installation/getting-started#choosing-a-node-type)
+- [Software requirements](/docs/bee/installation/getting-started#software-requirements)
+- [Hardware Requirements](/docs/bee/installation/getting-started#hardware-requirements)
+- [Network requirements](/docs/bee/installation/getting-started#network-requirements)
+- [Installation methods](/docs/bee/installation/getting-started#installation-methods)
 
 
 :::caution[New Bee Users: Read This Guide in Full]
@@ -35,7 +36,7 @@ The type of node type you need to run will differ depending on your use-case:
 
 Refer to the [Node Types](/docs/bee/working-with-bee/node-types) page for deep dive into each node type, their features and limitations, and configuration instructions.
 
-## General Node Requirements
+##  Software Requirements
 
 ### Recommended Operating Systems
 - Officially supported systems are listed in the [Bee releases](https://github.com/ethersphere/bee/releases).
@@ -53,6 +54,21 @@ While not strictly required, these tools will *greatly* simplify your experience
 - **[Swarm CLI](/docs/bee/working-with-bee/swarm-cli/)**: Terminal-based Bee node management.
 - **[Bee JS](/docs/develop/tools-and-features/bee-js)**: JavaScript library for programmatic API access.
 
+## Hardware Requirements
+
+### Light and Ultra-Light
+
+Light and ultra-light nodes can be run with practically any modern commercially available computer hardware and internet provider and have very minimal CPU, RAM and network requirements. 
+
+### Full Node
+
+Requires significant storage and processing power:
+- **Processor**: Recent 2 GHz dual-core.
+- **RAM**: 8 GB.
+- **Storage**: 30 GB SSD (HDD not recommended).
+- **Internet**: High-speed and stable connection.
+
+For staking and storage incentives, test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash).
 
 ## Network Requirements
 
@@ -90,24 +106,7 @@ For VPS/cloud-based setups, connectivity is typically unrestricted.
 
 If your home network happens to be using [CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT), you may face significant difficulty with setting up your node so it can connect with the rest of the network. Contacting your IP provider may be required. 
 
-## System Requirements
-
-### Light and Ultra-Light
-
-Light and ultra-light nodes can be run with practically any modern commercially available computer hardware and internet provider and have very minimal CPU, RAM and network requirements. 
-
-### Full Node
-
-Requires significant storage and processing power:
-- **Processor**: Recent 2 GHz dual-core.
-- **RAM**: 8 GB.
-- **Storage**: 30 GB SSD (HDD not recommended).
-- **Internet**: High-speed and stable connection.
-
-For staking and storage incentives, test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash).
-
-
-## Choosing an Installation Method
+## Installation Methods
 
 ### [Swarm Desktop](/docs/desktop/introduction)
 - Best for beginners.

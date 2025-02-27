@@ -190,4 +190,4 @@ Repeat these same steps with the other node in order to complete a private test 
 
 ### Getting Testnet Tokens
 
-In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node#getting-testnet-tokens) page.
+In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node) page.

@@ -206,9 +206,9 @@ sudo vi /usr/local/etc/swarm-bee/bee.yaml
 
 ### Set Node Type
 
-See the [Getting Started guide](/docs/bee/installation/getting-started) if you're not sure which type of node to run.
+See the [Getting Started guide](/docs/bee/installation/getting-started#choosing-a-node-type) if you're not sure which type of node to run.
  
-Once you've decided which node type is appropriate for you, refer to the [configuration section](/docs/bee/working-with-bee/configuration#set-bee-node-type) for instructions on setting the options for your preferred node type.
+Once you've decided which node type is appropriate for you, refer to the [configuration section](/docs/bee/working-with-bee/configuration#node-types) for instructions on setting the options for your preferred node type.
 
 ### Set Target Neighborhood
 

@@ -209,7 +209,7 @@ Sepolia is an Ethereum testnet. It is an environment where smart contracts can b
 
 A cryptocurrency faucet supplies small amounts of cryptocurrency to requestors (typically for testing purposes).
 
-Check out the [Fund Your Node](In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node#getting-mainnet-tokens) page.) page for more information.
+Check out the [Fund Your Node](In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node) page.) page for more information.
 
 
 ## RPC Endpoint

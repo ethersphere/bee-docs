@@ -28,7 +28,7 @@ For many other common use cases, you may prefer to make use of the [Swarm CLI](/
 
 ## Exploring Node Status
 
-After [installing](/docs/bee/installation/install) and starting up your node, we can begin to understand the node's status by interacting with the API.
+After installing and starting up your node, we can begin to understand the node's status by interacting with the API.
 
 First, let's check how many nodes we are currently connected to.
 

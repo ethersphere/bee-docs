@@ -7,7 +7,7 @@ Choose the appropriate uninstall method based on the install method used:
 
 ## Package Manager  
 
-This method can be used for package manager based [installs](/docs/bee/installation/install#shell-script-install) of the official Debian, RPM, and Homebrew packages.
+This method can be used for package manager based [installs](/docs/bee/installation/package-manager-install) of the official Debian, RPM, and Homebrew packages.
 
 :::danger
 This will remove your keyfiles so make certain that you have a [full backup](/docs/bee/working-with-bee/backups) of your keys and configuration before uninstalling.
@@ -93,7 +93,7 @@ ls -l ~/bee
 ```
 
 
-### **2. Backup Important Data First**  
+###  Backup Important Data First 
 
 Before proceeding, ensure you have backed up any necessary data.  
 
@@ -103,27 +103,26 @@ Follow the [official backup guide](https://docs.ethswarm.org/docs/bee/working-wi
 
 
 
-### **3. Remove Configuration Files**  
+## Remove Configuration Files
 
-Bee does not automatically generate a configuration file, but it looks for one at **`$HOME/.bee.yaml`** by default. If you have created a configuration file, you will need to remove it.  
+Bee does not automatically generate a configuration file, but it looks for one at **`$HOME/.bee.yaml`** by default. 
 
-### **Check for Configuration Files**  
+### Check for Configuration Files 
 
 **Default location for shell script installs:**  
-  ```bash
-  ls -l $HOME/.bee.yaml
-  ```
+```bash
+ls -l $HOME/.bee.yaml
+```
 
-### **Remove Configuration Files**  
+### Remove Configuration Files  
 If the files exist, remove them:
 
-- **Remove user-level config file:**  
-  ```bash
-  rm -f $HOME/.bee.yaml
-  ```
+```bash
+rm -f $HOME/.bee.yaml
+```
 
 
-### **Verify Removal**  
+### Verify Removal 
 Run the following commands to ensure the configuration files have been deleted:
 
 ```bash
@@ -136,14 +135,12 @@ If the command returns **"No such file or directory"**, the configuration file h
 If you have generated a config file and saved it to a non default location which you specify when starting your node using a command line flag (`--config`) or environment variable (`BEE_CONFIG`), then it is up to you to keep track of where you saved it and remove it yourself.
 :::
 
-## **4. Remove Data Files**  
+## Remove Data Files
 
-Bee stores its **node data, blockchain state, and other persistent files** in a data directory. If you want to fully remove Bee, this directory must be deleted.  
-
-
+Bee stores its **node data, blockchain state, and other persistent files** in a data directory. If you want to fully remove Bee, this directory must be deleted. The data directory [default location](/docs/bee/working-with-bee/configuration#default-data-and-config-directories) differs based on install method and system type. 
 
 
-## **6. Verify Uninstallation**  
+## Verify Uninstallation
 
 Ensure Bee has been completely removed by running:
 

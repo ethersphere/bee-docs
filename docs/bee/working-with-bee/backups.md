@@ -121,7 +121,7 @@ Default `data-dir` location:
 
 ### Shell Script & Binary Install 
 
-If you installed Bee using the [automated shell script](/docs/bee/installation/install#shell-script-install) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
+If you installed Bee using the [automated shell script](/docs/bee/installation/shell-script-install) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
 
 ```bash
 /home/<user>/.bee
@@ -201,14 +201,18 @@ To export your private key:
 
 ## Restore from backup
 
+
 :::danger
-Before restoring, make sure to check for any old node data at `/var/lib/bee` from a previous node which has not yet been backed up, and back it up if needed.
+Before restoring, make sure to check for any old node data from a previous node which has not yet been backed up, and back it up if needed.
 :::
 
+:::tip
+The specific directories and commands for restoring will depend on which install method and system is used. The instructions below are for a Linux package manager based installation. See the [configuration section](/docs/bee/working-with-bee/configuration#default-data-and-config-directories) more more details about default file locations.
+:::
 
-1. Install Bee. See [install](/docs/bee/installation/install/) page for more info.
+1. After [uninstalling](/docs/bee/working-with-bee/uninstalling-bee) any existing Bee installations, perform a new [installation](/docs/bee/installation/getting-started#installation-methods).
 
-1. Delete `/bee` folder which was generated during install
+1. Delete Bee data folder which was generated during install
 
     ```
     sudo rm -r /var/lib/bee

@@ -18,7 +18,7 @@ A bee node can be configured to run in various modes based on specific use cases
 
 #### What are the requirements for running a Bee node?
 
-See the [install section](/docs/bee/installation/install) for more information about running a Bee node.
+See the [getting started section](/docs/bee/installation/getting-started#software-requirements) for more information about running a Bee node.
 
 ##### Full node
 
@@ -93,7 +93,7 @@ We recommend you run your own [Gnosis Node using Nethermind](https://docs.gnosis
 
 ### How can I export my private keys?
 
-See the section on [backups](/docs/bee/working-with-bee/backups#files) for exporting your keys.
+See the section on [backups](/docs/bee/working-with-bee/backups) for exporting your keys.
 
 ### How to import bee node address to MetaMask?
 

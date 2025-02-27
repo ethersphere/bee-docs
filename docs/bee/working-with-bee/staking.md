@@ -272,7 +272,9 @@ There are two main factors which determine the chances for a staking node to win
 
 ### Neighborhood selection 
 
-By default when running a Bee node for the first time an overlay address will be generated and used to assign the node to a random [neighborhood](/docs/concepts/DISC/neighborhoods). However, by using the `target-neighborhood` config option, a specific neighborhood can be selected in which to generate the node's overlay address. This is an excellent tool for maximizing reward chances as generally speaking running in a less populated neighborhood will increase the chances of winning a reward. See the [config section](/docs/bee/installation/install#set-target-neighborhood-optional) on the installation page for more information on how to set a target neighborhood.
+By default when running a Bee node for the first time an overlay address will be generated and used to assign the node to a random [neighborhood](/docs/concepts/DISC/neighborhoods). However, by using the `target-neighborhood` config option, a specific neighborhood can be selected in which to generate the node's overlay address. This is an excellent tool for maximizing reward chances as generally speaking running in a less populated neighborhood will increase the chances of winning a reward. 
+
+Refer to these [instructions](/docs/bee/installation/set-target-neighborhood) for how to set a target neighborhood.
 
 
 ### Stake density
