@@ -3,7 +3,7 @@ title: Quick Start
 id: quick-start
 ---
 
-This guide will help you install and run a Bee light node using the official shell script. After starting the node, the guide explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and buy a batch of postage stamps. Finally it explains how to upload data using the postage stamp batch and how to download that data.
+This guide will help you install and run a Bee light node using the [shell script](/docs/bee/installation/shell-script-install) install method. After starting the node, the guide explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and buy a batch of postage stamps. Finally it explains how to upload data using the postage stamp batch and how to download that data.
 
 :::tip
 This guide is a great way to get started using Bee to interact with the Swarm network, however it leaves out important information for the sake of brevity. 
