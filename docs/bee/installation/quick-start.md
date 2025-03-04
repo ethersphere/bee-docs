@@ -29,7 +29,7 @@ Run the shell script using `curl` or `wget`:
 
 
 :::tip
-We use: `TAG=v2.4.0` to specify which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub rep.
+We specify `TAG=v2.4.0` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
 :::
 
 ```bash
@@ -174,7 +174,7 @@ After starting and funding a Bee light node for the first time, the node will au
 
 The node then needs to sync blockchain data before it can buy a postage stamp batch. The process may take ***half an hour or longer*** depending on your RPC provider and network speed.
 
-You can check your node's syncing progress with the `swarm-cli status` command::
+You can check your node's syncing progress with the `swarm-cli status` command:
 
 ```bash
 swarm-cli status
@@ -276,7 +276,7 @@ We input `Y` to confirm our purchase, and then we wait a few moments for the scr
 
 ```bash
 ? Confirm the purchase Yes
-Stamp ID: 0f7c2ee0a1a66ee7c75d89f242a4a7ffa12f4deb14fca4ee353c5a2d692942aa
+Stamp ID: 0f473645b8444eb75e647bee4ee5d51ad11b94c32a31a0e80729d16eee07b428
 ```
 
 ## Upload a File
@@ -292,12 +292,19 @@ cat test.txt
 Hello Swarm!
 ```
 
-Then use your postage stamp batch ID ("Stamp ID: Stamp ID: 0f7c2ee0a1a66ee7c75d89f242a4a7ffa12f4deb14fca4ee353c5a2d692942aa
-" in our example) to upload your file:
+After saving your test file, use the `swarm-cli upload` command to upload your file:
 
 ```bash
-swarm-cli upload test.txt --stamp Stamp ID: 0f7c2ee0a1a66ee7c75d89f242a4a7ffa12f4deb14fca4ee353c5a2d692942aa
+swarm-cli upload test.txt
 ```
+
+Then we will be prompted to choose a stamp batch ID, we only have a single batch so we just hit "Enter" to continue:
+
+```bash
+? Please select a stamp for this action (Use arrow keys)
+❯ 0f473645b8444eb75e647bee4ee5d51ad11b94c32a31a0e80729d16eee07b428 256.000 MB remaining, TTL 24 hours
+```
+
 
 Response:
 
@@ -315,7 +322,7 @@ You can share this hash with someone else and they can use it to download whatev
 
 ## Download a File
 
-Use the `swarm-cli download` command with the hash for our uploaded file to download it. We specify the output directory with as a second argument after the postage stamp hash with "./" to ensure the file is downloaded into our current directory (otherwise it will create a new directory with the hash itself as the filename and the `test.txt` file we uploaded inside that directory):  
+Use the `swarm-cli download` command with the hash for our uploaded file to download it. We specify the output as the second argument, after the postage stamp hash, using "./" to ensure the file is downloaded into our current directory (otherwise it will create a new directory with the hash itself as the filename and the `test.txt` file we uploaded inside that directory):  
 
 ```bash
 swarm-cli download cb8fbcc7bc0901afa2cec86590c09b491206af40fc6781874abfc3edc7aa495f ./
@@ -337,6 +344,6 @@ Hello Swarm!
 
 ## Learn More
 
-This guide is a great way to get started using Bee to interact with the Swarm network, however it leaves out important information for the sake of brevity. 
+This guide introduces you to Bee and Swarm, but omits advanced details for the sake of brevity.
 
 To learn more about Bee (including other installation methods, configuration, node types, and more) read the complete ***[Getting Started](/docs/bee/installation/getting-started)*** section.
