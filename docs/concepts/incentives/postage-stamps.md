@@ -3,11 +3,11 @@ title: Postage Stamps
 id: postage-stamps
 ---
 
-Postage stamps are used to pay for storing data on Swarm. They are purchased in batches which represent the pre-paid right to store data on Swarm in the same way that real-life postage stamps represent the pre-paid right to send mail through the postal service.
+Postage stamps are used to pay for storing data on Swarm. They are purchased in batches, granting a prepaid right to store data on Swarm, similar to how real-world postage stamps pay for mail delivery.
 
 When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/concepts/DISC/) of data. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
 
-The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. A stamp expires when the batch it is issued from has insufficient balance. A chunk with an expired stamp can not be used in the proof storer nodes need to submit in order to get compensated for their contributed storage space in the redistribution game, therefore such expired chunks are evicted from nodes' reserves and put into the cache where their continued persistence depends on their popularity. 
+The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. A stamp expires when its batch runs out of balance. Chunks with expired stamps cannot be used as proof in the redistribution game, meaning storer nodes will no longer receive rewards for storing them and can safely remove them from their reserves.
 
 Postage stamp prices are dynamically set based on a utilization signal supplied by the price oracle smart contract. Prices will automatically increase or decrease according to the level of utilization. 
 
@@ -17,9 +17,9 @@ Postage stamps are issued in batches with a certain number of storage slots part
 
 ### Bucket Size
 
-Each bucket has a certain number of slots which can be "filled" by chunks (In other words, for each bucket, a certain number of chunks can be stamped). Once all the slots of any single bucket from the batch are filled, the entire postage batch will become fully utilised and can no longer be used to upload additional data. 
+Bucket depth determines how the address space is partitioned, with each bucket storing chunks that share a common address prefix. Each bucket contains a fixed number of slots, each capable of storing a stamped chunk. Once all slots in any single bucket are filled, the entire postage batch becomes fully utilized, preventing further uploads.
 
-Together with `batch depth`, `bucket depth`determines how many chunks are allowed in each bucket. The number of chunks allowed in each bucket is calculated like so:
+Together with `batch depth`, `bucket depth` determines how many chunks are allowed in each bucket. The number of chunks allowed in each bucket is calculated like so:
 
 $$
 2^{(batchDepth - bucketDepth)}
@@ -73,7 +73,7 @@ $$
 
 ### Calculating *amount* needed for desired TTL 
 
-The desired `amount` can be easily estimated based on the current postage stamp price and the desired amount of storage time in seconds with the given Gnosis block time of 5 seconds and the stamp price. For the example below we assume a stamp price of 24000 PLUR / chunk / block:
+To calculate the required `amount`, divide the current postage price by the Gnosis block time (5 sec) and multiply by the desired storage duration in seconds. For the example below we assume a stamp price of 24000 PLUR / chunk / block:
 
 :::info
 The postage stamp price is dynamically determined according to a network utilisation signal. You can view the current storage price at [Swarmscan.io](https://swarmscan.io/).
@@ -94,6 +94,8 @@ So we can use 4976640000 as our `amount` value in order for our postage batch to
 
 
 ## Batch Utilisation
+
+There are two types of postage stamp batches: immutable and mutable. Immutable batches permanently store data, while mutable batches allow overwriting older data as new chunks are added.
 
 ### Immutable Batches
 
