@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 ## Configuration Methods and Priority
 
-There are three methods of configuration which each have different priority levels. Configuration is processed in the following ascending order of preference:
+There are three configuration methods, each with a different priority level. Configuration is processed in the following ascending order of preference:
 
 1. Command Line Flags 
 2. Environment Variables
@@ -24,7 +24,7 @@ However when Bee is started as a service with tools like `systemctl` or `brew se
 
 ### Command Line Arguments
 
-Run `bee start --help` in your Terminal to list the available command line arguments as follows:
+Run `bee start --help` in your terminal to list the available command-line arguments:
 
 ```bash
 Start a Swarm node
@@ -97,7 +97,7 @@ Global Flags:
 
 ### Environment variables
 
-Bee config may also be passed using environment variables.
+Bee configuration can also be set using environment variables.
 
 Environment variables are set as variables in your operating system's
 session or systemd configuration file. To set an environment variable,
@@ -107,7 +107,7 @@ type the following in your terminal session.
 export VARIABLE_NAME=variableValue
 ```
 
-Verify if it is correctly set by running `echo $VARIABLE_NAME`.
+Verify that it is correctly set by running `echo $VARIABLE_NAME`.
 
 All available configuration options are available as `BEE` prefixed,
 capitalised, and underscored environment variables, e.g. `--api-addr` becomes `BEE_API_ADDR`.
@@ -312,11 +312,7 @@ bee printconfig &> $HOME/.bee.yaml
 Note that `bee printconfig` prints the default configuration for your node, not the current configuration including any changes.
 :::
 
-Moreover, when using `bee.yaml` together with the `bee start` command, you must use the `--config` flag to specify where you have saved your configuration file or else your node will ignore it. This can be a good option if you have changed many default options and want to have them cleanly organized in a file that can be used to specify options when running your node node directly with `bee start`.
-
-## Restoring default YAML config file
-
-You can find the default configurations for your system in the [packaging folder of the Bee repo](https://github.com/ethersphere/bee/tree/master/packaging). If your configuration file is missing you can simply copy the contents of the file into a new `bee.yaml` file in the default configuration directory shown in the `bee.yaml` file for your system.
+When using `bee.yaml` with the `bee start` command, make sure to use the `--config` flag to specify the location of your configuration file.
 
 
 ## Node Types
@@ -333,7 +329,7 @@ There are three relevant options which are used to set your node type: `full-nod
 | Node Type        | `full-node` | `swap-enable` | `blockchain-rpc-endpoint` | Functionality                                                                      |
 | ---------------- | ----------- | ------------- | ------------------------- | ---------------------------------------------------------------------------------- |
 | Full Node        | `true`      | `true`        | Required                  | Full functionality, including uploads, downloads, and Swarm network participation. |
-| Light Node       | `false`     | `true`        | Required                  | Supports uploads and downloads only.                                               |
+| Light Node       | `false`     | `true`        | Required                  | Supports uploading and downloading only.                                               |
 | Ultra-Light Node | `false`     | `false`       | Not required              | Free-tier downloads only.                                                          |
 
 
@@ -510,7 +506,7 @@ A `password` option is also required for all modes, and can either be set direct
 
 In order to operate a Bee node on the Sepolia testnet, update your configuration to use the options shown in the example below. Make sure that you replace the `blockchain-rpc-endpoint` option value with your own valid Sepolia RPC endpoint. If you choose to use a 3rd party RPC provider like [Infura](https://www.infura.io/), make sure to [check in the docs](https://docs.infura.io/api/network-endpoints) that the endpoint format is up to date, and also make sure that you have filled in your own API key which you can find from the [Infura web app](https://app.infura.io). 
 
-Also make sure to fund your node with Sepolia ETH rather than xDAI to pay for gas on the Sepolia testnet. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
+Make sure to fund your node with Sepolia ETH rather than xDAI to pay for gas on the Sepolia testnet. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
 
 To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet. 
 
@@ -537,7 +533,7 @@ We strongly recommend you [run your own Gnosis Chain node](https://docs.gnosisch
 
 If you do not wish to run your own Gnosis Chain node and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
 
-For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/RPC%20Providers/) listed in the Gnosis Chain documentation. However the providers of these endpoints make no [SLA](https://business.adobe.com/blog/basics/service-level-agreements-slas-a-complete-guide#what-is-a-service-level-agreement-sla) or availability guarantees, and is therefore not recommended for full node operators.
+For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/RPC%20Providers/) listed in the Gnosis Chain documentation. However, these endpoint providers offer no [SLA](https://en.wikipedia.org/wiki/Service-level_agreement) or availability guarantees and are therefore not recommended for full node operators.
 
 To set your RPC endpoint provider, specify it with the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
 
@@ -565,7 +561,7 @@ configure your external IP and check
 connectivity](/docs/bee/installation/connectivity) to ensure your Bee is
 able to receive connections from other peers.
 
-First determine your public IP address:
+First, determine your public IP address:
 
 ```bash
 curl icanhazip.com
@@ -586,7 +582,7 @@ nat-addr: "123.123.123.123:1634"
 The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you run your own ethereum node. An option for resource restricted devices is geth+nimbus and a guide can be found [here](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/). Other options include [dappnode](https://dappnode.io/), [nicenode](https://www.nicenode.xyz/), [stereum](https://stereum.net/) and [avado](https://ava.do/). 
 
 
-If you do not wish to run your own Ethereum node you may use a blockchain API service provider such as Infura. After signing up for [Infura's](https://infura.io) API service, simply set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
+If you do not wish to run your own Ethereum node, you may use a blockchain RPC service provider such as [Infura](https://infura.io). After signing up for Infura, simply set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
 
 ```yaml
 ## bee.yaml
