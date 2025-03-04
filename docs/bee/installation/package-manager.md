@@ -6,22 +6,22 @@ id: package-manager-install
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Bee client can be [installed through a variety of package managers](/docs/bee/installation/package-manager-install) including [APT](https://en.wikipedia.org/wiki/APT_(software)), [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager), and [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)). 
+The Bee client can be [installed through a variety of package managers,](/docs/bee/installation/package-manager-install) including [APT](https://en.wikipedia.org/wiki/APT_(software)), [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager), and [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)). 
 
 :::caution
-  When installed using a package manager, Bee is set up so it can be started to run as a background service using `systemctl` or `brew services` (depending on the package manager used.) 
+  When installed using a package manager, Bee is set up so it can be started to run as a background service using `systemctl` or `brew services` (depending on the package manager used). 
   
-  However, a package manager installed Bee node can also be started using the standard `bee start` command.
+  However, Bee node installed via a package manager can also be started using the standard `bee start` command.
 
   When a node is started using the `bee start` command the node process will be bound to the terminal session and will exit if the terminal is closed. 
   
-  Depending on which of these startup methods was used, [*the default Bee directories will be different*](/docs/bee/working-with-bee/configuration#default-data-and-config-directories). For each startup method, a different default data directory is used, so each startup method will essentially be spinning up a totally different node.
+  Furthermore, depending on which of these startup methods was used, [*the default Bee directories will be different*](/docs/bee/working-with-bee/configuration#default-data-and-config-directories). For each startup method, a different default data directory is used, so each startup method will essentially be spinning up a totally different node.
 :::
 
 
 ## Install Bee
 
-Bee is available for Linux in .rpm and .deb package format for a variety of system architectures, and is available for MacOS through Homebrew. See the [releases](https://github.com/ethersphere/bee/releases) page of the Bee repo for all available packages. One of the advantages of this method is that it automatically sets up Bee to run as a service as a part of the install process.
+Bee is available for Linux in .rpm and .deb package format for a variety of system architectures, and is available for MacOS through Homebrew. See the [releases](https://github.com/ethersphere/bee/releases) page of the Bee repo for all available packages. One of the advantages of this method is that it automatically configures Bee to run as a background service during installation.
 
 <Tabs
 defaultValue="debian"
@@ -61,11 +61,11 @@ sudo apt-get install bee
 Set up repo:
 
 ```bash
-sudo echo "[ethersphere]
+echo "[ethersphere]
 name=Ethersphere Repo
 baseurl=https://repo.ethswarm.org/yum/
 enabled=1
-gpgcheck=0" > /etc/yum.repos.d/ethersphere.repo
+gpgcheck=0" | sudo tee /etc/yum.repos.d/ethersphere.repo
 ```
 Install package:
 
@@ -127,14 +127,14 @@ After installation, you can check that the file was successfully generated and c
 defaultValue="linux"
 values={[
 {label: 'Linux', value: 'linux'},
-{label: 'MacOS arm64 (Apple Silicon)', value: 'macos-arm64'},
-{label: 'MacOS amd64 (Intel)', value: 'macos-amd64'},
+{label: 'macOS arm64 (Apple Silicon)', value: 'macos-arm64'},
+{label: 'macOS amd64 (Intel)', value: 'macos-amd64'},
 ]}>
 <TabItem value="linux">
 
 
 ```bash
-  test -f /etc/bee/bee.yaml && echo "$FILE exists."
+  test -f /etc/bee/bee.yaml && echo "bee.yaml exists."
   cat /etc/bee/bee.yaml
 ```
 
@@ -172,7 +172,7 @@ values={[
 ]}>
 <TabItem value="linux">
 
-Create the `bee.yaml` config file and save it with the [the default configuration](https://github.com/ethersphere/bee/blob/master/packaging/bee.yaml).
+Create the `bee.yaml` config file and save it with [the default configuration](https://github.com/ethersphere/bee/blob/master/packaging/bee.yaml).
 
 ```bash
 sudo touch /etc/bee/bee.yaml
@@ -377,7 +377,7 @@ If all goes well, you will see your node automatically begin to connect to other
 INFO[2020-08-29T11:55:16Z] greeting <Hi I am a very buzzy bee bzzzz bzzz bzz. 🐝> from peer: b6ae5b22d4dc93ce5ee46a9799ef5975d436eb63a4b085bfc104fcdcbda3b82c
 ```
 
-Now your node will begin to request chunks of data that fall within your _radius of responsibilty_ - data that you will then serve to other p2p clients running in the swarm. Your node will then begin to
+Now your node will begin to request chunks of data that fall within your *radius of responsibilty*—data that you will then serve to other p2p clients running in the swarm. Your node will then begin to
 respond to requests for these chunks from other peers.
 
 :::tip Incentivisation
@@ -421,9 +421,9 @@ curl localhost:1633
 Ethereum Swarm Bee
 ```
 
-Great! Our API is listening!
+Success! The Bee API is now listening!
 
-Next, let's see if we have connected with any peers by querying the API which listens at port 1633 by default (`localhost:1633`).
+Next, let's see if we have connected with any peers by sending a query to the Bee API (port 1633 by default - `localhost:1633`).
 
 :::info
 Here we are using the `jq` [utility](https://stedolan.github.io/jq/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
@@ -462,7 +462,7 @@ This will initiate a transaction on-chain which deposits the specified amount of
 
 Storage incentive rewards are only available for full nodes which are providing storage capacity to the network.
 
-Note that SWAP rewards are available to all full and light nodes, regardless of whether or not they stake xBZZ in order to participate in the storage incentives system.
+*Note that SWAP rewards (bandwidth incentives paid for forwarding chunks) are available to all **full** nodes, regardless of whether or not they stake xBZZ in order to participate in the storage incentives system.*
 
 
 
