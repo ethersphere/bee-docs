@@ -82,10 +82,9 @@ Example output:
 
 ### Step 4: Monitor & Maximize Rewards
 
-✅ Use a **stable Gnosis Chain RPC endpoint**  
-✅ Store **all required chunks** for your neighborhood  
-✅ Check `/rchash` to ensure **your node's performance is sufficient**  
-✅ [Choose the best neighborhood](#neighborhood-selection) for higher rewards  
+✅ Use a stable Gnosis Chain [RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint)  
+✅ [Check `/redistributionstate`](/docs/bee/working-with-bee/staking#check-redistribution-status) to ensure `isFullySynced` and `hasSufficientFunds` are consistently `true`, and `isFrozen` is `false`.  
+✅ [Check `/rchash`](/docs/bee/working-with-bee/bee-api#rchash) to ensure your node's performance is sufficient
 
 
 ### Next Steps  
@@ -173,7 +172,7 @@ curl localhost:1633/stake
 
 ## Check redistribution status
 
-Use the <a href="/api/#tag/RedistributionState" target="_blank" rel="noopener noreferrer">RedistributionState</a> endpoint of the API to get more information about the redistribution status of the node.
+Use the <a href="/api/#tag/RedistributionState" target="_blank" rel="noopener noreferrer">`/redistributionstate`</a> endpoint of the API to get more information about the redistribution status of the node.
 
 ```bash
 curl -X GET http://localhost:1633/redistributionstate | jq
