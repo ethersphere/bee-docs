@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 Bee nodes can operate in three different modes depending on the user's needs, ranging from full-featured nodes that contribute to the network and earn incentives to lightweight modes that allow for basic interaction with minimal resource requirements. This guide outlines the three primary node types — **_Full_**, **_Light_**, and **_Ultra-Light_** — along with their configurations, capabilities, and limitations.
 
-Choosing the right node type depends on your goals, whether it's participating in the Swarm network as a storage provider, developing applications which make use of Swarm's decentralized storage, or simply exploring the technology with minimal setup.
+Choosing the right node type depends on your goals, whether it's participating in the Swarm network as a storage provider, developing applications that use Swarm's decentralized storage and messaging, or simply exploring the technology with minimal setup.
 
 
 ## Node Types Overview
@@ -39,7 +39,7 @@ Full nodes are ideal for users who want to contribute to the Swarm network and e
 :::warning
 Full nodes require significant system resources, including storage and bandwidth. Additionally, they must be connected to the blockchain to participate in incentives. 
 
-If you intend to participate in the redistribution game to earn storage incentives, you should test your setup using [the `/rchash` endpoint](/docs/bee/working-with-bee/bee-api/#rchash) in order to ensure that your hardware is sufficient. Participation in the redistribution game requires process with high computational and memory requirements along with significant bandwidth usage.
+If you intend to participate in the redistribution game to earn storage incentives, you should test your setup using [the `/rchash` endpoint](/docs/bee/working-with-bee/bee-api/#rchash) in order to ensure that your hardware is sufficient. Participation in the redistribution game requires a process with high computational and memory requirements, along with significant bandwidth usage.
 :::
 
 Requires significant storage and processing power compared to other node types:
@@ -62,8 +62,8 @@ To run Bee as a full node, set:
 - Can upload and download data.
 - Can purchase and manage postage stamp batches in order to pay for uploading data.
 - Can share disk space with the network and store chunks from Swarm uploaders.
-- Can earn xBZZ by staking xBZZ and participating in the storage incentive system.
-- Can earn xBZZ by participating in the bandwidth incentives system.
+- Can participate in the storage incentives system by sharing disk space for a chance to earn xBZZ.
+- Can participate in the bandwidth incentives system and earn xBZZ by forwarding chunks for other nodes.
 - Requires a Gnosis Chain RPC endpoint for blockchain connectivity.
 - Supports full PSS messaging and GSOC.
 
@@ -74,7 +74,7 @@ Light nodes provide a balance between functionality and resource efficiency. The
 
 Light nodes are suited for users who want to interact with Swarm without the overhead of running a full node. They can serve the needs of developers who need to access Swarm's download / upload features but do not need advanced messaging features such as PSS and GSOC which are available only in full nodes.
 
-Light node operators cannot earn xBZZ by participating in Swarm's incentives systems as they do not participate in chunk forwarding or storage but only consume services, paying xBZZ for downloading data from full nodes and buying postage stamp batches for uploading data.
+Light node operators cannot earn xBZZ by participating in Swarm's incentives systems, as they do not participate in chunk forwarding or storage but only consume services, paying xBZZ for downloading data from full nodes and buying postage stamp batches for uploading data.
 
 :::info
 Light nodes do not benefit from plausible deniability when requesting data from the network. They are always the originator of requests.
@@ -104,13 +104,13 @@ To run Bee as a light node, set:
 - Cannot share disk space with the network and store chunks from Swarm uploaders.
 - Cannot earn xBZZ by staking xBZZ and participating in the storage incentive system.
 - Cannot earn xBZZ by participating in the bandwidth incentives system.
-- Can send PSS messages but ***cannot*** receive.
-- Can send outgoing GSOC updates but ***cannot*** receive.
+- Can send PSS messages but ***cannot*** receive them.
+- Can send outgoing GSOC updates but ***cannot*** receive them.
 
 
 ## Ultra-Light Node
 
-Ultra-light nodes allow users to try running a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](/docs/bee/working-with-bee/configuration) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
+Ultra-light nodes allow users to run a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](/docs/bee/working-with-bee/configuration) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
 
 Ultra-light nodes are designed for users who want to access the Swarm network with minimal resource requirements. These nodes can download data within the free consumption threshold but do not support uploads and cannot earn xBZZ by participating in Swarm's incentives systems. 
 
@@ -119,7 +119,7 @@ As with light nodes, your node's download speed will be limited by your network 
 :::warning
 As with light nodes, ultra-light nodes do not benefit from plausible deniability when requesting data from the network.
 
-When running without a blockchain connection, bandwidth incentive payments (SWAP) cannot be made, so there is a risk of getting blocklisted by other peers for exceeding their free tier download limits.
+When running without a blockchain connection, [bandwidth incentive payments (SWAP)](/docs/concepts/incentives/bandwidth-incentives/) cannot be made, increasing the risk of being blocklisted by other peers for exceeding their free-tier download limits.
 :::
 
 ### Recommended Specifications
@@ -136,7 +136,7 @@ Bee will start in ultra-light mode by default, but in order to explicitly config
 
 **Key characteristics:**
 
-- Can download small amounts of data.
+- Can download limited amounts of data.
 
 **Limitations:**
 - Cannot upload data.
@@ -144,5 +144,5 @@ Bee will start in ultra-light mode by default, but in order to explicitly config
 - Cannot share disk space with the network and store chunks from Swarm uploaders.
 - Cannot earn xBZZ by staking xBZZ and participating in the storage incentive system.
 - Cannot earn xBZZ by participating in the bandwidth incentives system.
-- Cannot use PSS or GSOC, either for sending or receiving.
+- Cannot use PSS or GSOC for sending or receiving.
 
