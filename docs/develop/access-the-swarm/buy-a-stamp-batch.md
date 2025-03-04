@@ -12,6 +12,41 @@ import TabItem from '@theme/TabItem';
 
 A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](/docs/concepts/DISC/). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch. 
 
+:::info
+      The storage volume and duration are both non-deterministic. Volume is non-deterministic due to the details of how [postage stamp batch utilization](/docs/concepts/incentives/postage-stamps#batch-utilisation) works. While duration is non-deterministic due to price changes made by the [price oracle contract](/docs/concepts/incentives/price-oracle).
+
+      **Storage volume and `depth`:**
+
+      When purchasing stamp batches for larger volumes of data (by increasing the `depth` value), the amount of data which can be stored becomes increasingly more predictable. For example, at `depth` 22 a batch can store between 4.93 GB and 17.18 GB, while at `depth` 28, a batch can store between 1.0 and 1.1 TB of data, and at higher depths the difference between the minimum and maximum storage volumes approach the same value.
+
+      **Storage duration and `amount`:** 
+
+      The duration of time for which a batch can store data is also non-deterministic since the price of storage is automatically adjusted over time by the [price oracle contract](/docs/concepts/incentives/price-oracle). However, limits have been placed on how swiftly the price of storage can change, so there is no danger of a rapid change in price causing postage batches to unexpectedly expire due to a rapid increase in price. You can view a history of price changes by inspecting [the events emitted by the oracle contract](https://gnosisscan.io/address/0x47EeF336e7fE5bED98499A4696bce8f28c1B0a8b#events), or also through the [Swarmscan API](https://api.swarmscan.io/v1/events/storage-price-oracle/price-update). As you can see, if and when postage batch prices are updated, the updates are quite small. Still, since it is not entirely deterministic, it is important to monitor your stamp batch TTL (time to live) as it will change along with price oracle changes. You can inspect your batch's TTL using the `/stamps` endpoint of the API:
+
+      ```bash
+      root@noah-bee:~# curl -s  localhost:1633/stamps | jq
+      {
+        "stamps": [
+          {
+            "batchID": "f56af59cc2c785a3b45bbf3e46c3c4b20f80379339ef337b5bbf45ebe5629a66",
+            "utilization": 0,
+            "usable": true,
+            "label": "",
+            "depth": 17,
+            "amount": "432072000",
+            "bucketDepth": 16,
+            "blockNumber": 38498819,
+            "immutableFlag": true,
+            "exists": true,
+            "batchTTL": 82943
+          }
+        ]
+      }
+      ```
+      Here we can see from the `batchTTL` that `82943` seconds remain, or approximately 23 hours. 
+      :::
+
+
 For a deeper understanding of how `depth` and `amount` parameters determine the data volume and storage duration of a postage batch, see the [postage stamp page](/docs/concepts/incentives/postage-stamps/).
 
 ## Fund your node's wallet.
@@ -21,6 +56,8 @@ In order to purchase a postage stamp batch, your node's Gnosis Chain address nee
 xBZZ can be obtained from a variety of different centralized and decentralized exchanges. You can find more information on [where to obtain xBZZ](https://www.ethswarm.org/get-bzz#how-to-get-bzz) on the Ethswarm homepage.
 
 xDAI can be obtained from a wide range of centralized and decentralized exchanges. See [this list of exchanges](https://docs.gnosischain.com/about/tokens/xdai) from the Gnosis Chain documentation to get started.
+
+You can learn more details from the [Fund Your Node](/docs/bee/installation/fund-your-node/) section.
 
 ## Buying a stamp batch
 
@@ -91,7 +128,7 @@ Once your batch has been purchased, it will take a few minutes for other Bee nod
 When purchasing a batch of stamps there are several parameters and options which must be considered. The `depth` parameter will control how many chunks can be uploaded with a batch of stamps. The `amount` parameter determines how much xBZZ will be allocated per chunk, and therefore also controls how long the chunks will be stored. While the `immutable` header option sets the batch as either mutable or immutable, which can significantly alter the behavior of the batch utilisation (more details below).
 
 
-### Choosing `depth`
+### Choosing *depth*
 
 :::caution
 The minimum value for `depth` is 17, however a higher depth value is recommended for most use cases due to the [mechanics of stamp batch utilisation](/docs/concepts/incentives/postage-stamps/#batch-utilisation). See [the depths utilisation table](/docs/concepts/incentives/postage-stamps/#effective-utilisation-table) to help decide which depth is best for your use case.
@@ -101,7 +138,7 @@ One notable aspect of batch utilisation is that the entire batch is considered f
 
 See the [postage stamp page](/docs/concepts/incentives/postage-stamps) for a more complete explanation of how batch utilisation works and a [table](/docs/concepts/incentives/postage-stamps#effective-utilisation-table) with the specific amounts of data which can be safely uploaded for each `depth` value. 
 
-### Choosing `amount`
+### Choosing *amount*
 
 :::caution
 The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the lastPrice value from the postage stamp contract times 17280 (the number of blocks in 24 hours). You can also use the [calculator](#calculators) below. This requirement is in place in order to prevent spamming the network.

@@ -2,58 +2,63 @@
 title: Backups
 id: backups
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-## Files
 
-A full Bee node backup includes the `kademlia-metrics`,  `keys`,  `localstore`,  `password`,  `stamperstore`,  `statestore`, and `password` files. The node should be stopped before taking a backup and not restarted until restoring the node from the backup to prevent the node from getting out of sync with the network.
+Backing up your Bee node involves copying and saving files from the data directory specified in the `dat-dir` configuration option, along with the node's password. The details of where and how this option is specified will vary depending on the type of [configuration method](/docs/bee/working-with-bee/configuration) used (YAML file, command line flag, or environment variable).
 
-A node's data including keys and stamp data are found in the data directory specified in its [configuration](configuration).
+:::caution
+A node's password may be specified in several different locations. It can be specified either through the `password` option or the `password-file` option. For a backup, you will need to either copy the `password` option value, or copy the file itself from the location specified by the `password-file` option.
 
-Key data in backup files allows access to Bee node's Gnosis account. If lost or stolen it could lead to the loss of all assets in that account. Furthermore the `stamperstore` contains postage stamp data, and postage stamps will not be recoverable if it is lost.
-
-:::info
-Don't forget - it's not a backup until you're sure the backup files work! Make sure to test restoring from backup files to prevent loss of assets due to data loss or corruption.
+Don't forget - it's not a backup until you're sure the backup files work! Make sure to test restoring from backup files and password to prevent loss of assets due to data loss or corruption.
 :::
 
-### Ubuntu / Debian / Raspbian / CentOS package managers
 
-For Linux installations from package managers _yum_ or _apt_, the data directory is located at:
+## Bee Files
 
-```bash
-/var/lib/bee
-```
+A full Bee node backup includes the `keys`,  `localstore`, `stamperstore`,  `statestore`, and `password` files. The node should be stopped before taking a backup and not restarted until restoring the node from the backup to prevent the node from getting out of sync with the network.
 
-It may also be useful to include the `bee.yaml` config file in a backup so that configuration can be easily restored. The default location of the config file is:
+Key data from the `keys` directory allows access to Bee node's Gnosis account (provided that you have also made sure to back the password for your keys). If your keys and password are lost or stolen it could lead to the loss of all assets in that account. The `stamperstore` contains postage stamp data. If lost, previously purchased postage stamps will become unusable.
 
-```bash
-/etc/bee
-```
+### Statestore and Localstore.
 
-This guide uses the default package manager location for the data folder, make sure to change the commands to match your data folder's location if it in a different directory.
+The `statestore` retains data related to its operation, and the `localstore` contains chunks locally which are frequently requested, pinned in the node, or are in the node's neighborhood of responsibility.
 
-### Binary package install
+:::info
+As the data in `statestore` and `localstore` continually changes during normal operation of a node, when taking a backup the node should first be stopped and not re-connected to the Swarm network until restoring from the backup (otherwise the `statestore` and `localstore` files will get out of sync with the network). It is possible to restore using out of sync `statestore` and `localstore` files, however it may lead to data loss or unexpected behavior related to chunk uploads, postage stamps, and more. 
+:::
 
-If you installed Bee using the [automated shell script](/docs/bee/installation/install#shell-script-install) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
+### Stamperstore
 
-```bash
-/home/<user>/.bee
-```
+The `stamperstore` contains postage stamp batch related data, and so is important to include in your backup if you have purchased any postage batches which you wish to continue using.
 
-### Docker Compose
+### Keys
 
-When using [Docker Compose](/docs/bee/installation/docker) configuration files to run a node, Docker will create a volume for Bee.
+The `keys` directory contains the following key files: 
 
-Use `docker cp` to retrieve the contents of these folders:
+* `libp2p.key`
+* `libp2p_v2.key`
+* `pss.key`
+* `swarm.key`
 
-```bash
-docker cp bee_bee_1:/home/bee/.bee/ bee
-```
+These keys are generated during the Bee node's initialisation and are required for maintaining access to your node.
 
-### Data types
+:::danger
+The `swarm.key` file grants full control over your node's Gnosis Chain account. If lost, you cannot recover funds. If stolen, your assets can be drained.
+:::
 
-The data directory contains three directories. Its default location depends on the node install method used.
+:::info
+To use `swarm.key` to manage the Gnosis account for a node through Metamask or other wallets, [exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) can be used to convert `swarm.key` to a compatible format.
+:::
 
-For shell script install the location is `/home/<user>/.bee` and for package manager installs it is `/var/lib/bee`. The directory structure is as follows:
+
+
+
+### Data Directory Structure
+
+The data directory contains four directories. Its default location depends on the node install method and startup method used.
+
 
 ```
 ├── kademlia-metrics
@@ -74,42 +79,99 @@ For shell script install the location is `/home/<user>/.bee` and for package man
 ```
 
 
-### Keys
+## Data Directory Locations
 
-The `keys` directory contains three key files: `libp2p.key`,  `libp2p_v2.key`,  `pss.key`,  `swarm.key`,. These keys are generated during the Bee node's initialisation and are required for maintaining access to your node.
+The default data directory for your Bee node will depend on the installation method used. 
 
-:::danger
-The `swarm.key` file allows access to Bee node's Gnosis Chain account. If the key is lost or stolen it could lead to the loss of all assets secured by that key.
+
+:::caution
+If Bee is installed to run as a service using a package manager such as `apt` or `yum`, then it can be started using your system's services manager such as `systemctl` using a command like `systemctl start bee`. However, after installing with a package manager, Bee can also by started using the `bee start` command used for running Bee with a shell script / binary install. When the `bee start` command is run, it will create a SECOND data directory alongside the default data directory for your package manager at the same directory it would for the shell script installation:
+
+```
+/home/<user>/.bee
+```
+
+In that case, you would have two separate data directories in two different locations, and the directory used will depend on whether you start your node using a service manager like `systemctl` or the `bee start` command. 
+
+If you installed Bee via a package manager but sometimes start it manually, you may have two separate data directories:
+
+* System service (`systemctl start bee`) → Uses `/var/lib/bee`.
+* Manual start (`bee start`) → Uses `/home/<user>/.bee`.
+
+*The exact directory will differ depending on your system. See [Configuration page](/docs/bee/working-with-bee/configuration#default-data-and-config-directories).*
 :::
 
-:::info
-To use `swarm.key` to manage the Gnosis account for a node through Metamask or other wallets, [exportSwarmKeys](https://github.com/ethersphere/exportSwarmKey) can be used to convert `swarm.key` to a compatible format.
-:::
+### *apt* and *yum / rpm* Package Managers
 
-### Statestore and Localstore.
+Default `data-dir` location:
 
-The `statestore` retains data related to its operation, and the `localstore` contains chunks locally which are frequently requested, pinned in the node, or are in the node's neighborhood of responsibility.
+```
+/var/lib/bee
+```
 
-:::info
-As the data in `statestore` and `localstore` continually changes during normal operation of a node, when taking a backup the node should first be stopped and not re-connected to the Swarm network until restoring from the backup (otherwise the `statestore` and `localstore` files will get out of sync with the network). It is possible to restore using out of sync `statestore` and `localstore` files, however it may lead to data loss or unexpected behavior related to chunk uploads, postage stamps, and more. 
-:::
+### Homebrew (amd64)
+
+Default `data-dir` location:
+
+```
+/usr/local/var/lib/swarm-bee
+```
+
+### Homebrew (arm64)
+
+Default `data-dir` location:
+
+```
+/opt/homebrew/var/lib/swarm-bee
+```
+
+### *scoop* Package Manager
+
+Default `data-dir` location:
+
+```
+./data
+``` 
+
+### Shell Script & Binary Install 
+
+If you installed Bee using the [automated shell script](/docs/bee/installation/shell-script-install) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
+
+```bash
+/home/<user>/.bee
+```
+
+### Docker
+
+Default `data-dir` location:
+
+```
+/home/bee/.bee
+```
 
 ## Back-up your node data
 
 
-Copy entire `bee` data folder to fully backup your node. This will do a full backup of `kademlia-metrics`,  `keys`,  `localstore`,  `stamperstore`, `password`, and `statestore`, files into a newly created `/backup` directory. Make sure to save the backup directory to a safe location.
+Copy entire `bee` data folder to create a full backup. This will do a full backup of `kademlia-metrics`,  `keys`,  `statestore`,  `stamperstore`, `password`, and `localstore`, files into a newly created `/backup` directory. Make sure to save the backup directory to a safe location.
+
+:::tip
+For a more lightweight backup, you can remove `localstore` and `localstore`. You can safely restore your node from the remaining files.
+:::
 
 ```
 mkdir backup
 sudo cp -r /var/lib/bee/ backup
 ```
     
-### Back-up your password 
+## Back-up your password 
 
-Depending on your configuration, your password may not be located in the `/bee` data directory which was copied in the previous step. If it has been specified in an environment variable or in your [`bee.yaml` configuration file](/docs/bee/working-with-bee/configuration#default-data-and-config-directories), make sure to copy it and save it together with the rest of your backup files or write it down in a safe place.
+Depending on your [configuration](/docs/bee/working-with-bee/configuration) method, your password may be located in a variety of different locations. If you use a `.yaml` file for your configuration, then it might be found directly under the `password` option, or it could be that the location of your password file is recorded by the `password-file` option. In either case, make sure to record the password somewhere safe or include the password file as a part of your backup.   
 
+The same applies to other configuration methods. If you use environment variables for specifying your configuration options, your password itself will likely be specified in a `.env` file somewhere which contains either the password itself in the `BEE_PASSWORD` variable or the location of your password file in the `BEE_PASSWORD_FILE` variable. 
 
-### Back-up blockchain keys only
+The same again holds true for the command line flag method. Make sure you have the password you use with the `--password` command line flag or the password file specified by the `--password-file` flag saved in your backup. 
+
+## Back-up blockchain keys only
 
 If you only need to export your node's blockchain keys, you need to export the `swarm.key` UTC / JSON keystore file and the `password` file used to encrypt it. First create a directory for your keys and then copy your keys to that directory.
 
@@ -121,9 +183,9 @@ sudo cp -r /var/lib/bee/keys/swarm.key /var/lib/bee/password keystore
 
 ## Metamask Import
 
-If you wish to import your blockchain account to a wallet such as Metamask, you can simply print out your keystore file and password and use those data to import into the wallet:
+If you wish to import your Bee node’s Gnosis Chain account into Metamask, find your `swarm.key` and `password`, then follow these steps:
 
-### View key and password for wallet import 
+## View key and password for wallet import 
 
 ```bash
 sudo cat /var/lib/bee/keys/swarm.key 
@@ -134,7 +196,7 @@ sudo cat /var/lib/bee/password
 Note that `swarm.key` is in UTC / JSON keystores format and is encrypted by default by your password file inside the `/bee` directory. Make sure to export both the `swarm.key` file and the `password` file in order to secure your wallet. If you need your private key exported from the keystore file, you may use one of a variety of Ethereum wallets which support exporting private keys from UTC files (such as [Metamask](https://metamask.io/), however we offer no guarantees for any software, make sure you trust it completely before using it). 
 :::
 
-### Get private key from keystore and password
+## Get private key from keystore and password
 
 To import to Metamask:
 
@@ -157,14 +219,18 @@ To export your private key:
 
 ## Restore from backup
 
+
 :::danger
-Before restoring, make sure to check for any old node data at `/var/lib/bee` from a previous node which has not yet been backed up, and back it up if needed.
+Before restoring, make sure to check for any old node data from a previous node which has not yet been backed up, and back it up if needed.
 :::
 
+:::tip
+The specific directories and commands for restoring will depend on which install method and system is used. The instructions below are for a Linux package manager based installation. See the [configuration section](/docs/bee/working-with-bee/configuration#default-data-and-config-directories) more more details about default file locations.
+:::
 
-1. Install Bee. See [install](/docs/bee/installation/install/) page for more info.
+1. After [uninstalling](/docs/bee/working-with-bee/uninstalling-bee) any existing Bee installations, perform a new [installation](/docs/bee/installation/getting-started#installation-methods).
 
-1. Delete `/bee` folder which was generated during install
+1. Remove any existing Bee node data before restoring. This prevents conflicts with old files:
 
     ```
     sudo rm -r /var/lib/bee
@@ -180,7 +246,7 @@ Before restoring, make sure to check for any old node data at `/var/lib/bee` fro
     ```
     sudo chown -R bee:bee /var/lib/bee
     ```
-1. Start `bee` service and check logs to see if Bee node is running properly.
+1. Restart `bee` and check logs.
     ```
     sudo systemctl restart bee
     sudo journalctl --lines=100 --follow --unit bee      

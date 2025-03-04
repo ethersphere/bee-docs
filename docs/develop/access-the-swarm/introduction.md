@@ -35,10 +35,6 @@ Learn how to assign xBZZ to your data using postage stamps so that it remains [l
 
 Learn how to [pin your data](/docs/develop/access-the-swarm/pinning) so that it always remains available locally on your Bee node.
 
-### Light Nodes
+### Node Types
 
-When accessing the Swarm network for certain use cases a Bee might not want to take part in forwarding and storing data. Find out how to use Bee in [Light Node](/docs/bee/working-with-bee/light-nodes) mode.
-
-### Ultra Light Nodes
-
-For the cases when we want to get started quickly we can run the Bee instance without a blockchain. Find out how to use Bee in [Ultra Light Node](/docs/bee/working-with-bee/ultra-light-nodes) mode.
+Bee nodes can be operated in [three different modes](/docs/bee/working-with-bee/node-types): full, light, and ultra-light. Each mode of operation offers access to different Swarm features. 

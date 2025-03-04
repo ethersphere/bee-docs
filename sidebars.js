@@ -47,11 +47,14 @@ module.exports = {
       type: 'category',
       label: 'Installation',
       items: [
+        'bee/installation/getting-started',
         'bee/installation/quick-start',
-        'bee/installation/install',
-        'bee/installation/build-from-source',
-        'bee/installation/hive',
+        'bee/installation/shell-script-install',
         'bee/installation/docker',
+        'bee/installation/package-manager-install',
+        'bee/installation/build-from-source',
+        'bee/installation/set-target-neighborhood',
+        'bee/installation/hive',
         'bee/installation/connectivity',
         'bee/installation/fund-your-node',
       ],
@@ -63,6 +66,7 @@ module.exports = {
       items: [
         'bee/working-with-bee/introduction',
         'bee/working-with-bee/configuration',
+        'bee/working-with-bee/node-types',
         'bee/working-with-bee/bee-api',
         'bee/working-with-bee/logs-and-files',
         'bee/working-with-bee/bee-dashboard',
@@ -73,8 +77,7 @@ module.exports = {
         'bee/working-with-bee/backups',
         'bee/working-with-bee/upgrading-bee',
         'bee/working-with-bee/uninstalling-bee',
-        'bee/working-with-bee/light-nodes',
-        'bee/working-with-bee/ultra-light-nodes'
+        
       ],
       collapsed: false
     },

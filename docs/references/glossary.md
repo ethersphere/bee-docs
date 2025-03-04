@@ -209,4 +209,11 @@ Sepolia is an Ethereum testnet. It is an environment where smart contracts can b
 
 A cryptocurrency faucet supplies small amounts of cryptocurrency to requestors (typically for testing purposes).
 
-It supplies small amounts of sBZZ and Sepolia ETH for anyone who submits a request at the [Swarm Discord](https://discord.gg/wdghaQsGq5) server by using the `/faucet` command in the #develop-on-swarm channel.
+Check out the [Fund Your Node](In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node) page.) page for more information.
+
+
+## RPC Endpoint
+
+An RPC (Remote Procedure Call) endpoint is a URL that allows applications to communicate with a remote server by sending requests and receiving responses. It is commonly used to interact with decentralized networks, enabling applications to query data or send transactions without running a full node.
+
+In the context of Swarm, a Blockchain RPC endpoint refers specifically to a connection to Gnosis Chain, which is required for transactions such as purchasing postage stamps and staking xBZZ. Bee nodes rely on an RPC endpoint to facilitate these blockchain interactions.

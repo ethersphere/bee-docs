@@ -1,10 +1,14 @@
+---
+title: Logging in Bee
+id: logs-and-files
+---
 
 # Logging in Bee
 
 This section provides an overview of logging in Bee, including log locations, exporting logs, managing verbosity levels, and using fine-grained control for specific loggers.
 
 :::info
-Bee uses a structured logging format compatible with popular tools such as [Grafana](https://grafana.com/) and [Elasticsearch](https://www.elastic.co/elasticsearch). Structured logging helps streamline log analysis and management by organizing data into machine-readable formats which enable easy integration with monitoring and debugging tools.
+Bee uses a structured logging format compatible with popular tools such as [Grafana](https://grafana.com/) and [Elasticsearch](https://www.elastic.co/elasticsearch). Structured logging helps streamline log analysis and management by organizing data into machine-readable formats, enabling easy integration with monitoring and debugging tools.
 :::
 
 :::warning  
@@ -17,7 +21,7 @@ Bee logs can be verbose by default, potentially consuming significant disk space
 ### **Linux (Package Manager Installation)**
 When installed via a package manager (e.g., `APT`, `RPM`), Bee runs as a **systemd service**, and logs are managed by the system journal, **journalctl**.
 
-View logs using:
+View logs with:
 ```bash
 journalctl --lines=100 --follow --unit bee
 ```
@@ -42,7 +46,7 @@ For a Homebrew installation on macOS, logs are saved to:
 /usr/local/var/log/swarm-bee/bee.log
 ```
 
-View logs in real time:
+View logs in real-time:
 ```bash
 tail -f /usr/local/var/log/swarm-bee/bee.log
 ```
@@ -50,7 +54,7 @@ tail -f /usr/local/var/log/swarm-bee/bee.log
 
 ### **Docker**
 
-Docker saves **stdout** and **stderr** output as JSON files by default. The logs are stored under:
+Docker saves **stdout** and **stderr** output as JSON files by default. Logs are stored in:
 
 ```
 /var/lib/docker/containers/<container-id>/<container-id>-json.log
@@ -121,7 +125,7 @@ verbosity: debug
 ```
 
 ### **Command Line Flag**
-Specify verbosity when starting Bee:
+Set the verbosity level (0-5) when starting Bee:
 
 ```bash
 bee start --verbosity debug
@@ -142,7 +146,8 @@ Bee allows fine-grained control of logging levels for specific subsystems using 
 
 ### **1. Retrieving Loggers List**
 
-Retrieve the list of active loggers and their verbosity levels:
+Retrieve a list of active loggers and their verbosity levels:
+
 ```bash
 curl http://localhost:1633/loggers | jq
 ```

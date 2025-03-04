@@ -5,7 +5,7 @@ id: connectivity
 
 To fully connect to the swarm, your Bee node needs to be able to both
 send and receive messages from the outside world. Normally, your
-router will not allow other IP's on the Internet to connect, unless
+router will not allow other IPs on the Internet to connect, unless
 you have initiated the connection. Bees welcome newcomers in the
 swarm, as long as they play by the rules! If a node misbehaves, we
 will simply add it to a list of blocked nodes and refuse future
@@ -13,8 +13,8 @@ connections from them.
 
 Here at Swarm, every Bee counts! To make sure all Bees can join the
 swarm, below you will find a detailed guide to navigating your way
-through your network and making out into the wild so you can buzz
-around fellow bees and maximise your chances of earning xBZZ. If
+through your network and making it out into the wild so you can buzz
+around fellow bees and maximize your chances of earning xBZZ. If
 you still have problems, please join us in our [Discord
 server](https://discord.gg/wdghaQsGq5) and we'll help you find the
 way! 🐝 🐝 🐝 🐝 🐝
@@ -27,11 +27,11 @@ outgoing connections from the global Internet to its p2p port
 this is the case, or for the 1337: check your
 `http://localhost:1633/addresses` to see which public IP and port
 libp2p is advertising and verify its connectivity to the rest of the
-Internet! You may need to alter your Bee nodes `nat-addr`
+Internet! You may need to alter your Bee node's `nat-addr`
 configuration. 🤓
 :::
 
-### Networking Basics
+## Networking Basics
 
 In a network, each computer is assigned an IP address. Each IP address
 is then subdivided into thousands of _sockets_ or _ports_, each of
@@ -52,15 +52,14 @@ There are also some ports which you should never expose to the outside Internet.
 :::
 
 
-## Your IP Address
+### Your IP Address
 
 When you connect to the Internet, you are assigned a unique number
 called an IP Address. IP stands for **Internet Protocol**. The most
 prevalent IP version used is _still_ the archaic
 [IPv4](https://en.wikipedia.org/wiki/IPv4) which was invented way back
 in 1981. IPv6 is available but not well used. Due to the mitigation of
-the deficiencies inherent in the IPv4 standard, we may encounter some
-complications.
+the deficiencies inherent in the IPv4 standard, some complications may arise.
 
 ### Datacenters and Computers Connected Directly to the Internet
 
@@ -100,13 +99,13 @@ or
 curl ifconfig.co --ipv4
 ```
 
-The response something contain something like:
+The response may contain something like:
 
 ```
 178.128.196.191
 ```
 
-With Bee running, try to connect to your Bee's p2p port using the public IP adddress from another computer:
+With Bee running, try to connect to your Bee's p2p port using the public IP address from another computer:
 
 ```bash
 nc -zv 178.128.196.191 1634
@@ -154,15 +153,15 @@ through the router it changes our local IP to the public IP of the
 router, and vice versa when the responses are sent back, from the
 public IP to the local one.
 
-#### Navigating Through the NAT
+## Navigating Through the NAT
 
 The presence of NAT presents two problems for p2p networking.
 
 The first is that it can be difficult for programs running on our computer to know our real public IP as it is not explicitly known by our computer's networking interface, which is configured with a private network IP. This is a relatively easy problem to solve as we can simply discover our public IP and then specify it in Bee's configuration, or indeed determine it using other means.
 
 The second issue is that our router has only 65535 ports to expose to
-the public network, however, _each device on your private network_ is
-capable of exposing 65535 _each_. To the global Internet, it appears
+the public network. However, *each device on your private network is
+capable of exposing 65535 ports*. To the global Internet, it appears
 that there is only one set of ports to connect to, whereas, in actual
 fact, there is a full set of ports for each of the devices which are
 connected to the private network. To solve this second problem,
@@ -170,7 +169,7 @@ routers commonly employ an approach known as _port forwarding_.
 
 Bee's solution to these problems come in two flavours, automatic and manual.
 
-##### Automatic: Universal Plug and Play (UPnP)
+### Automatic: Universal Plug and Play (UPnP)
 
 UPnP is a protocol designed to simplify the administration of NAT and
 port forwarding for the end user by providing an API from which
@@ -194,7 +193,7 @@ In addition to this, a request will be sent to your router to ask it
 to forward a random one of its ports, which are exposed directly to
 the Internet, to the Bee p2p port (default `1634`) which your computer
 is exposing only to the private network. Doing this creates a tunnel
-through which other Bee's may connect to your computer safely.
+through which other Bees may connect to your computer safely.
 
 If you start your Bee node in a private network with UPnP available, the output of the addresses endpoint of your API will look something like this:
 
@@ -213,7 +212,7 @@ router's randomly selected `20529` which is forwarded by the router to
 `192.168.0.10:1634`. These addresses in this multiaddress are also
 known as the underlay addresses.
 
-##### Manual: Configure Your Router and Bee
+### Manual: Configure Your Router and Bee
 
 Inspecting the underlay addresses in the output of the addresses
 endpoint of our API, we can see addresses only for _localhost_
@@ -322,7 +321,7 @@ Connection to 127.0.0.1 port 1634 [tcp/*] succeeded!
 
 This should be a no brainer, the connection between localhost in not normally mediated.
 
-If there is a problem here, the problem is with some other software running on your operating system or your operating system itself. Try a different port, such as `1734` and turning off any unneccesary software. If this doesn't work, you may need to try a different operating system environment. Please get in touch and we'll try to help!
+If there is a problem here, the problem is with some other software running on your operating system or your operating system itself. Try a different port, such as `1734` and turning off any unnecessary software. If this doesn't work, you may need to try a different operating system environment. Please get in touch and we'll try to help!
 
 If we were successful, let's move on to the next stage.
 
@@ -403,6 +402,5 @@ Internet.
 3. Something else entirely?
 
 Networking is a complex topic, but it keeps us all together. If you
-still can't connect to your Bee, get in touch via [The
-Beehive](http://beehive.ethswarm.org/) and we'll do our best to get
-you connected. In the swarm, no Bee is left behind.
+still can't connect to your Bee, get in touch via the [official node operator's Discord channel](https://discord.gg/kHRyMNpw7t) and we'll do our best to get
+you connected. In Swarm, no Bee is left behind.

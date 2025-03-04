@@ -3,12 +3,12 @@ title: Bee API
 id: bee-api
 ---
 
-The Bee HTTP API is the primary interfaces to a running Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
+The Bee HTTP API is the primary interface to a running Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
 
-The Bee API-endpoint exposes all functionality to upload and download content to and from the Swarm network. By default, it runs on port `:1633`.
+The Bee API provides full access to all core functionalities of a Bee node, including uploading, downloading, staking, postage stamp batch purchasing and management, and node monitoring. By default, it runs on port `:1633`.
 
 :::danger
-Make sure that your api-addr (default 1633) is never exposed to the internet. If you are not using a firewall or other method to protect your node, make sure to change your Bee API address from the default `1633` to `127.0.0.1:1633` to ensure that it is not publicly exposed to the internet.
+Make sure that your api-addr (default 1633) is never exposed to the internet. If you do not have a firewall or other security measures in place, manually setting your Bee API address from the default `1633` to `127.0.0.1:1633` is strongly recommended to prevent unauthorized access.
 
 You may also consider using the [Gateway Proxy tool](/docs/develop/tools-and-features/gateway-proxy) to protect your node's API endpoint.
 :::
@@ -17,7 +17,7 @@ Detailed information about Bee API endpoints can be found in the [API reference 
 
 ## Interacting With the API
 
-You can use HTTP requests to interact directly with Bee API to access all of your Bee node's various functions such as [purchasing stamp batches](/docs/develop/access-the-swarm/buy-a-stamp-batch), [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download), [staking](/docs/bee/working-with-bee/staking), and more. 
+You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](/docs/develop/access-the-swarm/buy-a-stamp-batch), [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download), [staking](/docs/bee/working-with-bee/staking), and more. 
 
 ### Alternatives for Working with the API
 
@@ -28,9 +28,9 @@ For many other common use cases, you may prefer to make use of the [Swarm CLI](/
 
 ## Exploring Node Status
 
-After [installing](/docs/bee/installation/install) and starting up your node, we can begin to understand the node's status by interacting with the API.
+After installing and starting up your node, we can begin to understand the node's status by interacting with the API.
 
-First, let's check how many nodes we are currently connected to.
+For example, to determine how many nodes your Bee node is currently connected to, run:
 
 ```bash
 curl -s http://localhost:1633/peers | jq '.peers | length'
@@ -40,7 +40,7 @@ curl -s http://localhost:1633/peers | jq '.peers | length'
 23
 ```
 
-Great! We can see that we are currently connected and sharing data with 23 other nodes!
+Great! We can see that we are currently connected with 23 other nodes!
 
 :::info
 Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://stedolan.github.io/jq/).
@@ -48,7 +48,7 @@ Here we are using the `jq` command line utility to count the amount of objects i
 
 Let's review a handful of endpoints which will provide you with important information relevant to detecting and diagnosing problems with your nodes.
 
-### `/status`
+### */status*
 
   The `/status` endpoint returns a quick summary of some important metrics for your node.
 
@@ -72,7 +72,7 @@ Let's review a handful of endpoints which will provide you with important inform
   ``` 
   
   * `"peer"` - Your node's overlay address.
-  * `"proximity"` - The proximity order (number of shared leading bits) with this node and your node.
+  * `"proximity"` - The proximity order (PO), representing how closely related this node is to your own node in Swarm's Kademlia network. 
   * `"beeMode"` - The mode of your node, can be `"full"`, `"light"`, or `"ultraLight"`.
   * `"reserveSize"` - The number of chunks your node is currently storing in its reserve. This value should be roughly similar across nodes in the network. It should be identical for nodes within the same neighborhood.
   * `"pullsyncRate"` - The rate at which your node is currently syncing chunks from other nodes in the network.
@@ -82,11 +82,11 @@ Let's review a handful of endpoints which will provide you with important inform
   *    `"batchCommitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
   *    `"isReachable"` - Whether or not your node is reachable on the p2p API by other nodes on the Swarm network (port 1634 by default).
 
-### `/status/peers`
+### */status/peers*
 
 The `/status/peers` endpoint returns information about all the peers of the node making the request. The type of the object returned is the same as that returned from the `/status` endpoint. This endpoint is useful for diagnosing syncing / availability issues with your node. 
 
-The nodes are ordered by distance (Kademlia distance, not spatial / geographic distance) to your node, with the most distant nodes with PO (proximity order) of zero at the top of the list and the closest nodes with higher POs at the bottom of the list. The nodes at the bottom of the list with a PO equal or greater than the storage depth make up the nodes in your own node's neighborhood. It's possible that not all nodes in your neighborhood will appear in this list each time you call the endpoint if the connection between your nodes and the rest of the nodes in the neighborhood is not stable. 
+The list is sorted by Kademlia proximity, not geographical distance. Nodes with lower PO values are further away, while higher PO values indicate closer neighbors. The most distant nodes with PO (proximity order) of zero are at the top of the list and the closest nodes with higher POs at the bottom of the list. The nodes at the bottom of the list with a PO equal or greater than the storage depth make up the nodes in your own node's neighborhood. It's possible that not all nodes in your neighborhood will appear in this list each time you call the endpoint if the connection between your nodes and the rest of the nodes in the neighborhood is not stable. 
 
 Here are the last 12 entries:
 
@@ -272,7 +272,7 @@ And we can compare these entries to our own node's `/status` results for diagnos
 From the results we can see that we have a healthy neighborhood size when compared with the other nodes in our neighborhood and also has the same `batchCommitment` value as it should.
 
 
-### `/redistributionstate`
+### */redistributionstate*
     This endpoint provides an overview of values related to storage fee redistribution game (in other words, staking rewards). You can use this endpoint to check whether or not your node is participating properly in the redistribution game. 
     ```bash
     curl -s http://localhost:1633/redistributionstate | jq
@@ -297,7 +297,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     
     * `"minimumGasFunds"` - The minimum required xDAI denominated in wei (1 xDAI = 10^18 wei) required for a node to participate in the redistribution game.
     * `"hasSufficientFunds"` - Whether your node has at least the `"minimumGasFunds"` amount of xDAI.
-    * `"isFrozen"` - Whether your node is currently frozen. See [docs](#) for more information on freezing. 
+    * `"isFrozen"` - Indicates if your node is frozen, which may occur for [several reasons](/docs/bee/working-with-bee/staking/#diagnosing-freezing-issues).
     * `"isFullySynced"` - Whether your node has fully synced all the chunks in its `"storageRadius"` (the value returned from the `/reservestate` endpoint.)
     * `"phase"` - The current phase of the redistribution game (this does not indicate whether or not your node is participating in the current phase). 
     * `"round"` - The current number of the round of the redistribution game.
@@ -311,7 +311,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     * `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
     * `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
 
-### `/reservestate`
+### */reservestate*
     This endpoint shows key information about the reserve state of your node. You can use it to identify problems with your node related to its reserve (whether it is syncing chunks properly into its reserve for example).
 
     ```bash
@@ -325,11 +325,11 @@ From the results we can see that we have a healthy neighborhood size when compar
     ```
     
     Let's take a look at each of these values:
-    * `"radius"` - is what the storage radius would be if every available batch was 100% utilised, it is essentially the radius needed for the network to handle all of the batches at 100% utilisation. Radius is measured as a proximity order (PO).
+    * `"radius"` - Represents the maximum storage radius assuming all postage stamp batches are fully utilized.
     * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods).
     * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
     
-### `/chainstate`
+### */chainstate*
 
     This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
     
@@ -344,11 +344,11 @@ From the results we can see that we have a healthy neighborhood size when compar
     }
     ```
     * `"chainTip"` - The latest Gnosis Chain block number. Should be as high as or almost as high as the block number shown at [GnosisScan](https://gnosisscan.io/).
-    * `"block"` - The block to which your node has synced data from Gnosis Chain. This may be far behind the `"chainTip"` when you first start up your node as it takes some time to sync all the data from the blockchain (especially if you are not using the `snapshot` option). Should be very close to `"chainTip"` if your node has already been operating for a while.
+    * `"block"` -  The latest block your node has fully synced from Gnosis Chain. If significantly behind `"chainTip"`, your node may still be catching up. Should be very close to `"chainTip"` if your node has already been operating for a while.
     * `"totalAmount"` - Cumulative value of all prices per chunk in PLUR for each block.
     * `"currentPrice"` - The price in PLUR to store a single chunk for each Gnosis Chain block.
 
-### `/topology`
+### */topology*
     This endpoint allows you to explore the topology of your node within the Kademlia network. The results are split into 32 bins from bin_0 to bin_32. Each bin represents the nodes in the same neighborhood as your node at each proximity order from PO 0 to PO 32. 
     
     As the output of this file can be very large, we save it to the `topology.json` file for easier inspection:
@@ -361,7 +361,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     vim topology.json
     ```
     
-    The `/topology` results begin with several values describing the entire topology and are followed by the details for each of the 32 bins. Lets first look at the values describing the total topology:
+    The `/topology` endpoint provides insights into how your node is positioned within the Swarm network. The response starts with global network statistics, followed by detailed bin-by-bin peer connections (for 32 bins). Lets first look at the global stats:
     
     ```json
       "baseAddr": "da7e5cc3ed9a46b6e7491d3bf738535d98112641380cbed2e9ddfe4cf4fc01c4",
@@ -437,7 +437,7 @@ From the results we can see that we have a healthy neighborhood size when compar
     },
 ```
     
-### `/node`
+### */node*
     This endpoint returns info about options related to your node type and also displays your current node type.
 
     ```bash
@@ -456,9 +456,9 @@ From the results we can see that we have a healthy neighborhood size when compar
     If your node is not operating in the correct mode, this can help you to diagnose whether you have set your options correctly.
 
 
-### `/rchash`
+### */rchash*
 
-Calling the /rchash endpoint will make your node generate a reserve commitment hash (the hash used in the [redistribution game](/docs/concepts/incentives/redistribution-game)), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
+Calling the /rchash endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
 
 ```bash
 sudo curl -sX GET http://localhost:1633/rchash/10/aaaa/aaaa | jq
@@ -485,9 +485,9 @@ It should not take much longer than 6 minutes at most for results to be returned
 
 If the `Time` value is much longer than 6 minutes then it likely means that the node's hardware performance is not sufficient. Consider upgrading to use faster memory or processor.
 
-### `/health`
+### */health*
        
-  The /health endpoint is primarily used by infra tools such as Docker / Kubernetes to check whether the server is live.
+  The `/health` endpoint provides a quick status check for your Bee node which simply indicates whether the node is operating or not. It is often used in tools like Docker and Kubernetes.
       
   ```bash
       curl -s http://localhost:1633/health | jq

@@ -3,134 +3,74 @@ title: Fund Your Node
 id: fund-your-node
 ---
 
-In order to start your Bee node on the _mainnet_, its Ethereum wallet must be
-funded with:
+## Overview
+Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidth) to function properly. The amount needed depends on your node type and use case.
 
-- 1 [xBZZ](/docs/references/glossary#xbzz-token), for traffic
-  accounting (this is optional, [see below](#basic-deployment))
+### xDAI is Required For:
+- **Buying Postage Stamps** ([Uploading Data](/docs/develop/access-the-swarm/buy-a-stamp-batch))
+- **Stake Management Transactions** ([Staking](/docs/bee/working-with-bee/staking/))
+- **Storage Incentives Transactions** ([Redistribution Game](/docs/concepts/incentives/redistribution-game/) )
+- **Chequebook Deployment** ([Bandwidth Payments](/docs/concepts/incentives/bandwidth-incentives/))
 
-- some [xDAI](/docs/references/glossary#xdai-token), to pay the gas fees of
-  a couple of transactions on the [Gnosis
-  Chain](/docs/references/glossary#gnosis-chain).
+### xBZZ is Required For:
+- **Buying Postage Stamps** (scales with data size and duration)
+- **Staking** (Minimum **10 xBZZ**, **20 xBZZ** for reserve doubling)
+- **Bandwidth Payments** (~**0.5 xBZZ per GB downloaded**)
 
-Take note that xBZZ is the [bridged](/docs/references/glossary#bridged-tokens) version of BZZ from Ethereum to the Gnosis Chain.
+## Token Amounts by Use Case
 
-### A node's wallet
+| **Use Case** | **Node Type** | **xDAI Required** | **xBZZ Required** |
+|-------------|--------------|------------------|------------------|
+| Free tier downloads | Ultra-Light, Light, Full | None | None |
+| Downloading beyond free tier | Light, Full | None |Scales with volume—start with ~0.1 xBZZ, increase as needed  |
+| Uploading | Light, Full | None | Scales with volume—start with ~0.1 xBZZ, increase as needed |
+| Purchasing Postage Stamp Batches| Light, Full | < 0.01 xDAI / tx  | Scales with volume & duration. Can start with ~0.2 xBZZ for small uploads. |
+| Staking | Full | < 0.01 xDAI / tx | 10 xBZZ (minimum) |
+| Storage Incentives Transactions | Full | < 0.01 xDAI / tx - needs topups over time since these are reoccurring transactions | None |
+| Bandwidth Payments | Light, Full | None | Scales with bandwidth (~0.5 xBZZ/GB downloaded) |
+| Chequebook Deployment | Light, Full | < 0.001 xDAI  | None |
 
-When your Bee node is installed, an Ethereum wallet is also created. This wallet
-is used by Bee to interact with the blockchain (e.g. for sending and receiving
-cheques, or for making purchases of postage stamps, etc.).
 
-### Chequebook
+## Getting Tokens
 
-When your node has downloaded enough content to exceed the free tier threshold,
-then _cheques_ are sent to peers to provide payment in return for their
-services.
+### How to Get xDAI
+- **Free xDAI Faucets**: You may try one of the [Gnosis Chain faucets](https://docs.gnosischain.com/tools/Faucets) listed in the official Gnosis Chain documentation, however the amount offered may not meet your needs.
+- **Purchasing xDAI**: You can also purchase xDAI from [various exchanges](https://docs.gnosischain.com/about/tokens/xdai) listed in the Gnosis Chain documentation. xDAI is also widely available on most major cryptocurrency exchanges. 
+:::warning
+Make sure that you are withdrawing the Gnosis Chain version of xDAI, as xDAI has been bridged to several other chains as well.
+:::
+- **Bridging From Ethereum**: If you already have xDAI on Ethereum, you can also consider using the [Gnosis Chain bridge](https://bridge.gnosischain.com/) to transfer it over to Gnosis Chain.
 
-In order to send these cheques, a _chequebook_ must be deployed on the
-blockchain for your node, and for full speed operation it can be funded with
-BZZ. This deployment happens when a node initialises for the first time. Your
-Bee node will warn you in its log if there aren't enough funds in its wallet for
-deploying the chequebook.
 
-You can [configure](/docs/bee/working-with-bee/configuration) the amount of xBZZ to
-be sent from the node's wallet. It is 1 xBZZ by default, but it can be set to
-zero.
 
-## Joining the swarm (mainnet)
+### How to Get xBZZ
+- **Buying xBZZ**: xBZZ can be purchased from a variety of [centralized and decentralized exchanges](https://www.ethswarm.org/get-bzz#how-to-get-bzz) listed on the official Ethswarm.org website.
 
-### Basic deployment
 
-If you want to get your Bee node up and running as easily as possible, then you
-can set its
-[`--swap-initial-deposit`](/docs/bee/working-with-bee/configuration)
-value to zero. This means that your node's chequebook will not get funded with
-xBZZ, meaning that other nodes will only serve it within the free tier bandwidth
-threshold.
+### Getting Testnet Tokens (Sepolia ETH & sBZZ)
+- **Sepolia ETH**: Try [these faucets](https://faucetlink.to/sepolia).
+- **sBZZ**: Buy on [Uniswap](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH) (ensure **Sepolia testnet** is selected in MetaMask and **Testnet mode** is enabled in the Uniswap web app settings).
 
-Since gas fees on the [Gnosis Chain](https://www.gnosis.io/) are very low,
-you won't need much xDAI either to get started. You may acquire a small amount
-for free by using the official Gnosis Chain xDAI faucet [xDAI Faucet](https://gnosisfaucet.com/). The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be
-more than enough to start up your node.
 
-You can use the [Blockscout](https://blockscout.com/xdai/mainnet/) block
-explorer to inspect what's going on with your wallet by searching for its
-Ethereum address.
+## Node Wallet & Chequebook
+- **Wallet Creation**: A Gnosis Chain wallet is auto-created when you install Bee.
+- **Chequebook Deployment**: A chequebook contract will be automatically deployed when a Bee node is configured to run as a light or full node and has been funded with sufficient xDAI to pay for the chequebook deployment transaction. Required for bandwidth payments.
+- **Wallet Access**: Located in `keys/` in Bee's `data-dir` (importable to MetaMask). Also requires a password which is specified through your node's configuration (either passed directly with the `password` option or as a password file specified with the `password-file` option).
 
-### Full performance node
+## Funding Your Wallet
 
-If you want to run a full node, or upload a lot of content, then you may need
-more xDAI for gas. To acquire this, you may convert DAI on the main Ethereum
-network to xDAI using the
-[Gnosis Chain bridge](https://bridge.gnosischain.com/),
-or buy xDAI
-[directly using fiat](https://buyxdai.com/).
+In order to fund your wallet, first you need to identify your wallet address. The easiest way to do so is to first start your Bee node in ultra-light mode (Bee will start in ultra-light mode when started with the default settings) and then query the Bee API to find your address:
 
-You will also need to fund your node with more xBZZ for full speed access, or to
-purchase postage stamps to upload content. To bridge BZZ from the Ethereum
-mainet to the [Gnosis Chain](https://www.gnosis.io/), you may use the [Gnosis Chain Bridge](https://bridge.gnosischain.com/).
-
-To find out what your node's Ethereum address is, please consult your relevant
-installation guide or check your logs!
-
-# Configure Your Wallet App
-
-To interact with the BZZ ecosystem, you will need to make a couple of small
-configuration additions to your wallet software. In the case of e.g. MetaMask,
-you'll need to
-[add the Gnosis Chain network](https://docs.gnosischain.com/tools/wallets/metamask/),
-and then
-[add a custom token](https://metamask.zendesk.com/hc/en-us/articles/360015489031-How-to-add-unlisted-tokens-custom-tokens-in-MetaMask).
-
-The canonical addresses for the BZZ token on the various blockchains are as
-follows:
-
-| Blockchain             | Contract address                                                                                                                       |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Ethereum, BZZ          | [`0x19062190b1925b5b6689d7073fdfc8c2976ef8cb`](https://ethplorer.io/address/0x19062190b1925b5b6689d7073fdfc8c2976ef8cb)                |
-| Gnosis Chain, xBZZ     | [`0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da`](https://blockscout.com/xdai/mainnet/tokens/0xdBF3Ea6F5beE45c02255B2c26a16F300502F68da/) |
-| Sepolia (testnet), sBZZ | [`0x543dDb01Ba47acB11de34891cD86B675F04840db`](https://sepolia.etherscan.io/address/0x543dDb01Ba47acB11de34891cD86B675F04840db)         |
-
-# Accessing Your Node's Wallet
-
-If you wish to interact with the node's wallet directly then you can
-import it into a wallet app like [MetaMask](https://metamask.io/). To
-do that you will need the wallet file and its password. A Bee node's
-wallet key is stored within the `keys/` folder in its datadir, in JSON
-format, and its password should be in a file nearby it.
-
-For example on Debian or Ubuntu:
-
-```sh
-sudo cat /var/lib/bee/keys/swarm.key
-sudo cat /var/lib/bee/password
+```bash
+curl -s localhost:1633/addresses | jq .ethereum
 ```
 
-# Testnet
-
-A Bee node needs Sepolia ETH and sBZZ in its wallet to be able to properly
-interact with the test network. One way to acquire these funds is to
-sign into our Discord and request Sepolia ETH and sBZZ test tokens from the
-*faucet bot* to your node's Ethereum address.
-
-To find out what your node's Ethereum address is, please consult the
-installation guide or check the logs!
-
-Once you have the address:
-
-1. join our [Discord server](https://discord.gg/wdghaQsGq5)
-2. navigate to the [#faucet](https://discord.gg/TVgKhsGEbc) channel
-3. [verify your username](https://discord.gg/tXGPdzZQaV)
-4. request test tokens from the *faucet bot*
-
-To request the tokens you must **type** (not copy paste) the following, replacing the address with your own:
-
-```
-/faucet sprinkle 0xabeeecdef123452a40f6ea9f598596ca8556bd57
+```bash
+"0x9a73f283cd9212b99b5e263f9a81a0ddc847cd93"
 ```
 
-If you have problems, please let us know by making a post in the [#faucet](https://discord.gg/TVgKhsGEbc) channel, we will do our best to provide tokens to everyone.
+Fund your node with the appropriate amount of xDAI and xBZZ based on the recommended amounts specified in [the chart above](/docs/bee/installation/fund-your-node#token-amounts-by-use-case). 
 
-Note that you should use a Chromium-based client (e.g., Chrome, native Discord client) to type the faucet command, as support for other browsers is spotty. It's reported to not work on Firefox, for example.
 
-Transactions may take a while to complete, please be patient. We're also keen for you to join us in the swarm, and indeed you soon will! 🐝 &nbsp 🐝 &nbsp 🐝
+*For support, ask in the [Develop on Swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel.*
+

@@ -180,12 +180,14 @@ curl localhost:1633/addresses | jq
 }
 ```
 
-Then copy the address in the "ethereum" field. This is the address you need to send sETH and sBZZ to. There are many public faucets you can use to obtain Sepolia ETH, such as [this one](https://www.infura.io/faucet/sepolia) from Infura.
-
-To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet.
+Then copy the address in the "ethereum" field. This is the address you need to send sETH and sBZZ to. 
 
 You will need to send only a very small amount of sETH such as 0.01 sETH, to get started. You will need 10 sBZZ to run a full node with staking.
 
 After sending sETH and sBZZ to your node's address which you copied above, restart your node and it should begin operating properly as a full node. 
 
 Repeat these same steps with the other node in order to complete a private test network of two full nodes.
+
+### Getting Testnet Tokens
+
+In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node) page.

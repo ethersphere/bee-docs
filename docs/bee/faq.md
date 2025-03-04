@@ -7,25 +7,25 @@ id: bee-faq
 
 ### How can I become part of the Swarm network?
 
-You can become part of the network by running a bee node. Bee is a peer-to-peer client that connects you with other peers all over the world to become part of Swarm network, a global distributed p2p storage network that aims to store and distribute all of the world's data
+You can become part of the network by running a bee node. Bee is a peer-to-peer client that connects you with other peers all over the world to become part of the Swarm network, a global distributed p2p storage network that aims to store and distribute all of the world's data
 
-Depending on your needs you can run ultra-light, light or full node.
+Depending on your needs you can run an ultra-light, light or full node.
 
 ### What are the differences between Bee node types?
 
-A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](/docs/bee/installation/quick-start) for an overview of the differences.
+A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](/docs/bee/installation/getting-started) for an overview of the differences.
 
 
 #### What are the requirements for running a Bee node?
 
-See the [install section](/docs/bee/installation/install) for more information about running a Bee node.
+See the [getting started section](/docs/bee/installation/getting-started#software-requirements) for more information about running a Bee node.
 
 ##### Full node
 
-- 20GB -30GB SSD (ideally nvme).
+- 20GB -30GB SSD (ideally NVME).
 - 8GB RAM
 - CPU with 2+ cores
-- RCP connection to Gnosis Chaiin
+- RPC connection to Gnosis Chain
 - Min 0.1 xDAI for Gnosis GAS fees
 - 1 xBZZ for initial chequebook deployment
 - 10 xBZZ for staking (optional)
@@ -36,17 +36,15 @@ Typically, each node requires around 10 megabits per second (Mbps) of bandwidth 
 
 ##### How do I Install Bee on Windows?
 
-You can install Bee node on Windows but it is not mentioned in the documentation, however, the steps are the same as the manual installation https://docs.ethswarm.org/docs/bee/installation/manual you can download the binary from here
+Bee is compatible with Windows and a Bee `.exe` file can be found on the [`releases` page](https://github.com/ethersphere/bee/releases) of the Bee repo.  
 
-https://github.com/ethersphere/bee/releases and download one of the Windows releases.
-
-It is also possible to build from the source.
+It is also possible to [build from the source](/docs/bee/installation/build-from-source).
 
 ##### How do I get the node's wallet's private key (use-case for Desktop app)?
 
 See the [backup section](/docs/bee/working-with-bee/backups/) for more info.
 
-##### How do I import the swarm private key to metamask?
+##### How do I import my private key to Metamask?
 
 You can import the `swarm.key` json file in MetaMask using your password file or the password you have set in your bee config file.
 
@@ -68,11 +66,11 @@ You may communicate with your Bee using its HTTP api. Type `curl http://localhos
 
 ### What does "could not connect to peer" mean?
 
-“Could connect to peer can happen for various reasons.” One of the most common is that you have the identifier of a peer in your address book from a previous session. When trying to connect to this node again, the peer may no longer be online.
+The "Could not connect to peer" error can occur for various reasons. One of the most common is that you have the identifier of a peer in your address book from a previous session. When trying to connect to this node again, the peer may no longer be online.
 
 ### What does "context deadline exceeded" error mean?
 
-The "context deadline exceeded" is a non critical warning. It means that a node took unexpectedly long to respond to a request from your node. Your node will automatically try again via another node.
+The "context deadline exceeded" is a non-critical warning. It means that a node took unexpectedly long to respond to a request from your node. Your node will automatically try again via another node.
 
 ### How do I set up a blockchain endpoint?
 
@@ -93,7 +91,7 @@ We recommend you run your own [Gnosis Node using Nethermind](https://docs.gnosis
 
 ### How can I export my private keys?
 
-See the section on [backups](/docs/bee/working-with-bee/backups#files) for exporting your keys.
+See the section on [backups](/docs/bee/working-with-bee/backups) for exporting your keys.
 
 ### How to import bee node address to MetaMask?
 
@@ -134,17 +132,13 @@ Most common use cases:
 You can look at your chequebook contract at etherscan.
 Get your chequebook contract address with: `curl http://localhost:1633/chequebook/address`
 
-### I have compared transactions between my ethereum address and my chequebook address, the numbers are different, which is quite weird.
-
-Your chequebook will show OUT xBZZ transactions when your peers cash cheques issued by you, but you don't pay any gas for those so they won't show up in your Ethereum address transaction list.
-
 ### Where can I find documents about the cashout commands?
 
-https://docs.ethswarm.org/docs/bee/working-with-bee/cashing-out
+Learn how to cash out [here](/docs/bee/working-with-bee/cashing-out).
 
 ### When I run http://localhost:1633/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
 
-`totalBalance` is the balance on the blockchain, `availableBalance` is that balance minus the outstanding (non-cashed) cheques that you have issued to your peers. These latter cheques do not show up on the blockchain.
+`totalBalance` is the balance on the blockchain, and `availableBalance` is that balance minus the outstanding (non-cashed) cheques that you have issued to your peers. These latter cheques do not show up on the blockchain.
 
 It's like what the bank thinks your balance is vs what your chequebook knows is actually available because of the cheques you've written that are still "in the mail" and not yet cashed.
 

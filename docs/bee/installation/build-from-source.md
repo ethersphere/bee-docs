@@ -7,11 +7,11 @@ Bee is written using the [Go](https://golang.org) language.
 
 You may build the Bee client software directly from the [source](https://github.com/ethersphere/bee).
 
-Prerequisites for installing direct from source are:
+Prerequisites for installing directly from source are:
 
 -  **go** - download the latest release from [golang.org](https://golang.org/dl).
 -  **git** - download from [git-scm.com](https://git-scm.com/).
--  **make** - usually included in most operating systems.
+-  **make** - [make](https://www.gnu.org/software/make/) is usually included by default in most UNIX operating systems, and can be installed and used on almost any other operating system where it is not included by default.
 
 ### Build from Source
 
@@ -40,7 +40,7 @@ Prerequisites for installing direct from source are:
    make binary
    ```
 
-5. Check you are able to run the `bee` command. Success can be verified by running:
+5. Check that you are able to run the `bee` command. Success can be verified by running:
 
    ```bash
    dist/bee version
