@@ -5,7 +5,7 @@ id: gsoc
 
 ## Introduction
 
-The Graffiti Single Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](/docs/develop/tools-and-features/chunk-types/#single-owner-chunks) with an address which is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process. 
+The Graffiti Several Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](/docs/develop/tools-and-features/chunk-types/#single-owner-chunks) with an address which is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process. 
 
 The service node determines the data used to derive the GSOC private key. Any node with access to this data can derive the same private key and update the GSOC in order to send messages to the service node. Since only full nodes sync neighborhood chunks, the service node *must be a full node to receive GSOC updates*.  
 
