@@ -12,23 +12,23 @@ This guide provides the essential background information to help you start runni
 - [Types of Bee nodes and their features](/docs/bee/installation/getting-started#node-types)
 - [Choosing the right node type](/docs/bee/installation/getting-started#choosing-a-node-type)
 - [Software requirements](/docs/bee/installation/getting-started#software-requirements)
-- [Hardware Requirements](/docs/bee/installation/getting-started#hardware-requirements)
+- [Hardware requirements](/docs/bee/installation/getting-started#hardware-requirements)
 - [Network requirements](/docs/bee/installation/getting-started#network-requirements)
 - [Installation methods](/docs/bee/installation/getting-started#installation-methods)
 
 
 :::caution[New Bee Users: Read This Guide in Full]
-For new Bee users, it is very strongly recommended to read through this ***entire guide page*** before proceeding with installation and setup.
+For new Bee users, it is strongly recommended to read through this ***entire guide page*** before proceeding with installation and setup.
 :::
 
 ## Node Types
 
 Bee nodes can be run in three different modes, ***full***, ***light***, or ***ultra-light***. Full nodes provide complete access to all of Swarm's features including downloads, uploads, full participation in Swarm's incentives systems, and advanced messaging features such as PSS and GSOC. Light nodes are primarily for downloading and uploading only. Ultra-light nodes are the most limited, and only allow users to download a small amount of data with the free-tier limits set by full node operators.
 
-The [Node Types](/docs/bee/working-with-bee/node-types) page provides you with a deep dive into the features and limitations of each node type along with instructions for how to set node options for all three types. 
+The [Node Types](/docs/bee/working-with-bee/node-types) page provides you with an in-depth look into the features and limitations of each node type along with instructions for how to set node options for all three types. 
 
 ## Choosing a Node Type
-The type of node type you need to run will differ depending on your use-case:
+The node type you need to run will differ depending on your use-case:
 
 | Use Case                     | Recommended Node Type(s) | Details |
 |------------------------------|-------------------------|---------|
@@ -60,7 +60,7 @@ While not strictly required, these tools will *greatly* simplify your experience
 
 ### Light and Ultra-Light
 
-Light and ultra-light nodes can be run with practically any modern commercially available computer hardware and internet provider and have very minimal CPU, RAM and network requirements. 
+Light and ultra-light nodes can be run with practically any commercially available modern computer hardware and internet provider, and have very minimal CPU, RAM and network requirements. 
 
 ### Full Node
 
@@ -74,7 +74,7 @@ For staking and storage incentives, test node performance with [`/rchash`](https
 
 ## Network Requirements
 
-A reliable, high-speed internet connection is recommended when running a full node, while ultra-light and light nodes will have lower requirements. The actual amount of bandwidth consumption depends on the node type and use-case:
+A reliable, high-speed internet connection is recommended when running a full node, while ultra-light and light nodes require less bandwidth. The actual amount of bandwidth consumption depends on the node type and use-case:
 
 - **Full Node**: High bandwidth usage due to constant chunk syncing, and even greater utilization if also used for uploads / downloads.
 - **Light Node**: Moderate usage, based on data transfer volume.
@@ -93,20 +93,23 @@ This can be:
 - A [self-hosted Gnosis Chain node](https://docs.gnosischain.com/node), giving full control over blockchain interactions but requiring additional setup and maintenance.  
 
 :::info
-A well maintained list of both free and paid RPC endpoint providers can be found in the [Gnosis Chain documentation](https://docs.gnosischain.com/tools/RPC%20Providers/).
+A well-maintained list of both free and paid RPC endpoint providers can be found in the [Gnosis Chain documentation](https://docs.gnosischain.com/tools/RPC%20Providers/).
 :::
 
-Without a properly configured RPC endpoint, a Bee node cannot interact with the blockchain, meaning it will be unable to buy postage stamps, stake tokens, or make blockchain transactions.
+Without a properly configured RPC endpoint, a Bee node cannot interact with the blockchain, meaning it will be ***unable*** to:
+* Buy postage stamps
+* Stake tokens
+* Make blockchain transactions
 
 ### NAT and Port Forwarding
 
 If running Bee on a home network, there is a good chance it is behind NAT by default. Often simply [enabling port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) will be enough to allow your node to start communicating smoothly with the rest of the network.
 
-See [here](/docs/bee/installation/connectivity/) for more information on how to make sure your node can communicate with the network.
+See [this page](/docs/bee/installation/connectivity/) for more information on how to make sure your node can communicate with the network.
 
 For VPS/cloud-based setups, connectivity is typically unrestricted.
 
-If your home network happens to be using [CGNAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT), you may face significant difficulty with setting up your node so it can connect with the rest of the network. Contacting your IP provider may be required. 
+If your home network happens to be using [CGNAT (Carrier-Grade NAT)](https://en.wikipedia.org/wiki/Carrier-grade_NAT), you may face significant difficulty with setting up your node so it can connect with the rest of the network. Contacting your IP provider may be required. 
 
 ## Installation Methods
 
