@@ -658,7 +658,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "SwarmCommon.yaml#/components/schemas/HealthStatus"
+                $ref: "SwarmCommon.yaml#/components/schemas/Response"
         "404":
           $ref: "SwarmCommon.yaml#/components/responses/404"
         "500":
@@ -839,8 +839,6 @@ paths:
       summary: Subscribe to GSOC payloads
       tags:
         - GSOC
-        - Subscribe
-        - Websocket
       parameters:
         - in: path
           name: reference

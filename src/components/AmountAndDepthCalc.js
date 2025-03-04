@@ -265,7 +265,7 @@ function FetchPriceComponent() {
             </tr>
             <tr>
               <td>Suggested Minimum Amount</td>
-              <td>{amount} PLUR</td>
+              <td>{amount +10} PLUR</td>
             </tr>
             <tr>
               <td>Suggested Safe Depth</td>
