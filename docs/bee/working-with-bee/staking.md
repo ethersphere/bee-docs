@@ -73,7 +73,8 @@ Example output:
 }
 ```
 
-**Ensure:**  
+**Expected values for a healthy staking node:** 
+
 - `"isFullySynced": true`  
 - `"hasSufficientFunds": true`  
 - `"isFrozen": false`  
@@ -81,10 +82,10 @@ Example output:
 
 ### Step 4: Monitor & Maximize Rewards
 
-- ✅ Use a **stable Gnosis Chain RPC endpoint**  
-- ✅ Store **all required chunks** for your neighborhood  
-- ✅ Check `/rchash` to ensure **your node's performance is sufficient**  
-- ✅ [Choose the best neighborhood](#neighborhood-selection) for higher rewards  
+✅ Use a **stable Gnosis Chain RPC endpoint**  
+✅ Store **all required chunks** for your neighborhood  
+✅ Check `/rchash` to ensure **your node's performance is sufficient**  
+✅ [Choose the best neighborhood](#neighborhood-selection) for higher rewards  
 
 
 ### Next Steps  
@@ -93,7 +94,7 @@ Example output:
 
 * **💰 Want to maximize earnings?** Read [Maximizing Rewards](#maximize-rewards).
 
-* **📖 Want to Learn more?** Just continue reading through the rest of this page for an in-depth exploration of staking on Swarm.
+* **📖 Want to learn more?** Just continue reading through the rest of this page for an in-depth exploration of staking on Swarm.
 
 
 ## Staking Overview
@@ -178,7 +179,7 @@ Use the <a href="/api/#tag/RedistributionState" target="_blank" rel="noopener no
 curl -X GET http://localhost:1633/redistributionstate | jq
 ```
 
-```json
+```bash
 { 
   "minimumFunds": "18750000000000000",
   "hasSufficientFunds": true,
@@ -209,7 +210,7 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 
 
 :::warning
-Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get).
+Do not shut down or update your node during an active redistribution round as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get).
 :::
 
 :::info
@@ -219,7 +220,7 @@ If your node is not operating properly such as getting frozen or not participati
 
 ## Partial Stake Withdrawals
 
-In cases that the price of xBZZ rises so much that it is more than enough to act as collateral, a partial withdrawal will be allowed down to the minimum required stake:
+If the price of xBZZ rises significantly and provides excess collateral, a partial withdrawal will be allowed down to the minimum required stake:
 
 ### Check for withdrawable stake
 
@@ -312,7 +313,7 @@ The `/status/neighborhoods` endpoint can be used to confirm that the node has do
 }
 ```
 
-The expected output should contain two neighborhoods, the node's original neighborhood along with its sister neighborhood. 
+The output should list both your original and sister neighborhood.
 
 We can also check the `/status` endpoint to confirm our node is syncing new chunks:
 
@@ -352,7 +353,7 @@ In order to maximize the amount of withdrawable stake after reversing a reserve 
 
 In the case that a node with 20 xBZZ stake was doubled directly by increasing `reserve-capacity-doubling` from 0 to 1, the surplus xBZZ over the minimum required 10 xBZZ cannot be made withdrawable by simply reversing the `reserve-capacity-doubling` from 1 back to 0. 
 
-In this case, you will need to first send a very small staking transaction of a single PLUR while `reserve-capacity-doubling` is set to 1, and after that, change `reserve-capacity-doubling` from 1 to 0. This works because every time any amount of stake is added, it forces to staking contract to redo its calculations.  
+In this case, you will need to first send a minimal staking transaction of 1 PLUR while `reserve-capacity-doubling` is set to 1, and after that, change `reserve-capacity-doubling` from 1 to 0. This works because every time any amount of stake is added, it forces to staking contract to redo its calculations.  
 
 The detailed steps are:
 
@@ -458,7 +459,7 @@ You can check your node's frozen status using the `/redistributionstate` endpoin
 curl -X GET http://localhost:1633/redistributionstate | jq
 ```
 
-```json
+```bash
 { 
   "minimumFunds": "18750000000000000",
   "hasSufficientFunds": true,
@@ -685,7 +686,7 @@ If you are able to identify and fix a problem with your node from the checklist 
     curl -X GET http://localhost:1633/redistributionstate | jq
     ```
 
-    ```json
+    ```bash
     { 
       "minimumFunds": "18750000000000000",
       "hasSufficientFunds": true,
@@ -747,7 +748,7 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 ```
 Response:
 
-```json
+```bash
 { 
   "minimumFunds": "18750000000000000",
   "hasSufficientFunds": true,
