@@ -4,7 +4,7 @@ id: fund-your-node
 ---
 
 ## Overview
-Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidth). The amount needed depends on your node type and use case.
+Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidth) to function properly. The amount needed depends on your node type and use case.
 
 ### xDAI is Required For:
 - **Buying Postage Stamps** ([Uploading Data](/docs/develop/access-the-swarm/buy-a-stamp-batch))
@@ -22,8 +22,8 @@ Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidt
 | **Use Case** | **Node Type** | **xDAI Required** | **xBZZ Required** |
 |-------------|--------------|------------------|------------------|
 | Free tier downloads | Ultra-Light, Light, Full | None | None |
-| Downloading beyond free tier | Light, Full | None |Scales with volume - start with ~0.1 xBZZ, increase as needed  |
-| Uploading | Light, Full | None | Scales with volume - start with ~0.1 xBZZ, increase as needed |
+| Downloading beyond free tier | Light, Full | None |Scales with volume—start with ~0.1 xBZZ, increase as needed  |
+| Uploading | Light, Full | None | Scales with volume—start with ~0.1 xBZZ, increase as needed |
 | Purchasing Postage Stamp Batches| Light, Full | < 0.01 xDAI / tx  | Scales with volume & duration. Can start with ~0.2 xBZZ for small uploads. |
 | Staking | Full | < 0.01 xDAI / tx | 10 xBZZ (minimum) |
 | Storage Incentives Transactions | Full | < 0.01 xDAI / tx - needs topups over time since these are reoccurring transactions | None |
@@ -44,7 +44,7 @@ Make sure that you are withdrawing the Gnosis Chain version of xDAI, as xDAI has
 
 
 ### How to Get xBZZ
-- **Buying xBZZ**: xBZZ can be purchased from a variety of [centralized & decentralized exchanges](https://www.ethswarm.org/get-bzz#how-to-get-bzz) listed on the official Ethswarm.org website.
+- **Buying xBZZ**: xBZZ can be purchased from a variety of [centralized and decentralized exchanges](https://www.ethswarm.org/get-bzz#how-to-get-bzz) listed on the official Ethswarm.org website.
 
 
 ### Getting Testnet Tokens (Sepolia ETH & sBZZ)
@@ -55,7 +55,7 @@ Make sure that you are withdrawing the Gnosis Chain version of xDAI, as xDAI has
 ## Node Wallet & Chequebook
 - **Wallet Creation**: A Gnosis Chain wallet is auto-created when you install Bee.
 - **Chequebook Deployment**: A chequebook contract will be automatically deployed when a Bee node is configured to run as a light or full node and has been funded with sufficient xDAI to pay for the chequebook deployment transaction. Required for bandwidth payments.
-- **Wallet Access**: Found in `keys/` in Bee's `data-dir` (importable to MetaMask). Also requires a password which is specified through your node's configuration (either passed directly with the `password` option or as a password file specified with the `password-file` option).
+- **Wallet Access**: Located in `keys/` in Bee's `data-dir` (importable to MetaMask). Also requires a password which is specified through your node's configuration (either passed directly with the `password` option or as a password file specified with the `password-file` option).
 
 ## Funding Your Wallet
 
@@ -72,5 +72,5 @@ curl -s localhost:1633/addresses | jq .ethereum
 Fund your node with the appropriate amount of xDAI and xBZZ based on the recommended amounts specified in [the chart above](/docs/bee/installation/fund-your-node#token-amounts-by-use-case). 
 
 
-_For support, ask in the [Develop on Swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel._
+*For support, ask in the [Develop on Swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel.*
 
