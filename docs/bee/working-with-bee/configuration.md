@@ -427,8 +427,6 @@ Bee nodes can be configured using command-line flags, environment variables, or 
 </Tabs>
 
 
-
-
 ## Default Data and Config Directories
 
 Depending on the operating system and startup method used, the default directories for your node will differ:
@@ -496,26 +494,87 @@ The default directories for your system may differ from the example above, so ma
 
 ## Create Password
 
-A `password` option is also required for all modes, and can either be set directly as a configuration option or alternatively a file can be used by setting the `password-file` option to the path where your password file is located.
+A password is required for all modes, and can either be set directly in text through the `password` configuration option or alternatively a file can be used by setting the `password-file` option to the path where your password file is located.
 
+## Setting Blockchain RPC endpoint
 
+Full and light Bee nodes require a Gnosis Chain RPC endpoint so they can interact with and deploy their chequebook contract, see the latest view of the current postage stamp batches, and interact with and top-up postage stamp batches. A blockchain RPC endpoint is not required for nodes running in ultra-light mode. 
+We recommend you [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) if you are planning to run a full node, and especially if you plan to run a [hive of nodes](/docs/bee/installation/hive). 
+If you do not wish to run your own Gnosis Chain node and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
+For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/RPC%20Providers/) listed in the Gnosis Chain documentation. However, these endpoint providers offer no [SLA](https://en.wikipedia.org/wiki/Service-level_agreement) or availability guarantees and are therefore not recommended for full node operators.
+To set your RPC endpoint provider, specify it with the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
+
+```yaml
+## bee.yaml
+blockchain-rpc-endpoint: https://rpc.gnosis.gateway.fm
+```
+
+:::info
+The gateway.fm RPC endpoint in the example is great for learning how to set up Bee, but for the sake of security and reliability it's recommended that you run your [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) rather than relying on a third party provider.
+:::
+
+## Configuring Swap Initial Deposit (Optional)
+
+When running your Bee node with SWAP enabled for the first time, your node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
+
+## Configuring Swap Initial Deposit (Optional)
+
+When running your Bee node with SWAP enabled for the first time, your node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
+
+## NAT address
+
+Swarm is all about sharing and storing chunks of data. To enable other Bees (also known as _peers_) to connect to your Bee, you must
+broadcast your public IP address in order to ensure that Bee is reachable on the correct p2p port (default `1634`). We recommend that you [manually configure your external IP and check
+connectivity](/docs/bee/installation/connectivity) to ensure your Bee is able to receive connections from other peers.
+
+First, determine your public IP address:
+
+```bash
+curl icanhazip.com
+```
+
+```bash
+123.123.123.123
+```
+
+Then configure your node, including your p2p port (default 1634).
+
+```yaml
+## bee.yaml
+nat-addr: "123.123.123.123:1634"
+```
+
+## ENS Resolution (Optional)
+
+The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you run your own ethereum node. An option for resource restricted devices is geth+nimbus and a guide can be found [here](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/). Other options include [dappnode](https://dappnode.io/), [nicenode](https://www.nicenode.xyz/), [stereum](https://stereum.net/) and [avado](https://ava.do/). 
+
+If you do not wish to run your own Ethereum node, you may use a blockchain RPC service provider such as [Infura](https://infura.io). After signing up for Infura, simply set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
+
+```yaml
+## bee.yaml
+resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
+```
 
 ## Sepolia Testnet Configuration 
 
-Connecting to the Swarm testnet is as simple as adding the flag `--mainnet false` to your bee commandline, or `mainnet: false` to your configuration file. Swarm testnet smart contracts are deployed on Sepolia, so if you want to run a light or full node you will need to add a Sepolia RPC to your configuration and fund your node with Sepolia ETH. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
-
-To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH); just make sure that you've switched to the Sepolia network in your browser wallet. 
+In order to operate a Bee node on the Sepolia testnet, you need to change `mainnet` to `false`, and provide a valid Sepolia testnet RPC endpoint through the `blockchain-rpc-endpoint` option.
 
 Here is an example of a full configuration for a testnet full node:
 
 ```yaml
-data-dir: /home/username/bee/sepolia
+data-dir: /home/username/bee/sepolia # Specified an alternate "data-dir" for our testnet node data
 full-node: true
-mainnet: false
+mainnet: false # Changed to "false"
 password: password
-blockchain-rpc-endpoint: wss://sepolia.infura.io/ws/v3/<API-KEY>
+blockchain-rpc-endpoint: wss://sepolia.infura.io/ws/v3/<API-KEY> # Replaced the Gnosis Chain RPC with a Sepolia testnet RPC endpoint
 swap-enable: true
 verbosity: 5
 welcome-message: "welcome-from-the-hive"
 warmup-time: 30s
 ```
+
+### Funding Testnet Node
+
+Make sure to fund your node with Sepolia ETH rather than xDAI to pay for gas on the Sepolia testnet. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
+
+To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet. 
