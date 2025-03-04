@@ -3,14 +3,14 @@ title: Uninstalling Bee
 id: uninstalling-bee
 ---
 
-Choose the appropriate uninstall method based on the install method used:
+Choose the appropriate uninstallation method based on how Bee was installed:
 
 ## Package Manager  
 
 This method can be used for package manager based [installs](/docs/bee/installation/package-manager-install) of the official Debian, RPM, and Homebrew packages.
 
 :::danger
-This will remove your keyfiles so make certain that you have a [full backup](/docs/bee/working-with-bee/backups) of your keys and configuration before uninstalling.
+Uninstalling Bee will permanently delete your keyfiles and configuration. Ensure you have a [full backup](/docs/bee/working-with-bee/backups) before proceeding.
 :::
 
 ### Debian
@@ -42,7 +42,7 @@ bee printconfig
 
 The output from this command contains several dozen default configuration values, however we only include the two we need in the example output below, `config` and `data-dir`. These will reveal the default locations for the configuration files and data directory according to our specific system.
 
-These values will look something like this:
+Your output should look similar to this:
 
 ```bash
 # config file (default is $HOME/.bee.yaml)
@@ -90,12 +90,12 @@ Bee stores its **node data, blockchain state, and other persistent files** in a 
 
 ## Verify Uninstallation
 
-Ensure Bee has been completely removed by running:
+To confirm that Bee has been fully uninstalled, run:
 
 ```bash
 command -v bee
 ```
 
-If the command does **not return anything**, Bee has been successfully uninstalled. 🎉  
+If Bee is still installed, this command will return the binary path (e.g., /usr/bin/bee). If it returns nothing, Bee has been successfully uninstalled.
 
 
