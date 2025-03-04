@@ -5,10 +5,10 @@ id: docker
 
 # Docker Install
 
-The following is a guide for installing a Bee node using Docker. Docker images for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). Using Docker to operate your Bee node offers 
+The following is a guide for installing a Bee node using Docker. Docker images for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). Using Docker to operate your Bee node offers many benefits, such as ease of deployment and consistency across environments. 
 
 :::caution
-In the examples below we specify the exact version number of the image using the 2.4.0 tag. It's recommended to only use the exact version number tags. Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.4.0 in the commands below if there is a newer full release. 
+In the examples below we specify the exact image version as 2.4.0. It's recommended to only use the exact version number tags. Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.4.0 in the commands below if there is a newer full release. 
 :::
 
 :::warning
@@ -16,7 +16,7 @@ Note that in all the examples below we map the Bee API to 127.0.0.1 (localhost),
 :::
 
 :::info
-This guide sets options using environment variables as a part of the Docker startup commands such as `-e BEE_API_ADDR=":1633"`, however there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
+This guide sets options using environment variables as part of the Docker startup commands such as `-e BEE_API_ADDR=":1633"`, however there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
 :::
 
 
@@ -50,7 +50,7 @@ docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 
 #### Command explained:
 
 - **`-d`**: Runs the container in the background.
-- **`--restart always`**: Sets the [restart policy](https://docs.docker.com/engine/containers/start-containers-automatically/) for the container to `always`
+- **`--restart always`**: Sets the [restart policy](https://docs.docker.com/engine/containers/start-containers-automatically/) for the container to `always`.
 - **`--name bee-1`**: Names the container `bee-1`.
 - **`-p 127.0.0.1:1633:1633`**: Exposes the API on port 1633, only accessible locally.
 - **`-p 1634:1634`**: Exposes the P2P port 1634 to the public.
@@ -62,10 +62,10 @@ docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 
 - **`-v bee-1:/home/bee/.bee`**: Persists node data in the `bee-1` volume.
 - **`ethersphere/bee:2.4.0 start`**: Runs Bee version 2.4.0 and starts the node.
 
-This setup runs the Bee node in a container, with full-node functionality, SWAP enabled, and connections to the Gnosis blockchain for chequebook and postage stamp management, while persisting its data using a volume. 
+This setup runs the Bee node in a container, with full node functionality, SWAP enabled, and connections to the Gnosis blockchain for chequebook and postage stamp management, while persisting its data using a volume. 
 
 :::info
-We have included the password as part of the start command by setting it as an environment variable with `-e BEE_PASSWORD="flummoxedgranitecarrot"`. You may wish to use a password file instead, which can be set with the `BEE_PASSWORD_FILE` command. However this will likely require some modifications on your host machine, the details of which will vary from system to system.
+We have included the password directly in the start command as an environment variable with `-e BEE_PASSWORD="flummoxedgranitecarrot"`. You may wish to use a password file instead, which can be set with the `BEE_PASSWORD_FILE` command. However this will likely require some modifications on your host machine, the details of which will vary from system to system.
 :::
 
 ```bash
@@ -75,8 +75,7 @@ docker ps
 If everything is set up correctly, you should see your Bee node listed:
 
 ```bash
-CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS
-                                              NAMES
+CONTAINER ID     IMAGE     COMMAND     CREATED     STATUS     PORTS     NAMES
 37f4ad8b4060   ethersphere/bee:2.4.0   "bee start"   6 seconds ago   Up 5 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-1
 ```
 
@@ -243,7 +242,7 @@ curl -s  http://localhost:1633/status | jq
   "lastSyncedBlock": 36172390
 }
 ```
-We can see that our node has not yet finished syncing chunks since the `pullsyncRate` is around 497 chunks per second. Once the node is fully synced, this value will go to zero. It can take several hours for syncing to complete, but we do not need to wait until our node is full synced before staking, so we can move directly to the next step. 
+We can see that our node has not yet finished syncing chunks since the `pullsyncRate` is around 497 chunks per second. Once the node is fully synced, this value will go to zero. It can take several hours for syncing to complete, but we do not need to wait until our node is fully synced before staking, so we can move directly to the next step. 
 
 ### Stake node
 
@@ -271,7 +270,7 @@ The results will be displayed in PLUR units (1 PLUR is equal to 1e-16 xBZZ). If 
 {"stakedAmount":"100000000000000000"}
 ```
 
-Congratulations! You have now installed your Bee node and are connected to the network as a full staking node. Your node will now be in the process of syncing chunks from the network. Once it is fully synced, your node will finally be eligible for earning staking rewards. 
+Congratulations! You have now installed your Bee node and successfully connected it to the network as a full staking node. Your node will now be in the process of syncing chunks from the network. Once it is fully synced, your node will finally be eligible for earning staking rewards. 
 
 ### Set Target Neighborhood
 
@@ -363,5 +362,5 @@ The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for inte
 ### Run a hive! 
 If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
 
-### Start building DAPPs on Swarm
+### Start building DApps on Swarm
 If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/introduction).
