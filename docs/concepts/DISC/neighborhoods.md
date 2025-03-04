@@ -7,16 +7,14 @@ In Swarm, a neighborhood refers to an area of responsibility within the network,
 
 :::info
 To see current neighborhood populations and the current storage depth / storage radius navigate to the ["Neighborhoods" page of Swarmscan.io](https://swarmscan.io/neighborhoods).
-:::
 
-:::info
 The terms "depth" and "radius" are often used interchangeably when discussing neighborhoods. Both refer to number of shared leading bits of node and chunk addresses used to determine the nodes and chunks which fall into which neighborhoods.
 :::
 
 ## Key Concepts
 
 ### Proximity Order (PO)
-The PO is a measure how close a node is to a particular chunk of data or other node. It is defined as the number of shared leading bits between two addresses. Proximity order plays a role in how neighborhoods are defined, as a node’s neighborhood extends up to its storage depth, covering all nodes within that proximity​.
+The PO measures how close a node is to a particular chunk of data or another node. It is defined as the number of shared leading bits between two addresses. Proximity order plays a role in how neighborhoods are defined, as a node’s neighborhood extends up to its storage depth, covering all nodes within that proximity​.
 
 ### Reserve Depth
 
@@ -30,13 +28,12 @@ Storage depth is the proximity order of chunks for which a node must synchronize
 
 ### Neighborhood Depth
 
-Neigborhood depth for a node is the highest (deepest) PO *`d`* where the node has at least 3 peers which share the same *`d`* number of leading binary prefix bits in their addresses.
+Neighborhood depth for a node is the highest (deepest) PO *`d`* where the node has at least 3 peers which share the same *`d`* number of leading binary prefix bits in their addresses.
 
 
 ### Neighborhood
 
-A neighborhood is a set of nodes in close proximity to each other based on their proximity order (PO). Each node in the neighborhood defined by storage depth is responsible for interacting with other nodes within that neighborhood to store and replicate data chunks, ensuring data availability and redundancy. 
-
+A neighborhood is a set of nodes in close proximity to each other based on their proximity order (PO). Each node within a storage-depth-defined neighborhood interacts with other nodes to store and replicate data chunks, ensuring availability and redundancy.
 
 
 ## Example neighborhood
@@ -63,7 +60,7 @@ Since we are only concerned with the leading binary bits close to the neighborho
 
 ### Area of Responsibility
 
-Storer nodes are responsible for storing chunks with addresses whose leading btis match their own up to the storage depth. Here are two example chunks which fall within our example neighborhood:
+Storer nodes are responsible for storing chunks with addresses whose leading bits match their own up to the storage depth. Here are two example chunks which fall within our example neighborhood:
 
 > Chunk A address: `da49a42926015cd1e2bc552147c567b1ca13e8d4302c9e6026e79a24de328b65`   
 > Chunk B address: `da696a3dfb0f7f952872eb33e0e2a1435c61f111ff361e64203b5348cc06dc8a`   
