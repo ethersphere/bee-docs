@@ -11,11 +11,11 @@ import TabItem from '@theme/TabItem';
 The official [shell script](https://github.com/ethersphere/bee/blob/master/install.sh) provided by Swarm automatically detects your system and installs the correct version of Bee. This installation method is an excellent choice if you're looking for a minimalistic and flexible option for your Bee node installation.
 
 :::warning
-Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default), since we do not want to expose our Bee API endpoint to the public internet, as that would allow anyone to control our node. Make sure you do the same, and it's also recommended to use a  firewall to restrict access to your node(s).
+Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default), since we do not want to expose our Bee API endpoint to the public internet, as that would allow anyone to control our node. Make sure you do the same. Additionally, it's recommended to use a firewall to restrict access to your node(s).
 :::
 
 :::info
-This guide uses command line flag options in the node startup commands such as `--blockchain-rpc-endpoint`, however there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
+This guide uses command line flag options in the node startup commands such as `--blockchain-rpc-endpoint`, however, there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
 :::
 
 ## Install and Start Your Node 
@@ -27,7 +27,7 @@ Below is a step-by-step guide for installing and setting up your Bee node using 
 Run the install shell script using either `curl` or `wget`:
 
 :::caution
-In the example below, the version is specified using `TAG=v2.4.0`. Make sure that you [check if there is a newer tagged version of Bee](https://github.com/ethersphere/bee/tags) and if so, modify the commands below to use the most recent tag number so that you have the latest version of Bee.
+In the example below, the version is specified using `TAG=v2.4.0`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
 :::
 
 :::info
@@ -43,7 +43,7 @@ Note that while this shell script supports many commonly used Unix-like systems,
 - `darwin-arm64` (Apple Silicon, M1/M2/M3)  
 - `darwin-amd64` (Intel-based Mac)  
 
-This means the script should work on most modern Linux distributions and macOS versions that match the supported architectures, but not on Windows. However, you may consider using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) to run Linux on Windows as an alternative.
+This means the script works on most modern Linux distributions and macOS versions that match these architectures. Windows users can use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
 :::
 
 :::caution
@@ -135,7 +135,7 @@ bee start \
 ```
 </TabItem>
 <TabItem value="light">
-For the light node, we have removed `--full-node`, the rest remains the same as the full node setup.
+For the light node, we omit `--full-node`, keeping the rest the same as the full node setup.
 
 ```bash
 bee start \
@@ -186,7 +186,7 @@ values={[
 ]}>
 
 <TabItem value="full">
-Here you can see that the node has started up successfully, but our node still needs to be funded with xDAI and xBZZ (xDAI for Gnosis Chain transactions and xBZZ for uploads/downloads and staking). Continue to the next section for funding instructions.    
+The node has successfully started, but it still needs funding with xDAI (for Gnosis Chain transactions) and xBZZ (for uploads, downloads, and staking). 
 
 ```bash
 Welcome to Swarm.... Bzzz Bzzzz Bzzzz
@@ -453,7 +453,9 @@ This process can take a while, even up to several hours depending on your system
 You check your node's progress with the `/status` endpoint:
 
 :::info
-The [`jq` utility](https://jqlang.github.io/jq/) is used here to automatically format the output from the Bee API. It can help make API output more readable. You may need to install it, the exact steps will depend on your Linux distro and package manager of choice. Also feel free to remove the `| jq` from the command as it is only a convenience, not a requirement.
+The [`jq` utility](https://jqlang.github.io/jq/) jq utility formats API responses for easier reading:
+* Install it using your system’s package manager.
+* If you don't want to use it, remove `| jq` from all commands.
 :::
 
 ```bash
@@ -480,7 +482,7 @@ We can see that our node has not yet finished syncing chunks since the `pullsync
 
 ### Stake node
 
-Now we're ready to begin staking. We will slightly modify our startup command so that it now runs in the background instead of taking control of our terminal:
+Now we're ready to stake. We'll slightly modify our startup command so that it runs in the background instead of taking control of our terminal:
 
 ```bash
 nohup bee start \
@@ -492,7 +494,7 @@ nohup bee start \
 ```
 
 :::info
-1. **`nohup`**: This ensures that the `bee start` process will continue even after the terminal is closed.
+1. **`nohup`**: `nohup` prevents the `bee start` process from stopping when the terminal closes.
 
 2. **`> bee.log 2>&1`**: Redirects both standard output and standard error to a log file called `bee.log`. 
 
