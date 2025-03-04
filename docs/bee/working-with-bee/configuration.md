@@ -437,7 +437,7 @@ Bee nodes can be configured using command-line flags, environment variables, or 
 
 ## Default Data and Config Directories
 
-Depending on the operating system and startup method used, the default data and configuration directories for your node will differ. 
+Depending on the operating system and startup method used, the default directories for your node will differ:
 
 ### Bee Service Default Directories (Package Manager Install)
 
