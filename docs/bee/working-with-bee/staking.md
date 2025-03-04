@@ -3,30 +3,125 @@ title: Staking
 id: staking
 ---
 
-In order to earn storage incentives by participating in the redistribution of xBZZ from uploaders to storers, storers must first deposit a non-refundable xBZZ stake with a smart contract. Then, they are going to be chosen for payout with a probability proportional to their stake in their neighborhood, as long as they can log storing the part of the content that they are supposed to be storing according to protocol rules.
+## Quickstart Guide
 
-:::danger
-Staked xBZZ CANNOT be withdrawn after being staked under typical circumstances. Only stake your xBZZ if you really plan on participating in staking as a full node, as you will not be able to withdraw it later.
+This guide will walk you through **staking xBZZ** and participating in the **redistribution game** to earn storage incentives.  
+
+### Step 1: Fund Your Node with xDAI 
+
+Your node needs **xDAI** to pay for transaction fees on Gnosis Chain.  
+
+Run this command to check how much is required:
+
+```bash
+curl localhost:1633/redistributionstate | jq
+```
+Look at the `"minimumGasFunds"` field in the response.  
+
+:::tip
+**Recommended:** Deposit at least **0.5 xDAI** to cover fees for the next few weeks/months of active staking.
 :::
 
-In order to participate in redistribution, storers need to do the following:
+### Step 2: Stake 10 xBZZ (or More)
 
-- Join the network and download all the data that the protocol assigns to them. They can only participate if they are fully synchronized with the network.
-- Deposit a stake with the staking contract. There is a minimum staking requirement, presently 10 xBZZ. It can change in the future.
-- Stay online and fully synced, so that when a redistribution round comes, their node can check whether their neighborhood (nodes that are assigned the same content to store) has been selected and if so, they can perform a certain calculation (a random sampling) on their content and submit the result to the redistribution contract. This happens in two phases (commit and reveal), so that the nodes cannot know the results of others’ calculations when committing to their own.
-- Round length is estimated around 15 minutes (152 blocks to be precise), though it can be extended.
+Once your node has xDAI, stake **at least 10 xBZZ** (this is non-refundable).
 
-Amongst the nodes that agree with the correct result, one is chosen — with a probability in proportion to their stake — as the winner. The winner must execute an on-chain transaction claiming their reward, which is the entire pot of storage rent paid since the previous round, or even more, if the previous pot has not been claimed at that time.
+```bash
+curl -X POST localhost:1633/stake/100000000000000000
+```
+
+Confirm the staking transaction was successful using `GET /stake`:
+
+```bash
+curl localhost:1633/stake
+```
+```bash
+{"stakedAmount":"100000000000000000"}
+```
+
+:::tip
+**Optional:** Stake **20 xBZZ** if using the [reserve doubling](#reserve-doubling) feature.
+:::
+
+### Step 3: Sync Your Node & Check Status
+
+In addition to meeting the 10 xBZZ minimum stake requirements, your node must be ***fully synced*** and ***funded with xDAI*** to participate in staking. Check your node's status with `GET /redistributionstate`:
+
+```bash
+curl -X GET http://localhost:1633/redistributionstate | jq
+```
+
+Example output:
+
+```bash
+{
+  "minimumGasFunds": "11080889201250000",
+  "hasSufficientFunds": true,
+  "isFrozen": false,
+  "isFullySynced": true,
+  "phase": "claim",
+  "round": 212859,
+  "lastWonRound": 207391,
+  "lastPlayedRound": 210941,
+  "lastFrozenRound": 210942,
+  "lastSelectedRound": 212553,
+  "lastSampleDuration": 491687776653,
+  "block": 32354719,
+  "reward": "1804537795127017472",
+  "fees": "592679945236926714",
+  "isHealthy": true
+}
+```
+
+**Ensure:**  
+- `"isFullySynced": true`  
+- `"hasSufficientFunds": true`  
+- `"isFrozen": false`  
+
+
+### Step 4: Monitor & Maximize Rewards
+
+- ✅ Use a **stable Gnosis Chain RPC endpoint**  
+- ✅ Store **all required chunks** for your neighborhood  
+- ✅ Check `/rchash` to ensure **your node's performance is sufficient**  
+- ✅ [Choose the best neighborhood](#neighborhood-selection) for higher rewards  
+
+
+### Next Steps  
+
+* **🛠 Troubleshooting?** See the [Troubleshooting Guide](#troubleshooting).  
+
+* **💰 Want to maximize earnings?** Read [Maximizing Rewards](#maximize-rewards).
+
+* **📖 Want to Learn more?** Just continue reading through the rest of this page for an in-depth exploration of staking on Swarm.
+
+
+## Staking Overview
+
+To earn storage incentives by participating in the [redistribution game](/docs/concepts/incentives/redistribution-game), full nodes must first deposit a minimum of 10 xBZZ as ***non-refundable*** stake. xDAI is also required to pay for ongoing Gnosis Chain transactions related to the redistribution game.
+
+:::danger
+Only stake your xBZZ if you intend to participate as a full node, as withdrawals are not possible.
+:::
+
+In order to participate in the redistribution game for a chance to earn xBZZ, full nodes need to do the following:
+
+- Fully sync all chunks they are responsible for and maintain a healthy connection with their peers in order to get all the newest uploaded chunks
+- Maintain a [high-performance RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint) connection to Gnosis Chain to sync blockchain data and issue all redistribution game-related transactions on-chain.
+- Deposit stake with the staking contract. The current minimum staking requirement is 10 xBZZ (the requirement is increased if [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling) is used). 
+- Have the disk space to store all the chunks they are responsible for storing and sufficient CPU / RAM (you can benchmark your node with the [`/rchash` endpoint](/docs/bee/working-with-bee/bee-api#rchash)) to generate a hash of a sampling of those chunks fast enough to participate in the redistribution game.   
 
 ## Add xDAI 
 
-In order to stake and continue to participate in the storage incentives system your node will need to continually issue related transactions on the Gnosis Chain blockchain. Therefore you will need to fund your node with some xDAI before you can get started with staking. 
+Before staking, a node must first be funded with a small amount of xDAI to pay for Gnosis Chain transaction fees.
 
-:::info
 You can check exactly how much xDAI is required to get started with staking from the `/redistributionstate` endpoint:
 
 ```bash
-root@noah-bee:~#  curl localhost:1633/redistributionstate | jq
+root@user-bee:~#  curl localhost:1633/redistributionstate | jq
+```
+
+```bash
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   304  100   304    0     0  15258      0 --:--:-- --:--:-- --:--:-- 16000
@@ -48,29 +143,31 @@ root@noah-bee:~#  curl localhost:1633/redistributionstate | jq
   "isHealthy": true
 }
 ```
-The `"3750000030000000"` value listed for `"minimumGasFunds"`  is the minimum required amount of xDAI denominated in Wei ($1 \text{xDAI} = 10^{18} \text{ Wei}$) required for staking. That is equivalent to 0.00375000003 xDAI. However, it's recommended to add more than just the minimum amount, since it will quickly be used up by storage incentives related transaction fees. As little as a 1 xDAI should last for quite a while since an average incentives related transaction fee is as small as around 0.001 xDAI or even considerably less. 
-:::
+
+The `"3750000030000000"` value listed for `"minimumGasFunds"`  is the minimum required amount of xDAI denominated in Wei ($1 \text{xDAI} = 10^{18} \text{ Wei}$) required for staking. That is equivalent to 0.00375000003 xDAI. However, it's recommended to add more than just the minimum amount, since it will quickly be used up by storage incentives related transaction fees. As little as 0.5 xDAI should last for weeks or even months, as the average incentive-related transaction fee can be as low as 0.001 xDAI or less.
+
 
 
 ## Add stake
 
-Bee has builtin endpoints for depositing the stake. Currently the minimum staking requirement is 10 xBZZ, so make sure that there is enough xBZZ tokens in the node's wallet. You must also have some native xDAI tokens as well for paying the gas fees for staking and storage incentives related transactions.
-
-
-Then you can run the following command to stake 10 xBZZ. The amount is given in PLUR which is the smallest denomination of xBZZ and `1 xBZZ == 1e16 PLUR`.
+Once your node has xDAI to pay for transaction fees, you can use the `POST /stake` endpoint to add the initial required minimum 10 xBZZ stake. The amount is denominated in [PLUR](/docs/references/glossary#plur), the smallest denomination of xBZZ:
 
 ```bash
 curl -X POST localhost:1633/stake/100000000000000000
 ```
 
-If the command executed successfully it returns a transaction hash that you can use to verify on a block explorer.
+If the command executed successfully it returns a transaction hash that you can use to verify on a block explorer such as [GnosisScan](https://gnosisscan.io).
 
 It is possible to deposit more by repeatedly using the command above.
 
-You can also check the amount staked with the following command:
+You can also check the amount staked with a `GET /stake` request:
 
 ```bash
 curl localhost:1633/stake
+```
+
+```bash
+{"stakedAmount":"100000000000000000"}
 ```
 
 ## Check redistribution status
@@ -162,7 +259,7 @@ In order to double a node's reserve which has previously been operating without 
 For doubling the reserve of a node which was previously operating which already has 10 xBZZ staked, simply stake an additional 10 xBZZ for a total of 20 xBZZ stake:
 
 :::info
-As always, make sure that to properly convert the stake parameter to PLUR where 1 PLUR is equal to 1e-16 xBZZ. As in our example below, we have converted from 10 xBZZ to 100000000000000000  PLUR.
+As always, ensure you properly convert the stake parameter to PLUR, where 1 PLUR equals 1e-16 xBZZ.
 :::
 
 ```bash
@@ -272,9 +369,7 @@ There are two main factors which determine the chances for a staking node to win
 
 ### Neighborhood selection 
 
-By default when running a Bee node for the first time an overlay address will be generated and used to assign the node to a random [neighborhood](/docs/concepts/DISC/neighborhoods). However, by using the `target-neighborhood` config option, a specific neighborhood can be selected in which to generate the node's overlay address. This is an excellent tool for maximizing reward chances as generally speaking running in a less populated neighborhood will increase the chances of winning a reward. 
-
-Refer to these [instructions](/docs/bee/installation/set-target-neighborhood) for how to set a target neighborhood.
+By default when running a Bee node for the first time the node will use the [neighborhood suggestion tool](https://api.swarmscan.io/v1/network/neighborhoods/suggestion) from Swarmscan to find an optimal [neighborhood](/docs/concepts/DISC/neighborhoods). While it is possible to manually choose a neighborhood using the `target-neighborhood` config option, we recommend not to do so as the suggestion tool will pick neighborhoods in order to maximize node earnings and network health. [Learn more](/docs/bee/installation/set-target-neighborhood). 
 
 
 ### Stake density
