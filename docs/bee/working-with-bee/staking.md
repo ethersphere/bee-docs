@@ -223,8 +223,6 @@ If the price of xBZZ rises significantly and provides excess collateral, a parti
 
 ### Check for withdrawable stake
 
-
-
 ```bash
 curl http://localhost:1633/stake/withdrawable | jq
 ```
@@ -763,7 +761,7 @@ Response:
   "fees": "30166618102500000"
 }
 ```
-Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` before moving to the next step. If `hasSufficientFunds` if `false`, make sure to add at least the amount of xDAI shown in `minimumFunds` (unit of 1e-18 xDAI). If the node was recently installed and `isFullySynced` is `false`, wait for the node to fully sync before continuing. After confirming the node's status, continue to the next step.
+Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` before moving to the next step. If `hasSufficientFunds` is `false`, make sure to add at least the amount of xDAI shown in `minimumFunds` (unit of 1e-18 xDAI). If the node was recently installed and `isFullySynced` is `false`, wait for the node to fully sync before continuing. After confirming the node's status, continue to the next step.
 
 
 #### Run sampler process to benchmark performance
