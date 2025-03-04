@@ -5,7 +5,7 @@ id: overview
 
 import { globalVariables } from '/src/config/globalVariables'
 
-A key challenge in a decentralized data network is incentivizing users to store data and provide bandwidth. Swarm addresses this with two incentive mechanisms: **storage incentives**, which reward nodes for storing data over time, and **bandwidth incentives**, which reward nodes for transmitting data across the network. Together, these mechanisms establish a self-sustaining economic system where nodes are compensated for contributing resources honestly.
+A key challenge in decentralized data networks is incentivizing users to store and transmit data. Swarm addresses this with two incentive mechanisms: **storage incentives**, which reward nodes for storing data, and **bandwidth incentives**, which reward nodes for relaying data. Together, these mechanisms establish a self-sustaining economic system where nodes are compensated for contributing resources honestly.
 
 Swarm's storage incentives are detailed in the [Future Proof Storage](https://www.ethswarm.org/swarm-storage-incentives.pdf) paper and [The Book of Swarm](https://papers.ethswarm.org/p/book-of-swarm/).
 
@@ -34,13 +34,13 @@ Additionally, the game generates a **utilization signal**, which the price oracl
 
 ### Price Oracle  
 
-The **price oracle contract** dynamically adjusts postage stamp prices using the utilization signal from the redistribution contract. This mechanism ensures optimal redundancy by increasing or decreasing costs as needed. Read more [here](/docs/concepts/incentives/price-oracle).  
+The price oracle contract dynamically adjusts postage stamp prices based on network utilization data from the redistribution contract. This mechanism ensures optimal redundancy by increasing or decreasing the price of storage as needed. [Read more](/docs/concepts/incentives/price-oracle).  
 
 ## Bandwidth Incentives  
 
-Nodes in Swarm not only store data but also serve and relay data across the network. **Bandwidth incentives** compensate nodes for these services.  
+Nodes in Swarm not only store data but relay data across the network. **Bandwidth incentives** compensate nodes for these services.  
 
-The **Swarm Accounting Protocol (SWAP)** facilitates bandwidth payments between nodes, which can be settled either **in-kind** (data exchange) or via **cheques** processed through a **chequebook contract** on Gnosis Chain. SWAP applies to full and light nodes but not ultra-light nodes.  
+The **Swarm Accounting Protocol (SWAP)** facilitates bandwidth payments between nodes, which can be settled either **in-kind** (data exchange) or via **cheques** processed through a **chequebook contract** on Gnosis Chain. Only full nodes can participate in SWAP. 
 
 Read more [here](/docs/concepts/incentives/bandwidth-incentives).  
 
