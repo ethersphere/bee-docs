@@ -8,7 +8,7 @@ id: staking
 This guide will walk you through **staking xBZZ** and participating in the **redistribution game** to earn storage incentives. 
 
 :::warning
-Staking requires a full node and a minimum of 10 xBZZ. See detailed [staking requirements](/docs/bee/working-with-bee/staking#requirements) below.
+Staking requires a fully synced full node and a minimum of 10 xBZZ. See detailed [staking requirements](/docs/bee/working-with-bee/staking#requirements) below.
 :::
 
 ### Step 1: Fund Your Node with xDAI 
@@ -20,7 +20,7 @@ Run this command to check how much is required:
 ```bash
 curl localhost:1633/redistributionstate | jq
 ```
-Look at the `"minimumGasFunds"` field in the response.  
+Check the `"minimumGasFunds"` field in the response.  
 
 :::tip
 **Recommended:** Deposit at least **0.5 xDAI** to cover fees for the next few weeks/months of active staking.
@@ -47,42 +47,9 @@ curl localhost:1633/stake
 **Optional:** Stake **20 xBZZ** if using the [reserve doubling](#reserve-doubling) feature.
 :::
 
-### Step 3: Sync Your Node & Check Status
+### Step 3: Check Status
 
-In addition to meeting the 10 xBZZ minimum stake requirements, your node must be ***fully synced*** and ***funded with xDAI*** to participate in staking. Check your node's status with `GET /redistributionstate`:
-
-```bash
-curl -X GET http://localhost:1633/redistributionstate | jq
-```
-
-Example output:
-
-```bash
-{
-  "minimumGasFunds": "11080889201250000",
-  "hasSufficientFunds": true,
-  "isFrozen": false,
-  "isFullySynced": true,
-  "phase": "claim",
-  "round": 212859,
-  "lastWonRound": 207391,
-  "lastPlayedRound": 210941,
-  "lastFrozenRound": 210942,
-  "lastSelectedRound": 212553,
-  "lastSampleDuration": 491687776653,
-  "block": 32354719,
-  "reward": "1804537795127017472",
-  "fees": "592679945236926714",
-  "isHealthy": true
-}
-```
-
-**Expected values for a healthy staking node:** 
-
-- `"isFullySynced": true`  
-- `"hasSufficientFunds": true`  
-- `"isFrozen": false`  
-
+After staking you should [check your node's status](/docs/bee/working-with-bee/staking#check-status) to make sure it is fully synced, fully funded, and operating properly. 
 
 ### Step 4: Monitor & Maximize Rewards
 
@@ -216,6 +183,32 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 :::warning
 Do not shut down or update your node during an active redistribution round as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get).
 :::
+
+You should also check the [`/status`](/api/#tag/Node-Status/paths/~1status/get) endpoint: 
+
+```bash
+curl -s  http://localhost:1633/status | jq
+```
+
+```bash
+{
+  "peer": "da7e5cc3ed9a46b6e7491d3bf738535d98112641380cbed2e9ddfe4cf4fc01c4",
+  "proximity": 0,
+  "beeMode": "full",
+  "reserveSize": 3747532,
+  "pullsyncRate": 0,
+  "storageRadius": 10,
+  "connectedPeers": 183,
+  "neighborhoodSize": 12,
+  "batchCommitment": 133828050944,
+  "isReachable": true
+}
+```
+**Expected values for a healthy staking node:** 
+
+* `"beeMode": full`
+* `"pullsyncRate": 0`
+* `"isReachable": true`
 
 :::info
 If your node is not operating properly such as getting frozen or not participating in any rounds, see the [troubleshooting section](#troubleshooting).
