@@ -5,7 +5,11 @@ id: staking
 
 ## Quickstart Guide
 
-This guide will walk you through **staking xBZZ** and participating in the **redistribution game** to earn storage incentives.  
+This guide will walk you through **staking xBZZ** and participating in the **redistribution game** to earn storage incentives. 
+
+:::warning
+Staking requires a full node and a minimum of 10 xBZZ. See detailed [staking requirements](/docs/bee/working-with-bee/staking#requirements) below.
+:::
 
 ### Step 1: Fund Your Node with xDAI 
 
@@ -104,14 +108,13 @@ To earn storage incentives by participating in the [redistribution game](/docs/c
 Only stake your xBZZ if you intend to participate as a full node, as withdrawals are not possible.
 :::
 
-In order to participate in the redistribution game for a chance to earn xBZZ, full nodes need to do the following:
+### Requirements
 
-- Fully sync all chunks they are responsible for and maintain a healthy connection with their peers in order to get all the newest uploaded chunks
-- Maintain a [high-performance RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint) connection to Gnosis Chain to sync blockchain data and issue all redistribution game-related transactions on-chain.
-- Deposit stake with the staking contract. The current minimum staking requirement is 10 xBZZ (the requirement is increased if [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling) is used). 
-- Have the disk space to store all the chunks they are responsible for storing and sufficient CPU / RAM (you can benchmark your node with the [`/rchash` endpoint](/docs/bee/working-with-bee/bee-api#rchash)) to generate a hash of a sampling of those chunks fast enough to participate in the redistribution game.   
+- A [full node](/docs/bee/working-with-bee/node-types) - see full node [recommend specs](/docs/bee/working-with-bee/node-types#recommended-specifications).  
+- A [high-performance RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
+- A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling) is used).
 
-## Add xDAI 
+### Add xDAI 
 
 Before staking, a node must first be funded with a small amount of xDAI to pay for Gnosis Chain transaction fees.
 
@@ -146,9 +149,11 @@ root@user-bee:~#  curl localhost:1633/redistributionstate | jq
 
 The `"3750000030000000"` value listed for `"minimumGasFunds"`  is the minimum required amount of xDAI denominated in Wei ($1 \text{xDAI} = 10^{18} \text{ Wei}$) required for staking. That is equivalent to 0.00375000003 xDAI. However, it's recommended to add more than just the minimum amount, since it will quickly be used up by storage incentives related transaction fees. As little as 0.5 xDAI should last for weeks or even months, as the average incentive-related transaction fee can be as low as 0.001 xDAI or less.
 
+### Add xBZZ
 
+Your node must be funded with a minimum of 10 xBZZ before performing the staking transaction. An additional 10 xBZZ is required if the [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling) feature is used. If you don't already have xBZZ, you will need [get some](/docs/bee/installation/fund-your-node#how-to-get-xbzz) and transfer it to your [node's wallet](/docs/bee/installation/fund-your-node#funding-your-wallet).
 
-## Add stake
+### Deposit stake
 
 Once your node has xDAI to pay for transaction fees, you can use the `POST /stake` endpoint to add the initial required minimum 10 xBZZ stake. The amount is denominated in [PLUR](/docs/references/glossary#plur), the smallest denomination of xBZZ:
 
@@ -170,7 +175,7 @@ curl localhost:1633/stake
 {"stakedAmount":"100000000000000000"}
 ```
 
-## Check redistribution status
+### Check Status
 
 Use the <a href="/api/#tag/RedistributionState" target="_blank" rel="noopener noreferrer">`/redistributionstate`</a> endpoint of the API to get more information about the redistribution status of the node.
 
