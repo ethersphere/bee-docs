@@ -114,7 +114,7 @@ root@user-bee:~#  curl localhost:1633/redistributionstate | jq
 }
 ```
 
-The `"3750000030000000"` value listed for `"minimumGasFunds"`  is the minimum required amount of xDAI denominated in Wei ($1 \text{xDAI} = 10^{18} \text{ Wei}$) required for staking. That is equivalent to 0.00375000003 xDAI. However, it's recommended to add more than just the minimum amount, since it will quickly be used up by storage incentives related transaction fees. As little as 0.5 xDAI should last for weeks or even months, as the average incentive-related transaction fee can be as low as 0.001 xDAI or less.
+The `"3750000030000000"` value listed for `"minimumGasFunds"`  is the minimum required amount of xDAI denominated in Wei ($1 \text{xDAI} = 10^{18} \text{ Wei}$) required for staking. That is equivalent to 0.00375 xDAI. However, it's recommended to add more than just the minimum amount, since it will quickly be used up by storage incentives related transaction fees. As little as 0.5 xDAI should last for weeks or even months, as the average incentive-related transaction fee can be as low as 0.001 xDAI or less.
 
 ### Add xBZZ
 
@@ -250,7 +250,11 @@ Although reserve doubling demands twice the disk storage and increases bandwidth
 
 In order to double a node's reserve which has previously been operating without doubling, the `reserve-capacity-doubling` option must be updated from the default of `0` to `1` and restarted. There is also an increase in the xBZZ stake requirement from the minimum of 10 xBZZ to 20 xBZZ. 
 
-#### **Step 1**: Stake at least 20 xBZZ 
+#### **Step 1**: Set `reserve-capacity-doubling` to `1`.
+
+The reserve doubling feature can be enabled by setting the new `reserve-capacity-doubling` config option to `1`  using the [configuration method](/docs/bee/working-with-bee/configuration#configuration-methods-and-priority) of your choice. 
+
+#### **Step 2**: Stake at least 20 xBZZ 
 
 For doubling the reserve of a node which was previously operating which already has 10 xBZZ staked, simply stake an additional 10 xBZZ for a total of 20 xBZZ stake:
 
@@ -279,9 +283,6 @@ curl -s  http://localhost:1633/stake | jq
   "stakedAmount": "200000000000000000"
 }
 ```
-#### **Step 2**: Set `reserve-capacity-doubling` to `1`.
-
-The reserve doubling feature can be enabled by setting the new `reserve-capacity-doubling` config option to `1`  using the [configuration method](/docs/bee/working-with-bee/configuration#configuration-methods-and-priority) of your choice. 
 
 #### **Step 3**: Restart node 
 
