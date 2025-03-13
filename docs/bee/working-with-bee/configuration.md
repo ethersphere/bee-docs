@@ -51,6 +51,7 @@ Flags:
       --full-node                                cause the node to start in full mode
   -h, --help                                     help for start
       --mainnet                                  triggers connect to main net bootnodes. (default true)
+      --minimum-storage-radius uint              minimum radius storage threshold
       --nat-addr string                          NAT exposed address
       --neighborhood-suggester string            suggester for target neighborhood (default "https://api.swarmscan.io/v1/network/neighborhoods/suggestion")
       --network-id uint                          ID of the Swarm network (default 1)
@@ -67,6 +68,7 @@ Flags:
       --pprof-profile                            enable pprof block profile
       --price-oracle-address string              price oracle contract address
       --redistribution-address string            redistribution contract address
+      --reserve-capacity-doubling int            reserve capacity doubling
       --resolver-options strings                 ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
       --resync                                   forces the node to resync postage contract data
       --staking-address string                   staking contract address
@@ -79,12 +81,12 @@ Flags:
       --swap-factory-address string              swap factory addresses
       --swap-initial-deposit string              initial deposit if deploying a new chequebook (default "0")
       --target-neighborhood string               neighborhood to target in binary format (ex: 111111001) for mining the initial overlay
-      --token-encryption-key string              admin username to get the security token
       --tracing-enable                           enable tracing
       --tracing-endpoint string                  endpoint to send tracing data (default "127.0.0.1:6831")
       --tracing-host string                      host to send tracing data
       --tracing-port string                      port to send tracing data
       --tracing-service-name string              service name identifier for tracing (default "bee")
+      --transaction-debug-mode                   skips the gas estimate step for contract transactions
       --use-postage-snapshot                     bootstrap node using postage snapshot from the network
       --verbosity string                         log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
       --warmup-time duration                     time to warmup the node before some major protocols can be kicked off (default 5m0s)
@@ -92,7 +94,7 @@ Flags:
       --withdrawal-addresses-whitelist strings   withdrawal target addresses
 
 Global Flags:
-      --config string   config file (default is $HOME/.bee.yaml)  
+      --config string   config file (default is $HOME/.bee.yaml)
 ```
 
 ### Environment variables
