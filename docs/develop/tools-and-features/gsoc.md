@@ -114,7 +114,7 @@ First, initialize the service node project on a machine running a full Bee node 
 mkdir service-node
 cd service-node
 npm init -y && npm pkg set type="module" && cat package.json
-npm install @upcoming/bee-js --save
+npm install bee-js --save
 ```
 The command first creates the `service-node` directory, moves into that directory, initializes a `package.json` file, sets `"type": "module"` in the file, and finally installs the `bee-js` library.
 
@@ -137,7 +137,7 @@ Read through the code and code comments for a more in-depth understanding of how
 :::
 
 ```javascript
-import { Bee, NULL_IDENTIFIER } from '@upcoming/bee-js';
+import { Bee, NULL_IDENTIFIER } from 'bee-js';
 
 // Configuration
 const BEE_HOST = 'http://localhost:1633'; // Change this if necessary
@@ -213,7 +213,7 @@ We initialize our writer node using almost the same command as our service node,
 mkdir writer-node
 cd writer-node
 npm init -y && npm pkg set type="module" && cat package.json
-npm install @upcoming/bee-js --save
+npm install bee-js --save
 ```
 The command first creates the `writer-node` directory, moves into that directory, initializes a `package.json` file, sets `"type": "module"` in the file, and finally installs the `bee-js` library.
 
@@ -236,7 +236,7 @@ Read through the code and code comments for a more in-depth understanding of how
 :::
 
 ```javascript
-import { Bee, NULL_IDENTIFIER } from '@upcoming/bee-js';
+import { Bee, NULL_IDENTIFIER } from 'bee-js';
 
 // Configuration
 const BEE_HOST = 'http://localhost:1643'; // Change this if necessary
