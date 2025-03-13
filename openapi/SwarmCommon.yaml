@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 4.2.0
+  version: 4.3.0
   title: Common Data Types
   description: |
     \*****bzzz*****
@@ -28,6 +28,8 @@ components:
           items:
             $ref: "#/components/schemas/P2PUnderlay"
         ethereum:
+          $ref: "#/components/schemas/EthereumAddress"
+        chain_address:
           $ref: "#/components/schemas/EthereumAddress"
         publicKey:
           $ref: "#/components/schemas/PublicKey"
@@ -828,24 +830,6 @@ components:
         isRetrievable:
           type: boolean
 
-    SecurityTokenRequest:
-      type: object
-      properties:
-        role:
-          type: string
-          nullable: false
-        expiry:
-          type: integer
-          nullable: false
-          description: Expiration time in seconds
-
-    SecurityTokenResponse:
-      type: object
-      properties:
-        key:
-          type: string
-          nullable: false
-
     LoggerExp:
       type: string
       description: Base 64 encoded regular expression or subsystem string.
@@ -897,6 +881,8 @@ components:
       properties:
         overlay:
           $ref: "#/components/schemas/SwarmAddress"
+        proximity:
+          type: integer
         beeMode:
           type: string
           enum:
@@ -905,8 +891,6 @@ components:
             - "dev"
             - "ultra-light"
             - "unknown"
-        proximity:
-          type: integer
         reserveSize:
           type: integer
         reserveSizeWithinRadius:
@@ -922,7 +906,7 @@ components:
         requestFailed:
           nullable: true
           type: boolean
-        BatchCommitment:
+        batchCommitment:
           type: integer
         isReachable:
           type: boolean
@@ -931,10 +915,10 @@ components:
         committedDepth:
           type: integer
 
-    StatusResponse:
+    StatusPeersResponse:
       type: object
       properties:
-        stamps:
+        snapshots:
           type: array
           nullable: false
           items:
@@ -958,7 +942,7 @@ components:
     StatusNeighborhoodsResponse:
       type: object
       properties:
-        stamps:
+        neighborhoods:
           type: array
           nullable: false
           items:

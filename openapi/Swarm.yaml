@@ -1,12 +1,9 @@
 openapi: 3.0.3
 
 info:
-  version: 7.2.0
+  version: 7.3.0
   title: Bee API
   description: "A list of the currently provided Interfaces to interact with the swarm, implementing file operations and sending messages"
-
-security:
-  - {}
 
 externalDocs:
   description: Browse the documentation @ the Swarm Docs
@@ -70,7 +67,7 @@ paths:
               $ref: "SwarmCommon.yaml#/components/schemas/ActGranteesCreateRequest"
       responses:
         "201":
-          description: Ok
+          description: OK
           content:
             application/json:
               schema:
@@ -94,7 +91,7 @@ paths:
           description: Grantee list reference
       responses:
         "200":
-          description: Ok
+          description: OK
           content:
             application/json:
               schema:
@@ -150,7 +147,7 @@ paths:
               $ref: "SwarmCommon.yaml#/components/schemas/ActGranteesPatchRequest"
       responses:
         "200":
-          description: Ok
+          description: OK
           content:
             application/json:
               schema:
@@ -205,7 +202,7 @@ paths:
               format: binary
       responses:
         "201":
-          description: Ok
+          description: OK
           headers:
             "swarm-tag":
               $ref: "SwarmCommon.yaml#/components/headers/SwarmTag"
@@ -318,7 +315,7 @@ paths:
               format: binary
       responses:
         "201":
-          description: Ok
+          description: OK
           headers:
             "swarm-tag":
               description: Tag UID if it was passed to the request `swarm-tag` header.
@@ -405,7 +402,7 @@ paths:
               format: binary
       responses:
         "201":
-          description: Ok
+          description: OK
           headers:
             "swarm-tag":
               $ref: "SwarmCommon.yaml#/components/headers/SwarmTag"
@@ -448,7 +445,7 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmActHistoryAddress"
       responses:
         "200":
-          description: Ok
+          description: OK
           # "swarm-feed-index":
           #   $ref: "SwarmCommon.yaml#/components/headers/SwarmFeedIndex"
           content:
@@ -511,7 +508,7 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/SwarmChunkRetrievalTimeoutParameter"
       responses:
         "200":
-          description: Ok
+          description: OK
           content:
             application/octet-stream:
               schema:
@@ -654,7 +651,7 @@ paths:
               $ref: "SwarmCommon.yaml#/components/schemas/Address"
       responses:
         "200":
-          description: Ok
+          description: OK
           content:
             application/json:
               schema:
@@ -1111,7 +1108,7 @@ paths:
           description: Postage batch to use for re-upload. If none is provided and the file was uploaded on the same node before, it will reuse the same batch. If not found, it will return error. If a new batch is provided, the chunks are stamped again with the new batch.
       responses:
         "200":
-          description: Ok
+          description: OK
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         "404":
@@ -1191,7 +1188,7 @@ paths:
 
   "/balances/{address}":
     get:
-      summary: Get the balances with a specific peer including prepaid services  
+      summary: Get the balances with a specific peer including prepaid services
       tags:
         - Balance
       parameters:
@@ -1234,7 +1231,7 @@ paths:
 
   "/consumed":
     get:
-      summary: Get the past due consumption balances with all known peers  
+      summary: Get the past due consumption balances with all known peers
       tags:
         - Balance
       responses:
@@ -1378,7 +1375,7 @@ paths:
           required: true
       responses:
         "201":
-          description: Ok
+          description: OK
           content:
             application/json:
               schema:
@@ -1962,7 +1959,7 @@ paths:
 
   "/stamps/{amount}/{depth}":
     post:
-      summary: Buy a new postage batch
+      summary: Buy a new postage batch.
       description: |
         Be aware, this endpoint creates an on-chain transactions and transfers BZZ from the node's Ethereum account and hence directly manipulates the wallet balance!
       tags:
@@ -2228,20 +2225,6 @@ paths:
         default:
           description: Default response
 
-  "/stake/migrate":
-    post:
-      summary: Withdraws all past staked amount back to the wallet.
-      description: Be aware, the endpoint call only be called when the contract is paused and is in the process of being migrated to a new contract.
-      tags:
-        - Staking
-      responses:
-        "200":
-          $ref: "SwarmCommon.yaml#/components/schemas/StakeTransactionResponse"
-        "500":
-          $ref: "SwarmCommon.yaml#/components/responses/500"
-        default:
-          description: Default response
-
   "/stake/withdrawable":
     get:
       summary: Get the withdrawable staked amount.
@@ -2250,7 +2233,11 @@ paths:
         - Staking
       responses:
         "200":
-          $ref: "SwarmCommon.yaml#/components/schemas/GetWithdrawableResponse"
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "SwarmCommon.yaml#/components/schemas/GetWithdrawableResponse"
         "500":
           $ref: "SwarmCommon.yaml#/components/responses/500"
         default:
@@ -2265,7 +2252,11 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/GasLimitParameter"
       responses:
         "200":
-          $ref: "SwarmCommon.yaml#/components/schemas/StakeTransactionResponse"
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "SwarmCommon.yaml#/components/schemas/StakeTransactionResponse"
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         "500":
@@ -2290,7 +2281,11 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/GasLimitParameter"
       responses:
         "200":
-          $ref: "SwarmCommon.yaml#/components/schemas/StakeTransactionResponse"
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "SwarmCommon.yaml#/components/schemas/StakeTransactionResponse"
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         "500":
@@ -2306,7 +2301,11 @@ paths:
         - Staking
       responses:
         "200":
-          $ref: "SwarmCommon.yaml#/components/schemas/GetStakeResponse"
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "SwarmCommon.yaml#/components/schemas/GetStakeResponse"
         "500":
           $ref: "SwarmCommon.yaml#/components/responses/500"
         default:
@@ -2321,7 +2320,11 @@ paths:
         - $ref: "SwarmCommon.yaml#/components/parameters/GasLimitParameter"
       responses:
         "200":
-          $ref: "SwarmCommon.yaml#/components/schemas/StakeTransactionResponse"
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "SwarmCommon.yaml#/components/schemas/StakeTransactionResponse"
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         "500":
@@ -2416,7 +2419,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "SwarmCommon.yaml#/components/schemas/StatusResponse"
+                $ref: "SwarmCommon.yaml#/components/schemas/StatusPeersResponse"
         "400":
           $ref: "SwarmCommon.yaml#/components/responses/400"
         default:
@@ -2438,4 +2441,3 @@ paths:
           $ref: "SwarmCommon.yaml#/components/responses/400"
         default:
           description: Default response.
-
