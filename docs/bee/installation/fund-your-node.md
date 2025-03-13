@@ -140,7 +140,7 @@ threshold.
 
 Since gas fees on the [Gnosis Chain](https://www.gnosis.io/) are very low,
 you won't need much xDAI either to get started. You may acquire a small amount
-for free by using the official Gnosis Chain xDAI faucet [xDAI Faucet](https://gnosisfaucet.com/). The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be more than enough to start up your node.
+for free by using the official Gnosis Chain xDAI faucet [xDAI Faucet](https://faucet.gnosischain.com/). The required amount is a function of the current transaction fee on chain, but 0.01 xDAI should be more than enough to start up your node.
 
 You can use the [Blockscout](https://blockscout.com/xdai/mainnet/) block
 explorer to inspect what's going on with your wallet by searching for its
