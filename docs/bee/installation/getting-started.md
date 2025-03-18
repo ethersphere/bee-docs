@@ -82,15 +82,19 @@ A reliable, high-speed internet connection is recommended when running a full no
 
 ### RPC Endpoint  
 
+:::warning
+***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).
+:::
+
 An [RPC (Remote Procedure Call) endpoint](/docs/references/glossary#rpc-endpoint) is required to allow your node to interact with **Gnosis Chain**, which is required for transactions like purchasing postage stamps, staking xBZZ, and storage incentives related transactions.  
 
 Bee nodes use the **`--blockchain-rpc-endpoint`** configuration option to specify which Gnosis Chain RPC service to connect to. 
 
 This can be:  
 
-- A **public and free endpoint**, such as those offered by [Fair Data Society](https://xdai.fairdatasociety.org) or other free RPC providers listed in the [Gnosis Chain documentation](https://docs.gnosischain.com/tools/RPC%20Providers/).  
-- A **private and paid endpoint** provided by third-party services typically offers higher reliability and better performance.  
-- A [self-hosted Gnosis Chain node](https://docs.gnosischain.com/node), giving full control over blockchain interactions but requiring additional setup and maintenance.  
+- A [self-hosted Gnosis Chain node](https://docs.gnosischain.com/node), giving full control over blockchain interactions but requiring additional setup and maintenance (recommended).   
+- A **private and paid endpoint** from a third-party service provider.  
+- A **public and free endpoint**, such as this free one from the Fair Data Society: `https://xdai.fairdatasociety.org` 
 
 :::info
 A well-maintained list of both free and paid RPC endpoint providers can be found in the [Gnosis Chain documentation](https://docs.gnosischain.com/tools/RPC%20Providers/).
