@@ -178,7 +178,7 @@ If you are using a different wallet which does not have an easy option for addin
 #### Gnosis Chain
 
 Network name: Gnosis
-RPC URL: https://rpc.gnosischain.com
+RPC URL: https://xdai.fairdatasociety.org
 Chain ID: 100
 Currency symbol: XDAI
 

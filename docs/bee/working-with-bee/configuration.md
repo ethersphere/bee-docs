@@ -500,20 +500,34 @@ A password is required for all modes, and can either be set directly in text thr
 
 ## Setting Blockchain RPC endpoint
 
-Full and light Bee nodes require a Gnosis Chain RPC endpoint so they can interact with and deploy their chequebook contract, see the latest view of the current postage stamp batches, and interact with and top-up postage stamp batches. A blockchain RPC endpoint is not required for nodes running in ultra-light mode. 
-We recommend you [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) if you are planning to run a full node, and especially if you plan to run a [hive of nodes](/docs/bee/installation/hive). 
-If you do not wish to run your own Gnosis Chain node and are willing to trust a third party, you may also consider using an RPC endpoint provider such as [GetBlock](https://getblock.io/).
-For running a light node or for testing out a single full node you may also consider using one of the [free public RPC endpoints](https://docs.gnosischain.com/tools/RPC%20Providers/) listed in the Gnosis Chain documentation. However, these endpoint providers offer no [SLA](https://en.wikipedia.org/wiki/Service-level_agreement) or availability guarantees and are therefore not recommended for full node operators.
-To set your RPC endpoint provider, specify it with the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
+:::warning
+A RPC endpoint for *a full archival Gnosis Chain node is required* since a Bee node must sync all data starting from when the [postage stamp smart contract was created](https://gnosisscan.io/tx/0x3427deb106b30a7d23f7ce9d2465f2d83945948c5aeddba55337c318fb56ec25). 
+
+The free RPC endpoint offered by the Fair Data Society (https://xdai.fairdatasociety.org) will work since it is a full archival node, but running Bee with other public free RPC endpoints from non-archive nodes will result in the `storage: not found` error.
+
+If you do encounter the `storage: not found` error, update your RPC endpoint to one for a full archival node, and restart your node with the `resync` option set to `true`. 
+:::
+
+Full and light Bee nodes require a Gnosis Chain RPC endpoint in order to sync blockchain data and issue transactions (not required for ultra-light nodes). 
+
+To set your RPC endpoint, specify it with the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
 
 ```yaml
 ## bee.yaml
-blockchain-rpc-endpoint: https://rpc.gnosis.gateway.fm
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 ```
 
-:::info
-The gateway.fm RPC endpoint in the example is great for learning how to set up Bee, but for the sake of security and reliability it's recommended that you run your [run your own Gnosis Chain node](https://docs.gnosischain.com/node/) rather than relying on a third party provider.
-:::
+We recommend you [run your own Gnosis Chain node](https://docs.gnosischain.com/node/), but you may also consider using a paid RPC endpoint provider such as [GetBlock](https://getblock.io/).
+
+
+### RPC Providers
+
+While we recommend running your own Gnosis Chain node for your RPC endpoint, you may wish to use a third party provider instead.
+
+For a comprehensive list of RPC providers, refer to the [Gnosis Chain documentation](https://docs.gnosischain.com/tools/RPC%20Providers/). The list includes both free and paid RPC providers (refer to [warning above](#setting-blockchain-rpc-endpoint) about free RPC providers).
+
+For running a light node or for testing out a single full node you can use the free RPC endpoint provided by the Fair Data Society: `https://xdai.fairdatasociety.org`.
+
 
 ## Configuring Swap Initial Deposit (Optional)
 
