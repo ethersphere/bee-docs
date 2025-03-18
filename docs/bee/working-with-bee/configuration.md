@@ -522,6 +522,8 @@ We recommend you [run your own Gnosis Chain node](https://docs.gnosischain.com/n
 
 ### RPC Providers
 
+While we recommend running your own Gnosis Chain node for your RPC endpoint, you may wish to use a third party provider instead.
+
 For a comprehensive list of RPC providers, refer to the [Gnosis Chain documentation](https://docs.gnosischain.com/tools/RPC%20Providers/). The list includes both free and paid RPC providers (refer to [warning above](#setting-blockchain-rpc-endpoint) about free RPC providers).
 
 For running a light node or for testing out a single full node you can use the free RPC endpoint provided by the Fair Data Society: `https://xdai.fairdatasociety.org`.
