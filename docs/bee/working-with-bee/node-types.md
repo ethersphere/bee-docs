@@ -25,7 +25,7 @@ Bee can operate in different modes, each tailored to specific use cases:
 | [Storage incentives](/docs/bee/working-with-bee/staking/)               | ✅        | ❌         | ❌               |
 | [Bandwidth incentives](/docs/concepts/incentives/bandwidth-incentives/) | ✅        | ❌         | ❌               |
 | [PSS messaging](/docs/develop/tools-and-features/pss)                   | ✅        | ❌         | ❌               |
-| Gnosis Chain RPC                                                        | ✅        | ✅         | ❌               |
+
 
 ## Full Node
 
