@@ -350,7 +350,7 @@ services:
       - 1634:1634 # p2p port
   bee_02:
     container_name: bee-node_02
-    image: ethersphere/bee:2.4.0
+    image: ethersphere/bee:2.5.0
     command: start --config /home/bee/bee.yml
     volumes:
       - ./node_02/.bee:/home/bee/.bee
