@@ -9,10 +9,10 @@ The Bee client provides a facility to encrypt files and directories while upload
 
 # Encrypt and Upload a File
 
-To encrypt a file simply include the `Swarm-Encrypt: true` header with your HTTP request.
+To encrypt a file simply include the `--encrypt` flag to your `swarm-cli` upload command.
 
 ```bash
-curl -F file=@bee.jpg -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -H "Swarm-Encrypt: true" http://localhost:1633/bzz
+swarm-cli upload bee.jpg --stamp 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264 --encrypt
 ```
 
 When successful, the Bee client will return a 64 byte reference, instead of the usual 32 bytes.
@@ -21,7 +21,7 @@ More information on how to buy a postage stamp batch and get its batch id can be
 
 ```json
 {
-  "reference": "f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3"
+	"reference": "f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3"
 }
 ```
 
@@ -37,10 +37,10 @@ Encryption is disabled by default on all Swarm Gateways to keep your data safe. 
 
 # Download and Decrypt a File
 
-To retrieve your file, simply supply the full 64 byte string to the files endpoint, and the Bee client will download and decrypt all the relevant chunks and restore them to their original format.
+To retrieve your file, simply enter the full 64-byte string to swarm-cli's download command, and the Bee client will download and decrypt all the relevant chunks and restore them to their original format.
 
 ```bash
-curl -OJ http://localhost:1633/bzz/f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3
+swarm-cli download f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3
 ```
 
 :::danger

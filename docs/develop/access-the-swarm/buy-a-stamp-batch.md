@@ -179,7 +179,7 @@ Expires: 2023-10-26
 Don't let your batch run out! If it does, you will need to restamp and resync your content.
 :::
 
-If your batch is starting to run out, or you would like to extend the life of your batch to protect against storage price rises, you can increase the batch TTL by topping up your batch using the stamps endpoint, passing in the relevant batchID into the HTTP PATCH request.
+If your batch is starting to run out, or you would like to extend the life of your batch to protect against storage price rises, you can increase the batch TTL by topping up your batch using swarm-cli's stamp topup command, passing in the relevant batchID.
 
 #### Swarm CLI
 
