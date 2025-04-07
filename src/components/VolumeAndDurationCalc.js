@@ -155,7 +155,7 @@ export default function DepthCalc() {
         />
         {errors.depth && <div style={{ color: 'red', marginBottom: '10px' }}>{errors.depth}</div>}
 
-        <label htmlFor="amountInput" style={{ display: 'block', marginBottom: '5px' }}>Amount (current minimum is { loading ? 'Loading...' : price * 17280 } PLUR):</label>
+        <label htmlFor="amountInput" style={{ display: 'block', marginBottom: '5px' }}>Amount (current minimum is { loading ? 'Loading...' : (price * 17280) + 10 } PLUR):</label>
         <input
           id="amountInput"
           placeholder={`Input amount`}
