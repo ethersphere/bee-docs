@@ -86,16 +86,24 @@ export default function UploadCostCalc() {
       totalChunks = Math.ceil(chunksValue);
       sizeInKb = (totalChunks * (2 ** 12)) / 1024;
     }
+
+    // Calculate PAC overhead
+    const pacOverheadChunks = isEncrypted 
+      ? Math.ceil(totalChunks / 63)  // 1.6% overhead for encrypted files
+      : Math.ceil(totalChunks / 127); // 0.8% overhead for unencrypted files
+    
+    // Add PAC overhead to total chunks
+    const totalChunksWithPac = totalChunks + pacOverheadChunks;
   
     const redundancyLevels = { Medium: 0, Strong: 1, Insane: 2, Paranoid: 3 };
     const redundancyLevel = redundancyLevels[redundancy];
   
     const quotient = isEncrypted
-      ? Math.floor(totalChunks / maxChunksEncrypted[redundancyLevel])
-      : Math.floor(totalChunks / maxChunks[redundancyLevel]);
+      ? Math.floor(totalChunksWithPac / maxChunksEncrypted[redundancyLevel])
+      : Math.floor(totalChunksWithPac / maxChunks[redundancyLevel]);
     const remainder = isEncrypted
-      ? totalChunks % maxChunksEncrypted[redundancyLevel]
-      : totalChunks % maxChunks[redundancyLevel];
+      ? totalChunksWithPac % maxChunksEncrypted[redundancyLevel]
+      : totalChunksWithPac % maxChunks[redundancyLevel];
   
     let remainderParities = 0;
     if (remainder > 0) {
@@ -105,9 +113,13 @@ export default function UploadCostCalc() {
     }
   
     const totalParities = quotient * maxParities[redundancyLevel] + remainderParities;
-    const totalDataWithParity = totalChunks + totalParities;
+    const totalDataWithParity = totalChunksWithPac + totalParities;
     const percentDifference = ((totalDataWithParity - totalChunks) / totalChunks) * 100;
+    
+    // Calculate parity size in KB and GB
+    const pacOverheadInKb = (pacOverheadChunks * (2 ** 12)) / 1024;
     const parityDataInKb = (totalParities * (2 ** 12)) / 1024;
+    const totalOverheadInKb = pacOverheadInKb + parityDataInKb;
   
     if (unit === "gb") {
       parityDataInGb = parityDataInKb / (1024 * 1024); // Convert KB to GB
@@ -119,16 +131,34 @@ export default function UploadCostCalc() {
         value: unit === "gb" ? `${formatNumberCustom(sizeInGb)} GB` : `${formatNumberCustom(sizeInKb)} KB`,
       },
       {
+        name: "PAC overhead",
+        value: unit === "gb" 
+          ? `${formatNumberCustom(pacOverheadInKb / (1024 * 1024))} GB (${formatNumberCustom(pacOverheadChunks)} chunks)` 
+          : `${formatNumberCustom(pacOverheadInKb)} KB (${formatNumberCustom(pacOverheadChunks)} chunks)`,
+      },
+      {
         name: "Parity data size",
-        value: unit === "gb" ? `${formatNumberCustom(parityDataInGb)} GB` : `${formatNumberCustom(parityDataInKb)} KB`,
+        value: unit === "gb" 
+          ? `${formatNumberCustom(parityDataInGb)} GB (${formatNumberCustom(totalParities)} chunks)` 
+          : `${formatNumberCustom(parityDataInKb)} KB (${formatNumberCustom(totalParities)} chunks)`,
+      },
+      {
+        name: "Total overhead",
+        value: unit === "gb" 
+          ? `${formatNumberCustom(totalOverheadInKb / (1024 * 1024))} GB` 
+          : `${formatNumberCustom(totalOverheadInKb)} KB`,
       },
       { 
         name: "Source data in chunks", 
         value: formatNumberCustom(totalChunks) 
       },
       { 
-        name: "Additional parity chunks", 
-        value: formatNumberCustom(totalParities) 
+        name: "Source with PAC overhead", 
+        value: formatNumberCustom(totalChunksWithPac) 
+      },
+      { 
+        name: "Total with parity", 
+        value: formatNumberCustom(totalDataWithParity) 
       },
       { 
         name: "Percent cost increase", 
