@@ -190,48 +190,326 @@ $$
 \text{68.72 gb} \times{0.6433} =  \text{44.21 gb }
 $$
 
-:::info
-The details of how the effective rates of utilisation are calculated will be published soon.
-:::
 
-### Effective Utilisation Table
-
+## Effective Utilisation Tables
 
 When a user buys a batch of stamps they may make the naive assumption that they will be able to upload data equal to the sum total size of the maximum capacity of the batch. However, in practice this assumption is incorrect, so it is essential that Swarm users understand the relationship between batch depth and the theoretical and effective volumes of a batch.
 
-The provided table shows the effective volume for each batch depth from 20 to 41 (note that currently the minimum stamp batch depth is 17, however 22 is the first depth with an effective volume above zero). The utilisation rate is the rate of utilisation of the theoretical max volume that a stamp batch can reach with a 0.1% failure rate (that is, there is only a one-in-a-thousand chance that the difference between the actual effectively utilised volume and effective volume shown in the table is greater than 0.1%). The "effective volume" figure shows the actual amount of data which can be stored at the effective rate. The effective volume figure is the one which should be used as the de-facto maximum amount of data that a batch can store before becoming either fully utilised (for immutable batches), or start overwriting older chunks (mutable batches).
+Columns:
 
-
-| Batch Depth | Utilisation Rate | Theoretical Max Volume | Effective Volume |
-|-------------|------------------|-------------------------|-------------------|
-| 20          | 0.00%          | 4.29 GB                 | 0.00 B            |
-| 21          | 0.00%          | 8.59 GB                 | 0.00 B            |
-| 22          | 28.67%          | 17.18 GB                | 4.93 GB           |
-| 23          | 49.56%          | 34.36 GB                | 17.03 GB          |
-| 24          | 64.33%           | 68.72 GB                | 44.21 GB          |
-| 25          | 74.78%           | 137.44 GB               | 102.78 GB         |
-| 26          | 82.17%           | 274.88 GB               | 225.86 GB         |
-| 27          | 87.39%           | 549.76 GB               | 480.43 GB         |
-| 28          | 91.08%           | 1.10 TB                 | 1.00 TB           |
-| 29          | 93.69%           | 2.20 TB                 | 2.06 TB           |
-| 30          | 95.54%           | 4.40 TB                 | 4.20 TB           |
-| 31          | 96.85%           | 8.80 TB                 | 8.52 TB           |
-| 32          | 97.77%           | 17.59 TB                | 17.20 TB          |
-| 33          | 98.42%           | 35.18 TB                | 34.63 TB          |
-| 34          | 98.89%           | 70.37 TB                | 69.58 TB          |
-| 35          | 99.21%           | 140.74 TB               | 139.63 TB         |
-| 36          | 99.44%           | 281.47 TB               | 279.91 TB         |
-| 37          | 99.61%           | 562.95 TB               | 560.73 TB         |
-| 38          | 99.72%           | 1.13 PB                 | 1.12 PB           |
-| 39          | 99.80%           | 2.25 PB                 | 2.25 PB           |
-| 40          | 99.86%           | 4.50 PB                 | 4.50 PB           |
-| 41          | 99.90%           | 9.01 PB                 | 9.00 PB           |
-
+* **Theoretical Volume:** The theoretical maximum volume which can be reached if the batch is completely utilized.
+* **Effective Volume:** The actual volume which a batch can be expected to store based with a failure rate of less than or equal to 0.1% (1 in 1000)
+* **Batch Depth:** The batch depth value.
+* **Utilization Rate:** The percentage of the theoretical volume which can be expected to be used according to the effective volume.
 
 :::info
-This table is based on preliminary calculations and may be subject to change.
+The title of each table below states whether it is for encrypted or unencrypted uploads along with the erasure coding level.
+
+[Erasure coding](/docs/concepts/DISC/erasure-coding) on Swarm has five named levels:
+
+1. NONE
+2. MEDIUM
+3. STRONG
+4. INSANE 
+5. PARANOID
 :::
 
-Nodes' storage is actually defined as a number of chunks with a size of 4kb (2^12 bytes) each, but in fact some [SOC](/docs/concepts/DISC/#chunks) chunks can be a few bytes longer, and some chunks can be smaller, so the conversion is not precise. Furthermore, due to the way Swarm represents files in a Merkle tree, the intermediate chunks are additional overhead which must also be accounted for. 
+### Unencrypted - NONE 
 
-Additionally, when a node stores chunks it uses additional indexes — therefore the disk space a maximally filled reserve would demand cannot be calculated with perfect accuracy.
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 44.70 kB | 17 | 0.01% |
+| 1.07 GB | 6.66 MB | 18 | 0.61% |
+| 2.15 GB | 112.06 MB | 19 | 5.09% |
+| 4.29 GB | 687.62 MB | 20 | 15.65% |
+| 8.59 GB | 2.60 GB | 21 | 30.27% |
+| 17.18 GB | 7.73 GB | 22 | 44.99% |
+| 34.36 GB | 19.94 GB | 23 | 58.03% |
+| 68.72 GB | 47.06 GB | 24 | 68.48% |
+| 137.44 GB | 105.51 GB | 25 | 76.77% |
+| 274.88 GB | 227.98 GB | 26 | 82.94% |
+| 549.76 GB | 476.68 GB | 27 | 86.71% |
+| 1.10 TB | 993.65 GB | 28 | 88.37% |
+| 2.20 TB | 2.04 TB | 29 | 92.88% |
+| 4.40 TB | 4.17 TB | 30 | 94.81% |
+| 8.80 TB | 8.45 TB | 31 | 96.06% |
+| 17.59 TB | 17.07 TB | 32 | 97.01% |
+| 35.18 TB | 34.36 TB | 33 | 97.65% |
+| 70.37 TB | 69.04 TB | 34 | 98.11% |
+| 140.74 TB | 138.54 TB | 35 | 98.44% |
+| 281.47 TB | 277.72 TB | 36 | 98.67% |
+| 562.95 TB | 556.35 TB | 37 | 98.83% |
+| 1.13 PB | 1.11 PB | 38 | 98.91% |
+| 2.25 PB | 2.23 PB | 39 | 98.96% |
+| 4.50 PB | 4.46 PB | 40 | 98.98% |
+| 9.01 PB | 8.93 PB | 41 | 99.11% |
+
+### Unencrypted - MEDIUM 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 41.56 kB | 17 | 0.01% |
+| 1.07 GB | 6.19 MB | 18 | 0.57% |
+| 2.15 GB | 104.18 MB | 19 | 4.73% |
+| 4.29 GB | 639.27 MB | 20 | 14.54% |
+| 8.59 GB | 2.41 GB | 21 | 28.11% |
+| 17.18 GB | 7.18 GB | 22 | 41.79% |
+| 34.36 GB | 18.54 GB | 23 | 53.95% |
+| 68.72 GB | 43.75 GB | 24 | 63.66% |
+| 137.44 GB | 98.09 GB | 25 | 71.37% |
+| 274.88 GB | 211.95 GB | 26 | 77.11% |
+| 549.76 GB | 443.16 GB | 27 | 80.61% |
+| 1.10 TB | 923.78 GB | 28 | 82.16% |
+| 2.20 TB | 1.90 TB | 29 | 86.30% |
+| 4.40 TB | 3.88 TB | 30 | 88.14% |
+| 8.80 TB | 7.86 TB | 31 | 89.26% |
+| 17.59 TB | 15.87 TB | 32 | 90.21% |
+| 35.18 TB | 31.94 TB | 33 | 90.77% |
+| 70.37 TB | 64.19 TB | 34 | 91.22% |
+| 140.74 TB | 128.80 TB | 35 | 91.52% |
+| 281.47 TB | 258.19 TB | 36 | 91.73% |
+| 562.95 TB | 517.23 TB | 37 | 91.88% |
+| 1.13 PB | 1.04 PB | 38 | 91.95% |
+| 2.25 PB | 2.07 PB | 39 | 92.00% |
+| 4.50 PB | 4.15 PB | 40 | 92.15% |
+| 9.01 PB | 8.30 PB | 41 | 92.14% |
+
+### Unencrypted - STRONG 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 37.37 kB | 17 | 0.01% |
+| 1.07 GB | 5.57 MB | 18 | 0.51% |
+| 2.15 GB | 93.68 MB | 19 | 4.25% |
+| 4.29 GB | 574.81 MB | 20 | 13.07% |
+| 8.59 GB | 2.17 GB | 21 | 25.26% |
+| 17.18 GB | 6.46 GB | 22 | 37.58% |
+| 34.36 GB | 16.67 GB | 23 | 48.50% |
+| 68.72 GB | 39.34 GB | 24 | 57.24% |
+| 137.44 GB | 88.20 GB | 25 | 64.17% |
+| 274.88 GB | 190.58 GB | 26 | 69.33% |
+| 549.76 GB | 398.47 GB | 27 | 72.48% |
+| 1.10 TB | 830.63 GB | 28 | 73.85% |
+| 2.20 TB | 1.71 TB | 29 | 77.59% |
+| 4.40 TB | 3.49 TB | 30 | 79.27% |
+| 8.80 TB | 7.07 TB | 31 | 80.34% |
+| 17.59 TB | 14.27 TB | 32 | 81.12% |
+| 35.18 TB | 28.72 TB | 33 | 81.63% |
+| 70.37 TB | 57.71 TB | 34 | 82.01% |
+| 140.74 TB | 115.81 TB | 35 | 82.29% |
+| 281.47 TB | 232.16 TB | 36 | 82.48% |
+| 562.95 TB | 465.07 TB | 37 | 82.61% |
+| 1.13 PB | 931.23 TB | 38 | 82.67% |
+| 2.25 PB | 1.86 PB | 39 | 82.71% |
+| 4.50 PB | 3.73 PB | 40 | 82.78% |
+| 9.01 PB | 7.46 PB | 41 | 82.79% |
+
+### Unencrypted - INSANE 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 33.88 kB | 17 | 0.01% |
+| 1.07 GB | 5.05 MB | 18 | 0.46% |
+| 2.15 GB | 84.92 MB | 19 | 3.86% |
+| 4.29 GB | 521.09 MB | 20 | 11.85% |
+| 8.59 GB | 1.97 GB | 21 | 22.90% |
+| 17.18 GB | 5.86 GB | 22 | 34.09% |
+| 34.36 GB | 15.11 GB | 23 | 43.97% |
+| 68.72 GB | 35.66 GB | 24 | 51.90% |
+| 137.44 GB | 79.96 GB | 25 | 58.18% |
+| 274.88 GB | 172.77 GB | 26 | 62.85% |
+| 549.76 GB | 361.23 GB | 27 | 65.70% |
+| 1.10 TB | 753.00 GB | 28 | 66.95% |
+| 2.20 TB | 1.55 TB | 29 | 70.38% |
+| 4.40 TB | 3.16 TB | 30 | 71.92% |
+| 8.80 TB | 6.41 TB | 31 | 72.85% |
+| 17.59 TB | 12.93 TB | 32 | 73.53% |
+| 35.18 TB | 26.04 TB | 33 | 74.01% |
+| 70.37 TB | 52.32 TB | 34 | 74.35% |
+| 140.74 TB | 104.99 TB | 35 | 74.60% |
+| 281.47 TB | 210.46 TB | 36 | 74.77% |
+| 562.95 TB | 421.61 TB | 37 | 74.89% |
+| 1.13 PB | 844.20 TB | 38 | 74.94% |
+| 2.25 PB | 1.69 PB | 39 | 74.98% |
+| 4.50 PB | 3.38 PB | 40 | 75.03% |
+| 9.01 PB | 6.77 PB | 41 | 75.10% |
+
+### Unencrypted - PARANOID 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 13.27 kB | 17 | 0.00% |
+| 1.07 GB | 1.98 MB | 18 | 0.18% |
+| 2.15 GB | 33.27 MB | 19 | 1.51% |
+| 4.29 GB | 204.14 MB | 20 | 4.64% |
+| 8.59 GB | 771.13 MB | 21 | 8.75% |
+| 17.18 GB | 2.29 GB | 22 | 13.34% |
+| 34.36 GB | 5.92 GB | 23 | 17.22% |
+| 68.72 GB | 13.97 GB | 24 | 20.33% |
+| 137.44 GB | 31.32 GB | 25 | 22.79% |
+| 274.88 GB | 67.68 GB | 26 | 24.62% |
+| 549.76 GB | 141.51 GB | 27 | 25.74% |
+| 1.10 TB | 294.99 GB | 28 | 26.23% |
+| 2.20 TB | 606.90 GB | 29 | 27.56% |
+| 4.40 TB | 1.24 TB | 30 | 28.15% |
+| 8.80 TB | 2.51 TB | 31 | 28.54% |
+| 17.59 TB | 5.07 TB | 32 | 28.82% |
+| 35.18 TB | 10.20 TB | 33 | 28.99% |
+| 70.37 TB | 20.50 TB | 34 | 29.13% |
+| 140.74 TB | 41.13 TB | 35 | 29.22% |
+| 281.47 TB | 82.45 TB | 36 | 29.29% |
+| 562.95 TB | 165.17 TB | 37 | 29.34% |
+| 1.13 PB | 330.72 TB | 38 | 29.37% |
+| 2.25 PB | 661.97 TB | 39 | 29.39% |
+| 4.50 PB | 1.32 PB | 40 | 29.41% |
+| 9.01 PB | 2.65 PB | 41 | 29.43% |
+
+### Encrypted - NONE 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 44.35 kB | 17 | 0.01% |
+| 1.07 GB | 6.61 MB | 18 | 0.60% |
+| 2.15 GB | 111.18 MB | 19 | 5.05% |
+| 4.29 GB | 682.21 MB | 20 | 15.52% |
+| 8.59 GB | 2.58 GB | 21 | 30.04% |
+| 17.18 GB | 7.67 GB | 22 | 44.62% |
+| 34.36 GB | 19.78 GB | 23 | 57.56% |
+| 68.72 GB | 46.69 GB | 24 | 67.93% |
+| 137.44 GB | 104.68 GB | 25 | 76.16% |
+| 274.88 GB | 226.19 GB | 26 | 82.29% |
+| 549.76 GB | 472.93 GB | 27 | 86.02% |
+| 1.10 TB | 985.83 GB | 28 | 87.66% |
+| 2.20 TB | 2.03 TB | 29 | 92.25% |
+| 4.40 TB | 4.14 TB | 30 | 94.21% |
+| 8.80 TB | 8.39 TB | 31 | 95.37% |
+| 17.59 TB | 16.93 TB | 32 | 96.22% |
+| 35.18 TB | 34.09 TB | 33 | 96.88% |
+| 70.37 TB | 68.50 TB | 34 | 97.34% |
+| 140.74 TB | 137.45 TB | 35 | 97.67% |
+| 281.47 TB | 275.53 TB | 36 | 97.89% |
+| 562.95 TB | 551.97 TB | 37 | 98.05% |
+| 1.13 PB | 1.11 PB | 38 | 98.13% |
+| 2.25 PB | 2.21 PB | 39 | 98.18% |
+| 4.50 PB | 4.43 PB | 40 | 98.36% |
+| 9.01 PB | 8.86 PB | 41 | 98.37% |
+
+### Encrypted - MEDIUM 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 40.89 kB | 17 | 0.01% |
+| 1.07 GB | 6.09 MB | 18 | 0.56% |
+| 2.15 GB | 102.49 MB | 19 | 4.65% |
+| 4.29 GB | 628.91 MB | 20 | 14.30% |
+| 8.59 GB | 2.38 GB | 21 | 27.68% |
+| 17.18 GB | 7.07 GB | 22 | 41.15% |
+| 34.36 GB | 18.24 GB | 23 | 53.09% |
+| 68.72 GB | 43.04 GB | 24 | 62.63% |
+| 137.44 GB | 96.50 GB | 25 | 70.21% |
+| 274.88 GB | 208.52 GB | 26 | 75.86% |
+| 549.76 GB | 435.98 GB | 27 | 79.30% |
+| 1.10 TB | 908.81 GB | 28 | 80.82% |
+| 2.20 TB | 1.87 TB | 29 | 84.98% |
+| 4.40 TB | 3.81 TB | 30 | 86.67% |
+| 8.80 TB | 7.73 TB | 31 | 87.84% |
+| 17.59 TB | 15.61 TB | 32 | 88.74% |
+| 35.18 TB | 31.43 TB | 33 | 89.34% |
+| 70.37 TB | 63.15 TB | 34 | 89.74% |
+| 140.74 TB | 126.71 TB | 35 | 90.03% |
+| 281.47 TB | 254.01 TB | 36 | 90.24% |
+| 562.95 TB | 508.85 TB | 37 | 90.39% |
+| 1.13 PB | 1.02 PB | 38 | 90.47% |
+| 2.25 PB | 2.04 PB | 39 | 90.51% |
+| 4.50 PB | 4.08 PB | 40 | 90.64% |
+| 9.01 PB | 8.17 PB | 41 | 90.65% |
+
+### Encrypted - STRONG 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 36.73 kB | 17 | 0.01% |
+| 1.07 GB | 5.47 MB | 18 | 0.50% |
+| 2.15 GB | 92.07 MB | 19 | 4.18% |
+| 4.29 GB | 564.95 MB | 20 | 12.85% |
+| 8.59 GB | 2.13 GB | 21 | 24.86% |
+| 17.18 GB | 6.35 GB | 22 | 36.97% |
+| 34.36 GB | 16.38 GB | 23 | 47.67% |
+| 68.72 GB | 38.66 GB | 24 | 56.26% |
+| 137.44 GB | 86.69 GB | 25 | 63.07% |
+| 274.88 GB | 187.31 GB | 26 | 68.14% |
+| 549.76 GB | 391.64 GB | 27 | 71.24% |
+| 1.10 TB | 816.39 GB | 28 | 72.59% |
+| 2.20 TB | 1.68 TB | 29 | 76.34% |
+| 4.40 TB | 3.43 TB | 30 | 77.89% |
+| 8.80 TB | 6.94 TB | 31 | 78.86% |
+| 17.59 TB | 14.02 TB | 32 | 79.71% |
+| 35.18 TB | 28.23 TB | 33 | 80.23% |
+| 70.37 TB | 56.72 TB | 34 | 80.60% |
+| 140.74 TB | 113.82 TB | 35 | 80.88% |
+| 281.47 TB | 228.18 TB | 36 | 81.06% |
+| 562.95 TB | 457.10 TB | 37 | 81.20% |
+| 1.13 PB | 915.26 TB | 38 | 81.26% |
+| 2.25 PB | 1.83 PB | 39 | 81.30% |
+| 4.50 PB | 3.67 PB | 40 | 81.43% |
+| 9.01 PB | 7.34 PB | 41 | 81.45% |
+
+### Encrypted - INSANE 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 33.26 kB | 17 | 0.01% |
+| 1.07 GB | 4.96 MB | 18 | 0.45% |
+| 2.15 GB | 83.38 MB | 19 | 3.79% |
+| 4.29 GB | 511.65 MB | 20 | 11.64% |
+| 8.59 GB | 1.93 GB | 21 | 22.52% |
+| 17.18 GB | 5.75 GB | 22 | 33.50% |
+| 34.36 GB | 14.84 GB | 23 | 43.19% |
+| 68.72 GB | 35.02 GB | 24 | 50.96% |
+| 137.44 GB | 78.51 GB | 25 | 57.12% |
+| 274.88 GB | 169.64 GB | 26 | 61.71% |
+| 549.76 GB | 354.69 GB | 27 | 64.52% |
+| 1.10 TB | 739.37 GB | 28 | 65.74% |
+| 2.20 TB | 1.52 TB | 29 | 69.15% |
+| 4.40 TB | 3.10 TB | 30 | 70.56% |
+| 8.80 TB | 6.29 TB | 31 | 71.48% |
+| 17.59 TB | 12.70 TB | 32 | 72.18% |
+| 35.18 TB | 25.57 TB | 33 | 72.67% |
+| 70.37 TB | 51.37 TB | 34 | 73.00% |
+| 140.74 TB | 103.08 TB | 35 | 73.24% |
+| 281.47 TB | 206.65 TB | 36 | 73.42% |
+| 562.95 TB | 413.98 TB | 37 | 73.54% |
+| 1.13 PB | 828.91 TB | 38 | 73.59% |
+| 2.25 PB | 1.66 PB | 39 | 73.62% |
+| 4.50 PB | 3.32 PB | 40 | 73.72% |
+| 9.01 PB | 6.64 PB | 41 | 73.74% |
+
+### Encrypted - PARANOID 
+
+| Theoretical Volume | Effective Volume | Batch Depth | Utilization Rate |
+| ------------- | ------------- | ------------- | ------------- |
+| 536.87 MB | 13.17 kB | 17 | 0.00% |
+| 1.07 GB | 1.96 MB | 18 | 0.18% |
+| 2.15 GB | 33.01 MB | 19 | 1.50% |
+| 4.29 GB | 202.53 MB | 20 | 4.61% |
+| 8.59 GB | 765.05 MB | 21 | 8.68% |
+| 17.18 GB | 2.28 GB | 22 | 13.27% |
+| 34.36 GB | 5.87 GB | 23 | 17.08% |
+| 68.72 GB | 13.86 GB | 24 | 20.17% |
+| 137.44 GB | 31.08 GB | 25 | 22.61% |
+| 274.88 GB | 67.15 GB | 26 | 24.43% |
+| 549.76 GB | 140.40 GB | 27 | 25.54% |
+| 1.10 TB | 292.67 GB | 28 | 26.03% |
+| 2.20 TB | 602.12 GB | 29 | 27.35% |
+| 4.40 TB | 1.23 TB | 30 | 27.94% |
+| 8.80 TB | 2.49 TB | 31 | 28.32% |
+| 17.59 TB | 5.03 TB | 32 | 28.60% |
+| 35.18 TB | 10.12 TB | 33 | 28.77% |
+| 70.37 TB | 20.34 TB | 34 | 28.91% |
+| 140.74 TB | 40.80 TB | 35 | 29.00% |
+| 281.47 TB | 81.80 TB | 36 | 29.06% |
+| 562.95 TB | 163.87 TB | 37 | 29.11% |
+| 1.13 PB | 328.11 TB | 38 | 29.14% |
+| 2.25 PB | 656.76 TB | 39 | 29.16% |
+| 4.50 PB | 1.31 PB | 40 | 29.18% |
+| 9.01 PB | 2.63 PB | 41 | 29.19% |
