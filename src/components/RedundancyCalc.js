@@ -13,17 +13,20 @@ export default function UploadCostCalc() {
   const maxParities = [9, 21, 31, 90];
   const maxChunksEncrypted = [59, 53, 48, 18];
   const errorTolerances = {
+    None: "0%",
     Medium: "1%",
     Strong: "5%",
     Insane: "10%",
     Paranoid: "50%"
   };
   
-
   const formatNumberCustom = (num) => {
+    // Modify to display integers without .00 for chunks
+    if (unit === "chunks") {
+      return Math.round(num).toString();
+    }
     const isScientific = Math.abs(num) > 0 && Math.abs(num) < 0.0001;
-    let formattedNum = isScientific ? num.toExponential(2) : num.toFixed(2);
-    return formattedNum;
+    return isScientific ? num.toExponential(2) : num.toFixed(2);
   };
 
   const handleDataSizeChange = (e) => {
@@ -42,13 +45,18 @@ export default function UploadCostCalc() {
     setUnit(e.target.value);
   };
 
-
   const calculateCost = () => {
     setErrorMessage("");
     setResult([]);
   
     if (!redundancy) {
       setErrorMessage("Please select a redundancy level.");
+      return;
+    }
+
+    // If redundancy is None, skip erasure coding calculations
+    if (redundancy === "None") {
+      calculateNonRedundancyCost();
       return;
     }
 
@@ -93,17 +101,15 @@ export default function UploadCostCalc() {
       : Math.ceil(totalChunks / 127); // 0.8% overhead for unencrypted files
     
     // Add PAC overhead to total chunks
-    const totalChunksWithPac = totalChunks + pacOverheadChunks;
-  
-    const redundancyLevels = { Medium: 0, Strong: 1, Insane: 2, Paranoid: 3 };
+    const redundancyLevels = { None: -1, Medium: 0, Strong: 1, Insane: 2, Paranoid: 3 };
     const redundancyLevel = redundancyLevels[redundancy];
-  
+
     const quotient = isEncrypted
-      ? Math.floor(totalChunksWithPac / maxChunksEncrypted[redundancyLevel])
-      : Math.floor(totalChunksWithPac / maxChunks[redundancyLevel]);
+      ? Math.floor(totalChunks / maxChunksEncrypted[redundancyLevel])
+      : Math.floor(totalChunks / maxChunks[redundancyLevel]);
     const remainder = isEncrypted
-      ? totalChunksWithPac % maxChunksEncrypted[redundancyLevel]
-      : totalChunksWithPac % maxChunks[redundancyLevel];
+      ? totalChunks % maxChunksEncrypted[redundancyLevel]
+      : totalChunks % maxChunks[redundancyLevel];
   
     let remainderParities = 0;
     if (remainder > 0) {
@@ -113,6 +119,7 @@ export default function UploadCostCalc() {
     }
   
     const totalParities = quotient * maxParities[redundancyLevel] + remainderParities;
+    const totalChunksWithPac = totalChunks + pacOverheadChunks;
     const totalDataWithParity = totalChunksWithPac + totalParities;
     const percentDifference = ((totalDataWithParity - totalChunks) / totalChunks) * 100;
     
@@ -176,7 +183,89 @@ export default function UploadCostCalc() {
   
     setResult(resultsArray);
   };
+
+  const calculateNonRedundancyCost = () => {
+    let totalChunks, sizeInKb, sizeInGb;
   
+    if (!dataSize || isNaN(parseFloat(dataSize))) {
+      setErrorMessage("Please enter a valid data size.");
+      return;
+    }
+    
+    if (unit === "kb") {
+      const kbValue = parseFloat(dataSize);
+      if (isNaN(kbValue) || kbValue <= 0) {
+        setErrorMessage("Please input a valid KB value above 0.");
+        return;
+      }
+      sizeInKb = kbValue;
+      totalChunks = Math.ceil((kbValue * 1024) / (2 ** 12));
+    } else if (unit === "gb") {
+      const gbValue = parseFloat(dataSize);
+      if (isNaN(gbValue) || gbValue <= 0) {
+        setErrorMessage("Please input a valid GB value above 0.");
+        return;
+      }
+      sizeInGb = gbValue;
+      sizeInKb = gbValue * 1024 * 1024; // Convert GB to KB
+      totalChunks = Math.ceil((sizeInKb * 1024) / (2 ** 12));
+    } else {
+      const chunksValue = parseFloat(dataSize);
+      if (isNaN(chunksValue) || chunksValue <= 1 || chunksValue % 1 > 0) {
+        setErrorMessage("Please input an integer greater than 1 for chunk values");
+        return;
+      }
+      totalChunks = Math.ceil(chunksValue);
+      sizeInKb = (totalChunks * (2 ** 12)) / 1024;
+    }
+
+    // Calculate PAC overhead
+    const pacOverheadChunks = isEncrypted 
+      ? Math.ceil(totalChunks / 63)  // 1.6% overhead for encrypted files
+      : Math.ceil(totalChunks / 127); // 0.8% overhead for unencrypted files
+    
+    const totalChunksWithPac = totalChunks + pacOverheadChunks;
+    const percentDifference = ((totalChunksWithPac - totalChunks) / totalChunks) * 100;
+    
+    // Calculate PAC overhead size in KB and GB
+    const pacOverheadInKb = (pacOverheadChunks * (2 ** 12)) / 1024;
+    const sizeInGbCalculated = unit === "gb" ? sizeInKb / (1024 * 1024) : null;
+  
+    const resultsArray = [
+      {
+        name: "Source data size",
+        value: unit === "gb" ? `${formatNumberCustom(sizeInGbCalculated)} GB` : `${formatNumberCustom(sizeInKb)} KB`,
+      },
+      {
+        name: "PAC overhead",
+        value: unit === "gb" 
+          ? `${formatNumberCustom(pacOverheadInKb / (1024 * 1024))} GB (${formatNumberCustom(pacOverheadChunks)} chunks)` 
+          : `${formatNumberCustom(pacOverheadInKb)} KB (${formatNumberCustom(pacOverheadChunks)} chunks)`,
+      },
+      { 
+        name: "Source data in chunks", 
+        value: formatNumberCustom(totalChunks) 
+      },
+      { 
+        name: "Source with PAC overhead", 
+        value: formatNumberCustom(totalChunksWithPac) 
+      },
+      { 
+        name: "Percent cost increase", 
+        value: `${percentDifference.toFixed(2)}%` 
+      },
+      { 
+        name: "Selected redundancy level", 
+        value: `${redundancy}` 
+      },
+      { 
+        name: "Error tolerance", 
+        value: errorTolerances[redundancy] 
+      },
+    ];
+  
+    setResult(resultsArray);
+  };
 
   const styles = {
     container: { padding: '20px', fontFamily: 'Arial', maxWidth: '650px', margin: '0 auto' }, 
@@ -225,6 +314,7 @@ export default function UploadCostCalc() {
         <div style={styles.title}>Redundancy Level:</div>
         <select value={redundancy} onChange={handleRedundancyChange} style={styles.select}>
           <option value="" disabled>Select Redundancy Level</option>
+          <option value="None">None</option>
           <option value="Medium">Medium</option>
           <option value="Strong">Strong</option>
           <option value="Insane">Insane</option>
@@ -245,13 +335,10 @@ export default function UploadCostCalc() {
           <tbody>
             {result.map((item, index) => (
               <tr key={index}>
-                <td style={{...styles.tdName, ...styles.bold}}>{item.name}</td> {/* Apply bold style here */}
+                <td style={{...styles.tdName, ...styles.bold}}>{item.name}</td>
                 <td style={styles.tdValue}>{item.value}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </div>
-  );
-}

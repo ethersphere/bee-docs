@@ -39,10 +39,7 @@ To upload data to the swarm, you must perform the following steps:
 
 ## Purchasing Your Batch of Stamps
 
-In order to upload your data to swarm, you must agree to burn (spend)
-some of your xBZZ to signify to storer and fowarder nodes that this
-content is valued. Before you proceed to the next step, you must buy
-stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
+In order to upload your data to swarm, you must [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch) to pay for however much data you need to upload.
 
 ## Using Stamps to Upload a File
 
@@ -304,7 +301,7 @@ cd ..
 Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking care to include the header `Content Type: application/x-tar`.
 
 :::info
-In order to upload your data to swarm, you must agree to burn some of your xBZZ to signify to storer and fowarder nodes that the content is important. Before you progress to the next step, you must buy stamps! See this guide on how to [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
+Before you progress to the next step, you must buy stamps so you can pay for uploads! See this guide on how to [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
 :::
 
 ```bash
