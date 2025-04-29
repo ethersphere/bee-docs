@@ -21,7 +21,7 @@ share your implementations in other languages in the
 
 ### What are Feeds?
 
-A feed is a collection of Single Owner Chunks with predicatable addresses. This enables creators to upload pointers to data so that consumers of the feed are able to find the data in Swarm using only an _Ethereum address_ and _Topic ID_.
+A feed is a collection of single owner chunks with predictable addresses. This enables creators to upload pointers to data so that consumers of the feed are able to find the data in Swarm using only an _Ethereum address_ and _Topic ID_.
 
 ### Creating and Updating a Feed
 
