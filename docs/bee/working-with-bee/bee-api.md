@@ -458,10 +458,26 @@ From the results we can see that we have a healthy neighborhood size when compar
 
 ### */rchash*
 
-Calling the /rchash endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
+Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
+
+
+
+
+The `/rchash` endpoint has 3 parameters: `depth` and `anchor_01` and `anchor_02`. For both of the anchor parameters, you should use the first 4 digits from your node's overlay address:
+
+```
+/rchash/{depth}/{anchor_01}/{anchor_02}
+```
+
+:::info anchor parameter details
+- The anchor parameters must match the prefix bits of the node's overlay address up to at least the current storage depth (with each hex digit equal to 4 bits).
+- The anchor parameters also must have an even number of digits. 
+
+Therefore you can use the first four digits of your node's overlay address since it will work for depths up to depth 16, which will not be approached unless the depth increases up to depth 17, which is not likely to happen in the near future. If it does increase to depth 17, then the first 6 overlay digits should be used. 
+:::
 
 ```bash
-sudo curl -sX GET http://localhost:1633/rchash/10/aaaa/aaaa | jq
+sudo curl -sX GET http://localhost:1633/rchash/10/1e20/1e20 | jq
 ```
 It should not take much longer than 6 minutes at most for results to be returned:
 ```bash
@@ -484,6 +500,15 @@ It should not take much longer than 6 minutes at most for results to be returned
 ```
 
 If the `Time` value is much longer than 6 minutes then it likely means that the node's hardware performance is not sufficient. Consider upgrading to use faster memory or processor.
+
+If while running the `/rchash` command there is an evictions related error such as the one below, try running the call to the `/rchash` endpoint again.
+
+```
+error: "level"="error" "logger"="node/storageincentives" "msg"="make sample" "error"="sampler: failed creating sample: sampler stopped due to ongoing evictions"
+```
+
+While evictions are a normal part of Bee's standard operation, the event of an eviction will interrupt the sampler process.
+
 
 ### */health*
        
