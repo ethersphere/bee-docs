@@ -765,61 +765,8 @@ Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` befor
 
 #### Run sampler process to benchmark performance
 
-One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash/{depth}/{anchor_01}/{anchor_02}` endpoint of the API may be used. The `anchor_01` and `anchor_02` must be a hex string with an even number of digits. For simplicity, you can just use `aaaa` for both anchors as we do in the example further down. 
+One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash` endpoint of the API may be used. See the `/rchash` section of the [Bee API page for usage details](/docs/bee/working-with-bee/bee-api/). 
 
-The `{anchor}` value can be set to any random hexadecimal string, while `{depth}` should be set to the current depth.
-
-To get the current depth, call the `/reservestate` endpoint
-
-```bash
-sudo curl -sX GET http://localhost:1633/reservestate | jq
-```
-Copy the `storageRadius` value from the output (this represents the ACTUAL depth for your node, in other words, the depth to which your node is responsible for storing files. The `radius` value is the hypothetical depth your node would be at if every postage batch was fully utilised.)
-
-```bash
-{
-  "radius": 15,
-  "storageRadius": 10,
-  "commitment": 128332464128
-}
-```
-
-Call the endpoint like so:
-
-```bash
-sudo curl -sX GET http://localhost:1633/rchash/10/aaaa/aaaa | jq
-```
-
-If the sampler runs successfully, you should see output like this:
-
-```bash
-{
-  "Sample": {
-    "Items": [
-      "000003dac2b2f75842e410474dfa4c1e6e0b9970d81b57b33564c5620667ba96",
-      "00000baace30916f7445dbcc44d9b55cb699925acfbe157e4498c63bde834f40",
-      "0000126f48fb1e99e471efc683565e4b245703c922b9956f89cbe09e1238e983",
-      "000012db04a281b7cc0e6436a49bdc5b06ff85396fcb327330ca307e409d2a04",
-      "000014f365b1a381dda85bbeabdd3040fb1395ca9e222e72a597f4cc76ecf6c2",
-      "00001869a9216b3da6814a877fdbc31f156fc2e983b52bc68ffc6d3f3cc79af0",
-      "0000198c0456230b555d5261091cf9206e75b4ad738495a60640b425ecdf408f",
-      "00001a523bd1b688472c6ea5a3c87c697db64d54744829372ac808de8ec1d427"
-    ],
-    "Hash": "7f7d93c6235855fedc34e32c6b67253e27910ca4e3b8f2d942efcd758a6d8829"
-  },
-  "Time": "2m54.087909745s"
-}
-```
-
-If the `Time` value is higher than 6 minutes, then the hardware specifications for the node may need to be upgraded. 
-
-If there is an evictions related error such as the one below, try running the call to the `/rchash/` endpoint again.
-
-```
-error: "level"="error" "logger"="node/storageincentives" "msg"="make sample" "error"="sampler: failed creating sample: sampler stopped due to ongoing evictions"
-```
-
-While evictions are a normal part of Bee's standard operation, the event of an eviction will interrupt the sampler process.
 
 If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord). 
 
