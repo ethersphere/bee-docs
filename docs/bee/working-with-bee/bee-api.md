@@ -463,7 +463,7 @@ Calling the `/rchash` endpoint triggers the generation of a reserve commitment h
 
 
 
-The `/rchash` endpoint has 3 parameters: `depth` and `anchor_01` and `anchor_02`. For both of the anchor parameters, you should use the first 4 digits from your node's overlay address:
+The `/rchash` endpoint has 3 parameters: `depth` and `anchor_01` and `anchor_02`. For both of the anchor parameters, you should use the first 4 digits from your node's overlay address (which you can find from the `/addresses` endpoint):
 
 ```
 /rchash/{depth}/{anchor_01}/{anchor_02}
