@@ -461,9 +461,7 @@ From the results we can see that we have a healthy neighborhood size when compar
 Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient. 
 
 
-
-
-The `/rchash` endpoint has 3 parameters: `depth` and `anchor_01` and `anchor_02`. For both of the anchor parameters, you should use the first 4 digits from your node's overlay address (which you can find from the `/addresses` endpoint):
+The `/rchash` endpoint has 3 parameters: `depth` and `anchor_01` and `anchor_02`. For both of the anchor parameters, you should use the first 4 digits from your node's overlay address (which you can find from the `/addresses` endpoint). For depth, you should use the current storage depth of your node which you can find using the `/status` endpoint (storage depth is equivalent to the `storageRadius` value returned from `/status`):
 
 ```
 /rchash/{depth}/{anchor_01}/{anchor_02}
