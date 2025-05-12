@@ -139,8 +139,22 @@ However, directly interacting with the API is not recommended for most users. In
 
 ### How can I check how many cashed out cheques do I have?
 
-You can look at your chequebook contract at etherscan.
-Get your chequebook contract address with: `curl http://localhost:1633/chequebook/address`
+You can review chequebook information using swarm-cli:
+
+```bash
+swarm-cli cheque list
+```
+
+```bash
+Looking up cheques with value at least 0...
+No uncashed cheques found.
+```
+
+You can also use `swarm-cli` other chequebook interactions. Use the `-h` help flag for a list of related commands:
+
+```bash
+swarm-cli cheque -h
+```
 
 ### Where can I find documents about the cashout commands?
 

@@ -220,54 +220,74 @@ Eventually you will be able to see when your node finishes syncing, and the logs
 "time"="2024-09-24 22:30:33.610825" "level"="info" "logger"="node/kademlia" "msg"="disconnected peer" "peer_address"="6ceb30c7afc11716f866d19b7eeda9836757031ed056b61961e949f6e705b49e"
 ```
 
-Your node will now begin syncing chunks from the network, this process can take several hours. You check your node's progress with the `/status` endpoint:
+Your node will now begin syncing chunks from the network, this process can take several hours. You check your node's progress using `swarm-cli`:
 
 ```bash
-curl -s  http://localhost:1633/status | jq
+swarm-cli status
 ```
 
+The `Fully synced` field will change to `true` once your node is fully synced. Also:
+
+- `Mode` must be `full`
+- Check `Connected Peers` to ensure that your node is reachable by other nodes 
+
 ```bash
-{
-  "overlay": "22dc155fe072e131449ec7ea2f77de16f4735f06257ebaa5daf2fdcf14267fd9",
-  "proximity": 256,
-  "beeMode": "full",
-  "reserveSize": 686217,
-  "reserveSizeWithinRadius": 321888,
-  "pullsyncRate": 497.8747754074074,
-  "storageRadius": 11,
-  "connectedPeers": 148,
-  "neighborhoodSize": 4,
-  "batchCommitment": 74510761984,
-  "isReachable": false,
-  "lastSyncedBlock": 36172390
-}
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.5.0-5ec231ba
+Mode: full
+
+Topology
+Connected Peers: 132
+Population: 6443
+Depth: 10
+
+Wallet
+xBZZ: 1.2445451736121243
+xDAI: 0.074264145714886927
+
+Chainsync
+Block: 40,020,915 / 40,020,921 (Δ 6)
+
+Chequebook
+Available xBZZ: 0.0000000000000100
+Total xBZZ: 0.0000000000000100
+
+Staking
+Staked xBZZ: 10.0000000000000001
+
+Redistribution
+Reward: 0.0000000000000000
+Has sufficient funds: true
+Fully synced: true
+Frozen: false
+Last selected round: 262636
+Last played round: 0
+Last won round: 0
+Minimum gas funds: 0.000009519007500000
 ```
 We can see that our node has not yet finished syncing chunks since the `pullsyncRate` is around 497 chunks per second. Once the node is fully synced, this value will go to zero. It can take several hours for syncing to complete, but we do not need to wait until our node is fully synced before staking, so we can move directly to the next step. 
 
 ### Stake node
 
-You can use the following command to stake 10 xBZZ:
+You can use the following `swarm-cli` command to stake 10 xBZZ:
+
+:::info
+The deposit amount is specified in [PLUR](/docs/references/glossary/#plur)
+:::
 
 ```bash
-curl -XPOST localhost:1633/stake/100000000000000000
+swarm-cli stake --deposit 100000000000000000
 ```
 
-If the staking transaction is successful a `txHash` will be returned:
-
-```
-{"txHash":"0x258d64720fe7abade794f14ef3261534ff823ef3e2e0011c431c31aea75c2dd5"}
-```
-
-We can also confirm that our node has been staked with the `/stake` endpoint:
+After a moment, the staking transaction will complete. Then you can check that the transaction was successful:
 
 ```bash
-curl localhost:1633/stake
+swarm-cli stake
 ```
 
-The results will be displayed in PLUR units (1 PLUR is equal to 1e-16 xBZZ). If you have properly staked the minimum 10 xBZZ, you should see the output below:
-
 ```bash
-{"stakedAmount":"100000000000000000"}
+Staked xBZZ: 10
 ```
 
 Congratulations! You have now installed your Bee node and successfully connected it to the network as a full staking node. Your node will now be in the process of syncing chunks from the network. Once it is fully synced, your node will finally be eligible for earning staking rewards. 
