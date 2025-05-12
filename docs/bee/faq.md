@@ -60,7 +60,22 @@ The default p2p port for Bee is 1634, please forward this using your router and 
 
 ### How do I know if I am connected to other peers?
 
-You may communicate with your Bee using its HTTP api. Type `curl http://localhost:1633/peers` at your command line to see a list of your peers.
+You can use swarm-cli to check your node's connectivity status:
+
+```bash
+ swarm-cli status
+```
+
+The `Topology` section will display basic information about the peers your node is connected to:
+
+```bash
+...
+Topology
+Connected Peers: 132
+Population: 6437
+Depth: 10
+...
+```
 
 ## Errors
 
