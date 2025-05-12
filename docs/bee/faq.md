@@ -133,14 +133,9 @@ If you use "bee start"
 
 ### Relevant endpoints and explanations
 
-See the [API Reference](https://docs.ethswarm.org/api/) pages for details.
+See the [API Reference](https://docs.ethswarm.org/api/) pages for details about commonly used API endpoints, and the [API reference documentation](/api/) for a complete list of endpoints.
 
-Most common use cases:
-
-- `curl http://localhost:1633/peers` - Shows you the currently connected peers
-- `curl http://localhost:1633/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connected
-- `curl http://localhost:1633/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
-- `curl http://localhost:1633/chequebook/address` your chequebook contract to see the xBZZ.
+However, directly interacting with the API is not recommended for most users. Instead, [`bee-js`](/docs/develop/tools-and-features/bee-js) (for building applications) and [`swarm-cli`](/docs/bee/working-with-bee/swarm-cli) (for command line interaction) are the recommended methods for interaction with Bee as they greatly simplify the process.
 
 ### How can I check how many cashed out cheques do I have?
 
