@@ -47,14 +47,20 @@ Refer to the [Node Types](/docs/bee/working-with-bee/node-types) page for deep d
 - **Linux/macOS recommended**: Most tools and documentation are designed for Unix-based systems.
 - **Windows users**: While a Window release of Bee is available, you may also consider using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and using a Linux version of Bee.
 
-### Essential Tools
+### Recommended Tools
 
-While not strictly required, these tools will *greatly* simplify your experience working with Bee nodes:
+These tools are ***strongly encouraged*** over the direct use of the Bee API for most use cases:
 
-- **[`jq`](https://jqlang.github.io/jq/)**: Formats JSON responses (recommended for API users).
-- **[`curl`](https://curl.se/)**: Used for sending API requests (required for API interactions).
-- **[Swarm CLI](/docs/bee/working-with-bee/swarm-cli/)**: Terminal-based Bee node management.
-- **[Bee JS](/docs/develop/tools-and-features/bee-js)**: JavaScript library for programmatic API access.
+- **[Bee JS](/docs/develop/tools-and-features/bee-js)** is the JS library for programmatic Bee API access. It is the recommended method for building applications on Swarm.
+- **[Swarm CLI](/docs/bee/working-with-bee/swarm-cli/)** is built with Bee JS and is the recommended method for interacting with Bee from the command line. 
+
+
+:::tip ACCESSING THE BEE API DIRECTLY
+Working directly with the Bee API is ***not recommended*** unless you have a specific use case not supported by Bee JS and Swarm CLI. For direct API access, you can use any tool which allows you to make HTTP requests.
+
+- **[`curl`](https://curl.se/)** is a great option for sending Bee API requests. 
+- **[`jq`](https://jqlang.github.io/jq/)** is a useful tool for formatting JSON responses to make them more readable. This can be especially helpful as Bee API responses can sometimes be quite lengthy.
+:::
 
 ## Hardware Requirements
 
@@ -83,7 +89,7 @@ A reliable, high-speed internet connection is recommended when running a full no
 ### RPC Endpoint  
 
 :::warning
-***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).
+***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. When selecting an RPC provider, make sure that they have [archival nodes](https://ethereum.org/en/developers/docs/nodes-and-clients/#archive-node) with the full historical chain data. [Read more](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).
 :::
 
 An [RPC (Remote Procedure Call) endpoint](/docs/references/glossary#rpc-endpoint) is required to allow your node to interact with **Gnosis Chain**, which is required for transactions like purchasing postage stamps, staking xBZZ, and storage incentives related transactions.  
