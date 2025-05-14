@@ -314,49 +314,60 @@ You can read more about how Docker manages container logs [in their official doc
 
 **Checking the Node's status with the Bee API**
 
-To check your node's status as a staking node, we can use the `/redistributionstate` endpoint:
+To check your node's status as a staking node, use `swarm-cli status`:
 
 ```bash
-curl -s http://localhost:1633/redistributionstate | jq
+swarm-cli status
 ```
 
-Below is the output for a node which has been running for several days:
+The results logged to your terminal will include a wide range of key information about your node. For staking related information, refer to the `Staking` and `Redistribution` sections:
 
 ```bash
-{
-  "minimumGasFunds": "11080889201250000",
-  "hasSufficientFunds": true,
-  "isFrozen": false,
-  "isFullySynced": true,
-  "phase": "claim",
-  "round": 212859,
-  "lastWonRound": 207391,
-  "lastPlayedRound": 210941,
-  "lastFrozenRound": 210942,
-  "lastSelectedRound": 212553,
-  "lastSampleDuration": 491687776653,
-  "block": 32354719,
-  "reward": "1804537795127017472",
-  "fees": "592679945236926714",
-  "isHealthy": true
-}
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.5.0-5ec231ba
+Mode: full
+
+Topology
+Connected Peers: 100
+Population: 3662
+Depth: 10
+
+Wallet
+xBZZ: 1.2445451736121243
+xDAI: 0.074263338303721639
+
+Chainsync
+Block: 40,054,035 / 40,054,039 (Δ 4)
+
+Chequebook
+Available xBZZ: 0.0000000000000100
+Total xBZZ: 0.0000000000000100
+
+Staking
+Staked xBZZ: 20.0000000000000001
+
+Redistribution
+Reward: 0.0000000000000000
+Has sufficient funds: true
+Fully synced: true
+Frozen: false
+Last selected round: 263459
+Last played round: 0
+Last won round: 0
+Minimum gas funds: 0.000000000108750000
 ```
-
-For a complete breakdown of this output, check out [this section in the Bee docs](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api#redistributionstate).
-
-You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api), and you can find complete information about all available endpoints in [the API reference docs](https://docs.ethswarm.org/api/).
-
+ 
 
 **Stopping Your Node**
 
-To gracefully stop your Bee node, use the following command:
+To stop your Bee node, use the following command:
 
 ```bash
 docker stop bee-1
 ```
 
 Replace `bee-1` with the name of your node if you've given it a different name.
-
 
 
 ## Back Up Keys

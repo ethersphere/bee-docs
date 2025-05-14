@@ -407,44 +407,67 @@ bee version
 2.3.0
 ```
 
-Once the Bee node has been funded, the chequebook deployed, and postage stamp
-batch store synced, its HTTP [API](/docs/bee/working-with-bee/bee-api)
-will start listening at `localhost:1633` (for `full` or `light` nodes - for an `ultra-light` node, it should be initialized and the API should be available more rapidly).
+Once the Bee node has been funded, the chequebook deployed, and postage stamp batch store synced, the [Bee API](/docs/bee/working-with-bee/bee-api) will start listening at `localhost:1633`. It may take up to around 30 minutes for your node to sync all postage stamp contract data from the blockchain and become fully initialized.
 
 To check everything is working as expected, send a GET request to localhost port 1633.
 
 ```bash
-curl localhost:1633
+swarm-cli status
 ```
 
-```
-Ethereum Swarm Bee
-```
-
-Success! The Bee API is now listening!
-
-Next, let's see if we have connected with any peers by sending a query to the Bee API (port 1633 by default - `localhost:1633`).
-
-:::info
-Here we are using the `jq` [utility](https://stedolan.github.io/jq/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
-:::
+Terminal output:
 
 ```bash
-curl -s localhost:1633/peers | jq ".peers | length"
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.5.0-5ec231ba
+Mode: light
+
+Topology
+Connected Peers: 149
+Population: 28748
+Depth: 31
+
+Wallet
+xBZZ: 3.7669249091633152
+xDAI: 0.937743025678313767
+
+Chainsync
+Block: 40,025,585 / 40,025,591 (Δ 6)
+
+Chequebook
+Available xBZZ: 0.0000001999957500
+Total xBZZ: 0.0665519999984200
+
+Staking
+Staked xBZZ: 0.0000000000000000
 ```
 
-```
-87
+Check the `Chainsync` section in the output to see how far along your node has synced postage contract data so far (it shows blocks synced / total blocks (blocks left)):
+
+```bash
+Chainsync
+Block: 40,025,585 / 40,025,591 (Δ 6)
 ```
 
-Perfect! We are accumulating peers, this means you are connected to
-the network, and ready to start [using
-Bee](/docs/develop/access-the-swarm/introduction) to [upload and
-download](/docs/develop/access-the-swarm/upload-and-download) content or host
-and browse [websites](/docs/develop/access-the-swarm/host-your-website) hosted
-on the Swarm network.
+Since total blocks synced will always lag slightly behind total blocks, with only 6 blocks left, this node can be considered fully synced.
 
-Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
+We should also check the `Topology` section to ensure that our node is able to connect with other nodes in the Swarm:
+
+```bash
+Topology
+Connected Peers: 149
+Population: 28748
+Depth: 31
+```
+
+From the output we can see our node is healthy and has a full set of connected peers.
+
+Success! The Bee API is now listening, our node is fully synced, and it has a fully populated set of peers! This means you are connected to
+the network, and ready to start [using Bee](/docs/develop/access-the-swarm/introduction) to [upload and download](/docs/develop/access-the-swarm/upload-and-download) content or host and browse [websites](/docs/develop/access-the-swarm/host-your-website) hosted
+on Swarm.
+
+Welcome to the Swarm! 🐝 🐝 🐝 🐝 🐝
 
 ## Back Up Keys
 
@@ -454,16 +477,29 @@ Once your node is up and running, make sure to [back up your keys](/docs/bee/wor
 
 While depositing stake is not required to run a Bee node, it is required in order for a node to receive rewards for sharing storage with the network. You will need to [deposit xBZZ to the staking contract](/docs/bee/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
+:::info
+The value for `--deposit` is denominated in PLUR (1e-16 xBZZ)
+:::
+
 ```bash
-curl -X POST localhost:1633/stake/100000000000000000
+swarm-cli stake --deposit 100000000000000000
 ```
 
-This will initiate a transaction on-chain which deposits the specified amount of xBZZ into the staking contract. 
+This will initiate a transaction on-chain which deposits the specified amount of xBZZ into the staking contract. After a moment, the staking transaction will complete. Then you can check that the transaction was successful:
+
+```bash
+swarm-cli stake
+```
+
+This will display the currently staked amount of xBZZ:
+
+```bash
+Staked xBZZ: 10.0000000000000000
+```
 
 Storage incentive rewards are only available for full nodes which are providing storage capacity to the network.
 
 *Note that SWAP rewards (bandwidth incentives paid for forwarding chunks) are available to all **full** nodes, regardless of whether or not they stake xBZZ in order to participate in the storage incentives system.*
-
 
 
 ## Next Steps to Consider

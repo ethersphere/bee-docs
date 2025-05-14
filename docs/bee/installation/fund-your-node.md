@@ -59,18 +59,29 @@ Make sure that you are withdrawing the Gnosis Chain version of xDAI, as xDAI has
 
 ## Funding Your Wallet
 
-In order to fund your wallet, first you need to identify your wallet address. The easiest way to do so is to first start your Bee node in ultra-light mode (Bee will start in ultra-light mode when started with the default settings) and then query the Bee API to find your address:
+In order to fund your wallet, first you need to identify your wallet address. The easiest way to do so is to first start your Bee node in ultra-light mode (Bee will start in ultra-light mode when started with the default settings) and then use `swarm-cli` to find your address:
 
 ```bash
-curl -s localhost:1633/addresses | jq .ethereum
+swarm-cli addresses
 ```
 
+The value for the `Ethereum` entry is your node's Ethereum address on Gnosis Chain:
+
 ```bash
-"0x9a73f283cd9212b99b5e263f9a81a0ddc847cd93"
+Node Addresses
+---------------------------------------------------------------------------------------------------------------------
+Ethereum: 9a73f283cd9211b96b5ec63f7a81a0ddc847cd93
+Overlay: 1e2054bec3e681aeb0b365a1f9a574a03782176bd3ec0bcf810ebcaf551e4070
+PSS Public Key: 035ade58d20be7e04ee8f875eabeebf9c53375a8fc73917683155c7c0b572f47ef
+Public Key: 027d0c4759f689ea3dd3eb79222870671c492cb99f3fade275bcbf0ea39cd0ef6e
+Underlay: /ip4/127.0.0.1/tcp/1634/p2p/QmcpSJPHuuQYRgDkNfwziihVcpuVteoNxePvfzaJyp9z7j /ip4/172.17.0.2/tcp/1634/p2p/QmcpSJPHuuQYRgDkNfwziihVcpuVteoNxePvfzaJyp9z7j /ip6/::1/tcp/1634/p2p/QmcpSJPHuuQYRgDkNfwziihVcpuVteoNxePvfzaJyp9z7j
+
+Chequebook Address
+---------------------------------------------------------------------------------------------------------------------
+0x9953f4F6aA3A4A52eC021Dd8E3b2924b298b3cb5
 ```
 
 Fund your node with the appropriate amount of xDAI and xBZZ based on the recommended amounts specified in [the chart above](/docs/bee/installation/fund-your-node#token-amounts-by-use-case). 
-
 
 *For support, ask in the [Develop on Swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel.*
 
