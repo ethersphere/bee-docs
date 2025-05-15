@@ -3,9 +3,19 @@ title: Bee API
 id: bee-api
 ---
 
-The Bee HTTP API is the primary interface to a running Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
+The Bee HTTP API allows for direct interaction with a Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
 
 The Bee API provides full access to all core functionalities of a Bee node, including uploading, downloading, staking, postage stamp batch purchasing and management, and node monitoring. By default, it runs on port `:1633`.
+
+In addition to the user API, Bee also exposes a separate public-facing API on port `:1634` by default. This interface is used by other Bee nodes to connect and interact as part of the P2P protocol. It is essential for network connectivity and syncing, and should remain publicly accessible to allow other nodes to establish connections.
+
+:::tip RECOMMENDATION
+Unless explicitly required for your use case, it is not recommended to interact with the Bee API directly. Rather, [Bee JS](/docs/develop/tools-and-features/bee-js) and/or [Swarm CLI](/docs/bee/working-with-bee/swarm-cli) should be used instead, as they support all common use cases and greatly simplify the process of working with Bee.
+
+* `bee-js` is a JS based library for Bee which is ideal for anyone looking to build on Swarm. It takes care of all the intricacies of API interaction so that you can focus on building.
+
+* `swarm-cli` is a command line tool built using `bee-js` which is ideal for node operators or anyone who wishes to interact with Bee from the terminal. 
+:::
 
 :::danger
 Make sure that your api-addr (default 1633) is never exposed to the internet. If you do not have a firewall or other security measures in place, manually setting your Bee API address from the default `1633` to `127.0.0.1:1633` is strongly recommended to prevent unauthorized access.
@@ -18,12 +28,6 @@ Detailed information about Bee API endpoints can be found in the [API reference 
 ## Interacting With the API
 
 You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](/docs/develop/access-the-swarm/buy-a-stamp-batch), [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download), [staking](/docs/bee/working-with-bee/staking), and more. 
-
-### Alternatives for Working with the API
-
-For developers, the [Bee JS library](/docs/develop/tools-and-features/bee-js) offers a more convenient way to interact with the API in a NodeJS environment. 
-
-For many other common use cases, you may prefer to make use of the [Swarm CLI](/docs/bee/working-with-bee/swarm-cli) tool, as it offers a convenient command line based interface for interacting with your node's API.
 
 
 ## Exploring Node Status
