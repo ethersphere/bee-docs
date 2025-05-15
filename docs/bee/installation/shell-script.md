@@ -347,23 +347,39 @@ While running a light node requires a small amount of xDAI to pay for initializi
 
 ### Fund node 
 
+You will need to transfer xDAI (to pay for transaction fees) and xBZZ (to pay for storage and bandwidth fees and for staking) to your node's address on Gnosis Chain. If you do not already have them, then you will need to [acquire](/docs/bee/installation/fund-your-node#getting-tokens) some xDAI and xBZZ. 
+
+:::caution
+When interacting with `swarm-cli` and other Bee tools, you will see your node's address referred to as its `Ethereum` address - ***take note that this does not refer to the Ethereum blockchain***, it refers to an Ethereum format address on Gnosis Chain.  
+:::
+
 Check the logs from the previous step. Look for the line which says: 
 
 ```
-"time"="2024-09-24 18:15:34.520716" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x1A801dd3ec955E905ca424a85C3423599bfb0E66"
+"time"="2024-09-24 18:15:34.520716" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x9a73f283cd9211b96b5ec63f7a81a0ddc847cd93"
 ```
 That address is your node's address on Gnosis Chain which needs to be funded with xDAI (and also xBZZ if you plan on doing any uploading or on staking). Copy it and save it for the next step.
 
-You can also use the following command:
+You can also use `swarm-cli` to view your node's addresses:
 
 ```bash
-curl -s localhost:1633/addresses | jq .ethereum
+swarm-cli addresses
 ```
 
-Which will return your node's address:
+Which will return your node's address in the `Ethereum` field: 
 
 ```bash
-"0x1A801dd3ec955E905ca424a85C3423599bfb0E66"
+Node Addresses
+----------------------------------------------------------------------------------------------------------------------------
+Ethereum: 9a73f283cd9211b96b5ec63f7a81a0ddc847cd93
+Overlay: 1e2054bec3e681aeb0b365a1f9a574a03782176bd3ec0bcf810ebcaf551e4070
+PSS Public Key: 035ade58d20be7e04ee8f875eabeebf9c53375a8fc73917683155c7c0b572f47ef
+Public Key: 027d0c4759f689ea3dd3eb79222870671c492cb99f3fade275bcbf0ea39cd0ef6e
+Underlay: /ip4/127.0.0.1/tcp/1634/p2p/QmcpSJPHuuQYRgDkNfwziihVcpuVteoNxePvfzaJyp9z7j /ip4/172.17.0.2/tcp/1634/p2p/QmcpSJPHuuQYRgDkNfwziihVcpuVteoNxePvfzaJyp9z7j /ip6/::1/tcp/1634/p2p/QmcpSJPHuuQYRgDkNfwziihVcpuVteoNxePvfzaJyp9z7j
+
+Chequebook Address
+----------------------------------------------------------------------------------------------------------------------------
+0x9953f4F6aA3A4A52eC021Dd8E3b2924b298b3cb5
 ```
 
 ***How Much to Send?***
@@ -372,7 +388,7 @@ Only a very small amount of xDAI is needed to get started, 0.1 xDAI is more than
  
 For very small short term uploads you can start with ~0.2 xBZZ, but the required amount will scale up with the volume and duration of storage required.
 
-You will also need at least 10 xBZZ if you plan on staking.
+You will also need and additional 10 xBZZ as a non-refundable deposit if you plan on staking.
 
 
 ### Initialize full node
@@ -438,51 +454,70 @@ Next your node will begin to sync [postage stamp data](/docs/develop/access-the-
 "time"="2024-09-24 22:21:19.664897" "level"="info" "logger"="node" "msg"="waiting to sync postage contract data, this may take a while... more info available in Debug loglevel"
 ```
 
-After your node finishes syncing postage stamp data it will start in full node mode and begin to sync all the chunks of data it is responsible for storing as a full node:
+You can also use `swarm-cli` to check on your node's progress:
+
+```bash
+swarm-cli status
+```
+
+Various key metrics will be logged to the terminal. To check on your node's postage stamp contract syncing progress, refer to the `Chainsync` section:
+
+```bash
+# ... 
+
+Chainsync
+Block: 40,059,785 / 40,059,794 (Δ 9)
+
+# ...
+```
+
+This will show how many blocks are left to be synced until your node is caught up to the latest Gnosis Chain block. It just needs to get close to the latest block to be considered fully synced as there are new blocks every ~5 seconds (~Δ 10 or less blocks is typical when fully synced). 
+
+After your node finishes syncing postage stamp data it will start in full node mode and begin to sync all the chunks of data it is responsible for storing as a full node. 
+
+Here we can see the confirmation in the logs that our node has started in `full` mode:
 
 
 ```bash
 "time"="2024-09-24 22:30:19.154067" "level"="info" "logger"="node" "msg"="starting in full mode"
-"time"="2024-09-24 22:30:19.155320" "level"="info" "logger"="node/multiresolver" "msg"="name resolver: no name resolution service provided"
-"time"="2024-09-24 22:30:19.341032" "level"="info" "logger"="node/storageincentives" "msg"="entered new phase" "phase"="reveal" "round"=237974 "block"=36172090
-"time"="2024-09-24 22:30:33.610825" "level"="info" "logger"="node/kademlia" "msg"="disconnected peer" "peer_address"="6ceb30c7afc11716f866d19b7eeda9836757031ed056b61961e949f6e705b49e"
 ```
 
-This process can take a while, even up to several hours depending on your system and network. You can check the progress of your node through the logs which print out to the Bee API:
-
-You check your node's progress with the `/status` endpoint:
-
-:::info
-The [`jq` utility](https://jqlang.github.io/jq/) jq utility formats API responses for easier reading:
-* Install it using your system’s package manager.
-* If you don't want to use it, remove `| jq` from all commands.
-:::
+This syncing process can take a while, possibly up to several hours depending on your system and network. You can check your node's progress with `swarm-cli`:
 
 ```bash
-curl -s  http://localhost:1633/status | jq
+swarm-cli status
 ```
 
+In the `Bee` section, we should make sure that our node's `Mode` is `full`, and that our `Version` number matches the [latest Bee release](https://github.com/ethersphere/bee/releases/latest).
+
+In the `Topology` section we should check that our node is successfully connecting to peers:
+
+And then finally we will check the `Redistribution` section periodically until the `Fully synced` value changes to `true`. At that point your node is fully synced!
+
+
 ```bash
-{
-  "overlay": "22dc155fe072e131449ec7ea2f77de16f4735f06257ebaa5daf2fdcf14267fd9",
-  "proximity": 256,
-  "beeMode": "full",
-  "reserveSize": 686217,
-  "reserveSizeWithinRadius": 321888,
-  "pullsyncRate": 497.8747754074074,
-  "storageRadius": 11,
-  "connectedPeers": 148,
-  "neighborhoodSize": 4,
-  "batchCommitment": 74510761984,
-  "isReachable": false,
-  "lastSyncedBlock": 36172390
-}
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.5.0-5ec231ba
+Mode: full
+
+Topology
+Connected Peers: 105
+Population: 4523
+
+# ...
+
+Redistribution
+Fully synced: false
+
+# ...
 ```
-We can see that our node has not yet finished syncing chunks since the `pullsyncRate` is around 497 chunks per second. Once the node is fully synced, this value will go to zero. However, we do not need to wait until our node is fully synced in order to stake our node, so we can now move immediately to the next step.
+
+  
 
 ### Stake node
 
-Now we're ready to stake. We'll slightly modify our startup command so that it runs in the background instead of taking control of our terminal:
+Now we're ready to stake. We'll slightly modify our startup command so that it runs in the background instead of taking control of our terminal. Since it is running in the background we will no longer see the logs printed to the terminal, and we will therefore redirect the logs to a `bee.log` file so we can view them when needed:
 
 ```bash
 nohup bee start \
@@ -501,38 +536,42 @@ nohup bee start \
 3. **`&`**: This sends the process to the background, allowing the terminal to be used for other commands while the Bee node continues running.
 :::
 
-Let's check the Bee API to confirm the node is running:
+Let's use `swarm-cli` again to confirm the node is running:
 
+```bash
+swarm-cli status
 ```
-curl localhost:1633
-```
+
 If the node is running we should see:
-```
-Ethereum Swarm Bee
+
+```bash
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.5.0-5ec231ba
+Mode: full
+# ...
 ```
 
 Now with our node properly running in the background, we're ready to stake our node. You can use the following command to stake 10 xBZZ:
 
-```bash
-curl -XPOST localhost:1633/stake/100000000000000000
-```
-
-If the staking transaction is successful a `txHash` will be returned:
-
-```
-{"txHash":"0x258d64720fe7abade794f14ef3261534ff823ef3e2e0011c431c31aea75c2dd5"}
-```
-
-We can also confirm that our node has been staked with the `/stake` endpoint:
+:::tip
+The value for `--deposit` is denominated in [PLUR](/docs/references/glossary/#plur) (1e-16 xBZZ = 1 PLUR)
+:::
 
 ```bash
-curl localhost:1633/stake
+swarm-cli stake --deposit 100000000000000000
 ```
 
-The results will be displayed in PLUR units (1 PLUR is equal to 1e-16 xBZZ). If you have properly staked the minimum 10 xBZZ, you should see the output below:
+The transaction will complete after a moment. We can use `swarm-cli` to confirm:
 
 ```bash
-{"stakedAmount":"100000000000000000"}
+swarm-cli stake
+```
+
+You should then see the 10 xBZZ which was just staked:
+
+```bash
+Staked xBZZ: 10.0000000000000000
 ```
  
 Congratulations! You have now installed your Bee node and are connected to the network as a full staking node. Your node will now be in the process of syncing chunks from the network. Once the node is fully synced, your node will finally be eligible to earn staking rewards.
@@ -576,40 +615,6 @@ We can use the `f` key to filter for our Bee node's specific process by searchin
 
 ![](/img/bashtop_02.png)
 
-**Checking the Node's status with the Bee API**
-
-To check your node's status as a staking node, we can use the `/redistributionstate` endpoint:
-
-```bash
-curl -s http://localhost:1633/redistributionstate | jq
-```
-
-Below is the output for a node that has been running for several days:
-
-```bash
-{
-  "minimumGasFunds": "11080889201250000",
-  "hasSufficientFunds": true,
-  "isFrozen": false,
-  "isFullySynced": true,
-  "phase": "claim",
-  "round": 212859,
-  "lastWonRound": 207391,
-  "lastPlayedRound": 210941,
-  "lastFrozenRound": 210942,
-  "lastSelectedRound": 212553,
-  "lastSampleDuration": 491687776653,
-  "block": 32354719,
-  "reward": "1804537795127017472",
-  "fees": "592679945236926714",
-  "isHealthy": true
-}
-```
-
-For a complete breakdown of this output, check out [this section in the Bee docs](/docs/bee/working-with-bee/bee-api#redistributionstate).
-
-You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](/docs/bee/working-with-bee/bee-api), and you can find complete information about all available endpoints in [the API reference docs](/api/).
-
 
 ## Back Up Keys
 
@@ -628,8 +633,6 @@ You may also check out the [configuration guide](/docs/bee/working-with-bee/conf
 ### Access the Swarm
 If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/access-the-swarm/introduction).
 
-### Explore the API
-The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
 
 ### Run a hive! 
 If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.

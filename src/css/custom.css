@@ -312,3 +312,16 @@ body[data-rh] .redocusaurus {
     width: 60%;
   }
 }
+
+/* Style links inside admonition blocks */
+.theme-admonition a {
+  font-weight: 600; /* Semi-bold */
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+/* Optional: further emphasize on hover */
+.theme-admonition a:hover {
+  text-decoration-thickness: 3px;
+}
