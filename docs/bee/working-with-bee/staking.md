@@ -11,36 +11,93 @@ This guide will walk you through **staking xBZZ** and participating in the **red
 Staking requires a fully synced full node and a minimum of 10 xBZZ. See detailed [staking requirements](/docs/bee/working-with-bee/staking#requirements) below.
 :::
 
-### Step 1: Fund Your Node with xDAI 
+### Prerequisites   
 
-Your node needs **xDAI** to pay for transaction fees on Gnosis Chain.  
-
-Run this command to check how much is required:
-
-```bash
-curl localhost:1633/redistributionstate | jq
-```
-Check the `"minimumGasFunds"` field in the response.  
+- A small amount of xDAI to pay transaction fees - ~0.01 xDAI is enough to start
+- At least 10 xBZZ to deposit as non-refundable stake
+- A fully synced full Bee node
 
 :::tip
-**Recommended:** Deposit at least **0.5 xDAI** to cover fees for the next few weeks/months of active staking.
+If you don't already have xDAI or xBZZ, you will need to [get some](/docs/bee/installation/fund-your-node#getting-tokens).
 :::
 
-### Step 2: Stake 10 xBZZ (or More)
+### Step 1: Fund Your Node with xDAI and xBZZ
+
+Your node needs **xDAI** to pay for transaction fees on Gnosis Chain, and also needs **xBZZ** to deposit as stake. 
+
+First, find your node's address using:
+
+```bash
+swarm-cli addresses
+```
+
+This will print your node's various addresses. The one you need to fund is `Ethereum`
+
+:::tip
+The `Ethereum` term here refers to an Ethereum style address on Gnosis Chain. Do not send funds to the address on the Ethereum chain itself.
+:::
+
+```bash
+Node Addresses
+------------------------------------------------------------------------------------------------------------------
+Ethereum: 9a73f283cd9211b96b5ec63f7a81a0ddc847cd93
+...
+```
+
+Then, use the following command to check how much is required:
+
+```bash
+swarm-cli status
+```
+
+At the bottom of the results printed to the terminal you will find the `Redistribution` section. From there you will see the `Minimum gas funds` item. That value is the minimum amount required to participate in a *single redistribution round*.
+
+:::tip
+If you plan on operating your node for an extended period, you will want to deposit quite a bit more than the minimum. You can start with **0.01 xDAI** to cover fees for the next few weeks/months of active staking, and then monitor actual usage and top-up when needed.
+:::
+
+```
+Redistribution
+Reward: 0.0000000000000000
+Has sufficient funds: true
+Fully synced: true
+Frozen: false
+Last selected round: 263526
+Last played round: 0
+Last won round: 0
+Minimum gas funds: 0.000000000326250000
+```
+
+Finally, send the required xDAI and xBZZ to the address you got from `swarm-cli addresses`. 
+
+You will need to send at least 10 xBZZ to get started staking.
+
+:::tip
+Send **20 xBZZ** if using the [reserve doubling](#reserve-doubling) feature.
+:::
+
+### Step 2: Stake xBZZ 
 
 Once your node has xDAI, stake **at least 10 xBZZ** (this is non-refundable).
 
+You can use the following `swarm-cli` command to stake 10 xBZZ:
+
+:::info
+The deposit amount is specified in [PLUR](/docs/references/glossary/#plur)
+:::
+
 ```bash
-curl -X POST localhost:1633/stake/100000000000000000
+swarm-cli stake --deposit 100000000000000000
 ```
 
-Confirm the staking transaction was successful using `GET /stake`:
+After a moment, the staking transaction will complete. Then you can check that the transaction was successful:
 
 ```bash
-curl localhost:1633/stake
+swarm-cli stake
 ```
+
 ```bash
-{"stakedAmount":"100000000000000000"}
+Staked xBZZ: 10
 ```
 
 :::tip
@@ -53,18 +110,10 @@ After staking you should [check your node's status](/docs/bee/working-with-bee/s
 
 ### Step 4: Monitor & Maximize Rewards
 
-✅ Use a stable Gnosis Chain [RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint)  
-✅ [Check `/redistributionstate`](/docs/bee/working-with-bee/staking#check-redistribution-status) to ensure `isFullySynced` and `hasSufficientFunds` are consistently `true`, and `isFrozen` is `false`.  
-✅ [Check `/rchash`](/docs/bee/working-with-bee/bee-api#rchash) to ensure your node's performance is sufficient
+✅ Make sure you are using a stable Gnosis Chain [RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).  
+✅ [Check your node's status](/docs/bee/working-with-bee/staking#check-redistribution-status) to ensure it's operating properly.
+✅ [Check `/rchash`](/docs/bee/working-with-bee/bee-api#rchash) to ensure your node's performance is sufficient.
 
-
-### Next Steps  
-
-* **🛠 Troubleshooting?** See the [Troubleshooting Guide](#troubleshooting).  
-
-* **💰 Want to maximize earnings?** Read [Maximizing Rewards](#maximize-rewards).
-
-* **📖 Want to learn more?** Just continue reading through the rest of this page for an in-depth exploration of staking on Swarm.
 
 
 ## Staking Overview
@@ -81,66 +130,7 @@ Only stake your xBZZ if you intend to participate as a full node, as withdrawals
 - A [high-performance RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
 - A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling) is used).
 
-### Add xDAI 
-
-Before staking, a node must first be funded with a small amount of xDAI to pay for Gnosis Chain transaction fees.
-
-You can check exactly how much xDAI is required to get started with staking from the `/redistributionstate` endpoint:
-
-```bash
-root@user-bee:~#  curl localhost:1633/redistributionstate | jq
-```
-
-```bash
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   304  100   304    0     0  15258      0 --:--:-- --:--:-- --:--:-- 16000
-{
-  "minimumGasFunds": "3750000030000000",
-  "hasSufficientFunds": true,
-  "isFrozen": false,
-  "isFullySynced": false,
-  "phase": "reveal",
-  "round": 253280,
-  "lastWonRound": 0,
-  "lastPlayedRound": 0,
-  "lastFrozenRound": 0,
-  "lastSelectedRound": 0,
-  "lastSampleDurationSeconds": 0,
-  "block": 38498620,
-  "reward": "0",
-  "fees": "0",
-  "isHealthy": true
-}
-```
-
-The `"3750000030000000"` value listed for `"minimumGasFunds"`  is the minimum required amount of xDAI denominated in Wei ($1 \text{xDAI} = 10^{18} \text{ Wei}$) required for staking. That is equivalent to 0.00375 xDAI. However, it's recommended to add more than just the minimum amount, since it will quickly be used up by storage incentives related transaction fees. As little as 0.5 xDAI should last for weeks or even months, as the average incentive-related transaction fee can be as low as 0.001 xDAI or less.
-
-### Add xBZZ
-
-Your node must be funded with a minimum of 10 xBZZ before performing the staking transaction. An additional 10 xBZZ is required if the [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling) feature is used. If you don't already have xBZZ, you will need [get some](/docs/bee/installation/fund-your-node#how-to-get-xbzz) and transfer it to your [node's wallet](/docs/bee/installation/fund-your-node#funding-your-wallet).
-
-### Deposit stake
-
-Once your node has xDAI to pay for transaction fees, you can use the `POST /stake` endpoint to add the initial required minimum 10 xBZZ stake. The amount is denominated in [PLUR](/docs/references/glossary#plur), the smallest denomination of xBZZ:
-
-```bash
-curl -X POST localhost:1633/stake/100000000000000000
-```
-
-If the command executed successfully it returns a transaction hash that you can use to verify on a block explorer such as [GnosisScan](https://gnosisscan.io).
-
-It is possible to deposit more by repeatedly using the command above.
-
-You can also check the amount staked with a `GET /stake` request:
-
-```bash
-curl localhost:1633/stake
-```
-
-```bash
-{"stakedAmount":"100000000000000000"}
-```
+ 
 
 ### Check Status
 
@@ -438,7 +428,117 @@ Use the binary number you just copied and set it as a string value for the `targ
 ## bee.yaml
 target-neighborhood: "01100011110"
 ```
-    
+
+## Stake Migration
+
+If a new Bee release includes an updated staking contract, then you will be required to migrate your node's stake in order to continue normal operation. The stake migration process consists of the following steps:
+
+1. Withdraw xBZZ
+2. Stop node 
+3. Update and restart
+4. Re-stake to the new contract
+
+
+### Step 1: Withdraw xBZZ 
+
+When a new version of Bee is released with an updated staking contract, the previous staking contract will be disabled, and stake withdrawals will be enabled. 
+
+Once the contract is disabled, stake can be withdrawn by calling the `/stake` endpoint with the `DELETE` method:
+
+```bash
+curl -X DELETE http://localhost:1633/stake
+```
+
+This command will withdraw all stake from the node to the node’s Gnosis Chain address.
+
+Confirm that the stake was withdrawn:
+
+```bash
+ curl -s  http://localhost:1633/stake | jq
+```
+The value for `stakedAmount` should now be zero:
+```
+{
+  "stakedAmount": "0"
+}
+```
+### Step 2: Stop node
+
+This step will vary depending on how the node was set up:
+
+```bash
+sudo systemctl stop bee
+```
+
+or
+
+```
+docker compose down
+```
+
+or
+
+```
+docker stop <container_name_or_id>
+```
+
+etc.
+
+### Step 3: Update and restart
+
+:::danger
+Before every Bee client upgrade, it is best practice to ALWAYS take a full [backup](/docs/bee/working-with-bee/backups) of your node.
+:::
+
+After withdrawing stake and stopping the node, update to the newest version of Bee. After updating, restart the node.
+
+You can use the `/health` endpoint to confirm your current Bee version:
+
+```bash
+curl -s http://localhost:1633/health | jq
+```
+
+To confirm a successful update, check that the `version` number in the results corresponds to the [latest](https://github.com/ethersphere/bee/releases/tag/v2.5.0) Bee release:
+
+```bash
+{
+  "status": "ok",
+  "version": "2.5.0-5ec231ba",
+  "apiVersion": "7.3.0"
+}
+```
+
+
+### Step 4: Re-stake xBZZ
+
+
+After upgrading to the latest version and restarting, xBZZ should be re-staked into the new staking contract so that the node can continue to participate in the redistribution game. 
+
+To stake the minimum required 10 xBZZ:
+
+:::tip
+Make sure to modify to the correct staking amount in case your node is using [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling).
+:::
+
+```bash
+curl -X POST localhost:1633/stake/100000000000000000
+```
+
+Confirm that the staking transaction was successful:
+
+```bash
+curl -s  http://localhost:1633/stake | jq
+```
+The expected output after staking the minimum of 10 xBZZ:
+
+```bash
+{
+  "stakedAmount": "100000000000000000"
+}
+```
+
+Congratulations! You have performed a successful stake migration and your node will now continue to operate as normal.
+
 ## Troubleshooting
 
 In this section we cover several commonly seen issues encountered for staking nodes participating in the redistribution game. If you don't see your issue covered here or require additional guidance, check out the `#node-operators` [Discord channel](https://discord.com/channels/799027393297514537/811553590170353685) where you will find support from other node operators and community members.
