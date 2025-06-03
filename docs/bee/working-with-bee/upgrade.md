@@ -3,9 +3,7 @@ title: Upgrading Bee
 id: upgrading-bee
 ---
 
-Keep a close eye on the[#bee-node-updates](https://discord.gg/vQcngMzZ9c) channel in our [Discord Server](https://discord.gg/wdghaQsGq5) for information on the latest software updates for Bee. It's very important to keep Bee up to date to benefit from security updates and ensure you are able to properly interact with the Swarm network. The [#node-operators](https://discord.com/channels/799027393297514537/811553590170353685) channel is another excellent resource for any of your questions regarding node operation. 
-
-## Upgrade Procedure Warnings
+It's very important to keep Bee up to date to benefit from security updates and ensure you are able to properly interact with the Swarm network. The [#node-operators](https://discord.com/channels/799027393297514537/811553590170353685) channel is an excellent resource for any of your questions regarding node operation. 
 
 :::warning
 Bee sure to [back up](/docs/bee/working-with-bee/backups) your keys and [cash out your cheques](/docs/bee/working-with-bee/cashing-out) to ensure your xBZZ is safe before applying updates.
@@ -58,11 +56,11 @@ You may now start your node again:
 sudo systemctl start bee
 ```
 
-#### Manual Installations
+### Manual Installations
 
 To upgrade your manual installation, simply stop Bee, replace the Bee binary and restart.
 
-#### Docker
+### Docker
 
 To upgrade your Docker installation, simply increment the version number in your configuration and restart.
 

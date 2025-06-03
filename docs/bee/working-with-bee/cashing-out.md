@@ -28,7 +28,7 @@ The token you desire to withdraw is specified in the path directly:
 ```bash
 http://localhost:1633/wallet/withdraw/{coin}
 ```
-For `coin`, you can use the value `NativeToken` for xDAI or `BZZ` for xBZZ.
+For `coin`, you can use the value `NativeToken` for xDAI or `BZZ` for xBZZ. 
 
 The `amount` query parameter is used to specify how much of the token you wish to withdraw. The value should be specified in the lowest denomination for each token (wei for xDAI and PLUR for xBZZ).
 
