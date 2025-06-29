@@ -17,9 +17,7 @@ Access the HTTP API directly for [detailed information about your Bee](/docs/bee
 
 Find out where Bee stores your [logs and files](/docs/bee/working-with-bee/logs-and-files).
 
-## Bee Dashboard and Swarm CLI
-
-Try out the [Bee Dashboard app](/docs/bee/working-with-bee/bee-dashboard) which offers an easy to use graphical interface for your Bee node.
+## Swarm CLI
 
 You can use the [`swarm-cli`command line tool](/docs/bee/working-with-bee/swarm-cli) to monitor your Bee's status, cash out your cheques, upload data to the swarm and more!
 
