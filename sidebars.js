@@ -69,7 +69,6 @@ module.exports = {
         'bee/working-with-bee/node-types',
         'bee/working-with-bee/bee-api',
         'bee/working-with-bee/logs-and-files',
-        'bee/working-with-bee/bee-dashboard',
         'bee/working-with-bee/swarm-cli',
         'bee/working-with-bee/staking',
         'bee/working-with-bee/cashing-out',
