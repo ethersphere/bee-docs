@@ -355,7 +355,7 @@ module.exports = {
       contextualSearch: false,
     },
     metadata: [
-      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:card', content: 'summary_large_image' },
       { property: 'og:type', content: 'website' },
       { property: 'og:image', content: 'https://deploy-preview-746--test-twitter-preview-testing-3.netlify.app/img/swarm-logo.png' },
       { name: 'twitter:image', content: 'https://deploy-preview-746--test-twitter-preview-testing-3.netlify.app/img/swarm-logo.png' },
