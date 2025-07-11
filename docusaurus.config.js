@@ -354,6 +354,12 @@ module.exports = {
 
       contextualSearch: false,
     },
+    metadata: [
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:image', content: 'static/img/swarm-logo.png' },
+      { name: 'twitter:image', content: 'static/img/swarm-logo.png' },
+    ],
   },
   presets: [
     [
