@@ -8,6 +8,8 @@ import AmountAndDepthCalc from '@site/src/components/AmountAndDepthCalc.js';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import { globalVariables } from '/src/config/globalVariables'
+
 
 
 A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](/docs/concepts/DISC/). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch. 
@@ -21,7 +23,7 @@ A postage batch is required to upload data to Swarm. Postage stamp batches repre
 
       **Storage duration and `amount`:** 
 
-      The duration of time for which a batch can store data is also non-deterministic since the price of storage is automatically adjusted over time by the [price oracle contract](/docs/concepts/incentives/price-oracle). However, limits have been placed on how swiftly the price of storage can change, so there is no danger of a rapid change in price causing postage batches to unexpectedly expire due to a rapid increase in price. You can view a history of price changes by inspecting [the events emitted by the oracle contract](https://gnosisscan.io/address/0x47EeF336e7fE5bED98499A4696bce8f28c1B0a8b#events), or also through the [Swarmscan API](https://api.swarmscan.io/v1/events/storage-price-oracle/price-update). As you can see, if and when postage batch prices are updated, the updates are quite small. Still, since it is not entirely deterministic, it is important to monitor your stamp batch TTL (time to live) as it will change along with price oracle changes. You can inspect your batch's TTL using the `/stamps` endpoint of the API:
+      The duration of time for which a batch can store data is also non-deterministic since the price of storage is automatically adjusted over time by the [price oracle contract](/docs/concepts/incentives/price-oracle). However, limits have been placed on how swiftly the price of storage can change, so there is no danger of a rapid change in price causing postage batches to unexpectedly expire due to a rapid increase in price. You can view a history of price changes by inspecting <a href={`https://gnosisscan.io/address/${globalVariables.priceOracleContract}#events`} target="_blank">the events emitted by the oracle contract</a>, or also through the [Swarmscan API](https://api.swarmscan.io/v1/events/storage-price-oracle/price-update). As you can see, if and when postage batch prices are updated, the updates are quite small. Still, since it is not entirely deterministic, it is important to monitor your stamp batch TTL (time to live) as it will change along with price oracle changes. You can inspect your batch's TTL using the `/stamps` endpoint of the API:
 
       ```bash
       root@noah-bee:~# curl -s  localhost:1633/stamps | jq
