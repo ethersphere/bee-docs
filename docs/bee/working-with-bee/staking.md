@@ -498,16 +498,19 @@ You can use the `/health` endpoint to confirm your current Bee version:
 curl -s http://localhost:1633/health | jq
 ```
 
-To confirm a successful update, check that the `version` number in the results corresponds to the [latest](https://github.com/ethersphere/bee/releases/tag/v2.5.0) Bee release:
+To confirm a successful update, check that the value for the `"version"` field in the results corresponds to the version number of the [latest](https://github.com/ethersphere/bee/releases/latest) Bee release. 
+
+For example, if the latest version was 2.6.0, it would look like this:
 
 ```bash
 {
   "status": "ok",
-  "version": "2.5.0-5ec231ba",
+  "version": "2.6.0-d0aa8b93",
   "apiVersion": "7.3.0"
 }
 ```
 
+*Make sure to check the [latest](https://github.com/ethersphere/bee/releases/latest) version number yourself, as the versions shown in examples in this guide may not always be up to date with the latest.*
 
 ### Step 4: Re-stake xBZZ
 
