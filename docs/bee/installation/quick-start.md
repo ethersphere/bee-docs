@@ -29,17 +29,17 @@ Run the shell script using `curl` or `wget`:
 
 
 :::tip
-We specify `TAG=v2.4.0` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
+We specify `TAG=v2.6.0` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
 :::
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.4.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.6.0 bash
 ```
 
 OR
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.4.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.6.0 bash
 ```
 
 Verify installation:
@@ -108,9 +108,9 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-version: 2.4.0-390a402e - planned to be supported until 22 April 2025, please follow https://ethswarm.org/
+version: 2.6.0-390a402e - planned to be supported until 22 April 2025, please follow https://ethswarm.org/
 
-"time"="2025-03-04 11:13:10.113050" "level"="info" "logger"="node" "msg"="bee version" "version"="2.4.0-390a402e"
+"time"="2025-03-04 11:13:10.113050" "level"="info" "logger"="node" "msg"="bee version" "version"="2.6.0-390a402e"
 "time"="2025-03-04 11:13:10.164801" "level"="info" "logger"="node" "msg"="swarm public key" "public_key"="02b19880b8d024eac3bf8afa3fa85b31b72fcfd491cebc6af78ddd85ff97f65416"
 "time"="2025-03-04 11:13:10.216657" "level"="debug" "logger"="node" "msg"="using existing libp2p key"
 "time"="2025-03-04 11:13:10.268431" "level"="debug" "logger"="node" "msg"="using existing pss key"
@@ -183,7 +183,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.4.0-390a402e
+Version: 2.6.0-390a402e
 Mode: light
 
 Topology
