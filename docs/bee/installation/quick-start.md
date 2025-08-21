@@ -3,7 +3,7 @@ title: Quickstart
 id: quick-start
 ---
 
-This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and buy a batch of postage stamps. Finally it explains how to upload data using a postage stamp batch and how to download that data.
+This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and finally wait for it to sync.
 
 :::tip
 A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](/docs/bee/working-with-bee/node-types). 
@@ -168,11 +168,11 @@ Learn how to [get xDAI and xBZZ](/docs/bee/installation/fund-your-node#getting-t
 If you wait too long to fund your node it may shut itself down. In that case, simply use the same startup command to start the node again.
 :::
 
-## Wait to Sync (~30 Minutes)
+## Wait to Sync (~5 Minutes)
 
 After starting and funding a Bee light node for the first time, the node will automatically issue a [transaction](https://gnosisscan.io/tx/0xf8048c4e8020ccef842c9a901e6262e9c06d6f5926ff31bdb7dd9d7274dcf19c) on Gnosis Chain to deploy the node's [chequebook contract](/docs/concepts/incentives/bandwidth-incentives#chequebook-contract).
 
-The node then needs to sync blockchain data before it can buy a postage stamp batch. The process may take ***half an hour or longer*** depending on your RPC provider and network speed.
+The node then needs to sync blockchain data before it can buy a postage stamp batch. The process may take **~5 minutes** depending on your RPC provider and network speed. 
 
 You can check your node's syncing progress with the `swarm-cli status` command:
 
@@ -183,27 +183,16 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.6.0-390a402e
+Version: 2.6.0-d0aa8b93
 Mode: light
 
-Topology
-Connected Peers: 143
-Population: 6991
-Depth: 11
-
-Wallet
-xBZZ: 0.0000000000000000
-xDAI: 0.009829728398864856
-
 Chainsync
-Block: 33,515,656 / 38,855,407 (Δ 5,339,751)
+Block: 39,566,742 / 41,710,807 (Δ 2,144,065)
 
-Chequebook
-Available xBZZ: 0.0000000000000000
-Total xBZZ: 0.0000000000000000
+Topology
+ERROR Request failed with status code 503
 
-Staking
-Staked xBZZ: 0.0000000000000000
+There may be additional information in the Bee logs.
 ```
 
 The `Chainsync` section tells us how many blocks our node has synced so far out of the total Gnosis Chain blocks (and the number after the Δ symbol shows how many blocks still need to be synced):
@@ -212,3 +201,60 @@ The `Chainsync` section tells us how many blocks our node has synced so far out 
 Chainsync
 Block: 33,515,656 / 38,855,407 (Δ 5,339,751)
 ```
+
+The `Topology` section will show information about which other nodes your own node is connected with. It will display an `ERROR` until the node is fully initialized.
+
+After several minutes, your node will be fully synced, and can now interact with the Swarm network - we can use `swarm-cli status` again to confirm:
+
+```bash
+swarm-cli status
+```
+
+```bash
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.6.0-d0aa8b93
+Mode: light
+
+Chainsync
+Block: 41,710,955 / 41,710,962 (Δ 7)
+
+Topology
+Connected Peers: 151
+Population: 2257
+Depth: 10
+
+Wallet
+xBZZ: 0.0000000000000000
+xDAI: 0.009787142484816165
+
+Chequebook
+Available xBZZ: 0.0000000000000000
+Total xBZZ: 0.0000000000000000
+noah@NoahM16:~$ swarm-cli status
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.6.0-d0aa8b93
+Mode: light
+
+Chainsync
+Block: 41,711,260 / 41,711,268 (Δ 8)
+
+Topology
+Connected Peers: 156
+Population: 2693
+Depth: 10
+
+Wallet
+xBZZ: 0.0000000000000000
+xDAI: 0.009787142484816165
+
+Chequebook
+Available xBZZ: 0.0000000000000000
+Total xBZZ: 0.0000000000000000
+```
+
+## Next Steps
+
+With your node now fully synced, you're ready start [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download) or start learning how to [develop on Swarm](/docs/develop/introduction).
+
