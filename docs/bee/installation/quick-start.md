@@ -3,7 +3,7 @@ title: Quickstart
 id: quick-start
 ---
 
-This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and finally wait for it to sync.
+This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.
 
 :::tip
 A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](/docs/bee/working-with-bee/node-types). 
