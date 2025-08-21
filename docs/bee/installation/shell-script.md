@@ -27,7 +27,7 @@ Below is a step-by-step guide for installing and setting up your Bee node using 
 Run the install shell script using either `curl` or `wget`:
 
 :::caution
-In the example below, the version is specified using `TAG=v2.4.0`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
+In the example below, the version is specified using `TAG=v2.6.0`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
 :::
 
 :::info
@@ -60,7 +60,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.4.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.6.0 bash
 ```
 </TabItem>
 <TabItem value="wget">
@@ -68,7 +68,7 @@ curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TA
 **wget**
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.4.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.6.0 bash
 ```
 </TabItem>
 
