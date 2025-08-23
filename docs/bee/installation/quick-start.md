@@ -3,7 +3,7 @@ title: Quickstart
 id: quick-start
 ---
 
-This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and buy a batch of postage stamps. Finally it explains how to upload data using a postage stamp batch and how to download that data.
+This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.
 
 :::tip
 A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](/docs/bee/working-with-bee/node-types). 
@@ -168,11 +168,11 @@ Learn how to [get xDAI and xBZZ](/docs/bee/installation/fund-your-node#getting-t
 If you wait too long to fund your node it may shut itself down. In that case, simply use the same startup command to start the node again.
 :::
 
-## Wait to Sync (~30 Minutes)
+## Wait to Sync (~5 Minutes)
 
 After starting and funding a Bee light node for the first time, the node will automatically issue a [transaction](https://gnosisscan.io/tx/0xf8048c4e8020ccef842c9a901e6262e9c06d6f5926ff31bdb7dd9d7274dcf19c) on Gnosis Chain to deploy the node's [chequebook contract](/docs/concepts/incentives/bandwidth-incentives#chequebook-contract).
 
-The node then needs to sync blockchain data before it can buy a postage stamp batch. The process may take ***half an hour or longer*** depending on your RPC provider and network speed.
+The node then needs to sync blockchain data before it can buy a postage stamp batch. The process may take **~5 minutes** depending on your RPC provider and network speed. 
 
 You can check your node's syncing progress with the `swarm-cli status` command:
 
@@ -183,27 +183,16 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.6.0-390a402e
+Version: 2.6.0-d0aa8b93
 Mode: light
 
-Topology
-Connected Peers: 143
-Population: 6991
-Depth: 11
-
-Wallet
-xBZZ: 0.0000000000000000
-xDAI: 0.009829728398864856
-
 Chainsync
-Block: 33,515,656 / 38,855,407 (Δ 5,339,751)
+Block: 39,566,742 / 41,710,807 (Δ 2,144,065)
 
-Chequebook
-Available xBZZ: 0.0000000000000000
-Total xBZZ: 0.0000000000000000
+Topology
+ERROR Request failed with status code 503
 
-Staking
-Staked xBZZ: 0.0000000000000000
+There may be additional information in the Bee logs.
 ```
 
 The `Chainsync` section tells us how many blocks our node has synced so far out of the total Gnosis Chain blocks (and the number after the Δ symbol shows how many blocks still need to be synced):
@@ -213,137 +202,59 @@ Chainsync
 Block: 33,515,656 / 38,855,407 (Δ 5,339,751)
 ```
 
-Once our node is fully synced, we can move on to buying a batch of postage stamps.
+The `Topology` section will show information about which other nodes your own node is connected with. It will display an `ERROR` until the node is fully initialized.
 
-## Buy a Batch of Postage Stamps 
-
-:::tip
-If you try to purchase a batch of postage stamps before your node has fully synced, you will get a `503` error:
+After several minutes, your node will be fully synced, and can now interact with the Swarm network - we can use `swarm-cli status` again to confirm:
 
 ```bash
-ERROR Request failed with status code 503
-```
-:::
-
-Before uploading, you need a **postage stamp**. [Learn more](/docs/develop/access-the-swarm/buy-a-stamp-batch):
-
-You can purchase a batch of stamps using the `swarm-cli create` command to specify how much data you wish to store and for how long:
-
-```bash
-swarm-cli stamp create
-```
-
-
-Example output:
-
-```bash
-Please provide the total capacity of the postage stamp batch
-This represents the total size of data that can be uploaded
-Example: 1GB
-
-Please provide the time-to-live (TTL) of the postage stamps
-Defines the duration after which the stamp will expire
-Example: 1d, 1w, 1month
-```
-
-After running the command, you will be asked to specify how much data you wish to store and for how long. In our example we specified one day using `1d` and one gigabyte using `1gb`. The script then parses our input and chooses a ["depth" and "amount"](/docs/develop/access-the-swarm/buy-a-stamp-batch#setting-stamp-batch-parameters-and-options) for our batch, gives as an estimated cost, and prompts us to confirm if we wish to continue or not:
-
-:::tip
-The `amount` value determines how long your batch stays a live, while the `depth` value determines how much data it can store. There is a minimum depth of 17 and the `amount` value must be high enough for a batch with at least 24 hours of TTL (time to live). [Learn more](/docs/develop/access-the-swarm/buy-a-stamp-batch#setting-stamp-batch-parameters-and-options).
-:::
-
-```bash
-You have provided the following parameters:
-Capacity: 1.000 GB
-TTL: 24 hours
-
-Your parameters are now converted to Swarm's internal parameters:
-Depth (capacity): 18
-Amount (TTL): 581056344
-
-Estimated cost: 0.015 xBZZ
-Estimated capacity: 1.000 GB
-Estimated TTL: 24 hours
-Type: Immutable
-? Confirm the purchase (Y/n)
-```
-
-:::info
-The capacity and TTL are shown as estimates since the actual capacity and TTL are not deterministic. This is because of Swarm's [dynamic pricing model](/docs/concepts/incentives/price-oracle) and stamp batch [utilization mechanics](/docs/concepts/incentives/postage-stamps#batch-utilisation). 
-:::
-
-We input `Y` to confirm our purchase, and then we wait a few moments for the script to issue a transaction on Gnosis Chain to purchase our batch. Finally the script will return a `Stamp ID`, which is the unique identifier for our postage stamp batch.
-
-```bash
-? Confirm the purchase Yes
-Stamp ID: 0f473645b8444eb75e647bee4ee5d51ad11b94c32a31a0e80729d16eee07b428
-```
-
-## Upload a File
-
-After purchasing a batch of postage stamps, we're ready to upload to Swarm. First create a sample file to upload. Open it with your text editor of choice and write a message:
-
-```bash
-vi test.txt
-cat test.txt
+swarm-cli status
 ```
 
 ```bash
-Hello Swarm!
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.6.0-d0aa8b93
+Mode: light
+
+Chainsync
+Block: 41,710,955 / 41,710,962 (Δ 7)
+
+Topology
+Connected Peers: 151
+Population: 2257
+Depth: 10
+
+Wallet
+xBZZ: 0.0000000000000000
+xDAI: 0.009787142484816165
+
+Chequebook
+Available xBZZ: 0.0000000000000000
+Total xBZZ: 0.0000000000000000
+noah@NoahM16:~$ swarm-cli status
+Bee
+API: http://localhost:1633 [OK]
+Version: 2.6.0-d0aa8b93
+Mode: light
+
+Chainsync
+Block: 41,711,260 / 41,711,268 (Δ 8)
+
+Topology
+Connected Peers: 156
+Population: 2693
+Depth: 10
+
+Wallet
+xBZZ: 0.0000000000000000
+xDAI: 0.009787142484816165
+
+Chequebook
+Available xBZZ: 0.0000000000000000
+Total xBZZ: 0.0000000000000000
 ```
 
-After saving your test file, use the `swarm-cli upload` command to upload your file:
+## Next Steps
 
-```bash
-swarm-cli upload test.txt
-```
+With your node now fully synced, you're ready start [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download) or start learning how to [develop on Swarm](/docs/develop/introduction).
 
-Then we will be prompted to choose a stamp batch ID, we only have a single batch so we just hit "Enter" to continue:
-
-```bash
-? Please select a stamp for this action (Use arrow keys)
-❯ 0f473645b8444eb75e647bee4ee5d51ad11b94c32a31a0e80729d16eee07b428 256.000 MB remaining, TTL 24 hours
-```
-
-
-Response:
-
-```
-Swarm hash: cb8fbcc7bc0901afa2cec86590c09b491206af40fc6781874abfc3edc7aa495f
-URL: http://localhost:1633/bzz/cb8fbcc7bc0901afa2cec86590c09b491206af40fc6781874abfc3edc7aa495f/
-Stamp ID: 8d60f9c2
-Usage: 50%
-Capacity (immutable): 256.000 MB remaining out of 512.000 MB
-```
-
-The "Swarm hash" returned here is the unique reference for our upload.
-
-You can share this hash with someone else and they can use it to download whatever you uploaded for as long as the stamp batch you used still has remaining TTL. 
-
-## Download a File
-
-Use the `swarm-cli download` command with the hash for our uploaded file to download it. We specify the output as the second argument, after the postage stamp hash, using "./" to ensure the file is downloaded into our current directory (otherwise it will create a new directory with the hash itself as the filename and the `test.txt` file we uploaded inside that directory):  
-
-```bash
-swarm-cli download cb8fbcc7bc0901afa2cec86590c09b491206af40fc6781874abfc3edc7aa495f ./
-```
-Output after a successful download: 
-```bash
-test.txt OK
-```
-
-Check the file contents:
-```bash
-cat test.txt
-```
-
-```bash
-Hello Swarm!
-```
-
-
-## Learn More
-
-This guide introduces you to Bee and Swarm, but omits advanced details for the sake of brevity.
-
-To learn more about Bee (including other installation methods, configuration, node types, and more) read the complete ***[Getting Started](/docs/bee/installation/getting-started)*** section.
