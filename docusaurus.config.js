@@ -176,7 +176,7 @@ module.exports = {
           items: [
             {
               to: 'docs/develop/introduction',
-              label: 'Introduction'
+              label: 'Develop on Swarm'
             },
             {
               to: 'docs/develop/access-the-swarm/introduction',
