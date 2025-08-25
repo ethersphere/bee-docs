@@ -95,7 +95,7 @@ The `/status/peers` endpoint returns information about all the peers of the node
 
 The list is sorted by Kademlia proximity, not geographical distance. Nodes with lower PO values are further away, while higher PO values indicate closer neighbors. The most distant nodes with PO (proximity order) of zero are at the top of the list and the closest nodes with higher POs at the bottom of the list. The nodes at the bottom of the list with a PO equal or greater than the storage depth make up the nodes in your own node's neighborhood. It's possible that not all nodes in your neighborhood will appear in this list each time you call the endpoint if the connection between your nodes and the rest of the nodes in the neighborhood is not stable.
 
-Here are the last 12 entries:
+Here are the last few entries:
 
 ```bash
  curl -s http://localhost:1633/status/peers | jq
