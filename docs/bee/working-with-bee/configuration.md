@@ -27,6 +27,29 @@ However when Bee is started as a service with tools like `systemctl` or `brew se
 Run `bee start --help` in your terminal to list the available command-line arguments:
 
 ```bash
+Ethereum Swarm Bee
+
+Usage:
+  bee [command]
+
+Available Commands:
+  start       Start a Swarm node
+  dev         Start a Swarm node in development mode
+  init        Initialise a Swarm node
+  deploy      Deploy and fund the chequebook contract
+  version     Print version number
+  db          Perform basic DB related operations
+  split       Split a file into chunks
+  printconfig Print default or provided configuration in yaml format
+  help        Help about any command
+  completion  Generate the autocompletion script for the specified shell
+
+Flags:
+      --config string   config file (default is $HOME/.bee.yaml)
+  -h, --help            help for bee
+
+Use "bee [command] --help" for more information about a command.
+root@noah-bee:~# docker exec bee-1 bee start --help
 Start a Swarm node
 
 Usage:
@@ -35,15 +58,15 @@ Usage:
 Flags:
       --allow-private-cidrs                      allow to advertise private CIDRs to the public network
       --api-addr string                          HTTP API listen address (default "127.0.0.1:1633")
-      --block-time uint                          chain block time (default 15)
+      --block-time uint                          chain block time (default 5)
       --blockchain-rpc-endpoint string           rpc blockchain endpoint
-      --bootnode strings                         initial nodes to connect to
+      --bootnode strings                         initial nodes to connect to (default [/dnsaddr/mainnet.ethswarm.org])
       --bootnode-mode                            cause the node to always accept incoming connections
       --cache-capacity uint                      cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
       --cache-retrieval                          enable forwarded content caching (default true)
       --chequebook-enable                        enable chequebook (default true)
       --cors-allowed-origins strings             origins with CORS headers enabled
-      --data-dir string                          data directory (default "/home/noah/.bee")
+      --data-dir string                          data directory (default "/home/bee/.bee")
       --db-block-cache-capacity uint             size of block cache of the database in bytes (default 33554432)
       --db-disable-seeks-compaction              disables db compactions triggered by seeks (default true)
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
@@ -71,13 +94,12 @@ Flags:
       --reserve-capacity-doubling int            reserve capacity doubling
       --resolver-options strings                 ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
       --resync                                   forces the node to resync postage contract data
+      --skip-postage-snapshot                    skip postage snapshot
       --staking-address string                   staking contract address
       --statestore-cache-capacity uint           lru memory caching capacity in number of statestore entries (default 100000)
       --static-nodes strings                     protect nodes from getting kicked out on bootnode
       --storage-incentives-enable                enable storage incentives feature (default true)
-      --swap-deployment-gas-price string         gas price in wei to use for deployment and funding
       --swap-enable                              enable swap
-      --swap-endpoint string                     swap blockchain endpoint
       --swap-factory-address string              swap factory addresses
       --swap-initial-deposit string              initial deposit if deploying a new chequebook (default "0")
       --target-neighborhood string               neighborhood to target in binary format (ex: 111111001) for mining the initial overlay
@@ -89,7 +111,7 @@ Flags:
       --transaction-debug-mode                   skips the gas estimate step for contract transactions
       --use-postage-snapshot                     bootstrap node using postage snapshot from the network
       --verbosity string                         log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
-      --warmup-time duration                     time to warmup the node before some major protocols can be kicked off (default 5m0s)
+      --warmup-time duration                     maximum node warmup duration; proceeds when stable or after this time (default 5m0s)
       --welcome-message string                   send a welcome message string during handshakes
       --withdrawal-addresses-whitelist strings   withdrawal target addresses
 
@@ -126,13 +148,14 @@ bee printconfig
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
-api-addr: 127.0.0.1:1633
+api-addr: :1633
 # chain block time
-block-time: "15"
+block-time: "5"
 # rpc blockchain endpoint
-blockchain-rpc-endpoint: ""
+blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 # initial nodes to connect to
-bootnode: []
+bootnode:
+- /dnsaddr/mainnet.ethswarm.org
 # cause the node to always accept incoming connections
 bootnode-mode: false
 # cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes
@@ -142,11 +165,11 @@ cache-retrieval: true
 # enable chequebook
 chequebook-enable: true
 # config file (default is $HOME/.bee.yaml)
-config: /root/.bee.yaml
+config: /home/bee/.bee.yaml
 # origins with CORS headers enabled
 cors-allowed-origins: []
 # data directory
-data-dir: /root/.bee
+data-dir: /home/bee/.bee
 # size of block cache of the database in bytes
 db-block-cache-capacity: "33554432"
 # disables db compactions triggered by seeks
@@ -156,11 +179,13 @@ db-open-files-limit: "200"
 # size of the database write buffer in bytes
 db-write-buffer-size: "33554432"
 # cause the node to start in full mode
-full-node: false
+full-node: "true"
 # help for printconfig
 help: false
 # triggers connect to main net bootnodes.
-mainnet: true
+mainnet: "true"
+# minimum radius storage threshold
+minimum-storage-radius: "0"
 # NAT exposed address
 nat-addr: ""
 # suggester for target neighborhood
@@ -172,7 +197,7 @@ p2p-addr: :1634
 # enable P2P WebSocket transport
 p2p-ws-enable: false
 # password for decrypting keys
-password: ""
+password: 427067e9514e93613b861fef5561c6
 # path to a file that contains password for decrypting keys
 password-file: ""
 # percentage below the peers payment threshold when we initiate settlement
@@ -193,10 +218,14 @@ pprof-profile: false
 price-oracle-address: ""
 # redistribution contract address
 redistribution-address: ""
+# reserve capacity doubling
+reserve-capacity-doubling: "1"
 # ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
 resolver-options: []
 # forces the node to resync postage contract data
 resync: false
+# skip postage snapshot
+skip-postage-snapshot: false
 # staking contract address
 staking-address: ""
 # lru memory caching capacity in number of statestore entries
@@ -205,12 +234,8 @@ statestore-cache-capacity: "100000"
 static-nodes: []
 # enable storage incentives feature
 storage-incentives-enable: true
-# gas price in wei to use for deployment and funding
-swap-deployment-gas-price: ""
 # enable swap
-swap-enable: false
-# swap blockchain endpoint
-swap-endpoint: ""
+swap-enable: "true"
 # swap factory addresses
 swap-factory-address: ""
 # initial deposit if deploying a new chequebook
@@ -227,11 +252,13 @@ tracing-host: ""
 tracing-port: ""
 # service name identifier for tracing
 tracing-service-name: bee
+# skips the gas estimate step for contract transactions
+transaction-debug-mode: false
 # bootstrap node using postage snapshot from the network
 use-postage-snapshot: false
 # log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
-verbosity: info
-# time to warmup the node before some major protocols can be kicked off
+verbosity: "4"
+# maximum node warmup duration; proceeds when stable or after this time
 warmup-time: 5m0s
 # send a welcome message string during handshakes
 welcome-message: ""
