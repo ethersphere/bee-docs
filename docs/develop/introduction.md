@@ -48,159 +48,21 @@ The [Swarm-CLI](/docs/bee/working-with-bee/swarm-cli) command line tool is the r
 
 ## How to Integrate with a dApp
 
-Once you've got your Bee node up and running, then you can begin integrating it into your dApp. 
+Once you've got your Bee node up and running, then you can begin integrating it into your dApp.  
 
-- **bee-js**: [`bee-js` is the official JavaScript SDK for Swarm](https://bee-js.ethswarm.org/docs/), and is the *recommended approach* for building Swarm integrated dApps.  
+- **bee-js**: [`bee-js` is the official JavaScript SDK for Swarm](https://bee-js.ethswarm.org/docs/), and is the *recommended approach* for building Swarm integrated dApps. It supports both NodeJS and browser based APIs, making it easy to integrate with both frontend and backend applications.
 
-- **Raw API**: If required, you may also directly interact with the Bee HTTP API. This approach is discouraged unless explicitly required.
+:::tip
+Refer to the next section "Template Applications." to learn about using `create-swarm-app` to generate basic project scaffolding which demonstrate specifically how to use `bee-js` to integrate Swarm into your application.
+:::
+
+- **Raw API**: If required, you may also directly interact with the [Bee HTTP API](/api/). This approach is discouraged unless explicitly required for your use case.
 
 ## Template Applications
 
-The best way to begin understanding how everything works together is by exploring a working app. The [`create-swarm-app` tool](https://www.npmjs.com/package/create-swarm-app) allows you to rapidly generate a minimalistic working Swarm application. 
+Once you've got your Bee node up and running and have installed all the pre-requisites and recommended tools mentioned above, now you're really ready to get started building.
 
-As explained in the [bee-js docs](https://bee-js.ethswarm.org/docs/getting-started/#quickstart-with-create-swarm-app), the `create-swarm-app` tool allows you to specify options to generate a template app for your chosen development environment. The supported options include: `node`, `node-esm`, `node-ts` and `vite-tsx`. 
+The best way get started is with a simple template application to serve as an example. The [`create-swarm-app` tool](https://www.npmjs.com/package/create-swarm-app) allows you to rapidly generate simple starter templates for several different use cases, and serve a the perfect jumping off point for further learning. 
 
-### Swarm Integrated Back-end
+For more details on using `create-swarm-app`, and for a step-by-step explanation of the template apps it can output, refer to the [guides in the bee-js docs](https://bee-js.ethswarm.org/docs/getting-started/#quickstart-with-create-swarm-app).  
 
-When `create-swarm-app` is run using either of the `node`, `node-esm`, or `node-ts` options, the tool will output a simple script containing the basic scaffolding for a Swarm integrated back-end using the specified environment. The output scripts are examples of Swarm enabled code which runs alongside a Bee node on a traditional server, and allows for dynamic interaction with the Swarm.
-
-```bash
-npm init swarm-app@latest my-dapp node-ts
-```
-
-```bash
-> npx
-> create-swarm-app my-dapp node-ts
-
-Project created
-
-cd my-dapp
-npm install
-npm start
-```
-
-Your project structure will look like:
-
-```bash
-.
-├── package.json
-├── src
-│   ├── config.ts
-│   └── index.ts
-└── tsconfig.json
-```
-
-The Bee node's API endpoint is specified in `config.ts`:
-
-
-```js
-export const BEE_HOST = 'http://localhost:1633'
-```
-
-This is the default endpoint used in all Bee API requests, and which is used to initialized a Bee object when using the `bee-js` SDK.
-
-Within `index.ts`, the API endpoint is used to initialize a Bee object using `bee-js`, which is then used to pay for storage on Swarm if needed, and then upload and download data from Swarm:
-
-`index.ts`:
-
-```js
-import { Bee } from '@ethersphere/bee-js'
-import { BEE_HOST } from './config'
-
-main()
-
-async function main() {
-    const bee = new Bee(BEE_HOST)
-    const batchId = await getOrCreatePostageBatch(bee)
-    console.log('Batch ID', batchId.toString())
-    const data = 'Hello, world! The current time is ' + new Date().toLocaleString()
-    const uploadResult = await bee.uploadData(batchId, data)
-    console.log('Swarm hash', uploadResult.reference.toHex())
-    const downloadResult = await bee.downloadData(uploadResult.reference)
-    console.log('Downloaded data:', downloadResult.toUtf8())
-}
-
-async function getOrCreatePostageBatch(bee: Bee) {
-    const batches = await bee.getPostageBatches()
-    const usable = batches.find(x => x.usable)
-  
-    if (usable) {
-        return usable.batchID
-    } else {
-        return bee.createPostageBatch('500000000', 20)
-    }
-}
-```
-
-When `create-swarm-app` is used with either `node` and `node-esm` options, a similar basic script will be output for the selected development environment.
-
-### Fully Swarm Hosted dApp
-
-In contrast with the previous example, the `vite-tsx` option for `create-swarm-app` will output the basic scaffolding for a Swarm integrated static site which can be uploaded to Swarm directly - no servers needed! 
-
-```bash
-npm init swarm-app@latest my-dapp vite-tsx
-```
-
-```bash
-> npx
-> create-swarm-app my-dapp vite-tsx
-
-Project created
-
-cd my-dapp
-npm install
-npm start
-```
-
-The output files will have this structure:
-
-```bash
-tree .
-.
-├── index.html
-├── package.json
-├── src
-│   ├── App.tsx
-│   ├── config.ts
-│   └── index.tsx
-└── tsconfig.json
-```
-
-
-After installing and starting the application, you will be first be greeted with a button that will purchase a new postage batch or select an existing one as needed. 
-
-![](/img/develop-on-swarm-00.jpg)
-
-After a postage batch is selected, you will be greeted with an interface for uploading data:
-
-![](/img/develop-on-swarm-01.jpg)
-
-After selecting a file to upload, a reference hash to the file will be returned:
-
-![](/img/develop-on-swarm-02.jpg)
-
-Right now our application is running on localhost, and is only accessible locally. To make this application accessible for anyone on Swarm, all we need to do create a production build of our application using `vite build` and then upload it to the Swarm with `swarm-cli`.
-
-```bash
- npm run build
-```
-
-This will generate a production build in the `/dist` directory, which we can than use `swarm-cli` to upload:
-
-```bash
-swarm-cli upload dist
-```
-
-`swarm-cli` will prompt us to select a postage batch, after which it will automatically detect that we are trying upload a website, complete the upload, and return a hash to us which can now be used by anyone with a Bee node to access our app:
-
-```bash
-? Please select a stamp for this action
-4996787aee78da46b6e32d8141aee89ebb4f2ef3301bf04e0a399247fc414f27 550.296 MB
-Setting --index-document to index.html
-Swarm hash: 764b08bb0f9e82d4bdce951b1ded816bd0417e039828e4308d61ab3035ff60a2
-URL: http://localhost:1633/bzz/764b08bb0f9e82d4bdce951b1ded816bd0417e039828e4308d61ab3035ff60a2/
-Stamp ID: 4996787a
-Usage: 13%
-Capacity (immutable): 550.296 MB remaining out of 628.910 MB
-```
