@@ -256,5 +256,5 @@ Total xBZZ: 0.0000000000000000
 
 ## Next Steps
 
-With your node now fully synced, you're ready start [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download) or start learning how to [develop on Swarm](/docs/develop/introduction).
+With your node now fully synced, you're ready start start learning how to [develop on Swarm](/docs/develop/introduction).
 
