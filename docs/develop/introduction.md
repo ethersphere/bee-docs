@@ -29,7 +29,7 @@ pagination_next: null
         </a>
       </li>
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/tools-and-features/bee-js">
+        <a class="hub-card__link" target="_blank" href="https://bee-js.ethswarm.org/docs/getting-started/#installation">
           <h3 class="hub-card__title">Connect Your App</h3>
           <p class="hub-card__desc">
             Use the official <code>bee-js</code> SDK to integrate storage, feeds, and more into your app.
