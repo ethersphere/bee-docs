@@ -19,7 +19,7 @@ pagination_next: null
         <a class="hub-card__link" href="/docs/bee/installation/quick-start">
           <h3 class="hub-card__title">Install Bee</h3>
           <p class="hub-card__desc">
-            Install and run a Bee node — the entry point to development on the Swarm network.
+            Install and run a Bee node — your entry point for development on the Swarm network.
           </p>
           <span class="hub-card__cta">Get started</span>
         </a>
