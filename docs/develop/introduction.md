@@ -19,37 +19,24 @@ pagination_next: null
 
   <div class="container">
     <ul class="hub-grid">
-
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/bee/installation/quick-start">
-          <h3 class="hub-card__title">Step One: Install Bee</h3>
+          <h3 class="hub-card__title">Install Bee</h3>
           <p class="hub-card__desc">
             Install and run a Bee node — the entry point to the Swarm network.
           </p>
           <span class="hub-card__cta">Get started</span>
         </a>
       </li>
-
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/tools-and-features/bee-js">
-          <h3 class="hub-card__title">Step Two: Connecting your dApp with Swarm</h3>
+          <h3 class="hub-card__title">Connect Your App</h3>
           <p class="hub-card__desc">
             Use the official <code>bee-js</code> SDK to integrate storage, feeds, and more into your app.
           </p>
           <span class="hub-card__cta">Connect dApp</span>
         </a>
       </li>
-
-      <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/access-the-swarm/host-your-website">
-          <h3 class="hub-card__title">Step Three: Explore Example dApps</h3>
-          <p class="hub-card__desc">
-            Try ready-made templates and example projects that showcase how to build on Swarm.
-          </p>
-          <span class="hub-card__cta">See examples</span>
-        </a>
-      </li>
-
     </ul>
   </div>
 
