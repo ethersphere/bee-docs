@@ -32,7 +32,7 @@ pagination_next: null
         <a class="hub-card__link" target="_blank" href="https://bee-js.ethswarm.org/docs/getting-started/#installation">
           <h3 class="hub-card__title">Connect Your App</h3>
           <p class="hub-card__desc">
-            Use the official <code>bee-js</code> SDK to integrate storage, feeds, and more into your app.
+            Use the official <code>bee-js</code> SDK to connect your app to your Bee node and integrate Swarm based storage, feeds, and more.
           </p>
           <span class="hub-card__cta">Connect dApp</span>
         </a>

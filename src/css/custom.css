@@ -286,6 +286,21 @@ pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-Cod
   border-color: #F30000;
 }
 
+/* Style links inside admonitions */
+.theme-admonition a {
+  font-weight: 600; /* slightly bold, not as heavy as 700 */
+  text-decoration: none; /* remove default underline */
+  border-bottom: 2px solid currentColor; /* underline effect using border */
+  padding-bottom: 1px; /* spacing so border doesn’t touch text */
+}
+
+/* Hover/focus state for better interactivity */
+.theme-admonition a:hover,
+.theme-admonition a:focus {
+  color: var(--ifm-color-primary); /* matches your orange accent */
+  border-bottom-color: var(--ifm-color-primary);
+}
+
 
 /**
 * Prevent redocusaurus from displaying html before its styles are fully
