@@ -89,7 +89,7 @@ To run both nodes and send messages from the writer node to the service node you
 1. A fully synced Bee full node for the service node and a second Bee light node for the writer node (they do not both need to be running on the same machine) 
 2. A small amount of xDAI (~0.01) and xBZZ (~0.01)
 3. [NodeJS](https://nodejs.org/en) & [NPM](https://www.npmjs.com/)  
-4. A mutable stamp batch (*set the* [`immutable` header parameter](/api/#tag/Postage-Stamps/paths/~1stamps~1%7Bamount%7D~1%7Bdepth%7D/post) *to `false` when* [buying a batch](/docs/develop/access-the-swarm/buy-a-stamp-batch#buying-a-stamp-batch))  
+4. A mutable stamp batch (*set the* [`immutable` header parameter](/api/#tag/Postage-Stamps/paths/~1stamps~1%7Bamount%7D~1%7Bdepth%7D/post) *to `false` when* [buying a batch](/docs/develop/tools-and-features/buy-a-stamp-batch#buying-a-stamp-batch))  
 
 :::warning  
 Only ***mutable*** postage stamp batches should be used for GSOC.
@@ -283,7 +283,7 @@ async function sendGsocMessage(privateKey, name, body) {
 Update the configuration section constants with your own information:
 
 * Set `BEE_HOST` to your writer node's API endpoint
-* Set `BEE_BATCH` to the batch id of a valid, *mutable* postage stamp batch - [buy a batch](/docs/develop/access-the-swarm/buy-a-stamp-batch) if needed
+* Set `BEE_BATCH` to the batch id of a valid, *mutable* postage stamp batch - [buy a batch](/docs/develop/tools-and-features/buy-a-stamp-batch) if needed
 * Set `TARGET_OVERLAY` to the service node overlay value we copied from the output of the service node script 
 
 After updating the configuration, run the writer node script (before running the writer node script, make sure the service node script has already been started and is currently listening for GSOC updates):

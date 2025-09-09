@@ -39,7 +39,7 @@ To upload data to the swarm, you must perform the following steps:
 
 ## Purchasing Your Batch of Stamps
 
-In order to upload your data to swarm, you must [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch) to pay for however much data you need to upload.
+In order to upload your data to swarm, you must [purchase an appropriate batch of stamps](/docs/develop/tools-and-features/buy-a-stamp-batch) to pay for however much data you need to upload.
 
 ## Using Stamps to Upload a File
 
@@ -47,10 +47,10 @@ Once your Bee node is running, a HTTP API is enabled for you to interact with. T
 
 
 <Tabs
-defaultValue="api"
+defaultValue="swarm-cli"
 values={[
-{label: 'API', value: 'api'},
 {label: 'Swarm CLI', value: 'swarm-cli'},
+{label: 'API', value: 'api'},
 ]}>
 <TabItem value="api">
 
@@ -70,7 +70,7 @@ Once running, a file can be uploaded by making an HTTP POST request to the `bzz`
 
 Here, you must specify your _Batch ID_ in the `Swarm-Postage-Batch-Id` header, the file name in the `name` query parameter, and also pass the appropriate mime type in the `Content-Type` header.
 
-You may also wish to employ the erasure coding feature to add greater protection for your data, see [erasure coding page](/docs/develop/access-the-swarm/erasure-coding) for more details on its usage.
+You may also wish to employ the erasure coding feature to add greater protection for your data, see [erasure coding page](/docs/develop/tools-and-features/erasure-coding) for more details on its usage.
 
 ```bash
  curl -X POST -H "Swarm-Postage-Batch-Id: 54ba8e39a4f74ccfc7f903121e4d5d0fc40732b19efef5c8894d1f03bdd0f4c5" -H "Content-Type: text/plain" -H "Swarm-Encrypt: false" -v --data-binary "@test.txt" localhost:1633/bzz
@@ -78,7 +78,7 @@ You may also wish to employ the erasure coding feature to add greater protection
 
 :::danger
 Data uploaded to Swarm is always public. In Swarm, sensitive files
-must be [encrypted](/docs/develop/access-the-swarm/store-with-encryption)
+must be [encrypted](/docs/develop/tools-and-features/store-with-encryption)
 before uploading to ensure their contents always remains private.
 :::
 
@@ -199,7 +199,7 @@ It will be used to test uploading and downloading from Swarm
 In Swarm, every piece of data has a unique _address_ which is a unique and reproducible cryptographic hash digest. If you upload the same file twice, you will always receive the same hash. This makes working with data in Swarm super secure!
 
 :::info
-If you are uploading a large file it is useful to track the status of your upload as it is processed into the network. To improve the user experience, learn how to [follow the status of your upload](/docs/develop/access-the-swarm/syncing).
+If you are uploading a large file it is useful to track the status of your upload as it is processed into the network. To improve the user experience, learn how to [follow the status of your upload](/access-the-swarm/upload-and-download#tracking-deferred-uploads).
 
 Once your file has been **completely synced with the network**, you will be able to turn off your computer and other nodes will take over to serve the data for you!
 :::
@@ -210,10 +210,10 @@ Once your file is uploaded to Swarm it can be easily downloaded.
 
 
 <Tabs
-defaultValue="api"
+defaultValue="swarm-cli"
 values={[
-{label: 'API', value: 'api'},
 {label: 'Swarm CLI', value: 'swarm-cli'},
+{label: 'API', value: 'api'},
 ]}>
 <TabItem value="api">
 
@@ -301,7 +301,7 @@ cd ..
 Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking care to include the header `Content Type: application/x-tar`.
 
 :::info
-Before you progress to the next step, you must buy stamps so you can pay for uploads! See this guide on how to [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
+Before you progress to the next step, you must buy stamps so you can pay for uploads! See this guide on how to [purchase an appropriate batch of stamps](/docs/develop/tools-and-features/buy-a-stamp-batch).
 :::
 
 ```bash
@@ -335,7 +335,7 @@ Other files are served at their relative paths, e.g:
 
 [http://localhost:1633/bzz/b25c89a...214917b/assets/style.css](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css)
 
-Once your data has been [fully processed into the network](/docs/develop/access-the-swarm/syncing), you will then be able to retrieve it from any Bee node.
+Once your data has been [fully processed into the network](/access-the-swarm/upload-and-download#tracking-deferred-uploads), you will then be able to retrieve it from any Bee node.
 
 [https://gateway.ethswarm.org/bzz/b25c89a...214917b/index.html](https://gateway.ethswarm.org/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/)
 
@@ -369,3 +369,59 @@ curl \
 	--data-binary @my_data.tar http://localhost:1633/bzz
 ```
 
+### Tracking Deferred Uploads
+
+When uploading in a *deferred* manner, a Swarm reference hash will be returned before the content has been fully synced to the network. In order to help you validate whether the upload is completed or to estimate how long it will take, you can use the `tags` feature.
+
+
+#### Generate the tag 
+
+While the automatically-generated tag is convenient, with big uploads it might take a while until the Bee API returns the headers. What you want to do in this case is to pre-generate the tag and pass this tag along with the upload command.
+
+Generate a tag:
+
+```bash
+curl -X POST http://localhost:1633/tags
+```
+
+The `uid` value is your tag:
+
+```json
+ {
+    "split": 0,
+    "seen": 0,
+    "stored": 0,
+    "sent": 0,
+    "synced": 0,
+    "uid": 5,
+    "address": "",
+    "startedAt": "2023-08-31T06:46:41.574003454Z"
+}
+```
+
+:::info
+Before you progress to the next step, you must buy stamps so you can pay for uploads! See this guide on how to [purchase an appropriate batch of stamps](/docs/develop/tools-and-features/buy-a-stamp-batch).
+:::
+
+Pass the tag along with the upload:
+
+```bash
+curl --data-binary @bee.jpg \
+  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" \
+  -H "Swarm-Tag: 5" \
+  "http://localhost:1633/bzz?name=bee.jpg"
+```
+
+#### Get the Current Status
+
+To get the current status of an upload, send a GET request to the `tag/<Swarm-Tag>` API endpoint.
+
+```bash
+curl http://localhost:1633/tags/5 | jq
+```
+
+The response contains all the information that you need to follow the status of your file as it is synced with the network.
+
+:::info
+The numbers that the `tags` endpoint returns under `total`, `processed` and `synced` are denominated in [*chunks*](/docs/concepts/DISC/#chunks), i.e. Swarm's 4kb data units.
+:::

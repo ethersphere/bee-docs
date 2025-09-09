@@ -439,7 +439,7 @@ curl -s localhost:1633/peers | jq ".peers | length"
 
 Perfect! We are accumulating peers, this means you are connected to
 the network, and ready to start [using
-Bee](/docs/develop/access-the-swarm/introduction) to [upload and
+Bee](/docs/develop/introduction) to [upload and
 download](/docs/develop/access-the-swarm/upload-and-download) content or host
 and browse [websites](/docs/develop/access-the-swarm/host-your-website) hosted
 on the Swarm network.
@@ -470,7 +470,7 @@ Storage incentive rewards are only available for full nodes which are providing 
 
 
 ### Access the Swarm
-If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/access-the-swarm/introduction).
+If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/introduction).
 
 ### Explore the API
 The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.

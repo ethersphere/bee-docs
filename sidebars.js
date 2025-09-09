@@ -93,16 +93,14 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Access the Swarm',
+      label: 'Building on Swarm',
       items: [
-        'develop/access-the-swarm/introduction',
-        'develop/access-the-swarm/buy-a-stamp-batch',
         'develop/access-the-swarm/upload-and-download',
-        'develop/access-the-swarm/erasure-coding',
-        'develop/access-the-swarm/store-with-encryption',
         'develop/access-the-swarm/host-your-website',
-        'develop/access-the-swarm/syncing',
-        'develop/access-the-swarm/pinning',
+        'develop/access-the-swarm/updatable-content',
+        'develop/access-the-swarm/act',
+        'develop/access-the-swarm/messaging',
+        
       ],
       collapsed: false
     },
@@ -111,15 +109,18 @@ module.exports = {
       label: 'Tools and Features',
       items: [
         'develop/tools-and-features/introduction',
+        'develop/tools-and-features/buy-a-stamp-batch',
         'develop/tools-and-features/bee-js',
         'develop/tools-and-features/gateway-proxy',
         'develop/tools-and-features/chunk-types',
         'develop/tools-and-features/feeds',
         'develop/tools-and-features/pss',
         'develop/tools-and-features/gsoc',
+        'develop/tools-and-features/pinning',
+        'develop/tools-and-features/erasure-coding',
+        'develop/tools-and-features/store-with-encryption',
         'develop/tools-and-features/bee-dev-mode',
         'develop/tools-and-features/starting-a-test-network',
-        'develop/tools-and-features/act'
       ],
       collapsed: false
     },
