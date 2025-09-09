@@ -95,6 +95,7 @@ module.exports = {
       type: 'category',
       label: 'Building on Swarm',
       items: [
+        'develop/access-the-swarm/introduction',
         'develop/access-the-swarm/upload-and-download',
         'develop/access-the-swarm/host-your-website',
         'develop/access-the-swarm/updatable-content',

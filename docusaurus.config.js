@@ -176,11 +176,11 @@ module.exports = {
           items: [
             {
               to: 'docs/develop/introduction',
-              label: 'Develop on Swarm'
-            },
+              label: 'Getting Started'
+            },  
             {
               to: 'docs/develop/access-the-swarm/introduction',
-              label: 'Access the Swarm'
+              label: 'Building on Swarm'
             },
             {
               to: 'docs/develop/tools-and-features/introduction',

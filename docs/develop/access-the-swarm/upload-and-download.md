@@ -50,8 +50,12 @@ Once your Bee node is running, a HTTP API is enabled for you to interact with. T
 defaultValue="swarm-cli"
 values={[
 {label: 'Swarm CLI', value: 'swarm-cli'},
+{label: 'bee-js', value: 'bee-js'},
 {label: 'API', value: 'api'},
 ]}>
+
+<TabItem value="bee-js">
+</TabItem>
 <TabItem value="api">
 
 #### API
@@ -213,8 +217,13 @@ Once your file is uploaded to Swarm it can be easily downloaded.
 defaultValue="swarm-cli"
 values={[
 {label: 'Swarm CLI', value: 'swarm-cli'},
+{label: 'bee-js', value: 'bee-js'},
 {label: 'API', value: 'api'},
 ]}>
+
+<TabItem value="bee-js">
+</TabItem>
+
 <TabItem value="api">
 
 #### API
