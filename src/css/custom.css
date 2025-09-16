@@ -444,33 +444,60 @@ body[data-rh] .redocusaurus {
 }
 
 
-/* --- Docs sidebar typography: bold only top-level categories --- */
+/* --- Docs sidebar typography: desktop + mobile (drawer) --- */
 
 /* Reset: all sidebar links use base font at normal weight */
-.theme-doc-sidebar-container .menu__link {
+:where(.theme-doc-sidebar-container, .navbar-sidebar) .menu__link {
   font-family: var(--ifm-font-family-base) !important;
   font-weight: 400 !important;
 }
 
 /* Top-level categories (expand/collapse) → true bold (700) */
-.theme-doc-sidebar-container
+:where(.theme-doc-sidebar-container, .navbar-sidebar)
   .theme-doc-sidebar-item-category-level-1
   > .menu__list-item-collapsible
   > :is(a,button).menu__link--sublist {
   font-family: var(--ifm-font-family-base) !important;
-  font-weight: 700 !important; /* heavier than theme semibold (≈500) */
+  font-weight: 700 !important;
+  font-size: 1rem; /* keep full size for top-level */
+}
+
+/* Fallback (some themes don’t emit the -level-1 class consistently on mobile) */
+.navbar-sidebar
+  .menu__list > .theme-doc-sidebar-item-category
+  > .menu__list-item-collapsible
+  > :is(a,button).menu__link--sublist {
+  font-weight: 700 !important;
+  font-size: 1rem;
 }
 
 /* Nested categories (level ≥ 2) stay normal */
-.theme-doc-sidebar-container
+:where(.theme-doc-sidebar-container, .navbar-sidebar)
   .theme-doc-sidebar-item-category:not(.theme-doc-sidebar-item-category-level-1)
   > .menu__list-item-collapsible
   > :is(a,button).menu__link--sublist {
   font-weight: 400 !important;
 }
 
-/* Page links (including active) stay normal */
-.theme-doc-sidebar-container .theme-doc-sidebar-item-link .menu__link,
-.theme-doc-sidebar-container .theme-doc-sidebar-item-link .menu__link.menu__link--active {
+/* Page links (including active) slightly smaller + normal weight */
+:where(.theme-doc-sidebar-container, .navbar-sidebar)
+  .theme-doc-sidebar-item-link .menu__link,
+:where(.theme-doc-sidebar-container, .navbar-sidebar)
+  .theme-doc-sidebar-item-link .menu__link.menu__link--active {
   font-weight: 400 !important;
+  font-size: .85rem; 
 }
+
+
+/* --- Global typography --- */
+
+/* Primary: Infima base font size (affects rem-based components) */
+:root {
+  --ifm-font-size-base: 14px; 
+}
+
+/* Fallback: ensure everything follows the smaller base */
+html {
+  font-size: 14px; 
+}
+
