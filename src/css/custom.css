@@ -442,3 +442,35 @@ body[data-rh] .redocusaurus {
   padding: 2rem 0 !important;
   background: transparent !important;
 }
+
+
+/* --- Docs sidebar typography: bold only top-level categories --- */
+
+/* Reset: all sidebar links use base font at normal weight */
+.theme-doc-sidebar-container .menu__link {
+  font-family: var(--ifm-font-family-base) !important;
+  font-weight: 400 !important;
+}
+
+/* Top-level categories (expand/collapse) → true bold (700) */
+.theme-doc-sidebar-container
+  .theme-doc-sidebar-item-category-level-1
+  > .menu__list-item-collapsible
+  > :is(a,button).menu__link--sublist {
+  font-family: var(--ifm-font-family-base) !important;
+  font-weight: 700 !important; /* heavier than theme semibold (≈500) */
+}
+
+/* Nested categories (level ≥ 2) stay normal */
+.theme-doc-sidebar-container
+  .theme-doc-sidebar-item-category:not(.theme-doc-sidebar-item-category-level-1)
+  > .menu__list-item-collapsible
+  > :is(a,button).menu__link--sublist {
+  font-weight: 400 !important;
+}
+
+/* Page links (including active) stay normal */
+.theme-doc-sidebar-container .theme-doc-sidebar-item-link .menu__link,
+.theme-doc-sidebar-container .theme-doc-sidebar-item-link .menu__link.menu__link--active {
+  font-weight: 400 !important;
+}
