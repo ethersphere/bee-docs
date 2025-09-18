@@ -52,8 +52,6 @@ Some
 **Full example:**
 
 ```js
-// Single file upload & download (Node.js) — logs content to terminal
-
 import { Bee, Size, Duration } from "@ethersphere/bee-js"
 import { readFile } from "node:fs/promises"
 
@@ -63,19 +61,19 @@ const bee = new Bee("http://localhost:1633")
 // 2) Buy storage (postage stamp batch) for this session
 const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))
 
-// 3) Read the file from disk as bytes
+// 3) Read the file from disk 
 const data = await readFile("./hello.txt")
 
-// 4) Upload the bytes with a filename and content type; capture the reference
+// 4) Upload with a filename and content type; capture the reference
 const { reference } = await bee.uploadFile(batchId, data, "hello.txt", { contentType: "text/plain" })
-console.log("Uploaded reference:", reference)
+console.log("Uploaded reference:", reference.toHex())
 
 // 5) Download the file back using the reference
 const file = await bee.downloadFile(reference)
 
 // 6) Log the file's metadata and contents to the terminal
-console.log(file.name)        // e.g., "hello.txt"
-console.log(file.contentType) // e.g., "text/plain"
+console.log(file.name)        // "hello.txt"
+console.log(file.contentType) // "text/plain"
 console.log(file.data.toUtf8()) // Prints file content
 ```
 
@@ -111,15 +109,18 @@ const bee = new Bee("http://localhost:1633")
 
 // 1) Buy storage
 const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))
+console.log("Batch ID:", String(batchId))
 
-// 2) Upload a single file from an <input type="file" id="file">
-const fileInput = document.querySelector("#file")!
-const selected = fileInput.files![0] // a File object
-const { reference } = await bee.uploadFile(batchId, selected)
+// 2) Upload a single file created in code
+const file = new File(["Hello Swarm!"], "hello.txt", { type: "text/plain" })
+const { reference } = await bee.uploadFile(batchId, file)
+console.log("Reference:", String(reference))
 
-// 3) Download (gets name, type, and data back)
+// 3) Download and print name + contents
 const downloaded = await bee.downloadFile(reference)
-console.log(downloaded.name) // "your-file-name.ext"
+console.log(downloaded.name)          // "hello.txt"
+console.log(file.contentType) // "text/plain"
+console.log(downloaded.data.toUtf8()) // prints file content
 ```
 
 ### Multiple files — Browser 
