@@ -61,10 +61,10 @@ const bee = new Bee("http://localhost:1633")
 // 2) Buy storage (postage stamp batch) for this session
 const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))
 
-// 3) Read the file from disk 
+// 3) Read the file from disk as bytes
 const data = await readFile("./hello.txt")
 
-// 4) Upload with a filename and content type; capture the reference
+// 4) Upload the bytes with a filename and content type; capture the reference
 const { reference } = await bee.uploadFile(batchId, data, "hello.txt", { contentType: "text/plain" })
 console.log("Uploaded reference:", reference.toHex())
 
@@ -92,31 +92,32 @@ When working with browsers you can use the [`File` interface](https://developer.
 2. Buy storage and get postage stamp batch ID:
    `const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))`
 
-3. Grab a `File` from `<input type="file" id="file">`:
-   `const fileInput = document.querySelector("#file") as HTMLInputElement;`
-   `const selected = fileInput.files![0]`
+3. Create a `File` object:
+  `const file = new File(["Hello Swarm!"], "hello.txt", { type: "text/plain" })`
 
 4. Use batch ID to upload → get reference:
-   `const { reference } = await bee.uploadFile(batchId, selected)`
+   `const { reference } = await bee.uploadFile(batchId, file)`
 
 5. Download by reference:
    `const downloaded = await bee.downloadFile(reference)`
 
 ```js
+
 import { Bee, Size, Duration } from "@ethersphere/bee-js"
 
+// 1) Connect to your Bee node HTTP API
 const bee = new Bee("http://localhost:1633")
 
-// 1) Buy storage
+// 2) Buy storage (postage stamp batch) for this session
 const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))
 console.log("Batch ID:", String(batchId))
 
-// 2) Upload a single file created in code
+// 3) Upload a single file created in code
 const file = new File(["Hello Swarm!"], "hello.txt", { type: "text/plain" })
 const { reference } = await bee.uploadFile(batchId, file)
 console.log("Reference:", String(reference))
 
-// 3) Download and print name + contents
+// 4) Download and print name + contents
 const downloaded = await bee.downloadFile(reference)
 console.log(downloaded.name)          // "hello.txt"
 console.log(file.contentType) // "text/plain"
@@ -134,28 +135,48 @@ Use **`uploadFiles`** (browser-only). It accepts `File[]`/`FileList`. When using
 2. Buy storage and get postage stamp batch ID:
    `const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))`
 
-3. Select files/folder via `<input type="file" webkitdirectory multiple id="dir">`
-   `const files = Array.from(document.querySelector("#dir")!.files!)`
+3. Create files for upload:
+  ```js
+  const files = [
+  new File(["<h1>Hello Swarm</h1>"], "index.html", { type: "text/html" }),
+  new File(["body{font-family:sans-serif}"], "assets/main.css", { type: "text/css" })
+  ]
+  ```
 
 4. Upload multiple files (collection) → get collection reference
    `const res = await bee.uploadFiles(batchId, files)`
 
-5. Download a specific file by its relative path
+5. Download files by relative path
    `const logo = await bee.downloadFile(res.reference, "images/logo.png")`
 
 ```js
 import { Bee, Size, Duration } from "@ethersphere/bee-js"
 
+// 1. Initialize a Bee object
 const bee = new Bee("http://localhost:1633")
+
+// 2. Buy storage and get batch ID
 const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))
+console.log("Batch ID:", String(batchId))
 
-// Using a directory picker: <input type="file" id="dir" webkitdirectory multiple>
-const files = Array.from(document.querySelector("#dir")!.files!)
+// 3. Create files for upload
+const files = [
+  new File(["<h1>Hello Swarm</h1>"], "index.html", { type: "text/html" }),
+  new File(["body{font-family:sans-serif}"], "assets/main.css", { type: "text/css" })
+]
+
+//  4. Upload multiple files (collection) → get collection reference
 const res = await bee.uploadFiles(batchId, files)
-console.log("Collection reference:", res.reference.toString())
+console.log("Collection ref:", String(res.reference))
 
-// Download by relative path used at upload time:
-const logo = await bee.downloadFile(res.reference, "images/logo.png")
+// 5. Download files by relative path
+const page = await bee.downloadFile(res.reference, "index.html")
+console.log(page.name)          // "index.html"
+console.log(page.data.toUtf8()) // prints file content
+
+const style = await bee.downloadFile(res.reference, "assets/main.css")
+console.log(style.name)          // "main.css"
+console.log(style.data.toUtf8()) // prints file content
 ```
 
 
@@ -177,14 +198,13 @@ const logo = await bee.downloadFile(res.reference, "images/logo.png")
 4. Download one file by its relative path
    `const page = await bee.downloadFile(res.reference, "index.html")`
 
-5. Log the downloaded file’s metadata and contents
+5. Log the downloaded file name and contents
    `console.log(page.name ?? "index.html")`
-   `console.log(page.contentType)`
    `console.log(page.data.toUtf8())`
 
 **Full example:**
 
-```ts
+```js
 import { Bee, Size, Duration } from "@ethersphere/bee-js"
 
 // 1) Connect to your Bee node HTTP API
@@ -193,17 +213,20 @@ const bee = new Bee("http://localhost:1633")
 // 2) Buy storage (postage stamp batch)
 const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))
 
-// 3) Upload all files under ./site (relative paths preserved); get a collection reference
-const res = await bee.uploadFilesFromDirectory(batchId, "./site")
-console.log("Directory uploaded. Collection reference:", res.reference.toString())
+// 3) Upload all files under ./files (relative paths preserved); get reference
+const res = await bee.uploadFilesFromDirectory(batchId, "./files")
+console.log("Directory uploaded. Collection reference:", res.reference.toHex())
 
-// 4) Download a specific file from the collection by its original relative path
-const page = await bee.downloadFile(res.reference, "index.html")
+// 4) Download files from the collection by original relative paths
+const page = await bee.downloadFile(res.reference, "root.txt")
+const stylesheet = await bee.downloadFile(res.reference, "subdirectory/example.txt")
 
-// 5) Log the file's metadata and contents to the terminal
-console.log(page.name ?? "index.html")       // "index.html"
-console.log(page.contentType)                // e.g., "text/html"
-console.log(page.data.toUtf8()) // Prints file content // prints file content
+// 5) Log the file name and contents to the terminal
+console.log(page.name)       // "root.txt"
+console.log(page.data.toUtf8())              // prints file content
+
+console.log(stylesheet.name)       // "example.txt"
+console.log(stylesheet.data.toUtf8())              // prints file content
 ```
 
 > Tip: For **binary** files, don’t convert to UTF-8 — log `file.data.length` or write to disk instead.
