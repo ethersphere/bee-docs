@@ -485,7 +485,6 @@ body[data-rh] .redocusaurus {
 :where(.theme-doc-sidebar-container, .navbar-sidebar)
   .theme-doc-sidebar-item-link .menu__link.menu__link--active {
   font-weight: 400 !important;
-  font-size: .85rem; 
 }
 
 

@@ -47,7 +47,7 @@ Some
 6. Log the downloaded file’s metadata and contents
    `console.log(file.name)`
    `console.log(file.contentType)`
-   `console.log(Buffer.from(file.data).toString("utf8"))`
+   `console.log(file.data.toUtf8())`
 
 **Full example:**
 
@@ -76,7 +76,7 @@ const file = await bee.downloadFile(reference)
 // 6) Log the file's metadata and contents to the terminal
 console.log(file.name)        // e.g., "hello.txt"
 console.log(file.contentType) // e.g., "text/plain"
-console.log(Buffer.from(file.data).toString("utf8")) // prints file content
+console.log(file.data.toUtf8()) // Prints file content
 ```
 
 
@@ -179,7 +179,7 @@ const logo = await bee.downloadFile(res.reference, "images/logo.png")
 5. Log the downloaded file’s metadata and contents
    `console.log(page.name ?? "index.html")`
    `console.log(page.contentType)`
-   `console.log(Buffer.from(page.data).toString("utf8"))`
+   `console.log(page.data.toUtf8())`
 
 **Full example:**
 
@@ -202,7 +202,7 @@ const page = await bee.downloadFile(res.reference, "index.html")
 // 5) Log the file's metadata and contents to the terminal
 console.log(page.name ?? "index.html")       // "index.html"
 console.log(page.contentType)                // e.g., "text/html"
-console.log(Buffer.from(page.data).toString("utf8")) // prints file content
+console.log(page.data.toUtf8()) // Prints file content // prints file content
 ```
 
 > Tip: For **binary** files, don’t convert to UTF-8 — log `file.data.length` or write to disk instead.
@@ -213,8 +213,6 @@ console.log(Buffer.from(page.data).toString("utf8")) // prints file content
 
 The `swarm-cli` offers a convenient command-line interface for Bee node interaction. It's a convenient tool for node management or one-off uploads and downloads.
 
-### Upload
-
 Buy storage via an interactive prompt (capacity + TTL), then upload:
 
 ```bash
@@ -223,7 +221,7 @@ swarm-cli stamp create
 swarm-cli upload test.txt --stamp <BATCH_ID>
 ```
 
-### Download
+Download content:
 
 ```bash
 swarm-cli download <REFERENCE> ./output/

@@ -52,6 +52,7 @@ pagination_next: null
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
+      <!--
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/access-the-swarm/host-your-website">
           <h3 class="hub-card__title">Host a Webpage</h3>
@@ -88,6 +89,7 @@ pagination_next: null
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
+      -->
     </ul>
   </div>
 </div>
