@@ -501,3 +501,28 @@ html {
   font-size: 14px; 
 }
 
+
+/* Make inline-code links readable */
+.markdown a code,
+.theme-doc-markdown a code {
+  background-color: transparent !important; /* remove dark chip behind links */
+  color: var(--ifm-link-color) !important;  /* use normal link color */
+  border-bottom: 1px solid currentColor;    /* keep a clear affordance */
+  padding: 0;                               /* match surrounding text */
+}
+
+/* Hover/focus states */
+.markdown a:hover code,
+.markdown a:focus code,
+.theme-doc-markdown a:hover code,
+.theme-doc-markdown a:focus code {
+  color: var(--ifm-color-primary) !important;
+  border-bottom-color: var(--ifm-color-primary);
+}
+
+/* Optional: ensure visited link contrast stays good */
+.markdown a:visited code,
+.theme-doc-markdown a:visited code {
+  color: var(--ifm-link-color) !important;
+  border-bottom-color: currentColor;
+}
