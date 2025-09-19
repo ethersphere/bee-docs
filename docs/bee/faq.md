@@ -120,13 +120,6 @@ If you use "bee start"
 
 See the [API Reference](https://docs.ethswarm.org/api/) pages for details.
 
-Most common use cases:
-
-- `curl http://localhost:1633/peers` - Shows you the currently connected peers
-- `curl http://localhost:1633/balances` - Shows balances (positive=incoming, negative=outgoing) accumulating with peers, some of which may or may not be currently connected
-- `curl http://localhost:1633/settlements` - When the balance with a given peer exceeds a threshold, a settlement will be issued, if the settlement is received, then your node should have a check from that peer.
-- `curl http://localhost:1633/chequebook/address` your chequebook contract to see the xBZZ.
-
 ### How can I check how many cashed out cheques do I have?
 
 You can look at your chequebook contract at etherscan.
