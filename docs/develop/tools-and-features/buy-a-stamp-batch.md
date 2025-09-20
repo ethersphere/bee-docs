@@ -1,5 +1,5 @@
 ---
-title: Buy a Batch of Stamps
+title: Postage Stamp Batches
 id: buy-a-stamp-batch
 ---
 import VolumeAndDurationCalc from '@site/src/components/VolumeAndDurationCalc.js';
@@ -503,7 +503,7 @@ Amount: 100010002000
 
 ## Stewardship
 
-The <a href="/api/#tag/Stewardship" target="_blank">stewardship endpoint</a> in combination with [pinning](/docs/develop/access-the-swarm/pinning) can be used to guarantee that important content is always available. It is used for checking whether the content for a Swarm reference is retrievable and for re-uploading the content if it is not.
+The <a href="/api/#tag/Stewardship" target="_blank">stewardship endpoint</a> in combination with [pinning](/docs/develop/tools-and-features/pinning) can be used to guarantee that important content is always available. It is used for checking whether the content for a Swarm reference is retrievable and for re-uploading the content if it is not.
 
 An HTTP GET request to the `stewardship` endpoint checks to see whether the content for the specified Swarm reference is retrievable:
 

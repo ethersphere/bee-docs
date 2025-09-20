@@ -1,5 +1,5 @@
 ---
-title: Host Your Website on Swarm
+title: Host a Webpage
 id: host-your-website
 ---
 

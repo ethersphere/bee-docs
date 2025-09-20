@@ -17,7 +17,7 @@ Detailed information about Bee API endpoints can be found in the [API reference 
 
 ## Interacting With the API
 
-You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](/docs/develop/access-the-swarm/buy-a-stamp-batch), [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download), [staking](/docs/bee/working-with-bee/staking), and more.
+You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](/docs/develop/tools-and-features/buy-a-stamp-batch), [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download), [staking](/docs/bee/working-with-bee/staking), and more.
 
 ### Alternatives for Working with the API
 

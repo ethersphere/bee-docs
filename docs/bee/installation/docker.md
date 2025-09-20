@@ -203,7 +203,7 @@ version: 2.6.0-06a0aca7 - planned to be supported until 11 December 2024, please
 "time"="2024-09-24 22:21:19.664897" "level"="info" "logger"="node" "msg"="waiting to sync postage contract data, this may take a while... more info available in Debug loglevel"
 ```
 
-Your node will take some time to finish [syncing postage contract data](https://docs.ethswarm.org/docs/develop/access-the-swarm/buy-a-stamp-batch/) as indicated by the final line:
+Your node will take some time to finish [syncing postage contract data](https://docs.ethswarm.org/docs/develop/tools-and-features/buy-a-stamp-batch/) as indicated by the final line:
 
 ```bash
 "msg"="waiting to sync postage contract data, this may take a while... more info available in Debug loglevel"
@@ -354,7 +354,7 @@ You may also check out the [configuration guide](/docs/bee/working-with-bee/conf
 
 
 ### Access the Swarm
-If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/access-the-swarm/introduction).
+If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/introduction).
 
 ### Explore the API
 The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
