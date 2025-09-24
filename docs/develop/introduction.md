@@ -47,7 +47,7 @@ pagination_next: null
         <a class="hub-card__link" href="/docs/develop/access-the-swarm/upload-and-download">
           <h3 class="hub-card__title">Upload and Download</h3>
           <p class="hub-card__desc">
-            Learn how to upload and download a variety of data types from Swarm (with support for both browser and Node.js APIs).
+            Learn how to upload and download a variety of data types from Swarm (with support for both browser and Node.js environments).
           </p>
           <span class="hub-card__cta">Open guide</span>
         </a>
