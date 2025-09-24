@@ -35,7 +35,7 @@ Note that this guarantee of retrievability is for each 128 chunk segment, and th
 
 ## Usage
 
-For usage instructions, see the [erasure coding page in the "Develop" section](/docs/develop/access-the-swarm/erasure-coding).
+For usage instructions, see the [erasure coding page in the "Develop" section](/docs/develop/tools-and-features/erasure-coding).
 
 ## Cost Calculation
 

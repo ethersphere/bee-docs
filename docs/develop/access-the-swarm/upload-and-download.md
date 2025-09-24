@@ -1,90 +1,391 @@
 ---
-title: Upload and Download
+title: Upload & Download
 id: upload-and-download
 ---
 
+Uploading to Swarm has two steps: (1) **buy storage** as a **postage stamp batch** with a unique **batch ID**—and (2) **upload using the batch ID**. The upload returns a **Swarm reference hash**, anyone with that reference can download the content.
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+**Before you begin:**
 
-When you upload your files to the Swarm, they are split into 4kb
-_chunks_ and then distributed to nodes in the network that are
-responsible for storing and serving these parts of your content. 
-To learn more about how Swarm's decentralized storage solution works,
-check out the ["Concepts" section](/docs/concepts/what-is-swarm).
+- You need a running Bee node connected to Gnosis Chain and funded with **xBZZ** and **xDAI**.
+- Uploads always require a **postage stamp batch**.
+- Ultra-light nodes can download but **cannot upload**.
 
-In order for you to be able to upload any data to the network,
-you must first purchase [postage stamps](/docs/concepts/incentives/postage-stamps)
-and then use those stamps to upload your data. Keep on reading below to learn how.
+## Upload & Download with bee-js
 
-## Uploads and Download Endpoints Overview
+The `bee-js` library is the **official SDK for building Swarm-based applications**. It works in both **browser** and **Node.js** environments and **greatly simplifies development** compared with using the Bee HTTP API directly. It is the recommended method for developing applications on Swarm.
 
-There are three endpoints which can be used for uploading and downloading data from Swarm, and each endpoint has different usage. 
+Refer to the [`bee-js` documentation](https://bee-js.ethswarm.org/) for more usage guides.
 
-1. [`/bytes`](/api/#tag/Bytes) - Used for uploading raw data, lacks convenience features present in the `/bzz` endpoint but allows for greater customization for advanced use cases.
-1. [`/bzz`](/api/#tag/BZZ) - Used for general download and uploads of files or collections of files.
-1. [`/chunks`](/api/#tag/Chunk) - Used for downloading and uploading individual chunks, and also for uploading streams of chunks.
+:::tip
+**Environment-specific methods:**
 
-Generally speaking, the `/bzz` endpoint is appropriate for general common use cases such as uploading websites, sharing files, etc., while the `/chunks` and `bytes` endpoints allow for more complex uses cases. In this guide, we focus on the usage of the `/bzz` endpoint. 
+- **Browser-only:** [`uploadFiles`](https://bee-js.ethswarm.org/docs/api/classes/Bee/#uploadfiles) (multi-file via `File[]`/`FileList`)
+- **Node.js-only:** [`uploadFilesFromDirectory`](https://bee-js.ethswarm.org/docs/api/classes/Bee/#uploadfiles) (recursively reads local filesystem to upload multiple files in a directory using `fs`),
+- **Both:** [`uploadFile`](https://bee-js.ethswarm.org/docs/api/classes/Bee/#uploadfile) (with some environment specific usage), [`downloadFile`](https://bee-js.ethswarm.org/docs/api/classes/Bee/#downloadfile)
+  :::
 
-## Upload a File
+### Single file — Node.js
 
-To upload data to the swarm, you must perform the following steps:
+**Step-by-step Walkthrough:**
 
-1. Fund your node's wallet with xBZZ.
-2. Purchase a _batch_ of stamps with your xBZZ.
-3. Wait for the batch to propagate across the network.
-4. Upload your content, specifying the _batch id_ so that Bee can attach stamps to your chunks.
-5. Download your content using your content's hash.
+1. Create a Bee client:
 
-## Purchasing Your Batch of Stamps
+   `const bee = new Bee("http://localhost:1633")`
 
-In order to upload your data to swarm, you must [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch) to pay for however much data you need to upload.
+2. Buy storage (postage stamp batch) by specifying storage size and duration:
 
-## Using Stamps to Upload a File
+   `const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))`
 
-Once your Bee node is running, a HTTP API is enabled for you to interact with. The command line utility [curl](https://ec.haxx.se/http/http-multipart) is a great way to interact with a Bee node's API. Swarm CLI alternative commands are also included as a more user-friendly way of interacting with your Bee node's API.
+3. Read the file from disk:
 
+   `const data = await readFile("./hello.txt")`
 
-<Tabs
-defaultValue="api"
-values={[
-{label: 'API', value: 'api'},
-{label: 'Swarm CLI', value: 'swarm-cli'},
-]}>
-<TabItem value="api">
+4. Upload bytes with filename & content type → get reference:
 
-#### API
+   `const { reference } = await bee.uploadFile(batchId, data, "hello.txt", { contentType: "text/plain" })`
 
-First, let's check to see if the API is running as expected...
+5. Download the file by reference:
 
-```bash
-curl http://localhost:1633
+   `const file = await bee.downloadFile(reference)`
+
+6. Log the downloaded file’s title and metadata:
+
+   `console.log(file.name)`
+
+   `console.log(file.contentType)`
+
+   `console.log(file.data.toUtf8())`
+
+**Full example:**
+
+```js
+import { Bee, Size, Duration } from "@ethersphere/bee-js";
+import { readFile } from "node:fs/promises";
+
+// 1) Connect to your Bee node HTTP API
+const bee = new Bee("http://localhost:1633");
+
+// 2) Buy storage (postage stamp batch) for this session
+const batchId = await bee.buyStorage(
+  Size.fromGigabytes(1),
+  Duration.fromDays(1)
+);
+
+// 3) Read the file from disk as bytes
+const data = await readFile("./hello.txt");
+
+// 4) Upload the bytes with a filename and content type; capture the reference
+const { reference } = await bee.uploadFile(batchId, data, "hello.txt", {
+  contentType: "text/plain",
+});
+console.log("Uploaded reference:", reference.toHex());
+
+// 5) Download the file back using the reference
+const file = await bee.downloadFile(reference);
+
+// 6) Log the file's metadata and contents to the terminal
+console.log(file.name); // "hello.txt"
+console.log(file.contentType); // "text/plain"
+console.log(file.data.toUtf8()); // Prints file content
 ```
 
-```
-Ethereum Swarm Bee
-```
+### Single file — Browser
 
-Once running, a file can be uploaded by making an HTTP POST request to the `bzz` endpoint of the Bee API.
-
-Here, you must specify your _Batch ID_ in the `Swarm-Postage-Batch-Id` header, the file name in the `name` query parameter, and also pass the appropriate mime type in the `Content-Type` header.
-
-You may also wish to employ the erasure coding feature to add greater protection for your data, see [erasure coding page](/docs/develop/access-the-swarm/erasure-coding) for more details on its usage.
-
-```bash
- curl -X POST -H "Swarm-Postage-Batch-Id: 54ba8e39a4f74ccfc7f903121e4d5d0fc40732b19efef5c8894d1f03bdd0f4c5" -H "Content-Type: text/plain" -H "Swarm-Encrypt: false" -v --data-binary "@test.txt" localhost:1633/bzz
-```
-
-:::danger
-Data uploaded to Swarm is always public. In Swarm, sensitive files
-must be [encrypted](/docs/develop/access-the-swarm/store-with-encryption)
-before uploading to ensure their contents always remains private.
+:::info
+When working with browsers you can use the [`File` interface](https://developer.mozilla.org/en-US/docs/Web/API/File). The filename is taken from the `File` object itself, but can be overwritten through the second argument of the `uploadFile` function.
 :::
 
-When succesful, a JSON formatted response will be returned, containing
-a **swarm reference** or **hash** which is the _address_ of the
-uploaded file, for example:
+**Walkthrough**
+
+1. Initialize a Bee object using the API endpoint of a Bee node:
+
+   `const bee = new Bee("http://localhost:1633")`
+
+2. Buy storage and get postage stamp batch ID:
+
+   `const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))`
+
+3. Create a `File` object:
+
+`const file = new File(["Hello Swarm!"], "hello.txt", { type: "text/plain" })`
+
+4. Use batch ID to upload → get reference:
+
+   `const { reference } = await bee.uploadFile(batchId, file)`
+
+5. Download by reference:
+
+   `const downloaded = await bee.downloadFile(reference)`
+
+6. Log the downloaded file’s title and metadata:
+
+   `console.log(downloaded.name)   // "hello.txt"`
+
+   `console.log(file.contentType) // "text/plain"`
+
+   `console.log(downloaded.data.toUtf8()) // prints file content`
+
+```js
+import { Bee, Size, Duration } from "@ethersphere/bee-js";
+
+// 1) Connect to your Bee node HTTP API
+const bee = new Bee("http://localhost:1633");
+
+// 2) Buy storage (postage stamp batch) for this session
+const batchId = await bee.buyStorage(
+  Size.fromGigabytes(1),
+  Duration.fromDays(1)
+);
+console.log("Batch ID:", String(batchId));
+
+// 3) Upload a single file created in code
+const file = new File(["Hello Swarm!"], "hello.txt", { type: "text/plain" });
+const { reference } = await bee.uploadFile(batchId, file);
+console.log("Reference:", String(reference));
+
+// 4) Download and print name + contents
+const downloaded = await bee.downloadFile(reference);
+console.log(downloaded.name); // "hello.txt"
+console.log(file.contentType); // "text/plain"
+console.log(downloaded.data.toUtf8()); // prints file content
+```
+
+### Multiple files — Browser
+
+Use **`uploadFiles`** for multi-file upload in the browser. It accepts `File[]`/`FileList`. When using `<input type="file" webkitdirectory multiple>`, each file’s **relative path** is preserved. To download a specific file later, pass the **collection reference** plus the **same relative path**.
+
+1. Initialize a Bee object using the API endpoint of a Bee node:
+   `const bee = new Bee("http://localhost:1633")`
+
+2. Buy storage and get postage stamp batch ID:
+   `const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))`
+
+3. Create files for upload:
+
+```js
+const files = [
+  new File(["<h1>Hello Swarm</h1>"], "index.html", { type: "text/html" }),
+  new File(["body{font-family:sans-serif}"], "assets/main.css", {
+    type: "text/css",
+  }),
+];
+```
+
+4. Upload multiple files (collection) → get collection reference:
+   `const res = await bee.uploadFiles(batchId, files)`
+
+5. Download files by relative paths:
+   `const logo = await bee.downloadFile(res.reference, "images/logo.png")`
+
+6. Log the downloaded file’s title and contents:
+
+   `console.log(page.name)          // "index.html"`
+
+   `console.log(page.data.toUtf8()) // prints file content`
+
+```js
+import { Bee, Size, Duration } from "@ethersphere/bee-js";
+
+// 1. Initialize a Bee object
+const bee = new Bee("http://localhost:1633");
+
+// 2. Buy storage and get batch ID
+const batchId = await bee.buyStorage(
+  Size.fromGigabytes(1),
+  Duration.fromDays(1)
+);
+console.log("Batch ID:", String(batchId));
+
+// 3. Create files for upload
+const files = [
+  new File(["<h1>Hello Swarm</h1>"], "index.html", { type: "text/html" }),
+  new File(["body{font-family:sans-serif}"], "assets/main.css", {
+    type: "text/css",
+  }),
+];
+
+//  4. Upload multiple files (collection) → get collection reference
+const res = await bee.uploadFiles(batchId, files);
+console.log("Collection ref:", String(res.reference));
+
+// 5. Download files by relative path
+const page = await bee.downloadFile(res.reference, "index.html");
+console.log(page.name); // "index.html"
+console.log(page.data.toUtf8()); // prints file content
+
+const style = await bee.downloadFile(res.reference, "assets/main.css");
+console.log(style.name); // "main.css"
+console.log(style.data.toUtf8()); // prints file content
+```
+
+### Multiple files — Node.js
+
+**Step-by-step Walkthrough:**
+
+1. Initialize a Bee object using the API endpoint of a Bee node:
+
+   `const bee = new Bee("http://localhost:1633")`
+
+2. Buy storage and get postage stamp batch ID:
+
+   `const batchId = await bee.buyStorage(Size.fromGigabytes(1), Duration.fromDays(1))`
+
+3. Recursively upload a local directory → get collection reference:
+
+   `const res = await bee.uploadFilesFromDirectory(batchId, "./site")`
+
+4. Download one file by its relative path:
+
+   `const page = await bee.downloadFile(res.reference, "index.html")`
+
+5. Log the downloaded file name and contents:
+
+   `console.log(page.name ?? "index.html")`
+
+   `console.log(page.data.toUtf8())`
+
+**Full example:**
+
+```js
+import { Bee, Size, Duration } from "@ethersphere/bee-js";
+
+// 1) Connect to your Bee node HTTP API
+const bee = new Bee("http://localhost:1633");
+
+// 2) Buy storage (postage stamp batch)
+const batchId = await bee.buyStorage(
+  Size.fromGigabytes(1),
+  Duration.fromDays(1)
+);
+
+// 3) Upload all files under ./files (relative paths preserved); get reference
+const res = await bee.uploadFilesFromDirectory(batchId, "./files");
+console.log("Directory uploaded. Collection reference:", res.reference.toHex());
+
+// 4) Download files from the collection by original relative paths
+const page = await bee.downloadFile(res.reference, "root.txt");
+const stylesheet = await bee.downloadFile(
+  res.reference,
+  "subdirectory/example.txt"
+);
+
+// 5) Log the file name and contents to the terminal
+console.log(page.name); // "root.txt"
+console.log(page.data.toUtf8()); // prints file content
+
+console.log(stylesheet.name); // "example.txt"
+console.log(stylesheet.data.toUtf8()); // prints file content
+```
+
+## Upload & Download with Swarm CLI
+
+The `swarm-cli` tool offers a convenient command-line interface for Bee node interaction. It's a convenient tool for node management or one-off uploads and downloads.
+
+Refer to [the official README](https://github.com/ethersphere/swarm-cli/blob/master/README.md) for a more complete usage guide.
+
+Buy storage via an interactive prompt (capacity + TTL), then upload:
+
+```bash
+swarm-cli stamp create
+```
+
+Follow the interactive prompts:
+
+```bash
+For swarm cli, use "stamp create", which looks like this:
+
+PS C:\Users\noahm> swarm-cli stamp create
+Please provide the total capacity of the postage stamp batch
+This represents the total size of data that can be uploaded
+Example: 1GB
+
+Please provide the time-to-live (TTL) of the postage stamps
+Defines the duration after which the stamp will expire
+Example: 1d, 1w, 1month
+
+You have provided the following parameters:
+Capacity: 1.074 GB
+TTL: 7 days
+
+Cost: 0.6088166475825152 xBZZ
+Available: 10000.0000000000000000 xBZZ
+Type: Immutable
+? Confirm the purchase Yes
+... Creating postage batch. This may take up to 5 minutes.
+```
+
+Once you have a valid stamp batch, you can find it using `swarm-cli stamp list`
+
+```bash
+swarm-cli stamp list
+```
+
+```bash
+Stamp ID: 6dd0c4bbb6d62ba6c5fae3b000301c961ee584dd32846291821d789d7582ae36
+Usage: 0%
+Capacity (immutable): 2.380 GB remaining out of 2.380 GB
+TTL: A few seconds (2025-09-21)
+------------------------------------------------------------------------------------------------------------------------
+Stamp ID: d13210952ec60b01a3c0027602743921736d6b277e9e70dd00d0d95fd878acbc
+Usage: 0%
+Capacity (immutable): 2.380 GB remaining out of 2.380 GB
+TTL: A few seconds (2025-09-21)
+```
+
+Use `swarm-cli upload` along with a valid batch ID to upload a file:
+
+```bash
+swarm-cli upload test.txt --stamp <BATCH_ID>
+```
+
+You can also simply use:
+
+```bash
+swarm-cli upload <PATH_TO_FILE>
+```
+
+And an interactive prompt will walk your through stamp selection and the rest of the upload.
+
+Upon upload, a Swarm reference hash will be returned which can then be used to download content:
+
+```bash
+swarm-cli download <REFERENCE> ./output/
+```
+
+## Upload & Download with the Bee API (advanced)
+
+The **Bee HTTP API** offers the **lowest-level access** to a Bee node. However, it is **more complex and difficult to use** than **bee-js** or **swarm-cli** because you must manage headers, content types, and postage parameters yourself. **Unless you specifically require raw HTTP control**, we **do not recommend** using the Bee API directly. Instead use **bee-js** for application development and **swarm-cli** for command-line interaction.
+
+Refer to the [Bee API reference specification](https://docs.ethswarm.org/api/) for detailed usage information.
+
+The Bee API exposes three HTTP endpoints:
+
+- **`/bzz`** — upload & download files/directories (most common)
+- **`/bytes`** — upload & download raw data
+- **`/chunks`** — upload & download individual chunks
+
+#### Upload with **/bzz**
+
+While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](/docs/develop/tools-and-features/buy-a-stamp-batch).
+
+1. Buy a postage batch:
+
+```bash
+curl -s -X POST http://localhost:1633/stamps/<amount>/<depth>
+```
+
+2. Upload a file with the returned `batchID`:
+
+```bash
+curl -X POST \
+  -H "Swarm-Postage-Batch-Id: <BATCH_ID>" \
+  -H "Content-Type: text/plain" \
+  --data-binary "@test.txt" \
+  http://localhost:1633/bzz
+```
+
+Response:
 
 ```json
 {
@@ -92,280 +393,8 @@ uploaded file, for example:
 }
 ```
 
-Keep this _address_ safe, as we'll use it to retrieve our content later on.
-
-</TabItem>
-
-<TabItem value="swarm-cli">
-
-#### Swarm CLI
-We have a `test.txt` file we wish to upload, let's check its contents.
+3. Download with `/bzz`
 
 ```bash
-cat test.txt
-This is a test file
-It will be used to test uploading and downloading from Swarm
+curl http://localhost:1633/bzz/<REFERENCE> -o output.txt
 ```
-
-Check that our node is operating normally.  
-
-```bash
-swarm-cli status
-```
-
-```bash
-Bee
-API: http://localhost:1633 [OK]
-
-Version: 2.0.0-50fcec7b
-Mode: full
-
-Topology
-Connected Peers: 175
-Population: 13614
-Depth: 9
-
-Wallet
-xBZZ: 85.5638752768932272
-xDAI: 4.753393401487287091
-
-Chequebook
-Available xBZZ: 0.0000000000018
-Total xBZZ: 0.0000000000018
-
-Staking
-Staked xBZZ: 10
-
-Redistribution
-Reward: 831386836533248000
-Has sufficient funds: true
-Fully synced: true
-Frozen: false
-Last selected round: 202266
-Last played round: 202266
-Last won round: 186776
-Minimum gas funds: 101250000000000000
-```
-
-List our stamps.
-
-```bash
-swarm-cli stamp list
-```
-
-Copy the ID of the stamp we wish to use.
-
-```bash
-Stamp ID: daa8c5b36e1cf481b10118a8b02430a6f22618deaa6ba5aa4ea660de66aa62db
-Usage: 7%
-Remaining Capacity: 7.50 GB
-TTL: 91 days 1 hour 45 minutes 28 seconds
-Expires: 2024-02-01
-```
-Use the stamp ID to upload our file.
-
-```bash
-swarm-cli upload test.txt --stamp daa8c5b36e1cf481b10118a8b02430a6f22618deaa6ba5aa4ea660de66aa62db
-```
-
-If successful, we will receive the hash of the uploaded file and the URL where it is reachable.
-
-```bash
-Swarm hash: 1ffd2b67c8f34596a0b8375be29423c2d47e7995fcac8dd83fbd34e3d839b5a2
-URL: http://localhost:1633/bzz/1ffd2b67c8f34596a0b8375be29423c2d47e7995fcac8dd83fbd34e3d839b5a2/
-Stamp ID: daa8c5b3
-Usage: 7%
-Remaining Capacity: 7.50 GB 
-```
-
-Let's check that the file is downloadable.
-
-```bash
-swarm-cli download 1ffd2b67c8f34596a0b8375be29423c2d47e7995fcac8dd83fbd34e3d839b5a2
-test.txt OK
-```
-
-And let's confirm that the contents of the file are correct.
-
-```bash
-cat test.txt
-This is a test file
-It will be used to test uploading and downloading from Swarm
-```
-</TabItem>
-</Tabs>
-
-
-In Swarm, every piece of data has a unique _address_ which is a unique and reproducible cryptographic hash digest. If you upload the same file twice, you will always receive the same hash. This makes working with data in Swarm super secure!
-
-:::info
-If you are uploading a large file it is useful to track the status of your upload as it is processed into the network. To improve the user experience, learn how to [follow the status of your upload](/docs/develop/access-the-swarm/syncing).
-
-Once your file has been **completely synced with the network**, you will be able to turn off your computer and other nodes will take over to serve the data for you!
-:::
-
-## Download a File
-
-Once your file is uploaded to Swarm it can be easily downloaded. 
-
-
-<Tabs
-defaultValue="api"
-values={[
-{label: 'API', value: 'api'},
-{label: 'Swarm CLI', value: 'swarm-cli'},
-]}>
-<TabItem value="api">
-
-#### API
-
-Uploaded files can be retrieved with a simple HTTP GET request.
-
-Substitute the _hash_ in the last part of the URL with the reference
-to your own data.
-
-:::tip
-Make sure to include the trailing slash after the hash.
-:::
-```bash
-curl -OJL http://localhost:1633/bzz/c02e7d943fbc0e753540f377853b7181227a83e773870847765143681511c97d/
-```
-
-You may even simply navigate to the URL in your browser:
-
-[http://localhost:1633/bzz/22cb...aa00](http://localhost:1633/bzz/22cbb9cedca08ca8d50b0319a32016174ceb8fbaa452ca5f0a77b804109baa00)
-
-
-</TabItem>
-
-<TabItem value="swarm-cli">
-
-#### Swarm CLI
-Simply use the `swarm-cli download` command followed by the hash of the file you wish to download. 
-
-```bash
-swarm-cli download 1ffd2b67c8f34596a0b8375be29423c2d47e7995fcac8dd83fbd34e3d839b5a2
-test.txt OK
-```
-And let's print out the file contents to confirm it was downloaded properly.
-
-```bash
-cat test.txt
-This is a test file
-It will be used to test uploading and downloading from Swarm
-```
-</TabItem>
-</Tabs>
-
-
-## Upload a Directory 
-
-It is possible to use Bee to upload directories of files all at once.
-
-:::tip
-Comfortable with nodeJS and JavaScript? Check out [swarm-cli](https://github.com/ethersphere/swarm-cli), a command line tool you can use to easily interact with your Bee node!
-:::
-
-:::info
-If an uploaded directory contains an `index.html` file, when you navigate to the directory in a web browser it will automatically be served to users from our [Swarm gateways](https://gateway.ethswarm.org) as if it were a website hosted by a normal web server. Use this feature to host your unstoppable website on Swarm!
-:::
-
-This feature makes use of the [tar](https://www.gnu.org/software/tar/) command line utility to package the directory into a single file that can then be uploaded to the Bee API for processing and distributed into the swarm for later retrieval.
-
-:::caution
-GZIP compression is not supported in the current version of Bee, so make sure not to use the `-z` flag when using the `tar` command!
-:::
-
-### Upload the Directory Containing Your Website
-
-First, use the `tar` command line utility to create an archive containing all the files of your directory. If uploading a website, we must take care to ensure that the `index.html` file is at the root of the directory tree.
-
-```bash
-tree my_website
->
-my_website
-├── assets
-│   └── style.css
-├── index.html
-└── error.html
-```
-
-Use the following command to ensure that the `tar` package maintains the correct directory structure:
-
-```bash
-cd my_website
-tar -cf ../my_website.tar .
-cd ..
-```
-
-Next, simply POST the `tar` file as binary data to Bee's `dir` endpoint, taking care to include the header `Content Type: application/x-tar`.
-
-:::info
-Before you progress to the next step, you must buy stamps so you can pay for uploads! See this guide on how to [purchase an appropriate batch of stamps](/docs/develop/access-the-swarm/buy-a-stamp-batch).
-:::
-
-```bash
-curl \
-	-X POST \
-	-H "Content-Type: application/x-tar" \
-	-H "Swarm-Index-Document: index.html" \
-	-H "Swarm-Error-Document: error.html" \
-	-H "Swarm-Collection: true" \
-	-H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" \
-	--data-binary @my_website.tar http://localhost:1633/bzz
-```
-
-:::info
-For instances where a single page app has a JavaScript router that handles url queries itself, simply pass `index.html` as the error document. Bee will pass over control to the JavaScript served by the `index.html` file in the circumstance that a path does not yield a file from the manifest.
-:::
-
-When the upload is successful, Bee will return a JSON document containing the Swarm Reference.
-
-```json
-{
-  "reference": "b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b"
-}
-```
-
-Now, simply navigate your browser to view the reference using the `bzz` endpoint and your website will be served!
-
-[http://localhost:1633/bzz/b25c89a...214917b/](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/)
-
-Other files are served at their relative paths, e.g:
-
-[http://localhost:1633/bzz/b25c89a...214917b/assets/style.css](http://localhost:1633/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/assets/style.css)
-
-Once your data has been [fully processed into the network](/docs/develop/access-the-swarm/syncing), you will then be able to retrieve it from any Bee node.
-
-[https://gateway.ethswarm.org/bzz/b25c89a...214917b/index.html](https://gateway.ethswarm.org/bzz/b25c89a401d9f26811680476619a1eb4a4e189e614bc6161cbfd8b343214917b/)
-
-If you are not able to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/bee/installation/connectivity) for assistance.
-
-
-
-## Public Gateways
-
-To share files with someone who isn't running a Bee node yet, simply change the host in the link to be one of our public gateways. Send the link to your friends, and they will be able to download the file too!
-
-[https://download.gateway.ethswarm.org/bzz/22cb...aa00/](https://download.gateway.ethswarm.org/bzz/22cbb9cedca08ca8d50b0319a32016174ceb8fbaa452ca5f0a77b804109baa00/)
-
-<!-- If you are unable to download your file from a different Bee node, you may be experiencing connection issues, see [troubleshooting connectivity](/docs/troubleshooting/connectivitiy) for assistance. -->
-
-
-## Deferred and Direct Uploads
-
-By default your bee instance will handle uploads in a _deferred_ manner, meaning that the data will be completely uploaded to your node locally before being then being uploaded to the Swarm network. 
-
-In contrast, for a direct upload, the data will be completely uploaded to the Swarm network directly.
-
-If you want to upload directly to the network you have to set the `swarm-deferred-upload` header value to "false" in your request.
-
-```bash
-curl \
-	-X POST \
-	-H "swarm-deferred-upload: false" \
-	-H "Content-Type: application/x-tar" \
-	-H "swarm-postage-batch-id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" \
-	--data-binary @my_data.tar http://localhost:1633/bzz
-```
-

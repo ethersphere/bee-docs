@@ -7,7 +7,7 @@ id: fund-your-node
 Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidth) to function properly. The amount needed depends on your node type and use case.
 
 ### xDAI is Required For:
-- **Buying Postage Stamps** ([Uploading Data](/docs/develop/access-the-swarm/buy-a-stamp-batch))
+- **Buying Postage Stamps** ([Uploading Data](/docs/develop/tools-and-features/buy-a-stamp-batch))
 - **Stake Management Transactions** ([Staking](/docs/bee/working-with-bee/staking/))
 - **Storage Incentives Transactions** ([Redistribution Game](/docs/concepts/incentives/redistribution-game/) )
 - **Chequebook Deployment** ([Bandwidth Payments](/docs/concepts/incentives/bandwidth-incentives/))

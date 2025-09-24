@@ -16,8 +16,8 @@ A "light" node can download and upload data from Swarm but does not share its di
 - [Node.js (v18 or higher)](https://nodejs.org/)
 - [npm (Node Package Manager)](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
 - [`curl`](https://curl.se/) or [`wget`](https://www.gnu.org/software/wget/) (Check with `curl --version` or `wget --version`)
-- [~0.20 xBZZ on Gnosis Chain](/docs/bee/installation/fund-your-node)
-- [~0.01 xDAI on Gnosis Chain](/docs/bee/installation/fund-your-node)
+- [~0.20 xBZZ on Gnosis Chain](/docs/bee/installation/fund-your-node#how-to-get-xbzz)
+- [~0.01 xDAI on Gnosis Chain](/docs/bee/installation/fund-your-node#how-to-get-xdai)
 
 :::info
 Although `BZZ` is the official symbol of the token on both Ethereum and Gnosis Chain, the term `xBZZ` is widely used by the Swarm community and in documentation to indicate that it is BZZ on Gnosis Chain (not Ethereum).
@@ -256,5 +256,5 @@ Total xBZZ: 0.0000000000000000
 
 ## Next Steps
 
-With your node now fully synced, you're ready start [uploading and downloading](/docs/develop/access-the-swarm/upload-and-download) or start learning how to [develop on Swarm](/docs/develop/introduction).
+With your node now fully synced, you're ready start start learning how to [develop on Swarm](/docs/develop/introduction).
 

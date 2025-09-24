@@ -37,7 +37,7 @@ module.exports = {
           from: '/docs/working-with-bee/configuration',
         },
         {
-          to: '/docs/develop/access-the-swarm/buy-a-stamp-batch',
+          to: '/docs/develop/tools-and-features/buy-a-stamp-batch',
           from: '/docs/develop/access-the-swarm/keep-your-data-alive',
         },
         {
@@ -176,11 +176,11 @@ module.exports = {
           items: [
             {
               to: 'docs/develop/introduction',
-              label: 'Introduction'
-            },
+              label: 'Getting Started'
+            },  
             {
               to: 'docs/develop/access-the-swarm/introduction',
-              label: 'Access the Swarm'
+              label: 'Building on Swarm'
             },
             {
               to: 'docs/develop/tools-and-features/introduction',
