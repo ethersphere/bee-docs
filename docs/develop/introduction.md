@@ -52,16 +52,16 @@ pagination_next: null
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
-      <!--
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/access-the-swarm/host-your-website">
           <h3 class="hub-card__title">Host a Webpage</h3>
           <p class="hub-card__desc">
-            Upload your webpage to Swarm to make it accessible to anyone with a Bee node, and optionally set up ENS for a human-readable URL.
+             Host a website on Swarm and link it to your ENS domain for easy access at through gateways and Bee nodes. 
           </p>
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
+      <!--
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/access-the-swarm/updatable-content">
           <h3 class="hub-card__title">Publish Updatable Content</h3>
