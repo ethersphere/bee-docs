@@ -24,7 +24,7 @@ Part two shows how to register your Swarm hash with your ENS domain so it can be
 * A valid postage stamp batch
 * Your static website files (you can also use the example website files provided below)  
 
-You can download the example website files from the [ethersphere/examples](https://github.com/ethersphere/examples) repository.
+You can download the example website files from the [ethersphere/examples](https://github.com/ethersphere/examples/tree/main/basic-static-website) repository.
 
 
 ### Uploading the Website
@@ -99,9 +99,8 @@ Copy this and save it. You’ll need it for both direct access and ENS integrati
 Anyone with a Bee node can now access the site using the Swarm hash you just saved:
 
 ```
-http://localhost:1633/bzz/<your-hash>/
+http://localhost:1633/bzz/<swarm-hash>/
 ```
-
 
 
 ## 2. Connecting Your Website to ENS
@@ -133,7 +132,7 @@ may not resolve properly on localhost.
 As of the writing of this guide, both of these free and public endpoints work reliably for localhost resolution:
 
 ```
-https://mainnet.infura.io/v3/<your-api-key>
+https://mainnet.infura.io/v3/<infura-api-key>
 https://eth-mainnet.public.blastapi.io
 ```
 
@@ -159,7 +158,7 @@ The guide covers:
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 
 ```
-bzz://<your-Swarm-hash>
+bzz://<swarm-hash>
 ```
 
 Example:
@@ -176,11 +175,94 @@ This works across:
 
 You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
 
-## Summary
 
-* Upload your website using `swarm-cli`.
-* Access it directly with the Swarm hash or through your local Bee node.
-* Link it to an ENS name by adding a `bzz://<hash>` content hash in the ENS Manager.
-* Use a reliable RPC such as `https://eth-mainnet.public.blastapi.io` or `https://rpc.ankr.com/eth` or your own Ethereum node RPC if you want localhost resolution to work.
+## 3. (Recommended) Host Your Website via a Feed Instead of a Raw Hash
 
-This setup gives you a fully decentralized website hosted on Swarm and accessible through ENS without relying on centralized infrastructure.
+If you plan to update your website in the future, you should publish your website hash to a **feed** rather than pointing ENS directly to the raw content hash.
+
+Why:
+
+* ENS only needs to be set once
+* You can push new website versions later
+* Your ENS name always resolves to the latest upload
+
+In this section, you will:
+
+1. Create a publisher identity  
+2. Upload your site to a feed (this automatically creates the feed manifest)  
+3. Copy the feed manifest reference  
+4. Use that manifest reference as your ENS contenthash  
+
+This ensures future website updates require no ENS changes.
+
+### Prerequisite: Have your initial site hash
+
+From Part One you should already have uploaded your site and seen something like:
+
+```
+Reference: 1c686dee5891aae4ea97db397165ce511efdfc40b64846ac6f00f7330a0ed65f
+```
+
+We will refer to this as `<site-hash>` in the examples below.
+
+> In the next step we will re-upload the site using a feed so that ENS can always track updates.
+
+
+### Step 1: Create a dedicated publisher identity
+
+This key will sign feed updates.  
+**Do not** use your Bee wallet key.
+
+```bash
+swarm-cli identity create website-publisher
+```
+
+Record the output — you will need this identity for future updates.
+
+If you need to view/export it later:
+
+```bash
+swarm-cli identity export website-publisher
+```
+
+
+### Step 2: Upload your website to a feed (creates the manifest automatically)
+
+<Tabs>
+<TabItem value="linux" label="Linux / macOS">
+
+```bash
+swarm-cli feed upload ./website \
+  --identity website-publisher \
+  --topic-string website \
+  --stamp <postage-batch-id> \
+  --index-document index.html \
+  --error-document 404.html
+```
+
+</TabItem>
+<TabItem value="powershell" label="Windows PowerShell">
+
+```powershell
+swarm-cli feed upload .\website `
+  --identity website-publisher `
+  --topic-string website `
+  --stamp <postage-batch-id> `
+  --index-document index.html `
+  --error-document 404.html
+```
+</TabItem>
+</Tabs>
+
+You will see output that includes your **feed manifest reference**, for example:
+
+```
+Reference: 2d9ab1e827e2ac3e6f940e8d949125734897b55cc1b7aae23af882ed92f3b726
+```
+
+This is your **permanent website reference**.
+
+
+### Step 3: Use the feed reference as the ENS contenthash
+
+Under construction.
