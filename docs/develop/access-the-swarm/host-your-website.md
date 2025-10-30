@@ -10,9 +10,11 @@ import TabItem from '@theme/TabItem';
 
 This guide explains how to host a static website on Bee using `swarm-cli` and make it accessible through [Ethereum Name Service (ENS)](https://ens.domains/).
 
-Part one covers uploading and accessing your site through the raw Swarm hash.
+**Part one** covers uploading and accessing your site through the raw Swarm hash.
 
-Part two shows how to register your Swarm hash with your ENS domain so it can be easily accessed by anyone through public ENS gateways like `eth.limo`, `bzz.link`, or `localhost` on a Bee node.
+**Part two** shows how to register your Swarm hash with your ENS domain so it can be easily accessed by anyone through public ENS gateways like `eth.limo`, `bzz.link`, or `localhost` on a Bee node.
+
+**Part three** shows how to upload your website through a feed and register the feed manifest with ENS in order to provide a static hash for the website. This means you no longer need to update your ENS record every time you make a change to your website, and is the recommended method for hosting a publicly accessible website on Swarm.
 
 ## 1. Hosting and Accessing Your Website on Swarm
 
