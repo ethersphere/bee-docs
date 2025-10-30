@@ -213,7 +213,6 @@ We will refer to this as `<site-hash>` in the examples below.
 ### Step 1: Create a dedicated publisher identity
 
 This key will sign feed updates.  
-**Do not** use your Bee wallet key.
 
 ```bash
 swarm-cli identity create website-publisher
