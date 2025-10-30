@@ -253,18 +253,76 @@ swarm-cli feed upload .\website `
   --index-document index.html `
   --error-document 404.html
 ```
+
+
 </TabItem>
 </Tabs>
 
 You will see output that includes your **feed manifest reference**, for example:
 
-```
-Reference: 2d9ab1e827e2ac3e6f940e8d949125734897b55cc1b7aae23af882ed92f3b726
+```bash
+Swarm hash: 387dc3cf98419dcb20c68b284373bf7d9e8dcb27daadb67e1e6b6e0f17017f1f
+URL: http://localhost:1633/bzz/387dc3cf98419dcb20c68b284373bf7d9e8dcb27daadb67e1e6b6e0f17017f1f/
+Feed Manifest URL: http://localhost:1633/bzz/6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2/
+Stamp ID: 3d98a22f
+Usage: 50%
+Capacity (mutable): 20.445 KB remaining out of 40.890 KB
 ```
 
-This is your **permanent website reference**.
+You can find the manifest hash at `Feed Manifest URL` in the URL right after `/bzz/`: `6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2`
+
+Save this hash, you will use it for the next step.
+
+This is your **permanent website reference**. It is a reference to a feed manifest which points to the latest feed entry so that you can use it as a static, unchanging reference for your website even as you make multiple updates to the site. Every time you update the website through the feed, this manifest will point to the hash for the newest version of the website.
 
 
 ### Step 3: Use the feed reference as the ENS contenthash
 
-Under construction.
+Follow the same [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [Section 2](#2-connecting-your-website-to-ens)). However, this time, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step (`6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2` from our example above).
+
+Example:
+
+```
+bzz://6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2
+```
+
+Now your ENS name will always point to a static reference which will always resolve to the latest version of your website.
+
+### Updating your site in the future
+
+When you have a new version of your site, just run `feed upload` again against the same topic and identity:
+
+<Tabs>
+<TabItem value="linux" label="Linux / macOS">
+
+```bash
+swarm-cli feed upload ./website \
+  --identity website-publisher \
+  --topic-string website \
+  --stamp <postage-batch-id> \
+  --index-document index.html \
+  --error-document 404.html
+```
+
+</TabItem>
+<TabItem value="powershell" label="Windows PowerShell">
+
+```powershell
+swarm-cli feed upload .\website `
+  --identity website-publisher `
+  --topic-string website `
+  --stamp <postage-batch-id> `
+  --index-document index.html `
+  --error-document 404.html
+```
+
+</TabItem>
+</Tabs>
+
+* The **feed manifest reference stays the same**.
+* The feed now points to the newly uploaded site version.
+* No ENS changes needed.
+
+:::tip
+It may take a few minutes for caches to reload and make your changes accessible, especially with ENS gateway services like `eth.limo` and `bzz.link`.
+:::
