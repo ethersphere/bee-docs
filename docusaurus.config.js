@@ -84,7 +84,30 @@ module.exports = {
           to: '/docs/concepts/incentives/postage-stamps',
           from: '/docs/learn/technology/contracts/postage-stamp',
         },
-        
+        {
+          to: '/docs/develop/introduction',
+          from: '/docs/develop/access-the-swarm/introduction',
+        },
+        {
+          to: '/docs/develop/upload-and-download',
+          from: '/docs/develop/access-the-swarm/upload-and-download',
+        },
+        {
+          to: '/docs/develop/host-your-website',
+          from: '/docs/develop/access-the-swarm/host-your-website',
+        },
+        {
+          to: '/docs/develop/access-control',
+          from: '/docs/develop/access-the-swarm/access-control',
+        },
+        {
+          to: '/docs/develop/ultra-light-nodes',
+          from: '/docs/develop/access-the-swarm/ultra-light-nodes',
+        },
+        {
+          to: '/docs/develop/introduction',
+          from: '/docs/develop/access-the-swarm',
+        },
 
       ],
     },

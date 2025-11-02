@@ -440,8 +440,8 @@ curl -s localhost:1633/peers | jq ".peers | length"
 Perfect! We are accumulating peers, this means you are connected to
 the network, and ready to start [using
 Bee](/docs/develop/introduction) to [upload and
-download](/docs/develop/access-the-swarm/upload-and-download) content or host
-and browse [websites](/docs/develop/access-the-swarm/host-your-website) hosted
+download](/docs/develop/upload-and-download) content or host
+and browse [websites](/docs/develop/host-your-website) hosted
 on the Swarm network.
 
 Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝

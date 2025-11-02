@@ -6,19 +6,21 @@ id: host-your-website
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Hosting a Website on Swarm and Linking it to ENS
+This guide explains how to host a website on Swarm using `swarm-cli` and make it accessible through [Ethereum Name Service (ENS)](https://ens.domains/).
 
-This guide explains how to host a static website on Bee using `swarm-cli` and make it accessible through [Ethereum Name Service (ENS)](https://ens.domains/).
+## Host a Site With **swarm-cli** 
 
-**Part one** covers uploading and accessing your site through the raw Swarm hash.
+This three part guide shows you how to get your website hosted on Swarm with just a few simple commands by using `swarm-cli` from your terminal. 
+
+**Part one** covers uploading and accessing your site through the raw Swarm hash. 
 
 **Part two** shows how to register your Swarm hash with your ENS domain so it can be easily accessed by anyone through public ENS gateways like `eth.limo`, `bzz.link`, or `localhost` on a Bee node.
 
-**Part three** shows how to upload your website through a feed and register the feed manifest with ENS in order to provide a static hash for the website. This means you no longer need to update your ENS record every time you make a change to your website, and is the recommended method for hosting a publicly accessible website on Swarm.
+**Part three** shows you how to use feeds to make you website accessible at a static hash, and then use that hash to connect with your ENS domain. This is highly recommended for any site which will have future updates - without this step you would need to re-register your ENS domain every time you updated the site.
 
-## 1. Hosting and Accessing Your Website on Swarm
+### 1. Upload & Access by Hash
 
-### Prerequisites
+#### Prerequisites
 
 * A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
 * A valid postage batch
@@ -29,7 +31,7 @@ This guide explains how to host a static website on Bee using `swarm-cli` and ma
 You can download the example website files from the [ethersphere/examples](https://github.com/ethersphere/examples/tree/main/basic-static-website) repository.
 
 
-### Uploading the Website
+#### Uploading the Website
 
 1. Go to the folder containing your website files.
 
@@ -96,7 +98,7 @@ cf50756e6115445fd283691673fa4ad2204849558a6f3b3f4e632440f1c3ab7c
 Copy this and save it. You’ll need it for both direct access and ENS integration.
 
 
-### Accessing the Website
+#### Accessing the Website
 
 Anyone with a Bee node can now access the site using the Swarm hash you just saved:
 
@@ -105,7 +107,7 @@ http://localhost:1633/bzz/<swarm-hash>/
 ```
 
 
-## 2. Connecting Your Website to ENS
+### 2. (Recommended) Connect Site to ENS Domain 
 
 Once the site is uploaded, you can make it accessible via an easy to remember ENS domain name:
 
@@ -141,7 +143,7 @@ https://eth-mainnet.public.blastapi.io
 Alternatively, you can run your own Ethereum node and use that as the RPC.
 :::
 
-### Using the Official ENS Guide
+#### Using the Official ENS Guide
 
 The ENS team provides a clear walkthrough with screenshots showing how to add a content hash to your domain with their [easy to use app](https://app.ens.domains/):
 
@@ -155,7 +157,7 @@ The guide covers:
 * Confirming the transaction
 
 
-### Swarm-Specific Step
+#### Swarm-Specific Step
 
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 
@@ -178,7 +180,7 @@ This works across:
 You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
 
 
-## 3. (Recommended) Host Your Website via a Feed Instead of a Raw Hash
+### 3. (Recommended) Avoid Repeated ENS Registrations with Feeds
 
 If you plan to update your website in the future, you should publish your website hash to a **feed** rather than pointing ENS directly to the raw content hash.
 
@@ -197,7 +199,7 @@ In this section, you will:
 
 This ensures future website updates require no ENS changes.
 
-### Prerequisite: Have your initial site hash
+#### Prerequisite: Have your initial site hash
 
 From Part One you should already have uploaded your site and seen something like:
 
@@ -210,7 +212,7 @@ We will refer to this as `<site-hash>` in the examples below.
 > In the next step we will re-upload the site using a feed so that ENS can always track updates.
 
 
-### Step 1: Create a dedicated publisher identity
+#### Step 1: Create a dedicated publisher identity
 
 This key will sign feed updates.  
 
@@ -227,7 +229,7 @@ swarm-cli identity export website-publisher
 ```
 
 
-### Step 2: Upload your website to a feed (creates the manifest automatically)
+#### Step 2: Upload your website to a feed (creates the manifest automatically)
 
 <Tabs>
 <TabItem value="linux" label="Linux / macOS">
@@ -275,7 +277,7 @@ Save this hash, you will use it for the next step.
 This is your **permanent website reference**. It is a reference to a feed manifest which points to the latest feed entry so that you can use it as a static, unchanging reference for your website even as you make multiple updates to the site. Every time you update the website through the feed, this manifest will point to the hash for the newest version of the website.
 
 
-### Step 3: Use the feed reference as the ENS contenthash
+#### Step 3: Use the feed reference as the ENS contenthash
 
 Follow the same [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [Section 2](#2-connecting-your-website-to-ens)). However, this time, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step (`6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2` from our example above).
 
@@ -287,7 +289,7 @@ bzz://6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2
 
 Now your ENS name will always point to a static reference which will always resolve to the latest version of your website.
 
-### Updating your site in the future
+#### Updating your site in the future
 
 When you have a new version of your site, just run `feed upload` again against the same topic and identity:
 

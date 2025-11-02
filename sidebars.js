@@ -88,20 +88,13 @@ module.exports = {
       label: 'Develop',
       items: [
         'develop/introduction',
+        'develop/upload-and-download',
+        'develop/host-your-website',
+        'develop/act',
       ],
       collapsed: false
     },
-    {
-      type: 'category',
-      label: 'Building on Swarm',
-      items: [
-        'develop/access-the-swarm/introduction',
-        'develop/access-the-swarm/upload-and-download',
-        'develop/access-the-swarm/host-your-website',
-        'develop/access-the-swarm/act',
-      ],
-      collapsed: false
-    },
+  
     {
       type: 'category',
       label: 'Tools and Features',
