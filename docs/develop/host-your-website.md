@@ -6,7 +6,36 @@ id: host-your-website
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explains how to host a website on Swarm using `swarm-cli` and make it accessible through [Ethereum Name Service (ENS)](https://ens.domains/).
+There are two primary methods most developers should use for uploading a website to Swarm - `swarm-cli` and `bee-js`. Depending on the specific use case, it may make more sense to pick one or the other.
+
+For a simple website such as a personal blog or company page, using `swarm-cli` is simplest and fastest way to get your site uploaded and accessible on Swarm.
+
+However for developers who need finer grained control over the process or who wish to build a more complex application which require programmatically spinning up new pages, `bee-js` is required.
+
+:::tip
+The guides below assume you already have a registered ENS domain name. By using an ENS domain name, you can make your Swarm hosted website accessible through an easy to remember human-readable name rather than a Swarm hash. If you don't have an ENS domain name registered, you can get one using the official ENS application at [app.ens.domains](https://app.ens.domains/). Refer to their support section for a step-by-step guide to [register an ENS domain](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name).
+:::
+
+:::tip FIX FOR ENS NOT WORKING ON LOCALHOST
+If the site doesn’t load from localhost, it’s probably an with the resolver RPC (the RPC endpoint for the Ethereum node used to resolve your ENS domain name). 
+
+Some endpoints, such as:
+
+```
+https://cloudflare-eth.com
+```
+
+may not resolve properly on localhost.
+
+As of the writing of this guide, both of these free and public endpoints work reliably for localhost resolution:
+
+```
+https://mainnet.infura.io/v3/<infura-api-key>
+https://eth-mainnet.public.blastapi.io
+```
+
+Alternatively, you can run your own Ethereum node and use that as the RPC.
+:::
 
 ## Host a Site With **swarm-cli** 
 
@@ -18,15 +47,17 @@ This three part guide shows you how to get your website hosted on Swarm with jus
 
 **Part three** shows you how to use feeds to make you website accessible at a static hash, and then use that hash to connect with your ENS domain. This is highly recommended for any site which will have future updates - without this step you would need to re-register your ENS domain every time you updated the site.
 
-### 1. Upload & Access by Hash
-
-#### Prerequisites
+### Prerequisites
 
 * A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
 * A valid postage batch
 * [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli)
 * A valid postage stamp batch
 * Your static website files (you can also use the example website files provided below)  
+* (Optional for part one - "Upload & Access by Hash") An ENS domain which you [previously registered](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name)
+
+### 1. Upload & Access by Hash
+
 
 You can download the example website files from the [ethersphere/examples](https://github.com/ethersphere/examples/tree/main/basic-static-website) repository.
 
@@ -122,26 +153,6 @@ or through your own node:
 http://localhost:1633/bzz/yourname.eth/
 ```
 
-:::tip
-If the site doesn’t load from localhost, it’s probably an with the resolver RPC (the RPC endpoint for the Ethereum node used to resolve your ENS domain name). 
-
-Some endpoints, such as:
-
-```
-https://cloudflare-eth.com
-```
-
-may not resolve properly on localhost.
-
-As of the writing of this guide, both of these free and public endpoints work reliably for localhost resolution:
-
-```
-https://mainnet.infura.io/v3/<infura-api-key>
-https://eth-mainnet.public.blastapi.io
-```
-
-Alternatively, you can run your own Ethereum node and use that as the RPC.
-:::
 
 #### Using the Official ENS Guide
 
@@ -327,3 +338,156 @@ swarm-cli feed upload .\website `
 :::tip
 It may take a few minutes for caches to reload and make your changes accessible, especially with ENS gateway services like `eth.limo` and `bzz.link`.
 :::
+
+## Host a Website with **bee-js**
+
+This guide explains how to host a website on Swarm using the `bee-js` JavaScript SDK instead of the CLI.
+
+For developers building apps, tools, or automated deployments, `bee-js` offers programmatic control over uploading and updating content on Swarm. This three part guide explains how to host your site on Swarm using `bee-js`:
+
+1. Uploading a website and getting its Swarm hash.
+2. Registering the hash with your ENS domain.
+3. Using feeds to keep an ENS record up-to-date through a static reference.
+
+### Prerequisites
+
+* A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
+* A valid postage stamp batch
+* Node.js (18+) and `@ethersphere/bee-js` installed in your project
+* Static website files (HTML, CSS, etc.) - feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/basic-static-website)
+* (Optional for part one - "Upload & Access by Hash") An ENS domain which you [previously registered](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name)
+
+
+### 1. Upload and Access by Hash
+
+Install bee-js:
+
+```bash
+npm install @ethersphere/bee-js
+```
+
+Website upload script:
+
+```js
+import { Bee } from "@ethersphere/bee-js";
+
+const bee = new Bee("http://localhost:1633");
+const batchId = "<POSTAGE_BATCH_ID>"; // Replace with your batch ID
+
+const result = await bee.uploadFilesFromDirectory(batchId, ".", {
+  indexDocument: "index.html",
+  errorDocument: "404.html"
+});
+
+console.log("Swarm hash:", result.reference);
+```
+
+After running the script, copy the Swarm hash output to the console and then use it to open:
+
+```
+http://localhost:1633/bzz/<swarm-hash>/
+```
+
+### 2. (Recommended) Connect Site to ENS Domain 
+
+*These steps are identical to
+
+Once the site is uploaded, you can make it accessible via an easy to remember ENS domain name:
+
+```
+https://yourname.eth.limo/
+https://yourname.bzz.link/
+```
+
+or through your own node:
+
+```
+http://localhost:1633/bzz/yourname.eth/
+```
+
+
+#### Using the Official ENS Guide
+
+The ENS team provides a clear walkthrough with screenshots showing how to add a content hash to your domain with their [easy to use app](https://app.ens.domains/):
+
+[How to add a Decentralized website to an ENS name](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name)
+
+The guide covers:
+
+* Opening your ENS domain in the ENS Manager
+* Navigating to the Records tab
+* Adding a Content Hash
+* Confirming the transaction
+
+
+#### Swarm-Specific Step
+
+When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
+
+```
+bzz://<swarm-hash>
+```
+
+Example:
+
+```
+bzz://cf50756e6115445fd283691673fa4ad2204849558a6f3b3f4e632440f1c3ab7c
+```
+
+This works across:
+
+* eth.limo and bzz.link
+* localhost (with a compatible RPC)
+* any ENS-compatible Swarm resolver
+
+You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
+
+### 3. Use Feeds for Seamless Updates
+
+Feeds allow you to anchor an ENS domain to a static reference while changing the underlying content.
+
+#### a) Generate a Feed Identity
+
+```js
+import { PrivateKey } from "@ethersphere/bee-js";
+
+const privateKey = new PrivateKey("0xYOUR_PRIVATE_KEY");
+const owner = privateKey.publicKey().address();
+```
+
+#### b) Upload and Create Feed Manifest
+
+```js
+import { Topic } from "@ethersphere/bee-js";
+
+const topic = Topic.fromString("website");
+const writer = bee.makeFeedWriter(topic, privateKey);
+
+const upload = await bee.uploadFilesFromDirectory(batchId, ".", {
+  indexDocument: "index.html",
+  errorDocument: "404.html"
+});
+
+await writer.upload(batchId, upload.reference);
+
+const manifestRef = await bee.createFeedManifest(batchId, topic, owner);
+console.log("Feed Manifest:", manifestRef);
+```
+
+#### c) Set ENS Record to Feed Manifest
+
+Set this in ENS as:
+
+```
+bzz://<manifestRef>
+```
+
+Future updates just re-run:
+
+```js
+await writer.upload(batchId, newUpload.reference);
+```
+
+Your ENS domain will always point to the latest upload via the feed manifest.
+
+You’ve now got a programmatic way to deploy and update your Swarm-hosted site with ENS support using `bee-js`!

@@ -29,7 +29,7 @@ module.exports = {
           from: '/docs/api-reference/',
         },
         {
-          to: '/docs/develop/access-the-swarm/host-your-website',
+          to: '/docs/develop/host-your-website',
           from: '/docs/access-the-swarm/host-your-website',
         },
         {
@@ -41,7 +41,7 @@ module.exports = {
           from: '/docs/develop/access-the-swarm/keep-your-data-alive',
         },
         {
-          to: '/docs/develop/access-the-swarm/upload-and-download',
+          to: '/docs/develop/upload-and-download',
           from: '/docs/develop/access-the-swarm/upload-a-directory',
         },
         {
@@ -202,7 +202,7 @@ module.exports = {
               label: 'Getting Started'
             },  
             {
-              to: 'docs/develop/access-the-swarm/introduction',
+              to: 'docs/develop/introduction',
               label: 'Building on Swarm'
             },
             {
