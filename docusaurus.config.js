@@ -97,8 +97,8 @@ module.exports = {
           from: '/docs/develop/access-the-swarm/host-your-website',
         },
         {
-          to: '/docs/develop/access-control',
-          from: '/docs/develop/access-the-swarm/access-control',
+          to: '/docs/develop/act',
+          from: '/docs/develop/access-the-swarm/act',
         },
         {
           to: '/docs/develop/ultra-light-nodes',
