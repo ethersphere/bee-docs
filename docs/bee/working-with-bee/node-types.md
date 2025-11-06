@@ -18,8 +18,8 @@ Bee can operate in different modes, each tailored to specific use cases:
 
 | Feature                                                                 | Full Node | Light Node | Ultra-Light Node |
 | ----------------------------------------------------------------------- | --------- | ---------- | ---------------- |
-| Free tier [downloads](/docs/develop/access-the-swarm/upload-and-download)                                                     | ✅        | ✅         | ✅               |
-| [Uploading](/docs/develop/access-the-swarm/upload-and-download) (Can purchase [postage stamp batches](/docs/develop/tools-and-features/buy-a-stamp-batch))                          | ✅        | ✅         | ❌               |
+| Free tier [downloads](/docs/develop/upload-and-download)                                                     | ✅        | ✅         | ✅               |
+| [Uploading](/docs/develop/upload-and-download) (Can purchase [postage stamp batches](/docs/develop/tools-and-features/buy-a-stamp-batch))                          | ✅        | ✅         | ❌               |
 | Can exceed free tier downloads                                          | ✅        | ✅         | ❌               |
 | Storage sharing                                                         | ✅        | ❌         | ❌               |
 | [Storage incentives](/docs/bee/working-with-bee/staking/)               | ✅        | ❌         | ❌               |

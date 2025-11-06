@@ -45,7 +45,7 @@ For more details of erasure coding costs, see [here](/docs/concepts/DISC/erasure
 
 ## Downloading Erasure Encoded Data
 
-For a downloader, the process for downloading a file which has been erasure encoded does not require any changes from the [normal download process](/docs/develop/access-the-swarm/upload-and-download). There are several options for adjusting the default behaviour for erasure encoded downloads, however there is no need to adjust them.
+For a downloader, the process for downloading a file which has been erasure encoded does not require any changes from the [normal download process](/docs/develop/upload-and-download). There are several options for adjusting the default behaviour for erasure encoded downloads, however there is no need to adjust them.
 
 ### Default Download Behaviour
 
@@ -87,7 +87,7 @@ An example download request may look something like this:
 
 For this request, the redundancy strategy is set to 3 (RACE), which means that it will initiate a request for all data and parity chunks and continue to retrieve chunks until enough have been retrieved to reconstruct the source data. This is in contrast with the default strategy of DATA where only the data chunks will be retrieved.
 
-However, as noted above, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](/docs/develop/access-the-swarm/upload-and-download) without any additional options set):
+However, as noted above, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](/docs/develop/upload-and-download) without any additional options set):
 
 
 ```bash

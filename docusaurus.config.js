@@ -29,7 +29,7 @@ module.exports = {
           from: '/docs/api-reference/',
         },
         {
-          to: '/docs/develop/access-the-swarm/host-your-website',
+          to: '/docs/develop/host-your-website',
           from: '/docs/access-the-swarm/host-your-website',
         },
         {
@@ -41,7 +41,7 @@ module.exports = {
           from: '/docs/develop/access-the-swarm/keep-your-data-alive',
         },
         {
-          to: '/docs/develop/access-the-swarm/upload-and-download',
+          to: '/docs/develop/upload-and-download',
           from: '/docs/develop/access-the-swarm/upload-a-directory',
         },
         {
@@ -84,7 +84,30 @@ module.exports = {
           to: '/docs/concepts/incentives/postage-stamps',
           from: '/docs/learn/technology/contracts/postage-stamp',
         },
-        
+        {
+          to: '/docs/develop/introduction',
+          from: '/docs/develop/access-the-swarm/introduction',
+        },
+        {
+          to: '/docs/develop/upload-and-download',
+          from: '/docs/develop/access-the-swarm/upload-and-download',
+        },
+        {
+          to: '/docs/develop/host-your-website',
+          from: '/docs/develop/access-the-swarm/host-your-website',
+        },
+        {
+          to: '/docs/develop/act',
+          from: '/docs/develop/access-the-swarm/act',
+        },
+        {
+          to: '/docs/develop/ultra-light-nodes',
+          from: '/docs/develop/access-the-swarm/ultra-light-nodes',
+        },
+        {
+          to: '/docs/develop/introduction',
+          from: '/docs/develop/access-the-swarm',
+        },
 
       ],
     },
@@ -179,7 +202,7 @@ module.exports = {
               label: 'Getting Started'
             },  
             {
-              to: 'docs/develop/access-the-swarm/introduction',
+              to: 'docs/develop/introduction',
               label: 'Building on Swarm'
             },
             {

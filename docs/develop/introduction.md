@@ -44,7 +44,7 @@ pagination_next: null
   <div class="container">
     <ul class="hub-grid">
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/access-the-swarm/upload-and-download">
+        <a class="hub-card__link" href="/docs/develop/upload-and-download">
           <h3 class="hub-card__title">Upload and Download</h3>
           <p class="hub-card__desc">
             Learn how to upload and download a variety of data types from Swarm (with support for both browser and Node.js environments).
@@ -52,18 +52,18 @@ pagination_next: null
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
-      <!--
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/access-the-swarm/host-your-website">
+        <a class="hub-card__link" href="/docs/develop/host-your-website">
           <h3 class="hub-card__title">Host a Webpage</h3>
           <p class="hub-card__desc">
-            Upload your webpage to Swarm to make it accessible to anyone with a Bee node, and optionally set up ENS for a human-readable URL.
+             Host a website on Swarm and link it to your ENS domain for easy access at through gateways and Bee nodes. 
           </p>
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
+      <!--
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/access-the-swarm/updatable-content">
+        <a class="hub-card__link" href="/docs/develop/updatable-content">
           <h3 class="hub-card__title">Publish Updatable Content</h3>
           <p class="hub-card__desc">
             Learn how to host dynamic content on Swarm which can change over time such as a blog or personal website.
@@ -72,7 +72,7 @@ pagination_next: null
         </a>
       </li>
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/access-the-swarm/act">
+        <a class="hub-card__link" href="/docs/develop/act">
           <h3 class="hub-card__title">Add Access Control</h3>
           <p class="hub-card__desc">
             Control who is able to view your uploaded content, such as a list of paid newsletter or blog subscribers.
@@ -81,7 +81,7 @@ pagination_next: null
         </a>
       </li>
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/access-the-swarm/messaging">
+        <a class="hub-card__link" href="/docs/develop/messaging">
           <h3 class="hub-card__title">Messaging on Swarm</h3>
           <p class="hub-card__desc">
             Learn how to integrate Swarm-based messaging into your app — with support for both real-time messaging use cases and private encrypted messaging.
