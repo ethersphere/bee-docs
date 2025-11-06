@@ -39,13 +39,7 @@ Alternatively, you can run your own Ethereum node and use that as the RPC.
 
 ## Host a Site With **swarm-cli** 
 
-This three part guide shows you how to get your website hosted on Swarm with just a few simple commands by using `swarm-cli` from your terminal. 
-
-**Part one** covers uploading and accessing your site through the raw Swarm hash. 
-
-**Part two** shows how to register your Swarm hash with your ENS domain so it can be easily accessed by anyone through public ENS gateways like `eth.limo`, `bzz.link`, or `localhost` on a Bee node.
-
-**Part three** shows you how to use feeds to make you website accessible at a static hash, and then use that hash to connect with your ENS domain. This is highly recommended for any site which will have future updates - without this step you would need to re-register your ENS domain every time you updated the site.
+This guide shows you how to get your website hosted on Swarm with just a few simple commands by using `swarm-cli` from your terminal. 
 
 ### Prerequisites
 
@@ -56,7 +50,7 @@ This three part guide shows you how to get your website hosted on Swarm with jus
 * Your static website files (you can also use the example website files provided below)  
 * (Optional for part one - "Upload & Access by Hash") An ENS domain which you [previously registered](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name)
 
-### 1. Upload & Access by Hash
+### Upload & Access by Hash
 
 
 You can download the example website files from the [ethersphere/examples](https://github.com/ethersphere/examples/tree/main/basic-static-website) repository.
@@ -96,9 +90,9 @@ values={[
 
 ```powershell
 swarm-cli upload . `
-  --stamp 3d98a22f522377ae9cc2aa3bca7f352fb0ed6b16bad73f0246b0a5c155f367bc `
+  --stamp <BATCH_ID> `
   --index-document index.html `
-  --error-document index.html
+  --error-document 404.html
 ````
 
 </TabItem>
@@ -107,9 +101,9 @@ swarm-cli upload . `
 
 ```bash
 swarm-cli upload . \
-  --stamp 3d98a22f522377ae9cc2aa3bca7f352fb0ed6b16bad73f0246b0a5c155f367bc \
+  --stamp <BATCH_ID> \
   --index-document index.html \
-  --error-document index.html
+  --error-document 404.html
 ```
 
 </TabItem>
@@ -126,7 +120,7 @@ swarm-cli upload . \
 cf50756e6115445fd283691673fa4ad2204849558a6f3b3f4e632440f1c3ab7c
 ```
 
-Copy this and save it. You’ll need it for both direct access and ENS integration.
+Copy this and save it. You’ll need it for both direct access and [ENS integration](#connect-site-to-ens-domain).
 
 
 #### Accessing the Website
@@ -134,72 +128,21 @@ Copy this and save it. You’ll need it for both direct access and ENS integrati
 Anyone with a Bee node can now access the site using the Swarm hash you just saved:
 
 ```
-http://localhost:1633/bzz/<swarm-hash>/
+http://localhost:1633/bzz/<SWARM_HASH>/
 ```
 
 
-### 2. (Recommended) Connect Site to ENS Domain 
+### (Recommended) Use Feeds for Seamless Updates - swarm-cli
 
-Once the site is uploaded, you can make it accessible via an easy to remember ENS domain name:
+*If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
 
-```
-https://yourname.eth.limo/
-https://yourname.bzz.link/
-```
+If you have an ENS domain and Swarm hosted website, you can make the site available through the domain by registering website's Swarm hash as a content hash through the [ENS domain management app](https://app.ens.domains/). However, if you ever edit and reupload your site to Swarm, you will need to re-register your new website hash to make it available at your ENS domain.  
 
-or through your own node:
+Therefore, instead of directly using your website hash as the content hash for your ENS domain, upload your site as a feed update and use the feed manifest hash as the content hash. Then every time you update your site as a new feed update, the ENS domain will always resolve to the newest version of your site without the need to register a new hash each time.
 
-```
-http://localhost:1633/bzz/yourname.eth/
-```
-
-
-#### Using the Official ENS Guide
-
-The ENS team provides a clear walkthrough with screenshots showing how to add a content hash to your domain with their [easy to use app](https://app.ens.domains/):
-
-[How to add a Decentralized website to an ENS name](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name)
-
-The guide covers:
-
-* Opening your ENS domain in the ENS Manager
-* Navigating to the Records tab
-* Adding a Content Hash
-* Confirming the transaction
-
-
-#### Swarm-Specific Step
-
-When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
-
-```
-bzz://<swarm-hash>
-```
-
-Example:
-
-```
-bzz://cf50756e6115445fd283691673fa4ad2204849558a6f3b3f4e632440f1c3ab7c
-```
-
-This works across:
-
-* eth.limo and bzz.link
-* localhost (with a compatible RPC)
-* any ENS-compatible Swarm resolver
-
-You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
-
-
-### 3. (Recommended) Avoid Repeated ENS Registrations with Feeds
-
-If you plan to update your website in the future, you should publish your website hash to a **feed** rather than pointing ENS directly to the raw content hash.
-
-Why:
-
-* ENS only needs to be set once
-* You can push new website versions later
-* Your ENS name always resolves to the latest upload
+:::tip
+The examples below refer to core feed concepts such as "publisher identity", and "topic". To learn more about these concepts refer to the [bee-js documentation](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds).
+:::
 
 In this section, you will:
 
@@ -207,20 +150,6 @@ In this section, you will:
 2. Upload your site to a feed (this automatically creates the feed manifest)  
 3. Copy the feed manifest reference  
 4. Use that manifest reference as your ENS contenthash  
-
-This ensures future website updates require no ENS changes.
-
-#### Prerequisite: Have your initial site hash
-
-From Part One you should already have uploaded your site and seen something like:
-
-```
-Reference: 1c686dee5891aae4ea97db397165ce511efdfc40b64846ac6f00f7330a0ed65f
-```
-
-We will refer to this as `<site-hash>` in the examples below.
-
-> In the next step we will re-upload the site using a feed so that ENS can always track updates.
 
 
 #### Step 1: Create a dedicated publisher identity
@@ -231,14 +160,23 @@ This key will sign feed updates.
 swarm-cli identity create website-publisher
 ```
 
-Record the output — you will need this identity for future updates.
+Terminal output:
+
+```bash
+Name: website-publisher
+Type: V3 Wallet
+Private key: 0x22e918ef68c9bc975112ceaaee0ee0f147baa79da257873659bddbfd84a646fe
+Public key: 0x218c79f8dfb26d077b6379eb56aa9c6e71edf74dde8ecd27dac5016528aea80ee121b9e5050adf3948c8b0d8cffda763d7fb1f5608250b5009c5d50e158ab4a5
+Address: 0x2fb11d37a9913bd3258b9918c399f35fd842a232
+```
+
+Record the output in a secure location as a backup — you will need this identity for future updates.
 
 If you need to view/export it later:
 
 ```bash
 swarm-cli identity export website-publisher
 ```
-
 
 #### Step 2: Upload your website to a feed (creates the manifest automatically)
 
@@ -249,7 +187,7 @@ swarm-cli identity export website-publisher
 swarm-cli feed upload ./website \
   --identity website-publisher \
   --topic-string website \
-  --stamp <postage-batch-id> \
+  --stamp <BATCH_ID> \
   --index-document index.html \
   --error-document 404.html
 ```
@@ -261,12 +199,10 @@ swarm-cli feed upload ./website \
 swarm-cli feed upload .\website `
   --identity website-publisher `
   --topic-string website `
-  --stamp <postage-batch-id> `
+  --stamp <BATCH_ID> `
   --index-document index.html `
   --error-document 404.html
 ```
-
-
 </TabItem>
 </Tabs>
 
@@ -290,7 +226,7 @@ This is your **permanent website reference**. It is a reference to a feed manife
 
 #### Step 3: Use the feed reference as the ENS contenthash
 
-Follow the same [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [Section 2](#2-connecting-your-website-to-ens)). However, this time, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step (`6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2` from our example above).
+Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
 
 Example:
 
@@ -302,7 +238,7 @@ Now your ENS name will always point to a static reference which will always reso
 
 #### Updating your site in the future
 
-When you have a new version of your site, just run `feed upload` again against the same topic and identity:
+When you have a new version of your site, just run `feed upload` again using the same topic and identity:
 
 <Tabs>
 <TabItem value="linux" label="Linux / macOS">
@@ -311,7 +247,7 @@ When you have a new version of your site, just run `feed upload` again against t
 swarm-cli feed upload ./website \
   --identity website-publisher \
   --topic-string website \
-  --stamp <postage-batch-id> \
+  --stamp <BATCH_ID> \
   --index-document index.html \
   --error-document 404.html
 ```
@@ -323,7 +259,7 @@ swarm-cli feed upload ./website \
 swarm-cli feed upload .\website `
   --identity website-publisher `
   --topic-string website `
-  --stamp <postage-batch-id> `
+  --stamp <BATCH_ID> `
   --index-document index.html `
   --error-document 404.html
 ```
@@ -335,19 +271,12 @@ swarm-cli feed upload .\website `
 * The feed now points to the newly uploaded site version.
 * No ENS changes needed.
 
-:::tip
-It may take a few minutes for caches to reload and make your changes accessible, especially with ENS gateway services like `eth.limo` and `bzz.link`.
-:::
 
 ## Host a Website with **bee-js**
 
 This guide explains how to host a website on Swarm using the `bee-js` JavaScript SDK instead of the CLI.
 
-For developers building apps, tools, or automated deployments, `bee-js` offers programmatic control over uploading and updating content on Swarm. This three part guide explains how to host your site on Swarm using `bee-js`:
-
-1. Uploading a website and getting its Swarm hash.
-2. Registering the hash with your ENS domain.
-3. Using feeds to keep an ENS record up-to-date through a static reference.
+For developers building apps, tools, or automated deployments, `bee-js` offers programmatic control over uploading and updating content on Swarm.  
 
 ### Prerequisites
 
@@ -358,7 +287,7 @@ For developers building apps, tools, or automated deployments, `bee-js` offers p
 * (Optional for part one - "Upload & Access by Hash") An ENS domain which you [previously registered](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name)
 
 
-### 1. Upload and Access by Hash
+### Upload and Access by Hash
 
 Install bee-js:
 
@@ -372,27 +301,133 @@ Website upload script:
 import { Bee } from "@ethersphere/bee-js";
 
 const bee = new Bee("http://localhost:1633");
-const batchId = "<POSTAGE_BATCH_ID>"; // Replace with your batch ID
 
-const result = await bee.uploadFilesFromDirectory(batchId, ".", {
+const batchId = "<BATCH_ID>"; // Replace with your actual postage batch ID
+
+const result = await bee.uploadFilesFromDirectory(batchId, "./website", {
   indexDocument: "index.html",
   errorDocument: "404.html"
 });
 
-console.log("Swarm hash:", result.reference);
+console.log("Swarm hash:", result.reference.toHex());
 ```
 
-After running the script, copy the Swarm hash output to the console and then use it to open:
-
-```
-http://localhost:1633/bzz/<swarm-hash>/
+```bash
+Swarm hash: 6c45eae389b3bffce21443316d0bd47c4101545092b7c72c313a33ee7d003475
 ```
 
-### 2. (Recommended) Connect Site to ENS Domain 
+After running the script, copy the Swarm hash output to the console and then use it to open your Swarm hosted website in the browser:
 
-*These steps are identical to
+```bash
+http://localhost:1633/bzz/<SWARM_HASH>/
+```
 
-Once the site is uploaded, you can make it accessible via an easy to remember ENS domain name:
+
+### (Recommended) Use Feeds for Seamless Updates - bee-js
+
+*If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
+
+If you have an ENS domain and Swarm hosted website, you can make the site available through the domain by registering website's Swarm hash as a content hash through the [ENS domain management app](https://app.ens.domains/). However, if you ever edit and reupload your site to Swarm, you will need to re-register your new website hash to make it available at your ENS domain.  
+
+Therefore, instead of directly using your website hash as the content hash for your ENS domain, upload your site as a feed update and use the feed manifest hash as the content hash. Then every time you update your site as a new feed update, the ENS domain will always resolve to the newest version of your site without the need to register a new hash each time.
+
+:::tip
+You will need a publisher key to use for setting up your website feed.
+
+You can use the `PrivateKey` class to generate a dedicated publisher key:
+
+```js
+const crypto = require('crypto');
+const { PrivateKey } = require('@ethersphere/bee-js');
+
+// Generate 32 random bytes and construct a private key
+const hexKey = '0x' + crypto.randomBytes(32).toString('hex');
+const privateKey = new PrivateKey(hexKey);
+
+console.log('Private key:', privateKey.toHex());
+console.log('Public address:', privateKey.publicKey().address().toHex());
+````
+
+Example output:
+
+```bash
+Private key: 634fb5a872396d9693e5c9f9d7233cfa93f395c093371017ff44aa9ae6564cdd
+Public address: 8d3766440f0d7b949a5e32995d09619a7f86e632
+```
+
+Store this key securely.
+
+Anyone with access to it can publish to your feed.
+
+*It is recommended to use a separate publishing key for each feed.*
+:::
+
+#### Example Script
+
+:::tip
+The script below refers to some core feed concepts such as the feed "topic" and "writer". To learn more about these concepts and feeds in general, refer to the [bee-js documentation](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds).
+:::
+
+The script performs these steps:
+
+1. **Connects to your Bee node** and loads your postage batch + publisher private key.
+2. **Creates a feed topic and writer** for publishing website updates.
+3. **Uploads the `./website` directory** to Swarm and logs the resulting content hash.
+4. **Publishes that hash to the feed** so it becomes the latest feed entry.
+5. **Creates a feed manifest** and logs its reference — this is the permanent hash you use for ENS or stable URLs.
+
+
+```js
+import { Bee, Topic, PrivateKey } from "@ethersphere/bee-js";
+const bee = new Bee("http://localhost:1633");
+const batchId =  "<BATCH_ID>" // Replace with your batch id
+const privateKey = new PrivateKey("<PUBLISHER_KEY>"); // Replace with your publisher private key
+const owner = privateKey.publicKey().address();
+
+// Upload and Create Feed Manifest
+
+const topic = Topic.fromString("website");
+const writer = bee.makeFeedWriter(topic, privateKey);
+
+const upload = await bee.uploadFilesFromDirectory(batchId, "./website", {
+  indexDocument: "index.html",
+  errorDocument: "404.html"
+});
+
+console.log("Website Swarm Hash:", upload.reference.toHex())
+
+await writer.uploadReference(batchId, upload.reference);
+
+const manifestRef = await bee.createFeedManifest(batchId, topic, owner);
+console.log("Feed Manifest:", manifestRef.toHex());
+```
+
+Upon the successful execution of the script, the hash of the uploaded website will be logged along feed manifest hash. Copy the "Feed Manifest" hash to be used in the next step: 
+
+```bash
+Website Swarm Hash: 6c45eae389b3bffce21443316d0bd47c4101545092b7c72c313a33ee7d003475
+Feed Manifest: caa414d70028d14b0bdd9cbab18d1c1a0a3bab1b20a56cf06937a6b20c7e7377
+```
+
+Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#2-connecting-your-website-to-ens)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
+
+```
+bzz://<manifestRef>
+```
+
+Future updates just re-run:
+
+```js
+await writer.upload(batchId, newUpload.reference);
+```
+
+Your ENS domain will always point to the latest upload via the feed manifest.
+
+You’ve now got a programmatic way to deploy and update your Swarm-hosted site with ENS support using `bee-js`!
+
+## Connect Site to ENS Domain 
+
+Once your site is uploaded to Swarm, you can make it accessible via an easy to remember ENS domain name rather than its Swarm hash:
 
 ```
 https://yourname.eth.limo/
@@ -405,10 +440,9 @@ or through your own node:
 http://localhost:1633/bzz/yourname.eth/
 ```
 
-
 #### Using the Official ENS Guide
 
-The ENS team provides a clear walkthrough with screenshots showing how to add a content hash to your domain with their [easy to use app](https://app.ens.domains/):
+ENS provides a clear walkthrough with screenshots showing how to add a content hash to your domain with their [easy to use app](https://app.ens.domains/):
 
 [How to add a Decentralized website to an ENS name](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name)
 
@@ -424,8 +458,12 @@ The guide covers:
 
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 
+:::tip
+For the content hash, you can use a Swarm hosted website's hash directly, or as is recommended in the [`swarm-cli`](#recommended-use-feeds-for-seamless-updates---swarm-cli) and [`bee-js`](#recommended-use-feeds-for-seamless-updates---bee-js) guides above, publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates. 
+:::
+
 ```
-bzz://<swarm-hash>
+bzz://<SWARM_HASH>
 ```
 
 Example:
@@ -441,53 +479,3 @@ This works across:
 * any ENS-compatible Swarm resolver
 
 You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
-
-### 3. Use Feeds for Seamless Updates
-
-Feeds allow you to anchor an ENS domain to a static reference while changing the underlying content.
-
-#### a) Generate a Feed Identity
-
-```js
-import { PrivateKey } from "@ethersphere/bee-js";
-
-const privateKey = new PrivateKey("0xYOUR_PRIVATE_KEY");
-const owner = privateKey.publicKey().address();
-```
-
-#### b) Upload and Create Feed Manifest
-
-```js
-import { Topic } from "@ethersphere/bee-js";
-
-const topic = Topic.fromString("website");
-const writer = bee.makeFeedWriter(topic, privateKey);
-
-const upload = await bee.uploadFilesFromDirectory(batchId, ".", {
-  indexDocument: "index.html",
-  errorDocument: "404.html"
-});
-
-await writer.upload(batchId, upload.reference);
-
-const manifestRef = await bee.createFeedManifest(batchId, topic, owner);
-console.log("Feed Manifest:", manifestRef);
-```
-
-#### c) Set ENS Record to Feed Manifest
-
-Set this in ENS as:
-
-```
-bzz://<manifestRef>
-```
-
-Future updates just re-run:
-
-```js
-await writer.upload(batchId, newUpload.reference);
-```
-
-Your ENS domain will always point to the latest upload via the feed manifest.
-
-You’ve now got a programmatic way to deploy and update your Swarm-hosted site with ENS support using `bee-js`!
