@@ -202,10 +202,6 @@ module.exports = {
               label: 'Getting Started'
             },  
             {
-              to: 'docs/develop/introduction',
-              label: 'Building on Swarm'
-            },
-            {
               to: 'docs/develop/tools-and-features/introduction',
               label: 'Tools and Features'
             },

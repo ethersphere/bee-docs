@@ -1,41 +1,42 @@
 ---
-title: "Mutable" Content
-id: mutable-content
-sidebar_label: "Mutable" Content
+title: Dynamic Content
+id: dynamic-content
+sidebar_label: Dynamic Content
 ---
 
 
-:::information
-While *all data uploaded to Swarm is technically immutable*, mutable functionality can be simulated using feeds. A feed is essentially an ordered series of Swarm uploads (feed updates) which always resolve to the latest update. We can then use a feed manifest to create a static reference to the feed, so that the reference will always resolve to the latest feed update. In this way mutable functionality is emulated on top of Swarm's immutable [DISC](/docs/concepts/DISC/).
+## Using Feeds for Dynamic Content
+
+:::info
+Although all data on Swarm is immutable, feeds provide an updatable reference that enables dynamic content, simulating a mutable resource which always resolves to its latest update through a static feed manifest reference.
 :::
 
-# Granular Asset Feeds (Advanced Website Architecture)
+:::tip
+This guide relies heavily on the use of Swarm feeds. If you are not already familiar with feeds, it's recommended to familiarize yourself with them. See the [bee-docs feeds section](/docs/develop/tools-and-features/feeds/) for a high level overview and then check the [bee-js-docs feeds section](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds) for a more detailed explanation and example implementation.
+:::
 
-This guide extends the core website-hosting workflow by showing how to create **per-asset feeds** so you can update individual files (header images, CSS, JS bundles, logos, site config, etc.) without re-uploading the entire website.
+
+This guide shows how to create **per-asset feeds** so you can update individual files (header images, CSS, JS bundles, logos, site config, etc.) without re-uploading the entire website. 
 
 This technique effectively turns Swarm into a **decentralized CDN**:  
 each asset gets its own permanent reference, and updates flow atomically through feeds.
 
-## 🧠 Why Use Per-Asset Feeds?
+### Why Use Per-Asset Feeds?
 
 Traditional upload-and-replace workflows require re-deploying everything, even if only one asset changes. With Swarm feeds:
 
 - Every file can have its own independent "channel" (feed topic).
 - Each feed has a **stable manifest hash** that never changes.
-- When you update an asset, only that feed is updated.
-- Your website fetches each asset by its feed manifest, not by static hash.
+- When you update an asset, only that feed is updated.  
 
 This gives you:
 
-- Faster updates  
+- Faster and smaller updates  
 - Zero ENS updates  
-- Atomic, no-downtime asset changes  
-- Modular deployments  
-- A CDN-like architecture, but decentralized
+- No-downtime asset changes  
+- A decentralized CDN-like architecture
 
----
-
-## 🧩 Architecture Overview
+### Architecture Overview
 
 For a typical site:
 
@@ -54,9 +55,8 @@ Each of these gets:
 - its own feed manifest  
 - its own permanent URL  
 
----
 
-## 🔐 Generate Publisher Keys
+### Generate Publisher Keys
 
 Every feed should have its own publishing key.
 
@@ -71,9 +71,7 @@ console.log("Private key:", pk.toHex());
 console.log("Address:", pk.publicKey().address().toHex());
 ```
 
----
-
-## 🛠️ Create a Feed Per Asset
+### Create a Feed Per Asset
 
 Example: header image.
 
@@ -90,9 +88,7 @@ const owner = pk.publicKey().address();
 const writer = bee.makeFeedWriter(topic, pk);
 ```
 
----
-
-## 📤 Upload Asset + Publish Feed Update
+### Upload Asset + Publish Feed Update
 
 ```js
 const upload = await bee.uploadFile(batchId, "./assets/header.jpg");
@@ -108,9 +104,8 @@ Stable URL:
 bzz://<HEADER_MANIFEST_HASH>/
 ```
 
----
 
-## 🔁 Updating the Asset
+### Updating the Asset
 
 ```js
 const newUpload = await bee.uploadFile(batchId, "./assets/header-new.jpg");
@@ -119,9 +114,8 @@ await writer.uploadReference(batchId, newUpload.reference);
 
 Manifest stays the same.
 
----
 
-## 🔗 Reference Asset Feeds in HTML
+### Reference Asset Feeds in HTML
 
 ```html
 <img src="bzz://<HEADER_MANIFEST_HASH>/" alt="Header" />
@@ -129,9 +123,8 @@ Manifest stays the same.
 <script src="bzz://<JS_MANIFEST_HASH>/"></script>
 ```
 
----
 
-## ⚙️ ENS Integration
+## ENS Integration
 
 Optional: map each feed to ENS.
 
@@ -139,9 +132,7 @@ Optional: map each feed to ENS.
 header.mysite.eth → bzz://<HEADER_MANIFEST>
 ```
 
----
-
-# Visual Diagram
+### Visual Diagram
 
 ```
                 ┌─────────────────────────┐
@@ -178,67 +169,8 @@ full site changes     header changes                 CSS changes
  e.g. mysite.eth       header.mysite.eth             css.mysite.eth
 ```
 
----
 
-# Template Website Referencing Feeds
-
-`index.html`:
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="bzz://<CSS_MANIFEST>/" />
-    <script defer src="bzz://<JS_MANIFEST>/"></script>
-  </head>
-  <body>
-    <header>
-      <img src="bzz://<HEADER_MANIFEST>/" alt="Header" />
-    </header>
-
-    <main>
-      <h1>Welcome to My Swarm-Powered Site</h1>
-    </main>
-
-    <footer>
-      Loaded config:
-      <span id="config-output"></span>
-    </footer>
-  </body>
-</html>
-```
-
-`app.js`:
-
-```js
-async function loadConfig() {
-  const url = "bzz://<CONFIG_MANIFEST>/";
-  const res = await fetch(url);
-  const json = await res.json();
-
-  document.getElementById("config-output").innerText = JSON.stringify(json);
-}
-loadConfig();
-```
-
-`styles.css`:
-
-```css
-body {
-  font-family: sans-serif;
-  padding: 2rem;
-}
-header img {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-}
-```
-
----
-
-# Decentralized CDN Architecture for Bee-JS
+## Decentralized CDN Architecture for Bee-JS
 
 Swarm enables a CDN-like architecture where each asset is versioned and independently updatable via feeds.
 
@@ -263,9 +195,5 @@ Updates later:
 await writer.uploadReference(batchId, newUpload.reference);
 ```
 
-Manifest stays constant.
-
----
-
-You're ready to build modular, feed-powered sites on Swarm!
+While the manifest stays constant.
 
