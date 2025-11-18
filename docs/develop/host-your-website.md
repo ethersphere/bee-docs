@@ -504,185 +504,117 @@ dashboard/settings
 ```
 
 ...which obviously don’t exist unless you manually manipulate the manifest.
-This is theoretically possible, but is tricky and error prone to do manually, and there is currently not (yet) any tooling to make it easier.
+This is theoretically possible, but is tricky and complex to do manually, and there is currently not (yet) any tooling to make it easier.
 
 ### How to Add Routing
 
-The solution is to use client side hash based routing. The hash fragment (`/#/about`) is handled entirely on the client and never reaches Swarm, which solves the routing problem cleanly.
+If you want multiple pages on a Swarm-hosted website, you should use a client-side router. Swarm has no server backend running code and so can’t rewrite paths, so we use **React Router’s `HashRouter`**, which keeps all routing inside the browser.
 
-We can do this easily using the convenient [`create-swarm-app` tool](https://www.npmjs.com/package/create-swarm-app) to generate an SPA website with a vite powered front end, and then add hash based client side routing. You can read more about using [`create-swarm-app` in the bee-js documentation](https://bee-js.ethswarm.org/docs/getting-started/#quickstart-with-create-swarm-app). 
-
-
-Below is the recommended setup:
+Below is the simplest way to set this up using **create-swarm-app** and then adding your own pages.
 
 
-#### 1. Start From the Vite Template (swarm-create-app)
+#### 1. Create a New Vite + React Project (with `create-swarm-app`)
 
-When you scaffold a new app using:
+Run:
 
-```
+```bash
 npm init swarm-app@latest my-dapp-new vite-tsx
 ```
 
-...you get a minimal Vite + React + TypeScript project, like this:
+This generates a clean project containing:
 
 ```
 src/
-  index.tsx
   App.tsx
+  index.tsx
   config.ts
+public/
 index.html
 package.json
-tsconfig.json
 ```
 
-This runs smoothly on Swarm as a static site.
+You now have a fully working Vite/React app ready for Swarm uploads.
 
-Now we’ll extend it with routing.
 
 #### 2. Install React Router
 
-Inside your Vite project:
+Inside the project:
 
 ```bash
 npm install react-router-dom
 ```
 
-That’s it — React Router works great in any SPA.
+This gives you client-side navigation capability.
 
 
-#### 3. Use a Hash Router (Required for Swarm)
 
-Since Swarm can only serve files that actually exist in the manifest, and we want to avoid any manipulation of the manifest, we we must use hash based routing which works entirely on the client side.
+#### 3. Switch the App to Use Hash-Based Routing
 
-By using `HashRouter` we get this functionality:
+Swarm only serves literal files, so `/#/about` is the only reliable way to have “pages.”
 
-* `/#/about` stays inside the browser
-* Swarm only receives the file `index.html`
-* React Router handles the rest
-
-
-#### 4. Update `App.tsx` to Use Hash-Based Routing
-
-Replace the default `App.tsx` with this template for a basic routing setup:
+Replace your `App.tsx` with:
 
 ```tsx
 import { HashRouter, Routes, Route, Link } from 'react-router-dom'
 import { Home } from './Home'
 import { About } from './About'
+import { NotFound } from './NotFound'
 
 export function App() {
     return (
         <HashRouter>
             <nav style={{ display: 'flex', gap: '12px', padding: '12px' }}>
-                <Link to="/">Home</Link>
+                <Link to="/">Home NEW</Link>
                 <Link to="/about">About</Link>
             </nav>
 
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </HashRouter>
     )
 }
 ```
 
-This turns your app into a proper SPA that is completely compatible with Swarm.
+This gives you usable routes:
 
+```
+/#/         → Home
+/#/about    → About
+/#/anything → React 404 page
+```
 
-#### 5. Create Component Files for Each Route
+#### 4. Add Your Page Components
 
-**`Home.tsx`:**
+Example `Home.tsx`:
 
 ```tsx
 export function Home() {
-    return (
-        <div style={{ padding: '20px' }}>
-            <h1>Home</h1>
-            <p>Welcome to your Swarm-powered app.</p>
-            <p>You can generate postage batches, upload content, and get permanent Swarm references.</p>
-            <p>Routing is handled entirely client-side using HashRouter.</p>
-        </div>
-    )
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1>Home</h1>
+      <p>Welcome to your Swarm-powered app.</p>
+    </div>
+  )
 }
 ```
 
-**`About.tsx`:**
+Example `About.tsx`:
 
 ```tsx
 export function About() {
-    return (
-        <div style={{ padding: '20px' }}>
-            <h1>About This App</h1>
-            <p>This demo shows how to upload files or directories to Swarm using Bee-JS.</p>
-            <p>You can generate a postage batch, upload content, and host it as a decentralized website.</p>
-            <p>Hash-based routing ensures all routes resolve correctly on Swarm.</p>
-        </div>
-    )
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1>About</h1>
+      <p>This demo shows how to upload files or directories to Swarm using Bee-JS.</p>
+    </div>
+  )
 }
 ```
 
-These files can live inside `src/` or `src/pages/` — up to you.
-
-#### 6. Handling 404 Responses (Hash and Non-Hash Routes)
-
-Swarm will return your `404.html` file when a user requests a **file that doesn’t exist in the manifest**, such as:
-
-```
-/this-path-does-not-exist
-```
-
-But because hash-based routing happens fully in the browser, invalid hash routes like:
-
-```
-#/does/not/exist
-```
-
-never hit Swarm — they must be handled inside your React app.
-
-The following setup covers both cases:
-
-
-
-**1. Add a Static `404.html` for Non-Hash Requests**
-
-Create a `404.html` inside `public/` so Vite copies it into `dist/`:
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>404 – Not Found</title>
-    <style>
-      body { font-family: sans-serif; padding: 40px; }
-      a { color: #007bff; }
-    </style>
-  </head>
-
-  <nav style="display: flex; gap: 12px; padding: 12px">
-    <a href="./#/">Home</a>
-    <a href="./#/about">About</a>
-  </nav>
-
-  <body>
-    <h1>404</h1>
-    <p>This page doesn't exist.</p>
-    <p><a href="./#/">Return to Home</a></p>
-  </body>
-</html>
-```
-
-Swarm will show this page automatically for missing non-hash paths.
-
-
-**2. Add a Catch-All Route for Invalid Hash URLs**
-
-React Router handles broken hash routes internally.
-Include a simple `NotFound` component:
-
-**`NotFound.tsx`:**
+Example `NotFound.tsx`:
 
 ```tsx
 export function NotFound() {
@@ -695,65 +627,85 @@ export function NotFound() {
 }
 ```
 
-Then add the catch-all route:
+#### 5. Add a Static `404.html` for Non-Hash URLs
 
-**`App.tsx`:**
+Swarm still needs a fallback for URLs like:
 
-```tsx
-import { HashRouter, Routes, Route, Link } from 'react-router-dom'
-import { Home } from './Home'
-import { About } from './About'
-import { NotFound } from './NotFound'
-
-export function App() {
-  return (
-    <HashRouter>
-      <nav style={{ display: 'flex', gap: '12px', padding: '12px' }}>
-        <Link to="/">Home NEW</Link>
-        <Link to="/about">About</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </HashRouter>
-  )
-}
+```
+/non-existent-file
 ```
 
+Create `public/404.html`:
 
-**Summary:**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>404 – Not Found</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; }
+    a { color: #007bff; }
+  </style>
+</head>
 
-* **`404.html`** handles missing non-hash routes requested directly from Swarm.
-* **`NotFound.tsx`** handles missing hash routes inside your SPA.
+<nav style="display: flex; gap: 12px; padding: 12px">
+  <a href="./#/">Home</a>
+  <a href="./#/about">About</a>
+</nav>
 
-With this setup, users always see a consistent 404 response no matter how they land on an invalid path.
+<body>
+  <h1>404</h1>
+  <p>This page doesn't exist.</p>
+  <p><a href="./#/">Return to Home</a></p>
+</body>
+</html>
+```
+
+Vite will automatically include this in `dist/`.
+
+This file handles **non-hash** missing paths.
+React handles **hash** missing paths.
 
 
-#### 7. Build & Upload Like Normal
+#### 6. Build the Project
 
-You don’t need any special build steps. Just run:
+Before uploading, compile the Vite app into a static bundle:
 
 ```bash
 npm run build
 ```
 
-This generates a static bundle inside `dist/`, containing:
+This produces a `dist/` folder containing:
 
-* `index.html`
-* `assets/` (your JS/CSS chunks)
-* No extra files per route (because it’s an SPA)
+```
+dist/
+  index.html
+  404.html
+  assets/
+```
 
-Then upload it using Bee-JS or Swarm-CLI:
+Everything inside `dist/` will be uploaded to your Swarm feed.
+
+#### 7. Create a Publisher Identity and Deploy Using a Feed Manifest 
+
+For stable URLs, use a **feed manifest** reference. This gives you a permanent Swarm URL that always resolves to the latest version of your content.
+
+Create an identity (if you don’t have one yet):
+
+```bash
+swarm-cli identity create web-publisher
+```
+
+Upload your built site to the feed:
+
 
 <Tabs>
 <TabItem value="linux" label="Linux / macOS">
 
 ```bash
 swarm-cli feed upload ./dist \
-  --identity website-publisher \
+  --identity web-publisher \
   --topic-string website \
   --stamp <BATCH_ID> \
   --index-document index.html \
@@ -765,29 +717,51 @@ swarm-cli feed upload ./dist \
 
 ```powershell
 swarm-cli feed upload .\dist `
-  --identity website-publisher `
+  --identity web-publisher `
   --topic-string website `
   --stamp 3d98a22f522377ae9cc2aa3bca7f352fb0ed6b16bad73f0246b0a5c155f367bc `
   --index-document index.html `
   --error-document 404.html
 ```
-
 </TabItem>
 </Tabs>
 
-Or from Bee-JS:
 
-```ts
-bee.uploadFilesFromDirectory(batchId, './dist', {
-    indexDocument: 'index.html'
-})
+The output includes:
+
+* the **content hash**
+* the **feed manifest URL** → this is your **permanent website URL**
+* stamp usage details
+
+Example:
+
+```
+Feed Manifest URL:
+http://localhost:1633/bzz/<feed-manifest-hash>/
 ```
 
-Once deployed, your routes work like this:
+This URL never changes, even when you update your site.
 
-```
-/#/        → Home
-/#/about   → About
-```
 
-With this setup, no manifest changes are needed. Everything lives in a single HTML file, and routing is handled entirely client side.
+#### 8. Visit Your Site
+
+* Home:
+  `/#/`
+
+* About:
+  `/#/about`
+
+* Invalid hash route: handled by `NotFound.tsx`
+
+* Invalid non-hash route: handled by `404.html`
+
+
+#### Summary
+
+You now have:
+
+* A Vite + React app
+* Hash-based routing fully compatible with Swarm
+* A static 404 for non-hash paths
+* A React 404 for invalid hash paths
+* Stable, versioned deployments using feed manifests
