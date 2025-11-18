@@ -3,6 +3,10 @@ title: Developer mode
 id: bee-dev-mode
 ---
 
+:::warning
+Bee developer mode is deprecated and set to be removed. Consider using [fdp-play](github.com/fairDataSociety/fdp-play) as an alternative or [Beekeeper](https://github.com/ethersphere/beekeeper) for more complex use cases.
+::: 
+
 You can start the bee in `dev` mode by running the command:
 
 ```bash

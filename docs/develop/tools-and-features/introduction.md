@@ -53,10 +53,18 @@ their own Bee node, for the time being you will need to make use of the [Gateway
 
 ### Bee Dev Mode
 
+:::warning
+Bee developer mode is deprecated and set to be removed. Consider using [fdp-play](github.com/fairDataSociety/fdp-play) as an alternative or [Beekeeper](https://github.com/ethersphere/beekeeper) for more complex use cases.
+::: 
+
 If you want to test out Swarm based applications without needing to spend real xBZZ, Bee dev mode is an invaluable tool. Learn how to set up Bee in [dev mode](/docs/develop/tools-and-features/bee-dev-mode) to begin prototyping your applications.
 
 
 ### Starting a Test Network
+
+:::warning
+Bee developer mode is deprecated and set to be removed. Consider using [fdp-play](github.com/fairDataSociety/fdp-play) as an alternative or [Beekeeper](https://github.com/ethersphere/beekeeper) for more complex use cases.
+::: 
 
 While bee dev mode allows you to simulate running a single Bee node, setting up a [test network](/docs/develop/tools-and-features/starting-a-test-network) will allow you to better simulate interactions between multiple nodes.
 
