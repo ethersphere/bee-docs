@@ -5,7 +5,7 @@ sidebar_label: Dynamic Content
 ---
 
 
-## Using Feeds for Dynamic Content (Single Page Site)
+## Feeds for Dynamic Content 
 
 :::info
 Although all data on Swarm is immutable, feeds provide an updatable reference that enables dynamic content, simulating a mutable resource which always resolves to its latest update through a static feed manifest reference.
@@ -32,7 +32,6 @@ Traditional upload-and-replace workflows require re-deploying everything, even i
 This gives you:
 
 - Faster and smaller updates  
-- Zero ENS updates  
 - No-downtime asset changes  
 - A decentralized CDN-like architecture
 
@@ -53,12 +52,12 @@ Each of these gets:
 - its own private key  
 - its own topic  
 - its own feed manifest  
-- its own permanent URL  
+- its own permanent URL (using the static reference from the feed manifest) 
 
 
 ### Generate Publisher Keys
 
-Every feed should have its own publishing key.
+Every feed should have its own publishing key. These must be saved and stored securely as they grant the ability to make updates to their respective asset feeds. 
 
 ```js
 import crypto from "crypto";
@@ -123,46 +122,59 @@ Manifest stays the same.
 <script src="bzz://<JS_MANIFEST_HASH>/"></script>
 ```
 
-
-
-## Hierarchical Feed-Indexed Page Manifests (Multi-page Site)
+## Using Nested Feeds for Multi-Page Sites 
 
 In this pattern, you build a **fully dynamic blog** where:
 
 * The blog homepage is served from **one feed manifest**
-* The list of posts comes from **another feed** (the “post index”)
+* The list of posts comes from **another feed** (the "post index")
 * Each blog post lives at its own **independent feed manifest**
 * And each post’s internal assets (HTML, CSS, JS, images, metadata, etc.) are also updated through **their own feeds**
 
-This creates a structure like:
+
+### Diagram 1 — High-Level Dynamic Blog Structure
+
+*(Homepage feed → Post index feed → Post feeds)*
 
 ```mermaid
-flowchart TD
-
-    A[Blog Index Feed Manifest<br/>Stable URL] --> B(Blog Index Feed Entry<br/>JSON List of Posts)
-
-    B --> C1[Post #1 Feed Manifest<br/>Stable URL]
-    B --> C2[Post #2 Feed Manifest<br/>Stable URL]
-    B --> C3[Post #3 Feed Manifest<br/>Stable URL]
-
-    C1 --> D1A[Post #1 HTML Feed]
-    C1 --> D1B[Post #1 CSS Feed]
-    C1 --> D1C[Post #1 JS Feed]
-    C1 --> D1D[Post #1 Image Feeds]
-
-    C2 --> D2A[Post #2 HTML Feed]
-    C2 --> D2B[Post #2 CSS Feed]
-    C2 --> D2C[Post #2 JS Feed]
-    C2 --> D2D[Post #2 Image Feeds]
-
-    C3 --> D3A[Post #3 HTML Feed]
-    C3 --> D3B[Post #3 CSS Feed]
-    C3 --> D3C[Post #3 JS Feed]
-    C3 --> D3D[Post #3 Image Feeds]
-
+flowchart TB
+    A["Home Page Feed (Stable URL)"]
+    B["config.json Feed Manifest (Stable URL)"]
+    C["Post Index Feed Manifest (JSON list of posts)"]
+    A --> B
+    A --> C
+    subgraph Post1["Post 1"]
+        P1HTML["Post 1 HTML Feed"]
+        P1CSS["Post 1 CSS Feed"]
+        P1JS["Post 1 JS Feed"]
+        P1IMG["Post 1 Image Feed"]
+    end
+    subgraph Post2["Post 2"]
+        P2HTML["Post 2 HTML Feed"]
+        P2CSS["Post 2 CSS Feed"]
+        P2JS["Post 2 JS Feed"]
+        P2IMG["Post 2 Image Feed"]
+    end
+    C --> Post1
+    C --> Post2
 ```
 
-This is a **literal feed of feed manifests**, but described in a way that’s directly tied to the practical outcome: a fully dynamic, updatable blog where *every moving part can change independently*.
+
+### Diagram 2 — Internal Structure of a Single Post
+
+*(Each post is itself composed of multiple asset feeds)*
+
+```mermaid
+flowchart TB
+    subgraph POST["Post Feed<br/>(Stable URL)"]
+    end
+
+    POST --> HTML["HTML Feed"]
+    POST --> CSS["CSS Feed"]
+    POST --> JS["JS Feed"]
+    POST --> IMG1["Image Feed #1"]
+    POST --> IMG2["Image Feed #2"]
+```
 
 
 ### Dynamic Blog Structure (Feed-Indexed Manifests)
