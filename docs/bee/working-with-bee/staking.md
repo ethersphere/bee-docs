@@ -325,31 +325,7 @@ curl -s  http://localhost:1633/status | jq
 ```
 
 We can see that the `pullsyncRate` value is above zero, meaning that our node is currently syncing chunks, as expected.
-
-### Reserve Doubling Reversing & Withdrawable Stake
-
-Due to certain [implementation details](https://github.com/ethersphere/storage-incentives/blob/20bf3c0e3fcf1e98dedcbf16cd82fb4d337fdaf7/src/Staking.sol#L136), the order in which a node's reserve is doubled and then reversed can have an impact on the amount of withdrawable stake.
-
-When doubling a node's reserve, stake should be added AFTER 
-setting `reserve-capacity-doubling` to 1. If instead, xBZZ is first staked with `reserve-capacity-doubling` set to 0, and the reserve is then doubled by increasing from 0 to 1 without the addition of more stake, this will prevent stake from being withdrawable when the doubling is reversed.  
-
-In order to maximize the amount of withdrawable stake after reversing a reserve doubling, follow the step from the previous section in the exact order described when doubling.
-
-#### How to free up withdrawable stake from a node with >= 20 xBZZ stake that currently has zero withdrawable stake:
-
-In the case that a node with 20 xBZZ stake was doubled directly by increasing `reserve-capacity-doubling` from 0 to 1, the surplus xBZZ over the minimum required 10 xBZZ cannot be made withdrawable by simply reversing the `reserve-capacity-doubling` from 1 back to 0. 
-
-In this case, you will need to first send a minimal staking transaction of 1 PLUR while `reserve-capacity-doubling` is set to 1, and after that, change `reserve-capacity-doubling` from 1 to 0. This works because every time any amount of stake is added, it forces to staking contract to redo its calculations.  
-
-The detailed steps are:
-
-1. Issue a staking transaction for 1 PLUR while `reserve-capacity-doubling` is set to 1.
-    ```bash
-    curl -X POST localhost:1633/stake/1
-    ```
-2. Stop node and set `reserve-capacity-doubling` to 0.
-3. Restart node. The 10 xBZZ should now be withdrawable.
-
+ 
 ## Maximize rewards
 
 There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](/docs/concepts/incentives/redistribution-game) for more context.
