@@ -482,7 +482,7 @@ You do not need to encode the hash or use any additional tools. `bzz://<hash>` i
 
 ## Client-Side Routing 
 
-This section explains how to add hash based client side routing to your Swarm hosted site so that you can have clean URLs for each page of your website. 
+This section explains how to add hash based client side routing to your Swarm hosted site so that you can have clean URLs for each page of your website. See the [routing project in the examples repo](https://github.com/ethersphere/examples/tree/main/routing) for a full working example implementation.
 
 ### Why Hash Based Client Side Routing?
 
@@ -564,7 +564,7 @@ export function App() {
     return (
         <HashRouter>
             <nav style={{ display: 'flex', gap: '12px', padding: '12px' }}>
-                <Link to="/">Home NEW</Link>
+                <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
             </nav>
 
