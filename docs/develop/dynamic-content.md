@@ -4,75 +4,56 @@ id: dynamic-content
 sidebar_label: Dynamic Content
 ---
 
-
-## Feeds for Dynamic Content 
+## Feeds for Dynamic Content
 
 :::info
-Although all data on Swarm is immutable, feeds provide an updatable reference that enables dynamic content, simulating a mutable resource which always resolves to its latest update through a static feed manifest reference.
+Although all data on Swarm is immutable, feeds provide an updatable reference that lets you simulate dynamic content. A feed is an append‑only sequence of updates that always resolves to its latest entry through a stable feed manifest.
 :::
 
 :::tip
-This guide relies heavily on the use of Swarm feeds. If you are not already familiar with feeds, it's recommended to familiarize yourself with them. See the [bee-docs feeds section](/docs/develop/tools-and-features/feeds/) for a high level overview and then check the [bee-js-docs feeds section](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds) for a more detailed explanation and example implementation.
+If you are not familiar with feeds, read:
+- Bee docs: /docs/develop/tools-and-features/feeds/
+- Bee-JS docs: https://bee-js.ethswarm.org/docs/soc-and-feeds/
 :::
 
+Single‑page applications (SPAs) deployed on Swarm work best when their static assets can be updated independently. Instead of reuploading the entire site when one file changes, you can create a separate feed manifest for each asset. Each asset feed provides a stable URL that always resolves to the latest version of that file.
 
-This guide shows how to create **per-asset feeds** so you can update individual files (header images, CSS, JS bundles, logos, site config, etc.) without re-uploading the entire website. 
+## Why Use Per‑Asset Feeds
 
-This technique effectively turns Swarm into a **decentralized CDN**:  
-each asset gets its own permanent reference, and updates flow atomically through feeds.
+- Each React/Vite build artifact (HTML, JS, CSS, images) becomes individually updatable.
+- Every asset has a dedicated feed manifest with its own stable Swarm URL.
+- Updating a single file only updates its feed; the rest of the site stays untouched.
+- This keeps deployments small, fast, and cost‑efficient.
 
-### Why Use Per-Asset Feeds?
+## Architecture Overview
 
-Traditional upload-and-replace workflows require re-deploying everything, even if only one asset changes. With Swarm feeds:
+| Asset                | Feed Topic      | Purpose                     |
+|----------------------|-----------------|-----------------------------|
+| Main site bundle     | `website`       | HTML/JS/CSS entry point     |
+| CSS theme            | `main-css`      | Global styling              |
+| JS bundle            | `main-js`       | Application logic           |
+| Images               | `img-*`         | Media resources             |
 
-- Every file can have its own independent "channel" (feed topic).
-- Each feed has a **stable manifest hash** that never changes.
-- When you update an asset, only that feed is updated.  
+Each asset has:
+- a private key  
+- a feed topic  
+- a feed manifest  
+- a stable Swarm URL (`bzz://<MANIFEST_HASH>/`)
 
-This gives you:
-
-- Faster and smaller updates  
-- No-downtime asset changes  
-- A decentralized CDN-like architecture
-
-### Architecture Overview
-
-For a typical site:
-
-| Asset           | Feed Topic        | Purpose |
-|----------------|-------------------|---------|
-| Main website   | `website`         | Full site HTML/JS/CSS bundle |
-| Header image   | `header-image`    | Frequently changed graphic |
-| CSS theme      | `main-css`        | Style updates |
-| JS bundle      | `main-js`         | Client logic |
-| Config JSON    | `site-config`     | Dynamic data |
-
-Each of these gets:
-
-- its own private key  
-- its own topic  
-- its own feed manifest  
-- its own permanent URL (using the static reference from the feed manifest) 
-
-
-### Generate Publisher Keys
-
-Every feed should have its own publishing key. These must be saved and stored securely as they grant the ability to make updates to their respective asset feeds. 
+## Generate a Publisher Key
 
 ```js
 import crypto from "crypto";
 import { PrivateKey } from "@ethersphere/bee-js";
 
-const hexKey = '0x' + crypto.randomBytes(32).toString('hex');
-const pk = new PrivateKey(hexKey);
+const hex = "0x" + crypto.randomBytes(32).toString("hex");
+const pk = new PrivateKey(hex);
 
 console.log("Private key:", pk.toHex());
 console.log("Address:", pk.publicKey().address().toHex());
 ```
 
-### Create a Feed Per Asset
-
-Example: header image.
+## Create a Feed for an Asset
 
 ```js
 import { Bee, PrivateKey, Topic } from "@ethersphere/bee-js";
@@ -80,186 +61,86 @@ import { Bee, PrivateKey, Topic } from "@ethersphere/bee-js";
 const bee = new Bee("http://localhost:1633");
 const batchId = "<BATCH_ID>";
 
-const pk = new PrivateKey("<HEADER_PRIVATE_KEY>");
-const topic = Topic.fromString("header-image");
+const pk = new PrivateKey("<ASSET_PRIVATE_KEY>");
+const topic = Topic.fromString("main-js");
 const owner = pk.publicKey().address();
 
 const writer = bee.makeFeedWriter(topic, pk);
 ```
 
-### Upload Asset + Publish Feed Update
+## Upload an Asset and Publish a Feed Update
 
 ```js
-const upload = await bee.uploadFile(batchId, "./assets/header.jpg");
-await writer.uploadReference(batchId, upload.reference);
+const upload = await bee.uploadFile(batchId, "./dist/assets/index-398a.js");
+await writer.upload(batchId, upload.reference);
 
 const manifest = await bee.createFeedManifest(batchId, topic, owner);
-console.log("Header Manifest:", manifest.toHex());
+console.log("JS Manifest:", manifest.toHex());
 ```
 
 Stable URL:
 
 ```
-bzz://<HEADER_MANIFEST_HASH>/
+bzz://<JS_MANIFEST_HASH>/
 ```
 
+This URL never changes, even when you replace the underlying file.
 
-### Updating the Asset
+## Updating an Existing Asset
 
 ```js
-const newUpload = await bee.uploadFile(batchId, "./assets/header-new.jpg");
-await writer.uploadReference(batchId, newUpload.reference);
+const nextUpload = await bee.uploadFile(batchId, "./dist/assets/index-new.js");
+await writer.upload(batchId, nextUpload.reference);
 ```
 
-Manifest stays the same.
+No new manifest is created. The old URL now resolves to the updated file.
 
+## Referencing Asset Feeds in Your SPA
 
-### Reference Asset Feeds in HTML
+Rather than referencing a static build hash, point your SPA to feed manifests.
+
+Example `index.html`:
 
 ```html
-<img src="bzz://<HEADER_MANIFEST_HASH>/" alt="Header" />
+<script type="module" src="bzz://<JS_MANIFEST_HASH>/"></script>
 <link rel="stylesheet" href="bzz://<CSS_MANIFEST_HASH>/" />
-<script src="bzz://<JS_MANIFEST_HASH>/"></script>
 ```
 
-## Using Nested Feeds for Multi-Page Sites 
+Example React image reference:
 
-In this pattern, you build a **fully dynamic blog** where:
-
-* The blog homepage is served from **one feed manifest**
-* The list of posts comes from **another feed** (the "post index")
-* Each blog post lives at its own **independent feed manifest**
-* And each post’s internal assets (HTML, CSS, JS, images, metadata, etc.) are also updated through **their own feeds**
-
-
-### Diagram 1 — High-Level Dynamic Blog Structure
-
-*(Homepage feed → Post index feed → Post feeds)*
-
-```mermaid
-flowchart TB
-    A["Home Page Feed (Stable URL)"]
-    B["config.json Feed Manifest (Stable URL)"]
-    C["Post Index Feed Manifest (JSON list of posts)"]
-    A --> B
-    A --> C
-    subgraph Post1["Post 1"]
-        P1HTML["Post 1 HTML Feed"]
-        P1CSS["Post 1 CSS Feed"]
-        P1JS["Post 1 JS Feed"]
-        P1IMG["Post 1 Image Feed"]
-    end
-    subgraph Post2["Post 2"]
-        P2HTML["Post 2 HTML Feed"]
-        P2CSS["Post 2 CSS Feed"]
-        P2JS["Post 2 JS Feed"]
-        P2IMG["Post 2 Image Feed"]
-    end
-    C --> Post1
-    C --> Post2
+```jsx
+<img src={`bzz://${IMG_MANIFEST_HASH}/`} alt="Hero" />
 ```
 
+This makes your deployment resilient to Vite’s changing file names, because Swarm fetches the latest version through the feed instead of the literal file path.
 
-### Diagram 2 — Internal Structure of a Single Post
+## Example Deployment Workflow
 
-*(Each post is itself composed of multiple asset feeds)*
+1. Build Vite:
+   ```
+   npm run build
+   ```
 
-```mermaid
-flowchart TB
-    subgraph POST["Post Feed<br/>(Stable URL)"]
-    end
+2. For each file in `dist/`:
+   - assign (or reuse) a feed topic
+   - upload the file
+   - update its feed
+   - store the feed manifest hash in a hard‑coded list inside your SPA
 
-    POST --> HTML["HTML Feed"]
-    POST --> CSS["CSS Feed"]
-    POST --> JS["JS Feed"]
-    POST --> IMG1["Image Feed #1"]
-    POST --> IMG2["Image Feed #2"]
-```
+3. Rebuild your SPA to reference:
+   - `bzz://<JS_FEED_MANIFEST>/`
+   - `bzz://<CSS_FEED_MANIFEST>/`
+   - `bzz://<IMAGE_FEED_MANIFEST>/`
 
+4. Upload only the *main* SPA entrypoint (often a small static HTML + JS shell) using `swarm-cli feed upload`.
 
-### Dynamic Blog Structure (Feed-Indexed Manifests)
+This gives you a fully working dynamic SPA with lightweight incremental updates.
 
-A dynamic blog is built by combining multiple levels of Swarm feeds:
+## Summary
 
-#### **1. Top-level: Blog Feed Manifest (your main website URL)**
+- Each build artifact gets its own updatable feed.
+- Your SPA uses stable feed manifest URLs instead of build‑hashed filenames.
+- Only changed files need to be uploaded.
+- This keeps deployments fast while ensuring long‑lived URLs remain valid.
 
-This is the stable URL you give to users. It loads your SPA (React + hash routing).
-Your frontend then fetches the blog index.
-
-#### **2. Blog Index Feed (list of posts)**
-
-This feed contains a JSON array of **feed manifest addresses**, one per post.
-
-Example `posts.json` stored inside the index feed:
-
-```json
-{
-  "posts": [
-    "0xPOST1_MANIFEST",
-    "0xPOST2_MANIFEST",
-    "0xPOST3_MANIFEST"
-  ]
-}
-```
-
-Update this feed whenever you add or remove posts.
-
-#### **3. Blog Post Manifests (one per post)**
-
-Each post gets its own feed manifest which always points to its latest version.
-
-Each post contains:
-
-* the post HTML (also a feed)
-* post-specific CSS (feed)
-* post-specific JS (feed)
-* post images (feeds)
-* metadata JSON (feed)
-
-Your structure might look like:
-
-```
-post-1/
-  post.html   → feed
-  style.css   → feed
-  main.js     → feed
-  cover.jpg   → feed
-  metadata.json → feed
-```
-
-All bundled into **one feed manifest for the post**, so the post has a single stable URL.
-
-#### **4. Optional: ENS Integration**
-
-Each post can also have an ENS subdomain if desired:
-
-```
-post1.blog.eth     → post 1 feed manifest
-post2.blog.eth     → post 2 feed manifest
-```
-
-
-### How the Frontend Uses These Feeds
-
-Inside your React app (using [`HashRouter`](/docs/develop/host-your-website#client-side-routing)), you would:
-
-1. Load the **post index feed**
-2. Display the list of posts
-3. When the user navigates to `/#/post/<id>`, load that post’s feed manifest
-4. Render its HTML + assets
-
-This gives you:
-
-* **fully dynamic content**
-* posts you can update individually
-* a blog you can expand infinitely
-* stable URLs for *every* level of content
-* no need to reupload the main site for a new post
-
-
-### In Summary
-
-> A dynamic blog is built using a *feed-indexed set of page manifests*:
-> one feed acts as the post index, and each post has its own feed manifest that points to its latest version. Inside each post, the HTML, CSS, JS, images, and metadata are each stored in their own feeds so everything can update independently.
-
-
+The next section (not included here) expands this into a registry‑based system for large dynamic sites.
