@@ -3,8 +3,11 @@ title: Website Routing
 id: routing
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Add intro and transition, mention different types of routing and strengths and weaknesses.
-______________________
+-----------------
 
 ## Client-Side Hash Routing 
 
@@ -15,7 +18,7 @@ This section explains how to add hash based client side routing to your Swarm ho
 Swarm does not behave like a traditional web server — there is **no server-side routing**, and every route must correspond to a real file inside the site manifest.
 If you try to use typical "clean URLs" like:
 
-```
+```bash
 /about
 /contact
 /dashboard/settings
@@ -23,7 +26,7 @@ If you try to use typical "clean URLs" like:
 
 Swarm will look for literal files such as:
 
-```
+```bash
 about
 contact
 dashboard/settings
@@ -49,7 +52,7 @@ npm init swarm-app@latest my-dapp-new vite-tsx
 
 This generates a clean project containing:
 
-```
+```bash
 src/
   App.tsx
   index.tsx
@@ -106,7 +109,7 @@ export function App() {
 
 This gives you usable routes:
 
-```
+```bash
 /#/         → Home
 /#/about    → About
 /#/anything → React 404 page
@@ -204,7 +207,7 @@ npm run build
 
 This produces a `dist/` folder containing:
 
-```
+```bash
 dist/
   index.html
   404.html
@@ -225,31 +228,31 @@ swarm-cli identity create web-publisher
 
 Upload your built site to the feed:
 
-
 <Tabs>
-<TabItem value="linux" label="Linux / macOS">
+    <TabItem value="linux" label="Linux / macOS">
 
-```bash
-swarm-cli feed upload ./dist \
-  --identity web-publisher \
-  --topic-string website \
-  --stamp <BATCH_ID> \
-  --index-document index.html \
-  --error-document 404.html
-```
+    ```bash
+    swarm-cli feed upload ./dist \
+    --identity web-publisher \
+    --topic-string website \
+    --stamp <BATCH_ID> \
+    --index-document index.html \
+    --error-document 404.html
+    ```
+    </TabItem>
+    
+    <TabItem value="powershell" label="Windows PowerShell">
 
-</TabItem>
-<TabItem value="powershell" label="Windows PowerShell">
+    ```bash
+    swarm-cli feed upload .\dist `
+    --identity web-publisher `
+    --topic-string website `
+    --stamp 3d98a22f522377ae9cc2aa3bca7f352fb0ed6b16bad73f0246b0a5c155f367bc `
+    --index-document index.html `
+    --error-document 404.html
 
-```powershell
-swarm-cli feed upload .\dist `
-  --identity web-publisher `
-  --topic-string website `
-  --stamp 3d98a22f522377ae9cc2aa3bca7f352fb0ed6b16bad73f0246b0a5c155f367bc `
-  --index-document index.html `
-  --error-document 404.html
-```
-</TabItem>
+    ```
+    </TabItem>
 </Tabs>
 
 
@@ -261,7 +264,7 @@ The output includes:
 
 Example:
 
-```
+```bash
 Feed Manifest URL:
 http://localhost:1633/bzz/<feed-manifest-hash>/
 ```
@@ -292,7 +295,6 @@ You now have:
 * Stable, versioned deployments using feed manifests
 
 ## Add transition here
-_________________________________________________
 
 ## Website Routing 
 
