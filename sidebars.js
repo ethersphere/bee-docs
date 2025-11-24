@@ -91,6 +91,7 @@ module.exports = {
         'develop/upload-and-download',
         'develop/host-your-website',
         'develop/manifests',
+        'develop/routing',        
         'develop/dynamic-content',
         'develop/act',
       ],
