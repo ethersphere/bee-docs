@@ -4,6 +4,11 @@ id: dynamic-content
 sidebar_label: Dynamic Content
 ---
 
+:::warning
+Under construction, set for major revisions to incorporate content from manifests, rout, and host your website pages
+:::
+
+
 ## Feeds for Dynamic Content
 
 :::info
@@ -144,3 +149,5 @@ This gives you a fully working dynamic SPA with lightweight incremental updates.
 - This keeps deployments fast while ensuring long‑lived URLs remain valid.
 
 The next section (not included here) expands this into a registry‑based system for large dynamic sites.
+
+

@@ -1,7 +1,7 @@
 ---
-title: Directories & Routing (Manifests)
-id: directories-routing
-sidebar_label: Directories & Routing
+title: Manifests ("Virtual Filesystem")
+id: manifests
+sidebar_label: Manifests ("Virtual Filesystem")
 ---
 
 import Tabs from '@theme/Tabs';
@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 Bee nodes — along with tools used for working with them like `bee-js` and `swarm-cli` — let you upload whole folders of files to Swarm.
 
-Swarm doesn’t have a traditional filesystem, but can _act like one_ using **manifests**, which map readable paths (like `/images/cat.jpg`) to immutable Swarm references.
+Swarm doesn’t technically have a filesystem, but can *act like one* using **manifests**, which map readable paths (like `/images/cat.jpg`) to immutable Swarm references.
 
 :::info
 The `bee-js` [`MantarayNode` class](https://github.com/ethersphere/bee-js?tab=readme-ov-file#swarm-primitives) is the main way to work with manifests in NodeJS.
@@ -213,13 +213,16 @@ Instead, download files by using the top-level directory manifest and the file�
 
 Example:
 
-````bash
+```bash
 curl http://127.0.0.1:1633/bzz/4d5e6e3eb532131e128b1cd0400ca249f1a6ce5d4005c0b57bf848131300df9d/folder/subfolder/deep.txt
-:::
+```
+
+Terminal output:
 
 ```bash
 DEEP
-````
+```
+:::
 
 **Metadata:**
 
@@ -266,7 +269,7 @@ This means:
 
 Meanwhile, `"folder/"` has **no file itself**, so its target is zero.
 
-## Directories (bee-js)
+## Manipulating Directories 
 
 In this section we explain how to inspect and modify manifests for non-website directories. You can find the completed [example scripts on GitHub](https://github.com/ethersphere/examples/tree/main/manifests).
 
@@ -739,9 +742,4 @@ Now the file appears under:
 
 Note that the only new method we used was `node.removeFork()` to remove the entry from the manifest.
 
-```js
-// STEP 1 — Remove /new.txt
-        node.removeFork("new.txt")
-        console.log("Removed /new.txt from manifest.")
-```
 
