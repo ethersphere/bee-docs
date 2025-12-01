@@ -92,7 +92,7 @@ module.exports = {
         'develop/host-your-website',
         'develop/manifests',
         'develop/routing',        
-        'develop/dynamic-content',
+        // 'develop/dynamic-content',
         'develop/act',
       ],
       collapsed: false

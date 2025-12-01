@@ -6,8 +6,17 @@ id: routing
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Add intro and transition, mention different types of routing and strengths and weaknesses.
------------------
+
+Swarm's serverless architecture obviously doesn't support server-side routing, but there are several alternative approaches which work well for different circumstances: hash-based client-side routing, manifest-based clean URLs, or directory-style routing (also requires manifest manipulation). Each comes with its own trade-offs in simplicity, flexibility, and URL aesthetics. Here’s the quick overview before we dive into the details.
+
+| Routing Type                | How It Works                                                    | Pros                                                       | Cons                                                         |
+| --------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| **Hash Routing**            | Routes live after `/#/` and are handled entirely in the browser | Easiest to implement, zero manifest edits, highly reliable | URLs use `/#/`, not the cleanest visually                    |
+| **Manifest Clean URLs**     | Add aliases or rewrite paths directly in the manifest           | Real clean URLs like `/about`, flexible control            | Requires manual manifest manipulation                        |
+| **Directory-Style Routing** | Use folder structures with `index.html`                         | Clean URLs with familiar static-site patterns              | More structure in your build, still needs manifest awareness |
+
+Now let’s look at each method, starting with the simplest and most Swarm-friendly option: hash-based client-side routing.
+
 
 ## Client-Side Hash Routing 
 
@@ -298,7 +307,7 @@ You now have:
 
 ## Website Routing 
 
-#### 1. Upload the Site (and Observe Basic Behavior)
+#### 1. Upload the Site 
 
 Start by uploading the site:
 
