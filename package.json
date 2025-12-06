@@ -12,7 +12,6 @@
     "serve": "docusaurus serve"
   },
   "dependencies": {
-    "@cookbookdev/docsbot": "^4.24.12",
     "@docsearch/js": "^3.8.3",
     "@docusaurus/core": "^3.7.0",
     "@docusaurus/plugin-client-redirects": "^3.7.0",
@@ -31,7 +30,8 @@
     "react-markdown": "^9.0.3",
     "redocusaurus": "^2.2.1",
     "rehype-katex": "^7.0.1",
-    "remark-math": "^6.0.0"
+    "remark-math": "^6.0.0",
+    "yaml": "^2.8.2"
   },
   "browserslist": {
     "production": [
