@@ -31,6 +31,29 @@ export default {
   markdown: { mermaid: true },
 
   plugins: [
+    'plugin-image-zoom',
+    [
+      'docusaurus-plugin-llms',
+      {
+        // Include core developer documentation
+        include: [
+          'docs/develop/**',
+          'docs/api/**',
+          'docs/learn/technology/**'
+        ],
+        // Exclude non-essential content
+        exclude: [
+          'docs/learn/ecosystem/**',
+          'docs/desktop/**'
+        ],
+        // Prioritize essential developer content
+        priority: {
+          'docs/develop/getting-started': 'high',
+          'docs/api/': 'high',
+          'docs/learn/technology/**': 'medium'
+        }
+      }
+    ],
     [
       '@docusaurus/plugin-client-redirects',
       {
