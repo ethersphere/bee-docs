@@ -7,27 +7,23 @@ sidebar_label: Manifests ("Virtual Filesystem")
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Bee nodes — along with tools used for working with them like `bee-js` and `swarm-cli` — let you upload whole folders of files to Swarm.
+Bee nodes — and tools like `bee-js` and `swarm-cli` — let you upload entire folders of files to Swarm.
 
-Swarm doesn’t technically have a filesystem, but can *act like one* using **manifests**, which map readable paths (like `/images/cat.jpg`) to immutable Swarm references.
+Swarm doesn’t have a traditional file system like your computer does. Instead, when uploading a collection of files, it uses something called a **manifest**, which acts like a map between relative file paths (like `/images/cat.jpg`) and the actual content stored on Swarm.
 
-:::info
-The `bee-js` [`MantarayNode` class](https://github.com/ethersphere/bee-js?tab=readme-ov-file#swarm-primitives) is the main way to work with manifests in NodeJS.
+A manifest is stored in a compact binary [encoded **prefix trie**](https://en.wikipedia.org/wiki/Trie). 
 
-The name comes from an older (now deprecated) library, so you may still see manifests referred to as **“Mantaray manifests.”**
-:::
+A prefix trie is like a tree that stores file paths by breaking them into shared chunks. For example, `images/cat.jpg` and `images/dog.jpg` both start with `images/`, so they share a common branch.
 
-A manifest is stored as a compact, binary-encoded **prefix trie**. Each node in the trie represents part of a file path and may contain:
+This *saves space* and *makes lookups fast*.
 
-- a path segment
-- a trie fork
-- a reference to the root chunk of the file’s Swarm hash
-- file metadata (content type, filename, etc.)
+Each entry in the manifest includes:
 
-:::info
-A **trie** is a special type of tree that stores data based on **shared prefixes**.  
-This makes lookups fast and avoids repeating long path segments.
-:::
+* a part of the file path (like `images/`)
+* a reference to the file's data (its Swarm hash)
+* optional metadata (such as file name or content type)
+
+With manifests, Swarm can serve your content at readable URLs while still storing it securely and immutably.
 
 Manifests give Swarm two powerful features:
 
@@ -36,11 +32,11 @@ Manifests give Swarm two powerful features:
 
 :::info
 Manifests are stored on Swarm as raw binary data.  
-To work with them, these bytes must be **unmarshalled** (decoded) into a structured form.
+To work with them, these bytes must be [**unmarshalled** (decoded)](https://en.wikipedia.org/wiki/Marshalling_(computer_science)) into a structured form.
 
-Although `bee-js` provides this functionality through the `MantarayNode` class, although in theory could be done with any language as long as it preserves the trie data.
+`bee-js` provides this functionality through the `MantarayNode.umarshal` method.
 
-After unmarshalling, the data is still quite low-level (for example, many fields are `Uint8Array` values) and usually needs additional processing to make it human-readable. You can find a [script for this in the `ethersphere/examples` repo](https://github.com/ethersphere/examples/blob/main/manifests/printManifestJson.js).
+After unmarshalling, the data is still quite low-level (for example, many fields are `Uint8Array` values) and usually needs additional processing to make it human-readable. You can find a [script for this in the `ethersphere/examples` repo](https://github.com/ethersphere/examples/blob/main/manifests/manifestToJson.js).
 :::
 
 ## Introduction to Manifests
