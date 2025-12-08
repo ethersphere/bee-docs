@@ -6,25 +6,10 @@ id: routing
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+## Routing on Swarm 
 
-Swarm's serverless architecture obviously doesn't support server-side routing, but there are several alternative approaches which work well for different circumstances: hash-based client-side routing, manifest-based clean URLs, or directory-style routing (also requires manifest manipulation). Each comes with its own trade-offs in simplicity, flexibility, and URL aesthetics. Here’s the quick overview before we dive into the details.
+Swarm does not behave like a traditional web server — there is **no server-side routing**, and every route must correspond to a real file inside the site [manifest](/docs/develop/manifests).
 
-| Routing Type                | How It Works                                                    | Pros                                                       | Cons                                                         |
-| --------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
-| **Hash Routing**            | Routes live after `/#/` and are handled entirely in the browser | Easiest to implement, zero manifest edits, highly reliable | URLs use `/#/`, not the cleanest visually                    |
-| **Manifest Clean URLs**     | Add aliases or rewrite paths directly in the manifest           | Real clean URLs like `/about`, flexible control            | Requires manual manifest manipulation                        |
-| **Directory-Style Routing** | Use folder structures with `index.html`                         | Clean URLs with familiar static-site patterns              | More structure in your build, still needs manifest awareness |
-
-Now let’s look at each method, starting with the simplest and most Swarm-friendly option: hash-based client-side routing.
-
-
-## Client-Side Hash Routing 
-
-This section explains how to add hash based client side routing to your Swarm hosted site so that you can have clean URLs for each page of your website. See the [routing project in the examples repo](https://github.com/ethersphere/examples/tree/main/routing) for a full working example implementation.
-
-### Why Hash Based Client Side Routing?
-
-Swarm does not behave like a traditional web server — there is **no server-side routing**, and every route must correspond to a real file inside the site manifest.
 If you try to use typical "clean URLs" like:
 
 ```bash
@@ -41,12 +26,20 @@ contact
 dashboard/settings
 ```
 
-...which obviously don’t exist unless you manually manipulate the manifest.
-This is theoretically possible, but is tricky and complex to do manually, and there is currently not (yet) any tooling to make it easier.
+...which obviously don’t exist.
 
-### How to Add Routing
+There are two main strategies for addressing routing:
 
-If you want multiple pages on a Swarm-hosted website, you should use a client-side router. Swarm has no server backend running code and so can’t rewrite paths, so we use **React Router’s `HashRouter`**, which keeps all routing inside the browser.
+* **Hash-Based Client-Side Routing**
+* **Manifest-Based Routing with Aliases or Index Files**
+
+Now let’s look at each method:
+
+## Client-Side Hash Routing 
+
+This section explains how to add hash based client side routing to your Swarm hosted site so that you can have clean URLs for each page of your website. See the [routing project in the examples repo](https://github.com/ethersphere/examples/tree/main/routing) for a full working example implementation.
+
+Swarm has no server backend running code and so can’t rewrite paths, so we can use **React Router’s `HashRouter`**, which keeps all routing inside the browser.
 
 Below is the simplest way to set this up using **create-swarm-app** and then adding your own pages.
 
@@ -303,11 +296,15 @@ You now have:
 * A React 404 for invalid hash paths
 * Stable, versioned deployments using feed manifests
 
-## Add transition here
+## Manifest Based Routing
 
-## Website Routing 
+The second routing method involves directly manipulating the manifest so that routes resolve properly to the intended content. There are two primary approaches to manifest based routing:
 
-#### 1. Upload the Site 
+* Alias based routing with arbitrary file names
+* Directory based with index files
+
+
+### 1. Upload the Site 
 
 Start by uploading the site:
 
@@ -325,11 +322,11 @@ Without manifest edits, routes only work via exact file paths like:
 
 Trying to access `/about` or `/about/` will fail.
 
-#### 2. Fix Routing With Manifest Manipulation
+### 2. Fix Routing With Manifest Manipulation
 
 You can fix clean URLs using **two strategies**:
 
-##### Strategy A: Add Aliases to the Manifest
+#### Strategy A: Add Aliases to the Manifest
 
 ```ts
 node.addFork('about', referenceForAbout, metadata)
@@ -338,7 +335,7 @@ node.addFork('about/', referenceForAbout, metadata)
 
 Now `/about` and `/about/` work like `/about.html`.
 
-##### Strategy B: Use Directory Index Files
+#### Strategy B: Use Directory Index Files
 
 Restructure files like:
 
@@ -355,7 +352,7 @@ node.addFork('about/', referenceForAboutIndex, metadata)
 
 This gives you full directory-style clean URLs.
 
-#### 3. Removal and Redirect
+## Remove and Redirect Routes
 
 To "delete" a page you would need to remove all entries for it from the manifest to remove it entirely:
 
@@ -399,7 +396,7 @@ Once you understand manifest-based routing, you can dynamically:
 * Add new paths (e.g. blog posts, product pages)
 * Create custom routes
 * Redirect old paths
-* 
+* Remove unwanted paths
 
-Next, learn how manifest manipulation plays a key role in enabling the [dynamic content](/docs/develop/dynamic-content) on Swarm. It will allow you to turn Swarm into a decentralized CMS and decouple your front end from your back end.
+Next, learn how to combine all the previously covered concepts to enable [dynamic content](/docs/develop/dynamic-content) on Swarm. It will allow you to turn Swarm into a decentralized CMS and decouple your front end from your back end.
 
