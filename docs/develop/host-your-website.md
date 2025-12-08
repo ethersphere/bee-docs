@@ -479,3 +479,4 @@ This works across:
 * any ENS-compatible Swarm resolver
 
 You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
+

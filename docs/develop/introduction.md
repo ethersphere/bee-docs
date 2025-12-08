@@ -61,12 +61,31 @@ pagination_next: null
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
+      <li class="hub-card">
+        <a class="hub-card__link" href="/docs/develop/manifests">
+          <h3 class="hub-card__title">Manifests</h3>
+          <p class="hub-card__desc">
+            Learn about how manifests enable a virtual "file system" on Swarm, and how to manipulate the manifest to re-write virtual paths to add, remove, or move content. 
+          </p>
+          <span class="hub-card__cta">Open Guide</span>
+        </a>
+      </li>
+      <li class="hub-card">
+        <a class="hub-card__link" href="/docs/develop/routing">
+          <h3 class="hub-card__title">Routing</h3>
+          <p class="hub-card__desc">
+            Learn about routing on Swarm and the various options at your disposal for approaching website routing.
+          </p>
+          <span class="hub-card__cta">Open Guide</span>
+        </a>
+      </li>
       <!--
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/updatable-content">
-          <h3 class="hub-card__title">Publish Updatable Content</h3>
+        <a class="hub-card__link" href="/docs/develop/dynamic-content">
+          <h3 class="hub-card__title">Dynamic Content</h3>
           <p class="hub-card__desc">
-            Learn how to host dynamic content on Swarm which can change over time such as a blog or personal website.
+            Build dynamic sites on Swarm by updating individual assets through feeds —
+            enabling granular updates, decentralized CDN patterns, and zero-downtime content changes.
           </p>
           <span class="hub-card__cta">Open guide</span>
         </a>
