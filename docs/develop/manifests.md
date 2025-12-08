@@ -36,27 +36,29 @@ To work with them, these bytes must be [**unmarshalled** (decoded)](https://en.w
 
 `bee-js` provides this functionality through the `MantarayNode.umarshal` method.
 
-After unmarshalling, the data is still quite low-level (for example, many fields are `Uint8Array` values) and usually needs additional processing to make it human-readable. You can find a [script for this in the `ethersphere/examples` repo](https://github.com/ethersphere/examples/blob/main/manifests/manifestToJson.js).
+After unmarshalling, the data is still quite low-level (for example, many fields are `Uint8Array` values) and usually needs additional processing to make it human-readable. You can find a [script for this in the `ethersphere/examples` repo](https://github.com/ethersphere/examples/blob/main/manifests/manifestToJson.js). 
 :::
 
 ## Introduction to Manifests
 
-Whenever you upload a folder using Bee’s `/bzz` endpoint (and tools built on top of it such as `bee-js` and `swarm-cli`), Bee automatically creates a manifest that records:
+Whenever you upload a folder using Bee’s [`/bzz` endpoint](https://docs.ethswarm.org/api/#tag/BZZ) (and tools built on top of it such as `bee-js` and `swarm-cli`), Bee automatically creates a manifest that records:
 
 - every file inside the folder
 - the file’s relative path
 - metadata (content type, filename, etc.)
-- optional website metadata (index document, error document)
+- optional website metadata ([index document, error document](https://docs.ethswarm.org/api/#tag/BZZ/paths/~1bzz/post))
 
 Uploads made through the Bee API using `/bytes` or `/chunks` **do not** create manifests.  
-However, most developers rarely use these endpoints directly unless they’re building for some custom use-case.
+
+However, these endpoints are typically used only for custom use cases requiring lower level control, and are not required for standard use cases such as storing and retrieving files and hosting websites or dapps. 
 
 Because `bee-js` and `swarm-cli` call `/bzz` when appropriate, **you get a manifest automatically** whenever you upload a directory.
 
-:::important
+:::info
 Although working with a manifest may _feel_ like moving or deleting files in a regular filesystem, **no data on Swarm is ever changed**, because all content is immutable.
 
 When you "modify" a manifest, you’re actually creating a _new_ manifest based on the previous one.  
+
 Removing an entry only removes it from the manifest — the underlying file remains available as long as its postage batch is valid.
 :::
 
@@ -71,7 +73,7 @@ are also excellent references.
 
 ## Manifest Structure Explained
 
-The printed output below shows a **decoded Mantaray manifest** (printed using the `printManifestJson` method from the [`manifestToJson.js` script in the examples repo](https://github.com/ethersphere/examples/blob/main/manifests/manifestToJson.js)), represented as a tree of nodes and forks. Each part plays a specific role in describing how file paths map to Swarm content. Here’s what each piece means.
+The printed output below shows a **decoded Mantaray manifest** (printed using the `printManifestJson` method from the [`manifestToJson.js` script in the examples repo](https://github.com/ethersphere/examples/blob/main/manifests/manifestToJson.js)), represented as a tree of nodes and forks. Each part plays a specific role in describing how file paths map to Swarm content: 
 
 ```json
 {
@@ -118,6 +120,8 @@ The printed output below shows a **decoded Mantaray manifest** (printed using th
 
 ```
 
+Here’s what each piece means:
+
 #### **Node:**
 
 A **Node** represents a position within the manifest trie.
@@ -137,7 +141,7 @@ Every node may contain:
 
 #### **Forks:**
 
-A **fork** is an edge from one node to another.
+A **fork** is an [edge](https://en.wikipedia.org/wiki/Glossary_of_graph_theory#edge) from one node to another.
 It is how the trie branches when file paths diverge.
 
 For example, under `folder/`, you see:
@@ -153,7 +157,7 @@ This means:
 - the `folder/` node has two children
 - those children represent different path continuations (i.e., different files)
 
-Forks are how shared prefixes are stored only once. Everything that starts with `"folder/"` branches from the same node.
+Forks are how shared prefixes are stored only once. Everything that starts with `folder/` branches from the same node.
 
 #### **Path:**
 
@@ -193,7 +197,7 @@ For example:
 - The node for `folder/` also has no file associated → target is zero.
   It is just an internal directory-like prefix.
 
-Only **leaf nodes**, where a file actually exists, have a non-zero target (the file’s Swarm reference).
+Only [**leaf nodes**](https://en.wikipedia.org/wiki/Glossary_of_graph_theory#leaf) where a file actually exists, have a non-zero target (the file’s Swarm reference).
 
 So:
 
@@ -205,7 +209,7 @@ So:
 
 :::warning
 The `target` field in a manifest points to the raw file root chunk, not a manifest. `bee-js` and `swarm-cli` file download functions expect a file manifest, even for single-file uploads, so downloading using the raw target hash will not work properly.
-Instead, download files by using the top-level directory manifest and the file’s path within it.
+Instead, download files by using the top-level directory root manifest plus the file path relative to the root hash as it is represented in the manifest trie.
 
 Example:
 
@@ -265,9 +269,9 @@ This means:
 
 Meanwhile, `"folder/"` has **no file itself**, so its target is zero.
 
-## Manipulating Directories 
+## Usage & Example Scripts
 
-In this section we explain how to inspect and modify manifests for non-website directories. You can find the completed [example scripts on GitHub](https://github.com/ethersphere/examples/tree/main/manifests).
+In this section we explain how to inspect and modify manifests for non-website directories. You can find the completed [example scripts on GitHub](https://github.com/ethersphere/examples/tree/main/manifests/directory).
 
 In the following guides we will explain how to:
 
@@ -326,7 +330,7 @@ POSTAGE_BATCH_ID=<BATCH_ID>
 
 Great! Now you're all set up and ready to go.
 
-### Uploading a Directory and Printing Its Manifest
+### Uploading and Printing
 
 In our first script, we will simply upload our sample directory and print its contents:
 
@@ -464,7 +468,7 @@ Manifest reference: 4d5e6e3eb532131e128b1cd0400ca249f1a6ce5d4005c0b57bf848131300
 
 We will use this in the next section when adding a file manually to the manifest.
 
-### Adding a New File to the Manifest
+### Adding a New File
 
 This script uploads a **new file** (e.g. `newfile.txt`) and then updates the existing manifest so the new file becomes part of the directory structure.
 
@@ -589,7 +593,7 @@ new.txt: Hi, I'm new here.
 
 This produces a new manifest where `/new.txt` is now accessible as a root level entry.
 
-### Moving a File to a Subfolder
+### Moving a File
 
 This script:
 
@@ -737,5 +741,4 @@ Now the file appears under:
 ```
 
 Note that the only new method we used was `node.removeFork()` to remove the entry from the manifest.
-
 
