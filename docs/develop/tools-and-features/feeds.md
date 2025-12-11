@@ -38,12 +38,4 @@ Swarm's feeds provide the ability to update your immutable content in a mutable 
 
 ### Use Cases for Feeds
 
-Feeds are a hugely versatile data structure.
-
-#### Key Value Store
-
-Use [bee-js](/docs/develop/tools-and-features/bee-js) to use feeds to store values as a simple key value store in your JavaScript application. No more need for servers and databases!
-
-#### Store the History of a File
-
-Use [swarm-cli](/docs/bee/working-with-bee/swarm-cli) to store a file at the same location, and update whenever you like without changing the address.
+Feeds are a hugely versatile data structure. They allow you to host frequently updated content such as websites, RSS feeds (for podcasts, news, etc.), or even a DNS style architecture on top of Swarm's decentralized DISC. 
