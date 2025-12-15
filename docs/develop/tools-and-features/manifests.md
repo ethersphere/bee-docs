@@ -6,14 +6,14 @@ id: manifests
 
 # Manifests
 
-Manifests define how files and folders are organized in Swarm. Instead of a flat list of uploaded files, Bee encodes directory structure as a compact prefix [trie](https://en.wikipedia.org/wiki/Trie). This allows URLs like `/images/logo.png`, `/docs/readme.txt`, or `/` to resolve efficiently to the correct Swarm references. Whenever you upload a directory — via `/bzz`, `bee-js`, or `swarm-cli` — Bee automatically builds a manifest that behaves like a lightweight, filesystem-like layer inside Swarm.
+Manifests define how files and folders are organized in Swarm. Instead of a flat list of uploaded files, Bee encodes directory structure as a compact prefix [trie](https://en.wikipedia.org/wiki/Trie). This allows URLs like `/images/logo.png`, `/docs/readme.txt`, or `/` to resolve efficiently to the correct Swarm references. Whenever you upload a directory — via `/bzz`, `bee-js`, or `swarm-cli` — Bee automatically creates and uploads a manifest that enables a filesystem-like layer inside Swarm. The manifest reference itself is the root reference for your uploaded directory.
 
 Manifests provide:
 
 * Filesystem-style path lookup (`/foo/bar.txt`)
 * Hierarchical directory structure
 * Metadata attached to files or folders (e.g., Content-Type)
-* Optional custom routing behavior for websites
+* Optional custom routing behavior for websites (via manifest configuration)
 
 They allow structured collections of files — including websites — to exist naturally on Swarm.
 
@@ -23,7 +23,7 @@ Raw content hashes identify data immutably, but they don’t express relationshi
 
 ## When Manifests Are Created
 
-Manifests are created whenever you upload a directory via the `/bzz` endpoint, which are used internally by `swarm-cli` and `bee-js` for directory uploads. Bee scans the folder, builds the trie, and produces a manifest reference representing the entire directory tree.
+Manifests are created whenever you upload a directory via the `/bzz` endpoint, which is used internally by `swarm-cli` and `bee-js` for directory uploads. Bee scans the folder, builds the trie, and produces a manifest reference representing the entire directory tree.
 
 By contrast:
 
@@ -45,7 +45,7 @@ These specify which file Bee should serve for the manifest root (`/`) and for in
 
 ## How Manifests Are Structured
 
-A manifest is structured as a trie: nodes are connected by forks, and each fork is labelled with a path segment. The path to a node is the concatenation of the segments you follow from the root. If a node’s `target` is non-zero, that path represents a file and the target points to its Swarm content. If the `target` is zero, the node behaves like a directory or intermediate prefix.
+A manifest is structured as a trie: nodes are connected by forks, and each fork is labelled with a path segment. The path to a node is the concatenation of the segments you follow from the root. If a node’s `target` is non-zero, the path represented by that node refers to a file and the target points to its Swarm content. If the `target` is zero, the node behaves like a directory or intermediate prefix.
 
 The printed output below shows a decoded Mantaray manifest (using the [`manifestToJson.js` script](https://github.com/ethersphere/examples/blob/main/utils/manifestToJson.js) from the examples repo). It represents a simple folder tree containing a root file and a nested subfolder.
 

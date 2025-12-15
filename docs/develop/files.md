@@ -9,15 +9,14 @@ import TabItem from '@theme/TabItem';
 
 # Manage Files
 
-Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that defines relationships between files. Instead, these capabilities are provided through the use of [manifests](/docs/develop/tools-and-features/manifests), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically. This provides filesystem-like behavior for your data: files can be accessed by their path relative to the manifest reference, and the directory structure can be changed later by publishing a new version of the manifest with the desired updates.
+Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](/docs/develop/tools-and-features/manifests), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.
 
 ## Usage and Example Scripts
 
-This section walks through how to use manifests to provide filesystem-like features on Swarm, from uploading directories to adding or moving files by updating the manifest.
+This section demonstrates how manifests enable filesystem-like features on Swarm, including uploading directories and modifying file paths.
 
 The full working scripts are available in the [examples](https://github.com/ethersphere/examples) repo:
 
-* [`upload-directory.js`](https://github.com/ethersphere/examples/blob/main/utils/upload-directory.js)
 * [`script-01.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-01.js)
 * [`script-02.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-02.js)
 * [`script-03.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-03.js)
@@ -69,7 +68,7 @@ The directory upload utility script itself looks like this:
 const { reference } = await bee.uploadFilesFromDirectory(batchId, path, options);
 ```
 
-The returned `reference` is the **manifest hash**, not a file hash. Files must always be accessed *through* this manifest, not directly through file references shown in the manifest.
+The returned `reference` is for the **manifest itself**, not a file reference. Files must always be accessed *through* this manifest, not directly through file references shown in the manifest.
 :::
 
 
@@ -180,6 +179,21 @@ printManifestJson(node)
 
 This produces a tree showing how paths map to Swarm references. To better understand the tree shown in the terminal output, refer to the [Manifests](/docs/develop/tools-and-features/manifests) page.
 
+Note that the manifest contains an entry for the file we specified as the index document in the upload options `{ indexDocument: "disc.jpg" }`:
+
+```bash
+"/": {
+      "path": "/",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "metadata": {
+        "website-index-document": "disc.jpg"
+      },
+      "forks": {}
+    },
+```
+
+This entry ensures that a file will be served at the root directory rather than a 404 error.
+
 In the next script, we see how to update the manifest tree.
 
 ## Adding a File to an Existing Manifest
@@ -205,10 +219,10 @@ The terminal output will be similar to that from our first script except with se
 Since we've updated the manifest, we now have a new manifest reference:
 
 ```bash
-Updated manifest hash: aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc
+Updated manifest reference: aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc
 ```
 
-Update `SCRIPT_03_MANIFEST` in your `.env` file with the **Updated manifest hash**:
+Update `SCRIPT_03_MANIFEST` in your `.env` file with the **Updated manifest reference**:
 
 ```bash
 SCRIPT_03_MANIFEST=aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc
@@ -270,12 +284,12 @@ Hi, I'm new here.
 
 Our new file is now accessible through the same manifest reference along with all our other files. 
 
-## Moving a File by Editing the Manifest
+## Moving a File by Updating the Manifest
 
 The third script shows how to move a file by modifying paths in the manifest.
 
 :::tip
-Before running the third script, make sure that you have updated your `.env` variable `SCRIPT_03_MANIFEST` with the manifest reference returned by the second script (see terminal output from `Updated manifest hash:`).
+Before running the third script, make sure that you have updated your `.env` variable `SCRIPT_03_MANIFEST` with the manifest reference returned by the second script (see terminal output from `Updated manifest reference:`).
 :::
 
 Full script:
@@ -298,10 +312,10 @@ The output should look familiar, but again with several key changes:
 
 1. Updated manifest reference
 
-Since we've made another change to the manifest, we have a new manifest hash:
+Since we've made another change to the manifest, we have a new manifest reference:
 
 ```bash
-Updated manifest hash: 9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0
+Updated manifest reference: 9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0
 ```
 
 2. Modified directory tree
@@ -360,7 +374,7 @@ No data is duplicated, the `new.txt` file has not been modified, only the path m
 ## Key Takeaways
 
 * Uploading a directory creates a manifest
-* Files are accessed via the manifest, not directly by their internal hashes
+* Files are accessed via the manifest, not directly by their internal references
 * Manifests can be modified to add, move, or remove files
 * Updating a manifest produces a new reference, but underlying data remains immutable
 * This provides filesystem-like behavior without mutable storage
