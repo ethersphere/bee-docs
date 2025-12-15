@@ -199,7 +199,7 @@ module.exports = {
           items: [
             {
               to: 'docs/develop/introduction',
-              label: 'Getting Started'
+              label: 'Start Building'
             },  
             {
               to: 'docs/develop/tools-and-features/introduction',
