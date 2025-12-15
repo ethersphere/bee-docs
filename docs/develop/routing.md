@@ -6,9 +6,9 @@ id: routing
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Routing on Swarm 
+# Routing on Swarm 
 
-Swarm does not behave like a traditional web server — there is **no server-side routing**, and every route must correspond to a real file inside the site [manifest](/docs/develop/manifests).
+Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](/docs/develop/tools-and-features/manifests).
 
 If you try to use typical "clean URLs" like:
 
@@ -26,7 +26,7 @@ contact
 dashboard/settings
 ```
 
-...which obviously don’t exist.
+...which don’t exist if you've uploaded a static website with files like `about.html` and `contact.html`.
 
 There are two main strategies for addressing routing:
 
@@ -37,11 +37,13 @@ Now let’s look at each method:
 
 ## Client-Side Hash Routing 
 
-This section explains how to add hash based client side routing to your Swarm hosted site so that you can have clean URLs for each page of your website. See the [routing project in the examples repo](https://github.com/ethersphere/examples/tree/main/routing) for a full working example implementation.
+This section explains how to add hash based client side routing to your Swarm hosted site so that you can have clean URLs for each page of your website. 
 
-Swarm has no server backend running code and so can’t rewrite paths, so we can use **React Router’s `HashRouter`**, which keeps all routing inside the browser.
+See the [routing project in the examples repo](https://github.com/ethersphere/examples/tree/main/routing) for a full working example implementation.
 
-Below is the simplest way to set this up using **create-swarm-app** and then adding your own pages.
+Swarm has no server backend running code and so can’t rewrite paths. One approach to routing is to set up a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with React's `HashRouter`, which keeps all routing inside the browser.
+
+You can do this easily using a template from **create-swarm-app** and then adding your own pages.
 
 
 #### 1. Create a New Vite + React Project (with `create-swarm-app`)
@@ -49,7 +51,7 @@ Below is the simplest way to set this up using **create-swarm-app** and then add
 Run:
 
 ```bash
-npm init swarm-app@latest my-dapp-new vite-tsx
+npm init swarm-app@latest my-dapp vite-tsx
 ```
 
 This generates a clean project containing:
@@ -69,6 +71,12 @@ You now have a fully working Vite/React app ready for Swarm uploads.
 
 #### 2. Install React Router
 
+Navigate to the project directory:
+
+```bash
+cd my-dapp
+```
+
 Inside the project:
 
 ```bash
@@ -83,7 +91,7 @@ This gives you client-side navigation capability.
 
 Swarm only serves literal files, so `/#/about` is the only reliable way to have “pages.”
 
-Replace your `App.tsx` with:
+Replace your `./src/App.tsx` with:
 
 ```tsx
 import { HashRouter, Routes, Route, Link } from 'react-router-dom'
@@ -118,6 +126,8 @@ This gives you usable routes:
 ```
 
 #### 4. Add Your Page Components
+
+Create your page components inside `./src`:
 
 Example `Home.tsx`:
 
@@ -166,7 +176,7 @@ Swarm still needs a fallback for URLs like:
 /non-existent-file
 ```
 
-Create `public/404.html`:
+Create a `./public` directory and save a `404.html` file inside:
 
 ```html
 <!DOCTYPE html>
@@ -198,7 +208,6 @@ Vite will automatically include this in `dist/`.
 This file handles **non-hash** missing paths.
 React handles **hash** missing paths.
 
-
 #### 6. Build the Project
 
 Before uploading, compile the Vite app into a static bundle:
@@ -218,60 +227,56 @@ dist/
 
 Everything inside `dist/` will be uploaded to your Swarm feed.
 
-#### 7. Create a Publisher Identity and Deploy Using a Feed Manifest 
+#### 7. Create a Publisher Identity and Deploy Using a Feed Manifest
 
-For stable URLs, use a **feed manifest** reference. This gives you a permanent Swarm URL that always resolves to the latest version of your content.
+A **feed manifest** gives your site a stable Swarm URL that always points to the latest version. You upload your site, publish its reference to a feed, and then use the feed manifest hash as your permanent URL.
 
-Create an identity (if you don’t have one yet):
+### Deploy Using `bee-js`
+
+
+:::info Using swarm-cli instead?
+
+You can perform the same steps with swarm-cli:
+
+<Tabs>
+  <TabItem value="linux" label="Linux / macOS">
 
 ```bash
 swarm-cli identity create web-publisher
+
+swarm-cli feed upload ./dist \
+  --identity web-publisher \
+  --topic-string website \
+  --stamp <BATCH_ID> \
+  --index-document index.html \
+  --error-document 404.html
 ```
 
-Upload your built site to the feed:
+  </TabItem>
 
-<Tabs>
-    <TabItem value="linux" label="Linux / macOS">
+  <TabItem value="powershell" label="Windows PowerShell">
 
-    ```bash
-    swarm-cli feed upload ./dist \
-    --identity web-publisher \
-    --topic-string website \
-    --stamp <BATCH_ID> \
-    --index-document index.html \
-    --error-document 404.html
-    ```
-    </TabItem>
-    
-    <TabItem value="powershell" label="Windows PowerShell">
+```powershell
+swarm-cli identity create web-publisher
 
-    ```bash
-    swarm-cli feed upload .\dist `
-    --identity web-publisher `
-    --topic-string website `
-    --stamp 3d98a22f522377ae9cc2aa3bca7f352fb0ed6b16bad73f0246b0a5c155f367bc `
-    --index-document index.html `
-    --error-document 404.html
-
-    ```
-    </TabItem>
+swarm-cli feed upload .\dist `
+  --identity web-publisher `
+  --topic-string website `
+  --stamp <BATCH_ID> `
+  --index-document index.html `
+  --error-document 404.html
+```
+  </TabItem>
 </Tabs>
 
-
-The output includes:
-
-* the **content hash**
-* the **feed manifest URL** → this is your **permanent website URL**
-* stamp usage details
+The output includes the site hash, the feed manifest URL (your permanent URL), and postage stamp details.
 
 Example:
 
-```bash
-Feed Manifest URL:
+```
 http://localhost:1633/bzz/<feed-manifest-hash>/
 ```
-
-This URL never changes, even when you update your site.
+:::
 
 
 #### 8. Visit Your Site
