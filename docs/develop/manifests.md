@@ -7,6 +7,11 @@ sidebar_label: Manifests ("Virtual Filesystem")
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+:::warning
+Under construction, set for major revisions.
+:::
+
+
 Bee nodes — and tools like `bee-js` and `swarm-cli` — let you upload entire folders of files to Swarm.
 
 Swarm doesn’t have a traditional file system like your computer does. Instead, when uploading a collection of files, it uses something called a **manifest**, which acts like a map between relative file paths (like `/images/cat.jpg`) and the actual content stored on Swarm.
