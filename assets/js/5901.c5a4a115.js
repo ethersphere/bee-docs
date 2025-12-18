@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbee_docs=self.webpackChunkbee_docs||[]).push([[5901],{75901(e,s,c){c.d(s,{createTreemapServices:()=>a.d});var a=c(51633);c(87960)}}]);
