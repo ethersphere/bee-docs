@@ -61,6 +61,7 @@ pagination_next: null
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
+      <!--
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/manifests">
           <h3 class="hub-card__title">Manifests</h3>
@@ -79,7 +80,7 @@ pagination_next: null
           <span class="hub-card__cta">Open Guide</span>
         </a>
       </li>
-      <!--
+      
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/dynamic-content">
           <h3 class="hub-card__title">Dynamic Content</h3>
