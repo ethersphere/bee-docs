@@ -5,7 +5,7 @@ sidebar_label: Dynamic Content
 ---
 
 :::warning
-Under construction, set for major revisions to incorporate content from manifests, rout, and host your website pages
+Under construction, set for major revisions.
 :::
 
 

@@ -8,6 +8,10 @@ import TabItem from '@theme/TabItem';
 
 ## Routing on Swarm 
 
+:::warning
+Under construction, set for major revisions.
+:::
+
 Swarm does not behave like a traditional web server — there is **no server-side routing**, and every route must correspond to a real file inside the site [manifest](/docs/develop/manifests).
 
 If you try to use typical "clean URLs" like:
