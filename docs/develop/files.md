@@ -50,9 +50,13 @@ SCRIPT_02_MANIFEST=<MANIFEST_REFERENCE>
 SCRIPT_03_MANIFEST=<MANIFEST_REFERENCE>
 ```
 
-## Example 1: Upload Folder and Inspect Manifest
+## Script 1: Upload Folder and Inspect Manifest
 
 In this example, we simply upload a folder and print its manifest in a human readable format.
+
+Full script:
+
+* [`script-01.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-01.js)
 
 :::info
 Uploading is handled by a utility script:
@@ -196,20 +200,20 @@ This entry ensures that a file will be served at the root directory rather than 
 
 In the next script, we see how to update the manifest tree.
 
-## Adding a File to an Existing Manifest
+## Script 2: Adding a File to an Existing Manifest
 
 The second script demonstrates how to add a new file without re-uploading the entire directory.
 
 Full script:
 
-* [`script-02.js`](https://github.com/ethersphere/examples/blob/main/manifests/directory/script-02.js)
+* [`script-02.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-02.js)
 
 :::tip
 Before running the second script, make sure that you have updated your `.env` variable `SCRIPT_02_MANIFEST` with the manifest reference returned by the first script.
 :::
 
 ```bash
-node script-01.js
+node script-02.js
 ```
 
 The terminal output will be similar to that from our first script except with several key differences:
@@ -284,9 +288,13 @@ Hi, I'm new here.
 
 Our new file is now accessible through the same manifest reference along with all our other files. 
 
-## Moving a File by Updating the Manifest
+## Script 3: Moving a File by Updating the Manifest
 
 The third script shows how to move a file by modifying paths in the manifest.
+
+Full script:
+
+* [`script-03.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-03.js)
 
 :::tip
 Before running the third script, make sure that you have updated your `.env` variable `SCRIPT_03_MANIFEST` with the manifest reference returned by the second script (see terminal output from `Updated manifest reference:`).

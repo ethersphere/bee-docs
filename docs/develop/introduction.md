@@ -63,7 +63,7 @@ This is the go-to starting point for web3 developers who want to build with Swar
         </a>
       </li>
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/filesystem">
+        <a class="hub-card__link" href="/docs/develop/files ">
           <h3 class="hub-card__title">Working with the "Filesystem"</h3>
           <p class="hub-card__desc">
             Learn about how manifests enable a virtual "filesystem" on Swarm, and how to manipulate the manifest to re-write virtual paths to add, remove, or move content. 
