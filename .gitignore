@@ -8,3 +8,4 @@ resources
 .netlify
 # Generated content
 /src/pages/awesome-swarm.mdx    
+test

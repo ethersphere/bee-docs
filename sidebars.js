@@ -90,14 +90,14 @@ module.exports = {
         'develop/introduction',
         'develop/upload-and-download',
         'develop/host-your-website',
-        'develop/manifests',
+        'develop/files',
         'develop/routing',        
         // 'develop/dynamic-content',
         'develop/act',
       ],
       collapsed: false
     },
-  
+
     {
       type: 'category',
       label: 'Tools and Features',
@@ -108,6 +108,7 @@ module.exports = {
         'develop/tools-and-features/gateway-proxy',
         'develop/tools-and-features/chunk-types',
         'develop/tools-and-features/feeds',
+        'develop/tools-and-features/manifests',
         'develop/tools-and-features/pss',
         'develop/tools-and-features/gsoc',
         'develop/tools-and-features/pinning',

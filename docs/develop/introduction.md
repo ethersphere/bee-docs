@@ -1,14 +1,15 @@
 ---
-title: Getting Started
+title: Start Building
 id: introduction
-sidebar_label: Getting Started
+sidebar_label: Start Building
 hide_table_of_contents: false
 pagination_prev: null
 pagination_next: null
 ---
 
+# Building on Swarm
 
- This is the go-to starting point for web3 developers who want to build with Swarm. The guides on this page will help you get started with setting up a Bee node, using that node to integrate your dApp with Swarm, and to begin exploring some example applications to better understand the possibilities of building on Swarm.
+This is the go-to starting point for web3 developers who want to build with Swarm. The guides on this page will help you get started with setting up a Bee node, using that node to integrate your dApp with Swarm, and to begin exploring some example applications to better understand the possibilities of building on Swarm.
 
 ## Setup
 
@@ -38,7 +39,7 @@ pagination_next: null
 
 </div>
 
-## Building on Swarm
+## Guides
 
 <div class="hub-wrap">
   <div class="container">
@@ -62,10 +63,10 @@ pagination_next: null
         </a>
       </li>
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/develop/manifests">
-          <h3 class="hub-card__title">Manifests</h3>
+        <a class="hub-card__link" href="/docs/develop/files ">
+          <h3 class="hub-card__title">Working with the "Filesystem"</h3>
           <p class="hub-card__desc">
-            Learn about how manifests enable a virtual "file system" on Swarm, and how to manipulate the manifest to re-write virtual paths to add, remove, or move content. 
+            Learn about how manifests enable a virtual "filesystem" on Swarm, and how to manipulate the manifest to re-write virtual paths to add, remove, or move content. 
           </p>
           <span class="hub-card__cta">Open Guide</span>
         </a>
