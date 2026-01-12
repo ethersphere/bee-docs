@@ -142,6 +142,19 @@ export function About() {
 }
 ```
 
+Example `Home.tsx`:
+
+```tsx
+export function Home() {
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1>Home</h1>
+      <p>Welcome to your Swarm-powered app.</p>
+    </div>
+  )
+}
+```
+
 Example `NotFound.tsx`:
 
 ```tsx
@@ -218,7 +231,45 @@ Everything inside `dist/` will be uploaded to your Swarm feed.
 
 Now with routing handled its time to deploy the site. Refer to the [Host Your Website](/docs/develop/host-your-website#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
 
-*Make sure when using the commands/scripts from the linked guide to replace the `./website` directory with the directory for our build — `./dist`.*
+If you already have `swarm-cli` installed, you can do this easily with the following command:
+
+:::warning
+You will need to replace `<BATCH_ID>` with a valid batch id from your Bee node, and may need to replace the directory specified from this line...
+
+```bash
+swarm-cli feed upload ./dist
+```
+ 
+If you have a different build directory. If you followed all the steps above though, it should be in `./dist` already.
+:::
+
+<Tabs>
+<TabItem value="linux" label="Linux / macOS">
+
+```bash
+swarm-cli feed upload ./dist \
+  --identity website-publisher \
+  --topic-string website \
+  --stamp <BATCH_ID> \
+  --index-document index.html \
+  --error-document 404.html
+```
+
+</TabItem>
+<TabItem value="powershell" label="Windows PowerShell">
+
+```powershell
+swarm-cli feed upload .\dist `
+  --identity website-publisher `
+  --topic-string website `
+  --stamp <BATCH_ID> `
+  --index-document index.html `
+  --error-document 404.html
+```
+
+</TabItem>
+</Tabs>
+
 
 Now the Home and About pages will be properly resolved by the routes we specified (`./#/`) and (`./#/about`), and non existent URLs will be handled by the `NotFound` component for hash URLs and our `404.html` error document for all others.
 
@@ -227,8 +278,6 @@ Now the Home and About pages will be properly resolved by the routes we specifie
 ## Manifest Based Routing
 
 The second routing method involves directly manipulating the manifest so that routes resolve properly to the intended content. 
-
-
 
 ### 1. Upload the Site with Default Manifest
 
@@ -254,6 +303,7 @@ BEE_URL=http://localhost:1633
 BATCH_ID=afd0810c2ea2936df849fe7b52650e231a19b7b31dbf7f96a93f0cf8a296f3f3
 PUBLISHER_KEY=0x1111111111111111111111111111111111111111111111111111111111111111
 UPLOAD_DIR=./site
+BASE_MANIFEST=
 ```
 
 Start by uploading the site using the `upload.js` script provided in the example project:
@@ -265,11 +315,17 @@ node .\upload.js
 Terminal output:
 
 ```bash
-Site reference: e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515
 
-Site URL: http://localhost:1633/bzz/e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515/
+Manifest reference: e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515
+
+URL: http://localhost:1633/bzz/e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515/
 ```
 
+Copy the manifest reference hash and set it inside your `.env` file as the BASE_MANIFEST value:
+
+```bash
+BASE_MANIFEST=e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515
+```
 
 If you peek inside the `upload.js` code you will see these lines:
 
@@ -286,7 +342,7 @@ const { reference } = await bee.uploadFilesFromDirectory(
 
 Take note of the values set by the `indexDocument` and `errorDocument` options. With those options specified, manifest entries for the root path `./` and non existent paths will be created on upload to resolve to `index.html` and `404.html` respectively. Without specifying them, your site would not load either page unless you explicitly include the entire filename with extension in the URL.
 
-Navigate in your browser to the URL output to the terminal after running the `upload.js` script:
+Navigate in your browser to the manifest URL output to the terminal after running the `upload.js` script:
 
 ```bash
 http://localhost:1633/bzz/e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515/
@@ -296,6 +352,7 @@ Scroll down the example web page, read the instructions in the example website a
 
 ![](/img/routing-manifest.png)
 
+You will find that links to direct files with file extensions included like `/about.html` will work, but links to `/about` will not. This is because we have not yet modified our manifest to set up typical routing behavior.
 
 ### 2. Fix Routing With Manifest Manipulation
 
@@ -309,32 +366,9 @@ Without manifest edits, routes only work via exact file paths like:
 
 Trying to access `/about` or `/about/` will fail.
 
-You can fix clean URLs using **two strategies**:
+#### Add Routing Behavior by Manifest Manipulation
 
-
-
-#### Strategy B: Use Directory Index Files (Recommended)
-
-If you control your site structure, this is the **recommended approach**. Instead of using flat files like `about.html`, restructure your site to use directory index files:
-
-```
-/about/index.html
-/contact/index.html
-```
-
-Then add the directory route to the manifest:
-
-```ts
-node.addFork('about/', referenceForAboutIndex, metadata)
-```
-
-Now `/about/` resolves naturally to `/about/index.html`, which matches how most static hosting and web servers work.
-
-This approach **scales cleanly to nested routes**, avoids duplicate aliases, and lets you group page-specific assets under the same directory. For anything beyond a trivial site, this structure is simpler, more predictable, and easier to maintain.
-
-#### Strategy A: Add Aliases to the Manifest (Quick Fix)
-
-This strategy keeps your existing file structure (for example `about.html`) and fixes clean URLs by adding **alias paths** in the manifest. It is useful when you **cannot or do not want to change your build output**.
+We can easily add standard routing behavior by adding entries to our manifest which link the content reference with our desired URL paths:
 
 ```ts
 node.addFork('about', referenceForAbout, metadata)
@@ -342,54 +376,106 @@ node.addFork('about/', referenceForAbout, metadata)
 ```
 
 After this, both `/about` and `/about/` will resolve to the same content as `/about.html`.
+ 
+Run the provided script to update the manifest:
 
-This approach is best for **retrofitting clean URLs onto an existing flat-file site**, but it does not scale as nicely: you must usually maintain **two routes per page**, and the path prefix becomes “claimed” by that page.
+:::warning
+Make sure you have already set the `BASE_MANIFEST` to the hash returned from the upload script we ran above or else this won't work:
 
-## Remove and Redirect Routes
-
-To "delete" a page you would need to remove all entries for it from the manifest to remove it entirely:
-
-```js
-node.removeFork('old-page.html')
+```bash
+BASE_MANIFEST=e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515
 ```
-For example, if you had manually added:
-
-```js
-node.addFork('about', referenceForAbout, metadata)
-node.addFork('about/', referenceForAbout, metadata)
-```
-
-You will need to make sure to fully remove all entries for that file from the manifest to really "delete" it from your site.
-
-```js
-node.removeFork('about')
-node.removeFork('about/')
-node.removeFork('about.html')
-```
-
-:::info 
-The file is not removed from the Swarm network since data on Swarm is immutable. Anyone who has its reference can still retrieve it. Removing it from your manifest just means it's no longer available through a route on your site.
 :::
 
-
-We are adding a record with the same path but now pointing at new content to achieve "redirect" like behavior.
-
-To redirect:
-
-```js
-node.addFork('old-page.html', newPageReference, metadata)
+```bash
+node .\updateManifest.js
 ```
 
-This lets you “deprecate” a page and point old paths to new ones.
+Terminal output:
 
-#### 4. Manifest Routing Enables Dynamic Content
+```bash
+Updated manifest reference: 1483be29a42ec1e40b4d639f800a8fd982db9d5146088672a5edef9a1e0648aa
+
+URL: http://localhost:1633/bzz/1483be29a42ec1e40b4d639f800a8fd982db9d5146088672a5edef9a1e0648aa/007bff
+```
+
+Try navigating to the `/about` and `/about/` routes which previously led to a 404 page, they should now resolve properly. `/about.html` will still resolve properly as it did previously. 
+
+### 3. Remove Routes and Add New Ones
+
+Manifests control **which paths exist** on your site by mapping paths to immutable Swarm content references. To remove a page from your site, remove its route(s) from the manifest:
+
+```js
+node.removeFork("old-page.html")
+```
+
+If you previously added clean-URL aliases such as:
+
+```js
+node.addFork("about", referenceForAbout, metadata)
+node.addFork("about/", referenceForAbout, metadata)
+```
+
+…then you must remove **all** routes that expose that content:
+
+```js
+node.removeFork("about")
+node.removeFork("about/")
+node.removeFork("about.html")
+```
+
+You can also reuse the **same content reference** under a different path by adding a new manifest entry that points to that same reference:
+
+```js
+node.addFork("new-path", existingFileReference, metadata)
+```
+
+This is useful when you want the same page to be available at a new URL without re-uploading or changing the underlying content. If you remove the old route, the old URL will return a 404, while the new URL will serve the same content.
+
+Run the provided script to test the behavior:
+
+:::warning
+Make sure that once again you have updated the `.env` file with the hash returned from the second step before running this script.
+:::
+
+```bash
+node .\updateManifest.js
+```
+
+Terminal output:
+
+```bash
+
+Updated manifest reference: 53e90f4033b99c7f6b82026b8f7beb39f42f99fbb816ae76e850cf2a1b45491d
+
+URL: http://localhost:1633/bzz/53e90f4033b99c7f6b82026b8f7beb39f42f99fbb816ae76e850cf2a1b45491d/
+
+Routes now:
+  /moved-about
+  /moved-about/
+Removed:
+  /about
+  /about/
+  /about.html
+```
+
+Now all our old links to the `about` page will 404. However, you can still reach the same content by navigating to the newly added routs:
+
+
+```bash
+/moved-about
+/moved-about/
+```
+
+Manually add them to the end of your website URL to check that they load properly. 
+
+### 4. Manifest Routing Enables Dynamic Content
 
 Once you understand manifest-based routing, you can dynamically:
 
 * Add new paths (e.g. blog posts, product pages)
 * Create custom routes
-* Redirect old paths
 * Remove unwanted paths
 
-Next, learn how to combine all the previously covered concepts to enable [dynamic content](/docs/develop/dynamic-content) on Swarm. It will allow you to turn Swarm into a decentralized CMS and decouple your front end from your back end.
+
 
