@@ -140,6 +140,11 @@ subfolder/nested.txt: NESTED DIRECTORY
 }
 ```
 
+:::info
+Note that the manifest contains an entry for the file we specified as the index document in the upload options `indexDocument: "disc.jpg"` 
+Both `indexDocument` and `errorDocument` options will cause the manifest to be updated, but for more complex manifest manipulation we will need to do a bit more than setting some options. Keep reading to learn how.
+:::
+
 In the example output, you will find the following line (with your own unique manifest reference):
 
 ```bash
@@ -152,7 +157,31 @@ Update `SCRIPT_02_MANIFEST` in your `.env` file with the printed **manifest refe
 SCRIPT_02_MANIFEST=bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8
 ```
 
-### Explanation
+You will also see a formatted URL in the output:
+
+```bash
+URL: http://localhost:1633/bzz/bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8/
+```
+
+Copy it and open in your browser. Since we specified an index document in our code, that's what you will see:
+
+Index document option:
+
+```js
+indexDocument: "disc.jpg"
+```
+*/img/disc.jpg:*
+![DISC diagram](/img/disc.jpg)
+
+Since we DID NOT specify the `errorDocument` option, If you navigate to a non-existing document, you will just see your browser's default 404 error page:
+
+[http://localhost:1633/bzz/bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8/non-existing-content](http://localhost:1633/bzz/bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8/non-existing-content)
+
+![browser default 404 page](/img/default-404.jpg)
+
+We'll fix this later.
+
+### Code Explanation
 
 1. Get path
 
@@ -183,7 +212,6 @@ printManifestJson(node)
 
 This produces a tree showing how paths map to Swarm references. To better understand the tree shown in the terminal output, refer to the [Manifests](/docs/develop/tools-and-features/manifests) page.
 
-Note that the manifest contains an entry for the file we specified as the index document in the upload options `{ indexDocument: "disc.jpg" }`:
 
 ```bash
 "/": {
@@ -224,6 +252,8 @@ Since we've updated the manifest, we now have a new manifest reference:
 
 ```bash
 Updated manifest reference: aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc
+
+Updated manifest URL: http://localhost:1633/bzz/aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc/
 ```
 
 Update `SCRIPT_03_MANIFEST` in your `.env` file with the **Updated manifest reference**:
@@ -244,6 +274,13 @@ SCRIPT_03_MANIFEST=aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f
     },
     "forks": {}
   }
+```
+
+Now if we navigate to [http://localhost:1633/bzz/aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc/new.txt](http://localhost:1633/bzz/aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc/new.txt), we will see the contents of the new file added to our manifest:
+
+
+```bash
+Hi, I'm new here.
 ```
 
 ### Explanation
@@ -340,6 +377,20 @@ We no longer see the entry for `new.txt` at the root directory, and we now have 
   },
   "forks": {}
 }
+```
+
+If we navigate to the `new.txt` file in its old location:
+
+[http://localhost:1633/bzz/9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0/new.txt](http://localhost:1633/bzz/9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0/new.txt)
+
+We will get a 404 error since we removed that entry from the manifest.
+
+But if we navigate to its new location at `/nested/deeper/new.txt` we will now see it again:
+
+[http://localhost:1633/bzz/9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0/nested/deeper/new.txt](http://localhost:1633/bzz/9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0/nested/deeper/new.txt)
+
+```bash
+Hi, I'm new here.
 ```
 
 ### Explanation

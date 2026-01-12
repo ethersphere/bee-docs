@@ -132,7 +132,7 @@ http://localhost:1633/bzz/<SWARM_HASH>/
 ```
 
 
-### (Recommended) Use Feeds for Seamless Updates - swarm-cli
+### Use Feeds for Seamless Updates - swarm-cli
 
 *If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
 
@@ -179,6 +179,8 @@ swarm-cli identity export website-publisher
 ```
 
 #### Step 2: Upload your website to a feed (creates the manifest automatically)
+
+Don't forget to replace `<BATCH_ID>` with your own valid batch ID before running the commands below:
 
 <Tabs>
 <TabItem value="linux" label="Linux / macOS">
@@ -323,7 +325,7 @@ http://localhost:1633/bzz/<SWARM_HASH>/
 ```
 
 
-### (Recommended) Use Feeds for Seamless Updates - bee-js
+### Use Feeds for Seamless Updates - bee-js
 
 *If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
 

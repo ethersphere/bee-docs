@@ -7,7 +7,7 @@ export default {
   title: 'Swarm Documentation',
   tagline: 'Welcome to the Swarm',
   url: 'https://docs.ethswarm.org',
-  baseUrl: '/',
+  baseUrl: '/', 
 
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',

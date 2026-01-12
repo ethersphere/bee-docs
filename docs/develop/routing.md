@@ -129,19 +129,6 @@ This gives you usable routes:
 
 Create your page components inside `./src`:
 
-Example `Home.tsx`:
-
-```tsx
-export function Home() {
-  return (
-    <div style={{ padding: '20px' }}>
-      <h1>Home</h1>
-      <p>Welcome to your Swarm-powered app.</p>
-    </div>
-  )
-}
-```
-
 Example `About.tsx`:
 
 ```tsx
@@ -227,95 +214,90 @@ dist/
 
 Everything inside `dist/` will be uploaded to your Swarm feed.
 
-#### 7. Create a Publisher Identity and Deploy Using a Feed Manifest
+#### 7. Deploy Site
 
-A **feed manifest** gives your site a stable Swarm URL that always points to the latest version. You upload your site, publish its reference to a feed, and then use the feed manifest hash as your permanent URL.
+Now with routing handled its time to deploy the site. Refer to the [Host Your Website](/docs/develop/host-your-website#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
 
-### Deploy Using `bee-js`
+*Make sure when using the commands/scripts from the linked guide to replace the `./website` directory with the directory for our build — `./dist`.*
 
+Now the Home and About pages will be properly resolved by the routes we specified (`./#/`) and (`./#/about`), and non existent URLs will be handled by the `NotFound` component for hash URLs and our `404.html` error document for all others.
 
-:::info Using swarm-cli instead?
-
-You can perform the same steps with swarm-cli:
-
-<Tabs>
-  <TabItem value="linux" label="Linux / macOS">
-
-```bash
-swarm-cli identity create web-publisher
-
-swarm-cli feed upload ./dist \
-  --identity web-publisher \
-  --topic-string website \
-  --stamp <BATCH_ID> \
-  --index-document index.html \
-  --error-document 404.html
-```
-
-  </TabItem>
-
-  <TabItem value="powershell" label="Windows PowerShell">
-
-```powershell
-swarm-cli identity create web-publisher
-
-swarm-cli feed upload .\dist `
-  --identity web-publisher `
-  --topic-string website `
-  --stamp <BATCH_ID> `
-  --index-document index.html `
-  --error-document 404.html
-```
-  </TabItem>
-</Tabs>
-
-The output includes the site hash, the feed manifest URL (your permanent URL), and postage stamp details.
-
-Example:
-
-```
-http://localhost:1633/bzz/<feed-manifest-hash>/
-```
-:::
-
-
-#### 8. Visit Your Site
-
-* Home:
-  `/#/`
-
-* About:
-  `/#/about`
-
-* Invalid hash route: handled by `NotFound.tsx`
-
-* Invalid non-hash route: handled by `404.html`
-
-#### Summary
-
-You now have:
-
-* A Vite + React app
-* Hash-based routing fully compatible with Swarm
-* A static 404 for non-hash paths
-* A React 404 for invalid hash paths
-* Stable, versioned deployments using feed manifests
+![](/img/hash-routing.jpg)
 
 ## Manifest Based Routing
 
-The second routing method involves directly manipulating the manifest so that routes resolve properly to the intended content. There are two primary approaches to manifest based routing:
-
-* Alias based routing with arbitrary file names
-* Directory based with index files
+The second routing method involves directly manipulating the manifest so that routes resolve properly to the intended content. 
 
 
-### 1. Upload the Site 
 
-Start by uploading the site:
+### 1. Upload the Site with Default Manifest
 
-```ts
-const { reference } = await bee.uploadFilesFromDirectory(batchId, './site')
+Download example project:
+
+```bash
+git clone https://github.com/ethersphere/examples.git
+cd examples/routing-manifest
 ```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Configure environment variables. There is a `.env` file with important constants listed in it. You will need to at least update it with a valid batch ID, and potentially other changes if you are not using a default setup:
+
+Replace the value for `BATCH_ID` with your own valid batch IDs. Otherwise you may also need to update `BEE_URL` if its value doesn't match your Bee RPC endpoint.
+
+```.env
+BEE_URL=http://localhost:1633
+BATCH_ID=afd0810c2ea2936df849fe7b52650e231a19b7b31dbf7f96a93f0cf8a296f3f3
+PUBLISHER_KEY=0x1111111111111111111111111111111111111111111111111111111111111111
+UPLOAD_DIR=./site
+```
+
+Start by uploading the site using the `upload.js` script provided in the example project:
+
+```bash
+node .\upload.js
+```
+
+Terminal output:
+
+```bash
+Site reference: e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515
+
+Site URL: http://localhost:1633/bzz/e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515/
+```
+
+
+If you peek inside the `upload.js` code you will see these lines:
+
+```js
+const { reference } = await bee.uploadFilesFromDirectory(
+  batchId,
+  uploadDir,
+  {
+    indexDocument: "index.html",
+    errorDocument: "404.html",
+  }
+)
+```
+
+Take note of the values set by the `indexDocument` and `errorDocument` options. With those options specified, manifest entries for the root path `./` and non existent paths will be created on upload to resolve to `index.html` and `404.html` respectively. Without specifying them, your site would not load either page unless you explicitly include the entire filename with extension in the URL.
+
+Navigate in your browser to the URL output to the terminal after running the `upload.js` script:
+
+```bash
+http://localhost:1633/bzz/e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515/
+```
+
+Scroll down the example web page, read the instructions in the example website and click each of the example links to inspect how routing works by default without any manifest edits (besides those specified for the index and error documents):
+
+![](/img/routing-manifest.png)
+
+
+### 2. Fix Routing With Manifest Manipulation
 
 Without manifest edits, routes only work via exact file paths like:
 
@@ -327,35 +309,41 @@ Without manifest edits, routes only work via exact file paths like:
 
 Trying to access `/about` or `/about/` will fail.
 
-### 2. Fix Routing With Manifest Manipulation
-
 You can fix clean URLs using **two strategies**:
 
-#### Strategy A: Add Aliases to the Manifest
 
-```ts
-node.addFork('about', referenceForAbout, metadata)
-node.addFork('about/', referenceForAbout, metadata)
-```
 
-Now `/about` and `/about/` work like `/about.html`.
+#### Strategy B: Use Directory Index Files (Recommended)
 
-#### Strategy B: Use Directory Index Files
-
-Restructure files like:
+If you control your site structure, this is the **recommended approach**. Instead of using flat files like `about.html`, restructure your site to use directory index files:
 
 ```
 /about/index.html
 /contact/index.html
 ```
 
-And add them to the manifest like:
+Then add the directory route to the manifest:
 
 ```ts
 node.addFork('about/', referenceForAboutIndex, metadata)
 ```
 
-This gives you full directory-style clean URLs.
+Now `/about/` resolves naturally to `/about/index.html`, which matches how most static hosting and web servers work.
+
+This approach **scales cleanly to nested routes**, avoids duplicate aliases, and lets you group page-specific assets under the same directory. For anything beyond a trivial site, this structure is simpler, more predictable, and easier to maintain.
+
+#### Strategy A: Add Aliases to the Manifest (Quick Fix)
+
+This strategy keeps your existing file structure (for example `about.html`) and fixes clean URLs by adding **alias paths** in the manifest. It is useful when you **cannot or do not want to change your build output**.
+
+```ts
+node.addFork('about', referenceForAbout, metadata)
+node.addFork('about/', referenceForAbout, metadata)
+```
+
+After this, both `/about` and `/about/` will resolve to the same content as `/about.html`.
+
+This approach is best for **retrofitting clean URLs onto an existing flat-file site**, but it does not scale as nicely: you must usually maintain **two routes per page**, and the path prefix becomes “claimed” by that page.
 
 ## Remove and Redirect Routes
 
