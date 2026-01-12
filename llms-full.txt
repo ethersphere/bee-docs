@@ -8356,6 +8356,443 @@ The next section (not included here) expands this into a registry‑based system
 
 ---
 
+## Manage Files
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Manage Files
+
+Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](/docs/develop/tools-and-features/manifests), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.
+
+## Usage and Example Scripts
+
+This section demonstrates how manifests enable filesystem-like features on Swarm, including uploading directories and modifying file paths.
+
+The full working scripts are available in the [examples](https://github.com/ethersphere/examples) repo:
+
+* [`script-01.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-01.js)
+* [`script-02.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-02.js)
+* [`script-03.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-03.js)
+
+:::info Website routing
+Manifests are also used for website routing (index documents, clean URLs, error pages, redirects). If you are building a website, see the [Routing guide](/docs/develop/routing).
+:::
+
+### Prerequisites
+
+* Node.js (v20+ recommended)
+* npm
+* A running Bee node (local or remote)
+* A funded postage batch
+
+Clone the [examples](https://github.com/ethersphere/examples) repo and navigate to the manifests directory:
+
+```bash
+git clone https://github.com/ethersphere/examples.git
+cd examples/filesystem
+npm install
+```
+
+Update the `<BATCH_ID>` in the `.env` file with a valid batch ID, and make sure that `BEE_URL` is set to the RPC endpoint for your Bee node:
+
+```bash
+BEE_URL=http://localhost:1633 # or http://127.0.0.1:1633  
+BATCH_ID=<BATCH_ID>
+UPLOAD_DIR=./folder
+SCRIPT_02_MANIFEST=<MANIFEST_REFERENCE>
+SCRIPT_03_MANIFEST=<MANIFEST_REFERENCE>
+```
+
+## Script 1: Upload Folder and Inspect Manifest
+
+In this example, we simply upload a folder and print its manifest in a human readable format.
+
+Full script:
+
+* [`script-01.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-01.js)
+
+:::info
+Uploading is handled by a utility script:
+* [`upload-directory.js`](https://github.com/ethersphere/examples/blob/main/utils/upload-directory.js)
+
+The script:
+* Uploads a directory using `bee.uploadFilesFromDirectory`
+* Returns the manifest reference and prints it to the terminal
+
+The directory upload utility script itself looks like this:
+
+```js
+const { reference } = await bee.uploadFilesFromDirectory(batchId, path, options);
+```
+
+The returned `reference` is for the **manifest itself**, not a file reference. Files must always be accessed *through* this manifest, not directly through file references shown in the manifest.
+:::
+
+Run the script:
+
+```bash
+node script-01.js
+```
+
+Script terminal output:
+
+```bash
+[dotenv@17.2.3] injecting env (3) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+Uploaded directory: C:\Users\username\Documents\examples\filesystem\folder
+
+Reference: http://127.0.0.1:1633/bzz/bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8
+
+Manifest reference: bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8
+root.txt: ROOT DIRECTORY
+subfolder/nested.txt: NESTED DIRECTORY
+
+--- Manifest Tree ---
+{
+  "path": "",
+  "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "metadata": null,
+  "forks": {
+    "/": {
+      "path": "/",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "metadata": {
+        "website-index-document": "disc.jpg"
+      },
+      "forks": {}
+    },
+    "disc.jpg": {
+      "path": "disc.jpg",
+      "target": "0xc4df63219e294cf412b4ad77169c8c6a30077af1b4160c3db6d536fdb7cc91df",
+      "metadata": {
+        "Content-Type": "image/jpeg",
+        "Filename": "disc.jpg"
+      },
+      "forks": {}
+    },
+    "root.txt": {
+      "path": "root.txt",
+      "target": "0x45b3c65f9bcba9150247878baf9120836a51e62f61f7397270227a71ed94bfaf",
+      "metadata": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Filename": "root.txt"
+      },
+      "forks": {}
+    },
+    "subfolder/nested.txt": {
+      "path": "subfolder/nested.txt",
+      "target": "0x7ca0eb93e9b5802fa5c62ca8e2ef84fffa73a0f589ef68fc457beccbb2b1f84f",
+      "metadata": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Filename": "subfolder\\nested.txt"
+      },
+      "forks": {}
+    }
+  }
+}
+```
+
+:::info
+Note that the manifest contains an entry for the file we specified as the index document in the upload options `indexDocument: "disc.jpg"` 
+Both `indexDocument` and `errorDocument` options will cause the manifest to be updated, but for more complex manifest manipulation we will need to do a bit more than setting some options. Keep reading to learn how.
+:::
+
+In the example output, you will find the following line (with your own unique manifest reference):
+
+```bash
+Manifest reference: bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8
+```
+
+Update `SCRIPT_02_MANIFEST` in your `.env` file with the printed **manifest reference**:
+
+```bash
+SCRIPT_02_MANIFEST=bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8
+```
+
+You will also see a formatted URL in the output:
+
+```bash
+URL: http://localhost:1633/bzz/bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8/
+```
+
+Copy it and open in your browser. Since we specified an index document in our code, that's what you will see:
+
+Index document option:
+
+```js
+indexDocument: "disc.jpg"
+```
+*/img/disc.jpg:*
+![DISC diagram](/img/disc.jpg)
+
+Since we DID NOT specify the `errorDocument` option, If you navigate to a non-existing document, you will just see your browser's default 404 error page:
+
+[http://localhost:1633/bzz/bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8/non-existing-content](http://localhost:1633/bzz/bf5fa30cf426fe9b646db8cb1dfcb8fd146096e6a86c1de2b266689346e703c8/non-existing-content)
+
+![browser default 404 page](/img/default-404.jpg)
+
+We'll fix this later.
+
+### Code Explanation
+
+1. Get path
+
+First we get the path to our upload directory as specified in the `.env` file by the `UPLOAD_DIR` variable:
+
+```bash
+const directoryPath = path.join(__dirname, process.env.UPLOAD_DIR);
+```
+
+2. Upload 
+
+Then we upload the directory using our imported `uploadDirectory` utility function and set the index document to the "disc.jpg" in the root of our folder. Upon successful upload, the manifest reference is saved in `reference` and printed to the terminal:
+
+```bash
+const reference = await uploadDirectory(directoryPath, { indexDocument: "disc.jpg" });
+console.log("Manifest reference:", reference.toHex());
+```
+
+3. Print manifest
+
+After upload, the manifest is loaded and printed:
+
+```js
+const node = await MantarayNode.unmarshal(bee, reference)
+await node.loadRecursively(bee)
+printManifestJson(node)
+```
+
+This produces a tree showing how paths map to Swarm references. To better understand the tree shown in the terminal output, refer to the [Manifests](/docs/develop/tools-and-features/manifests) page.
+
+```bash
+"/": {
+      "path": "/",
+      "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "metadata": {
+        "website-index-document": "disc.jpg"
+      },
+      "forks": {}
+    },
+```
+
+This entry ensures that a file will be served at the root directory rather than a 404 error.
+
+In the next script, we see how to update the manifest tree.
+
+## Script 2: Adding a File to an Existing Manifest
+
+The second script demonstrates how to add a new file without re-uploading the entire directory.
+
+Full script:
+
+* [`script-02.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-02.js)
+
+:::tip
+Before running the second script, make sure that you have updated your `.env` variable `SCRIPT_02_MANIFEST` with the manifest reference returned by the first script.
+:::
+
+```bash
+node script-02.js
+```
+
+The terminal output will be similar to that from our first script except with several key differences:
+
+1. Updated manifest reference
+
+Since we've updated the manifest, we now have a new manifest reference:
+
+```bash
+Updated manifest reference: aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc
+
+Updated manifest URL: http://localhost:1633/bzz/aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc/
+```
+
+Update `SCRIPT_03_MANIFEST` in your `.env` file with the **Updated manifest reference**:
+
+```bash
+SCRIPT_03_MANIFEST=aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc
+```
+
+2. Modified directory tree
+
+```bash
+"new.txt": {
+    "path": "new.txt",
+    "target": "0x3515db2f5e3c075b7546d7dd7dea1680c3e0785c6584e66b7e4f56fc344a0a78",
+    "metadata": {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Filename": "new.txt"
+    },
+    "forks": {}
+  }
+```
+
+Now if we navigate to [http://localhost:1633/bzz/aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc/new.txt](http://localhost:1633/bzz/aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc/new.txt), we will see the contents of the new file added to our manifest:
+
+```bash
+Hi, I'm new here.
+```
+
+### Explanation
+
+1. Load the existing manifest returned from the first script:
+
+```js
+const node = await MantarayNode.unmarshal(bee, ROOT_MANIFEST)
+await node.loadRecursively(bee)
+```
+
+2. Upload a new file we intend to add to the manifest (not a directory):
+
+```js
+const { reference } = await bee.uploadData(batchId, bytes)
+```
+
+3. Insert the file into the manifest:
+
+```js
+node.addFork(filename, reference, metadata)
+```
+
+4. Save the updated manifest:
+
+```js
+const updated = await node.saveRecursively(bee, batchId)
+```
+
+This produces a **new manifest reference** where the file is now accessible by path, for example:
+
+```bash
+swarm-cli download aaec0f55d6e9216944246f5adce0834c69b55ac2164ea1f5777dadf545b8f3bc/new.txt ./
+new.txt OK
+```
+Print file contents to confirm:
+
+```bash
+cat .\new.txt
+Hi, I'm new here.
+```
+
+Our new file is now accessible through the same manifest reference along with all our other files. 
+
+## Script 3: Moving a File by Updating the Manifest
+
+The third script shows how to move a file by modifying paths in the manifest.
+
+Full script:
+
+* [`script-03.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-03.js)
+
+:::tip
+Before running the third script, make sure that you have updated your `.env` variable `SCRIPT_03_MANIFEST` with the manifest reference returned by the second script (see terminal output from `Updated manifest reference:`).
+:::
+
+Full script:
+
+* [`script-03.js`](https://github.com/ethersphere/examples/blob/main/manifests/directory/script-03.js)
+
+This is done by:
+
+1. Locating the existing file entry
+2. Removing it from its current path
+3. Re-adding it under a new path
+
+Run the script:
+
+```bash
+node script-03.js
+```
+
+The output should look familiar, but again with several key changes:
+
+1. Updated manifest reference
+
+Since we've made another change to the manifest, we have a new manifest reference:
+
+```bash
+Updated manifest reference: 9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0
+```
+
+2. Modified directory tree
+
+We no longer see the entry for `new.txt` at the root directory, and we now have a new entry for the same file but now at an updated path in a nested directory:
+
+```bash
+"nested/deeper/new.txt": {
+  "path": "nested/deeper/new.txt",
+  "target": "0x3515db2f5e3c075b7546d7dd7dea1680c3e0785c6584e66b7e4f56fc344a0a78",
+  "metadata": {
+    "Content-Type": "text/plain; charset=utf-8",
+    "Filename": "new.txt"
+  },
+  "forks": {}
+}
+```
+
+If we navigate to the `new.txt` file in its old location:
+
+[http://localhost:1633/bzz/9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0/new.txt](http://localhost:1633/bzz/9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0/new.txt)
+
+We will get a 404 error since we removed that entry from the manifest.
+
+But if we navigate to its new location at `/nested/deeper/new.txt` we will now see it again:
+
+[http://localhost:1633/bzz/9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0/nested/deeper/new.txt](http://localhost:1633/bzz/9a4a6305c811b2976498ef38270fffeb16966fc8719f745a4b18598d39e77ae0/nested/deeper/new.txt)
+
+```bash
+Hi, I'm new here.
+```
+
+### Explanation
+
+1. Remove entry 
+
+Remove the entry for `new.txt` which was added by the second script:
+
+```js
+node.removeFork("new.txt")
+```
+
+2. Add new entry 
+
+Add a new entry for `new.txt` in a new location in a nested directory:
+
+```js
+node.addFork(
+  "nested/deeper/new.txt",
+  fileRef,
+  metadata
+)
+```
+
+3. Save and print
+
+```bash
+const updated = await node.saveRecursively(bee, batchId);
+const newManifestRef = updated.reference.toHex();
+```
+
+After saving the manifest again, the file becomes accessible at:
+
+```
+/nested/deeper/new.txt
+```
+
+No data is duplicated, the `new.txt` file has not been modified, only the path mapping changes in the manifest.
+
+## Key Takeaways
+
+* Uploading a directory creates a manifest
+* Files are accessed via the manifest, not directly by their internal references
+* Manifests can be modified to add, move, or remove files
+* Updating a manifest produces a new reference, but underlying data remains immutable
+* This provides filesystem-like behavior without mutable storage
+
+With these tools, you can treat Swarm directories much like a filesystem — while still preserving immutability and content addressing.
+
+---
+
 ## Host a Webpage
 
 import Tabs from '@theme/Tabs';
@@ -8481,7 +8918,7 @@ Anyone with a Bee node can now access the site using the Swarm hash you just sav
 http://localhost:1633/bzz/<SWARM_HASH>/
 ```
 
-### (Recommended) Use Feeds for Seamless Updates - swarm-cli
+### Use Feeds for Seamless Updates - swarm-cli
 
 *If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
 
@@ -8527,6 +8964,8 @@ swarm-cli identity export website-publisher
 ```
 
 #### Step 2: Upload your website to a feed (creates the manifest automatically)
+
+Don't forget to replace `<BATCH_ID>` with your own valid batch ID before running the commands below:
 
 <Tabs>
 <TabItem value="linux" label="Linux / macOS">
@@ -8667,7 +9106,7 @@ After running the script, copy the Swarm hash output to the console and then use
 http://localhost:1633/bzz/<SWARM_HASH>/
 ```
 
-### (Recommended) Use Feeds for Seamless Updates - bee-js
+### Use Feeds for Seamless Updates - bee-js
 
 *If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
 
@@ -8824,7 +9263,9 @@ You do not need to encode the hash or use any additional tools. `bzz://<hash>` i
 
 ---
 
-## Getting Started(Develop)
+## Start Building
+
+# Building on Swarm
 
 This is the go-to starting point for web3 developers who want to build with Swarm. The guides on this page will help you get started with setting up a Bee node, using that node to integrate your dApp with Swarm, and to begin exploring some example applications to better understand the possibilities of building on Swarm.
 
@@ -8853,7 +9294,7 @@ This is the go-to starting point for web3 developers who want to build with Swar
     
   
 
-## Building on Swarm
+## Guides
 
   
     
@@ -8877,9 +9318,9 @@ This is the go-to starting point for web3 developers who want to build with Swar
       
       
         
-          Manifests
+          Working with the "Filesystem"
           
-            Learn about how manifests enable a virtual "file system" on Swarm, and how to manipulate the manifest to re-write virtual paths to add, remove, or move content. 
+            Learn about how manifests enable a virtual "filesystem" on Swarm, and how to manipulate the manifest to re-write virtual paths to add, remove, or move content. 
           
           Open Guide
         
@@ -8926,763 +9367,14 @@ This is the go-to starting point for web3 developers who want to build with Swar
 
 ---
 
-## Manifests ("Virtual Filesystem")
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-:::warning
-Under construction, set for major revisions.
-:::
-
-Bee nodes — and tools like `bee-js` and `swarm-cli` — let you upload entire folders of files to Swarm.
-
-Swarm doesn’t have a traditional file system like your computer does. Instead, when uploading a collection of files, it uses something called a **manifest**, which acts like a map between relative file paths (like `/images/cat.jpg`) and the actual content stored on Swarm.
-
-A manifest is stored in a compact binary [encoded **prefix trie**](https://en.wikipedia.org/wiki/Trie). 
-
-A prefix trie is like a tree that stores file paths by breaking them into shared chunks. For example, `images/cat.jpg` and `images/dog.jpg` both start with `images/`, so they share a common branch.
-
-This *saves space* and *makes lookups fast*.
-
-Each entry in the manifest includes:
-
-* a part of the file path (like `images/`)
-* a reference to the file's data (its Swarm hash)
-* optional metadata (such as file name or content type)
-
-With manifests, Swarm can serve your content at readable URLs while still storing it securely and immutably.
-
-Manifests give Swarm two powerful features:
-
-- A **filesystem-like structure** that preserves the directory layout of uploaded folders.
-- **Clean, customizable website routing**, such as mapping `/about`, `/about/`, and `/about.html` to the same file or redirecting old paths to new ones.
-
-:::info
-Manifests are stored on Swarm as raw binary data.  
-To work with them, these bytes must be [**unmarshalled** (decoded)](https://en.wikipedia.org/wiki/Marshalling_(computer_science)) into a structured form.
-
-`bee-js` provides this functionality through the `MantarayNode.umarshal` method.
-
-After unmarshalling, the data is still quite low-level (for example, many fields are `Uint8Array` values) and usually needs additional processing to make it human-readable. You can find a [script for this in the `ethersphere/examples` repo](https://github.com/ethersphere/examples/blob/main/manifests/manifestToJson.js). 
-:::
-
-## Introduction to Manifests
-
-Whenever you upload a folder using Bee’s [`/bzz` endpoint](https://docs.ethswarm.org/api/#tag/BZZ) (and tools built on top of it such as `bee-js` and `swarm-cli`), Bee automatically creates a manifest that records:
-
-- every file inside the folder
-- the file’s relative path
-- metadata (content type, filename, etc.)
-- optional website metadata ([index document, error document](https://docs.ethswarm.org/api/#tag/BZZ/paths/~1bzz/post))
-
-Uploads made through the Bee API using `/bytes` or `/chunks` **do not** create manifests.  
-
-However, these endpoints are typically used only for custom use cases requiring lower level control, and are not required for standard use cases such as storing and retrieving files and hosting websites or dapps. 
-
-Because `bee-js` and `swarm-cli` call `/bzz` when appropriate, **you get a manifest automatically** whenever you upload a directory.
-
-:::info
-Although working with a manifest may _feel_ like moving or deleting files in a regular filesystem, **no data on Swarm is ever changed**, because all content is immutable.
-
-When you "modify" a manifest, you’re actually creating a _new_ manifest based on the previous one.  
-
-Removing an entry only removes it from the manifest — the underlying file remains available as long as its postage batch is valid.
-:::
-
-:::tip
-You can find complete examples of all manifest scripts in the ethersphere/examples repo under  
-[`/manifests`](https://github.com/ethersphere/examples/tree/main/manifests).
-
-The `bee-js` [`cheatsheet.ts`](https://github.com/ethersphere/bee-js/blob/master/cheatsheet.ts) and  
-[manifest source code](https://github.com/ethersphere/bee-js/blob/master/src/manifest/manifest.ts)  
-are also excellent references.
-:::
-
-## Manifest Structure Explained
-
-The printed output below shows a **decoded Mantaray manifest** (printed using the `printManifestJson` method from the [`manifestToJson.js` script in the examples repo](https://github.com/ethersphere/examples/blob/main/manifests/manifestToJson.js)), represented as a tree of nodes and forks. Each part plays a specific role in describing how file paths map to Swarm content: 
-
-```json
-{
-    "path": "/",
-    "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "metadata": null,
-    "forks": {
-        "folder/": {
-            "path": "folder/",
-            "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
-            "metadata": null,
-            "forks": {
-                "nested.txt": {
-                    "path": "nested.txt",
-                    "target": "0x9442e445c0d58adea58e0a8afcdcc28ed7642d7a4ff9a253e8f1595faafbb808",
-                    "metadata": {
-                        "Content-Type": "text/plain; charset=utf-8",
-                        "Filename": "nested.txt"
-                    },
-                    "forks": {}
-                },
-                "subfolder/deep.txt": {
-                    "path": "subfolder/deep.txt",
-                    "target": "0x6aa935879ad2a547e57ea6350338bd04ad758977b542e86b31c159f31834b8fc",
-                    "metadata": {
-                        "Content-Type": "text/plain; charset=utf-8",
-                        "Filename": "deep.txt"
-                    },
-                    "forks": {}
-                }
-            }
-        },
-        "root.txt": {
-            "path": "root.txt",
-            "target": "0x98e63f7e826a01634881874246fc873cdf06bb5409ff5f9ec61d1e2de1dd3bf6",
-            "metadata": {
-                "Content-Type": "text/plain; charset=utf-8",
-                "Filename": "root.txt"
-            },
-            "forks": {}
-        }
-    }
-}
-
-```
-
-Here’s what each piece means:
-
-#### **Node:**
-
-A **Node** represents a position within the manifest trie.
-Each node corresponds to a **path prefix**—a segment of the full file path.
-
-For example:
-
-- A node with `path: folder/` represents the prefix `"folder/"`.
-- A node with `path: nested.txt` represents a leaf for the file `"nested.txt"`.
-
-Every node may contain:
-
-- a path segment (`path`)
-- zero or more child connections (`forks`)
-- optional metadata (e.g., content-type, filename)
-- a `target` (if the node corresponds to an actual file)
-
-#### **Forks:**
-
-A **fork** is an [edge](https://en.wikipedia.org/wiki/Glossary_of_graph_theory#edge) from one node to another.
-It is how the trie branches when file paths diverge.
-
-For example, under `folder/`, you see:
-
-```bash
-forks:
-  nested.txt/
-  subfolder/deep.txt/
-```
-
-This means:
-
-- the `folder/` node has two children
-- those children represent different path continuations (i.e., different files)
-
-Forks are how shared prefixes are stored only once. Everything that starts with `folder/` branches from the same node.
-
-#### **Path:**
-
-`path` is the **path segment stored at that node**.
-
-Examples:
-
-- `path: root.txt`
-- `path: nested.txt`
-- `path: subfolder/deep.txt`
-
-These are _not_ full paths.
-They represent only the part needed at that position in the trie.
-The full path is reconstructed by walking from the root down through forks.
-
-#### **Target:**
-
-The `target` field holds the **Swarm hash of the file the node points to**.
-
-Example:
-
-```
-target: 0x9442e445c0d58a...
-```
-
-This hash is the immutable reference of the actual content uploaded to Swarm.
-
-**Why is the target sometimes `0x000000...000`?**
-
-Because **not every node corresponds to a file**.
-
-Nodes represent **prefixes**, not necessarily files.
-
-For example:
-
-- The root node (`Node:` at the top) has no file associated so its `target` is zero.
-- The node for `folder/` also has no file associated → target is zero.
-  It is just an internal directory-like prefix.
-
-Only [**leaf nodes**](https://en.wikipedia.org/wiki/Glossary_of_graph_theory#leaf) where a file actually exists, have a non-zero target (the file’s Swarm reference).
-
-So:
-
-| Node type               | Example       | Has file? | Target        |
-| ----------------------- | ------------- | --------- | ------------- |
-| Internal directory node | `folder/`     | No        | `0x000...000` |
-| Leaf node               | `nested.txt`  | Yes       | real hash     |
-| Root node               | (top of tree) | No        | `0x000...000` |
-
-:::warning
-The `target` field in a manifest points to the raw file root chunk, not a manifest. `bee-js` and `swarm-cli` file download functions expect a file manifest, even for single-file uploads, so downloading using the raw target hash will not work properly.
-Instead, download files by using the top-level directory root manifest plus the file path relative to the root hash as it is represented in the manifest trie.
-
-Example:
-
-```bash
-curl http://127.0.0.1:1633/bzz/4d5e6e3eb532131e128b1cd0400ca249f1a6ce5d4005c0b57bf848131300df9d/folder/subfolder/deep.txt
-```
-
-Terminal output:
-
-```bash
-DEEP
-```
-:::
-
-**Metadata:**
-
-Metadata stores information about a file, such as:
-
-- Content-Type
-- Filename
-- Website index/error docs (if configured)
-
-Example:
-
-```yaml
-metadata:
-  Content-Type: text/plain; charset=utf-8
-  Filename: nested.txt
-```
-
-Only **file nodes** (leaf nodes) normally have metadata.
-Internal nodes generally do not.
-
-Metadata helps:
-
-- gateways set HTTP headers (e.g., correct MIME type)
-- browsers display files correctly
-- filesystem-like behavior
-
-#### **Putting it together:**
-
-Let’s interpret a branch:
-
-```
-folder/
-  nested.txt
-```
-
-This means:
-
-1. There is a prefix node representing `"folder/"`.
-2. Inside it, there is a file `"nested.txt"`.
-3. The file node has:
-
-   - a target (its Swarm content hash)
-   - metadata (filename + content-type)
-
-Meanwhile, `"folder/"` has **no file itself**, so its target is zero.
-
-## Usage & Example Scripts
-
-In this section we explain how to inspect and modify manifests for non-website directories. You can find the completed [example scripts on GitHub](https://github.com/ethersphere/examples/tree/main/manifests/directory).
-
-In the following guides we will explain how to:
-
-1. Upload a directory and print its manifest
-2. Add a new file 
-3. Move a file (delete + add new entry)
-
-#### Pre-requisites:
-
-- NodeJS and npm
-- Linux or WSL preferred but most commands should work from windows Powershell with slight modifications
-- git
-- The RPC endpoint for a currently running Bee node (either on your machine or remote, try [Swarm Desktop](https://www.ethswarm.org/build/desktop) for a no-hassle way to get started)
-
-If you'd like to follow along with the guides shown below, clone the [`ethersphere/examples` repo](https://github.com/ethersphere/examples/) and navigate to the `/manifests` folder:
-
-```bash
-git clone git@github.com:ethersphere/examples.git
-cd examples/manifests/
-```
-
-Print the file tree to confirm you're in the right place:
-
-```bash
-user@machine:~/examples/manifests$ tree
-.
-├── directory
-│   ├── folder
-│   │   ├── nested.txt
-│   │   └── subfolder
-│   │       └── deep.txt
-│   └── root.txt
-├── env
-├── manifestToJson.js
-├── package-lock.json
-├── package.json
-├── script-01.js
-├── script-02.js
-└── script-03.js
-```
-
-If you're using Powershell you can use the `tree /f` command instead and the output file tree should look similar.
-
-After confirming, run `npm install` to install dependencies:
-
-```bash
-npm install
-```
-
-Locate the `env` file and add a period/full stop to change the file name to a standard `dotenv` file (`.env`). Then modify the file to replace `<BEE_API_ENDPOINT>` with your RPC endpoint and `<BATCH_ID>` with your own postage batch ID:
-
-```bash
-BEE_RPC_URL=<BEE_API_ENDPOINT> // Default: http://localhost:1633
-POSTAGE_BATCH_ID=<BATCH_ID>
-```
-
-Great! Now you're all set up and ready to go.
-
-### Uploading and Printing
-
-In our first script, we will simply upload our sample directory and print its contents:
-
-**script-01.js (initial upload script)**
-
-```js
-import { Bee, MantarayNode } from "@ethersphere/bee-js";
-import path from "path";
-import { fileURLToPath } from "url";
-import "dotenv/config";
-import { printManifest } from "./printManifest.js";
-
-// Recreate __dirname for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const bee = new Bee(process.env.BEE_RPC_URL);
-const postageBatchId = process.env.POSTAGE_BATCH_ID;
-
-// Build the folder path safely
-const directoryPath = path.join(__dirname, "directory");
-
-async function uploadDirectory() {
-  try {
-    console.log("Uploading directory:", directoryPath);
-
-    // Upload using the resolved directory and get manifest reference
-    const { reference } = await bee.uploadFilesFromDirectory(
-      postageBatchId,
-      directoryPath
-    );
-
-    console.log("Directory uploaded successfully!");
-    console.log("Manifest reference:", reference.toHex());
-
-    // Download each file using its relative path as recorded by the manifest
-    const root = await bee.downloadFile(reference, "root.txt");
-    const nested = await bee.downloadFile(reference, "folder/nested.txt");
-    const deep = await bee.downloadFile(reference, "folder/subfolder/deep.txt");
-
-    // Print out file contents
-    console.log("root.txt:", root.data.toUtf8());
-    console.log("folder/nested.txt:", nested.data.toUtf8());
-    console.log("folder/subfolder/deep.txt:", deep.data.toUtf8());
-
-    // Load the generated manifest
-    const node = await MantarayNode.unmarshal(bee, reference);
-    await node.loadRecursively(bee);
-
-    // Print manifest in human readable format
-    console.log("\n--- Manifest Tree ---");
-    printManifest(node);
-  } catch (error) {
-    console.error("Error during upload or download:", error.message);
-  }
-}
-
-uploadDirectory();
-```
-
-Note that in the script when downloading our files individually we must use the same relative paths that match the directory we uploaded:
-
-```js
-// Download each file using its relative path as recorded by the manifest
-const root = await bee.downloadFile(reference, "root.txt");
-const nested = await bee.downloadFile(reference, "folder/nested.txt");
-const deep = await bee.downloadFile(reference, "folder/subfolder/deep.txt");
-```
-
-Run the script:
-
-```bash
-node script-01.js
-```
-
-If you've set up everything properly, you should see the file contents printed to the terminal followed by the manifest tree:
-
-```json
-Uploading directory: /home/user/examples/manifests/directory
-Directory uploaded successfully!
-Manifest reference: 4d5e6e3eb532131e128b1cd0400ca249f1a6ce5d4005c0b57bf848131300df9d
-root.txt: ROOT
-folder/nested.txt: NESTED
-folder/subfolder/deep.txt: DEEP
-
---- Manifest Tree ---
-{
-  "path": "/",
-  "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "metadata": null,
-  "forks": {
-    "folder/": {
-      "path": "folder/",
-      "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
-      "metadata": null,
-      "forks": {
-        "nested.txt": {
-          "path": "nested.txt",
-          "target": "0x9442e445c0d58adea58e0a8afcdcc28ed7642d7a4ff9a253e8f1595faafbb808",
-          "metadata": {
-            "Content-Type": "text/plain; charset=utf-8",
-            "Filename": "nested.txt"
-          },
-          "forks": {}
-        },
-        "subfolder/deep.txt": {
-          "path": "subfolder/deep.txt",
-          "target": "0x6aa935879ad2a547e57ea6350338bd04ad758977b542e86b31c159f31834b8fc",
-          "metadata": {
-            "Content-Type": "text/plain; charset=utf-8",
-            "Filename": "deep.txt"
-          },
-          "forks": {}
-        }
-      }
-    },
-    "root.txt": {
-      "path": "root.txt",
-      "target": "0x98e63f7e826a01634881874246fc873cdf06bb5409ff5f9ec61d1e2de1dd3bf6",
-      "metadata": {
-        "Content-Type": "text/plain; charset=utf-8",
-        "Filename": "root.txt"
-      },
-      "forks": {}
-    }
-  }
-}
-```
-
-Note and record the manifest reference returned before the manifest tree is printed:
-
-```bash
-Manifest reference: 4d5e6e3eb532131e128b1cd0400ca249f1a6ce5d4005c0b57bf848131300df9d
-```
-
-We will use this in the next section when adding a file manually to the manifest.
-
-### Adding a New File
-
-This script uploads a **new file** (e.g. `newfile.txt`) and then updates the existing manifest so the new file becomes part of the directory structure.
-
-**script-02.js**
-
-*The following script is almost identical to script-01.js, only the changed sections will be highlighted. Remember you can always refer to the complete version of the script in the examples repo.*
-
-```js
-
-import "dotenv/config"
-import { Bee, MantarayNode } from "@ethersphere/bee-js"
-import { printManifestJson } from './manifestToJson.js'
-
-const bee = new Bee(process.env.BEE_RPC_URL)
-const batchId = process.env.POSTAGE_BATCH_ID
-
-// We specify the manifest returned from script-01.js here
-const ROOT_MANIFEST = '4d5e6e3eb532131e128b1cd0400ca249f1a6ce5d4005c0b57bf848131300df9d'
-
-async function addFileToManifest() {
-    try {
-        // Load the generated manifest from script-01.js
-        const node = await MantarayNode.unmarshal(bee, ROOT_MANIFEST)
-        await node.loadRecursively(bee)
-
-        // File details for new file
-        const filename = 'new.txt'
-        const content = "Hi, I'm new here."
-        const bytes = new TextEncoder().encode(content)
-
-        // Upload raw file data 
-        // Note we use "bee.uploadData()", not "bee.uploadFile()", since we need the root reference hash of the content, not a manifest reference. 
-        const { reference } = await bee.uploadData(batchId, bytes)
-        console.log('Uploaded raw reference:', reference.toHex())
-
-        // Metadata must be a plain JS object — NOT a Map or Uint8Array
-        const metadata = {
-            'Content-Type': 'text/plain; charset=utf-8',
-            'Filename': filename,
-        }
-
-        // Insert the new file data into our new manifest
-        node.addFork(filename, reference, metadata)
-
-        // Save and print updated manifest
-        const newManifest = await node.saveRecursively(bee, batchId)
-        const newReference = newManifest.reference
-        console.log('Updated manifest hash:', newReference.toHex())
-        printManifestJson(node)
-
-        // Download new file and print its contents
-        const newFile = await bee.downloadFile(newReference, "new.txt")
-        console.log("new.txt:", newFile.data.toUtf8())
-
-    }
-    catch (error) {
-        console.error("Error during upload or download:", error.message)
-    }
-}
-
-addFileToManifest()
-```
-
-Terminal output:
-
-```bash
-noah@NoahM16:~/examples/manifests$ node script-02.js
-Uploaded raw reference: 3515db2f5e3c075b7546d7dd7dea1680c3e0785c6584e66b7e4f56fc344a0a78
-Updated manifest hash: 4f67218844a814655c8d81aae4c4286a142318d672113973360c33c7930ce2f5
-{
-    "path": "/",
-    "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "metadata": null,
-    "forks": {
-        "folder/": {
-            "path": "folder/",
-            "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
-            "metadata": null,
-            "forks": {
-                "nested.txt": {
-                    "path": "nested.txt",
-                    "target": "0x9442e445c0d58adea58e0a8afcdcc28ed7642d7a4ff9a253e8f1595faafbb808",
-                    "metadata": {
-                        "Content-Type": "text/plain; charset=utf-8",
-                        "Filename": "nested.txt"
-                    },
-                    "forks": {}
-                },
-                "subfolder/deep.txt": {
-                    "path": "subfolder/deep.txt",
-                    "target": "0x6aa935879ad2a547e57ea6350338bd04ad758977b542e86b31c159f31834b8fc",
-                    "metadata": {
-                        "Content-Type": "text/plain; charset=utf-8",
-                        "Filename": "deep.txt"
-                    },
-                    "forks": {}
-                }
-            }
-        },
-        "root.txt": {
-            "path": "root.txt",
-            "target": "0x98e63f7e826a01634881874246fc873cdf06bb5409ff5f9ec61d1e2de1dd3bf6",
-            "metadata": {
-                "Content-Type": "text/plain; charset=utf-8",
-                "Filename": "root.txt"
-            },
-            "forks": {}
-        },
-        "new.txt": {
-            "path": "new.txt",
-            "target": "0x3515db2f5e3c075b7546d7dd7dea1680c3e0785c6584e66b7e4f56fc344a0a78",
-            "metadata": {
-                "Content-Type": "text/plain; charset=utf-8",
-                "Filename": "new.txt"
-            },
-            "forks": {}
-        }
-    }
-}
-new.txt: Hi, I'm new here.
-```
-
-This produces a new manifest where `/new.txt` is now accessible as a root level entry.
-
-### Moving a File
-
-This script:
-
-1. Removes `/new.txt` from the manifest
-2. Adds it back under `/nested/deeper/new.txt`
-3. Prints the updated manifest
-
-**script-03.js**
-
-```js
-import "dotenv/config"
-import { Bee, MantarayNode } from "@ethersphere/bee-js"
-import { printManifestJson } from './manifestToJson.js'
-
-const bee = new Bee(process.env.BEERPC_URL || process.env.BEE_RPC_URL)
-const batchId = process.env.POSTAGE_BATCH_ID
-
-// Manifest returned from script-02.js
-const ROOT_MANIFEST = 'SCRIPT_2_MANIFEST'
-
-async function moveFileInManifest() {
-    try {
-        // Load manifest generated in script-02
-        const node = await MantarayNode.unmarshal(bee, ROOT_MANIFEST)
-        await node.loadRecursively(bee)
-
-        // Reload manifest to capture original file reference *before* deletion
-        const original = await MantarayNode.unmarshal(bee, ROOT_MANIFEST)
-        await original.loadRecursively(bee)
-
-        const existing = original.find("new.txt")
-        if (!existing) {
-            throw new Error("Could not retrieve file reference for new.txt — run script-02.js first.")
-        }
-
-        const fileRef = existing.targetAddress
-
-        // STEP 1 — Remove /new.txt
-        node.removeFork("new.txt")
-        console.log("Removed /new.txt from manifest.")
-
-        // STEP 2 — Re-add under /nested/deeper/new.txt
-        const newPath = "nested/deeper/new.txt"
-
-        node.addFork(
-            newPath,
-            fileRef,
-            {
-                "Content-Type": "text/plain; charset=utf-8",
-                "Filename": "new.txt"
-            }
-        )
-
-        console.log(`Added file under /${newPath}`)
-
-        // STEP 3 — Save updated manifest
-        const updated = await node.saveRecursively(bee, batchId)
-        const newManifestRef = updated.reference.toHex()
-
-        console.log("Updated manifest hash:", newManifestRef)
-
-        // STEP 4 — Print JSON
-        printManifestJson(node)
-
-        // STEP 5 — Download the file from its new location and print contents
-        const downloaded = await bee.downloadFile(updated.reference, newPath)
-        console.log(`\nContents of /${newPath}:`)
-        console.log(downloaded.data.toUtf8())
-
-    } catch (error) {
-        console.error("Error while modifying manifest:", error.message)
-    }
-}
-
-moveFileInManifest()
-```
-
-Terminal output:
-
-```bash
-user@machine:~/examples/manifests$ node script-03.js
-Removed /new.txt from manifest.
-Added file under /nested/deeper/new.txt
-Updated manifest hash: 656ea924fb4d98b7fa327eb9e4d98ece6c2f4370515d23b40dfca71bc99a08a6
-{
-    "path": "/",
-    "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "metadata": null,
-    "forks": {
-        "folder/": {
-            "path": "folder/",
-            "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
-            "metadata": null,
-            "forks": {
-                "nested.txt": {
-                    "path": "nested.txt",
-                    "target": "0x9442e445c0d58adea58e0a8afcdcc28ed7642d7a4ff9a253e8f1595faafbb808",
-                    "metadata": {
-                        "Content-Type": "text/plain; charset=utf-8",
-                        "Filename": "nested.txt"
-                    },
-                    "forks": {}
-                },
-                "subfolder/deep.txt": {
-                    "path": "subfolder/deep.txt",
-                    "target": "0x6aa935879ad2a547e57ea6350338bd04ad758977b542e86b31c159f31834b8fc",
-                    "metadata": {
-                        "Content-Type": "text/plain; charset=utf-8",
-                        "Filename": "deep.txt"
-                    },
-                    "forks": {}
-                }
-            }
-        },
-        "root.txt": {
-            "path": "root.txt",
-            "target": "0x98e63f7e826a01634881874246fc873cdf06bb5409ff5f9ec61d1e2de1dd3bf6",
-            "metadata": {
-                "Content-Type": "text/plain; charset=utf-8",
-                "Filename": "root.txt"
-            },
-            "forks": {}
-        },
-        "nested/deeper/new.txt": {
-            "path": "nested/deeper/new.txt",
-            "target": "0x3515db2f5e3c075b7546d7dd7dea1680c3e0785c6584e66b7e4f56fc344a0a78",
-            "metadata": {
-                "Content-Type": "text/plain; charset=utf-8",
-                "Filename": "new.txt"
-            },
-            "forks": {}
-        }
-    }
-}
-
-Contents of /nested/deeper/new.txt:
-Hi, I'm new here.
-```
-
-Now the file appears under:
-
-```
-/nested/deeper/root.txt
-```
-
-Note that the only new method we used was `node.removeFork()` to remove the entry from the manifest.
-
----
-
 ## Website Routing
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Routing on Swarm 
+# Routing on Swarm 
 
-:::warning
-Under construction, set for major revisions.
-:::
-
-Swarm does not behave like a traditional web server — there is **no server-side routing**, and every route must correspond to a real file inside the site [manifest](/docs/develop/manifests).
+Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](/docs/develop/tools-and-features/manifests).
 
 If you try to use typical "clean URLs" like:
 
@@ -9700,7 +9392,7 @@ contact
 dashboard/settings
 ```
 
-...which obviously don’t exist.
+...which don’t exist if you've uploaded a static website with files like `about.html` and `contact.html`.
 
 There are two main strategies for addressing routing:
 
@@ -9711,18 +9403,20 @@ Now let’s look at each method:
 
 ## Client-Side Hash Routing 
 
-This section explains how to add hash based client side routing to your Swarm hosted site so that you can have clean URLs for each page of your website. See the [routing project in the examples repo](https://github.com/ethersphere/examples/tree/main/routing) for a full working example implementation.
+This section explains how to add hash based client side routing to your Swarm hosted site so that you can have clean URLs for each page of your website. 
 
-Swarm has no server backend running code and so can’t rewrite paths, so we can use **React Router’s `HashRouter`**, which keeps all routing inside the browser.
+See the [routing project in the examples repo](https://github.com/ethersphere/examples/tree/main/routing) for a full working example implementation.
 
-Below is the simplest way to set this up using **create-swarm-app** and then adding your own pages.
+Swarm has no server backend running code and so can’t rewrite paths. One approach to routing is to set up a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with React's `HashRouter`, which keeps all routing inside the browser.
+
+You can do this easily using a template from **create-swarm-app** and then adding your own pages.
 
 #### 1. Create a New Vite + React Project (with `create-swarm-app`)
 
 Run:
 
 ```bash
-npm init swarm-app@latest my-dapp-new vite-tsx
+npm init swarm-app@latest my-dapp vite-tsx
 ```
 
 This generates a clean project containing:
@@ -9741,6 +9435,12 @@ You now have a fully working Vite/React app ready for Swarm uploads.
 
 #### 2. Install React Router
 
+Navigate to the project directory:
+
+```bash
+cd my-dapp
+```
+
 Inside the project:
 
 ```bash
@@ -9753,7 +9453,7 @@ This gives you client-side navigation capability.
 
 Swarm only serves literal files, so `/#/about` is the only reliable way to have “pages.”
 
-Replace your `App.tsx` with:
+Replace your `./src/App.tsx` with:
 
 ```tsx
 import { HashRouter, Routes, Route, Link } from 'react-router-dom'
@@ -9789,18 +9489,7 @@ This gives you usable routes:
 
 #### 4. Add Your Page Components
 
-Example `Home.tsx`:
-
-```tsx
-export function Home() {
-  return (
-    
-      Home
-      Welcome to your Swarm-powered app.
-    
-  )
-}
-```
+Create your page components inside `./src`:
 
 Example `About.tsx`:
 
@@ -9810,6 +9499,19 @@ export function About() {
     
       About
       This demo shows how to upload files or directories to Swarm using Bee-JS.
+    
+  )
+}
+```
+
+Example `Home.tsx`:
+
+```tsx
+export function Home() {
+  return (
+    
+      Home
+      Welcome to your Swarm-powered app.
     
   )
 }
@@ -9836,7 +9538,7 @@ Swarm still needs a fallback for URLs like:
 /non-existent-file
 ```
 
-Create `public/404.html`:
+Create a `./public` directory and save a `404.html` file inside:
 
 ```html
 <!DOCTYPE html>
@@ -9887,96 +9589,133 @@ dist/
 
 Everything inside `dist/` will be uploaded to your Swarm feed.
 
-#### 7. Create a Publisher Identity and Deploy Using a Feed Manifest 
+#### 7. Deploy Site
 
-For stable URLs, use a **feed manifest** reference. This gives you a permanent Swarm URL that always resolves to the latest version of your content.
+Now with routing handled its time to deploy the site. Refer to the [Host Your Website](/docs/develop/host-your-website#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
 
-Create an identity (if you don’t have one yet):
+If you already have `swarm-cli` installed, you can do this easily with the following command:
+
+:::warning
+You will need to replace `<BATCH_ID>` with a valid batch id from your Bee node, and may need to replace the directory specified from this line...
 
 ```bash
-swarm-cli identity create web-publisher
+swarm-cli feed upload ./dist
 ```
-
-Upload your built site to the feed:
+ 
+If you have a different build directory. If you followed all the steps above though, it should be in `./dist` already.
+:::
 
 <Tabs>
-    <TabItem value="linux" label="Linux / macOS">
-
-    ```bash
-    swarm-cli feed upload ./dist \
-    --identity web-publisher \
-    --topic-string website \
-    --stamp <BATCH_ID> \
-    --index-document index.html \
-    --error-document 404.html
-    ```
-    </TabItem>
-    
-    <TabItem value="powershell" label="Windows PowerShell">
-
-    ```bash
-    swarm-cli feed upload .\dist `
-    --identity web-publisher `
-    --topic-string website `
-    --stamp 3d98a22f522377ae9cc2aa3bca7f352fb0ed6b16bad73f0246b0a5c155f367bc `
-    --index-document index.html `
-    --error-document 404.html
-
-    ```
-    </TabItem>
-</Tabs>
-
-The output includes:
-
-* the **content hash**
-* the **feed manifest URL** → this is your **permanent website URL**
-* stamp usage details
-
-Example:
+<TabItem value="linux" label="Linux / macOS">
 
 ```bash
-Feed Manifest URL:
-http://localhost:1633/bzz/<feed-manifest-hash>/
+swarm-cli feed upload ./dist \
+  --identity website-publisher \
+  --topic-string website \
+  --stamp <BATCH_ID> \
+  --index-document index.html \
+  --error-document 404.html
 ```
 
-This URL never changes, even when you update your site.
+</TabItem>
+<TabItem value="powershell" label="Windows PowerShell">
 
-#### 8. Visit Your Site
+```powershell
+swarm-cli feed upload .\dist `
+  --identity website-publisher `
+  --topic-string website `
+  --stamp <BATCH_ID> `
+  --index-document index.html `
+  --error-document 404.html
+```
 
-* Home:
-  `/#/`
+</TabItem>
+</Tabs>
 
-* About:
-  `/#/about`
+Now the Home and About pages will be properly resolved by the routes we specified (`./#/`) and (`./#/about`), and non existent URLs will be handled by the `NotFound` component for hash URLs and our `404.html` error document for all others.
 
-* Invalid hash route: handled by `NotFound.tsx`
-
-* Invalid non-hash route: handled by `404.html`
-
-#### Summary
-
-You now have:
-
-* A Vite + React app
-* Hash-based routing fully compatible with Swarm
-* A static 404 for non-hash paths
-* A React 404 for invalid hash paths
-* Stable, versioned deployments using feed manifests
+![](/img/hash-routing.jpg)
 
 ## Manifest Based Routing
 
-The second routing method involves directly manipulating the manifest so that routes resolve properly to the intended content. There are two primary approaches to manifest based routing:
+The second routing method involves directly manipulating the manifest so that routes resolve properly to the intended content. 
 
-* Alias based routing with arbitrary file names
-* Directory based with index files
+### 1. Upload the Site with Default Manifest
 
-### 1. Upload the Site 
+Download example project:
 
-Start by uploading the site:
-
-```ts
-const { reference } = await bee.uploadFilesFromDirectory(batchId, './site')
+```bash
+git clone https://github.com/ethersphere/examples.git
+cd examples/routing-manifest
 ```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Configure environment variables. There is a `.env` file with important constants listed in it. You will need to at least update it with a valid batch ID, and potentially other changes if you are not using a default setup:
+
+Replace the value for `BATCH_ID` with your own valid batch IDs. Otherwise you may also need to update `BEE_URL` if its value doesn't match your Bee RPC endpoint.
+
+```.env
+BEE_URL=http://localhost:1633
+BATCH_ID=afd0810c2ea2936df849fe7b52650e231a19b7b31dbf7f96a93f0cf8a296f3f3
+PUBLISHER_KEY=0x1111111111111111111111111111111111111111111111111111111111111111
+UPLOAD_DIR=./site
+BASE_MANIFEST=
+```
+
+Start by uploading the site using the `upload.js` script provided in the example project:
+
+```bash
+node .\upload.js
+```
+
+Terminal output:
+
+```bash
+
+Manifest reference: e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515
+
+URL: http://localhost:1633/bzz/e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515/
+```
+
+Copy the manifest reference hash and set it inside your `.env` file as the BASE_MANIFEST value:
+
+```bash
+BASE_MANIFEST=e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515
+```
+
+If you peek inside the `upload.js` code you will see these lines:
+
+```js
+const { reference } = await bee.uploadFilesFromDirectory(
+  batchId,
+  uploadDir,
+  {
+    indexDocument: "index.html",
+    errorDocument: "404.html",
+  }
+)
+```
+
+Take note of the values set by the `indexDocument` and `errorDocument` options. With those options specified, manifest entries for the root path `./` and non existent paths will be created on upload to resolve to `index.html` and `404.html` respectively. Without specifying them, your site would not load either page unless you explicitly include the entire filename with extension in the URL.
+
+Navigate in your browser to the manifest URL output to the terminal after running the `upload.js` script:
+
+```bash
+http://localhost:1633/bzz/e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515/
+```
+
+Scroll down the example web page, read the instructions in the example website and click each of the example links to inspect how routing works by default without any manifest edits (besides those specified for the index and error documents):
+
+![](/img/routing-manifest.png)
+
+You will find that links to direct files with file extensions included like `/about.html` will work, but links to `/about` will not. This is because we have not yet modified our manifest to set up typical routing behavior.
+
+### 2. Fix Routing With Manifest Manipulation
 
 Without manifest edits, routes only work via exact file paths like:
 
@@ -9988,82 +9727,115 @@ Without manifest edits, routes only work via exact file paths like:
 
 Trying to access `/about` or `/about/` will fail.
 
-### 2. Fix Routing With Manifest Manipulation
+#### Add Routing Behavior by Manifest Manipulation
 
-You can fix clean URLs using **two strategies**:
-
-#### Strategy A: Add Aliases to the Manifest
+We can easily add standard routing behavior by adding entries to our manifest which link the content reference with our desired URL paths:
 
 ```ts
 node.addFork('about', referenceForAbout, metadata)
 node.addFork('about/', referenceForAbout, metadata)
 ```
 
-Now `/about` and `/about/` work like `/about.html`.
+After this, both `/about` and `/about/` will resolve to the same content as `/about.html`.
+ 
+Run the provided script to update the manifest:
 
-#### Strategy B: Use Directory Index Files
+:::warning
+Make sure you have already set the `BASE_MANIFEST` to the hash returned from the upload script we ran above or else this won't work:
 
-Restructure files like:
-
+```bash
+BASE_MANIFEST=e4d93dc161d9b1fb192fdcef7e18830bd50fa5b80561de18d5f2945fb8618515
 ```
-/about/index.html
-/contact/index.html
-```
-
-And add them to the manifest like:
-
-```ts
-node.addFork('about/', referenceForAboutIndex, metadata)
-```
-
-This gives you full directory-style clean URLs.
-
-## Remove and Redirect Routes
-
-To "delete" a page you would need to remove all entries for it from the manifest to remove it entirely:
-
-```js
-node.removeFork('old-page.html')
-```
-For example, if you had manually added:
-
-```js
-node.addFork('about', referenceForAbout, metadata)
-node.addFork('about/', referenceForAbout, metadata)
-```
-
-You will need to make sure to fully remove all entries for that file from the manifest to really "delete" it from your site.
-
-```js
-node.removeFork('about')
-node.removeFork('about/')
-node.removeFork('about.html')
-```
-
-:::info 
-The file is not removed from the Swarm network since data on Swarm is immutable. Anyone who has its reference can still retrieve it. Removing it from your manifest just means it's no longer available through a route on your site.
 :::
 
-We are adding a record with the same path but now pointing at new content to achieve "redirect" like behavior.
-
-To redirect:
-
-```js
-node.addFork('old-page.html', newPageReference, metadata)
+```bash
+node .\updateManifest.js
 ```
 
-This lets you “deprecate” a page and point old paths to new ones.
+Terminal output:
 
-#### 4. Manifest Routing Enables Dynamic Content
+```bash
+Updated manifest reference: 1483be29a42ec1e40b4d639f800a8fd982db9d5146088672a5edef9a1e0648aa
+
+URL: http://localhost:1633/bzz/1483be29a42ec1e40b4d639f800a8fd982db9d5146088672a5edef9a1e0648aa/007bff
+```
+
+Try navigating to the `/about` and `/about/` routes which previously led to a 404 page, they should now resolve properly. `/about.html` will still resolve properly as it did previously. 
+
+### 3. Remove Routes and Add New Ones
+
+Manifests control **which paths exist** on your site by mapping paths to immutable Swarm content references. To remove a page from your site, remove its route(s) from the manifest:
+
+```js
+node.removeFork("old-page.html")
+```
+
+If you previously added clean-URL aliases such as:
+
+```js
+node.addFork("about", referenceForAbout, metadata)
+node.addFork("about/", referenceForAbout, metadata)
+```
+
+…then you must remove **all** routes that expose that content:
+
+```js
+node.removeFork("about")
+node.removeFork("about/")
+node.removeFork("about.html")
+```
+
+You can also reuse the **same content reference** under a different path by adding a new manifest entry that points to that same reference:
+
+```js
+node.addFork("new-path", existingFileReference, metadata)
+```
+
+This is useful when you want the same page to be available at a new URL without re-uploading or changing the underlying content. If you remove the old route, the old URL will return a 404, while the new URL will serve the same content.
+
+Run the provided script to test the behavior:
+
+:::warning
+Make sure that once again you have updated the `.env` file with the hash returned from the second step before running this script.
+:::
+
+```bash
+node .\updateManifest.js
+```
+
+Terminal output:
+
+```bash
+
+Updated manifest reference: 53e90f4033b99c7f6b82026b8f7beb39f42f99fbb816ae76e850cf2a1b45491d
+
+URL: http://localhost:1633/bzz/53e90f4033b99c7f6b82026b8f7beb39f42f99fbb816ae76e850cf2a1b45491d/
+
+Routes now:
+  /moved-about
+  /moved-about/
+Removed:
+  /about
+  /about/
+  /about.html
+```
+
+Now all our old links to the `about` page will 404. However, you can still reach the same content by navigating to the newly added routs:
+
+```bash
+/moved-about
+/moved-about/
+```
+
+Manually add them to the end of your website URL to check that they load properly. 
+
+### 4. Manifest Routing Enables Dynamic Content
 
 Once you understand manifest-based routing, you can dynamically:
 
 * Add new paths (e.g. blog posts, product pages)
 * Create custom routes
-* Redirect old paths
 * Remove unwanted paths
-
-Next, learn how to combine all the previously covered concepts to enable [dynamic content](/docs/develop/dynamic-content) on Swarm. It will allow you to turn Swarm into a decentralized CMS and decouple your front end from your back end.
 
 ---
 
@@ -11165,6 +10937,192 @@ If you want to test out Swarm based applications without needing to spend real x
 ### Starting a Test Network
 
 While bee dev mode allows you to simulate running a single Bee node, setting up a [test network](/docs/develop/tools-and-features/starting-a-test-network) will allow you to better simulate interactions between multiple nodes.
+
+---
+
+## Manifests
+
+
+Manifests define how files and folders are organized in Swarm. Instead of a flat list of uploaded files, Bee encodes directory structure as a compact prefix [trie](https://en.wikipedia.org/wiki/Trie). This allows URLs like `/images/logo.png`, `/docs/readme.txt`, or `/` to resolve efficiently to the correct Swarm references. Whenever you upload a directory — via `/bzz`, `bee-js`, or `swarm-cli` — Bee automatically creates and uploads a manifest that enables a filesystem-like layer inside Swarm. The manifest reference itself is the root reference for your uploaded directory.
+
+Manifests provide:
+
+* Filesystem-style path lookup (`/foo/bar.txt`)
+* Hierarchical directory structure
+* Metadata attached to files or folders (e.g., Content-Type)
+* Optional custom routing behavior for websites (via manifest configuration)
+
+They allow structured collections of files — including websites — to exist naturally on Swarm.
+
+## Why Manifests Matter
+
+Raw content hashes identify data immutably, but they don’t express relationships between files. A manifest adds this missing structure: it groups related files, assigns paths, stores metadata, and exposes the entire folder tree through URL-like navigation. Without manifests, every application on Swarm would need its own indexing and routing logic. 
+
+## When Manifests Are Created
+
+Manifests are created whenever you upload a directory via the `/bzz` endpoint, which is used internally by `swarm-cli` and `bee-js` for directory uploads. Bee scans the folder, builds the trie, and produces a manifest reference representing the entire directory tree.
+
+By contrast:
+
+* `/bytes` and `/chunks` upload raw binary data only
+* They do not create manifests
+
+## Index and Error Document Options
+
+Directory uploads in `bee-js` support two optional helpers:
+
+```js
+{
+  indexDocument: "index.html",
+  errorDocument: "404.html"
+}
+```
+
+These specify which file Bee should serve for the manifest root (`/`) and for invalid paths. These options can be used with normal directory uploads, not only websites — and any file type can be used — not only HTML. 
+
+## How Manifests Are Structured
+
+A manifest is structured as a trie: nodes are connected by forks, and each fork is labelled with a path segment. The path to a node is the concatenation of the segments you follow from the root. If a node’s `target` is non-zero, the path represented by that node refers to a file and the target points to its Swarm content. If the `target` is zero, the node behaves like a directory or intermediate prefix.
+
+The printed output below shows a decoded Mantaray manifest (using the [`manifestToJson.js` script](https://github.com/ethersphere/examples/blob/main/utils/manifestToJson.js) from the examples repo). It represents a simple folder tree containing a root file and a nested subfolder.
+
+:::info About the Term "Mantaray"
+"Mantaray" was originally a standalone Swarm library for working with manifests. It has since been integrated into `bee-js` and is no longer maintained as a standalone library. Its name is still used in `bee-js` for the manifest-related classes (`MantarayNode`, etc.).
+:::
+
+```json
+{
+    "path": "/",
+    "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "metadata": null,
+    "forks": {
+        "folder/": {
+            "path": "folder/",
+            "target": "0x0000000000000000000000000000000000000000000000000000000000000000",
+            "metadata": null,
+            "forks": {
+                "nested.txt": {
+                    "path": "nested.txt",
+                    "target": "0x9442e445c0d58adea58e0a8afcdcc28ed7642d7a4ff9a253e8f1595faafbb808",
+                    "metadata": {
+                        "Content-Type": "text/plain; charset=utf-8",
+                        "Filename": "nested.txt"
+                    },
+                    "forks": {}
+                },
+                "subfolder/deep.txt": {
+                    "path": "subfolder/deep.txt",
+                    "target": "0x6aa935879ad2a547e57ea6350338bd04ad758977b542e86b31c159f31834b8fc",
+                    "metadata": {
+                        "Content-Type": "text/plain; charset=utf-8",
+                        "Filename": "deep.txt"
+                    },
+                    "forks": {}
+                }
+            }
+        },
+        "root.txt": {
+            "path": "root.txt",
+            "target": "0x98e63f7e826a01634881874246fc873cdf06bb5409ff5f9ec61d1e2de1dd3bf6",
+            "metadata": {
+                "Content-Type": "text/plain; charset=utf-8",
+                "Filename": "root.txt"
+            },
+            "forks": {}
+        }
+    }
+}
+```
+
+### Key Concepts
+
+**Node** — Represents either a directory or a file inside the manifest.  
+- Directories have a zero target and may contain child nodes.  
+- Files have a non-zero target pointing to their Swarm content.
+
+**Fork** — A mapping from a path segment to a child node.  
+In the JSON representation, the fork is the key (for example `"folder/"` or `"root.txt"`), and the value is the child node for that segment.
+
+**Path** — The path segment label stored on a node (the same string used as the fork key from its parent). It may be a single segment such as `folder/` or `nested.txt`, or a remainder of the full path such as `subfolder/deep.txt`.  
+
+**Target** — The Swarm reference for a file’s content. Directories use a zero target.
+
+**Metadata** — Attributes stored with a node (for example `Content-Type`, filename, etc.).
+
+## Immutability
+
+Manifests are immutable. When you add, remove, or move a file, Bee writes new manifest nodes rather than modifying existing ones. Each update produces a new manifest reference, and older versions remain accessible.
+
+To provide a stable entry point even as the manifest changes, you can combine manifests with feeds. A feed acts as an updateable pointer: publish each new manifest reference to the feed, and users access the feed hash instead of individual manifest hashes.
+
+You can find examples of this in the [Building on Swarm](/docs/develop/introduction#building-on-swarm) page.
+
+## Serving Files From a Manifest
+
+A manifest reference acts like the root of a filesystem. Requests such as:
+
+```
+/ → index document
+/docs/readme.txt → file content
+```
+
+are resolved by walking the trie until the correct file target is found. Bee handles this automatically under:
+
+```
+/bzz/<manifest-hash>/<path>
+```
+
+Paths to directories such as `/docs/` or even `/` will result in a 404 error by default unless the manifest is modified (or by specifying an `indexDocument` for `/`):
+
+```
+/docs/ → 404
+```
+
+You can specify which file or webpage you would like paths such as `/docs/` (which do not get entries in the manifest by default) to resolve to by manipulating the manifest. See the ["Filesystem"](/docs/develop/filesystem) and [Routing](/docs/develop/routing) guides for more information and examples.
+
+:::caution
+The `target` values inside a manifest should not be accessed directly. They cannot be reliably fetched via endpoints such as `/bzz/` or tools like `swarm-cli download`.
+
+To retrieve a file, always access it through the manifest, for example:
+
+```
+curl http://localhost:1633/bzz/<DIRECTORY_MANIFEST_HASH>/root.txt -o ./root.txt
+```
+
+or
+
+```
+swarm-cli download c8275d246e8a14ccd6f680ea0ecae543ebc0734e52676a5468a9a30db156be64/disc.jpg
+```
+
+Bee resolves the underlying content automatically and returns the file correctly.
+:::
+
+## When to Modify the Manifest
+
+Most Swarm users never need to manually inspect or modify a manifest. When you upload a directory, Bee creates one automatically and it "just works" for many common cases. You only need to modify the manifest when you want to change how paths resolve after the upload.
+
+### Websites
+
+For simple single-page sites, no manual changes are required — setting `indexDocument` and `errorDocument` during upload is enough.
+
+You need to modify the manifest when you want to change routing behavior, such as:
+
+* Removing `.html` extensions for clean URLs
+* Adding, changing, or deleting routes
+* Redirecting paths or restructuring the site
+
+See the [Routing](/docs/develop/routing) guide for details.
+
+### Directory Uploads
+
+For one-time directory uploads that you don’t plan to change, you typically don’t need to touch the manifest. However, if you later want to add files, remove files, rename paths, or point new paths at existing content, the manifest must be updated.
+
+See the ["Filesystem"](/docs/develop/filesystem) guide for examples.
+
+## Putting It All Together
+
+A manifest turns a set of immutable chunks into a structured, navigable collection of files. It enables folder trees, static assets, multi-file application bundles, websites, and data archives to exist on Swarm in a coherent, accessible way. Whether you're uploading a small directory or a full site, the manifest is what ties everything together.
 
 ---
 
