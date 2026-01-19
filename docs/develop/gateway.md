@@ -54,8 +54,8 @@ This part of the guide does not cover setting up TLS, so your gateway will be ac
 ### Prerequisites
 
 
-* A server with:
-  * A public IP address (VPS recommended)
+* A VPS with:
+  * A public IP address 
   * Port **80** open
 * Docker 
 * A domain for hosting your gateway publicly
