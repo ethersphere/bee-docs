@@ -3,17 +3,50 @@ title: Gateway Proxy
 id: gateway-proxy
 ---
 
-The [Gateway Proxy tool](https://github.com/ethersphere/gateway-proxy) is more than just a proxy, it offers a range of useful functionalities for node operators and Swarm developers. For more in depth documentation of its features, refer to its [README doc](https://github.com/ethersphere/gateway-proxy/blob/master/README.md) on GitHub.
+The [Swarm Gateway](https://github.com/ethersphere/swarm-gateway) is the standard way to expose a Bee node over HTTP.
 
-### Public Gateway
+:::info
+Another tool which is currently popular for running Bee in gateway mode is [Gateway Proxy](https://github.com/ethersphere/gateway-proxy). It offers several features not yet included in Swarm Gateway. However, since it is set for deprecation, unless you have a specific need, it is recommended to use Swarm Gateway instead.
+:::
 
-The tool can be used to set up a public gateway which can be used to host public facing applications or websites to users on the web who aren't running Bee nodes.
+It acts as a reverse proxy that runs in front of a Bee node, allowing you to expose your node publicly. It proxies the Bee HTTP API and content endpoints, while optionally adding access control, postage batch auto-buy, and other optional features.
+
+### Public Access to Swarm
+
+A gateway can be used to run a public endpoint that allows users to:
+
+* Access content stored on Swarm using standard HTTP URLs
+* Browse websites hosted on Swarm
+* Interact with Swarm through a familiar web interface
+
+This makes Swarm content accessible to any web client, even if the user is not running a Bee node locally.
+
+### Authentication, Access Control, and Policy
+
+The Swarm Gateway also acts as an access control and content moderation layer in front of a Bee node.
+
+Rather than exposing a Bee node directly to the public internet, the gateway allows operators to place a managed HTTP interface in front of it. Through this interface, the gateway can:
+
+* Expose a Bee node through a single public HTTP endpoint
+* Restrict or control uploads and other sensitive operations
+* Require authentication for selected endpoints or request types
+* Apply basic access control and usage policies before requests reach the Bee node
+
+This makes it possible to run public, private, or semi-public gateways while retaining control over how the underlying Bee node is used.
+
+For production deployments, the gateway is typically run behind an HTTPS-terminating reverse proxy to ensure encrypted connections.
 
 ### Stamp Management
 
-In addition to acting as a proxy, it also includes convenient features for managing stamps such as automatically buying new stamps or automatically extending the life of existing stamps.
+The Swarm Gateway can optionally manage postage stamps on behalf of the operator, including:
 
-### Security
+* Automatically buying new batches
+* Monitoring batch usage and expiration
+* Keeping batches alive based on specified TTL
 
-Authentication can also be enabled so that only authorized requests are fulfilled. This is a useful feature for protecting your node if its API endpoint is publicly exposed. 
+This is especially useful for gateways that accept uploads from users or applications.
 
+
+## Setting up a Gateway
+
+For a step by step guide on setting up a gateway yourself, refer to the guide in the Develop on Swarm section.
