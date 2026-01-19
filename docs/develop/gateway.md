@@ -62,7 +62,7 @@ This part of the guide does not cover setting up TLS, so your gateway will be ac
 * A running Bee node in Docker
 * A valid stamp batch
 
-### 1. Configure DNS
+### 1. Configure DNS for your Domain
 
 Create an A record in your DNS provider:
 
