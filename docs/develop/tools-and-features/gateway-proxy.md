@@ -49,4 +49,4 @@ This is especially useful for gateways that accept uploads from users or applica
 
 ## Setting up a Gateway
 
-For a step by step guide on setting up a gateway yourself, refer to the guide in the Develop on Swarm section.
+For a step by step guide on setting up a gateway yourself, refer to the [guide in the Develop on Swarm section](/docs/develop/gateway-proxy/).
