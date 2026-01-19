@@ -62,7 +62,7 @@ This part of the guide does not cover setting up TLS, so your gateway will be ac
 * A running Bee node in Docker
 * A valid stamp batch
 
-### 1. Configure DNS for your Domain
+### 1. Configure DNS for your domain
 
 Create an A record in your DNS provider:
 
@@ -70,13 +70,13 @@ Create an A record in your DNS provider:
 your-domain.example -> <your-server-ip>
 ```
 
+ADD SCREENSHOT 
+
 After DNS propagation, verify that the domain resolves to your server (this may take some time, to verify more quickly, try pinging from a different machine or VPS):
 
 ```bash
 ping your-domain.example
 ```
-
-(or use `dig` / `nslookup`)
 
 ### 2. Create a Docker network
 
