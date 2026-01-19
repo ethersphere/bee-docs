@@ -122,7 +122,7 @@ In this configuration, database-backed features such as subdomain rewrites and m
 
 ### 5. Verify operation
 
-From your local machine (not the server):
+From your local machine (not the server on your VPS):
 
 ```bash
 curl http://your-domain.example/health
@@ -173,12 +173,11 @@ At this point, you have:
 
 * A working Swarm HTTP gateway
 * Connected to your Bee node
-* Exposing content over `/bzz/<reference>`
+* Exposing content publicly over `/bzz/<reference>`
 
 The setup is intentionally minimal and suitable for testing and development, however without TLS, it is not secure and should never be used in production or publicly exposed. 
 
 The next section explains how to enable TLS so that your gateway can be securely accessed through HTTPS.
-
 
 ## TLS Setup
 
