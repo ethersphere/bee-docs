@@ -41,9 +41,7 @@ Traffic is not encrypted and any `Authorization` headers can be observed by inte
 The purpose of this section is to verify that the gateway is working. HTTPS is added in a later part of the guide.
 :::
 
-### Scope of this section
-
-This section:
+The guide in this section:
 
 * Runs `swarm-gateway` using Docker
 * Connects it to an existing Bee node
