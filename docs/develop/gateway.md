@@ -118,7 +118,7 @@ docker run -d --restart unless-stopped \
   ethersphere/swarm-gateway:0.1.3
 ```
 
-In this configuration, database-backed features such as subdomain rewrites and moderation are disabled.
+In this configuration, database-backed features such as subdomain rewrites and moderation are not configured.
 
 ### 5. Verify operation
 
