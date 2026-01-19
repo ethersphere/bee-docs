@@ -53,13 +53,14 @@ This part of the guide does not cover setting up TLS, so your gateway will be ac
 
 ### Prerequisites
 
+
 * A server with:
-  * A public IP address
+  * A public IP address (VPS recommended)
   * Port **80** open
-* Docker installed
+* Docker 
+* A domain for hosting your gateway publicly
 * A running Bee node in Docker
 * A valid stamp batch
-
 
 ### 1. Configure DNS
 
