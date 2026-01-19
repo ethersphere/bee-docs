@@ -34,7 +34,7 @@ Rather than exposing a Bee node directly to the public internet, the gateway all
 
 This makes it possible to run public, private, or semi-public gateways while retaining control over how the underlying Bee node is used.
 
-For production deployments, the gateway is typically run behind an HTTPS-terminating reverse proxy to ensure encrypted connections.
+For production deployments, the gateway is typically run behind an HTTPS reverse proxy to ensure encrypted connections.
 
 ### Stamp Management
 
