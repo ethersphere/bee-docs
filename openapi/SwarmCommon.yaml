@@ -45,22 +45,29 @@ components:
       type: object
       properties:
         radius:
+          description: Maximum storage radius assuming all postage stamp batches are fully utilized.
           type: integer
         storageRadius:
+          description: The radius of responsibility — the proximity order of chunks for which the node is responsible for storing.
           type: integer
         commitment:
+          description: Total number of chunks that would be stored on the Swarm network if 100% of all postage batches were fully utilized.
           type: integer
 
     ChainState:
       type: object
       properties:
         chainTip:
+          description: Latest Gnosis Chain block number known to the node.
           type: integer
         block:
+          description: Latest block the node has fully synced from Gnosis Chain. If significantly behind chainTip, the node may still be catching up.
           type: integer
         totalAmount:
+          description: Cumulative value of all storage prices per chunk in PLUR across all blocks.
           $ref: "#/components/schemas/BigInt"
         currentPrice:
+          description: Current price in PLUR to store a single chunk for one Gnosis Chain block.
           $ref: "#/components/schemas/BigInt"
 
     PeerAccountingData:
@@ -223,8 +230,10 @@ components:
       type: object
       properties:
         totalBalance:
+          description: Total xBZZ balance (in PLUR) in the chequebook contract on the blockchain.
           $ref: "#/components/schemas/BigInt"
         availableBalance:
+          description: Available xBZZ balance (in PLUR) — the total balance minus outstanding (non-cashed) cheques issued to peers.
           $ref: "#/components/schemas/BigInt"
 
     ChequebookAddress:
@@ -730,42 +739,59 @@ components:
       type: object
       properties:
         transactionHash:
+          description: Hash of the transaction on Gnosis Chain.
           $ref: "#/components/schemas/TransactionHash"
         to:
+          description: Destination Ethereum address of the transaction.
           $ref: "#/components/schemas/EthereumAddress"
         nonce:
+          description: Transaction nonce for the sender account.
           type: integer
         gasPrice:
+          description: Gas price (in wei) used for the transaction.
           $ref: "#/components/schemas/BigInt"
         gasLimit:
+          description: Maximum gas units allowed for the transaction.
           type: integer
         gasTipCap:
+          description: Maximum priority fee per gas (in wei) the sender is willing to pay (EIP-1559).
           $ref: "#/components/schemas/BigInt"
         gasTipBoost:
+          description: Percentage boost applied to the gas tip to speed up transaction inclusion.
           type: integer
         gasFeeCap:
+          description: Maximum total fee per gas (in wei) the sender is willing to pay (EIP-1559).
           $ref: "#/components/schemas/BigInt"
         data:
+          description: Hex-encoded transaction input data.
           type: string
         created:
+          description: Timestamp when the transaction was created by the node.
           $ref: "#/components/schemas/DateTime"
         description:
+          description: Human-readable description of the transaction purpose.
           type: string
         value:
+          description: Amount of native token (xDAI, in wei) sent with the transaction.
           $ref: "#/components/schemas/BigInt"
 
     WalletResponse:
       type: object
       properties:
         bzzBalance:
+          description: xBZZ token balance (in PLUR) of the node's wallet on Gnosis Chain.
           $ref: "#/components/schemas/BigInt"
         nativeTokenBalance:
+          description: Native token (xDAI) balance (in wei) of the node's wallet on Gnosis Chain.
           $ref: "#/components/schemas/BigInt"
         chainID:
+          description: Chain ID of the blockchain the node is connected to (e.g. 100 for Gnosis Chain).
           type: integer
         chequebookContractAddress:
+          description: Ethereum address of the node's deployed chequebook contract.
           $ref: "#/components/schemas/EthereumAddress"
         walletAddress:
+          description: Ethereum address of the node's wallet.
           $ref: "#/components/schemas/EthereumAddress"
 
     RedistributionStatusResponse:
