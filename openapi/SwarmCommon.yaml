@@ -75,18 +75,25 @@ components:
       type: object
       properties:
         balance:
+          description: Current SWAP balance with the peer. Negative values indicate debt owed to the peer, positive values indicate credit owed by the peer.
           $ref: "#/components/schemas/BigInt"
         thresholdReceived:
+          description: Payment threshold communicated to this peer — the debt limit at which the peer is expected to settle.
           $ref: "#/components/schemas/BigInt"
         thresholdGiven:
+          description: Payment threshold received from this peer — the debt limit at which this node is expected to settle. Adjusts over time based on the peer's repayment history.
           $ref: "#/components/schemas/BigInt"
         surplusBalance:
+          description: Surplus from incoming payments that exceeded the outstanding debt. Not considered debt for settlement purposes.
           $ref: "#/components/schemas/BigInt"
         reservedBalance:
+          description: Amount currently reserved for an active peer interaction to prevent overdrafts during concurrent operations.
           $ref: "#/components/schemas/BigInt"
         shadowReservedBalance:
+          description: Amount potentially to be debited for an active peer interaction. Reserves anticipated debits before they are applied.
           $ref: "#/components/schemas/BigInt"
         ghostBalance:
+          description: Amount that could have been debited but was not, used to detect misbehaving peers.
           $ref: "#/components/schemas/BigInt"
 
     ActGranteesCreateRequest:
@@ -594,20 +601,26 @@ components:
       type: object
       properties:
         peer:
+          description: Swarm overlay address of the peer.
           $ref: "#/components/schemas/SwarmAddress"
         received:
+          description: Total amount of xBZZ (in PLUR) received from this peer through SWAP cheque settlements.
           type: integer
         sent:
+          description: Total amount of xBZZ (in PLUR) sent to this peer through SWAP cheque settlements.
           type: integer
 
     Settlements:
       type: object
       properties:
         totalReceived:
+          description: Total amount of xBZZ (in PLUR) received from all peers through SWAP cheque settlements.
           type: integer
         totalSent:
+          description: Total amount of xBZZ (in PLUR) sent to all peers through SWAP cheque settlements.
           type: integer
         settlements:
+          description: Per-peer settlement details.
           type: array
           nullable: false
           items:
