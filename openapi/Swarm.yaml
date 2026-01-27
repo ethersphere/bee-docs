@@ -1988,6 +1988,7 @@ paths:
           schema:
             type: boolean
           required: false
+          description: Whether the postage batch is immutable. Immutable batches permanently store data and do not allow overwriting older chunks with new ones. Mutable batches allow overwriting older data as new chunks are added. Default batch type is immutable.
         - $ref: "SwarmCommon.yaml#/components/parameters/GasPriceParameter"
         - $ref: "SwarmCommon.yaml#/components/parameters/GasLimitParameter"
       responses:
@@ -2200,16 +2201,19 @@ paths:
           required: true
           schema:
             $ref: "SwarmCommon.yaml#/components/schemas/BigInt"
+          description: Amount of tokens to withdraw in the lowest denomination (PLUR for xBZZ, wei for xDAI)
         - in: query
           name: address
           required: true
           schema:
             $ref: "SwarmCommon.yaml#/components/schemas/EthereumAddress"
+          description: Destination Ethereum address for the withdrawal. Must be whitelisted using the withdrawal-addresses-whitelist configuration option.
         - in: path
           name: coin
           required: true
           schema:
             $ref: "SwarmCommon.yaml#/components/schemas/SwarmAddress"
+          description: "Token type to withdraw. Use BZZ for xBZZ or NativeToken for xDAI."
       responses:
         "200":
           content:
