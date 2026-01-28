@@ -22,18 +22,25 @@ components:
       type: object
       properties:
         overlay:
+          description: The node's overlay address in Swarm's Kademlia network, used for content routing and peer selection.
           $ref: "#/components/schemas/SwarmAddress"
         underlay:
+          description: List of the node's underlay (transport-layer) multiaddresses used for peer-to-peer communication.
           type: array
           items:
             $ref: "#/components/schemas/P2PUnderlay"
         ethereum:
+          description: "Deprecated: use `chain_address` instead. The node's Ethereum address on Gnosis Chain."
+          deprecated: true
           $ref: "#/components/schemas/EthereumAddress"
         chain_address:
+          description: The node's Ethereum-compatible address on Gnosis Chain, used for on-chain transactions such as postage stamp purchases and chequebook operations.
           $ref: "#/components/schemas/EthereumAddress"
         publicKey:
+          description: The node's hex-encoded secp256k1 public key, used for peer identity verification and encrypted communication.
           $ref: "#/components/schemas/PublicKey"
         pssPublicKey:
+          description: The node's hex-encoded secp256k1 public key used for Postal Service over Swarm (PSS) encrypted messaging.
           $ref: "#/components/schemas/PublicKey"
 
     BigInt:
@@ -139,24 +146,40 @@ components:
       type: object
       properties:
         baseAddr:
+          description: The node's overlay address in Swarm's Kademlia network.
           $ref: "#/components/schemas/SwarmAddress"
         population:
+          description: Total number of peers known to this node across all Kademlia bins, including both connected and previously seen peers.
           type: integer
         connected:
+          description: Number of peers currently connected to this node across all Kademlia bins.
           type: integer
         timestamp:
+          description: ISO 8601 timestamp of when this topology snapshot was taken.
           type: string
         nnLowWatermark:
+          description: Minimum number of peers required in the nearest neighbour bins. Used in neighborhood depth calculation (default 3).
           type: integer
         depth:
+          description: The Kademlia neighborhood depth of this node. Bins at or deeper than this value form the node's neighborhood.
           type: integer
         reachability:
+          description: |
+            The node's reachability status as determined by connectivity checks.
+            - `Unknown` — Reachability has not yet been determined.
+            - `Public` — The node is publicly reachable by other nodes on the network.
+            - `Private` — The node is behind a NAT or firewall and is not directly reachable.
           type: string
           enum:
             - "Unknown"
             - "Public"
             - "Private"
         networkAvailability:
+          description: |
+            The node's network availability status.
+            - `Unknown` — Network availability has not yet been determined.
+            - `Available` — The node can connect to the Swarm network and participate in protocols.
+            - `Unavailable` — The node cannot connect to the Swarm network.
           type: string
           enum:
             - "Unknown"
@@ -339,26 +362,34 @@ components:
       type: object
       properties:
         lastSeenTimestamp:
+          description: Unix timestamp (in nanoseconds) of when the peer was last seen by this node.
           type: integer
           nullable: false
         sessionConnectionRetry:
+          description: Number of connection retry attempts in the current session with this peer.
           type: integer
           nullable: false
         connectionTotalDuration:
+          description: Total cumulative duration (in nanoseconds) of all connections with this peer across all sessions.
           type: number
           nullable: false
         sessionConnectionDuration:
+          description: Duration (in nanoseconds) of the current or most recent connection session with this peer.
           type: number
           nullable: false
         sessionConnectionDirection:
+          description: Direction of the connection — either "inbound" (the peer initiated) or "outbound" (this node initiated).
           type: string
           nullable: false
         latencyEWMA:
+          description: Exponentially weighted moving average of round-trip latency to this peer, in nanoseconds.
           type: integer
           nullable: false
         reachability:
+          description: Reachability status of this peer as observed by the node (Unknown, Public, or Private).
           type: string
         healthy:
+          description: Whether the peer is considered healthy based on its connectivity and performance metrics.
           type: boolean
 
     Peers:
@@ -378,10 +409,13 @@ components:
           address:
             $ref: "#/components/schemas/Address"
           fullNode:
+            description: Whether the blocklisted peer is a full node (as opposed to a light node).
             type: boolean
           reason:
+            description: Human-readable reason why this peer was added to the blocklist.
             type: string
           duration:
+            description: Duration in nanoseconds for which this peer remains blocklisted.
             type: integer
 
     PssRecipient:
