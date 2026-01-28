@@ -880,10 +880,19 @@ components:
       type: object
       properties:
         overlay:
+          description: The overlay address of the node this snapshot describes.
           $ref: "#/components/schemas/SwarmAddress"
         proximity:
+          description: Proximity order of the peer relative to the requesting node. For the local node's own status, this is 256 (self).
           type: integer
         beeMode:
+          description: |
+            The operating mode of the Bee node.
+            - `light` — Light node that does not participate in storage or forwarding.
+            - `full` — Full node that stores chunks and participates in all protocols.
+            - `dev` — Development mode for local testing.
+            - `ultra-light` — Ultra-light node with minimal resource usage and protocol participation.
+            - `unknown` — Node mode could not be determined.
           type: string
           enum:
             - "light"
@@ -892,27 +901,38 @@ components:
             - "ultra-light"
             - "unknown"
         reserveSize:
+          description: Total number of chunks in the node's reserve store.
           type: integer
         reserveSizeWithinRadius:
+          description: Number of chunks in the reserve that fall within the node's storage radius.
           type: integer
         pullsyncRate:
+          description: Rate of chunk syncing via the pull-sync protocol (chunks per second).
           type: number
         storageRadius:
+          description: The node's storage radius — the proximity order within which the node stores chunks.
           type: integer
         connectedPeers:
+          description: Number of peers currently connected to this node.
           type: integer
         neighborhoodSize:
+          description: Number of peers in the node's neighborhood (including the node itself).
           type: integer
         requestFailed:
+          description: Whether the status request to this peer failed. Only relevant in peer status responses; null for the local node.
           nullable: true
           type: boolean
         batchCommitment:
+          description: Total number of chunks that the node is committed to store based on postage batch utilisation.
           type: integer
         isReachable:
+          description: Whether the node is publicly reachable by other nodes on the network.
           type: boolean
         lastSyncedBlock:
+          description: The most recent Gnosis Chain block number the node has synced.
           type: integer
         committedDepth:
+          description: The batch depth commitment of the node's reserve.
           type: integer
 
     StatusPeersResponse:
