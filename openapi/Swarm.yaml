@@ -257,7 +257,7 @@ paths:
         - Bytes
       parameters:
         - in: path
-          name: address
+          name: reference
           schema:
             $ref: "SwarmCommon.yaml#/components/schemas/SwarmAddress"
           required: true
@@ -467,7 +467,7 @@ paths:
         - BZZ
       parameters:
         - in: path
-          name: address
+          name: reference
           schema:
             $ref: "SwarmCommon.yaml#/components/schemas/SwarmAddress"
           required: true
@@ -752,7 +752,7 @@ paths:
 
   "/pins/check":
     get:
-      summary: Validate pinned chunks integerity
+      summary: Validate pinned chunks integrity
       tags:
         - Pinning
       parameters:
@@ -761,7 +761,7 @@ paths:
           schema:
             $ref: "SwarmCommon.yaml#/components/schemas/SwarmOnlyReference"
           required: false
-          description: The number of items to skip before starting to collect the result set.
+          description: Swarm reference of the pinned root hash to check. If omitted, all pinned content is checked.
       responses:
         "200":
           description: List of checked root hash references
@@ -1309,7 +1309,7 @@ paths:
         - Chunk
       parameters:
         - in: path
-          name: reference
+          name: address
           schema:
             $ref: "SwarmCommon.yaml#/components/schemas/SwarmReference"
           required: true
