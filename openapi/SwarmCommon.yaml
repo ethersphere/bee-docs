@@ -772,34 +772,54 @@ components:
       type: object
       properties:
         minimumGasFunds:
+          description: Minimum native token (xDAI) balance in PLUR required in the node's wallet to participate in the next redistribution round.
           $ref: "#/components/schemas/BigInt"
         hasSufficientFunds:
+          description: Whether the node's wallet has enough native token balance to cover gas costs for redistribution.
           type: boolean
         isFrozen:
+          description: Whether the node is frozen and excluded from the redistribution game. A node is frozen as a penalty for submitting incorrect data during a round.
           type: boolean
         isFullySynced:
+          description: Whether the node has fully synced all data within its storage radius. Must be true to participate in redistribution.
           type: boolean
         isHealthy:
+          description: Whether the node is considered healthy for participation in the redistribution game.
           type: boolean
         phase:
+          description: |
+            Current phase of the redistribution round.
+            - `commit` — Selected nodes submit a hashed commitment of their reserve sample.
+            - `reveal` — Nodes that committed reveal the obfuscation key used in the commit phase.
+            - `claim` — The winning node is determined and can claim its reward.
+            - `sample` — The node creates a reserve sample for the upcoming round.
           type: string
         round:
+          description: Current redistribution round number.
           type: integer
         lastWonRound:
+          description: Round number of the last round won by this node.
           type: integer
         lastPlayedRound:
+          description: Round number of the last round in which this node submitted a commit transaction.
           type: integer
         lastFrozenRound:
+          description: Round number of the last round in which this node was frozen.
           type: integer
         lastSelectedRound:
+          description: Round number of the last round in which this node was eligible to participate — requires the node's neighborhood to be selected and the node to be staked, healthy, fully synced, unfrozen, and sufficiently funded.
           type: integer
         lastSampleDurationSeconds:
+          description: Time in seconds it took to generate the reserve sample in the most recent round.
           type: number
         block:
+          description: Current Gnosis Chain block number as seen by the node.
           type: integer
         reward:
+          description: Cumulative xBZZ rewards (in PLUR) earned by this node from winning redistribution rounds.
           $ref: "#/components/schemas/BigInt"
         fees:
+          description: Cumulative gas fees (in wei) spent by this node on redistribution transactions.
           $ref: "#/components/schemas/BigInt"
 
     PendingTransactionsResponse:
@@ -821,6 +841,10 @@ components:
           type: string
 
     FeedType:
+      description: |
+        Feed indexing scheme.
+        - `sequence` — Sequential indexing where updates are numbered incrementally (0, 1, 2, ...). Best for frequent or regular-interval updates.
+        - `epoch` — Time-based indexing using a hierarchical epoch grid. Better suited for sparse or time-irregular updates.
       type: string
       pattern: "^(sequence|epoch)$"
 
@@ -858,12 +882,16 @@ components:
       type: object
       properties:
         logger:
+          description: Hierarchical logger name path using `/` as a separator (e.g. `node/api/router`).
           type: string
         verbosity:
+          description: "Current verbosity level of the logger: `none`, `error`, `warning`, `info`, `debug`, or `all`."
           type: string
         subsystem:
+          description: Unique subsystem identifier string used to match loggers via expressions or regex patterns.
           type: string
         id:
+          description: Base64 URL-encoded representation of the subsystem identifier, used as a path parameter when setting logger verbosity.
           type: string
 
     LoggerResponse:
@@ -1117,9 +1145,13 @@ components:
         type: integer
         enum: [0, 1, 2, 3, 4]
       required: false
-      description: >
-        Add redundancy to the data being uploaded so that downloaders can download it with better UX.
-        0 value is default and does not add any redundancy to the file.
+      description: |
+        Add erasure coding redundancy to uploaded data for improved download reliability.
+        - `0` — None (default). No redundancy is added.
+        - `1` — Medium. Tolerates up to 1% chunk retrieval error rate.
+        - `2` — Strong. Tolerates up to 5% chunk retrieval error rate.
+        - `3` — Insane. Tolerates up to 10% chunk retrieval error rate.
+        - `4` — Paranoid. Tolerates up to 50% chunk retrieval error rate.
 
     SwarmRedundancyStrategyParameter:
       in: header
