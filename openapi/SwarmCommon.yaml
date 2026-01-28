@@ -115,8 +115,10 @@ components:
       type: object
       properties:
         ref:
+          description: Swarm encrypted reference to the updated or newly created grantee list.
           $ref: "#/components/schemas/SwarmEncryptedReference"
         historyref:
+          description: Swarm encrypted reference to the access control history entry, a time-versioned log of access control changes.
           $ref: "#/components/schemas/SwarmEncryptedReference"
 
     Balance:
@@ -419,12 +421,16 @@ components:
       type: object
       properties:
         issuer:
+          description: Ethereum address of the node that created the stamp.
           $ref: "#/components/schemas/EthereumAddress"
         index:
+          description: Within-batch index assigned to this stamp. Encodes a bucket (upper 16 bits) and an in-bucket counter.
           $ref: "#/components/schemas/Hex8Bytes"
         timestamp:
+          description: Timestamp of stamp creation, used for ordering when multiple chunks compete for the same batch index slot.
           $ref: "#/components/schemas/Hex8Bytes"
         signature:
+          description: ECDSA signature by the batch owner over the hash of (chunk address | batch ID | index | timestamp), proving authorization to stamp the chunk.
           $ref: "#/components/schemas/Signature"
 
     DebugPostageBatchesResponse:
@@ -952,30 +958,38 @@ components:
       type: object
       properties:
         chunkSpan:
+          description: Span of the chunk data in bytes, from the BMT span header.
           minimum: 0
           type: integer
         postageProof:
+          description: Postage stamp proof for the chunk, proving it has a valid stamp attached.
           $ref: "#/components/schemas/ApiPostageProof"
         proofSegments:
+          description: Sister segments for the first Merkle proof (reserve sample level), proving the chunk's inclusion in the sample.
           items:
             type: string
           nullable: true
           type: array
         proofSegments2:
+          description: Sister segments for the second Merkle proof (original chunk level), proving knowledge of a specific data segment within the chunk.
           items:
             type: string
           nullable: true
           type: array
         proofSegments3:
+          description: Sister segments for the third Merkle proof (transformed chunk level), proving correct transformation of chunk data with the round anchor.
           items:
             type: string
           nullable: true
           type: array
         proveSegment:
+          description: The data segment being proved at the reserve sample level.
           type: string
         proveSegment2:
+          description: The data segment being proved at the original chunk level.
           type: string
         socProof:
+          description: Single Owner Chunk proof, present only if the chunk is a SOC. Empty for content-addressed chunks.
           items:
             $ref: "#/components/schemas/ApiSOCProof"
           nullable: true
@@ -995,12 +1009,16 @@ components:
       type: object
       properties:
         index:
+          description: Within-batch index of the stamp, hex-encoded. Identifies which slot in the postage batch was used.
           type: string
         postageId:
+          description: The postage batch ID, a 32-byte hex-encoded hash identifying the batch on the blockchain.
           type: string
         signature:
+          description: ECDSA signature (65 bytes, hex-encoded) by the batch owner proving authorization to stamp this chunk.
           type: string
         timeStamp:
+          description: Timestamp of stamp creation, hex-encoded. Used for ordering when multiple chunks compete for the same batch index slot.
           type: string
 
     ApiRCHashResponse:
@@ -1017,12 +1035,16 @@ components:
       type: object
       properties:
         chunkAddr:
+          description: Swarm address of the wrapped content-addressed chunk inside the SOC (the inner chunk address, not the SOC address).
           type: string
         identifier:
+          description: Arbitrary 32-byte identifier chosen by the SOC owner. Together with the signer address, it determines the SOC's address.
           type: string
         signature:
+          description: ECDSA signature by the SOC owner over the identifier and wrapped chunk address, proving ownership.
           type: string
         signer:
+          description: Ethereum address of the SOC owner. Together with the identifier, it determines the SOC's address.
           type: string
 
     WalletTxResponse:
