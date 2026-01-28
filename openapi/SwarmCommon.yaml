@@ -544,22 +544,31 @@ components:
       type: object
       properties:
         batchID:
+          description: Unique identifier of the postage batch.
           $ref: "#/components/schemas/BatchID"
         value:
+          description: Normalised balance of the batch per chunk (in PLUR). Decreases over time as storage rent is consumed.
           $ref: "#/components/schemas/BigInt"
         start:
+          description: Block number on Gnosis Chain at which the batch was created.
           type: integer
         depth:
+          description: Batch depth which determines the maximum number of chunks the batch can stamp. The theoretical maximum is 2^depth chunks, but effective capacity is lower due to how chunks are distributed across buckets.
           type: integer
         bucketDepth:
+          description: Depth of the postage batch buckets. Fixed at 16, partitioning the address space into 2^16 (65536) equally sized buckets.
           type: integer
         immutableFlag:
+          description: Whether the batch is immutable. Immutable batches permanently store data and do not allow overwriting older chunks. Mutable batches allow overwriting older data as new chunks are added.
           type: boolean
         batchTTL:
+          description: Estimated remaining time-to-live of the batch in seconds.
           type: integer
         owner:
+          description: Ethereum address of the batch owner.
           $ref: "#/components/schemas/EthereumAddress"
         storageRadius:
+          description: The storage radius of the node. Defines the proximity order of chunks for which the node is responsible for storing.
           type: integer
 
     DebugPostageBatch:
@@ -571,20 +580,26 @@ components:
       type: object
       properties:
         bucketID:
+          description: Index of the bucket in the address space partition (0 to 2^bucketDepth - 1).
           type: integer
         collisions:
+          description: Number of chunks assigned to this bucket. When this reaches 2^(depth - bucketDepth), the bucket is full.
           type: integer
 
     PostageStampBuckets:
       type: object
       properties:
         depth:
+          description: Batch depth of the postage batch.
           type: integer
         bucketDepth:
+          description: Depth of the postage batch buckets. Fixed at 16.
           type: integer
         bucketUpperBound:
+          description: Maximum number of chunks allowed per bucket, equal to 2^(depth - bucketDepth).
           type: integer
         buckets:
+          description: Array of bucket data showing the utilization of each bucket.
           type: array
           nullable: false
           items:
@@ -665,12 +680,16 @@ components:
       type: object
       properties:
         reference:
+          description: Swarm reference of the pinned root hash that was checked.
           $ref: "#/components/schemas/SwarmOnlyReference"
         total:
+          description: Total number of chunks expected for this pinned content.
           type: integer
         missing:
+          description: Number of chunks that are missing from the local store.
           type: integer
         invalid:
+          description: Number of chunks that are present but have invalid data.
           type: integer
 
     SwarmOnlyReferencesList:
