@@ -507,27 +507,37 @@ components:
       type: object
       properties:
         batchID:
+          description: Unique identifier of the postage batch.
           $ref: "#/components/schemas/BatchID"
         utilization:
+          description: The highest number of filled slots out of all 2^bucketDepth buckets. When utilization reaches 2^(depth - bucketDepth), the batch is fully utilized for immutable batches.
           type: integer
         usable:
           description: Indicate that the batch was discovered by the Bee node, but it awaits enough on-chain confirmations before declaring the batch as usable.
           type: boolean
         label:
+          description: Optional label assigned to the batch for identification purposes. Labels are stored locally on the Bee node where the batch was created and are not available on other nodes.
           type: string
         depth:
+          description: Batch depth which determines the maximum number of chunks the batch can stamp. The theoretical maximum is 2^depth chunks, but effective capacity is lower due to how chunks are distributed across buckets.
           type: integer
         amount:
+          description: Amount of xBZZ (in PLUR) assigned per chunk. Determines how long the batch remains valid based on the current storage price (in PLUR per chunk per block). The total cost of the batch is 2^depth × amount.
           $ref: "#/components/schemas/BigInt"
         bucketDepth:
+          description: Depth of the postage batch buckets. Fixed at 16, partitioning the address space into 2^16 (65536) equally sized buckets.
           type: integer
         blockNumber:
+          description: Block number on Gnosis Chain at which the batch was created.
           type: integer
         immutableFlag:
+          description: Whether the batch is immutable. Immutable batches permanently store data and do not allow overwriting older chunks. Mutable batches allow overwriting older data as new chunks are added.
           type: boolean
         exists:
+          description: Whether the batch exists on-chain.
           type: boolean
         batchTTL:
+          description: Estimated remaining time-to-live of the batch in seconds. The TTL decreases as blocks are mined on Gnosis Chain and the batch balance is consumed.
           type: integer
 
     PostageBatchNoIssuer:
