@@ -179,10 +179,123 @@ The setup is intentionally minimal and suitable for testing and development, how
 
 The next section explains how to enable TLS so that your gateway can be securely accessed through HTTPS.
 
-## TLS Setup
 
-TBD
+## Part 2 — Securing your gateway with TLS (HTTPS)
 
-## Optional Features
+This section explains how to secure your gateway using **TLS (HTTPS)** with **Caddy**.
 
-TBD
+Caddy is used here as a front-facing web server that automatically manages TLS certificates and forwards traffic to `swarm-gateway`.
+
+In this setup:
+
+* Caddy is responsible only for HTTPS and certificate management
+* `swarm-gateway` continues to act as the application gateway and reverse proxy for Bee
+
+At the end of this section, your gateway will be reachable at:
+
+```text
+https://your-domain.example
+```
+
+And all HTTP traffic will be automatically redirected to HTTPS.
+
+### Prerequisites
+
+In addition to the prerequisites from Part 1:
+
+* Your domain must already point to your VPS IP address
+* Ports **80** and **443** must be open on your VPS firewall
+
+
+### 1. Reconfigure the gateway to not expose port 80
+
+Caddy will become the public entry point, so `swarm-gateway` should no longer be exposed directly.
+
+Stop and remove the existing container:
+
+```bash
+docker stop swarm-gateway
+docker rm swarm-gateway
+```
+
+Recreate it **without** publishing port 80:
+
+```bash
+docker run -d --restart unless-stopped \
+  --name swarm-gateway \
+  --network swarm-net \
+  -e HOSTNAME="your-domain.example" \
+  -e BEE_API_URL="http://bee-1:1633" \
+  -e DATABASE_CONFIG="{}" \
+  ethersphere/swarm-gateway:0.1.3
+```
+
+The gateway is now only accessible from within the Docker network.
+
+
+### 2. Create a Caddy configuration
+
+Create a directory for the Caddy configuration:
+
+```bash
+mkdir -p ~/caddy
+cd ~/caddy
+```
+
+Create a file named `Caddyfile`:
+
+```bash
+nano Caddyfile
+```
+
+Add the following configuration (replace the domain):
+
+```caddy
+your-domain.example {
+  reverse_proxy swarm-gateway:3000
+}
+```
+
+### 3. Run Caddy
+
+Start Caddy in Docker and attach it to the same Docker network:
+
+```bash
+docker run -d --restart unless-stopped \
+  --name caddy \
+  --network swarm-net \
+  -p 80:80 \
+  -p 443:443 \
+  -v $HOME/caddy/Caddyfile:/etc/caddy/Caddyfile \
+  -v caddy_data:/data \
+  -v caddy_config:/config \
+  caddy:2
+```
+
+Caddy will automatically:
+
+* Obtain a TLS certificate for your domain
+* Renew it before it expires
+* Redirect all HTTP traffic to HTTPS
+
+
+### 4. Verify operation
+
+From your local machine:
+
+```bash
+curl https://your-domain.example/health
+```
+
+Expected output:
+
+```text
+OK
+```
+
+You can also verify that HTTP is redirected to HTTPS:
+
+```bash
+curl -I http://your-domain.example/health
+```
+
