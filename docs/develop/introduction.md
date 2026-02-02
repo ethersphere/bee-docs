@@ -80,6 +80,15 @@ This is the go-to starting point for web3 developers who want to build with Swar
           <span class="hub-card__cta">Open Guide</span>
         </a>
       </li>
+      <li class="hub-card">
+        <a class="hub-card__link" href="/docs/develop/gateway-proxy">
+          <h3 class="hub-card__title">Run a Gateway</h3>
+          <p class="hub-card__desc">
+            Run your own Swarm HTTP gateway to serve content from the network and make it accessible to browsers and other HTTP clients.
+          </p>
+          <span class="hub-card__cta">Open guide</span>
+        </a>
+      </li>
       <!--
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/dynamic-content">
