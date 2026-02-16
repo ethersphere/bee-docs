@@ -24,7 +24,7 @@ However when Bee is started as a service with tools like `systemctl` or `brew se
 
 ### Command Line Arguments
 
-Run `bee start --help` in your terminal to list the available command-line arguments:
+Run `bee help printconfig` in your terminal to list the available command-line arguments and config option flags:
 
 ```bash
 Ethereum Swarm Bee
@@ -34,7 +34,7 @@ Usage:
 
 Available Commands:
   start       Start a Swarm node
-  dev         Start a Swarm node in development mode
+  dev         Start in dev mode. WARNING: This command will be deprecated soon.
   init        Initialise a Swarm node
   deploy      Deploy and fund the chequebook contract
   version     Print version number
@@ -49,15 +49,18 @@ Flags:
   -h, --help            help for bee
 
 Use "bee [command] --help" for more information about a command.
-root@noah-bee:~# docker exec bee-1 bee start --help
-Start a Swarm node
+root@noah-bee:~# docker exec -it bee-1 bee help printconfig
+Print default or provided configuration in yaml format
 
 Usage:
-  bee start [flags]
+  bee printconfig [flags]
 
 Flags:
       --allow-private-cidrs                      allow to advertise private CIDRs to the public network
       --api-addr string                          HTTP API listen address (default "127.0.0.1:1633")
+      --autotls-ca-endpoint string               autotls certificate authority endpoint (default "https://acme-v02.api.letsencrypt.org/directory")
+      --autotls-domain string                    autotls domain (default "libp2p.direct")
+      --autotls-registration-endpoint string     autotls registration endpoint (default "https://registration.libp2p.direct")
       --block-time uint                          chain block time (default 5)
       --blockchain-rpc-endpoint string           rpc blockchain endpoint
       --bootnode strings                         initial nodes to connect to (default [/dnsaddr/mainnet.ethswarm.org])
@@ -72,14 +75,18 @@ Flags:
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
       --db-write-buffer-size uint                size of the database write buffer in bytes (default 33554432)
       --full-node                                cause the node to start in full mode
-  -h, --help                                     help for start
+  -h, --help                                     help for printconfig
       --mainnet                                  triggers connect to main net bootnodes. (default true)
+      --minimum-gas-tip-cap uint                 minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
       --minimum-storage-radius uint              minimum radius storage threshold
       --nat-addr string                          NAT exposed address
+      --nat-wss-addr string                      WSS NAT exposed address
       --neighborhood-suggester string            suggester for target neighborhood (default "https://api.swarmscan.io/v1/network/neighborhoods/suggestion")
       --network-id uint                          ID of the Swarm network (default 1)
       --p2p-addr string                          P2P listen address (default ":1634")
       --p2p-ws-enable                            enable P2P WebSocket transport
+      --p2p-wss-addr string                      p2p wss address (default ":1635")
+      --p2p-wss-enable                           Enable Secure WebSocket P2P connections
       --password string                          password for decrypting keys
       --password-file string                     path to a file that contains password for decrypting keys
       --payment-early-percent int                percentage below the peers payment threshold when we initiate settlement (default 50)
@@ -148,11 +155,17 @@ bee printconfig
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
-api-addr: :1633
+api-addr: 0.0.0.0:1633
+# autotls certificate authority endpoint
+autotls-ca-endpoint: https://acme-v02.api.letsencrypt.org/directory
+# autotls domain
+autotls-domain: libp2p.direct
+# autotls registration endpoint
+autotls-registration-endpoint: https://registration.libp2p.direct
 # chain block time
 block-time: "5"
 # rpc blockchain endpoint
-blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+blockchain-rpc-endpoint: https://rpc.gnosischain.com
 # initial nodes to connect to
 bootnode:
 - /dnsaddr/mainnet.ethswarm.org
@@ -184,10 +197,14 @@ full-node: "true"
 help: false
 # triggers connect to main net bootnodes.
 mainnet: "true"
+# minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
+minimum-gas-tip-cap: "0"
 # minimum radius storage threshold
 minimum-storage-radius: "0"
 # NAT exposed address
 nat-addr: ""
+# WSS NAT exposed address
+nat-wss-addr: ""
 # suggester for target neighborhood
 neighborhood-suggester: https://api.swarmscan.io/v1/network/neighborhoods/suggestion
 # ID of the Swarm network
@@ -196,6 +213,10 @@ network-id: "1"
 p2p-addr: :1634
 # enable P2P WebSocket transport
 p2p-ws-enable: false
+# p2p wss address
+p2p-wss-addr: :1635
+# Enable Secure WebSocket P2P connections
+p2p-wss-enable: false
 # password for decrypting keys
 password: 427067e9514e93613b861fef5561c6
 # path to a file that contains password for decrypting keys
@@ -219,7 +240,7 @@ price-oracle-address: ""
 # redistribution contract address
 redistribution-address: ""
 # reserve capacity doubling
-reserve-capacity-doubling: "1"
+reserve-capacity-doubling: "0"
 # ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
 resolver-options: []
 # forces the node to resync postage contract data
@@ -582,6 +603,9 @@ Then configure your node, including your p2p port (default 1634).
 ## bee.yaml
 nat-addr: "123.123.123.123:1634"
 ```
+
+Ensure `nat-addr` and `nat-wss-addr` if used are set to valid `host:port` values — invalid values prevent the node from starting.
+
 
 ## ENS Resolution (Optional)
 
