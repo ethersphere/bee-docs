@@ -333,7 +333,8 @@ From the results we can see that our node's neighborhood size and batch commitme
         {
           "radius": 15,
           "storageRadius": 10,
-          "commitment": 134121783296
+          "commitment": 134121783296,
+          "reserveCapacityDoubling": 0
         }
     ```
 
@@ -341,7 +342,7 @@ From the results we can see that our node's neighborhood size and batch commitme
     * `"radius"` - Represents the maximum storage radius assuming all postage stamp batches are fully utilized.
     * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods).
     * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
-
+    * `"reserveCapacityDoubling"` - Indicates whether your node is currently using the reserve doubling mechanism. See [Reserve Doubling](/docs/bee/working-with-bee/staking#reserve-doubling) for details.
 ### _/chainstate_
 
     This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
