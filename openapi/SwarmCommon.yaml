@@ -50,6 +50,8 @@ components:
           type: integer
         commitment:
           type: integer
+        reserveCapacityDoubling:
+          type: integer
 
     ChainState:
       type: object
@@ -292,12 +294,6 @@ components:
 
     MultiAddress:
       type: string
-
-    NewTagRequest:
-      type: object
-      properties:
-        address:
-          $ref: "#/components/schemas/SwarmAddress"
 
     NewTagResponse:
       type: object
@@ -768,6 +764,12 @@ components:
         walletAddress:
           $ref: "#/components/schemas/EthereumAddress"
 
+    WithdrawCoin:
+      type: string
+      enum:
+        - "bzz"
+        - "nativetoken"
+
     RedistributionStatusResponse:
       type: object
       properties:
@@ -914,6 +916,8 @@ components:
           type: integer
         committedDepth:
           type: integer
+        isWarmingUp:
+          type: boolean
 
     StatusPeersResponse:
       type: object
@@ -1066,6 +1070,13 @@ components:
         quoted string, possibly prefixed by a weakness indicator.
       schema:
         type: string
+
+    SwarmFeedResolvedVersion:
+      schema:
+        type: string
+      required: false
+      description: "Indicates which feed version was resolved (v1 or v2)"
+
 
   parameters:
     GasPriceParameter:
