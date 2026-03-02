@@ -411,7 +411,7 @@ Website Swarm Hash: 6c45eae389b3bffce21443316d0bd47c4101545092b7c72c313a33ee7d00
 Feed Manifest: caa414d70028d14b0bdd9cbab18d1c1a0a3bab1b20a56cf06937a6b20c7e7377
 ```
 
-Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#2-connecting-your-website-to-ens)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
+Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
 
 ```
 bzz://<manifestRef>
@@ -461,7 +461,7 @@ The guide covers:
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 
 :::tip
-For the content hash, you can use a Swarm hosted website's hash directly, or as is recommended in the [`swarm-cli`](#recommended-use-feeds-for-seamless-updates---swarm-cli) and [`bee-js`](#recommended-use-feeds-for-seamless-updates---bee-js) guides above, publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates. 
+For the content hash, you can use a Swarm hosted website's hash directly, or as is recommended in the [`swarm-cli`](#use-feeds-for-seamless-updates---swarm-cli) and [`bee-js`](#use-feeds-for-seamless-updates---bee-js) guides above, publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates. 
 :::
 
 ```

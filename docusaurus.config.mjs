@@ -125,7 +125,7 @@ export default {
       items: [
         { 
           type: 'dropdown',
-          activeBasePath: 'docs/concepts',
+          activeBasePath: 'concepts',
           label: 'Concepts',
           position: 'left',
           className: 'inter',
@@ -140,7 +140,7 @@ export default {
         },
         {
           type: 'dropdown',
-          activeBasePath: 'docs/bee',
+          activeBasePath: 'bee',
           label: 'Bee Client',
           position: 'left',
           items: [
@@ -151,7 +151,7 @@ export default {
         },
         { 
           type: 'dropdown',
-          activeBasePath: 'docs/develop',
+          activeBasePath: 'develop',
           label: 'Develop',
           position: 'left',
           items: [
@@ -163,7 +163,7 @@ export default {
         },
         {
           type: 'dropdown',
-          activeBasePath: 'docs/desktop',
+          activeBasePath: 'desktop',
           label: 'Desktop App',
           position: 'left',
           items: [
@@ -180,7 +180,7 @@ export default {
         },
         { 
           type: 'dropdown',
-          activeBasePath: 'docs/references',
+          activeBasePath: 'references',
           label: 'References',
           position: 'left',
           items: [

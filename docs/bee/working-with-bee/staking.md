@@ -107,7 +107,7 @@ After staking you should [check your node's status](/docs/bee/working-with-bee/s
 ### Step 4: Monitor & Maximize Rewards
 
 ✅ Make sure you are using a stable Gnosis Chain [RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).  
-✅ [Check your node's status](/docs/bee/working-with-bee/staking#check-redistribution-status) to ensure it's operating properly.
+✅ [Check your node's status](/docs/bee/working-with-bee/staking#check-status) to ensure it's operating properly.
 ✅ [Check `/rchash`](/docs/bee/working-with-bee/bee-api#rchash) to ensure your node's performance is sufficient.
 
 

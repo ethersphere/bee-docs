@@ -10,3 +10,4 @@ resources
 /src/pages/awesome-swarm.mdx    
 test
 *.zip
+*.csv
