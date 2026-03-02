@@ -11,3 +11,5 @@ resources
 test
 *.zip
 *.csv
+# Tools
+.claude
