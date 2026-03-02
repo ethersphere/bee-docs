@@ -1,6 +1,7 @@
 ---
 title: Postage Stamps 
 id: postage-stamps
+description: Details prepaid batch system for uploading data to Swarm with dynamic pricing based on network redundancy signals.
 ---
 
 Postage stamps are used to pay for storing data on Swarm. They are purchased in batches, granting a prepaid right to store data on Swarm, similar to how real-world postage stamps pay for mail delivery.

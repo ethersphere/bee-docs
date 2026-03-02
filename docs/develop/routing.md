@@ -1,6 +1,7 @@
 ---
 title: Website Routing
 id: routing
+description: Explains message routing protocols and peer discovery mechanisms in the Swarm network.
 ---
 
 import Tabs from '@theme/Tabs';

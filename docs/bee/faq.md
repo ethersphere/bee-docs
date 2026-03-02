@@ -1,6 +1,7 @@
 ---
 title: Bee FAQ
 id: bee-faq
+description: Addresses common questions about running Bee nodes including setup installation troubleshooting and blockchain interactions.
 ---
 
 ## Running a Bee Node

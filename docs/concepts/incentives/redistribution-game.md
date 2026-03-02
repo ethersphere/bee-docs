@@ -1,6 +1,7 @@
 ---
 title: Redistribution Game
 id: redistribution-game
+description: Explains game-theoretic system distributing xBZZ from postage stamps to full nodes that honestly store data.
 ---
 
 The redistribution game distributes xBZZ collected from [postage stamp](/docs/concepts/incentives/postage-stamps) purchases, rewarding nodes for providing storage. Redistribution rewards incentivize nodes to continue providing storage to the network. The game is designed so that the most profitable strategy for participants is to store their assigned data honestly.

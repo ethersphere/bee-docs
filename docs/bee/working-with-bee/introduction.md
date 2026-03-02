@@ -1,6 +1,7 @@
 ---
 title: Introduction
 id: introduction
+description: Overview of node operation topics including configuration API access backups monitoring and upgrade procedures.
 ---
 
 In this section we cover everything a node operator needs to know about working with Bee:

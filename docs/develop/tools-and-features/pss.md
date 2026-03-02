@@ -1,6 +1,7 @@
 ---
 title: PSS Messaging
 id: pss
+description: Guide for using Postal Service over Swarm for private messaging between nodes.
 ---
 
 Out of the ashes of Ethereum's vision for a leak-proof decentralised anonymous messaging system - Whisper - comes PSS (or BZZ, whispered! 🤫). Swarm provides the ability to send messages that appear to be normal Swarm traffic, but are in fact messages that may be received and decrypted to reveal their content only by the specific nodes they were intended to be received by.

@@ -1,6 +1,7 @@
 ---
 title: GSOC
 id: gsoc
+description: Documentation for Group Send Over Content messaging feature in Swarm.
 ---
 
 ## Introduction

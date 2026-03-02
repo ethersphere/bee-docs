@@ -1,6 +1,7 @@
 ---
 title: Node Types
 id: node-types
+description: Compares full light and ultra-light node types with their features requirements and configuration for different use cases.
 ---
 
 

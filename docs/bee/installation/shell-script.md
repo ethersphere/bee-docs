@@ -1,6 +1,7 @@
 ---
 title: Shell Script Install
 id: shell-script-install
+description: Provides flexible installation using an automated shell script supporting Linux and macOS with customizable configuration options.
 ---
 
 import Tabs from '@theme/Tabs';

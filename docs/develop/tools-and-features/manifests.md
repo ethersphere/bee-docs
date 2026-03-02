@@ -1,6 +1,7 @@
 ---
 title: Manifests
 id: manifests
+description: Guide for using manifests to organize and address multiple files as a single unit in Swarm.
 ---
 
 

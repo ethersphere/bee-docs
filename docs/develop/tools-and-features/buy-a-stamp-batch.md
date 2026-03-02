@@ -1,6 +1,7 @@
 ---
 title: Postage Stamp Batches
 id: buy-a-stamp-batch
+description: Guide for purchasing postage stamp batches required for uploading data to Swarm.
 ---
 import VolumeAndDurationCalc from '@site/src/components/VolumeAndDurationCalc.js';
 import AmountAndDepthCalc from '@site/src/components/AmountAndDepthCalc.js';

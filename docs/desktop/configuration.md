@@ -1,6 +1,7 @@
 ---
 title: Configuration
 id: configuration
+description: Explains configuration options and settings available in the Swarm Desktop user interface.
 ---
 
 

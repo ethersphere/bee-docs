@@ -1,6 +1,7 @@
 ---
 title: Quickstart
 id: quick-start
+description: Accelerates Bee setup with shell script installation and swarm-cli tools enabling rapid node deployment and network interaction.
 ---
 
 This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.

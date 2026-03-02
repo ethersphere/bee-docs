@@ -1,6 +1,7 @@
 ---
 title: Upload & Download
 id: upload-and-download
+description: Comprehensive guide for uploading and downloading files with the Bee API.
 ---
 
 Uploading to Swarm has two steps: (1) **buy storage** as a **postage stamp batch** with a unique **batch ID**—and (2) **upload using the batch ID**. The upload returns a **Swarm reference hash**, anyone with that reference can download the content.

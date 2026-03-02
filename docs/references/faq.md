@@ -1,6 +1,7 @@
 ---
 title: FAQ
 id: faq
+description: Frequently asked questions about Swarm protocols and general usage.
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 title: Fund Your Node
 id: fund-your-node
+description: Outlines xDAI and xBZZ token requirements by use case and provides guidance on acquiring tokens from exchanges and faucets.
 ---
 
 ## Overview

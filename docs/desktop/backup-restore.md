@@ -1,6 +1,7 @@
 ---
 title: Backup and Restore 
 id: backup-restore
+description: Instructions for backing up and restoring wallet keys and data in the Swarm Desktop application.
 ---
 
 ## Create a Backup

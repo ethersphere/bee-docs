@@ -1,6 +1,7 @@
 ---
 title: Backups
 id: backups
+description: Details critical backup procedures for keys password and node data across various installation methods and platforms.
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

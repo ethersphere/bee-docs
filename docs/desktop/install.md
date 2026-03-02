@@ -1,6 +1,7 @@
 ---
 title: Install
 id: install
+description: Provides installation instructions for the Swarm Desktop GUI application on Windows macOS and Linux.
 ---
 
 ## Download and Install Swarm Desktop

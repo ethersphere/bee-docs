@@ -1,6 +1,7 @@
 ---
 title: Host a Webpage
 id: host-your-website
+description: Comprehensive guide for uploading and hosting websites on Swarm with content addressing.
 ---
 
 import Tabs from '@theme/Tabs';

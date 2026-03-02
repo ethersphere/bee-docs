@@ -1,6 +1,7 @@
 ---
 title: Configuration
 id: configuration
+description: Documents all Bee configuration options available through YAML files environment variables and command-line flags.
 ---
 
 import Tabs from '@theme/Tabs';

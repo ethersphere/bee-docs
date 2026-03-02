@@ -1,6 +1,7 @@
 ---
 title: Erasure Coding
 id: erasure-coding
+description: Guide for using optional erasure coding to add redundancy and protection to uploaded data.
 ---
 
 import RedundancyCalc from '@site/src/components/RedundancyCalc.js';

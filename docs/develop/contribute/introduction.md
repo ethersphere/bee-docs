@@ -1,6 +1,7 @@
 ---
 title: Introduction
 id: introduction
+description: Overview of how to contribute to Bee development including code standards and contribution process.
 ---
 
 # Contribute to Bee Development

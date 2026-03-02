@@ -1,6 +1,7 @@
 ---
 title: Swarm CLI
 id: swarm-cli
+description: Introduces swarm-cli command-line tool that simplifies node interaction uploads downloads and batch management.
 ---
 
 **Swarm‑CLI** is a command‑line tool powered by `bee-js` that makes it easy to interact with your Bee node directly from the command line. It’s friendlier than working with the raw Bee HTTP API and faster than writing a custom `bee-js` script when you just want to perform an action from the terminal.

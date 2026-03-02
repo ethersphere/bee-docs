@@ -1,6 +1,7 @@
 ---
 title: Feeds
 id: feeds
+description: Explains mutable content feeds allowing for updating content while maintaining a static address.
 ---
 
 Swarm feeds cleverly combine

@@ -1,6 +1,7 @@
 ---
 title: Glossary
 id: glossary
+description: Comprehensive glossary of terms and concepts used throughout Swarm documentation.
 ---
 
 

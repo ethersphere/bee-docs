@@ -1,6 +1,7 @@
 ---
 title: Introduction
 id: introduction
+description: Overview of advanced tools and features available for Swarm development.
 ---
 
 # Hosting Your Dapps & Storing Their Data

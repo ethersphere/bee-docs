@@ -1,6 +1,7 @@
 ---
 title: Starting a Private Network
 id: starting-a-test-network
+description: Instructions for setting up local test networks for development and experimentation.
 ---
 
 A private network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](/docs/bee/working-with-bee/configuration)).

@@ -1,6 +1,7 @@
 ---
 title: Start a Blog
 id: start-a-blog
+description: Tutorial for creating and publishing blog content on Swarm with the Desktop application.
 ---
 
 ## A Guide to Starting Your Blog on Swarm

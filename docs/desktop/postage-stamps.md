@@ -1,6 +1,7 @@
 ---
 title: Postage Stamps
 id: postage-stamps
+description: Guide for purchasing and managing postage stamp batches through the Swarm Desktop interface.
 ---
 
 

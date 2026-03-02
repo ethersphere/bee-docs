@@ -1,6 +1,7 @@
 ---
 title: Chunk Types
 id: chunk-types
+description: Explains different chunk types including content-addressed and single-owner chunks used in Swarm.
 ---
 
 Swarm is home to many types of chunks, but these can be categoried

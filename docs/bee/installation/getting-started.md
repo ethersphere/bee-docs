@@ -1,6 +1,7 @@
 ---
 title: Getting Started
 id: getting-started
+description: Introduces Bee node types their requirements and available installation methods to help users choose appropriate setup approaches.
 ---
 
 *If you want to get a Bee node up and running ASAP, check out the [Quick Start](/docs/bee/installation/quick-start) guide.* 

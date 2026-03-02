@@ -1,6 +1,7 @@
 ---
 title: Publish a Website
 id: publish-a-website
+description: Step-by-step instructions for uploading and hosting websites on Swarm using the Desktop application.
 ---
 
 ## Step by Step Guide 

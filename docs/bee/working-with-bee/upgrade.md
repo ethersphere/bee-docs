@@ -1,6 +1,7 @@
 ---
 title: Upgrading Bee
 id: upgrading-bee
+description: Procedures for safely upgrading Bee to latest versions while preserving keys avoiding round disruption and cashing out rewards.
 ---
 
 It's very important to keep Bee up to date to benefit from security updates and ensure you are able to properly interact with the Swarm network. The [#node-operators](https://discord.com/channels/799027393297514537/811553590170353685) channel is an excellent resource for any of your questions regarding node operation. 

@@ -1,6 +1,7 @@
 ---
 title: Docker Install
 id: docker
+description: Provides comprehensive steps for deploying Bee nodes using Docker containers with volume management and network configuration.
 ---
 
 # Docker Install

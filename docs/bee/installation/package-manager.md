@@ -1,6 +1,7 @@
 ---
 title: Package Manager Install
 id: package-manager-install
+description: Guides installation using system package managers (APT RPM Homebrew) with background service configuration and management.
 ---
 
 import Tabs from '@theme/Tabs';

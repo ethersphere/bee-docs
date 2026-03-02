@@ -1,6 +1,7 @@
 ---
 title: Add Access Control
 id: act
+description: Guide for implementing encryption and access control in decentralized applications using Bee.
 ---
 
 :::info

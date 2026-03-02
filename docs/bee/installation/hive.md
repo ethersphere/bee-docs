@@ -1,6 +1,7 @@
 ---
 title: Hive
 id: hive
+description: Describes tools and orchestration methods for managing multiple Bee nodes using Docker Compose Helm or manual configuration.
 ---
 
 Due to the mechanics of Swarm's [storage incentives](/docs/concepts/incentives/redistribution-game), node operators may wish to run multiple nodes in order to maximize earning potential. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for more information on how the

@@ -1,6 +1,7 @@
 ---
 title: Fair Data Society
 id: fair-data-society
+description: Overview of Fair Data Society initiatives and collaboration with Swarm.
 ---
 
 The [Fair Data Society (FDS)](https://fairdatasociety.org/) is a coordinated network developing infrastructure and dApps for a fairer data economy and promoting human rights through digital sovereignty. It is a movement and vision aimed at promoting a decentralized, equitable, and sustainable digital ecosystem that respects individual privacy and data ownership. Its core goal is to empower individuals with control over their data, ensuring that data is used ethically and transparently, while fostering a more balanced relationship between individuals, organizations, and governments.

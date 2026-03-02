@@ -1,6 +1,7 @@
 ---
 title: Ultra Light Nodes
 id: ultra-light-nodes
+description: Guide for running minimal ultra-light nodes with limited functionality and resource requirements.
 ---
 
 :::danger

@@ -1,6 +1,7 @@
 ---
 title: Staking
 id: staking
+description: Walkthrough of depositing xBZZ to participate in the storage incentives redistribution game and earn network rewards.
 ---
 
 ## Quickstart Guide

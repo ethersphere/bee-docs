@@ -1,6 +1,7 @@
 ---
 title: Neighborhoods
 id: neighborhoods
+description: Describes proximity-based node groupings that share storage responsibilities using proximity order to determine neighborhoods.
 ---
 
 In Swarm, a neighborhood refers to an area of responsibility within the network, where nodes in proximity to one another share the task of storing and maintaining data chunks. Nodes within a neighborhood replicate chunks to ensure that if one node goes offline, other nodes in the neighborhood can still retrieve and serve the content.

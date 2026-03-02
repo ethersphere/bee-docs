@@ -1,6 +1,7 @@
 ---
 title: Uninstalling Bee
 id: uninstalling-bee
+description: Instructions for cleanly removing Bee installations across different operating systems and package managers.
 ---
 
 Choose the appropriate uninstallation method based on how Bee was installed:

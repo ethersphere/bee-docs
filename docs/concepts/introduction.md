@@ -1,6 +1,7 @@
 ---
 title: Introduction
 id: introduction
+description: Overview of Swarm's peer-to-peer infrastructure the Bee client and the Swarm Foundation's mission for decentralized storage.
 ---
 
 

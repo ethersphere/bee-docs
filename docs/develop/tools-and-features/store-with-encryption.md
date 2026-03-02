@@ -1,6 +1,7 @@
 ---
 title: Store with Encryption
 id: store-with-encryption
+description: Guide for encrypting data before upload to protect privacy and confidentiality.
 ---
 
 In Swarm, all data is _public_ by default. To protect sensitive content, it must be encrypted so that only authorised users are able to decrypt and then view the plaintext content.

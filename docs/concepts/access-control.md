@@ -1,6 +1,7 @@
 ---
 title: Access Control
 id: access-control
+description: Introduces Access Control Trie (ACT) for managing encryption and permissions in decentralized storage with content sharing capabilities.
 ---
 
 The Access Control Trie (ACT) implements the operation of encryption at the chunk level, with the presence of a decryption/encryption key being the only distinction between accessing private and public data.

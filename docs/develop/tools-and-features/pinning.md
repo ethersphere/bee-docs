@@ -1,6 +1,7 @@
 ---
 title: Pinning
 id: pinning
+description: Explains pinning mechanism for ensuring data permanence and preventing garbage collection.
 ---
 
 Each Bee node is configured to reserve a certain amount of memory on your computer's hard drive to store and serve chunks within their _neighborhood of responsibility_ for other nodes in the Swarm network. Once this alloted space has been filled, each Bee node deletes older chunks to make way for newer ones as they are uploaded by the network.

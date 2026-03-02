@@ -1,6 +1,7 @@
 ---
 title: Bee JS
 id: bee-js
+description: Documentation for the JavaScript library providing programmatic access to Bee node APIs.
 ---
 
 bee-js is Bee's complementary JavaScript library. It is the technology underpinning [swarm-cli](/docs/bee/working-with-bee/swarm-cli) and [Swarm Desktop](/docs/desktop/introduction/) and is a powerful tool for building completely decentralized apps.
