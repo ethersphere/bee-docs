@@ -36,7 +36,7 @@ Note that this guarantee of retrievability is for each 128 chunk segment, and th
 
 ## Usage
 
-For usage instructions, see the [erasure coding page in the "Develop" section](/docs/develop/tools-and-features/erasure-coding).
+For usage instructions, see the [erasure coding page in the "Develop" section](./../../develop/tools-and-features/erasure-coding.md).
 
 ## Cost Calculation
 

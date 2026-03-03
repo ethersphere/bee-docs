@@ -4,15 +4,15 @@ id: redistribution-game
 description: Explains game-theoretic system distributing xBZZ from postage stamps to full nodes that honestly store data.
 ---
 
-The redistribution game distributes xBZZ collected from [postage stamp](/docs/concepts/incentives/postage-stamps) purchases, rewarding nodes for providing storage. Redistribution rewards incentivize nodes to continue providing storage to the network. The game is designed so that the most profitable strategy for participants is to store their assigned data honestly.
+The redistribution game distributes xBZZ collected from [postage stamp](./postage-stamps.md) purchases, rewarding nodes for providing storage. Redistribution rewards incentivize nodes to continue providing storage to the network. The game is designed so that the most profitable strategy for participants is to store their assigned data honestly.
 
 ### Redistribution Game Details
 
-Uploading data to Swarm requires purchasing postage stamp batches with xBZZ. The collected xBZZ is later redistributed as rewards to storage nodes. Every 152 Gnosis Chain blocks ***a single [neighborhood](/docs/concepts/DISC/neighborhoods)*** is selected to play the redistribution game. For each round of the game, one node from the selected neighborhood will have the chance to win a reward which is paid out from the accumulated xBZZ. 
+Uploading data to Swarm requires purchasing postage stamp batches with xBZZ. The collected xBZZ is later redistributed as rewards to storage nodes. Every 152 Gnosis Chain blocks ***a single [neighborhood](./../DISC/neighborhoods.md)*** is selected to play the redistribution game. For each round of the game, one node from the selected neighborhood will have the chance to win a reward which is paid out from the accumulated xBZZ. 
 
 The game has 3 phases, `commit`, `reveal`, and `claim`. In the `reveal` phase of a previous game, an "anchor" address is randomly generated and used to determine the neighborhood for the current round. 
 
-In the `commit` phase, nodes issue an on-chain transaction including an encrypted hash of the data they are storing (the unencrypted hash is known as the "reserve commitment") along with the [depth](/docs/references/glossary#2-area-of-responsibility-related-depths) for which they are reporting. This serves as an attestation of the data they are storing without revealing any other information.
+In the `commit` phase, nodes issue an on-chain transaction including an encrypted hash of the data they are storing (the unencrypted hash is known as the "reserve commitment") along with the [depth](./../../references/glossary.md#2-area-of-responsibility-related-depths) for which they are reporting. This serves as an attestation of the data they are storing without revealing any other information.
 
 In the `reveal` phase, each node reveals the decryption key for their encrypted hashes thereby publishing the hash. The winner is chosen at random among the honest nodes, but it is weighted in proportion to each node's stake density. Stake density is calculated as so:
 

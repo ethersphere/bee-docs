@@ -10,7 +10,6 @@ export default {
   baseUrl: '/', 
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
   onDuplicateRoutes: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm',
@@ -28,7 +27,12 @@ export default {
   ],
 
   themes: ['@docusaurus/theme-mermaid'],
-  markdown: { mermaid: true },
+  markdown: {
+    mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn'
+    }
+  },
 
   plugins: [
     'plugin-image-zoom',

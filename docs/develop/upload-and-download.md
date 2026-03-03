@@ -368,7 +368,7 @@ The Bee API exposes three HTTP endpoints:
 
 #### Upload with **/bzz**
 
-While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](/docs/develop/tools-and-features/buy-a-stamp-batch).
+While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
 
 1. Buy a postage batch:
 

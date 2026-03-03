@@ -7,7 +7,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-Backing up your Bee node involves copying and saving files from the data directory specified in the `dat-dir` configuration option, along with the node's password. The details of where and how this option is specified will vary depending on the type of [configuration method](/docs/bee/working-with-bee/configuration) used (YAML file, command line flag, or environment variable).
+Backing up your Bee node involves copying and saving files from the data directory specified in the `dat-dir` configuration option, along with the node's password. The details of where and how this option is specified will vary depending on the type of [configuration method](./configuration.md) used (YAML file, command line flag, or environment variable).
 
 :::caution
 A node's password may be specified in several different locations. It can be specified either through the `password` option or the `password-file` option. For a backup, you will need to either copy the `password` option value, or copy the file itself from the location specified by the `password-file` option.
@@ -99,7 +99,7 @@ If you installed Bee via a package manager but sometimes start it manually, you 
 * System service (`systemctl start bee`) → Uses `/var/lib/bee`.
 * Manual start (`bee start`) → Uses `/home/<user>/.bee`.
 
-*The exact directory will differ depending on your system. See [Configuration page](/docs/bee/working-with-bee/configuration#default-data-and-config-directories).*
+*The exact directory will differ depending on your system. See [Configuration page](./configuration.md#default-data-and-config-directories).*
 :::
 
 ### *apt* and *yum / rpm* Package Managers
@@ -136,7 +136,7 @@ Default `data-dir` location:
 
 ### Shell Script & Binary Install 
 
-If you installed Bee using the [automated shell script](/docs/bee/installation/shell-script-install) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
+If you installed Bee using the [automated shell script](./../installation/shell-script.md) or by [building Bee from source](./../installation/build-from-source.md), your data directory will typically be located at:
 
 ```bash
 /home/<user>/.bee
@@ -166,7 +166,7 @@ sudo cp -r /var/lib/bee/ backup
     
 ## Back-up your password 
 
-Depending on your [configuration](/docs/bee/working-with-bee/configuration) method, your password may be located in a variety of different locations. If you use a `.yaml` file for your configuration, then it might be found directly under the `password` option, or it could be that the location of your password file is recorded by the `password-file` option. In either case, make sure to record the password somewhere safe or include the password file as a part of your backup.   
+Depending on your [configuration](./configuration.md) method, your password may be located in a variety of different locations. If you use a `.yaml` file for your configuration, then it might be found directly under the `password` option, or it could be that the location of your password file is recorded by the `password-file` option. In either case, make sure to record the password somewhere safe or include the password file as a part of your backup.   
 
 The same applies to other configuration methods. If you use environment variables for specifying your configuration options, your password itself will likely be specified in a `.env` file somewhere which contains either the password itself in the `BEE_PASSWORD` variable or the location of your password file in the `BEE_PASSWORD_FILE` variable. 
 
@@ -226,10 +226,10 @@ Before restoring, make sure to check for any old node data from a previous node 
 :::
 
 :::tip
-The specific directories and commands for restoring will depend on which install method and system is used. The instructions below are for a Linux package manager based installation. See the [configuration section](/docs/bee/working-with-bee/configuration#default-data-and-config-directories) more more details about default file locations.
+The specific directories and commands for restoring will depend on which install method and system is used. The instructions below are for a Linux package manager based installation. See the [configuration section](./configuration.md#default-data-and-config-directories) more more details about default file locations.
 :::
 
-1. After [uninstalling](/docs/bee/working-with-bee/uninstalling-bee) any existing Bee installations, perform a new [installation](/docs/bee/installation/getting-started#installation-methods).
+1. After [uninstalling](./uninstalling-bee.md) any existing Bee installations, perform a new [installation](./../installation/getting-started.md#installation-methods).
 
 1. Remove any existing Bee node data before restoring. This prevents conflicts with old files:
 

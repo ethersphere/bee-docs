@@ -6,7 +6,7 @@ description: Documentation for Group Send Over Content messaging feature in Swar
 
 ## Introduction
 
-The Graffiti Several Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](/docs/develop/tools-and-features/chunk-types/#single-owner-chunks) with an address which is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process. 
+The Graffiti Several Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](./chunk-types.md#single-owner-chunks) with an address which is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process. 
 
 The service node determines the data used to derive the GSOC private key. Any node with access to this data can derive the same private key and update the GSOC in order to send messages to the service node. Since only full nodes sync neighborhood chunks, the service node *must be a full node to receive GSOC updates*.  
 
@@ -18,7 +18,7 @@ GSOC was initially introduced in a [SWIP](https://github.com/ethersphere/SWIPs/b
 
 ## *bee-js* GSOC Methods
 
-While you can interact with GSOC directly via the `/gsoc/subscribe/{address}` endpoint, the [bee-js](/docs/develop/tools-and-features/bee-js/) library is the recommended way for most users. The library includes three methods which make it easy to get started with GSOC:
+While you can interact with GSOC directly via the `/gsoc/subscribe/{address}` endpoint, the [bee-js](./bee-js.md) library is the recommended way for most users. The library includes three methods which make it easy to get started with GSOC:
 
 ### `Bee.gsocMine()`
 
@@ -59,7 +59,7 @@ The `Bee.gsocSend` method is used by a writer node for sending GSOC messages. It
 #### Functionality:
 
 1. Used by the writer node to send a GSOC message using the private key returned from `gsocMine()`.
-2. Requires the `postageBatchId` for a valid postage stamp batch (ideally [mutable](/docs/develop/tools-and-features/gsoc#script-requirements)) to send messages.
+2. Requires the `postageBatchId` for a valid postage stamp batch (ideally [mutable](./gsoc.md#script-requirements)) to send messages.
 
 
 ### `Bee.gsocSubscribe()`
@@ -90,12 +90,12 @@ To run both nodes and send messages from the writer node to the service node you
 1. A fully synced Bee full node for the service node and a second Bee light node for the writer node (they do not both need to be running on the same machine) 
 2. A small amount of xDAI (~0.01) and xBZZ (~0.01)
 3. [NodeJS](https://nodejs.org/en) & [NPM](https://www.npmjs.com/)  
-4. A mutable stamp batch (*set the* [`immutable` header parameter](/api/#tag/Postage-Stamps/paths/~1stamps~1%7Bamount%7D~1%7Bdepth%7D/post) *to `false` when* [buying a batch](/docs/develop/tools-and-features/buy-a-stamp-batch#buying-a-stamp-batch))  
+4. A mutable stamp batch (*set the* [`immutable` header parameter](/api/#tag/Postage-Stamps/paths/~1stamps~1%7Bamount%7D~1%7Bdepth%7D/post) *to `false` when* [buying a batch](./buy-a-stamp-batch.md#buying-a-stamp-batch))  
 
 :::warning  
 Only ***mutable*** postage stamp batches should be used for GSOC.
 
-Since each GSOC update utilizes one slot within the ***same*** [postage batch bucket](/docs/concepts/incentives/postage-stamps#batch-utilisation), immutable batches will fill up very quickly (e.g., at depth 18, four GSOC messages exhaust the batch).  
+Since each GSOC update utilizes one slot within the ***same*** [postage batch bucket](./../../concepts/incentives/postage-stamps.md#batch-utilisation), immutable batches will fill up very quickly (e.g., at depth 18, four GSOC messages exhaust the batch).  
 
 Mutable batches allow updates to overwrite older ones, preventing full utilization and enabling indefinite GSOC messaging as long as the batch still has remaining TTL.  
 :::  
@@ -204,7 +204,7 @@ This means the service node has successfully mined a GSOC chunk that it falls in
  
 ✅ For your writer node, either a light or a full node can be used
 
-✅ A writer node needs a valid ***mutable*** (not technically required, but [strongly recommended](/docs/develop/tools-and-features/gsoc#script-requirements)) postage stamp batch in order to send GSOC messages 
+✅ A writer node needs a valid ***mutable*** (not technically required, but [strongly recommended](./gsoc.md#script-requirements)) postage stamp batch in order to send GSOC messages 
 
 #### Initialize Project
 
@@ -284,7 +284,7 @@ async function sendGsocMessage(privateKey, name, body) {
 Update the configuration section constants with your own information:
 
 * Set `BEE_HOST` to your writer node's API endpoint
-* Set `BEE_BATCH` to the batch id of a valid, *mutable* postage stamp batch - [buy a batch](/docs/develop/tools-and-features/buy-a-stamp-batch) if needed
+* Set `BEE_BATCH` to the batch id of a valid, *mutable* postage stamp batch - [buy a batch](./buy-a-stamp-batch.md) if needed
 * Set `TARGET_OVERLAY` to the service node overlay value we copied from the output of the service node script 
 
 After updating the configuration, run the writer node script (before running the writer node script, make sure the service node script has already been started and is currently listening for GSOC updates):

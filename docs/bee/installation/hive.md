@@ -4,12 +4,12 @@ id: hive
 description: Describes tools and orchestration methods for managing multiple Bee nodes using Docker Compose Helm or manual configuration.
 ---
 
-Due to the mechanics of Swarm's [storage incentives](/docs/concepts/incentives/redistribution-game), node operators may wish to run multiple nodes in order to maximize earning potential. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for more information on how the
+Due to the mechanics of Swarm's [storage incentives](./../../concepts/incentives/redistribution-game.md), node operators may wish to run multiple nodes in order to maximize earning potential. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for more information on how the
 swarm comes together.
 
 ### Docker
 
-Up-to-date [Docker images for Bee](/docs/bee/installation/docker) are provided.
+Up-to-date [Docker images for Bee](./docker.md) are provided.
 
 ### Docker Compose
 
@@ -37,4 +37,4 @@ Configure your nodes as desired, but ensure that the values `api-addr`, `data-di
 
 ### Monitoring
 
-See the [logging section](/docs/bee/working-with-bee/logs-and-files) for more information on how to access your node's metrics. Share your community creations (such as [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel of our Discord server so we can add you to our list of all things that are [awesome](https://github.com/ethersphere/awesome-swarm) and Swarm. 🧡
+See the [logging section](./../working-with-bee/logs-and-files.md) for more information on how to access your node's metrics. Share your community creations (such as [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel of our Discord server so we can add you to our list of all things that are [awesome](https://github.com/ethersphere/awesome-swarm) and Swarm. 🧡

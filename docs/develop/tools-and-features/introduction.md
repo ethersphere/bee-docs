@@ -18,27 +18,27 @@ Swarm is designed with decentralised applications in mind, and much time has bee
 
 ### Bee JS
 
-Our maverick JavaScript team, the Bee-Gees (🕺), have been working hard in the last few months to build some impressive tools for all you budding dapp developer Bees to get stuck into! Find out how to use the [bee-js](/docs/develop/tools-and-features/bee-js) JavaScript library to start creating your own that live and work on Swarm!
+Our maverick JavaScript team, the Bee-Gees (🕺), have been working hard in the last few months to build some impressive tools for all you budding dapp developer Bees to get stuck into! Find out how to use the [bee-js](./bee-js.md) JavaScript library to start creating your own that live and work on Swarm!
 
 ### Chunk Types
 
 Swarm contains 3 types of chunks which enable us to build novel
 structures of how data can be stored in the swarm - in a completely
 decentralised way. Learn more about
-[chunk types](/docs/develop/tools-and-features/chunk-types)
+[chunk types](./chunk-types.md)
 to change the way you deal with data in your dapps forever!
 
 ### Feeds
 
 Swarm's single owner chunks have been cleverly combined to create user
-generated [feeds](/docs/develop/tools-and-features/feeds) in the swarm, see this
+generated [feeds](./feeds.md) in the swarm, see this
 example of how chunks are combined into a useful data structure you
 can use to build amazing applications.
 
 ### PSS
 
 Hey there! Pss! 🤫 Swarm's trojan chunks are implemented in Bee to
-deliver [Postal Service on Swarm](/docs/develop/tools-and-features/pss) - a
+deliver [Postal Service on Swarm](./pss.md) - a
 pub-sub system that provides a totally leak-proof messaging system
 over the swarm.
 
@@ -54,10 +54,10 @@ their own Bee node, for the time being you will need to make use of the [Gateway
 
 ### Bee Dev Mode
 
-If you want to test out Swarm based applications without needing to spend real xBZZ, Bee dev mode is an invaluable tool. Learn how to set up Bee in [dev mode](/docs/develop/tools-and-features/bee-dev-mode) to begin prototyping your applications.
+If you want to test out Swarm based applications without needing to spend real xBZZ, Bee dev mode is an invaluable tool. Learn how to set up Bee in [dev mode](./dev-mode.md) to begin prototyping your applications.
 
 
 ### Starting a Test Network
 
-While bee dev mode allows you to simulate running a single Bee node, setting up a [test network](/docs/develop/tools-and-features/starting-a-test-network) will allow you to better simulate interactions between multiple nodes.
+While bee dev mode allows you to simulate running a single Bee node, setting up a [test network](./starting-a-test-network.md) will allow you to better simulate interactions between multiple nodes.
 

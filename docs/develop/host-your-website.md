@@ -44,7 +44,7 @@ This guide shows you how to get your website hosted on Swarm with just a few sim
 
 ### Prerequisites
 
-* A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
+* A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage batch
 * [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli)
 * A valid postage stamp batch
@@ -283,7 +283,7 @@ For developers building apps, tools, or automated deployments, `bee-js` offers p
 
 ### Prerequisites
 
-* A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
+* A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage stamp batch
 * Node.js (18+) and `@ethersphere/bee-js` installed in your project
 * Static website files (HTML, CSS, etc.) - feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/basic-static-website)

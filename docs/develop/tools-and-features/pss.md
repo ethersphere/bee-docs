@@ -52,7 +52,7 @@ localhost:1833/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072
 --data "Hello Swarm"
 ```
 
-More information on how to buy a postage stamp batch and get its batch id can be found [here](/docs/develop/tools-and-features/buy-a-stamp-batch).
+More information on how to buy a postage stamp batch and get its batch id can be found [here](./buy-a-stamp-batch.md).
 
 ### Send Messages in a Test Network
 

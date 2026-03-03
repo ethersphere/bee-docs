@@ -7,11 +7,11 @@ description: Procedures for safely upgrading Bee to latest versions while preser
 It's very important to keep Bee up to date to benefit from security updates and ensure you are able to properly interact with the Swarm network. The [#node-operators](https://discord.com/channels/799027393297514537/811553590170353685) channel is an excellent resource for any of your questions regarding node operation. 
 
 :::warning
-Bee sure to [back up](/docs/bee/working-with-bee/backups) your keys and [cash out your cheques](/docs/bee/working-with-bee/cashing-out) to ensure your xBZZ is safe before applying updates.
+Bee sure to [back up](./backups.md) your keys and [cash out your cheques](./cashing-out.md) to ensure your xBZZ is safe before applying updates.
 :::
 
 :::warning
-Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get). See [staking section](/docs/bee/working-with-bee/staking/) for more information on staking and troubleshooting.
+Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get). See [staking section](./staking.md) for more information on staking and troubleshooting.
 :::
 
 

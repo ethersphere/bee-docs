@@ -6,7 +6,7 @@ description: Guide for purchasing and managing postage stamp batches through the
 
 
 :::info
-Swarm Desktop must be configured as a light node in order to access stamp related features. If you have not already upgraded from the default ultra-light configuration, complete the upgrade by following the ***[instructions here](/docs/desktop/configuration#upgrading-from-an-ultra-light-to-a-light-node)***.
+Swarm Desktop must be configured as a light node in order to access stamp related features. If you have not already upgraded from the default ultra-light configuration, complete the upgrade by following the ***[instructions here](./configuration.md#upgrading-from-an-ultra-light-to-a-light-node)***.
 :::
 
 Postage stamps are required in order to upload data to Swarm. Postage stamps are purchased by interacting with the Swarm postage stamp smart contract on Gnosis Chain. Postage stamps are not purchased one by one, rather they are purchased in batches only.
@@ -24,7 +24,7 @@ And then clicking the ***Buy New Postage Stamp*** button:
 
 ### Depth and Amount
 
-Batch [depth and amount](/docs/concepts/incentives/postage-stamps) are the two required parameters which must be set when purchasing a postage stamp batch. Depth determines how many chunks can be stamped with a batch while amount determines how much xBZZ is assigned per chunk.
+Batch [depth and amount](./../concepts/incentives/postage-stamps.md) are the two required parameters which must be set when purchasing a postage stamp batch. Depth determines how many chunks can be stamped with a batch while amount determines how much xBZZ is assigned per chunk.
 
 ![](/img/stamps3.png)
 
@@ -57,7 +57,7 @@ To get started, click on the "Topup and Dilute" button.
 
 ![](/img/stamps7.png)
 
-From the "Action" dropdown menu, make sure that you have "Topup" selected and then fill in the `amount` by which you wish to top up the batch. Note that the number entered here is in PLUR (1e-16 xBZZ), and it is the same `amount`` parameter described in the [section above](/docs/desktop/postage-stamps#depth-and-amount) on purchasing postage stamp batches, it is NOT equal to the total amount of xBZZ spent for this top up transaction. 
+From the "Action" dropdown menu, make sure that you have "Topup" selected and then fill in the `amount` by which you wish to top up the batch. Note that the number entered here is in PLUR (1e-16 xBZZ), and it is the same `amount`` parameter described in the [section above](./postage-stamps.md#depth-and-amount) on purchasing postage stamp batches, it is NOT equal to the total amount of xBZZ spent for this top up transaction. 
 
 After inputting the `amount`, click "Topup" to submit the transaction.
 

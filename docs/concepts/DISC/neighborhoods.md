@@ -19,7 +19,7 @@ The PO measures how close a node is to a particular chunk of data or another nod
 
 ### Reserve Depth
 
-The reserve depth is the shallowest PO at which neighborhoods are able to store all of the chunks which have been paid for through [postage stamp batch](/docs/concepts/incentives/overview#postage-stamps) purchases.
+The reserve depth is the shallowest PO at which neighborhoods are able to store all of the chunks which have been paid for through [postage stamp batch](./../incentives/overview.mdx#postage-stamps) purchases.
 
 ### Storage Depth
 
@@ -66,7 +66,7 @@ Storer nodes are responsible for storing chunks with addresses whose leading bit
 > Chunk A address: `da49a42926015cd1e2bc552147c567b1ca13e8d4302c9e6026e79a24de328b65`   
 > Chunk B address: `da696a3dfb0f7f952872eb33e0e2a1435c61f111ff361e64203b5348cc06dc8a`   
 
-As the address of the chunk shown above shares the same ten leading binary bits as the nodes in our example neighborhood, it falls into that neighborhood's [area of responsibility](/docs/references/glossary#2-area-of-responsibility-related-depths), and all the nodes in that neighborhood are required to store that chunk:
+As the address of the chunk shown above shares the same ten leading binary bits as the nodes in our example neighborhood, it falls into that neighborhood's [area of responsibility](./../../references/glossary.md#2-area-of-responsibility-related-depths), and all the nodes in that neighborhood are required to store that chunk:
 
 > da49 --> <u>1101101001</u>001001  
 > da69 --> <u>1101101001</u>101001 
@@ -124,4 +124,4 @@ Each of our two example chunks will also be split amongst the two new neighborho
 
 #### Doubling Implications for Node Operators
 
-One of the implications of doubling for node operators is that the reward chances for a node depends in part on how many other nodes are in its neighborhood. If it is in a neighborhood with fewer nodes, its chances of winning rewards are greater. Therefore node operators should make certain to place their nodes into less populated neighborhoods, and also should look ahead to neighborhoods at the next depth after a doubling. For more details about how to adjust node placement, see [here](/docs/bee/installation/set-target-neighborhood).
+One of the implications of doubling for node operators is that the reward chances for a node depends in part on how many other nodes are in its neighborhood. If it is in a neighborhood with fewer nodes, its chances of winning rewards are greater. Therefore node operators should make certain to place their nodes into less populated neighborhoods, and also should look ahead to neighborhoods at the next depth after a doubling. For more details about how to adjust node placement, see [here](./../../bee/installation/set-target-neighborhood.md).

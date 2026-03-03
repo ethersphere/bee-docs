@@ -5,7 +5,7 @@ description: Guide for implementing encryption and access control in decentraliz
 ---
 
 :::info
-This is guide contains a detailed explanation of how to use the ACT feature, but does not cover its higher level concepts. To better understand how ACT works and why to use it, read [the ACT page in the "Concepts" section](/docs/concepts/access-control).
+This is guide contains a detailed explanation of how to use the ACT feature, but does not cover its higher level concepts. To better understand how ACT works and why to use it, read [the ACT page in the "Concepts" section](./../concepts/access-control.md).
 :::
 
 

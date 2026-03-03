@@ -4,10 +4,10 @@ id: quick-start
 description: Accelerates Bee setup with shell script installation and swarm-cli tools enabling rapid node deployment and network interaction.
 ---
 
-This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.
+This guide will help you install and run a Bee [light node](./../working-with-bee/node-types.md) using the [shell script](./shell-script.md) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](./../working-with-bee/swarm-cli.md) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.
 
 :::tip
-A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](/docs/bee/working-with-bee/node-types). 
+A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](./../working-with-bee/node-types.md). 
 :::
 
 
@@ -17,8 +17,8 @@ A "light" node can download and upload data from Swarm but does not share its di
 - [Node.js (v18 or higher)](https://nodejs.org/)
 - [npm (Node Package Manager)](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
 - [`curl`](https://curl.se/) or [`wget`](https://www.gnu.org/software/wget/) (Check with `curl --version` or `wget --version`)
-- [~0.20 xBZZ on Gnosis Chain](/docs/bee/installation/fund-your-node#how-to-get-xbzz)
-- [~0.01 xDAI on Gnosis Chain](/docs/bee/installation/fund-your-node#how-to-get-xdai)
+- [~0.20 xBZZ on Gnosis Chain](./fund-your-node.md#how-to-get-xbzz)
+- [~0.01 xDAI on Gnosis Chain](./fund-your-node.md#how-to-get-xdai)
 
 :::info
 Although `BZZ` is the official symbol of the token on both Ethereum and Gnosis Chain, the term `xBZZ` is widely used by the Swarm community and in documentation to indicate that it is BZZ on Gnosis Chain (not Ethereum).
@@ -163,7 +163,7 @@ Send **xDAI** (to pay for transaction fees on Gnosis Chain) and **xBZZ** (for up
 - **xDAI:** 0.01 xDAI is enough to start a light node
 - **xBZZ:** 0.20 xBZZ is enough to upload a small amount of data
 
-Learn how to [get xDAI and xBZZ](/docs/bee/installation/fund-your-node#getting-tokens) if you need some.
+Learn how to [get xDAI and xBZZ](./fund-your-node.md#getting-tokens) if you need some.
 
 :::tip
 If you wait too long to fund your node it may shut itself down. In that case, simply use the same startup command to start the node again.
@@ -171,7 +171,7 @@ If you wait too long to fund your node it may shut itself down. In that case, si
 
 ## Wait to Sync (~5 Minutes)
 
-After starting and funding a Bee light node for the first time, the node will automatically issue a [transaction](https://gnosisscan.io/tx/0xf8048c4e8020ccef842c9a901e6262e9c06d6f5926ff31bdb7dd9d7274dcf19c) on Gnosis Chain to deploy the node's [chequebook contract](/docs/concepts/incentives/bandwidth-incentives#chequebook-contract).
+After starting and funding a Bee light node for the first time, the node will automatically issue a [transaction](https://gnosisscan.io/tx/0xf8048c4e8020ccef842c9a901e6262e9c06d6f5926ff31bdb7dd9d7274dcf19c) on Gnosis Chain to deploy the node's [chequebook contract](./../../concepts/incentives/bandwidth-incentives.md#chequebook-contract).
 
 The node then needs to sync blockchain data before it can buy a postage stamp batch. The process may take **~5 minutes** depending on your RPC provider and network speed. 
 
@@ -257,5 +257,5 @@ Total xBZZ: 0.0000000000000000
 
 ## Next Steps
 
-With your node now fully synced, you're ready start start learning how to [develop on Swarm](/docs/develop/introduction).
+With your node now fully synced, you're ready start start learning how to [develop on Swarm](./../../develop/introduction.md).
 

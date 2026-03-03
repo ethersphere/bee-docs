@@ -7,7 +7,7 @@ description: Guides installation using system package managers (APT RPM Homebrew
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Bee client can be [installed through a variety of package managers,](/docs/bee/installation/package-manager-install) including [APT](https://en.wikipedia.org/wiki/APT_(software)), [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager), and [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)). 
+The Bee client can be [installed through a variety of package managers,](./package-manager.md) including [APT](https://en.wikipedia.org/wiki/APT_(software)), [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager), and [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)). 
 
 :::caution
   When installed using a package manager, Bee is set up so it can be started to run as a background service using `systemctl` or `brew services` (depending on the package manager used). 
@@ -16,7 +16,7 @@ The Bee client can be [installed through a variety of package managers,](/docs/b
 
   When a node is started using the `bee start` command the node process will be bound to the terminal session and will exit if the terminal is closed. 
   
-  Furthermore, depending on which of these startup methods was used, [*the default Bee directories will be different*](/docs/bee/working-with-bee/configuration#default-data-and-config-directories). For each startup method, a different default data directory is used, so each startup method will essentially be spinning up a totally different node.
+  Furthermore, depending on which of these startup methods was used, [*the default Bee directories will be different*](./../working-with-bee/configuration.md#default-data-and-config-directories). For each startup method, a different default data directory is used, so each startup method will essentially be spinning up a totally different node.
 :::
 
 
@@ -119,7 +119,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/bee.service → /lib
 When Bee is installed using a package manager, a `bee.yaml` file containing the default configuration will be generated. 
 
 :::info
-While this package manager install guide uses the `bee.yaml` file for setting configuration options, there are  [several other available methods for setting node options](/docs/bee/working-with-bee/configuration).
+While this package manager install guide uses the `bee.yaml` file for setting configuration options, there are  [several other available methods for setting node options](./../working-with-bee/configuration.md).
 :::
 
 After installation, you can check that the file was successfully generated and contains the [default configuration](https://github.com/ethersphere/bee/blob/master/packaging) for your system:
@@ -207,13 +207,13 @@ sudo vi /usr/local/etc/swarm-bee/bee.yaml
 
 ### Set Node Type
 
-See the [Getting Started guide](/docs/bee/installation/getting-started#choosing-a-node-type) if you're not sure which type of node to run.
+See the [Getting Started guide](./getting-started.md#choosing-a-node-type) if you're not sure which type of node to run.
  
-Once you've decided which node type is appropriate for you, refer to the [configuration section](/docs/bee/working-with-bee/configuration#node-types) for instructions on setting the options for your preferred node type.
+Once you've decided which node type is appropriate for you, refer to the [configuration section](./../working-with-bee/configuration.md#node-types) for instructions on setting the options for your preferred node type.
 
 ### Set Target Neighborhood
 
-When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](/docs/bee/installation/set-target-neighborhood).
+When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](./set-target-neighborhood.md).
 
 
 ## Start Node
@@ -301,7 +301,7 @@ The address referred to in both of these lines is your node's Gnosis Chain addre
 
 ## Fund Node
 
-Depending on your chosen node type, (full, light, or ultra-light), you will want to fund your node with differing amounts of xBZZ and xDAI. See [this section](/docs/bee/installation/fund-your-node) for more information on how to fund your node. 
+Depending on your chosen node type, (full, light, or ultra-light), you will want to fund your node with differing amounts of xBZZ and xDAI. See [this section](./fund-your-node.md) for more information on how to fund your node. 
 
 
 ### Restart and Wait for Initialisation
@@ -382,10 +382,10 @@ Now your node will begin to request chunks of data that fall within your *radius
 respond to requests for these chunks from other peers.
 
 :::tip Incentivisation
-In Swarm, storing, serving and forwarding chunks of data to other nodes can earn you rewards! Follow [this guide](/docs/bee/working-with-bee/cashing-out) to learn how to regularly cash out cheques other nodes send you in return for your services so that you can get your xBZZ!
+In Swarm, storing, serving and forwarding chunks of data to other nodes can earn you rewards! Follow [this guide](./../working-with-bee/cashing-out.md) to learn how to regularly cash out cheques other nodes send you in return for your services so that you can get your xBZZ!
 :::
 
-Your Bee client has now generated an elliptic curve key pair similar to an Ethereum wallet. These are stored in your [data directory](/docs/bee/working-with-bee/configuration), in the `keys` folder.
+Your Bee client has now generated an elliptic curve key pair similar to an Ethereum wallet. These are stored in your [data directory](./../working-with-bee/configuration.md), in the `keys` folder.
 
 :::danger Keep Your Keys and Password Safe!
 Your keys and password are very important, back up these files and
@@ -409,7 +409,7 @@ bee version
 ```
 
 Once the Bee node has been funded, the chequebook deployed, and postage stamp
-batch store synced, its HTTP [API](/docs/bee/working-with-bee/bee-api)
+batch store synced, its HTTP [API](./../working-with-bee/bee-api.md)
 will start listening at `localhost:1633` (for `full` or `light` nodes - for an `ultra-light` node, it should be initialized and the API should be available more rapidly).
 
 To check everything is working as expected, send a GET request to localhost port 1633.
@@ -442,18 +442,18 @@ Perfect! We are accumulating peers, this means you are connected to
 the network, and ready to start [using
 Bee](/docs/develop/introduction) to [upload and
 download](/docs/develop/upload-and-download) content or host
-and browse [websites](/docs/develop/host-your-website) hosted
+and browse [websites](./../../develop/host-your-website.md) hosted
 on the Swarm network.
 
 Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
 
 ## Back Up Keys
 
-Once your node is up and running, make sure to [back up your keys](/docs/bee/working-with-bee/backups). 
+Once your node is up and running, make sure to [back up your keys](./../working-with-bee/backups.md). 
 
 ## Deposit Stake (Optional)
 
-While depositing stake is not required to run a Bee node, it is required in order for a node to receive rewards for sharing storage with the network. You will need to [deposit xBZZ to the staking contract](/docs/bee/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
+While depositing stake is not required to run a Bee node, it is required in order for a node to receive rewards for sharing storage with the network. You will need to [deposit xBZZ to the staking contract](./../working-with-bee/staking.md) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
 ```bash
 curl -X POST localhost:1633/stake/100000000000000000
@@ -471,15 +471,15 @@ Storage incentive rewards are only available for full nodes which are providing 
 
 
 ### Access the Swarm
-If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/introduction).
+If you'd like to start uploading or downloading files to Swarm, [start here](./../../develop/introduction.md).
 
 ### Explore the API
-The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
+The [Bee API](./../working-with-bee/bee-api.md) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
 
 ### Run a hive! 
-If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
+If you would like to run a hive of many Bees, check out the [hive operators](./hive.md) section for information on how to operate and monitor many Bees at once.
 
 ### Start building DAPPs on Swarm
-If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/introduction).
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](./../../develop/introduction.md).
 
 

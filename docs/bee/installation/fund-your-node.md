@@ -8,10 +8,10 @@ description: Outlines xDAI and xBZZ token requirements by use case and provides 
 Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidth) to function properly. The amount needed depends on your node type and use case.
 
 ### xDAI is Required For:
-- **Buying Postage Stamps** ([Uploading Data](/docs/develop/tools-and-features/buy-a-stamp-batch))
-- **Stake Management Transactions** ([Staking](/docs/bee/working-with-bee/staking/))
-- **Storage Incentives Transactions** ([Redistribution Game](/docs/concepts/incentives/redistribution-game/) )
-- **Chequebook Deployment** ([Bandwidth Payments](/docs/concepts/incentives/bandwidth-incentives/))
+- **Buying Postage Stamps** ([Uploading Data](./../../develop/tools-and-features/buy-a-stamp-batch.md))
+- **Stake Management Transactions** ([Staking](./../working-with-bee/staking.md))
+- **Storage Incentives Transactions** ([Redistribution Game](./../../concepts/incentives/redistribution-game.md))
+- **Chequebook Deployment** ([Bandwidth Payments](./../../concepts/incentives/bandwidth-incentives.md))
 
 ### xBZZ is Required For:
 - **Buying Postage Stamps** (scales with data size and duration)
@@ -70,7 +70,7 @@ curl -s localhost:1633/addresses | jq .ethereum
 "0x9a73f283cd9212b99b5e263f9a81a0ddc847cd93"
 ```
 
-Fund your node with the appropriate amount of xDAI and xBZZ based on the recommended amounts specified in [the chart above](/docs/bee/installation/fund-your-node#token-amounts-by-use-case). 
+Fund your node with the appropriate amount of xDAI and xBZZ based on the recommended amounts specified in [the chart above](./fund-your-node.md#token-amounts-by-use-case). 
 
 
 *For support, ask in the [Develop on Swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel.*

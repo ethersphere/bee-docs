@@ -39,12 +39,12 @@ If the installation went smoothly, you should see the message "Your node is conn
 Running the Swarm Desktop app for the first time set up a new Bee node on your system. The installation process generated and saved private keys for your node in the Swarm Desktop's data directory. Those keys were used to start up a new Bee node in ultra-light mode. 
 
 :::warning
-If your Swarm Desktop files are accidentally deleted or become corrupted you will lose access to any assets or data which are secured using those keys. Make sure to [backup your keys](/docs/desktop/backup-restore).
+If your Swarm Desktop files are accidentally deleted or become corrupted you will lose access to any assets or data which are secured using those keys. Make sure to [backup your keys](./backup-restore.md).
 :::
 
 ### "Ultra-light" and "Light" Nodes
 
-Swarm Desktop by default starts up a node in "ultra-light" mode. When running in ultra-light mode Swarm Desktop  limited to only downloading data from Swarm. Moreover, it's limited to downloading only within the free threshold allowed by other nodes. For instructions on switching to light mode see the [configuration section](/docs/desktop/configuration).
+Swarm Desktop by default starts up a node in "ultra-light" mode. When running in ultra-light mode Swarm Desktop  limited to only downloading data from Swarm. Moreover, it's limited to downloading only within the free threshold allowed by other nodes. For instructions on switching to light mode see the [configuration section](./configuration.md).
 
 ## Tour of Swarm Desktop
 
@@ -56,7 +56,7 @@ The "Info" tab gives you a quick view of your Swarm Desktop's status. From here 
 
 ### Files Tab
 
-From "Files" tab you can input a Swarm hash in order to download the file associated with the hash. See this full [guide for downloading](/docs/desktop/access-content) using Swarm Desktop.
+From "Files" tab you can input a Swarm hash in order to download the file associated with the hash. See this full [guide for downloading](./access-content.md) using Swarm Desktop.
 
 ![](/img/swarm-desktop-files-tab.png)
 
@@ -68,7 +68,7 @@ From the "Account" tab you can view your Swarm Desktop node's Gnosis Chain addre
 
 ### Settings Tab
 
-From the "Settings" tab you can view important settings values. Note that the Blockchain RPC URL and ENS resolver URL are already filled in, and only the Blockchain RPC URL is modifiable through this tab. If you wish to modify other settings see the [ configuration page](/docs/desktop/configuration) for detailed instructions.
+From the "Settings" tab you can view important settings values. Note that the Blockchain RPC URL and ENS resolver URL are already filled in, and only the Blockchain RPC URL is modifiable through this tab. If you wish to modify other settings see the [ configuration page](./configuration.md) for detailed instructions.
 
 ![](/img/swarm-desktop-settings-tab.png)
 

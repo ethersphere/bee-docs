@@ -289,7 +289,7 @@ withdrawal-addresses-whitelist: []
 ```
 
 :::info
-Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](/docs/bee/working-with-bee/configuration). 
+Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](./configuration.md). 
 :::
 
 To change your node's configuration, simply edit the YAML file and restart Bee: 
@@ -351,7 +351,7 @@ brew services restart swarm-bee
 
 ## Manually generating YAML config file for *bee start*
 
-No YAML file is generated during installation when using the [shell script install method](/docs/bee/installation/shell-script-install), so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
+No YAML file is generated during installation when using the [shell script install method](./../installation/shell-script.md), so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
 
 ```bash
 bee printconfig &> $HOME/.bee.yaml
@@ -368,7 +368,7 @@ When using `bee.yaml` with the `bee start` command, make sure to use the `--conf
 
 There are three node types which each offer varying levels of functionality - ***full***, ***light***, and ***ultra-light***. You can configure your node to run as any of these three types by setting the related options within your configuration. 
 
-For a deeper dive into each node type and its features and limitations, refer to the [Node Types](/docs/bee/working-with-bee/node-types) page.
+For a deeper dive into each node type and its features and limitations, refer to the [Node Types](./node-types.md) page.
 
 
 ### How to Set Node Type

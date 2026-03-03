@@ -4,7 +4,7 @@ id: access-content
 description: Guide for using Swarm Desktop application to download and retrieve content from the Swarm network.
 ---
 
-Accessing content on Swarm using Swarm Desktop is easy. All you need to get started is the Swarm hash for the content you wish to access. Whenever content is [uploaded to Swarm](/docs/desktop/upload-content) a Swarm hash is generated as a reference to that content. 
+Accessing content on Swarm using Swarm Desktop is easy. All you need to get started is the Swarm hash for the content you wish to access. Whenever content is [uploaded to Swarm](./upload-content.md) a Swarm hash is generated as a reference to that content. 
 
 To access content on Swarm go to the ***Files*** tab and click ***Download***:
 

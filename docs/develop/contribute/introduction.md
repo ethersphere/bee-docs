@@ -14,7 +14,7 @@ Connect with other Bee developers over at the official [Discord Server](https://
 
 - If you would like to contribute, please read the [coding guidelines](https://github.com/ethersphere/bee/blob/master/CODING.md) before you get started.
 
-- Installation from source is described in the [Installation](/docs/bee/installation/build-from-source).
+- Installation from source is described in the [Installation](./../../bee/installation/build-from-source.md).
 
 - Contribute to Swarm’s evolution by proposing your own Swarm Improvement Proposal (SWIP) [here](https://github.com/ethersphere/SWIPs).
 

@@ -16,7 +16,7 @@ Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default
 :::
 
 :::info
-This guide uses command line flag options in the node startup commands such as `--blockchain-rpc-endpoint`, however, there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
+This guide uses command line flag options in the node startup commands such as `--blockchain-rpc-endpoint`, however, there are [several other methods available for configuring options](./../working-with-bee/configuration.md). 
 :::
 
 ## Install and Start Your Node 
@@ -113,7 +113,7 @@ Use "bee [command] --help" for more information about a command.
  
 Let's try starting up our node for the first time with the command below. Make sure to pick a [strong password](https://xkcd.com/936/) of your own:
 
-Below are startup commands configured for each of the three Bee node types, ***full***, ***light***, and ***ultra-light***. Refer to the [Node Types](/docs/bee/working-with-bee/node-types) page to learn more about each node type and decide which one best suits your needs.
+Below are startup commands configured for each of the three Bee node types, ***full***, ***light***, and ***ultra-light***. Refer to the [Node Types](./../working-with-bee/node-types.md) page to learn more about each node type and decide which one best suits your needs.
 
 <Tabs
 defaultValue="full"
@@ -433,7 +433,7 @@ version: 2.2.0-06a0aca7 - planned to be supported until 11 December 2024, please
 
 Here we can see that after our node has been funded, it was able to issue the transactions for deploying the chequebook contract, which is a prerequisite for running a staking node.
 
-Next your node will begin to sync [postage stamp data](/docs/develop/tools-and-features/buy-a-stamp-batch), which can take ~5 to 10 minutes. You will see this log message while your node is syncing postage stamp data:
+Next your node will begin to sync [postage stamp data](./../../develop/tools-and-features/buy-a-stamp-batch.md), which can take ~5 to 10 minutes. You will see this log message while your node is syncing postage stamp data:
 
 ```bash
 "time"="2024-09-24 22:21:19.664897" "level"="info" "logger"="node" "msg"="waiting to sync postage contract data, this may take a while... more info available in Debug loglevel"
@@ -540,13 +540,13 @@ Congratulations! You have now installed your Bee node and are connected to the n
 
 ### Set Target Neighborhood
 
-When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](/docs/bee/installation/set-target-neighborhood).
+When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](./set-target-neighborhood.md).
 
 
 ### Logs and monitoring
 
 :::info
-You can learn more about Bee logs [here](/docs/bee/working-with-bee/logs-and-files).
+You can learn more about Bee logs [here](./../working-with-bee/logs-and-files.md).
 :::
 
 With our previously modified command, our Bee node will now be running in the background and the logs will be written to the `bee.log` file. To review our node's logs we can simply view the file contents:
@@ -607,33 +607,33 @@ Below is the output for a node that has been running for several days:
 }
 ```
 
-For a complete breakdown of this output, check out [this section in the Bee docs](/docs/bee/working-with-bee/bee-api#redistributionstate).
+For a complete breakdown of this output, check out [this section in the Bee docs](./../working-with-bee/bee-api.md#redistributionstate).
 
-You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](/docs/bee/working-with-bee/bee-api), and you can find complete information about all available endpoints in [the API reference docs](/api/).
+You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](./../working-with-bee/bee-api.md), and you can find complete information about all available endpoints in [the API reference docs](/api/).
 
 
 ## Back Up Keys
 
-Once your node is up and running, make sure to [back up your keys](/docs/bee/working-with-bee/backups).
+Once your node is up and running, make sure to [back up your keys](./../working-with-bee/backups.md).
 
 ## Getting help
 
 The CLI has built-in documentation. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
 
-You may also check out the [configuration guide](/docs/bee/working-with-bee/configuration), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
+You may also check out the [configuration guide](./../working-with-bee/configuration.md), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
 
 
 ## Next Steps to Consider
 
 
 ### Access the Swarm
-If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/introduction).
+If you'd like to start uploading or downloading files to Swarm, [start here](./../../develop/introduction.md).
 
 ### Explore the API
-The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
+The [Bee API](./../working-with-bee/bee-api.md) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
 
 ### Run a hive! 
-If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
+If you would like to run a hive of many Bees, check out the [hive operators](./hive.md) section for information on how to operate and monitor many Bees at once.
 
 ### Start building DAPPs on Swarm
-If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/introduction).
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](./../../develop/introduction.md).

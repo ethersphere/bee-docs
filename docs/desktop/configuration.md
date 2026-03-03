@@ -16,7 +16,7 @@ To modify the RPC endpoint, first navigate to the ***Settings*** tab:
 From the ***Settings*** tab, expand the API Settings section and click the pen button next to Blockchain RPC URL to edit the default RPC. You can choose any valid Gnosis Chain RPC, either from your own Gnosis node or a service provider. You can find a list of paid and free RPC options from the [Gnosis Chain docs](https://docs.gnosischain.com/tools/RPC%20Providers/). For this example we will use the free endpoint - *https://xdai.fairdatasociety.org*.
 
 :::warning
-Other ***free public RPC endpoints are discouraged,*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).
+Other ***free public RPC endpoints are discouraged,*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](./../bee/working-with-bee/configuration.md#setting-blockchain-rpc-endpoint).
 :::
 
 

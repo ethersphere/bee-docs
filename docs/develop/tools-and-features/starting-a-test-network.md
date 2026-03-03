@@ -4,7 +4,7 @@ id: starting-a-test-network
 description: Instructions for setting up local test networks for development and experimentation.
 ---
 
-A private network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](/docs/bee/working-with-bee/configuration)).
+A private network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](./../../bee/working-with-bee/configuration.md)).
 
 ## Start a network on your own computer
 
@@ -191,4 +191,4 @@ Repeat these same steps with the other node in order to complete a private test 
 
 ### Getting Testnet Tokens
 
-In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node) page.
+In order to acquire sETH and sBZZ, refer to the [Fund Your Node](./../../bee/installation/fund-your-node.md) page.

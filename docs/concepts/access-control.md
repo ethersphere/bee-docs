@@ -7,7 +7,7 @@ description: Introduces Access Control Trie (ACT) for managing encryption and pe
 The Access Control Trie (ACT) implements the operation of encryption at the chunk level, with the presence of a decryption/encryption key being the only distinction between accessing private and public data.
 
 :::info
-This article describes the high level concepts and functionalities of ACT. If you're ready to try it out for yourself, please refer to this [hands on usage guide with specific details](/docs/develop/act/).
+This article describes the high level concepts and functionalities of ACT. If you're ready to try it out for yourself, please refer to this [hands on usage guide with specific details](./../develop/access-control.md).
 :::
 
 In decentralized public data storage systems like Swarm, data is distributed across multiple nodes. Ensuring
