@@ -1,6 +1,7 @@
 ---
 title: Start a Blog
 id: start-a-blog
+description: Tutorial for creating and publishing blog content on Swarm with the Desktop application.
 ---
 
 ## A Guide to Starting Your Blog on Swarm
@@ -9,11 +10,11 @@ There are many different approaches to starting a blog on Swarm, however the eas
 
 ## Requirements
 
-* [Swarm Desktop](/docs/desktop/install) with a [valid postage stamp batch](/docs/desktop/postage-stamps)
+* [Swarm Desktop](./install.md) with a [valid postage stamp batch](./postage-stamps.md)
 
 ## Getting Started
 
-To get started you must first have installed Swarm Desktop and have it running on your computer with a [valid stamp batch](/docs/desktop/postage-stamps). Note that your blog will only stay online as long as the postage batch is still valid, therefore you must make sure to stay aware of the postage batch TTL (time to live), and [top up your batch](/docs/desktop/postage-stamps#top-up-a-batch) regularly in order to keep your content online.
+To get started you must first have installed Swarm Desktop and have it running on your computer with a [valid stamp batch](./postage-stamps.md). Note that your blog will only stay online as long as the postage batch is still valid, therefore you must make sure to stay aware of the postage batch TTL (time to live), and [top up your batch](./postage-stamps.md#top-up-a-batch) regularly in order to keep your content online.
 
 ### Open Etherjot
 
@@ -28,7 +29,7 @@ When first starting Etherjot Web, you will be greeted with this page:
 
 ![](/img/etherjot1.png)
 
-On this page, as long as you have fulfilled the requirements outlined above, you will see two green checkmarks confirming you have Swarm Desktop running with a valid postage stamp batch. You will also see a warning reminding you of the importance of [topping up your stamp batch](/docs/desktop/postage-stamps#top-up-a-batch) to prevent the batch TTL from running out. 
+On this page, as long as you have fulfilled the requirements outlined above, you will see two green checkmarks confirming you have Swarm Desktop running with a valid postage stamp batch. You will also see a warning reminding you of the importance of [topping up your stamp batch](./postage-stamps.md#top-up-a-batch) to prevent the batch TTL from running out. 
 
 :::danger
 In addition to monitoring your postage stamp batch TTL, it is also important that you back up your blog, or else you may lose access to your blog in Etherjot (although it will still remain live on Swarm as long as its stamp batch has not expired). 
@@ -66,7 +67,7 @@ Copy the displayed text to a `.json` file, make certain to copy the entire displ
 Etherjot currently does not allow you to save drafts locally, so if you navigate away from the blog post you are currently editing, you will lose any changes you have made which have not yet been uploaded to Swarm. Take note of the three UI elements highlighted in the screenshot - using the "+" or "Settings" buttons will cause you to lose any changes not uploaded to Swarm, and hitting the "Reset" button will cause you to lose everything which has not been backed up.
 
 :::danger
-Hitting the "Reset" button will cause you to lose any content which has not yet been published and [backed up](/docs/desktop/start-a-blog#back-up-your-blog). 
+Hitting the "Reset" button will cause you to lose any content which has not yet been published and [backed up](./start-a-blog.md#back-up-your-blog). 
 :::
 
 ![](/img/etherjot19.png)
@@ -174,7 +175,7 @@ Click "Settings" to open up the Settings page. Note that any unpublished changes
 
 ![](/img/etherjot21.png)
 
-From here you can [back up](/docs/desktop/start-a-blog#back-up-your-blog) and restore blogs, and can set a variety of other options. 
+From here you can [back up](./start-a-blog.md#back-up-your-blog) and restore blogs, and can set a variety of other options. 
 
 ### Setting Custom Text and Links
 
@@ -188,9 +189,9 @@ Highlighted in this first screenshot you can see the options for setting custom 
 ## Reset Your Blog (DANGER)
 
 :::danger
-Hitting the "Reset" button will cause you to lose any content which has not yet been published and backed up. Make sure you have [backed up your blog](/docs/desktop/start-a-blog#back-up-your-blog) before clicking "reset!"
+Hitting the "Reset" button will cause you to lose any content which has not yet been published and backed up. Make sure you have [backed up your blog](./start-a-blog.md#back-up-your-blog) before clicking "reset!"
 :::
 
-To reset your blog and start a new blog, click the "Reset" button. This will immediately reset your blog, and you will lose any changes which have not yet been published. You will ALSO lose anything which you have not backed up, so it is important to [back up your blog](/docs/desktop/start-a-blog#back-up-your-blog) before resetting.
+To reset your blog and start a new blog, click the "Reset" button. This will immediately reset your blog, and you will lose any changes which have not yet been published. You will ALSO lose anything which you have not backed up, so it is important to [back up your blog](./start-a-blog.md#back-up-your-blog) before resetting.
 
 ![](/img/etherjot25.png)

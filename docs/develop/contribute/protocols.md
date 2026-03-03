@@ -1,6 +1,7 @@
 ---
 title: Protocols
 id: protocols
+description: Technical documentation of core Bee protocols and their implementation details for developers.
 ---
 
 ## Protocols specifications

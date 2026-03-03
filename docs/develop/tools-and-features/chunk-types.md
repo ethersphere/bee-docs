@@ -1,6 +1,7 @@
 ---
 title: Chunk Types
 id: chunk-types
+description: Explains different chunk types including content-addressed and single-owner chunks used in Swarm.
 ---
 
 Swarm is home to many types of chunks, but these can be categoried
@@ -17,7 +18,7 @@ To be able trust your data, you must run your own Bee node that automatically ve
 
 ## Trojan Chunks
 
-Trojan chunks are a special version of content addressed chunks that have been 'mined' so that their natural home is in a particular area of the Swarm. If the destination node is in the right neighborhood, it will be able to receive and decrypt the message. See [PSS](/docs/develop/tools-and-features/pss) for more information, or check out the [bee-js](https://bee-js.ethswarm.org/docs/api/classes/Bee/#psssend) bindings.
+Trojan chunks are a special version of content addressed chunks that have been 'mined' so that their natural home is in a particular area of the Swarm. If the destination node is in the right neighborhood, it will be able to receive and decrypt the message. See [PSS](./pss.md) for more information, or check out the [bee-js](https://bee-js.ethswarm.org/docs/api/classes/Bee/#psssend) bindings.
 
 ## Single Owner Chunks
 
@@ -26,7 +27,7 @@ Chunks and are the only other type of chunk which is allowed in
 Swarm. These chunks represent part of Swarm's address space which is
 reserved just for your personal Ethereum key pair! Here you can write
 whatever you'd please. Single Owner Chunks are the technology that
-powers Swarm's [feeds](/docs/develop/tools-and-features/feeds), but they are
+powers Swarm's [feeds](./feeds.md), but they are
 capable of much more! Look out for more chats about this soon, and for
 more info read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf).
 

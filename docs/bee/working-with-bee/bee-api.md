@@ -1,6 +1,7 @@
 ---
 title: Bee API
 id: bee-api
+description: Comprehensive reference for Bee's HTTP API endpoints enabling programmatic access to node management uploads downloads and monitoring.
 ---
 
 The Bee HTTP API is the primary interface to a running Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
@@ -10,20 +11,20 @@ The Bee API provides full access to all core functionalities of a Bee node, incl
 :::danger
 Make sure that your api-addr (default 1633) is never exposed to the internet. If you do not have a firewall or other security measures in place, manually setting your Bee API address from the default `1633` to `127.0.0.1:1633` is strongly recommended to prevent unauthorized access.
 
-You may also consider using the [Gateway Proxy tool](/docs/develop/tools-and-features/gateway-proxy) to protect your node's API endpoint.
+You may also consider using the [Gateway Proxy tool](./../../develop/tools-and-features/gateway-proxy.md) to protect your node's API endpoint.
 :::
 
 Detailed information about Bee API endpoints can be found in the [API reference docs](/api/).
 
 ## Interacting With the API
 
-You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](/docs/develop/tools-and-features/buy-a-stamp-batch), [uploading and downloading](/docs/develop/upload-and-download), [staking](/docs/bee/working-with-bee/staking), and more.
+You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](./../../develop/tools-and-features/buy-a-stamp-batch.md), [uploading and downloading](./../../develop/upload-and-download.md), [staking](./staking.md), and more.
 
 ### Alternatives for Working with the API
 
-For developers, the [Bee JS library](/docs/develop/tools-and-features/bee-js) offers a more convenient way to interact with the API in a NodeJS environment.
+For developers, the [Bee JS library](./../../develop/tools-and-features/bee-js.md) offers a more convenient way to interact with the API in a NodeJS environment.
 
-For many other common use cases, you may prefer to make use of the [Swarm CLI](/docs/bee/working-with-bee/swarm-cli) tool, as it offers a convenient command line based interface for interacting with your node's API.
+For many other common use cases, you may prefer to make use of the [Swarm CLI](./swarm-cli.md) tool, as it offers a convenient command line based interface for interacting with your node's API.
 
 ## Exploring Node Status
 
@@ -86,7 +87,7 @@ The `/status` endpoint returns a quick summary of some important metrics for you
 - `"batchCommitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
 - `"isReachable"` - Whether or not your node is reachable on the p2p API by other nodes on the Swarm network (port 1634 by default).
 - `"lastSyncedBlock"` - The last block number from the connected blockchain that your node has synced up to.
-- `"committedDepth"` - The storage depth currently committed by your node, which defines how much of your reserve is actually being used to store chunks. Is equal to `"storageRadius"` plus the [doubling factor](/docs/bee/working-with-bee/staking/#reserve-doubling) specified in the `reserve-capacity-doubling` option (which is zero by default).
+- `"committedDepth"` - The storage depth currently committed by your node, which defines how much of your reserve is actually being used to store chunks. Is equal to `"storageRadius"` plus the [doubling factor](./staking.md#reserve-doubling) specified in the `reserve-capacity-doubling` option (which is zero by default).
 - `"isWarmingUp"` - Indicates whether your node is still in the warm-up phase (building up its reserve and syncing with the network) or has reached normal operation.
 
 ### _/status/peers_
@@ -308,7 +309,7 @@ From the results we can see that our node's neighborhood size and batch commitme
 
     * `"minimumGasFunds"` - The minimum required xDAI denominated in wei (1 xDAI = 10^18 wei) required for a node to participate in the redistribution game.
     * `"hasSufficientFunds"` - Whether your node has at least the `"minimumGasFunds"` amount of xDAI.
-    * `"isFrozen"` - Indicates if your node is frozen, which may occur for [several reasons](/docs/bee/working-with-bee/staking/#diagnosing-freezing-issues).
+    * `"isFrozen"` - Indicates if your node is frozen, which may occur for [several reasons](./staking.md#diagnosing-freezing-issues).
     * `"isFullySynced"` - Whether your node has fully synced all the chunks in its `"storageRadius"` (the value returned from the `/reservestate` endpoint.)
     * `"phase"` - The current phase of the redistribution game (this does not indicate whether or not your node is participating in the current phase).
     * `"round"` - The current number of the round of the redistribution game.
@@ -342,7 +343,7 @@ From the results we can see that our node's neighborhood size and batch commitme
     * `"radius"` - Represents the maximum storage radius assuming all postage stamp batches are fully utilized.
     * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods).
     * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
-    * `"reserveCapacityDoubling"` - Indicates whether your node is currently using the reserve doubling mechanism. See [Reserve Doubling](/docs/bee/working-with-bee/staking#reserve-doubling) for details.
+    * `"reserveCapacityDoubling"` - Indicates whether your node is currently using the reserve doubling mechanism. See [Reserve Doubling](./staking.md#reserve-doubling) for details.
 ### _/chainstate_
 
     This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
@@ -473,7 +474,7 @@ From the results we can see that our node's neighborhood size and batch commitme
 
 ### _/rchash_
 
-Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient.
+Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](./../../concepts/incentives/redistribution-game.md), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient.
 
 The `/rchash` endpoint has 3 parameters: `depth` and `anchor_01` and `anchor_02`. For both of the anchor parameters, you should use the first 4 digits from your node's overlay address (which you can find from the `/addresses` endpoint). For depth, you should use the current storage depth of your node which you can find using the `/status` endpoint (storage depth is equivalent to the `storageRadius` value returned from `/status`):
 

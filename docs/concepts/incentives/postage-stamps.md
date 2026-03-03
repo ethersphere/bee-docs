@@ -1,11 +1,12 @@
 ---
 title: Postage Stamps 
 id: postage-stamps
+description: Details prepaid batch system for uploading data to Swarm with dynamic pricing based on network redundancy signals.
 ---
 
 Postage stamps are used to pay for storing data on Swarm. They are purchased in batches, granting a prepaid right to store data on Swarm, similar to how real-world postage stamps pay for mail delivery.
 
-When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/concepts/DISC/) of data. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
+When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](./../DISC/DISC.mdx) of data. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
 
 The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. A stamp expires when its batch runs out of balance. Chunks with expired stamps cannot be used as proof in the redistribution game, meaning storer nodes will no longer receive rewards for storing them and can safely remove them from their reserves.
 
@@ -32,17 +33,17 @@ $$
 $$
 
 :::info
-Note that due how buckets fill as described above, a batch can become fully utilised before its theoretical maximum volume has been reached. See [batch utilisation section below](/docs/concepts/incentives/postage-stamps#batch-utilisation) for more information.
+Note that due how buckets fill as described above, a batch can become fully utilised before its theoretical maximum volume has been reached. See [batch utilisation section below](./postage-stamps.md#batch-utilisation) for more information.
 :::
 
 ## Batch Depth and Batch Amount
 
-Each batch of stamps has two key parameters, `batch depth` and `amount`, which are recorded on Gnosis Chain at issuance. Note that these "depths" do not refer to the depth terms used to describe topology which are outlined [here in the glossary](/docs/references/glossary#depth-types).
+Each batch of stamps has two key parameters, `batch depth` and `amount`, which are recorded on Gnosis Chain at issuance. Note that these "depths" do not refer to the depth terms used to describe topology which are outlined [here in the glossary](./../../references/glossary.md#depth-types).
 
 ### Batch Depth 
 
 :::caution
-The minimum value for `depth` is 17, however higher depths are recommended for most use cases due to the [mechanics of stamp batch utilisation](#batch-utilisation). See [the depths utilisation table](#effective-utilisation-table) to help decide which depth is best for your use case. 
+The minimum value for `depth` is 17, however higher depths are recommended for most use cases due to the [mechanics of stamp batch utilisation](#batch-utilisation). See [the depths utilisation table](#effective-utilisation-tables) to help decide which depth is best for your use case. 
 :::
 
 `Batch depth` determines how much data can be stored by a batch. The number of chunks which can be stored (stamped) by a batch is equal to  $$2^{batchDepth}$$. 
@@ -55,7 +56,7 @@ $$
 \text{Theoretical maximum batch volume} = 2^{batchDepth} \times \text{4 kb}   
 $$
 
-However, due to the way postage stamp batches are utilised, batches will become fully utilised before stamping the theoretical maximum number of chunks. Therefore when deciding which batch depth to use, it is important to consider the effective amount of data that can be stored by a batch, and not the theoretical maximum. The effective rate of utilisation increases along with the  batch depth. See [section on stamp batch utilisation below](/docs/concepts/incentives/postage-stamps#batch-utilisation) for more information.
+However, due to the way postage stamp batches are utilised, batches will become fully utilised before stamping the theoretical maximum number of chunks. Therefore when deciding which batch depth to use, it is important to consider the effective amount of data that can be stored by a batch, and not the theoretical maximum. The effective rate of utilisation increases along with the  batch depth. See [section on stamp batch utilisation below](./postage-stamps.md#batch-utilisation) for more information.
 
 ### Batch Amount (& Batch Cost)
 
@@ -103,7 +104,7 @@ Utilisation of an immutable batch is computed using a hash map of size $$2^{buck
 
 ![](/img/batches_01.png)
 
-As chunks are uploaded to Swarm, each chunk is assigned to a bucket based the first 16 binary digits of the [chunk's hash](/docs/concepts/DISC/#chunks). The chunk will be assigned to whichever bucket's key matches the first 16 bits of its hash, and that bucket's counter will be incremented by 1. 
+As chunks are uploaded to Swarm, each chunk is assigned to a bucket based the first 16 binary digits of the [chunk's hash](./../DISC/DISC.mdx#chunks). The chunk will be assigned to whichever bucket's key matches the first 16 bits of its hash, and that bucket's counter will be incremented by 1. 
 
 The batch is deemed "full" when ANY of these counters reach a certain max value. The max value is computed from the batch depth as such: $$2^{(batchDepth-bucketDepth)}$$. For example with batch depth of 24, the max value is $$2^{(24-16)}$$ or 256. A bucket can be thought of as have a number of "slots" equal to this maximum value, and every time the bucket's counter is incremented, one of its slots gets filled. 
 
@@ -178,7 +179,7 @@ The implications of this behaviour are that even a small change to the data of a
 
 Due to the nature of batch utilisation described above, batches are often fully utilised before reaching their theoretical maximum storage amount. However as the batch depth increases, the chance of a postage batch becoming fully utilised early decreases. At batch depth 24, there is a 0.1% chance that a batch will be fully utilised/start replacing old chunks before reaching 64.33% of its theoretical maximum.
 
-Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](/docs/concepts/incentives/postage-stamps#batch-depth), we can see that for a batch depth of 24, the theoretical maximum amount which can be stored is 68.72 gb:
+Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](./postage-stamps.md#batch-depth), we can see that for a batch depth of 24, the theoretical maximum amount which can be stored is 68.72 gb:
 
 $$
 2^{24+12} = \text{68,719,476,736 bytes} = \text{68.72 gb}
@@ -205,7 +206,7 @@ Columns:
 :::info
 The title of each table below states whether it is for encrypted or unencrypted uploads along with the erasure coding level.
 
-[Erasure coding](/docs/concepts/DISC/erasure-coding) on Swarm has five named levels:
+[Erasure coding](./../DISC/erasure-coding.md) on Swarm has five named levels:
 
 1. NONE
 2. MEDIUM

@@ -1,6 +1,7 @@
 ---
 title: Bcrypt hashing utility
 id: bcrypt
+description: Shows how to generate and validate bcrypt password hashes using Bee's built-in utilities or external tools.
 ---
 
 In order to generate a valid admin password hash you can use any available bcrypt compatible tools, both [online](https://bcrypt-generator.com/) and offline (htpasswd).

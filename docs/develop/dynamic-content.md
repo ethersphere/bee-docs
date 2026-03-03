@@ -2,6 +2,7 @@
 title: Dynamic Content
 id: dynamic-content
 sidebar_label: Dynamic Content
+description: Explains how to create mutable content on Swarm using feeds and single-owner chunks.
 ---
 
 :::warning
