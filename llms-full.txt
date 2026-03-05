@@ -16,11 +16,11 @@ Depending on your needs you can run an ultra-light, light or full node.
 
 ### What are the differences between Bee node types?
 
-A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](/docs/bee/installation/getting-started) for an overview of the differences.
+A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](./installation/getting-started.md) for an overview of the differences.
 
 #### What are the requirements for running a Bee node?
 
-See the [getting started section](/docs/bee/installation/getting-started#software-requirements) for more information about running a Bee node.
+See the [getting started section](./installation/getting-started.md#software-requirements) for more information about running a Bee node.
 
 ##### Full node
 
@@ -40,11 +40,11 @@ Typically, each node requires around 10 megabits per second (Mbps) of bandwidth 
 
 Bee is compatible with Windows and a Bee `.exe` file can be found on the [`releases` page](https://github.com/ethersphere/bee/releases) of the Bee repo.  
 
-It is also possible to [build from the source](/docs/bee/installation/build-from-source).
+It is also possible to [build from the source](./installation/build-from-source.md).
 
 ##### How do I get the node's wallet's private key (use-case for Desktop app)?
 
-See the [backup section](/docs/bee/working-with-bee/backups/) for more info.
+See the [backup section](./working-with-bee/backups.md) for more info.
 
 ##### How do I import my private key to Metamask?
 
@@ -52,7 +52,7 @@ You can import the `swarm.key` json file in MetaMask using your password file or
 
 ##### Where can I find my password?
 
-You can find the password in the root of your data directory. See the [backup section](/docs/bee/working-with-bee/backups/) for more info.
+You can find the password in the root of your data directory. See the [backup section](./working-with-bee/backups.md) for more info.
 
 ## Connectivity
 
@@ -93,11 +93,11 @@ We recommend you run your own [Gnosis Node using Nethermind](https://docs.gnosis
 
 ### How can I export my private keys?
 
-See the section on [backups](/docs/bee/working-with-bee/backups) for exporting your keys.
+See the section on [backups](./working-with-bee/backups.md) for exporting your keys.
 
 ### How to import bee node address to MetaMask?
 
-1. See the [backup section](/docs/bee/working-with-bee/backups/) for info on exporting keys.
+1. See the [backup section](./working-with-bee/backups.md) for info on exporting keys.
 2. Go to Metamask and click "Account 1" --> "Import Account"
 3. Choose the "Select Type" dropdown menu and choose "JSON file"
 4. Paste the password (Make sure to do this first)
@@ -128,7 +128,7 @@ Get your chequebook contract address with: `curl http://localhost:1633/chequeboo
 
 ### Where can I find documents about the cashout commands?
 
-Learn how to cash out [here](/docs/bee/working-with-bee/cashing-out).
+Learn how to cash out [here](./working-with-bee/cashing-out.md).
 
 ### When I run http://localhost:1633/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
 
@@ -258,7 +258,7 @@ you still have problems, please join us in our [Discord
 server](https://discord.gg/wdghaQsGq5) and we'll help you find the
 way! 🐝 🐝 🐝 🐝 🐝
 
-:::info
+:::warning
 To ensure your Bee has the best chance of participating in the swarm,
 you must ensure your Bee is able to handle **both incoming and
 outgoing connections from the global Internet to its p2p port
@@ -536,7 +536,57 @@ to your computer's MAC address. This will ensure that your Bee
 seamlessly connects when you rejoin the network!
 :::
 
-### Debugging Connectivity
+### Using multiple P2P transports (TCP, WS, WSS)
+
+A Bee node can expose more than one transport for peer-to-peer communication. By default, nodes use the TCP-based libp2p transport, but Secure WebSocket (`WSS`) transport can also be enabled.
+
+To enable WSS support, set:
+
+```yaml
+p2p-wss-enable: true
+````
+
+When enabled, Bee listens for Secure WebSocket connections on `p2p-wss-addr` (default `:1635`). In most cases the remaining WSS and AutoTLS options can be left at their default values:
+
+```yaml
+p2p-wss-addr: ":1635"
+nat-wss-addr: ""
+
+autotls-domain: libp2p.direct
+autotls-registration-endpoint: https://registration.libp2p.direct
+autotls-ca-endpoint: https://acme-v02.api.letsencrypt.org/directory
+```
+
+A configuration using both TCP and WSS transports may look like:
+
+```yaml
+p2p-addr: :1634
+p2p-wss-enable: true
+p2p-wss-addr: :1635
+
+nat-addr: 1.2.3.4:1634
+nat-wss-addr: node.example.com:443
+```
+
+In this example:
+
+* `p2p-addr` defines the local TCP listening address.
+* `p2p-wss-addr` defines the local Secure WebSocket listening address.
+* `nat-addr` is the public address advertised to peers for TCP connections.
+* `nat-wss-addr` is the public address advertised to peers for WSS connections.
+
+If WSS is enabled, the WSS port must be reachable by peers. This means the port should be open in your firewall, exposed by your container or host configuration, and permitted by your network if outbound connections are restricted.
+
+When specifying `nat-addr` or `nat-wss-addr`, the value must be a valid `host:port` pair. For example:
+
+```yaml
+nat-addr: 1.2.3.4:1634
+nat-wss-addr: node.example.com:443
+```
+
+Values missing either the host or port or otherwise misformed addresses are considered invalid and will prevent the node from starting.
+
+### Troubleshooting Connectivity
 
 The above guide navigates your NAT, but there are still a few hurdles to overcome. To make sure there is a clear path from your computer to the outside world, let's follow our Bee's journey from the inside out.
 
@@ -617,7 +667,7 @@ the open Internet. Ensure that both TCP and UDP traffic are allowed.
 
 Similarly, if you are connecting from within a private network, you
 may find that the port is blocked by the router. Each router is
-different, so consult your router's firware documentation to make
+different, so consult your router's firmware documentation to make
 sure there are no firewalls in place blocking traffic on your Bee's
 designated p2p port.
 
@@ -659,7 +709,7 @@ Note that in all the examples below we map the Bee API to 127.0.0.1 (localhost),
 :::
 
 :::info
-This guide sets options using environment variables as part of the Docker startup commands such as `-e BEE_API_ADDR=":1633"`, however there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
+This guide sets options using environment variables as part of the Docker startup commands such as `-e BEE_API_ADDR=":1633"`, however there are [several other methods available for configuring options](./../working-with-bee/configuration.md). 
 :::
 
 ## Node setup process 
@@ -915,11 +965,11 @@ Congratulations! You have now installed your Bee node and successfully connected
 
 ### Set Target Neighborhood
 
-When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](/docs/bee/installation/set-target-neighborhood).
+When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](./set-target-neighborhood.md).
 
 ### Logs and monitoring
 
-Docker provides convenient built-in tools for logging and monitoring your node, which you've already encountered if you've read through earlier sections of this guide. For a more detailed guide, [refer to the section on logging](/docs/bee/working-with-bee/logs-and-files).
+Docker provides convenient built-in tools for logging and monitoring your node, which you've already encountered if you've read through earlier sections of this guide. For a more detailed guide, [refer to the section on logging](./../working-with-bee/logs-and-files.md).
 
 **Viewing node logs:**
 
@@ -979,27 +1029,27 @@ Replace `bee-1` with the name of your node if you've given it a different name.
 
 ## Back Up Keys
 
-Once your node is up and running, make sure to [back up your keys](/docs/bee/working-with-bee/backups). 
+Once your node is up and running, make sure to [back up your keys](./../working-with-bee/backups.md). 
 
 ## Getting help
 
 The CLI has documentation built-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` from within your Docker container or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
 
-You may also check out the [configuration guide](/docs/bee/working-with-bee/configuration), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
+You may also check out the [configuration guide](./../working-with-bee/configuration.md), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
 
 ## Next Steps to Consider
 
 ### Access the Swarm
-If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/introduction).
+If you'd like to start uploading or downloading files to Swarm, [start here](./../../develop/introduction.md).
 
 ### Explore the API
-The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
+The [Bee API](./../working-with-bee/bee-api.md) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
 
 ### Run a hive! 
-If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
+If you would like to run a hive of many Bees, check out the [hive operators](./hive.md) section for information on how to operate and monitor many Bees at once.
 
 ### Start building DApps on Swarm
-If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/introduction).
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](./../../develop/introduction.md).
 
 ---
 
@@ -1009,10 +1059,10 @@ If you would like to start building decentralised applications on Swarm, check o
 Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidth) to function properly. The amount needed depends on your node type and use case.
 
 ### xDAI is Required For:
-- **Buying Postage Stamps** ([Uploading Data](/docs/develop/tools-and-features/buy-a-stamp-batch))
-- **Stake Management Transactions** ([Staking](/docs/bee/working-with-bee/staking/))
-- **Storage Incentives Transactions** ([Redistribution Game](/docs/concepts/incentives/redistribution-game/) )
-- **Chequebook Deployment** ([Bandwidth Payments](/docs/concepts/incentives/bandwidth-incentives/))
+- **Buying Postage Stamps** ([Uploading Data](./../../develop/tools-and-features/buy-a-stamp-batch.md))
+- **Stake Management Transactions** ([Staking](./../working-with-bee/staking.md))
+- **Storage Incentives Transactions** ([Redistribution Game](./../../concepts/incentives/redistribution-game.md))
+- **Chequebook Deployment** ([Bandwidth Payments](./../../concepts/incentives/bandwidth-incentives.md))
 
 ### xBZZ is Required For:
 - **Buying Postage Stamps** (scales with data size and duration)
@@ -1066,7 +1116,7 @@ curl -s localhost:1633/addresses | jq .ethereum
 "0x9a73f283cd9212b99b5e263f9a81a0ddc847cd93"
 ```
 
-Fund your node with the appropriate amount of xDAI and xBZZ based on the recommended amounts specified in [the chart above](/docs/bee/installation/fund-your-node#token-amounts-by-use-case). 
+Fund your node with the appropriate amount of xDAI and xBZZ based on the recommended amounts specified in [the chart above](./fund-your-node.md#token-amounts-by-use-case). 
 
 *For support, ask in the [Develop on Swarm](https://discord.com/channels/799027393297514537/811574542069137449) Discord channel.*
 
@@ -1074,18 +1124,18 @@ Fund your node with the appropriate amount of xDAI and xBZZ based on the recomme
 
 ## Getting Started
 
-*If you want to get a Bee node up and running ASAP, check out the [Quick Start](/docs/bee/installation/quick-start) guide.* 
+*If you want to get a Bee node up and running ASAP, check out the [Quick Start](./quick-start.md) guide.* 
 
 ## Overview
 
 This guide provides the essential background information to help you start running a Bee node, including:
 
-- [Types of Bee nodes and their features](/docs/bee/installation/getting-started#node-types)
-- [Choosing the right node type](/docs/bee/installation/getting-started#choosing-a-node-type)
-- [Software requirements](/docs/bee/installation/getting-started#software-requirements)
-- [Hardware requirements](/docs/bee/installation/getting-started#hardware-requirements)
-- [Network requirements](/docs/bee/installation/getting-started#network-requirements)
-- [Installation methods](/docs/bee/installation/getting-started#installation-methods)
+- [Types of Bee nodes and their features](./getting-started.md#node-types)
+- [Choosing the right node type](./getting-started.md#choosing-a-node-type)
+- [Software requirements](./getting-started.md#software-requirements)
+- [Hardware requirements](./getting-started.md#hardware-requirements)
+- [Network requirements](./getting-started.md#network-requirements)
+- [Installation methods](./getting-started.md#installation-methods)
 
 :::caution[New Bee Users: Read This Guide in Full]
 For new Bee users, it is strongly recommended to read through this ***entire guide page*** before proceeding with installation and setup.
@@ -1095,7 +1145,7 @@ For new Bee users, it is strongly recommended to read through this ***entire gui
 
 Bee nodes can be run in three different modes, ***full***, ***light***, or ***ultra-light***. Full nodes provide complete access to all of Swarm's features including downloads, uploads, full participation in Swarm's incentives systems, and advanced messaging features such as PSS and GSOC. Light nodes are primarily for downloading and uploading only. Ultra-light nodes are the most limited, and only allow users to download a small amount of data with the free-tier limits set by full node operators.
 
-The [Node Types](/docs/bee/working-with-bee/node-types) page provides you with an in-depth look into the features and limitations of each node type along with instructions for how to set node options for all three types. 
+The [Node Types](./../working-with-bee/node-types.md) page provides you with an in-depth look into the features and limitations of each node type along with instructions for how to set node options for all three types. 
 
 ## Choosing a Node Type
 The node type you need to run will differ depending on your use-case:
@@ -1106,13 +1156,13 @@ The node type you need to run will differ depending on your use-case:
 | **DApp Development**          | Light, Full           | Light nodes are sufficient for many DApp use cases. Full nodes are required for advanced features like GSOC and PSS. |
 | **Earning xBZZ & Supporting the Network** | Full | Full nodes are necessary for storage incentives and long-term xBZZ earnings. Running multiple nodes? Consider using [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), or [Kubernetes](https://kubernetes.io/) for easier management. |
 
-Refer to the [Node Types](/docs/bee/working-with-bee/node-types) page for deep dive into each node type, their features and limitations, and configuration instructions.
+Refer to the [Node Types](./../working-with-bee/node-types.md) page for deep dive into each node type, their features and limitations, and configuration instructions.
 
 ##  Software Requirements
 
 ### Recommended Operating Systems
 - Officially supported systems are listed in the [Bee releases](https://github.com/ethersphere/bee/releases).
-- You can [build from source](/docs/bee/installation/build-from-source) if your OS is unsupported.
+- You can [build from source](./build-from-source.md) if your OS is unsupported.
 - **Swarm Desktop users** can use macOS, Windows, or Linux.
 - **Linux/macOS recommended**: Most tools and documentation are designed for Unix-based systems.
 - **Windows users**: While a Window release of Bee is available, you may also consider using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and using a Linux version of Bee.
@@ -1123,8 +1173,8 @@ While not strictly required, these tools will *greatly* simplify your experience
 
 - **[`jq`](https://jqlang.github.io/jq/)**: Formats JSON responses (recommended for API users).
 - **[`curl`](https://curl.se/)**: Used for sending API requests (required for API interactions).
-- **[Swarm CLI](/docs/bee/working-with-bee/swarm-cli/)**: Terminal-based Bee node management.
-- **[Bee JS](/docs/develop/tools-and-features/bee-js)**: JavaScript library for programmatic API access.
+- **[Swarm CLI](./../working-with-bee/swarm-cli.md)**: Terminal-based Bee node management.
+- **[Bee JS](./../../develop/tools-and-features/bee-js.md)**: JavaScript library for programmatic API access.
 
 ## Hardware Requirements
 
@@ -1153,10 +1203,10 @@ A reliable, high-speed internet connection is recommended when running a full no
 ### RPC Endpoint  
 
 :::warning
-***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).
+***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](./../working-with-bee/configuration.md#setting-blockchain-rpc-endpoint).
 :::
 
-An [RPC (Remote Procedure Call) endpoint](/docs/references/glossary#rpc-endpoint) is required to allow your node to interact with **Gnosis Chain**, which is required for transactions like purchasing postage stamps, staking xBZZ, and storage incentives related transactions.  
+An [RPC (Remote Procedure Call) endpoint](./../../references/glossary.md#rpc-endpoint) is required to allow your node to interact with **Gnosis Chain**, which is required for transactions like purchasing postage stamps, staking xBZZ, and storage incentives related transactions.  
 
 Bee nodes use the **`--blockchain-rpc-endpoint`** configuration option to specify which Gnosis Chain RPC service to connect to. 
 
@@ -1179,7 +1229,7 @@ Without a properly configured RPC endpoint, a Bee node cannot interact with the 
 
 If running Bee on a home network, there is a good chance it is behind NAT by default. Often simply [enabling port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) will be enough to allow your node to start communicating smoothly with the rest of the network.
 
-See [this page](/docs/bee/installation/connectivity/) for more information on how to make sure your node can communicate with the network.
+See [this page](./connectivity.md) for more information on how to make sure your node can communicate with the network.
 
 For VPS/cloud-based setups, connectivity is typically unrestricted.
 
@@ -1187,35 +1237,35 @@ If your home network happens to be using [CGNAT (Carrier-Grade NAT)](https://en.
 
 ## Installation Methods
 
-### [Swarm Desktop](/docs/desktop/introduction)
+### [Swarm Desktop](./../../desktop/introduction.md)
 - Best for beginners.
 - GUI-based interface.
 
-### [Shell Script Install](/docs/bee/installation/shell-script-install)
+### [Shell Script Install](./shell-script.md)
 - Quick setup using a minimal script.
 - Requires manual configuration for background operation.
 
-### [Docker Install](/docs/bee/installation/docker)
+### [Docker Install](./docker.md)
 - Suitable for running multiple nodes.
 - Offers easy container management.
 
-### [Package Manager Install](/docs/bee/installation/package-manager-install)
+### [Package Manager Install](./package-manager.md)
 - Uses APT, RPM, or Homebrew.
 - Runs Bee as a background service.
 
-### [Building from Source](/docs/bee/installation/build-from-source)
+### [Building from Source](./build-from-source.md)
 - Most flexible, but requires advanced setup.
 
 ---
 
 ## Hive
 
-Due to the mechanics of Swarm's [storage incentives](/docs/concepts/incentives/redistribution-game), node operators may wish to run multiple nodes in order to maximize earning potential. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for more information on how the
+Due to the mechanics of Swarm's [storage incentives](./../../concepts/incentives/redistribution-game.md), node operators may wish to run multiple nodes in order to maximize earning potential. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for more information on how the
 swarm comes together.
 
 ### Docker
 
-Up-to-date [Docker images for Bee](/docs/bee/installation/docker) are provided.
+Up-to-date [Docker images for Bee](./docker.md) are provided.
 
 ### Docker Compose
 
@@ -1243,7 +1293,7 @@ Configure your nodes as desired, but ensure that the values `api-addr`, `data-di
 
 ### Monitoring
 
-See the [logging section](/docs/bee/working-with-bee/logs-and-files) for more information on how to access your node's metrics. Share your community creations (such as [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel of our Discord server so we can add you to our list of all things that are [awesome](https://github.com/ethersphere/awesome-swarm) and Swarm. 🧡
+See the [logging section](./../working-with-bee/logs-and-files.md) for more information on how to access your node's metrics. Share your community creations (such as [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel of our Discord server so we can add you to our list of all things that are [awesome](https://github.com/ethersphere/awesome-swarm) and Swarm. 🧡
 
 ---
 
@@ -1252,7 +1302,7 @@ See the [logging section](/docs/bee/working-with-bee/logs-and-files) for more in
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Bee client can be [installed through a variety of package managers,](/docs/bee/installation/package-manager-install) including [APT](https://en.wikipedia.org/wiki/APT_(software)), [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager), and [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)). 
+The Bee client can be [installed through a variety of package managers,](./package-manager.md) including [APT](https://en.wikipedia.org/wiki/APT_(software)), [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager), and [Homebrew](https://en.wikipedia.org/wiki/Homebrew_(package_manager)). 
 
 :::caution
   When installed using a package manager, Bee is set up so it can be started to run as a background service using `systemctl` or `brew services` (depending on the package manager used). 
@@ -1261,7 +1311,7 @@ The Bee client can be [installed through a variety of package managers,](/docs/b
 
   When a node is started using the `bee start` command the node process will be bound to the terminal session and will exit if the terminal is closed. 
   
-  Furthermore, depending on which of these startup methods was used, [*the default Bee directories will be different*](/docs/bee/working-with-bee/configuration#default-data-and-config-directories). For each startup method, a different default data directory is used, so each startup method will essentially be spinning up a totally different node.
+  Furthermore, depending on which of these startup methods was used, [*the default Bee directories will be different*](./../working-with-bee/configuration.md#default-data-and-config-directories). For each startup method, a different default data directory is used, so each startup method will essentially be spinning up a totally different node.
 :::
 
 ## Install Bee
@@ -1362,7 +1412,7 @@ Created symlink /etc/systemd/system/multi-user.target.wants/bee.service → /lib
 When Bee is installed using a package manager, a `bee.yaml` file containing the default configuration will be generated. 
 
 :::info
-While this package manager install guide uses the `bee.yaml` file for setting configuration options, there are  [several other available methods for setting node options](/docs/bee/working-with-bee/configuration).
+While this package manager install guide uses the `bee.yaml` file for setting configuration options, there are  [several other available methods for setting node options](./../working-with-bee/configuration.md).
 :::
 
 After installation, you can check that the file was successfully generated and contains the [default configuration](https://github.com/ethersphere/bee/blob/master/packaging) for your system:
@@ -1448,13 +1498,13 @@ sudo vi /usr/local/etc/swarm-bee/bee.yaml
 
 ### Set Node Type
 
-See the [Getting Started guide](/docs/bee/installation/getting-started#choosing-a-node-type) if you're not sure which type of node to run.
+See the [Getting Started guide](./getting-started.md#choosing-a-node-type) if you're not sure which type of node to run.
  
-Once you've decided which node type is appropriate for you, refer to the [configuration section](/docs/bee/working-with-bee/configuration#node-types) for instructions on setting the options for your preferred node type.
+Once you've decided which node type is appropriate for you, refer to the [configuration section](./../working-with-bee/configuration.md#node-types) for instructions on setting the options for your preferred node type.
 
 ### Set Target Neighborhood
 
-When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](/docs/bee/installation/set-target-neighborhood).
+When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](./set-target-neighborhood.md).
 
 ## Start Node
 
@@ -1540,7 +1590,7 @@ The address referred to in both of these lines is your node's Gnosis Chain addre
 
 ## Fund Node
 
-Depending on your chosen node type, (full, light, or ultra-light), you will want to fund your node with differing amounts of xBZZ and xDAI. See [this section](/docs/bee/installation/fund-your-node) for more information on how to fund your node. 
+Depending on your chosen node type, (full, light, or ultra-light), you will want to fund your node with differing amounts of xBZZ and xDAI. See [this section](./fund-your-node.md) for more information on how to fund your node. 
 
 ### Restart and Wait for Initialisation
 
@@ -1616,10 +1666,10 @@ Now your node will begin to request chunks of data that fall within your *radius
 respond to requests for these chunks from other peers.
 
 :::tip Incentivisation
-In Swarm, storing, serving and forwarding chunks of data to other nodes can earn you rewards! Follow [this guide](/docs/bee/working-with-bee/cashing-out) to learn how to regularly cash out cheques other nodes send you in return for your services so that you can get your xBZZ!
+In Swarm, storing, serving and forwarding chunks of data to other nodes can earn you rewards! Follow [this guide](./../working-with-bee/cashing-out.md) to learn how to regularly cash out cheques other nodes send you in return for your services so that you can get your xBZZ!
 :::
 
-Your Bee client has now generated an elliptic curve key pair similar to an Ethereum wallet. These are stored in your [data directory](/docs/bee/working-with-bee/configuration), in the `keys` folder.
+Your Bee client has now generated an elliptic curve key pair similar to an Ethereum wallet. These are stored in your [data directory](./../working-with-bee/configuration.md), in the `keys` folder.
 
 :::danger Keep Your Keys and Password Safe!
 Your keys and password are very important, back up these files and
@@ -1643,7 +1693,7 @@ bee version
 ```
 
 Once the Bee node has been funded, the chequebook deployed, and postage stamp
-batch store synced, its HTTP [API](/docs/bee/working-with-bee/bee-api)
+batch store synced, its HTTP [API](./../working-with-bee/bee-api.md)
 will start listening at `localhost:1633` (for `full` or `light` nodes - for an `ultra-light` node, it should be initialized and the API should be available more rapidly).
 
 To check everything is working as expected, send a GET request to localhost port 1633.
@@ -1676,18 +1726,18 @@ Perfect! We are accumulating peers, this means you are connected to
 the network, and ready to start [using
 Bee](/docs/develop/introduction) to [upload and
 download](/docs/develop/upload-and-download) content or host
-and browse [websites](/docs/develop/host-your-website) hosted
+and browse [websites](./../../develop/host-your-website.md) hosted
 on the Swarm network.
 
 Welcome to the swarm! 🐝 🐝 🐝 🐝 🐝
 
 ## Back Up Keys
 
-Once your node is up and running, make sure to [back up your keys](/docs/bee/working-with-bee/backups). 
+Once your node is up and running, make sure to [back up your keys](./../working-with-bee/backups.md). 
 
 ## Deposit Stake (Optional)
 
-While depositing stake is not required to run a Bee node, it is required in order for a node to receive rewards for sharing storage with the network. You will need to [deposit xBZZ to the staking contract](/docs/bee/working-with-bee/staking) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
+While depositing stake is not required to run a Bee node, it is required in order for a node to receive rewards for sharing storage with the network. You will need to [deposit xBZZ to the staking contract](./../working-with-bee/staking.md) for your node. To do this, send a minimum of 10 xBZZ to your nodes' wallet and run:
 
 ```bash
 curl -X POST localhost:1633/stake/100000000000000000
@@ -1702,25 +1752,25 @@ Storage incentive rewards are only available for full nodes which are providing 
 ## Next Steps to Consider
 
 ### Access the Swarm
-If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/introduction).
+If you'd like to start uploading or downloading files to Swarm, [start here](./../../develop/introduction.md).
 
 ### Explore the API
-The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
+The [Bee API](./../working-with-bee/bee-api.md) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
 
 ### Run a hive! 
-If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
+If you would like to run a hive of many Bees, check out the [hive operators](./hive.md) section for information on how to operate and monitor many Bees at once.
 
 ### Start building DAPPs on Swarm
-If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/introduction).
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](./../../develop/introduction.md).
 
 ---
 
 ## Quickstart
 
-This guide will help you install and run a Bee [light node](/docs/bee/working-with-bee/node-types) using the [shell script](/docs/bee/installation/shell-script-install) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](/docs/bee/working-with-bee/swarm-cli) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.
+This guide will help you install and run a Bee [light node](./../working-with-bee/node-types.md) using the [shell script](./shell-script.md) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](./../working-with-bee/swarm-cli.md) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.
 
 :::tip
-A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](/docs/bee/working-with-bee/node-types). 
+A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](./../working-with-bee/node-types.md). 
 :::
 
 ## Requirements  
@@ -1729,8 +1779,8 @@ A "light" node can download and upload data from Swarm but does not share its di
 - [Node.js (v18 or higher)](https://nodejs.org/)
 - [npm (Node Package Manager)](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)  
 - [`curl`](https://curl.se/) or [`wget`](https://www.gnu.org/software/wget/) (Check with `curl --version` or `wget --version`)
-- [~0.20 xBZZ on Gnosis Chain](/docs/bee/installation/fund-your-node#how-to-get-xbzz)
-- [~0.01 xDAI on Gnosis Chain](/docs/bee/installation/fund-your-node#how-to-get-xdai)
+- [~0.20 xBZZ on Gnosis Chain](./fund-your-node.md#how-to-get-xbzz)
+- [~0.01 xDAI on Gnosis Chain](./fund-your-node.md#how-to-get-xdai)
 
 :::info
 Although `BZZ` is the official symbol of the token on both Ethereum and Gnosis Chain, the term `xBZZ` is widely used by the Swarm community and in documentation to indicate that it is BZZ on Gnosis Chain (not Ethereum).
@@ -1868,7 +1918,7 @@ Send **xDAI** (to pay for transaction fees on Gnosis Chain) and **xBZZ** (for up
 - **xDAI:** 0.01 xDAI is enough to start a light node
 - **xBZZ:** 0.20 xBZZ is enough to upload a small amount of data
 
-Learn how to [get xDAI and xBZZ](/docs/bee/installation/fund-your-node#getting-tokens) if you need some.
+Learn how to [get xDAI and xBZZ](./fund-your-node.md#getting-tokens) if you need some.
 
 :::tip
 If you wait too long to fund your node it may shut itself down. In that case, simply use the same startup command to start the node again.
@@ -1876,7 +1926,7 @@ If you wait too long to fund your node it may shut itself down. In that case, si
 
 ## Wait to Sync (~5 Minutes)
 
-After starting and funding a Bee light node for the first time, the node will automatically issue a [transaction](https://gnosisscan.io/tx/0xf8048c4e8020ccef842c9a901e6262e9c06d6f5926ff31bdb7dd9d7274dcf19c) on Gnosis Chain to deploy the node's [chequebook contract](/docs/concepts/incentives/bandwidth-incentives#chequebook-contract).
+After starting and funding a Bee light node for the first time, the node will automatically issue a [transaction](https://gnosisscan.io/tx/0xf8048c4e8020ccef842c9a901e6262e9c06d6f5926ff31bdb7dd9d7274dcf19c) on Gnosis Chain to deploy the node's [chequebook contract](./../../concepts/incentives/bandwidth-incentives.md#chequebook-contract).
 
 The node then needs to sync blockchain data before it can buy a postage stamp batch. The process may take **~5 minutes** depending on your RPC provider and network speed. 
 
@@ -1962,13 +2012,13 @@ Total xBZZ: 0.0000000000000000
 
 ## Next Steps
 
-With your node now fully synced, you're ready start start learning how to [develop on Swarm](/docs/develop/introduction).
+With your node now fully synced, you're ready start start learning how to [develop on Swarm](./../../develop/introduction.md).
 
 ---
 
 ## Set Target Neighborhood
 
-In older versions of Bee, [neighborhood](/docs/concepts/DISC/neighborhoods) assignment was random by default. However, we can maximize a node's chances of winning xBZZ and also strengthen the resiliency of the network by strategically assigning neighborhoods to new nodes (see the [staking section](/docs/bee/working-with-bee/staking) for more details).
+In older versions of Bee, [neighborhood](./../../concepts/DISC/neighborhoods.md) assignment was random by default. However, we can maximize a node's chances of winning xBZZ and also strengthen the resiliency of the network by strategically assigning neighborhoods to new nodes (see the [staking section](./../working-with-bee/staking.md) for more details).
 
 Therefore the default Bee configuration now includes the `neighborhood-suggester` option, which is set by default to use the Swarmscan neighborhood suggester (`https://api.swarmscan.io/v1/network/neighborhoods/suggestion`). You can use an alternative suggester URL, but it must return a JSON response in the following format: `{"neighborhood":"101000110101"}`. However, we currently recommend using only the default suggester. 
 
@@ -2014,7 +2064,7 @@ Note that we append 127.0.0.1 (localhost) to our Bee API's port (1633 by default
 :::
 
 :::info
-This guide uses command line flag options in the node startup commands such as `--blockchain-rpc-endpoint`, however, there are [several other methods available for configuring options](/docs/bee/working-with-bee/configuration). 
+This guide uses command line flag options in the node startup commands such as `--blockchain-rpc-endpoint`, however, there are [several other methods available for configuring options](./../working-with-bee/configuration.md). 
 :::
 
 ## Install and Start Your Node 
@@ -2109,7 +2159,7 @@ Use "bee [command] --help" for more information about a command.
  
 Let's try starting up our node for the first time with the command below. Make sure to pick a [strong password](https://xkcd.com/936/) of your own:
 
-Below are startup commands configured for each of the three Bee node types, ***full***, ***light***, and ***ultra-light***. Refer to the [Node Types](/docs/bee/working-with-bee/node-types) page to learn more about each node type and decide which one best suits your needs.
+Below are startup commands configured for each of the three Bee node types, ***full***, ***light***, and ***ultra-light***. Refer to the [Node Types](./../working-with-bee/node-types.md) page to learn more about each node type and decide which one best suits your needs.
 
 <Tabs
 defaultValue="full"
@@ -2426,7 +2476,7 @@ version: 2.2.0-06a0aca7 - planned to be supported until 11 December 2024, please
 
 Here we can see that after our node has been funded, it was able to issue the transactions for deploying the chequebook contract, which is a prerequisite for running a staking node.
 
-Next your node will begin to sync [postage stamp data](/docs/develop/tools-and-features/buy-a-stamp-batch), which can take ~5 to 10 minutes. You will see this log message while your node is syncing postage stamp data:
+Next your node will begin to sync [postage stamp data](./../../develop/tools-and-features/buy-a-stamp-batch.md), which can take ~5 to 10 minutes. You will see this log message while your node is syncing postage stamp data:
 
 ```bash
 "time"="2024-09-24 22:21:19.664897" "level"="info" "logger"="node" "msg"="waiting to sync postage contract data, this may take a while... more info available in Debug loglevel"
@@ -2532,12 +2582,12 @@ Congratulations! You have now installed your Bee node and are connected to the n
 
 ### Set Target Neighborhood
 
-When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](/docs/bee/installation/set-target-neighborhood).
+When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](./set-target-neighborhood.md).
 
 ### Logs and monitoring
 
 :::info
-You can learn more about Bee logs [here](/docs/bee/working-with-bee/logs-and-files).
+You can learn more about Bee logs [here](./../working-with-bee/logs-and-files.md).
 :::
 
 With our previously modified command, our Bee node will now be running in the background and the logs will be written to the `bee.log` file. To review our node's logs we can simply view the file contents:
@@ -2598,33 +2648,33 @@ Below is the output for a node that has been running for several days:
 }
 ```
 
-For a complete breakdown of this output, check out [this section in the Bee docs](/docs/bee/working-with-bee/bee-api#redistributionstate).
+For a complete breakdown of this output, check out [this section in the Bee docs](./../working-with-bee/bee-api.md#redistributionstate).
 
-You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](/docs/bee/working-with-bee/bee-api), and you can find complete information about all available endpoints in [the API reference docs](/api/).
+You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](./../working-with-bee/bee-api.md), and you can find complete information about all available endpoints in [the API reference docs](/api/).
 
 ## Back Up Keys
 
-Once your node is up and running, make sure to [back up your keys](/docs/bee/working-with-bee/backups).
+Once your node is up and running, make sure to [back up your keys](./../working-with-bee/backups.md).
 
 ## Getting help
 
 The CLI has built-in documentation. Running `bee` gives you an entry point to the documentation. Running `bee start -h` or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
 
-You may also check out the [configuration guide](/docs/bee/working-with-bee/configuration), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
+You may also check out the [configuration guide](./../working-with-bee/configuration.md), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
 
 ## Next Steps to Consider
 
 ### Access the Swarm
-If you'd like to start uploading or downloading files to Swarm, [start here](/docs/develop/introduction).
+If you'd like to start uploading or downloading files to Swarm, [start here](./../../develop/introduction.md).
 
 ### Explore the API
-The [Bee API](/docs/bee/working-with-bee/bee-api) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
+The [Bee API](./../working-with-bee/bee-api.md) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
 
 ### Run a hive! 
-If you would like to run a hive of many Bees, check out the [hive operators](/docs/bee/installation/hive) section for information on how to operate and monitor many Bees at once.
+If you would like to run a hive of many Bees, check out the [hive operators](./hive.md) section for information on how to operate and monitor many Bees at once.
 
 ### Start building DAPPs on Swarm
-If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](/docs/develop/introduction).
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](./../../develop/introduction.md).
 
 ---
 
@@ -2641,7 +2691,7 @@ https://github.com/ethersphere/bee/pull/1581
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Backing up your Bee node involves copying and saving files from the data directory specified in the `dat-dir` configuration option, along with the node's password. The details of where and how this option is specified will vary depending on the type of [configuration method](/docs/bee/working-with-bee/configuration) used (YAML file, command line flag, or environment variable).
+Backing up your Bee node involves copying and saving files from the data directory specified in the `dat-dir` configuration option, along with the node's password. The details of where and how this option is specified will vary depending on the type of [configuration method](./configuration.md) used (YAML file, command line flag, or environment variable).
 
 :::caution
 A node's password may be specified in several different locations. It can be specified either through the `password` option or the `password-file` option. For a backup, you will need to either copy the `password` option value, or copy the file itself from the location specified by the `password-file` option.
@@ -2726,7 +2776,7 @@ If you installed Bee via a package manager but sometimes start it manually, you 
 * System service (`systemctl start bee`) → Uses `/var/lib/bee`.
 * Manual start (`bee start`) → Uses `/home/<user>/.bee`.
 
-*The exact directory will differ depending on your system. See [Configuration page](/docs/bee/working-with-bee/configuration#default-data-and-config-directories).*
+*The exact directory will differ depending on your system. See [Configuration page](./configuration.md#default-data-and-config-directories).*
 :::
 
 ### *apt* and *yum / rpm* Package Managers
@@ -2763,7 +2813,7 @@ Default `data-dir` location:
 
 ### Shell Script & Binary Install 
 
-If you installed Bee using the [automated shell script](/docs/bee/installation/shell-script-install) or by [building Bee from source](/docs/bee/installation/build-from-source), your data directory will typically be located at:
+If you installed Bee using the [automated shell script](./../installation/shell-script.md) or by [building Bee from source](./../installation/build-from-source.md), your data directory will typically be located at:
 
 ```bash
 /home/<user>/.bee
@@ -2792,7 +2842,7 @@ sudo cp -r /var/lib/bee/ backup
     
 ## Back-up your password 
 
-Depending on your [configuration](/docs/bee/working-with-bee/configuration) method, your password may be located in a variety of different locations. If you use a `.yaml` file for your configuration, then it might be found directly under the `password` option, or it could be that the location of your password file is recorded by the `password-file` option. In either case, make sure to record the password somewhere safe or include the password file as a part of your backup.   
+Depending on your [configuration](./configuration.md) method, your password may be located in a variety of different locations. If you use a `.yaml` file for your configuration, then it might be found directly under the `password` option, or it could be that the location of your password file is recorded by the `password-file` option. In either case, make sure to record the password somewhere safe or include the password file as a part of your backup.   
 
 The same applies to other configuration methods. If you use environment variables for specifying your configuration options, your password itself will likely be specified in a `.env` file somewhere which contains either the password itself in the `BEE_PASSWORD` variable or the location of your password file in the `BEE_PASSWORD_FILE` variable. 
 
@@ -2849,10 +2899,10 @@ Before restoring, make sure to check for any old node data from a previous node 
 :::
 
 :::tip
-The specific directories and commands for restoring will depend on which install method and system is used. The instructions below are for a Linux package manager based installation. See the [configuration section](/docs/bee/working-with-bee/configuration#default-data-and-config-directories) more more details about default file locations.
+The specific directories and commands for restoring will depend on which install method and system is used. The instructions below are for a Linux package manager based installation. See the [configuration section](./configuration.md#default-data-and-config-directories) more more details about default file locations.
 :::
 
-1. After [uninstalling](/docs/bee/working-with-bee/uninstalling-bee) any existing Bee installations, perform a new [installation](/docs/bee/installation/getting-started#installation-methods).
+1. After [uninstalling](./uninstalling-bee.md) any existing Bee installations, perform a new [installation](./../installation/getting-started.md#installation-methods).
 
 1. Remove any existing Bee node data before restoring. This prevents conflicts with old files:
 
@@ -2906,20 +2956,20 @@ The Bee API provides full access to all core functionalities of a Bee node, incl
 :::danger
 Make sure that your api-addr (default 1633) is never exposed to the internet. If you do not have a firewall or other security measures in place, manually setting your Bee API address from the default `1633` to `127.0.0.1:1633` is strongly recommended to prevent unauthorized access.
 
-You may also consider using the [Gateway Proxy tool](/docs/develop/tools-and-features/gateway-proxy) to protect your node's API endpoint.
+You may also consider using the [Gateway Proxy tool](./../../develop/tools-and-features/gateway-proxy.md) to protect your node's API endpoint.
 :::
 
 Detailed information about Bee API endpoints can be found in the [API reference docs](/api/).
 
 ## Interacting With the API
 
-You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](/docs/develop/tools-and-features/buy-a-stamp-batch), [uploading and downloading](/docs/develop/upload-and-download), [staking](/docs/bee/working-with-bee/staking), and more.
+You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](./../../develop/tools-and-features/buy-a-stamp-batch.md), [uploading and downloading](./../../develop/upload-and-download.md), [staking](./staking.md), and more.
 
 ### Alternatives for Working with the API
 
-For developers, the [Bee JS library](/docs/develop/tools-and-features/bee-js) offers a more convenient way to interact with the API in a NodeJS environment.
+For developers, the [Bee JS library](./../../develop/tools-and-features/bee-js.md) offers a more convenient way to interact with the API in a NodeJS environment.
 
-For many other common use cases, you may prefer to make use of the [Swarm CLI](/docs/bee/working-with-bee/swarm-cli) tool, as it offers a convenient command line based interface for interacting with your node's API.
+For many other common use cases, you may prefer to make use of the [Swarm CLI](./swarm-cli.md) tool, as it offers a convenient command line based interface for interacting with your node's API.
 
 ## Exploring Node Status
 
@@ -2982,7 +3032,7 @@ The `/status` endpoint returns a quick summary of some important metrics for you
 - `"batchCommitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
 - `"isReachable"` - Whether or not your node is reachable on the p2p API by other nodes on the Swarm network (port 1634 by default).
 - `"lastSyncedBlock"` - The last block number from the connected blockchain that your node has synced up to.
-- `"committedDepth"` - The storage depth currently committed by your node, which defines how much of your reserve is actually being used to store chunks. Is equal to `"storageRadius"` plus the [doubling factor](/docs/bee/working-with-bee/staking/#reserve-doubling) specified in the `reserve-capacity-doubling` option (which is zero by default).
+- `"committedDepth"` - The storage depth currently committed by your node, which defines how much of your reserve is actually being used to store chunks. Is equal to `"storageRadius"` plus the [doubling factor](./staking.md#reserve-doubling) specified in the `reserve-capacity-doubling` option (which is zero by default).
 - `"isWarmingUp"` - Indicates whether your node is still in the warm-up phase (building up its reserve and syncing with the network) or has reached normal operation.
 
 ### _/status/peers_
@@ -3204,7 +3254,7 @@ From the results we can see that our node's neighborhood size and batch commitme
 
     * `"minimumGasFunds"` - The minimum required xDAI denominated in wei (1 xDAI = 10^18 wei) required for a node to participate in the redistribution game.
     * `"hasSufficientFunds"` - Whether your node has at least the `"minimumGasFunds"` amount of xDAI.
-    * `"isFrozen"` - Indicates if your node is frozen, which may occur for [several reasons](/docs/bee/working-with-bee/staking/#diagnosing-freezing-issues).
+    * `"isFrozen"` - Indicates if your node is frozen, which may occur for [several reasons](./staking.md#diagnosing-freezing-issues).
     * `"isFullySynced"` - Whether your node has fully synced all the chunks in its `"storageRadius"` (the value returned from the `/reservestate` endpoint.)
     * `"phase"` - The current phase of the redistribution game (this does not indicate whether or not your node is participating in the current phase).
     * `"round"` - The current number of the round of the redistribution game.
@@ -3229,7 +3279,8 @@ From the results we can see that our node's neighborhood size and batch commitme
         {
           "radius": 15,
           "storageRadius": 10,
-          "commitment": 134121783296
+          "commitment": 134121783296,
+          "reserveCapacityDoubling": 0
         }
     ```
 
@@ -3237,7 +3288,7 @@ From the results we can see that our node's neighborhood size and batch commitme
     * `"radius"` - Represents the maximum storage radius assuming all postage stamp batches are fully utilized.
     * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods).
     * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
-
+    * `"reserveCapacityDoubling"` - Indicates whether your node is currently using the reserve doubling mechanism. See [Reserve Doubling](./staking.md#reserve-doubling) for details.
 ### _/chainstate_
 
     This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
@@ -3368,7 +3419,7 @@ From the results we can see that our node's neighborhood size and batch commitme
 
 ### _/rchash_
 
-Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient.
+Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](./../../concepts/incentives/redistribution-game.md), and will report the amount of time it took to generate the hash. This is useful for getting a performance benchmark to ensure that your node's hardware is sufficient.
 
 The `/rchash` endpoint has 3 parameters: `depth` and `anchor_01` and `anchor_02`. For both of the anchor parameters, you should use the first 4 digits from your node's overlay address (which you can find from the `/addresses` endpoint). For depth, you should use the current storage depth of your node which you can find using the `/status` endpoint (storage depth is equivalent to the `storageRadius` value returned from `/status`):
 
@@ -3835,7 +3886,7 @@ However when Bee is started as a service with tools like `systemctl` or `brew se
 
 ### Command Line Arguments
 
-Run `bee start --help` in your terminal to list the available command-line arguments:
+Run `bee help printconfig` in your terminal to list the available command-line arguments and config option flags:
 
 ```bash
 Ethereum Swarm Bee
@@ -3845,7 +3896,7 @@ Usage:
 
 Available Commands:
   start       Start a Swarm node
-  dev         Start a Swarm node in development mode
+  dev         Start in dev mode. WARNING: This command will be deprecated soon.
   init        Initialise a Swarm node
   deploy      Deploy and fund the chequebook contract
   version     Print version number
@@ -3860,15 +3911,18 @@ Flags:
   -h, --help            help for bee
 
 Use "bee [command] --help" for more information about a command.
-root@noah-bee:~# docker exec bee-1 bee start --help
-Start a Swarm node
+root@noah-bee:~# docker exec -it bee-1 bee help printconfig
+Print default or provided configuration in yaml format
 
 Usage:
-  bee start [flags]
+  bee printconfig [flags]
 
 Flags:
       --allow-private-cidrs                      allow to advertise private CIDRs to the public network
       --api-addr string                          HTTP API listen address (default "127.0.0.1:1633")
+      --autotls-ca-endpoint string               autotls certificate authority endpoint (default "https://acme-v02.api.letsencrypt.org/directory")
+      --autotls-domain string                    autotls domain (default "libp2p.direct")
+      --autotls-registration-endpoint string     autotls registration endpoint (default "https://registration.libp2p.direct")
       --block-time uint                          chain block time (default 5)
       --blockchain-rpc-endpoint string           rpc blockchain endpoint
       --bootnode strings                         initial nodes to connect to (default [/dnsaddr/mainnet.ethswarm.org])
@@ -3883,14 +3937,18 @@ Flags:
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
       --db-write-buffer-size uint                size of the database write buffer in bytes (default 33554432)
       --full-node                                cause the node to start in full mode
-  -h, --help                                     help for start
+  -h, --help                                     help for printconfig
       --mainnet                                  triggers connect to main net bootnodes. (default true)
+      --minimum-gas-tip-cap uint                 minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
       --minimum-storage-radius uint              minimum radius storage threshold
       --nat-addr string                          NAT exposed address
+      --nat-wss-addr string                      WSS NAT exposed address
       --neighborhood-suggester string            suggester for target neighborhood (default "https://api.swarmscan.io/v1/network/neighborhoods/suggestion")
       --network-id uint                          ID of the Swarm network (default 1)
       --p2p-addr string                          P2P listen address (default ":1634")
       --p2p-ws-enable                            enable P2P WebSocket transport
+      --p2p-wss-addr string                      p2p wss address (default ":1635")
+      --p2p-wss-enable                           Enable Secure WebSocket P2P connections
       --password string                          password for decrypting keys
       --password-file string                     path to a file that contains password for decrypting keys
       --payment-early-percent int                percentage below the peers payment threshold when we initiate settlement (default 50)
@@ -3959,11 +4017,17 @@ bee printconfig
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
-api-addr: :1633
+api-addr: 0.0.0.0:1633
+# autotls certificate authority endpoint
+autotls-ca-endpoint: https://acme-v02.api.letsencrypt.org/directory
+# autotls domain
+autotls-domain: libp2p.direct
+# autotls registration endpoint
+autotls-registration-endpoint: https://registration.libp2p.direct
 # chain block time
 block-time: "5"
 # rpc blockchain endpoint
-blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
+blockchain-rpc-endpoint: https://rpc.gnosischain.com
 # initial nodes to connect to
 bootnode:
 - /dnsaddr/mainnet.ethswarm.org
@@ -3995,10 +4059,14 @@ full-node: "true"
 help: false
 # triggers connect to main net bootnodes.
 mainnet: "true"
+# minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
+minimum-gas-tip-cap: "0"
 # minimum radius storage threshold
 minimum-storage-radius: "0"
 # NAT exposed address
 nat-addr: ""
+# WSS NAT exposed address
+nat-wss-addr: ""
 # suggester for target neighborhood
 neighborhood-suggester: https://api.swarmscan.io/v1/network/neighborhoods/suggestion
 # ID of the Swarm network
@@ -4007,6 +4075,10 @@ network-id: "1"
 p2p-addr: :1634
 # enable P2P WebSocket transport
 p2p-ws-enable: false
+# p2p wss address
+p2p-wss-addr: :1635
+# Enable Secure WebSocket P2P connections
+p2p-wss-enable: false
 # password for decrypting keys
 password: 427067e9514e93613b861fef5561c6
 # path to a file that contains password for decrypting keys
@@ -4030,7 +4102,7 @@ price-oracle-address: ""
 # redistribution contract address
 redistribution-address: ""
 # reserve capacity doubling
-reserve-capacity-doubling: "1"
+reserve-capacity-doubling: "0"
 # ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
 resolver-options: []
 # forces the node to resync postage contract data
@@ -4078,7 +4150,7 @@ withdrawal-addresses-whitelist: []
 ```
 
 :::info
-Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](/docs/bee/working-with-bee/configuration). 
+Note that depending on whether Bee is started directly with the `bee start` command or started as a service with `systemctl` / `brew services`, the default directory for the YAML configuration file (shown in the `config` option above) [will be different](./configuration.md). 
 :::
 
 To change your node's configuration, simply edit the YAML file and restart Bee: 
@@ -4140,7 +4212,7 @@ brew services restart swarm-bee
 
 ## Manually generating YAML config file for *bee start*
 
-No YAML file is generated during installation when using the [shell script install method](/docs/bee/installation/shell-script-install), so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
+No YAML file is generated during installation when using the [shell script install method](./../installation/shell-script.md), so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
 
 ```bash
 bee printconfig &> $HOME/.bee.yaml
@@ -4156,7 +4228,7 @@ When using `bee.yaml` with the `bee start` command, make sure to use the `--conf
 
 There are three node types which each offer varying levels of functionality - ***full***, ***light***, and ***ultra-light***. You can configure your node to run as any of these three types by setting the related options within your configuration. 
 
-For a deeper dive into each node type and its features and limitations, refer to the [Node Types](/docs/bee/working-with-bee/node-types) page.
+For a deeper dive into each node type and its features and limitations, refer to the [Node Types](./node-types.md) page.
 
 ### How to Set Node Type
 
@@ -4387,6 +4459,8 @@ Then configure your node, including your p2p port (default 1634).
 nat-addr: "123.123.123.123:1634"
 ```
 
+Ensure `nat-addr` and `nat-wss-addr` if used are set to valid `host:port` values — invalid values prevent the node from starting.
+
 ## ENS Resolution (Optional)
 
 The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you run your own ethereum node. An option for resource restricted devices is geth+nimbus and a guide can be found [here](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/). Other options include [dappnode](https://dappnode.io/), [nicenode](https://www.nicenode.xyz/), [stereum](https://stereum.net/) and [avado](https://ava.do/). 
@@ -4430,39 +4504,39 @@ In this section we cover everything a node operator needs to know about working 
 
 ## Configuration
 
-Learn how to [configure your node](/docs/bee/working-with-bee/configuration), and the details behind all the configuration options Bee provides.
+Learn how to [configure your node](./configuration.md), and the details behind all the configuration options Bee provides.
 
 ## Bee API
 
-Access the HTTP API directly for [detailed information about your Bee](/docs/bee/working-with-bee/bee-api).
+Access the HTTP API directly for [detailed information about your Bee](./bee-api.md).
 
 ## Logs and Files
 
-Find out where Bee stores your [logs and files](/docs/bee/working-with-bee/logs-and-files).
+Find out where Bee stores your [logs and files](./logs-and-files.md).
 
 ## Swarm CLI
 
-You can use the [`swarm-cli`command line tool](/docs/bee/working-with-bee/swarm-cli) to monitor your Bee's status, cash out your cheques, upload data to the swarm and more!
+You can use the [`swarm-cli`command line tool](./swarm-cli.md) to monitor your Bee's status, cash out your cheques, upload data to the swarm and more!
 
 ## Cashing Out
 
-Get your cheques cashed and bank your xBZZ. [See this guide](/docs/bee/working-with-bee/cashing-out) to receiving payments from your peers.
+Get your cheques cashed and bank your xBZZ. [See this guide](./cashing-out.md) to receiving payments from your peers.
 
 ## Monitoring and Metrics
 
-There is a lot going on inside Bee, we provide tools and metrics to help you [find out what's going on](/docs/bee/working-with-bee/monitoring).
+There is a lot going on inside Bee, we provide tools and metrics to help you [find out what's going on](./monitoring.md).
 
 ## Backups
 
-[Keep your important data safe](/docs/bee/working-with-bee/backups), Bee stores important state and key information on your hardrive, make sure you keep a secure copy in case of disaster.
+[Keep your important data safe](./backups.md), Bee stores important state and key information on your hardrive, make sure you keep a secure copy in case of disaster.
 
 ## Upgrading
 
-Find out how to [keep your Bee up to date](/docs/bee/working-with-bee/upgrading-bee) with the latest and greatest releases, and make sure you're tuned into our release announcements.
+Find out how to [keep your Bee up to date](./upgrade.md) with the latest and greatest releases, and make sure you're tuned into our release announcements.
 
 ## Uninstalling Bee
 
-We hope you won't need to remove Bee. If you do, please let us know if you had issues so we can help resolve them for our beloved network. Here's the guide to [removing Bee from your system](/docs/bee/working-with-bee/uninstalling-bee).
+We hope you won't need to remove Bee. If you do, please let us know if you had issues so we can help resolve them for our beloved network. Here's the guide to [removing Bee from your system](./uninstalling-bee.md).
 
 ---
 
@@ -4711,13 +4785,13 @@ Bee can operate in different modes, each tailored to specific use cases:
 
 | Feature                                                                 | Full Node | Light Node | Ultra-Light Node |
 | ----------------------------------------------------------------------- | --------- | ---------- | ---------------- |
-| Free tier [downloads](/docs/develop/upload-and-download)                                                     | ✅        | ✅         | ✅               |
-| [Uploading](/docs/develop/upload-and-download) (Can purchase [postage stamp batches](/docs/develop/tools-and-features/buy-a-stamp-batch))                          | ✅        | ✅         | ❌               |
+| Free tier [downloads](./../../develop/upload-and-download.md)                                                     | ✅        | ✅         | ✅               |
+| [Uploading](./../../develop/upload-and-download.md) (Can purchase [postage stamp batches](./../../develop/tools-and-features/buy-a-stamp-batch.md))                          | ✅        | ✅         | ❌               |
 | Can exceed free tier downloads                                          | ✅        | ✅         | ❌               |
 | Storage sharing                                                         | ✅        | ❌         | ❌               |
-| [Storage incentives](/docs/bee/working-with-bee/staking/)               | ✅        | ❌         | ❌               |
-| [Bandwidth incentives](/docs/concepts/incentives/bandwidth-incentives/) | ✅        | ❌         | ❌               |
-| [PSS messaging](/docs/develop/tools-and-features/pss)                   | ✅        | ❌         | ❌               |
+| [Storage incentives](./staking.md)               | ✅        | ❌         | ❌               |
+| [Bandwidth incentives](./../../concepts/incentives/bandwidth-incentives.md) | ✅        | ❌         | ❌               |
+| [PSS messaging](./../../develop/tools-and-features/pss.md)                   | ✅        | ❌         | ❌               |
 
 ## Full Node
 
@@ -4730,7 +4804,7 @@ Full nodes are ideal for users who want to contribute to the Swarm network and e
 :::warning
 Full nodes require significant system resources, including storage and bandwidth. Additionally, they must be connected to the blockchain to participate in incentives. 
 
-If you intend to participate in the redistribution game to earn storage incentives, you should test your setup using [the `/rchash` endpoint](/docs/bee/working-with-bee/bee-api/#rchash) in order to ensure that your hardware is sufficient. Participation in the redistribution game requires a process with high computational and memory requirements, along with significant bandwidth usage.
+If you intend to participate in the redistribution game to earn storage incentives, you should test your setup using [the `/rchash` endpoint](./bee-api.md#rchash) in order to ensure that your hardware is sufficient. Participation in the redistribution game requires a process with high computational and memory requirements, along with significant bandwidth usage.
 :::
 
 Requires significant storage and processing power compared to other node types:
@@ -4798,7 +4872,7 @@ To run Bee as a light node, set:
 
 ## Ultra-Light Node
 
-Ultra-light nodes allow users to run a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](/docs/bee/working-with-bee/configuration) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
+Ultra-light nodes allow users to run a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](./configuration.md) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
 
 Ultra-light nodes are designed for users who want to access the Swarm network with minimal resource requirements. These nodes can download data within the free consumption threshold but do not support uploads and cannot earn xBZZ by participating in Swarm's incentives systems. 
 
@@ -4807,7 +4881,7 @@ As with light nodes, your node's download speed will be limited by your network 
 :::warning
 As with light nodes, ultra-light nodes do not benefit from plausible deniability when requesting data from the network.
 
-When running without a blockchain connection, [bandwidth incentive payments (SWAP)](/docs/concepts/incentives/bandwidth-incentives/) cannot be made, increasing the risk of being blocklisted by other peers for exceeding their free-tier download limits.
+When running without a blockchain connection, [bandwidth incentive payments (SWAP)](./../../concepts/incentives/bandwidth-incentives.md) cannot be made, increasing the risk of being blocklisted by other peers for exceeding their free-tier download limits.
 :::
 
 ### Recommended Specifications
@@ -4843,7 +4917,7 @@ Bee will start in ultra-light mode by default, but in order to explicitly config
 This guide will walk you through **staking xBZZ** and participating in the **redistribution game** to earn storage incentives. 
 
 :::warning
-Staking requires a fully synced full node and a minimum of 10 xBZZ. See detailed [staking requirements](/docs/bee/working-with-bee/staking#requirements) below.
+Staking requires a fully synced full node and a minimum of 10 xBZZ. See detailed [staking requirements](./staking.md#requirements) below.
 :::
 
 ### Prerequisites   
@@ -4853,7 +4927,7 @@ Staking requires a fully synced full node and a minimum of 10 xBZZ. See detailed
 - A fully synced full Bee node
 
 :::tip
-If you don't already have xDAI or xBZZ, you will need to [get some](/docs/bee/installation/fund-your-node#getting-tokens).
+If you don't already have xDAI or xBZZ, you will need to [get some](./../installation/fund-your-node.md#getting-tokens).
 :::
 
 ### Step 1: Fund Your Node with xDAI and xBZZ
@@ -4937,17 +5011,17 @@ Staked xBZZ: 10
 
 ### Step 3: Check Status
 
-After staking you should [check your node's status](/docs/bee/working-with-bee/staking#check-status) to make sure it is fully synced, fully funded, and operating properly. 
+After staking you should [check your node's status](./staking.md#check-status) to make sure it is fully synced, fully funded, and operating properly. 
 
 ### Step 4: Monitor & Maximize Rewards
 
-✅ Make sure you are using a stable Gnosis Chain [RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).  
-✅ [Check your node's status](/docs/bee/working-with-bee/staking#check-redistribution-status) to ensure it's operating properly.
-✅ [Check `/rchash`](/docs/bee/working-with-bee/bee-api#rchash) to ensure your node's performance is sufficient.
+✅ Make sure you are using a stable Gnosis Chain [RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint).  
+✅ [Check your node's status](./staking.md#check-status) to ensure it's operating properly.
+✅ [Check `/rchash`](./bee-api.md#rchash) to ensure your node's performance is sufficient.
 
 ## Staking Overview
 
-To earn storage incentives by participating in the [redistribution game](/docs/concepts/incentives/redistribution-game), full nodes must first deposit a minimum of 10 xBZZ as ***non-refundable*** stake. xDAI is also required to pay for ongoing Gnosis Chain transactions related to the redistribution game.
+To earn storage incentives by participating in the [redistribution game](./../../concepts/incentives/redistribution-game.md), full nodes must first deposit a minimum of 10 xBZZ as ***non-refundable*** stake. xDAI is also required to pay for ongoing Gnosis Chain transactions related to the redistribution game.
 
 :::danger
 Only stake your xBZZ if you intend to participate as a full node, as withdrawals are not possible.
@@ -4955,9 +5029,9 @@ Only stake your xBZZ if you intend to participate as a full node, as withdrawals
 
 ### Requirements
 
-- A [full node](/docs/bee/working-with-bee/node-types) - see full node [recommend specs](/docs/bee/working-with-bee/node-types#recommended-specifications).  
-- A [high-performance RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
-- A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling) is used).
+- A [full node](./node-types.md) - see full node [recommend specs](./node-types.md#recommended-specifications).  
+- A [high-performance RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
+- A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](./staking.md#reserve-doubling) is used).
 
  
 
@@ -4989,13 +5063,13 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 * `"hasSufficientFunds": <bool>` - Shows whether the node has enough xDAI balance to submit at least five storage incentives redistribution related transactions.  If `false` the node will not be permitted to participate in next round.
 * `"isFrozen": <bool>` - Shows node frozen status.
 * `"isFullySynced": <bool>` - Shows whether node's localstore has completed full historical syncing with all connected peers.
-* `"phase": <string>` - Current phase of [redistribution game](/docs/concepts/incentives/redistribution-game) (`commit`, `reveal`, or `claim`).
+* `"phase": <string>` - Current phase of [redistribution game](./../../concepts/incentives/redistribution-game.md) (`commit`, `reveal`, or `claim`).
 * `"round": <integer>` - Current round of redistribution game. The round number is determined by dividing the current Gnosis Chain block height by the number of blocks in one round. One round takes 152 blocks, so using the "block" output from the example above we can confirm that the round number is 176319 (block 26800488 / 152 blocks = round 176319).   
 * `"lastWonRound": <integer>` - Number of round last won by this node.
 * `"lastPlayedRound": <integer>` - Number of the last round where node's neighborhood was selected to participate in redistribution game.
 * `"lastFrozenRound": <integer>` The number the round when node was last frozen. 
 * `"block": <integer>` - Gnosis block of the current redistribution game.
-* `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](/docs/references/glossary#plur).
+* `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](./../../references/glossary.md#plur).
 * `"fees": <string (BigInt)>` - Record of total spent in 1E-18 xDAI on all redistribution related transactions.
 
 :::warning
@@ -5069,7 +5143,7 @@ In order to double a node's reserve which has previously been operating without 
 
 #### **Step 1**: Set `reserve-capacity-doubling` to `1`.
 
-The reserve doubling feature can be enabled by setting the new `reserve-capacity-doubling` config option to `1`  using the [configuration method](/docs/bee/working-with-bee/configuration#configuration-methods-and-priority) of your choice. 
+The reserve doubling feature can be enabled by setting the new `reserve-capacity-doubling` config option to `1`  using the [configuration method](./configuration.md#configuration-methods-and-priority) of your choice. 
 
 #### **Step 2**: Stake at least 20 xBZZ 
 
@@ -5155,11 +5229,11 @@ We can see that the `pullsyncRate` value is above zero, meaning that our node is
  
 ## Maximize rewards
 
-There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](/docs/concepts/incentives/redistribution-game) for more context.
+There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](./../../concepts/incentives/redistribution-game.md) for more context.
 
 ### Neighborhood selection 
 
-By default when running a Bee node for the first time the node will use the [neighborhood suggestion tool](https://api.swarmscan.io/v1/network/neighborhoods/suggestion) from Swarmscan to find an optimal [neighborhood](/docs/concepts/DISC/neighborhoods). While it is possible to manually choose a neighborhood using the `target-neighborhood` config option, we recommend not to do so as the suggestion tool will pick neighborhoods in order to maximize node earnings and network health. [Learn more](/docs/bee/installation/set-target-neighborhood). 
+By default when running a Bee node for the first time the node will use the [neighborhood suggestion tool](https://api.swarmscan.io/v1/network/neighborhoods/suggestion) from Swarmscan to find an optimal [neighborhood](./../../concepts/DISC/neighborhoods.md). While it is possible to manually choose a neighborhood using the `target-neighborhood` config option, we recommend not to do so as the suggestion tool will pick neighborhoods in order to maximize node earnings and network health. [Learn more](./../installation/set-target-neighborhood.md). 
 
 ### Stake density
 
@@ -5169,7 +5243,7 @@ $$
 \text{stake density} = \text{staked xBZZ} \times {2}^\text{storageDepth}
 $$
   
-*To learn more about stake density and the mechanics of the incentives system, see the [incentives page](/docs/concepts/incentives/redistribution-game).*
+*To learn more about stake density and the mechanics of the incentives system, see the [incentives page](./../../concepts/incentives/redistribution-game.md).*
 
 Stake density determines the weighted chances of nodes within a neighborhood of winning rewards. The chance of winning within a neighborhood corresponds to stake density. Stake density can be increased by depositing more xBZZ as stake (note that stake withdrawals are not currently possible, so any staked xBZZ is not currently recoverable). 
 
@@ -5286,7 +5360,7 @@ etc.
 ### Step 3: Update and restart
 
 :::danger
-Before every Bee client upgrade, it is best practice to ALWAYS take a full [backup](/docs/bee/working-with-bee/backups) of your node.
+Before every Bee client upgrade, it is best practice to ALWAYS take a full [backup](./backups.md) of your node.
 :::
 
 After withdrawing stake and stopping the node, update to the newest version of Bee. After updating, restart the node.
@@ -5318,7 +5392,7 @@ After upgrading to the latest version and restarting, xBZZ should be re-staked i
 To stake the minimum required 10 xBZZ:
 
 :::tip
-Make sure to modify to the correct staking amount in case your node is using [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling).
+Make sure to modify to the correct staking amount in case your node is using [reserve doubling](./staking.md#reserve-doubling).
 :::
 
 ```bash
@@ -5346,7 +5420,7 @@ In this section we cover several commonly seen issues encountered for staking no
 
 ### Frozen node
 
-A node will be frozen when the reserve commitment hash it submits in its [`commit` transaction](/docs/concepts/incentives/redistribution-game) does not match the correct hash. The reserve commitment hash is used as proof that a node is storing the chunks it is responsible for. It will not be able to play in the redistribution game during the freezing period. See the  [penalties](/docs/concepts/incentives/redistribution-game) section for more information.
+A node will be frozen when the reserve commitment hash it submits in its [`commit` transaction](./../../concepts/incentives/redistribution-game.md) does not match the correct hash. The reserve commitment hash is used as proof that a node is storing the chunks it is responsible for. It will not be able to play in the redistribution game during the freezing period. See the  [penalties](./../../concepts/incentives/redistribution-game.md) section for more information.
 
 #### Check frozen status
 
@@ -5601,7 +5675,7 @@ If you are able to identify and fix a problem with your node from the checklist 
     ```
 5. Check peer connectivity
 
-    Compare the value of your node's `neighborhoodSize` from the `/status` endpoint and the `neighborhoodSize` of its peers in the same neighborhood from the `/status/peers` endpoint. The figure should be generally the same (although it may fluctuate slightly up or down at any one point in time). If your node's `neighborhoodSize` value is significantly different and remains so over time then your node likely has a connectivity problem. Make sure to [check your network environment](/docs/bee/installation/connectivity) to ensure your node is able to communicate with the network.
+    Compare the value of your node's `neighborhoodSize` from the `/status` endpoint and the `neighborhoodSize` of its peers in the same neighborhood from the `/status/peers` endpoint. The figure should be generally the same (although it may fluctuate slightly up or down at any one point in time). If your node's `neighborhoodSize` value is significantly different and remains so over time then your node likely has a connectivity problem. Make sure to [check your network environment](./../installation/connectivity.md) to ensure your node is able to communicate with the network.
 
 If no problems are identified during these checks it likely indicates that your node was frozen in error and there are no additional steps you need to take. 
 
@@ -5612,7 +5686,7 @@ If you have identified and fixed a problem causing your node to become frozen or
 First stop your node, and then run the following command:
 
 :::caution
-Make sure to replace `/home/bee/.bee` with your node’s data directory if it differs from the one shown in the example. Make sure that the directory you specify is the root directory for your node’s data files, not the localstore directory itself. This is the same directory specified using the `data-dir` option in your node’s [configuration](/docs/bee/working-with-bee/configuration/).
+Make sure to replace `/home/bee/.bee` with your node’s data directory if it differs from the one shown in the example. Make sure that the directory you specify is the root directory for your node’s data files, not the localstore directory itself. This is the same directory specified using the `data-dir` option in your node’s [configuration](./configuration.md).
 :::
 
 ```bash
@@ -5663,7 +5737,7 @@ Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` befor
 
 #### Run sampler process to benchmark performance
 
-One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash` endpoint of the API may be used. See the `/rchash` section of the [Bee API page for usage details](/docs/bee/working-with-bee/bee-api/). 
+One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash` endpoint of the API may be used. See the `/rchash` section of the [Bee API page for usage details](./bee-api.md). 
 
 If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord).
 
@@ -5692,7 +5766,7 @@ Common uses:
 * **Smart option inference** — it infers options based on your input (e.g., batch selection, index page, content type) so you don’t need deep Bee API knowledge
 * **Powered by `bee-js`** — stays aligned with the latest Bee features
 
-It also greatly simplifies certain more complex tasks, such as as the management of [feeds](/docs/develop/tools-and-features/feeds).  
+It also greatly simplifies certain more complex tasks, such as as the management of [feeds](./../../develop/tools-and-features/feeds.md).  
 
 For installation and usage instructions, [see the README](https://github.com/ethersphere/swarm-cli/blob/master/README.md).
 
@@ -5708,10 +5782,10 @@ Choose the appropriate uninstallation method based on how Bee was installed:
 
 ## Package Manager  
 
-This method can be used for package manager based [installs](/docs/bee/installation/package-manager-install) of the official Debian, RPM, and Homebrew packages.
+This method can be used for package manager based [installs](./../installation/package-manager.md) of the official Debian, RPM, and Homebrew packages.
 
 :::danger
-Uninstalling Bee will permanently delete your keyfiles and configuration. Ensure you have a [full backup](/docs/bee/working-with-bee/backups) before proceeding.
+Uninstalling Bee will permanently delete your keyfiles and configuration. Ensure you have a [full backup](./backups.md) before proceeding.
 :::
 
 ### Debian
@@ -5730,7 +5804,7 @@ sudo yum remove bee
 
 ## Shell Script / Binary Install
 
-If Bee was installed using the [automated shell script](/docs/bee/installation/shell-script-install) or as a binary by [building from source](/docs/bee/installation/build-from-source), it can be uninstalled by manually removing the installed binary, configuration files, and data directories.
+If Bee was installed using the [automated shell script](./../installation/shell-script.md) or as a binary by [building from source](./../installation/build-from-source.md), it can be uninstalled by manually removing the installed binary, configuration files, and data directories.
 
 ### Identify Data and Config Locations
 
@@ -5784,7 +5858,7 @@ If you have generated a config file and saved it to a non default location which
 
 ## Remove Data Files
 
-Bee stores its **node data, blockchain state, and other persistent files** in a data directory. If you want to fully remove Bee, this directory must be deleted. The data directory [default location](/docs/bee/working-with-bee/configuration#default-data-and-config-directories) differs based on install method and system type. 
+Bee stores its **node data, blockchain state, and other persistent files** in a data directory. If you want to fully remove Bee, this directory must be deleted. The data directory [default location](./configuration.md#default-data-and-config-directories) differs based on install method and system type. 
 
 ## Verify Uninstallation
 
@@ -5803,11 +5877,11 @@ If Bee is still installed, this command will return the binary path (e.g., /usr/
 It's very important to keep Bee up to date to benefit from security updates and ensure you are able to properly interact with the Swarm network. The [#node-operators](https://discord.com/channels/799027393297514537/811553590170353685) channel is an excellent resource for any of your questions regarding node operation. 
 
 :::warning
-Bee sure to [back up](/docs/bee/working-with-bee/backups) your keys and [cash out your cheques](/docs/bee/working-with-bee/cashing-out) to ensure your xBZZ is safe before applying updates.
+Bee sure to [back up](./backups.md) your keys and [cash out your cheques](./cashing-out.md) to ensure your xBZZ is safe before applying updates.
 :::
 
 :::warning
-Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get). See [staking section](/docs/bee/working-with-bee/staking/) for more information on staking and troubleshooting.
+Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get). See [staking section](./staking.md) for more information on staking and troubleshooting.
 :::
 
 ### Ubuntu / Debian 
@@ -5866,23 +5940,23 @@ To upgrade your Docker installation, simply increment the version number in your
 
 import bos_fig_2_7 from '/static/img/bos_fig_2_7.jpg';
 
-DISC (Distributed Immutable Storage of Chunks) is a storage solution developed by Swarm based on a modified implementation of a [Kademlia DHT](/docs/concepts/DISC/kademlia) which has been specialized for data storage. Swarm's implementation of a DHT differs significantly in that it stores the content in the DHT directly, rather than just storing a list of seeders who are able to serve the content. This approach allows for much faster and more efficient retrieval of data.
+DISC (Distributed Immutable Storage of Chunks) is a storage solution developed by Swarm based on a modified implementation of a [Kademlia DHT](./kademlia.mdx) which has been specialized for data storage. Swarm's implementation of a DHT differs significantly in that it stores the content in the DHT directly, rather than just storing a list of seeders who are able to serve the content. This approach allows for much faster and more efficient retrieval of data.
 
 ### Kademlia Topology and Routing
 
-[Kademlia](/docs/concepts/DISC/kademlia) is a distributed hash table (DHT) widely used in peer-to-peer networks such as Ethereum and Bittorent. It serves as the routing and topology foundation for communication between nodes in the Swarm network. It organizes nodes based on their overlay addresses and ensures that messages are relayed efficiently, even in a dynamic, decentralized environment. 
+[Kademlia](./kademlia.mdx) is a distributed hash table (DHT) widely used in peer-to-peer networks such as Ethereum and Bittorent. It serves as the routing and topology foundation for communication between nodes in the Swarm network. It organizes nodes based on their overlay addresses and ensures that messages are relayed efficiently, even in a dynamic, decentralized environment. 
 
 One of the advantages of using Kademlia as a model for network topology is that both the number of forwarding "hops" required to route a chunk to its destination and the number of peer connections required to maintain Kademlia topology are logarithmic to the size of the network (a minimum of two connections is required in order to maintain Kademlia topology in case of network churn - nodes dropping in and out of the network). This makes Swarm a highly scalable system which is efficient even at very large scales. 
 
 ### Neighborhoods
 
-[Neighborhoods](/docs/concepts/DISC/neighborhoods) are groups of nodes which are responsible for sharing the same chunks. The chunks which each neighborhood is responsible for storing are defined by the proximity order of the nodes and the chunks. In other words, each node is responsible for storing chunks with which their overlay addresses share a certain number of prefix bits, and together with other nodes which share the same prefix bits, make up neighborhoods which share the responsibility for storing the same chunks. 
+[Neighborhoods](./neighborhoods.md) are groups of nodes which are responsible for sharing the same chunks. The chunks which each neighborhood is responsible for storing are defined by the proximity order of the nodes and the chunks. In other words, each node is responsible for storing chunks with which their overlay addresses share a certain number of prefix bits, and together with other nodes which share the same prefix bits, make up neighborhoods which share the responsibility for storing the same chunks. 
 
-Neighborhoods play a key role in providing data redundancy for chunks stored on Swarm since each node in a neighborhood will keep copies of the same chunks. The optional [erasure coding](/docs/concepts/DISC/erasure-coding) feature can also be enabled for added redundancy and greater data protection.
+Neighborhoods play a key role in providing data redundancy for chunks stored on Swarm since each node in a neighborhood will keep copies of the same chunks. The optional [erasure coding](./erasure-coding.md) feature can also be enabled for added redundancy and greater data protection.
 
 ### Chunks 
 
-In the DISC model, chunks are the canonical unit of data. When a file is uploaded to Swarm, it gets broken down into 4kb pieces with attached metadata. The pieces then get distributed amongst nodes in the Swarm network based on their [overlay addresses](/docs/references/glossary#overlay). There are two fundamental chunk types: content-addressed chunks and single-owner chunks. 
+In the DISC model, chunks are the canonical unit of data. When a file is uploaded to Swarm, it gets broken down into 4kb pieces with attached metadata. The pieces then get distributed amongst nodes in the Swarm network based on their [overlay addresses](./../../references/glossary.md#overlay). There are two fundamental chunk types: content-addressed chunks and single-owner chunks. 
 
 #### Content-Addressed Chunks and Single-Owner Chunks
 
@@ -5935,7 +6009,7 @@ Note that this guarantee of retrievability is for each 128 chunk segment, and th
 
 ## Usage
 
-For usage instructions, see the [erasure coding page in the "Develop" section](/docs/develop/tools-and-features/erasure-coding).
+For usage instructions, see the [erasure coding page in the "Develop" section](./../../develop/tools-and-features/erasure-coding.md).
 
 ## Cost Calculation
 
@@ -6103,9 +6177,9 @@ As mentioned above, Swarm's version of Kademlia differs from commonly used imple
 
 ### Proximity Order & Neighborhoods
 
-Swarm introduces the concept of [proximity order (PO)](/docs/references/glossary#proximity-order-po) as a discrete measure of node relatedness between two addresses. In contrast with Kademlia distance which is an exact measure of relatedness, PO is used to measure the relatedness between two addresses on a discrete scale based on the number of shared leading bits. Since this metric ignores all the bits after the shared leading bits, it is not an exact measure of distance between any two addresses.
+Swarm introduces the concept of [proximity order (PO)](./../../references/glossary.md#proximity-order-po) as a discrete measure of node relatedness between two addresses. In contrast with Kademlia distance which is an exact measure of relatedness, PO is used to measure the relatedness between two addresses on a discrete scale based on the number of shared leading bits. Since this metric ignores all the bits after the shared leading bits, it is not an exact measure of distance between any two addresses.
 
-In Swarm's version of Kademlia, nodes are grouped into [neighborhoods](/docs/concepts/DISC/neighborhoods) of nodes based on PO (ie., neighborhood are composed of nodes which all share the same leading binary prefix bits). Each neighborhood of nodes is responsible for storing the same set of chunks. 
+In Swarm's version of Kademlia, nodes are grouped into [neighborhoods](./neighborhoods.md) of nodes based on PO (ie., neighborhood are composed of nodes which all share the same leading binary prefix bits). Each neighborhood of nodes is responsible for storing the same set of chunks. 
 
 Neighborhoods are important for ensuring data redundancy, and they also play a role in the incentives system which guarantees nodes are rewarded for contributing resources to the network.
 
@@ -6145,7 +6219,7 @@ The PO measures how close a node is to a particular chunk of data or another nod
 
 ### Reserve Depth
 
-The reserve depth is the shallowest PO at which neighborhoods are able to store all of the chunks which have been paid for through [postage stamp batch](/docs/concepts/incentives/overview#postage-stamps) purchases.
+The reserve depth is the shallowest PO at which neighborhoods are able to store all of the chunks which have been paid for through [postage stamp batch](./../incentives/overview.mdx#postage-stamps) purchases.
 
 ### Storage Depth
 
@@ -6190,7 +6264,7 @@ Storer nodes are responsible for storing chunks with addresses whose leading bit
 > Chunk A address: `da49a42926015cd1e2bc552147c567b1ca13e8d4302c9e6026e79a24de328b65`   
 > Chunk B address: `da696a3dfb0f7f952872eb33e0e2a1435c61f111ff361e64203b5348cc06dc8a`   
 
-As the address of the chunk shown above shares the same ten leading binary bits as the nodes in our example neighborhood, it falls into that neighborhood's [area of responsibility](/docs/references/glossary#2-area-of-responsibility-related-depths), and all the nodes in that neighborhood are required to store that chunk:
+As the address of the chunk shown above shares the same ten leading binary bits as the nodes in our example neighborhood, it falls into that neighborhood's [area of responsibility](./../../references/glossary.md#2-area-of-responsibility-related-depths), and all the nodes in that neighborhood are required to store that chunk:
 
 > da49 --> 1101101001001001  
 > da69 --> 1101101001101001 
@@ -6241,7 +6315,7 @@ Each of our two example chunks will also be split amongst the two new neighborho
 
 #### Doubling Implications for Node Operators
 
-One of the implications of doubling for node operators is that the reward chances for a node depends in part on how many other nodes are in its neighborhood. If it is in a neighborhood with fewer nodes, its chances of winning rewards are greater. Therefore node operators should make certain to place their nodes into less populated neighborhoods, and also should look ahead to neighborhoods at the next depth after a doubling. For more details about how to adjust node placement, see [here](/docs/bee/installation/set-target-neighborhood).
+One of the implications of doubling for node operators is that the reward chances for a node depends in part on how many other nodes are in its neighborhood. If it is in a neighborhood with fewer nodes, its chances of winning rewards are greater. Therefore node operators should make certain to place their nodes into less populated neighborhoods, and also should look ahead to neighborhoods at the next depth after a doubling. For more details about how to adjust node placement, see [here](./../../bee/installation/set-target-neighborhood.md).
 
 ---
 
@@ -6250,7 +6324,7 @@ One of the implications of doubling for node operators is that the reward chance
 The Access Control Trie (ACT) implements the operation of encryption at the chunk level, with the presence of a decryption/encryption key being the only distinction between accessing private and public data.
 
 :::info
-This article describes the high level concepts and functionalities of ACT. If you're ready to try it out for yourself, please refer to this [hands on usage guide with specific details](/docs/develop/act/).
+This article describes the high level concepts and functionalities of ACT. If you're ready to try it out for yourself, please refer to this [hands on usage guide with specific details](./../develop/access-control.md).
 :::
 
 In decentralized public data storage systems like Swarm, data is distributed across multiple nodes. Ensuring
@@ -6340,23 +6414,23 @@ Storage incentives reward node operators for providing disk space and reliably s
 - **Price Oracle Contract** – Uses network redundancy data to determine postage stamp prices.  
 
 If you want to dig into the code, check out the [incentives contracts repo](https://github.com/ethersphere/storage-incentives)
-You can find the on-chain address for each contract within the docs [here](/docs/references/smart-contracts#storage-incentives-contracts), however since the contracts there are updated manually, they may at times fall slightly behind the most recent changes. For the most up to date address for each storage incentives contract refer to the [storage incentives ABI repo](https://github.com/ethersphere/go-storage-incentives-abi/commits/master/abi/abi_mainnet.go), and you can also find past addresses of older versions of the incentives contracts by reviewing previous commits.
+You can find the on-chain address for each contract within the docs [here](./../../references/smart-contracts.mdx#storage-incentives-contracts), however since the contracts there are updated manually, they may at times fall slightly behind the most recent changes. For the most up to date address for each storage incentives contract refer to the [storage incentives ABI repo](https://github.com/ethersphere/go-storage-incentives-abi/commits/master/abi/abi_mainnet.go), and you can also find past addresses of older versions of the incentives contracts by reviewing previous commits.
 
 ### Postage Stamps  
 
 Postage stamps are required to upload data to Swarm, similar to how real-world postage stamps prepay for mail delivery. Instead of being purchased individually, they are bought in batches using xBZZ through the postage stamp smart contract.  
 
-The xBZZ used to buy postage stamps is later redistributed as storage incentives. The **price oracle contract** adjusts postage stamp pricing based on network redundancy to ensure a sustainable level of storage. You can find more details about postage stamps [here](/docs/concepts/incentives/postage-stamps).  
+The xBZZ used to buy postage stamps is later redistributed as storage incentives. The **price oracle contract** adjusts postage stamp pricing based on network redundancy to ensure a sustainable level of storage. You can find more details about postage stamps [here](./postage-stamps.md).  
 
 ### Redistribution Game  
 
 The redistribution game determines how xBZZ from postage stamp purchases is distributed among full staking nodes that store data. The system is designed so that **honestly storing assigned data** is the most profitable strategy. Rules for this process are encoded in the [redistribution smart contract](https://github.com/ethersphere/storage-incentives).  
 
-Additionally, the game generates a **utilization signal**, which the price oracle uses to regulate postage stamp prices. Read more [here](/docs/concepts/incentives/redistribution-game).
+Additionally, the game generates a **utilization signal**, which the price oracle uses to regulate postage stamp prices. Read more [here](./redistribution-game.md).
 
 ### Price Oracle  
 
-The price oracle contract dynamically adjusts postage stamp prices based on network utilization data from the redistribution contract. This mechanism ensures optimal redundancy by increasing or decreasing the price of storage as needed. [Read more](/docs/concepts/incentives/price-oracle).  
+The price oracle contract dynamically adjusts postage stamp prices based on network utilization data from the redistribution contract. This mechanism ensures optimal redundancy by increasing or decreasing the price of storage as needed. [Read more](./price-oracle.md).  
 
 ## Bandwidth Incentives  
 
@@ -6364,7 +6438,7 @@ Nodes in Swarm not only store data but relay data across the network. **Bandwidt
 
 The **Swarm Accounting Protocol (SWAP)** facilitates bandwidth payments between nodes, which can be settled either **in-kind** (data exchange) or via **cheques** processed through a **chequebook contract** on Gnosis Chain. Only full nodes can participate in SWAP. 
 
-Read more [here](/docs/concepts/incentives/bandwidth-incentives).
+Read more [here](./bandwidth-incentives.md).
 
 ---
 
@@ -6372,7 +6446,7 @@ Read more [here](/docs/concepts/incentives/bandwidth-incentives).
 
 Postage stamps are used to pay for storing data on Swarm. They are purchased in batches, granting a prepaid right to store data on Swarm, similar to how real-world postage stamps pay for mail delivery.
 
-When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](/docs/concepts/DISC/) of data. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
+When a node uploads data to Swarm, it 'attaches' postage stamps to each [chunk](./../DISC/DISC.mdx) of data. The value assigned to a stamp indicates how much it is worth to persist the associated data on Swarm, which nodes use to prioritize which chunks to remove from their reserve first.
 
 The value of a postage stamp decreases over time as if storage rent was regularly deducted from the batch balance. A stamp expires when its batch runs out of balance. Chunks with expired stamps cannot be used as proof in the redistribution game, meaning storer nodes will no longer receive rewards for storing them and can safely remove them from their reserves.
 
@@ -6399,17 +6473,17 @@ $$
 $$
 
 :::info
-Note that due how buckets fill as described above, a batch can become fully utilised before its theoretical maximum volume has been reached. See [batch utilisation section below](/docs/concepts/incentives/postage-stamps#batch-utilisation) for more information.
+Note that due how buckets fill as described above, a batch can become fully utilised before its theoretical maximum volume has been reached. See [batch utilisation section below](./postage-stamps.md#batch-utilisation) for more information.
 :::
 
 ## Batch Depth and Batch Amount
 
-Each batch of stamps has two key parameters, `batch depth` and `amount`, which are recorded on Gnosis Chain at issuance. Note that these "depths" do not refer to the depth terms used to describe topology which are outlined [here in the glossary](/docs/references/glossary#depth-types).
+Each batch of stamps has two key parameters, `batch depth` and `amount`, which are recorded on Gnosis Chain at issuance. Note that these "depths" do not refer to the depth terms used to describe topology which are outlined [here in the glossary](./../../references/glossary.md#depth-types).
 
 ### Batch Depth 
 
 :::caution
-The minimum value for `depth` is 17, however higher depths are recommended for most use cases due to the [mechanics of stamp batch utilisation](#batch-utilisation). See [the depths utilisation table](#effective-utilisation-table) to help decide which depth is best for your use case. 
+The minimum value for `depth` is 17, however higher depths are recommended for most use cases due to the [mechanics of stamp batch utilisation](#batch-utilisation). See [the depths utilisation table](#effective-utilisation-tables) to help decide which depth is best for your use case. 
 :::
 
 `Batch depth` determines how much data can be stored by a batch. The number of chunks which can be stored (stamped) by a batch is equal to  $$2^{batchDepth}$$. 
@@ -6422,7 +6496,7 @@ $$
 \text{Theoretical maximum batch volume} = 2^{batchDepth} \times \text{4 kb}   
 $$
 
-However, due to the way postage stamp batches are utilised, batches will become fully utilised before stamping the theoretical maximum number of chunks. Therefore when deciding which batch depth to use, it is important to consider the effective amount of data that can be stored by a batch, and not the theoretical maximum. The effective rate of utilisation increases along with the  batch depth. See [section on stamp batch utilisation below](/docs/concepts/incentives/postage-stamps#batch-utilisation) for more information.
+However, due to the way postage stamp batches are utilised, batches will become fully utilised before stamping the theoretical maximum number of chunks. Therefore when deciding which batch depth to use, it is important to consider the effective amount of data that can be stored by a batch, and not the theoretical maximum. The effective rate of utilisation increases along with the  batch depth. See [section on stamp batch utilisation below](./postage-stamps.md#batch-utilisation) for more information.
 
 ### Batch Amount (& Batch Cost)
 
@@ -6469,7 +6543,7 @@ Utilisation of an immutable batch is computed using a hash map of size $$2^{buck
 
 ![](/img/batches_01.png)
 
-As chunks are uploaded to Swarm, each chunk is assigned to a bucket based the first 16 binary digits of the [chunk's hash](/docs/concepts/DISC/#chunks). The chunk will be assigned to whichever bucket's key matches the first 16 bits of its hash, and that bucket's counter will be incremented by 1. 
+As chunks are uploaded to Swarm, each chunk is assigned to a bucket based the first 16 binary digits of the [chunk's hash](./../DISC/DISC.mdx#chunks). The chunk will be assigned to whichever bucket's key matches the first 16 bits of its hash, and that bucket's counter will be incremented by 1. 
 
 The batch is deemed "full" when ANY of these counters reach a certain max value. The max value is computed from the batch depth as such: $$2^{(batchDepth-bucketDepth)}$$. For example with batch depth of 24, the max value is $$2^{(24-16)}$$ or 256. A bucket can be thought of as have a number of "slots" equal to this maximum value, and every time the bucket's counter is incremented, one of its slots gets filled. 
 
@@ -6541,7 +6615,7 @@ The implications of this behaviour are that even a small change to the data of a
 
 Due to the nature of batch utilisation described above, batches are often fully utilised before reaching their theoretical maximum storage amount. However as the batch depth increases, the chance of a postage batch becoming fully utilised early decreases. At batch depth 24, there is a 0.1% chance that a batch will be fully utilised/start replacing old chunks before reaching 64.33% of its theoretical maximum.
 
-Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](/docs/concepts/incentives/postage-stamps#batch-depth), we can see that for a batch depth of 24, the theoretical maximum amount which can be stored is 68.72 gb:
+Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](./postage-stamps.md#batch-depth), we can see that for a batch depth of 24, the theoretical maximum amount which can be stored is 68.72 gb:
 
 $$
 2^{24+12} = \text{68,719,476,736 bytes} = \text{68.72 gb}
@@ -6567,7 +6641,7 @@ Columns:
 :::info
 The title of each table below states whether it is for encrypted or unencrypted uploads along with the erasure coding level.
 
-[Erasure coding](/docs/concepts/DISC/erasure-coding) on Swarm has five named levels:
+[Erasure coding](./../DISC/erasure-coding.md) on Swarm has five named levels:
 
 1. NONE
 2. MEDIUM
@@ -6890,15 +6964,15 @@ Conversely, if the amount of Stamps being purchased decreases while the number o
 
 ## Redistribution Game
 
-The redistribution game distributes xBZZ collected from [postage stamp](/docs/concepts/incentives/postage-stamps) purchases, rewarding nodes for providing storage. Redistribution rewards incentivize nodes to continue providing storage to the network. The game is designed so that the most profitable strategy for participants is to store their assigned data honestly.
+The redistribution game distributes xBZZ collected from [postage stamp](./postage-stamps.md) purchases, rewarding nodes for providing storage. Redistribution rewards incentivize nodes to continue providing storage to the network. The game is designed so that the most profitable strategy for participants is to store their assigned data honestly.
 
 ### Redistribution Game Details
 
-Uploading data to Swarm requires purchasing postage stamp batches with xBZZ. The collected xBZZ is later redistributed as rewards to storage nodes. Every 152 Gnosis Chain blocks ***a single [neighborhood](/docs/concepts/DISC/neighborhoods)*** is selected to play the redistribution game. For each round of the game, one node from the selected neighborhood will have the chance to win a reward which is paid out from the accumulated xBZZ. 
+Uploading data to Swarm requires purchasing postage stamp batches with xBZZ. The collected xBZZ is later redistributed as rewards to storage nodes. Every 152 Gnosis Chain blocks ***a single [neighborhood](./../DISC/neighborhoods.md)*** is selected to play the redistribution game. For each round of the game, one node from the selected neighborhood will have the chance to win a reward which is paid out from the accumulated xBZZ. 
 
 The game has 3 phases, `commit`, `reveal`, and `claim`. In the `reveal` phase of a previous game, an "anchor" address is randomly generated and used to determine the neighborhood for the current round. 
 
-In the `commit` phase, nodes issue an on-chain transaction including an encrypted hash of the data they are storing (the unencrypted hash is known as the "reserve commitment") along with the [depth](/docs/references/glossary#2-area-of-responsibility-related-depths) for which they are reporting. This serves as an attestation of the data they are storing without revealing any other information.
+In the `commit` phase, nodes issue an on-chain transaction including an encrypted hash of the data they are storing (the unencrypted hash is known as the "reserve commitment") along with the [depth](./../../references/glossary.md#2-area-of-responsibility-related-depths) for which they are reporting. This serves as an attestation of the data they are storing without revealing any other information.
 
 In the `reveal` phase, each node reveals the decryption key for their encrypted hashes thereby publishing the hash. The winner is chosen at random among the honest nodes, but it is weighted in proportion to each node's stake density. Stake density is calculated as so:
 
@@ -6928,7 +7002,7 @@ Swarm is a peer-to-peer network of Bee nodes that collectively provide censorshi
 
 ## Bee Client
 
-Bee is a Swarm client implemented in Go and serves as the foundation of the Swarm network. Bee nodes form a private, decentralized, and self-sustaining network for permissionless publishing and data storage. You can learn more about how Bee clients work by reading about the [concepts and protocols](/docs/concepts/what-is-swarm/) which underpin the Swarm network. To get hands on experience working with Swarm, you can start by learning how to [install and operate a Bee node](/docs/bee/installation/getting-started). 
+Bee is a Swarm client implemented in Go and serves as the foundation of the Swarm network. Bee nodes form a private, decentralized, and self-sustaining network for permissionless publishing and data storage. You can learn more about how Bee clients work by reading about the [concepts and protocols](./what-is-swarm.mdx) which underpin the Swarm network. To get hands on experience working with Swarm, you can start by learning how to [install and operate a Bee node](./../bee/installation/getting-started.md). 
 
 ## Swarm Foundation
 
@@ -6960,7 +7034,7 @@ import bos_fig_1_1 from '/static/img/bos_fig_1_1.jpg';
 
 # What is Swarm?
 
-The complete vision of Swarm is described in detail in [The Book of Swarm](https://papers.ethswarm.org/p/book-of-swarm/) written by Swarm founder Viktor Tron, with further high level details described in the [whitepaper](https://papers.ethswarm.org/p/whitepaper/). More in depth low level implementation details can be found in the [Swarm Specification paper](https://papers.ethswarm.org/p/swarm-specification/). The latest research and technical papers from Swarm can be found on the ["Papers" section](https://papers.ethswarm.org/) of the Ethswarm homepage.
+The complete vision of Swarm is described in detail in [The Book of Swarm](https://papers.ethswarm.org/p/book-of-swarm/) written by Swarm founder Viktor Tron, with further high level details described in the [whitepaper](https://papers.ethswarm.org/p/whitepaper/). More in depth low level implementation details can be found in the [Swarm Specification paper](https://papers.ethswarm.org/p/swarm-protocol-spec/). The latest research and technical papers from Swarm can be found on the ["Papers" section](https://papers.ethswarm.org/) of the Ethswarm homepage.
 
 Swarm is peer-to-peer network of nodes which work together to provide decentralised storage and communication infrastructure.
 
@@ -6988,9 +7062,9 @@ As the [libp2p](https://libp2p.io/) library meets all these requirements it has 
 
 ### 2. Overlay Network
 
-The second part of Swarm is an overlay network with protocols powering the [Distributed Immutable Store of Chunks (DISC)](/docs/concepts/DISC/). This layer is responsible for storing and retrieving data in a decentralised and secure manner.
+The second part of Swarm is an overlay network with protocols powering the [Distributed Immutable Store of Chunks (DISC)](./DISC/DISC.mdx). This layer is responsible for storing and retrieving data in a decentralised and secure manner.
 
-Swarm's overlay network is built on top of the underlay transport layer and uses [Kademlia](/docs/concepts/DISC/kademlia) overlay routing to enable efficient and scalable communication between nodes. Kademlia is a distributed hash table (DHT) algorithm that allows nodes to locate each other in the network based on their unique identifier or hash.
+Swarm's overlay network is built on top of the underlay transport layer and uses [Kademlia](./DISC/kademlia.mdx) overlay routing to enable efficient and scalable communication between nodes. Kademlia is a distributed hash table (DHT) algorithm that allows nodes to locate each other in the network based on their unique identifier or hash.
 
 Swarm's DISC is an implementation of a Kademlia DHT optimized for storage. While the use of DHTs in distributed data storage protocols is common, for many implementations DHTs are used only for indexing file references. Swarm's DISC distinguishes itself from other implementations by instead breaking files into chunks and storing the chunks themselves directly within the DHT.
 
@@ -6998,23 +7072,23 @@ Each chunk has a fixed size of 4kb and is distributed across the network using t
 
 Swarm's distributed immutable storage provides several benefits, including data redundancy, tamper-proofing, and fault tolerance. Because data is stored across multiple nodes in the network, it can be retrieved even if some nodes fail or go offline. 
 
-Built on top of the overlay network is also an [incentives layer](/docs/concepts/incentives/overview) which guarantees that node operators which share their resources with the network are fairly rewarded for their services.
+Built on top of the overlay network is also an [incentives layer](./incentives/overview.mdx) which guarantees that node operators which share their resources with the network are fairly rewarded for their services.
 
 ### 3. Data Access Layer
 
 The third part of Swarm is a component that provides high-level data access and defines APIs for base-layer features. This layer is responsible for providing an easy-to-use interface for developers to interact with Swarm's underlying storage and communication infrastructure.
 
-Swarm's high-level data access component provides [APIs that allow developers to perform various operations](/api/) on the network, including [uploading and downloading data](/docs/develop/upload-and-download) and searching for content. These APIs are designed to be simple and intuitive, making it easy for developers to build decentralised applications on top of Swarm.
+Swarm's high-level data access component provides [APIs that allow developers to perform various operations](/api/) on the network, including [uploading and downloading data](./../develop/upload-and-download.md) and searching for content. These APIs are designed to be simple and intuitive, making it easy for developers to build decentralised applications on top of Swarm.
 
 ### 4. Application Layer 
 
-The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use cases. This layer is responsible for providing guidance to developers on [how to build complex applications](/docs/develop/introduction) on top of Swarm's underlying infrastructure.
+The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use cases. This layer is responsible for providing guidance to developers on [how to build complex applications](./../develop/introduction.md) on top of Swarm's underlying infrastructure.
 
 ---
 
 ## Access Content
 
-Accessing content on Swarm using Swarm Desktop is easy. All you need to get started is the Swarm hash for the content you wish to access. Whenever content is [uploaded to Swarm](/docs/desktop/upload-content) a Swarm hash is generated as a reference to that content. 
+Accessing content on Swarm using Swarm Desktop is easy. All you need to get started is the Swarm hash for the content you wish to access. Whenever content is [uploaded to Swarm](./upload-content.md) a Swarm hash is generated as a reference to that content. 
 
 To access content on Swarm go to the ***Files*** tab and click ***Download***:
 
@@ -7082,7 +7156,7 @@ Alternatively you may open the `config.yaml` and save the password as a text fil
 
 ## Restore from Backup
 
-To restore from backup, begin with a [new install](/docs/desktop/install) of Swarm Desktop. Once the installation process is finished, navigate to the `Settings` tab in the app and copy the install file directory as indicated in the `Data DIR` field:
+To restore from backup, begin with a [new install](./install.md) of Swarm Desktop. Once the installation process is finished, navigate to the `Settings` tab in the app and copy the install file directory as indicated in the `Data DIR` field:
 
 ![](/img/backup1.png)
 
@@ -7110,7 +7184,7 @@ Restart Swarm Desktop and check to see if the backup was restored successfully:
 
 ### Restore Gnosis Chain Account
 
-If you only wish to access your Gnosis Chain account, you can [follow these instructions](/docs/bee/working-with-bee/backups#metamask-import) for exporting to Metamask in order to access your account.
+If you only wish to access your Gnosis Chain account, you can [follow these instructions](./../bee/working-with-bee/backups.md#metamask-import) for exporting to Metamask in order to access your account.
 
 ---
 
@@ -7127,7 +7201,7 @@ To modify the RPC endpoint, first navigate to the ***Settings*** tab:
 From the ***Settings*** tab, expand the API Settings section and click the pen button next to Blockchain RPC URL to edit the default RPC. You can choose any valid Gnosis Chain RPC, either from your own Gnosis node or a service provider. You can find a list of paid and free RPC options from the [Gnosis Chain docs](https://docs.gnosischain.com/tools/RPC%20Providers/). For this example we will use the free endpoint - *https://xdai.fairdatasociety.org*.
 
 :::warning
-Other ***free public RPC endpoints are discouraged,*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).
+Other ***free public RPC endpoints are discouraged,*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](./../bee/working-with-bee/configuration.md#setting-blockchain-rpc-endpoint).
 :::
 
 ![](/img/config2.png)
@@ -7223,12 +7297,12 @@ If the installation went smoothly, you should see the message "Your node is conn
 Running the Swarm Desktop app for the first time set up a new Bee node on your system. The installation process generated and saved private keys for your node in the Swarm Desktop's data directory. Those keys were used to start up a new Bee node in ultra-light mode. 
 
 :::warning
-If your Swarm Desktop files are accidentally deleted or become corrupted you will lose access to any assets or data which are secured using those keys. Make sure to [backup your keys](/docs/desktop/backup-restore).
+If your Swarm Desktop files are accidentally deleted or become corrupted you will lose access to any assets or data which are secured using those keys. Make sure to [backup your keys](./backup-restore.md).
 :::
 
 ### "Ultra-light" and "Light" Nodes
 
-Swarm Desktop by default starts up a node in "ultra-light" mode. When running in ultra-light mode Swarm Desktop  limited to only downloading data from Swarm. Moreover, it's limited to downloading only within the free threshold allowed by other nodes. For instructions on switching to light mode see the [configuration section](/docs/desktop/configuration).
+Swarm Desktop by default starts up a node in "ultra-light" mode. When running in ultra-light mode Swarm Desktop  limited to only downloading data from Swarm. Moreover, it's limited to downloading only within the free threshold allowed by other nodes. For instructions on switching to light mode see the [configuration section](./configuration.md).
 
 ## Tour of Swarm Desktop
 
@@ -7240,7 +7314,7 @@ The "Info" tab gives you a quick view of your Swarm Desktop's status. From here 
 
 ### Files Tab
 
-From "Files" tab you can input a Swarm hash in order to download the file associated with the hash. See this full [guide for downloading](/docs/desktop/access-content) using Swarm Desktop.
+From "Files" tab you can input a Swarm hash in order to download the file associated with the hash. See this full [guide for downloading](./access-content.md) using Swarm Desktop.
 
 ![](/img/swarm-desktop-files-tab.png)
 
@@ -7252,7 +7326,7 @@ From the "Account" tab you can view your Swarm Desktop node's Gnosis Chain addre
 
 ### Settings Tab
 
-From the "Settings" tab you can view important settings values. Note that the Blockchain RPC URL and ENS resolver URL are already filled in, and only the Blockchain RPC URL is modifiable through this tab. If you wish to modify other settings see the [ configuration page](/docs/desktop/configuration) for detailed instructions.
+From the "Settings" tab you can view important settings values. Note that the Blockchain RPC URL and ENS resolver URL are already filled in, and only the Blockchain RPC URL is modifiable through this tab. If you wish to modify other settings see the [ configuration page](./configuration.md) for detailed instructions.
 
 ![](/img/swarm-desktop-settings-tab.png)
 
@@ -7279,7 +7353,7 @@ The Swarm Desktop App was designed to simplify the Swarm onboarding process so t
 ## Postage Stamps(Desktop)
 
 :::info
-Swarm Desktop must be configured as a light node in order to access stamp related features. If you have not already upgraded from the default ultra-light configuration, complete the upgrade by following the ***[instructions here](/docs/desktop/configuration#upgrading-from-an-ultra-light-to-a-light-node)***.
+Swarm Desktop must be configured as a light node in order to access stamp related features. If you have not already upgraded from the default ultra-light configuration, complete the upgrade by following the ***[instructions here](./configuration.md#upgrading-from-an-ultra-light-to-a-light-node)***.
 :::
 
 Postage stamps are required in order to upload data to Swarm. Postage stamps are purchased by interacting with the Swarm postage stamp smart contract on Gnosis Chain. Postage stamps are not purchased one by one, rather they are purchased in batches only.
@@ -7296,7 +7370,7 @@ And then clicking the ***Buy New Postage Stamp*** button:
 
 ### Depth and Amount
 
-Batch [depth and amount](/docs/concepts/incentives/postage-stamps) are the two required parameters which must be set when purchasing a postage stamp batch. Depth determines how many chunks can be stamped with a batch while amount determines how much xBZZ is assigned per chunk.
+Batch [depth and amount](./../concepts/incentives/postage-stamps.md) are the two required parameters which must be set when purchasing a postage stamp batch. Depth determines how many chunks can be stamped with a batch while amount determines how much xBZZ is assigned per chunk.
 
 ![](/img/stamps3.png)
 
@@ -7326,7 +7400,7 @@ To get started, click on the "Topup and Dilute" button.
 
 ![](/img/stamps7.png)
 
-From the "Action" dropdown menu, make sure that you have "Topup" selected and then fill in the `amount` by which you wish to top up the batch. Note that the number entered here is in PLUR (1e-16 xBZZ), and it is the same `amount`` parameter described in the [section above](/docs/desktop/postage-stamps#depth-and-amount) on purchasing postage stamp batches, it is NOT equal to the total amount of xBZZ spent for this top up transaction. 
+From the "Action" dropdown menu, make sure that you have "Topup" selected and then fill in the `amount` by which you wish to top up the batch. Note that the number entered here is in PLUR (1e-16 xBZZ), and it is the same `amount`` parameter described in the [section above](./postage-stamps.md#depth-and-amount) on purchasing postage stamp batches, it is NOT equal to the total amount of xBZZ spent for this top up transaction. 
 
 After inputting the `amount`, click "Topup" to submit the transaction.
 
@@ -7360,7 +7434,7 @@ Note that both the Depth and Capacity have increased while the TTL has decreased
 
 ### Install Swarm Desktop and Deposit Funds
 
-First, download and [install the Swarm Desktop App](/docs/desktop/install). Next, add xDAI (transaction fees) to your Node Wallet address. If you possess xBZZ (storage fees), you can deposit it alongside the xDAI. Otherwise, you can exchange your xDAI for xBZZ using the Swarm Desktop app.
+First, download and [install the Swarm Desktop App](./install.md). Next, add xDAI (transaction fees) to your Node Wallet address. If you possess xBZZ (storage fees), you can deposit it alongside the xDAI. Otherwise, you can exchange your xDAI for xBZZ using the Swarm Desktop app.
 
 Follow these steps to deposit funds:
 
@@ -7458,11 +7532,11 @@ There are many different approaches to starting a blog on Swarm, however the eas
 
 ## Requirements
 
-* [Swarm Desktop](/docs/desktop/install) with a [valid postage stamp batch](/docs/desktop/postage-stamps)
+* [Swarm Desktop](./install.md) with a [valid postage stamp batch](./postage-stamps.md)
 
 ## Getting Started
 
-To get started you must first have installed Swarm Desktop and have it running on your computer with a [valid stamp batch](/docs/desktop/postage-stamps). Note that your blog will only stay online as long as the postage batch is still valid, therefore you must make sure to stay aware of the postage batch TTL (time to live), and [top up your batch](/docs/desktop/postage-stamps#top-up-a-batch) regularly in order to keep your content online.
+To get started you must first have installed Swarm Desktop and have it running on your computer with a [valid stamp batch](./postage-stamps.md). Note that your blog will only stay online as long as the postage batch is still valid, therefore you must make sure to stay aware of the postage batch TTL (time to live), and [top up your batch](./postage-stamps.md#top-up-a-batch) regularly in order to keep your content online.
 
 ### Open Etherjot
 
@@ -7476,7 +7550,7 @@ When first starting Etherjot Web, you will be greeted with this page:
 
 ![](/img/etherjot1.png)
 
-On this page, as long as you have fulfilled the requirements outlined above, you will see two green checkmarks confirming you have Swarm Desktop running with a valid postage stamp batch. You will also see a warning reminding you of the importance of [topping up your stamp batch](/docs/desktop/postage-stamps#top-up-a-batch) to prevent the batch TTL from running out. 
+On this page, as long as you have fulfilled the requirements outlined above, you will see two green checkmarks confirming you have Swarm Desktop running with a valid postage stamp batch. You will also see a warning reminding you of the importance of [topping up your stamp batch](./postage-stamps.md#top-up-a-batch) to prevent the batch TTL from running out. 
 
 :::danger
 In addition to monitoring your postage stamp batch TTL, it is also important that you back up your blog, or else you may lose access to your blog in Etherjot (although it will still remain live on Swarm as long as its stamp batch has not expired). 
@@ -7513,7 +7587,7 @@ Copy the displayed text to a `.json` file, make certain to copy the entire displ
 Etherjot currently does not allow you to save drafts locally, so if you navigate away from the blog post you are currently editing, you will lose any changes you have made which have not yet been uploaded to Swarm. Take note of the three UI elements highlighted in the screenshot - using the "+" or "Settings" buttons will cause you to lose any changes not uploaded to Swarm, and hitting the "Reset" button will cause you to lose everything which has not been backed up.
 
 :::danger
-Hitting the "Reset" button will cause you to lose any content which has not yet been published and [backed up](/docs/desktop/start-a-blog#back-up-your-blog). 
+Hitting the "Reset" button will cause you to lose any content which has not yet been published and [backed up](./start-a-blog.md#back-up-your-blog). 
 :::
 
 ![](/img/etherjot19.png)
@@ -7618,7 +7692,7 @@ Click "Settings" to open up the Settings page. Note that any unpublished changes
 
 ![](/img/etherjot21.png)
 
-From here you can [back up](/docs/desktop/start-a-blog#back-up-your-blog) and restore blogs, and can set a variety of other options. 
+From here you can [back up](./start-a-blog.md#back-up-your-blog) and restore blogs, and can set a variety of other options. 
 
 ### Setting Custom Text and Links
 
@@ -7631,10 +7705,10 @@ Highlighted in this first screenshot you can see the options for setting custom 
 ## Reset Your Blog (DANGER)
 
 :::danger
-Hitting the "Reset" button will cause you to lose any content which has not yet been published and backed up. Make sure you have [backed up your blog](/docs/desktop/start-a-blog#back-up-your-blog) before clicking "reset!"
+Hitting the "Reset" button will cause you to lose any content which has not yet been published and backed up. Make sure you have [backed up your blog](./start-a-blog.md#back-up-your-blog) before clicking "reset!"
 :::
 
-To reset your blog and start a new blog, click the "Reset" button. This will immediately reset your blog, and you will lose any changes which have not yet been published. You will ALSO lose anything which you have not backed up, so it is important to [back up your blog](/docs/desktop/start-a-blog#back-up-your-blog) before resetting.
+To reset your blog and start a new blog, click the "Reset" button. This will immediately reset your blog, and you will lose any changes which have not yet been published. You will ALSO lose anything which you have not backed up, so it is important to [back up your blog](./start-a-blog.md#back-up-your-blog) before resetting.
 
 ![](/img/etherjot25.png)
 
@@ -7642,7 +7716,7 @@ To reset your blog and start a new blog, click the "Reset" button. This will imm
 
 ## Upload Content
 
-After [purchasing a batch of postage stamps](/docs/desktop/postage-stamps) you will be able to upload files. First go to the “Files” tab. Here you can choose between three options, depending on what you want to upload: a single file, a folder or a website. After choosing your option you’ll need to add a postage stamp.
+After [purchasing a batch of postage stamps](./postage-stamps.md) you will be able to upload files. First go to the “Files” tab. Here you can choose between three options, depending on what you want to upload: a single file, a folder or a website. After choosing your option you’ll need to add a postage stamp.
 
 ![](/img/upload1.png)
 
@@ -7667,7 +7741,7 @@ Once your file is uploaded a Swarm hash and Swarm Gateway link will be displayed
 ## Add Access Control
 
 :::info
-This is guide contains a detailed explanation of how to use the ACT feature, but does not cover its higher level concepts. To better understand how ACT works and why to use it, read [the ACT page in the "Concepts" section](/docs/concepts/access-control).
+This is guide contains a detailed explanation of how to use the ACT feature, but does not cover its higher level concepts. To better understand how ACT works and why to use it, read [the ACT page in the "Concepts" section](./../concepts/access-control.md).
 :::
 
 In this section we'll provide information on how to use the **swarm-cli** to upload, download data with ACT or update the grantee list. 
@@ -7766,7 +7840,7 @@ Connect with other Bee developers over at the official [Discord Server](https://
 
 - If you would like to contribute, please read the [coding guidelines](https://github.com/ethersphere/bee/blob/master/CODING.md) before you get started.
 
-- Installation from source is described in the [Installation](/docs/bee/installation/build-from-source).
+- Installation from source is described in the [Installation](./../../bee/installation/build-from-source.md).
 
 - Contribute to Swarm’s evolution by proposing your own Swarm Improvement Proposal (SWIP) [here](https://github.com/ethersphere/SWIPs).
 
@@ -8359,7 +8433,7 @@ import TabItem from '@theme/TabItem';
 
 # Manage Files
 
-Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](/docs/develop/tools-and-features/manifests), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.
+Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](./tools-and-features/manifests.md), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.
 
 ## Usage and Example Scripts
 
@@ -8372,7 +8446,7 @@ The full working scripts are available in the [examples](https://github.com/ethe
 * [`script-03.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-03.js)
 
 :::info Website routing
-Manifests are also used for website routing (index documents, clean URLs, error pages, redirects). If you are building a website, see the [Routing guide](/docs/develop/routing).
+Manifests are also used for website routing (index documents, clean URLs, error pages, redirects). If you are building a website, see the [Routing guide](./routing.md).
 :::
 
 ### Prerequisites
@@ -8559,7 +8633,7 @@ await node.loadRecursively(bee)
 printManifestJson(node)
 ```
 
-This produces a tree showing how paths map to Swarm references. To better understand the tree shown in the terminal output, refer to the [Manifests](/docs/develop/tools-and-features/manifests) page.
+This produces a tree showing how paths map to Swarm references. To better understand the tree shown in the terminal output, refer to the [Manifests](./tools-and-features/manifests.md) page.
 
 ```bash
 "/": {
@@ -9126,7 +9200,7 @@ This guide shows you how to get your website hosted on Swarm with just a few sim
 
 ### Prerequisites
 
-* A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
+* A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage batch
 * [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli)
 * A valid postage stamp batch
@@ -9356,7 +9430,7 @@ For developers building apps, tools, or automated deployments, `bee-js` offers p
 
 ### Prerequisites
 
-* A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
+* A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage stamp batch
 * Node.js (18+) and `@ethersphere/bee-js` installed in your project
 * Static website files (HTML, CSS, etc.) - feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/basic-static-website)
@@ -9482,7 +9556,7 @@ Website Swarm Hash: 6c45eae389b3bffce21443316d0bd47c4101545092b7c72c313a33ee7d00
 Feed Manifest: caa414d70028d14b0bdd9cbab18d1c1a0a3bab1b20a56cf06937a6b20c7e7377
 ```
 
-Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#2-connecting-your-website-to-ens)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
+Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
 
 ```
 bzz://<manifestRef>
@@ -9531,7 +9605,7 @@ The guide covers:
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 
 :::tip
-For the content hash, you can use a Swarm hosted website's hash directly, or as is recommended in the [`swarm-cli`](#recommended-use-feeds-for-seamless-updates---swarm-cli) and [`bee-js`](#recommended-use-feeds-for-seamless-updates---bee-js) guides above, publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates. 
+For the content hash, you can use a Swarm hosted website's hash directly, or as is recommended in the [`swarm-cli`](#use-feeds-for-seamless-updates---swarm-cli) and [`bee-js`](#use-feeds-for-seamless-updates---bee-js) guides above, publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates. 
 :::
 
 ```
@@ -9674,7 +9748,7 @@ import TabItem from '@theme/TabItem';
 
 # Routing on Swarm 
 
-Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](/docs/develop/tools-and-features/manifests).
+Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](./tools-and-features/manifests.md).
 
 If you try to use typical "clean URLs" like:
 
@@ -9891,7 +9965,7 @@ Everything inside `dist/` will be uploaded to your Swarm feed.
 
 #### 7. Deploy Site
 
-Now with routing handled its time to deploy the site. Refer to the [Host Your Website](/docs/develop/host-your-website#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
+Now with routing handled its time to deploy the site. Refer to the [Host Your Website](./host-your-website.md#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
 
 If you already have `swarm-cli` installed, you can do this easily with the following command:
 
@@ -10141,7 +10215,7 @@ Once you understand manifest-based routing, you can dynamically:
 
 ## Bee JS
 
-bee-js is Bee's complementary JavaScript library. It is the technology underpinning [swarm-cli](/docs/bee/working-with-bee/swarm-cli) and [Swarm Desktop](/docs/desktop/introduction/) and is a powerful tool for building completely decentralized apps.
+bee-js is Bee's complementary JavaScript library. It is the technology underpinning [swarm-cli](./../../bee/working-with-bee/swarm-cli.md) and [Swarm Desktop](./../../desktop/introduction.md) and is a powerful tool for building completely decentralized apps.
 
 See the [bee-js](https://bee-js.ethswarm.org/) documentation for detailed information on using and installing the library.
 
@@ -10157,10 +10231,10 @@ import TabItem from '@theme/TabItem';
 
 import { globalVariables } from '/src/config/globalVariables'
 
-A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](/docs/concepts/DISC/). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch. 
+A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](./../../concepts/DISC/DISC.mdx). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch. 
 
 :::info
-      The storage volume and duration are both non-deterministic. Volume is non-deterministic due to the details of how [postage stamp batch utilization](/docs/concepts/incentives/postage-stamps#batch-utilisation) works. While duration is non-deterministic due to price changes made by the [price oracle contract](/docs/concepts/incentives/price-oracle).
+      The storage volume and duration are both non-deterministic. Volume is non-deterministic due to the details of how [postage stamp batch utilization](./../../concepts/incentives/postage-stamps.md#batch-utilisation) works. While duration is non-deterministic due to price changes made by the [price oracle contract](./../../concepts/incentives/price-oracle.md).
 
       **Storage volume and `depth`:**
 
@@ -10168,7 +10242,7 @@ A postage batch is required to upload data to Swarm. Postage stamp batches repre
 
       **Storage duration and `amount`:** 
 
-      The duration of time for which a batch can store data is also non-deterministic since the price of storage is automatically adjusted over time by the [price oracle contract](/docs/concepts/incentives/price-oracle). However, limits have been placed on how swiftly the price of storage can change, so there is no danger of a rapid change in price causing postage batches to unexpectedly expire due to a rapid increase in price. You can view a history of price changes by inspecting the events emitted by the oracle contract, or also through the [Swarmscan API](https://api.swarmscan.io/v1/events/storage-price-oracle/price-update). As you can see, if and when postage batch prices are updated, the updates are quite small. Still, since it is not entirely deterministic, it is important to monitor your stamp batch TTL (time to live) as it will change along with price oracle changes. You can inspect your batch's TTL using the `/stamps` endpoint of the API:
+      The duration of time for which a batch can store data is also non-deterministic since the price of storage is automatically adjusted over time by the [price oracle contract](./../../concepts/incentives/price-oracle.md). However, limits have been placed on how swiftly the price of storage can change, so there is no danger of a rapid change in price causing postage batches to unexpectedly expire due to a rapid increase in price. You can view a history of price changes by inspecting the events emitted by the oracle contract, or also through the [Swarmscan API](https://api.swarmscan.io/v1/events/storage-price-oracle/price-update). As you can see, if and when postage batch prices are updated, the updates are quite small. Still, since it is not entirely deterministic, it is important to monitor your stamp batch TTL (time to live) as it will change along with price oracle changes. You can inspect your batch's TTL using the `/stamps` endpoint of the API:
 
       ```bash
       root@noah-bee:~# curl -s  localhost:1633/stamps | jq
@@ -10193,7 +10267,7 @@ A postage batch is required to upload data to Swarm. Postage stamp batches repre
       Here we can see from the `batchTTL` that `82943` seconds remain, or approximately 23 hours. 
       :::
 
-For a deeper understanding of how `depth` and `amount` parameters determine the data volume and storage duration of a postage batch, see the [postage stamp page](/docs/concepts/incentives/postage-stamps/).
+For a deeper understanding of how `depth` and `amount` parameters determine the data volume and storage duration of a postage batch, see the [postage stamp page](./../../concepts/incentives/postage-stamps.md).
 
 ## Fund your node's wallet.
 
@@ -10203,7 +10277,7 @@ xBZZ can be obtained from a variety of different centralized and decentralized e
 
 xDAI can be obtained from a wide range of centralized and decentralized exchanges. See [this list of exchanges](https://docs.gnosischain.com/about/tokens/xdai) from the Gnosis Chain documentation to get started.
 
-You can learn more details from the [Fund Your Node](/docs/bee/installation/fund-your-node/) section.
+You can learn more details from the [Fund Your Node](./../../bee/installation/fund-your-node.md) section.
 
 ## Buying a stamp batch
 
@@ -10273,12 +10347,12 @@ When purchasing a batch of stamps there are several parameters and options which
 ### Choosing *depth*
 
 :::caution
-The minimum value for `depth` is 17, however a higher depth value is recommended for most use cases due to the [mechanics of stamp batch utilisation](/docs/concepts/incentives/postage-stamps/#batch-utilisation). See [the depths utilisation table](/docs/concepts/incentives/postage-stamps/#effective-utilisation-table) to help decide which depth is best for your use case.
+The minimum value for `depth` is 17, however a higher depth value is recommended for most use cases due to the [mechanics of stamp batch utilisation](./../../concepts/incentives/postage-stamps.md#batch-utilisation). See [the depths utilisation table](./../../concepts/incentives/postage-stamps.md#effective-utilisation-tables) to help decide which depth is best for your use case.
 :::
 
 One notable aspect of batch utilisation is that the entire batch is considered fully utilised as soon as any one of its buckets are filled. This means that the actual amount of chunks storable by a batch is less than the nominal maximum amount. 
 
-See the [postage stamp page](/docs/concepts/incentives/postage-stamps) for a more complete explanation of how batch utilisation works and a [table](/docs/concepts/incentives/postage-stamps#effective-utilisation-table) with the specific amounts of data which can be safely uploaded for each `depth` value. 
+See the [postage stamp page](./../../concepts/incentives/postage-stamps.md) for a more complete explanation of how batch utilisation works and a [table](./../../concepts/incentives/postage-stamps.md#effective-utilisation-tables) with the specific amounts of data which can be safely uploaded for each `depth` value. 
 
 ### Choosing *amount*
 
@@ -10286,18 +10360,18 @@ See the [postage stamp page](/docs/concepts/incentives/postage-stamps) for a mor
 The minimum `amount` value for purchasing stamps is required to be at least enough to pay for 24 hours of storage. To find this value multiply the lastPrice value from the postage stamp contract times 17280 (the number of blocks in 24 hours). You can also use the [calculator](#calculators) below. This requirement is in place in order to prevent spamming the network.
 :::
 
-The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp](/docs/concepts/incentives/postage-stamps#batch-depth-and-batch-amount) page where a more complete description is included.
+The `amount` parameter determines how much xBZZ is assigned per chunk for a postage stamp batch. You can use the calculators below to find the appropriate `amount` value for your target duration of storage and can also preview the price. For more information see the [postage stamp](./../../concepts/incentives/postage-stamps.md#batch-depth-and-batch-amount) page where a more complete description is included.
 
 ### Mutable or Immutable?
 
-Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](/docs/concepts/incentives/postage-stamps#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
+Depending on the use case, uploaders may desire to use mutable or immutable batches. The fundamental difference between immutable and mutable batches is that immutable batches become unusable once their capacity is filled, while for mutable batches, once their capacity is filled, they may continue to be used, however older chunks of data will be overwritten with the newer once over capacity. The default batch type is immutable. In order to set the batch type to mutable, the `immutable` header should be set to `false`. See [this section on postage stamp batch utilisation](./../../concepts/incentives/postage-stamps.md#which-type-of-batch-to-use) to learn more about mutable vs immutable batches, and about which type may be right for your use case.
 
 ## Calculators
 
 The following postage batch calculators allow you to conveniently find the depth and amount values for a given storage duration and storage volume, or to find the storage duration and storage volume for a given depth and amount. The results will display the cost in xBZZ for the postage batch. The current pricing information is sourced from the Swarmscan API and will vary over time. 
 
 :::info
-The 'effective volume' is the volume of data that can safely stored for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. The lowest depth with an effective volume above zero is 22, with an effective depth of 4.93 GB. Lower depth values can be used for smaller uploads but do not come with the same storage guarantees. [Learn more here](/docs/concepts/incentives/postage-stamps#effective-utilisation-table). 
+The 'effective volume' is the volume of data that can safely stored for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. The lowest depth with an effective volume above zero is 22, with an effective depth of 4.93 GB. Lower depth values can be used for smaller uploads but do not come with the same storage guarantees. [Learn more here](./../../concepts/incentives/postage-stamps.md#effective-utilisation-tables). 
 :::
 
 ### Depth & Amount to Time & Volume Calculator
@@ -10306,7 +10380,7 @@ The 'effective volume' is the volume of data that can safely stored for each sto
 
 ### Time & Volume to Depth & Amount Calculator
 
-The recommended depth in this calculator's results is the lowest depth value whose [effective volume](/docs/concepts/incentives/postage-stamps#effective-utilisation-table) is greater than the entered volume. 
+The recommended depth in this calculator's results is the lowest depth value whose [effective volume](./../../concepts/incentives/postage-stamps.md#effective-utilisation-tables) is greater than the entered volume. 
 
 <AmountAndDepthCalc />
 
@@ -10380,7 +10454,7 @@ It is not possible to reupload unencrypted content which was stamped using an ex
 At present, TTL is a primitive calculation based on the current storage price and the assumption that storage price will remain static in the future. As more data is uploaded into Swarm, the price of storage will begin to increase. For data that it is important to keep alive, make sure your batches have plenty of time to live!
 :::
 
-In order to make sure your *batch* has sufficient *remaining balance* to be stored and served by nodes in its [*area of responsibility*](/docs/references/glossary#2-area-of-responsibility-related-depths), you must regularly check on its _time to live_ and act accordingly. The *time to live* is the number of seconds before the chunks will be considered for garbage collection by nodes in the network.
+In order to make sure your *batch* has sufficient *remaining balance* to be stored and served by nodes in its [*area of responsibility*](./../../references/glossary.md#2-area-of-responsibility-related-depths), you must regularly check on its _time to live_ and act accordingly. The *time to live* is the number of seconds before the chunks will be considered for garbage collection by nodes in the network.
 
 The remaining *time to live* in seconds is shown in the API in the returned json object as the value for `batchTTL`, and with Swarm CLI you will see the formatted TTL as the `TTL` value.
 
@@ -10633,7 +10707,7 @@ Amount: 100010002000
 
 ## Stewardship
 
-The stewardship endpoint in combination with [pinning](/docs/develop/tools-and-features/pinning) can be used to guarantee that important content is always available. It is used for checking whether the content for a Swarm reference is retrievable and for re-uploading the content if it is not.
+The stewardship endpoint in combination with [pinning](./pinning.md) can be used to guarantee that important content is always available. It is used for checking whether the content for a Swarm reference is retrievable and for re-uploading the content if it is not.
 
 An HTTP GET request to the `stewardship` endpoint checks to see whether the content for the specified Swarm reference is retrievable:
 
@@ -10677,7 +10751,7 @@ To be able trust your data, you must run your own Bee node that automatically ve
 
 ## Trojan Chunks
 
-Trojan chunks are a special version of content addressed chunks that have been 'mined' so that their natural home is in a particular area of the Swarm. If the destination node is in the right neighborhood, it will be able to receive and decrypt the message. See [PSS](/docs/develop/tools-and-features/pss) for more information, or check out the [bee-js](https://bee-js.ethswarm.org/docs/api/classes/Bee/#psssend) bindings.
+Trojan chunks are a special version of content addressed chunks that have been 'mined' so that their natural home is in a particular area of the Swarm. If the destination node is in the right neighborhood, it will be able to receive and decrypt the message. See [PSS](./pss.md) for more information, or check out the [bee-js](https://bee-js.ethswarm.org/docs/api/classes/Bee/#psssend) bindings.
 
 ## Single Owner Chunks
 
@@ -10686,7 +10760,7 @@ Chunks and are the only other type of chunk which is allowed in
 Swarm. These chunks represent part of Swarm's address space which is
 reserved just for your personal Ethereum key pair! Here you can write
 whatever you'd please. Single Owner Chunks are the technology that
-powers Swarm's [feeds](/docs/develop/tools-and-features/feeds), but they are
+powers Swarm's [feeds](./feeds.md), but they are
 capable of much more! Look out for more chats about this soon, and for
 more info read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf).
 
@@ -10720,7 +10794,7 @@ It accepts the same configuration options as a normal bee but it will ignore the
 
 import RedundancyCalc from '@site/src/components/RedundancyCalc.js';
 
-[Erasure coding](/docs/concepts/DISC/erasure-coding) is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
+[Erasure coding](./../../concepts/DISC/erasure-coding.md) is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
 
 ## Uploading With Erasure Coding
 
@@ -10748,7 +10822,7 @@ The accepted values for the `swarm-redundancy-level` header range from the defau
 | 3                | Insane    | 
 | 4                | Paranoid  | 
 
-For more details about each level of protection refer to the [erasure coding page](/docs/concepts/DISC/erasure-coding) in the learn section and refer to the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) for an even deeper dive.
+For more details about each level of protection refer to the [erasure coding page](./../../concepts/DISC/erasure-coding.md) in the learn section and refer to the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) for an even deeper dive.
 
 ## Cost Calculator Widget
 
@@ -10756,11 +10830,11 @@ This calculator takes as input an amount of data and an erasure coding redundanc
 
 <RedundancyCalc />
 
-For more details of erasure coding costs, see [here](/docs/concepts/DISC/erasure-coding).
+For more details of erasure coding costs, see [here](./../../concepts/DISC/erasure-coding.md).
 
 ## Downloading Erasure Encoded Data
 
-For a downloader, the process for downloading a file which has been erasure encoded does not require any changes from the [normal download process](/docs/develop/upload-and-download). There are several options for adjusting the default behaviour for erasure encoded downloads, however there is no need to adjust them.
+For a downloader, the process for downloading a file which has been erasure encoded does not require any changes from the [normal download process](./../upload-and-download.md). There are several options for adjusting the default behaviour for erasure encoded downloads, however there is no need to adjust them.
 
 ### Default Download Behaviour
 
@@ -10802,7 +10876,7 @@ An example download request may look something like this:
 
 For this request, the redundancy strategy is set to 3 (RACE), which means that it will initiate a request for all data and parity chunks and continue to retrieve chunks until enough have been retrieved to reconstruct the source data. This is in contrast with the default strategy of DATA where only the data chunks will be retrieved.
 
-However, as noted above, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](/docs/develop/upload-and-download) without any additional options set):
+However, as noted above, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](./../upload-and-download.md) without any additional options set):
 
 ```bash
     curl -OJL http://localhost:1633/bzz/c02e7d943fbc0e753540f377853b7181227a83e773870847765143681511c97d/
@@ -10819,7 +10893,7 @@ This means that there is no need to inform downloaders that a file uses erasure 
 ## Feeds
 
 Swarm feeds cleverly combine
-[single owner chunks](/docs/develop/tools-and-features/chunk-types)
+[single owner chunks](./chunk-types.md)
 into a data structure which enables you to have static addresses for
 your mutable content. This means that you can signpost your data for
 other Bees, and then update it at will.
@@ -10827,8 +10901,8 @@ other Bees, and then update it at will.
 :::info
 Although it's possible to interact with feeds directly, it can involve
 a little data juggling and crypto magic. For the easiest route, see
-[the bee-js feeds functionality](/docs/develop/tools-and-features/bee-js) and
-[swarm-cli](/docs/bee/working-with-bee/swarm-cli), or for the super 1337,
+[the bee-js feeds functionality](./bee-js.md) and
+[swarm-cli](./../../bee/working-with-bee/swarm-cli.md), or for the super 1337,
 share your implementations in other languages in the
 [#develop-on-swarm](https://discord.gg/C6dgqpxZkU) channel of our
 [Discord Server](https://discord.gg/wdghaQsGq5).
@@ -10842,8 +10916,8 @@ A feed is a collection of Single Owner Chunks with predicatable addresses. This 
 
 In order to edit a feed, you will need to sign your chunks using an
 Ethereum keypair. For the intrepid, check out the [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) on precise details on how to do
-this. For the rest of us, both [bee-js](/docs/develop/tools-and-features/bee-js)
-and [swarm-cli](/docs/bee/working-with-bee/swarm-cli) provide facilities
+this. For the rest of us, both [bee-js](./bee-js.md)
+and [swarm-cli](./../../bee/working-with-bee/swarm-cli.md) provide facilities
 to achieve this using JavaScript and a node-js powered command line
 tool respectively.
 
@@ -10904,7 +10978,7 @@ This is especially useful for gateways that accept uploads from users or applica
 
 ## Setting up a Gateway
 
-For a step by step guide on setting up a gateway yourself, refer to the [guide in the Develop on Swarm section](/docs/develop/gateway-proxy/).
+For a step by step guide on setting up a gateway yourself, refer to the [guide in the Develop on Swarm section](./../gateway.md).
 
 ---
 
@@ -10912,7 +10986,7 @@ For a step by step guide on setting up a gateway yourself, refer to the [guide i
 
 ## Introduction
 
-The Graffiti Several Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](/docs/develop/tools-and-features/chunk-types/#single-owner-chunks) with an address which is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process. 
+The Graffiti Several Owner Chunk (GSOC) feature enables a single Bee *service* node to receive messages from multiple Bee *writer* nodes. It is based on a [Single Owner Chunk (SOC)](./chunk-types.md#single-owner-chunks) with an address which is derived so that it falls within the neighborhood of the service node, ensuring updates are automatically synced as part of the normal full node syncing process. 
 
 The service node determines the data used to derive the GSOC private key. Any node with access to this data can derive the same private key and update the GSOC in order to send messages to the service node. Since only full nodes sync neighborhood chunks, the service node *must be a full node to receive GSOC updates*.  
 
@@ -10924,7 +10998,7 @@ GSOC was initially introduced in a [SWIP](https://github.com/ethersphere/SWIPs/b
 
 ## *bee-js* GSOC Methods
 
-While you can interact with GSOC directly via the `/gsoc/subscribe/{address}` endpoint, the [bee-js](/docs/develop/tools-and-features/bee-js/) library is the recommended way for most users. The library includes three methods which make it easy to get started with GSOC:
+While you can interact with GSOC directly via the `/gsoc/subscribe/{address}` endpoint, the [bee-js](./bee-js.md) library is the recommended way for most users. The library includes three methods which make it easy to get started with GSOC:
 
 ### `Bee.gsocMine()`
 
@@ -10965,7 +11039,7 @@ The `Bee.gsocSend` method is used by a writer node for sending GSOC messages. It
 #### Functionality:
 
 1. Used by the writer node to send a GSOC message using the private key returned from `gsocMine()`.
-2. Requires the `postageBatchId` for a valid postage stamp batch (ideally [mutable](/docs/develop/tools-and-features/gsoc#script-requirements)) to send messages.
+2. Requires the `postageBatchId` for a valid postage stamp batch (ideally [mutable](./gsoc.md#script-requirements)) to send messages.
 
 ### `Bee.gsocSubscribe()`
 
@@ -10995,12 +11069,12 @@ To run both nodes and send messages from the writer node to the service node you
 1. A fully synced Bee full node for the service node and a second Bee light node for the writer node (they do not both need to be running on the same machine) 
 2. A small amount of xDAI (~0.01) and xBZZ (~0.01)
 3. [NodeJS](https://nodejs.org/en) & [NPM](https://www.npmjs.com/)  
-4. A mutable stamp batch (*set the* [`immutable` header parameter](/api/#tag/Postage-Stamps/paths/~1stamps~1%7Bamount%7D~1%7Bdepth%7D/post) *to `false` when* [buying a batch](/docs/develop/tools-and-features/buy-a-stamp-batch#buying-a-stamp-batch))  
+4. A mutable stamp batch (*set the* [`immutable` header parameter](/api/#tag/Postage-Stamps/paths/~1stamps~1%7Bamount%7D~1%7Bdepth%7D/post) *to `false` when* [buying a batch](./buy-a-stamp-batch.md#buying-a-stamp-batch))  
 
 :::warning  
 Only ***mutable*** postage stamp batches should be used for GSOC.
 
-Since each GSOC update utilizes one slot within the ***same*** [postage batch bucket](/docs/concepts/incentives/postage-stamps#batch-utilisation), immutable batches will fill up very quickly (e.g., at depth 18, four GSOC messages exhaust the batch).  
+Since each GSOC update utilizes one slot within the ***same*** [postage batch bucket](./../../concepts/incentives/postage-stamps.md#batch-utilisation), immutable batches will fill up very quickly (e.g., at depth 18, four GSOC messages exhaust the batch).  
 
 Mutable batches allow updates to overwrite older ones, preventing full utilization and enabling indefinite GSOC messaging as long as the batch still has remaining TTL.  
 :::  
@@ -11108,7 +11182,7 @@ This means the service node has successfully mined a GSOC chunk that it falls in
  
 ✅ For your writer node, either a light or a full node can be used
 
-✅ A writer node needs a valid ***mutable*** (not technically required, but [strongly recommended](/docs/develop/tools-and-features/gsoc#script-requirements)) postage stamp batch in order to send GSOC messages 
+✅ A writer node needs a valid ***mutable*** (not technically required, but [strongly recommended](./gsoc.md#script-requirements)) postage stamp batch in order to send GSOC messages 
 
 #### Initialize Project
 
@@ -11188,7 +11262,7 @@ async function sendGsocMessage(privateKey, name, body) {
 Update the configuration section constants with your own information:
 
 * Set `BEE_HOST` to your writer node's API endpoint
-* Set `BEE_BATCH` to the batch id of a valid, *mutable* postage stamp batch - [buy a batch](/docs/develop/tools-and-features/buy-a-stamp-batch) if needed
+* Set `BEE_BATCH` to the batch id of a valid, *mutable* postage stamp batch - [buy a batch](./buy-a-stamp-batch.md) if needed
 * Set `TARGET_OVERLAY` to the service node overlay value we copied from the output of the service node script 
 
 After updating the configuration, run the writer node script (before running the writer node script, make sure the service node script has already been started and is currently listening for GSOC updates):
@@ -11232,27 +11306,27 @@ Swarm is designed with decentralised applications in mind, and much time has bee
 
 ### Bee JS
 
-Our maverick JavaScript team, the Bee-Gees (🕺), have been working hard in the last few months to build some impressive tools for all you budding dapp developer Bees to get stuck into! Find out how to use the [bee-js](/docs/develop/tools-and-features/bee-js) JavaScript library to start creating your own that live and work on Swarm!
+Our maverick JavaScript team, the Bee-Gees (🕺), have been working hard in the last few months to build some impressive tools for all you budding dapp developer Bees to get stuck into! Find out how to use the [bee-js](./bee-js.md) JavaScript library to start creating your own that live and work on Swarm!
 
 ### Chunk Types
 
 Swarm contains 3 types of chunks which enable us to build novel
 structures of how data can be stored in the swarm - in a completely
 decentralised way. Learn more about
-[chunk types](/docs/develop/tools-and-features/chunk-types)
+[chunk types](./chunk-types.md)
 to change the way you deal with data in your dapps forever!
 
 ### Feeds
 
 Swarm's single owner chunks have been cleverly combined to create user
-generated [feeds](/docs/develop/tools-and-features/feeds) in the swarm, see this
+generated [feeds](./feeds.md) in the swarm, see this
 example of how chunks are combined into a useful data structure you
 can use to build amazing applications.
 
 ### PSS
 
 Hey there! Pss! 🤫 Swarm's trojan chunks are implemented in Bee to
-deliver [Postal Service on Swarm](/docs/develop/tools-and-features/pss) - a
+deliver [Postal Service on Swarm](./pss.md) - a
 pub-sub system that provides a totally leak-proof messaging system
 over the swarm.
 
@@ -11265,11 +11339,11 @@ their own Bee node, for the time being you will need to make use of the [Gateway
 
 ### Bee Dev Mode
 
-If you want to test out Swarm based applications without needing to spend real xBZZ, Bee dev mode is an invaluable tool. Learn how to set up Bee in [dev mode](/docs/develop/tools-and-features/bee-dev-mode) to begin prototyping your applications.
+If you want to test out Swarm based applications without needing to spend real xBZZ, Bee dev mode is an invaluable tool. Learn how to set up Bee in [dev mode](./dev-mode.md) to begin prototyping your applications.
 
 ### Starting a Test Network
 
-While bee dev mode allows you to simulate running a single Bee node, setting up a [test network](/docs/develop/tools-and-features/starting-a-test-network) will allow you to better simulate interactions between multiple nodes.
+While bee dev mode allows you to simulate running a single Bee node, setting up a [test network](./starting-a-test-network.md) will allow you to better simulate interactions between multiple nodes.
 
 ---
 
@@ -11388,7 +11462,7 @@ Manifests are immutable. When you add, remove, or move a file, Bee writes new ma
 
 To provide a stable entry point even as the manifest changes, you can combine manifests with feeds. A feed acts as an updateable pointer: publish each new manifest reference to the feed, and users access the feed hash instead of individual manifest hashes.
 
-You can find examples of this in the [Building on Swarm](/docs/develop/introduction#building-on-swarm) page.
+You can find examples of this in the [Building on Swarm](./../introduction.md) page.
 
 ## Serving Files From a Manifest
 
@@ -11411,7 +11485,7 @@ Paths to directories such as `/docs/` or even `/` will result in a 404 error by 
 /docs/ → 404
 ```
 
-You can specify which file or webpage you would like paths such as `/docs/` (which do not get entries in the manifest by default) to resolve to by manipulating the manifest. See the ["Filesystem"](/docs/develop/filesystem) and [Routing](/docs/develop/routing) guides for more information and examples.
+You can specify which file or webpage you would like paths such as `/docs/` (which do not get entries in the manifest by default) to resolve to by manipulating the manifest. See the ["Filesystem"](./../files.md) and [Routing](./../routing.md) guides for more information and examples.
 
 :::caution
 The `target` values inside a manifest should not be accessed directly. They cannot be reliably fetched via endpoints such as `/bzz/` or tools like `swarm-cli download`.
@@ -11445,13 +11519,13 @@ You need to modify the manifest when you want to change routing behavior, such a
 * Adding, changing, or deleting routes
 * Redirecting paths or restructuring the site
 
-See the [Routing](/docs/develop/routing) guide for details.
+See the [Routing](./../routing.md) guide for details.
 
 ### Directory Uploads
 
 For one-time directory uploads that you don’t plan to change, you typically don’t need to touch the manifest. However, if you later want to add files, remove files, rename paths, or point new paths at existing content, the manifest must be updated.
 
-See the ["Filesystem"](/docs/develop/filesystem) guide for examples.
+See the ["Filesystem"](./../files.md) guide for examples.
 
 ## Putting It All Together
 
@@ -11615,7 +11689,7 @@ localhost:1833/pss/send/test-topic/7bc5?recipient=0349f7b9a6fa41b3a123c64706a072
 --data "Hello Swarm"
 ```
 
-More information on how to buy a postage stamp batch and get its batch id can be found [here](/docs/develop/tools-and-features/buy-a-stamp-batch).
+More information on how to buy a postage stamp batch and get its batch id can be found [here](./buy-a-stamp-batch.md).
 
 ### Send Messages in a Test Network
 
@@ -11777,7 +11851,7 @@ Congratulations! 🎉 You have sent your first encrypted, zero leak message over
 
 ## Starting a Private Network
 
-A private network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](/docs/bee/working-with-bee/configuration)).
+A private network can be used to test your applications in an isolated environment before you deploy to Swarm mainnet. It can be started by overriding the default configuration values of your Swarm node. Throughout this tutorial, we will make use of configuration files to configure the nodes but of course you can also do the same using flags or environment variables (see [Start your node](./../../bee/working-with-bee/configuration.md)).
 
 ## Start a network on your own computer
 
@@ -11962,7 +12036,7 @@ Repeat these same steps with the other node in order to complete a private test 
 
 ### Getting Testnet Tokens
 
-In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node) page.
+In order to acquire sETH and sBZZ, refer to the [Fund Your Node](./../../bee/installation/fund-your-node.md) page.
 
 ---
 
@@ -11982,7 +12056,7 @@ curl -F file=@bee.jpg -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd
 
 When successful, the Bee client will return a 64 byte reference, instead of the usual 32 bytes.
 
-More information on how to buy a postage stamp batch and get its batch id can be found [here](/docs/develop/tools-and-features/buy-a-stamp-batch).
+More information on how to buy a postage stamp batch and get its batch id can be found [here](./buy-a-stamp-batch.md).
 
 ```json
 {
@@ -11997,7 +12071,7 @@ The second part of the reference is a 64 character decryption key which is requi
 It is important that this data not be sent in requests to a public gateway as this would mean that gateway would be able to decrypt your data. However, if you are running a node on your local machine, you may safely use the API bound to `localhost`. The key material is never exposed to the network so your data remains safe.
 
 :::info
-Encryption is disabled by default on all Swarm Gateways to keep your data safe. [Install Bee on your computer](/docs/bee/installation/getting-started) to use the encryption feature.
+Encryption is disabled by default on all Swarm Gateways to keep your data safe. [Install Bee on your computer](./../../bee/installation/getting-started.md) to use the encryption feature.
 :::
 
 # Download and Decrypt a File
@@ -12009,7 +12083,7 @@ curl -OJ http://localhost:1633/bzz/f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96
 ```
 
 :::danger
-Never use public gateways when requesting full encrypted references. The hash contains sensitive key information which should be kept private. Run [your own node](/docs/bee/installation/getting-started) to use Bee's encryption features.
+Never use public gateways when requesting full encrypted references. The hash contains sensitive key information which should be kept private. Run [your own node](./../../bee/installation/getting-started.md) to use Bee's encryption features.
 :::
 
 ---
@@ -12022,12 +12096,12 @@ When running without a blockchain connections, bandwidth incentive payments (SWA
 
 #### Configuration
 
-To run Bee as an ultra-light node `full-node` and `swap-enable` must both be set to `false`, and the `blockchain-rpc-endpoint` value should be set to an empty string `""` or commented out in the [configuration](/docs/bee/working-with-bee/configuration).
+To run Bee as an ultra-light node `full-node` and `swap-enable` must both be set to `false`, and the `blockchain-rpc-endpoint` value should be set to an empty string `""` or commented out in the [configuration](./../bee/working-with-bee/configuration.md).
 
 #### Mode of Operation
 
 The target audience for this mode of operations are users who want to try out running a node but don't
-want to go through the hassle of blockchain onboarding. Ultra-light nodes will be able to download data as long as the data consumed does not exceed the payment threshold (`payment-threshold` in [configuration](/docs/bee/working-with-bee/configuration)) set by peers they connect to.
+want to go through the hassle of blockchain onboarding. Ultra-light nodes will be able to download data as long as the data consumed does not exceed the payment threshold (`payment-threshold` in [configuration](./../bee/working-with-bee/configuration.md)) set by peers they connect to.
 
 Running Bee without a connected blockchain backend, however, imposes some limitations:
 
@@ -12407,7 +12481,7 @@ The Bee API exposes three HTTP endpoints:
 
 #### Upload with **/bzz**
 
-While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](/docs/develop/tools-and-features/buy-a-stamp-batch).
+While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
 
 1. Buy a postage batch:
 
@@ -12450,12 +12524,6 @@ curl http://localhost:1633/bzz/<REFERENCE> -o output.txt
 This is a list of free and open source projects related to Swarm and its growing ecosystem.
 
 See [CONTRIBUTING.md](https://github.com/ethersphere/awesome-swarm/blob/master/CONTRIBUTING.md) to learn how to create your submission.
-
-## Table of contents
-
-Click on the menu icon next to [README.md](#readme) for a list of sections
-
-## Projects
 
 ### Services
 
@@ -12711,7 +12779,7 @@ There are many ways to acquire BZZ tokens, either on custodial centralised excha
 
 ### What is the BZZ token address?
 
-See [this page](/docs/references/smart-contracts) for a list of relevant token addresses. 
+See [this page](./smart-contracts.mdx) for a list of relevant token addresses. 
 
 ### What is the BZZ token supply?
 
@@ -12767,7 +12835,7 @@ Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and th
 
 ## Neighborhood
 
-[Neighborhoods](/docs/concepts/DISC/neighborhoods) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
+[Neighborhoods](./../concepts/DISC/neighborhoods.md) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
 
 ## Sister Neighborhood
 
@@ -12934,7 +13002,7 @@ Sepolia is an Ethereum testnet. It is an environment where smart contracts can b
 
 A cryptocurrency faucet supplies small amounts of cryptocurrency to requestors (typically for testing purposes).
 
-Check out the [Fund Your Node](In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node) page.) page for more information.
+Check out the [Fund Your Node](In order to acquire sETH and sBZZ, refer to the [Fund Your Node](./../bee/installation/fund-your-node.md) page.) page for more information.
 
 ## RPC Endpoint
 
