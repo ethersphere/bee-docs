@@ -298,6 +298,10 @@ This section puts everything together into a minimal but complete project: a **d
 This project follows the same architectural pattern used by [Etherjot](https://github.com/ethersphere/etherjot), a full-featured blogging platform on Swarm. Etherjot regenerates and re-uploads the entire blog site each time a post is added, then updates a single feed to point to the new version. Our note board does the same thing in a simplified form.
 :::
 
+:::info Content Deduplication
+When you regenerate and re-upload the entire note board with a new note added, Bee automatically deduplicates content. It checks the content hash of each chunk and reuses references to chunks that already exist in storage. Only the new content is stored as new chunks. This makes the regenerate-and-append approach efficient, even though it regenerates everything each time.
+:::
+
 ### Project Setup
 
 <Tabs>
