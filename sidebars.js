@@ -91,9 +91,9 @@ module.exports = {
         'develop/upload-and-download',
         'develop/host-your-website',
         'develop/files',
-        'develop/routing', 
-        'develop/gateway-proxy',       
-        // 'develop/dynamic-content',
+        'develop/routing',
+        'develop/gateway-proxy',
+        'develop/dynamic-content',
         'develop/act',
       ],
       collapsed: false
