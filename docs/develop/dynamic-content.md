@@ -90,6 +90,13 @@ console.log("Private key:", pk.toHex());
 console.log("Address:", pk.publicKey().address().toHex());
 ```
 
+Example output:
+
+```
+Private key: 0x634fb5a872396d9693e5c9f9d7233cfa93f395c093371017ff44aa9ae6564cdd
+Address: 0x8d3766440f0d7b949a5e32995d09619a7f86e632
+```
+
 Save the private key somewhere secure. You will use it for all future feed updates.
 
 </TabItem>
