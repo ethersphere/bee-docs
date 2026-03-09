@@ -94,6 +94,7 @@ module.exports = {
         'develop/routing',
         'develop/gateway-proxy',
         'develop/dynamic-content',
+        'develop/multi-author-blog',
         'develop/act',
       ],
       collapsed: false
