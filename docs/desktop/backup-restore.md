@@ -1,6 +1,7 @@
 ---
 title: Backup and Restore 
 id: backup-restore
+description: Instructions for backing up and restoring wallet keys and data in the Swarm Desktop application.
 ---
 
 ## Create a Backup
@@ -49,7 +50,7 @@ Alternatively you may open the `config.yaml` and save the password as a text fil
 
 ## Restore from Backup
 
-To restore from backup, begin with a [new install](/docs/desktop/install) of Swarm Desktop. Once the installation process is finished, navigate to the `Settings` tab in the app and copy the install file directory as indicated in the `Data DIR` field:
+To restore from backup, begin with a [new install](./install.md) of Swarm Desktop. Once the installation process is finished, navigate to the `Settings` tab in the app and copy the install file directory as indicated in the `Data DIR` field:
 
 ![](/img/backup1.png)
 
@@ -77,4 +78,4 @@ Restart Swarm Desktop and check to see if the backup was restored successfully:
 
 ### Restore Gnosis Chain Account
 
-If you only wish to access your Gnosis Chain account, you can [follow these instructions](/docs/bee/working-with-bee/backups#metamask-import) for exporting to Metamask in order to access your account.
+If you only wish to access your Gnosis Chain account, you can [follow these instructions](./../bee/working-with-bee/backups.md#metamask-import) for exporting to Metamask in order to access your account.

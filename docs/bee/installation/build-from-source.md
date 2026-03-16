@@ -1,6 +1,7 @@
 ---
 title: Build from Source
 id: build-from-source
+description: Guides developers through compiling Bee directly from source code using Go git and make with step-by-step instructions.
 ---
 
 Bee is written using the [Go](https://golang.org) language.

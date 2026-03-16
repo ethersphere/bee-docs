@@ -1,6 +1,7 @@
 ---
 title: Connectivity
 id: connectivity
+description: Explains network setup and NAT configuration to ensure Bee nodes can communicate with peers on both private and public networks.
 ---
 
 To fully connect to the swarm, your Bee node needs to be able to both

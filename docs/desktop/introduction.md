@@ -1,6 +1,7 @@
 ---
 title: Introduction
 id: introduction
+description: Overview of Swarm Desktop graphical interface for managing nodes uploading and downloading content.
 ---
 
 ![](/img/swarm-desktop.png)

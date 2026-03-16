@@ -1,6 +1,7 @@
 ---
 title: Incentives Overview
 id: overview
+description: Describes dual incentive mechanisms combining storage incentives for data retention and bandwidth incentives for data relay.
 ---
 
 import { globalVariables } from '/src/config/globalVariables'
@@ -18,23 +19,23 @@ Storage incentives reward node operators for providing disk space and reliably s
 - **Price Oracle Contract** – Uses network redundancy data to determine postage stamp prices.  
 
 If you want to dig into the code, check out the [incentives contracts repo](https://github.com/ethersphere/storage-incentives)
-You can find the on-chain address for each contract within the docs [here](/docs/references/smart-contracts#storage-incentives-contracts), however since the contracts there are updated manually, they may at times fall slightly behind the most recent changes. For the most up to date address for each storage incentives contract refer to the [storage incentives ABI repo](https://github.com/ethersphere/go-storage-incentives-abi/commits/master/abi/abi_mainnet.go), and you can also find past addresses of older versions of the incentives contracts by reviewing previous commits.
+You can find the on-chain address for each contract within the docs [here](./../../references/smart-contracts.mdx#storage-incentives-contracts), however since the contracts there are updated manually, they may at times fall slightly behind the most recent changes. For the most up to date address for each storage incentives contract refer to the [storage incentives ABI repo](https://github.com/ethersphere/go-storage-incentives-abi/commits/master/abi/abi_mainnet.go), and you can also find past addresses of older versions of the incentives contracts by reviewing previous commits.
 
 ### Postage Stamps  
 
 Postage stamps are required to upload data to Swarm, similar to how real-world postage stamps prepay for mail delivery. Instead of being purchased individually, they are bought in batches using xBZZ through the postage stamp smart contract.  
 
-The xBZZ used to buy postage stamps is later redistributed as storage incentives. The **price oracle contract** adjusts postage stamp pricing based on network redundancy to ensure a sustainable level of storage. You can find more details about postage stamps [here](/docs/concepts/incentives/postage-stamps).  
+The xBZZ used to buy postage stamps is later redistributed as storage incentives. The **price oracle contract** adjusts postage stamp pricing based on network redundancy to ensure a sustainable level of storage. You can find more details about postage stamps [here](./postage-stamps.md).  
 
 ### Redistribution Game  
 
 The redistribution game determines how xBZZ from postage stamp purchases is distributed among full staking nodes that store data. The system is designed so that **honestly storing assigned data** is the most profitable strategy. Rules for this process are encoded in the [redistribution smart contract](https://github.com/ethersphere/storage-incentives).  
 
-Additionally, the game generates a **utilization signal**, which the price oracle uses to regulate postage stamp prices. Read more [here](/docs/concepts/incentives/redistribution-game).
+Additionally, the game generates a **utilization signal**, which the price oracle uses to regulate postage stamp prices. Read more [here](./redistribution-game.md).
 
 ### Price Oracle  
 
-The price oracle contract dynamically adjusts postage stamp prices based on network utilization data from the redistribution contract. This mechanism ensures optimal redundancy by increasing or decreasing the price of storage as needed. [Read more](/docs/concepts/incentives/price-oracle).  
+The price oracle contract dynamically adjusts postage stamp prices based on network utilization data from the redistribution contract. This mechanism ensures optimal redundancy by increasing or decreasing the price of storage as needed. [Read more](./price-oracle.md).  
 
 ## Bandwidth Incentives  
 
@@ -42,5 +43,5 @@ Nodes in Swarm not only store data but relay data across the network. **Bandwidt
 
 The **Swarm Accounting Protocol (SWAP)** facilitates bandwidth payments between nodes, which can be settled either **in-kind** (data exchange) or via **cheques** processed through a **chequebook contract** on Gnosis Chain. Only full nodes can participate in SWAP. 
 
-Read more [here](/docs/concepts/incentives/bandwidth-incentives).  
+Read more [here](./bandwidth-incentives.md).  
 

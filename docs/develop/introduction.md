@@ -5,6 +5,7 @@ sidebar_label: Start Building
 hide_table_of_contents: false
 pagination_prev: null
 pagination_next: null
+description: Overview of development on Swarm including APIs tools and use cases for building applications.
 ---
 
 # Building on Swarm

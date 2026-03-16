@@ -1,16 +1,17 @@
 ---
 title: Uninstalling Bee
 id: uninstalling-bee
+description: Instructions for cleanly removing Bee installations across different operating systems and package managers.
 ---
 
 Choose the appropriate uninstallation method based on how Bee was installed:
 
 ## Package Manager  
 
-This method can be used for package manager based [installs](/docs/bee/installation/package-manager-install) of the official Debian, RPM, and Homebrew packages.
+This method can be used for package manager based [installs](./../installation/package-manager.md) of the official Debian, RPM, and Homebrew packages.
 
 :::danger
-Uninstalling Bee will permanently delete your keyfiles and configuration. Ensure you have a [full backup](/docs/bee/working-with-bee/backups) before proceeding.
+Uninstalling Bee will permanently delete your keyfiles and configuration. Ensure you have a [full backup](./backups.md) before proceeding.
 :::
 
 ### Debian
@@ -30,7 +31,7 @@ sudo yum remove bee
 
 ## Shell Script / Binary Install
 
-If Bee was installed using the [automated shell script](/docs/bee/installation/shell-script-install) or as a binary by [building from source](/docs/bee/installation/build-from-source), it can be uninstalled by manually removing the installed binary, configuration files, and data directories.
+If Bee was installed using the [automated shell script](./../installation/shell-script.md) or as a binary by [building from source](./../installation/build-from-source.md), it can be uninstalled by manually removing the installed binary, configuration files, and data directories.
 
 ### Identify Data and Config Locations
 
@@ -85,7 +86,7 @@ If you have generated a config file and saved it to a non default location which
 
 ## Remove Data Files
 
-Bee stores its **node data, blockchain state, and other persistent files** in a data directory. If you want to fully remove Bee, this directory must be deleted. The data directory [default location](/docs/bee/working-with-bee/configuration#default-data-and-config-directories) differs based on install method and system type. 
+Bee stores its **node data, blockchain state, and other persistent files** in a data directory. If you want to fully remove Bee, this directory must be deleted. The data directory [default location](./configuration.md#default-data-and-config-directories) differs based on install method and system type. 
 
 
 ## Verify Uninstallation
