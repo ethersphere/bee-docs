@@ -20,11 +20,12 @@ For an 8KB image, if we set **m = 2** and **k = 1**, we create 3 chunks (2 origi
 
 ### Levels of Protection
 
-In Swarm's implementation of erasure coding, there are four named levels of protection, Medium, Strong, Insane, and Paranoid. For each level, the **m** and **k** values have been adjusted in order to meet a certain level of data protection:
+In Swarm's implementation of erasure coding, there are five levels of protection, None, Medium, Strong, Insane, and Paranoid. For each level, the **m** and **k** values have been adjusted in order to meet a certain level of data protection:
 
 ***Table A:***
 | Redundancy Level Value | Level Name | Chunk Loss Tolerance         |      
 | ---------------- | --------- | ----------------------------------- |
+| 0                | None      | 0%                                  | 
 | 1                | Medium    | 1%                                  | 
 | 2                | Strong    | 5%                                  |
 | 3                | Insane    | 10%                                 | 
@@ -40,17 +41,18 @@ For usage instructions, see the [erasure coding page in the "Develop" section](.
 
 ## Cost Calculation
 
-In Swarm's implementation of erasure coding, there are four levels of protection: Medium, Strong, Insane, and Paranoid. Each level adds additional parity chunks for a corresponding increase in data protection (and also cost).
+In Swarm's implementation of erasure coding, there are five levels of protection: None, Medium, Strong, Insane, and Paranoid. Each level adds additional parity chunks for a corresponding increase in data protection (and also cost).
 
 The table below shows the number of parities and data chunks for each level, as well as the percent increase in cost vs a non-erasure coded upload. 
 
 ***Table B:***
 | Redundancy | Parities | Data Chunks | Percent | Chunks Encrypted | Percent Encrypted |
 |----------|----------|--------|---------|------------------|-------------------|
-| Medium   | 9        | 119 | *7.6%*  | 59            | 15%           |
-| Strong   | 21       | 107 | *19.6%* | 53            | 40%           |
-| Insane   | 31       | 97   | 32%  | 48            | 65%            |
-| Paranoid | 90       | 38      | 240.5%    | 18               | 494%              |
+| None     | 0        | 128 | *0%*    | 64               | 0%            |
+| Medium   | 9        | 119 | *7.6%*  | 59            | 15.3%           |
+| Strong   | 21       | 107 | *19.6%* | 53            | 39.6%           |
+| Insane   | 31       | 97   | 32%  | 48            | 64.6%            |
+| Paranoid | 90       | 38      | 236.8%    | 19               | 473.7%              |
 
 For each redundancy level, there are **m + k** = 128 chunks, where **m** are the data chunks (shown in column "Data Chunks") and **k** are the parity chunks (shown in column "Parities"). The "Percent" and "Percent Encrypted" columns show percent of "parity overhead" cost increase from using erasure coding for normal and encrypted uploads respectively. 
 
@@ -152,6 +154,7 @@ To find the percent increase in cost for uploads of less than 128 chunks, refer 
 | Paranoid  | 86      | 35      | 245.7%     | 17               | 505.9%            |               
 | Paranoid  | 87      | 36      | 241.7%     | 18               | 483.3%            |               
 | Paranoid  | 89      | 37      | 240.5%     | 18               | 494.4%            |  
+| Paranoid  | 90      | 38      | 236.8%     | 19               | 473.7%            |  
 
 ### Example Cost Calculation
 
