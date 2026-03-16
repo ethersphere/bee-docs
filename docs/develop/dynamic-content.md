@@ -44,7 +44,7 @@ Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `B
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=<BATCH_ID>
+BATCH_ID=BATCH_ID
 ```
 
 You can then run any script with:
@@ -69,7 +69,7 @@ To see why feeds are necessary, try uploading the same content twice with a smal
 import { Bee } from "@ethersphere/bee-js";
 
 const bee = new Bee("http://localhost:1633");
-const batchId = "<BATCH_ID>";
+const batchId = "BATCH_ID";
 
 const upload1 = await bee.uploadFile(batchId, "Hello Swarm - version 1", "note.txt");
 console.log("Version 1:", upload1.reference.toHex());
@@ -83,11 +83,11 @@ console.log("Version 2:", upload2.reference.toHex());
 
 ```bash
 echo "Hello Swarm - version 1" > note-v1.txt
-swarm-cli upload note-v1.txt --stamp <BATCH_ID>
+swarm-cli upload note-v1.txt --stamp BATCH_ID
 # Swarm hash: a1b2c3d4...
 
 echo "Hello Swarm - version 2" > note-v2.txt
-swarm-cli upload note-v2.txt --stamp <BATCH_ID>
+swarm-cli upload note-v2.txt --stamp BATCH_ID
 # Swarm hash: e5f6a7b8... (different!)
 ```
 
@@ -168,8 +168,8 @@ Now upload some content and write its reference to a feed, then read it back ([`
 import { Bee, Topic, PrivateKey } from "@ethersphere/bee-js";
 
 const bee = new Bee("http://localhost:1633");
-const batchId = "<BATCH_ID>";
-const pk = new PrivateKey("<YOUR_PRIVATE_KEY>");
+const batchId = "BATCH_ID";
+const pk = new PrivateKey("YOUR_PRIVATE_KEY");
 const owner = pk.publicKey().address();
 
 // Choose a topic for this feed
@@ -199,7 +199,7 @@ console.log("Current index:", result.feedIndex.toBigInt());
 swarm-cli feed upload note.txt \
   --identity publisher \
   --topic-string notes \
-  --stamp <BATCH_ID>
+  --stamp BATCH_ID
 
 # Read the feed
 swarm-cli feed print \
@@ -246,7 +246,7 @@ echo "My updated note" > note.txt
 swarm-cli feed upload note.txt \
   --identity publisher \
   --topic-string notes \
-  --stamp <BATCH_ID>
+  --stamp BATCH_ID
 ```
 
 The feed now points to the new content. The feed manifest URL (printed in the output) remains the same.
@@ -277,7 +277,7 @@ The `feed upload` command creates the manifest automatically and prints the `Fee
 swarm-cli feed upload note.txt \
   --identity publisher \
   --topic-string notes \
-  --stamp <BATCH_ID>
+  --stamp BATCH_ID
 ```
 
 Example output:
@@ -310,19 +310,10 @@ A feed manifest only needs to be created once. After that, just update the feed 
 
 The resolution chain when someone accesses your feed manifest URL:
 
-<<<<<<< HEAD
 ```text
 GET /bzz/MANIFEST_HASH/
   → Bee downloads the manifest, extracts the topic and owner
   → Looks up the latest feed entry for that topic/owner pair
-=======
-```bash
-node init.js
-```
-GET /bzz/<manifestHash>/
-  → Bee downloads the manifest, extracts {topic, owner}
-  → Looks up the latest feed entry for that topic/owner
->>>>>>> 166d88c95da806bc2da20b830a84756f0bbbc7d0
   → Reads the Swarm content reference from the latest entry
   → Retrieves and serves the content at that reference
 ```
@@ -355,7 +346,7 @@ Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `B
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=<YOUR_BATCH_ID>
+BATCH_ID=YOUR_BATCH_ID
 ```
 
 </TabItem>
@@ -550,7 +541,7 @@ Upload it to a feed:
 swarm-cli feed upload ./site \
   --identity blog-publisher \
   --topic-string blog \
-  --stamp <BATCH_ID> \
+  --stamp BATCH_ID \
   --index-document index.html
 ```
 
@@ -767,7 +758,7 @@ Upload to the feed:
 swarm-cli feed upload ./site \
   --identity blog-publisher \
   --topic-string blog \
-  --stamp <BATCH_ID> \
+  --stamp BATCH_ID \
   --index-document index.html
 ```
 
