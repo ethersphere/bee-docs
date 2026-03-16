@@ -1,6 +1,7 @@
 ---
 title: Staking
 id: staking
+description: Walkthrough of depositing xBZZ to participate in the storage incentives redistribution game and earn network rewards.
 ---
 
 ## Quickstart Guide
@@ -8,7 +9,7 @@ id: staking
 This guide will walk you through **staking xBZZ** and participating in the **redistribution game** to earn storage incentives. 
 
 :::warning
-Staking requires a fully synced full node and a minimum of 10 xBZZ. See detailed [staking requirements](/docs/bee/working-with-bee/staking#requirements) below.
+Staking requires a fully synced full node and a minimum of 10 xBZZ. See detailed [staking requirements](./staking.md#requirements) below.
 :::
 
 ### Prerequisites   
@@ -18,7 +19,7 @@ Staking requires a fully synced full node and a minimum of 10 xBZZ. See detailed
 - A fully synced full Bee node
 
 :::tip
-If you don't already have xDAI or xBZZ, you will need to [get some](/docs/bee/installation/fund-your-node#getting-tokens).
+If you don't already have xDAI or xBZZ, you will need to [get some](./../installation/fund-your-node.md#getting-tokens).
 :::
 
 ### Step 1: Fund Your Node with xDAI and xBZZ
@@ -102,19 +103,19 @@ Staked xBZZ: 10
 
 ### Step 3: Check Status
 
-After staking you should [check your node's status](/docs/bee/working-with-bee/staking#check-status) to make sure it is fully synced, fully funded, and operating properly. 
+After staking you should [check your node's status](./staking.md#check-status) to make sure it is fully synced, fully funded, and operating properly. 
 
 ### Step 4: Monitor & Maximize Rewards
 
-✅ Make sure you are using a stable Gnosis Chain [RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).  
-✅ [Check your node's status](/docs/bee/working-with-bee/staking#check-redistribution-status) to ensure it's operating properly.
-✅ [Check `/rchash`](/docs/bee/working-with-bee/bee-api#rchash) to ensure your node's performance is sufficient.
+✅ Make sure you are using a stable Gnosis Chain [RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint).  
+✅ [Check your node's status](./staking.md#check-status) to ensure it's operating properly.
+✅ [Check `/rchash`](./bee-api.md#rchash) to ensure your node's performance is sufficient.
 
 
 
 ## Staking Overview
 
-To earn storage incentives by participating in the [redistribution game](/docs/concepts/incentives/redistribution-game), full nodes must first deposit a minimum of 10 xBZZ as ***non-refundable*** stake. xDAI is also required to pay for ongoing Gnosis Chain transactions related to the redistribution game.
+To earn storage incentives by participating in the [redistribution game](./../../concepts/incentives/redistribution-game.md), full nodes must first deposit a minimum of 10 xBZZ as ***non-refundable*** stake. xDAI is also required to pay for ongoing Gnosis Chain transactions related to the redistribution game.
 
 :::danger
 Only stake your xBZZ if you intend to participate as a full node, as withdrawals are not possible.
@@ -122,9 +123,9 @@ Only stake your xBZZ if you intend to participate as a full node, as withdrawals
 
 ### Requirements
 
-- A [full node](/docs/bee/working-with-bee/node-types) - see full node [recommend specs](/docs/bee/working-with-bee/node-types#recommended-specifications).  
-- A [high-performance RPC endpoint](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
-- A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling) is used).
+- A [full node](./node-types.md) - see full node [recommend specs](./node-types.md#recommended-specifications).  
+- A [high-performance RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
+- A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](./staking.md#reserve-doubling) is used).
 
  
 
@@ -156,13 +157,13 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 * `"hasSufficientFunds": <bool>` - Shows whether the node has enough xDAI balance to submit at least five storage incentives redistribution related transactions.  If `false` the node will not be permitted to participate in next round.
 * `"isFrozen": <bool>` - Shows node frozen status.
 * `"isFullySynced": <bool>` - Shows whether node's localstore has completed full historical syncing with all connected peers.
-* `"phase": <string>` - Current phase of [redistribution game](/docs/concepts/incentives/redistribution-game) (`commit`, `reveal`, or `claim`).
+* `"phase": <string>` - Current phase of [redistribution game](./../../concepts/incentives/redistribution-game.md) (`commit`, `reveal`, or `claim`).
 * `"round": <integer>` - Current round of redistribution game. The round number is determined by dividing the current Gnosis Chain block height by the number of blocks in one round. One round takes 152 blocks, so using the "block" output from the example above we can confirm that the round number is 176319 (block 26800488 / 152 blocks = round 176319).   
 * `"lastWonRound": <integer>` - Number of round last won by this node.
 * `"lastPlayedRound": <integer>` - Number of the last round where node's neighborhood was selected to participate in redistribution game.
 * `"lastFrozenRound": <integer>` The number the round when node was last frozen. 
 * `"block": <integer>` - Gnosis block of the current redistribution game.
-* `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](/docs/references/glossary#plur).
+* `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](./../../references/glossary.md#plur).
 * `"fees": <string (BigInt)>` - Record of total spent in 1E-18 xDAI on all redistribution related transactions.
 
 
@@ -238,7 +239,7 @@ In order to double a node's reserve which has previously been operating without 
 
 #### **Step 1**: Set `reserve-capacity-doubling` to `1`.
 
-The reserve doubling feature can be enabled by setting the new `reserve-capacity-doubling` config option to `1`  using the [configuration method](/docs/bee/working-with-bee/configuration#configuration-methods-and-priority) of your choice. 
+The reserve doubling feature can be enabled by setting the new `reserve-capacity-doubling` config option to `1`  using the [configuration method](./configuration.md#configuration-methods-and-priority) of your choice. 
 
 #### **Step 2**: Stake at least 20 xBZZ 
 
@@ -324,11 +325,11 @@ We can see that the `pullsyncRate` value is above zero, meaning that our node is
  
 ## Maximize rewards
 
-There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](/docs/concepts/incentives/redistribution-game) for more context.
+There are two main factors which determine the chances for a staking node to win a reward — neighborhood selection and stake density. Both of these should be considered together before starting up a Bee node for the first time. See the [incentives page](./../../concepts/incentives/redistribution-game.md) for more context.
 
 ### Neighborhood selection 
 
-By default when running a Bee node for the first time the node will use the [neighborhood suggestion tool](https://api.swarmscan.io/v1/network/neighborhoods/suggestion) from Swarmscan to find an optimal [neighborhood](/docs/concepts/DISC/neighborhoods). While it is possible to manually choose a neighborhood using the `target-neighborhood` config option, we recommend not to do so as the suggestion tool will pick neighborhoods in order to maximize node earnings and network health. [Learn more](/docs/bee/installation/set-target-neighborhood). 
+By default when running a Bee node for the first time the node will use the [neighborhood suggestion tool](https://api.swarmscan.io/v1/network/neighborhoods/suggestion) from Swarmscan to find an optimal [neighborhood](./../../concepts/DISC/neighborhoods.md). While it is possible to manually choose a neighborhood using the `target-neighborhood` config option, we recommend not to do so as the suggestion tool will pick neighborhoods in order to maximize node earnings and network health. [Learn more](./../installation/set-target-neighborhood.md). 
 
 
 ### Stake density
@@ -339,7 +340,7 @@ $$
 \text{stake density} = \text{staked xBZZ} \times {2}^\text{storageDepth}
 $$
   
-*To learn more about stake density and the mechanics of the incentives system, see the [incentives page](/docs/concepts/incentives/redistribution-game).*
+*To learn more about stake density and the mechanics of the incentives system, see the [incentives page](./../../concepts/incentives/redistribution-game.md).*
 
 Stake density determines the weighted chances of nodes within a neighborhood of winning rewards. The chance of winning within a neighborhood corresponds to stake density. Stake density can be increased by depositing more xBZZ as stake (note that stake withdrawals are not currently possible, so any staked xBZZ is not currently recoverable). 
 
@@ -459,7 +460,7 @@ etc.
 ### Step 3: Update and restart
 
 :::danger
-Before every Bee client upgrade, it is best practice to ALWAYS take a full [backup](/docs/bee/working-with-bee/backups) of your node.
+Before every Bee client upgrade, it is best practice to ALWAYS take a full [backup](./backups.md) of your node.
 :::
 
 After withdrawing stake and stopping the node, update to the newest version of Bee. After updating, restart the node.
@@ -492,7 +493,7 @@ After upgrading to the latest version and restarting, xBZZ should be re-staked i
 To stake the minimum required 10 xBZZ:
 
 :::tip
-Make sure to modify to the correct staking amount in case your node is using [reserve doubling](/docs/bee/working-with-bee/staking#reserve-doubling).
+Make sure to modify to the correct staking amount in case your node is using [reserve doubling](./staking.md#reserve-doubling).
 :::
 
 ```bash
@@ -520,7 +521,7 @@ In this section we cover several commonly seen issues encountered for staking no
 
 ### Frozen node
 
-A node will be frozen when the reserve commitment hash it submits in its [`commit` transaction](/docs/concepts/incentives/redistribution-game) does not match the correct hash. The reserve commitment hash is used as proof that a node is storing the chunks it is responsible for. It will not be able to play in the redistribution game during the freezing period. See the  [penalties](/docs/concepts/incentives/redistribution-game) section for more information.
+A node will be frozen when the reserve commitment hash it submits in its [`commit` transaction](./../../concepts/incentives/redistribution-game.md) does not match the correct hash. The reserve commitment hash is used as proof that a node is storing the chunks it is responsible for. It will not be able to play in the redistribution game during the freezing period. See the  [penalties](./../../concepts/incentives/redistribution-game.md) section for more information.
 
 #### Check frozen status
 
@@ -775,7 +776,7 @@ If you are able to identify and fix a problem with your node from the checklist 
     ```
 5. Check peer connectivity
 
-    Compare the value of your node's `neighborhoodSize` from the `/status` endpoint and the `neighborhoodSize` of its peers in the same neighborhood from the `/status/peers` endpoint. The figure should be generally the same (although it may fluctuate slightly up or down at any one point in time). If your node's `neighborhoodSize` value is significantly different and remains so over time then your node likely has a connectivity problem. Make sure to [check your network environment](/docs/bee/installation/connectivity) to ensure your node is able to communicate with the network.
+    Compare the value of your node's `neighborhoodSize` from the `/status` endpoint and the `neighborhoodSize` of its peers in the same neighborhood from the `/status/peers` endpoint. The figure should be generally the same (although it may fluctuate slightly up or down at any one point in time). If your node's `neighborhoodSize` value is significantly different and remains so over time then your node likely has a connectivity problem. Make sure to [check your network environment](./../installation/connectivity.md) to ensure your node is able to communicate with the network.
 
 
 If no problems are identified during these checks it likely indicates that your node was frozen in error and there are no additional steps you need to take. 
@@ -787,7 +788,7 @@ If you have identified and fixed a problem causing your node to become frozen or
 First stop your node, and then run the following command:
 
 :::caution
-Make sure to replace `/home/bee/.bee` with your node’s data directory if it differs from the one shown in the example. Make sure that the directory you specify is the root directory for your node’s data files, not the localstore directory itself. This is the same directory specified using the `data-dir` option in your node’s [configuration](/docs/bee/working-with-bee/configuration/).
+Make sure to replace `/home/bee/.bee` with your node’s data directory if it differs from the one shown in the example. Make sure that the directory you specify is the root directory for your node’s data files, not the localstore directory itself. This is the same directory specified using the `data-dir` option in your node’s [configuration](./configuration.md).
 :::
 
 ```bash
@@ -840,7 +841,7 @@ Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` befor
 
 #### Run sampler process to benchmark performance
 
-One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash` endpoint of the API may be used. See the `/rchash` section of the [Bee API page for usage details](/docs/bee/working-with-bee/bee-api/). 
+One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash` endpoint of the API may be used. See the `/rchash` section of the [Bee API page for usage details](./bee-api.md). 
 
 
 If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord). 

@@ -12,3 +12,6 @@ resources
 test
 *.zip
 swarm-cli
+*.csv
+# Tools
+.claude

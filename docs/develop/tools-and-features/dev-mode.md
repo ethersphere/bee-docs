@@ -1,6 +1,7 @@
 ---
 title: Developer mode
 id: bee-dev-mode
+description: Documentation for development mode features for testing and debugging Bee applications.
 ---
 
 You can start the bee in `dev` mode by running the command:

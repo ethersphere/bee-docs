@@ -1,6 +1,7 @@
 ---
 title: Tokens
 id: tokens
+description: Information about xBZZ and xDAI tokens including where to obtain them.
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 title: Website Routing
 id: routing
+description: Explains message routing protocols and peer discovery mechanisms in the Swarm network.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -8,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 # Routing on Swarm 
 
-Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](/docs/develop/tools-and-features/manifests).
+Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](./tools-and-features/manifests.md).
 
 If you try to use typical "clean URLs" like:
 
@@ -229,7 +230,7 @@ Everything inside `dist/` will be uploaded to your Swarm feed.
 
 #### 7. Deploy Site
 
-Now with routing handled its time to deploy the site. Refer to the [Host Your Website](/docs/develop/host-your-website#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
+Now with routing handled its time to deploy the site. Refer to the [Host Your Website](./host-your-website.md#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
 
 If you already have `swarm-cli` installed, you can do this easily with the following command:
 

@@ -1,6 +1,7 @@
 ---
 title: Swarm CLI
 id: swarm-cli
+description: Introduces swarm-cli command-line tool that simplifies node interaction uploads downloads and batch management.
 ---
 
 **Swarm‑CLI** is a command‑line tool powered by `bee-js` that makes it easy to interact with your Bee node directly from the command line. It’s friendlier than working with the raw Bee HTTP API and faster than writing a custom `bee-js` script when you just want to perform an action from the terminal.
@@ -24,7 +25,7 @@ Common uses:
 * **Smart option inference** — it infers options based on your input (e.g., batch selection, index page, content type) so you don’t need deep Bee API knowledge
 * **Powered by `bee-js`** — stays aligned with the latest Bee features
 
-It also greatly simplifies certain more complex tasks, such as as the management of [feeds](/docs/develop/tools-and-features/feeds).  
+It also greatly simplifies certain more complex tasks, such as as the management of [feeds](./../../develop/tools-and-features/feeds.md).  
 
 For installation and usage instructions, [see the README](https://github.com/ethersphere/swarm-cli/blob/master/README.md).
 
