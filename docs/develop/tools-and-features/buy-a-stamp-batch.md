@@ -20,7 +20,7 @@ A postage batch is required to upload data to Swarm. Postage stamp batches repre
 
       **Storage volume and `depth`:**
 
-      When purchasing stamp batches for larger volumes of data (by increasing the `depth` value), the amount of data which can be stored becomes increasingly more predictable. For example, at `depth` 22 a batch can store between 4.93 GB and 17.18 GB, while at `depth` 28, a batch can store between 1.0 and 1.1 TB of data, and at higher depths the difference between the minimum and maximum storage volumes approach the same value.
+      When purchasing stamp batches for larger volumes of data (by increasing the `depth` value), the amount of data which can be stored becomes increasingly more predictable. For example, at `depth` 22 a batch can store between 2.28 GB (encrypted, paranoid erasure coding) and 17.18 GB (theoretical max), while at `depth` 28, a batch can store between 292.67 GB and 1.1 TB of data, and at higher depths the difference between the minimum and maximum storage volumes approach the same value. The effective volume also depends on the encryption and erasure coding settings used. See the [effective utilisation tables](./../../concepts/incentives/postage-stamps.md#effective-utilisation-tables) for the full details.
 
       **Storage duration and `amount`:** 
 
@@ -158,7 +158,7 @@ Depending on the use case, uploaders may desire to use mutable or immutable batc
 The following postage batch calculators allow you to conveniently find the depth and amount values for a given storage duration and storage volume, or to find the storage duration and storage volume for a given depth and amount. The results will display the cost in xBZZ for the postage batch. The current pricing information is sourced from the Swarmscan API and will vary over time. 
 
 :::info
-The 'effective volume' is the volume of data that can safely stored for each storage depth. The 'theoretical max volume' is significantly lower than the effective volume at lower depths and the two values trend towards the same value at higher depths. The lowest depth with an effective volume above zero is 22, with an effective depth of 4.93 GB. Lower depth values can be used for smaller uploads but do not come with the same storage guarantees. [Learn more here](./../../concepts/incentives/postage-stamps.md#effective-utilisation-tables). 
+The 'effective volume' is the volume of data that can be safely stored for each batch depth, with a failure rate of less than 0.1%. The 'theoretical max volume' is significantly higher than the effective volume at lower depths, and the two values trend towards the same value at higher depths. Effective volumes are available for all depths from 17 to 41, and depend on the encryption and erasure coding settings selected. For example, at depth 17, the effective volume ranges from 13.17 kB (encrypted, paranoid) to 44.70 kB (unencrypted, no erasure coding). [Learn more here](./../../concepts/incentives/postage-stamps.md#effective-utilisation-tables). 
 :::
 
 ### Depth & Amount to Time & Volume Calculator
