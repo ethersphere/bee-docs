@@ -1,4 +1,5 @@
 .docusaurus
+.claude
 node_modules
 .DS_Store
 build
@@ -10,3 +11,4 @@ resources
 /src/pages/awesome-swarm.mdx    
 test
 *.zip
+swarm-cli
