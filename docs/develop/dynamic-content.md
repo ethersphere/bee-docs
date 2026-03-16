@@ -2,7 +2,7 @@
 title: Dynamic Content
 id: dynamic-content
 sidebar_label: Dynamic Content
-description: Learn how to use feeds to create updateable content on Swarm — with a complete example project that builds a dynamic note board.
+description: Learn how to use feeds to create updateable content on Swarm — with a complete example project that builds a simple blog.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -20,9 +20,47 @@ If you followed the [Host a Webpage](/docs/develop/host-your-website) guide, you
 * [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli) (for `swarm-cli` examples)
 
 
+## Example Scripts and Projects
+
+The `bee-js` code snippets throughout this guide are available as runnable scripts in the [examples](https://github.com/ethersphere/examples) repo. The guide also includes a complete blog project that puts all the concepts together.
+
+The full working scripts are available in the [examples](https://github.com/ethersphere/examples) repo:
+
+* [`script-01.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-01.js) — The Immutability Problem
+* [`script-02.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-02.js) — Write, Read, and Update a Feed
+* [`script-03.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-03.js) — Feed Manifests — Stable URLs
+
+The complete blog project is in the [`simple-blog`](https://github.com/ethersphere/examples/tree/main/simple-blog) directory.
+
+Clone the repo and set up the example scripts:
+
+```bash
+git clone https://github.com/ethersphere/examples.git
+cd examples/dynamic-content
+npm install
+```
+
+Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
+
+```bash
+BEE_URL=http://localhost:1633
+BATCH_ID=BATCH_ID
+```
+
+You can then run any script with:
+
+```bash
+node script-01.js
+node script-02.js
+node script-03.js
+```
+
+The blog project has its own setup — see [Example Project — Simple Blog](#example-project--simple-blog) below.
+
+
 ## The Immutability Problem
 
-To see why feeds are necessary, try uploading the same content twice with a small change:
+To see why feeds are necessary, try uploading the same content twice with a small change ([`script-01.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-01.js)):
 
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
@@ -31,7 +69,7 @@ To see why feeds are necessary, try uploading the same content twice with a smal
 import { Bee } from "@ethersphere/bee-js";
 
 const bee = new Bee("http://localhost:1633");
-const batchId = "<BATCH_ID>";
+const batchId = "BATCH_ID";
 
 const upload1 = await bee.uploadFile(batchId, "Hello Swarm - version 1", "note.txt");
 console.log("Version 1:", upload1.reference.toHex());
@@ -45,11 +83,11 @@ console.log("Version 2:", upload2.reference.toHex());
 
 ```bash
 echo "Hello Swarm - version 1" > note-v1.txt
-swarm-cli upload note-v1.txt --stamp <BATCH_ID>
+swarm-cli upload note-v1.txt --stamp BATCH_ID
 # Swarm hash: a1b2c3d4...
 
 echo "Hello Swarm - version 2" > note-v2.txt
-swarm-cli upload note-v2.txt --stamp <BATCH_ID>
+swarm-cli upload note-v2.txt --stamp BATCH_ID
 # Swarm hash: e5f6a7b8... (different!)
 ```
 
@@ -69,7 +107,7 @@ Feeds are built on top of [single-owner chunks](/docs/develop/tools-and-features
 :::
 
 :::warning Always use immutable stamp batches with feeds
-When a mutable batch fills up, new chunks overwrite the oldest chunks in each bucket. If feed entry chunks get overwritten, the sequential indexing scheme that feeds depend on breaks — lookups will fail because earlier indices are no longer reachable. Always use an immutable batch when working with feeds.
+When a [mutable batch](/docs/concepts/incentives/postage-stamps#mutable-batches) fills up, new chunks overwrite the oldest chunks in each bucket. If feed entry chunks get overwritten, the sequential indexing scheme that feeds depend on breaks — lookups will fail because earlier indices are no longer reachable. Always use an **immutable** batch when working with feeds.
 :::
 
 ### Create a Publisher Key
@@ -88,13 +126,6 @@ const pk = new PrivateKey(hex);
 
 console.log("Private key:", pk.toHex());
 console.log("Address:", pk.publicKey().address().toHex());
-```
-
-Example output:
-
-```
-Private key: 0x634fb5a872396d9693e5c9f9d7233cfa93f395c093371017ff44aa9ae6564cdd
-Address: 0x8d3766440f0d7b949a5e32995d09619a7f86e632
 ```
 
 Save the private key somewhere secure. You will use it for all future feed updates.
@@ -128,7 +159,7 @@ swarm-cli identity export publisher
 
 ### Write and Read a Feed
 
-Now upload some content and write its reference to a feed, then read it back:
+Now upload some content and write its reference to a feed, then read it back ([`script-02.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-02.js)):
 
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
@@ -137,8 +168,8 @@ Now upload some content and write its reference to a feed, then read it back:
 import { Bee, Topic, PrivateKey } from "@ethersphere/bee-js";
 
 const bee = new Bee("http://localhost:1633");
-const batchId = "<BATCH_ID>";
-const pk = new PrivateKey("<YOUR_PRIVATE_KEY>");
+const batchId = "BATCH_ID";
+const pk = new PrivateKey("YOUR_PRIVATE_KEY");
 const owner = pk.publicKey().address();
 
 // Choose a topic for this feed
@@ -155,9 +186,9 @@ console.log("Feed updated at index 0");
 
 // Read the latest reference from the feed
 const reader = bee.makeFeedReader(topic, owner);
-const result = await reader.download();
+const result = await reader.downloadReference();
+console.log("Latest reference:", result.reference.toHex());
 console.log("Current index:", result.feedIndex.toBigInt());
-console.log("Feed is readable - you can access it via the feed manifest URL");
 ```
 
 </TabItem>
@@ -168,7 +199,7 @@ console.log("Feed is readable - you can access it via the feed manifest URL");
 swarm-cli feed upload note.txt \
   --identity publisher \
   --topic-string notes \
-  --stamp <BATCH_ID>
+  --stamp BATCH_ID
 
 # Read the feed
 swarm-cli feed print \
@@ -184,7 +215,7 @@ The `feed print` command displays the current feed state, including the Swarm re
 
 ### Update the Feed
 
-When you have new content, upload it and write the new reference to the feed. The writer automatically uses the next sequential index:
+When you have new content, upload it and write the new reference to the feed. The writer automatically uses the next sequential index (this continues from the previous snippet — both are combined in [`script-02.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-02.js)):
 
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
@@ -198,10 +229,10 @@ console.log("New content hash:", upload2.reference.toHex());
 await writer.upload(batchId, upload2.reference);
 console.log("Feed updated at index 1");
 
-// Reading the feed now returns the updated state
-const result2 = await reader.download();
+// Reading the feed now returns the updated reference
+const result2 = await reader.downloadReference();
+console.log("Latest reference:", result2.reference.toHex());
 console.log("Current index:", result2.feedIndex.toBigInt()); // 1n
-console.log("Feed manifest URL still serves the latest content");
 ```
 
 </TabItem>
@@ -215,7 +246,7 @@ echo "My updated note" > note.txt
 swarm-cli feed upload note.txt \
   --identity publisher \
   --topic-string notes \
-  --stamp <BATCH_ID>
+  --stamp BATCH_ID
 ```
 
 The feed now points to the new content. The feed manifest URL (printed in the output) remains the same.
@@ -226,7 +257,7 @@ The feed now points to the new content. The feed manifest URL (printed in the ou
 
 ## Feed Manifests — Stable URLs
 
-So far, reading a feed requires knowing the owner address and topic. A **feed manifest** packages these two values into a single Swarm hash that acts as a permanent URL. When Bee resolves a feed manifest through the `/bzz/` endpoint, it automatically looks up the latest feed entry and serves whatever content it points to.
+So far, reading a feed requires knowing the owner address and topic. A **feed manifest** packages these two values into a single Swarm hash that acts as a permanent URL. When Bee resolves a feed manifest through the `/bzz/` endpoint, it automatically looks up the latest feed entry and serves whatever content it points to ([`script-03.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-03.js)).
 
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
@@ -246,7 +277,7 @@ The `feed upload` command creates the manifest automatically and prints the `Fee
 swarm-cli feed upload note.txt \
   --identity publisher \
   --topic-string notes \
-  --stamp <BATCH_ID>
+  --stamp BATCH_ID
 ```
 
 Example output:
@@ -264,8 +295,8 @@ The hash in the `Feed Manifest URL` (`6c30ef2254ac1565...`) is your permanent re
 
 You can now access the content through a stable URL:
 
-```
-http://localhost:1633/bzz/<FEED_MANIFEST_HASH>/
+```text
+http://localhost:1633/bzz/FEED_MANIFEST_HASH/
 ```
 
 Every time you update the feed, the same URL serves the new content — no URL change needed. This is also the hash you would register in ENS as your content hash (see [Host a Webpage - Connect to ENS](/docs/develop/host-your-website#connect-site-to-ens-domain)).
@@ -279,10 +310,10 @@ A feed manifest only needs to be created once. After that, just update the feed 
 
 The resolution chain when someone accesses your feed manifest URL:
 
-```
-GET /bzz/<manifestHash>/
-  → Bee downloads the manifest, extracts {topic, owner}
-  → Looks up the latest feed entry for that topic/owner
+```text
+GET /bzz/MANIFEST_HASH/
+  → Bee downloads the manifest, extracts the topic and owner
+  → Looks up the latest feed entry for that topic/owner pair
   → Reads the Swarm content reference from the latest entry
   → Retrieves and serves the content at that reference
 ```
@@ -290,16 +321,12 @@ GET /bzz/<manifestHash>/
 From the outside, a feed manifest URL behaves exactly like a regular Swarm URL — except the content behind it can change whenever the feed owner publishes an update.
 
 
-## Example Project — Dynamic Note Board
+## Example Project — Simple Blog
 
-This section puts everything together into a minimal but complete project: a **dynamic note board** that lives on Swarm. It is a single HTML page that displays a list of notes. The publisher can add notes and the page updates at a single stable URL.
+This section puts everything together into a minimal but complete project: a **simple blog** that lives on Swarm. It generates a static HTML site with an index page listing all posts and individual post pages. The publisher can create, edit, and delete posts — and readers always find the latest version at a single stable URL.
 
 :::info
-This project follows the same architectural pattern used by [Etherjot](https://github.com/ethersphere/etherjot), a full-featured blogging platform on Swarm. Etherjot regenerates and re-uploads the entire blog site each time a post is added, then updates a single feed to point to the new version. Our note board does the same thing in a simplified form.
-:::
-
-:::info Content Deduplication
-When you regenerate and re-upload the entire note board with a new note added, Bee automatically deduplicates content. It checks the content hash of each chunk and reuses references to chunks that already exist in storage. Only the new content is stored as new chunks. This makes the regenerate-and-append approach efficient, even though it regenerates everything each time.
+This project follows the same architectural pattern used by [Etherjot](https://github.com/ethersphere/etherjot), a full-featured blogging platform on Swarm. Etherjot regenerates and re-uploads the entire blog site each time a post is added, then updates a single feed to point to the new version. Our blog does the same thing in a simplified form.
 :::
 
 ### Project Setup
@@ -307,21 +334,19 @@ When you regenerate and re-upload the entire note board with a new note added, B
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
 
-Create a new directory and initialize the project:
+Clone the [examples](https://github.com/ethersphere/examples) repo (if you haven't already) and navigate to the blog project:
 
 ```bash
-mkdir swarm-noteboard && cd swarm-noteboard
-npm init -y
-npm install @ethersphere/bee-js dotenv
+git clone https://github.com/ethersphere/examples.git
+cd examples/simple-blog
+npm install
 ```
 
-Add `"type": "module"` to your `package.json` to use ES module imports.
-
-Create a `.env` file with your configuration:
+Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=<YOUR_BATCH_ID>
+BATCH_ID=YOUR_BATCH_ID
 ```
 
 </TabItem>
@@ -330,14 +355,14 @@ BATCH_ID=<YOUR_BATCH_ID>
 Create a new directory:
 
 ```bash
-mkdir swarm-noteboard && cd swarm-noteboard
-mkdir noteboard
+mkdir swarm-blog && cd swarm-blog
+mkdir site
 ```
 
 Make sure you have a `swarm-cli` identity ready:
 
 ```bash
-swarm-cli identity create noteboard-publisher
+swarm-cli identity create blog-publisher
 ```
 
 </TabItem>
@@ -350,41 +375,43 @@ swarm-cli identity create noteboard-publisher
 <TabItem value="bee-js" label="bee-js">
 
 ```
-swarm-noteboard/
+simple-blog/
 ├── .env               # Bee URL and batch ID
-├── config.json        # Created by init.js — stores keys and manifest hash
-├── notes.json         # Created by init.js — stores the list of notes
-├── init.js            # Initialize the note board (run once)
-├── publish.js         # Add a note and update the board
-└── read.js            # Read the feed (demonstrates reader access)
+├── html.js            # Shared HTML generation utility
+├── init.js            # Initialize the blog (run once)
+├── post.js            # Create, edit, or delete a post and update the feed
+├── read.js            # Read the feed (demonstrates reader access)
+├── config.json        # Generated by init.js — stores keys and manifest hash
+└── posts.json         # Generated by init.js — stores all blog posts
 ```
 
 </TabItem>
 <TabItem value="swarm-cli" label="swarm-cli">
 
 ```
-swarm-noteboard/
-├── noteboard/
-│   └── index.html     # The note board HTML page
-├── notes.json         # Tracks notes locally (optional helper)
-└── generate.sh        # Helper script to regenerate HTML and upload
+swarm-blog/
+├── site/
+│   ├── index.html       # Blog index page (listing of all posts)
+│   └── posts/
+│       └── <slug>.html  # Individual post pages
+└── posts.json           # Tracks posts locally
 ```
 
 </TabItem>
 </Tabs>
 
 
-### Initialize the Note Board
+### Initialize the Blog
 
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
 
-Create `init.js` — this generates a publisher key, creates an empty note board, uploads it, sets up the feed, and saves the configuration:
+Create `init.js` — this generates a publisher key, creates an empty blog, uploads it, sets up the feed, and saves the configuration:
 
 ```js
 import { Bee, Topic, PrivateKey } from "@ethersphere/bee-js";
 import crypto from "crypto";
-import { writeFileSync } from "fs";
+import { writeFileSync, mkdirSync } from "fs";
 import { config } from "dotenv";
 config();
 
@@ -395,15 +422,18 @@ const batchId = process.env.BATCH_ID;
 const hex = "0x" + crypto.randomBytes(32).toString("hex");
 const pk = new PrivateKey(hex);
 const owner = pk.publicKey().address();
-const topic = Topic.fromString("noteboard");
+const topic = Topic.fromString("blog");
 
-// Create initial empty note board
-const notes = [];
-writeFileSync("notes.json", JSON.stringify(notes, null, 2));
+// Create initial empty blog
+const posts = [];
+writeFileSync("posts.json", JSON.stringify(posts, null, 2));
 
-const html = generateHTML(notes);
-const upload = await bee.uploadFile(batchId, html, "index.html", {
-  contentType: "text/html",
+// Generate site files and upload
+mkdirSync("site/posts", { recursive: true });
+writeSiteFiles(posts);
+
+const upload = await bee.uploadFilesFromDirectory(batchId, "./site", {
+  indexDocument: "index.html",
 });
 
 // Set up feed and manifest
@@ -415,35 +445,58 @@ const manifest = await bee.createFeedManifest(batchId, topic, owner);
 const cfg = {
   privateKey: pk.toHex(),
   owner: owner.toHex(),
-  topic: "noteboard",
+  topic: "blog",
   manifest: manifest.toHex(),
 };
 writeFileSync("config.json", JSON.stringify(cfg, null, 2));
 
-console.log("Note board initialized!");
+console.log("Blog initialized!");
 console.log("Feed manifest:", manifest.toHex());
-console.log("View your board:", `${process.env.BEE_URL}/bzz/${manifest.toHex()}/`);
+console.log("View your blog:", `${process.env.BEE_URL}/bzz/${manifest.toHex()}/`);
 
-function generateHTML(notes) {
-  const noteItems = notes
+// --- HTML generation ---
+
+function writeSiteFiles(posts) {
+  writeFileSync("site/index.html", generateIndex(posts));
+  for (const post of posts) {
+    writeFileSync(`site/posts/${post.slug}.html`, generatePost(post));
+  }
+}
+
+function generateIndex(posts) {
+  const items = posts
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
     .map(
-      (n) => `
-    <div style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:4px;">
-      <p style="margin:0 0 4px 0;">${n.text}</p>
-      <small style="color:#888;">${n.date}</small>
-    </div>`
+      (p) => `
+    <article style="margin:16px 0; padding:16px; border:1px solid #ddd; border-radius:4px;">
+      <h2 style="margin:0 0 4px 0;"><a href="posts/${p.slug}.html">${esc(p.title)}</a></h2>
+      <small style="color:#888;">${p.date}</small>
+    </article>`
     )
     .join("\n");
 
   return `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Note Board</title></head>
-<body style="max-width:600px; margin:40px auto; font-family:sans-serif;">
-  <h1>Note Board</h1>
-  <p>${notes.length} note${notes.length !== 1 ? "s" : ""}</p>
-  ${noteItems || "<p><em>No notes yet.</em></p>"}
-</body>
-</html>`;
+<html><head><meta charset="utf-8"><title>My Blog</title></head>
+<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
+  <h1>My Blog</h1>
+  <p>${posts.length} post${posts.length !== 1 ? "s" : ""}</p>
+  ${items || "<p><em>No posts yet.</em></p>"}
+</body></html>`;
+}
+
+function generatePost(post) {
+  return `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>${esc(post.title)}</title></head>
+<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
+  <p><a href="../">← Back</a></p>
+  <h1>${esc(post.title)}</h1>
+  <small style="color:#888;">${post.date}</small>
+  <div style="margin-top:16px; line-height:1.6;">${esc(post.body)}</div>
+</body></html>`;
+}
+
+function esc(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 ```
 
@@ -456,35 +509,39 @@ node init.js
 Example output:
 
 ```
-Note board initialized!
+Blog initialized!
 Feed manifest: caa414d70028d14b0bdd9cbab18d1c1a0a3bab1b...
-View your board: http://localhost:1633/bzz/caa414d70028d14b.../
+View your blog: http://localhost:1633/bzz/caa414d70028d14b.../
 ```
 
 </TabItem>
 <TabItem value="swarm-cli" label="swarm-cli">
 
-Create the initial HTML page at `noteboard/index.html`:
+Create the initial site structure:
+
+```bash
+mkdir -p site/posts
+```
+
+Create `site/index.html`:
 
 ```html
 <!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Note Board</title></head>
-<body style="max-width:600px; margin:40px auto; font-family:sans-serif;">
-  <h1>Note Board</h1>
-  <p>0 notes</p>
-  <p><em>No notes yet.</em></p>
-</body>
-</html>
+<html><head><meta charset="utf-8"><title>My Blog</title></head>
+<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
+  <h1>My Blog</h1>
+  <p>0 posts</p>
+  <p><em>No posts yet.</em></p>
+</body></html>
 ```
 
 Upload it to a feed:
 
 ```bash
-swarm-cli feed upload ./noteboard \
-  --identity noteboard-publisher \
-  --topic-string noteboard \
-  --stamp <BATCH_ID> \
+swarm-cli feed upload ./site \
+  --identity blog-publisher \
+  --topic-string blog \
+  --stamp BATCH_ID \
   --index-document index.html
 ```
 
@@ -496,124 +553,227 @@ URL: http://localhost:1633/bzz/387dc3cf.../
 Feed Manifest URL: http://localhost:1633/bzz/6c30ef22.../
 ```
 
-Save the `Feed Manifest URL` hash — this is your board's permanent address. Open it in a browser to see the empty note board.
+Save the `Feed Manifest URL` hash — this is your blog's permanent address.
 
 </TabItem>
 </Tabs>
 
 
-### Add a Note
+### Create, Edit, and Delete Posts
 
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
 
-Create `publish.js` — this loads the config, appends a new note, regenerates the HTML, uploads it, and updates the feed:
+Create `post.js` — a single script that handles creating, editing, and deleting posts. Each operation modifies the local `posts.json`, regenerates the entire site, uploads it, and updates the feed:
 
 ```js
 import { Bee, Topic, PrivateKey } from "@ethersphere/bee-js";
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync, rmSync } from "fs";
 import { config } from "dotenv";
 config();
 
-const noteText = process.argv[2];
-if (!noteText) {
-  console.error('Usage: node publish.js "Your note text"');
+const [action, ...args] = process.argv.slice(2);
+
+if (!action || !["create", "edit", "delete"].includes(action)) {
+  console.log(`Usage:
+  node post.js create <slug> <title> <body>
+  node post.js edit   <slug> <title> <body>
+  node post.js delete <slug>`);
   process.exit(1);
 }
 
 const bee = new Bee(process.env.BEE_URL);
 const batchId = process.env.BATCH_ID;
-
-// Load config and existing notes
 const cfg = JSON.parse(readFileSync("config.json", "utf-8"));
-const notes = JSON.parse(readFileSync("notes.json", "utf-8"));
+const posts = JSON.parse(readFileSync("posts.json", "utf-8"));
 
-// Add new note
-notes.push({ text: noteText, date: new Date().toISOString() });
-writeFileSync("notes.json", JSON.stringify(notes, null, 2));
+// Apply the action
+if (action === "create") {
+  const [slug, title, body] = args;
+  if (!slug || !title || !body) {
+    console.error('Usage: node post.js create <slug> "<title>" "<body>"');
+    process.exit(1);
+  }
+  if (posts.find((p) => p.slug === slug)) {
+    console.error(`Post "${slug}" already exists. Use "edit" to update it.`);
+    process.exit(1);
+  }
+  posts.push({ slug, title, body, date: new Date().toISOString() });
+  console.log(`Created post: ${slug}`);
+}
 
-// Regenerate HTML
-const html = generateHTML(notes);
+if (action === "edit") {
+  const [slug, title, body] = args;
+  if (!slug || !title || !body) {
+    console.error('Usage: node post.js edit <slug> "<title>" "<body>"');
+    process.exit(1);
+  }
+  const idx = posts.findIndex((p) => p.slug === slug);
+  if (idx === -1) {
+    console.error(`Post "${slug}" not found.`);
+    process.exit(1);
+  }
+  posts[idx] = { ...posts[idx], title, body, date: new Date().toISOString() };
+  console.log(`Edited post: ${slug}`);
+}
+
+if (action === "delete") {
+  const [slug] = args;
+  if (!slug) {
+    console.error("Usage: node post.js delete <slug>");
+    process.exit(1);
+  }
+  const idx = posts.findIndex((p) => p.slug === slug);
+  if (idx === -1) {
+    console.error(`Post "${slug}" not found.`);
+    process.exit(1);
+  }
+  posts.splice(idx, 1);
+  console.log(`Deleted post: ${slug}`);
+}
+
+// Save updated posts
+writeFileSync("posts.json", JSON.stringify(posts, null, 2));
+
+// Regenerate entire site
+rmSync("site", { recursive: true, force: true });
+mkdirSync("site/posts", { recursive: true });
+writeFileSync("site/index.html", generateIndex(posts));
+for (const post of posts) {
+  writeFileSync(`site/posts/${post.slug}.html`, generatePost(post));
+}
 
 // Upload and update feed
 const pk = new PrivateKey(cfg.privateKey);
 const topic = Topic.fromString(cfg.topic);
 const writer = bee.makeFeedWriter(topic, pk);
 
-const upload = await bee.uploadFile(batchId, html, "index.html", {
-  contentType: "text/html",
+const upload = await bee.uploadFilesFromDirectory(batchId, "./site", {
+  indexDocument: "index.html",
 });
 await writer.upload(batchId, upload.reference);
 
-console.log(`Note added! (${notes.length} total)`);
-console.log("View:", `${process.env.BEE_URL}/bzz/${cfg.manifest}/`);
+console.log(`Blog updated! (${posts.length} post${posts.length !== 1 ? "s" : ""})`);
+console.log(`View: ${process.env.BEE_URL}/bzz/${cfg.manifest}/`);
 
-function generateHTML(notes) {
-  const noteItems = notes
+// --- HTML generation ---
+
+function generateIndex(posts) {
+  const items = posts
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
     .map(
-      (n) => `
-    <div style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:4px;">
-      <p style="margin:0 0 4px 0;">${n.text}</p>
-      <small style="color:#888;">${n.date}</small>
-    </div>`
+      (p) => `
+    <article style="margin:16px 0; padding:16px; border:1px solid #ddd; border-radius:4px;">
+      <h2 style="margin:0 0 4px 0;"><a href="posts/${p.slug}.html">${esc(p.title)}</a></h2>
+      <small style="color:#888;">${p.date}</small>
+    </article>`
     )
     .join("\n");
 
   return `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Note Board</title></head>
-<body style="max-width:600px; margin:40px auto; font-family:sans-serif;">
-  <h1>Note Board</h1>
-  <p>${notes.length} note${notes.length !== 1 ? "s" : ""}</p>
-  ${noteItems}
-</body>
-</html>`;
+<html><head><meta charset="utf-8"><title>My Blog</title></head>
+<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
+  <h1>My Blog</h1>
+  <p>${posts.length} post${posts.length !== 1 ? "s" : ""}</p>
+  ${items || "<p><em>No posts yet.</em></p>"}
+</body></html>`;
+}
+
+function generatePost(post) {
+  return `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>${esc(post.title)}</title></head>
+<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
+  <p><a href="../">← Back</a></p>
+  <h1>${esc(post.title)}</h1>
+  <small style="color:#888;">${post.date}</small>
+  <div style="margin-top:16px; line-height:1.6;">${esc(post.body)}</div>
+</body></html>`;
+}
+
+function esc(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 ```
 
-Run it:
+Usage:
 
 ```bash
-node publish.js "This is my first note"
-node publish.js "Here is another one"
+# Create a post
+node post.js create hello-world "Hello World" "This is my first blog post on Swarm."
+
+# Create another post
+node post.js create feeds-intro "Understanding Feeds" "Feeds provide mutable pointers on immutable storage."
+
+# Edit a post
+node post.js edit hello-world "Hello Swarm!" "Updated: this is my first post, now improved."
+
+# Delete a post
+node post.js delete feeds-intro
 ```
 
-Each time you run this, the same feed manifest URL serves the updated page with all notes.
+Each command regenerates the entire site and updates the feed. The same feed manifest URL always serves the latest version of the blog.
+
+:::tip
+Notice that editing and deleting work the same way as creating — modify the local data, regenerate the site, re-upload, update the feed. Swarm itself doesn't have "edit" or "delete" operations. The old versions of the site remain accessible via their direct Swarm hashes, but the feed manifest always resolves to the latest version.
+:::
 
 </TabItem>
 <TabItem value="swarm-cli" label="swarm-cli">
 
-Edit `noteboard/index.html` with your new note content:
+With `swarm-cli`, you manage the site files manually (or with a helper script), then re-upload:
+
+#### Create a post
+
+Add a new post file at `site/posts/hello-world.html`:
 
 ```html
 <!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Note Board</title></head>
-<body style="max-width:600px; margin:40px auto; font-family:sans-serif;">
-  <h1>Note Board</h1>
-  <p>1 note</p>
-  <div style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:4px;">
-    <p style="margin:0 0 4px 0;">This is my first note</p>
-    <small style="color:#888;">2025-06-15</small>
-  </div>
-</body>
-</html>
+<html><head><meta charset="utf-8"><title>Hello World</title></head>
+<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
+  <p><a href="../">← Back</a></p>
+  <h1>Hello World</h1>
+  <small style="color:#888;">2025-06-15</small>
+  <div style="margin-top:16px; line-height:1.6;">This is my first blog post on Swarm.</div>
+</body></html>
 ```
 
-Then re-upload to the same feed:
+Update `site/index.html` to link to it:
+
+```html
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>My Blog</title></head>
+<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
+  <h1>My Blog</h1>
+  <p>1 post</p>
+  <article style="margin:16px 0; padding:16px; border:1px solid #ddd; border-radius:4px;">
+    <h2 style="margin:0 0 4px 0;"><a href="posts/hello-world.html">Hello World</a></h2>
+    <small style="color:#888;">2025-06-15</small>
+  </article>
+</body></html>
+```
+
+Upload to the feed:
 
 ```bash
-swarm-cli feed upload ./noteboard \
-  --identity noteboard-publisher \
-  --topic-string noteboard \
-  --stamp <BATCH_ID> \
+swarm-cli feed upload ./site \
+  --identity blog-publisher \
+  --topic-string blog \
+  --stamp BATCH_ID \
   --index-document index.html
 ```
 
-The feed manifest URL stays the same. The page now shows the updated content. Repeat for each new note.
+#### Edit a post
+
+Edit the HTML file at `site/posts/hello-world.html` with the updated title and body, then re-upload with the same command above.
+
+#### Delete a post
+
+Remove the post file from `site/posts/` and update `site/index.html` to remove the link, then re-upload.
+
+In every case, the operation is the same on the Swarm side: modify local files, then re-upload the `site/` folder to the feed. The feed manifest URL remains unchanged.
 
 :::tip
-You can automate the HTML generation with a simple shell or Node.js script that reads notes from a local JSON file and writes the HTML before uploading. The key point is that the Swarm side of things is always the same: regenerate content, upload, update feed.
+You can automate the HTML generation with a simple shell or Node.js script that reads posts from a local JSON file and writes the HTML before uploading. The key point is that the Swarm side of things is always the same: regenerate content, upload, update feed.
 :::
 
 </TabItem>
@@ -641,10 +801,10 @@ const topic = Topic.fromString(cfg.topic);
 const owner = new EthAddress(cfg.owner);
 const reader = bee.makeFeedReader(topic, owner);
 
-const result = await reader.download();
+const result = await reader.downloadReference();
+console.log("Latest content reference:", result.reference.toHex());
 console.log("Feed index:", result.feedIndex.toBigInt());
-console.log("Feed is accessible at:");
-console.log(`  ${process.env.BEE_URL}/bzz/${cfg.manifest}/`);
+console.log("View:", `${process.env.BEE_URL}/bzz/${cfg.manifest}/`);
 ```
 
 Run it:
@@ -658,14 +818,14 @@ node read.js
 
 ```bash
 swarm-cli feed print \
-  --identity noteboard-publisher \
-  --topic-string noteboard
+  --identity blog-publisher \
+  --topic-string blog
 ```
 
 Or simply open the feed manifest URL in a browser:
 
-```
-http://localhost:1633/bzz/<FEED_MANIFEST_HASH>/
+```text
+http://localhost:1633/bzz/FEED_MANIFEST_HASH/
 ```
 
 </TabItem>
@@ -685,3 +845,4 @@ Key takeaways:
 - Each feed update stores a Swarm reference pointing to your content.
 - A **feed manifest** wraps the feed identity into a single permanent hash that resolves through `/bzz/`.
 - Only the feed owner (holder of the private key) can publish updates, but anyone can read the feed.
+- "Editing" and "deleting" content on Swarm means regenerating your site without the removed or changed content, re-uploading, and updating the feed. Old versions remain on Swarm at their original hashes, but the feed always points to the latest.
