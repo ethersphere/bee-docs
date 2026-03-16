@@ -295,8 +295,8 @@ The hash in the `Feed Manifest URL` (`6c30ef2254ac1565...`) is your permanent re
 
 You can now access the content through a stable URL:
 
-```
-http://localhost:1633/bzz/<FEED_MANIFEST_HASH>/
+```text
+http://localhost:1633/bzz/FEED_MANIFEST_HASH/
 ```
 
 Every time you update the feed, the same URL serves the new content — no URL change needed. This is also the hash you would register in ENS as your content hash (see [Host a Webpage - Connect to ENS](/docs/develop/host-your-website#connect-site-to-ens-domain)).
@@ -310,10 +310,10 @@ A feed manifest only needs to be created once. After that, just update the feed 
 
 The resolution chain when someone accesses your feed manifest URL:
 
-```
-GET /bzz/<manifestHash>/
-  → Bee downloads the manifest, extracts {topic, owner}
-  → Looks up the latest feed entry for that topic/owner
+```text
+GET /bzz/MANIFEST_HASH/
+  → Bee downloads the manifest, extracts the topic and owner
+  → Looks up the latest feed entry for that topic/owner pair
   → Reads the Swarm content reference from the latest entry
   → Retrieves and serves the content at that reference
 ```
@@ -824,8 +824,8 @@ swarm-cli feed print \
 
 Or simply open the feed manifest URL in a browser:
 
-```
-http://localhost:1633/bzz/<FEED_MANIFEST_HASH>/
+```text
+http://localhost:1633/bzz/FEED_MANIFEST_HASH/
 ```
 
 </TabItem>
