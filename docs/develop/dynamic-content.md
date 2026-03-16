@@ -310,10 +310,19 @@ A feed manifest only needs to be created once. After that, just update the feed 
 
 The resolution chain when someone accesses your feed manifest URL:
 
+<<<<<<< HEAD
 ```text
 GET /bzz/MANIFEST_HASH/
   → Bee downloads the manifest, extracts the topic and owner
   → Looks up the latest feed entry for that topic/owner pair
+=======
+```bash
+node init.js
+```
+GET /bzz/<manifestHash>/
+  → Bee downloads the manifest, extracts {topic, owner}
+  → Looks up the latest feed entry for that topic/owner
+>>>>>>> 166d88c95da806bc2da20b830a84756f0bbbc7d0
   → Reads the Swarm content reference from the latest entry
   → Retrieves and serves the content at that reference
 ```
