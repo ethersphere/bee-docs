@@ -310,6 +310,8 @@ A feed manifest only needs to be created once. After that, just update the feed 
 
 The resolution chain when someone accesses your feed manifest URL:
 
+```bash
+node init.js
 ```
 GET /bzz/<manifestHash>/
   → Bee downloads the manifest, extracts {topic, owner}
