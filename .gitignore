@@ -1,3 +1,4 @@
+examples
 .docusaurus
 .claude
 node_modules
@@ -12,5 +13,5 @@ resources
 test
 *.zip
 *.csv
-# Tools
+# LLM Tools
 .claude
