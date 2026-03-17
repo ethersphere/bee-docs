@@ -35,23 +35,21 @@ export default {
     [
       'docusaurus-plugin-llms',
       {
-        // Include core developer documentation
-        include: [
+        generateLLMsTxt: false,
+        generateLLMsFullTxt: true,
+        title: 'Ethereum Swarm Documentation',
+        description: 'Swarm is a decentralised storage and communication system for a sovereign digital society.',
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        includeOrder: [
+          'docs/concepts/**',
+          'docs/bee/installation/**',
+          'docs/bee/working-with-bee/**',
+          'docs/bee/faq.*',
           'docs/develop/**',
-          'docs/api/**',
-          'docs/learn/technology/**'
+          'docs/desktop/**',
+          'docs/references/**',
         ],
-        // Exclude non-essential content
-        exclude: [
-          'docs/learn/ecosystem/**',
-          'docs/desktop/**'
-        ],
-        // Prioritize essential developer content
-        priority: {
-          'docs/develop/getting-started': 'high',
-          'docs/api/': 'high',
-          'docs/learn/technology/**': 'medium'
-        }
       }
     ],
     [
