@@ -56,11 +56,12 @@ This file contains links to documentation sections following the llmstxt.org sta
 - [Add Access Control](https://docs.ethswarm.org/docs/develop/access-control): Guide for implementing encryption and access control in decentralized applications using Bee.
 - [Introduction](https://docs.ethswarm.org/docs/develop/contribute/introduction): Overview of how to contribute to Bee development including code standards and contribution process.
 - [Protocols](https://docs.ethswarm.org/docs/develop/contribute/protocols): Technical documentation of core Bee protocols and their implementation details for developers.
-- [Dynamic Content](https://docs.ethswarm.org/docs/develop/dynamic-content): Explains how to create mutable content on Swarm using feeds and single-owner chunks.
+- [Dynamic Content](https://docs.ethswarm.org/docs/develop/dynamic-content): Learn how to use feeds to create updateable content on Swarm — with a complete example project that builds a simple blog.
 - [Manage Files](https://docs.ethswarm.org/docs/develop/files): Guide for working with file operations including chunking and handling in Swarm applications.
 - [Run a Gateway](https://docs.ethswarm.org/docs/develop/gateway): Explains Bee gateway functionality for accessing Swarm content through HTTP interfaces.
 - [Host a Webpage](https://docs.ethswarm.org/docs/develop/host-your-website): Comprehensive guide for uploading and hosting websites on Swarm with content addressing.
 - [Start Building](https://docs.ethswarm.org/docs/develop/introduction): Overview of development on Swarm including APIs tools and use cases for building applications.
+- [Multi-Author Blog](https://docs.ethswarm.org/docs/develop/multi-author-blog): Build a decentralized multi-author blog on Swarm using linked feeds — each author has their own feed, and a master index feed ties them together.
 - [Website Routing](https://docs.ethswarm.org/docs/develop/routing): Explains message routing protocols and peer discovery mechanisms in the Swarm network.
 - [Bee JS](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-js): Documentation for the JavaScript library providing programmatic access to Bee node APIs.
 - [Postage Stamp Batches](https://docs.ethswarm.org/docs/develop/tools-and-features/buy-a-stamp-batch): Guide for purchasing postage stamp batches required for uploading data to Swarm.
