@@ -18,6 +18,17 @@ export default {
 
   scripts: [{ src: "/matomo.js", async: true }],
 
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'api-description',
+        href: '/openapi.yaml',
+        type: 'application/openapi+yaml',
+      },
+    },
+  ],
+
   stylesheets: [
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
