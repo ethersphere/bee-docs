@@ -5,7 +5,7 @@
 This is the documentation for [Swarm](https://www.ethswarm.org/) and its reference node implementation, [Bee](https://github.com/ethersphere/bee). Swarm splits data into 4 KB chunks, distributes them across a Kademlia-based network (DISC), and uses postage stamps (paid in xBZZ on Gnosis Chain) for storage incentives. Bee nodes expose an HTTP API on port 1633 (gateway) and 1635 (debug/admin). For the full unabridged documentation, see [llms-full.txt](https://docs.ethswarm.org/llms-full.txt).
 
 - [API Reference](https://docs.ethswarm.org/api/): Interactive OpenAPI documentation for all Bee endpoints
-- [OpenAPI spec (Swarm.yaml)](https://raw.githubusercontent.com/ethersphere/bee/master/openapi/Swarm.yaml): Machine-readable API definition
+- [OpenAPI spec (Swarm.yaml)](https://docs.ethswarm.org/openapi.yaml): Machine-readable API definition
 - [bee-js documentation](https://bee-js.ethswarm.org/): JavaScript/TypeScript SDK for Swarm
 - [The Book of Swarm](https://www.ethswarm.org/The-Book-of-Swarm.pdf): Comprehensive technical reference
 - [Swarm Whitepaper](https://www.ethswarm.org/swarm-whitepaper.pdf): Original design paper
