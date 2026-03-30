@@ -1,6 +1,7 @@
 ---
 title: Cashing Out
 id: cashing-out
+description: Explains how to withdraw earned xBZZ rewards and manage cheques through the bandwidth incentives SWAP system.
 ---
 
 There are two different types of cashing out. The first type is cashing out xBZZ rewards earned from staking and providing storage services (this method also allows for withdrawal of the native xDAI token). The second type is for the withdrawal of xBZZ earned through bandwidth incentives (SWAP). Both types are explained below: 

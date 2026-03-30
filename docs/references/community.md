@@ -1,6 +1,7 @@
 ---
 title: Community
 id: community
+description: Information about Swarm community channels resources and contribution opportunities.
 ---
 
 

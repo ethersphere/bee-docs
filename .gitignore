@@ -1,4 +1,6 @@
+examples
 .docusaurus
+.claude
 node_modules
 .DS_Store
 build
@@ -9,3 +11,7 @@ resources
 # Generated content
 /src/pages/awesome-swarm.mdx    
 test
+*.zip
+*.csv
+# LLM Tools
+.claude

@@ -1,6 +1,7 @@
 ---
 title: Publish a Website
 id: publish-a-website
+description: Step-by-step instructions for uploading and hosting websites on Swarm using the Desktop application.
 ---
 
 ## Step by Step Guide 
@@ -8,7 +9,7 @@ id: publish-a-website
 
 ### Install Swarm Desktop and Deposit Funds
 
-First, download and [install the Swarm Desktop App](/docs/desktop/install). Next, add xDAI (transaction fees) to your Node Wallet address. If you possess xBZZ (storage fees), you can deposit it alongside the xDAI. Otherwise, you can exchange your xDAI for xBZZ using the Swarm Desktop app.
+First, download and [install the Swarm Desktop App](./install.md). Next, add xDAI (transaction fees) to your Node Wallet address. If you possess xBZZ (storage fees), you can deposit it alongside the xDAI. Otherwise, you can exchange your xDAI for xBZZ using the Swarm Desktop app.
 
 Follow these steps to deposit funds:
 

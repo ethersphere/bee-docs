@@ -44,6 +44,7 @@ async function main() {
   const header = `---
 title: Awesome Swarm
 sidebar_label: Awesome Swarm
+description: Curated list of community resources tools and projects related to Swarm.
 # Do NOT set 'id' here; we want the doc id to be 'references/awesome-list' from the path
 ---
 

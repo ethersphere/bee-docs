@@ -1,6 +1,7 @@
 ---
 title: Manifests
 id: manifests
+description: Guide for using manifests to organize and address multiple files as a single unit in Swarm.
 ---
 
 
@@ -119,7 +120,7 @@ Manifests are immutable. When you add, remove, or move a file, Bee writes new ma
 
 To provide a stable entry point even as the manifest changes, you can combine manifests with feeds. A feed acts as an updateable pointer: publish each new manifest reference to the feed, and users access the feed hash instead of individual manifest hashes.
 
-You can find examples of this in the [Building on Swarm](/docs/develop/introduction#building-on-swarm) page.
+You can find examples of this in the [Building on Swarm](./../introduction.md) page.
 
 ## Serving Files From a Manifest
 
@@ -142,7 +143,7 @@ Paths to directories such as `/docs/` or even `/` will result in a 404 error by 
 /docs/ → 404
 ```
 
-You can specify which file or webpage you would like paths such as `/docs/` (which do not get entries in the manifest by default) to resolve to by manipulating the manifest. See the ["Filesystem"](/docs/develop/filesystem) and [Routing](/docs/develop/routing) guides for more information and examples.
+You can specify which file or webpage you would like paths such as `/docs/` (which do not get entries in the manifest by default) to resolve to by manipulating the manifest. See the ["Filesystem"](./../files.md) and [Routing](./../routing.md) guides for more information and examples.
 
 :::caution
 The `target` values inside a manifest should not be accessed directly. They cannot be reliably fetched via endpoints such as `/bzz/` or tools like `swarm-cli download`.
@@ -177,13 +178,13 @@ You need to modify the manifest when you want to change routing behavior, such a
 * Adding, changing, or deleting routes
 * Redirecting paths or restructuring the site
 
-See the [Routing](/docs/develop/routing) guide for details.
+See the [Routing](./../routing.md) guide for details.
 
 ### Directory Uploads
 
 For one-time directory uploads that you don’t plan to change, you typically don’t need to touch the manifest. However, if you later want to add files, remove files, rename paths, or point new paths at existing content, the manifest must be updated.
 
-See the ["Filesystem"](/docs/develop/filesystem) guide for examples.
+See the ["Filesystem"](./../files.md) guide for examples.
 
 ## Putting It All Together
 

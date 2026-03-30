@@ -1,6 +1,7 @@
 ---
 title: PSS
 id: pss
+description: Explains Postal Service over Swarm messaging protocol enabling secure private and efficient communication between network nodes.
 ---
 
 PSS, or Postal Service over Swarm, is a messaging protocol that enables users to send and receive messages over Swarm. It is an essential component of Swarm's infrastructure, providing secure, private, and efficient communication between nodes.
