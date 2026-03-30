@@ -1,6 +1,7 @@
 ---
 title: Run a Gateway
 id: gateway-proxy
+description: Explains Bee gateway functionality for accessing Swarm content through HTTP interfaces.
 ---
 
 This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API. 

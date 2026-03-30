@@ -1,20 +1,21 @@
 ---
 title: Getting Started
 id: getting-started
+description: Introduces Bee node types their requirements and available installation methods to help users choose appropriate setup approaches.
 ---
 
-*If you want to get a Bee node up and running ASAP, check out the [Quick Start](/docs/bee/installation/quick-start) guide.* 
+*If you want to get a Bee node up and running ASAP, check out the [Quick Start](./quick-start.md) guide.* 
 
 ## Overview
 
 This guide provides the essential background information to help you start running a Bee node, including:
 
-- [Types of Bee nodes and their features](/docs/bee/installation/getting-started#node-types)
-- [Choosing the right node type](/docs/bee/installation/getting-started#choosing-a-node-type)
-- [Software requirements](/docs/bee/installation/getting-started#software-requirements)
-- [Hardware requirements](/docs/bee/installation/getting-started#hardware-requirements)
-- [Network requirements](/docs/bee/installation/getting-started#network-requirements)
-- [Installation methods](/docs/bee/installation/getting-started#installation-methods)
+- [Types of Bee nodes and their features](./getting-started.md#node-types)
+- [Choosing the right node type](./getting-started.md#choosing-a-node-type)
+- [Software requirements](./getting-started.md#software-requirements)
+- [Hardware requirements](./getting-started.md#hardware-requirements)
+- [Network requirements](./getting-started.md#network-requirements)
+- [Installation methods](./getting-started.md#installation-methods)
 
 
 :::caution[New Bee Users: Read This Guide in Full]
@@ -25,7 +26,7 @@ For new Bee users, it is strongly recommended to read through this ***entire gui
 
 Bee nodes can be run in three different modes, ***full***, ***light***, or ***ultra-light***. Full nodes provide complete access to all of Swarm's features including downloads, uploads, full participation in Swarm's incentives systems, and advanced messaging features such as PSS and GSOC. Light nodes are primarily for downloading and uploading only. Ultra-light nodes are the most limited, and only allow users to download a small amount of data with the free-tier limits set by full node operators.
 
-The [Node Types](/docs/bee/working-with-bee/node-types) page provides you with an in-depth look into the features and limitations of each node type along with instructions for how to set node options for all three types. 
+The [Node Types](./../working-with-bee/node-types.md) page provides you with an in-depth look into the features and limitations of each node type along with instructions for how to set node options for all three types. 
 
 ## Choosing a Node Type
 The node type you need to run will differ depending on your use-case:
@@ -36,13 +37,13 @@ The node type you need to run will differ depending on your use-case:
 | **DApp Development**          | Light, Full           | Light nodes are sufficient for many DApp use cases. Full nodes are required for advanced features like GSOC and PSS. |
 | **Earning xBZZ & Supporting the Network** | Full | Full nodes are necessary for storage incentives and long-term xBZZ earnings. Running multiple nodes? Consider using [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), or [Kubernetes](https://kubernetes.io/) for easier management. |
 
-Refer to the [Node Types](/docs/bee/working-with-bee/node-types) page for deep dive into each node type, their features and limitations, and configuration instructions.
+Refer to the [Node Types](./../working-with-bee/node-types.md) page for deep dive into each node type, their features and limitations, and configuration instructions.
 
 ##  Software Requirements
 
 ### Recommended Operating Systems
 - Officially supported systems are listed in the [Bee releases](https://github.com/ethersphere/bee/releases).
-- You can [build from source](/docs/bee/installation/build-from-source) if your OS is unsupported.
+- You can [build from source](./build-from-source.md) if your OS is unsupported.
 - **Swarm Desktop users** can use macOS, Windows, or Linux.
 - **Linux/macOS recommended**: Most tools and documentation are designed for Unix-based systems.
 - **Windows users**: While a Window release of Bee is available, you may also consider using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and using a Linux version of Bee.
@@ -53,8 +54,8 @@ While not strictly required, these tools will *greatly* simplify your experience
 
 - **[`jq`](https://jqlang.github.io/jq/)**: Formats JSON responses (recommended for API users).
 - **[`curl`](https://curl.se/)**: Used for sending API requests (required for API interactions).
-- **[Swarm CLI](/docs/bee/working-with-bee/swarm-cli/)**: Terminal-based Bee node management.
-- **[Bee JS](/docs/develop/tools-and-features/bee-js)**: JavaScript library for programmatic API access.
+- **[Swarm CLI](./../working-with-bee/swarm-cli.md)**: Terminal-based Bee node management.
+- **[Bee JS](./../../develop/tools-and-features/bee-js.md)**: JavaScript library for programmatic API access.
 
 ## Hardware Requirements
 
@@ -83,10 +84,10 @@ A reliable, high-speed internet connection is recommended when running a full no
 ### RPC Endpoint  
 
 :::warning
-***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](/docs/bee/working-with-bee/configuration#setting-blockchain-rpc-endpoint).
+***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](./../working-with-bee/configuration.md#setting-blockchain-rpc-endpoint).
 :::
 
-An [RPC (Remote Procedure Call) endpoint](/docs/references/glossary#rpc-endpoint) is required to allow your node to interact with **Gnosis Chain**, which is required for transactions like purchasing postage stamps, staking xBZZ, and storage incentives related transactions.  
+An [RPC (Remote Procedure Call) endpoint](./../../references/glossary.md#rpc-endpoint) is required to allow your node to interact with **Gnosis Chain**, which is required for transactions like purchasing postage stamps, staking xBZZ, and storage incentives related transactions.  
 
 Bee nodes use the **`--blockchain-rpc-endpoint`** configuration option to specify which Gnosis Chain RPC service to connect to. 
 
@@ -109,7 +110,7 @@ Without a properly configured RPC endpoint, a Bee node cannot interact with the 
 
 If running Bee on a home network, there is a good chance it is behind NAT by default. Often simply [enabling port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) will be enough to allow your node to start communicating smoothly with the rest of the network.
 
-See [this page](/docs/bee/installation/connectivity/) for more information on how to make sure your node can communicate with the network.
+See [this page](./connectivity.md) for more information on how to make sure your node can communicate with the network.
 
 For VPS/cloud-based setups, connectivity is typically unrestricted.
 
@@ -117,22 +118,22 @@ If your home network happens to be using [CGNAT (Carrier-Grade NAT)](https://en.
 
 ## Installation Methods
 
-### [Swarm Desktop](/docs/desktop/introduction)
+### [Swarm Desktop](./../../desktop/introduction.md)
 - Best for beginners.
 - GUI-based interface.
 
-### [Shell Script Install](/docs/bee/installation/shell-script-install)
+### [Shell Script Install](./shell-script.md)
 - Quick setup using a minimal script.
 - Requires manual configuration for background operation.
 
-### [Docker Install](/docs/bee/installation/docker)
+### [Docker Install](./docker.md)
 - Suitable for running multiple nodes.
 - Offers easy container management.
 
-### [Package Manager Install](/docs/bee/installation/package-manager-install)
+### [Package Manager Install](./package-manager.md)
 - Uses APT, RPM, or Homebrew.
 - Runs Bee as a background service.
 
-### [Building from Source](/docs/bee/installation/build-from-source)
+### [Building from Source](./build-from-source.md)
 - Most flexible, but requires advanced setup.
 

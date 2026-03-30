@@ -1,6 +1,7 @@
 ---
 title: Monitoring Your Node
 id: monitoring
+description: Explains how to monitor Bee node metrics using Prometheus and Grafana for tracking cheque rates and network performance.
 ---
 
 Your Bee node is equipped with tools to help you understand what your Bee has been up to!

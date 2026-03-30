@@ -9,10 +9,11 @@ export default function UploadCostCalc() {
   const [redundancy, setRedundancy] = useState("");
   const [isEncrypted, setIsEncrypted] = useState(false);
   const [unit, setUnit] = useState("chunks"); 
-  const maxChunks = [119, 107, 97, 37];
+  const maxChunks = [119, 107, 97, 38];
   const maxParities = [9, 21, 31, 90];
-  const maxChunksEncrypted = [59, 53, 48, 18];
+  const maxChunksEncrypted = [59, 53, 48, 19];
   const errorTolerances = {
+    None: "0%",
     Medium: "1%",
     Strong: "5%",
     Insane: "10%",
@@ -24,6 +25,10 @@ export default function UploadCostCalc() {
     const isScientific = Math.abs(num) > 0 && Math.abs(num) < 0.0001;
     let formattedNum = isScientific ? num.toExponential(2) : num.toFixed(2);
     return formattedNum;
+  };
+
+  const formatChunks = (num) => {
+    return Math.round(num).toLocaleString();
   };
 
   const handleDataSizeChange = (e) => {
@@ -95,25 +100,32 @@ export default function UploadCostCalc() {
     // Add PAC overhead to total chunks
     const totalChunksWithPac = totalChunks + pacOverheadChunks;
   
-    const redundancyLevels = { Medium: 0, Strong: 1, Insane: 2, Paranoid: 3 };
+    const redundancyLevels = { None: -1, Medium: 0, Strong: 1, Insane: 2, Paranoid: 3 };
     const redundancyLevel = redundancyLevels[redundancy];
-  
-    const quotient = isEncrypted
-      ? Math.floor(totalChunksWithPac / maxChunksEncrypted[redundancyLevel])
-      : Math.floor(totalChunksWithPac / maxChunks[redundancyLevel]);
-    const remainder = isEncrypted
-      ? totalChunksWithPac % maxChunksEncrypted[redundancyLevel]
-      : totalChunksWithPac % maxChunks[redundancyLevel];
-  
-    let remainderParities = 0;
-    if (remainder > 0) {
-      const remainderIndex = remainder - 1 < 0 ? 0 : remainder - 1;
-      const selectedParities = isEncrypted ? paritiesEncrypted : parities;
-      remainderParities = selectedParities[redundancyLevel][remainderIndex] || 0;
+
+    let totalParities = 0;
+
+    if (redundancyLevel >= 0) {
+      // Apply erasure coding to the original totalChunks (NOT totalChunksWithPac)
+      const quotient = isEncrypted
+        ? Math.floor(totalChunks / maxChunksEncrypted[redundancyLevel])
+        : Math.floor(totalChunks / maxChunks[redundancyLevel]);
+      const remainder = isEncrypted
+        ? totalChunks % maxChunksEncrypted[redundancyLevel]
+        : totalChunks % maxChunks[redundancyLevel];
+    
+      let remainderParities = 0;
+      if (remainder > 0) {
+        const remainderIndex = remainder - 1;
+        const selectedParities = isEncrypted ? paritiesEncrypted : parities;
+        remainderParities = selectedParities[redundancyLevel][remainderIndex] || 0;
+      }
+    
+      totalParities = quotient * maxParities[redundancyLevel] + remainderParities;
     }
-  
-    const totalParities = quotient * maxParities[redundancyLevel] + remainderParities;
-    const totalDataWithParity = totalChunksWithPac + totalParities;
+
+    // Total = original data + parity chunks + PAC overhead for both
+    const totalDataWithParity = totalChunks + totalParities + pacOverheadChunks;
     const percentDifference = ((totalDataWithParity - totalChunks) / totalChunks) * 100;
     
     // Calculate parity size in KB and GB
@@ -133,14 +145,14 @@ export default function UploadCostCalc() {
       {
         name: "PAC overhead",
         value: unit === "gb" 
-          ? `${formatNumberCustom(pacOverheadInKb / (1024 * 1024))} GB (${formatNumberCustom(pacOverheadChunks)} chunks)` 
-          : `${formatNumberCustom(pacOverheadInKb)} KB (${formatNumberCustom(pacOverheadChunks)} chunks)`,
+          ? `${formatNumberCustom(pacOverheadInKb / (1024 * 1024))} GB (${formatChunks(pacOverheadChunks)} chunks)` 
+          : `${formatNumberCustom(pacOverheadInKb)} KB (${formatChunks(pacOverheadChunks)} chunks)`,
       },
       {
         name: "Parity data size",
         value: unit === "gb" 
-          ? `${formatNumberCustom(parityDataInGb)} GB (${formatNumberCustom(totalParities)} chunks)` 
-          : `${formatNumberCustom(parityDataInKb)} KB (${formatNumberCustom(totalParities)} chunks)`,
+          ? `${formatNumberCustom(parityDataInGb)} GB (${formatChunks(totalParities)} chunks)` 
+          : `${formatNumberCustom(parityDataInKb)} KB (${formatChunks(totalParities)} chunks)`,
       },
       {
         name: "Total overhead",
@@ -150,15 +162,15 @@ export default function UploadCostCalc() {
       },
       { 
         name: "Source data in chunks", 
-        value: formatNumberCustom(totalChunks) 
+        value: formatChunks(totalChunks) 
       },
       { 
         name: "Source with PAC overhead", 
-        value: formatNumberCustom(totalChunksWithPac) 
+        value: formatChunks(totalChunksWithPac) 
       },
       { 
         name: "Total with parity", 
-        value: formatNumberCustom(totalDataWithParity) 
+        value: formatChunks(totalDataWithParity) 
       },
       { 
         name: "Percent cost increase", 
@@ -225,6 +237,7 @@ export default function UploadCostCalc() {
         <div style={styles.title}>Redundancy Level:</div>
         <select value={redundancy} onChange={handleRedundancyChange} style={styles.select}>
           <option value="" disabled>Select Redundancy Level</option>
+          <option value="None">None</option>
           <option value="Medium">Medium</option>
           <option value="Strong">Strong</option>
           <option value="Insane">Insane</option>

@@ -1,6 +1,7 @@
 ---
 title: Host a Webpage
 id: host-your-website
+description: Comprehensive guide for uploading and hosting websites on Swarm with content addressing.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -43,7 +44,7 @@ This guide shows you how to get your website hosted on Swarm with just a few sim
 
 ### Prerequisites
 
-* A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
+* A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage batch
 * [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli)
 * A valid postage stamp batch
@@ -282,7 +283,7 @@ For developers building apps, tools, or automated deployments, `bee-js` offers p
 
 ### Prerequisites
 
-* A running Bee node (either a [standard installation](/docs/bee/installation/quick-start) or [Swarm Desktop](/docs/desktop/install))
+* A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage stamp batch
 * Node.js (18+) and `@ethersphere/bee-js` installed in your project
 * Static website files (HTML, CSS, etc.) - feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/basic-static-website)
@@ -411,7 +412,7 @@ Website Swarm Hash: 6c45eae389b3bffce21443316d0bd47c4101545092b7c72c313a33ee7d00
 Feed Manifest: caa414d70028d14b0bdd9cbab18d1c1a0a3bab1b20a56cf06937a6b20c7e7377
 ```
 
-Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#2-connecting-your-website-to-ens)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
+Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
 
 ```
 bzz://<manifestRef>
@@ -461,7 +462,7 @@ The guide covers:
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 
 :::tip
-For the content hash, you can use a Swarm hosted website's hash directly, or as is recommended in the [`swarm-cli`](#recommended-use-feeds-for-seamless-updates---swarm-cli) and [`bee-js`](#recommended-use-feeds-for-seamless-updates---bee-js) guides above, publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates. 
+For the content hash, you can use a Swarm hosted website's hash directly, or as is recommended in the [`swarm-cli`](#use-feeds-for-seamless-updates---swarm-cli) and [`bee-js`](#use-feeds-for-seamless-updates---bee-js) guides above, publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates. 
 :::
 
 ```

@@ -1,6 +1,7 @@
 ---
 title: FAQ
 id: faq
+description: Frequently asked questions about Swarm protocols and general usage.
 ---
 
 
@@ -55,7 +56,7 @@ There are many ways to acquire BZZ tokens, either on custodial centralised excha
 
 ### What is the BZZ token address?
 
-See [this page](/docs/references/smart-contracts) for a list of relevant token addresses. 
+See [this page](./smart-contracts.mdx) for a list of relevant token addresses. 
 
 ### What is the BZZ token supply?
 

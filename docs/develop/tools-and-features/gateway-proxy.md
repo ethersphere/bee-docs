@@ -1,6 +1,7 @@
 ---
 title: Gateway Proxy
 id: gateway-proxy
+description: Tool for proxying and protecting Bee API endpoints with additional security and filtering.
 ---
 
 The [Swarm Gateway](https://github.com/ethersphere/swarm-gateway) is the standard way to expose a Bee node over HTTP.
@@ -49,4 +50,4 @@ This is especially useful for gateways that accept uploads from users or applica
 
 ## Setting up a Gateway
 
-For a step by step guide on setting up a gateway yourself, refer to the [guide in the Develop on Swarm section](/docs/develop/gateway-proxy/).
+For a step by step guide on setting up a gateway yourself, refer to the [guide in the Develop on Swarm section](./../gateway.md).

@@ -1,12 +1,17 @@
+examples
 .docusaurus
+.claude
 node_modules
 .DS_Store
 build
 public
 resources
-# Local Netlify folder
 .netlify
-# Generated content
 /src/pages/awesome-swarm.mdx
 /static/openapi.yaml
 test
+/src/pages/awesome-swarm.mdx    
+*.zip
+*.csv
+
+

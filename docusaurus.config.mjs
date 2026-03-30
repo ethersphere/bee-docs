@@ -10,7 +10,6 @@ export default {
   baseUrl: '/', 
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
   onDuplicateRoutes: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'Swarm',
@@ -39,7 +38,12 @@ export default {
   ],
 
   themes: ['@docusaurus/theme-mermaid'],
-  markdown: { mermaid: true },
+  markdown: {
+    mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn'
+    }
+  },
 
   plugins: [
     'plugin-image-zoom',
@@ -103,6 +107,7 @@ export default {
           editUrl: 'https://github.com/ethersphere/docs.github.io/blob/master',
           remarkPlugins: [remarkMath], // Now using imported ESM modules
           rehypePlugins: [rehypeKatex],
+          routeBasePath: 'docs', // Serve the docs at the site's root
         },
         blog: { showReadingTime: false, editUrl: 'https://github.com/ethersphere/docs.github.io' },
         theme: { customCss: './src/css/custom.css' },
@@ -134,12 +139,12 @@ export default {
       items: [
         { 
           type: 'dropdown',
-          activeBasePath: 'docs/concepts',
+          activeBasePath: 'concepts',
           label: 'Concepts',
           position: 'left',
           className: 'inter',
           items: [
-            { to: 'docs/concepts/introduction', label: 'Introduction' },
+            { to: '/docs/concepts/introduction', label: 'Introduction' },
             { to: '/docs/concepts/what-is-swarm', label: 'What is Swarm?' },
             { to: '/docs/concepts/DISC/', label: 'DISC Storage' },
             { to: '/docs/concepts/incentives/overview', label: 'Incentives' },
@@ -149,57 +154,57 @@ export default {
         },
         {
           type: 'dropdown',
-          activeBasePath: 'docs/bee',
+          activeBasePath: 'bee',
           label: 'Bee Client',
           position: 'left',
           items: [
-            { to: 'docs/bee/installation/getting-started', label: 'Installation' },
-            { to: 'docs/bee/working-with-bee/introduction', label: 'Working With Bee' },
-            { to: 'docs/bee/bee-faq', label: 'Bee FAQ' },
+            { to: '/docs/bee/installation/getting-started', label: 'Installation' },
+            { to: '/docs/bee/working-with-bee/introduction', label: 'Working With Bee' },
+            { to: '/docs/bee/bee-faq', label: 'Bee FAQ' },
           ]
         },
         { 
           type: 'dropdown',
-          activeBasePath: 'docs/develop',
+          activeBasePath: 'develop',
           label: 'Develop',
           position: 'left',
           items: [
-            { to: 'docs/develop/introduction', label: 'Getting Started' },  
-            { to: 'docs/develop/introduction', label: 'Building on Swarm' },
-            { to: 'docs/develop/tools-and-features/introduction', label: 'Tools and Features' },
-            { to: 'docs/develop/contribute/introduction', label: 'Contribute to Bee Development' },
+            { to: '/docs/develop/introduction', label: 'Getting Started' },  
+            { to: '/docs/develop/introduction', label: 'Building on Swarm' },
+            { to: '/docs/develop/tools-and-features/introduction', label: 'Tools and Features' },
+            { to: '/docs/develop/contribute/introduction', label: 'Contribute to Bee Development' },
           ]
         },
         {
           type: 'dropdown',
-          activeBasePath: 'docs/desktop',
+          activeBasePath: 'desktop',
           label: 'Desktop App',
           position: 'left',
           items: [
-            { to: 'docs/desktop/introduction', label: 'Introduction' },
-            { to: 'docs/desktop/install', label: 'Install' },
-            { to: 'docs/desktop/configuration', label: 'Configuration' },
-            { to: 'docs/desktop/access-content', label: 'Access Content' },
-            { to: 'docs/desktop/postage-stamps', label: 'Postage Stamps' },
-            { to: 'docs/desktop/upload-content', label: 'Upload Content' },
-            { to: 'docs/desktop/backup-restore', label: 'Backup and Restore' },
-            { to: 'docs/desktop/publish-a-website', label: 'Publish a Static Website' },
-            { to: 'docs/desktop/start-a-blog', label: 'Start a Blog' }
+            { to: '/docs/desktop/introduction', label: 'Introduction' },
+            { to: '/docs/desktop/install', label: 'Install' },
+            { to: '/docs/desktop/configuration', label: 'Configuration' },
+            { to: '/docs/desktop/access-content', label: 'Access Content' },
+            { to: '/docs/desktop/postage-stamps', label: 'Postage Stamps' },
+            { to: '/docs/desktop/upload-content', label: 'Upload Content' },
+            { to: '/docs/desktop/backup-restore', label: 'Backup and Restore' },
+            { to: '/docs/desktop/publish-a-website', label: 'Publish a Static Website' },
+            { to: '/docs/desktop/start-a-blog', label: 'Start a Blog' }
           ]
         },
         { 
           type: 'dropdown',
-          activeBasePath: 'docs/references',
+          activeBasePath: 'references',
           label: 'References',
           position: 'left',
           items: [
-            { to: 'docs/references/smart-contracts', label: 'Smart Contracts' },
-            { to: 'docs/references/tokens', label: 'Tokens' },
+            { to: '/docs/references/smart-contracts', label: 'Smart Contracts' },
+            { to: '/docs/references/tokens', label: 'Tokens' },
             { to: '/docs/references/community', label: 'Community' },
-            { to: 'docs/references/glossary', label: 'Glossary' },
-            { to: 'docs/references/fair-data-society', label: 'Fair Data Society' },
-            { to: 'docs/references/awesome-list', label: 'Awesome Swarm' },
-            { to: 'docs/references/faq', label: 'FAQ' },
+            { to: '/docs/references/glossary', label: 'Glossary' },
+            { to: '/docs/references/fair-data-society', label: 'Fair Data Society' },
+            { to: '/docs/references/awesome-list', label: 'Awesome Swarm' },
+            { to: '/docs/references/faq', label: 'FAQ' },
           ]
         },
         { to: '/api/', activeBasePath: '/api/', label: 'API Specification', position: 'left' },
