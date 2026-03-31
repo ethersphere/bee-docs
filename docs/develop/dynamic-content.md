@@ -184,6 +184,9 @@ const writer = bee.makeFeedWriter(topic, pk);
 await writer.upload(batchId, upload.reference);
 console.log("Feed updated at index 0");
 
+// Brief pause to allow the node to index the feed chunk
+await new Promise((r) => setTimeout(r, 1000));
+
 // Read the latest reference from the feed
 const reader = bee.makeFeedReader(topic, owner);
 const result = await reader.downloadReference();
@@ -228,6 +231,9 @@ console.log("New content hash:", upload2.reference.toHex());
 // Update the feed — writer auto-discovers the next index
 await writer.upload(batchId, upload2.reference);
 console.log("Feed updated at index 1");
+
+// Brief pause to allow the node to index the feed chunk
+await new Promise((r) => setTimeout(r, 1000));
 
 // Reading the feed now returns the updated reference
 const result2 = await reader.downloadReference();
