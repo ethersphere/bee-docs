@@ -786,12 +786,12 @@ const cfg = JSON.parse(readFileSync("config.json", "utf-8"));
 const indexTopic = Topic.fromString(cfg.topics.index);
 const indexOwner = new EthAddress(cfg.admin.owner);
 const indexReader = bee.makeFeedReader(indexTopic, indexOwner);
-const indexResult = await indexReader.download();
+const indexResult = await indexReader.downloadReference();
 console.log("Index feed at index:", indexResult.feedIndex.toBigInt());
 
 // Download the authors.json manifest
 const authorsData = await bee.downloadFile(indexResult.reference);
-const authors = JSON.parse(new TextDecoder().decode(authorsData.data));
+const authors = JSON.parse(new TextDecoder().decode(authorsData.data.bytes));
 
 console.log(`\n${authors.length} authors in blog:\n`);
 
@@ -801,7 +801,7 @@ for (const author of authors) {
   const owner  = new EthAddress(author.owner);
   const reader = bee.makeFeedReader(topic, owner);
   try {
-    const result = await reader.download();
+    const result = await reader.downloadReference();
     console.log(`${author.name}`);
     console.log(`  Feed index: ${result.feedIndex.toBigInt()}`);
     console.log(`  URL: ${process.env.BEE_URL}/bzz/${author.feedManifest}/`);
@@ -814,7 +814,7 @@ for (const author of authors) {
 const homeTopic  = Topic.fromString(cfg.topics.home);
 const homeOwner  = new EthAddress(cfg.admin.owner);
 const homeReader = bee.makeFeedReader(homeTopic, homeOwner);
-const homeResult = await homeReader.download();
+const homeResult = await homeReader.downloadReference();
 console.log(`\nHomepage feed at index: ${homeResult.feedIndex.toBigInt()}`);
 console.log(`Homepage URL: ${process.env.BEE_URL}/bzz/${cfg.manifests.home}/`);
 ```
