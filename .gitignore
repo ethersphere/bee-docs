@@ -15,3 +15,5 @@ test
 *.csv
 # LLM Tools
 .claude
+# Link checker reports
+link-reports/

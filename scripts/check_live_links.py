@@ -38,7 +38,7 @@ from collections import defaultdict
 SITE_BASE    = "https://docs.ethswarm.org"
 SITEMAP_URL  = f"{SITE_BASE}/sitemap.xml"
 PROJECT_DIR  = Path(__file__).resolve().parent.parent
-REPORT_PATH  = PROJECT_DIR / ".claude/live_links_audit.md"
+REPORT_PATH  = PROJECT_DIR / "link-reports/live_links_audit.md"
 
 EXT_TIMEOUT = 15   # seconds per HTTP request
 EXT_THREADS = 8    # concurrent URL checkers
@@ -582,6 +582,7 @@ def write_report(url_to_sources, results, pages_crawled, total_links_found, stag
     lines.append(f"- **Total actionable:** {n_action}")
     lines.append("")
 
+    REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.write_text('\n'.join(lines), encoding='utf-8')
     print(f"\nReport written to: {REPORT_PATH}")
 

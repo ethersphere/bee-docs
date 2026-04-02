@@ -44,8 +44,8 @@ PROJECT_DIR = Path(__file__).resolve().parent.parent
 DOCS_DIR    = PROJECT_DIR / "docs"
 BUILD_DIR   = PROJECT_DIR / "build"
 STATIC_DIR  = PROJECT_DIR / "static"
-REPORT_PATH       = PROJECT_DIR / ".claude/dead_links_report.md"
-HUMAN_REPORT_PATH = PROJECT_DIR / ".claude/dead_links_audit.md"
+REPORT_PATH       = PROJECT_DIR / "link-reports/dead_links_report.md"
+HUMAN_REPORT_PATH = PROJECT_DIR / "link-reports/dead_links_audit.md"
 
 # The live domain — full-URL links using this domain are treated as internal
 # and checked against the local build directory instead of via HTTP.
@@ -962,6 +962,7 @@ def write_report(
             lines.append(f"| {item['count']} | `{url}` | {reason} | `{example}` |")
         lines.append("")
 
+    REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.write_text('\n'.join(lines), encoding='utf-8')
     print(f"Report written to: {REPORT_PATH}")
 
@@ -1178,6 +1179,7 @@ def write_human_report(
         lines.append(item)
     lines.append("")
 
+    HUMAN_REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     HUMAN_REPORT_PATH.write_text('\n'.join(lines), encoding='utf-8')
     print(f"Human report written to: {HUMAN_REPORT_PATH}")
 
