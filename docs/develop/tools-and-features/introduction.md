@@ -47,8 +47,8 @@ over the swarm.
 
 If you want your users to be able to access Swarm without running
 their own Bee node, for the time being you will need to make use of the [Gateway Proxy tool](https://github.com/ethersphere/gateway-proxy). Join us in the
-[#develop-on-swarm](https://discord.gg/C6dgqpxZkU) room in our
-[Discord Server](https://discord.gg/wdghaQsGq5) for more information on how to make your Swarm based applications accessible to everyone. 
+[#builders](https://discord.gg/8SMCfvm3kw) room in our
+[Discord Server](https://discord.gg/kHRyMNpw7t) for more information on how to make your Swarm based applications accessible to everyone. 
 
 
 

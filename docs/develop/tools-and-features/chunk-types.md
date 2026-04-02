@@ -35,4 +35,4 @@ more info read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.
 
 Although all chunks must satisfy the constraints of either being addressed by the BMT hash of their payload, or assigned by the owner of an Ethereum private key pair, so much more is possible. How else can you use the DISC to distribute and store your data? We're excited to see what you come up with! 💡
 
-Share your creations in the [#develop-on-swarm](https://discord.gg/C6dgqpxZkU) channel of our [Discord Server](https://discord.gg/wdghaQsGq5).
+Share your creations in the [#builders](https://discord.gg/8SMCfvm3kw) channel of our [Discord Server](https://discord.gg/kHRyMNpw7t).

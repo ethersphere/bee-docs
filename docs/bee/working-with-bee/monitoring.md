@@ -43,4 +43,4 @@ rate(bee_swap_cheques_sent[1d])
 rate(bee_swap_cheques_rejected[1d])
 ```
 
-Share your creations in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel of our Discord server!
+Share your creations in the [#node-operators](https://discord.gg/kHRyMNpw7t) channel of our Discord server!

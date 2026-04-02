@@ -92,7 +92,7 @@ curl -s http://localhost:1733/topology | jq .connected
 No connections yet? Right! Let's remedy that!
 
 :::info
-Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://stedolan.github.io/jq/).
+Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://jqlang.github.io/jq/).
 :::
 
 ### Making a network
@@ -119,7 +119,7 @@ curl localhost:1633/addresses | jq
 }
 ```
 
-Here, we get firstly the **overlay address** - this is the permanent address Swarm uses as your anonymous identity in the network and secondly, a list of all the [multiaddresses](https://docs.libp2p.io/reference/glossary/#multiaddr), which are physical network addresses at which you node can be found by peers.
+Here, we get firstly the **overlay address** - this is the permanent address Swarm uses as your anonymous identity in the network and secondly, a list of all the [multiaddresses](https://libp2p.io/docs/peers/#peer-ids-in-multiaddrs), which are physical network addresses at which you node can be found by peers.
 
 Note the addresses starting with an `/ip4`, followed by `127.0.0.1`, which is the `localhost` internal network in your computer. Now we can use this full address to be the bootnode of our second node so that when it starts up, it goes to this address and both nodes become peers of each other. Let's add this into our config_2.yaml file.
 

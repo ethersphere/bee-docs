@@ -106,7 +106,7 @@ Config: /etc/bee/bee.yaml
 
 Bee requires a Gnosis Chain RPC endpoint to function. By default this is expected to be found at ws://localhost:8546.
 
-Please see https://docs.ethswarm.org/docs/installation/install for more details on how to configure your node.
+Please see https://docs.ethswarm.org/docs/bee/installation/getting-started for more details on how to configure your node.
 
 After you finish configuration run 'sudo bee-get-addr' and fund your node with XDAI, and also XBZZ if so desired.
 
@@ -122,7 +122,7 @@ When Bee is installed using a package manager, a `bee.yaml` file containing the 
 While this package manager install guide uses the `bee.yaml` file for setting configuration options, there are  [several other available methods for setting node options](./../working-with-bee/configuration.md).
 :::
 
-After installation, you can check that the file was successfully generated and contains the [default configuration](https://github.com/ethersphere/bee/blob/master/packaging) for your system:
+After installation, you can check that the file was successfully generated and contains the [default configuration](https://github.com/ethersphere/bee/tree/master/packaging) for your system:
 
 <Tabs
 defaultValue="linux"
@@ -427,7 +427,7 @@ Success! The Bee API is now listening!
 Next, let's see if we have connected with any peers by sending a query to the Bee API (port 1633 by default - `localhost:1633`).
 
 :::info
-Here we are using the `jq` [utility](https://stedolan.github.io/jq/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
+Here we are using the `jq` [utility](https://jqlang.github.io/jq/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
 :::
 
 ```bash

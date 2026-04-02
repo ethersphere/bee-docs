@@ -16,8 +16,6 @@ Specifically, data is divided into **m** chunks, and **k** additional chunks are
 
 For an 8KB image, if we set **m = 2** and **k = 1**, we create 3 chunks (2 original + 1 redundant). As long as any 2 of these 3 chunks are available, we can reconstruct the original data. By increasing **k** to 4, we can tolerate the loss of up to 4 chunks while still recovering the original data.
 
-![Erasure Code Example](https://www.ethswarm.org/uploads/erasure-coding-01.png)
-
 ### Levels of Protection
 
 In Swarm's implementation of erasure coding, there are five levels of protection, None, Medium, Strong, Insane, and Paranoid. For each level, the **m** and **k** values have been adjusted in order to meet a certain level of data protection:

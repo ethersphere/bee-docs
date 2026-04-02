@@ -4,7 +4,7 @@ id: bee-api
 description: Comprehensive reference for Bee's HTTP API endpoints enabling programmatic access to node management uploads downloads and monitoring.
 ---
 
-The Bee HTTP API is the primary interface to a running Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
+The Bee HTTP API is the primary interface to a running Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
 
 The Bee API provides full access to all core functionalities of a Bee node, including uploading, downloading, staking, postage stamp batch purchasing and management, and node monitoring. By default, it runs on port `:1633`.
 
@@ -43,7 +43,7 @@ curl -s http://localhost:1633/peers | jq '.peers | length'
 Great! We can see that we are currently connected with 23 other nodes!
 
 :::info
-Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://stedolan.github.io/jq/).
+Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://jqlang.github.io/jq/).
 :::
 
 Let's review a handful of endpoints which will provide you with important information relevant to detecting and diagnosing problems with your nodes.

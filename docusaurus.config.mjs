@@ -84,6 +84,7 @@ export default {
            { to: '/docs/develop/act', from: '/docs/develop/access-the-swarm/act' },
            { to: '/docs/develop/ultra-light-nodes', from: '/docs/develop/access-the-swarm/ultra-light-nodes' },
            { to: '/docs/develop/introduction', from: '/docs/develop/access-the-swarm' },
+           { to: '/docs/concepts/DISC/erasure-coding', from: '/docs/develop/access-the-swarm/erasure-coding' },
         ],
       },
     ],
