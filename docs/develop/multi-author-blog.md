@@ -44,7 +44,7 @@ Each author publishes independently to their own feed. The admin reads from all 
 
 ## Feeds Referencing Feeds
 
-The Dynamic Note Board demonstrated regenerate-and-publish: upload content, point a feed to it, update the feed manifest URL. The multi-author blog adds a new dimension: **feeds as data structures**.
+The Simple Blog example in the [Dynamic Content guide](/docs/develop/dynamic-content#example-project--simple-blog) demonstrated regenerate-and-publish: upload content, point a feed to it, update the feed manifest URL. The multi-author blog adds a new dimension: **feeds as data structures**.
 
 When you store a JSON document inside a feed that contains the `topic` and `owner` of other feeds, you've created a directory of feeds — a linked network. The `authors.json` file is not just content; it's a data structure that enumerates other feeds and their stable references (feed manifest hashes).
 
