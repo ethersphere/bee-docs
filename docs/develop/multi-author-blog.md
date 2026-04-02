@@ -54,30 +54,6 @@ A feed manifest hash is a stable, permanent reference to a feed. You can store f
 
 This pattern scales. You can have hundreds of author feeds, all discovered through a single index feed. Add a new author by appending their entry to `authors.json` and re-uploading to the index feed. Readers polling the index automatically discover the new author — no out-of-band notification needed.
 
-## Example Scripts
-
-The complete project is in the [`multi-author-blog`](https://github.com/ethersphere/examples/tree/main/multi-author-blog) directory of the [examples](https://github.com/ethersphere/examples) repo:
-
-* [`init.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/init.js) — One-time setup: create all feeds and manifests
-* [`add-post.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-post.js) — Author publishes a new post
-* [`update-index.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/update-index.js) — Admin aggregates author feeds and updates homepage
-* [`read.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/read.js) — Read the feeds without private keys
-
-Clone the repo and set up the project:
-
-```bash
-git clone https://github.com/ethersphere/examples.git
-cd examples/multi-author-blog
-npm install
-```
-
-Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
-
-```bash
-BEE_URL=http://localhost:1633
-BATCH_ID=YOUR_BATCH_ID
-```
-
 ## Example Project — Multi-Author Blog
 
 This section builds a complete runnable project: a blog where multiple authors publish independently, and an admin maintains a homepage that aggregates all posts.
