@@ -1,0 +1,109 @@
+# Ethereum Swarm Documentation
+
+> Swarm is a decentralised storage and communication system built on the Ethereum blockchain, providing censorship-resistant infrastructure for storing data, hosting websites, and building applications.
+
+This is the documentation for [Swarm](https://www.ethswarm.org/) and its reference node implementation, [Bee](https://github.com/ethersphere/bee). Swarm splits data into 4 KB chunks, distributes them across a Kademlia-based network (DISC), and uses postage stamps (paid in xBZZ on Gnosis Chain) for storage incentives. Bee nodes expose an HTTP API on port 1633 (gateway) and 1635 (debug/admin). For the full unabridged documentation, see [llms-full.txt](https://docs.ethswarm.org/llms-full.txt).
+
+- [API Reference](https://docs.ethswarm.org/api/): Interactive OpenAPI documentation for all Bee endpoints
+- [OpenAPI spec (Swarm.yaml)](https://docs.ethswarm.org/openapi.yaml): Machine-readable API definition
+- [bee-js documentation](https://bee-js.ethswarm.org/): JavaScript/TypeScript SDK for Swarm
+- [The Book of Swarm](https://www.ethswarm.org/The-Book-of-Swarm.pdf): Comprehensive technical reference
+- [Swarm Whitepaper](https://www.ethswarm.org/swarm-whitepaper.pdf): Original design paper
+
+## Install and run a Bee node
+
+- [Getting Started](https://docs.ethswarm.org/docs/bee/installation/getting-started): Overview of node requirements and installation options
+- [Quickstart](https://docs.ethswarm.org/docs/bee/installation/quick-start): Fastest path to a running Bee node
+- [Shell Script Install](https://docs.ethswarm.org/docs/bee/installation/shell-script-install): Automated install script for Linux
+- [Docker Install](https://docs.ethswarm.org/docs/bee/installation/docker): Run Bee in a Docker container
+- [Package Manager Install](https://docs.ethswarm.org/docs/bee/installation/package-manager-install): Install via apt, brew, or rpm
+- [Build from Source](https://docs.ethswarm.org/docs/bee/installation/build-from-source): Compile Bee from the Go source code
+- [Set Target Neighborhood](https://docs.ethswarm.org/docs/bee/installation/set-target-neighborhood): Choose a network neighborhood for your node
+- [Connectivity](https://docs.ethswarm.org/docs/bee/installation/connectivity): NAT traversal, ports, and peer connectivity
+- [Fund Your Node](https://docs.ethswarm.org/docs/bee/installation/fund-your-node): Add xBZZ and xDAI to operate your node
+
+## Configure and operate a Bee node
+
+- [Configuration](https://docs.ethswarm.org/docs/bee/working-with-bee/configuration): All Bee config options (YAML, env vars, CLI flags)
+- [Node Types](https://docs.ethswarm.org/docs/bee/working-with-bee/node-types): Full, light, and ultra-light node modes
+- [Bee API](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api): Overview of the HTTP API endpoints
+- [Logging](https://docs.ethswarm.org/docs/bee/working-with-bee/logs-and-files): Log levels, file locations, and data directories
+- [Swarm CLI](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli): Command-line tool for interacting with Bee
+- [Staking](https://docs.ethswarm.org/docs/bee/working-with-bee/staking): Stake xBZZ to participate in storage incentives
+- [Cashing Out](https://docs.ethswarm.org/docs/bee/working-with-bee/cashing-out): Withdraw earnings from SWAP cheques
+- [Monitoring](https://docs.ethswarm.org/docs/bee/working-with-bee/monitoring): Prometheus metrics and Grafana dashboards
+- [Backups](https://docs.ethswarm.org/docs/bee/working-with-bee/backups): Back up keys, statestore, and stamps
+- [Upgrading Bee](https://docs.ethswarm.org/docs/bee/working-with-bee/upgrading-bee): Upgrade process and migration notes
+
+## Upload, download, and manage data
+
+- [Upload & Download](https://docs.ethswarm.org/docs/develop/upload-and-download): Store and retrieve files and directories via the Bee API
+- [Manage Files](https://docs.ethswarm.org/docs/develop/files): File operations, collections, and tags
+- [Postage Stamp Batches](https://docs.ethswarm.org/docs/develop/tools-and-features/buy-a-stamp-batch): Buy and manage stamps for uploads
+- [Store with Encryption](https://docs.ethswarm.org/docs/develop/tools-and-features/store-with-encryption): Client-side encryption for uploaded data
+- [Pinning](https://docs.ethswarm.org/docs/develop/tools-and-features/pinning): Pin content locally to prevent garbage collection
+- [Erasure Coding (usage)](https://docs.ethswarm.org/docs/develop/tools-and-features/erasure-coding): Add redundancy to uploads for reliability
+
+## Host websites on Swarm
+
+- [Host a Webpage](https://docs.ethswarm.org/docs/develop/host-your-website): Upload and serve static websites on Swarm
+- [Website Routing](https://docs.ethswarm.org/docs/develop/routing): Custom domains, ENS resolution, and routing configuration
+- [Run a Gateway](https://docs.ethswarm.org/docs/develop/gateway-proxy): Serve Swarm content over HTTP to regular browsers
+
+## Build applications on Swarm
+
+- [Bee JS](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-js): JavaScript/TypeScript SDK for Swarm
+- [Chunk Types](https://docs.ethswarm.org/docs/develop/tools-and-features/chunk-types): Content-addressed chunks (CAC) and single-owner chunks (SOC)
+- [Feeds](https://docs.ethswarm.org/docs/develop/tools-and-features/feeds): Mutable data references using single-owner chunks
+- [Manifests](https://docs.ethswarm.org/docs/develop/tools-and-features/manifests): Trie-based path mapping for file collections
+- [PSS Messaging (usage)](https://docs.ethswarm.org/docs/develop/tools-and-features/pss): Send messages through the Swarm network
+- [GSOC](https://docs.ethswarm.org/docs/develop/tools-and-features/gsoc): Graffiti SOC for pub/sub messaging patterns
+- [Add Access Control (usage)](https://docs.ethswarm.org/docs/develop/act): Encrypt content for specific recipients using ACT
+- [Gateway Proxy](https://docs.ethswarm.org/docs/develop/tools-and-features/gateway-proxy): Proxy for browser-based Swarm access
+- [Developer Mode](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-dev-mode): Run Bee without blockchain for local testing
+- [Starting a Private Network](https://docs.ethswarm.org/docs/develop/tools-and-features/starting-a-test-network): Multi-node test clusters
+- [Dynamic Content](https://docs.ethswarm.org/docs/develop/dynamic-content): Updatable content using feeds
+- [Ultra Light Nodes](https://docs.ethswarm.org/docs/develop/ultra-light-nodes): Minimal nodes for lightweight client use cases
+
+## Understand Swarm concepts
+
+- [What is Swarm?](https://docs.ethswarm.org/docs/concepts/what-is-swarm): Architecture overview and design goals
+- [DISC](https://docs.ethswarm.org/docs/concepts/DISC/): Distributed Immutable Store for Chunks
+- [Kademlia](https://docs.ethswarm.org/docs/concepts/DISC/kademlia): Distributed hash table and routing
+- [Neighborhoods](https://docs.ethswarm.org/docs/concepts/DISC/neighborhoods): Address space, proximity, and storage responsibility
+- [Erasure Coding (theory)](https://docs.ethswarm.org/docs/concepts/DISC/erasure-coding): Reed-Solomon redundancy for chunk reliability
+- [Incentives Overview](https://docs.ethswarm.org/docs/concepts/incentives/overview): Economic model for storage and bandwidth
+- [Redistribution Game](https://docs.ethswarm.org/docs/concepts/incentives/redistribution-game): Staking and rewards for storage providers
+- [Postage Stamps (theory)](https://docs.ethswarm.org/docs/concepts/incentives/postage-stamps): Prepaid storage with batch depth and amount
+- [PSS (theory)](https://docs.ethswarm.org/docs/concepts/pss): Postal Service over Swarm messaging layer
+- [Access Control (theory)](https://docs.ethswarm.org/docs/concepts/access-control): ACT-based encryption and grantee management
+
+## Reference
+
+- [Smart Contracts](https://docs.ethswarm.org/docs/references/smart-contracts): Deployed contract addresses and ABIs
+- [Tokens](https://docs.ethswarm.org/docs/references/tokens): BZZ, xBZZ, and bridging between chains
+- [Glossary](https://docs.ethswarm.org/docs/references/glossary): Key terms and definitions
+
+## Optional
+
+- [Desktop: Introduction](https://docs.ethswarm.org/docs/desktop/introduction): Swarm Desktop GUI app overview
+- [Desktop: Install](https://docs.ethswarm.org/docs/desktop/install): Install Swarm Desktop
+- [Desktop: Configuration](https://docs.ethswarm.org/docs/desktop/configuration): Configure the Desktop app
+- [Desktop: Access Content](https://docs.ethswarm.org/docs/desktop/access-content): Browse Swarm content via Desktop
+- [Desktop: Postage Stamps](https://docs.ethswarm.org/docs/desktop/postage-stamps): Manage stamps in the Desktop app
+- [Desktop: Upload Content](https://docs.ethswarm.org/docs/desktop/upload-content): Upload files through the Desktop app
+- [Desktop: Backup and Restore](https://docs.ethswarm.org/docs/desktop/backup-restore): Back up and restore Desktop data
+- [Desktop: Publish a Website](https://docs.ethswarm.org/docs/desktop/publish-a-website): Host a website using Swarm Desktop
+- [Desktop: Start a Blog](https://docs.ethswarm.org/docs/desktop/start-a-blog): Create a blog on Swarm
+- [Hive](https://docs.ethswarm.org/docs/bee/installation/hive): Run multiple Bee nodes together
+- [Uninstalling Bee](https://docs.ethswarm.org/docs/bee/working-with-bee/uninstalling-bee): Remove Bee and clean up its data
+- [Bcrypt Utility](https://docs.ethswarm.org/docs/bee/working-with-bee/bcrypt): Password hashing for API authentication
+- [Bee FAQ](https://docs.ethswarm.org/docs/bee/bee-faq): Common node operator questions
+- [Bandwidth Incentives](https://docs.ethswarm.org/docs/concepts/incentives/bandwidth-incentives): SWAP protocol for bandwidth accounting
+- [Price Oracle](https://docs.ethswarm.org/docs/concepts/incentives/price-oracle): On-chain price feed for storage costs
+- [Contributing](https://docs.ethswarm.org/docs/develop/contribute/introduction): How to contribute to Swarm
+- [Protocols](https://docs.ethswarm.org/docs/develop/contribute/protocols): Swarm protocol specifications
+- [Community](https://docs.ethswarm.org/docs/references/community): Official channels and resources
+- [Fair Data Society](https://docs.ethswarm.org/docs/references/fair-data-society): Fair data principles and ecosystem
+- [General FAQ](https://docs.ethswarm.org/docs/references/faq): Frequently asked questions about Swarm
+- [Awesome Swarm](https://docs.ethswarm.org/docs/references/awesome-list): Curated list of Swarm projects and tools

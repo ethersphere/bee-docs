@@ -1,9 +1,10 @@
 ---
 title: Set Target Neighborhood
 id: set-target-neighborhood
+description: Explains how to strategically assign node neighborhoods using Swarmscan data to optimize staking rewards and network resilience.
 ---
 
-In older versions of Bee, [neighborhood](/docs/concepts/DISC/neighborhoods) assignment was random by default. However, we can maximize a node's chances of winning xBZZ and also strengthen the resiliency of the network by strategically assigning neighborhoods to new nodes (see the [staking section](/docs/bee/working-with-bee/staking) for more details).
+In older versions of Bee, [neighborhood](./../../concepts/DISC/neighborhoods.md) assignment was random by default. However, we can maximize a node's chances of winning xBZZ and also strengthen the resiliency of the network by strategically assigning neighborhoods to new nodes (see the [staking section](./../working-with-bee/staking.md) for more details).
 
 Therefore the default Bee configuration now includes the `neighborhood-suggester` option, which is set by default to use the Swarmscan neighborhood suggester (`https://api.swarmscan.io/v1/network/neighborhoods/suggestion`). You can use an alternative suggester URL, but it must return a JSON response in the following format: `{"neighborhood":"101000110101"}`. However, we currently recommend using only the default suggester. 
 

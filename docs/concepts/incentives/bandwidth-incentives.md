@@ -1,6 +1,7 @@
 ---
 title: Bandwidth Incentives (SWAP)
 id: bandwidth-incentives
+description: Explains SWAP protocol for managing bandwidth resource exchange between nodes using cheques and off-chain accounting.
 ---
 
 The Swarm Accounting Protocol (SWAP) is a protocol used to manage the exchange of bandwidth resources between nodes. SWAP ensures that node operators collaborate in routing messages and data while protecting the network against frivolous use of bandwidth. The protocol combines off-chain peer-to-peer based accounting with on-chain settlement through the chequebook contract.

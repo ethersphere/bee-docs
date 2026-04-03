@@ -1,6 +1,7 @@
 ---
 title: Node Types
 id: node-types
+description: Compares full light and ultra-light node types with their features requirements and configuration for different use cases.
 ---
 
 
@@ -18,13 +19,13 @@ Bee can operate in different modes, each tailored to specific use cases:
 
 | Feature                                                                 | Full Node | Light Node | Ultra-Light Node |
 | ----------------------------------------------------------------------- | --------- | ---------- | ---------------- |
-| Free tier [downloads](/docs/develop/upload-and-download)                                                     | ✅        | ✅         | ✅               |
-| [Uploading](/docs/develop/upload-and-download) (Can purchase [postage stamp batches](/docs/develop/tools-and-features/buy-a-stamp-batch))                          | ✅        | ✅         | ❌               |
+| Free tier [downloads](./../../develop/upload-and-download.md)                                                     | ✅        | ✅         | ✅               |
+| [Uploading](./../../develop/upload-and-download.md) (Can purchase [postage stamp batches](./../../develop/tools-and-features/buy-a-stamp-batch.md))                          | ✅        | ✅         | ❌               |
 | Can exceed free tier downloads                                          | ✅        | ✅         | ❌               |
 | Storage sharing                                                         | ✅        | ❌         | ❌               |
-| [Storage incentives](/docs/bee/working-with-bee/staking/)               | ✅        | ❌         | ❌               |
-| [Bandwidth incentives](/docs/concepts/incentives/bandwidth-incentives/) | ✅        | ❌         | ❌               |
-| [PSS messaging](/docs/develop/tools-and-features/pss)                   | ✅        | ❌         | ❌               |
+| [Storage incentives](./staking.md)               | ✅        | ❌         | ❌               |
+| [Bandwidth incentives](./../../concepts/incentives/bandwidth-incentives.md) | ✅        | ❌         | ❌               |
+| [PSS messaging](./../../develop/tools-and-features/pss.md)                   | ✅        | ❌         | ❌               |
 
 
 ## Full Node
@@ -39,7 +40,7 @@ Full nodes are ideal for users who want to contribute to the Swarm network and e
 :::warning
 Full nodes require significant system resources, including storage and bandwidth. Additionally, they must be connected to the blockchain to participate in incentives. 
 
-If you intend to participate in the redistribution game to earn storage incentives, you should test your setup using [the `/rchash` endpoint](/docs/bee/working-with-bee/bee-api/#rchash) in order to ensure that your hardware is sufficient. Participation in the redistribution game requires a process with high computational and memory requirements, along with significant bandwidth usage.
+If you intend to participate in the redistribution game to earn storage incentives, you should test your setup using [the `/rchash` endpoint](./bee-api.md#rchash) in order to ensure that your hardware is sufficient. Participation in the redistribution game requires a process with high computational and memory requirements, along with significant bandwidth usage.
 :::
 
 Requires significant storage and processing power compared to other node types:
@@ -110,7 +111,7 @@ To run Bee as a light node, set:
 
 ## Ultra-Light Node
 
-Ultra-light nodes allow users to run a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](/docs/bee/working-with-bee/configuration) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
+Ultra-light nodes allow users to run a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](./configuration.md) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
 
 Ultra-light nodes are designed for users who want to access the Swarm network with minimal resource requirements. These nodes can download data within the free consumption threshold but do not support uploads and cannot earn xBZZ by participating in Swarm's incentives systems. 
 
@@ -119,7 +120,7 @@ As with light nodes, your node's download speed will be limited by your network 
 :::warning
 As with light nodes, ultra-light nodes do not benefit from plausible deniability when requesting data from the network.
 
-When running without a blockchain connection, [bandwidth incentive payments (SWAP)](/docs/concepts/incentives/bandwidth-incentives/) cannot be made, increasing the risk of being blocklisted by other peers for exceeding their free-tier download limits.
+When running without a blockchain connection, [bandwidth incentive payments (SWAP)](./../../concepts/incentives/bandwidth-incentives.md) cannot be made, increasing the risk of being blocklisted by other peers for exceeding their free-tier download limits.
 :::
 
 ### Recommended Specifications

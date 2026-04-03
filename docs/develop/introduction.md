@@ -5,6 +5,7 @@ sidebar_label: Start Building
 hide_table_of_contents: false
 pagination_prev: null
 pagination_next: null
+description: Overview of development on Swarm including APIs tools and use cases for building applications.
 ---
 
 # Building on Swarm
@@ -89,17 +90,16 @@ This is the go-to starting point for web3 developers who want to build with Swar
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
-      <!--
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/dynamic-content">
           <h3 class="hub-card__title">Dynamic Content</h3>
           <p class="hub-card__desc">
-            Build dynamic sites on Swarm by updating individual assets through feeds —
-            enabling granular updates, decentralized CDN patterns, and zero-downtime content changes.
+            Learn how to use feeds to create updatable content on Swarm — with a complete example project that builds a dynamic note board.
           </p>
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
+      <!--  
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/act">
           <h3 class="hub-card__title">Add Access Control</h3>

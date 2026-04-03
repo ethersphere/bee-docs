@@ -93,7 +93,8 @@ module.exports = {
         'develop/files',
         'develop/routing', 
         'develop/run-a-gateway',       
-        // 'develop/dynamic-content',
+        'develop/dynamic-content',
+        'develop/multi-author-blog',
         'develop/act',
       ],
       collapsed: false

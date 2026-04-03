@@ -1,6 +1,7 @@
 ---
 title: Price Oracle
 id: price-oracle
+description: Describes smart contract mechanism for dynamically adjusting postage stamp prices based on network utilization data.
 ---
 
 The job of the [oracle contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PriceOracle.sol) is to set the price of postage stamps. The oracle contract uses data from the [redistribution contract](https://github.com/ethersphere/storage-incentives/blob/master/src/Redistribution.sol) in order to set the appropriate price for postage stamps through the [postage stamp contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PostageStamp.sol). The data from the redistribution contract is used to calculate a "utilisation signal". This signal is an indicator of how much the Swarm network’s data storage capacity is being utilized. Specifically, the signal is a measure of data redundancy on the network. Redundancy is a measure of how many copies of each piece of data can be stored by the network. The protocol targets a fourfold level of data redundancy as a safe minimum. 

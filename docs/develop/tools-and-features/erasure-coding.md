@@ -1,11 +1,12 @@
 ---
 title: Erasure Coding
 id: erasure-coding
+description: Guide for using optional erasure coding to add redundancy and protection to uploaded data.
 ---
 
 import RedundancyCalc from '@site/src/components/RedundancyCalc.js';
 
-[Erasure coding](/docs/concepts/DISC/erasure-coding) is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
+[Erasure coding](./../../concepts/DISC/erasure-coding.md) is a powerful method for safeguarding data, offering robust protection against partial data loss. This technique involves dividing the original data into multiple fragments and generating extra parity fragments to introduce redundancy. A key advantage of erasure coding is its ability to recover the complete original data even if some fragments are lost. Additionally, it offers the flexibility to customize the level of data loss protection, making it a versatile and reliable choice for preserving data integrity on Swarm. For a more in depth dive into erasure coding on Swarm, see the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) from the Swarm research team. 
 
 ## Uploading With Erasure Coding
 
@@ -33,7 +34,7 @@ The accepted values for the `swarm-redundancy-level` header range from the defau
 | 3                | Insane    | 
 | 4                | Paranoid  | 
 
-For more details about each level of protection refer to the [erasure coding page](/docs/concepts/DISC/erasure-coding) in the learn section and refer to the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) for an even deeper dive.
+For more details about each level of protection refer to the [erasure coding page](./../../concepts/DISC/erasure-coding.md) in the learn section and refer to the [erasure coding paper](https://papers.ethswarm.org/p/erasure/) for an even deeper dive.
 
 ## Cost Calculator Widget
 
@@ -41,11 +42,11 @@ This calculator takes as input an amount of data and an erasure coding redundanc
 
 <RedundancyCalc />
 
-For more details of erasure coding costs, see [here](/docs/concepts/DISC/erasure-coding).
+For more details of erasure coding costs, see [here](./../../concepts/DISC/erasure-coding.md).
 
 ## Downloading Erasure Encoded Data
 
-For a downloader, the process for downloading a file which has been erasure encoded does not require any changes from the [normal download process](/docs/develop/upload-and-download). There are several options for adjusting the default behaviour for erasure encoded downloads, however there is no need to adjust them.
+For a downloader, the process for downloading a file which has been erasure encoded does not require any changes from the [normal download process](./../upload-and-download.md). There are several options for adjusting the default behaviour for erasure encoded downloads, however there is no need to adjust them.
 
 ### Default Download Behaviour
 
@@ -87,7 +88,7 @@ An example download request may look something like this:
 
 For this request, the redundancy strategy is set to 3 (RACE), which means that it will initiate a request for all data and parity chunks and continue to retrieve chunks until enough have been retrieved to reconstruct the source data. This is in contrast with the default strategy of DATA where only the data chunks will be retrieved.
 
-However, as noted above, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](/docs/develop/upload-and-download) without any additional options set):
+However, as noted above, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](./../upload-and-download.md) without any additional options set):
 
 
 ```bash
