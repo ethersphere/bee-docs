@@ -18,7 +18,7 @@ function FetchPriceComponent() {
   const [timeError, setTimeError] = useState('');
   const [volumeError, setVolumeError] = useState('');
 
-  // Effective volume tables from Gyuri's simulations (ν=16, logBucketSize 1-25, i.e. depth 17-41)
+  // Effective volume tables from Gyuri's simulations (ν=16, logBucketSize 1-18, i.e. depth 17-34)
   // These account for batch utilization (0.1% failure quantile), PAC overhead, and erasure coding overhead.
   // label: human-readable effective volume, gb: value in GB for comparison
   const depthToEffectiveVolume = {
@@ -42,13 +42,6 @@ function FetchPriceComponent() {
         32: { label: "17.07 TB", gb: 17479.68 },
         33: { label: "34.36 TB", gb: 35184.64 },
         34: { label: "69.04 TB", gb: 70696.96 },
-        35: { label: "138.54 TB", gb: 141864.96 },
-        36: { label: "277.72 TB", gb: 284385.28 },
-        37: { label: "556.35 TB", gb: 569702.40 },
-        38: { label: "1.11 PB", gb: 1163919.36 },
-        39: { label: "2.23 PB", gb: 2338324.48 },
-        40: { label: "4.46 PB", gb: 4676648.96 },
-        41: { label: "8.93 PB", gb: 9363783.68 },
       },
       medium: {
         17: { label: "41.56 kB", gb: 0.000040 },
@@ -69,13 +62,6 @@ function FetchPriceComponent() {
         32: { label: "15.87 TB", gb: 16250.88 },
         33: { label: "31.94 TB", gb: 32706.56 },
         34: { label: "64.19 TB", gb: 65730.56 },
-        35: { label: "128.80 TB", gb: 131891.20 },
-        36: { label: "258.19 TB", gb: 264386.56 },
-        37: { label: "517.23 TB", gb: 529643.52 },
-        38: { label: "1.04 PB", gb: 1090519.04 },
-        39: { label: "2.07 PB", gb: 2170552.32 },
-        40: { label: "4.15 PB", gb: 4351590.40 },
-        41: { label: "8.30 PB", gb: 8703180.80 },
       },
       strong: {
         17: { label: "37.37 kB", gb: 0.000036 },
@@ -96,13 +82,6 @@ function FetchPriceComponent() {
         32: { label: "14.27 TB", gb: 14612.48 },
         33: { label: "28.72 TB", gb: 29409.28 },
         34: { label: "57.71 TB", gb: 59095.04 },
-        35: { label: "115.81 TB", gb: 118589.44 },
-        36: { label: "232.16 TB", gb: 237731.84 },
-        37: { label: "465.07 TB", gb: 476231.68 },
-        38: { label: "931.23 TB", gb: 953579.52 },
-        39: { label: "1.86 PB", gb: 1950351.36 },
-        40: { label: "3.73 PB", gb: 3911188.48 },
-        41: { label: "7.46 PB", gb: 7822376.96 },
       },
       insane: {
         17: { label: "33.88 kB", gb: 0.000032 },
@@ -123,13 +102,6 @@ function FetchPriceComponent() {
         32: { label: "12.93 TB", gb: 13240.32 },
         33: { label: "26.04 TB", gb: 26664.96 },
         34: { label: "52.32 TB", gb: 53575.68 },
-        35: { label: "104.99 TB", gb: 107509.76 },
-        36: { label: "210.46 TB", gb: 215511.04 },
-        37: { label: "421.61 TB", gb: 431728.64 },
-        38: { label: "844.20 TB", gb: 864460.80 },
-        39: { label: "1.69 PB", gb: 1772093.44 },
-        40: { label: "3.38 PB", gb: 3544186.88 },
-        41: { label: "6.77 PB", gb: 7098859.52 },
       },
       paranoid: {
         17: { label: "13.27 kB", gb: 0.000013 },
@@ -150,13 +122,6 @@ function FetchPriceComponent() {
         32: { label: "5.07 TB", gb: 5191.68 },
         33: { label: "10.20 TB", gb: 10444.80 },
         34: { label: "20.50 TB", gb: 20992.00 },
-        35: { label: "41.13 TB", gb: 42117.12 },
-        36: { label: "82.45 TB", gb: 84428.80 },
-        37: { label: "165.17 TB", gb: 169134.08 },
-        38: { label: "330.72 TB", gb: 338657.28 },
-        39: { label: "661.97 TB", gb: 677857.28 },
-        40: { label: "1.32 PB", gb: 1384120.32 },
-        41: { label: "2.65 PB", gb: 2778726.40 },
       },
     },
     encrypted: {
@@ -179,13 +144,6 @@ function FetchPriceComponent() {
         32: { label: "16.93 TB", gb: 17336.32 },
         33: { label: "34.09 TB", gb: 34908.16 },
         34: { label: "68.50 TB", gb: 70144.00 },
-        35: { label: "137.45 TB", gb: 140748.80 },
-        36: { label: "275.53 TB", gb: 282142.72 },
-        37: { label: "551.97 TB", gb: 565217.28 },
-        38: { label: "1.11 PB", gb: 1163919.36 },
-        39: { label: "2.21 PB", gb: 2317352.96 },
-        40: { label: "4.43 PB", gb: 4645191.68 },
-        41: { label: "8.86 PB", gb: 9290383.36 },
       },
       medium: {
         17: { label: "40.89 kB", gb: 0.000039 },
@@ -206,13 +164,6 @@ function FetchPriceComponent() {
         32: { label: "15.61 TB", gb: 15984.64 },
         33: { label: "31.43 TB", gb: 32184.32 },
         34: { label: "63.15 TB", gb: 64665.60 },
-        35: { label: "126.71 TB", gb: 129751.04 },
-        36: { label: "254.01 TB", gb: 260106.24 },
-        37: { label: "508.85 TB", gb: 521062.40 },
-        38: { label: "1.02 PB", gb: 1069547.52 },
-        39: { label: "2.04 PB", gb: 2139095.04 },
-        40: { label: "4.08 PB", gb: 4278190.08 },
-        41: { label: "8.17 PB", gb: 8566865.92 },
       },
       strong: {
         17: { label: "36.73 kB", gb: 0.000035 },
@@ -233,13 +184,6 @@ function FetchPriceComponent() {
         32: { label: "14.02 TB", gb: 14356.48 },
         33: { label: "28.23 TB", gb: 28907.52 },
         34: { label: "56.72 TB", gb: 58081.28 },
-        35: { label: "113.82 TB", gb: 116551.68 },
-        36: { label: "228.18 TB", gb: 233656.32 },
-        37: { label: "457.10 TB", gb: 468070.40 },
-        38: { label: "915.26 TB", gb: 937226.24 },
-        39: { label: "1.83 PB", gb: 1918894.08 },
-        40: { label: "3.67 PB", gb: 3848273.92 },
-        41: { label: "7.34 PB", gb: 7696547.84 },
       },
       insane: {
         17: { label: "33.26 kB", gb: 0.000032 },
@@ -260,13 +204,6 @@ function FetchPriceComponent() {
         32: { label: "12.70 TB", gb: 13004.80 },
         33: { label: "25.57 TB", gb: 26183.68 },
         34: { label: "51.37 TB", gb: 52602.88 },
-        35: { label: "103.08 TB", gb: 105553.92 },
-        36: { label: "206.65 TB", gb: 211609.60 },
-        37: { label: "413.98 TB", gb: 423915.52 },
-        38: { label: "828.91 TB", gb: 848803.84 },
-        39: { label: "1.66 PB", gb: 1740636.16 },
-        40: { label: "3.32 PB", gb: 3481272.32 },
-        41: { label: "6.64 PB", gb: 6962544.64 },
       },
       paranoid: {
         17: { label: "13.17 kB", gb: 0.000013 },
@@ -287,13 +224,6 @@ function FetchPriceComponent() {
         32: { label: "5.03 TB", gb: 5150.72 },
         33: { label: "10.12 TB", gb: 10362.88 },
         34: { label: "20.34 TB", gb: 20828.16 },
-        35: { label: "40.80 TB", gb: 41779.20 },
-        36: { label: "81.80 TB", gb: 83763.20 },
-        37: { label: "163.87 TB", gb: 167802.88 },
-        38: { label: "328.11 TB", gb: 335984.64 },
-        39: { label: "656.76 TB", gb: 672522.24 },
-        40: { label: "1.31 PB", gb: 1373634.56 },
-        41: { label: "2.63 PB", gb: 2757754.88 },
       },
     },
   };
@@ -370,7 +300,7 @@ function FetchPriceComponent() {
 
     // Find the smallest depth whose effective volume (in GB) >= requested volume
     let foundDepth = null;
-    for (let d = 17; d <= 41; d++) {
+    for (let d = 17; d <= 34; d++) {
       if (table[d] && table[d].gb >= gigabytes) {
         foundDepth = d;
         break;
@@ -397,7 +327,7 @@ function FetchPriceComponent() {
   };
 
   const calculateMinimumDepth = (gigabytes) => {
-    for (let d = 17; d <= 41; d++) {
+    for (let d = 17; d <= 34; d++) {
       if (gigabytes <= Math.pow(2, 12 + d) / (1024 ** 3)) {
         return d;
       }
@@ -447,9 +377,9 @@ function FetchPriceComponent() {
 
     // Check against max effective volume for the selected settings
     const table = getEffectiveVolumeTable();
-    const maxGb = table[41].gb;
+    const maxGb = table[34].gb;
     if (gigabytes > maxGb) {
-      setVolumeError(`Volume exceeds maximum effective volume (${table[41].label}) for the selected encryption and erasure settings.`);
+      setVolumeError(`Volume exceeds maximum effective volume (${table[34].label}) for the selected encryption and erasure settings.`);
       return 0;
     }
     return gigabytes;
