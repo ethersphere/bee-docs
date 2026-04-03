@@ -62,6 +62,7 @@ The complete project is in the [`multi-author-blog`](https://github.com/ethersph
 * [`init.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/init.js) — One-time setup: create all feeds and manifests
 * [`add-post.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-post.js) — Author publishes a new post
 * [`update-index.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/update-index.js) — Admin aggregates author feeds and updates homepage
+* [`add-author.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-author.js) — Add a new author to the blog
 * [`read.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/read.js) — Read the feeds without private keys
 
 Clone the repo and set up the project:
@@ -896,41 +897,20 @@ Extending the system with a new author is straightforward. The new author gets t
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
 
-Generate a key for the new author, upload their initial page, create their feed manifest, and append to `authors.json`:
+The [`add-author.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-author.js) script from the examples repo handles everything in one step. From the project directory (after running `init.js`):
 
-1. Add the new author to your `config.json` (or generate a new key using `makeKey()`)
-2. Create a new author feed topic
-3. Upload their initial empty page
-4. Create their feed manifest
-5. Read `authors.json`, append the new entry, re-upload
-6. Re-run `update-index.js` to refresh the homepage
-
-```js
-// Example: Adding Charlie
-const charlieKey = makeKey();
-const charlieOwner = charlieKey.publicKey().address();
-const charlieTopic = Topic.fromString("charlie-posts");
-
-// Upload initial page, create feed and manifest (same pattern as init.js)
-// ...
-
-// Update authors.json
-const authors = JSON.parse(readFileSync("authors.json", "utf-8"));
-authors.push({
-  name: "Charlie",
-  topic: "charlie-posts",
-  owner: charlieOwner.toHex(),
-  feedManifest: charlieManifest.toHex(),
-});
-writeFileSync("authors.json", JSON.stringify(authors, null, 2));
-
-// Re-upload to the index feed
-const indexUpload = await bee.uploadFile(batchId, JSON.stringify(authors), "authors.json", {
-  contentType: "application/json",
-});
-const indexWriter = bee.makeFeedWriter(indexTopic, adminKey);
-await indexWriter.upload(batchId, indexUpload.reference);
+```bash
+node add-author.js charlie
 ```
+
+This will:
+1. Generate a new private key for Charlie
+2. Upload an initial empty blog page for them
+3. Create their feed and feed manifest
+4. Append their entry to `authors.json` and re-upload to the index feed
+5. Update `config.json` so Charlie can use `add-post.js`
+
+Then run `update-index.js` to refresh the homepage with the new author.
 
 </TabItem>
 <TabItem value="swarm-cli" label="swarm-cli">
