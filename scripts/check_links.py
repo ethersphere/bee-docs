@@ -891,15 +891,14 @@ def write_report(
     if not all_404:
         lines.append("_No external 404s found._\n")
     else:
-        lines.append("| URL | Replacement URL | Notes | Instances (Link Text — File) |")
-        lines.append("|---|---|---|---|")
+        lines.append("| URL | Notes | Instances (Link Text — File) |")
+        lines.append("|---|---|---|")
         for url, res in sorted(all_404.items()):
             instances = _fmt_instances(ext_url_to_src.get(url, []))
             code_str  = f"HTTP {res['http_code']}" if res['http_code'] else (res['error_msg'] or '')
             if res['status'] == EXT_STATUS_INTERNAL:
                 code_str = "Not found in local build"
-            repl = _repl(url, res)
-            lines.append(f"| `{url[:100]}` | {repl} | {code_str} | {instances} |")
+            lines.append(f"| `{url[:100]}` | {code_str} | {instances} |")
         lines.append("")
 
     # ── Section 3: Down / refused ──
@@ -909,13 +908,12 @@ def write_report(
     if not ext_down:
         lines.append("_No unreachable external links._\n")
     else:
-        lines.append("| URL | Replacement URL | Error | Instances (Link Text — File) |")
-        lines.append("|---|---|---|---|")
+        lines.append("| URL | Error | Instances (Link Text — File) |")
+        lines.append("|---|---|---|")
         for url, res in sorted(ext_down.items()):
             instances = _fmt_instances(ext_url_to_src.get(url, []))
             err       = res.get('error_msg', '') or ''
-            repl      = _repl(url, res)
-            lines.append(f"| `{url[:100]}` | {repl} | {err} | {instances} |")
+            lines.append(f"| `{url[:100]}` | {err} | {instances} |")
         lines.append("")
 
     # ── Section 4: Stale redirects ──
@@ -925,12 +923,11 @@ def write_report(
     if not ext_redirect:
         lines.append("_No stale redirects found._\n")
     else:
-        lines.append("| Original URL | Redirects To | Instances (Link Text — File) |")
-        lines.append("|---|---|---|")
+        lines.append("| Original URL | Instances (Link Text — File) |")
+        lines.append("|---|---|")
         for url, res in sorted(ext_redirect.items()):
             instances = _fmt_instances(ext_url_to_src.get(url, []))
-            repl      = _repl(url, res)
-            lines.append(f"| `{url[:80]}` | `{repl[:80]}` | {instances} |")
+            lines.append(f"| `{url[:80]}` | {instances} |")
         lines.append("")
 
     # ── Section 5: Errors / timeouts ──
@@ -1067,26 +1064,25 @@ def write_human_report(
     if not md_broken and not self_404 and not real_404:
         lines.append("_No dead links found._\n")
     else:
-        lines.append("| Dead Link | Replacement URL | Status | Instances (Link Text — File) |")
-        lines.append("|---|---|---|---|")
+        lines.append("| Dead Link | Status | Instances (Link Text — File) |")
+        lines.append("|---|---|---|")
 
         # Broken internal links (wrong file path or missing anchor)
         for item in md_broken:
             url       = item['link_url'].replace('|', '\\|')
             reason    = item['reason'].replace('|', '\\|')
             instances = _fmt_instances([(item['source'], item.get('link_text', ''))])
-            lines.append(f"| `{url}` | | **Broken** — {reason} | {instances} |")
+            lines.append(f"| `{url}` | **Broken** — {reason} | {instances} |")
 
         # Self-site 404s (old docs.ethswarm.org paths not in local build)
         for url, _res in sorted(self_404.items()):
             instances = _fmt_instances(ext_url_to_src.get(url, []))
-            lines.append(f"| {url} | | **404** — not found in local build (old path?) | {instances} |")
+            lines.append(f"| {url} | **404** — not found in local build (old path?) | {instances} |")
 
         # External 404s
         for url, res in sorted(real_404.items()):
             instances = _fmt_instances(ext_url_to_src.get(url, []))
-            repl = _repl(url, res)
-            lines.append(f"| {url} | {repl} | **404** | {instances} |")
+            lines.append(f"| {url} | **404** | {instances} |")
 
     lines.append("")
 
@@ -1097,12 +1093,11 @@ def write_human_report(
     if not ext_down:
         lines.append("_No unreachable links._\n")
     else:
-        lines.append("| Dead Link | Replacement URL | Status | Instances (Link Text — File) |")
-        lines.append("|---|---|---|---|")
+        lines.append("| Dead Link | Status | Instances (Link Text — File) |")
+        lines.append("|---|---|---|")
         for url, res in sorted(ext_down.items()):
             instances = _fmt_instances(ext_url_to_src.get(url, []))
             err       = res.get('error_msg') or 'connection failed'
-            repl      = _repl(url, res)
             # Simplify error messages
             if 'DNS' in err or 'getaddrinfo' in err.lower():
                 status = "**DNS failure** — domain not found"
@@ -1114,7 +1109,7 @@ def write_human_report(
                 status = "**SSL error** — handshake failure"
             else:
                 status = f"**Down** — {err[:80]}"
-            lines.append(f"| {url} | {repl} | {status} | {instances} |")
+            lines.append(f"| {url} | {status} | {instances} |")
 
     lines.append("")
 
@@ -1125,12 +1120,11 @@ def write_human_report(
     if not ext_redirect:
         lines.append("_No stale redirects._\n")
     else:
-        lines.append("| Old Link | Redirects To | Instances (Link Text — File) |")
-        lines.append("|---|---|---|")
+        lines.append("| Old Link | Instances (Link Text — File) |")
+        lines.append("|---|---|")
         for url, res in sorted(ext_redirect.items()):
             instances = _fmt_instances(ext_url_to_src.get(url, []))
-            repl = _repl(url, res)
-            lines.append(f"| {url} | {repl} | {instances} |")
+            lines.append(f"| {url} | {instances} |")
 
     lines.append("")
 

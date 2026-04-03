@@ -516,13 +516,12 @@ def write_report(url_to_sources, results, pages_crawled, total_links_found, stag
     lines.append("---\n")
     lines.append("## Dead Links (404)\n")
     if broken_404:
-        lines.append("| Dead Link | Replacement URL | Status | Instances (Link Text — Source Page) |")
-        lines.append("|---|---|---|---|")
+        lines.append("| Dead Link | Status | Instances (Link Text — Source Page) |")
+        lines.append("|---|---|---|")
         for url, res in sorted(broken_404.items()):
             instances = fmt_instances(url)
             err       = res.get('error_msg') or 'HTTP 404'
-            repl      = _repl(url, res)
-            lines.append(f"| {url} | {repl} | **Broken** — {err} | {instances} |")
+            lines.append(f"| {url} | **Broken** — {err} | {instances} |")
     else:
         lines.append("_No 404s found._")
     lines.append("")
@@ -531,13 +530,12 @@ def write_report(url_to_sources, results, pages_crawled, total_links_found, stag
     lines.append("---\n")
     lines.append("## Forbidden / Down\n")
     if broken_down:
-        lines.append("| Dead Link | Replacement URL | Status | Instances (Link Text — Source Page) |")
-        lines.append("|---|---|---|---|")
+        lines.append("| Dead Link | Status | Instances (Link Text — Source Page) |")
+        lines.append("|---|---|---|")
         for url, res in sorted(broken_down.items()):
             instances = fmt_instances(url)
             err       = res.get('error_msg') or 'Connection error'
-            repl      = _repl(url, res)
-            lines.append(f"| {url} | {repl} | **{err}** | {instances} |")
+            lines.append(f"| {url} | **{err}** | {instances} |")
     else:
         lines.append("_No down/refused links found._")
     lines.append("")
@@ -546,12 +544,11 @@ def write_report(url_to_sources, results, pages_crawled, total_links_found, stag
     lines.append("---\n")
     lines.append("## Stale Redirects (Should Update)\n")
     if redirects:
-        lines.append("| Old Link | Redirects To | Instances (Link Text — Source Page) |")
-        lines.append("|---|---|---|")
+        lines.append("| Old Link | Instances (Link Text — Source Page) |")
+        lines.append("|---|---|")
         for url, res in sorted(redirects.items()):
             instances = fmt_instances(url)
-            repl      = _repl(url, res)
-            lines.append(f"| {url} | {repl} | {instances} |")
+            lines.append(f"| {url} | {instances} |")
     else:
         lines.append("_No stale redirects found._")
     lines.append("")
