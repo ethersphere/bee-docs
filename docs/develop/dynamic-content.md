@@ -184,9 +184,10 @@ const writer = bee.makeFeedWriter(topic, pk);
 await writer.upload(batchId, upload.reference);
 console.log("Feed updated at index 0");
 
-// Read the latest reference from the feed
+
+// Read the latest reference from the feed (retries until indexed)
 const reader = bee.makeFeedReader(topic, owner);
-const result = await reader.downloadReference();
+const result = await retryFeedRead(() => reader.downloadReference());
 console.log("Latest reference:", result.reference.toHex());
 console.log("Current index:", result.feedIndex.toBigInt());
 ```
@@ -207,7 +208,7 @@ swarm-cli feed print \
   --topic-string notes
 ```
 
-The `feed print` command displays the current feed state, including the Swarm reference it points to and the feed manifest URL.
+The `feed print` command displays the current feed state — topic hash, number of updates, and the feed manifest URL.
 
 </TabItem>
 </Tabs>
@@ -229,8 +230,12 @@ console.log("New content hash:", upload2.reference.toHex());
 await writer.upload(batchId, upload2.reference);
 console.log("Feed updated at index 1");
 
-// Reading the feed now returns the updated reference
-const result2 = await reader.downloadReference();
+
+// Pass minFeedIndex so the retry waits for the new entry, not just any entry.
+const result2 = await retryFeedRead(
+  () => reader.downloadReference(),
+  result.feedIndex.toBigInt() + 1n
+);
 console.log("Latest reference:", result2.reference.toHex());
 console.log("Current index:", result2.feedIndex.toBigInt()); // 1n
 ```
@@ -801,7 +806,7 @@ const topic = Topic.fromString(cfg.topic);
 const owner = new EthAddress(cfg.owner);
 const reader = bee.makeFeedReader(topic, owner);
 
-const result = await reader.downloadReference();
+const result = await retryFeedRead(() => reader.downloadReference());
 console.log("Latest content reference:", result.reference.toHex());
 console.log("Feed index:", result.feedIndex.toBigInt());
 console.log("View:", `${process.env.BEE_URL}/bzz/${cfg.manifest}/`);
