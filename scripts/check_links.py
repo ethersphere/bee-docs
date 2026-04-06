@@ -68,6 +68,12 @@ EXTERNAL_SCHEMES = ("http://", "https://")
 # Schemes to ignore entirely
 IGNORE_SCHEMES   = ("mailto:", "javascript:", "tel:", "ftp:", "data:")
 
+# Internal path prefixes where anchor checking is skipped (JS-rendered pages)
+SKIP_ANCHOR_PATHS = (
+    "/api/",
+    "/api#",
+)
+
 # Hostnames/prefixes to skip — example/placeholder URLs in documentation
 IGNORE_HOSTS = (
     "localhost",
@@ -83,6 +89,7 @@ IGNORE_HOSTS = (
 # ─────────────────────────────────────────────
 
 def strip_code_blocks(content):
+    content = re.sub(r'<!--[\s\S]*?-->', '', content)   # HTML comments
     content = re.sub(r'```[^\n]*\n[\s\S]*?```', '', content)
     content = re.sub(r'~~~[^\n]*\n[\s\S]*?~~~', '', content)
     content = re.sub(r'`[^`\n]+`', '', content)
@@ -649,6 +656,8 @@ def check_markdown_files(check_external=True):
                     continue
 
             # ── Check anchor in rendered HTML ──
+            if anchor and any(url.startswith(p) for p in SKIP_ANCHOR_PATHS):
+                continue  # JS-rendered page — anchor not in static HTML
             if anchor and target_html and target_html.exists():
                 key = str(target_html)
                 if key not in html_id_cache:
