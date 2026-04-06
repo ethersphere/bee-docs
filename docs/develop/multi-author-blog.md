@@ -44,7 +44,7 @@ Each author publishes independently to their own feed. The admin reads from all 
 
 ## Feeds Referencing Feeds
 
-The Dynamic Note Board demonstrated regenerate-and-publish: upload content, point a feed to it, update the feed manifest URL. The multi-author blog adds a new dimension: **feeds as data structures**.
+The Simple Blog example in the [Dynamic Content guide](/docs/develop/dynamic-content#example-project--simple-blog) demonstrated regenerate-and-publish: upload content, point a feed to it, update the feed manifest URL. The multi-author blog adds a new dimension: **feeds as data structures**.
 
 When you store a JSON document inside a feed that contains the `topic` and `owner` of other feeds, you've created a directory of feeds — a linked network. The `authors.json` file is not just content; it's a data structure that enumerates other feeds and their stable references (feed manifest hashes).
 
@@ -53,6 +53,32 @@ A feed manifest hash is a stable, permanent reference to a feed. You can store f
 :::
 
 This pattern scales. You can have hundreds of author feeds, all discovered through a single index feed. Add a new author by appending their entry to `authors.json` and re-uploading to the index feed. Readers polling the index automatically discover the new author — no out-of-band notification needed.
+
+
+## Example Scripts
+
+The complete project is in the [`multi-author-blog`](https://github.com/ethersphere/examples/tree/main/multi-author-blog) directory of the [examples](https://github.com/ethersphere/examples) repo:
+
+* [`init.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/init.js) — One-time setup: create all feeds and manifests
+* [`add-post.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-post.js) — Author publishes a new post
+* [`update-index.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/update-index.js) — Admin aggregates author feeds and updates homepage
+* [`add-author.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-author.js) — Add a new author to the blog
+* [`read.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/read.js) — Read the feeds without private keys
+
+Clone the repo and set up the project:
+
+```bash
+git clone https://github.com/ethersphere/examples.git
+cd examples/multi-author-blog
+npm install
+```
+
+Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
+
+```bash
+BEE_URL=http://localhost:1633
+BATCH_ID=YOUR_BATCH_ID
+```
 
 ## Example Project — Multi-Author Blog
 
@@ -786,12 +812,12 @@ const cfg = JSON.parse(readFileSync("config.json", "utf-8"));
 const indexTopic = Topic.fromString(cfg.topics.index);
 const indexOwner = new EthAddress(cfg.admin.owner);
 const indexReader = bee.makeFeedReader(indexTopic, indexOwner);
-const indexResult = await indexReader.download();
+const indexResult = await indexReader.downloadReference();
 console.log("Index feed at index:", indexResult.feedIndex.toBigInt());
 
 // Download the authors.json manifest
 const authorsData = await bee.downloadFile(indexResult.reference);
-const authors = JSON.parse(new TextDecoder().decode(authorsData.data));
+const authors = JSON.parse(authorsData.data.toUtf8());
 
 console.log(`\n${authors.length} authors in blog:\n`);
 
@@ -801,7 +827,7 @@ for (const author of authors) {
   const owner  = new EthAddress(author.owner);
   const reader = bee.makeFeedReader(topic, owner);
   try {
-    const result = await reader.download();
+    const result = await reader.downloadReference();
     console.log(`${author.name}`);
     console.log(`  Feed index: ${result.feedIndex.toBigInt()}`);
     console.log(`  URL: ${process.env.BEE_URL}/bzz/${author.feedManifest}/`);
@@ -814,7 +840,7 @@ for (const author of authors) {
 const homeTopic  = Topic.fromString(cfg.topics.home);
 const homeOwner  = new EthAddress(cfg.admin.owner);
 const homeReader = bee.makeFeedReader(homeTopic, homeOwner);
-const homeResult = await homeReader.download();
+const homeResult = await homeReader.downloadReference();
 console.log(`\nHomepage feed at index: ${homeResult.feedIndex.toBigInt()}`);
 console.log(`Homepage URL: ${process.env.BEE_URL}/bzz/${cfg.manifests.home}/`);
 ```
@@ -871,41 +897,20 @@ Extending the system with a new author is straightforward. The new author gets t
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
 
-Generate a key for the new author, upload their initial page, create their feed manifest, and append to `authors.json`:
+The [`add-author.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-author.js) script from the examples repo handles everything in one step. From the project directory (after running `init.js`):
 
-1. Add the new author to your `config.json` (or generate a new key using `makeKey()`)
-2. Create a new author feed topic
-3. Upload their initial empty page
-4. Create their feed manifest
-5. Read `authors.json`, append the new entry, re-upload
-6. Re-run `update-index.js` to refresh the homepage
-
-```js
-// Example: Adding Charlie
-const charlieKey = makeKey();
-const charlieOwner = charlieKey.publicKey().address();
-const charlieTopic = Topic.fromString("charlie-posts");
-
-// Upload initial page, create feed and manifest (same pattern as init.js)
-// ...
-
-// Update authors.json
-const authors = JSON.parse(readFileSync("authors.json", "utf-8"));
-authors.push({
-  name: "Charlie",
-  topic: "charlie-posts",
-  owner: charlieOwner.toHex(),
-  feedManifest: charlieManifest.toHex(),
-});
-writeFileSync("authors.json", JSON.stringify(authors, null, 2));
-
-// Re-upload to the index feed
-const indexUpload = await bee.uploadFile(batchId, JSON.stringify(authors), "authors.json", {
-  contentType: "application/json",
-});
-const indexWriter = bee.makeFeedWriter(indexTopic, adminKey);
-await indexWriter.upload(batchId, indexUpload.reference);
+```bash
+node add-author.js charlie
 ```
+
+This will:
+1. Generate a new private key for Charlie
+2. Upload an initial empty blog page for them
+3. Create their feed and feed manifest
+4. Append their entry to `authors.json` and re-upload to the index feed
+5. Update `config.json` so Charlie can use `add-post.js`
+
+Then run `update-index.js` to refresh the homepage with the new author.
 
 </TabItem>
 <TabItem value="swarm-cli" label="swarm-cli">

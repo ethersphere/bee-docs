@@ -99,6 +99,15 @@ This is the go-to starting point for web3 developers who want to build with Swar
           <span class="hub-card__cta">Open guide</span>
         </a>
       </li>
+      <li class="hub-card">
+        <a class="hub-card__link" href="/docs/develop/multi-author-blog">
+          <h3 class="hub-card__title">Multi-Author Blog</h3>
+          <p class="hub-card__desc">
+            Build a decentralized multi-author blog where each author controls their own feed and an admin index feed links them all together.
+          </p>
+          <span class="hub-card__cta">Open guide</span>
+        </a>
+      </li>
       <!--  
       <li class="hub-card">
         <a class="hub-card__link" href="/docs/develop/act">
