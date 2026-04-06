@@ -9,10 +9,11 @@
 
 
 
+<link rel="api-description" href="/openapi.yaml" type="application/openapi+yaml">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous">
 <script src="/matomo.js" async></script><link rel="stylesheet" href="/assets/css/styles.f69ef441.css">
-<script src="/assets/js/runtime~main.51dacb09.js" defer="defer"></script>
-<script src="/assets/js/main.fa538385.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ea7f9310.js" defer="defer"></script>
+<script src="/assets/js/main.4b821971.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -24,7 +25,6 @@
 <p>Specifically, data is divided into <strong>m</strong> chunks, and <strong>k</strong> additional chunks are generated, resulting in <strong>m + k</strong> total chunks. The data is encoded across these chunks such that as long as <strong>m</strong> chunks are intact, the original data can be fully reconstructed. Chunks are then distributed across the network as with a standard upload. This approach provides a robust method for data recovery in distributed storage networks like Swarm.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="example">Example<a href="#example" class="hash-link" aria-label="Direct link to Example" title="Direct link to Example" translate="no">​</a></h3>
 <p>For an 8KB image, if we set <strong>m = 2</strong> and <strong>k = 1</strong>, we create 3 chunks (2 original + 1 redundant). As long as any 2 of these 3 chunks are available, we can reconstruct the original data. By increasing <strong>k</strong> to 4, we can tolerate the loss of up to 4 chunks while still recovering the original data.</p>
-<p><img decoding="async" loading="lazy" src="https://www.ethswarm.org/uploads/erasure-coding-01.png" alt="Erasure Code Example" class="img_ev3q"></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="levels-of-protection">Levels of Protection<a href="#levels-of-protection" class="hash-link" aria-label="Direct link to Levels of Protection" title="Direct link to Levels of Protection" translate="no">​</a></h3>
 <p>In Swarm&#x27;s implementation of erasure coding, there are five levels of protection, None, Medium, Strong, Insane, and Paranoid. For each level, the <strong>m</strong> and <strong>k</strong> values have been adjusted in order to meet a certain level of data protection:</p>
 <p><em><strong>Table A:</strong></em></p>

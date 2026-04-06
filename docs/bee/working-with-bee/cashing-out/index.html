@@ -9,10 +9,11 @@
 
 
 
+<link rel="api-description" href="/openapi.yaml" type="application/openapi+yaml">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous">
 <script src="/matomo.js" async></script><link rel="stylesheet" href="/assets/css/styles.f69ef441.css">
-<script src="/assets/js/runtime~main.51dacb09.js" defer="defer"></script>
-<script src="/assets/js/main.fa538385.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ea7f9310.js" defer="defer"></script>
+<script src="/assets/js/main.4b821971.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -60,7 +61,7 @@ relieves unnecessary congestion on the blockchain. 💩</p></div></div>
 <p>To do this, we simply POST the relevant peer&#x27;s address to the <code>cashout</code> endpoint.</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">curl -X POST http://localhost:1633/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b</span><br></span></code></pre></div></div>
 <div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token punctuation" style="color:rgb(199, 146, 234)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  </span><span class="token property">&quot;transactionHash&quot;</span><span class="token operator" style="color:rgb(137, 221, 255)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(195, 232, 141)">&quot;0xba7b500e21fc0dc0d7163c13bb5fea235d4eb769d342e9c007f51ab8512a9a82&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token punctuation" style="color:rgb(199, 146, 234)">}</span><br></span></code></pre></div></div>
-<p>You may check the status of your transaction using the <a href="https://blockscout.com/xdai/mainnet" target="_blank" rel="noopener noreferrer" class="">xDAI
+<p>You may check the status of your transaction using the <a href="https://gnosis.blockscout.com/" target="_blank" rel="noopener noreferrer" class="">xDAI
 Blockscout</a>.</p>
 <p>Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">curl http://localhost:1633/chequebook/cashout/d7881307e793e389642ea733451db368c4c9b9e23f188cca659c8674d183a56b | jq</span><br></span></code></pre></div></div>
@@ -71,7 +72,7 @@ Blockscout</a>.</p>
 <p>And conversely, if we have used more services than we have provided, we may deposit extra xBZZ into the chequebook contract by sending a POST request to the deposit endpoint.</p>
 <div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token plain">curl -X POST http://localhost:1633/chequebook/deposit\?amount\=1000 | jq</span><br></span></code></pre></div></div>
 <div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token punctuation" style="color:rgb(199, 146, 234)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">  </span><span class="token property">&quot;transactionHash&quot;</span><span class="token operator" style="color:rgb(137, 221, 255)">:</span><span class="token plain"> </span><span class="token string" style="color:rgb(195, 232, 141)">&quot;0xedc80ebc89e6d719e617a50c6900c3dd5dc2f283e1b8c447b9065d7c8280484a&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token punctuation" style="color:rgb(199, 146, 234)">}</span><br></span></code></pre></div></div>
-<p>You may then use <a href="https://blockscout.com/xdai/mainnet" target="_blank" rel="noopener noreferrer" class="">Blockscout</a> to
+<p>You may then use <a href="https://gnosis.blockscout.com/" target="_blank" rel="noopener noreferrer" class="">Blockscout</a> to
 track your transaction and make sure it completed successfully.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="managing-uncashed-cheques">Managing uncashed cheques<a href="#managing-uncashed-cheques" class="hash-link" aria-label="Direct link to Managing uncashed cheques" title="Direct link to Managing uncashed cheques" translate="no">​</a></h2>
 <p>For the Bee process, the final step of earning xBZZ is cashing a
