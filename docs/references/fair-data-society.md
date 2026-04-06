@@ -18,7 +18,6 @@ FDS's software is currently in beta or earlier and has no guarantees of file int
 1. [Fairdrive](https://fairdrive.fairdatasociety.org/) - Decentralised storage on Swarm.
 1. [Fairdrop](https://fairdrop.fairdatasociety.org/) - An easy and secure way to send your files. No central server. No tracking. No backdoors. 
 1. [FairOS](https://docs.fairos.fairdatasociety.org/docs/) - The operating system for the decentralised web.
-1. [Galileo](https://app.galileo.fairdatasociety.org/) - An open source project that allows you to use, create and modify maps of various participants.
 
 ## Links
 

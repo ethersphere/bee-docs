@@ -165,7 +165,7 @@ Therefore, the rule is, each node must have:
 
 ### How can I add Gnosis / Sepolia to Metamask?
 
-You can easily add Sepolia or Gnosis to metamask using the [official guide from Metamask](https://support.metamask.io/networks-and-sidechains/managing-networks/how-to-add-a-custom-network-rpc/).
+You can easily add Sepolia or Gnosis to metamask using the [official guide from Metamask](https://support.metamask.io/configure/networks/how-to-add-a-custom-network-rpc/).
 
 If you are using a different wallet which does not have an easy option for adding networks like Metamask does, then you may need to add the networks manually. You need to fill in four pieces of information to do so:
 

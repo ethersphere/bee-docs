@@ -16,7 +16,7 @@ Uploading to Swarm has two steps: (1) **buy storage** as a **postage stamp batch
 
 The `bee-js` library is the **official SDK for building Swarm-based applications**. It works in both **browser** and **Node.js** environments and **greatly simplifies development** compared with using the Bee HTTP API directly. It is the recommended method for developing applications on Swarm.
 
-Refer to the [`bee-js` documentation](https://bee-js.ethswarm.org/) for more usage guides.
+Refer to the [`bee-js` documentation](https://bee-js.ethswarm.org/docs/) for more usage guides.
 
 :::tip
 **Environment-specific methods:**

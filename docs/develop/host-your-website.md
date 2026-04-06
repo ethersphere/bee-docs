@@ -18,15 +18,17 @@ The guides below assume you already have a registered ENS domain name. By using 
 :::
 
 :::tip FIX FOR ENS NOT WORKING ON LOCALHOST
-If the site doesn’t load from localhost, it’s probably an with the resolver RPC (the RPC endpoint for the Ethereum node used to resolve your ENS domain name). 
+If the site doesn’t load from localhost, it’s may be an issue with the resolver RPC (the RPC endpoint for the Ethereum node used to resolve your ENS domain name). This is even more likely if you are using a free RPC since they generally don't come with the same guarantees as paid ones.
 
-Some endpoints, such as:
+Some endpoints, such as...
 
 ```
 https://cloudflare-eth.com
 ```
 
-may not resolve properly on localhost.
+...may not resolve properly on localhost. Even if they previously worked, it may be the case that the RPC has been [changed or removed](https://developers.cloudflare.com/web3/reference/migration-guide/?utm_source=chatgpt.com).
+
+
 
 As of the writing of this guide, both of these free and public endpoints work reliably for localhost resolution:
 
@@ -37,7 +39,7 @@ https://eth-mainnet.public.blastapi.io
 
 Alternatively, you can run your own Ethereum node and use that as the RPC.
 :::
-
+ 
 ## Host a Site With **swarm-cli** 
 
 This guide shows you how to get your website hosted on Swarm with just a few simple commands by using `swarm-cli` from your terminal. 
@@ -54,7 +56,7 @@ This guide shows you how to get your website hosted on Swarm with just a few sim
 ### Upload & Access by Hash
 
 
-You can download the example website files from the [ethersphere/examples](https://github.com/ethersphere/examples/tree/main/basic-static-website) repository.
+You can download the example website files from the [ethersphere/examples](https://github.com/ethersphere/examples/tree/main/website) repository.
 
 
 #### Uploading the Website
@@ -286,7 +288,7 @@ For developers building apps, tools, or automated deployments, `bee-js` offers p
 * A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage stamp batch
 * Node.js (18+) and `@ethersphere/bee-js` installed in your project
-* Static website files (HTML, CSS, etc.) - feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/basic-static-website)
+* Static website files (HTML, CSS, etc.) - feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/website)
 * (Optional for part one - "Upload & Access by Hash") An ENS domain which you [previously registered](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name)
 
 

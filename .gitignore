@@ -13,5 +13,6 @@ test
 /src/pages/awesome-swarm.mdx    
 *.zip
 *.csv
+link-reports/
 
 

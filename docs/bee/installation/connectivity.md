@@ -17,7 +17,7 @@ swarm, below you will find a detailed guide to navigating your way
 through your network and making it out into the wild so you can buzz
 around fellow bees and maximize your chances of earning xBZZ. If
 you still have problems, please join us in our [Discord
-server](https://discord.gg/wdghaQsGq5) and we'll help you find the
+server](https://discord.gg/kHRyMNpw7t) and we'll help you find the
 way! 🐝 🐝 🐝 🐝 🐝
 
 :::warning

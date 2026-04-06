@@ -10,7 +10,8 @@
     "build:quiet": "cross-env NODE_OPTIONS=\"--disable-warning=DEP0040 --disable-warning=DEP0169\" docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve"
+    "serve": "docusaurus serve",
+    "check:links": "python scripts/check_links.py"
   },
   "dependencies": {
     "@docsearch/js": "^4.3.2",

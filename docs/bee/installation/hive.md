@@ -37,4 +37,4 @@ Configure your nodes as desired, but ensure that the values `api-addr`, `data-di
 
 ### Monitoring
 
-See the [logging section](./../working-with-bee/logs-and-files.md) for more information on how to access your node's metrics. Share your community creations (such as [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/X3ph5yGRFU) channel of our Discord server so we can add you to our list of all things that are [awesome](https://github.com/ethersphere/awesome-swarm) and Swarm. 🧡
+See the [logging section](./../working-with-bee/logs-and-files.md) for more information on how to access your node's metrics. Share your community creations (such as [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/kHRyMNpw7t) channel of our Discord server so we can add you to our list of all things that are [awesome](https://github.com/ethersphere/awesome-swarm) and Swarm. 🧡

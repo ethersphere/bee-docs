@@ -338,10 +338,6 @@ Full script:
 Before running the third script, make sure that you have updated your `.env` variable `SCRIPT_03_MANIFEST` with the manifest reference returned by the second script (see terminal output from `Updated manifest reference:`).
 :::
 
-Full script:
-
-* [`script-03.js`](https://github.com/ethersphere/examples/blob/main/manifests/directory/script-03.js)
-
 This is done by:
 
 1. Locating the existing file entry

@@ -610,7 +610,7 @@ Ensure `nat-addr` and `nat-wss-addr` if used are set to valid `host:port` values
 
 ## ENS Resolution (Optional)
 
-The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you run your own ethereum node. An option for resource restricted devices is geth+nimbus and a guide can be found [here](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/). Other options include [dappnode](https://dappnode.io/), [nicenode](https://www.nicenode.xyz/), [stereum](https://stereum.net/) and [avado](https://ava.do/). 
+The [ENS](https://ens.domains/) domain resolution system is used to host websites on Bee, and in order to use this your Bee must be connected to a mainnet Ethereum blockchain node. We recommend you run your own ethereum node. An option for resource restricted devices is geth+nimbus and a guide can be found [here](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/). Other options include [dappnode](https://dappnode.com/), [nicenode](https://www.nicenode.xyz/), [stereum](https://stereum.net/) and [avado](https://ava.do/). 
 
 If you do not wish to run your own Ethereum node, you may use a blockchain RPC service provider such as [Infura](https://infura.io). After signing up for Infura, simply set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
 

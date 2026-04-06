@@ -16,8 +16,8 @@ a little data juggling and crypto magic. For the easiest route, see
 [the bee-js feeds functionality](./bee-js.md) and
 [swarm-cli](./../../bee/working-with-bee/swarm-cli.md), or for the super 1337,
 share your implementations in other languages in the
-[#develop-on-swarm](https://discord.gg/C6dgqpxZkU) channel of our
-[Discord Server](https://discord.gg/wdghaQsGq5).
+[#builders](https://discord.gg/8SMCfvm3kw) channel of our
+[Discord Server](https://discord.gg/kHRyMNpw7t).
 :::
 
 ### What are Feeds?

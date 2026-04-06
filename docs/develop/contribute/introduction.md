@@ -10,7 +10,7 @@ Welcome to the Dev area! We love PR's! 🐝
 
 We would would love you to get involved with our [Github repo](https://github.com/ethersphere/bee).
 
-Connect with other Bee developers over at the official [Discord Server](https://discord.gg/wdghaQsGq5). Sign up and get involved with our buzzing hive of daily dev chat.
+Connect with other Bee developers over at the official [Discord Server](https://discord.gg/kHRyMNpw7t). Sign up and get involved with our buzzing hive of daily dev chat.
 
 - If you would like to contribute, please read the [coding guidelines](https://github.com/ethersphere/bee/blob/master/CODING.md) before you get started.
 

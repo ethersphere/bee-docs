@@ -50,7 +50,7 @@ Next simply send your xDAI to that address. Before sending, make sure you have s
 | **New RPC URL:** | https://xdai.fairdatasociety.org |
 | **Chain ID:**| 100 |
 | **Symbol:**|  xDai   |
-| **Block Explorer URL (Optional):**|  https://blockscout.com/xdai/mainnet   |
+| **Block Explorer URL (Optional):**|  https://gnosis.blockscout.com/   |
 
 ![](/img/config4.png)
 

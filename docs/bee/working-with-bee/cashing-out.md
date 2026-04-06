@@ -158,7 +158,7 @@ curl -X POST http://localhost:1633/chequebook/cashout/d7881307e793e389642ea73345
 ```
 
 You may check the status of your transaction using the [xDAI
-Blockscout](https://blockscout.com/xdai/mainnet).
+Blockscout](https://gnosis.blockscout.com/).
 
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
 
@@ -201,7 +201,7 @@ curl -X POST http://localhost:1633/chequebook/deposit\?amount\=1000 | jq
 }
 ```
 
-You may then use [Blockscout](https://blockscout.com/xdai/mainnet) to
+You may then use [Blockscout](https://gnosis.blockscout.com/) to
 track your transaction and make sure it completed successfully.
 
 ## Managing uncashed cheques
