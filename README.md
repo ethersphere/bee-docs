@@ -50,6 +50,28 @@ npm run build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### Testing
+
+#### Calculator Component Tests
+
+If you modify the postage stamp cost calculator component (`src/components/AmountAndDepthCalc.js`), you should run the automated tests to verify your changes:
+
+```bash
+node src/components/AmountAndDepthCalc.test.js
+```
+
+This runs 37 unit tests covering:
+- Time conversion (hours, days, weeks, years)
+- Depth selection and cost calculation
+- Data table integrity and consistency
+- Edge cases and boundary conditions
+
+**Expected output:** `PASSED: 37` (all tests should pass)
+
+If any tests fail, it indicates a bug in the calculator logic. Please investigate and fix before submitting your PR.
+
+For more information about the calculator tests, see: `.claude/README-CALCULATOR-TESTING.md`
+
 
 ### Note about lunr search plugin
 

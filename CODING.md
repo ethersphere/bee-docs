@@ -31,3 +31,17 @@ can even run your own!
 a specific bee client, written in the `go` programming language, while
 `bee`, in lower case, refers to any worker that can join a swarm
 (e.g. any client implementation that speaks the Swarm protocol).
+
+## Component Testing
+
+### Calculator Component
+
+If you modify `src/components/AmountAndDepthCalc.js` (the postage stamp cost calculator), you **must** run the automated tests before submitting your PR:
+
+```bash
+node src/components/AmountAndDepthCalc.test.js
+```
+
+All 37 tests must pass (`PASSED: 37`). If any test fails, your changes have introduced a bug. Fix the issue and re-run the tests.
+
+For detailed information about what the tests cover and how to debug failures, see `.claude/README-CALCULATOR-TESTING.md`.
