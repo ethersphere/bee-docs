@@ -1,18 +1,11 @@
 ---
 title: Run a Gateway
-id: gateway-proxy
-description: Explains Bee gateway functionality for accessing Swarm content through HTTP interfaces.
+id: run-a-gateway
 ---
 
-This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API. 
+This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API.
 
-It is divided into several parts:
-
-* Part 1 - Basic setup 
-* Part 2 - Securing your gateway with TLS
-* Part 3 - Optional features
-
-## Part 1 — Running a Swarm Gateway (HTTP, minimal setup)
+## Part 1 - Basic setup 
 
 :::info
 Historically, the main tool for running a Swarm HTTP gateway was [gateway-proxy](https://github.com/ethersphere/gateway-proxy), however it is planned to be deprecated in favor of [swarm-gateway](https://github.com/ethersphere/swarm-gateway).
@@ -146,13 +139,41 @@ swarm-cli upload test.txt
 
 This will print a Swarm reference.
 
-Open the file through the gateway:
+Open the file through the gateway in your browser:
 
-```text
+```bash
 http://your-domain.example/bzz/<REFERENCE>/
 ```
 
-The file contents should be returned.
+Or from the terminal:
+
+```bash
+url -i http://your-domain.example/bzz/<REFERENCE>/
+```
+
+The file contents should be returned. 
+
+Example terminal output:
+
+```bash
+600/
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Headers: Content-Type, Authorization, swarm-postage-batch-id, swarm-deferred-upload
+accept-ranges: bytes
+access-control-expose-headers: Content-Disposition
+content-disposition: inline; filename="test.txt"
+content-type: text/plain; charset=utf-8
+date: Mon, 02 Feb 2026 10:21:39 GMT
+Content-Length: 12
+ETag: W/"c-5RZWYiFSSX7yHMJRTWWjxA9B9oo"
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+hello swarm
+```
 
 ### 7. Optional: restrict uploads using authentication
 
@@ -170,11 +191,13 @@ Example (add these lines to the `docker run` command):
 -e SOFT_AUTH="true" \
 ```
 
+See the [Swarm Gateway README](https://github.com/ethersphere/swarm-gateway) for more information about authentication and other options.
+
 At this point, you have:
 
 * A working Swarm HTTP gateway
 * Connected to your Bee node
-* Exposing content publicly over `/bzz/<reference>`
+* Content accessible publicly over `/bzz/<reference>`
 
 The setup is intentionally minimal and suitable for testing and development, however without TLS, it is not secure and should never be used in production or publicly exposed. 
 
@@ -246,12 +269,12 @@ cd ~/caddy
 Create a file named `Caddyfile`:
 
 ```bash
-nano Caddyfile
+vim Caddyfile
 ```
 
 Add the following configuration (replace the domain):
 
-```caddy
+```bash
 your-domain.example {
   reverse_proxy swarm-gateway:3000
 }
@@ -300,3 +323,20 @@ You can also verify that HTTP is redirected to HTTPS:
 curl -I http://your-domain.example/health
 ```
 
+Example terminal output:
+
+```bash
+HTTP/1.1 308 Permanent Redirect
+Connection: close
+Location: https://your-domain.example/health
+Server: Caddy
+Date: Mon, 02 Feb 2026 10:31:17 GMT
+```
+
+## Part 3 — Options
+
+:::caution
+This section is under construction. Further guidance will be available in the near future. For the time being, please join the [#builders channel](https://discord.gg/udBg6ctH) on the Swarm Discord server.
+:::
+
+You can find a [list](https://github.com/ethersphere/swarm-gateway/blob/main/README.md#overview) of all available options on the [Swarm Gateway README](github.com/ethersphere/swarm-gateway/blob/main/README.md) on GitHub. [Database options](https://github.com/ethersphere/swarm-gateway/blob/main/README.md#database) can also be set using the DATABASE_CONFIG environment variable.    
