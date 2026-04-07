@@ -11,7 +11,8 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "check:links": "python scripts/check_links.py"
+    "check:links": "python tools/docusaurus-link-checker/check_links.py",
+    "build:check": "npm run build && npm run check:links"
   },
   "dependencies": {
     "@docsearch/js": "^4.3.2",

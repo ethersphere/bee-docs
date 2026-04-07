@@ -84,6 +84,45 @@ The script is **informational only** (exit 0) — it won't block the build.
 
 A few pages are intentionally excluded (intro/landing pages that only contain navigation cards). Their warnings are expected and can be ignored.
 
+## Link Checker
+
+This repo includes [ethersphere/docusaurus-link-checker](https://github.com/ethersphere/docusaurus-link-checker) as a git submodule at `tools/docusaurus-link-checker`. After cloning, initialise it with:
+
+```bash
+git submodule update --init
+```
+
+### Usage
+
+Run the checker from the repo root:
+
+```bash
+npm run check:links
+```
+
+You will be prompted to choose local or live mode. Flags are passed through after `--`:
+
+```bash
+npm run check:links -- --mode local
+npm run check:links -- --mode live --site-domain docs.ethswarm.org
+npm run check:links -- --mode local --no-external --threads 16
+```
+
+| Flag | Description |
+|---|---|
+| `--mode local\|live` | Local build check (default) or live site crawl |
+| `--site-domain` | Your site's domain — auto-detected from `docusaurus.config.*` if omitted |
+| `--no-external` | Skip external URL checking (local mode only) |
+| `--threads N` | Number of concurrent HTTP threads (default: 8) |
+
+To run the full build and then immediately check links:
+
+```bash
+npm run build:check
+```
+
+Reports are written to `link-reports/` (gitignored).
+
 ## Bumping Version
 
 Don't forget to find and replace the version number for the whole of the docs folder. 
