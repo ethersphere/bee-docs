@@ -11,6 +11,7 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
+    "precheck:links": "git submodule update --remote tools/docusaurus-link-checker",
     "check:links": "python tools/docusaurus-link-checker/check_links.py",
     "build:check": "npm run build && python tools/docusaurus-link-checker/check_links.py"
   },
