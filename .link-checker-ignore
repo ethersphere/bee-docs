@@ -1,0 +1,8 @@
+# URLs to ignore in link checker
+# One URL pattern per line (substring matching, case-sensitive).
+# These URLs are still checked and reported separately, but don't block the check.
+# Lines starting with # are comments.
+
+# Example: remove or update these patterns as needed
+# https://example.com/api
+# example.org/docs
