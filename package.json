@@ -12,8 +12,8 @@
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "precheck:links": "git submodule update --remote tools/docusaurus-link-checker",
-    "check:links": "python tools/docusaurus-link-checker/check_links.py",
-    "build:check": "npm run build && python tools/docusaurus-link-checker/check_links.py"
+    "check:links": "python3 tools/docusaurus-link-checker/check_links.py",
+    "build:check": "npm run build && python3 tools/docusaurus-link-checker/check_links.py"
   },
   "dependencies": {
     "@docsearch/js": "^4.3.2",
