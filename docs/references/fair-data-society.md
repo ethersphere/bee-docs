@@ -17,8 +17,6 @@ FDS's software is currently in beta or earlier and has no guarantees of file int
 1. [The Fair Data Protocol (FDP)](https://fdp.fairdatasociety.org/) - A data interoperability protocol for dApps that use personal data.
 1. [Fairdrive](https://fairdrive.fairdatasociety.org/) - Decentralised storage on Swarm.
 1. [Fairdrop](https://fairdrop.fairdatasociety.org/) - An easy and secure way to send your files. No central server. No tracking. No backdoors. 
-1. [FairOS](https://docs.fairos.fairdatasociety.org/docs/) - The operating system for the decentralised web.
-
 ## Links
 
 * [FDS YouTube](https://www.youtube.com/@fairdatasociety8412)

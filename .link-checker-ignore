@@ -5,3 +5,9 @@
 
 # Example hash from desktop/publish-a-website.md — just an example of URL format
 https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+
+# External services that may have rate limiting, SSL issues, or temporary downtime
+https://gnosis.blockscout.com/
+https://gnosisscan.io/token/
+https://www.npmjs.com/
+https://xdai.fairdatasociety.org
