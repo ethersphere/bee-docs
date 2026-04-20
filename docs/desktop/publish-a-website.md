@@ -47,7 +47,21 @@ To publish your website on Swarm, follow these steps:
 
 ![](/img/upload-a-website2.gif)
 
-[https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/](https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/)
+Once uploaded, your website can be accessed through its Swarm hash via your local Bee node or through a public gateway. Sharing the hash is a convenient way to distribute your content to users who aren't running their own Bee node—they can access it directly through any Swarm gateway.
+
+Your website is now accessible via:
+
+**Local Bee node:**
+```
+http://localhost:1633/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+```
+
+**Public gateway:**
+```
+https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+```
+
+Replace the hash with your actual website hash.
 
 ### Connecting an ENS Domain to Your Website
 
