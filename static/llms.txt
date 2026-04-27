@@ -21,8 +21,11 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [Set Target Neighborhood](https://docs.ethswarm.org/docs/bee/installation/set-target-neighborhood): Choose a network neighborhood for your node
 - [Connectivity](https://docs.ethswarm.org/docs/bee/installation/connectivity): NAT traversal, ports, and peer connectivity
 - [Fund Your Node](https://docs.ethswarm.org/docs/bee/installation/fund-your-node): Add xBZZ and xDAI to operate your node
+- [Verify Installation](https://docs.ethswarm.org/docs/bee/installation/verify): Verify your Bee installation
 
 ## Configure and operate a Bee node
+
+- [Introduction](https://docs.ethswarm.org/docs/bee/working-with-bee/introduction): Overview of operating and managing a Bee node
 
 - [Configuration](https://docs.ethswarm.org/docs/bee/working-with-bee/configuration): All Bee config options (YAML, env vars, CLI flags)
 - [Node Types](https://docs.ethswarm.org/docs/bee/working-with-bee/node-types): Full, light, and ultra-light node modes
@@ -34,6 +37,10 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [Monitoring](https://docs.ethswarm.org/docs/bee/working-with-bee/monitoring): Prometheus metrics and Grafana dashboards
 - [Backups](https://docs.ethswarm.org/docs/bee/working-with-bee/backups): Back up keys, statestore, and stamps
 - [Upgrading Bee](https://docs.ethswarm.org/docs/bee/working-with-bee/upgrading-bee): Upgrade process and migration notes
+
+## Getting Started with Development
+
+- [Introduction](https://docs.ethswarm.org/docs/develop/introduction): Introduction to building with Swarm
 
 ## Upload, download, and manage data
 
@@ -48,10 +55,12 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 
 - [Host a Webpage](https://docs.ethswarm.org/docs/develop/host-your-website): Upload and serve static websites on Swarm
 - [Website Routing](https://docs.ethswarm.org/docs/develop/routing): Custom domains, ENS resolution, and routing configuration
+- [Multi-Author Blog](https://docs.ethswarm.org/docs/develop/multi-author-blog): Create collaborative blogs on Swarm
 - [Run a Gateway](https://docs.ethswarm.org/docs/develop/gateway-proxy): Serve Swarm content over HTTP to regular browsers
 
 ## Build applications on Swarm
 
+- [Tools and Features](https://docs.ethswarm.org/docs/develop/tools-and-features/introduction): Overview of Swarm development tools and features
 - [Bee JS](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-js): JavaScript/TypeScript SDK for Swarm
 - [Chunk Types](https://docs.ethswarm.org/docs/develop/tools-and-features/chunk-types): Content-addressed chunks (CAC) and single-owner chunks (SOC)
 - [Feeds](https://docs.ethswarm.org/docs/develop/tools-and-features/feeds): Mutable data references using single-owner chunks
@@ -67,6 +76,7 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 
 ## Understand Swarm concepts
 
+- [Introduction](https://docs.ethswarm.org/docs/concepts/introduction): Introduction to Swarm concepts and architecture
 - [What is Swarm?](https://docs.ethswarm.org/docs/concepts/what-is-swarm): Architecture overview and design goals
 - [DISC](https://docs.ethswarm.org/docs/concepts/DISC/): Distributed Immutable Store for Chunks
 - [Kademlia](https://docs.ethswarm.org/docs/concepts/DISC/kademlia): Distributed hash table and routing
