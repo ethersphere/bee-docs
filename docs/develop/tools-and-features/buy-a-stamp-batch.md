@@ -13,7 +13,13 @@ import { globalVariables } from '/src/config/globalVariables'
 
 
 
-A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](./../../concepts/DISC/DISC.mdx). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch. 
+A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](./../../concepts/DISC/DISC.mdx). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch.
+
+:::warning Public Gateways and Batch Lookup Errors
+If you receive errors like `"get batch ... storage not found"` when using public gateways for uploads, this is expected behavior. **Public gateway endpoints cannot access your postage batches** — batches are stored on your own Bee node and are not shared across the network. 
+
+Always upload using your own Bee node's API endpoint (typically `http://localhost:1633`), not through public gateways. Public gateways can only download content; for uploads, you must connect directly to your node.
+:::
 
 :::info
       The storage volume and duration are both non-deterministic. Volume is non-deterministic due to the details of how [postage stamp batch utilization](./../../concepts/incentives/postage-stamps.md#batch-utilisation) works. While duration is non-deterministic due to price changes made by the [price oracle contract](./../../concepts/incentives/price-oracle.md).
