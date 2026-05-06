@@ -96,6 +96,7 @@ module.exports = {
         'develop/dynamic-content',
         'develop/multi-author-blog',
         'develop/act',
+        'develop/resources',
       ],
       collapsed: false
     },
