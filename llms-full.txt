@@ -10606,6 +10606,139 @@ This architecture scales to hundreds of feeds and can represent complex data str
 
 ---
 
+## Developer Resources
+
+## Learn
+
+### Get Started
+
+- [What is Swarm](/docs/concepts/what-is-swarm) — Introduction to the decentralised storage network
+- [Developer introduction](/docs/develop/introduction) — Overview of building on Swarm
+- [Bee node quickstart](/docs/bee/installation/quick-start) — Get a node running in minutes
+- [Full installation guide](/docs/bee/installation/getting-started) — Step-by-step setup for all platforms
+- [Swarm papers ↗](https://papers.ethswarm.org) — Technical whitepapers and research
+- [The Book of Swarm ↗](https://docs.ethswarm.org/the-book-of-swarm.pdf) — Full technical book on Swarm's architecture and design
+- [Swarm Protocol Specification ↗](https://papers.ethswarm.org/p/swarm-protocol-spec/) — Formal spec for developers building clients or integrations
+
+### Key Concepts
+
+- [DISC](/docs/concepts/DISC/) — How data is stored and retrieved across the network
+- [Incentives & BZZ](/docs/concepts/incentives/overview) — Economic model and token mechanics
+- [Postage stamps](/docs/develop/tools-and-features/buy-a-stamp-batch) — Pay for storage with stamp batches
+- [Feeds](/docs/develop/tools-and-features/feeds) — Mutable content pointers for updatable data
+- [Manifests](/docs/develop/tools-and-features/manifests) — Directory and routing structure on Swarm
+- [Chunk types](/docs/develop/tools-and-features/chunk-types) — Content-addressed and single-owner chunks
+- [Node types](/docs/bee/working-with-bee/node-types) — Full, light, and ultra-light participation levels
+
+### Developer Guides
+
+- [Upload and download files](/docs/develop/upload-and-download) — Basic file operations via the API
+- [Host a website on Swarm](/docs/develop/host-your-website) — Deploy static sites to decentralised storage
+- [Work with files and directories](/docs/develop/files) — Manifest operations for virtual paths
+- [Routing manifests for SPAs](/docs/develop/routing) — Single-page app routing on Swarm
+- [Dynamic content with feeds](/docs/develop/dynamic-content) — Build updatable content with feed primitives
+- [Multi-author blog](/docs/develop/multi-author-blog) — Combine per-author feeds with a shared index
+- [Access control (ACT)](/docs/develop/act) — Restrict who can read your uploaded content
+- [PSS messaging](/docs/develop/tools-and-features/pss) — Send encrypted messages over the network
+- [GSOC messaging](/docs/develop/tools-and-features/gsoc) — Graffiti single-owner chunk messaging
+- [Encrypt uploads](/docs/develop/tools-and-features/store-with-encryption) — Client-side encryption before uploading
+- [Erasure coding](/docs/develop/tools-and-features/erasure-coding) — Redundant storage for fault tolerance
+- [Pinning content](/docs/develop/tools-and-features/pinning) — Keep content locally pinned to your node
+- [Run a local gateway proxy](/docs/develop/tools-and-features/gateway-proxy) — Serve Swarm content over HTTP
+- [Start a private test network](/docs/develop/tools-and-features/starting-a-test-network) — Local multi-node dev environment
+- [Dev mode](/docs/develop/tools-and-features/bee-dev-mode) — Instant stamps, no funding needed
+
+## Examples
+
+### Publishing & Websites
+
+- [Cafe137/etherjot ↗](https://github.com/Cafe137/etherjot) — Static blog generator, live at etherjot.eth.limo
+- [ethersphere/examples ↗](https://github.com/ethersphere/examples) — Collection of example apps and starters
+- [examples/simple-blog ↗](https://github.com/ethersphere/examples/tree/master/simple-blog) — Minimal feed-backed blog, one publisher, updatable content
+- [examples/multi-author-blog ↗](https://github.com/ethersphere/examples/tree/master/multi-author-blog) — Multi-author blog using per-author feeds and a shared index
+- [examples/website ↗](https://github.com/ethersphere/examples/tree/master/website) — Swarm + ENS starter, upload a site and resolve it via ENS
+- [examples/routing-manifest ↗](https://github.com/ethersphere/examples/tree/master/routing-manifest) — Manifest-based routing demo for single-page apps
+- [examples/basic-static-website ↗](https://github.com/ethersphere/examples/tree/main/basic-static-website) — Basic static website on Swarm
+
+### Streaming
+
+- [Solar-Punk-Ltd/swarm-stream-js ↗](https://github.com/Solar-Punk-Ltd/swarm-stream-js) — Core streaming library for Swarm
+- [Solar-Punk-Ltd/swarm-hls-stream ↗](https://github.com/Solar-Punk-Ltd/swarm-hls-stream) — HLS streaming over Swarm
+- [Solar-Punk-Ltd/swarm-stream-aggregator-js ↗](https://github.com/Solar-Punk-Ltd/swarm-stream-aggregator-js) — Stream aggregation layer
+- [Solar-Punk-Ltd/swarm-stream-react-example ↗](https://github.com/Solar-Punk-Ltd/swarm-stream-react-example) — React media player consuming Swarm streams
+- [Solar-Punk-Ltd/swarm-ingestion-stream-react-example ↗](https://github.com/Solar-Punk-Ltd/swarm-ingestion-stream-react-example) — React app for live stream ingest to Swarm
+
+### Messaging & Chat
+
+- [Solar-Punk-Ltd/swarm-chat-js ↗](https://github.com/Solar-Punk-Ltd/swarm-chat-js) — Core chat library for Swarm
+- [Solar-Punk-Ltd/swarm-chat-aggregator-js ↗](https://github.com/Solar-Punk-Ltd/swarm-chat-aggregator-js) — Chat message aggregation layer
+- [Solar-Punk-Ltd/swarm-chat-react-example ↗](https://github.com/Solar-Punk-Ltd/swarm-chat-react-example) — React chat application on Swarm
+- [Solar-Punk-Ltd/swarm-comment-js ↗](https://github.com/Solar-Punk-Ltd/swarm-comment-js) — Core comments library
+- [Solar-Punk-Ltd/swarm-comment-react-example ↗](https://github.com/Solar-Punk-Ltd/swarm-comment-react-example) — React comments component
+- [Solar-Punk-Ltd/comment-system ↗](https://github.com/Solar-Punk-Ltd/comment-system) — Deployable comment system on Swarm
+- [Solar-Punk-Ltd/comment-system-ui ↗](https://github.com/Solar-Punk-Ltd/comment-system-ui) — UI for the Swarm comment system
+- [Solar-Punk-Ltd/swarm-collaborative-docs ↗](https://github.com/Solar-Punk-Ltd/swarm-collaborative-docs) — Real-time collaborative document editing on Swarm
+- [Cafe137/gsoc-group-chat ↗](https://github.com/Cafe137/gsoc-group-chat) — Group chat using GSOC (Graffiti Single Owner Chunks)
+
+## Tools
+
+### SDKs & APIs
+
+- [bee-js ↗](https://bee-js.ethswarm.org/docs/) — Official JavaScript / TypeScript SDK
+- [bee-js getting started ↗](https://bee-js.ethswarm.org/docs/getting-started/) — Quickstart for bee-js integration
+- [Bee HTTP API reference ↗](https://docs.ethswarm.org/api/) — Full REST API documentation
+- [swarm-cli](/docs/bee/working-with-bee/swarm-cli/) — Command-line interface for uploads, feeds, and more
+- [swarm-mcp ↗](https://github.com/ethersphere/swarm-mcp) — MCP server for AI agents to read and write Swarm
+- [Swarm Actions ↗](https://github.com/ethersphere/swarm-actions) — Deploy to Swarm from GitHub CI/CD workflows
+- [Swarm Skills ↗](https://github.com/GasperX93/swarm-skills) — Claude Code integration for Swarm
+
+### Libraries & Primitives
+
+- [Solar-Punk-Ltd/file-manager-lib ↗](https://github.com/Solar-Punk-Ltd/file-manager-lib) — High-level file management primitives for Swarm
+- [Cafe137/feed-helper ↗](https://github.com/Cafe137/feed-helper) — Utility library for working with Swarm feeds
+- [fairDataSociety/fdp-storage ↗](https://github.com/fairDataSociety/fdp-storage) — Serverless web3 filesystem, Fair Data Protocol reference implementation
+
+### Developer Tools
+
+- [ethersphere/create-swarm-app ↗](https://github.com/ethersphere/create-swarm-app) — Boilerplate for building Swarm apps with JavaScript
+- [Cafe137/fdp-play ↗](https://github.com/Cafe137/fdp-play) — Docker-based local Bee cluster and FDP dev environment
+- [Cafe137/pss-gsoc-learning-material ↗](https://github.com/Cafe137/pss-gsoc-learning-material) — Learning material for PSS and GSOC primitives
+- [examples/dynamic-content ↗](https://github.com/ethersphere/examples/tree/master/dynamic-content) — Content addressing and feeds, introduction example
+- [examples/filesystem ↗](https://github.com/ethersphere/examples/tree/master/filesystem) — Filesystem-style operations using bee-js
+- [agazso/swarm-cid-converter ↗](https://github.com/agazso/swarm-cid-converter) — Convert Swarm hashes or links to CID and vice versa
+- [Solar-Punk-Ltd/ipfs-to-swarm ↗](https://github.com/Solar-Punk-Ltd/ipfs-to-swarm) — Migrate data from IPFS to Swarm
+
+### Gateways & Deploy
+
+- [Beeport ↗](https://beeport.ethswarm.org) — Upload without running a node
+- Public content gateway — Access any content by hash (`https://<hash>.bzz.link`)
+- ENS gateway — Resolve ENS names to Swarm content (`https://<name>.eth.limo`)
+- [ENS name management ↗](https://app.ens.domains) — Register and manage ENS names
+- [ethersphere/gateway-proxy ↗](https://github.com/ethersphere/gateway-proxy) — Production gateway proxy server
+- [ethersphere/swarm-gateway ↗](https://github.com/ethersphere/swarm-gateway) — Official Swarm HTTP content gateway
+- [Swarmy ↗](https://swarmy.cloud) — Swarm as a service, upload and retrieve without running a node
+
+### Network Tools
+
+- [SwarmScan ↗](https://swarmscan.io/) — Network explorer and node statistics
+- [Swarm Gateway ↗](https://gateway.ethswarm.org/) — Share files via URL
+- [Swarm Desktop ↗](https://desktop.ethswarm.org) — GUI node for non-technical users
+- [Bee Dashboard ↗](https://github.com/ethersphere/bee-dashboard) — Web UI for node management
+
+## Community
+
+### Community & Support
+
+- [Discord ↗](https://discord.ethswarm.org) — Community chat and support
+- [GitHub — Ethersphere org ↗](https://github.com/ethersphere) — All official repositories
+- [Awesome Swarm ↗](https://github.com/ethersphere/awesome-swarm) — Curated ecosystem list
+- [Blog ↗](https://blog.ethswarm.org) — News, updates, and deep dives
+- [Website ↗](https://ethswarm.org) — Main Swarm website
+- [FAQ](/docs/references/faq/) — Frequently asked questions
+- [SWIPs ↗](https://github.com/ethersphere/SWIPs) — Swarm Improvement Proposals, follow or contribute to protocol direction
+
+---
+
 ## Website Routing
 
 # Routing on Swarm 
@@ -12888,21 +13021,24 @@ In order to acquire sETH and sBZZ, refer to the [Fund Your Node](./../../bee/ins
 
 ## Store with Encryption
 
-In Swarm, all data is _public_ by default. To protect sensitive content, it must be encrypted so that only authorised users are able to decrypt and then view the plaintext content.
+In Swarm, all data is _public_ by default. To protect sensitive content, it must be encrypted so that only authorised users are able to decrypt and view the plaintext content.
 
-The Bee client provides a facility to encrypt files and directories while uploading which are only able to be read by users with access to the corresponding decryption key.
+The Bee client can encrypt files and directories during upload, producing a reference that bundles a Swarm address with a decryption key. Only those in possession of the full reference can decrypt the content.
 
-# Encrypt and Upload a File
+## Encrypt and Upload a File
 
-To encrypt a file simply include the `Swarm-Encrypt: true` header with your HTTP request.
+Include the `Swarm-Encrypt: true` header with your upload request:
 
 ```bash
-curl -F file=@bee.jpg -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -H "Swarm-Encrypt: true" http://localhost:1633/bzz
+curl -F file=@bee.jpg \
+  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" \
+  -H "Swarm-Encrypt: true" \
+  http://localhost:1633/bzz
 ```
 
-When successful, the Bee client will return a 64 byte reference, instead of the usual 32 bytes.
-
 More information on how to buy a postage stamp batch and get its batch id can be found [here](./buy-a-stamp-batch.md).
+
+When successful, Bee returns a 128-character (64-byte) reference instead of the usual 64-character (32-byte) unencrypted reference:
 
 ```json
 {
@@ -12910,19 +13046,43 @@ More information on how to buy a postage stamp batch and get its batch id can be
 }
 ```
 
-Here we see that, when using the Bee node's encryption function, the reference hash that is returned is 128 hex characters long. The first 64 characters of this is the familiar Swarm address - the reference that allows us to retrieve the data from the swarm. This is the same reference we would get uploading unencrypted files using Bee, so it is safe to share.
+The reference is composed of two 64-character (32-byte) parts:
 
-The second part of the reference is a 64 character decryption key which is required to decrypt the referenced content and view the original data in the clear. This is sensitive key material and must be kept private.
+```
+f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265ba  ← Swarm address (safe to share)
+ef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3  ← decryption key (keep private)
+```
 
-It is important that this data not be sent in requests to a public gateway as this would mean that gateway would be able to decrypt your data. However, if you are running a node on your local machine, you may safely use the API bound to `localhost`. The key material is never exposed to the network so your data remains safe.
+The Swarm address (first 64 characters) is a standard content address — the same identifier you would get from an unencrypted upload and safe to share publicly. The decryption key (last 64 characters) is sensitive: anyone who holds the full 128-character reference can decrypt and read the original content. Access control is entirely possession-based — there is no server-side revocation. The key is never transmitted to the Swarm network; Bee only exposes it through the local API response.
 
-:::info
-Encryption is disabled by default on all Swarm Gateways to keep your data safe. [Install Bee on your computer](./../../bee/installation/getting-started.md) to use the encryption feature.
+:::warning
+If you lose the decryption key portion of the reference, the encrypted data becomes permanently unrecoverable. Store the full 128-character reference in a secure location such as a password manager.
 :::
 
-# Download and Decrypt a File
+:::info
+Encryption is disabled by default on all Swarm gateways to protect your data. [Install Bee on your computer](./../../bee/installation/getting-started.md) to use the encryption feature.
+:::
 
-To retrieve your file, simply supply the full 64 byte string to the files endpoint, and the Bee client will download and decrypt all the relevant chunks and restore them to their original format.
+## Encrypt and Upload a Directory
+
+To upload an entire directory with encryption, package it as a tar archive and set the `Swarm-Collection: true` header:
+
+```bash
+tar -cf site.tar ./my-website/
+
+curl --data-binary @site.tar \
+  -H "Content-Type: application/x-tar" \
+  -H "Swarm-Collection: true" \
+  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" \
+  -H "Swarm-Encrypt: true" \
+  http://localhost:1633/bzz
+```
+
+The response follows the same 128-character reference format. All files in the collection are encrypted with the same key, and the full reference is required to access any file within it.
+
+## Download and Decrypt a File
+
+Supply the full 128-character reference to the `/bzz` endpoint. Bee downloads all the relevant chunks, decrypts them, and returns the original content:
 
 ```bash
 curl -OJ http://localhost:1633/bzz/f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3
@@ -13741,7 +13901,21 @@ To publish your website on Swarm, follow these steps:
 
 ![](/img/upload-a-website2.gif)
 
-[https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/](https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/)
+Once uploaded, your website can be accessed through its Swarm hash via your local Bee node or through a public gateway. Sharing the hash is a convenient way to distribute your content to users who aren't running their own Bee node—they can access it directly through any Swarm gateway.
+
+Your website is now accessible via:
+
+**Local Bee node:**
+```
+http://localhost:1633/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+```
+
+**Public gateway:**
+```
+https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+```
+
+Replace the hash with your actual website hash.
 
 ### Connecting an ENS Domain to Your Website
 
@@ -14012,7 +14186,7 @@ Once your file is uploaded a Swarm hash and Swarm Gateway link will be displayed
 
 *Contribute to the Awesome Swarm list on [GitHub](https://github.com/ethersphere/awesome-swarm).*
 
-[Swarm](https://www.ethswarm.org/) is an incentivized peer-to-peer storage and communication system. [Join the decentralized network with a Bee node](https://docs.ethswarm.org/docs/installation/quick-start), the basic building block of Swarm.
+[Swarm](https://www.ethswarm.org/) is an incentivized peer-to-peer storage and communication system. [Join the decentralized network with a Bee node](https://docs.ethswarm.org/docs/bee/installation/quick-start), the basic building block of Swarm.
 
 This is a list of free and open source projects related to Swarm and its growing ecosystem.
 
@@ -14056,9 +14230,7 @@ See [CONTRIBUTING.md](https://github.com/ethersphere/awesome-swarm/blob/master/C
 
 [Etherjot](https://github.com/ethersphere/etherjot) - Bring your web3 blog live in minutes with Etherjot, a graphical blogging application natively supporting Swarm.
 
-[buzzMint](https://github.com/ethersphere/awesome-swarm/blob/master/buzz-mint.eth.limo) - A decentralised NFT creator.
-
-[Bchan](https://bchan.bzz.limo/) - A private message board allowing users to post images, text, and links across various threads.
+[buzzMint](https://buzzmint.io/) - A decentralised NFT creator.
 
 ### Tools
 
@@ -14100,7 +14272,7 @@ See [CONTRIBUTING.md](https://github.com/ethersphere/awesome-swarm/blob/master/C
 
 [Bee-JS Docs](https://github.com/ethersphere/bee-js-docs) - Documentation for the Swarm Bee-js javascript library. View at [bee-js.ethswarm.org](https://bee-js.ethswarm.org/docs/).
 
-[Swarm Specification](https://papers.ethswarm.org/p/swarm-specification/) - The Swarm specification document is an essential resource for developers and software engineers seeking to build their own Swarm client or integrate Swarm's functionalities into their applications.
+[Swarm Specification](https://papers.ethswarm.org/p/swarm-protocol-spec/) - The Swarm specification document is an essential resource for developers and software engineers seeking to build their own Swarm client or integrate Swarm's functionalities into their applications.
 
 [Swarm Erasure Coding paper](https://papers.ethswarm.org/p/erasure/) - The erasure coding paper provides a technical exploration of erasure coding in the Swarm network, focusing on ensuring data integrity and resilience.
 
@@ -14124,8 +14296,6 @@ See [CONTRIBUTING.md](https://github.com/ethersphere/awesome-swarm/blob/master/C
 
 [Fairdrive code](https://github.com/fairDataSociety/fairdrive-theapp) - Code for decentralised and unstoppable "Dropbox" for end-users and developers using Fair Data Protocol.
 
-[Galileo](https://app.galileo.fairdatasociety.org/) - Open Street Maps on Swarm.
-
 [SwarmScan](https://swarmscan.resenje.org/) - Get network insights.
 
 [Etherna.io](https://etherna.io/) - Decentralised media platform on Swarm.
@@ -14136,7 +14306,7 @@ See [CONTRIBUTING.md](https://github.com/ethersphere/awesome-swarm/blob/master/C
 
 [DeBoot](https://github.com/awmacpherson/deboot) - DeBoot is a project to research and implement approaches to bootloading OS images from a decentralized storage network such as Swarm or IPFS.
 
-[Swarm DAppNode Package](https://github.com/rndlabs/dappnodepackage-swarm) - Swarm DAppNode package for Swarm Mainnet with multi-platform (x86_64 and arm64) support. Testnet DAppNode packages can be found [here](https://github.com/rndlabs/dappnodepackage-swarm-testnet).
+[Swarm DAppNode Package](https://github.com/rndlabs/dappnodepackage-swarm) - Swarm DAppNode package for Swarm Mainnet with multi-platform (x86_64 and arm64) support.
 
 [Mipasa Swarm Connector](https://github.com/MiPasa/mipasa-swarm-connector/) - MiPasa connector for Swarm (BZZ) distributed storage network.
 
