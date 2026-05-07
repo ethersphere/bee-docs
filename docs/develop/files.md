@@ -10,6 +10,8 @@ import TabItem from '@theme/TabItem';
 
 # Manage Files
 
+In the [Host a Webpage](/docs/develop/host-your-website) guide you uploaded a directory and got back a single Swarm reference that serves your site. That reference points to a **manifest** — a data structure that maps relative paths to content. This guide explores manifests directly: how to inspect them, add a file without re-uploading everything, and move a file by remapping a path.
+
 Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](./tools-and-features/manifests.md), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.
 
 ## Usage and Example Scripts
@@ -41,14 +43,18 @@ cd examples/filesystem
 npm install
 ```
 
-Update the `<BATCH_ID>` in the `.env` file with a valid batch ID, and make sure that `BEE_URL` is set to the RPC endpoint for your Bee node:
+Copy `.env.example` to `.env` and fill in your values:
+
+```bash
+cp .env.example .env
+```
 
 ```bash
 BEE_URL=http://localhost:1633 # or http://127.0.0.1:1633  
-BATCH_ID=<BATCH_ID>
+BATCH_ID=<YOUR_BATCH_ID>
 UPLOAD_DIR=./folder
-SCRIPT_02_MANIFEST=<MANIFEST_REFERENCE>
-SCRIPT_03_MANIFEST=<MANIFEST_REFERENCE>
+SCRIPT_02_MANIFEST=
+SCRIPT_03_MANIFEST=
 ```
 
 ## Script 1: Upload Folder and Inspect Manifest
@@ -437,3 +443,6 @@ No data is duplicated, the `new.txt` file has not been modified, only the path m
 
 With these tools, you can treat Swarm directories much like a filesystem — while still preserving immutability and content addressing.
 
+---
+
+**Next:** [Website Routing](/docs/develop/routing) — put manifest path mapping to practical use by setting up clean URL routing for a Swarm-hosted site.

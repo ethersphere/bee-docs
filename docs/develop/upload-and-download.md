@@ -6,6 +6,10 @@ description: Comprehensive guide for uploading and downloading files with the Be
 
 Uploading to Swarm has two steps: (1) **buy storage** as a **postage stamp batch** with a unique **batch ID**—and (2) **upload using the batch ID**. The upload returns a **Swarm reference hash**, anyone with that reference can download the content.
 
+:::info Example project
+The runnable Node.js scripts for this guide are in [`examples/upload-and-download`](https://github.com/ethersphere/examples/tree/main/upload-and-download). Clone the repo, copy `.env.example` to `.env`, fill in your `BEE_URL` and `BATCH_ID`, run `npm install`, then `npm run script:01` or `npm run script:02`.
+:::
+
 **Before you begin:**
 
 - You need a running Bee node connected to Gnosis Chain and funded with **xBZZ** and **xDAI**.
@@ -399,3 +403,7 @@ Response:
 ```bash
 curl http://localhost:1633/bzz/<REFERENCE> -o output.txt
 ```
+
+---
+
+**Next:** [Host a Webpage](/docs/develop/host-your-website) — upload a static website and serve it through `/bzz/<reference>/`.

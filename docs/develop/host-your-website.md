@@ -7,14 +7,12 @@ description: Comprehensive guide for uploading and hosting websites on Swarm wit
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-There are two primary methods most developers should use for uploading a website to Swarm - `swarm-cli` and `bee-js`. Depending on the specific use case, it may make more sense to pick one or the other.
+In the [Upload and Download](/docs/develop/upload-and-download) guide you uploaded individual files and got back Swarm reference hashes. A website is just a collection of files — an HTML page, a stylesheet, maybe an image. When you upload a directory, Bee automatically builds a [manifest](/docs/develop/tools-and-features/manifests) that maps each relative path to its content. Set an `indexDocument` and the root URL resolves to your homepage.
 
-For a simple website such as a personal blog or company page, using `swarm-cli` is simplest and fastest way to get your site uploaded and accessible on Swarm.
+This guide shows how to upload a static site and open it through `/bzz/<reference>/`.
 
-However for developers who need finer grained control over the process or who wish to build a more complex application which require programmatically spinning up new pages, `bee-js` is required.
-
-:::tip
-The guides below assume you already have a registered ENS domain name. By using an ENS domain name, you can make your Swarm hosted website accessible through an easy to remember human-readable name rather than a Swarm hash. If you don't have an ENS domain name registered, you can get one using the official ENS application at [app.ens.domains](https://app.ens.domains/). Refer to their support section for a step-by-step guide to [register an ENS domain](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name).
+:::info Example project
+The example website used in this guide is in [`examples/website`](https://github.com/ethersphere/examples/tree/main/website). Clone the repo, copy `.env.example` to `.env`, fill in your values, and run `npm install && npm run upload`.
 :::
 
 :::tip FIX FOR ENS NOT WORKING ON LOCALHOST
@@ -135,16 +133,18 @@ http://localhost:1633/bzz/<SWARM_HASH>/
 ```
 
 
+## Advanced: Keep Your URL Stable Across Updates
+
+:::note Prerequisite
+This section uses feeds — the concept of a mutable pointer on top of Swarm's immutable storage. Feeds are explained from scratch in the [Dynamic Content](/docs/develop/dynamic-content) guide. You can complete this guide without this section and come back after you have worked through Dynamic Content.
+:::
+
+Every time you re-upload a site to Swarm, you get a new reference hash. If you want a single stable URL that always points to the latest version of your site — useful for ENS integration or sharing a permanent link — you can publish each upload as a feed entry and share the feed manifest hash instead of the content hash.
+
 ### Use Feeds for Seamless Updates - swarm-cli
 
-*If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
-
-If you have an ENS domain and Swarm hosted website, you can make the site available through the domain by registering website's Swarm hash as a content hash through the [ENS domain management app](https://app.ens.domains/). However, if you ever edit and reupload your site to Swarm, you will need to re-register your new website hash to make it available at your ENS domain.  
-
-Therefore, instead of directly using your website hash as the content hash for your ENS domain, upload your site as a feed update and use the feed manifest hash as the content hash. Then every time you update your site as a new feed update, the ENS domain will always resolve to the newest version of your site without the need to register a new hash each time.
-
 :::tip
-The examples below refer to core feed concepts such as "publisher identity", and "topic". To learn more about these concepts refer to the [bee-js documentation](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds).
+The examples below refer to core feed concepts such as "publisher identity" and "topic". To learn more about these concepts refer to the [bee-js documentation](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds).
 :::
 
 In this section, you will:
@@ -330,12 +330,6 @@ http://localhost:1633/bzz/<SWARM_HASH>/
 
 ### Use Feeds for Seamless Updates - bee-js
 
-*If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
-
-If you have an ENS domain and Swarm hosted website, you can make the site available through the domain by registering website's Swarm hash as a content hash through the [ENS domain management app](https://app.ens.domains/). However, if you ever edit and reupload your site to Swarm, you will need to re-register your new website hash to make it available at your ENS domain.  
-
-Therefore, instead of directly using your website hash as the content hash for your ENS domain, upload your site as a feed update and use the feed manifest hash as the content hash. Then every time you update your site as a new feed update, the ENS domain will always resolve to the newest version of your site without the need to register a new hash each time.
-
 :::tip
 You will need a publisher key to use for setting up your website feed.
 
@@ -430,7 +424,7 @@ Your ENS domain will always point to the latest upload via the feed manifest.
 
 You’ve now got a programmatic way to deploy and update your Swarm-hosted site with ENS support using `bee-js`!
 
-## Connect Site to ENS Domain 
+## Optional: Connect Site to ENS Domain
 
 Once your site is uploaded to Swarm, you can make it accessible via an easy to remember ENS domain name rather than its Swarm hash:
 
@@ -485,3 +479,6 @@ This works across:
 
 You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
 
+---
+
+**Next:** [Manage Files](/docs/develop/files) — learn how manifests provide filesystem-like path mapping and how to add, move, or remove files without re-uploading everything.

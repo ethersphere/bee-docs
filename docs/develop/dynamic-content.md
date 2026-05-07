@@ -38,13 +38,14 @@ Clone the repo and set up the example scripts:
 git clone https://github.com/ethersphere/examples.git
 cd examples/dynamic-content
 npm install
+cp .env.example .env
 ```
 
-Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
+Fill in your `BATCH_ID` and verify `BEE_URL` in `.env`:
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=BATCH_ID
+BATCH_ID=<YOUR_BATCH_ID>
 ```
 
 You can then run any script with:
@@ -184,10 +185,12 @@ const writer = bee.makeFeedWriter(topic, pk);
 await writer.upload(batchId, upload.reference);
 console.log("Feed updated at index 0");
 
+// Brief pause to allow the node to index the feed chunk
+await new Promise((r) => setTimeout(r, 1000));
 
-// Read the latest reference from the feed (retries until indexed)
+// Read the latest reference from the feed
 const reader = bee.makeFeedReader(topic, owner);
-const result = await retryFeedRead(() => reader.downloadReference());
+const result = await reader.downloadReference();
 console.log("Latest reference:", result.reference.toHex());
 console.log("Current index:", result.feedIndex.toBigInt());
 ```
@@ -230,12 +233,10 @@ console.log("New content hash:", upload2.reference.toHex());
 await writer.upload(batchId, upload2.reference);
 console.log("Feed updated at index 1");
 
+// Brief pause to allow the node to index the new entry
+await new Promise((r) => setTimeout(r, 1000));
 
-// Pass minFeedIndex so the retry waits for the new entry, not just any entry.
-const result2 = await retryFeedRead(
-  () => reader.downloadReference(),
-  result.feedIndex.toBigInt() + 1n
-);
+const result2 = await reader.downloadReference();
 console.log("Latest reference:", result2.reference.toHex());
 console.log("Current index:", result2.feedIndex.toBigInt()); // 1n
 ```
@@ -347,11 +348,15 @@ cd examples/simple-blog
 npm install
 ```
 
-Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
+Copy `.env.example` to `.env` and fill in your `BATCH_ID`:
+
+```bash
+cp .env.example .env
+```
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=YOUR_BATCH_ID
+BATCH_ID=<YOUR_BATCH_ID>
 ```
 
 </TabItem>
@@ -806,7 +811,7 @@ const topic = Topic.fromString(cfg.topic);
 const owner = new EthAddress(cfg.owner);
 const reader = bee.makeFeedReader(topic, owner);
 
-const result = await retryFeedRead(() => reader.downloadReference());
+const result = await reader.downloadReference();
 console.log("Latest content reference:", result.reference.toHex());
 console.log("Feed index:", result.feedIndex.toBigInt());
 console.log("View:", `${process.env.BEE_URL}/bzz/${cfg.manifest}/`);
@@ -843,6 +848,8 @@ Feeds add a mutable pointer layer on top of Swarm's immutable storage. The core 
 
 This is the same pattern that [Etherjot](https://github.com/ethersphere/etherjot) uses to power fully decentralized blogs — regenerate the site, re-upload, and update the feed. The difference is only in scale and features (markdown rendering, categories, media management), not in the underlying feed mechanics.
 
+The `simple-blog` project you just built is a single-author blog. The next guide extends this into a multi-author system where each author controls their own feed and an admin maintains an index feed that links them all together.
+
 Key takeaways:
 
 - Every upload to Swarm is immutable and produces a unique hash.
@@ -851,3 +858,7 @@ Key takeaways:
 - A **feed manifest** wraps the feed identity into a single permanent hash that resolves through `/bzz/`.
 - Only the feed owner (holder of the private key) can publish updates, but anyone can read the feed.
 - "Editing" and "deleting" content on Swarm means regenerating your site without the removed or changed content, re-uploading, and updating the feed. Old versions remain on Swarm at their original hashes, but the feed always points to the latest.
+
+---
+
+**Next:** [Multi-Author Blog](/docs/develop/multi-author-blog) — extend feeds into a multi-publisher system where each author controls their own feed and a shared index links them together.

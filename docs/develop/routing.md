@@ -7,7 +7,9 @@ description: Explains message routing protocols and peer discovery mechanisms in
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Routing on Swarm 
+# Routing on Swarm
+
+In the [Manage Files](/docs/develop/files) guide you saw that a directory upload creates a manifest — a data structure mapping paths to content. Routing on Swarm is a direct consequence: every URL your site serves must correspond to an entry in that manifest. This guide covers the two main strategies for giving your site clean, navigable URLs.
 
 Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](./tools-and-features/manifests.md).
 
@@ -477,6 +479,10 @@ Once you understand manifest-based routing, you can dynamically:
 * Add new paths (e.g. blog posts, product pages)
 * Create custom routes
 * Remove unwanted paths
+
+---
+
+**Next:** [Run a Gateway](/docs/develop/gateway-proxy) — expose your Swarm-hosted site to the public web through an HTTP gateway.
 
 
 

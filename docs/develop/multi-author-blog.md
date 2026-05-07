@@ -71,13 +71,14 @@ Clone the repo and set up the project:
 git clone https://github.com/ethersphere/examples.git
 cd examples/multi-author-blog
 npm install
+cp .env.example .env
 ```
 
-Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
+Fill in your `BATCH_ID` in `.env`:
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=YOUR_BATCH_ID
+BATCH_ID=<YOUR_BATCH_ID>
 ```
 
 ## Example Project — Multi-Author Blog
@@ -89,21 +90,13 @@ This section builds a complete runnable project: a blog where multiple authors p
 <Tabs>
 <TabItem value="bee-js" label="bee-js">
 
-Create a new directory and install dependencies:
+Use the cloned examples repo (see [Example Scripts](#example-scripts) above):
 
 ```bash
-mkdir swarm-multiblog && cd swarm-multiblog
-npm init -y
-npm install @ethersphere/bee-js dotenv
-```
-
-Add `"type": "module"` to your `package.json` to use ES module imports.
-
-Create a `.env` file:
-
-```bash
-BEE_URL=http://localhost:1633
-BATCH_ID=<YOUR_BATCH_ID>
+cd examples/multi-author-blog
+npm install
+cp .env.example .env
+# Fill in BEE_URL and BATCH_ID in .env
 ```
 
 </TabItem>
@@ -350,6 +343,7 @@ Run it once to initialize the blog:
 
 ```bash
 node init.js
+# or: npm run init
 ```
 
 Example output:
@@ -576,6 +570,7 @@ Run it:
 ```bash
 node add-post.js alice "Hello Swarm" "My first post on a decentralized blog."
 node add-post.js bob "Why Swarm?" "Censorship resistance matters."
+# or: npm run add-post -- alice "Hello Swarm" "My first post on a decentralized blog."
 ```
 
 :::tip
@@ -735,6 +730,7 @@ Run it after authors publish:
 
 ```bash
 node update-index.js
+# or: npm run update-index
 ```
 
 The homepage now displays previews of the latest posts from all authors. The homepage feed manifest URL (`cfg.manifests.home`) always serves the aggregated view.
@@ -849,6 +845,7 @@ Run it:
 
 ```bash
 node read.js
+# or: npm run read
 ```
 
 </TabItem>
@@ -901,6 +898,7 @@ The [`add-author.js`](https://github.com/ethersphere/examples/blob/main/multi-au
 
 ```bash
 node add-author.js charlie
+# or: npm run add-author -- charlie
 ```
 
 This will:

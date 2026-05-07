@@ -4,7 +4,9 @@ id: gateway-proxy
 description: Explains Bee gateway functionality for accessing Swarm content through HTTP interfaces.
 ---
 
-This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API. 
+At this point you can build and deploy complete Swarm-hosted websites with working routing. This guide is an **operational step**: it shows how to make those sites accessible to the public web through an HTTP gateway, so that anyone with a browser can reach them without running their own Bee node.
+
+This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API.
 
 It is divided into several parts:
 
@@ -65,13 +67,11 @@ This part of the guide does not cover setting up TLS, so your gateway will be ac
 
 ### 1. Configure DNS for your domain
 
-Create an A record in your DNS provider:
+Create an A record in your DNS provider pointing your domain to your server's IP address:
 
 ```text
 your-domain.example -> <your-server-ip>
 ```
-
-ADD SCREENSHOT 
 
 After DNS propagation, verify that the domain resolves to your server (this may take some time, to verify more quickly, try pinging from a different machine or VPS):
 
@@ -300,3 +300,6 @@ You can also verify that HTTP is redirected to HTTPS:
 curl -I http://your-domain.example/health
 ```
 
+---
+
+**Next:** [Dynamic Content](/docs/develop/dynamic-content) — return to app development and learn how feeds add a mutable pointer layer on top of Swarm's immutable storage.
