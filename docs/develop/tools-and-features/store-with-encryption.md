@@ -4,21 +4,24 @@ id: store-with-encryption
 description: Guide for encrypting data before upload to protect privacy and confidentiality.
 ---
 
-In Swarm, all data is _public_ by default. To protect sensitive content, it must be encrypted so that only authorised users are able to decrypt and then view the plaintext content.
+In Swarm, all data is _public_ by default. To protect sensitive content, it must be encrypted so that only authorised users are able to decrypt and view the plaintext content.
 
-The Bee client provides a facility to encrypt files and directories while uploading which are only able to be read by users with access to the corresponding decryption key.
+The Bee client can encrypt files and directories during upload, producing a reference that bundles a Swarm address with a decryption key. Only those in possession of the full reference can decrypt the content.
 
-# Encrypt and Upload a File
+## Encrypt and Upload a File
 
-To encrypt a file simply include the `Swarm-Encrypt: true` header with your HTTP request.
+Include the `Swarm-Encrypt: true` header with your upload request:
 
 ```bash
-curl -F file=@bee.jpg -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" -H "Swarm-Encrypt: true" http://localhost:1633/bzz
+curl -F file=@bee.jpg \
+  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" \
+  -H "Swarm-Encrypt: true" \
+  http://localhost:1633/bzz
 ```
 
-When successful, the Bee client will return a 64 byte reference, instead of the usual 32 bytes.
-
 More information on how to buy a postage stamp batch and get its batch id can be found [here](./buy-a-stamp-batch.md).
+
+When successful, Bee returns a 128-character (64-byte) reference instead of the usual 64-character (32-byte) unencrypted reference:
 
 ```json
 {
@@ -26,19 +29,43 @@ More information on how to buy a postage stamp batch and get its batch id can be
 }
 ```
 
-Here we see that, when using the Bee node's encryption function, the reference hash that is returned is 128 hex characters long. The first 64 characters of this is the familiar Swarm address - the reference that allows us to retrieve the data from the swarm. This is the same reference we would get uploading unencrypted files using Bee, so it is safe to share.
+The reference is composed of two 64-character (32-byte) parts:
 
-The second part of the reference is a 64 character decryption key which is required to decrypt the referenced content and view the original data in the clear. This is sensitive key material and must be kept private.
+```
+f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265ba  ← Swarm address (safe to share)
+ef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3  ← decryption key (keep private)
+```
 
-It is important that this data not be sent in requests to a public gateway as this would mean that gateway would be able to decrypt your data. However, if you are running a node on your local machine, you may safely use the API bound to `localhost`. The key material is never exposed to the network so your data remains safe.
+The Swarm address (first 64 characters) is a standard content address — the same identifier you would get from an unencrypted upload and safe to share publicly. The decryption key (last 64 characters) is sensitive: anyone who holds the full 128-character reference can decrypt and read the original content. Access control is entirely possession-based — there is no server-side revocation. The key is never transmitted to the Swarm network; Bee only exposes it through the local API response.
 
-:::info
-Encryption is disabled by default on all Swarm Gateways to keep your data safe. [Install Bee on your computer](./../../bee/installation/getting-started.md) to use the encryption feature.
+:::warning
+If you lose the decryption key portion of the reference, the encrypted data becomes permanently unrecoverable. Store the full 128-character reference in a secure location such as a password manager.
 :::
 
-# Download and Decrypt a File
+:::info
+Encryption is disabled by default on all Swarm gateways to protect your data. [Install Bee on your computer](./../../bee/installation/getting-started.md) to use the encryption feature.
+:::
 
-To retrieve your file, simply supply the full 64 byte string to the files endpoint, and the Bee client will download and decrypt all the relevant chunks and restore them to their original format.
+## Encrypt and Upload a Directory
+
+To upload an entire directory with encryption, package it as a tar archive and set the `Swarm-Collection: true` header:
+
+```bash
+tar -cf site.tar ./my-website/
+
+curl --data-binary @site.tar \
+  -H "Content-Type: application/x-tar" \
+  -H "Swarm-Collection: true" \
+  -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e47cbd0cf34f533db4e9c91cf92be40eb2968264" \
+  -H "Swarm-Encrypt: true" \
+  http://localhost:1633/bzz
+```
+
+The response follows the same 128-character reference format. All files in the collection are encrypted with the same key, and the full reference is required to access any file within it.
+
+## Download and Decrypt a File
+
+Supply the full 128-character reference to the `/bzz` endpoint. Bee downloads all the relevant chunks, decrypts them, and returns the original content:
 
 ```bash
 curl -OJ http://localhost:1633/bzz/f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96c447409e9205cf265baef29bf6aa294264762e33f6a18318562c86383dd8bfea2cec14fae08a8039bf3
