@@ -10,6 +10,11 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [The Book of Swarm](https://www.ethswarm.org/The-Book-of-Swarm.pdf): Comprehensive technical reference
 - [Swarm Whitepaper](https://www.ethswarm.org/swarm-whitepaper.pdf): Original design paper
 
+## Focused Documentation
+
+- [API & Development](https://docs.ethswarm.org/llms-api.txt): API usage, uploads, stamps, feeds, chunks, and integration patterns — for agents building on Swarm
+- [Node Operations](https://docs.ethswarm.org/llms-node-ops.txt): Installation, configuration, monitoring, staking, backups, and troubleshooting — for DevOps agents
+
 ## Install and run a Bee node
 
 - [Getting Started](https://docs.ethswarm.org/docs/bee/installation/getting-started): Overview of node requirements and installation options
