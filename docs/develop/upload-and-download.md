@@ -1,6 +1,7 @@
 ---
 title: Upload & Download
 id: upload-and-download
+description: Comprehensive guide for uploading and downloading files with the Bee API.
 ---
 
 Uploading to Swarm has two steps: (1) **buy storage** as a **postage stamp batch** with a unique **batch ID**—and (2) **upload using the batch ID**. The upload returns a **Swarm reference hash**, anyone with that reference can download the content.
@@ -15,7 +16,7 @@ Uploading to Swarm has two steps: (1) **buy storage** as a **postage stamp batch
 
 The `bee-js` library is the **official SDK for building Swarm-based applications**. It works in both **browser** and **Node.js** environments and **greatly simplifies development** compared with using the Bee HTTP API directly. It is the recommended method for developing applications on Swarm.
 
-Refer to the [`bee-js` documentation](https://bee-js.ethswarm.org/) for more usage guides.
+Refer to the [`bee-js` documentation](https://bee-js.ethswarm.org/docs/) for more usage guides.
 
 :::tip
 **Environment-specific methods:**
@@ -367,7 +368,7 @@ The Bee API exposes three HTTP endpoints:
 
 #### Upload with **/bzz**
 
-While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](/docs/develop/tools-and-features/buy-a-stamp-batch).
+While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
 
 1. Buy a postage batch:
 

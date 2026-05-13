@@ -1,6 +1,7 @@
 ---
 title: Introduction
 id: introduction
+description: Overview of how to contribute to Bee development including code standards and contribution process.
 ---
 
 # Contribute to Bee Development
@@ -9,11 +10,11 @@ Welcome to the Dev area! We love PR's! 🐝
 
 We would would love you to get involved with our [Github repo](https://github.com/ethersphere/bee).
 
-Connect with other Bee developers over at the official [Discord Server](https://discord.gg/wdghaQsGq5). Sign up and get involved with our buzzing hive of daily dev chat.
+Connect with other Bee developers over at the official [Discord Server](https://discord.gg/kHRyMNpw7t). Sign up and get involved with our buzzing hive of daily dev chat.
 
 - If you would like to contribute, please read the [coding guidelines](https://github.com/ethersphere/bee/blob/master/CODING.md) before you get started.
 
-- Installation from source is described in the [Installation](/docs/bee/installation/build-from-source).
+- Installation from source is described in the [Installation](./../../bee/installation/build-from-source.md).
 
 - Contribute to Swarm’s evolution by proposing your own Swarm Improvement Proposal (SWIP) [here](https://github.com/ethersphere/SWIPs).
 

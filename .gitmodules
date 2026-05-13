@@ -1,0 +1,3 @@
+[submodule "tools/docusaurus-link-checker"]
+	path = tools/docusaurus-link-checker
+	url = https://github.com/ethersphere/docusaurus-link-checker.git

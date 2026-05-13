@@ -1,13 +1,14 @@
 ---
 title: Community
 id: community
+description: Information about Swarm community channels resources and contribution opportunities.
 ---
 
 
 ## Official Links
 
 [Twitter](https://twitter.com/ethswarm)  
-[Discord server](https://discord.gg/wdghaQsGq5)  
+[Discord server](https://discord.gg/kHRyMNpw7t)  
 [Reddit](https://www.reddit.com/r/ethswarm/)  
 [GitHub](https://github.com/ethersphere)  
 [Blog](https://blog.ethswarm.org)  

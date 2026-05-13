@@ -1,6 +1,7 @@
 ---
 title: Logging in Bee
 id: logs-and-files
+description: Guides log access rotation verbosity levels and structured logging integration with monitoring tools like Prometheus and Grafana.
 ---
 
 # Logging in Bee

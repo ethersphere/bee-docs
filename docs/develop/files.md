@@ -2,6 +2,7 @@
 title: Manage Files
 id: files
 sidebar_label: Manage Files
+description: Guide for working with file operations including chunking and handling in Swarm applications.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -9,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 # Manage Files
 
-Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](/docs/develop/tools-and-features/manifests), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.
+Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](./tools-and-features/manifests.md), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.
 
 ## Usage and Example Scripts
 
@@ -22,7 +23,7 @@ The full working scripts are available in the [examples](https://github.com/ethe
 * [`script-03.js`](https://github.com/ethersphere/examples/blob/main/filesystem/script-03.js)
 
 :::info Website routing
-Manifests are also used for website routing (index documents, clean URLs, error pages, redirects). If you are building a website, see the [Routing guide](/docs/develop/routing).
+Manifests are also used for website routing (index documents, clean URLs, error pages, redirects). If you are building a website, see the [Routing guide](./routing.md).
 :::
 
 ### Prerequisites
@@ -210,7 +211,7 @@ await node.loadRecursively(bee)
 printManifestJson(node)
 ```
 
-This produces a tree showing how paths map to Swarm references. To better understand the tree shown in the terminal output, refer to the [Manifests](/docs/develop/tools-and-features/manifests) page.
+This produces a tree showing how paths map to Swarm references. To better understand the tree shown in the terminal output, refer to the [Manifests](./tools-and-features/manifests.md) page.
 
 
 ```bash
@@ -336,10 +337,6 @@ Full script:
 :::tip
 Before running the third script, make sure that you have updated your `.env` variable `SCRIPT_03_MANIFEST` with the manifest reference returned by the second script (see terminal output from `Updated manifest reference:`).
 :::
-
-Full script:
-
-* [`script-03.js`](https://github.com/ethersphere/examples/blob/main/manifests/directory/script-03.js)
 
 This is done by:
 

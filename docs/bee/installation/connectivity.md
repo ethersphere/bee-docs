@@ -1,6 +1,7 @@
 ---
 title: Connectivity
 id: connectivity
+description: Explains network setup and NAT configuration to ensure Bee nodes can communicate with peers on both private and public networks.
 ---
 
 To fully connect to the swarm, your Bee node needs to be able to both
@@ -16,10 +17,10 @@ swarm, below you will find a detailed guide to navigating your way
 through your network and making it out into the wild so you can buzz
 around fellow bees and maximize your chances of earning xBZZ. If
 you still have problems, please join us in our [Discord
-server](https://discord.gg/wdghaQsGq5) and we'll help you find the
+server](https://discord.gg/kHRyMNpw7t) and we'll help you find the
 way! 🐝 🐝 🐝 🐝 🐝
 
-:::info
+:::warning
 To ensure your Bee has the best chance of participating in the swarm,
 you must ensure your Bee is able to handle **both incoming and
 outgoing connections from the global Internet to its p2p port
@@ -30,6 +31,8 @@ libp2p is advertising and verify its connectivity to the rest of the
 Internet! You may need to alter your Bee node's `nat-addr`
 configuration. 🤓
 :::
+
+
 
 ## Networking Basics
 
@@ -298,7 +301,58 @@ to your computer's MAC address. This will ensure that your Bee
 seamlessly connects when you rejoin the network!
 :::
 
-### Debugging Connectivity
+### Using multiple P2P transports (TCP, WS, WSS)
+
+A Bee node can expose more than one transport for peer-to-peer communication. By default, nodes use the TCP-based libp2p transport, but Secure WebSocket (`WSS`) transport can also be enabled.
+
+To enable WSS support, set:
+
+```yaml
+p2p-wss-enable: true
+````
+
+When enabled, Bee listens for Secure WebSocket connections on `p2p-wss-addr` (default `:1635`). In most cases the remaining WSS and AutoTLS options can be left at their default values:
+
+```yaml
+p2p-wss-addr: ":1635"
+nat-wss-addr: ""
+
+autotls-domain: libp2p.direct
+autotls-registration-endpoint: https://registration.libp2p.direct
+autotls-ca-endpoint: https://acme-v02.api.letsencrypt.org/directory
+```
+
+A configuration using both TCP and WSS transports may look like:
+
+```yaml
+p2p-addr: :1634
+p2p-wss-enable: true
+p2p-wss-addr: :1635
+
+nat-addr: 1.2.3.4:1634
+nat-wss-addr: node.example.com:443
+```
+
+In this example:
+
+* `p2p-addr` defines the local TCP listening address.
+* `p2p-wss-addr` defines the local Secure WebSocket listening address.
+* `nat-addr` is the public address advertised to peers for TCP connections.
+* `nat-wss-addr` is the public address advertised to peers for WSS connections.
+
+If WSS is enabled, the WSS port must be reachable by peers. This means the port should be open in your firewall, exposed by your container or host configuration, and permitted by your network if outbound connections are restricted.
+
+When specifying `nat-addr` or `nat-wss-addr`, the value must be a valid `host:port` pair. For example:
+
+```yaml
+nat-addr: 1.2.3.4:1634
+nat-wss-addr: node.example.com:443
+```
+
+Values missing either the host or port or otherwise misformed addresses are considered invalid and will prevent the node from starting.
+
+
+### Troubleshooting Connectivity
 
 The above guide navigates your NAT, but there are still a few hurdles to overcome. To make sure there is a clear path from your computer to the outside world, let's follow our Bee's journey from the inside out.
 
@@ -379,7 +433,7 @@ the open Internet. Ensure that both TCP and UDP traffic are allowed.
 
 Similarly, if you are connecting from within a private network, you
 may find that the port is blocked by the router. Each router is
-different, so consult your router's firware documentation to make
+different, so consult your router's firmware documentation to make
 sure there are no firewalls in place blocking traffic on your Bee's
 designated p2p port.
 

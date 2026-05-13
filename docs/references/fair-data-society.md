@@ -1,6 +1,7 @@
 ---
 title: Fair Data Society
 id: fair-data-society
+description: Overview of Fair Data Society initiatives and collaboration with Swarm.
 ---
 
 The [Fair Data Society (FDS)](https://fairdatasociety.org/) is a coordinated network developing infrastructure and dApps for a fairer data economy and promoting human rights through digital sovereignty. It is a movement and vision aimed at promoting a decentralized, equitable, and sustainable digital ecosystem that respects individual privacy and data ownership. Its core goal is to empower individuals with control over their data, ensuring that data is used ethically and transparently, while fostering a more balanced relationship between individuals, organizations, and governments.
@@ -17,7 +18,6 @@ FDS's software is currently in beta or earlier and has no guarantees of file int
 1. [Fairdrive](https://fairdrive.fairdatasociety.org/) - Decentralised storage on Swarm.
 1. [Fairdrop](https://fairdrop.fairdatasociety.org/) - An easy and secure way to send your files. No central server. No tracking. No backdoors. 
 1. [FairOS](https://docs.fairos.fairdatasociety.org/docs/) - The operating system for the decentralised web.
-1. [Galileo](https://app.galileo.fairdatasociety.org/) - An open source project that allows you to use, create and modify maps of various participants.
 
 ## Links
 

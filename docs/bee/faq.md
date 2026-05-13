@@ -1,6 +1,7 @@
 ---
 title: Bee FAQ
 id: bee-faq
+description: Addresses common questions about running Bee nodes including setup installation troubleshooting and blockchain interactions.
 ---
 
 ## Running a Bee Node
@@ -13,12 +14,12 @@ Depending on your needs you can run an ultra-light, light or full node.
 
 ### What are the differences between Bee node types?
 
-A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](/docs/bee/installation/getting-started) for an overview of the differences.
+A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](./installation/getting-started.md) for an overview of the differences.
 
 
 #### What are the requirements for running a Bee node?
 
-See the [getting started section](/docs/bee/installation/getting-started#software-requirements) for more information about running a Bee node.
+See the [getting started section](./installation/getting-started.md#software-requirements) for more information about running a Bee node.
 
 ##### Full node
 
@@ -38,11 +39,11 @@ Typically, each node requires around 10 megabits per second (Mbps) of bandwidth 
 
 Bee is compatible with Windows and a Bee `.exe` file can be found on the [`releases` page](https://github.com/ethersphere/bee/releases) of the Bee repo.  
 
-It is also possible to [build from the source](/docs/bee/installation/build-from-source).
+It is also possible to [build from the source](./installation/build-from-source.md).
 
 ##### How do I get the node's wallet's private key (use-case for Desktop app)?
 
-See the [backup section](/docs/bee/working-with-bee/backups/) for more info.
+See the [backup section](./working-with-bee/backups.md) for more info.
 
 ##### How do I import my private key to Metamask?
 
@@ -50,7 +51,7 @@ You can import the `swarm.key` json file in MetaMask using your password file or
 
 ##### Where can I find my password?
 
-You can find the password in the root of your data directory. See the [backup section](/docs/bee/working-with-bee/backups/) for more info.
+You can find the password in the root of your data directory. See the [backup section](./working-with-bee/backups.md) for more info.
 
 ## Connectivity
 
@@ -91,11 +92,11 @@ We recommend you run your own [Gnosis Node using Nethermind](https://docs.gnosis
 
 ### How can I export my private keys?
 
-See the section on [backups](/docs/bee/working-with-bee/backups) for exporting your keys.
+See the section on [backups](./working-with-bee/backups.md) for exporting your keys.
 
 ### How to import bee node address to MetaMask?
 
-1. See the [backup section](/docs/bee/working-with-bee/backups/) for info on exporting keys.
+1. See the [backup section](./working-with-bee/backups.md) for info on exporting keys.
 2. Go to Metamask and click "Account 1" --> "Import Account"
 3. Choose the "Select Type" dropdown menu and choose "JSON file"
 4. Paste the password (Make sure to do this first)
@@ -127,7 +128,7 @@ Get your chequebook contract address with: `curl http://localhost:1633/chequeboo
 
 ### Where can I find documents about the cashout commands?
 
-Learn how to cash out [here](/docs/bee/working-with-bee/cashing-out).
+Learn how to cash out [here](./working-with-bee/cashing-out.md).
 
 ### When I run http://localhost:1633/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
 
@@ -164,7 +165,7 @@ Therefore, the rule is, each node must have:
 
 ### How can I add Gnosis / Sepolia to Metamask?
 
-You can easily add Sepolia or Gnosis to metamask using the [official guide from Metamask](https://support.metamask.io/networks-and-sidechains/managing-networks/how-to-add-a-custom-network-rpc/).
+You can easily add Sepolia or Gnosis to metamask using the [official guide from Metamask](https://support.metamask.io/configure/networks/how-to-add-a-custom-network-rpc/).
 
 If you are using a different wallet which does not have an easy option for adding networks like Metamask does, then you may need to add the networks manually. You need to fill in four pieces of information to do so:
 

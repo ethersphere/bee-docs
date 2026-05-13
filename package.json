@@ -5,14 +5,17 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node scripts/fetch-awesome-swarm.mjs",
+    "prebuild": "cp openapi/Swarm.yaml static/openapi.yaml && node scripts/fetch-awesome-swarm.mjs && node scripts/validate-llms-txt.mjs",
     "build": "docusaurus build",
+    "build:quiet": "cross-env NODE_OPTIONS=\"--disable-warning=DEP0040 --disable-warning=DEP0169\" docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve"
+    "serve": "docusaurus serve",
+    "precheck:links": "git submodule update --remote tools/docusaurus-link-checker",
+    "check:links": "python3 tools/docusaurus-link-checker/check_links.py",
+    "build:check": "npm run build && python3 tools/docusaurus-link-checker/check_links.py"
   },
   "dependencies": {
-    "@cookbookdev/docsbot": "^4.25.15",
     "@docsearch/js": "^4.3.2",
     "@docusaurus/core": "^3.9.2",
     "@docusaurus/plugin-client-redirects": "^3.9.2",
@@ -22,10 +25,10 @@
     "@saucelabs/theme-github-codeblock": "^0.3.0",
     "babel-plugin-styled-components": "^2.1.4",
     "clsx": "^2.1.1",
-    "docusaurus-lunr-search": "^3.6.0",
     "docusaurus-plugin-llms": "^0.2.2",
     "docusaurus-plugin-matomo": "^0.0.8",
     "hast-util-is-element": "^3.0.0",
+    "iconv-lite": "^0.7.2",
     "plugin-image-zoom": "github:flexanalytics/plugin-image-zoom",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -50,5 +53,8 @@
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=9.6.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
   }
 }

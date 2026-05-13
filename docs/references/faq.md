@@ -1,6 +1,7 @@
 ---
 title: FAQ
 id: faq
+description: Frequently asked questions about Swarm protocols and general usage.
 ---
 
 
@@ -10,22 +11,22 @@ id: faq
 
 ### What are the Swarm Foundation's official channels?
 
-- Website: [https://ethswarm.org/](https://ethswarm.org/)
+- Website: [https://www.ethswarm.org/](https://www.ethswarm.org/)
 - Blog:[https://blog.ethswarm.org/](https://blog.ethswarm.org/)
 - Github: [https://github.com/ethersphere](https://github.com/ethersphere)
 - e-mail: info@ethswarm.org
-- Discord: [https://discord.ethswarm.org/](https://discord.ethswarm.org/)
+- Discord: [https://discord.gg/kHRyMNpw7t](https://discord.gg/kHRyMNpw7t)
 - Twitter: [https://twitter.com/ethswarm](https://twitter.com/ethswarm)
 - Reddit: [https://www.reddit.com/r/ethswarm](https://www.reddit.com/r/ethswarm)
 - Youtube: [https://www.youtube.com/channel/UCu6ywn9MTqdREuE6xuRkskA](https://www.youtube.com/channel/UCu6ywn9MTqdREuE6xuRkskA)
 
 ### Where can I find technical support and get answers to my other questions?
 
-The Swarm community is centered around our Discord server where you will find many people willing and able to help with your every need! [https://discord.ethswarm.org/](https://discord.ethswarm.org/)
+The Swarm community is centered around our Discord server where you will find many people willing and able to help with your every need! [https://discord.gg/kHRyMNpw7t](https://discord.gg/kHRyMNpw7t)
 
 ### Where can I find support for running Bee node on Dappnode?
 
-You can find support for running Bee on Dappnode on the Dappnode Discord server: [https://discord.gg/dRd5CrjF](https://discord.gg/dRd5CrjF)
+You can find support for running Bee on Dappnode on the Dappnode Discord server: [https://discord.gg/dappnode](https://discord.gg/dappnode)
 
 ### Who can I contact for other inquiries?
 
@@ -55,7 +56,7 @@ There are many ways to acquire BZZ tokens, either on custodial centralised excha
 
 ### What is the BZZ token address?
 
-See [this page](/docs/references/smart-contracts) for a list of relevant token addresses. 
+See [this page](./smart-contracts.mdx) for a list of relevant token addresses. 
 
 ### What is the BZZ token supply?
 

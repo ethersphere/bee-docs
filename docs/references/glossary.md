@@ -1,6 +1,7 @@
 ---
 title: Glossary
 id: glossary
+description: Comprehensive glossary of terms and concepts used throughout Swarm documentation.
 ---
 
 
@@ -12,7 +13,7 @@ Swarm is also the name of the core organization that oversees the development an
 
 ## Gnosis Chain
 
-[Gnosis Chain](https://www.gnosis.io/) (previously known as xDai chain) is a [PoS](https://www.gnosis.io/validators), [EVM](https://ethereum.org/en/developers/docs/evm/) compatible Ethereum [sidechain](https://ethereum.org/en/developers/docs/scaling/sidechains/) which uses the same addressing scheme as Ethereum. Swarm's smart contracts have been issued on Gnosis Chain.
+[Gnosis Chain](https://www.gnosis.io/) (previously known as xDai chain) is a [PoS](https://www.gnosis.io/validators), [EVM](https://ethereum.org/developers/docs/evm/) compatible Ethereum [sidechain](https://ethereum.org/developers/docs/scaling/sidechains/) which uses the same addressing scheme as Ethereum. Swarm's smart contracts have been issued on Gnosis Chain.
 
 ## Smart Contracts
 
@@ -36,7 +37,7 @@ Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and th
 
 ## Neighborhood
 
-[Neighborhoods](/docs/concepts/DISC/neighborhoods) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
+[Neighborhoods](./../concepts/DISC/neighborhoods.md) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
 
 ## Sister Neighborhood
 
@@ -184,7 +185,7 @@ Bridged tokens are tokens from one blockchain which have been _bridged_ to anoth
 
 ## BZZ Token
 
-BZZ is Swarm's [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) token issued on Ethereum.   
+BZZ is Swarm's [ERC-20](https://ethereum.org/developers/docs/standards/tokens/erc-20/) token issued on Ethereum.   
 
 
 ## xBZZ Token
@@ -195,11 +196,11 @@ It is used as payment for [postage stamps](#postage-stamps) and as the unit of a
 
 ## DAI Token
 
-[DAI](https://developer.makerdao.com/dai/1/) is an [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) stable token issued on the Ethereum blockchain, tracking USD.
+[DAI](https://docs.gnosischain.com/about/tokens/xdai) is an [ERC-20](https://ethereum.org/developers/docs/standards/tokens/erc-20/) stable token issued on the Ethereum blockchain, tracking USD.
 
 ## xDAI Token
 
-xDAI is [DAI](https://developer.makerdao.com/dai/1/) [bridged](#bridged-tokens) to the [Gnosis Chain](https://www.gnosis.io) using [xDai Bridge](https://bridge.gnosischain.com/). It is also the native token of the Gnosis Chain, i.e. transaction fees are paid in xDai.
+xDAI is [DAI](https://docs.gnosischain.com/about/tokens/xdai) [bridged](#bridged-tokens) to the [Gnosis Chain](https://www.gnosis.io) using [xDai Bridge](https://bridge.gnosischain.com/). It is also the native token of the Gnosis Chain, i.e. transaction fees are paid in xDai.
 
 ## Sepolia
 
@@ -209,7 +210,7 @@ Sepolia is an Ethereum testnet. It is an environment where smart contracts can b
 
 A cryptocurrency faucet supplies small amounts of cryptocurrency to requestors (typically for testing purposes).
 
-Check out the [Fund Your Node](In order to acquire sETH and sBZZ, refer to the [Fund Your Node](/docs/bee/installation/fund-your-node) page.) page for more information.
+Check out the [Fund Your Node](./../bee/installation/fund-your-node.md) page for more information.
 
 
 ## RPC Endpoint

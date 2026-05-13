@@ -1,6 +1,7 @@
 ---
 title: Cashing Out
 id: cashing-out
+description: Explains how to withdraw earned xBZZ rewards and manage cheques through the bandwidth incentives SWAP system.
 ---
 
 There are two different types of cashing out. The first type is cashing out xBZZ rewards earned from staking and providing storage services (this method also allows for withdrawal of the native xDAI token). The second type is for the withdrawal of xBZZ earned through bandwidth incentives (SWAP). Both types are explained below: 
@@ -157,7 +158,7 @@ curl -X POST http://localhost:1633/chequebook/cashout/d7881307e793e389642ea73345
 ```
 
 You may check the status of your transaction using the [xDAI
-Blockscout](https://blockscout.com/xdai/mainnet).
+Blockscout](https://gnosis.blockscout.com/).
 
 Finally, we can now see the status of the cashout transaction by sending a GET request to the same URL.
 
@@ -200,7 +201,7 @@ curl -X POST http://localhost:1633/chequebook/deposit\?amount\=1000 | jq
 }
 ```
 
-You may then use [Blockscout](https://blockscout.com/xdai/mainnet) to
+You may then use [Blockscout](https://gnosis.blockscout.com/) to
 track your transaction and make sure it completed successfully.
 
 ## Managing uncashed cheques
