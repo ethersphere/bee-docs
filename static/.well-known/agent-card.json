@@ -8,6 +8,8 @@
   },
   "version": "0.1.0",
   "documentationUrl": "https://docs.ethswarm.org",
+  "mcpServerUrl": "https://github.com/ethersphere/swarm-mcp",
+  "llmsTxtUrl": "https://docs.ethswarm.org/llms.txt",
   "capabilities": {
     "streaming": false,
     "pushNotifications": false
