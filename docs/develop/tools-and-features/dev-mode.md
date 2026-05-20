@@ -1,19 +1,68 @@
 ---
-title: Developer mode
+title: bee-factory
 id: bee-dev-mode
-description: Documentation for development mode features for testing and debugging Bee applications.
+description: Documentation for bee-factory, the recommended local Swarm development stack for testing and prototyping Bee applications.
 ---
 
-You can start the bee in `dev` mode by running the command:
+`bee-factory` is the recommended way to run a local Swarm development environment. It spins up 5 Bee nodes connected to a local Anvil blockchain — all wired together in a single command, with no real xBZZ required.
 
-```bash
-bee dev
+:::info
+The `bee dev` command is no longer recommended. Please use `bee-factory` for local development instead.
+:::
+
+## Requirements
+
+- Node.js ≥ 18
+- Docker
+
+## Installation
+
+```sh
+npm install -g @ethersphere/bee-factory
 ```
 
-It will start an instance with volatile persistence all back-ends mocked.
+## Usage
 
-As a developer you interact with all the usual HTTP endpoints, for instance you can buy postage stamps and use them to upload files, which will be saved to memory.
+```sh
+bee-factory start               # Start the stack (uses bundled snapshot for fast boot)
+bee-factory start --fresh       # Redeploy contracts from scratch, save new snapshot
+bee-factory start --tag v2.7.1  # Build Bee from a specific git ref (default: master)
 
-## Configuration options
+bee-factory stop                # Stop and remove all containers
+```
 
-It accepts the same configuration options as a normal bee but it will ignore the ones that are not relevant (accounting, networking, blockchain etc).
+The `--fresh` flag redeploys all contracts and saves a new snapshot; subsequent normal starts load from it instantly.
+
+## Endpoints
+
+Once running, the nodes are accessible at these addresses:
+
+| Node     | API                     | P2P                     |
+|----------|-------------------------|-------------------------|
+| Queen    | http://localhost:1633   | http://localhost:1634   |
+| Worker 1 | http://localhost:11633  | http://localhost:11634  |
+| Worker 2 | http://localhost:21633  | http://localhost:21634  |
+| Worker 3 | http://localhost:31633  | http://localhost:31634  |
+| Worker 4 | http://localhost:41633  | http://localhost:41634  |
+
+**Anvil RPC:** `http://localhost:8545` (chain ID 1337)
+
+## Deployed contracts
+
+The following contracts are deployed automatically on startup, with addresses printed to the console:
+
+| Contract             | Role                      |
+|----------------------|---------------------------|
+| BzzToken             | ERC-20 BZZ token          |
+| PostageStamp         | Postage stamp management  |
+| PriceOracle          | Postage pricing           |
+| StakeRegistry        | Node staking              |
+| Redistribution       | Stake redistribution      |
+| SimpleSwapFactory    | Swap contract factory     |
+| SwapPriceOracle      | Swap pricing oracle       |
+
+## Notes
+
+- Each node is funded with 1 ETH and 100 BZZ.
+- Node password: `bee-factory`
+- Uses [Foundry test keys](https://www.getfoundry.sh/anvil#default-accounts) — never use in production.
