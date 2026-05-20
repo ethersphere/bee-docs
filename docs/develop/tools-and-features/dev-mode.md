@@ -7,7 +7,7 @@ description: Documentation for bee-factory, the recommended local Swarm developm
 `bee-factory` is the recommended way to run a local Swarm development environment. It spins up 5 Bee nodes connected to a local Anvil blockchain — all wired together in a single command, with no real xBZZ required.
 
 :::info
-The `bee dev` command is no longer recommended. Please use `bee-factory` for local development instead.
+The `bee dev` command is no longer available. Please use `bee-factory` for local development instead.
 :::
 
 ## Requirements
