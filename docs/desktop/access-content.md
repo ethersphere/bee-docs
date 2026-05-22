@@ -12,7 +12,7 @@ To access content on Swarm go to the ***Files*** tab and click ***Download***:
 
 From there, paste the Swarm hash for the content you want to access, and click ***Find***. We'll use the hash for a Swarm blog post explaining how to upload a website to Swarm:
 
-`6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae`
+`bc9b942212421e2a19fe1ffdf0add641ae530923041ea8f549381747b14b2f2d`
 
 ![](/img/access2.png)
 

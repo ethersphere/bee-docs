@@ -53,12 +53,12 @@ Your website is now accessible via:
 
 **Local Bee node:**
 ```
-http://localhost:1633/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+http://localhost:1633/bzz/bc9b942212421e2a19fe1ffdf0add641ae530923041ea8f549381747b14b2f2d/
 ```
 
 **Public gateway:**
 ```
-https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+https://api.gateway.ethswarm.org/bzz/bc9b942212421e2a19fe1ffdf0add641ae530923041ea8f549381747b14b2f2d/
 ```
 
 Replace the hash with your actual website hash.
