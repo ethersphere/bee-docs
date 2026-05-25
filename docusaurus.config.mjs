@@ -1,6 +1,27 @@
 // docusaurus.config.mjs
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import webpack from 'webpack';
+
+function fixStencilSsrPlugin(_context, _options) {
+  return {
+    name: 'fix-stencil-ssr',
+    configureWebpack(_config, isServer) {
+      if (isServer) return {};
+      // @stencil/react-output-target uses process.env.STENCIL_SSR_DEBUG.
+      // Webpack replaces process.env with {}, producing {}.STENCIL_SSR_DEBUG
+      // at statement level — invalid JS that Terser rejects. Define it
+      // explicitly so webpack emits `false` instead.
+      return {
+        plugins: [
+          new webpack.DefinePlugin({
+            'process.env.STENCIL_SSR_DEBUG': JSON.stringify(false),
+          }),
+        ],
+      };
+    },
+  };
+}
 
 /** @type {import('@docusaurus/types').Config} */
 export default {
@@ -46,6 +67,8 @@ export default {
   },
 
   plugins: [
+    fixStencilSsrPlugin,
+    ['@orama/plugin-docusaurus-v3', { analytics: false }],
     'plugin-image-zoom',
     [
       'docusaurus-plugin-llms',
@@ -238,11 +261,11 @@ export default {
       ],
       copyright: `Copyleft © ${new Date().getFullYear()}.`,
     },
-    algolia: {
+   /* algolia: {
       appId: "UAJRQL15I8",
       apiKey: "7660a0b9a0f5aff5abd6c285b57f1e45",
       indexName: "ethswarm",
       contextualSearch: false,
-    },
+    }, */
   },
 };
