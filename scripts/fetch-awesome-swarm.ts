@@ -3,6 +3,7 @@
 
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const SOURCE_URL =
   'https://raw.githubusercontent.com/ethersphere/awesome-swarm/refs/heads/master/README.md';
@@ -55,7 +56,9 @@ description: Curated list of community resources tools and projects related to S
   console.log(`Wrote ${OUT_PATH}`);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}
