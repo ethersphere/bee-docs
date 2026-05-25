@@ -22,7 +22,7 @@ if (!existsSync(LLMS_TXT)) {
   process.exit(1);
 }
 
-function walkFind(dir: string, name: string, results: string[] = []): string[] {
+export function walkFind(dir: string, name: string, results: string[] = []): string[] {
   for (const entry of readdirSync(dir, { withFileTypes: true }) as Dirent[]) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) {

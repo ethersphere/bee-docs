@@ -14,7 +14,8 @@
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "check:links": "tsx scripts/check_links.ts",
-    "build:check": "npm run build && tsx scripts/check_links.ts"
+    "build:check": "npm run build && tsx scripts/check_links.ts",
+    "test": "node --import tsx/esm --test \"scripts/*.test.ts\""
   },
   "dependencies": {
     "@docsearch/js": "^4.3.2",
@@ -23,6 +24,7 @@
     "@docusaurus/preset-classic": "^3.9.2",
     "@docusaurus/theme-mermaid": "^3.9.2",
     "@mdx-js/react": "^3.1.0",
+    "@orama/plugin-docusaurus-v3": "^3.1.18",
     "@saucelabs/theme-github-codeblock": "^0.3.0",
     "babel-plugin-styled-components": "^2.1.4",
     "clsx": "^2.1.1",

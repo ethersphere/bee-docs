@@ -12,11 +12,11 @@ const OUT_PATH = resolve(process.cwd(), 'docs/references/awesome-list.mdx');
 const REPO_HTTP_BASE = 'https://github.com/ethersphere/awesome-swarm/blob/master/';
 const RAW_HTTP_BASE  = 'https://raw.githubusercontent.com/ethersphere/awesome-swarm/master/';
 
-function normalizeNewlines(str: string): string {
+export function normalizeNewlines(str: string): string {
   return str.replace(/\r\n/g, '\n');
 }
 
-function rewriteRelativeLinks(md: string): string {
+export function rewriteRelativeLinks(md: string): string {
   md = md.replace(
     /!\[([^\]]*)\]\((?!https?:|#|mailto:)([^)]+)\)/g,
     (_m, alt: string, p: string) => `![${alt}](${RAW_HTTP_BASE}${p})`
