@@ -12,33 +12,29 @@ const OUT_PATH = resolve(process.cwd(), 'docs/references/awesome-list.mdx');
 const REPO_HTTP_BASE = 'https://github.com/ethersphere/awesome-swarm/blob/master/';
 const RAW_HTTP_BASE  = 'https://raw.githubusercontent.com/ethersphere/awesome-swarm/master/';
 
-function normalizeNewlines(str) {
+function normalizeNewlines(str: string): string {
   return str.replace(/\r\n/g, '\n');
 }
 
-function rewriteRelativeLinks(md) {
-  // Images: ![alt](path) where path is relative
+function rewriteRelativeLinks(md: string): string {
   md = md.replace(
     /!\[([^\]]*)\]\((?!https?:|#|mailto:)([^)]+)\)/g,
-    (_m, alt, path) => `![${alt}](${RAW_HTTP_BASE}${path})`
+    (_m, alt: string, p: string) => `![${alt}](${RAW_HTTP_BASE}${p})`
   );
-  // Links: [text](path) where path is relative
   md = md.replace(
     /\[([^\]]+)\]\((?!https?:|#|mailto:)([^)]+)\)/g,
-    (_m, text, path) => `[${text}](${REPO_HTTP_BASE}${path})`
+    (_m, text: string, p: string) => `[${text}](${REPO_HTTP_BASE}${p})`
   );
   return md;
 }
 
-async function main() {
+async function main(): Promise<void> {
   const res = await fetch(SOURCE_URL);
   if (!res.ok) throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
 
   let md = normalizeNewlines(await res.text());
 
-  // Optional: strip upstream H1 to avoid a second big title under our frontmatter title
   md = md.replace(/^# .*\n+/, '');
-
   md = rewriteRelativeLinks(md);
 
   const header = `---

@@ -2,18 +2,19 @@
   "name": "bee-docs",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node -e \"require('fs').copyFileSync('openapi/Swarm.yaml', 'static/openapi.yaml')\" && node scripts/fetch-awesome-swarm.mjs && node scripts/validate-llms-txt.mjs",
+    "prebuild": "node -e \"require('fs').copyFileSync('openapi/Swarm.yaml', 'static/openapi.yaml')\" && tsx scripts/fetch-awesome-swarm.ts",
     "build": "docusaurus build",
+    "postbuild": "tsx scripts/check-llms-coverage.ts",
     "build:quiet": "cross-env NODE_OPTIONS=\"--disable-warning=DEP0040 --disable-warning=DEP0169\" docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "precheck:links": "git submodule update --remote tools/docusaurus-link-checker",
-    "check:links": "python3 tools/docusaurus-link-checker/check_links.py",
-    "build:check": "npm run build && python3 tools/docusaurus-link-checker/check_links.py"
+    "check:links": "tsx scripts/check_links.ts",
+    "build:check": "npm run build && tsx scripts/check_links.ts"
   },
   "dependencies": {
     "@docsearch/js": "^4.3.2",
@@ -55,6 +56,9 @@
     "npm": ">=9.6.0"
   },
   "devDependencies": {
-    "cross-env": "^10.1.0"
+    "@types/node": "^22.0.0",
+    "cross-env": "^10.1.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
   }
 }

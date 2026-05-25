@@ -104,7 +104,7 @@ export default {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: './sidebars.js', // Simplified path for ESM
+          sidebarPath: './sidebars.cjs',
           editUrl: 'https://github.com/ethersphere/docs.github.io/blob/master',
           remarkPlugins: [remarkMath], // Now using imported ESM modules
           rehypePlugins: [rehypeKatex],

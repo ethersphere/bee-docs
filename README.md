@@ -70,10 +70,10 @@ The site serves two files for AI agents at the root:
 
 ### Keeping `llms.txt` up to date
 
-The validation script `scripts/validate-llms-txt.mjs` runs automatically during `npm run build` (via the `prebuild` hook). It cross-checks `static/llms.txt` against the actual doc files and prints warnings for:
+The script `scripts/check-llms-coverage.mjs` runs automatically after every build (via the `postbuild` hook). It cross-checks `static/llms.txt` against the actual build output (`build/docs/`) and prints warnings for:
 
-- **Stale links** — a URL in `llms.txt` points to a doc page that no longer exists (renamed/deleted).
-- **Missing coverage** — a doc file exists that isn't listed in `llms.txt` (new page added without updating the index).
+- **Stale links** — a URL in `llms.txt` points to a page that no longer exists in the build.
+- **Missing coverage** — a built page isn't listed in `llms.txt`.
 
 The script is **informational only** (exit 0) — it won't block the build.
 
@@ -86,21 +86,24 @@ A few pages are intentionally excluded (intro/landing pages that only contain na
 
 ## Link Checker
 
-This repo includes [ethersphere/docusaurus-link-checker](https://github.com/ethersphere/docusaurus-link-checker) as a git submodule at `tools/docusaurus-link-checker`. After cloning, initialise it with:
-
-```bash
-git submodule update --init
-```
+The link checker scripts live in `scripts/` and are written in TypeScript. They require no additional installation beyond `npm ci` (which installs `tsx`).
 
 ### Usage
 
-Run the checker from the repo root:
+Run the checker against a local build:
 
 ```bash
-npm run check:links
+npm run build          # build the site first
+npm run check:links    # check the local build
 ```
 
-You will be prompted to choose local or live mode. Flags are passed through after `--`:
+Or build and check in one step:
+
+```bash
+npm run build:check
+```
+
+Flags are passed through after `--`:
 
 ```bash
 npm run check:links -- --mode local
@@ -114,12 +117,6 @@ npm run check:links -- --mode local --no-external --threads 16
 | `--site-domain` | Your site's domain — auto-detected from `docusaurus.config.*` if omitted |
 | `--no-external` | Skip external URL checking (local mode only) |
 | `--threads N` | Number of concurrent HTTP threads (default: 8) |
-
-To run the full build and then immediately check links:
-
-```bash
-npm run build:check
-```
 
 Reports are written to `link-reports/` (gitignored).
 
