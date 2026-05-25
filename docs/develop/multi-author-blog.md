@@ -823,7 +823,7 @@ for (const author of authors) {
   const owner  = new EthAddress(author.owner);
   const reader = bee.makeFeedReader(topic, owner);
   try {
-    const result = await reader.downloadReference();
+    const result = await reader.download();
     console.log(`${author.name}`);
     console.log(`  Feed index: ${result.feedIndex.toBigInt()}`);
     console.log(`  URL: ${process.env.BEE_URL}/bzz/${author.feedManifest}/`);
