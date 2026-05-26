@@ -69,6 +69,8 @@ Flags:
       --cache-capacity uint                      cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
       --cache-retrieval                          enable forwarded content caching (default true)
       --chequebook-enable                        enable chequebook (default true)
+      --chequebook-min-balance string            minimum chequebook balance required for incoming full-node peers in BZZ (default "11")
+      --chequebook-verification                  enable chequebook verification for incoming full-node peers (default false)
       --cors-allowed-origins strings             origins with CORS headers enabled
       --data-dir string                          data directory (default "/home/bee/.bee")
       --db-block-cache-capacity uint             size of block cache of the database in bytes (default 33554432)
@@ -178,6 +180,10 @@ cache-capacity: "1000000"
 cache-retrieval: true
 # enable chequebook
 chequebook-enable: true
+# minimum chequebook balance required for incoming full-node peers in BZZ
+chequebook-min-balance: "11"
+# enable chequebook verification for incoming full-node peers
+chequebook-verification: false
 # config file (default is $HOME/.bee.yaml)
 config: /home/bee/.bee.yaml
 # origins with CORS headers enabled
@@ -581,6 +587,39 @@ For running a light node or for testing out a single full node you can use the f
 ## Configuring Swap Initial Deposit (Optional)
 
 When running your Bee node with SWAP enabled for the first time, your node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
+
+## Chequebook Verification (Optional)
+
+Full node operators can optionally require that incoming peer connections come from nodes that maintain a minimum chequebook balance. When enabled, the node checks the chequebook balance of each incoming full-node peer and rejects connections from peers whose balance falls below the configured threshold.
+
+This feature is **disabled by default** and only applies to full nodes with chequebook and chain functionality enabled. Light nodes skip chequebook verification regardless of configuration. Remote peers do not need to enable chequebook verification themselves in order to be accepted — only the verifying node needs to have it enabled.
+
+To enable chequebook verification, set `chequebook-verification` to `true`:
+
+```yaml
+## bee.yaml
+chequebook-verification: true
+```
+
+The default minimum balance threshold is **11 BZZ**. To configure a different threshold, set `chequebook-min-balance` to the desired amount in BZZ:
+
+```yaml
+## bee.yaml
+chequebook-verification: true
+chequebook-min-balance: "11"
+```
+
+Or using command-line flags:
+
+```bash
+bee start \
+  --chequebook-verification \
+  --chequebook-min-balance 11
+```
+
+:::info
+Chequebook verification is an optional defense layer for full node operators who want to avoid connecting to peers that do not maintain a sufficient chequebook balance. It was introduced in Bee v2.8.0.
+:::
 
 ## NAT address
 
