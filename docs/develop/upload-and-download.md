@@ -283,84 +283,9 @@ console.log(stylesheet.name); // "example.txt"
 console.log(stylesheet.data.toUtf8()); // prints file content
 ```
 
-## Upload & Download with Swarm CLI
-
-The `swarm-cli` tool offers a convenient command-line interface for Bee node interaction. It's a convenient tool for node management or one-off uploads and downloads.
-
-Refer to [the official README](https://github.com/ethersphere/swarm-cli/blob/master/README.md) for a more complete usage guide.
-
-Buy storage via an interactive prompt (capacity + TTL), then upload:
-
-```bash
-swarm-cli stamp create
-```
-
-Follow the interactive prompts:
-
-```bash
-For swarm cli, use "stamp create", which looks like this:
-
-PS C:\Users\noahm> swarm-cli stamp create
-Please provide the total capacity of the postage stamp batch
-This represents the total size of data that can be uploaded
-Example: 1GB
-
-Please provide the time-to-live (TTL) of the postage stamps
-Defines the duration after which the stamp will expire
-Example: 1d, 1w, 1month
-
-You have provided the following parameters:
-Capacity: 1.074 GB
-TTL: 7 days
-
-Cost: 0.6088166475825152 xBZZ
-Available: 10000.0000000000000000 xBZZ
-Type: Immutable
-? Confirm the purchase Yes
-... Creating postage batch. This may take up to 5 minutes.
-```
-
-Once you have a valid stamp batch, you can find it using `swarm-cli stamp list`
-
-```bash
-swarm-cli stamp list
-```
-
-```bash
-Stamp ID: 6dd0c4bbb6d62ba6c5fae3b000301c961ee584dd32846291821d789d7582ae36
-Usage: 0%
-Capacity (immutable): 2.380 GB remaining out of 2.380 GB
-TTL: A few seconds (2025-09-21)
-------------------------------------------------------------------------------------------------------------------------
-Stamp ID: d13210952ec60b01a3c0027602743921736d6b277e9e70dd00d0d95fd878acbc
-Usage: 0%
-Capacity (immutable): 2.380 GB remaining out of 2.380 GB
-TTL: A few seconds (2025-09-21)
-```
-
-Use `swarm-cli upload` along with a valid batch ID to upload a file:
-
-```bash
-swarm-cli upload test.txt --stamp <BATCH_ID>
-```
-
-You can also simply use:
-
-```bash
-swarm-cli upload <PATH_TO_FILE>
-```
-
-And an interactive prompt will walk your through stamp selection and the rest of the upload.
-
-Upon upload, a Swarm reference hash will be returned which can then be used to download content:
-
-```bash
-swarm-cli download <REFERENCE> ./output/
-```
-
 ## Upload & Download with the Bee API (advanced)
 
-The **Bee HTTP API** offers the **lowest-level access** to a Bee node. However, it is **more complex and difficult to use** than **bee-js** or **swarm-cli** because you must manage headers, content types, and postage parameters yourself. **Unless you specifically require raw HTTP control**, we **do not recommend** using the Bee API directly. Instead use **bee-js** for application development and **swarm-cli** for command-line interaction.
+The **Bee HTTP API** offers the **lowest-level access** to a Bee node. It is **more complex and harder to use** than **bee-js** because you must manage headers, content types, and postage parameters yourself. **Unless you specifically require raw HTTP control**, we **do not recommend** using the Bee API directly — use **bee-js** instead for application development.
 
 Refer to the [Bee API reference specification](https://docs.ethswarm.org/api/) for detailed usage information.
 
@@ -372,7 +297,7 @@ The Bee API exposes three HTTP endpoints:
 
 #### Upload with **/bzz**
 
-While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
+While `bee-js` allows postage stamp batches to be purchased by specifying storage duration and data size, the raw Bee API requires `amount` and `depth` parameters directly. The relationship between these parameters and the storage size and duration of the batch is complex, so `bee-js` is strongly encouraged for newcomers. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
 
 1. Buy a postage batch:
 

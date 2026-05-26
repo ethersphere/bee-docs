@@ -5,8 +5,6 @@ sidebar_label: Manage Files
 description: Guide for working with file operations including chunking and handling in Swarm applications.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Manage Files
 

@@ -135,24 +135,25 @@ Expected output:
 OK
 ```
 
-### 6. Test with uploaded content
+### 6. Test with existing content
 
-Upload a file using Bee:
-
-```bash
-echo "hello swarm" > test.txt
-swarm-cli upload test.txt
-```
-
-This will print a Swarm reference.
-
-Open the file through the gateway:
+To confirm the gateway is correctly serving content from Swarm, request a reference that is already on the network. The following hash points to a small JSON file:
 
 ```text
-http://your-domain.example/bzz/<REFERENCE>/
+http://your-domain.example/bzz/f3f5e25c90824876c2468b9bdf0d842cd05dc5f0974681789b9729bc155c4f65/
 ```
 
-The file contents should be returned.
+Expected output:
+
+```json
+{
+  "octalmage.com": "bzz://45f0f1e13b70e2919e59fdc5bcf3a99bcbe19dc1be6ebdebe3f89794b77c19ab/",
+  "o8.is": "bzz://4cd43b1c0ebc257f79cc45ebd9774e1251e34f08026325c78ef2ca46972935cc/",
+  "dist.o8.is": "bzz://0890110b61109aee2b6f0d071cedce584868bb29dcb7e41b1c0388d6cf775ace/"
+}
+```
+
+If the JSON is returned, your gateway is correctly fetching and serving content from Swarm. To serve your own content, upload a file or website through your Bee node (see the [Upload and Download](/docs/develop/upload-and-download) and [Host a Webpage](/docs/develop/host-your-website) guides) and use the resulting reference in place of the one above.
 
 ### 7. Optional: restrict uploads using authentication
 

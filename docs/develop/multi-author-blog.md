@@ -5,8 +5,6 @@ sidebar_label: Multi-Author Blog
 description: Build a decentralized multi-author blog on Swarm using linked feeds — each author has their own feed, and a master index feed ties them together.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 This guide extends the [Dynamic Content](/docs/develop/dynamic-content) pattern into a multi-author system. Instead of a single publisher managing one feed, each author independently controls their own feed, and an admin maintains an index feed that links them all together. This demonstrates the core architectural pattern needed for decentralized networks: **feeds that reference other feeds**.
 
@@ -16,8 +14,7 @@ The key insight is that a feed entry does not have to point to HTML content — 
 
 * A running Bee node ([install guide](/docs/bee/installation/quick-start))
 * A valid postage stamp batch ([how to get one](/docs/develop/tools-and-features/buy-a-stamp-batch))
-* Node.js 18+ and `@ethersphere/bee-js` installed (for `bee-js` examples)
-* [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli) (for `swarm-cli` examples)
+* Node.js 18+ and `@ethersphere/bee-js` installed
 * Familiarity with the [Dynamic Content](/docs/develop/dynamic-content) guide and feeds
 
 ## Architecture
@@ -87,9 +84,6 @@ This section builds a complete runnable project: a blog where multiple authors p
 
 ### Project Setup
 
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
-
 Use the cloned examples repo (see [Example Scripts](#example-scripts) above):
 
 ```bash
@@ -99,33 +93,8 @@ cp .env.example .env
 # Fill in BEE_URL and BATCH_ID in .env
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Create the project directory and author folders:
-
-```bash
-mkdir swarm-multiblog && cd swarm-multiblog
-mkdir -p blog/alice blog/bob blog/home
-```
-
-Set up three identities — one for each author and one for the admin:
-
-```bash
-swarm-cli identity create blog-admin
-swarm-cli identity create alice
-swarm-cli identity create bob
-```
-
-Keep the output of each command — you'll need the owner addresses and any other identity information for later steps.
-
-</TabItem>
-</Tabs>
 
 ### Project Structure
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 ```
 swarm-multiblog/
@@ -140,32 +109,10 @@ swarm-multiblog/
 └── read.js              # Read the feeds without private keys
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-```
-swarm-multiblog/
-├── blog/
-│   ├── alice/
-│   │   └── index.html       # Alice's latest blog page
-│   ├── bob/
-│   │   └── index.html       # Bob's latest blog page
-│   └── home/
-│       └── index.html       # Homepage with aggregated posts
-├── authors.json             # Directory of authors (manifest hashes, topics, owners)
-├── alice-posts.json         # Local tracking of Alice's posts
-└── bob-posts.json           # Local tracking of Bob's posts
-```
-
-</TabItem>
-</Tabs>
 
 ### Initialize the Blog
 
 This step generates keys for all authors and the admin, creates feeds for each author and for the homepage, builds the index feed with an `authors.json` manifest, and saves everything to `config.json`.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `init.js`:
 
@@ -359,129 +306,10 @@ Alice's feed:  http://localhost:1633/bzz/3fa19c.../
 Bob's feed:    http://localhost:1633/bzz/7c244b.../
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Create initial HTML files for each author. Start with Alice:
-
-```bash
-cat > blog/alice/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Alice's Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  <h1>Alice's Blog</h1>
-  <p><em>No posts yet.</em></p>
-</body>
-</html>
-EOF
-```
-
-Do the same for Bob:
-
-```bash
-cat > blog/bob/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Bob's Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  <h1>Bob's Blog</h1>
-  <p><em>No posts yet.</em></p>
-</body>
-</html>
-EOF
-```
-
-Upload Alice's initial page to her feed and save the manifest hash:
-
-```bash
-swarm-cli feed upload ./blog/alice \
-  --identity alice \
-  --topic-string alice-posts \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-This outputs a `Feed Manifest URL`. Extract the hash and save it as `ALICE_MANIFEST`. Do the same for Bob and save as `BOB_MANIFEST`.
-
-Now create `authors.json` with your manifest hashes and owner addresses (from your `swarm-cli identity` output earlier):
-
-```json
-[
-  {
-    "name": "Alice",
-    "topic": "alice-posts",
-    "owner": "<ALICE_ADDRESS>",
-    "feedManifest": "<ALICE_MANIFEST>"
-  },
-  {
-    "name": "Bob",
-    "topic": "bob-posts",
-    "owner": "<BOB_ADDRESS>",
-    "feedManifest": "<BOB_MANIFEST>"
-  }
-]
-```
-
-Upload `authors.json` to the index feed:
-
-```bash
-swarm-cli feed upload authors.json \
-  --identity blog-admin \
-  --topic-string blog-index \
-  --stamp <BATCH_ID>
-```
-
-Save the `Feed Manifest URL` hash as `INDEX_MANIFEST`.
-
-Finally, create the homepage and upload it to the home feed:
-
-```bash
-cat > blog/home/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Multi-Author Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  <h1>Multi-Author Blog</h1>
-  <p>2 authors</p>
-  <div style="border:1px solid #ddd; padding:16px; margin:12px 0; border-radius:4px;">
-    <h2 style="margin:0 0 8px 0;"><a href="/bzz/<ALICE_MANIFEST>/">Alice</a></h2>
-    <p><em>No posts yet.</em></p>
-  </div>
-  <div style="border:1px solid #ddd; padding:16px; margin:12px 0; border-radius:4px;">
-    <h2 style="margin:0 0 8px 0;"><a href="/bzz/<BOB_MANIFEST>/">Bob</a></h2>
-    <p><em>No posts yet.</em></p>
-  </div>
-</body>
-</html>
-EOF
-```
-
-Upload it:
-
-```bash
-swarm-cli feed upload ./blog/home \
-  --identity blog-admin \
-  --topic-string blog-home \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-Save the `Feed Manifest URL` hash as `HOME_MANIFEST`. This is your permanent blog URL.
-
-:::info
-In the swarm-cli workflow, `authors.json` and all state tracking is maintained manually or by local shell scripts. The swarm-cli commands handle uploads and feed updates; local file organization is left to you. For automation, you could write a shell script that regenerates `blog/home/index.html` and re-runs the feed upload.
-:::
-
-</TabItem>
-</Tabs>
 
 ### Add a Post
 
 Authors publish independently. Each author regenerates their blog page with the new post, uploads it, and updates their feed. The admin can then aggregate the latest posts into the homepage.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `add-post.js`:
 
@@ -577,76 +405,10 @@ node add-post.js bob "Why Swarm?" "Censorship resistance matters."
 Authors are fully independent. Bob can publish a post without Alice's involvement, without any coordination, and without running any admin script. Each author controls only their own private key and topic. The admin (homepage aggregator) runs separately and at their own discretion.
 :::
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Edit `blog/alice/index.html` to include the new post:
-
-```bash
-cat > blog/alice/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Alice's Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  <h1>Alice's Blog</h1>
-  <p>1 post</p>
-  <div style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:4px;">
-    <h2 style="margin:0 0 4px 0;">Hello Swarm</h2>
-    <small style="color:#888;">2025-06-15</small>
-    <p>My first post on a decentralized blog.</p>
-  </div>
-</body>
-</html>
-EOF
-```
-
-Re-upload to Alice's feed:
-
-```bash
-swarm-cli feed upload ./blog/alice \
-  --identity alice \
-  --topic-string alice-posts \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-The Feed Manifest URL stays the same. Alice's page now shows the new post. Do the same for Bob:
-
-```bash
-cat > blog/bob/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Bob's Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  <h1>Bob's Blog</h1>
-  <p>1 post</p>
-  <div style="border:1px solid #ddd; padding:12px; margin:8px 0; border-radius:4px;">
-    <h2 style="margin:0 0 4px 0;">Why Swarm?</h2>
-    <small style="color:#888;">2025-06-15</small>
-    <p>Censorship resistance matters.</p>
-  </div>
-</body>
-</html>
-EOF
-
-swarm-cli feed upload ./blog/bob \
-  --identity bob \
-  --topic-string bob-posts \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-Each author's feed manifest URL always serves their latest posts.
-
-</TabItem>
-</Tabs>
 
 ### Update the Homepage
 
 The admin aggregates all author feeds and publishes an updated homepage with previews of their latest posts. This is the key demonstration of feeds referencing feeds: the aggregator reads the index feed to discover authors, then reads each author's feed to fetch their latest content.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `update-index.js`:
 
@@ -739,59 +501,10 @@ The homepage now displays previews of the latest posts from all authors. The hom
 The `update-index.js` script reads local JSON sidecars (`alice-posts.json`, `bob-posts.json`) to populate post previews. In a production system, each post would be a separate Swarm upload, and the author's feed would store a JSON post-list reference (topic + manifest hash) instead of raw HTML. See [Etherjot](https://github.com/ethersphere/etherjot) for a full-featured example of this approach.
 :::
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-After authors have published posts, update the homepage HTML to include previews and links:
-
-```bash
-cat > blog/home/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Multi-Author Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  <h1>Multi-Author Blog</h1>
-  <p>2 authors</p>
-  <div style="border:1px solid #ddd; padding:16px; margin:12px 0; border-radius:4px;">
-    <h2 style="margin:0 0 8px 0;"><a href="/bzz/<ALICE_MANIFEST>/">Alice</a></h2>
-    <p><strong>Hello Swarm</strong> — 2025-06-15</p>
-    <p>My first post on a decentralized blog.</p>
-  </div>
-  <div style="border:1px solid #ddd; padding:16px; margin:12px 0; border-radius:4px;">
-    <h2 style="margin:0 0 8px 0;"><a href="/bzz/<BOB_MANIFEST>/">Bob</a></h2>
-    <p><strong>Why Swarm?</strong> — 2025-06-15</p>
-    <p>Censorship resistance matters.</p>
-  </div>
-</body>
-</html>
-EOF
-```
-
-Re-upload the homepage to its feed:
-
-```bash
-swarm-cli feed upload ./blog/home \
-  --identity blog-admin \
-  --topic-string blog-home \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-The homepage feed manifest URL (your permanent blog URL) now displays aggregated posts. The `<a>` links point to each author's feed manifest hash — stable, permanent URLs that always resolve to the latest version of each author's page.
-
-:::tip
-Notice: you did not edit the links to Alice or Bob's feeds. They are permanent feed manifest hashes. When Alice publishes a new post, her feed manifest URL automatically serves the new content. No link updates needed.
-:::
-
-</TabItem>
-</Tabs>
 
 ### Read the Blog
 
 Any third party can read the blog and discover all authors using only the index feed manifest hash. No private keys are needed.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `read.js`:
 
@@ -848,51 +561,10 @@ node read.js
 # or: npm run read
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Print the state of all feeds:
-
-```bash
-# Read the index feed
-swarm-cli feed print \
-  --identity blog-admin \
-  --topic-string blog-index
-
-# Read each author's feed
-swarm-cli feed print \
-  --identity alice \
-  --topic-string alice-posts
-
-swarm-cli feed print \
-  --identity bob \
-  --topic-string bob-posts
-
-# Read the homepage feed
-swarm-cli feed print \
-  --identity blog-admin \
-  --topic-string blog-home
-```
-
-:::info
-The `swarm-cli feed print` command requires the identity (key file) to be available locally. To read another author's feed without their key, use Bee's HTTP API directly:
-
-```bash
-curl http://localhost:1633/bzz/<FEED_MANIFEST_HASH>/
-```
-
-This fetches the latest content published to that feed manifest, without needing the author's private key.
-:::
-
-</TabItem>
-</Tabs>
 
 ### Adding a New Author
 
 Extending the system with a new author is straightforward. The new author gets their own key and topic. Their entry is appended to `authors.json`. Readers automatically discover them.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 The [`add-author.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-author.js) script from the examples repo handles everything in one step. From the project directory (after running `init.js`):
 
@@ -910,51 +582,6 @@ This will:
 
 Then run `update-index.js` to refresh the homepage with the new author.
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Create the new author's identity and directory:
-
-```bash
-swarm-cli identity create charlie
-mkdir blog/charlie
-```
-
-Upload their initial page:
-
-```bash
-# Create blog/charlie/index.html (empty page template)
-
-swarm-cli feed upload ./blog/charlie \
-  --identity charlie \
-  --topic-string charlie-posts \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-Save the Feed Manifest URL hash as `CHARLIE_MANIFEST`. Update `authors.json`:
-
-```json
-[
-  { "name": "Alice", "topic": "alice-posts", "owner": "<ALICE_ADDRESS>", "feedManifest": "<ALICE_MANIFEST>" },
-  { "name": "Bob",   "topic": "bob-posts",   "owner": "<BOB_ADDRESS>",   "feedManifest": "<BOB_MANIFEST>"   },
-  { "name": "Charlie", "topic": "charlie-posts", "owner": "<CHARLIE_ADDRESS>", "feedManifest": "<CHARLIE_MANIFEST>" }
-]
-```
-
-Re-upload `authors.json` to the index feed:
-
-```bash
-swarm-cli feed upload authors.json \
-  --identity blog-admin \
-  --topic-string blog-index \
-  --stamp <BATCH_ID>
-```
-
-The index feed now points to the updated manifest.
-
-</TabItem>
-</Tabs>
 
 :::info
 Because the index feed always points to the *latest* `authors.json`, any reader who polls the index feed automatically discovers newly added authors. You don't need to notify readers through a separate channel — the feed is the notification channel.
