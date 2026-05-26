@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import parities from './parities.js';
-import paritiesEncrypted from './paritiesEncrypted.js';
+import parities from './parities';
+import paritiesEncrypted from './paritiesEncrypted';
 
 export default function UploadCostCalc() {
   const [errorMessage, setErrorMessage] = useState("");
