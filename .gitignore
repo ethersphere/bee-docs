@@ -10,6 +10,7 @@ resources
 .netlify
 # Generated content
 /src/pages/awesome-swarm.mdx
+/docs/references/awesome-list.mdx
 /static/openapi.yaml
 test
 *.zip
