@@ -101,7 +101,7 @@ The output should list `bee-1` as an attached container.
 ### 3. Pull the gateway image
 
 ```bash
-docker pull ethersphere/swarm-gateway:0.1.3
+docker pull ethersphere/swarm-gateway:0.1.6
 ```
 
 ### 4. Run the gateway
@@ -116,7 +116,7 @@ docker run -d --restart unless-stopped \
   -e HOSTNAME="your-domain.example" \
   -e BEE_API_URL="http://bee-1:1633" \
   -e DATABASE_CONFIG="{}" \
-  ethersphere/swarm-gateway:0.1.3
+  ethersphere/swarm-gateway:0.1.6
 ```
 
 In this configuration, database-backed features such as subdomain rewrites and moderation are not configured.
@@ -228,7 +228,7 @@ docker run -d --restart unless-stopped \
   -e HOSTNAME="your-domain.example" \
   -e BEE_API_URL="http://bee-1:1633" \
   -e DATABASE_CONFIG="{}" \
-  ethersphere/swarm-gateway:0.1.3
+  ethersphere/swarm-gateway:0.1.6
 ```
 
 The gateway is now only accessible from within the Docker network.
