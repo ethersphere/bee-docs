@@ -9,6 +9,8 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [bee-js documentation](https://bee-js.ethswarm.org/): JavaScript/TypeScript SDK for Swarm
 - [The Book of Swarm](https://www.ethswarm.org/The-Book-of-Swarm.pdf): Comprehensive technical reference
 - [Swarm Whitepaper](https://www.ethswarm.org/swarm-whitepaper.pdf): Original design paper
+- [A2A Agent Card](https://docs.ethswarm.org/.well-known/agent-card.json): Machine-readable agent capabilities for A2A protocol discovery
+- [Swarm MCP Server](https://github.com/ethersphere/swarm-mcp): MCP server for AI agents to interact with Swarm programmatically
 
 ## Install and run a Bee node
 

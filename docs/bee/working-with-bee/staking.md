@@ -346,6 +346,12 @@ Stake density determines the weighted chances of nodes within a neighborhood of 
 
 Generally speaking, the minimum required stake of 10 xBZZ is sufficient, and rewards can be better maximized by operating more nodes over a greater range of neighborhoods rather than increasing stake. However this may not be true for all node operators depending on how many different neighborhoods they operate nodes in, and it also may change as network dynamics continue to evolve (join the `#node-operators` [Discord channel](https://discord.com/channels/799027393297514537/811553590170353685) to stay up to date with the latest discussions about staking and network dynamics).
 
+### Chequebook verification
+
+Full node operators can optionally enable chequebook verification to reject incoming peers whose chequebook balance falls below a configurable threshold. This can help filter out poorly funded peers from your node's connections.
+
+Chequebook verification is disabled by default and can be enabled with the `--chequebook-verification` flag. The default minimum balance threshold is 11 BZZ and can be adjusted with `--chequebook-min-balance`. See the [configuration page](./configuration.md#chequebook-verification-optional) for details.
+
 ## Neighborhood Hopping
 
 :::warning 
@@ -473,12 +479,12 @@ curl -s http://localhost:1633/health | jq
 
 To confirm a successful update, check that the value for the `"version"` field in the results corresponds to the version number of the [latest](https://github.com/ethersphere/bee/releases/latest) Bee release. 
 
-For example, if the latest version was 2.6.0, it would look like this:
+For example, if the latest version was 2.8.0, it would look like this:
 
 ```bash
 {
   "status": "ok",
-  "version": "2.6.0-d0aa8b93",
+  "version": "2.8.0-d0aa8b93",
   "apiVersion": "7.3.0"
 }
 ```
