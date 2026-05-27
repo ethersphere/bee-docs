@@ -12,6 +12,11 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [A2A Agent Card](https://docs.ethswarm.org/.well-known/agent-card.json): Machine-readable agent capabilities for A2A protocol discovery
 - [Swarm MCP Server](https://github.com/ethersphere/swarm-mcp): MCP server for AI agents to interact with Swarm programmatically
 
+## Focused Documentation
+
+- [API & Development](https://docs.ethswarm.org/llms-api.txt): API usage, uploads, stamps, feeds, chunks, and integration patterns — for agents building on Swarm
+- [Node Operations](https://docs.ethswarm.org/llms-node-ops.txt): Installation, configuration, monitoring, staking, backups, and troubleshooting — for DevOps agents
+
 ## Install and run a Bee node
 
 - [Getting Started](https://docs.ethswarm.org/docs/bee/installation/getting-started): Overview of node requirements and installation options
