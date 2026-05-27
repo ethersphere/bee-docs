@@ -185,7 +185,7 @@ You can now access the content through a stable URL:
 http://localhost:1633/bzz/FEED_MANIFEST_HASH/
 ```
 
-Every time you update the feed, the same URL serves the new content — no URL change needed. This is also the hash you would register in ENS as your content hash (see [Host a Webpage - Connect to ENS](/docs/develop/host-your-website#connect-site-to-ens-domain)).
+Every time you update the feed, the same URL serves the new content — no URL change needed. This is also the hash you would register in ENS as your content hash (see [Host a Webpage - Connect to ENS](/docs/develop/host-your-website#optional-connect-site-to-ens-domain)).
 
 :::tip
 A feed manifest only needs to be created once. After that, just update the feed and the manifest URL will always resolve to the latest content.
