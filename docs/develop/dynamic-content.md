@@ -541,5 +541,6 @@ Key takeaways:
 - Only the feed owner (holder of the private key) can publish updates, but anyone can read the feed.
 - "Editing" and "deleting" content on Swarm means regenerating your site without the removed or changed content, re-uploading, and updating the feed. Old versions remain on Swarm at their original hashes, but the feed always points to the latest.
 
+---
 
 **Next:** [Multi-Author Blog](/docs/develop/multi-author-blog) — extend feeds into a multi-publisher system where each author controls their own feed and a shared index links them together.

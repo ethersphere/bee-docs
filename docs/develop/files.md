@@ -441,5 +441,6 @@ No data is duplicated, the `new.txt` file has not been modified, only the path m
 
 With these tools, you can treat Swarm directories much like a filesystem — while still preserving immutability and content addressing.
 
+---
 
 **Next:** [Website Routing](/docs/develop/routing) — put manifest path mapping to practical use by setting up clean URL routing for a Swarm-hosted site.

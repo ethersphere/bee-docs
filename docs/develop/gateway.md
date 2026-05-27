@@ -301,5 +301,6 @@ You can also verify that HTTP is redirected to HTTPS:
 curl -I http://your-domain.example/health
 ```
 
+---
 
 **Next:** [Dynamic Content](/docs/develop/dynamic-content) — return to app development and learn how feeds add a mutable pointer layer on top of Swarm's immutable storage.
