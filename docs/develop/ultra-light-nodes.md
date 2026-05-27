@@ -5,7 +5,7 @@ description: Guide for running minimal ultra-light nodes with limited functional
 ---
 
 :::danger
-When running without a blockchain connections, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
+When running without a blockchain connection, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
 :::
 
 #### Configuration
