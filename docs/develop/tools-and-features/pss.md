@@ -8,6 +8,17 @@ Out of the ashes of Ethereum's vision for a leak-proof decentralised anonymous m
 
 PSS provides a pub-sub facility that can be used for a variety of tasks. Nodes are able to listen to messages received for a specific topic in their nearest neighborhood and create messages destined for another neighborhood which are sent over the network using Swarm's usual data dissemination protocols.
 
+## Prerequisites
+
+:::warning
+**You must be running a full node to receive PSS messages.** Ultra-light and light nodes cannot subscribe to or receive messages. Full nodes connected to a blockchain RPC endpoint are required for PSS functionality.
+:::
+
+Additionally, to send PSS messages, you will need:
+- A postage stamp batch with sufficient xBZZ balance
+- The recipient's Swarm address prefix (at least 2 bytes)
+- The recipient's public key
+
 ### Subscribe and Receive Messages
 
 Once your Bee node is up and running, you will be able to subscribe to feeds using WebSockets. For testing, it is useful to use the [websocat](https://docs.rs/crate/websocat/1.0.1) command line utility.
