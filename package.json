@@ -2,7 +2,6 @@
   "name": "bee-docs",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -15,7 +14,7 @@
     "serve": "docusaurus serve",
     "check:links": "tsx scripts/check_links.ts",
     "build:check": "npm run build && tsx scripts/check_links.ts",
-    "test": "node --import tsx/esm --test \"scripts/*.test.ts\""
+    "test": "tsx --test scripts/*.test.ts"
   },
   "dependencies": {
     "@docsearch/js": "^4.3.2",
