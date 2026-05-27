@@ -175,10 +175,3 @@ Network name: Gnosis
 RPC URL: https://xdai.fairdatasociety.org
 Chain ID: 100
 Currency symbol: XDAI
-
-#### Sepolia
-
-Network name: Sepolia test network
-RPC URL: https://sepolia.infura.io/v3/
-Chain ID: 11155111
-Currency symbol: SepoliaETH
