@@ -86,21 +86,24 @@ A few pages are intentionally excluded (intro/landing pages that only contain na
 
 ## Link Checker
 
-This repo includes [ethersphere/docusaurus-link-checker](https://github.com/ethersphere/docusaurus-link-checker) as a git submodule at `tools/docusaurus-link-checker`. After cloning, initialise it with:
-
-```bash
-git submodule update --init
-```
+The link checker scripts live in `scripts/` and are written in TypeScript. They require no additional installation beyond `npm ci` (which installs `tsx`).
 
 ### Usage
 
-Run the checker from the repo root:
+Run the checker against a local build:
 
 ```bash
-npm run check:links
+npm run build          # build the site first
+npm run check:links    # check the local build
 ```
 
-You will be prompted to choose local or live mode. Flags are passed through after `--`:
+Or build and check in one step:
+
+```bash
+npm run build:check
+```
+
+Flags are passed through after `--`:
 
 ```bash
 npm run check:links -- --mode local
@@ -114,12 +117,6 @@ npm run check:links -- --mode local --no-external --threads 16
 | `--site-domain` | Your site's domain — auto-detected from `docusaurus.config.*` if omitted |
 | `--no-external` | Skip external URL checking (local mode only) |
 | `--threads N` | Number of concurrent HTTP threads (default: 8) |
-
-To run the full build and then immediately check links:
-
-```bash
-npm run build:check
-```
 
 Reports are written to `link-reports/` (gitignored).
 
