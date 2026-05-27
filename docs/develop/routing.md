@@ -4,10 +4,10 @@ id: routing
 description: Explains message routing protocols and peer discovery mechanisms in the Swarm network.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
-# Routing on Swarm 
+# Routing on Swarm
+
+In the [Manage Files](/docs/develop/files) guide you saw that a directory upload creates a manifest — a data structure mapping paths to content. Routing on Swarm is a direct consequence: every URL your site serves must correspond to an entry in that manifest. This guide covers the two main strategies for giving your site clean, navigable URLs.
 
 Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](./tools-and-features/manifests.md).
 
@@ -230,49 +230,19 @@ Everything inside `dist/` will be uploaded to your Swarm feed.
 
 #### 7. Deploy Site
 
-Now with routing handled its time to deploy the site. Refer to the [Host Your Website](./host-your-website.md#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
-
-If you already have `swarm-cli` installed, you can do this easily with the following command:
-
-:::warning
-You will need to replace `<BATCH_ID>` with a valid batch id from your Bee node, and may need to replace the directory specified from this line...
+The project includes an `upload.js` script that uploads `./dist` to Swarm and publishes the result to a feed (so your URL stays stable across re-uploads). Set up your `.env` and run it:
 
 ```bash
-swarm-cli feed upload ./dist
-```
- 
-If you have a different build directory. If you followed all the steps above though, it should be in `./dist` already.
-:::
-
-<Tabs>
-<TabItem value="linux" label="Linux / macOS">
-
-```bash
-swarm-cli feed upload ./dist \
-  --identity website-publisher \
-  --topic-string website \
-  --stamp <BATCH_ID> \
-  --index-document index.html \
-  --error-document 404.html
+cp .env.example .env
+# Fill in BATCH_ID and PUBLISHER_KEY in .env
+npm run upload
 ```
 
-</TabItem>
-<TabItem value="powershell" label="Windows PowerShell">
+You should see the website Swarm hash and a feed manifest hash. Open the feed manifest URL — `http://localhost:1633/bzz/<FEED_MANIFEST>/` — in your browser.
 
-```powershell
-swarm-cli feed upload .\dist `
-  --identity website-publisher `
-  --topic-string website `
-  --stamp <BATCH_ID> `
-  --index-document index.html `
-  --error-document 404.html
-```
+For details on feeds and stable URLs, see the [Host a Webpage](./host-your-website.md#advanced-keep-your-url-stable-across-updates) guide.
 
-</TabItem>
-</Tabs>
-
-
-Now the Home and About pages will be properly resolved by the routes we specified (`./#/`) and (`./#/about`), and non existent URLs will be handled by the `NotFound` component for hash URLs and our `404.html` error document for all others.
+The Home and About pages will be properly resolved by the routes we specified (`./#/`) and (`./#/about`), and non-existent URLs will be handled by the `NotFound` component for hash URLs and our `404.html` error document for all others.
 
 ![](/img/hash-routing.jpg)
 
@@ -477,6 +447,10 @@ Once you understand manifest-based routing, you can dynamically:
 * Add new paths (e.g. blog posts, product pages)
 * Create custom routes
 * Remove unwanted paths
+
+---
+
+**Next:** [Run a Gateway](/docs/develop/gateway-proxy) — expose your Swarm-hosted site to the public web through an HTTP gateway.
 
 
 

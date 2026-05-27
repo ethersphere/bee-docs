@@ -4,7 +4,9 @@ id: gateway-proxy
 description: Explains Bee gateway functionality for accessing Swarm content through HTTP interfaces.
 ---
 
-This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API. 
+At this point you can build and deploy complete Swarm-hosted websites with working routing. This guide is an **operational step**: it shows how to make those sites accessible to the public web through an HTTP gateway, so that anyone with a browser can reach them without running their own Bee node.
+
+This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API.
 
 It is divided into several parts:
 
@@ -65,13 +67,11 @@ This part of the guide does not cover setting up TLS, so your gateway will be ac
 
 ### 1. Configure DNS for your domain
 
-Create an A record in your DNS provider:
+Create an A record in your DNS provider pointing your domain to your server's IP address:
 
 ```text
 your-domain.example -> <your-server-ip>
 ```
-
-ADD SCREENSHOT 
 
 After DNS propagation, verify that the domain resolves to your server (this may take some time, to verify more quickly, try pinging from a different machine or VPS):
 
@@ -101,7 +101,7 @@ The output should list `bee-1` as an attached container.
 ### 3. Pull the gateway image
 
 ```bash
-docker pull ethersphere/swarm-gateway:0.1.3
+docker pull ethersphere/swarm-gateway:0.1.6
 ```
 
 ### 4. Run the gateway
@@ -116,7 +116,7 @@ docker run -d --restart unless-stopped \
   -e HOSTNAME="your-domain.example" \
   -e BEE_API_URL="http://bee-1:1633" \
   -e DATABASE_CONFIG="{}" \
-  ethersphere/swarm-gateway:0.1.3
+  ethersphere/swarm-gateway:0.1.6
 ```
 
 In this configuration, database-backed features such as subdomain rewrites and moderation are not configured.
@@ -135,24 +135,25 @@ Expected output:
 OK
 ```
 
-### 6. Test with uploaded content
+### 6. Test with existing content
 
-Upload a file using Bee:
-
-```bash
-echo "hello swarm" > test.txt
-swarm-cli upload test.txt
-```
-
-This will print a Swarm reference.
-
-Open the file through the gateway:
+To confirm the gateway is correctly serving content from Swarm, request a reference that is already on the network. The following hash points to a small JSON file:
 
 ```text
-http://your-domain.example/bzz/<REFERENCE>/
+http://your-domain.example/bzz/f3f5e25c90824876c2468b9bdf0d842cd05dc5f0974681789b9729bc155c4f65/
 ```
 
-The file contents should be returned.
+Expected output:
+
+```json
+{
+  "octalmage.com": "bzz://45f0f1e13b70e2919e59fdc5bcf3a99bcbe19dc1be6ebdebe3f89794b77c19ab/",
+  "o8.is": "bzz://4cd43b1c0ebc257f79cc45ebd9774e1251e34f08026325c78ef2ca46972935cc/",
+  "dist.o8.is": "bzz://0890110b61109aee2b6f0d071cedce584868bb29dcb7e41b1c0388d6cf775ace/"
+}
+```
+
+If the JSON is returned, your gateway is correctly fetching and serving content from Swarm. To serve your own content, upload a file or website through your Bee node (see the [Upload and Download](/docs/develop/upload-and-download) and [Host a Webpage](/docs/develop/host-your-website) guides) and use the resulting reference in place of the one above.
 
 ### 7. Optional: restrict uploads using authentication
 
@@ -228,7 +229,7 @@ docker run -d --restart unless-stopped \
   -e HOSTNAME="your-domain.example" \
   -e BEE_API_URL="http://bee-1:1633" \
   -e DATABASE_CONFIG="{}" \
-  ethersphere/swarm-gateway:0.1.3
+  ethersphere/swarm-gateway:0.1.6
 ```
 
 The gateway is now only accessible from within the Docker network.
@@ -300,3 +301,6 @@ You can also verify that HTTP is redirected to HTTPS:
 curl -I http://your-domain.example/health
 ```
 
+---
+
+**Next:** [Dynamic Content](/docs/develop/dynamic-content) — return to app development and learn how feeds add a mutable pointer layer on top of Swarm's immutable storage.
