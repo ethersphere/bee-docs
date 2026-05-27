@@ -218,6 +218,5 @@ This works across:
 
 You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
 
----
 
 **Next:** [Manage Files](/docs/develop/files) — learn how manifests provide filesystem-like path mapping and how to add, move, or remove files without re-uploading everything.

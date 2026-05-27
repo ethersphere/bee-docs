@@ -329,6 +329,5 @@ Response:
 curl http://localhost:1633/bzz/<REFERENCE> -o output.txt
 ```
 
----
 
 **Next:** [Host a Webpage](/docs/develop/host-your-website) — upload a static website and serve it through `/bzz/<reference>/`.

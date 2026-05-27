@@ -448,7 +448,6 @@ Once you understand manifest-based routing, you can dynamically:
 * Create custom routes
 * Remove unwanted paths
 
----
 
 **Next:** [Run a Gateway](/docs/develop/gateway-proxy) — expose your Swarm-hosted site to the public web through an HTTP gateway.
 
