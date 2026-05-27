@@ -10,7 +10,7 @@ resources
 /src/pages/awesome-swarm.mdx
 /static/openapi.yaml
 test
-/src/pages/awesome-swarm.mdx    
+docs/references/awesome-list.mdx
 *.zip
 *.csv
 link-reports/
