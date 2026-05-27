@@ -11,9 +11,8 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "precheck:links": "git submodule update --remote tools/docusaurus-link-checker",
-    "check:links": "python3 tools/docusaurus-link-checker/check_links.py",
-    "build:check": "npm run build && python3 tools/docusaurus-link-checker/check_links.py"
+    "check:links": "tsx scripts/check_links.ts",
+    "build:check": "npm run build && tsx scripts/check_links.ts"
   },
   "dependencies": {
     "@docsearch/js": "^4.3.2",
@@ -55,6 +54,9 @@
     "npm": ">=9.6.0"
   },
   "devDependencies": {
-    "cross-env": "^10.1.0"
+    "@types/node": "^22.0.0",
+    "cross-env": "^10.1.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
   }
 }
