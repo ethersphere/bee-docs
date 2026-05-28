@@ -1177,7 +1177,7 @@ Prerequisites for installing directly from source are:
 3. Checkout the required version:
 
    ```bash
-   git checkout v2.6.0
+   git checkout v2.8.0
    ```
 
 4. Build the binary:
@@ -1193,7 +1193,7 @@ Prerequisites for installing directly from source are:
    ```
 
    ```
-   2.6.0
+   2.8.0
    ```
 
 6. (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`
@@ -1665,7 +1665,7 @@ you connected. In Swarm, no Bee is left behind.
 The following is a guide for installing a Bee node using Docker. Docker images for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). Using Docker to operate your Bee node offers many benefits, such as ease of deployment and consistency across environments. 
 
 :::caution
-In the examples below we specify the exact image version as 2.6.0. It's recommended to only use the exact version number tags. Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.6.0 in the commands below if there is a newer full release. 
+In the examples below we specify the exact image version as 2.8.0. It's recommended to only use the exact version number tags. Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.8.0 in the commands below if there is a newer full release. 
 :::
 
 :::warning
@@ -1693,13 +1693,13 @@ docker run -d --name bee-1 \
   -e BEE_PASSWORD="flummoxedgranitecarrot" \
   -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" \
   -v bee-1:/home/bee/.bee \
-  ethersphere/bee:2.6.0 start
+  ethersphere/bee:2.8.0 start
 ```
 
 Here is the same command in a single line in case you run into issues with the line breaks in the command above:
 
 ```bash
-docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 -e BEE_API_ADDR=":1633" -e BEE_FULL_NODE="true" -e BEE_SWAP_ENABLE="true" -e BEE_PASSWORD="flummoxedgranitecarrot" -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" -v bee-1:/home/bee/.bee ethersphere/bee:2.6.0 start
+docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 -e BEE_API_ADDR=":1633" -e BEE_FULL_NODE="true" -e BEE_SWAP_ENABLE="true" -e BEE_PASSWORD="flummoxedgranitecarrot" -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" -v bee-1:/home/bee/.bee ethersphere/bee:2.8.0 start
 ```
 
 #### Command explained:
@@ -1715,7 +1715,7 @@ docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 
 - **`-e BEE_PASSWORD="flummoxedgranitecarrot"`**: Sets the keystore password, make sure to replace with your own.
 - **`-e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org"`**: Connects to the Gnosis Chain.
 - **`-v bee-1:/home/bee/.bee`**: Persists node data in the `bee-1` volume.
-- **`ethersphere/bee:2.6.0 start`**: Runs Bee version 2.6.0 and starts the node.
+- **`ethersphere/bee:2.8.0 start`**: Runs Bee version 2.8.0 and starts the node.
 
 This setup runs the Bee node in a container, with full node functionality, SWAP enabled, and connections to the Gnosis blockchain for chequebook and postage stamp management, while persisting its data using a volume. 
 
@@ -1731,7 +1731,7 @@ If everything is set up correctly, you should see your Bee node listed:
 
 ```bash
 CONTAINER ID     IMAGE     COMMAND     CREATED     STATUS     PORTS     NAMES
-37f4ad8b4060   ethersphere/bee:2.6.0   "bee start"   6 seconds ago   Up 5 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-1
+37f4ad8b4060   ethersphere/bee:2.8.0   "bee start"   6 seconds ago   Up 5 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-1
 ```
 
 And check the logs:
@@ -1824,9 +1824,9 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-version: 2.6.0-06a0aca7 - planned to be supported until 11 December 2024, please follow https://ethswarm.org/
+version: 2.8.0-06a0aca7 - planned to be supported until 11 December 2024, please follow https://ethswarm.org/
 
-"time"="2024-09-24 22:21:04.543661" "level"="info" "logger"="node" "msg"="bee version" "version"="2.6.0-06a0aca7"
+"time"="2024-09-24 22:21:04.543661" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.0-06a0aca7"
 "time"="2024-09-24 22:21:04.590823" "level"="info" "logger"="node" "msg"="swarm public key" "public_key"="02f0e59eafa3c5c06542c0a7a7fe9579c55a163cf1d28d9f6945a34469f88d1b2a"
 "time"="2024-09-24 22:21:04.686430" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02ea739530bbf48eed49197f21660f3b6564709b95bf558dc3b472688c34096418"
 "time"="2024-09-24 22:21:04.686464" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x8288F1c8e3dE7c3bf42Ae67fa840EC61481D085e"
@@ -2752,17 +2752,17 @@ Although `BZZ` is the official symbol of the token on both Ethereum and Gnosis C
 Run the shell script using `curl` or `wget`:
 
 :::tip
-We specify `TAG=v2.6.0` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
+We specify `TAG=v2.8.0` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
 :::
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.6.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.0 bash
 ```
 
 OR
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.6.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.0 bash
 ```
 
 Verify installation:
@@ -2826,7 +2826,7 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-version: 2.6.0-390a402e - planned to be supported until 22 April 2025, please follow https://ethswarm.org/
+version: 2.8.0-390a402e - planned to be supported until 22 April 2025, please follow https://ethswarm.org/
 
 "time"="2025-03-04 11:13:10.113050" "level"="info" "logger"="node" "msg"="bee version" "version"="2.6.0-390a402e"
 "time"="2025-03-04 11:13:10.164801" "level"="info" "logger"="node" "msg"="swarm public key" "public_key"="02b19880b8d024eac3bf8afa3fa85b31b72fcfd491cebc6af78ddd85ff97f65416"
@@ -2900,7 +2900,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.6.0-d0aa8b93
+Version: 2.8.0-d0aa8b93
 Mode: light
 
 Chainsync
@@ -2930,7 +2930,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.6.0-d0aa8b93
+Version: 2.8.0-d0aa8b93
 Mode: light
 
 Chainsync
@@ -2951,7 +2951,7 @@ Total xBZZ: 0.0000000000000000
 noah@NoahM16:~$ swarm-cli status
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.6.0-d0aa8b93
+Version: 2.8.0-d0aa8b93
 Mode: light
 
 Chainsync
@@ -3033,7 +3033,7 @@ Below is a step-by-step guide for installing and setting up your Bee node using 
 Run the install shell script using either `curl` or `wget`:
 
 :::caution
-In the example below, the version is specified using `TAG=v2.6.0`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
+In the example below, the version is specified using `TAG=v2.8.0`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
 :::
 
 :::info
@@ -3066,7 +3066,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.6.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.0 bash
 ```
 </TabItem>
 <TabItem value="wget">
@@ -3074,7 +3074,7 @@ curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TA
 **wget**
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.6.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.0 bash
 ```
 </TabItem>
 
@@ -4448,7 +4448,7 @@ The `/health` endpoint provides a quick status check for your Bee node which sim
 ```bash
     {
       "status": "ok",
-      "version": "2.6.0-d0aa8b93",
+      "version": "2.8.0-d0aa8b93",
       "apiVersion": "7.3.0"
     }
 ```
@@ -4787,6 +4787,8 @@ Flags:
       --cache-capacity uint                      cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
       --cache-retrieval                          enable forwarded content caching (default true)
       --chequebook-enable                        enable chequebook (default true)
+      --chequebook-min-balance string            minimum chequebook balance required for incoming full-node peers in BZZ (default "11")
+      --chequebook-verification                  enable chequebook verification for incoming full-node peers (default false)
       --cors-allowed-origins strings             origins with CORS headers enabled
       --data-dir string                          data directory (default "/home/bee/.bee")
       --db-block-cache-capacity uint             size of block cache of the database in bytes (default 33554432)
@@ -4896,6 +4898,10 @@ cache-capacity: "1000000"
 cache-retrieval: true
 # enable chequebook
 chequebook-enable: true
+# minimum chequebook balance required for incoming full-node peers in BZZ
+chequebook-min-balance: "11"
+# enable chequebook verification for incoming full-node peers
+chequebook-verification: false
 # config file (default is $HOME/.bee.yaml)
 config: /home/bee/.bee.yaml
 # origins with CORS headers enabled
@@ -5292,6 +5298,39 @@ For running a light node or for testing out a single full node you can use the f
 ## Configuring Swap Initial Deposit (Optional)
 
 When running your Bee node with SWAP enabled for the first time, your node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
+
+## Chequebook Verification (Optional)
+
+Full node operators can optionally require that incoming peer connections come from nodes that maintain a minimum chequebook balance. When enabled, the node checks the chequebook balance of each incoming full-node peer and rejects connections from peers whose balance falls below the configured threshold.
+
+This feature is **disabled by default** and only applies to full nodes with chequebook and chain functionality enabled. Light nodes skip chequebook verification regardless of configuration. Remote peers do not need to enable chequebook verification themselves in order to be accepted — only the verifying node needs to have it enabled.
+
+To enable chequebook verification, set `chequebook-verification` to `true`:
+
+```yaml
+## bee.yaml
+chequebook-verification: true
+```
+
+The default minimum balance threshold is **11 BZZ**. To configure a different threshold, set `chequebook-min-balance` to the desired amount in BZZ:
+
+```yaml
+## bee.yaml
+chequebook-verification: true
+chequebook-min-balance: "11"
+```
+
+Or using command-line flags:
+
+```bash
+bee start \
+  --chequebook-verification \
+  --chequebook-min-balance 11
+```
+
+:::info
+Chequebook verification is an optional defense layer for full node operators who want to avoid connecting to peers that do not maintain a sufficient chequebook balance. It was introduced in Bee v2.8.0.
+:::
 
 ## NAT address
 
@@ -6103,6 +6142,12 @@ Stake density determines the weighted chances of nodes within a neighborhood of 
 
 Generally speaking, the minimum required stake of 10 xBZZ is sufficient, and rewards can be better maximized by operating more nodes over a greater range of neighborhoods rather than increasing stake. However this may not be true for all node operators depending on how many different neighborhoods they operate nodes in, and it also may change as network dynamics continue to evolve (join the `#node-operators` [Discord channel](https://discord.com/channels/799027393297514537/811553590170353685) to stay up to date with the latest discussions about staking and network dynamics).
 
+### Chequebook verification
+
+Full node operators can optionally enable chequebook verification to reject incoming peers whose chequebook balance falls below a configurable threshold. This can help filter out poorly funded peers from your node's connections.
+
+Chequebook verification is disabled by default and can be enabled with the `--chequebook-verification` flag. The default minimum balance threshold is 11 BZZ and can be adjusted with `--chequebook-min-balance`. See the [configuration page](./configuration.md#chequebook-verification-optional) for details.
+
 ## Neighborhood Hopping
 
 :::warning 
@@ -6227,12 +6272,12 @@ curl -s http://localhost:1633/health | jq
 
 To confirm a successful update, check that the value for the `"version"` field in the results corresponds to the version number of the [latest](https://github.com/ethersphere/bee/releases/latest) Bee release. 
 
-For example, if the latest version was 2.6.0, it would look like this:
+For example, if the latest version was 2.8.0, it would look like this:
 
 ```bash
 {
   "status": "ok",
-  "version": "2.6.0-d0aa8b93",
+  "version": "2.8.0-d0aa8b93",
   "apiVersion": "7.3.0"
 }
 ```
@@ -6960,13 +7005,6 @@ RPC URL: https://xdai.fairdatasociety.org
 Chain ID: 100
 Currency symbol: XDAI
 
-#### Sepolia
-
-Network name: Sepolia test network
-RPC URL: https://sepolia.infura.io/v3/
-Chain ID: 11155111
-Currency symbol: SepoliaETH
-
 ---
 
 ## Add Access Control
@@ -7518,8 +7556,7 @@ If you followed the [Host a Webpage](/docs/develop/host-your-website) guide, you
 
 * A running Bee node ([install guide](/docs/bee/installation/quick-start))
 * A valid postage stamp batch ([how to get one](/docs/develop/tools-and-features/buy-a-stamp-batch))
-* Node.js 18+ and `@ethersphere/bee-js` installed (for `bee-js` examples)
-* [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli) (for `swarm-cli` examples)
+* Node.js 18+ and `@ethersphere/bee-js` installed
 
 ## Example Scripts and Projects
 
@@ -7539,13 +7576,14 @@ Clone the repo and set up the example scripts:
 git clone https://github.com/ethersphere/examples.git
 cd examples/dynamic-content
 npm install
+cp .env.example .env
 ```
 
-Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
+Fill in your `BATCH_ID` and verify `BEE_URL` in `.env`:
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=BATCH_ID
+BATCH_ID=<YOUR_BATCH_ID>
 ```
 
 You can then run any script with:
@@ -7562,9 +7600,6 @@ The blog project has its own setup — see [Example Project — Simple Blog](#ex
 
 To see why feeds are necessary, try uploading the same content twice with a small change ([`script-01.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-01.js)):
 
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
-
 ```js
 
 const bee = new Bee("http://localhost:1633");
@@ -7576,22 +7611,6 @@ console.log("Version 1:", upload1.reference.toHex());
 const upload2 = await bee.uploadFile(batchId, "Hello Swarm - version 2", "note.txt");
 console.log("Version 2:", upload2.reference.toHex());
 ```
-
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-```bash
-echo "Hello Swarm - version 1" > note-v1.txt
-swarm-cli upload note-v1.txt --stamp BATCH_ID
-# Swarm hash: a1b2c3d4...
-
-echo "Hello Swarm - version 2" > note-v2.txt
-swarm-cli upload note-v2.txt --stamp BATCH_ID
-# Swarm hash: e5f6a7b8... (different!)
-```
-
-</TabItem>
-</Tabs>
 
 Each upload returns a different hash. If you shared the first hash with someone, they would always see "version 1" — there is no way to redirect them to "version 2" using content addressing alone. Feeds provide the missing layer of indirection.
 
@@ -7613,9 +7632,6 @@ When a [mutable batch](/docs/concepts/incentives/postage-stamps#mutable-batches)
 
 Before creating a feed, you need a dedicated private key that will sign feed updates. Anyone with this key can publish to your feed, so store it securely.
 
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
-
 ```js
 
 const hex = "0x" + crypto.randomBytes(32).toString("hex");
@@ -7627,38 +7643,9 @@ console.log("Address:", pk.publicKey().address().toHex());
 
 Save the private key somewhere secure. You will use it for all future feed updates.
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-```bash
-swarm-cli identity create publisher
-```
-
-Example output:
-
-```
-Name: publisher
-Type: V3 Wallet
-Private key: 0x634fb5a872396d9693e5c9f9d7233cfa93f395c093371017ff44aa9ae6564cdd
-Public key: 0x218c79f8dfb26d077b6379eb56aa9c6e71edf74d...
-Address: 0x8d3766440f0d7b949a5e32995d09619a7f86e632
-```
-
-Record this output in a secure location. If you need to view it later:
-
-```bash
-swarm-cli identity export publisher
-```
-
-</TabItem>
-</Tabs>
-
 ### Write and Read a Feed
 
 Now upload some content and write its reference to a feed, then read it back ([`script-02.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-02.js)):
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 ```js
 
@@ -7679,40 +7666,19 @@ const writer = bee.makeFeedWriter(topic, pk);
 await writer.upload(batchId, upload.reference);
 console.log("Feed updated at index 0");
 
-// Read the latest reference from the feed (retries until indexed)
+// Brief pause to allow the node to index the feed chunk
+await new Promise((r) => setTimeout(r, 1000));
+
+// Read the latest reference from the feed
 const reader = bee.makeFeedReader(topic, owner);
-const result = await retryFeedRead(() => reader.downloadReference());
+const result = await reader.downloadReference();
 console.log("Latest reference:", result.reference.toHex());
 console.log("Current index:", result.feedIndex.toBigInt());
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-```bash
-# Upload content and update feed in one step
-swarm-cli feed upload note.txt \
-  --identity publisher \
-  --topic-string notes \
-  --stamp BATCH_ID
-
-# Read the feed
-swarm-cli feed print \
-  --identity publisher \
-  --topic-string notes
-```
-
-The `feed print` command displays the current feed state — topic hash, number of updates, and the feed manifest URL.
-
-</TabItem>
-</Tabs>
-
 ### Update the Feed
 
 When you have new content, upload it and write the new reference to the feed. The writer automatically uses the next sequential index (this continues from the previous snippet — both are combined in [`script-02.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-02.js)):
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 ```js
 // Upload updated content
@@ -7723,40 +7689,17 @@ console.log("New content hash:", upload2.reference.toHex());
 await writer.upload(batchId, upload2.reference);
 console.log("Feed updated at index 1");
 
-// Pass minFeedIndex so the retry waits for the new entry, not just any entry.
-const result2 = await retryFeedRead(
-  () => reader.downloadReference(),
-  result.feedIndex.toBigInt() + 1n
-);
+// Brief pause to allow the node to index the new entry
+await new Promise((r) => setTimeout(r, 1000));
+
+const result2 = await reader.downloadReference();
 console.log("Latest reference:", result2.reference.toHex());
 console.log("Current index:", result2.feedIndex.toBigInt()); // 1n
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-```bash
-# Update the note
-echo "My updated note" > note.txt
-
-# Upload to the same feed — reuse the same identity and topic
-swarm-cli feed upload note.txt \
-  --identity publisher \
-  --topic-string notes \
-  --stamp BATCH_ID
-```
-
-The feed now points to the new content. The feed manifest URL (printed in the output) remains the same.
-
-</TabItem>
-</Tabs>
-
 ## Feed Manifests — Stable URLs
 
 So far, reading a feed requires knowing the owner address and topic. A **feed manifest** packages these two values into a single Swarm hash that acts as a permanent URL. When Bee resolves a feed manifest through the `/bzz/` endpoint, it automatically looks up the latest feed entry and serves whatever content it points to ([`script-03.js`](https://github.com/ethersphere/examples/blob/main/dynamic-content/script-03.js)).
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 ```js
 // Create a feed manifest (one-time operation)
@@ -7764,38 +7707,13 @@ const manifest = await bee.createFeedManifest(batchId, topic, owner);
 console.log("Feed manifest:", manifest.toHex());
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-The `feed upload` command creates the manifest automatically and prints the `Feed Manifest URL` in its output:
-
-```bash
-swarm-cli feed upload note.txt \
-  --identity publisher \
-  --topic-string notes \
-  --stamp BATCH_ID
-```
-
-Example output:
-
-```
-Swarm hash: 387dc3cf98419dcb20c68b284373bf7d9e8dcb27...
-URL: http://localhost:1633/bzz/387dc3cf98419dcb.../
-Feed Manifest URL: http://localhost:1633/bzz/6c30ef2254ac1565.../
-```
-
-The hash in the `Feed Manifest URL` (`6c30ef2254ac1565...`) is your permanent reference.
-
-</TabItem>
-</Tabs>
-
 You can now access the content through a stable URL:
 
 ```text
 http://localhost:1633/bzz/FEED_MANIFEST_HASH/
 ```
 
-Every time you update the feed, the same URL serves the new content — no URL change needed. This is also the hash you would register in ENS as your content hash (see [Host a Webpage - Connect to ENS](/docs/develop/host-your-website#connect-site-to-ens-domain)).
+Every time you update the feed, the same URL serves the new content — no URL change needed. This is also the hash you would register in ENS as your content hash (see [Host a Webpage - Connect to ENS](/docs/develop/host-your-website#optional-connect-site-to-ens-domain)).
 
 :::tip
 A feed manifest only needs to be created once. After that, just update the feed and the manifest URL will always resolve to the latest content.
@@ -7825,9 +7743,6 @@ This project follows the same architectural pattern used by [Etherjot](https://g
 
 ### Project Setup
 
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
-
 Clone the [examples](https://github.com/ethersphere/examples) repo (if you haven't already) and navigate to the blog project:
 
 ```bash
@@ -7836,36 +7751,18 @@ cd examples/simple-blog
 npm install
 ```
 
-Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
+Copy `.env.example` to `.env` and fill in your `BATCH_ID`:
+
+```bash
+cp .env.example .env
+```
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=YOUR_BATCH_ID
+BATCH_ID=<YOUR_BATCH_ID>
 ```
-
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Create a new directory:
-
-```bash
-mkdir swarm-blog && cd swarm-blog
-mkdir site
-```
-
-Make sure you have a `swarm-cli` identity ready:
-
-```bash
-swarm-cli identity create blog-publisher
-```
-
-</TabItem>
-</Tabs>
 
 ### Project Structure
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 ```
 simple-blog/
@@ -7878,74 +7775,17 @@ simple-blog/
 └── posts.json         # Generated by init.js — stores all blog posts
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
+### The HTML Generation Module
 
-```
-swarm-blog/
-├── site/
-│   ├── index.html       # Blog index page (listing of all posts)
-│   └── posts/
-│       └── <slug>.html  # Individual post pages
-└── posts.json           # Tracks posts locally
-```
-
-</TabItem>
-</Tabs>
-
-### Initialize the Blog
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
-
-Create `init.js` — this generates a publisher key, creates an empty blog, uploads it, sets up the feed, and saves the configuration:
+The blog regenerates its site from `posts.json` every time a post is created, edited, or deleted. To keep that logic in one place, `init.js` and `post.js` both import a single helper from `html.js`:
 
 ```js
+// html.js
 
-config();
+export function writeSiteFiles(posts) {
+  rmSync("site", { recursive: true, force: true });
+  mkdirSync("site/posts", { recursive: true });
 
-const bee = new Bee(process.env.BEE_URL);
-const batchId = process.env.BATCH_ID;
-
-// Generate publisher key
-const hex = "0x" + crypto.randomBytes(32).toString("hex");
-const pk = new PrivateKey(hex);
-const owner = pk.publicKey().address();
-const topic = Topic.fromString("blog");
-
-// Create initial empty blog
-const posts = [];
-writeFileSync("posts.json", JSON.stringify(posts, null, 2));
-
-// Generate site files and upload
-mkdirSync("site/posts", { recursive: true });
-writeSiteFiles(posts);
-
-const upload = await bee.uploadFilesFromDirectory(batchId, "./site", {
-  indexDocument: "index.html",
-});
-
-// Set up feed and manifest
-const writer = bee.makeFeedWriter(topic, pk);
-await writer.upload(batchId, upload.reference);
-const manifest = await bee.createFeedManifest(batchId, topic, owner);
-
-// Save config
-const cfg = {
-  privateKey: pk.toHex(),
-  owner: owner.toHex(),
-  topic: "blog",
-  manifest: manifest.toHex(),
-};
-writeFileSync("config.json", JSON.stringify(cfg, null, 2));
-
-console.log("Blog initialized!");
-console.log("Feed manifest:", manifest.toHex());
-console.log("View your blog:", `${process.env.BEE_URL}/bzz/${manifest.toHex()}/`);
-
-// --- HTML generation ---
-
-function writeSiteFiles(posts) {
   writeFileSync("site/index.html", generateIndex(posts));
   for (const post of posts) {
     writeFileSync(`site/posts/${post.slug}.html`, generatePost(post));
@@ -7977,7 +7817,7 @@ function generatePost(post) {
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>${esc(post.title)}</title></head>
 <body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
-  ← Back
+  &larr; Back
   ${esc(post.title)}
   <small style="color:#888;">${post.date}</small>
   ${esc(post.body)}
@@ -7985,8 +7825,58 @@ function generatePost(post) {
 }
 
 function esc(s) {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
+```
+
+`writeSiteFiles(posts)` wipes the local `site/` directory and rebuilds it from the array of posts. The Swarm-side logic — uploading the regenerated directory and pointing the feed at the new reference — lives in `init.js` and `post.js`.
+
+### Initialize the Blog
+
+Create `init.js` — this generates a publisher key, creates an empty blog, uploads it, sets up the feed, and saves the configuration:
+
+```js
+
+config();
+
+const bee = new Bee(process.env.BEE_URL);
+const batchId = process.env.BATCH_ID;
+
+// 1. Generate publisher key
+const hex = "0x" + crypto.randomBytes(32).toString("hex");
+const pk = new PrivateKey(hex);
+const owner = pk.publicKey().address();
+const topic = Topic.fromString("blog");
+
+// 2. Create initial empty blog
+const posts = [];
+writeFileSync("posts.json", JSON.stringify(posts, null, 2));
+writeSiteFiles(posts);
+
+const upload = await bee.uploadFilesFromDirectory(batchId, "./site", {
+  indexDocument: "index.html",
+});
+
+// 3. Set up feed and manifest
+const writer = bee.makeFeedWriter(topic, pk);
+await writer.upload(batchId, upload.reference);
+const manifest = await bee.createFeedManifest(batchId, topic, owner);
+
+// 4. Save config
+const cfg = {
+  privateKey: pk.toHex(),
+  owner: owner.toHex(),
+  topic: "blog",
+  manifest: manifest.toHex(),
+};
+writeFileSync("config.json", JSON.stringify(cfg, null, 2));
+
+console.log("Blog initialized!");
+console.log(`View your blog: ${process.env.BEE_URL}/bzz/${manifest.toHex()}/`);
 ```
 
 Run it once:
@@ -8003,54 +7893,7 @@ Feed manifest: caa414d70028d14b0bdd9cbab18d1c1a0a3bab1b...
 View your blog: http://localhost:1633/bzz/caa414d70028d14b.../
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Create the initial site structure:
-
-```bash
-mkdir -p site/posts
-```
-
-Create `site/index.html`:
-
-```html
-<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>My Blog</title></head>
-<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
-  My Blog
-  0 posts
-  No posts yet.
-</body></html>
-```
-
-Upload it to a feed:
-
-```bash
-swarm-cli feed upload ./site \
-  --identity blog-publisher \
-  --topic-string blog \
-  --stamp BATCH_ID \
-  --index-document index.html
-```
-
-Example output:
-
-```
-Swarm hash: 387dc3cf98419dcb20c68b284373bf7d9e8dcb27...
-URL: http://localhost:1633/bzz/387dc3cf.../
-Feed Manifest URL: http://localhost:1633/bzz/6c30ef22.../
-```
-
-Save the `Feed Manifest URL` hash — this is your blog's permanent address.
-
-</TabItem>
-</Tabs>
-
 ### Create, Edit, and Delete Posts
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `post.js` — a single script that handles creating, editing, and deleting posts. Each operation modifies the local `posts.json`, regenerates the entire site, uploads it, and updates the feed:
 
@@ -8062,8 +7905,8 @@ const [action, ...args] = process.argv.slice(2);
 
 if (!action || !["create", "edit", "delete"].includes(action)) {
   console.log(`Usage:
-  node post.js create <slug> <title> <body>
-  node post.js edit   <slug> <title> <body>
+  node post.js create <slug> "<title>" "<body>"
+  node post.js edit   <slug> "<title>" "<body>"
   node post.js delete <slug>`);
   process.exit(1);
 }
@@ -8073,7 +7916,8 @@ const batchId = process.env.BATCH_ID;
 const cfg = JSON.parse(readFileSync("config.json", "utf-8"));
 const posts = JSON.parse(readFileSync("posts.json", "utf-8"));
 
-// Apply the action
+// --- Apply the action ---
+
 if (action === "create") {
   const [slug, title, body] = args;
   if (!slug || !title || !body) {
@@ -8118,18 +7962,11 @@ if (action === "delete") {
   console.log(`Deleted post: ${slug}`);
 }
 
-// Save updated posts
+// --- Save, regenerate, upload, update feed ---
+
 writeFileSync("posts.json", JSON.stringify(posts, null, 2));
+writeSiteFiles(posts);
 
-// Regenerate entire site
-rmSync("site", { recursive: true, force: true });
-mkdirSync("site/posts", { recursive: true });
-writeFileSync("site/index.html", generateIndex(posts));
-for (const post of posts) {
-  writeFileSync(`site/posts/${post.slug}.html`, generatePost(post));
-}
-
-// Upload and update feed
 const pk = new PrivateKey(cfg.privateKey);
 const topic = Topic.fromString(cfg.topic);
 const writer = bee.makeFeedWriter(topic, pk);
@@ -8141,44 +7978,6 @@ await writer.upload(batchId, upload.reference);
 
 console.log(`Blog updated! (${posts.length} post${posts.length !== 1 ? "s" : ""})`);
 console.log(`View: ${process.env.BEE_URL}/bzz/${cfg.manifest}/`);
-
-// --- HTML generation ---
-
-function generateIndex(posts) {
-  const items = posts
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .map(
-      (p) => `
-    <article style="margin:16px 0; padding:16px; border:1px solid #ddd; border-radius:4px;">
-      ${esc(p.title)}
-      <small style="color:#888;">${p.date}</small>
-    </article>`
-    )
-    .join("\n");
-
-  return `<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>My Blog</title></head>
-<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
-  My Blog
-  ${posts.length} post${posts.length !== 1 ? "s" : ""}
-  ${items || "No posts yet."}
-</body></html>`;
-}
-
-function generatePost(post) {
-  return `<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>${esc(post.title)}</title></head>
-<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
-  ← Back
-  ${esc(post.title)}
-  <small style="color:#888;">${post.date}</small>
-  ${esc(post.body)}
-</body></html>`;
-}
-
-function esc(s) {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
 ```
 
 Usage:
@@ -8203,74 +8002,9 @@ Each command regenerates the entire site and updates the feed. The same feed man
 Notice that editing and deleting work the same way as creating — modify the local data, regenerate the site, re-upload, update the feed. Swarm itself doesn't have "edit" or "delete" operations. The old versions of the site remain accessible via their direct Swarm hashes, but the feed manifest always resolves to the latest version.
 :::
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-With `swarm-cli`, you manage the site files manually (or with a helper script), then re-upload:
-
-#### Create a post
-
-Add a new post file at `site/posts/hello-world.html`:
-
-```html
-<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Hello World</title></head>
-<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
-  ← Back
-  Hello World
-  <small style="color:#888;">2025-06-15</small>
-  This is my first blog post on Swarm.
-</body></html>
-```
-
-Update `site/index.html` to link to it:
-
-```html
-<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>My Blog</title></head>
-<body style="max-width:640px; margin:40px auto; font-family:sans-serif;">
-  My Blog
-  1 post
-  <article style="margin:16px 0; padding:16px; border:1px solid #ddd; border-radius:4px;">
-    Hello World
-    <small style="color:#888;">2025-06-15</small>
-  </article>
-</body></html>
-```
-
-Upload to the feed:
-
-```bash
-swarm-cli feed upload ./site \
-  --identity blog-publisher \
-  --topic-string blog \
-  --stamp BATCH_ID \
-  --index-document index.html
-```
-
-#### Edit a post
-
-Edit the HTML file at `site/posts/hello-world.html` with the updated title and body, then re-upload with the same command above.
-
-#### Delete a post
-
-Remove the post file from `site/posts/` and update `site/index.html` to remove the link, then re-upload.
-
-In every case, the operation is the same on the Swarm side: modify local files, then re-upload the `site/` folder to the feed. The feed manifest URL remains unchanged.
-
-:::tip
-You can automate the HTML generation with a simple shell or Node.js script that reads posts from a local JSON file and writes the HTML before uploading. The key point is that the Swarm side of things is always the same: regenerate content, upload, update feed.
-:::
-
-</TabItem>
-</Tabs>
-
 ### Read the Feed
 
 This demonstrates how anyone can read the feed without the publisher's private key — only the owner address and topic (or the manifest hash) are needed:
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `read.js`:
 
@@ -8285,7 +8019,7 @@ const topic = Topic.fromString(cfg.topic);
 const owner = new EthAddress(cfg.owner);
 const reader = bee.makeFeedReader(topic, owner);
 
-const result = await retryFeedRead(() => reader.downloadReference());
+const result = await reader.downloadReference();
 console.log("Latest content reference:", result.reference.toHex());
 console.log("Feed index:", result.feedIndex.toBigInt());
 console.log("View:", `${process.env.BEE_URL}/bzz/${cfg.manifest}/`);
@@ -8297,29 +8031,13 @@ Run it:
 node read.js
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-```bash
-swarm-cli feed print \
-  --identity blog-publisher \
-  --topic-string blog
-```
-
-Or simply open the feed manifest URL in a browser:
-
-```text
-http://localhost:1633/bzz/FEED_MANIFEST_HASH/
-```
-
-</TabItem>
-</Tabs>
-
 ## Summary
 
 Feeds add a mutable pointer layer on top of Swarm's immutable storage. The core pattern is: upload content → write its reference to a feed → use a feed manifest as a stable URL. The same manifest URL always serves the latest content.
 
 This is the same pattern that [Etherjot](https://github.com/ethersphere/etherjot) uses to power fully decentralized blogs — regenerate the site, re-upload, and update the feed. The difference is only in scale and features (markdown rendering, categories, media management), not in the underlying feed mechanics.
+
+The `simple-blog` project you just built is a single-author blog. The next guide extends this into a multi-author system where each author controls their own feed and an admin maintains an index feed that links them all together.
 
 Key takeaways:
 
@@ -8332,8 +8050,14 @@ Key takeaways:
 
 ---
 
+**Next:** [Multi-Author Blog](/docs/develop/multi-author-blog) — extend feeds into a multi-publisher system where each author controls their own feed and a shared index links them together.
+
+---
+
 ## Manage Files
 
+
+In the [Host a Webpage](/docs/develop/host-your-website) guide you uploaded a directory and got back a single Swarm reference that serves your site. That reference points to a **manifest** — a data structure that maps relative paths to content. This guide explores manifests directly: how to inspect them, add a file without re-uploading everything, and move a file by remapping a path.
 
 Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](./tools-and-features/manifests.md), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.
 
@@ -8366,14 +8090,18 @@ cd examples/filesystem
 npm install
 ```
 
-Update the `<BATCH_ID>` in the `.env` file with a valid batch ID, and make sure that `BEE_URL` is set to the RPC endpoint for your Bee node:
+Copy `.env.example` to `.env` and fill in your values:
+
+```bash
+cp .env.example .env
+```
 
 ```bash
 BEE_URL=http://localhost:1633 # or http://127.0.0.1:1633  
-BATCH_ID=<BATCH_ID>
+BATCH_ID=<YOUR_BATCH_ID>
 UPLOAD_DIR=./folder
-SCRIPT_02_MANIFEST=<MANIFEST_REFERENCE>
-SCRIPT_03_MANIFEST=<MANIFEST_REFERENCE>
+SCRIPT_02_MANIFEST=
+SCRIPT_03_MANIFEST=
 ```
 
 ## Script 1: Upload Folder and Inspect Manifest
@@ -8761,9 +8489,15 @@ With these tools, you can treat Swarm directories much like a filesystem — whi
 
 ---
 
+**Next:** [Website Routing](/docs/develop/routing) — put manifest path mapping to practical use by setting up clean URL routing for a Swarm-hosted site.
+
+---
+
 ## Run a Gateway
 
-This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API. 
+At this point you can build and deploy complete Swarm-hosted websites with working routing. This guide is an **operational step**: it shows how to make those sites accessible to the public web through an HTTP gateway, so that anyone with a browser can reach them without running their own Bee node.
+
+This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API.
 
 It is divided into several parts:
 
@@ -8823,13 +8557,11 @@ This part of the guide does not cover setting up TLS, so your gateway will be ac
 
 ### 1. Configure DNS for your domain
 
-Create an A record in your DNS provider:
+Create an A record in your DNS provider pointing your domain to your server's IP address:
 
 ```text
 your-domain.example -> <your-server-ip>
 ```
-
-ADD SCREENSHOT 
 
 After DNS propagation, verify that the domain resolves to your server (this may take some time, to verify more quickly, try pinging from a different machine or VPS):
 
@@ -8859,7 +8591,7 @@ The output should list `bee-1` as an attached container.
 ### 3. Pull the gateway image
 
 ```bash
-docker pull ethersphere/swarm-gateway:0.1.3
+docker pull ethersphere/swarm-gateway:0.1.6
 ```
 
 ### 4. Run the gateway
@@ -8874,7 +8606,7 @@ docker run -d --restart unless-stopped \
   -e HOSTNAME="your-domain.example" \
   -e BEE_API_URL="http://bee-1:1633" \
   -e DATABASE_CONFIG="{}" \
-  ethersphere/swarm-gateway:0.1.3
+  ethersphere/swarm-gateway:0.1.6
 ```
 
 In this configuration, database-backed features such as subdomain rewrites and moderation are not configured.
@@ -8893,24 +8625,25 @@ Expected output:
 OK
 ```
 
-### 6. Test with uploaded content
+### 6. Test with existing content
 
-Upload a file using Bee:
-
-```bash
-echo "hello swarm" > test.txt
-swarm-cli upload test.txt
-```
-
-This will print a Swarm reference.
-
-Open the file through the gateway:
+To confirm the gateway is correctly serving content from Swarm, request a reference that is already on the network. The following hash points to a small JSON file:
 
 ```text
-http://your-domain.example/bzz/<REFERENCE>/
+http://your-domain.example/bzz/f3f5e25c90824876c2468b9bdf0d842cd05dc5f0974681789b9729bc155c4f65/
 ```
 
-The file contents should be returned.
+Expected output:
+
+```json
+{
+  "octalmage.com": "bzz://45f0f1e13b70e2919e59fdc5bcf3a99bcbe19dc1be6ebdebe3f89794b77c19ab/",
+  "o8.is": "bzz://4cd43b1c0ebc257f79cc45ebd9774e1251e34f08026325c78ef2ca46972935cc/",
+  "dist.o8.is": "bzz://0890110b61109aee2b6f0d071cedce584868bb29dcb7e41b1c0388d6cf775ace/"
+}
+```
+
+If the JSON is returned, your gateway is correctly fetching and serving content from Swarm. To serve your own content, upload a file or website through your Bee node (see the [Upload and Download](/docs/develop/upload-and-download) and [Host a Webpage](/docs/develop/host-your-website) guides) and use the resulting reference in place of the one above.
 
 ### 7. Optional: restrict uploads using authentication
 
@@ -8984,7 +8717,7 @@ docker run -d --restart unless-stopped \
   -e HOSTNAME="your-domain.example" \
   -e BEE_API_URL="http://bee-1:1633" \
   -e DATABASE_CONFIG="{}" \
-  ethersphere/swarm-gateway:0.1.3
+  ethersphere/swarm-gateway:0.1.6
 ```
 
 The gateway is now only accessible from within the Docker network.
@@ -9056,282 +8789,28 @@ curl -I http://your-domain.example/health
 
 ---
 
+**Next:** [Dynamic Content](/docs/develop/dynamic-content) — return to app development and learn how feeds add a mutable pointer layer on top of Swarm's immutable storage.
+
+---
+
 ## Host a Webpage
 
-There are two primary methods most developers should use for uploading a website to Swarm - `swarm-cli` and `bee-js`. Depending on the specific use case, it may make more sense to pick one or the other.
+In the [Upload and Download](/docs/develop/upload-and-download) guide you uploaded individual files and got back Swarm reference hashes. A website is just a collection of files — an HTML page, a stylesheet, maybe an image. When you upload a directory, Bee automatically builds a [manifest](/docs/develop/tools-and-features/manifests) that maps each relative path to its content. Set an `indexDocument` and the root URL resolves to your homepage.
 
-For a simple website such as a personal blog or company page, using `swarm-cli` is simplest and fastest way to get your site uploaded and accessible on Swarm.
+This guide shows how to upload a static site and open it through `/bzz/<reference>/`.
 
-However for developers who need finer grained control over the process or who wish to build a more complex application which require programmatically spinning up new pages, `bee-js` is required.
-
-:::tip
-The guides below assume you already have a registered ENS domain name. By using an ENS domain name, you can make your Swarm hosted website accessible through an easy to remember human-readable name rather than a Swarm hash. If you don't have an ENS domain name registered, you can get one using the official ENS application at [app.ens.domains](https://app.ens.domains/). Refer to their support section for a step-by-step guide to [register an ENS domain](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name).
+:::info Example project
+The example website used in this guide is in [`examples/website`](https://github.com/ethersphere/examples/tree/main/website). Clone the repo, copy `.env.example` to `.env`, fill in your values, and run `npm install && npm run upload`.
 :::
 
-:::tip FIX FOR ENS NOT WORKING ON LOCALHOST
-If the site doesn’t load from localhost, it’s may be an issue with the resolver RPC (the RPC endpoint for the Ethereum node used to resolve your ENS domain name). This is even more likely if you are using a free RPC since they generally don't come with the same guarantees as paid ones.
-
-Some endpoints, such as...
-
-```
-https://cloudflare-eth.com
-```
-
-...may not resolve properly on localhost. Even if they previously worked, it may be the case that the RPC has been [changed or removed](https://developers.cloudflare.com/web3/reference/migration-guide/?utm_source=chatgpt.com).
-
-As of the writing of this guide, both of these free and public endpoints work reliably for localhost resolution:
-
-```
-https://mainnet.infura.io/v3/<infura-api-key>
-https://eth-mainnet.public.blastapi.io
-```
-
-Alternatively, you can run your own Ethereum node and use that as the RPC.
-:::
- 
-## Host a Site With **swarm-cli** 
-
-This guide shows you how to get your website hosted on Swarm with just a few simple commands by using `swarm-cli` from your terminal. 
-
-### Prerequisites
-
-* A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
-* A valid postage batch
-* [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli)
-* A valid postage stamp batch
-* Your static website files (you can also use the example website files provided below)  
-* (Optional for part one - "Upload & Access by Hash") An ENS domain which you [previously registered](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name)
-
-### Upload & Access by Hash
-
-You can download the example website files from the [ethersphere/examples](https://github.com/ethersphere/examples/tree/main/website) repository.
-
-#### Uploading the Website
-
-1. Go to the folder containing your website files.
-
-The example website files look like this:
-
-```
-my-website/
-├── index.html       # main landing page
-├── 404.html         # custom error page
-├── styles.css       # basic styling
-├── script.js        # optional script
-├── favicon.svg      # site icon
-└── robots.txt       # default robots config
-```
-
-* `index.html` will be served by default when users visit the root URL.
-* `404.html` will be served for non-existent paths.
-* The other files are optional and can be customized.
-
-2. Run:
-
-<Tabs
-defaultValue="powershell"
-values={[
-{label: 'PowerShell', value: 'powershell'},
-{label: 'Linux / macOS', value: 'bash'},
-]}>
-
-<TabItem value="powershell">
-
-```powershell
-swarm-cli upload . `
-  --stamp <BATCH_ID> `
-  --index-document index.html `
-  --error-document 404.html
-````
-
-</TabItem>
-
-<TabItem value="bash">
-
-```bash
-swarm-cli upload . \
-  --stamp <BATCH_ID> \
-  --index-document index.html \
-  --error-document 404.html
-```
-
-</TabItem>
-</Tabs>
-
-* Replace `<BATCH_ID>` with your postage batch ID.
-* `--index-document` tells Bee which file to serve at the root.
-* `--error-document` defines the fallback file for missing paths.
-
-3. The upload will return a Swarm reference hash, for example:
-
-```
-cf50756e6115445fd283691673fa4ad2204849558a6f3b3f4e632440f1c3ab7c
-```
-
-Copy this and save it. You’ll need it for both direct access and [ENS integration](#connect-site-to-ens-domain).
-
-#### Accessing the Website
-
-Anyone with a Bee node can now access the site using the Swarm hash you just saved:
-
-```
-http://localhost:1633/bzz/<SWARM_HASH>/
-```
-
-### Use Feeds for Seamless Updates - swarm-cli
-
-*If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
-
-If you have an ENS domain and Swarm hosted website, you can make the site available through the domain by registering website's Swarm hash as a content hash through the [ENS domain management app](https://app.ens.domains/). However, if you ever edit and reupload your site to Swarm, you will need to re-register your new website hash to make it available at your ENS domain.  
-
-Therefore, instead of directly using your website hash as the content hash for your ENS domain, upload your site as a feed update and use the feed manifest hash as the content hash. Then every time you update your site as a new feed update, the ENS domain will always resolve to the newest version of your site without the need to register a new hash each time.
-
-:::tip
-The examples below refer to core feed concepts such as "publisher identity", and "topic". To learn more about these concepts refer to the [bee-js documentation](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds).
-:::
-
-In this section, you will:
-
-1. Create a publisher identity  
-2. Upload your site to a feed (this automatically creates the feed manifest)  
-3. Copy the feed manifest reference  
-4. Use that manifest reference as your ENS contenthash  
-
-#### Step 1: Create a dedicated publisher identity
-
-This key will sign feed updates.  
-
-```bash
-swarm-cli identity create website-publisher
-```
-
-Terminal output:
-
-```bash
-Name: website-publisher
-Type: V3 Wallet
-Private key: 0x22e918ef68c9bc975112ceaaee0ee0f147baa79da257873659bddbfd84a646fe
-Public key: 0x218c79f8dfb26d077b6379eb56aa9c6e71edf74dde8ecd27dac5016528aea80ee121b9e5050adf3948c8b0d8cffda763d7fb1f5608250b5009c5d50e158ab4a5
-Address: 0x2fb11d37a9913bd3258b9918c399f35fd842a232
-```
-
-Record the output in a secure location as a backup — you will need this identity for future updates.
-
-If you need to view/export it later:
-
-```bash
-swarm-cli identity export website-publisher
-```
-
-#### Step 2: Upload your website to a feed (creates the manifest automatically)
-
-Don't forget to replace `<BATCH_ID>` with your own valid batch ID before running the commands below:
-
-<Tabs>
-<TabItem value="linux" label="Linux / macOS">
-
-```bash
-swarm-cli feed upload ./website \
-  --identity website-publisher \
-  --topic-string website \
-  --stamp <BATCH_ID> \
-  --index-document index.html \
-  --error-document 404.html
-```
-
-</TabItem>
-<TabItem value="powershell" label="Windows PowerShell">
-
-```powershell
-swarm-cli feed upload .\website `
-  --identity website-publisher `
-  --topic-string website `
-  --stamp <BATCH_ID> `
-  --index-document index.html `
-  --error-document 404.html
-```
-</TabItem>
-</Tabs>
-
-You will see output that includes your **feed manifest reference**, for example:
-
-```bash
-Swarm hash: 387dc3cf98419dcb20c68b284373bf7d9e8dcb27daadb67e1e6b6e0f17017f1f
-URL: http://localhost:1633/bzz/387dc3cf98419dcb20c68b284373bf7d9e8dcb27daadb67e1e6b6e0f17017f1f/
-Feed Manifest URL: http://localhost:1633/bzz/6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2/
-Stamp ID: 3d98a22f
-Usage: 50%
-Capacity (mutable): 20.445 KB remaining out of 40.890 KB
-```
-
-You can find the manifest hash at `Feed Manifest URL` in the URL right after `/bzz/`: `6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2`
-
-Save this hash, you will use it for the next step.
-
-This is your **permanent website reference**. It is a reference to a feed manifest which points to the latest feed entry so that you can use it as a static, unchanging reference for your website even as you make multiple updates to the site. Every time you update the website through the feed, this manifest will point to the hash for the newest version of the website.
-
-#### Step 3: Use the feed reference as the ENS contenthash
-
-Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
-
-Example:
-
-```
-bzz://6c30ef2254ac15658959cb18dd123bcce7c16d06fa7d0d4550a1ee87b0a846a2
-```
-
-Now your ENS name will always point to a static reference which will always resolve to the latest version of your website.
-
-#### Updating your site in the future
-
-When you have a new version of your site, just run `feed upload` again using the same topic and identity:
-
-<Tabs>
-<TabItem value="linux" label="Linux / macOS">
-
-```bash
-swarm-cli feed upload ./website \
-  --identity website-publisher \
-  --topic-string website \
-  --stamp <BATCH_ID> \
-  --index-document index.html \
-  --error-document 404.html
-```
-
-</TabItem>
-<TabItem value="powershell" label="Windows PowerShell">
-
-```powershell
-swarm-cli feed upload .\website `
-  --identity website-publisher `
-  --topic-string website `
-  --stamp <BATCH_ID> `
-  --index-document index.html `
-  --error-document 404.html
-```
-
-</TabItem>
-</Tabs>
-
-* The **feed manifest reference stays the same**.
-* The feed now points to the newly uploaded site version.
-* No ENS changes needed.
-
-## Host a Website with **bee-js**
-
-This guide explains how to host a website on Swarm using the `bee-js` JavaScript SDK instead of the CLI.
-
-For developers building apps, tools, or automated deployments, `bee-js` offers programmatic control over uploading and updating content on Swarm.  
-
-### Prerequisites
+## Prerequisites
 
 * A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage stamp batch
 * Node.js (18+) and `@ethersphere/bee-js` installed in your project
-* Static website files (HTML, CSS, etc.) - feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/website)
-* (Optional for part one - "Upload & Access by Hash") An ENS domain which you [previously registered](https://support.ens.domains/en/articles/7882582-how-to-register-a-eth-name)
+* Static website files (HTML, CSS, etc.) — feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/website)
 
-### Upload and Access by Hash
+## Upload and Access by Hash
 
 Install bee-js:
 
@@ -9365,13 +8844,13 @@ After running the script, copy the Swarm hash output to the console and then use
 http://localhost:1633/bzz/<SWARM_HASH>/
 ```
 
-### Use Feeds for Seamless Updates - bee-js
+## Advanced: Keep Your URL Stable Across Updates
 
-*If you have not already connected your site to your ENS domain, [do that now](#connect-site-to-ens-domain) before returning here.*
+:::note Prerequisite
+This section uses feeds — the concept of a mutable pointer on top of Swarm's immutable storage. Feeds are explained from scratch in the [Dynamic Content](/docs/develop/dynamic-content) guide. You can complete this guide without this section and come back after you have worked through Dynamic Content.
+:::
 
-If you have an ENS domain and Swarm hosted website, you can make the site available through the domain by registering website's Swarm hash as a content hash through the [ENS domain management app](https://app.ens.domains/). However, if you ever edit and reupload your site to Swarm, you will need to re-register your new website hash to make it available at your ENS domain.  
-
-Therefore, instead of directly using your website hash as the content hash for your ENS domain, upload your site as a feed update and use the feed manifest hash as the content hash. Then every time you update your site as a new feed update, the ENS domain will always resolve to the newest version of your site without the need to register a new hash each time.
+Every time you re-upload a site to Swarm, you get a new reference hash. If you want a single stable URL that always points to the latest version of your site — useful for ENS integration or sharing a permanent link — publish each upload as a feed entry and share the feed manifest hash instead of the content hash.
 
 :::tip
 You will need a publisher key to use for setting up your website feed.
@@ -9450,7 +8929,7 @@ Website Swarm Hash: 6c45eae389b3bffce21443316d0bd47c4101545092b7c72c313a33ee7d00
 Feed Manifest: caa414d70028d14b0bdd9cbab18d1c1a0a3bab1b20a56cf06937a6b20c7e7377
 ```
 
-Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
+Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#optional-connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
 
 ```
 bzz://<manifestRef>
@@ -9466,7 +8945,7 @@ Your ENS domain will always point to the latest upload via the feed manifest.
 
 You’ve now got a programmatic way to deploy and update your Swarm-hosted site with ENS support using `bee-js`!
 
-## Connect Site to ENS Domain 
+## Optional: Connect Site to ENS Domain
 
 Once your site is uploaded to Swarm, you can make it accessible via an easy to remember ENS domain name rather than its Swarm hash:
 
@@ -9499,7 +8978,11 @@ The guide covers:
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 
 :::tip
-For the content hash, you can use a Swarm hosted website's hash directly, or as is recommended in the [`swarm-cli`](#use-feeds-for-seamless-updates---swarm-cli) and [`bee-js`](#use-feeds-for-seamless-updates---bee-js) guides above, publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates. 
+For the content hash, you can use a Swarm-hosted website's hash directly, or — as recommended in the [Advanced: Keep Your URL Stable Across Updates](#advanced-keep-your-url-stable-across-updates) section above — publish your site to a feed and use the feed manifest hash instead. By using a feed manifest as the content hash, you can avoid repeated ENS registry updates.
+:::
+
+:::tip If ENS does not resolve on localhost
+If the site doesn't load from `http://localhost:1633/bzz/yourname.eth/`, the issue is usually the ENS resolver RPC. Free public endpoints like `https://cloudflare-eth.com` [may not resolve reliably](https://developers.cloudflare.com/web3/reference/migration-guide/?utm_source=chatgpt.com). Reliable alternatives include `https://mainnet.infura.io/v3/<infura-api-key>` and `https://eth-mainnet.public.blastapi.io`, or run your own Ethereum node.
 :::
 
 ```
@@ -9519,6 +9002,10 @@ This works across:
 * any ENS-compatible Swarm resolver
 
 You do not need to encode the hash or use any additional tools. `bzz://<hash>` is sufficient.
+
+---
+
+**Next:** [Manage Files](/docs/develop/files) — learn how manifests provide filesystem-like path mapping and how to add, move, or remove files without re-uploading everything.
 
 ---
 
@@ -9577,7 +9064,7 @@ This is the go-to starting point for web3 developers who want to build with Swar
       
       
         
-          Working with the "Filesystem"
+          Manage Files
           
             Learn about how manifests enable a virtual "filesystem" on Swarm, and how to manipulate the manifest to re-write virtual paths to add, remove, or move content. 
           
@@ -9586,7 +9073,7 @@ This is the go-to starting point for web3 developers who want to build with Swar
       
       
         
-          Routing
+          Website Routing
           
             Learn about routing on Swarm and the various options at your disposal for approaching website routing.
           
@@ -9653,8 +9140,7 @@ The key insight is that a feed entry does not have to point to HTML content — 
 
 * A running Bee node ([install guide](/docs/bee/installation/quick-start))
 * A valid postage stamp batch ([how to get one](/docs/develop/tools-and-features/buy-a-stamp-batch))
-* Node.js 18+ and `@ethersphere/bee-js` installed (for `bee-js` examples)
-* [`swarm-cli` installed](https://docs.ethswarm.org/docs/bee/working-with-bee/swarm-cli) (for `swarm-cli` examples)
+* Node.js 18+ and `@ethersphere/bee-js` installed
 * Familiarity with the [Dynamic Content](/docs/develop/dynamic-content) guide and feeds
 
 ## Architecture
@@ -9707,13 +9193,14 @@ Clone the repo and set up the project:
 git clone https://github.com/ethersphere/examples.git
 cd examples/multi-author-blog
 npm install
+cp .env.example .env
 ```
 
-Update the `BATCH_ID` in the `.env` file with a valid batch ID, and make sure `BEE_URL` points to your Bee node:
+Fill in your `BATCH_ID` in `.env`:
 
 ```bash
 BEE_URL=http://localhost:1633
-BATCH_ID=YOUR_BATCH_ID
+BATCH_ID=<YOUR_BATCH_ID>
 ```
 
 ## Example Project — Multi-Author Blog
@@ -9722,53 +9209,16 @@ This section builds a complete runnable project: a blog where multiple authors p
 
 ### Project Setup
 
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
-
-Create a new directory and install dependencies:
+Use the cloned examples repo (see [Example Scripts](#example-scripts) above):
 
 ```bash
-mkdir swarm-multiblog && cd swarm-multiblog
-npm init -y
-npm install @ethersphere/bee-js dotenv
+cd examples/multi-author-blog
+npm install
+cp .env.example .env
+# Fill in BEE_URL and BATCH_ID in .env
 ```
-
-Add `"type": "module"` to your `package.json` to use ES module imports.
-
-Create a `.env` file:
-
-```bash
-BEE_URL=http://localhost:1633
-BATCH_ID=<YOUR_BATCH_ID>
-```
-
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Create the project directory and author folders:
-
-```bash
-mkdir swarm-multiblog && cd swarm-multiblog
-mkdir -p blog/alice blog/bob blog/home
-```
-
-Set up three identities — one for each author and one for the admin:
-
-```bash
-swarm-cli identity create blog-admin
-swarm-cli identity create alice
-swarm-cli identity create bob
-```
-
-Keep the output of each command — you'll need the owner addresses and any other identity information for later steps.
-
-</TabItem>
-</Tabs>
 
 ### Project Structure
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 ```
 swarm-multiblog/
@@ -9783,32 +9233,9 @@ swarm-multiblog/
 └── read.js              # Read the feeds without private keys
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-```
-swarm-multiblog/
-├── blog/
-│   ├── alice/
-│   │   └── index.html       # Alice's latest blog page
-│   ├── bob/
-│   │   └── index.html       # Bob's latest blog page
-│   └── home/
-│       └── index.html       # Homepage with aggregated posts
-├── authors.json             # Directory of authors (manifest hashes, topics, owners)
-├── alice-posts.json         # Local tracking of Alice's posts
-└── bob-posts.json           # Local tracking of Bob's posts
-```
-
-</TabItem>
-</Tabs>
-
 ### Initialize the Blog
 
 This step generates keys for all authors and the admin, creates feeds for each author and for the homepage, builds the index feed with an `authors.json` manifest, and saves everything to `config.json`.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `init.js`:
 
@@ -9983,6 +9410,7 @@ Run it once to initialize the blog:
 
 ```bash
 node init.js
+# or: npm run init
 ```
 
 Example output:
@@ -9998,129 +9426,9 @@ Alice's feed:  http://localhost:1633/bzz/3fa19c.../
 Bob's feed:    http://localhost:1633/bzz/7c244b.../
 ```
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Create initial HTML files for each author. Start with Alice:
-
-```bash
-cat > blog/alice/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Alice's Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  Alice's Blog
-  No posts yet.
-</body>
-</html>
-EOF
-```
-
-Do the same for Bob:
-
-```bash
-cat > blog/bob/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Bob's Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  Bob's Blog
-  No posts yet.
-</body>
-</html>
-EOF
-```
-
-Upload Alice's initial page to her feed and save the manifest hash:
-
-```bash
-swarm-cli feed upload ./blog/alice \
-  --identity alice \
-  --topic-string alice-posts \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-This outputs a `Feed Manifest URL`. Extract the hash and save it as `ALICE_MANIFEST`. Do the same for Bob and save as `BOB_MANIFEST`.
-
-Now create `authors.json` with your manifest hashes and owner addresses (from your `swarm-cli identity` output earlier):
-
-```json
-[
-  {
-    "name": "Alice",
-    "topic": "alice-posts",
-    "owner": "<ALICE_ADDRESS>",
-    "feedManifest": "<ALICE_MANIFEST>"
-  },
-  {
-    "name": "Bob",
-    "topic": "bob-posts",
-    "owner": "<BOB_ADDRESS>",
-    "feedManifest": "<BOB_MANIFEST>"
-  }
-]
-```
-
-Upload `authors.json` to the index feed:
-
-```bash
-swarm-cli feed upload authors.json \
-  --identity blog-admin \
-  --topic-string blog-index \
-  --stamp <BATCH_ID>
-```
-
-Save the `Feed Manifest URL` hash as `INDEX_MANIFEST`.
-
-Finally, create the homepage and upload it to the home feed:
-
-```bash
-cat > blog/home/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Multi-Author Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  Multi-Author Blog
-  2 authors
-  
-    /">Alice
-    No posts yet.
-  
-  
-    /">Bob
-    No posts yet.
-  
-</body>
-</html>
-EOF
-```
-
-Upload it:
-
-```bash
-swarm-cli feed upload ./blog/home \
-  --identity blog-admin \
-  --topic-string blog-home \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-Save the `Feed Manifest URL` hash as `HOME_MANIFEST`. This is your permanent blog URL.
-
-:::info
-In the swarm-cli workflow, `authors.json` and all state tracking is maintained manually or by local shell scripts. The swarm-cli commands handle uploads and feed updates; local file organization is left to you. For automation, you could write a shell script that regenerates `blog/home/index.html` and re-runs the feed upload.
-:::
-
-</TabItem>
-</Tabs>
-
 ### Add a Post
 
 Authors publish independently. Each author regenerates their blog page with the new post, uploads it, and updates their feed. The admin can then aggregate the latest posts into the homepage.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `add-post.js`:
 
@@ -10207,82 +9515,16 @@ Run it:
 ```bash
 node add-post.js alice "Hello Swarm" "My first post on a decentralized blog."
 node add-post.js bob "Why Swarm?" "Censorship resistance matters."
+# or: npm run add-post -- alice "Hello Swarm" "My first post on a decentralized blog."
 ```
 
 :::tip
 Authors are fully independent. Bob can publish a post without Alice's involvement, without any coordination, and without running any admin script. Each author controls only their own private key and topic. The admin (homepage aggregator) runs separately and at their own discretion.
 :::
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Edit `blog/alice/index.html` to include the new post:
-
-```bash
-cat > blog/alice/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Alice's Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  Alice's Blog
-  1 post
-  
-    Hello Swarm
-    <small style="color:#888;">2025-06-15</small>
-    My first post on a decentralized blog.
-  
-</body>
-</html>
-EOF
-```
-
-Re-upload to Alice's feed:
-
-```bash
-swarm-cli feed upload ./blog/alice \
-  --identity alice \
-  --topic-string alice-posts \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-The Feed Manifest URL stays the same. Alice's page now shows the new post. Do the same for Bob:
-
-```bash
-cat > blog/bob/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Bob's Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  Bob's Blog
-  1 post
-  
-    Why Swarm?
-    <small style="color:#888;">2025-06-15</small>
-    Censorship resistance matters.
-  
-</body>
-</html>
-EOF
-
-swarm-cli feed upload ./blog/bob \
-  --identity bob \
-  --topic-string bob-posts \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-Each author's feed manifest URL always serves their latest posts.
-
-</TabItem>
-</Tabs>
-
 ### Update the Homepage
 
 The admin aggregates all author feeds and publishes an updated homepage with previews of their latest posts. This is the key demonstration of feeds referencing feeds: the aggregator reads the index feed to discover authors, then reads each author's feed to fetch their latest content.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `update-index.js`:
 
@@ -10364,6 +9606,7 @@ Run it after authors publish:
 
 ```bash
 node update-index.js
+# or: npm run update-index
 ```
 
 The homepage now displays previews of the latest posts from all authors. The homepage feed manifest URL (`cfg.manifests.home`) always serves the aggregated view.
@@ -10372,59 +9615,9 @@ The homepage now displays previews of the latest posts from all authors. The hom
 The `update-index.js` script reads local JSON sidecars (`alice-posts.json`, `bob-posts.json`) to populate post previews. In a production system, each post would be a separate Swarm upload, and the author's feed would store a JSON post-list reference (topic + manifest hash) instead of raw HTML. See [Etherjot](https://github.com/ethersphere/etherjot) for a full-featured example of this approach.
 :::
 
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-After authors have published posts, update the homepage HTML to include previews and links:
-
-```bash
-cat > blog/home/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Multi-Author Blog</title></head>
-<body style="max-width:680px; margin:40px auto; font-family:sans-serif;">
-  Multi-Author Blog
-  2 authors
-  
-    /">Alice
-    Hello Swarm — 2025-06-15
-    My first post on a decentralized blog.
-  
-  
-    /">Bob
-    Why Swarm? — 2025-06-15
-    Censorship resistance matters.
-  
-</body>
-</html>
-EOF
-```
-
-Re-upload the homepage to its feed:
-
-```bash
-swarm-cli feed upload ./blog/home \
-  --identity blog-admin \
-  --topic-string blog-home \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-The homepage feed manifest URL (your permanent blog URL) now displays aggregated posts. The `` links point to each author's feed manifest hash — stable, permanent URLs that always resolve to the latest version of each author's page.
-
-:::tip
-Notice: you did not edit the links to Alice or Bob's feeds. They are permanent feed manifest hashes. When Alice publishes a new post, her feed manifest URL automatically serves the new content. No link updates needed.
-:::
-
-</TabItem>
-</Tabs>
-
 ### Read the Blog
 
 Any third party can read the blog and discover all authors using only the index feed manifest hash. No private keys are needed.
-
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
 
 Create `read.js`:
 
@@ -10454,7 +9647,7 @@ for (const author of authors) {
   const owner  = new EthAddress(author.owner);
   const reader = bee.makeFeedReader(topic, owner);
   try {
-    const result = await reader.downloadReference();
+    const result = await reader.download();
     console.log(`${author.name}`);
     console.log(`  Feed index: ${result.feedIndex.toBigInt()}`);
     console.log(`  URL: ${process.env.BEE_URL}/bzz/${author.feedManifest}/`);
@@ -10476,58 +9669,18 @@ Run it:
 
 ```bash
 node read.js
+# or: npm run read
 ```
-
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Print the state of all feeds:
-
-```bash
-# Read the index feed
-swarm-cli feed print \
-  --identity blog-admin \
-  --topic-string blog-index
-
-# Read each author's feed
-swarm-cli feed print \
-  --identity alice \
-  --topic-string alice-posts
-
-swarm-cli feed print \
-  --identity bob \
-  --topic-string bob-posts
-
-# Read the homepage feed
-swarm-cli feed print \
-  --identity blog-admin \
-  --topic-string blog-home
-```
-
-:::info
-The `swarm-cli feed print` command requires the identity (key file) to be available locally. To read another author's feed without their key, use Bee's HTTP API directly:
-
-```bash
-curl http://localhost:1633/bzz/<FEED_MANIFEST_HASH>/
-```
-
-This fetches the latest content published to that feed manifest, without needing the author's private key.
-:::
-
-</TabItem>
-</Tabs>
 
 ### Adding a New Author
 
 Extending the system with a new author is straightforward. The new author gets their own key and topic. Their entry is appended to `authors.json`. Readers automatically discover them.
 
-<Tabs>
-<TabItem value="bee-js" label="bee-js">
-
 The [`add-author.js`](https://github.com/ethersphere/examples/blob/main/multi-author-blog/add-author.js) script from the examples repo handles everything in one step. From the project directory (after running `init.js`):
 
 ```bash
 node add-author.js charlie
+# or: npm run add-author -- charlie
 ```
 
 This will:
@@ -10538,52 +9691,6 @@ This will:
 5. Update `config.json` so Charlie can use `add-post.js`
 
 Then run `update-index.js` to refresh the homepage with the new author.
-
-</TabItem>
-<TabItem value="swarm-cli" label="swarm-cli">
-
-Create the new author's identity and directory:
-
-```bash
-swarm-cli identity create charlie
-mkdir blog/charlie
-```
-
-Upload their initial page:
-
-```bash
-# Create blog/charlie/index.html (empty page template)
-
-swarm-cli feed upload ./blog/charlie \
-  --identity charlie \
-  --topic-string charlie-posts \
-  --stamp <BATCH_ID> \
-  --index-document index.html
-```
-
-Save the Feed Manifest URL hash as `CHARLIE_MANIFEST`. Update `authors.json`:
-
-```json
-[
-  { "name": "Alice", "topic": "alice-posts", "owner": "<ALICE_ADDRESS>", "feedManifest": "<ALICE_MANIFEST>" },
-  { "name": "Bob",   "topic": "bob-posts",   "owner": "<BOB_ADDRESS>",   "feedManifest": "<BOB_MANIFEST>"   },
-  { "name": "Charlie", "topic": "charlie-posts", "owner": "<CHARLIE_ADDRESS>", "feedManifest": "<CHARLIE_MANIFEST>" }
-]
-```
-
-Re-upload `authors.json` to the index feed:
-
-```bash
-swarm-cli feed upload authors.json \
-  --identity blog-admin \
-  --topic-string blog-index \
-  --stamp <BATCH_ID>
-```
-
-The index feed now points to the updated manifest.
-
-</TabItem>
-</Tabs>
 
 :::info
 Because the index feed always points to the *latest* `authors.json`, any reader who polls the index feed automatically discovers newly added authors. You don't need to notify readers through a separate channel — the feed is the notification channel.
@@ -10741,7 +9848,9 @@ This architecture scales to hundreds of feeds and can represent complex data str
 
 ## Website Routing
 
-# Routing on Swarm 
+# Routing on Swarm
+
+In the [Manage Files](/docs/develop/files) guide you saw that a directory upload creates a manifest — a data structure mapping paths to content. Routing on Swarm is a direct consequence: every URL your site serves must correspond to an entry in that manifest. This guide covers the two main strategies for giving your site clean, navigable URLs.
 
 Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](./tools-and-features/manifests.md).
 
@@ -10956,48 +10065,19 @@ Everything inside `dist/` will be uploaded to your Swarm feed.
 
 #### 7. Deploy Site
 
-Now with routing handled its time to deploy the site. Refer to the [Host Your Website](./host-your-website.md#host-a-site-with-swarm-cli) guide for instructions on how to deploy your site using `bee-js` or `swarm-cli` 
-
-If you already have `swarm-cli` installed, you can do this easily with the following command:
-
-:::warning
-You will need to replace `<BATCH_ID>` with a valid batch id from your Bee node, and may need to replace the directory specified from this line...
+The project includes an `upload.js` script that uploads `./dist` to Swarm and publishes the result to a feed (so your URL stays stable across re-uploads). Set up your `.env` and run it:
 
 ```bash
-swarm-cli feed upload ./dist
-```
- 
-If you have a different build directory. If you followed all the steps above though, it should be in `./dist` already.
-:::
-
-<Tabs>
-<TabItem value="linux" label="Linux / macOS">
-
-```bash
-swarm-cli feed upload ./dist \
-  --identity website-publisher \
-  --topic-string website \
-  --stamp <BATCH_ID> \
-  --index-document index.html \
-  --error-document 404.html
+cp .env.example .env
+# Fill in BATCH_ID and PUBLISHER_KEY in .env
+npm run upload
 ```
 
-</TabItem>
-<TabItem value="powershell" label="Windows PowerShell">
+You should see the website Swarm hash and a feed manifest hash. Open the feed manifest URL — `http://localhost:1633/bzz/<FEED_MANIFEST>/` — in your browser.
 
-```powershell
-swarm-cli feed upload .\dist `
-  --identity website-publisher `
-  --topic-string website `
-  --stamp <BATCH_ID> `
-  --index-document index.html `
-  --error-document 404.html
-```
+For details on feeds and stable URLs, see the [Host a Webpage](./host-your-website.md#advanced-keep-your-url-stable-across-updates) guide.
 
-</TabItem>
-</Tabs>
-
-Now the Home and About pages will be properly resolved by the routes we specified (`./#/`) and (`./#/about`), and non existent URLs will be handled by the `NotFound` component for hash URLs and our `404.html` error document for all others.
+The Home and About pages will be properly resolved by the routes we specified (`./#/`) and (`./#/about`), and non-existent URLs will be handled by the `NotFound` component for hash URLs and our `404.html` error document for all others.
 
 ![](/img/hash-routing.jpg)
 
@@ -11201,6 +10281,10 @@ Once you understand manifest-based routing, you can dynamically:
 * Add new paths (e.g. blog posts, product pages)
 * Create custom routes
 * Remove unwanted paths
+
+---
+
+**Next:** [Run a Gateway](/docs/develop/gateway-proxy) — expose your Swarm-hosted site to the public web through an HTTP gateway.
 
 ---
 
@@ -11755,21 +10839,70 @@ Share your creations in the [#builders](https://discord.gg/8SMCfvm3kw) channel o
 
 ---
 
-## Developer mode
+## bee-factory
 
-You can start the bee in `dev` mode by running the command:
+`bee-factory` is the recommended way to run a local Swarm development environment. It spins up 5 Bee nodes connected to a local Anvil blockchain — all wired together in a single command, with no real xBZZ required.
 
-```bash
-bee dev
+:::info
+The `bee dev` command is no longer available. Please use `bee-factory` for local development instead.
+:::
+
+## Requirements
+
+- Node.js ≥ 18
+- Docker
+
+## Installation
+
+```sh
+npm install -g @ethersphere/bee-factory
 ```
 
-It will start an instance with volatile persistence all back-ends mocked.
+## Usage
 
-As a developer you interact with all the usual HTTP endpoints, for instance you can buy postage stamps and use them to upload files, which will be saved to memory.
+```sh
+bee-factory start               # Start the stack (uses bundled snapshot for fast boot)
+bee-factory start --fresh       # Redeploy contracts from scratch, save new snapshot
+bee-factory start --tag v2.7.1  # Build Bee from a specific git ref (default: master)
 
-## Configuration options
+bee-factory stop                # Stop and remove all containers
+```
 
-It accepts the same configuration options as a normal bee but it will ignore the ones that are not relevant (accounting, networking, blockchain etc).
+The `--fresh` flag redeploys all contracts and saves a new snapshot; subsequent normal starts load from it instantly.
+
+## Endpoints
+
+Once running, the nodes are accessible at these addresses:
+
+| Node     | API                     | P2P                     |
+|----------|-------------------------|-------------------------|
+| Queen    | http://localhost:1633   | http://localhost:1634   |
+| Worker 1 | http://localhost:11633  | http://localhost:11634  |
+| Worker 2 | http://localhost:21633  | http://localhost:21634  |
+| Worker 3 | http://localhost:31633  | http://localhost:31634  |
+| Worker 4 | http://localhost:41633  | http://localhost:41634  |
+
+**Anvil RPC:** `http://localhost:8545` (chain ID 1337)
+
+## Deployed contracts
+
+The following contracts are deployed automatically on startup, with addresses printed to the console:
+
+| Contract             | Role                      |
+|----------------------|---------------------------|
+| BzzToken             | ERC-20 BZZ token          |
+| PostageStamp         | Postage stamp management  |
+| PriceOracle          | Postage pricing           |
+| StakeRegistry        | Node staking              |
+| Redistribution       | Stake redistribution      |
+| SimpleSwapFactory    | Swap contract factory     |
+| SwapPriceOracle      | Swap pricing oracle       |
+
+## Notes
+
+- Each node is funded with 1 ETH and 100 BZZ.
+- Node password: `bee-factory`
+- Uses [Foundry test keys](https://www.getfoundry.sh/anvil#default-accounts) — never use in production.
 
 ---
 
@@ -12316,13 +11449,13 @@ their own Bee node, for the time being you will need to make use of the [Gateway
 [#builders](https://discord.gg/8SMCfvm3kw) room in our
 [Discord Server](https://discord.gg/kHRyMNpw7t) for more information on how to make your Swarm based applications accessible to everyone. 
 
-### Bee Dev Mode
+### Local Development with bee-factory
 
-If you want to test out Swarm based applications without needing to spend real xBZZ, Bee dev mode is an invaluable tool. Learn how to set up Bee in [dev mode](./dev-mode.md) to begin prototyping your applications.
+If you want to test Swarm-based applications without spending real xBZZ, [bee-factory](./dev-mode.md) is the recommended tool. It starts a full local stack — 5 Bee nodes plus a local Anvil blockchain — with a single command. The older `bee dev` mode has been sunset in favour of bee-factory.
 
 ### Starting a Test Network
 
-While bee dev mode allows you to simulate running a single Bee node, setting up a [test network](./starting-a-test-network.md) will allow you to better simulate interactions between multiple nodes.
+While bee-factory already runs multiple nodes locally, setting up a [test network](./starting-a-test-network.md) gives you even greater control over simulating interactions between nodes in a more customised environment.
 
 ---
 
@@ -12623,6 +11756,17 @@ While the pin operation will attempt to fetch content from the network if it is 
 Out of the ashes of Ethereum's vision for a leak-proof decentralised anonymous messaging system - Whisper - comes PSS (or BZZ, whispered! 🤫). Swarm provides the ability to send messages that appear to be normal Swarm traffic, but are in fact messages that may be received and decrypted to reveal their content only by the specific nodes they were intended to be received by.
 
 PSS provides a pub-sub facility that can be used for a variety of tasks. Nodes are able to listen to messages received for a specific topic in their nearest neighborhood and create messages destined for another neighborhood which are sent over the network using Swarm's usual data dissemination protocols.
+
+## Prerequisites
+
+:::warning
+**You must be running a full node to receive PSS messages.** Ultra-light and light nodes cannot subscribe to or receive messages. Full nodes connected to a blockchain RPC endpoint are required for PSS functionality.
+:::
+
+Additionally, to send PSS messages, you will need:
+- A postage stamp batch with sufficient xBZZ balance
+- The recipient's Swarm address prefix (at least 2 bytes)
+- The recipient's public key
 
 ### Subscribe and Receive Messages
 
@@ -13097,7 +12241,7 @@ Never use public gateways when requesting full encrypted references. The hash co
 ## Ultra Light Nodes
 
 :::danger
-When running without a blockchain connections, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
+When running without a blockchain connection, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
 :::
 
 #### Configuration
@@ -13124,6 +12268,10 @@ Since we can't buy postage stamps:
 ## Upload & Download
 
 Uploading to Swarm has two steps: (1) **buy storage** as a **postage stamp batch** with a unique **batch ID**—and (2) **upload using the batch ID**. The upload returns a **Swarm reference hash**, anyone with that reference can download the content.
+
+:::info Example project
+The runnable Node.js scripts for this guide are in [`examples/upload-and-download`](https://github.com/ethersphere/examples/tree/main/upload-and-download). Clone the repo, copy `.env.example` to `.env`, fill in your `BEE_URL` and `BATCH_ID`, run `npm install`, then `npm run script:01` or `npm run script:02`.
+:::
 
 **Before you begin:**
 
@@ -13393,84 +12541,9 @@ console.log(stylesheet.name); // "example.txt"
 console.log(stylesheet.data.toUtf8()); // prints file content
 ```
 
-## Upload & Download with Swarm CLI
-
-The `swarm-cli` tool offers a convenient command-line interface for Bee node interaction. It's a convenient tool for node management or one-off uploads and downloads.
-
-Refer to [the official README](https://github.com/ethersphere/swarm-cli/blob/master/README.md) for a more complete usage guide.
-
-Buy storage via an interactive prompt (capacity + TTL), then upload:
-
-```bash
-swarm-cli stamp create
-```
-
-Follow the interactive prompts:
-
-```bash
-For swarm cli, use "stamp create", which looks like this:
-
-PS C:\Users\noahm> swarm-cli stamp create
-Please provide the total capacity of the postage stamp batch
-This represents the total size of data that can be uploaded
-Example: 1GB
-
-Please provide the time-to-live (TTL) of the postage stamps
-Defines the duration after which the stamp will expire
-Example: 1d, 1w, 1month
-
-You have provided the following parameters:
-Capacity: 1.074 GB
-TTL: 7 days
-
-Cost: 0.6088166475825152 xBZZ
-Available: 10000.0000000000000000 xBZZ
-Type: Immutable
-? Confirm the purchase Yes
-... Creating postage batch. This may take up to 5 minutes.
-```
-
-Once you have a valid stamp batch, you can find it using `swarm-cli stamp list`
-
-```bash
-swarm-cli stamp list
-```
-
-```bash
-Stamp ID: 6dd0c4bbb6d62ba6c5fae3b000301c961ee584dd32846291821d789d7582ae36
-Usage: 0%
-Capacity (immutable): 2.380 GB remaining out of 2.380 GB
-TTL: A few seconds (2025-09-21)
-------------------------------------------------------------------------------------------------------------------------
-Stamp ID: d13210952ec60b01a3c0027602743921736d6b277e9e70dd00d0d95fd878acbc
-Usage: 0%
-Capacity (immutable): 2.380 GB remaining out of 2.380 GB
-TTL: A few seconds (2025-09-21)
-```
-
-Use `swarm-cli upload` along with a valid batch ID to upload a file:
-
-```bash
-swarm-cli upload test.txt --stamp <BATCH_ID>
-```
-
-You can also simply use:
-
-```bash
-swarm-cli upload <PATH_TO_FILE>
-```
-
-And an interactive prompt will walk your through stamp selection and the rest of the upload.
-
-Upon upload, a Swarm reference hash will be returned which can then be used to download content:
-
-```bash
-swarm-cli download <REFERENCE> ./output/
-```
-
 ## Upload & Download with the Bee API (advanced)
 
-The **Bee HTTP API** offers the **lowest-level access** to a Bee node. However, it is **more complex and difficult to use** than **bee-js** or **swarm-cli** because you must manage headers, content types, and postage parameters yourself. **Unless you specifically require raw HTTP control**, we **do not recommend** using the Bee API directly. Instead use **bee-js** for application development and **swarm-cli** for command-line interaction.
+The **Bee HTTP API** offers the **lowest-level access** to a Bee node. It is **more complex and harder to use** than **bee-js** because you must manage headers, content types, and postage parameters yourself. **Unless you specifically require raw HTTP control**, we **do not recommend** using the Bee API directly — use **bee-js** instead for application development.
 
 Refer to the [Bee API reference specification](https://docs.ethswarm.org/api/) for detailed usage information.
 
@@ -13482,7 +12555,7 @@ The Bee API exposes three HTTP endpoints:
 
 #### Upload with **/bzz**
 
-While both `swarm-cli` and `bee-js` allow for postage stamp batches to be purchased by specifying the storage duration and data size, the actual call to the Bee API requires an `amount` and `depth` parameters. The relationship between these parameters and the storage size and duration of the batch is complex. Therefore `bee-js` and `swarm-cli` (which allow batches to be purchased by data size/duration which are then converted to `depth`/`amount`) are strongly encouraged for newcomers to development on Swarm. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
+While `bee-js` allows postage stamp batches to be purchased by specifying storage duration and data size, the raw Bee API requires `amount` and `depth` parameters directly. The relationship between these parameters and the storage size and duration of the batch is complex, so `bee-js` is strongly encouraged for newcomers. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
 
 1. Buy a postage batch:
 
@@ -13516,6 +12589,10 @@ curl http://localhost:1633/bzz/<REFERENCE> -o output.txt
 
 ---
 
+**Next:** [Host a Webpage](/docs/develop/host-your-website) — upload a static website and serve it through `/bzz/<reference>/`.
+
+---
+
 ## Access Content
 
 Accessing content on Swarm using Swarm Desktop is easy. All you need to get started is the Swarm hash for the content you wish to access. Whenever content is [uploaded to Swarm](./upload-content.md) a Swarm hash is generated as a reference to that content. 
@@ -13526,7 +12603,7 @@ To access content on Swarm go to the ***Files*** tab and click ***Download***:
 
 From there, paste the Swarm hash for the content you want to access, and click ***Find***. We'll use the hash for a Swarm blog post explaining how to upload a website to Swarm:
 
-`6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae`
+`bc9b942212421e2a19fe1ffdf0add641ae530923041ea8f549381747b14b2f2d`
 
 ![](/img/access2.png)
 
@@ -13907,12 +12984,12 @@ Your website is now accessible via:
 
 **Local Bee node:**
 ```
-http://localhost:1633/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+http://localhost:1633/bzz/bc9b942212421e2a19fe1ffdf0add641ae530923041ea8f549381747b14b2f2d/
 ```
 
 **Public gateway:**
 ```
-https://api.gateway.ethswarm.org/bzz/6843d3be17364ea0620011430e4db2a26ff781da478493a02d6eb5aae886b8ae/
+https://api.gateway.ethswarm.org/bzz/bc9b942212421e2a19fe1ffdf0add641ae530923041ea8f549381747b14b2f2d/
 ```
 
 Replace the hash with your actual website hash.
@@ -14376,7 +13453,6 @@ FDS's software is currently in beta or earlier and has no guarantees of file int
 1. [The Fair Data Protocol (FDP)](https://fdp.fairdatasociety.org/) - A data interoperability protocol for dApps that use personal data.
 1. [Fairdrive](https://fairdrive.fairdatasociety.org/) - Decentralised storage on Swarm.
 1. [Fairdrop](https://fairdrop.fairdatasociety.org/) - An easy and secure way to send your files. No central server. No tracking. No backdoors. 
-1. [FairOS](https://docs.fairos.fairdatasociety.org/docs/) - The operating system for the decentralised web.
 
 ## Links
 
