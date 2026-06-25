@@ -43,7 +43,8 @@ The `prebuild` npm hook runs automatically before `build` and does three things,
 
 - **`docs/`** — all documentation content, grouped into top-level sections: `bee/`, `concepts/`, `desktop/`, `develop/`, `references/`. Page ordering and the sidebar tree are defined manually in **`sidebars.js`** (not auto-generated) — adding a doc file requires adding it to `sidebars.js`.
 - **`docusaurus.config.mjs`** — single source of site config: plugins, presets, redirects (`@docusaurus/plugin-client-redirects`), the OpenAPI integration (`redocusaurus`), and three `docusaurus-plugin-llms` slice configs (`llms-api.txt`, `llms-node-ops.txt`, etc.).
-- **`openapi/`** — `Swarm.yaml` + `SwarmCommon.yaml`. The API reference page is compiled from these at build time via redocusaurus. These are **manually kept in sync** with the [OpenAPI specs in the Bee repo](https://github.com/ethersphere/bee/tree/master/openapi) — they do not auto-update.
+- **`openapi/`** — `Swarm.yaml` + `SwarmCommon.yaml`. The API reference page is compiled from these at build time via redocusaurus. Kept in sync with the [OpenAPI specs in the Bee repo](https://github.com/ethersphere/bee/tree/master/openapi) by the `update-openapi` workflow (see below) — they are **not** edited by hand.
+- **`.github/workflows/`** — `build.yaml` (build on push/PR), `gh-pages.yaml` (deploy on `v*.*.*` tag push), and two Bee-sync workflows: `update-openapi.yaml` (daily; pulls openapi specs + bumps version strings from the latest stable Bee tag and opens a PR labelled `openapi-auto-update`) and `tag-on-openapi-merge.yaml` (tags the merge commit `vX.Y.Z` when that PR merges, triggering the deploy). Both need the `BOT_PAT` secret and fail loudly without it.
 - **`src/components/`** — interactive calculators embedded in docs via MDX (e.g. `AmountAndDepthCalc.js`, `RedundancyCalc.js`, `VolumeAndDurationCalc.js`). `src/config/globalVariables.js` holds shared constants.
 - **`src/theme/SearchBar/`** — a **swizzled** component (ejected from the theme). See the README: upgrading the Docusaurus theme does NOT upgrade swizzled components and can break search; re-swizzle after theme upgrades.
 - **`scripts/`** — TypeScript (`tsx`, no separate install) build/CI helpers: link checkers (`check_links.ts`, `check_live_links.ts`) and the build-time `.mjs` scripts above.
@@ -59,4 +60,4 @@ The `prebuild` npm hook runs automatically before `build` and does three things,
 - **Wrap long lines** with newlines — keeps git diffs small and reduces merge conflicts.
 - **Minimize unrelated edits** (e.g. don't reflow a whole paragraph to fix one typo) for the same reason.
 - **`Swarm` vs `swarm`**: capital `Swarm` = the project / main network; lowercase `swarm` = a swarm of bee nodes (Bee supports running multiple). Capital `Bee` = the Go client; lowercase `bee` = any Swarm-protocol client.
-- **Version bumps**: find-and-replace the version number across the whole `docs/` folder.
+- **Version bumps**: automated by the `update-openapi` workflow on each new stable Bee release (literal find-and-replace of the semver in the install docs). Only bump by hand for out-of-band corrections, across the whole `docs/` folder.
