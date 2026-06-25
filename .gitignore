@@ -1,7 +1,6 @@
 examples
 .docusaurus
 .claude
-CLAUDE.md
 node_modules
 .DS_Store
 build
@@ -15,6 +14,3 @@ docs/references/awesome-list.mdx
 *.zip
 *.csv
 link-reports/
-CLAUDE.md
-
-
