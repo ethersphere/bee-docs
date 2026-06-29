@@ -1,0 +1,139 @@
+name: update openapi
+
+# Detects a new STABLE ethersphere/bee release tag, pulls its OpenAPI specs into
+# openapi/, bumps the Bee version strings in the install docs, and opens (or updates)
+# a PR. Prereleases (-rc*, -beta, v2.7.1a, v2.5.0-v8, ...) are ignored.
+#
+# Requires the BOT_PAT secret (a classic PAT with public_repo scope, or a fine-grained PAT
+# with contents + pull-requests write). It is used so the auto-PR triggers build.yaml CI —
+# PRs opened with the default GITHUB_TOKEN do NOT trigger other workflows. The job fails
+# loudly if BOT_PAT is missing/expired rather than silently skipping CI.
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # daily 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Force a specific Bee tag (e.g. v2.9.0); blank = latest stable"
+        required: false
+
+concurrency:
+  group: update-openapi
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-openapi:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve latest stable Bee tag
+        id: resolve
+        run: |
+          set -euo pipefail
+          if [ -n "${{ github.event.inputs.tag }}" ]; then
+            NEW_TAG="${{ github.event.inputs.tag }}"
+          else
+            NEW_TAG="$(git ls-remote --tags --refs https://github.com/ethersphere/bee.git \
+              | awk '{print $2}' | sed 's#refs/tags/##' \
+              | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' \
+              | sort -V | tail -1)"
+          fi
+          if [ -z "$NEW_TAG" ]; then
+            echo "Could not resolve a stable Bee tag" >&2
+            exit 1
+          fi
+          NEW_VER="${NEW_TAG#v}"
+          echo "new_tag=$NEW_TAG" >> "$GITHUB_OUTPUT"
+          echo "new_ver=$NEW_VER" >> "$GITHUB_OUTPUT"
+          echo "Latest stable Bee tag: $NEW_TAG (version $NEW_VER)"
+
+      - name: Determine current docs version
+        id: current
+        run: |
+          set -euo pipefail
+          OLD_VER="$(grep -oE 'TAG=v[0-9]+\.[0-9]+\.[0-9]+' docs/bee/installation/quick-start.md \
+            | head -1 | sed 's/^TAG=v//')"
+          if [ -z "$OLD_VER" ]; then
+            echo "Could not determine current docs version anchor" >&2
+            exit 1
+          fi
+          echo "old_ver=$OLD_VER" >> "$GITHUB_OUTPUT"
+          echo "Current docs version: $OLD_VER"
+
+      - name: Fetch OpenAPI specs from the tag
+        env:
+          NEW_TAG: ${{ steps.resolve.outputs.new_tag }}
+        run: |
+          set -euo pipefail
+          for f in Swarm.yaml SwarmCommon.yaml; do
+            curl -fsSL \
+              "https://raw.githubusercontent.com/ethersphere/bee/${NEW_TAG}/openapi/$f" \
+              -o "openapi/$f"
+          done
+
+      - name: Bump Bee version strings in docs
+        if: ${{ steps.current.outputs.old_ver != steps.resolve.outputs.new_ver }}
+        env:
+          OLD_VER: ${{ steps.current.outputs.old_ver }}
+          NEW_VER: ${{ steps.resolve.outputs.new_ver }}
+        run: |
+          set -euo pipefail
+          FILES=(
+            docs/bee/installation/build-from-source.md
+            docs/bee/installation/docker.md
+            docs/bee/installation/quick-start.md
+            docs/bee/installation/shell-script.md
+            docs/bee/working-with-bee/bee-api.md
+            docs/bee/working-with-bee/configuration.md
+            docs/bee/working-with-bee/staking.md
+          )
+          # Literal substring swap of the semver. This deliberately also rewrites the
+          # vX.Y.Z, bee:X.Y.Z and X.Y.Z-<hash> forms (the version is a substring of each),
+          # and is safe because the old version never appears inside an unrelated number
+          # in these files. ESC_OLD escapes the dots so they match literally.
+          ESC_OLD="${OLD_VER//./\\.}"
+          sed -i "s/${ESC_OLD}/${NEW_VER}/g" "${FILES[@]}"
+
+      - name: Detect changes
+        id: changes
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No changes — already up to date with the latest stable Bee release."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update PR
+        if: ${{ steps.changes.outputs.changed == 'true' }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.BOT_PAT }}
+          branch: bot/update-openapi-${{ steps.resolve.outputs.new_tag }}
+          commit-message: "chore: update OpenAPI specs and version refs to Bee ${{ steps.resolve.outputs.new_tag }}"
+          title: "Update OpenAPI specs to Bee ${{ steps.resolve.outputs.new_tag }}"
+          labels: openapi-auto-update
+          delete-branch: true
+          body: |
+            Automated update to Bee **${{ steps.resolve.outputs.new_tag }}**.
+
+            Source: https://github.com/ethersphere/bee/tree/${{ steps.resolve.outputs.new_tag }}/openapi
+
+            ## What changed
+            - `openapi/Swarm.yaml` and `openapi/SwarmCommon.yaml` pulled from the tagged commit.
+            - Bee version strings bumped `${{ steps.current.outputs.old_ver }}` → `${{ steps.resolve.outputs.new_ver }}` in the install docs.
+
+            ## ⚠️ Please review before merging
+            The version-string replacement is **best-effort** (literal semver swap in a fixed set
+            of doc files) and can miss or over-match. Skim the doc diff. Merging this PR triggers
+            the `tag-on-openapi-merge` workflow, which tags the merge commit `${{ steps.resolve.outputs.new_tag }}`
+            and (with a PAT configured) kicks off the gh-pages deploy.

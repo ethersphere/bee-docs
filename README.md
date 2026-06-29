@@ -122,8 +122,17 @@ Reports are written to `link-reports/` (gitignored).
 
 ## Bumping Version
 
-Don't forget to find and replace the version number for the whole of the docs folder. 
+When a new stable Bee version is released, the version number across the `docs/` folder is bumped automatically — see [Keeping in sync with Bee releases](#keeping-in-sync-with-bee-releases) below. 
 
 ## API Reference 
 
-The OpenAPI reference docs are compiled at build time from the OpenAPI yaml files in the `/openapi` directory using the [redocusaurus plugin](https://www.npmjs.com/package/redocusaurus) for Docusaurus. They must be manually updated to stay up to date with the [OpenAPI specs in the Bee repo](https://github.com/ethersphere/bee/tree/master/openapi).
+The OpenAPI reference docs are compiled at build time from the OpenAPI yaml files in the `/openapi` directory using the [redocusaurus plugin](https://www.npmjs.com/package/redocusaurus) for Docusaurus. They are kept in sync with the [OpenAPI specs in the Bee repo](https://github.com/ethersphere/bee/tree/master/openapi) automatically — see below.
+
+## Keeping in sync with Bee releases
+
+Two GitHub Actions workflows keep the docs aligned with [ethersphere/bee](https://github.com/ethersphere/bee) releases:
+
+- **`.github/workflows/update-openapi.yaml`** runs daily (and on manual `workflow_dispatch`). It finds the latest **stable** Bee tag (prereleases like `-rc*` are ignored), pulls `Swarm.yaml` + `SwarmCommon.yaml` from that tag into `openapi/`, bumps the Bee version strings in the install docs, and opens (or updates) a PR labelled `openapi-auto-update`. The version-string replacement is best-effort — **review the doc diff before merging**.
+- **`.github/workflows/tag-on-openapi-merge.yaml`** runs when such a PR is merged. It tags the merge commit with the matching Bee version (`vX.Y.Z`), which triggers the existing `gh-pages.yaml` deploy.
+
+Both require a repository secret named **`BOT_PAT`** (a classic PAT with `public_repo` scope, or a fine-grained PAT with contents + pull-requests write). The PAT is necessary to allow CI for the auto-PRs and deployment for the auto-release tags. If the token is missing or expired, the workflows fail loudly rather than silently degrading. Renew BOT_PAT in such case.
