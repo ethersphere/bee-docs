@@ -7,7 +7,6 @@ description: Documents all Bee configuration options available through YAML file
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
 ## Configuration Methods and Priority
 
 There are three configuration methods, each with a different priority level. Configuration is processed in the following ascending order of preference:
@@ -22,7 +21,6 @@ All three methods may be used when running Bee using `bee start`.
 However when Bee is started as a service with tools like `systemctl` or `brew services`, only the YAML configuration file is supported by default.
 :::
 
-
 ### Command Line Arguments
 
 Run `bee help printconfig` in your terminal to list the available command-line arguments and config option flags:
@@ -35,7 +33,6 @@ Usage:
 
 Available Commands:
   start       Start a Swarm node
-  dev         Start in dev mode. WARNING: This command will be deprecated soon.
   init        Initialise a Swarm node
   deploy      Deploy and fund the chequebook contract
   version     Print version number
@@ -62,15 +59,21 @@ Flags:
       --autotls-ca-endpoint string               autotls certificate authority endpoint (default "https://acme-v02.api.letsencrypt.org/directory")
       --autotls-domain string                    autotls domain (default "libp2p.direct")
       --autotls-registration-endpoint string     autotls registration endpoint (default "https://registration.libp2p.direct")
+      --block-sync-interval uint                 block number cache sync interval in blocks (default 10)
       --block-time uint                          chain block time (default 5)
+      --blockchain-rpc-dial-timeout duration     blockchain rpc TCP dial timeout (default 30s)
       --blockchain-rpc-endpoint string           rpc blockchain endpoint
+      --blockchain-rpc-idle-timeout duration     blockchain rpc idle connection timeout (default 1m30s)
+      --blockchain-rpc-keepalive duration        blockchain rpc TCP keepalive interval (default 30s)
+      --blockchain-rpc-tls-timeout duration      blockchain rpc TLS handshake timeout (default 10s)
       --bootnode strings                         initial nodes to connect to (default [/dnsaddr/mainnet.ethswarm.org])
       --bootnode-mode                            cause the node to always accept incoming connections
+      --bzz-token-address string                 bzz token contract address
       --cache-capacity uint                      cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
       --cache-retrieval                          enable forwarded content caching (default true)
       --chequebook-enable                        enable chequebook (default true)
-      --chequebook-min-balance string            minimum chequebook balance required for incoming full-node peers in BZZ (default "11")
-      --chequebook-verification                  enable chequebook verification for incoming full-node peers (default false)
+      --chequebook-min-balance string            minimum chequebook token balance required for verification, in token small units (default 11 BZZ) (default "110000000000000000")
+      --chequebook-verification                  reject full-node hive/handshake records that carry no chequebook address
       --cors-allowed-origins strings             origins with CORS headers enabled
       --data-dir string                          data directory (default "/home/bee/.bee")
       --db-block-cache-capacity uint             size of block cache of the database in bytes (default 33554432)
@@ -78,6 +81,7 @@ Flags:
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
       --db-write-buffer-size uint                size of the database write buffer in bytes (default 33554432)
       --full-node                                cause the node to start in full mode
+      --gas-limit-fallback uint                  gas limit fallback when estimation fails for contract transactions (default 500000)
   -h, --help                                     help for printconfig
       --mainnet                                  triggers connect to main net bootnodes. (default true)
       --minimum-gas-tip-cap uint                 minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
@@ -119,7 +123,7 @@ Flags:
       --tracing-port string                      port to send tracing data
       --tracing-service-name string              service name identifier for tracing (default "bee")
       --transaction-debug-mode                   skips the gas estimate step for contract transactions
-      --use-postage-snapshot                     bootstrap node using postage snapshot from the network
+      --use-simd-hashing                         use SIMD BMT hasher (available only on linux amd64 platforms)
       --verbosity string                         log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
       --warmup-time duration                     maximum node warmup duration; proceeds when stable or after this time (default 5m0s)
       --welcome-message string                   send a welcome message string during handshakes
@@ -158,31 +162,43 @@ bee printconfig
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
-api-addr: 0.0.0.0:1633
+api-addr: 127.0.0.1:1633
 # autotls certificate authority endpoint
 autotls-ca-endpoint: https://acme-v02.api.letsencrypt.org/directory
 # autotls domain
 autotls-domain: libp2p.direct
 # autotls registration endpoint
 autotls-registration-endpoint: https://registration.libp2p.direct
+# block number cache sync interval in blocks
+block-sync-interval: "10"
 # chain block time
 block-time: "5"
+# blockchain rpc TCP dial timeout
+blockchain-rpc-dial-timeout: 30s
 # rpc blockchain endpoint
-blockchain-rpc-endpoint: https://rpc.gnosischain.com
+blockchain-rpc-endpoint: ""
+# blockchain rpc idle connection timeout
+blockchain-rpc-idle-timeout: 1m30s
+# blockchain rpc TCP keepalive interval
+blockchain-rpc-keepalive: 30s
+# blockchain rpc TLS handshake timeout
+blockchain-rpc-tls-timeout: 10s
 # initial nodes to connect to
 bootnode:
 - /dnsaddr/mainnet.ethswarm.org
 # cause the node to always accept incoming connections
 bootnode-mode: false
+# bzz token contract address
+bzz-token-address: ""
 # cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes
 cache-capacity: "1000000"
 # enable forwarded content caching
 cache-retrieval: true
 # enable chequebook
 chequebook-enable: true
-# minimum chequebook balance required for incoming full-node peers in BZZ
-chequebook-min-balance: "11"
-# enable chequebook verification for incoming full-node peers
+# minimum chequebook token balance required for verification, in token small units (default 11 BZZ)
+chequebook-min-balance: "110000000000000000"
+# reject full-node hive/handshake records that carry no chequebook address
 chequebook-verification: false
 # config file (default is $HOME/.bee.yaml)
 config: /home/bee/.bee.yaml
@@ -199,11 +215,13 @@ db-open-files-limit: "200"
 # size of the database write buffer in bytes
 db-write-buffer-size: "33554432"
 # cause the node to start in full mode
-full-node: "true"
+full-node: false
+# gas limit fallback when estimation fails for contract transactions
+gas-limit-fallback: "500000"
 # help for printconfig
 help: false
 # triggers connect to main net bootnodes.
-mainnet: "true"
+mainnet: true
 # minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
 minimum-gas-tip-cap: "0"
 # minimum radius storage threshold
@@ -225,7 +243,7 @@ p2p-wss-addr: :1635
 # Enable Secure WebSocket P2P connections
 p2p-wss-enable: false
 # password for decrypting keys
-password: 427067e9514e93613b861fef5561c6
+password: ""
 # path to a file that contains password for decrypting keys
 password-file: ""
 # percentage below the peers payment threshold when we initiate settlement
@@ -247,7 +265,7 @@ price-oracle-address: ""
 # redistribution contract address
 redistribution-address: ""
 # reserve capacity doubling
-reserve-capacity-doubling: "0"
+reserve-capacity-doubling: 0
 # ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
 resolver-options: []
 # forces the node to resync postage contract data
@@ -263,7 +281,7 @@ static-nodes: []
 # enable storage incentives feature
 storage-incentives-enable: true
 # enable swap
-swap-enable: "true"
+swap-enable: false
 # swap factory addresses
 swap-factory-address: ""
 # initial deposit if deploying a new chequebook
@@ -282,10 +300,10 @@ tracing-port: ""
 tracing-service-name: bee
 # skips the gas estimate step for contract transactions
 transaction-debug-mode: false
-# bootstrap node using postage snapshot from the network
-use-postage-snapshot: false
+# use SIMD BMT hasher (available only on linux amd64 platforms)
+use-simd-hashing: false
 # log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
-verbosity: "4"
+verbosity: info
 # maximum node warmup duration; proceeds when stable or after this time
 warmup-time: 5m0s
 # send a welcome message string during handshakes
@@ -574,7 +592,6 @@ blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 
 We recommend you [run your own Gnosis Chain node](https://docs.gnosischain.com/node/), but you may also consider using a paid RPC endpoint provider such as [GetBlock](https://getblock.io/).
 
-
 ### RPC Providers
 
 While we recommend running your own Gnosis Chain node for your RPC endpoint, you may wish to use a third party provider instead.
@@ -583,6 +600,40 @@ For a comprehensive list of RPC providers, refer to the [Gnosis Chain documentat
 
 For running a light node or for testing out a single full node you can use the free RPC endpoint provided by the Fair Data Society: `https://xdai.fairdatasociety.org`.
 
+### Block number sync interval
+
+Bee periodically reads the current block number from your blockchain RPC endpoint and estimates it locally in between those reads, which significantly reduces how often it calls the RPC. 
+The `block-sync-interval` option controls how frequently the real block number is refreshed:
+
+```yaml
+## bee.yaml
+block-sync-interval: 10
+```
+
+- The default is `10`, so operators who want the default do not need to set anything.
+- A higher value means fewer RPC calls, at the cost of a slightly staler block-number estimate.
+- `1` refreshes the block number as often as possible.
+- `0` is not allowed; the node treats it as "no interval" and clamps it to `1`.
+
+The equivalent flag is `--block-sync-interval` and the environment variable is `BEE_BLOCK_SYNC_INTERVAL`. 
+This is especially useful for operators on paid or rate-limited RPC providers who want to lower request volume.
+
+## SIMD hashing (Optional)
+
+Bee can use a hardware-accelerated (SIMD) implementation of its chunk hasher, a frequent and CPU-intensive operation. 
+On supported hardware this noticeably lowers the CPU cost of hashing, which speeds up uploads and other hashing-heavy work.
+
+This is **opt-in and off by default**. 
+It is currently available **only on Linux x86-64 (amd64)**; on all other platforms (Windows, macOS, ARM) the node automatically falls back to the standard hasher, with no action required and no regression.
+
+To enable it, set the `use-simd-hashing` option:
+
+```yaml
+## bee.yaml
+use-simd-hashing: true
+```
+
+The equivalent flag is `--use-simd-hashing` and the environment variable is `BEE_USE_SIMD_HASHING`.
 
 ## Configuring Swap Initial Deposit (Optional)
 
@@ -601,12 +652,14 @@ To enable chequebook verification, set `chequebook-verification` to `true`:
 chequebook-verification: true
 ```
 
-The default minimum balance threshold is **11 BZZ**. To configure a different threshold, set `chequebook-min-balance` to the desired amount in BZZ:
+The default minimum balance threshold is **11 BZZ**.
+The value is set in the token's smallest unit (PLUR), where 1 BZZ = 10^16 PLUR, so the default is `110000000000000000`.
+To configure a different threshold, set `chequebook-min-balance` accordingly:
 
 ```yaml
 ## bee.yaml
 chequebook-verification: true
-chequebook-min-balance: "11"
+chequebook-min-balance: "110000000000000000" # 11 BZZ, expressed in PLUR
 ```
 
 Or using command-line flags:
@@ -614,7 +667,7 @@ Or using command-line flags:
 ```bash
 bee start \
   --chequebook-verification \
-  --chequebook-min-balance 11
+  --chequebook-min-balance 110000000000000000
 ```
 
 :::info
@@ -645,7 +698,6 @@ nat-addr: "123.123.123.123:1634"
 ```
 
 Ensure `nat-addr` and `nat-wss-addr` if used are set to valid `host:port` values — invalid values prevent the node from starting.
-
 
 ## ENS Resolution (Optional)
 
@@ -680,4 +732,4 @@ warmup-time: 30s
 
 Make sure to fund your node with Sepolia ETH rather than xDAI to pay for gas on the Sepolia testnet. There are many public faucets you can use to obtain Sepolia ETH, such as [this one from Infura](https://www.infura.io/faucet/sepolia). 
 
-To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet. 
+To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.org/swap?outputCurrency=0x543dDb01Ba47acB11de34891cD86B675F04840db&inputCurrency=ETH), just make sure that you've switched to the Sepolia network in your browser wallet.

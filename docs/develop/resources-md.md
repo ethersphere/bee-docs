@@ -44,7 +44,7 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 - [Pinning content](/docs/develop/tools-and-features/pinning) — Keep content locally pinned to your node
 - [Run a local gateway proxy](/docs/develop/tools-and-features/gateway-proxy) — Serve Swarm content over HTTP
 - [Start a private test network](/docs/develop/tools-and-features/starting-a-test-network) — Local multi-node dev environment
-- [Dev mode](/docs/develop/tools-and-features/bee-dev-mode) — Instant stamps, no funding needed
+- [bee-factory](/docs/develop/tools-and-features/bee-dev-mode) — Local Swarm dev stack, no real funds needed
 
 ## Examples
 
