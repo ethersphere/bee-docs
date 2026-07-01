@@ -16,6 +16,10 @@ won't break the bank and can live forever!
 
 Swarm is designed with decentralised applications in mind, and much time has been devoted to designing tools and features to support their prototyping and development. 
 
+### AI Agent Skills
+
+In a hurry? The [Swarm Quickstart Skills](./ai-agent-skills.md) run inside Claude Code and walk you through setting up a Bee node and building on Swarm — just type `/swarm` and follow the guided steps.
+
 ### Bee JS
 
 Our maverick JavaScript team, the Bee-Gees (🕺), have been working hard in the last few months to build some impressive tools for all you budding dapp developer Bees to get stuck into! Find out how to use the [bee-js](./bee-js.md) JavaScript library to start creating your own that live and work on Swarm!

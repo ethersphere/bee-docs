@@ -106,6 +106,7 @@ module.exports = {
       label: 'Tools and Features',
       items: [
         'develop/tools-and-features/introduction',
+        'develop/tools-and-features/ai-agent-skills',
         'develop/tools-and-features/buy-a-stamp-batch',
         'develop/tools-and-features/bee-js',
         'develop/tools-and-features/gateway-proxy',

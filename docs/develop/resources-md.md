@@ -88,7 +88,7 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 - [swarm-cli](/docs/bee/working-with-bee/swarm-cli/) — Command-line interface for uploads, feeds, and more
 - [swarm-mcp ↗](https://github.com/ethersphere/swarm-mcp) — MCP server for AI agents to read and write Swarm
 - [Swarm Actions ↗](https://github.com/ethersphere/swarm-actions) — Deploy to Swarm from GitHub CI/CD workflows
-- [Swarm Skills ↗](https://github.com/GasperX93/swarm-skills) — Claude Code integration for Swarm
+- [Swarm Quickstart Skills ↗](https://github.com/ethersphere/swarm-quickstart-skills) — Interactive Claude Code skills for guided Swarm onboarding
 
 ### Libraries & Primitives
 

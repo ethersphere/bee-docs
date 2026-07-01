@@ -35,6 +35,15 @@ This is the go-to starting point for web3 developers who want to build with Swar
           <span class="hub-card__cta">Connect dApp</span>
         </a>
       </li>
+      <li class="hub-card">
+        <a class="hub-card__link" href="/docs/develop/tools-and-features/ai-agent-skills">
+          <h3 class="hub-card__title">Onboard with AI Skills</h3>
+          <p class="hub-card__desc">
+            Use the Swarm Quickstart Skills in Claude Code — type <code>/swarm</code> for guided, prerequisite-checking steps to set up a node and start building.
+          </p>
+          <span class="hub-card__cta">Start with AI</span>
+        </a>
+      </li>
     </ul>
   </div>
 
