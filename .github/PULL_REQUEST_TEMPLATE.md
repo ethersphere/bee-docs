@@ -12,6 +12,6 @@
 - [ ] `npm run build` succeeds
 - [ ] Links checked (`npm run check:links`) where relevant
 - [ ] `static/llms.txt` updated if pages were added / renamed / deleted
-- [ ] Content follows [CODING.md](../CODING.md) conventions (wrap long lines, `Swarm` vs `swarm`)
+- [ ] Content follows [CODING.md](../CODING.md) conventions (`Swarm` vs `swarm`, ..)
 - [ ] Self-reviewed the diff
 - [ ] Commits are signed off (`git commit -s`)
