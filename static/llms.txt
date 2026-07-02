@@ -69,7 +69,7 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [GSOC](https://docs.ethswarm.org/docs/develop/tools-and-features/gsoc): Graffiti SOC for pub/sub messaging patterns
 - [Add Access Control (usage)](https://docs.ethswarm.org/docs/develop/act): Encrypt content for specific recipients using ACT
 - [Gateway Proxy](https://docs.ethswarm.org/docs/develop/tools-and-features/gateway-proxy): Proxy for browser-based Swarm access
-- [Developer Mode](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-dev-mode): Run Bee without blockchain for local testing
+- [bee-factory](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-dev-mode): Local Swarm development stack (5 Bee nodes plus a local chain) started with a single command
 - [Starting a Private Network](https://docs.ethswarm.org/docs/develop/tools-and-features/starting-a-test-network): Multi-node test clusters
 - [Dynamic Content](https://docs.ethswarm.org/docs/develop/dynamic-content): Updatable content using feeds
 - [Ultra Light Nodes](https://docs.ethswarm.org/docs/develop/ultra-light-nodes): Minimal nodes for lightweight client use cases

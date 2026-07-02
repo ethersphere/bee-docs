@@ -58,7 +58,9 @@ their own Bee node, for the time being you will need to make use of the [Gateway
 
 ### Local Development with bee-factory
 
-If you want to test Swarm-based applications without spending real xBZZ, [bee-factory](./dev-mode.md) is the recommended tool. It starts a full local stack — 5 Bee nodes plus a local Anvil blockchain — with a single command. The older `bee dev` mode has been sunset in favour of bee-factory.
+If you want to test Swarm-based applications without spending real xBZZ, [bee-factory](./dev-mode.md) is the recommended tool.
+It starts a full local stack — 5 Bee nodes plus a local Anvil blockchain — with a single command.
+The `bee dev` mode was removed in Bee v2.8.1; use bee-factory instead.
 
 
 ### Starting a Test Network

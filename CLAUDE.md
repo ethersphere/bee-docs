@@ -57,7 +57,7 @@ The `prebuild` npm hook runs automatically before `build` and does three things,
 
 ## Content conventions (from CODING.md)
 
-- **Wrap long lines** with newlines — keeps git diffs small and reduces merge conflicts.
+- **One sentence per line** — put a newline after every sentence instead of hard-wrapping at a fixed width; keeps git diffs small and reduces merge conflicts.
 - **Minimize unrelated edits** (e.g. don't reflow a whole paragraph to fix one typo) for the same reason.
 - **`Swarm` vs `swarm`**: capital `Swarm` = the project / main network; lowercase `swarm` = a swarm of bee nodes (Bee supports running multiple). Capital `Bee` = the Go client; lowercase `bee` = any Swarm-protocol client.
 - **Version bumps**: automated by the `update-openapi` workflow on each new stable Bee release (literal find-and-replace of the semver in the install docs). Only bump by hand for out-of-band corrections, across the whole `docs/` folder.

@@ -91,7 +91,6 @@ Usage:
 
 Available Commands:
   start       Start a Swarm node
-  dev         Start a Swarm node in development mode
   init        Initialise a Swarm node
   deploy      Deploy and fund the chequebook contract
   version     Print version number
