@@ -206,7 +206,7 @@ Prerequisites for installing directly from source are:
 3. Checkout the required version:
 
    ```bash
-   git checkout v2.8.0
+   git checkout v2.8.1
    ```
 
 4. Build the binary:
@@ -222,7 +222,7 @@ Prerequisites for installing directly from source are:
    ```
 
    ```
-   2.8.0
+   2.8.1
    ```
 
 6. (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`
@@ -694,7 +694,9 @@ you connected. In Swarm, no Bee is left behind.
 The following is a guide for installing a Bee node using Docker. Docker images for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). Using Docker to operate your Bee node offers many benefits, such as ease of deployment and consistency across environments. 
 
 :::caution
-In the examples below we specify the exact image version as 2.8.0. It's recommended to only use the exact version number tags. Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.8.0 in the commands below if there is a newer full release. 
+In the examples below we specify the exact image version as 2.8.1. 
+It's recommended to only use the exact version number tags. 
+Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.8.1 in the commands below if there is a newer full release. 
 :::
 
 :::warning
@@ -722,13 +724,13 @@ docker run -d --name bee-1 \
   -e BEE_PASSWORD="flummoxedgranitecarrot" \
   -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" \
   -v bee-1:/home/bee/.bee \
-  ethersphere/bee:2.8.0 start
+  ethersphere/bee:2.8.1 start
 ```
 
 Here is the same command in a single line in case you run into issues with the line breaks in the command above:
 
 ```bash
-docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 -e BEE_API_ADDR=":1633" -e BEE_FULL_NODE="true" -e BEE_SWAP_ENABLE="true" -e BEE_PASSWORD="flummoxedgranitecarrot" -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" -v bee-1:/home/bee/.bee ethersphere/bee:2.8.0 start
+docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 -e BEE_API_ADDR=":1633" -e BEE_FULL_NODE="true" -e BEE_SWAP_ENABLE="true" -e BEE_PASSWORD="flummoxedgranitecarrot" -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" -v bee-1:/home/bee/.bee ethersphere/bee:2.8.1 start
 ```
 
 #### Command explained:
@@ -744,7 +746,7 @@ docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 
 - **`-e BEE_PASSWORD="flummoxedgranitecarrot"`**: Sets the keystore password, make sure to replace with your own.
 - **`-e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org"`**: Connects to the Gnosis Chain.
 - **`-v bee-1:/home/bee/.bee`**: Persists node data in the `bee-1` volume.
-- **`ethersphere/bee:2.8.0 start`**: Runs Bee version 2.8.0 and starts the node.
+- **`ethersphere/bee:2.8.1 start`**: Runs Bee version 2.8.1 and starts the node.
 
 This setup runs the Bee node in a container, with full node functionality, SWAP enabled, and connections to the Gnosis blockchain for chequebook and postage stamp management, while persisting its data using a volume. 
 
@@ -760,7 +762,7 @@ If everything is set up correctly, you should see your Bee node listed:
 
 ```bash
 CONTAINER ID     IMAGE     COMMAND     CREATED     STATUS     PORTS     NAMES
-37f4ad8b4060   ethersphere/bee:2.8.0   "bee start"   6 seconds ago   Up 5 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-1
+37f4ad8b4060   ethersphere/bee:2.8.1   "bee start"   6 seconds ago   Up 5 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-1
 ```
 
 And check the logs:
@@ -853,11 +855,10 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-version: 2.8.0-06a0aca7 - planned to be supported until 11 December 2024, please follow https://ethswarm.org/
-
-"time"="2024-09-24 22:21:04.543661" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.0-06a0aca7"
-"time"="2024-09-24 22:21:04.590823" "level"="info" "logger"="node" "msg"="swarm public key" "public_key"="02f0e59eafa3c5c06542c0a7a7fe9579c55a163cf1d28d9f6945a34469f88d1b2a"
-"time"="2024-09-24 22:21:04.686430" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02ea739530bbf48eed49197f21660f3b6564709b95bf558dc3b472688c34096418"
+"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.1-7cf53193"
+"time"="2026-07-07 16:52:59.793257" "level"="info" "logger"="node" "msg"="swarm public key"
+"public_key"="02d8d7e1ca6b3b43653ae27e35a375dd74e3ce2f40587fd264bc7268ed918650ab"
+"time"="2026-07-07 16:53:00.087534" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02aaae4ede42f47f48aa5182df4b94039ca71254f44ebc5383d5a67f71fe7e6156"
 "time"="2024-09-24 22:21:04.686464" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x8288F1c8e3dE7c3bf42Ae67fa840EC61481D085e"
 "time"="2024-09-24 22:21:04.700711" "level"="info" "logger"="node" "msg"="using overlay address" "address"="22dc155fe072e131449ec7ea2f77de16f4735f06257ebaa5daf2fdcf14267fd9"
 "time"="2024-09-24 22:21:04.700741" "level"="info" "logger"="node" "msg"="starting with an enabled chain backend"
@@ -1781,17 +1782,17 @@ Although `BZZ` is the official symbol of the token on both Ethereum and Gnosis C
 Run the shell script using `curl` or `wget`:
 
 :::tip
-We specify `TAG=v2.8.0` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
+We specify `TAG=v2.8.1` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
 :::
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.1 bash
 ```
 
 OR
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.1 bash
 ```
 
 Verify installation:
@@ -1855,13 +1856,10 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-version: 2.8.0-390a402e - planned to be supported until 22 April 2025, please follow https://ethswarm.org/
-
-"time"="2025-03-04 11:13:10.113050" "level"="info" "logger"="node" "msg"="bee version" "version"="2.6.0-390a402e"
-"time"="2025-03-04 11:13:10.164801" "level"="info" "logger"="node" "msg"="swarm public key" "public_key"="02b19880b8d024eac3bf8afa3fa85b31b72fcfd491cebc6af78ddd85ff97f65416"
-"time"="2025-03-04 11:13:10.216657" "level"="debug" "logger"="node" "msg"="using existing libp2p key"
-"time"="2025-03-04 11:13:10.268431" "level"="debug" "logger"="node" "msg"="using existing pss key"
-"time"="2025-03-04 11:13:10.268474" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="03a3166e04b749ab3d04fda8a41180598ff2eed01a8096fb72d2c7da393a47c46a"
+"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.1-7cf53193"
+"time"="2026-07-07 16:52:59.793257" "level"="info" "logger"="node" "msg"="swarm public key"
+"public_key"="02d8d7e1ca6b3b43653ae27e35a375dd74e3ce2f40587fd264bc7268ed918650ab"
+"time"="2026-07-07 16:53:00.087534" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02aaae4ede42f47f48aa5182df4b94039ca71254f44ebc5383d5a67f71fe7e6156"
 "time"="2025-03-04 11:13:10.268479" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x003842B26B3dB292Cf84d5969E71c0d1e93F5578"
 "time"="2025-03-04 11:13:10.288418" "level"="info" "logger"="node" "msg"="using overlay address" "address"="fe38346dd89e4211c0e60195ee73e38d2c2ee2fe2b914b771d4ad503cfedbd3c"
 "time"="2025-03-04 11:13:10.288474" "level"="info" "logger"="node" "msg"="starting with an enabled chain backend"
@@ -1929,7 +1927,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.8.0-d0aa8b93
+Version: 2.8.1-7cf53193
 Mode: light
 
 Chainsync
@@ -1959,28 +1957,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.8.0-d0aa8b93
-Mode: light
-
-Chainsync
-Block: 41,710,955 / 41,710,962 (Δ 7)
-
-Topology
-Connected Peers: 151
-Population: 2257
-Depth: 10
-
-Wallet
-xBZZ: 0.0000000000000000
-xDAI: 0.009787142484816165
-
-Chequebook
-Available xBZZ: 0.0000000000000000
-Total xBZZ: 0.0000000000000000
-noah@NoahM16:~$ swarm-cli status
-Bee
-API: http://localhost:1633 [OK]
-Version: 2.8.0-d0aa8b93
+Version: 2.8.1-7cf53193
 Mode: light
 
 Chainsync
@@ -2062,7 +2039,7 @@ Below is a step-by-step guide for installing and setting up your Bee node using 
 Run the install shell script using either `curl` or `wget`:
 
 :::caution
-In the example below, the version is specified using `TAG=v2.8.0`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
+In the example below, the version is specified using `TAG=v2.8.1`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
 :::
 
 :::info
@@ -2095,7 +2072,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.0 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.1 bash
 ```
 </TabItem>
 <TabItem value="wget">
@@ -2103,7 +2080,7 @@ curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TA
 **wget**
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.0 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.1 bash
 ```
 </TabItem>
 
@@ -2125,7 +2102,6 @@ Usage:
 
 Available Commands:
   start       Start a Swarm node
-  dev         Start a Swarm node in development mode
   init        Initialise a Swarm node
   deploy      Deploy and fund the chequebook contract
   version     Print version number
@@ -3225,7 +3201,6 @@ Usage:
 
 Available Commands:
   start       Start a Swarm node
-  dev         Start in dev mode. WARNING: This command will be deprecated soon.
   init        Initialise a Swarm node
   deploy      Deploy and fund the chequebook contract
   version     Print version number
@@ -3252,15 +3227,21 @@ Flags:
       --autotls-ca-endpoint string               autotls certificate authority endpoint (default "https://acme-v02.api.letsencrypt.org/directory")
       --autotls-domain string                    autotls domain (default "libp2p.direct")
       --autotls-registration-endpoint string     autotls registration endpoint (default "https://registration.libp2p.direct")
+      --block-sync-interval uint                 block number cache sync interval in blocks (default 10)
       --block-time uint                          chain block time (default 5)
+      --blockchain-rpc-dial-timeout duration     blockchain rpc TCP dial timeout (default 30s)
       --blockchain-rpc-endpoint string           rpc blockchain endpoint
+      --blockchain-rpc-idle-timeout duration     blockchain rpc idle connection timeout (default 1m30s)
+      --blockchain-rpc-keepalive duration        blockchain rpc TCP keepalive interval (default 30s)
+      --blockchain-rpc-tls-timeout duration      blockchain rpc TLS handshake timeout (default 10s)
       --bootnode strings                         initial nodes to connect to (default [/dnsaddr/mainnet.ethswarm.org])
       --bootnode-mode                            cause the node to always accept incoming connections
+      --bzz-token-address string                 bzz token contract address
       --cache-capacity uint                      cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes (default 1000000)
       --cache-retrieval                          enable forwarded content caching (default true)
       --chequebook-enable                        enable chequebook (default true)
-      --chequebook-min-balance string            minimum chequebook balance required for incoming full-node peers in BZZ (default "11")
-      --chequebook-verification                  enable chequebook verification for incoming full-node peers (default false)
+      --chequebook-min-balance string            minimum chequebook token balance required for verification, in token small units (default 11 BZZ) (default "110000000000000000")
+      --chequebook-verification                  reject full-node hive/handshake records that carry no chequebook address
       --cors-allowed-origins strings             origins with CORS headers enabled
       --data-dir string                          data directory (default "/home/bee/.bee")
       --db-block-cache-capacity uint             size of block cache of the database in bytes (default 33554432)
@@ -3268,6 +3249,7 @@ Flags:
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
       --db-write-buffer-size uint                size of the database write buffer in bytes (default 33554432)
       --full-node                                cause the node to start in full mode
+      --gas-limit-fallback uint                  gas limit fallback when estimation fails for contract transactions (default 500000)
   -h, --help                                     help for printconfig
       --mainnet                                  triggers connect to main net bootnodes. (default true)
       --minimum-gas-tip-cap uint                 minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
@@ -3309,7 +3291,7 @@ Flags:
       --tracing-port string                      port to send tracing data
       --tracing-service-name string              service name identifier for tracing (default "bee")
       --transaction-debug-mode                   skips the gas estimate step for contract transactions
-      --use-postage-snapshot                     bootstrap node using postage snapshot from the network
+      --use-simd-hashing                         use SIMD BMT hasher (available only on linux amd64 platforms)
       --verbosity string                         log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace (default "info")
       --warmup-time duration                     maximum node warmup duration; proceeds when stable or after this time (default 5m0s)
       --welcome-message string                   send a welcome message string during handshakes
@@ -3348,31 +3330,43 @@ bee printconfig
 # allow to advertise private CIDRs to the public network
 allow-private-cidrs: false
 # HTTP API listen address
-api-addr: 0.0.0.0:1633
+api-addr: 127.0.0.1:1633
 # autotls certificate authority endpoint
 autotls-ca-endpoint: https://acme-v02.api.letsencrypt.org/directory
 # autotls domain
 autotls-domain: libp2p.direct
 # autotls registration endpoint
 autotls-registration-endpoint: https://registration.libp2p.direct
+# block number cache sync interval in blocks
+block-sync-interval: "10"
 # chain block time
 block-time: "5"
+# blockchain rpc TCP dial timeout
+blockchain-rpc-dial-timeout: 30s
 # rpc blockchain endpoint
-blockchain-rpc-endpoint: https://rpc.gnosischain.com
+blockchain-rpc-endpoint: ""
+# blockchain rpc idle connection timeout
+blockchain-rpc-idle-timeout: 1m30s
+# blockchain rpc TCP keepalive interval
+blockchain-rpc-keepalive: 30s
+# blockchain rpc TLS handshake timeout
+blockchain-rpc-tls-timeout: 10s
 # initial nodes to connect to
 bootnode:
 - /dnsaddr/mainnet.ethswarm.org
 # cause the node to always accept incoming connections
 bootnode-mode: false
+# bzz token contract address
+bzz-token-address: ""
 # cache capacity in chunks, multiply by 4096 to get approximate capacity in bytes
 cache-capacity: "1000000"
 # enable forwarded content caching
 cache-retrieval: true
 # enable chequebook
 chequebook-enable: true
-# minimum chequebook balance required for incoming full-node peers in BZZ
-chequebook-min-balance: "11"
-# enable chequebook verification for incoming full-node peers
+# minimum chequebook token balance required for verification, in token small units (default 11 BZZ)
+chequebook-min-balance: "110000000000000000"
+# reject full-node hive/handshake records that carry no chequebook address
 chequebook-verification: false
 # config file (default is $HOME/.bee.yaml)
 config: /home/bee/.bee.yaml
@@ -3389,11 +3383,13 @@ db-open-files-limit: "200"
 # size of the database write buffer in bytes
 db-write-buffer-size: "33554432"
 # cause the node to start in full mode
-full-node: "true"
+full-node: false
+# gas limit fallback when estimation fails for contract transactions
+gas-limit-fallback: "500000"
 # help for printconfig
 help: false
 # triggers connect to main net bootnodes.
-mainnet: "true"
+mainnet: true
 # minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
 minimum-gas-tip-cap: "0"
 # minimum radius storage threshold
@@ -3415,7 +3411,7 @@ p2p-wss-addr: :1635
 # Enable Secure WebSocket P2P connections
 p2p-wss-enable: false
 # password for decrypting keys
-password: 427067e9514e93613b861fef5561c6
+password: ""
 # path to a file that contains password for decrypting keys
 password-file: ""
 # percentage below the peers payment threshold when we initiate settlement
@@ -3437,7 +3433,7 @@ price-oracle-address: ""
 # redistribution contract address
 redistribution-address: ""
 # reserve capacity doubling
-reserve-capacity-doubling: "0"
+reserve-capacity-doubling: 0
 # ENS compatible API endpoint for a TLD and with contract address, can be repeated, format [tld:][contract-addr@]url
 resolver-options: []
 # forces the node to resync postage contract data
@@ -3453,7 +3449,7 @@ static-nodes: []
 # enable storage incentives feature
 storage-incentives-enable: true
 # enable swap
-swap-enable: "true"
+swap-enable: false
 # swap factory addresses
 swap-factory-address: ""
 # initial deposit if deploying a new chequebook
@@ -3472,10 +3468,10 @@ tracing-port: ""
 tracing-service-name: bee
 # skips the gas estimate step for contract transactions
 transaction-debug-mode: false
-# bootstrap node using postage snapshot from the network
-use-postage-snapshot: false
+# use SIMD BMT hasher (available only on linux amd64 platforms)
+use-simd-hashing: false
 # log verbosity level 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=trace
-verbosity: "4"
+verbosity: info
 # maximum node warmup duration; proceeds when stable or after this time
 warmup-time: 5m0s
 # send a welcome message string during handshakes
@@ -3767,6 +3763,41 @@ For a comprehensive list of RPC providers, refer to the [Gnosis Chain documentat
 
 For running a light node or for testing out a single full node you can use the free RPC endpoint provided by the Fair Data Society: `https://xdai.fairdatasociety.org`.
 
+### Block number sync interval
+
+Bee periodically reads the current block number from your blockchain RPC endpoint and estimates it locally in between those reads, which significantly reduces how often it calls the RPC. 
+The `block-sync-interval` option controls how frequently the real block number is refreshed:
+
+```yaml
+## bee.yaml
+block-sync-interval: 10
+```
+
+- The default is `10`, so operators who want the default do not need to set anything.
+- A higher value means fewer RPC calls, at the cost of a slightly staler block-number estimate.
+- `1` refreshes the block number as often as possible.
+- `0` is not allowed; the node treats it as "no interval" and clamps it to `1`.
+
+The equivalent flag is `--block-sync-interval` and the environment variable is `BEE_BLOCK_SYNC_INTERVAL`. 
+This is especially useful for operators on paid or rate-limited RPC providers who want to lower request volume.
+
+## SIMD hashing (Optional)
+
+Bee can use a hardware-accelerated (SIMD) implementation of its chunk hasher, a frequent and CPU-intensive operation. 
+On supported hardware this noticeably lowers the CPU cost of hashing, which speeds up uploads and other hashing-heavy work.
+
+This is **opt-in and off by default**. 
+It is currently available **only on Linux x86-64 (amd64)**; on all other platforms (Windows, macOS, ARM) the node automatically falls back to the standard hasher, with no action required and no regression.
+
+To enable it, set the `use-simd-hashing` option:
+
+```yaml
+## bee.yaml
+use-simd-hashing: true
+```
+
+The equivalent flag is `--use-simd-hashing` and the environment variable is `BEE_USE_SIMD_HASHING`.
+
 ## Configuring Swap Initial Deposit (Optional)
 
 When running your Bee node with SWAP enabled for the first time, your node will deploy a 'chequebook' contract using the canonical factory contract which is deployed by Swarm. Once the chequebook is deployed, Bee will (optionally) deposit a certain amount of xBZZ in the chequebook contract so that it can pay other nodes in return for their services. The amount of xBZZ transferred to the chequebook is set by the `swap-initial-deposit` configuration setting (it may be left at the default value of zero or commented out). 
@@ -3784,12 +3815,14 @@ To enable chequebook verification, set `chequebook-verification` to `true`:
 chequebook-verification: true
 ```
 
-The default minimum balance threshold is **11 BZZ**. To configure a different threshold, set `chequebook-min-balance` to the desired amount in BZZ:
+The default minimum balance threshold is **11 BZZ**.
+The value is set in the token's smallest unit (PLUR), where 1 BZZ = 10^16 PLUR, so the default is `110000000000000000`.
+To configure a different threshold, set `chequebook-min-balance` accordingly:
 
 ```yaml
 ## bee.yaml
 chequebook-verification: true
-chequebook-min-balance: "11"
+chequebook-min-balance: "110000000000000000" # 11 BZZ, expressed in PLUR
 ```
 
 Or using command-line flags:
@@ -3797,11 +3830,12 @@ Or using command-line flags:
 ```bash
 bee start \
   --chequebook-verification \
-  --chequebook-min-balance 11
+  --chequebook-min-balance 110000000000000000
 ```
 
 :::info
-Chequebook verification is an optional defense layer for full node operators who want to avoid connecting to peers that do not maintain a sufficient chequebook balance. It was introduced in Bee v2.8.0.
+Chequebook verification is an optional defense layer for full node operators who want to avoid connecting to peers that do not maintain a sufficient chequebook balance. 
+It was introduced in Bee v2.8.0.
 :::
 
 ## NAT address
@@ -4702,13 +4736,13 @@ curl -s http://localhost:1633/health | jq
 
 To confirm a successful update, check that the value for the `"version"` field in the results corresponds to the version number of the [latest](https://github.com/ethersphere/bee/releases/latest) Bee release. 
 
-For example, if the latest version was 2.8.0, it would look like this:
+For example, if the latest version was 2.8.1, it would look like this:
 
-```bash
+```json
 {
   "status": "ok",
-  "version": "2.8.0-d0aa8b93",
-  "apiVersion": "7.3.0"
+  "version": "2.8.1-7cf53193",
+  "apiVersion": "8.1.0"
 }
 ```
 
@@ -5178,6 +5212,21 @@ Bee sure to [back up](./backups.md) your keys and [cash out your cheques](./cash
 
 :::warning
 Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get). See [staking section](./staking.md) for more information on staking and troubleshooting.
+:::
+
+## Version compatibility and upgrade path
+
+The Swarm network has a **minimum supported Bee version**.
+It is currently **v2.8.0**, the release which introduced a breaking p2p protocol change, so nodes running an older protocol can no longer connect to the network.
+
+When upgrading across a breaking protocol change, do not skip the release that introduced it.
+Upgrade *through* that version so any one-time data migrations run while they still exist in the code, since Bee removes old migration and compatibility code once a version is no longer supported.
+
+Bee v2.8.1 is **non-disruptive for nodes already on v2.8.0**: it makes no breaking p2p protocol changes, so you can upgrade in place using the steps below.
+
+:::warning
+**If you are running Bee v2.6.0 or older:** Bee v2.8.1 removes the last of the v2.6.0 backward-compatibility code, so you cannot upgrade to it directly.
+Either upgrade stepwise (**v2.6.0 → v2.8.0 → v2.8.1**) so the data migrations run, or reinstall the node fresh on v2.8.1.
 :::
 
 ### Ubuntu / Debian 

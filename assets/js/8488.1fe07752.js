@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbee_docs=self.webpackChunkbee_docs||[]).push([[8488],{8488(e,c,s){s.d(c,{createArchitectureServices:()=>r.S});var r=s(89221);s(51400)}}]);
