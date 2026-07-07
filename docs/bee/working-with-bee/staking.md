@@ -481,11 +481,11 @@ To confirm a successful update, check that the value for the `"version"` field i
 
 For example, if the latest version was 2.8.1, it would look like this:
 
-```bash
+```json
 {
   "status": "ok",
-  "version": "2.8.1-d0aa8b93",
-  "apiVersion": "7.3.0"
+  "version": "2.8.1-7cf53193",
+  "apiVersion": "8.1.0"
 }
 ```
 
@@ -850,6 +850,4 @@ Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` befor
 One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash` endpoint of the API may be used. See the `/rchash` section of the [Bee API page for usage details](./bee-api.md). 
 
 
-If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord). 
-
-
+If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord).

@@ -53,10 +53,10 @@ Let's review a handful of endpoints which will provide you with important inform
 The `/status` endpoint returns a quick summary of some important metrics for your node.
 
 ```bash
-  curl -s  http://localhost:1633/status | jq
+curl -s  http://localhost:1633/status | jq
 ```
 
-```bash
+```json
 {
   "overlay": "1e2054bec3e681aeb0b365a1f9a574a03782176bd3ec0bcf810ebcaf551e4070",
   "proximity": 256,
@@ -102,7 +102,7 @@ Here are the last few entries:
  curl -s http://localhost:1633/status/peers | jq
 ```
 
-```bash
+```json
  ...
   {
       "overlay": "1e1547d0d629469ff0d8fd2cbb6435df8fd913f2e948f177d733356d784b7ea4",
@@ -258,7 +258,7 @@ And we can compare these entries to our own node's `/status` results for diagnos
  curl -s http://localhost:1633/status | jq
 ```
 
-```bash
+```json
 {
   "overlay": "1e2054bec3e681aeb0b365a1f9a574a03782176bd3ec0bcf810ebcaf551e4070",
   "proximity": 256,
@@ -281,115 +281,116 @@ From the results we can see that our node's neighborhood size and batch commitme
 
 ### _/redistributionstate_
 
-    This endpoint provides an overview of values related to storage fee redistribution game (in other words, staking rewards). You can use this endpoint to check whether or not your node is participating properly in the redistribution game.
+This endpoint provides an overview of values related to storage fee redistribution game (in other words, staking rewards). You can use this endpoint to check whether or not your node is participating properly in the redistribution game.
 
-    ```bash
-    curl -s http://localhost:1633/redistributionstate | jq
-    ```
+```bash
+curl -s http://localhost:1633/redistributionstate | jq
+```
 
-    ```bash
-    {
-      "minimumGasFunds": "11080889201250000",
-      "hasSufficientFunds": true,
-      "isFrozen": false,
-      "isFullySynced": true,
-      "phase": "claim",
-      "round": 212859,
-      "lastWonRound": 207391,
-      "lastPlayedRound": 210941,
-      "lastFrozenRound": 210942,
-      "lastSelectedRound": 212553,
-      "lastSampleDuration": 491687776653,
-      "block": 32354719,
-      "reward": "1804537795127017472",
-      "fees": "592679945236926714",
-      "isHealthy": true
-    }
-    ```
+```json
+{
+  "minimumGasFunds": "11080889201250000",
+  "hasSufficientFunds": true,
+  "isFrozen": false,
+  "isFullySynced": true,
+  "phase": "claim",
+  "round": 212859,
+  "lastWonRound": 207391,
+  "lastPlayedRound": 210941,
+  "lastFrozenRound": 210942,
+  "lastSelectedRound": 212553,
+  "lastSampleDuration": 491687776653,
+  "block": 32354719,
+  "reward": "1804537795127017472",
+  "fees": "592679945236926714",
+  "isHealthy": true
+}
+```
 
-    * `"minimumGasFunds"` - The minimum required xDAI denominated in wei (1 xDAI = 10^18 wei) required for a node to participate in the redistribution game.
-    * `"hasSufficientFunds"` - Whether your node has at least the `"minimumGasFunds"` amount of xDAI.
-    * `"isFrozen"` - Indicates if your node is frozen, which may occur for [several reasons](./staking.md#diagnosing-freezing-issues).
-    * `"isFullySynced"` - Whether your node has fully synced all the chunks in its `"storageRadius"` (the value returned from the `/reservestate` endpoint.)
-    * `"phase"` - The current phase of the redistribution game (this does not indicate whether or not your node is participating in the current phase).
-    * `"round"` - The current number of the round of the redistribution game.
-    * `"lastWonRound"` - The last round number in which your node won the redistribution game.
-    * `"lastPlayedRound"` - The last round number in which your node participating in the redistribution game. If this number matches the number of the current round shown in `"round"`, then your node is participating in the current round.
-    * `"lastFrozenRound"` - The last round in which your node was frozen.
-    * `"lastSelectedRound"` - The last round in which your node's neighborhood was selected. Note that it is possible for your node's neighborhood to be selected without your node playing in the redistribution game. This may potentially indicate your node's hardware is not sufficient to calculate the commitment hash fast enough. See [section on the `/rchash` endpoint](#rchash) for more information.
-    * `"lastSampleDuration"` - The time it took for your node to calculate the sample commitment hash in nanoseconds.
-    * `"block"` - current Gnosis block number
-    * `"reward"` - The total all-time reward in PLUR earned by your node.
-    * `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
-    * `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
+* `"minimumGasFunds"` - The minimum required xDAI denominated in wei (1 xDAI = 10^18 wei) required for a node to participate in the redistribution game.
+* `"hasSufficientFunds"` - Whether your node has at least the `"minimumGasFunds"` amount of xDAI.
+* `"isFrozen"` - Indicates if your node is frozen, which may occur for [several reasons](./staking.md#diagnosing-freezing-issues).
+* `"isFullySynced"` - Whether your node has fully synced all the chunks in its `"storageRadius"` (the value returned from the `/reservestate` endpoint.)
+* `"phase"` - The current phase of the redistribution game (this does not indicate whether or not your node is participating in the current phase).
+* `"round"` - The current number of the round of the redistribution game.
+* `"lastWonRound"` - The last round number in which your node won the redistribution game.
+* `"lastPlayedRound"` - The last round number in which your node participating in the redistribution game. If this number matches the number of the current round shown in `"round"`, then your node is participating in the current round.
+* `"lastFrozenRound"` - The last round in which your node was frozen.
+* `"lastSelectedRound"` - The last round in which your node's neighborhood was selected. Note that it is possible for your node's neighborhood to be selected without your node playing in the redistribution game. This may potentially indicate your node's hardware is not sufficient to calculate the commitment hash fast enough. See [section on the `/rchash` endpoint](#rchash) for more information.
+* `"lastSampleDuration"` - The time it took for your node to calculate the sample commitment hash in nanoseconds.
+* `"block"` - current Gnosis block number
+* `"reward"` - The total all-time reward in PLUR earned by your node.
+* `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
+* `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
 
 ### _/reservestate_
 
-    This endpoint shows key information about the reserve state of your node. You can use it to identify problems with your node related to its reserve (whether it is syncing chunks properly into its reserve for example).
+This endpoint shows key information about the reserve state of your node. You can use it to identify problems with your node related to its reserve (whether it is syncing chunks properly into its reserve for example).
 
-    ```bash
-        curl -s  http://localhost:1633/reservestate | jq
-    ```
-    ```bash
-        {
-          "radius": 15,
-          "storageRadius": 10,
-          "commitment": 134121783296,
-          "reserveCapacityDoubling": 0
-        }
-    ```
+```bash
+curl -s  http://localhost:1633/reservestate | jq
+```
+```json
+{
+  "radius": 15,
+  "storageRadius": 10,
+  "commitment": 134121783296,
+  "reserveCapacityDoubling": 0
+}
+```
 
-    Let's take a look at each of these values:
-    * `"radius"` - Represents the maximum storage radius assuming all postage stamp batches are fully utilized.
-    * `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods).
-    * `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
-    * `"reserveCapacityDoubling"` - Indicates whether your node is currently using the reserve doubling mechanism. See [Reserve Doubling](./staking.md#reserve-doubling) for details.
+Let's take a look at each of these values:
+* `"radius"` - Represents the maximum storage radius assuming all postage stamp batches are fully utilized.
+* `"storageRadius"` - The radius of responsibility - the proximity order of chunks for which your node is responsible for storing. It should generally match the radius shown on [Swarmscan](https://swarmscan.io/neighborhoods).
+* `"commitment"` - The total number of chunks which would be stored on the Swarm network if 100% of all postage batches were fully utilised.
+* `"reserveCapacityDoubling"` - Indicates whether your node is currently using the reserve doubling mechanism. See [Reserve Doubling](./staking.md#reserve-doubling) for details.
+
 ### _/chainstate_
 
-    This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
+This endpoint relates to your node's interactions with the Swarm Smart contracts on the Gnosis Chain.
 
-    ```bash
-     curl -s http://localhost:1633/chainstate | jq
+```bash
+  curl -s http://localhost:1633/chainstate | jq
 
-    {
-      "chainTip": 41786513,
-      "block": 41786505,
-      "totalAmount": "293796491451",
-      "currentPrice": "56774"
-    }
-    ```
-    * `"chainTip"` - The latest Gnosis Chain block number. Should be as high as or almost as high as the block number shown at [GnosisScan](https://gnosisscan.io/).
-    * `"block"` -  The latest block your node has fully synced from Gnosis Chain. If significantly behind `"chainTip"`, your node may still be catching up. Should be very close to `"chainTip"` if your node has already been operating for a while.
-    * `"totalAmount"` - Cumulative value of all prices per chunk in PLUR for each block.
-    * `"currentPrice"` - The price in PLUR to store a single chunk for each Gnosis Chain block.
+{
+  "chainTip": 41786513,
+  "block": 41786505,
+  "totalAmount": "293796491451",
+  "currentPrice": "56774"
+}
+```
+* `"chainTip"` - The latest Gnosis Chain block number. Should be as high as or almost as high as the block number shown at [GnosisScan](https://gnosisscan.io/).
+* `"block"` -  The latest block your node has fully synced from Gnosis Chain. If significantly behind `"chainTip"`, your node may still be catching up. Should be very close to `"chainTip"` if your node has already been operating for a while.
+* `"totalAmount"` - Cumulative value of all prices per chunk in PLUR for each block.
+* `"currentPrice"` - The price in PLUR to store a single chunk for each Gnosis Chain block.
 
 ### _/topology_
 
-    This endpoint allows you to explore the topology of your node within the Kademlia network. The results are split into 32 bins from bin_0 to bin_32. Each bin represents the nodes in the same neighborhood as your node at each proximity order from PO 0 to PO 32.
+This endpoint allows you to explore the topology of your node within the Kademlia network. The results are split into 32 bins from bin_0 to bin_32. Each bin represents the nodes in the same neighborhood as your node at each proximity order from PO 0 to PO 32.
 
-    As the output of this file can be very large, we save it to the `topology.json` file for easier inspection:
+As the output of this file can be very large, we save it to the `topology.json` file for easier inspection:
 
-    ```bash
-     curl -s http://localhost:1633/topology | jq '.' > topology.json
-    ```
-    We open the file in vim for inspection:
-    ```bash
-    vim topology.json
-    ```
+```bash
+  curl -s http://localhost:1633/topology | jq '.' > topology.json
+```
+We open the file in vim for inspection:
+```bash
+vim topology.json
+```
 
-    The `/topology` endpoint provides insights into how your node is positioned within the Swarm network. The response starts with global network statistics, followed by detailed bin-by-bin peer connections (for 32 bins). Lets first look at the global stats:
+The `/topology` endpoint provides insights into how your node is positioned within the Swarm network. The response starts with global network statistics, followed by detailed bin-by-bin peer connections (for 32 bins). Lets first look at the global stats:
 
-    ```json
-      "baseAddr": "da7e5cc3ed9a46b6e7491d3bf738535d98112641380cbed2e9ddfe4cf4fc01c4",
-      "population": 20514,
-      "connected": 176,
-      "timestamp": "2024-02-08T20:57:03.815537925Z",
-      "nnLowWatermark": 3,
-      "depth": 10,
-      "reachability": "Public",
-      "networkAvailability": "Available",
-        ...
-    ```
+```json
+  "baseAddr": "da7e5cc3ed9a46b6e7491d3bf738535d98112641380cbed2e9ddfe4cf4fc01c4",
+  "population": 20514,
+  "connected": 176,
+  "timestamp": "2024-02-08T20:57:03.815537925Z",
+  "nnLowWatermark": 3,
+  "depth": 10,
+  "reachability": "Public",
+  "networkAvailability": "Available",
+    ...
+```
 
 - `"baseAddr"` - Your node's overlay address.
 - `"population"` - The total number of nodes your node has collected information about. This number should be around ####. If it is far higher or lower it likely indicates a problem.
@@ -454,23 +455,23 @@ From the results we can see that our node's neighborhood size and batch commitme
 
 ### _/node_
 
-    This endpoint returns info about options related to your node type and also displays your current node type.
+This endpoint returns info about options related to your node type and also displays your current node type.
 
-    ```bash
-    curl -s http://localhost:1633/node | jq
-    ```
-    ```bash
-    {
-      "beeMode": "full",
-      "chequebookEnabled": true,
-      "swapEnabled": true
-    }
-    ```
-    * `"beeMode"` - The mode of your node, can be `"full"`, `"light"`, or `"ultraLight"`.
-    * `"chequebookEnabled"` - Whether or not your node's `chequebook-enable` option is set to `true`.
-    * `"swapEnabled"` - Whether or not your node's `swap-enable` option is set to `true`.
+```bash
+curl -s http://localhost:1633/node | jq
+```
+```json
+{
+  "beeMode": "full",
+  "chequebookEnabled": true,
+  "swapEnabled": true
+}
+```
+* `"beeMode"` - The mode of your node, can be `"full"`, `"light"`, or `"ultraLight"`.
+* `"chequebookEnabled"` - Whether or not your node's `chequebook-enable` option is set to `true`.
+* `"swapEnabled"` - Whether or not your node's `swap-enable` option is set to `true`.
 
-    If your node is not operating in the correct mode, this can help you to diagnose whether you have set your options correctly.
+If your node is not operating in the correct mode, this can help you to diagnose whether you have set your options correctly.
 
 ### _/rchash_
 
@@ -542,15 +543,15 @@ eviction will interrupt the sampler process.
 The `/health` endpoint provides a quick status check for your Bee node which simply indicates whether the node is operating or not. It is often used in tools like Docker and Kubernetes.
 
 ```bash
-    curl -s http://localhost:1633/health | jq
+curl -s http://localhost:1633/health | jq
 ```
 
-```bash
-    {
-      "status": "ok",
-      "version": "2.8.1-d0aa8b93",
-      "apiVersion": "7.3.0"
-    }
+```json
+{
+  "status": "ok",
+  "version": "2.8.1-7cf53193",
+  "apiVersion": "8.1.0"
+}
 ```
 
 - `"status"` - "ok" if the server is responsive.

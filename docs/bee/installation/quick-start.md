@@ -109,13 +109,10 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-version: 2.8.1-390a402e - planned to be supported until 22 April 2025, please follow https://ethswarm.org/
-
-"time"="2025-03-04 11:13:10.113050" "level"="info" "logger"="node" "msg"="bee version" "version"="2.6.0-390a402e"
-"time"="2025-03-04 11:13:10.164801" "level"="info" "logger"="node" "msg"="swarm public key" "public_key"="02b19880b8d024eac3bf8afa3fa85b31b72fcfd491cebc6af78ddd85ff97f65416"
-"time"="2025-03-04 11:13:10.216657" "level"="debug" "logger"="node" "msg"="using existing libp2p key"
-"time"="2025-03-04 11:13:10.268431" "level"="debug" "logger"="node" "msg"="using existing pss key"
-"time"="2025-03-04 11:13:10.268474" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="03a3166e04b749ab3d04fda8a41180598ff2eed01a8096fb72d2c7da393a47c46a"
+"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.1-7cf53193"
+"time"="2026-07-07 16:52:59.793257" "level"="info" "logger"="node" "msg"="swarm public key"
+"public_key"="02d8d7e1ca6b3b43653ae27e35a375dd74e3ce2f40587fd264bc7268ed918650ab"
+"time"="2026-07-07 16:53:00.087534" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02aaae4ede42f47f48aa5182df4b94039ca71254f44ebc5383d5a67f71fe7e6156"
 "time"="2025-03-04 11:13:10.268479" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x003842B26B3dB292Cf84d5969E71c0d1e93F5578"
 "time"="2025-03-04 11:13:10.288418" "level"="info" "logger"="node" "msg"="using overlay address" "address"="fe38346dd89e4211c0e60195ee73e38d2c2ee2fe2b914b771d4ad503cfedbd3c"
 "time"="2025-03-04 11:13:10.288474" "level"="info" "logger"="node" "msg"="starting with an enabled chain backend"
@@ -184,7 +181,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.8.1-d0aa8b93
+Version: 2.8.1-7cf53193
 Mode: light
 
 Chainsync
@@ -214,28 +211,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.8.1-d0aa8b93
-Mode: light
-
-Chainsync
-Block: 41,710,955 / 41,710,962 (Δ 7)
-
-Topology
-Connected Peers: 151
-Population: 2257
-Depth: 10
-
-Wallet
-xBZZ: 0.0000000000000000
-xDAI: 0.009787142484816165
-
-Chequebook
-Available xBZZ: 0.0000000000000000
-Total xBZZ: 0.0000000000000000
-noah@NoahM16:~$ swarm-cli status
-Bee
-API: http://localhost:1633 [OK]
-Version: 2.8.1-d0aa8b93
+Version: 2.8.1-7cf53193
 Mode: light
 
 Chainsync
@@ -258,4 +234,3 @@ Total xBZZ: 0.0000000000000000
 ## Next Steps
 
 With your node now fully synced, you're ready start start learning how to [develop on Swarm](./../../develop/introduction.md).
-

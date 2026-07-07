@@ -9,7 +9,9 @@ description: Provides comprehensive steps for deploying Bee nodes using Docker c
 The following is a guide for installing a Bee node using Docker. Docker images for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). Using Docker to operate your Bee node offers many benefits, such as ease of deployment and consistency across environments. 
 
 :::caution
-In the examples below we specify the exact image version as 2.8.1. It's recommended to only use the exact version number tags. Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.8.1 in the commands below if there is a newer full release. 
+In the examples below we specify the exact image version as 2.8.1. 
+It's recommended to only use the exact version number tags. 
+Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.8.1 in the commands below if there is a newer full release. 
 :::
 
 :::warning
@@ -170,11 +172,10 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-version: 2.8.1-06a0aca7 - planned to be supported until 11 December 2024, please follow https://ethswarm.org/
-
-"time"="2024-09-24 22:21:04.543661" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.1-06a0aca7"
-"time"="2024-09-24 22:21:04.590823" "level"="info" "logger"="node" "msg"="swarm public key" "public_key"="02f0e59eafa3c5c06542c0a7a7fe9579c55a163cf1d28d9f6945a34469f88d1b2a"
-"time"="2024-09-24 22:21:04.686430" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02ea739530bbf48eed49197f21660f3b6564709b95bf558dc3b472688c34096418"
+"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.1-7cf53193"
+"time"="2026-07-07 16:52:59.793257" "level"="info" "logger"="node" "msg"="swarm public key"
+"public_key"="02d8d7e1ca6b3b43653ae27e35a375dd74e3ce2f40587fd264bc7268ed918650ab"
+"time"="2026-07-07 16:53:00.087534" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02aaae4ede42f47f48aa5182df4b94039ca71254f44ebc5383d5a67f71fe7e6156"
 "time"="2024-09-24 22:21:04.686464" "level"="info" "logger"="node" "msg"="using ethereum address" "address"="0x8288F1c8e3dE7c3bf42Ae67fa840EC61481D085e"
 "time"="2024-09-24 22:21:04.700711" "level"="info" "logger"="node" "msg"="using overlay address" "address"="22dc155fe072e131449ec7ea2f77de16f4735f06257ebaa5daf2fdcf14267fd9"
 "time"="2024-09-24 22:21:04.700741" "level"="info" "logger"="node" "msg"="starting with an enabled chain backend"
