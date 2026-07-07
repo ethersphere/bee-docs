@@ -304,14 +304,17 @@ pre, code, .codeBlockLines_node_modules-\@docusaurus-theme-classic-lib-theme-Cod
 
 /**
 * Prevent redocusaurus from displaying html before its styles are fully
-* loaded. This prevents large icons from being displayed before they 
-* properly styled. 
+* loaded. This prevents large icons from being displayed before they
+* properly styled.
+* Docusaurus sets data-has-hydrated="true" on <html> once client-side
+* hydration completes (the body[data-rh] attribute this hack previously
+* relied on stopped being emitted as of Docusaurus 3.10).
 */
 .redocusaurus {
   display: none;
 }
 
-body[data-rh] .redocusaurus {
+html[data-has-hydrated='true'] .redocusaurus {
   display: block;
 }
 
