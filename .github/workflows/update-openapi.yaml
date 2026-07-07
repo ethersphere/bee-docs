@@ -4,10 +4,10 @@ name: update openapi
 # openapi/, bumps the Bee version strings in the install docs, and opens (or updates)
 # a PR. Prereleases (-rc*, -beta, v2.7.1a, v2.5.0-v8, ...) are ignored.
 #
-# Requires the BOT_PAT secret (a classic PAT with public_repo scope, or a fine-grained PAT
+# Requires the GHA_PAT_ADVANCED secret (a classic PAT with public_repo scope, or a fine-grained PAT
 # with contents + pull-requests write). It is used so the auto-PR triggers build.yaml CI —
 # PRs opened with the default GITHUB_TOKEN do NOT trigger other workflows. The job fails
-# loudly if BOT_PAT is missing/expired rather than silently skipping CI.
+# loudly if GHA_PAT_ADVANCED is missing/expired rather than silently skipping CI.
 
 on:
   schedule:
@@ -117,7 +117,7 @@ jobs:
         if: ${{ steps.changes.outputs.changed == 'true' }}
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.BOT_PAT }}
+          token: ${{ secrets.GHA_PAT_ADVANCED }}
           branch: bot/update-openapi-${{ steps.resolve.outputs.new_tag }}
           commit-message: "chore: update OpenAPI specs and version refs to Bee ${{ steps.resolve.outputs.new_tag }}"
           title: "Update OpenAPI specs to Bee ${{ steps.resolve.outputs.new_tag }}"
