@@ -1,9 +1,8 @@
 openapi: 3.0.3
 info:
-  version: 4.3.0
+  version: 5.0.0
   title: Common Data Types
-  description: |
-    \*****bzzz*****
+  description: Common data structures and types used throughout the Bee API
 
 externalDocs:
   description: Browse the documentation @ the Swarm Docs
@@ -37,7 +36,7 @@ components:
           $ref: "#/components/schemas/PublicKey"
 
     BigInt:
-      description: Numeric string that represents integer which might exceed `Number.MAX_SAFE_INTEGER` limit (2^53-1)
+      description: Numeric string representing an integer that may exceed `Number.MAX_SAFE_INTEGER` (2^53-1)
       type: string
       example: "1000000000000000000"
 
@@ -49,6 +48,8 @@ components:
         storageRadius:
           type: integer
         commitment:
+          type: integer
+        reserveCapacityDoubling:
           type: integer
 
     ChainState:
@@ -62,6 +63,8 @@ components:
           $ref: "#/components/schemas/BigInt"
         currentPrice:
           $ref: "#/components/schemas/BigInt"
+        minimumValidityBlocks:
+          type: integer
 
     PeerAccountingData:
       type: object
@@ -76,9 +79,15 @@ components:
       properties:
         balance:
           $ref: "#/components/schemas/BigInt"
+        consumedBalance:
+          $ref: "#/components/schemas/BigInt"
         thresholdReceived:
           $ref: "#/components/schemas/BigInt"
         thresholdGiven:
+          $ref: "#/components/schemas/BigInt"
+        currentThresholdReceived:
+          $ref: "#/components/schemas/BigInt"
+        currentThresholdGiven:
           $ref: "#/components/schemas/BigInt"
         surplusBalance:
           $ref: "#/components/schemas/BigInt"
@@ -125,6 +134,10 @@ components:
         peer:
           $ref: "#/components/schemas/SwarmAddress"
         balance:
+          $ref: "#/components/schemas/BigInt"
+        thresholdreceived:
+          $ref: "#/components/schemas/BigInt"
+        thresholdgiven:
           $ref: "#/components/schemas/BigInt"
 
     Balances:
@@ -240,12 +253,12 @@ components:
       example: "2020-06-11T11:26:42.6969797+02:00"
 
     Duration:
-      description: Go time.Duration format
+      description: Time duration in Go time.Duration format (e.g., 5.0018ms)
       type: string
       example: "5.0018ms"
 
     Seconds:
-      description: Go time.Duration format in seconds
+      description: Time duration in seconds (Go time.Duration format)
       type: number
       example: 30.5
 
@@ -293,17 +306,14 @@ components:
     MultiAddress:
       type: string
 
-    NewTagRequest:
-      type: object
-      properties:
-        address:
-          $ref: "#/components/schemas/SwarmAddress"
-
     NewTagResponse:
       type: object
       properties:
         uid:
           $ref: "#/components/schemas/Uid"
+        address:
+          $ref: "#/components/schemas/SwarmAddress"
+          description: Root reference associated with the tag once the upload is finalized; zero value before that.
         startedAt:
           $ref: "#/components/schemas/DateTime"
         split:
@@ -368,21 +378,31 @@ components:
           type: array
           nullable: false
           items:
-            $ref: "#/components/schemas/Address"
+            type: object
+            properties:
+              address:
+                $ref: "#/components/schemas/SwarmAddress"
+              fullNode:
+                type: boolean
 
     BlockListedPeers:
-      type: array
-      items:
-        type: object
-        properties:
-          address:
-            $ref: "#/components/schemas/Address"
-          fullNode:
-            type: boolean
-          reason:
-            type: string
-          duration:
-            type: integer
+      type: object
+      properties:
+        peers:
+          type: array
+          nullable: false
+          items:
+            type: object
+            properties:
+              address:
+                $ref: "#/components/schemas/SwarmAddress"
+              fullNode:
+                type: boolean
+              reason:
+                type: string
+              duration:
+                type: integer
+                description: Block duration in seconds
 
     PssRecipient:
       type: string
@@ -472,12 +492,11 @@ components:
       properties:
         beeMode:
           type: string
-          enum: [light, full, dev, ultra-light, unknown]
+          enum: [light, full, ultra-light, unknown]
           description: >
             Gives back in what mode the Bee client has been started. The modes are mutually exclusive
             * `light` - light node; does not participate in forwarding or storing chunks
             * `full` - full node
-            * `dev` - development mode; Bee client for development purposes, blockchain operations are mocked
             * `ultra-light` - ultra-light node; a light node with chain disabled
             * `unknown` - unknown mode
         chequebookEnabled:
@@ -510,8 +529,29 @@ components:
           $ref: "#/components/schemas/BatchID"
         utilization:
           type: integer
+          description: >
+            Raw batch fullness indicator: the highest write count among the
+            `2^bucketDepth` collision buckets of the batch. This is **not** a
+            percentage; one unit corresponds to one chunk written into the
+            fullest bucket. Total batch capacity is `2^depth` chunks, while
+            the fullest bucket caps at `2^(depth - bucketDepth)` chunks, so
+            the fractional usage of the batch is
+            `utilization / 2^(depth - bucketDepth)` (also exposed directly as
+            `utilizationRatio`). When the value reaches
+            `2^(depth - bucketDepth)` the batch is effectively full and any
+            further write to the fullest bucket would overflow it.
+        utilizationRatio:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: >
+            Fractional batch fullness in the range `[0, 1]`, computed as
+            `utilization / 2^(depth - bucketDepth)`. A value of `1` means the
+            fullest bucket has reached its capacity and the batch can no
+            longer accept writes that would land in that bucket.
         usable:
-          description: Indicate that the batch was discovered by the Bee node, but it awaits enough on-chain confirmations before declaring the batch as usable.
+          description: Indicates whether the batch was discovered by the Bee node and has received sufficient on-chain confirmations
           type: boolean
         label:
           type: string
@@ -549,17 +589,15 @@ components:
           $ref: "#/components/schemas/BigInt"
         start:
           type: integer
+        owner:
+          $ref: "#/components/schemas/EthereumAddress"
         depth:
           type: integer
         bucketDepth:
           type: integer
-        immutableFlag:
+        immutable:
           type: boolean
         batchTTL:
-          type: integer
-        owner:
-          $ref: "#/components/schemas/EthereumAddress"
-        storageRadius:
           type: integer
 
     DebugPostageBatch:
@@ -596,17 +634,17 @@ components:
         peer:
           $ref: "#/components/schemas/SwarmAddress"
         received:
-          type: integer
+          $ref: "#/components/schemas/BigInt"
         sent:
-          type: integer
+          $ref: "#/components/schemas/BigInt"
 
     Settlements:
       type: object
       properties:
         totalReceived:
-          type: integer
+          $ref: "#/components/schemas/BigInt"
         totalSent:
-          type: integer
+          $ref: "#/components/schemas/BigInt"
         settlements:
           type: array
           nullable: false
@@ -676,7 +714,7 @@ components:
     SwarmOnlyReferencesList:
       type: object
       properties:
-        reference:
+        references:
           type: array
           nullable: false
           items:
@@ -768,6 +806,12 @@ components:
         walletAddress:
           $ref: "#/components/schemas/EthereumAddress"
 
+    WithdrawCoin:
+      type: string
+      enum:
+        - "bzz"
+        - "nativetoken"
+
     RedistributionStatusResponse:
       type: object
       properties:
@@ -832,7 +876,7 @@ components:
 
     LoggerExp:
       type: string
-      description: Base 64 encoded regular expression or subsystem string.
+      description: Base64-encoded regular expression or subsystem string
       pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
       example: "b25lL25hbWU="
 
@@ -888,7 +932,6 @@ components:
           enum:
             - "light"
             - "full"
-            - "dev"
             - "ultra-light"
             - "unknown"
         reserveSize:
@@ -914,6 +957,8 @@ components:
           type: integer
         committedDepth:
           type: integer
+        isWarmingUp:
+          type: boolean
 
     StatusPeersResponse:
       type: object
@@ -1067,6 +1112,13 @@ components:
       schema:
         type: string
 
+    SwarmFeedResolvedVersion:
+      schema:
+        type: string
+      required: false
+      description: "Indicates which feed version was resolved (v1 or v2)"
+
+
   parameters:
     GasPriceParameter:
       in: header
@@ -1099,7 +1151,7 @@ components:
         type: boolean
       required: false
       description: >
-        Represents if the uploaded data should be also locally pinned on the node.
+        Indicates whether the uploaded data should also be locally pinned on this node
 
     SwarmEncryptParameter:
       in: header
@@ -1108,7 +1160,7 @@ components:
         type: boolean
       required: false
       description: >
-        Represents the encrypting state of the file
+        Indicates whether the file should be encrypted
 
     SwarmRedundancyLevelParameter:
       in: header
@@ -1129,14 +1181,11 @@ components:
         enum: [0, 1, 2, 3]
       required: false
       description: >
-        Specify the retrieve strategy on redundant data.
-        The numbers stand for NONE, DATA, PROX and RACE, respectively.
-        Strategy NONE means no prefetching takes place.
-        Strategy DATA means only data chunks are prefetched.
-        Strategy PROX means only chunks that are close to the node are prefetched.
-        Strategy RACE means all chunks are prefetched: n data chunks and k parity chunks. The first n chunks to arrive are used to reconstruct the file.
-        Multiple strategies can be used in a fallback cascade if the swarm redundancy fallback mode is set to true.
-        The default strategy is NONE, DATA, falling back to PROX, falling back to RACE
+        Specify the retrieval strategy for redundant data.
+        Values represent: NONE (0), DATA (1), PROX (2), RACE (3).
+        NONE: no prefetching. DATA: prefetch only data chunks. PROX: prefetch chunks near this node. RACE: prefetch all chunks and use the first n to arrive.
+        Multiple strategies can be cascaded if fallback mode is enabled.
+        Default: NONE > DATA > PROX > RACE
 
     SwarmRedundancyFallbackModeParameter:
       in: header
@@ -1156,6 +1205,16 @@ components:
       description: >
         Specify the timeout for chunk retrieval. The default is 30 seconds.
 
+    SwarmLookaheadBufferSizeParameter:
+      in: header
+      name: swarm-lookahead-buffer-size
+      schema:
+        type: integer
+      required: false
+      description: >
+        Override the lookahead buffer size used during retrieval, in bytes. When unset the node
+        picks 8x or 16x the io.Copy default buffer (32 kB) depending on file size.
+
     SwarmOnlyRootChunkParameter:
       in: header
       name: swarm-only-root-chunk
@@ -1169,7 +1228,7 @@ components:
       name: Content-Type
       schema:
         type: string
-      description: The specified content-type is preserved for download of the asset
+      description: "Single file: trimmed Content-Type is stored as-is or, if omitted or empty, inferred from the first bytes without validating against the body; tar (`swarm-collection`) and multipart collection uploads still need a full-body Content-Type (e.g. `application/x-tar` or `multipart/form-data` with boundary) so the request can be parsed."
 
     SwarmIndexDocumentParameter:
       in: header
@@ -1178,7 +1237,7 @@ components:
         type: string
         example: index.html
       required: false
-      description: Default file to be referenced on path, if exists under that path
+      description: Default file to serve when a directory path is accessed
 
     SwarmErrorDocumentParameter:
       in: header
@@ -1187,7 +1246,7 @@ components:
         type: string
         example: error.html
       required: false
-      description: Configure custom error document to be returned when a specified path can not be found in collection
+      description: Custom error document to return when a path is not found in the collection
 
     SwarmCollection:
       in: header
@@ -1227,7 +1286,7 @@ components:
         default: "true"
       required: false
       description: >
-        Determines if the uploaded data should be sent to the network immediately or in a deferred fashion. By default the upload will be deferred.
+        Indicates whether the uploaded data should be sent to the network immediately or deferred. Default: deferred (true)
 
     SwarmCache:
       in: header
@@ -1236,7 +1295,7 @@ components:
         type: boolean
         default: "true"
       required: false
-      description: "Determines if the download data should be cached on the node. By default the download will be cached"
+      description: "Indicates whether downloaded data should be cached on the node. Default: cached (true)"
 
     SwarmAct:
       in: header
@@ -1274,7 +1333,7 @@ components:
 
   responses:
     "200":
-      description: OK.
+      description: Success
     "204":
       description: The resource was deleted successfully.
     "400":
