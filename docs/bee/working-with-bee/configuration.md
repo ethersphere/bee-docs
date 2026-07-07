@@ -671,7 +671,8 @@ bee start \
 ```
 
 :::info
-Chequebook verification is an optional defense layer for full node operators who want to avoid connecting to peers that do not maintain a sufficient chequebook balance. It was introduced in Bee v2.8.1.
+Chequebook verification is an optional defense layer for full node operators who want to avoid connecting to peers that do not maintain a sufficient chequebook balance. 
+It was introduced in Bee v2.8.0.
 :::
 
 ## NAT address
