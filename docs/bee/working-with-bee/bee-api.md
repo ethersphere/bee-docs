@@ -548,7 +548,7 @@ The `/health` endpoint provides a quick status check for your Bee node which sim
 ```bash
     {
       "status": "ok",
-      "version": "2.8.0-d0aa8b93",
+      "version": "2.8.1-d0aa8b93",
       "apiVersion": "7.3.0"
     }
 ```

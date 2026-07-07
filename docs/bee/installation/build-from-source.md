@@ -32,7 +32,7 @@ Prerequisites for installing directly from source are:
 3. Checkout the required version:
 
    ```bash
-   git checkout v2.8.0
+   git checkout v2.8.1
    ```
 
 4. Build the binary:
@@ -48,7 +48,7 @@ Prerequisites for installing directly from source are:
    ```
 
    ```
-   2.8.0
+   2.8.1
    ```
 
 6. (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`
