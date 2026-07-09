@@ -52,11 +52,10 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 
 - [Cafe137/etherjot ↗](https://github.com/Cafe137/etherjot) — Static blog generator, live at etherjot.eth.limo
 - [ethersphere/examples ↗](https://github.com/ethersphere/examples) — Collection of example apps and starters
-- [examples/simple-blog ↗](https://github.com/ethersphere/examples/tree/master/simple-blog) — Minimal feed-backed blog, one publisher, updatable content
-- [examples/multi-author-blog ↗](https://github.com/ethersphere/examples/tree/master/multi-author-blog) — Multi-author blog using per-author feeds and a shared index
-- [examples/website ↗](https://github.com/ethersphere/examples/tree/master/website) — Swarm + ENS starter, upload a site and resolve it via ENS
-- [examples/routing-manifest ↗](https://github.com/ethersphere/examples/tree/master/routing-manifest) — Manifest-based routing demo for single-page apps
-- [examples/basic-static-website ↗](https://github.com/ethersphere/examples/tree/main/basic-static-website) — Basic static website on Swarm
+- [examples/simple-blog ↗](https://github.com/ethersphere/examples/tree/main/simple-blog) — Minimal feed-backed blog, one publisher, updatable content
+- [examples/multi-author-blog ↗](https://github.com/ethersphere/examples/tree/main/multi-author-blog) — Multi-author blog using per-author feeds and a shared index
+- [examples/website ↗](https://github.com/ethersphere/examples/tree/main/website) — Upload a static website to Swarm, publish it to a feed for a stable URL, and resolve it via ENS
+- [examples/routing-manifest ↗](https://github.com/ethersphere/examples/tree/main/routing-manifest) — Manifest-based routing demo for single-page apps
 
 ### Streaming
 
@@ -101,8 +100,8 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 - [ethersphere/create-swarm-app ↗](https://github.com/ethersphere/create-swarm-app) — Boilerplate for building Swarm apps with JavaScript
 - [Cafe137/fdp-play ↗](https://github.com/Cafe137/fdp-play) — Docker-based local Bee cluster and FDP dev environment
 - [Cafe137/pss-gsoc-learning-material ↗](https://github.com/Cafe137/pss-gsoc-learning-material) — Learning material for PSS and GSOC primitives
-- [examples/dynamic-content ↗](https://github.com/ethersphere/examples/tree/master/dynamic-content) — Content addressing and feeds, introduction example
-- [examples/filesystem ↗](https://github.com/ethersphere/examples/tree/master/filesystem) — Filesystem-style operations using bee-js
+- [examples/dynamic-content ↗](https://github.com/ethersphere/examples/tree/main/dynamic-content) — Content addressing and feeds, introduction example
+- [examples/filesystem ↗](https://github.com/ethersphere/examples/tree/main/filesystem) — Filesystem-style operations using bee-js
 - [agazso/swarm-cid-converter ↗](https://github.com/agazso/swarm-cid-converter) — Convert Swarm hashes or links to CID and vice versa
 - [Solar-Punk-Ltd/ipfs-to-swarm ↗](https://github.com/Solar-Punk-Ltd/ipfs-to-swarm) — Migrate data from IPFS to Swarm
 
@@ -120,7 +119,7 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 
 - [SwarmScan ↗](https://swarmscan.io/) — Network explorer and node statistics
 - [Swarm Gateway ↗](https://gateway.ethswarm.org/) — Share files via URL
-- [Swarm Desktop ↗](https://desktop.ethswarm.org) — GUI node for non-technical users
+- [Swarm Desktop ↗](https://ethswarm.org/build/desktop) — GUI node for non-technical users
 - [Bee Dashboard ↗](https://github.com/ethersphere/bee-dashboard) — Web UI for node management
 
 ## Community

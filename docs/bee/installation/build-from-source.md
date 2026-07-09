@@ -4,13 +4,13 @@ id: build-from-source
 description: Guides developers through compiling Bee directly from source code using Go git and make with step-by-step instructions.
 ---
 
-Bee is written using the [Go](https://golang.org) language.
+Bee is written using the [Go](https://go.dev) language.
 
 You may build the Bee client software directly from the [source](https://github.com/ethersphere/bee).
 
 Prerequisites for installing directly from source are:
 
--  **go** - download the latest release from [golang.org](https://golang.org/dl).
+-  **go** - download the latest release from [go.dev](https://go.dev/dl).
 -  **git** - download from [git-scm.com](https://git-scm.com/).
 -  **make** - [make](https://www.gnu.org/software/make/) is usually included by default in most UNIX operating systems, and can be installed and used on almost any other operating system where it is not included by default.
 

@@ -6,7 +6,7 @@ description: Interactive Claude Code skills that guide you through setting up Be
 
 [Swarm Quickstart Skills](https://github.com/ethersphere/swarm-quickstart-skills)
 is a set of interactive guides ("skills") that run inside
-[Claude Code](https://claude.com/claude-code). Instead of copying commands from
+[Claude Code](https://claude.com/product/claude-code). Instead of copying commands from
 the docs by hand, the skills check your prerequisites first, run real commands
 against your Bee node, and explain what is happening at each step. Type `/swarm`
 and you are routed to the right next step for your current setup — installing a
@@ -14,7 +14,7 @@ node, buying a postage stamp, uploading files, or scaffolding a dApp.
 
 ## Requirements
 
-- [Claude Code](https://claude.com/claude-code)
+- [Claude Code](https://claude.com/product/claude-code)
 - Node.js 18+
 - A running Bee light node at `http://localhost:1633` (for most skills)
   - The

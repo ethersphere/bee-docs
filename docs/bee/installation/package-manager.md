@@ -427,7 +427,7 @@ Success! The Bee API is now listening!
 Next, let's see if we have connected with any peers by sending a query to the Bee API (port 1633 by default - `localhost:1633`).
 
 :::info
-Here we are using the `jq` [utility](https://jqlang.github.io/jq/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
+Here we are using the `jq` [utility](https://jqlang.org/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
 :::
 
 ```bash

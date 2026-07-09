@@ -52,7 +52,7 @@ Refer to the [Node Types](./../working-with-bee/node-types.md) page for deep div
 
 While not strictly required, these tools will *greatly* simplify your experience working with Bee nodes:
 
-- **[`jq`](https://jqlang.github.io/jq/)**: Formats JSON responses (recommended for API users).
+- **[`jq`](https://jqlang.org/)**: Formats JSON responses (recommended for API users).
 - **[`curl`](https://curl.se/)**: Used for sending API requests (required for API interactions).
 - **[Swarm CLI](./../working-with-bee/swarm-cli.md)**: Terminal-based Bee node management.
 - **[Bee JS](./../../develop/tools-and-features/bee-js.md)**: JavaScript library for programmatic API access.

@@ -418,7 +418,7 @@ using the local IP `nc -zv 192.168.0.10 1634`.
 Ubuntu uses [UFW](https://help.ubuntu.com/community/UFW), MacOS can
 be configured using the _Firewall_ tab in the _Security & Privacy_
 section of _System Preferences_. Windows uses
-[Defender Firewall](https://support.microsoft.com/en-us/help/4028544/windows-10-turn-microsoft-defender-firewall-on-or-off).
+[Defender Firewall](https://support.microsoft.com/en-US/windows/security/windows-security/firewall-and-network-protection-in-the-windows-security-app).
 
 For each of these firewalls, set a special rule to allow UDP and TCP
 traffic to pass through on port `1634`. You may want to limit this
