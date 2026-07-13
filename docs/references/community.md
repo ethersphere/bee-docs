@@ -16,7 +16,7 @@ description: Information about Swarm community channels resources and contributi
 
 ## Awesome Swarm
 
-An [awesome list](https://awesome.re) on anything awesome related to the Swarm platform. 🐝 🐝 🐝
+An [awesome list](/docs/references/awesome-list) on anything awesome related to the Swarm platform. 🐝 🐝 🐝
 
 To see the most up to date list or submit an addition to it, make sure to check the [awesome-swarm repo](https://github.com/ethersphere/awesome-swarm).
 
@@ -24,7 +24,7 @@ To see the most up to date list or submit an addition to it, make sure to check 
 
 Swarm grants support many interesting projects that are already building their products on top of Swarm. Swarm bounties extend the ecosystem with tooling and infrastructure. 
 
-If you have an idea for a project which uses Swarm's technology we welcome you to [apply for a grant](https://grants.ethswarm.org).
+If you have an idea for a project which uses Swarm's technology we welcome you to [apply for a grant](https://www.ethswarm.org/grants/swarm-grants-programme).
 
 Learn more about grants for building on Swarm at the [EthSwarm homepage](https://www.ethswarm.org/grants).
 

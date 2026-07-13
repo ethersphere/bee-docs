@@ -453,7 +453,7 @@ This process can take a while, even up to several hours depending on your system
 You check your node's progress with the `/status` endpoint:
 
 :::info
-The [`jq` utility](https://jqlang.github.io/jq/) jq utility formats API responses for easier reading:
+The [`jq` utility](https://jqlang.org/) jq utility formats API responses for easier reading:
 * Install it using your system’s package manager.
 * If you don't want to use it, remove `| jq` from all commands.
 :::

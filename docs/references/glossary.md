@@ -13,7 +13,7 @@ Swarm is also the name of the core organization that oversees the development an
 
 ## Gnosis Chain
 
-[Gnosis Chain](https://www.gnosis.io/) (previously known as xDai chain) is a [PoS](https://www.gnosis.io/validators), [EVM](https://ethereum.org/developers/docs/evm/) compatible Ethereum [sidechain](https://ethereum.org/developers/docs/scaling/sidechains/) which uses the same addressing scheme as Ethereum. Swarm's smart contracts have been issued on Gnosis Chain.
+[Gnosis Chain](https://www.gnosis.io/) (previously known as xDai chain) is a [PoS](https://www.validategnosis.com/), [EVM](https://ethereum.org/developers/docs/evm/) compatible Ethereum [sidechain](https://ethereum.org/developers/docs/scaling/sidechains/) which uses the same addressing scheme as Ethereum. Swarm's smart contracts have been issued on Gnosis Chain.
 
 ## Smart Contracts
 

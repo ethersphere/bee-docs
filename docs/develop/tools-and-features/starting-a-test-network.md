@@ -92,7 +92,7 @@ curl -s http://localhost:1733/topology | jq .connected
 No connections yet? Right! Let's remedy that!
 
 :::info
-Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://jqlang.github.io/jq/).
+Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://jqlang.org/).
 :::
 
 ### Making a network

@@ -43,7 +43,7 @@ curl -s http://localhost:1633/peers | jq '.peers | length'
 Great! We can see that we are currently connected with 23 other nodes!
 
 :::info
-Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://jqlang.github.io/jq/).
+Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://jqlang.org/).
 :::
 
 Let's review a handful of endpoints which will provide you with important information relevant to detecting and diagnosing problems with your nodes.
