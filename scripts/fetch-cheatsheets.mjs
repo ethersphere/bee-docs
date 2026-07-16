@@ -25,7 +25,6 @@ const FETCH_TIMEOUT_MS = 20000;
 const ASSETS = [
   'assets/favicon.png',
   'assets/swarm-logo.svg',
-  'assets/swarm-logo-white.svg',
   'assets/vendor/qrcode.min.js',
   'assets/fonts/fonts.css',
   'assets/fonts/dm-mono-400-latin.woff2',
@@ -63,8 +62,11 @@ async function writeOut(relPath, data) {
 // only) rewrites asset paths; without it the file is copied verbatim
 // (binary-safe). Adding a future cheatsheet is a one-line addition here.
 const FILES = [
-  { src: 'src/cheatsheets/overview/index.html', dest: 'overview/index.html', transform: rewriteAssetPaths },
+  // The card-only document (chrome/toolbar/footer live in the source's
+  // index.html and are intentionally excluded — we embed just the cheatsheet).
+  { src: 'src/cheatsheets/overview/cheatsheet.html', dest: 'overview/index.html', transform: rewriteAssetPaths },
   ...ASSETS.map((rel) => ({ src: rel, dest: rel })),
+  // Not referenced by the card; kept so the doc page can offer a download link.
   { src: 'dist/swarm-overview-cheatsheet.pdf', dest: 'swarm-overview-cheatsheet.pdf' },
 ];
 

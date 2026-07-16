@@ -7,7 +7,7 @@ hide_table_of_contents: true
 
 The Swarm Cheatsheet is a dense, two-page quick-reference for building on Swarm.
 
-It's designed to print cleanly to A4, so you can keep it beside you at a hackathon or on your desk — use the **Download PDF** button on the card below to grab a copy.
+It's designed to print cleanly to A4, so you can keep it beside you at a hackathon or on your desk — use the **Download PDF** link below to grab a copy.
 
 <iframe
   src="/cheatsheets/overview/"
@@ -27,4 +27,6 @@ It's designed to print cleanly to A4, so you can keep it beside you at a hackath
   style={{ width: '100%', minHeight: '85vh', border: 0 }}
 ></iframe>
 
-<a className="button button--primary button--lg" href="/cheatsheets/overview/" target="_blank" rel="noopener">Open the cheatsheet in a new tab</a>
+<a className="button button--primary button--lg" href="/cheatsheets/swarm-overview-cheatsheet.pdf" download>Download PDF</a>
+&nbsp;
+<a className="button button--secondary button--lg" href="/cheatsheets/overview/" target="_blank" rel="noopener">Open in a new tab</a>
