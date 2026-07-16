@@ -63,6 +63,7 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 
 - [Bee JS](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-js): JavaScript/TypeScript SDK for Swarm
 - [AI Agent Skills](https://docs.ethswarm.org/docs/develop/tools-and-features/ai-agent-skills): Claude Code skills that guide Swarm setup and building
+- [Swarm Cheatsheet](https://docs.ethswarm.org/cheatsheets/overview/): Printable quick-reference — what Swarm is/isn't, limitations, quickstart, and curated links for building on Swarm
 - [Chunk Types](https://docs.ethswarm.org/docs/develop/tools-and-features/chunk-types): Content-addressed chunks (CAC) and single-owner chunks (SOC)
 - [Feeds](https://docs.ethswarm.org/docs/develop/tools-and-features/feeds): Mutable data references using single-owner chunks
 - [Manifests](https://docs.ethswarm.org/docs/develop/tools-and-features/manifests): Trie-based path mapping for file collections

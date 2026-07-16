@@ -44,6 +44,15 @@ This is the go-to starting point for web3 developers who want to build with Swar
           <span class="hub-card__cta">Start with AI</span>
         </a>
       </li>
+      <li class="hub-card">
+        <a class="hub-card__link" href="/docs/develop/tools-and-features/cheatsheets">
+          <h3 class="hub-card__title">Swarm Cheatsheet</h3>
+          <p class="hub-card__desc">
+            A dense, printable quick-reference for building on Swarm — what it is, its limits, and curated links to get started fast.
+          </p>
+          <span class="hub-card__cta">View cheatsheet</span>
+        </a>
+      </li>
     </ul>
   </div>
 
