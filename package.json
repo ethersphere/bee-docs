@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node -e \"require('fs').copyFileSync('openapi/Swarm.yaml', 'static/openapi.yaml')\" && node scripts/fetch-awesome-swarm.mjs && node scripts/validate-llms-txt.mjs",
+    "prebuild": "node -e \"require('fs').copyFileSync('openapi/Swarm.yaml', 'static/openapi.yaml')\" && node scripts/fetch-awesome-swarm.mjs && node scripts/fetch-cheatsheets.mjs && node scripts/validate-llms-txt.mjs",
     "build": "docusaurus build",
     "build:quiet": "cross-env NODE_OPTIONS=\"--disable-warning=DEP0040 --disable-warning=DEP0169\" docusaurus build",
     "swizzle": "docusaurus swizzle",
