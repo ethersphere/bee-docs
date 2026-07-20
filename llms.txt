@@ -57,11 +57,13 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [Host a Webpage](https://docs.ethswarm.org/docs/develop/host-your-website): Upload and serve static websites on Swarm
 - [Website Routing](https://docs.ethswarm.org/docs/develop/routing): Custom domains, ENS resolution, and routing configuration
 - [Run a Gateway](https://docs.ethswarm.org/docs/develop/gateway-proxy): Serve Swarm content over HTTP to regular browsers
+- [Multi-Author Blog](https://docs.ethswarm.org/docs/develop/multi-author-blog): Build a multi-author blog on Swarm using per-author feeds and a shared index
 
 ## Build applications on Swarm
 
 - [Bee JS](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-js): JavaScript/TypeScript SDK for Swarm
 - [AI Agent Skills](https://docs.ethswarm.org/docs/develop/tools-and-features/ai-agent-skills): Claude Code skills that guide Swarm setup and building
+- [Swarm Cheatsheet](https://docs.ethswarm.org/cheatsheets/overview/): Printable quick-reference — what Swarm is/isn't, limitations, quickstart, and curated links for building on Swarm
 - [Chunk Types](https://docs.ethswarm.org/docs/develop/tools-and-features/chunk-types): Content-addressed chunks (CAC) and single-owner chunks (SOC)
 - [Feeds](https://docs.ethswarm.org/docs/develop/tools-and-features/feeds): Mutable data references using single-owner chunks
 - [Manifests](https://docs.ethswarm.org/docs/develop/tools-and-features/manifests): Trie-based path mapping for file collections
@@ -73,11 +75,12 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [Starting a Private Network](https://docs.ethswarm.org/docs/develop/tools-and-features/starting-a-test-network): Multi-node test clusters
 - [Dynamic Content](https://docs.ethswarm.org/docs/develop/dynamic-content): Updatable content using feeds
 - [Ultra Light Nodes](https://docs.ethswarm.org/docs/develop/ultra-light-nodes): Minimal nodes for lightweight client use cases
+- [Developer Resources](https://docs.ethswarm.org/docs/develop/resources): Curated SDKs, libraries, example apps, and community tools for building on Swarm
 
 ## Understand Swarm concepts
 
 - [What is Swarm?](https://docs.ethswarm.org/docs/concepts/what-is-swarm): Architecture overview and design goals
-- [DISC](https://docs.ethswarm.org/docs/concepts/DISC/): Distributed Immutable Store for Chunks
+- [DISC](https://docs.ethswarm.org/docs/concepts/DISC): Distributed Immutable Store for Chunks
 - [Kademlia](https://docs.ethswarm.org/docs/concepts/DISC/kademlia): Distributed hash table and routing
 - [Neighborhoods](https://docs.ethswarm.org/docs/concepts/DISC/neighborhoods): Address space, proximity, and storage responsibility
 - [Erasure Coding (theory)](https://docs.ethswarm.org/docs/concepts/DISC/erasure-coding): Reed-Solomon redundancy for chunk reliability

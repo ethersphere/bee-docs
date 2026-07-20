@@ -178,13 +178,13 @@ Currency symbol: XDAI
 
 ## Build from Source
 
-Bee is written using the [Go](https://golang.org) language.
+Bee is written using the [Go](https://go.dev) language.
 
 You may build the Bee client software directly from the [source](https://github.com/ethersphere/bee).
 
 Prerequisites for installing directly from source are:
 
--  **go** - download the latest release from [golang.org](https://golang.org/dl).
+-  **go** - download the latest release from [go.dev](https://go.dev/dl).
 -  **git** - download from [git-scm.com](https://git-scm.com/).
 -  **make** - [make](https://www.gnu.org/software/make/) is usually included by default in most UNIX operating systems, and can be installed and used on almost any other operating system where it is not included by default.
 
@@ -645,7 +645,7 @@ using the local IP `nc -zv 192.168.0.10 1634`.
 Ubuntu uses [UFW](https://help.ubuntu.com/community/UFW), MacOS can
 be configured using the _Firewall_ tab in the _Security & Privacy_
 section of _System Preferences_. Windows uses
-[Defender Firewall](https://support.microsoft.com/en-us/help/4028544/windows-10-turn-microsoft-defender-firewall-on-or-off).
+[Defender Firewall](https://support.microsoft.com/en-US/windows/security/windows-security/firewall-and-network-protection-in-the-windows-security-app).
 
 For each of these firewalls, set a special rule to allow UDP and TCP
 traffic to pass through on port `1634`. You may want to limit this
@@ -1165,7 +1165,7 @@ Refer to the [Node Types](./../working-with-bee/node-types.md) page for deep div
 
 While not strictly required, these tools will *greatly* simplify your experience working with Bee nodes:
 
-- **[`jq`](https://jqlang.github.io/jq/)**: Formats JSON responses (recommended for API users).
+- **[`jq`](https://jqlang.org/)**: Formats JSON responses (recommended for API users).
 - **[`curl`](https://curl.se/)**: Used for sending API requests (required for API interactions).
 - **[Swarm CLI](./../working-with-bee/swarm-cli.md)**: Terminal-based Bee node management.
 - **[Bee JS](./../../develop/tools-and-features/bee-js.md)**: JavaScript library for programmatic API access.
@@ -1702,7 +1702,7 @@ Success! The Bee API is now listening!
 Next, let's see if we have connected with any peers by sending a query to the Bee API (port 1633 by default - `localhost:1633`).
 
 :::info
-Here we are using the `jq` [utility](https://jqlang.github.io/jq/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
+Here we are using the `jq` [utility](https://jqlang.org/) to parse our javascript. Use your package manager to install `jq`, or simply remove everything after and including the first `|` to view the raw json without it.
 :::
 
 ```bash
@@ -2459,7 +2459,7 @@ This process can take a while, even up to several hours depending on your system
 You check your node's progress with the `/status` endpoint:
 
 :::info
-The [`jq` utility](https://jqlang.github.io/jq/) jq utility formats API responses for easier reading:
+The [`jq` utility](https://jqlang.org/) jq utility formats API responses for easier reading:
 * Install it using your system’s package manager.
 * If you don't want to use it, remove `| jq` from all commands.
 :::
@@ -2638,14 +2638,6 @@ If you would like to run a hive of many Bees, check out the [hive operators](./h
 
 ### Start building DAPPs on Swarm
 If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](./../../develop/introduction.md).
-
----
-
-## Verify
-
-verify.md
-
-https://github.com/ethersphere/bee/pull/1581
 
 ---
 

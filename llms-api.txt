@@ -45,7 +45,7 @@ curl -s http://localhost:1633/peers | jq '.peers | length'
 Great! We can see that we are currently connected with 23 other nodes!
 
 :::info
-Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://jqlang.github.io/jq/).
+Here we are using the `jq` command line utility to count the amount of objects in the `peers` array in the JSON response we have received from our API, learn more about how to install and use `jq` [here](https://jqlang.org/).
 :::
 
 Let's review a handful of endpoints which will provide you with important information relevant to detecting and diagnosing problems with your nodes.
@@ -1735,7 +1735,7 @@ Website Swarm Hash: 6c45eae389b3bffce21443316d0bd47c4101545092b7c72c313a33ee7d00
 Feed Manifest: caa414d70028d14b0bdd9cbab18d1c1a0a3bab1b20a56cf06937a6b20c7e7377
 ```
 
-Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#optional-connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
+Follow the [official ENS guide](https://support.ens.domains/en/articles/12275979-how-do-i-add-a-decentralised-website-to-my-ens-name) for registering a content hash adding your content hash in the ENS UI (see [guide](#optional-connect-site-to-ens-domain)). However, rather than registering your website's hash directly, register the feed manifest hash we saved from the previous step from our example above.
 
 ```
 bzz://<manifestRef>
@@ -1770,7 +1770,7 @@ http://localhost:1633/bzz/yourname.eth/
 
 ENS provides a clear walkthrough with screenshots showing how to add a content hash to your domain with their [easy to use app](https://app.ens.domains/):
 
-[How to add a Decentralized website to an ENS name](https://support.ens.domains/en/articles/12275979-how-to-add-a-decentralized-website-to-an-ens-name)
+[How to add a Decentralized website to an ENS name](https://support.ens.domains/en/articles/12275979-how-do-i-add-a-decentralised-website-to-my-ens-name)
 
 The guide covers:
 
@@ -2446,11 +2446,10 @@ This architecture scales to hundreds of feeds and can represent complex data str
 
 - [Cafe137/etherjot ↗](https://github.com/Cafe137/etherjot) — Static blog generator, live at etherjot.eth.limo
 - [ethersphere/examples ↗](https://github.com/ethersphere/examples) — Collection of example apps and starters
-- [examples/simple-blog ↗](https://github.com/ethersphere/examples/tree/master/simple-blog) — Minimal feed-backed blog, one publisher, updatable content
-- [examples/multi-author-blog ↗](https://github.com/ethersphere/examples/tree/master/multi-author-blog) — Multi-author blog using per-author feeds and a shared index
-- [examples/website ↗](https://github.com/ethersphere/examples/tree/master/website) — Swarm + ENS starter, upload a site and resolve it via ENS
-- [examples/routing-manifest ↗](https://github.com/ethersphere/examples/tree/master/routing-manifest) — Manifest-based routing demo for single-page apps
-- [examples/basic-static-website ↗](https://github.com/ethersphere/examples/tree/main/basic-static-website) — Basic static website on Swarm
+- [examples/simple-blog ↗](https://github.com/ethersphere/examples/tree/main/simple-blog) — Minimal feed-backed blog, one publisher, updatable content
+- [examples/multi-author-blog ↗](https://github.com/ethersphere/examples/tree/main/multi-author-blog) — Multi-author blog using per-author feeds and a shared index
+- [examples/website ↗](https://github.com/ethersphere/examples/tree/main/website) — Upload a static website to Swarm, publish it to a feed for a stable URL, and resolve it via ENS
+- [examples/routing-manifest ↗](https://github.com/ethersphere/examples/tree/main/routing-manifest) — Manifest-based routing demo for single-page apps
 
 ### Streaming
 
@@ -2495,8 +2494,8 @@ This architecture scales to hundreds of feeds and can represent complex data str
 - [ethersphere/create-swarm-app ↗](https://github.com/ethersphere/create-swarm-app) — Boilerplate for building Swarm apps with JavaScript
 - [Cafe137/fdp-play ↗](https://github.com/Cafe137/fdp-play) — Docker-based local Bee cluster and FDP dev environment
 - [Cafe137/pss-gsoc-learning-material ↗](https://github.com/Cafe137/pss-gsoc-learning-material) — Learning material for PSS and GSOC primitives
-- [examples/dynamic-content ↗](https://github.com/ethersphere/examples/tree/master/dynamic-content) — Content addressing and feeds, introduction example
-- [examples/filesystem ↗](https://github.com/ethersphere/examples/tree/master/filesystem) — Filesystem-style operations using bee-js
+- [examples/dynamic-content ↗](https://github.com/ethersphere/examples/tree/main/dynamic-content) — Content addressing and feeds, introduction example
+- [examples/filesystem ↗](https://github.com/ethersphere/examples/tree/main/filesystem) — Filesystem-style operations using bee-js
 - [agazso/swarm-cid-converter ↗](https://github.com/agazso/swarm-cid-converter) — Convert Swarm hashes or links to CID and vice versa
 - [Solar-Punk-Ltd/ipfs-to-swarm ↗](https://github.com/Solar-Punk-Ltd/ipfs-to-swarm) — Migrate data from IPFS to Swarm
 
@@ -2514,7 +2513,7 @@ This architecture scales to hundreds of feeds and can represent complex data str
 
 - [SwarmScan ↗](https://swarmscan.io/) — Network explorer and node statistics
 - [Swarm Gateway ↗](https://gateway.ethswarm.org/) — Share files via URL
-- [Swarm Desktop ↗](https://desktop.ethswarm.org) — GUI node for non-technical users
+- [Swarm Desktop ↗](https://ethswarm.org/build/desktop) — GUI node for non-technical users
 - [Bee Dashboard ↗](https://github.com/ethersphere/bee-dashboard) — Web UI for node management
 
 ## Community
