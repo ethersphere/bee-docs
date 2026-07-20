@@ -84,7 +84,7 @@ Once your node has xDAI, stake **at least 10 xBZZ** (this is non-refundable).
 You can use the following `swarm-cli` command to stake 10 xBZZ:
 
 ```bash
-swarm-cli stake deposit --bzz 10
+swarm-cli stake deposit 10 --unit bzz
 ```
 
 After a moment, the staking transaction will complete. Then you can check that the transaction was successful:
