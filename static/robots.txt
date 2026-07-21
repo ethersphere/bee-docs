@@ -1,2 +1,5 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://docs.ethswarm.org/sitemap.xml
+# llms.txt: https://docs.ethswarm.org/llms.txt
