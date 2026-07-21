@@ -6,7 +6,7 @@ description: Explains optional data protection technique using redundant chunks 
 
 Erasure coding (also known as erasure code) is an efficient and flexible approach to data protection which is an optional feature for Swarm uploads. It is a technique that increases data protection by enabling the recovery of original data even when some encoded chunks are lost or corrupted. When used, it ensures that data on Swarm can always be accessed reliably, even if some nodes or entire neighborhoods go offline. Refer to the [official erasure coding paper](https://papers.ethswarm.org/p/erasure/) for more in depth details. 
 
-## How It Works
+## How does erasure coding work? {#how-it-works}
 
 Erasure coding enhances data protection by dividing the source data into "chunks" and adding additional redundant chunks.
 

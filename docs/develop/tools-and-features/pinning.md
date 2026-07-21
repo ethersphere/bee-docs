@@ -11,7 +11,7 @@ Each time a chunk is accessed, it is moved back to the end of the deletion queue
 Bee nodes provide a facility to **pin** important content so that it is not deleted by the node's garbage collection routine. Chunks can be _pinned_ either during upload, or retrospectively using the Swarm reference.
 
 
-## Pin During Upload
+## How do I pin content during upload? {#pin-during-upload}
 
 To store content so that it will persist even when Bee's garbage collection routine is deleting old chunks, we simply pass the `Swarm-Pin` header set to `true` when uploading.
 
@@ -25,7 +25,7 @@ curl -H "Swarm-Pin: true" -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e4
 }
 ```
 
-## Administer Pinned Content
+## How do I manage pinned content? {#administer-pinned-content}
 
 To check what content is currently pinned on your node, query the `pins` endpoint of your Bee API:
 
@@ -49,7 +49,7 @@ curl localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a8782740
 
 A `404` response indicates the content is not available.
 
-### Unpinning Content
+### How do I unpin content? {#unpinning-content}
 
 We can unpin content by sending a `DELETE` request to the pinning endpoint using the same reference:
 
@@ -75,7 +75,7 @@ curl localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a8782740
 Pinning and unpinning is possible for files (as in the example) and also the chunks, directories, and bytes endpoints. See the [API](/api/) documentation for more details.
 :::
 
-### Pinning Already Uploaded Content
+### How do I pin already-uploaded content? {#pinning-already-uploaded-content}
 
 The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded and present in the Swarm.
 

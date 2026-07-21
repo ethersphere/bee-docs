@@ -13,7 +13,7 @@ Bee nodes can operate in three different modes depending on the user's needs, ra
 Choosing the right node type depends on your goals, whether it's participating in the Swarm network as a storage provider, developing applications that use Swarm's decentralized storage and messaging, or simply exploring the technology with minimal setup.
 
 
-## Node Types Overview
+## What are the Bee node types? {#node-types-overview}
 
 Bee can operate in different modes, each tailored to specific use cases:
 
@@ -28,7 +28,7 @@ Bee can operate in different modes, each tailored to specific use cases:
 | [PSS messaging](./../../develop/tools-and-features/pss.md)                   | ✅        | ❌         | ❌               |
 
 
-## Full Node
+## What is a full node? {#full-node}
 
 Full nodes are the most feature-rich nodes in the Swarm network. They provide full upload and download capabilities, store and serve data, and participate in storage and bandwidth incentives. Running a full node requires more system resources, but it allows users to fully engage with and support the network.
 
@@ -69,7 +69,7 @@ To run Bee as a full node, set:
 - Supports full PSS messaging and GSOC.
 
 
-## Light Node
+## What is a light node? {#light-node}
 
 Light nodes provide a balance between functionality and resource efficiency. They can upload and download data but do not participate in chunk forwarding or storage for other nodes.
 
@@ -109,7 +109,7 @@ To run Bee as a light node, set:
 - Can send outgoing GSOC updates but ***cannot*** receive them.
 
 
-## Ultra-Light Node
+## What is an ultra-light node? {#ultra-light-node}
 
 Ultra-light nodes allow users to run a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](./configuration.md) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
 
