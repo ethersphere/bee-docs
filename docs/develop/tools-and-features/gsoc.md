@@ -1,7 +1,7 @@
 ---
 title: GSOC
 id: gsoc
-description: Documentation for Group Send Over Content messaging feature in Swarm.
+description: Graffiti Several Owner Chunk (GSOC) — a many-to-one messaging feature that lets one full Bee node receive messages from many writer nodes.
 ---
 
 ## Introduction
