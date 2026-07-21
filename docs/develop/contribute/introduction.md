@@ -6,7 +6,7 @@ description: Overview of how to contribute to Bee development including code sta
 
 # Contribute to Bee Development
 
-Welcome to the Dev area! We love PR's! 🐝
+Bee is developed in the open on GitHub, and contributions are welcome via pull request. We love PRs! 🐝
 
 We would would love you to get involved with our [Github repo](https://github.com/ethersphere/bee).
 

@@ -4,6 +4,8 @@ id: staking
 description: Walkthrough of depositing xBZZ to participate in the storage incentives redistribution game and earn network rewards.
 ---
 
+Staking locks up xBZZ so your full node can join the **redistribution game** and earn a share of the network's storage-rent rewards. Staking requires a fully synced full node and a minimum of 10 xBZZ, and the stake is non-refundable.
+
 ## Quickstart Guide
 
 This guide will walk you through **staking xBZZ** and participating in the **redistribution game** to earn storage incentives. 

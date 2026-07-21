@@ -1,10 +1,10 @@
 ---
 title: Run a Gateway
 id: gateway-proxy
-description: Explains Bee gateway functionality for accessing Swarm content through HTTP interfaces.
+description: Run a Bee node as a public HTTP gateway so anyone can access Swarm-hosted content from an ordinary web browser.
 ---
 
-At this point you can build and deploy complete Swarm-hosted websites with working routing. This guide is an **operational step**: it shows how to make those sites accessible to the public web through an HTTP gateway, so that anyone with a browser can reach them without running their own Bee node.
+A Swarm gateway is an HTTP server that makes Swarm-hosted websites reachable from an ordinary web browser, without visitors needing to run their own Bee node. This guide shows how to run your Bee node as a public HTTP gateway.
 
 This guide explains how to use the [swarm-gateway](https://github.com/ethersphere/swarm-gateway) tool to set up your node in gateway mode. Running your node in gateway mode exposes it publicly, allowing access through any typical browser or http API.
 

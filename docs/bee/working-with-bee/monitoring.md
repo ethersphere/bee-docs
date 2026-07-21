@@ -4,7 +4,7 @@ id: monitoring
 description: Explains how to monitor Bee node metrics using Prometheus and Grafana for tracking cheque rates and network performance.
 ---
 
-Your Bee node is equipped with tools to help you understand what your Bee has been up to!
+Bee nodes expose runtime metrics in Prometheus format, which you can collect and visualise with Grafana to understand what your Bee has been up to.
 
 Navigate to `http://localhost:1633/metrics`.
 
