@@ -5,7 +5,7 @@ sidebar_label: Start Building
 hide_table_of_contents: false
 pagination_prev: null
 pagination_next: null
-description: Overview of development on Swarm including APIs tools and use cases for building applications.
+description: Swarm lets developers store data, host websites, and build decentralised apps using the Bee HTTP API and the bee-js SDK.
 ---
 
 # Building on Swarm

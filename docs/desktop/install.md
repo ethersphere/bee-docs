@@ -1,7 +1,7 @@
 ---
 title: Install
 id: install
-description: Provides installation instructions for the Swarm Desktop GUI application on Windows macOS and Linux.
+description: Install the Swarm Desktop app on Windows, macOS, or Linux to run a Bee node with a graphical interface.
 ---
 
 ## Download and Install Swarm Desktop

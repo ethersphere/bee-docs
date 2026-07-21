@@ -2,7 +2,7 @@
 title: Manage Files
 id: files
 sidebar_label: Manage Files
-description: Guide for working with file operations including chunking and handling in Swarm applications.
+description: Upload, download, and manage files, directories, and collections on Swarm using the Bee API and bee-js.
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 title: Introduction
 id: introduction
-description: Overview of advanced tools and features available for Swarm development.
+description: Swarm's developer tools and features for hosting dapps and storing their data, including feeds, stamps, encryption, and messaging.
 ---
 
 # Hosting Your Dapps & Storing Their Data
