@@ -586,7 +586,7 @@ Full and light Bee nodes require a Gnosis Chain RPC endpoint in order to sync bl
 To set your RPC endpoint, specify it with the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
 
 ```yaml
-## bee.yaml
+# bee.yaml
 blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 ```
 
@@ -606,7 +606,7 @@ Bee periodically reads the current block number from your blockchain RPC endpoin
 The `block-sync-interval` option controls how frequently the real block number is refreshed:
 
 ```yaml
-## bee.yaml
+# bee.yaml
 block-sync-interval: 10
 ```
 
@@ -629,7 +629,7 @@ It is currently available **only on Linux x86-64 (amd64)**; on all other platfor
 To enable it, set the `use-simd-hashing` option:
 
 ```yaml
-## bee.yaml
+# bee.yaml
 use-simd-hashing: true
 ```
 
@@ -648,7 +648,7 @@ This feature is **disabled by default** and only applies to full nodes with cheq
 To enable chequebook verification, set `chequebook-verification` to `true`:
 
 ```yaml
-## bee.yaml
+# bee.yaml
 chequebook-verification: true
 ```
 
@@ -657,7 +657,7 @@ The value is set in the token's smallest unit (PLUR), where 1 BZZ = 10^16 PLUR, 
 To configure a different threshold, set `chequebook-min-balance` accordingly:
 
 ```yaml
-## bee.yaml
+# bee.yaml
 chequebook-verification: true
 chequebook-min-balance: "110000000000000000" # 11 BZZ, expressed in PLUR
 ```
@@ -694,7 +694,7 @@ curl icanhazip.com
 Then configure your node, including your p2p port (default 1634).
 
 ```yaml
-## bee.yaml
+# bee.yaml
 nat-addr: "123.123.123.123:1634"
 ```
 
@@ -707,7 +707,7 @@ The [ENS](https://ens.domains/) domain resolution system is used to host website
 If you do not wish to run your own Ethereum node, you may use a blockchain RPC service provider such as [Infura](https://infura.io). After signing up for Infura, simply set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
 
 ```yaml
-## bee.yaml
+# bee.yaml
 resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 ```
 
