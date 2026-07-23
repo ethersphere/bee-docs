@@ -6,8 +6,6 @@ description: Upload, download, and manage files, directories, and collections on
 ---
 
 
-# Manage Files
-
 In the [Host a Webpage](/docs/develop/host-your-website) guide you uploaded a directory and got back a single Swarm reference that serves your site. That reference points to a **manifest** — a data structure that maps relative paths to content. This guide explores manifests directly: how to inspect them, add a file without re-uploading everything, and move a file by remapping a path.
 
 Swarm does not have a traditional filesystem — there are no mutable directories, in-place updates, or a built-in directory structure that preserves relationships between files. Instead, these capabilities are provided through the use of [manifests](./tools-and-features/manifests.md), which map relative paths (such as `/images/cat.jpg`) to immutable Swarm content references. When you upload a directory, Bee creates a manifest automatically and returns its reference. Files can then be accessed using paths that are relative to that manifest reference, based on the original directory structure. This provides filesystem-like behavior for your data, and the directory structure can later be changed by publishing a new version of the manifest with the desired updates.

@@ -4,8 +4,6 @@ id: logs-and-files
 description: Guides log access rotation verbosity levels and structured logging integration with monitoring tools like Prometheus and Grafana.
 ---
 
-# Logging in Bee
-
 This section provides an overview of logging in Bee, including log locations, exporting logs, managing verbosity levels, and using fine-grained control for specific loggers.
 
 :::info

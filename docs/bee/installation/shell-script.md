@@ -7,8 +7,6 @@ description: Provides flexible installation using an automated shell script supp
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Swarm Shell Script Installation Guide
-
 The official [shell script](https://github.com/ethersphere/bee/blob/master/install.sh) provided by Swarm automatically detects your system and installs the correct version of Bee. This installation method is an excellent choice if you're looking for a minimalistic and flexible option for your Bee node installation.
 
 :::warning

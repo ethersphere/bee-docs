@@ -5,8 +5,6 @@ description: Answers to common questions about Swarm, the BZZ token, and communi
 ---
 
 
-# Swarm FAQ
-
 ## Community
 
 ### What are the Swarm Foundation's official channels?

@@ -1,5 +1,5 @@
 ---
-title: Start Building
+title: Building on Swarm
 id: introduction
 sidebar_label: Start Building
 hide_table_of_contents: false
@@ -7,8 +7,6 @@ pagination_prev: null
 pagination_next: null
 description: Swarm lets developers store data, host websites, and build decentralised apps using the Bee HTTP API and the bee-js SDK.
 ---
-
-# Building on Swarm
 
 This is the go-to starting point for web3 developers who want to build with Swarm. The guides on this page will help you get started with setting up a Bee node, using that node to integrate your dApp with Swarm, and to begin exploring some example applications to better understand the possibilities of building on Swarm.
 

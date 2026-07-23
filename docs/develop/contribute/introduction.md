@@ -1,14 +1,13 @@
 ---
-title: Introduction
+title: Contribute to Bee Development
 id: introduction
+sidebar_label: Overview
 description: Overview of how to contribute to Bee development including code standards and contribution process.
 ---
 
-# Contribute to Bee Development
-
 Bee is developed in the open on GitHub, and contributions are welcome via pull request. We love PRs! 🐝
 
-We would would love you to get involved with our [Github repo](https://github.com/ethersphere/bee).
+We would love you to get involved with our [Github repo](https://github.com/ethersphere/bee).
 
 Connect with other Bee developers over at the official [Discord Server](https://discord.gg/kHRyMNpw7t). Sign up and get involved with our buzzing hive of daily dev chat.
 

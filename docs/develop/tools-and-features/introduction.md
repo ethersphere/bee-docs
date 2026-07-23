@@ -1,16 +1,12 @@
 ---
-title: Introduction
+title: Hosting Your Dapps & Storing Their Data
 id: introduction
+sidebar_label: Overview
 description: Swarm's developer tools and features for hosting dapps and storing their data, including feeds, stamps, encryption, and messaging.
 ---
 
-# Hosting Your Dapps & Storing Their Data
-
-Swarm is hugely versatile, but at a very basic level you can think of
-it as storage for your dapps data that is too big for blockchain, but
-still needs to live in our totally decentralised universe. Swarm is
-perfect for storing your NFT meta-data and images in a web3 way that
-won't break the bank and can live forever!
+Swarm is hugely versatile, but at a very basic level you can think of it as storage for your dapps data that is too big for blockchain, but still needs to live in our totally decentralised universe. 
+Swarm is perfect for storing your NFT meta-data and images in a web3 way that won't break the bank and can live forever!
 
 ## Tools and Features
 
@@ -66,4 +62,3 @@ The `bee dev` mode was removed in Bee v2.8.1; use bee-factory instead.
 ### Starting a Test Network
 
 While bee-factory already runs multiple nodes locally, setting up a [test network](./starting-a-test-network.md) gives you even greater control over simulating interactions between nodes in a more customised environment.
-

@@ -4,8 +4,6 @@ id: docker
 description: Provides comprehensive steps for deploying Bee nodes using Docker containers with volume management and network configuration.
 ---
 
-# Docker Install
-
 The following is a guide for installing a Bee node using Docker. Docker images for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). Using Docker to operate your Bee node offers many benefits, such as ease of deployment and consistency across environments. 
 
 :::caution
