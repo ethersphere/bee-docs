@@ -6,7 +6,7 @@ description: Explains game-theoretic system distributing xBZZ from postage stamp
 
 The redistribution game distributes xBZZ collected from [postage stamp](./postage-stamps.md) purchases, rewarding nodes for providing storage. Redistribution rewards incentivize nodes to continue providing storage to the network. The game is designed so that the most profitable strategy for participants is to store their assigned data honestly.
 
-### How does the redistribution game work? {#redistribution-game-details}
+## How does the redistribution game work? {#redistribution-game-details}
 
 Uploading data to Swarm requires purchasing postage stamp batches with xBZZ. The collected xBZZ is later redistributed as rewards to storage nodes. Every 152 Gnosis Chain blocks ***a single [neighborhood](./../DISC/neighborhoods.md)*** is selected to play the redistribution game. For each round of the game, one node from the selected neighborhood will have the chance to win a reward which is paid out from the accumulated xBZZ. 
 
@@ -21,7 +21,7 @@ $$
 $$
 
 
-### What penalties apply for dishonest nodes? {#penalties}
+## What penalties apply for dishonest nodes? {#penalties}
 
 During the `reveal` phase if a nodes' revealed hash does not match the honest nodes' hash, that node will be temporarily frozen and will not be able to participate in a number of upcoming rounds. Currently the freeze period is defined in the [redistribution smart contract](https://github.com/ethersphere/storage-incentives/blob/master/src/Redistribution.sol#L536C1-L536C100) as:
 

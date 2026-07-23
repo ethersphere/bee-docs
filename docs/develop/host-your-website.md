@@ -96,7 +96,7 @@ Anyone with access to it can publish to your feed.
 *It is recommended to use a separate publishing key for each feed.*
 :::
 
-#### Example Script
+### Example Script
 
 :::tip
 The script below refers to some core feed concepts such as the feed "topic" and "writer". To learn more about these concepts and feeds in general, refer to the [bee-js documentation](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds).
@@ -174,7 +174,7 @@ or through your own node:
 http://localhost:1633/bzz/yourname.eth/
 ```
 
-#### Using the Official ENS Guide
+### Using the Official ENS Guide
 
 ENS provides a clear walkthrough with screenshots showing how to add a content hash to your domain with their [easy to use app](https://app.ens.domains/):
 
@@ -188,7 +188,7 @@ The guide covers:
 * Confirming the transaction
 
 
-#### Swarm-Specific Step
+### Swarm-Specific Step
 
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 

@@ -14,7 +14,7 @@ Prerequisites for installing directly from source are:
 -  **git** - download from [git-scm.com](https://git-scm.com/).
 -  **make** - [make](https://www.gnu.org/software/make/) is usually included by default in most UNIX operating systems, and can be installed and used on almost any other operating system where it is not included by default.
 
-### Build from Source
+## Build steps
 
 1. Clone the repository:
 

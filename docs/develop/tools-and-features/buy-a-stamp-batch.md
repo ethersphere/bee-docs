@@ -84,8 +84,6 @@ values={[
 ]}>
 <TabItem value="api">
 
-#### API
-
 ```bash
 curl -s -X POST http://localhost:1633/stamps/100000000/20
 ```
@@ -100,8 +98,6 @@ curl -s -X POST http://localhost:1633/stamps/100000000/20
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 ```bash
 swarm-cli stamp buy --depth 20 --amount 100000000
@@ -184,8 +180,6 @@ values={[
 ]}>
 <TabItem value="api">
 
-#### API
-
 
 ```bash
 curl http://localhost:1633/stamps
@@ -215,8 +209,6 @@ curl http://localhost:1633/stamps
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 ```bash
 swarm-cli stamp list
@@ -258,9 +250,6 @@ values={[
 ]}>
 <TabItem value="api">
 
-#### API
-
-
 ```bash
 curl http://localhost:1633/stamps
 ```
@@ -289,8 +278,6 @@ curl http://localhost:1633/stamps
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 ```bash
 swarm-cli stamp list
@@ -324,8 +311,6 @@ values={[
 ]}>
 <TabItem value="api">
 
-#### API
-
 ```bash
 curl -X PATCH "http://localhost:1633/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
 ```
@@ -333,8 +318,6 @@ curl -X PATCH "http://localhost:1633/stamps/topup/6d32e6f1b724f8658830e51f8f57aa
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 List available stamps.
 
@@ -382,8 +365,6 @@ values={[
 {label: 'Swarm CLI', value: 'swarm-cli'},
 ]}>
 <TabItem value="api">
-
-#### API
 
 
 Here we call the `/stamps` endpoint and find a batch with `depth` 24 and a `batchTTL` of 2083223 which we wish to dilute:
@@ -460,8 +441,6 @@ We can see the new `depth` of 26 and a decreased `batchTTL` of 519265.
 
 <TabItem value="swarm-cli">
 
-#### Swarm CLI
-
 List available stamps, make sure to use the `--verbose` flag so that we can see the batch depth.
 
 ```bash
@@ -528,4 +507,4 @@ If the content is not retrievable, an HTTP PUT request can be used to re-upload 
 curl -X PUT "http://localhost:1633/stewardship/c0c2b70b01db8cdfaf114cde176a1e30972b556c7e72d5403bea32ec0207136f"
 ```
 
-Note that for the re-upload to succeed, the associated content must be available locally, either pinned or cached. Since it isn't easy to predict if the content will be cached, for important content pinning is recommended. 
+Note that for the re-upload to succeed, the associated content must be available locally, either pinned or cached. Since it isn't easy to predict if the content will be cached, for important content pinning is recommended.

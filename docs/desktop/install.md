@@ -34,7 +34,7 @@ Once the installation is complete, Swarm Desktop will open up in your default br
 
 If the installation went smoothly, you should see the message "Your node is connected" above the "Access Content" button along with a status message of "Node OK".
 
-#### What Just Happened?
+### What Just Happened?
 
 Running the Swarm Desktop app for the first time set up a new Bee node on your system. The installation process generated and saved private keys for your node in the Swarm Desktop's data directory. Those keys were used to start up a new Bee node in ultra-light mode. 
 

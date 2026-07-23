@@ -11,7 +11,7 @@ This is guide contains a detailed explanation of how to use the ACT feature, but
 
 In this section we'll provide information on how to use the **swarm-cli** to upload, download data with ACT or update the grantee list. 
 
-### Upload
+## Upload
 
 Uploading data without ACT to the network remains unchanged.
 
@@ -26,7 +26,7 @@ If the provided **act-history-address** is invalid then the request will fail wi
 
 The response returns the newly created reference encrypted with ACT and the header contains history reference.
 
-### Download
+## Download
 
 Downloading data which was uploaded without ACT from the network remains unchanged.
 
@@ -39,11 +39,11 @@ Here **act** indicates that the **swarm_hash** shall be decrypted using the cont
 If the **act-history-address** or **act-publisher** flags are omitted then the request is treated as a "usual" download.
 If the data was uploaded with ACT and we try to download it without the ACT flags then the request will fail with a not found error.
 
-### Grantee management
+## Grantee management
 
 Updating a grantee list literally means patching a json file containing the list of grantee swarm public keys.
 
-#### Create
+### Create
 
 A brand new grantee list can be created using the following command:
 ```bash
@@ -61,7 +61,7 @@ where **grantees.json** shall contain the key **grantees** with the list of publ
 The response returns the newly created and encrypted grantee list and the history reference. Only the publisher can decrypt and therefore access the list.
 If **act-history-address** is provided then the grantee list is uploaded as the newest version under that history.
 
-#### Patch
+### Patch
 
 ```bash
 swarm-cli grantee patch grantees-patch.json --reference $grantee_reference --history $grantee_history_reference --stamp $stamp_id
@@ -80,7 +80,7 @@ The **grantee_history_reference** indicates the reference of historical version 
 
 **Limitation**: If an update is called again within a second from the latest upload/update of a grantee list, then mantaray save fails with an invalid input error, because the key (timestamp) already exists, hence a new fork is not created.
 
-#### Get
+### Get
 
 As stated above, only the publisher can decrypt and therefore access the list with the following command:
 ```bash

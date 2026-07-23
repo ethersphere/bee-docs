@@ -13,14 +13,14 @@ Therefore the default Bee configuration now includes the `neighborhood-suggester
 The Swarmscan neighborhood selector prioritizes the least populated neighborhood. If a neighborhood contains imbalanced sub-neighborhoods, it will suggest the least populated sub-neighborhood instead. Furthermore, the suggester will temporarily de-prioritize previously suggested neighborhoods based on the assumption that a new node is being created in each suggested neighborhood so that multiple nodes do not simultaneously attempt to join the same neighborhood.
 :::
 
-#### Setting Neighborhood Manually
+## Setting Neighborhood Manually
 
 It's recommended to use the default `neighborhood-suggester` configuration for choosing your node's neighborhood, however you may also set your node's neighborhood manually using the `target-neighborhood` option.
 
 To use this option, it's first necessary to identify potential target neighborhoods. You can find underpopulated neighborhoods using the [Swarmscan website](https://swarmscan.io/neighborhoods). It ranks neighborhoods from least to most populated and displays their leading binary bits. Simply copy the leading bits from one of the least populated neighborhoods (for example, `0010100001`) and use it to set `target-neighborhood`. After doing so, an overlay address within that neighborhood will be generated when starting Bee for the first time.
 
 ```yaml
-## bee.yaml
+# bee.yaml
 target-neighborhood: "0010100001"
 ```
 

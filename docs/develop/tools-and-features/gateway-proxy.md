@@ -12,7 +12,7 @@ Another tool which is currently popular for running Bee in gateway mode is [Gate
 
 It acts as a reverse proxy that runs in front of a Bee node, allowing you to expose your node publicly. It proxies the Bee HTTP API and content endpoints, while optionally adding access control, postage batch auto-buy, and other optional features.
 
-### Public Access to Swarm
+## Public Access to Swarm
 
 A gateway can be used to run a public endpoint that allows users to:
 
@@ -22,7 +22,7 @@ A gateway can be used to run a public endpoint that allows users to:
 
 This makes Swarm content accessible to any web client, even if the user is not running a Bee node locally.
 
-### Authentication, Access Control, and Policy
+## Authentication, Access Control, and Policy
 
 The Swarm Gateway also acts as an access control and content moderation layer in front of a Bee node.
 
@@ -37,7 +37,7 @@ This makes it possible to run public, private, or semi-public gateways while ret
 
 For production deployments, the gateway is typically run behind an HTTPS reverse proxy to ensure encrypted connections.
 
-### Stamp Management
+## Stamp Management
 
 The Swarm Gateway can optionally manage postage stamps on behalf of the operator, including:
 
