@@ -201,7 +201,7 @@ Note that `swarm.key` is in UTC / JSON keystores format and is encrypted by defa
 
 To import to Metamask:
 
-1. View and copy your `swarm.key` and `password` as shown above
+1. View and copy the contents of your exported `swarm.key` and `password` files
 2. Go to Metamask and click "Account 1" --> "Import Account"
 3. Choose the "Select Type" dropdown menu and choose "JSON file"
 4. Paste the password (Make sure to do this first)

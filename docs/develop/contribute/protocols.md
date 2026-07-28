@@ -73,7 +73,7 @@ This approach implies that every forwarding node - once it received a request - 
 
 Because a forwarder can not reliably tell how much time the downstream peer will need to satisfy the request - the choice of a reasonable value for waiting period is a point of contention.
 
-It is constrained by these factors:
+The choice of a reasonable waiting period is constrained by these factors:
 
 - keeping the in-memory record for too long means that there's going to be a limit on how many concurrent requests a peer can keep "in-flight", because memory is limited.
 - if the peer decides to time out prematurely (while downstream peers are still processing the request) then the effort of all the downstream peers will be wasted.
@@ -132,7 +132,7 @@ Having a granular punishment strategy ensures that the peers who misbehave (perh
 
 The retrieval of a chunk is a process which fetches a given chunk from the network by its address.
 
-It follows the general semantics of the chunk syncing described above and follows the same network path as the push sync protocol, but in reverse.
+Chunk retrieval follows the general semantics of chunk syncing and takes the same network path as the push sync protocol, but in reverse.
 
 ### Protocol breach
 
@@ -214,7 +214,7 @@ message Delivery {
 
 Pushsync protocol is responsible for ensuring delivery of the chunk to its prescribed storer after it has been uploaded to any arbitrary node.
 
-It works in a similar way to the Retrieval protocol in the sense that the chunk is being passed to a peer whose address is closest to the chunk address and a custody receipt is received in response.
+The Pushsync protocol works in a similar way to the Retrieval protocol: the chunk is passed to the peer whose address is closest to the chunk address, and a custody receipt is received in response.
 
 Then the same process is repeated until the chunk eventually reaches the storer node located in a certain "neighborhood".
 
@@ -228,7 +228,7 @@ Multiplexing is a recommended node strategy for the push sync protocol that invo
 
 The current implementation of the push sync protocol aims to push a chunk to the closest node in the neighborhood which is then supposed to give out a receipt.
 
-This is motivated by the  retrieval protocol that aims to find the chunk at this closest node.
+Pushing the chunk to the single closest node is motivated by the retrieval protocol, which aims to find the chunk at that closest node.
 
 When the closest node hands out a receipt, this node also replicates the chunk to 3 peers in the neighborhood which are further away from the chunk than him.
 
@@ -398,6 +398,6 @@ At the implementation level the Kademlia component will offer (in exchange for a
 
 A reliable network transport is required for the proper functionality of DISC protocols.
 
-It can be a distinct component whose responsibilities would be ensuring delivery, re-tries on network issues and timeouts and optimal use of network related resources.
+The network transport can be a distinct component responsible for ensuring delivery, retrying on network issues and timeouts, and making optimal use of network resources.
 
 One example of usage for such a component could be embedding into the Kademlia driver so that the topology component is only concerned with overlay related operations, abstracting away any low level transport concerns.

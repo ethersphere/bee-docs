@@ -18,7 +18,7 @@ Nodes should not be shut down or updated in the middle of a round they are playi
 ## Version compatibility and upgrade path
 
 The Swarm network has a **minimum supported Bee version**.
-It is currently **v2.8.0**, the release which introduced a breaking p2p protocol change, so nodes running an older protocol can no longer connect to the network.
+The minimum supported version is currently **v2.8.0**, the release that introduced a breaking p2p protocol change, so nodes running an older protocol can no longer connect to the network.
 
 When upgrading across a breaking protocol change, do not skip the release that introduced it.
 Upgrade *through* that version so any one-time data migrations run while they still exist in the code, since Bee removes old migration and compatibility code once a version is no longer supported.
