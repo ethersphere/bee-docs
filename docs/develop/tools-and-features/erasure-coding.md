@@ -88,7 +88,7 @@ An example download request may look something like this:
 
 For this request, the redundancy strategy is set to 3 (RACE), which means that it will initiate a request for all data and parity chunks and continue to retrieve chunks until enough have been retrieved to reconstruct the source data. This is in contrast with the default strategy of DATA where only the data chunks will be retrieved.
 
-However, as noted above, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](./../upload-and-download.md) without any additional options set):
+However, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](./../upload-and-download.md) without any additional options set):
 
 
 ```bash

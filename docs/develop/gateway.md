@@ -171,7 +171,7 @@ Example (add these lines to the `docker run` command):
 -e SOFT_AUTH="true" \
 ```
 
-At this point, you have:
+A minimal gateway setup consists of:
 
 * A working Swarm HTTP gateway
 * Connected to your Bee node
