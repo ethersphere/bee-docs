@@ -13,7 +13,7 @@ Bee nodes can operate in three different modes depending on the user's needs, ra
 Choosing the right node type depends on your goals, whether it's participating in the Swarm network as a storage provider, developing applications that use Swarm's decentralized storage and messaging, or simply exploring the technology with minimal setup.
 
 
-## Node Types Overview
+## What are the Bee node types? {#node-types-overview}
 
 Bee can operate in different modes, each tailored to specific use cases:
 
@@ -28,14 +28,14 @@ Bee can operate in different modes, each tailored to specific use cases:
 | [PSS messaging](./../../develop/tools-and-features/pss.md)                   | ✅        | ❌         | ❌               |
 
 
-## Full Node
+## What is a full node? {#full-node}
 
 Full nodes are the most feature-rich nodes in the Swarm network. They provide full upload and download capabilities, store and serve data, and participate in storage and bandwidth incentives. Running a full node requires more system resources, but it allows users to fully engage with and support the network.
 
 Full nodes are ideal for users who want to contribute to the Swarm network and earn incentives, as well as developers who require access to all Bee features including messaging features such as PSS and GSOC.
 
 
-### Recommended Specifications
+### Full node specifications
 
 :::warning
 Full nodes require significant system resources, including storage and bandwidth. Additionally, they must be connected to the blockchain to participate in incentives. 
@@ -50,7 +50,7 @@ Requires significant storage and processing power compared to other node types:
 - **Storage**: 30 GB SSD (HDD not recommended).
 - **Internet**: High-speed and stable connection.
 
-### Configuration
+### Full node configuration
 
 To run Bee as a full node, set:
 
@@ -69,7 +69,7 @@ To run Bee as a full node, set:
 - Supports full PSS messaging and GSOC.
 
 
-## Light Node
+## What is a light node? {#light-node}
 
 Light nodes provide a balance between functionality and resource efficiency. They can upload and download data but do not participate in chunk forwarding or storage for other nodes.
 
@@ -81,11 +81,11 @@ Light node operators cannot earn xBZZ by participating in Swarm's incentives sys
 Light nodes do not benefit from plausible deniability when requesting data from the network. They are always the originator of requests.
 :::
 
-### Recommended Specifications
+### Light node specifications
 
 No specific hardware is required to run a light node. It can run well on practically any commercially available computer released in recent years, including lightweight single-board computers such as [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi). Your downloads / uploads may be limited by your network speed, however, so if you plan on interacting extensively with the Swarm network, you should take your connection speed into consideration.
 
-### Configuration
+### Light node configuration
 
 To run Bee as a light node, set:
 
@@ -109,7 +109,7 @@ To run Bee as a light node, set:
 - Can send outgoing GSOC updates but ***cannot*** receive them.
 
 
-## Ultra-Light Node
+## What is an ultra-light node? {#ultra-light-node}
 
 Ultra-light nodes allow users to run a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](./configuration.md) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
 
@@ -123,11 +123,11 @@ As with light nodes, ultra-light nodes do not benefit from plausible deniability
 When running without a blockchain connection, [bandwidth incentive payments (SWAP)](./../../concepts/incentives/bandwidth-incentives.md) cannot be made, increasing the risk of being blocklisted by other peers for exceeding their free-tier download limits.
 :::
 
-### Recommended Specifications
+### Ultra-light node specifications
 
 As with the light node, there are no specific requirements to run an ultra-light node, and it will run on practically any commercially available hardware from recent years.   
 
-### Configuration
+### Ultra-light node configuration
 
 Bee will start in ultra-light mode by default, but in order to explicitly configure your node to run as an ultra-light node, use the following options:
 

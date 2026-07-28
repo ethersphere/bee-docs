@@ -6,16 +6,14 @@ description: Details Swarm's four-layer architecture including underlay overlay 
 
 import bos_fig_1_1 from '/static/img/bos_fig_1_1.jpg';
 
-# What is Swarm?
+Swarm is a peer-to-peer network of nodes which work together to provide decentralised storage and communication infrastructure.
 
 The complete vision of Swarm is described in detail in [The Book of Swarm](https://papers.ethswarm.org/p/book-of-swarm/) written by Swarm founder Viktor Tron, with further high level details described in the [whitepaper](https://papers.ethswarm.org/p/whitepaper/). More in depth low level implementation details can be found in the [Swarm Specification paper](https://papers.ethswarm.org/p/swarm-protocol-spec/). The latest research and technical papers from Swarm can be found on the ["Papers" section](https://papers.ethswarm.org/) of the Ethswarm homepage.
-
-Swarm is peer-to-peer network of nodes which work together to provide decentralised storage and communication infrastructure.
 
 Swarm can be divided into four main parts:
 
 1. Underlay Network - A peer-to-peer network protocol to serve as underlay transport. Swarm's underlay network is built with [libp2p](https://libp2p.io/). 
-2. Overlay Network - An overlay network with protocols powering a distributed immutable storage of chunks (fixed size data blocks). 
+2. Overlay Network - An overlay network with protocols powering a distributed immutable store for chunks (fixed size data blocks). 
 3. Data Access Layer - A component providing high-level data access and defining APIs for base-layer features.
 4. Application Layer - An application layer defining standards and outlining best practices for more elaborate use cases.
 
@@ -61,5 +59,4 @@ Swarm's high-level data access component provides [APIs that allow developers to
 
 ### 4. Application Layer 
 
-The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use cases. This layer is responsible for providing guidance to developers on [how to build complex applications](./../develop/introduction.md) on top of Swarm's underlying infrastructure. 
-
+The fourth part of Swarm is an application layer that defines standards and outlines best practices for more elaborate use cases. This layer is responsible for providing guidance to developers on [how to build complex applications](./../develop/introduction.md) on top of Swarm's underlying infrastructure.

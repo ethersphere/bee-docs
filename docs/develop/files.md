@@ -2,11 +2,9 @@
 title: Manage Files
 id: files
 sidebar_label: Manage Files
-description: Guide for working with file operations including chunking and handling in Swarm applications.
+description: Upload, download, and manage files, directories, and collections on Swarm using the Bee API and bee-js.
 ---
 
-
-# Manage Files
 
 In the [Host a Webpage](/docs/develop/host-your-website) guide you uploaded a directory and got back a single Swarm reference that serves your site. That reference points to a **manifest** — a data structure that maps relative paths to content. This guide explores manifests directly: how to inspect them, add a file without re-uploading everything, and move a file by remapping a path.
 

@@ -5,8 +5,6 @@ description: Guide for using manifests to organize and address multiple files as
 ---
 
 
-# Manifests
-
 Manifests define how files and folders are organized in Swarm. Instead of a flat list of uploaded files, Bee encodes directory structure as a compact prefix [trie](https://en.wikipedia.org/wiki/Trie). This allows URLs like `/images/logo.png`, `/docs/readme.txt`, or `/` to resolve efficiently to the correct Swarm references. Whenever you upload a directory — via `/bzz`, `bee-js`, or `swarm-cli` — Bee automatically creates and uploads a manifest that enables a filesystem-like layer inside Swarm. The manifest reference itself is the root reference for your uploaded directory.
 
 Manifests provide:

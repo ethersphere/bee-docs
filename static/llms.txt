@@ -68,7 +68,7 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 - [Feeds](https://docs.ethswarm.org/docs/develop/tools-and-features/feeds): Mutable data references using single-owner chunks
 - [Manifests](https://docs.ethswarm.org/docs/develop/tools-and-features/manifests): Trie-based path mapping for file collections
 - [PSS Messaging (usage)](https://docs.ethswarm.org/docs/develop/tools-and-features/pss): Send messages through the Swarm network
-- [GSOC](https://docs.ethswarm.org/docs/develop/tools-and-features/gsoc): Graffiti SOC for pub/sub messaging patterns
+- [GSOC](https://docs.ethswarm.org/docs/develop/tools-and-features/gsoc): Graffiti Several Owner Chunk for pub/sub messaging patterns
 - [Add Access Control (usage)](https://docs.ethswarm.org/docs/develop/act): Encrypt content for specific recipients using ACT
 - [Gateway Proxy](https://docs.ethswarm.org/docs/develop/tools-and-features/gateway-proxy): Proxy for browser-based Swarm access
 - [bee-factory](https://docs.ethswarm.org/docs/develop/tools-and-features/bee-dev-mode): Local Swarm development stack (5 Bee nodes plus a local chain) started with a single command
@@ -80,7 +80,7 @@ This is the documentation for [Swarm](https://www.ethswarm.org/) and its referen
 ## Understand Swarm concepts
 
 - [What is Swarm?](https://docs.ethswarm.org/docs/concepts/what-is-swarm): Architecture overview and design goals
-- [DISC](https://docs.ethswarm.org/docs/concepts/DISC): Distributed Immutable Store for Chunks
+- [DISC](https://docs.ethswarm.org/docs/concepts/DISC/): Distributed Immutable Store for Chunks
 - [Kademlia](https://docs.ethswarm.org/docs/concepts/DISC/kademlia): Distributed hash table and routing
 - [Neighborhoods](https://docs.ethswarm.org/docs/concepts/DISC/neighborhoods): Address space, proximity, and storage responsibility
 - [Erasure Coding (theory)](https://docs.ethswarm.org/docs/concepts/DISC/erasure-coding): Reed-Solomon redundancy for chunk reliability

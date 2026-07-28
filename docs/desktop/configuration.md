@@ -1,7 +1,7 @@
 ---
 title: Configuration
 id: configuration
-description: Explains configuration options and settings available in the Swarm Desktop user interface.
+description: Adjust your Bee node's settings through the Swarm Desktop app.
 ---
 
 

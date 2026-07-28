@@ -1,7 +1,7 @@
 ---
 title: Publish a Website
 id: publish-a-website
-description: Step-by-step instructions for uploading and hosting websites on Swarm using the Desktop application.
+description: Publish a static website to Swarm from the Swarm Desktop app and access it via a Swarm hash.
 ---
 
 ## Step by Step Guide 

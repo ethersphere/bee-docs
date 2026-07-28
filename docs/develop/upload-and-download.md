@@ -295,7 +295,7 @@ The Bee API exposes three HTTP endpoints:
 - **`/bytes`** — upload & download raw data
 - **`/chunks`** — upload & download individual chunks
 
-#### Upload with **/bzz**
+### Upload with **/bzz**
 
 While `bee-js` allows postage stamp batches to be purchased by specifying storage duration and data size, the raw Bee API requires `amount` and `depth` parameters directly. The relationship between these parameters and the storage size and duration of the batch is complex, so `bee-js` is strongly encouraged for newcomers. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
 

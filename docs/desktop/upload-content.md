@@ -1,7 +1,7 @@
 ---
 title: Upload Content
 id: upload-content
-description: Instructions for uploading files and directories to Swarm through the Desktop application interface.
+description: Upload files and directories to Swarm from the Swarm Desktop app and get a shareable Swarm reference.
 ---
 
 After [purchasing a batch of postage stamps](./postage-stamps.md) you will be able to upload files. First go to the “Files” tab. Here you can choose between three options, depending on what you want to upload: a single file, a folder or a website. After choosing your option you’ll need to add a postage stamp.

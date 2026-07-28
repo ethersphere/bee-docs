@@ -1,11 +1,9 @@
 ---
 title: FAQ
 id: faq
-description: Frequently asked questions about Swarm protocols and general usage.
+description: Answers to common questions about Swarm, the BZZ token, and community channels.
 ---
 
-
-# Swarm FAQ
 
 ## Community
 

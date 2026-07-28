@@ -1,7 +1,7 @@
 ---
 title: Backup and Restore 
 id: backup-restore
-description: Instructions for backing up and restoring wallet keys and data in the Swarm Desktop application.
+description: Back up and restore your Bee node's wallet keys and data in the Swarm Desktop app.
 ---
 
 ## Create a Backup

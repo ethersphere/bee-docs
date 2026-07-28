@@ -1,7 +1,7 @@
 ---
 title: Postage Stamps
 id: postage-stamps
-description: Guide for purchasing and managing postage stamp batches through the Swarm Desktop interface.
+description: Buy and manage postage stamp batches — the prepaid storage needed to upload — from the Swarm Desktop app.
 ---
 
 

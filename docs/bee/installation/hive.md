@@ -7,21 +7,21 @@ description: Describes tools and orchestration methods for managing multiple Bee
 Due to the mechanics of Swarm's [storage incentives](./../../concepts/incentives/redistribution-game.md), node operators may wish to run multiple nodes in order to maximize earning potential. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for more information on how the
 swarm comes together.
 
-### Docker
+## Docker
 
 Up-to-date [Docker images for Bee](./docker.md) are provided.
 
-### Docker Compose
+## Docker Compose
 
 Running multiple Bee nodes is easier with
 `docker-compose`. Check out the Docker compose section of the
 [Docker README](https://github.com/ethersphere/bee/tree/master/packaging/docker).
 
-### Helm
+## Helm
 
 If you plan to run a large number of Bee nodes and you have experience using Kubernetes with Helm, you can have a look at how we manage our cluster under [Ethersphere/helm](https://github.com/ethersphere/helm/tree/master/charts/bee).
 
-### Manual Setup
+## Manual Setup
 
 If you just want to run a handful of Bee nodes, you can run multiple Bee nodes by creating separate configuration files.
 
@@ -35,6 +35,6 @@ Make as many copies of bee-config-1.yaml as you want to run Bee nodes. Increment
 
 Configure your nodes as desired, but ensure that the values `api-addr`, `data-dir` and `p2p-addr` are unique for each configuration.
 
-### Monitoring
+## Monitoring
 
 See the [logging section](./../working-with-bee/logs-and-files.md) for more information on how to access your node's metrics. Share your community creations (such as [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/kHRyMNpw7t) channel of our Discord server so we can add you to our list of all things that are [awesome](https://github.com/ethersphere/awesome-swarm) and Swarm. 🧡

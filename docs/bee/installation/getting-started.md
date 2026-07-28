@@ -4,7 +4,11 @@ id: getting-started
 description: Introduces Bee node types their requirements and available installation methods to help users choose appropriate setup approaches.
 ---
 
-*If you want to get a Bee node up and running ASAP, check out the [Quick Start](./quick-start.md) guide.* 
+Running a Bee node means choosing a node type (full, light, or ultra-light), meeting the software, hardware, and network requirements, and picking an installation method. This guide covers each so you can choose the right setup.
+
+:::tip
+If you want to get a Bee node up and running ASAP, check out the [Quick Start](./quick-start.md) guide.
+:::
 
 ## Overview
 

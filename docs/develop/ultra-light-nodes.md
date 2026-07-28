@@ -8,11 +8,11 @@ description: Guide for running minimal ultra-light nodes with limited functional
 When running without a blockchain connection, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
 :::
 
-#### Configuration
+## Configuration
 
 To run Bee as an ultra-light node `full-node` and `swap-enable` must both be set to `false`, and the `blockchain-rpc-endpoint` value should be set to an empty string `""` or commented out in the [configuration](./../bee/working-with-bee/configuration.md).
 
-#### Mode of Operation
+## Mode of Operation
 
 The target audience for this mode of operations are users who want to try out running a node but don't
 want to go through the hassle of blockchain onboarding. Ultra-light nodes will be able to download data as long as the data consumed does not exceed the payment threshold (`payment-threshold` in [configuration](./../bee/working-with-bee/configuration.md)) set by peers they connect to.

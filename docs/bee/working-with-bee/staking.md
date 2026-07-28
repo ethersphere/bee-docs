@@ -4,6 +4,8 @@ id: staking
 description: Walkthrough of depositing xBZZ to participate in the storage incentives redistribution game and earn network rewards.
 ---
 
+Staking locks up xBZZ so your full node can join the **redistribution game** and earn a share of the network's storage-rent rewards. Staking requires a fully synced full node and a minimum of 10 xBZZ, and the stake is non-refundable.
+
 ## Quickstart Guide
 
 This guide will walk you through **staking xBZZ** and participating in the **redistribution game** to earn storage incentives. 
@@ -123,7 +125,7 @@ Only stake your xBZZ if you intend to participate as a full node, as withdrawals
 
 ### Requirements
 
-- A [full node](./node-types.md) - see full node [recommend specs](./node-types.md#recommended-specifications).  
+- A [full node](./node-types.md) - see full node [recommend specs](./node-types.md#full-node-specifications).  
 - A [high-performance RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
 - A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](./staking.md#reserve-doubling) is used).
 
@@ -404,7 +406,7 @@ Copy the binary number returned from the API:
 Use the binary number you just copied and set it as a string value for the `target-neighborhood` option in your config. 
 
 ```bash
-## bee.yaml
+# bee.yaml
 target-neighborhood: "01100011110"
 ```
 

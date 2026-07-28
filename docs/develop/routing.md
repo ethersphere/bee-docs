@@ -5,8 +5,6 @@ description: Explains message routing protocols and peer discovery mechanisms in
 ---
 
 
-# Routing on Swarm
-
 In the [Manage Files](/docs/develop/files) guide you saw that a directory upload creates a manifest — a data structure mapping paths to content. Routing on Swarm is a direct consequence: every URL your site serves must correspond to an entry in that manifest. This guide covers the two main strategies for giving your site clean, navigable URLs.
 
 Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](./tools-and-features/manifests.md).
@@ -47,7 +45,7 @@ Swarm has no server backend running code and so can’t rewrite paths. One appro
 You can do this easily using a template from **create-swarm-app** and then adding your own pages.
 
 
-#### 1. Create a New Vite + React Project (with `create-swarm-app`)
+### 1. Create a New Vite + React Project (with `create-swarm-app`)
 
 Run:
 
@@ -70,7 +68,7 @@ package.json
 You now have a fully working Vite/React app ready for Swarm uploads.
 
 
-#### 2. Install React Router
+### 2. Install React Router
 
 Navigate to the project directory:
 
@@ -88,7 +86,7 @@ This gives you client-side navigation capability.
 
 
 
-#### 3. Switch the App to Use Hash-Based Routing
+### 3. Switch the App to Use Hash-Based Routing
 
 Swarm only serves literal files, so `/#/about` is the only reliable way to have “pages.”
 
@@ -126,7 +124,7 @@ This gives you usable routes:
 /#/anything → React 404 page
 ```
 
-#### 4. Add Your Page Components
+### 4. Add Your Page Components
 
 Create your page components inside `./src`:
 
@@ -169,7 +167,7 @@ export function NotFound() {
 }
 ```
 
-#### 5. Add a Static `404.html` for Non-Hash URLs
+### 5. Add a Static `404.html` for Non-Hash URLs
 
 Swarm still needs a fallback for URLs like:
 
@@ -209,7 +207,7 @@ Vite will automatically include this in `dist/`.
 This file handles **non-hash** missing paths.
 React handles **hash** missing paths.
 
-#### 6. Build the Project
+### 6. Build the Project
 
 Before uploading, compile the Vite app into a static bundle:
 
@@ -228,7 +226,7 @@ dist/
 
 Everything inside `dist/` will be uploaded to your Swarm feed.
 
-#### 7. Deploy Site
+### 7. Deploy Site
 
 The project includes an `upload.js` script that uploads `./dist` to Swarm and publishes the result to a feed (so your URL stays stable across re-uploads). Set up your `.env` and run it:
 

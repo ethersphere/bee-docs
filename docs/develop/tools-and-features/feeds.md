@@ -20,11 +20,11 @@ share your implementations in other languages in the
 [Discord Server](https://discord.gg/kHRyMNpw7t).
 :::
 
-### What are Feeds?
+## What are Feeds?
 
 A feed is a collection of Single Owner Chunks with predicatable addresses. This enables creators to upload pointers to data so that consumers of the feed are able to find the data in Swarm using only an _Ethereum address_ and _Topic ID_.
 
-### Creating and Updating a Feed
+## Creating and Updating a Feed
 
 In order to edit a feed, you will need to sign your chunks using an
 Ethereum keypair. For the intrepid, check out the [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) on precise details on how to do
@@ -33,10 +33,10 @@ and [swarm-cli](./../../bee/working-with-bee/swarm-cli.md) provide facilities
 to achieve this using JavaScript and a node-js powered command line
 tool respectively.
 
-### No More ENS Transaction Charges
+## No More ENS Transaction Charges
 
 Swarm's feeds provide the ability to update your immutable content in a mutable world. Simply reference your feed's `manifest address` as the `content hash` in your ENS domain's resolver, and Bee will automatically provide the latest version of your website.
 
-### Use Cases for Feeds
+## Use Cases for Feeds
 
 Feeds are a hugely versatile data structure. They allow you to host frequently updated content such as websites, RSS feeds (for podcasts, news, etc.), or even a DNS style architecture on top of Swarm's decentralized DISC. 

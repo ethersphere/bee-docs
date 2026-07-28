@@ -26,6 +26,52 @@ export default {
         type: 'application/openapi+yaml',
       },
     },
+    // Machine-readable pointer to the hand-curated llms.txt index (no standard rel yet;
+    // rel="alternate" + text/plain is the least-surprising choice for AI-agent discovery).
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'alternate',
+        type: 'text/plain',
+        title: 'llms.txt',
+        href: '/llms.txt',
+      },
+    },
+    // Site-wide structured data: Organization + WebSite. The @id values below are a shared
+    // contract with the per-doc TechArticle in src/theme/DocItem/Layout — keep them identical.
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Organization',
+            '@id': 'https://docs.ethswarm.org/#organization',
+            name: 'Swarm Foundation',
+            url: 'https://www.ethswarm.org',
+            logo: 'https://docs.ethswarm.org/img/logo-512.png',
+            sameAs: [
+              'https://twitter.com/ethswarm',
+              'https://github.com/ethersphere',
+              'https://www.reddit.com/r/ethswarm',
+            ],
+          },
+          {
+            '@type': 'WebSite',
+            '@id': 'https://docs.ethswarm.org/#website',
+            name: 'Swarm Documentation',
+            url: 'https://docs.ethswarm.org',
+            publisher: { '@id': 'https://docs.ethswarm.org/#organization' },
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: 'https://docs.ethswarm.org/search?q={search_term_string}',
+              'query-input': 'required name=search_term_string',
+            },
+          },
+        ],
+      }),
+    },
   ],
 
   stylesheets: [
