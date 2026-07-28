@@ -39,6 +39,13 @@ Content-addressed chunks are chunks whose address is based on the hash digest of
 
 For single-owner chunks on the other hand, the address is calculated as the hash of a unique id and the owner's overlay address. The content consists of an arbitrary data payload along with required headers. Unlike a content-addressed chunk, the contents of a single-owner chunk may be updated while the address remains unchanged. Single owner chunks form the basis for feeds, which are data structures that allow for mutable content with a static address.
 
+| | Content-addressed chunk (CAC) | Single-owner chunk (SOC) |
+|---|---|---|
+| Address derived from | BMT hash of the payload (plus span) | Hash of a unique id + the owner's address |
+| Content mutable? | No — the address changes if the content changes | Yes — the address stays fixed while content updates |
+| Max payload | 4 KB | 4 KB (payload plus required headers) |
+| Basis for | Content integrity / file data | Feeds (mutable content at a static address) |
+
 ## Push-Sync, Pull-Sync, and Retrieval Protocols
 
 When a file is first uploaded to Swarm, it gets broken down by the uploading Bee node chunks which are then distributed amongst other Bee nodes in the Swarm network. Chunks get distributed to the target neighborhood by the ***push-sync*** protocol. Once a chunk reaches its destination, it will then be duplicated and synced to other nodes in order to achieve data redundancy through the ***pull-sync*** protocol. The pull-sync protocol operates continuously as nodes enter or exit the network – ensuring that data redundancy is always maintained. When a client node requests a file for download, its request gets forwarded by the ***retrieval-protocol*** to all the nodes storing the relevant chunks, and then those chunks get returned to the requesting node and the file gets reconstructed from its constituent chunks.
