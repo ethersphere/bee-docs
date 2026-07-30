@@ -129,8 +129,8 @@ Therefore rather than speaking of the number of slots as determining the utilisa
 
 | | Immutable batch | Mutable batch |
 |---|---|---|
-| Content guarantee | Uploaded data can never be overwritten — it is permanent for the batch's lifetime | Older data may be overwritten once capacity is reached |
-| When capacity is full | Becomes unusable | Keeps accepting uploads; overwrites the oldest chunks |
+| Data retention | Uploaded data won't be overwritten by later uploads to the same batch | Older data may be overwritten once capacity is reached |
+| When capacity is full | Additional uploads are not accepted | Keeps accepting uploads; overwrites the oldest chunks |
 | Default? | Yes (`immutable` unset) | No (set the `immutable` header to `false`) |
 | Best for | Long-term or never-overwritten data (archives, legal documents, photos) | Frequently updated data (blogs, websites, messaging) |
 
