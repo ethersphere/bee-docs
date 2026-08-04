@@ -7,9 +7,10 @@ on:
 
 jobs:
   deploy:
-    # Self-hosted: the upload targets an internal bee node that is not
-    # reachable from GitHub-hosted runners.
-    runs-on: [self-hosted, Linux, bee]
+    # GitHub-hosted is sufficient: the bee endpoint is publicly reachable and
+    # gated by PRIVATE_API_TOKEN, so this does not need the self-hosted runners
+    # (and a public repo should not be granted access to them).
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
         with:
@@ -18,10 +19,10 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
-          # setup-node >=6.5.0 probes `npm --version` to auto-detect the package
-          # manager. That probe hangs indefinitely on the self-hosted runners.
-          # package.json declares no packageManager/devEngines field, so no
-          # dependency caching is lost by disabling it.
+          # No-op for caching here (package.json declares no packageManager /
+          # devEngines field), but it also skips setup-node's `npm --version`
+          # probe, which is known to hang on the self-hosted runners if this
+          # job is ever moved there.
           package-manager-cache: false
 
       - name: Build
