@@ -1,0 +1,66 @@
+name: Swarm Upload
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  deploy:
+    # Self-hosted: the upload targets an internal bee node that is not
+    # reachable from GitHub-hosted runners.
+    runs-on: [self-hosted, Linux, bee]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          # setup-node >=6.5.0 probes `npm --version` to auto-detect the package
+          # manager. That probe hangs indefinitely on the self-hosted runners.
+          # package.json declares no packageManager/devEngines field, so no
+          # dependency caching is lost by disabling it.
+          package-manager-cache: false
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload to Swarm
+        uses: ethersphere/swarm-actions/upload-dir@latest
+        id: upload
+        with:
+          dir: ./build
+          index-document: index.html
+          postage-batch-id: ${{ secrets.PRIVATE_POSTAGE_BATCH_ID }}
+          bee-url: ${{ secrets.PRIVATE_BEE_URL }}
+          timeout: 300000
+          deferred: false
+          headers: |
+            authorization: ${{ secrets.PRIVATE_API_TOKEN }}
+
+      - name: Setup feed
+        uses: ethersphere/swarm-actions/write-feed@latest
+        id: feed
+        with:
+          reference: ${{ steps.upload.outputs.reference }}
+          topic: "swarm-docs"
+          postage-batch-id: ${{ secrets.PRIVATE_POSTAGE_BATCH_ID }}
+          bee-url: ${{ secrets.PRIVATE_BEE_URL }}
+          signer: ${{ secrets.PRIVATE_SIGNER }}
+          headers: |
+            authorization: ${{ secrets.PRIVATE_API_TOKEN }}
+
+      - uses: ethersphere/swarm-actions/reference-to-cid@v0
+        id: cid
+        with:
+          reference: ${{ steps.feed.outputs.manifest }}
+
+      - run: |
+          echo 'Chunk Reference: ${{ steps.upload.outputs.reference }}'
+          echo 'Feed Reference: ${{ steps.feed.outputs.reference }}'
+          echo 'Feed Manifest: ${{ steps.feed.outputs.manifest }}'
+          echo 'Feed Bzz.link: https://${{ steps.cid.outputs.cid }}.bzz.link'
