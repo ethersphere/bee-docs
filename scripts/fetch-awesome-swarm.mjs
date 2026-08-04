@@ -5,12 +5,12 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 
 const SOURCE_URL =
-  'https://raw.githubusercontent.com/ethersphere/awesome-swarm/refs/heads/master/README.md';
+  'https://raw.githubusercontent.com/ethersphere/awesome-swarm/refs/heads/main/README.md';
 
 const OUT_PATH = resolve(process.cwd(), 'docs/references/awesome-list.mdx');
 
-const REPO_HTTP_BASE = 'https://github.com/ethersphere/awesome-swarm/blob/master/';
-const RAW_HTTP_BASE  = 'https://raw.githubusercontent.com/ethersphere/awesome-swarm/master/';
+const REPO_HTTP_BASE = 'https://github.com/ethersphere/awesome-swarm/blob/main/';
+const RAW_HTTP_BASE  = 'https://raw.githubusercontent.com/ethersphere/awesome-swarm/main/';
 
 function normalizeNewlines(str) {
   return str.replace(/\r\n/g, '\n');
