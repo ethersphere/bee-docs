@@ -7,10 +7,11 @@ on:
 
 jobs:
   deploy:
-    # GitHub-hosted is sufficient: the bee endpoint is publicly reachable and
-    # gated by PRIVATE_API_TOKEN, so this does not need the self-hosted runners
-    # (and a public repo should not be granted access to them).
-    runs-on: ubuntu-latest
+    # Must be self-hosted: the bee gateway ingress enforces a source-IP
+    # allowlist (nginx server-snippet), and the self-hosted runners are on it.
+    # GitHub-hosted runners have dynamic IPs and get HTTP 403 from the upload,
+    # even with a valid PRIVATE_API_TOKEN.
+    runs-on: [self-hosted, Linux, bee]
     steps:
       - uses: actions/checkout@v6
         with:
