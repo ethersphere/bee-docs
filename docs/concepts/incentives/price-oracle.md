@@ -6,9 +6,24 @@ description: Describes smart contract mechanism for dynamically adjusting postag
 
 ## How does the price oracle set stamp prices? {#stamp-prices}
 
+The price oracle targets a fourfold (4×) data-redundancy level as a safe minimum, and moves the stamp price to hold it there: when redundancy falls below 4 it raises the price, and when redundancy rises above 4 it lowers it — a negative-feedback loop that pulls redundancy back toward 4.
+
 The job of the [oracle contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PriceOracle.sol) is to set the price of postage stamps. The oracle contract uses data from the [redistribution contract](https://github.com/ethersphere/storage-incentives/blob/master/src/Redistribution.sol) in order to set the appropriate price for postage stamps through the [postage stamp contract](https://github.com/ethersphere/storage-incentives/blob/master/src/PostageStamp.sol). The data from the redistribution contract is used to calculate a "utilisation signal". This signal is an indicator of how much the Swarm network’s data storage capacity is being utilized. Specifically, the signal is a measure of data redundancy on the network. Redundancy is a measure of how many copies of each piece of data can be stored by the network. The protocol targets a fourfold level of data redundancy as a safe minimum. 
 
 ## How does the price adjust to network demand? {#network-demand}
+
+The oracle runs a negative-feedback loop that keeps redundancy near the 4× target:
+
+```mermaid
+flowchart TD
+    T([Target: 4x data redundancy])
+    T -- redundancy falls below 4 --> U[Oracle raises the stamp price]
+    U --> V[Fewer stamps bought]
+    V -- redundancy rises --> T
+    T -- redundancy rises above 4 --> X[Oracle lowers the stamp price]
+    X --> Y[More stamps bought]
+    Y -- redundancy falls --> T
+```
 
 For example, if there is an increase in postage stamps being purchased while the number of nodes remains constant, the data redundancy level will begin to fall as data storers’ available space begins to become reserved. If too many postage stamps are purchased without an equivalent increase in storage providers, the redundancy level may fall below four. In this case, the oracle will increase the price of postage stamps so that it becomes more expensive to store data on Swarm. The higher cost of storage will then lead to less postage stamps being purchased, and will push the redundancy level back up towards four. 
 

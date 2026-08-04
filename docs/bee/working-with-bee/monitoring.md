@@ -8,11 +8,11 @@ Bee nodes expose runtime metrics in Prometheus format, which you can collect and
 
 Navigate to `http://localhost:1633/metrics`.
 
-This is the current state of Bee's metrics as they stand at this moment.
+The /metrics page shows a snapshot of your Bee node's metrics at the moment you load it.
 
-In order to use these metrics and view, we need to keep a record of these metrics over time.
+To make these raw metrics useful, you need to record them over time.
 
-To do this we will use [Prometheus](https://prometheus.io/docs/introduction/overview/). Simply install, configure as follows, and restart!
+To record Bee's metrics over time, we will use [Prometheus](https://prometheus.io/docs/introduction/overview/). Simply install, configure as follows, and restart!
 
 For Ubuntu and other Debian based Linux distributions install using `apt`:
 

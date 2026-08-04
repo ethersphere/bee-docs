@@ -127,6 +127,13 @@ Therefore rather than speaking of the number of slots as determining the utilisa
 
 ### Which Type of Batch to Use
 
+| | Immutable batch | Mutable batch |
+|---|---|---|
+| Data retention | Uploaded data won't be overwritten by later uploads to the same batch | Older data may be overwritten once capacity is reached |
+| When capacity is full | Additional uploads are not accepted | Keeps accepting uploads; overwrites the oldest chunks |
+| Default? | Yes (`immutable` unset) | No (set the `immutable` header to `false`) |
+| Best for | Long-term or never-overwritten data (archives, legal documents, photos) | Frequently updated data (blogs, websites, messaging) |
+
 Immutable batches are suitable for long term storage of data or for data which otherwise does not need to be changed and should never be overwritten, such as records archival, legal documents, family photos, etc. 
 
 Mutable batches are great for data which needs to be frequently updated and does not require a guarantee of immutability. For example, a blog, personal or company websites, ephemeral messaging app, etc.
@@ -177,7 +184,7 @@ The implications of this behaviour are that even a small change to the data of a
 
 ### Implications for Swarm Users
 
-Due to the nature of batch utilisation described above, batches are often fully utilised before reaching their theoretical maximum storage amount. However as the batch depth increases, the chance of a postage batch becoming fully utilised early decreases. At batch depth 24 (unencrypted, no erasure coding), there is a 0.1% chance that a batch will be fully utilised/start replacing old chunks before reaching 68.48% of its theoretical maximum.
+Because of how buckets fill during batch utilisation, batches are often fully utilised before reaching their theoretical maximum storage amount. However as the batch depth increases, the chance of a postage batch becoming fully utilised early decreases. At batch depth 24 (unencrypted, no erasure coding), there is a 0.1% chance that a batch will be fully utilised/start replacing old chunks before reaching 68.48% of its theoretical maximum.
 
 Let's look at an example to make it clearer. Using the method of calculating the theoretical maximum storage amount [outlined above](./postage-stamps.md#batch-depth), we can see that for a batch depth of 24, the theoretical maximum amount which can be stored is 68.72 gb:
 

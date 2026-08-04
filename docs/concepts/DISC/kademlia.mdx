@@ -34,7 +34,7 @@ Kademlia's design allows it to scale to large networks, as each node only needs 
 
 ## Kademlia in Swarm 
 
-As mentioned above, Swarm's version of Kademlia differs from commonly used implementations of Kademlia in several important ways:
+Swarm's version of Kademlia differs from commonly used implementations of Kademlia in several important ways:
 
 ### Proximity Order & Neighborhoods
 
@@ -51,6 +51,12 @@ Kademlia comes in two flavors, iterative and forwarding. In iterative Kademlia, 
 In contrast, Swarm makes use of forwarding Kademlia. Here each node forwards the query to the next closest node in the network, and this process continues until a node with the requested chunk is found. Once the chunk is found, it is sent back along the same chain of nodes rather than sent directly to the initiator of the request.
 
 The main advantage of forwarding Kademlia is that it maintains the anonymity of the node which initiated the request.
+
+| | Iterative Kademlia | Forwarding Kademlia (Swarm) |
+|---|---|---|
+| Who queries the next node | The requesting node, directly | Each intermediate node forwards the query |
+| Chunk return path | Sent directly from storer to requester | Relayed back along the same chain of nodes |
+| Requester anonymity | No | Yes |
 
 <div style={{ textAlign: 'center' }}>
   <img src={bos_fig_2_3} className="responsive-image" />

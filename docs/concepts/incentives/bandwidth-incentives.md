@@ -6,6 +6,13 @@ description: Explains SWAP protocol for managing bandwidth resource exchange bet
 
 The Swarm Accounting Protocol (SWAP) is a protocol used to manage the exchange of bandwidth resources between nodes. SWAP ensures that node operators collaborate in routing messages and data while protecting the network against frivolous use of bandwidth. The protocol combines off-chain peer-to-peer based accounting with on-chain settlement through the chequebook contract.
 
+:::info[Key facts]
+- **What it is**: SWAP (Swarm Accounting Protocol) manages the exchange of bandwidth between nodes.
+- **Accounting**: each pair of peers tracks their relative bandwidth usage off-chain.
+- **Settlement**: when one node's debt crosses a threshold, it either issues an xBZZ "cheque" (settled on-chain via the chequebook contract) or keeps serving bandwidth in kind until the debt is paid off.
+- **Thresholds & freeloaders**: each node sets its own debt threshold; nodes that do not pay risk being blacklisted.
+:::
+
 As nodes relay requests and responses, they keep track of their bandwidth usage with each of their peers. Peers engage in a service-for-service exchange, where they provide resources to each other based on their relative usage. 
 
 Once a node's relative debt with one of their peers crosses a certain threshold, the party in debt can either send a xBZZ payment in the form of a "cheque" (an off chain commitment to pay their debt), or can continue to provide bandwidth services in kind until their debt is paid off. Each node can set their own threshold for the level of relative debt they accept. Freeloader nodes which do not pay their debts are at risk of being blacklisted by other nodes. 

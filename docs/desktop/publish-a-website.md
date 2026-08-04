@@ -106,7 +106,7 @@ If you plan to update your website in the future, it’s recommended that you se
   6. Select your website folder. NOTE: The index.html file should be in the root folder.
   7. Add Postage Stamp to publish your page. NOTE: Postage stamps cover storage costs for a specified duration.
   8. Upload the website to your Node.
-  9. Connect Feed hash to ENS domain as described above.
+  9. Connect the Feed hash to your ENS domain using the ENS steps shown earlier.
 
 ![](/img/upload-a-website4.gif)
 
