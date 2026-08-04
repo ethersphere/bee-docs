@@ -30,6 +30,30 @@ function rewriteRelativeLinks(md) {
   return md;
 }
 
+// MDX (Docusaurus) requires void HTML elements to be self-closed. The upstream
+// README embeds a raw <img> inside an <a>; left as-is the build fails with
+// "end-tag-mismatch".
+function selfCloseVoidTags(md) {
+  return md.replace(
+    /<(img|br|hr|input|meta|source)\b([^>]*?)\s*\/?>/gi,
+    (_m, tag, attrs) => `<${tag}${attrs.replace(/\s+$/, '')} />`
+  );
+}
+
+// Relative paths inside raw HTML attributes are not covered by the markdown
+// link rewriting above, so they would 404 once rendered on the docs site.
+function rewriteHtmlAssetPaths(md) {
+  md = md.replace(
+    /(<[^>]*\ssrc=")(?!https?:|data:|#|\/)([^"]+)(")/gi,
+    (_m, pre, path, post) => `${pre}${RAW_HTTP_BASE}${path}${post}`
+  );
+  md = md.replace(
+    /(<[^>]*\shref=")(?!https?:|mailto:|#|\/)([^"]+)(")/gi,
+    (_m, pre, path, post) => `${pre}${REPO_HTTP_BASE}${path}${post}`
+  );
+  return md;
+}
+
 async function main() {
   const res = await fetch(SOURCE_URL);
   if (!res.ok) throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
@@ -39,7 +63,7 @@ async function main() {
   // Optional: strip upstream H1 to avoid a second big title under our frontmatter title
   md = md.replace(/^# .*\n+/, '');
 
-  md = rewriteRelativeLinks(md);
+  md = selfCloseVoidTags(rewriteHtmlAssetPaths(rewriteRelativeLinks(md)));
 
   const header = `---
 title: Awesome Swarm
