@@ -5,6 +5,7 @@ description: Overview of Swarm's Distributed Immutable Store for Chunks system u
 ---
 
 import bos_fig_2_7 from '/static/img/bos_fig_2_7.jpg';
+import bos_fig_2_10 from '/static/img/bos_fig_2_10.jpg';
 
 
 DISC (Distributed Immutable Store for Chunks) is a storage solution developed by Swarm based on a modified implementation of a [Kademlia DHT](./kademlia.mdx) which has been specialized for data storage. Swarm's implementation of a DHT differs significantly in that it stores the content in the DHT directly, rather than just storing a list of seeders who are able to serve the content. This approach allows for much faster and more efficient retrieval of data.
@@ -23,11 +24,20 @@ Neighborhoods play a key role in providing data redundancy for chunks stored on 
 
 ## Chunks
 
-In the DISC model, chunks are the canonical unit of data. When a file is uploaded to Swarm, it gets broken down into 4kb pieces with attached metadata. The pieces then get distributed amongst nodes in the Swarm network based on their [overlay addresses](./../../references/glossary.md#overlay). There are two fundamental chunk types: content-addressed chunks and single-owner chunks. 
+In the DISC model, **chunks** are the basic storage unit of the network layer. 
+When a file is uploaded to Swarm, it gets broken down into chunks - pieces of at most 4KB, each with a small metadata header. 
+Every chunk gets its own address, and each chunk is stored by the nodes whose [overlay addresses](./../../references/glossary.md#overlay) are closest to that chunk address. 
+Chunk addressing is *deterministic, collision-free, and uniformly distributed,* which is what gives Swarm local validity, integrity guarantee, and load balancing across nodes. 
+There are two fundamental chunk types: content-addressed chunks and single-owner chunks. 
 
 ### Content-Addressed Chunks and Single-Owner Chunks
 
-Content-addressed chunks are chunks whose address is based on the hash digest of their data. Using a hash as the chunk address makes it possible to verify the integrity of chunk data. Swarm uses the BMT hash function based on a binary Merkle tree over small segments of the chunk data. A content-addressed chunk has an at most 4KB payload, and its address is calculated as the hash of the span (chunk metadata) and the Binary Merkle Tree hash of the payload.
+Content-addressed chunks are chunks whose address is based on the hash digest of their data. 
+Using a hash as the chunk address makes it possible to verify the integrity of chunk data. 
+Swarm uses the BMT hash function, a binary Merkle tree (BMT) built with Keccak256 over the 32-byte segments of the chunk data; payloads shorter than 4KB are hashed as if zero-padded up to 4KB. 
+A content-addressed chunk has an at most 4KB payload, and its address is calculated as the hash of the 8-byte span and the BMT root of the payload. 
+Because the address is derived from the content, a content-addressed chunk cannot be changed in place. 
+Different content yields a different address.
 
 <div style={{ textAlign: 'center' }}>
   <img src={bos_fig_2_7} className="responsive-image" />
@@ -37,14 +47,29 @@ Content-addressed chunks are chunks whose address is based on the hash digest of
 </div>
 
 
-For single-owner chunks on the other hand, the address is calculated as the hash of a unique id and the owner's overlay address. The content consists of an arbitrary data payload along with required headers. Unlike a content-addressed chunk, the contents of a single-owner chunk may be updated while the address remains unchanged. Single owner chunks form the basis for feeds, which are data structures that allow for mutable content with a static address.
+For single-owner chunks on the other hand, the address is calculated as the hash of an identifier and an owner's Ethereum address. 
+The content consists of an arbitrary data payload along with required headers: a 32-byte identifier, a 65-byte signature, and the same 8-byte span used by content-addressed chunks. 
+The signature signs off on the identifier and the BMT hash of the span and payload, so integrity comes from the owner's signature rather than from the content itself.
+Validating a single-owner chunk means recovering the owner's address from the signature and checking the hash of the identifier and that address against the chunk address, which is in effect, an authentication that the owner has write access to that address. 
+
+<div style={{ textAlign: 'center' }}>
+  <img src={bos_fig_2_10} className="responsive-image" />
+  <p style={{ fontStyle: 'italic', marginTop: '0.5rem' }}>
+    Source: <a href="https://www.ethswarm.org/the-book-of-swarm-2.pdf#subsection.2.2.3" target="_blank">The Book of Swarm - Figure 2.10 - "Single owner chunk"</a>
+  </p>
+</div>
+
+Single-owner chunks form the basis for feeds. 
+A feed chunk is a single-owner chunk whose identifier is the hash of a feed topic and an index, so each update is published as a new chunk at a new, deterministically derivable address. 
+A reader can therefore find the latest update from the owner's address and the topic alone, even though no individual chunk is ever overwritten, meaning the chunk store itself remains immutable.
 
 | | Content-addressed chunk (CAC) | Single-owner chunk (SOC) |
 |---|---|---|
-| Address derived from | BMT hash of the payload (plus span) | Hash of a unique id + the owner's address |
-| Content mutable? | No — the address changes if the content changes | Yes — the address stays fixed while content updates |
-| Max payload | 4 KB | 4 KB (payload plus required headers) |
-| Basis for | Content integrity / file data | Feeds (mutable content at a static address) |
+| Address derived from | Hash of the 8-byte span and the BMT root of the payload | Hash of the 32-byte identifier and the owner's Ethereum address |
+| Integrity attested by | The content itself — the address is the hash of the content | The owner's signature over the identifier and the BMT hash of span and payload |
+| Chunk mutable? | No — different content yields a different address | No — signing a second payload for the same identifier makes network behaviour unpredictable; mutability is achieved at the feed layer |
+| Max payload | 4 KB + 8-byte span header | 4 KB + 105 bytes of headers (identifier, signature, span) |
+| Basis for | File and manifest data | Feeds (a mutable resource resolved from owner address + topic) |
 
 ## Push-Sync, Pull-Sync, and Retrieval Protocols
 
