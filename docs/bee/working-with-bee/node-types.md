@@ -45,10 +45,17 @@ If you intend to participate in the redistribution game to earn storage incentiv
 
 Requires significant storage and processing power compared to other node types:
 
-- **Processor**: Recent 2 GHz dual-core.
-- **RAM**: 8 GB.
-- **Storage**: 30 GB SSD (HDD not recommended).
+- **Processor**: Recent 2 GHz dual-core (2+ cores).
+- **RAM**: 500 MB.
+- **Storage**: 20~30 GB SSD, ideally NVMe (HDD not recommended).
 - **Internet**: High-speed and stable connection.
+
+A full node must also be connected to Gnosis Chain and hold enough funds to cover its on-chain operations:
+
+- **RPC endpoint**: A connection to Gnosis Chain (see [setting the blockchain RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint)).
+- **xDAI**: Minimum 0.1 xDAI for Gnosis Chain gas fees.
+- **xBZZ**: 1 xBZZ for the initial chequebook deployment.
+- **(optional) xBZZ for staking**: 10 xBZZ, required only to participate in [storage incentives](./staking.md).
 
 ### Full node configuration
 
@@ -146,4 +153,3 @@ Bee will start in ultra-light mode by default, but in order to explicitly config
 - Cannot earn xBZZ by staking xBZZ and participating in the storage incentive system.
 - Cannot earn xBZZ by participating in the bandwidth incentives system.
 - Cannot use PSS or GSOC for sending or receiving.
-
