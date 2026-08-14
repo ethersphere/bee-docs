@@ -475,15 +475,12 @@ If your node is not operating in the correct mode, this can help you to diagnose
 
 ### _/rchash_
 
-Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash,
-which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game),
-and will report the amount of time it took to generate the hash. This is useful for
-getting a performance benchmark to ensure that your node's hardware is sufficient.
+Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. 
+This is useful for getting a performance benchmark to ensure that your node's processor is fast enough.
 
 The `/rchash` endpoint has 3 parameters: `depth`, `anchor1`, and `anchor2`.
-For both anchor parameters, use the first 4 hex digits from your node's overlay
-address (which you can find from the `/addresses` endpoint). For depth, use the
-current storage depth of your node from the `/status` endpoint (`storageRadius` value):
+For both anchor parameters, use the first 4 hex digits from your node's overlay address (which you can find from the `/addresses` endpoint). 
+For depth, use the current storage depth of your node from the `/status` endpoint (`storageRadius` value):
 
 ```text
 /rchash/{depth}/{anchor1}/{anchor2}

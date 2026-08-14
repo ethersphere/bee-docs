@@ -23,8 +23,8 @@ See the [getting started section](./installation/getting-started.md#requirements
 
 #### Full node
 
-Light and ultra-light nodes run on practically any modern computer, while full nodes have specific hardware and funding requirements.
-See [full node specifications](./working-with-bee/node-types.md#full-node-specifications) for the current list.
+All three node types run on ordinary consumer hardware.
+Full nodes use more disk space and bandwidth than the lighter modes and additionally need a Gnosis Chain connection and funds — see [full node specifications](./working-with-bee/node-types.md#full-node-specifications) for the current list.
 
 ### How much bandwidth is required for each node?
 

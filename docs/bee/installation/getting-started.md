@@ -65,16 +65,21 @@ While not strictly required, these tools will *greatly* simplify your experience
 
 ### Hardware Requirements
 
+All three node types run on ordinary consumer hardware.
+None of them requires a powerful machine.
+
 #### Light and Ultra-Light
 
-Light and ultra-light nodes can be run with practically any commercially available modern computer hardware and internet provider, and have very minimal CPU, RAM and network requirements. 
+Light and ultra-light nodes have very minimal CPU, RAM, disk and network requirements, and run on practically any commercially available computer hardware and internet connection.
 
 #### Full Node
 
-Full nodes require significant storage and processing power, a Gnosis Chain RPC endpoint, and enough xDAI and xBZZ to cover gas fees and chequebook deployment.
+Full nodes have modest CPU and RAM requirements too, but they use more disk space and require a more sustained bandwidth than the lighter modes. 
+They also need a Gnosis Chain RPC endpoint and some xDAI and xBZZ to cover gas fees and chequebook deployment.
 See [full node specifications](./../working-with-bee/node-types.md#full-node-specifications) on the Node Types page for the complete list of hardware and funding requirements.
 
-For staking and storage incentives, test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash).
+Staking and receiving storage incentives may require more CPU power. 
+Test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash) before deciding to participate in the redistribution game.
 
 ### Network Requirements
 
