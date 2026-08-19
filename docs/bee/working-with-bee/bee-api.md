@@ -3,6 +3,8 @@ title: Bee API
 id: bee-api
 description: Comprehensive reference for Bee's HTTP API endpoints enabling programmatic access to node management uploads downloads and monitoring.
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 The Bee HTTP API is the primary interface to a running Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
 
@@ -478,9 +480,38 @@ If your node is not operating in the correct mode, this can help you to diagnose
 Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. 
 This is useful for getting a performance benchmark to ensure that your node's processor and disk are fast enough.
 
+<Tabs
+defaultValue="swarm-cli"
+values={[
+{label: 'Swarm CLI', value: 'swarm-cli'},
+{label: 'API', value: 'api'},
+]}>
+<TabItem value="swarm-cli">
+
+The [`swarm-cli`](./swarm-cli.md) command doesn't require arguments.
+It reads the node's overlay address and committed depth, and derives the anchor and depth parameters from them.
+
+```bash
+swarm-cli utility rchash
+```
+
+Pass `--depth` to benchmark against a depth other than the node's current one.
+
+The command gives as a result the time it took to generate the reserve commitment hash. 
+
+```bash
+$ swarm-cli utility rchash
+Reserve sampling duration: 360.37808911 seconds
+```
+
+</TabItem>
+
+<TabItem value="api">
+
 The `/rchash` endpoint has 3 parameters: `depth`, `anchor1`, and `anchor2`.
 For both anchor parameters, use the first 4 hex digits from your node's overlay address (which you can find from the `/addresses` endpoint). 
-For depth, use the current storage depth of your node from the `/status` endpoint (`storageRadius` value):
+For depth, use your node's `committedDepth` from the `/status` endpoint. 
+For nodes which do not use [reserve doubling](./staking.md#reserve-doubling), `committedDepth` is equal to `storageRadius`:
 
 ```text
 /rchash/{depth}/{anchor1}/{anchor2}
@@ -513,6 +544,10 @@ successful result:
   "durationSeconds": 287.52
 }
 ```
+
+</TabItem>
+</Tabs>
+
 
 The `durationSeconds` value should not exceed roughly 6 minutes (360 seconds).
 
