@@ -500,7 +500,6 @@ Pass `--depth` to benchmark against a depth other than the node's current one.
 The command gives as a result the time it took to generate the reserve commitment hash. 
 
 ```bash
-$ swarm-cli utility rchash
 Reserve sampling duration: 360.37808911 seconds
 ```
 
@@ -550,6 +549,13 @@ successful result:
 
 
 The `durationSeconds` value should not exceed roughly 6 minutes (360 seconds).
+
+:::caution A single measurement is not a guarantee
+Sampling time scales with how full the node's reserve is within its radius, since the sampler walks every chunk in radius. 
+Reserve occupancy depends on network conditions rather than on anything the operator sets, so a result measured against a half-full reserve says little about the same node once the reserve fills up. 
+A node holding around 2M chunks can complete a sample in roughly half the time of one at the full default reserve capacity of about 4M chunks. 
+Aim for a comfortable margin below 360 seconds; a marginal pass is not enough.
+:::
 
 :::warning Slow results
 If `durationSeconds` is much longer than 360 seconds (for example, 1191 seconds / ~20 minutes), the node will likely fail to submit proofs in time during the redistribution game, resulting in missed rewards or freezing. 
