@@ -63,7 +63,6 @@ A full node must also be connected to Gnosis Chain and hold enough funds to cove
 
 - **RPC endpoint**: A connection to Gnosis Chain (see [setting the blockchain RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint)).
 - **xDAI**: Minimum 0.1 xDAI for Gnosis Chain gas fees.
-- **xBZZ**: 1 xBZZ for the initial chequebook deployment.
 - **(optional) xBZZ for staking**: 10 xBZZ, required only to participate in [storage incentives](./staking.md).
 
 ### Full node configuration

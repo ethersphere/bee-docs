@@ -75,7 +75,7 @@ Light and ultra-light nodes have very minimal CPU, RAM, disk and network require
 #### Full Node
 
 Full nodes have modest CPU and RAM requirements too, but they use more disk space and require a more sustained bandwidth than the lighter modes. 
-They also need a Gnosis Chain RPC endpoint and some xDAI and xBZZ to cover gas fees and chequebook deployment.
+They also need a Gnosis Chain RPC endpoint and some xDAI to cover gas fees, including the chequebook deployment transaction.
 See [full node specifications](./../working-with-bee/node-types.md#full-node-specifications) on the Node Types page for the complete list of hardware and funding requirements.
 
 Staking and receiving storage incentives may require more CPU power. 
