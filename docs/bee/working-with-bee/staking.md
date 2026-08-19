@@ -851,7 +851,7 @@ Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` befor
 
 One of the most common issues affecting staking is the `sampler` process failing. 
 The sampler is a CPU-intensive process which is run by nodes which are selected to take part in redistribution. 
-It does not need much memory, but on a slow processor it may fail or time out; 4 cores are sufficient. 
+It does not need much memory, but on a slow processor or a slow disk it may fail or time out; 4 cores are sufficient. 
 To check a node's performance the `/rchash` endpoint of the API may be used. 
 See the `/rchash` section of the [Bee API page for usage details](./bee-api.md). 
 

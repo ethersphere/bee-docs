@@ -476,7 +476,7 @@ If your node is not operating in the correct mode, this can help you to diagnose
 ### _/rchash_
 
 Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. 
-This is useful for getting a performance benchmark to ensure that your node's processor is fast enough.
+This is useful for getting a performance benchmark to ensure that your node's processor and disk are fast enough.
 
 The `/rchash` endpoint has 3 parameters: `depth`, `anchor1`, and `anchor2`.
 For both anchor parameters, use the first 4 hex digits from your node's overlay address (which you can find from the `/addresses` endpoint). 
@@ -517,12 +517,9 @@ successful result:
 The `durationSeconds` value should not exceed roughly 6 minutes (360 seconds).
 
 :::warning Slow results
-If `durationSeconds` is much longer than 360 seconds (for example, 1191 seconds /
-~20 minutes), the node will likely fail to submit proofs in time during the
-redistribution game, resulting in missed rewards or freezing. SSD speed and RAM
-are typically the main bottlenecks, since the sampler does heavy random I/O
-across the reserve. Upgrade to a faster SSD first, then consider more RAM or a
-faster processor.
+If `durationSeconds` is much longer than 360 seconds (for example, 1191 seconds / ~20 minutes), the node will likely fail to submit proofs in time during the redistribution game, resulting in missed rewards or freezing. 
+The sampler reads every chunk in radius from local storage, so disk and processor speed are typically the bottlenecks. 
+Upgrade to a faster SSD first, then consider a faster processor or more cores.
 :::
 
 If while running the `/rchash` command there is an evictions related error such

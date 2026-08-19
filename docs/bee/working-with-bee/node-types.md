@@ -53,10 +53,10 @@ Disk space and sustained bandwidth are the main differences from the lighter nod
 - **Internet**: High-speed and stable connection.
 
 :::info
-Staking raises the CPU demand but not the memory demand.
-Nodes selected for the redistribution game run the sampler process, which is CPU-bound and bandwidth-hungry; 4 cores are sufficient for it.
+Staking means taking part in the redistribution game, which raises CPU demand and disk I/O. 
+This calls for more than 2 processor cores and SSD storage rather than an HDD.
 
-Before staking, test your setup using [the `/rchash` endpoint](./bee-api.md#rchash) in order to confirm your node can complete a sample in time.
+Before staking, test your setup using [the `/rchash` endpoint](./bee-api.md#rchash) to confirm your node can complete a sample in time.
 :::
 
 A full node must also be connected to Gnosis Chain and hold enough funds to cover its on-chain operations:
