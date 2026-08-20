@@ -3,6 +3,8 @@ title: Bee API
 id: bee-api
 description: Comprehensive reference for Bee's HTTP API endpoints enabling programmatic access to node management uploads downloads and monitoring.
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 The Bee HTTP API is the primary interface to a running Bee node. API-endpoints can be queried using familiar HTTP requests, and will respond with semantically accurate [HTTP status and error codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) as well as data payloads in [JSON](https://www.json.org/json-en.html) format where appropriate.
 
@@ -475,15 +477,40 @@ If your node is not operating in the correct mode, this can help you to diagnose
 
 ### _/rchash_
 
-Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash,
-which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game),
-and will report the amount of time it took to generate the hash. This is useful for
-getting a performance benchmark to ensure that your node's hardware is sufficient.
+Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. 
+This is useful for getting a performance benchmark to ensure that your node's processor and disk are fast enough.
+
+<Tabs
+defaultValue="swarm-cli"
+values={[
+{label: 'Swarm CLI', value: 'swarm-cli'},
+{label: 'API', value: 'api'},
+]}>
+<TabItem value="swarm-cli">
+
+The [`swarm-cli`](./swarm-cli.md) command doesn't require arguments.
+It reads the node's overlay address and committed depth, and derives the anchor and depth parameters from them.
+
+```bash
+swarm-cli utility rchash
+```
+
+Pass `--depth` to benchmark against a depth other than the node's current one.
+
+The command gives as a result the time it took to generate the reserve commitment hash. 
+
+```bash
+Reserve sampling duration: 360.37808911 seconds
+```
+
+</TabItem>
+
+<TabItem value="api">
 
 The `/rchash` endpoint has 3 parameters: `depth`, `anchor1`, and `anchor2`.
-For both anchor parameters, use the first 4 hex digits from your node's overlay
-address (which you can find from the `/addresses` endpoint). For depth, use the
-current storage depth of your node from the `/status` endpoint (`storageRadius` value):
+For both anchor parameters, use the first 4 hex digits from your node's overlay address (which you can find from the `/addresses` endpoint). 
+For depth, use your node's `committedDepth` from the `/status` endpoint. 
+For nodes which do not use [reserve doubling](./staking.md#reserve-doubling), `committedDepth` is equal to `storageRadius`:
 
 ```text
 /rchash/{depth}/{anchor1}/{anchor2}
@@ -517,15 +544,23 @@ successful result:
 }
 ```
 
+</TabItem>
+</Tabs>
+
+
 The `durationSeconds` value should not exceed roughly 6 minutes (360 seconds).
 
+:::caution A single measurement is not a guarantee
+Sampling time scales with how full the node's reserve is within its radius, since the sampler walks every chunk in radius. 
+Reserve occupancy depends on network conditions rather than on anything the operator sets, so a result measured against a half-full reserve says little about the same node once the reserve fills up. 
+A node holding around 2M chunks can complete a sample in roughly half the time of one at the full default reserve capacity of about 4M chunks. 
+Aim for a comfortable margin below 360 seconds; a marginal pass is not enough.
+:::
+
 :::warning Slow results
-If `durationSeconds` is much longer than 360 seconds (for example, 1191 seconds /
-~20 minutes), the node will likely fail to submit proofs in time during the
-redistribution game, resulting in missed rewards or freezing. SSD speed and RAM
-are typically the main bottlenecks, since the sampler does heavy random I/O
-across the reserve. Upgrade to a faster SSD first, then consider more RAM or a
-faster processor.
+If `durationSeconds` is much longer than 360 seconds (for example, 1191 seconds / ~20 minutes), the node will likely fail to submit proofs in time during the redistribution game, resulting in missed rewards or freezing. 
+The sampler reads every chunk in radius from local storage, so disk and processor speed are typically the bottlenecks. 
+Upgrade to a faster SSD first, then consider a faster processor or more cores.
 :::
 
 If while running the `/rchash` command there is an evictions related error such

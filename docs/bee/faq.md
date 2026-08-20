@@ -14,42 +14,37 @@ Depending on your needs you can run an ultra-light, light or full node.
 
 ### What are the differences between Bee node types?
 
-A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](./installation/getting-started.md) for an overview of the differences.
+A bee node can be configured to run in various modes based on specific use cases and requirements.
+[See here](./working-with-bee/node-types.md#node-types-overview) for an overview of the differences.
 
+### What are the requirements for running a Bee node?
 
-#### What are the requirements for running a Bee node?
+See the [getting started section](./installation/getting-started.md#requirements) for more information about running a Bee node.
 
-See the [getting started section](./installation/getting-started.md#software-requirements) for more information about running a Bee node.
+#### Full node
 
-##### Full node
+All three node types run on ordinary consumer hardware.
+Full nodes use more disk space and bandwidth than the lighter modes and additionally need a Gnosis Chain connection and funds — see [full node specifications](./working-with-bee/node-types.md#full-node-specifications) for the current list.
 
-- 20GB -30GB SSD (ideally NVME).
-- 8GB RAM
-- CPU with 2+ cores
-- RPC connection to Gnosis Chain
-- Min 0.1 xDAI for Gnosis GAS fees
-- 1 xBZZ for initial chequebook deployment
-- 10 xBZZ for staking (optional)
-
-##### How much bandwidth is required for each node?
+### How much bandwidth is required for each node?
 
 Typically, each node requires around 10 megabits per second (Mbps) of bandwidth during normal operation.
 
-##### How do I Install Bee on Windows?
+### How do I Install Bee on Windows?
 
 Bee is compatible with Windows and a Bee `.exe` file can be found on the [`releases` page](https://github.com/ethersphere/bee/releases) of the Bee repo.  
 
 It is also possible to [build from the source](./installation/build-from-source.md).
 
-##### How do I get the node's wallet's private key (use-case for Desktop app)?
+### How do I get the node's wallet's private key (use-case for Desktop app)?
 
 See the [backup section](./working-with-bee/backups.md) for more info.
 
-##### How do I import my private key to Metamask?
+### How do I import my private key to Metamask?
 
 You can import the `swarm.key` json file in MetaMask using your password file or the password you have set in your bee config file.
 
-##### Where can I find my password?
+### Where can I find my password?
 
 You can find the password in the root of your data directory. See the [backup section](./working-with-bee/backups.md) for more info.
 

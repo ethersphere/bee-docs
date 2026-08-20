@@ -43,16 +43,18 @@ The node type you need to run will differ depending on your use-case:
 
 Refer to the [Node Types](./../working-with-bee/node-types.md) page for deep dive into each node type, their features and limitations, and configuration instructions.
 
-##  Software Requirements
+## Requirements
 
-### Recommended Operating Systems
+###  Software Requirements
+
+#### Recommended Operating Systems
 - Officially supported systems are listed in the [Bee releases](https://github.com/ethersphere/bee/releases).
 - You can [build from source](./build-from-source.md) if your OS is unsupported.
 - **Swarm Desktop users** can use macOS, Windows, or Linux.
 - **Linux/macOS recommended**: Most tools and documentation are designed for Unix-based systems.
 - **Windows users**: While a Window release of Bee is available, you may also consider using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and using a Linux version of Bee.
 
-### Essential Tools
+#### Essential Tools
 
 While not strictly required, these tools will *greatly* simplify your experience working with Bee nodes:
 
@@ -61,23 +63,25 @@ While not strictly required, these tools will *greatly* simplify your experience
 - **[Swarm CLI](./../working-with-bee/swarm-cli.md)**: Terminal-based Bee node management.
 - **[Bee JS](./../../develop/tools-and-features/bee-js.md)**: JavaScript library for programmatic API access.
 
-## Hardware Requirements
+### Hardware Requirements
 
-### Light and Ultra-Light
+All three node types run on ordinary consumer hardware.
+None of them requires a powerful machine.
 
-Light and ultra-light nodes can be run with practically any commercially available modern computer hardware and internet provider, and have very minimal CPU, RAM and network requirements. 
+#### Light and Ultra-Light
 
-### Full Node
+Light and ultra-light nodes have very minimal CPU, RAM, disk and network requirements, and run on practically any commercially available computer hardware and internet connection.
 
-Requires significant storage and processing power:
-- **Processor**: Recent 2 GHz dual-core.
-- **RAM**: 8 GB.
-- **Storage**: 30 GB SSD (HDD not recommended).
-- **Internet**: High-speed and stable connection.
+#### Full Node
 
-For staking and storage incentives, test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash).
+Full nodes have modest CPU and RAM requirements too, but they use more disk space and require a more sustained bandwidth than the lighter modes. 
+They also need a Gnosis Chain RPC endpoint and some xDAI to cover gas fees, including the chequebook deployment transaction.
+See [full node specifications](./../working-with-bee/node-types.md#full-node-specifications) on the Node Types page for the complete list of hardware and funding requirements.
 
-## Network Requirements
+Staking and receiving storage incentives may require more CPU power. 
+Test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash) before deciding to participate in the redistribution game.
+
+### Network Requirements
 
 A reliable, high-speed internet connection is recommended when running a full node, while ultra-light and light nodes require less bandwidth. The actual amount of bandwidth consumption depends on the node type and use-case:
 
@@ -85,7 +89,7 @@ A reliable, high-speed internet connection is recommended when running a full no
 - **Light Node**: Moderate usage, based on data transfer volume.
 - **Ultra-Light Node**: Minimal usage, bandwidth utilization restricted based on free-tier download limits.
 
-### RPC Endpoint  
+#### RPC Endpoint  
 
 :::warning
 ***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](./../working-with-bee/configuration.md#setting-blockchain-rpc-endpoint).
@@ -110,7 +114,7 @@ Without a properly configured RPC endpoint, a Bee node cannot interact with the 
 * Stake tokens
 * Make blockchain transactions
 
-### NAT and Port Forwarding
+#### NAT and Port Forwarding
 
 If running Bee on a home network, there is a good chance it is behind NAT by default. Often simply [enabling port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) will be enough to allow your node to start communicating smoothly with the rest of the network.
 
@@ -140,4 +144,3 @@ If your home network happens to be using [CGNAT (Carrier-Grade NAT)](https://en.
 
 ### [Building from Source](./build-from-source.md)
 - Most flexible, but requires advanced setup.
-

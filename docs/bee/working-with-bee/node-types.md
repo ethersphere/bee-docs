@@ -8,7 +8,11 @@ description: Compares full light and ultra-light node types with their features 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Bee nodes can operate in three different modes depending on the user's needs, ranging from full-featured nodes that contribute to the network and earn incentives to lightweight modes that allow for basic interaction with minimal resource requirements. This guide outlines the three primary node types — **_Full_**, **_Light_**, and **_Ultra-Light_** — along with their configurations, capabilities, and limitations.
+Bee nodes can operate in three different modes depending on the user's needs, ranging from full-featured nodes that contribute storage to the network and earn incentives to simpler modes that only download and upload data. 
+This guide outlines the three primary node types — **_Full_**, **_Light_**, and **_Ultra-Light_** — along with their configurations, capabilities, and limitations.
+
+All three modes can run on ordinary consumer computers, without requiring any extraordinary hardware.
+What differs between them is the feature set, how much disk space and bandwidth the node uses, and whether it needs a blockchain connection and funds.
 
 Choosing the right node type depends on your goals, whether it's participating in the Swarm network as a storage provider, developing applications that use Swarm's decentralized storage and messaging, or simply exploring the technology with minimal setup.
 
@@ -30,25 +34,36 @@ Bee can operate in different modes, each tailored to specific use cases:
 
 ## What is a full node? {#full-node}
 
-Full nodes are the most feature-rich nodes in the Swarm network. They provide full upload and download capabilities, store and serve data, and participate in storage and bandwidth incentives. Running a full node requires more system resources, but it allows users to fully engage with and support the network.
+Full nodes are the most feature-rich nodes in the Swarm network. 
+They provide full upload and download capabilities, store and serve data, and participate in storage and bandwidth incentives. 
+A full node uses more disk space and bandwidth than the lighter modes and needs a funded blockchain connection, but its CPU and memory requirements stay low enough for everyday consumer hardware.
 
 Full nodes are ideal for users who want to contribute to the Swarm network and earn incentives, as well as developers who require access to all Bee features including messaging features such as PSS and GSOC.
 
 
 ### Full node specifications
 
-:::warning
-Full nodes require significant system resources, including storage and bandwidth. Additionally, they must be connected to the blockchain to participate in incentives. 
+A full node does not need powerful hardware.
+The requirements below are met by most laptops and desktops, and even single-board computers such as a [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi) with an attached SSD.
+Disk space and sustained bandwidth are the main differences from the lighter node types:
 
-If you intend to participate in the redistribution game to earn storage incentives, you should test your setup using [the `/rchash` endpoint](./bee-api.md#rchash) in order to ensure that your hardware is sufficient. Participation in the redistribution game requires a process with high computational and memory requirements, along with significant bandwidth usage.
+- **Processor**: Recent 2 GHz dual-core (2+ cores). 4-cores is comfortable if you intend to take part in the redistribution game.
+- **RAM**: 500 MB. 
+- **Storage**: 20~30 GB SSD, ideally NVMe (HDD not recommended).
+- **Internet**: High-speed and stable connection.
+
+:::info
+Staking means taking part in the redistribution game, which raises CPU demand and disk I/O. 
+This calls for more than 2 processor cores and SSD storage rather than an HDD.
+
+Before staking, test your setup using [the `/rchash` endpoint](./bee-api.md#rchash) to confirm your node can complete a sample in time.
 :::
 
-Requires significant storage and processing power compared to other node types:
+A full node must also be connected to Gnosis Chain and hold enough funds to cover its on-chain operations:
 
-- **Processor**: Recent 2 GHz dual-core.
-- **RAM**: 8 GB.
-- **Storage**: 30 GB SSD (HDD not recommended).
-- **Internet**: High-speed and stable connection.
+- **RPC endpoint**: A connection to Gnosis Chain (see [setting the blockchain RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint)).
+- **xDAI**: Minimum 0.1 xDAI for Gnosis Chain gas fees.
+- **(optional) xBZZ for staking**: 10 xBZZ, required only to participate in [storage incentives](./staking.md).
 
 ### Full node configuration
 
@@ -73,7 +88,7 @@ To run Bee as a full node, set:
 
 Light nodes provide a balance between functionality and resource efficiency. They can upload and download data but do not participate in chunk forwarding or storage for other nodes.
 
-Light nodes are suited for users who want to interact with Swarm without the overhead of running a full node. They can serve the needs of developers who need to access Swarm's download / upload features but do not need advanced messaging features such as PSS and GSOC which are available only in full nodes.
+Light nodes are suited for users who want to interact with Swarm without contributing storage to the network or maintaining a reserve. They can serve the needs of developers who need to access Swarm's download / upload features but do not need advanced messaging features such as PSS and GSOC which are available only in full nodes.
 
 Light node operators cannot earn xBZZ by participating in Swarm's incentives systems, as they do not participate in chunk forwarding or storage but only consume services, paying xBZZ for downloading data from full nodes and buying postage stamp batches for uploading data.
 
@@ -146,4 +161,3 @@ Bee will start in ultra-light mode by default, but in order to explicitly config
 - Cannot earn xBZZ by staking xBZZ and participating in the storage incentive system.
 - Cannot earn xBZZ by participating in the bandwidth incentives system.
 - Cannot use PSS or GSOC for sending or receiving.
-
