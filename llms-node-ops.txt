@@ -16,41 +16,37 @@ Depending on your needs you can run an ultra-light, light or full node.
 
 ### What are the differences between Bee node types?
 
-A bee node can be configured to run in various modes based on specific use cases and requirements. [See here](./installation/getting-started.md) for an overview of the differences.
+A bee node can be configured to run in various modes based on specific use cases and requirements.
+[See here](./working-with-bee/node-types.md#node-types-overview) for an overview of the differences.
 
-#### What are the requirements for running a Bee node?
+### What are the requirements for running a Bee node?
 
-See the [getting started section](./installation/getting-started.md#software-requirements) for more information about running a Bee node.
+See the [getting started section](./installation/getting-started.md#requirements) for more information about running a Bee node.
 
-##### Full node
+#### Full node
 
-- 20GB -30GB SSD (ideally NVME).
-- 8GB RAM
-- CPU with 2+ cores
-- RPC connection to Gnosis Chain
-- Min 0.1 xDAI for Gnosis GAS fees
-- 1 xBZZ for initial chequebook deployment
-- 10 xBZZ for staking (optional)
+All three node types run on ordinary consumer hardware.
+Full nodes use more disk space and bandwidth than the lighter modes and additionally need a Gnosis Chain connection and funds — see [full node specifications](./working-with-bee/node-types.md#full-node-specifications) for the current list.
 
-##### How much bandwidth is required for each node?
+### How much bandwidth is required for each node?
 
 Typically, each node requires around 10 megabits per second (Mbps) of bandwidth during normal operation.
 
-##### How do I Install Bee on Windows?
+### How do I Install Bee on Windows?
 
 Bee is compatible with Windows and a Bee `.exe` file can be found on the [`releases` page](https://github.com/ethersphere/bee/releases) of the Bee repo.  
 
 It is also possible to [build from the source](./installation/build-from-source.md).
 
-##### How do I get the node's wallet's private key (use-case for Desktop app)?
+### How do I get the node's wallet's private key (use-case for Desktop app)?
 
 See the [backup section](./working-with-bee/backups.md) for more info.
 
-##### How do I import my private key to Metamask?
+### How do I import my private key to Metamask?
 
 You can import the `swarm.key` json file in MetaMask using your password file or the password you have set in your bee config file.
 
-##### Where can I find my password?
+### Where can I find my password?
 
 You can find the password in the root of your data directory. See the [backup section](./working-with-bee/backups.md) for more info.
 
@@ -188,7 +184,7 @@ Prerequisites for installing directly from source are:
 -  **git** - download from [git-scm.com](https://git-scm.com/).
 -  **make** - [make](https://www.gnu.org/software/make/) is usually included by default in most UNIX operating systems, and can be installed and used on almost any other operating system where it is not included by default.
 
-### Build from Source
+## Build steps
 
 1. Clone the repository:
 
@@ -690,7 +686,6 @@ you connected. In Swarm, no Bee is left behind.
 
 ## Docker Install
 
-
 The following is a guide for installing a Bee node using Docker. Docker images for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). Using Docker to operate your Bee node offers many benefits, such as ease of deployment and consistency across environments. 
 
 :::caution
@@ -1118,7 +1113,11 @@ Fund your node with the appropriate amount of xDAI and xBZZ based on the recomme
 
 ## Getting Started
 
-*If you want to get a Bee node up and running ASAP, check out the [Quick Start](./quick-start.md) guide.* 
+Running a Bee node means choosing a node type (full, light, or ultra-light), meeting the software, hardware, and network requirements, and picking an installation method. This guide covers each so you can choose the right setup.
+
+:::tip
+If you want to get a Bee node up and running ASAP, check out the [Quick Start](./quick-start.md) guide.
+:::
 
 ## Overview
 
@@ -1152,16 +1151,18 @@ The node type you need to run will differ depending on your use-case:
 
 Refer to the [Node Types](./../working-with-bee/node-types.md) page for deep dive into each node type, their features and limitations, and configuration instructions.
 
-##  Software Requirements
+## Requirements
 
-### Recommended Operating Systems
+###  Software Requirements
+
+#### Recommended Operating Systems
 - Officially supported systems are listed in the [Bee releases](https://github.com/ethersphere/bee/releases).
 - You can [build from source](./build-from-source.md) if your OS is unsupported.
 - **Swarm Desktop users** can use macOS, Windows, or Linux.
 - **Linux/macOS recommended**: Most tools and documentation are designed for Unix-based systems.
 - **Windows users**: While a Window release of Bee is available, you may also consider using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and using a Linux version of Bee.
 
-### Essential Tools
+#### Essential Tools
 
 While not strictly required, these tools will *greatly* simplify your experience working with Bee nodes:
 
@@ -1170,23 +1171,25 @@ While not strictly required, these tools will *greatly* simplify your experience
 - **[Swarm CLI](./../working-with-bee/swarm-cli.md)**: Terminal-based Bee node management.
 - **[Bee JS](./../../develop/tools-and-features/bee-js.md)**: JavaScript library for programmatic API access.
 
-## Hardware Requirements
+### Hardware Requirements
 
-### Light and Ultra-Light
+All three node types run on ordinary consumer hardware.
+None of them requires a powerful machine.
 
-Light and ultra-light nodes can be run with practically any commercially available modern computer hardware and internet provider, and have very minimal CPU, RAM and network requirements. 
+#### Light and Ultra-Light
 
-### Full Node
+Light and ultra-light nodes have very minimal CPU, RAM, disk and network requirements, and run on practically any commercially available computer hardware and internet connection.
 
-Requires significant storage and processing power:
-- **Processor**: Recent 2 GHz dual-core.
-- **RAM**: 8 GB.
-- **Storage**: 30 GB SSD (HDD not recommended).
-- **Internet**: High-speed and stable connection.
+#### Full Node
 
-For staking and storage incentives, test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash).
+Full nodes have modest CPU and RAM requirements too, but they use more disk space and require a more sustained bandwidth than the lighter modes. 
+They also need a Gnosis Chain RPC endpoint and some xDAI to cover gas fees, including the chequebook deployment transaction.
+See [full node specifications](./../working-with-bee/node-types.md#full-node-specifications) on the Node Types page for the complete list of hardware and funding requirements.
 
-## Network Requirements
+Staking and receiving storage incentives may require more CPU power. 
+Test node performance with [`/rchash`](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api/#rchash) before deciding to participate in the redistribution game.
+
+### Network Requirements
 
 A reliable, high-speed internet connection is recommended when running a full node, while ultra-light and light nodes require less bandwidth. The actual amount of bandwidth consumption depends on the node type and use-case:
 
@@ -1194,7 +1197,7 @@ A reliable, high-speed internet connection is recommended when running a full no
 - **Light Node**: Moderate usage, based on data transfer volume.
 - **Ultra-Light Node**: Minimal usage, bandwidth utilization restricted based on free-tier download limits.
 
-### RPC Endpoint  
+#### RPC Endpoint  
 
 :::warning
 ***Free public RPC endpoints are discouraged*** since they may enforce rate limiting or may not store the historical smart contract data required by Bee nodes. [Read more](./../working-with-bee/configuration.md#setting-blockchain-rpc-endpoint).
@@ -1219,7 +1222,7 @@ Without a properly configured RPC endpoint, a Bee node cannot interact with the 
 * Stake tokens
 * Make blockchain transactions
 
-### NAT and Port Forwarding
+#### NAT and Port Forwarding
 
 If running Bee on a home network, there is a good chance it is behind NAT by default. Often simply [enabling port forwarding](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) will be enough to allow your node to start communicating smoothly with the rest of the network.
 
@@ -1257,21 +1260,21 @@ If your home network happens to be using [CGNAT (Carrier-Grade NAT)](https://en.
 Due to the mechanics of Swarm's [storage incentives](./../../concepts/incentives/redistribution-game.md), node operators may wish to run multiple nodes in order to maximize earning potential. Read [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) for more information on how the
 swarm comes together.
 
-### Docker
+## Docker
 
 Up-to-date [Docker images for Bee](./docker.md) are provided.
 
-### Docker Compose
+## Docker Compose
 
 Running multiple Bee nodes is easier with
 `docker-compose`. Check out the Docker compose section of the
 [Docker README](https://github.com/ethersphere/bee/tree/master/packaging/docker).
 
-### Helm
+## Helm
 
 If you plan to run a large number of Bee nodes and you have experience using Kubernetes with Helm, you can have a look at how we manage our cluster under [Ethersphere/helm](https://github.com/ethersphere/helm/tree/master/charts/bee).
 
-### Manual Setup
+## Manual Setup
 
 If you just want to run a handful of Bee nodes, you can run multiple Bee nodes by creating separate configuration files.
 
@@ -1285,7 +1288,7 @@ Make as many copies of bee-config-1.yaml as you want to run Bee nodes. Increment
 
 Configure your nodes as desired, but ensure that the values `api-addr`, `data-dir` and `p2p-addr` are unique for each configuration.
 
-### Monitoring
+## Monitoring
 
 See the [logging section](./../working-with-bee/logs-and-files.md) for more information on how to access your node's metrics. Share your community creations (such as [swarmMonitor](https://github.com/doristeo/SwarmMonitoring) - thanks doristeo!) in the [#node-operators](https://discord.gg/kHRyMNpw7t) channel of our Discord server so we can add you to our list of all things that are [awesome](https://github.com/ethersphere/awesome-swarm) and Swarm. 🧡
 
@@ -1993,14 +1996,14 @@ Therefore the default Bee configuration now includes the `neighborhood-suggester
 The Swarmscan neighborhood selector prioritizes the least populated neighborhood. If a neighborhood contains imbalanced sub-neighborhoods, it will suggest the least populated sub-neighborhood instead. Furthermore, the suggester will temporarily de-prioritize previously suggested neighborhoods based on the assumption that a new node is being created in each suggested neighborhood so that multiple nodes do not simultaneously attempt to join the same neighborhood.
 :::
 
-#### Setting Neighborhood Manually
+## Setting Neighborhood Manually
 
 It's recommended to use the default `neighborhood-suggester` configuration for choosing your node's neighborhood, however you may also set your node's neighborhood manually using the `target-neighborhood` option.
 
 To use this option, it's first necessary to identify potential target neighborhoods. You can find underpopulated neighborhoods using the [Swarmscan website](https://swarmscan.io/neighborhoods). It ranks neighborhoods from least to most populated and displays their leading binary bits. Simply copy the leading bits from one of the least populated neighborhoods (for example, `0010100001`) and use it to set `target-neighborhood`. After doing so, an overlay address within that neighborhood will be generated when starting Bee for the first time.
 
 ```yaml
-## bee.yaml
+# bee.yaml
 target-neighborhood: "0010100001"
 ```
 
@@ -2018,8 +2021,6 @@ A suggested neighborhood will be returned:
 ---
 
 ## Shell Script Install
-
-# Swarm Shell Script Installation Guide
 
 The official [shell script](https://github.com/ethersphere/bee/blob/master/install.sh) provided by Swarm automatically detects your system and installs the correct version of Bee. This installation method is an excellent choice if you're looking for a minimalistic and flexible option for your Bee node installation.
 
@@ -2828,7 +2829,7 @@ Note that `swarm.key` is in UTC / JSON keystores format and is encrypted by defa
 
 To import to Metamask:
 
-1. View and copy your `swarm.key` and `password` as shown above
+1. View and copy the contents of your exported `swarm.key` and `password` files
 2. Go to Metamask and click "Account 1" --> "Import Account"
 3. Choose the "Select Type" dropdown menu and choose "JSON file"
 4. Paste the password (Make sure to do this first)
@@ -3741,7 +3742,7 @@ Full and light Bee nodes require a Gnosis Chain RPC endpoint in order to sync bl
 To set your RPC endpoint, specify it with the `blockchain-rpc-endpoint` value, which is set to an empty string by default.
 
 ```yaml
-## bee.yaml
+# bee.yaml
 blockchain-rpc-endpoint: https://xdai.fairdatasociety.org
 ```
 
@@ -3761,7 +3762,7 @@ Bee periodically reads the current block number from your blockchain RPC endpoin
 The `block-sync-interval` option controls how frequently the real block number is refreshed:
 
 ```yaml
-## bee.yaml
+# bee.yaml
 block-sync-interval: 10
 ```
 
@@ -3784,7 +3785,7 @@ It is currently available **only on Linux x86-64 (amd64)**; on all other platfor
 To enable it, set the `use-simd-hashing` option:
 
 ```yaml
-## bee.yaml
+# bee.yaml
 use-simd-hashing: true
 ```
 
@@ -3803,7 +3804,7 @@ This feature is **disabled by default** and only applies to full nodes with cheq
 To enable chequebook verification, set `chequebook-verification` to `true`:
 
 ```yaml
-## bee.yaml
+# bee.yaml
 chequebook-verification: true
 ```
 
@@ -3812,7 +3813,7 @@ The value is set in the token's smallest unit (PLUR), where 1 BZZ = 10^16 PLUR, 
 To configure a different threshold, set `chequebook-min-balance` accordingly:
 
 ```yaml
-## bee.yaml
+# bee.yaml
 chequebook-verification: true
 chequebook-min-balance: "110000000000000000" # 11 BZZ, expressed in PLUR
 ```
@@ -3849,7 +3850,7 @@ curl icanhazip.com
 Then configure your node, including your p2p port (default 1634).
 
 ```yaml
-## bee.yaml
+# bee.yaml
 nat-addr: "123.123.123.123:1634"
 ```
 
@@ -3862,7 +3863,7 @@ The [ENS](https://ens.domains/) domain resolution system is used to host website
 If you do not wish to run your own Ethereum node, you may use a blockchain RPC service provider such as [Infura](https://infura.io). After signing up for Infura, simply set your `--resolver-options` to `https://mainnet.infura.io/v3/your-api-key`.
 
 ```yaml
-## bee.yaml
+# bee.yaml
 resolver-options: ["https://mainnet.infura.io/v3/<<your-api-key>>"]
 ```
 
@@ -3893,7 +3894,6 @@ To get Sepolia BZZ (sBZZ) you can use [this Uniswap market](https://app.uniswap.
 ---
 
 ## Logging in Bee
-
 
 This section provides an overview of logging in Bee, including log locations, exporting logs, managing verbosity levels, and using fine-grained control for specific loggers.
 
@@ -4079,15 +4079,15 @@ For example:
 
 ## Monitoring Your Node
 
-Your Bee node is equipped with tools to help you understand what your Bee has been up to!
+Bee nodes expose runtime metrics in Prometheus format, which you can collect and visualise with Grafana to understand what your Bee has been up to.
 
 Navigate to `http://localhost:1633/metrics`.
 
-This is the current state of Bee's metrics as they stand at this moment.
+The /metrics page shows a snapshot of your Bee node's metrics at the moment you load it.
 
-In order to use these metrics and view, we need to keep a record of these metrics over time.
+To make these raw metrics useful, you need to record them over time.
 
-To do this we will use [Prometheus](https://prometheus.io/docs/introduction/overview/). Simply install, configure as follows, and restart!
+To record Bee's metrics over time, we will use [Prometheus](https://prometheus.io/docs/introduction/overview/). Simply install, configure as follows, and restart!
 
 For Ubuntu and other Debian based Linux distributions install using `apt`:
 
@@ -4124,11 +4124,15 @@ Share your creations in the [#node-operators](https://discord.gg/kHRyMNpw7t) cha
 
 ## Node Types
 
-Bee nodes can operate in three different modes depending on the user's needs, ranging from full-featured nodes that contribute to the network and earn incentives to lightweight modes that allow for basic interaction with minimal resource requirements. This guide outlines the three primary node types — **_Full_**, **_Light_**, and **_Ultra-Light_** — along with their configurations, capabilities, and limitations.
+Bee nodes can operate in three different modes depending on the user's needs, ranging from full-featured nodes that contribute storage to the network and earn incentives to simpler modes that only download and upload data. 
+This guide outlines the three primary node types — **_Full_**, **_Light_**, and **_Ultra-Light_** — along with their configurations, capabilities, and limitations.
+
+All three modes can run on ordinary consumer computers, without requiring any extraordinary hardware.
+What differs between them is the feature set, how much disk space and bandwidth the node uses, and whether it needs a blockchain connection and funds.
 
 Choosing the right node type depends on your goals, whether it's participating in the Swarm network as a storage provider, developing applications that use Swarm's decentralized storage and messaging, or simply exploring the technology with minimal setup.
 
-## Node Types Overview
+## What are the Bee node types? {#node-types-overview}
 
 Bee can operate in different modes, each tailored to specific use cases:
 
@@ -4142,28 +4146,39 @@ Bee can operate in different modes, each tailored to specific use cases:
 | [Bandwidth incentives](./../../concepts/incentives/bandwidth-incentives.md) | ✅        | ❌         | ❌               |
 | [PSS messaging](./../../develop/tools-and-features/pss.md)                   | ✅        | ❌         | ❌               |
 
-## Full Node
+## What is a full node? {#full-node}
 
-Full nodes are the most feature-rich nodes in the Swarm network. They provide full upload and download capabilities, store and serve data, and participate in storage and bandwidth incentives. Running a full node requires more system resources, but it allows users to fully engage with and support the network.
+Full nodes are the most feature-rich nodes in the Swarm network. 
+They provide full upload and download capabilities, store and serve data, and participate in storage and bandwidth incentives. 
+A full node uses more disk space and bandwidth than the lighter modes and needs a funded blockchain connection, but its CPU and memory requirements stay low enough for everyday consumer hardware.
 
 Full nodes are ideal for users who want to contribute to the Swarm network and earn incentives, as well as developers who require access to all Bee features including messaging features such as PSS and GSOC.
 
-### Recommended Specifications
+### Full node specifications
 
-:::warning
-Full nodes require significant system resources, including storage and bandwidth. Additionally, they must be connected to the blockchain to participate in incentives. 
+A full node does not need powerful hardware.
+The requirements below are met by most laptops and desktops, and even single-board computers such as a [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi) with an attached SSD.
+Disk space and sustained bandwidth are the main differences from the lighter node types:
 
-If you intend to participate in the redistribution game to earn storage incentives, you should test your setup using [the `/rchash` endpoint](./bee-api.md#rchash) in order to ensure that your hardware is sufficient. Participation in the redistribution game requires a process with high computational and memory requirements, along with significant bandwidth usage.
-:::
-
-Requires significant storage and processing power compared to other node types:
-
-- **Processor**: Recent 2 GHz dual-core.
-- **RAM**: 8 GB.
-- **Storage**: 30 GB SSD (HDD not recommended).
+- **Processor**: Recent 2 GHz dual-core (2+ cores). 4-cores is comfortable if you intend to take part in the redistribution game.
+- **RAM**: 500 MB. 
+- **Storage**: 20~30 GB SSD, ideally NVMe (HDD not recommended).
 - **Internet**: High-speed and stable connection.
 
-### Configuration
+:::info
+Staking means taking part in the redistribution game, which raises CPU demand and disk I/O. 
+This calls for more than 2 processor cores and SSD storage rather than an HDD.
+
+Before staking, test your setup using [the `/rchash` endpoint](./bee-api.md#rchash) to confirm your node can complete a sample in time.
+:::
+
+A full node must also be connected to Gnosis Chain and hold enough funds to cover its on-chain operations:
+
+- **RPC endpoint**: A connection to Gnosis Chain (see [setting the blockchain RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint)).
+- **xDAI**: Minimum 0.1 xDAI for Gnosis Chain gas fees.
+- **(optional) xBZZ for staking**: 10 xBZZ, required only to participate in [storage incentives](./staking.md).
+
+### Full node configuration
 
 To run Bee as a full node, set:
 
@@ -4181,11 +4196,11 @@ To run Bee as a full node, set:
 - Requires a Gnosis Chain RPC endpoint for blockchain connectivity.
 - Supports full PSS messaging and GSOC.
 
-## Light Node
+## What is a light node? {#light-node}
 
 Light nodes provide a balance between functionality and resource efficiency. They can upload and download data but do not participate in chunk forwarding or storage for other nodes.
 
-Light nodes are suited for users who want to interact with Swarm without the overhead of running a full node. They can serve the needs of developers who need to access Swarm's download / upload features but do not need advanced messaging features such as PSS and GSOC which are available only in full nodes.
+Light nodes are suited for users who want to interact with Swarm without contributing storage to the network or maintaining a reserve. They can serve the needs of developers who need to access Swarm's download / upload features but do not need advanced messaging features such as PSS and GSOC which are available only in full nodes.
 
 Light node operators cannot earn xBZZ by participating in Swarm's incentives systems, as they do not participate in chunk forwarding or storage but only consume services, paying xBZZ for downloading data from full nodes and buying postage stamp batches for uploading data.
 
@@ -4193,11 +4208,11 @@ Light node operators cannot earn xBZZ by participating in Swarm's incentives sys
 Light nodes do not benefit from plausible deniability when requesting data from the network. They are always the originator of requests.
 :::
 
-### Recommended Specifications
+### Light node specifications
 
 No specific hardware is required to run a light node. It can run well on practically any commercially available computer released in recent years, including lightweight single-board computers such as [Raspberry Pi](https://en.wikipedia.org/wiki/Raspberry_Pi). Your downloads / uploads may be limited by your network speed, however, so if you plan on interacting extensively with the Swarm network, you should take your connection speed into consideration.
 
-### Configuration
+### Light node configuration
 
 To run Bee as a light node, set:
 
@@ -4219,7 +4234,7 @@ To run Bee as a light node, set:
 - Can send PSS messages but ***cannot*** receive them.
 - Can send outgoing GSOC updates but ***cannot*** receive them.
 
-## Ultra-Light Node
+## What is an ultra-light node? {#ultra-light-node}
 
 Ultra-light nodes allow users to run a node without requiring a blockchain RPC endpoint. These nodes can download data within the free consumption threshold set by full nodes (this threshold may vary since it is [configurable](./configuration.md) by full node operators using the `payment-tolerance-percent` and `payment-threshold` options).
 
@@ -4233,11 +4248,11 @@ As with light nodes, ultra-light nodes do not benefit from plausible deniability
 When running without a blockchain connection, [bandwidth incentive payments (SWAP)](./../../concepts/incentives/bandwidth-incentives.md) cannot be made, increasing the risk of being blocklisted by other peers for exceeding their free-tier download limits.
 :::
 
-### Recommended Specifications
+### Ultra-light node specifications
 
 As with the light node, there are no specific requirements to run an ultra-light node, and it will run on practically any commercially available hardware from recent years.   
 
-### Configuration
+### Ultra-light node configuration
 
 Bee will start in ultra-light mode by default, but in order to explicitly configure your node to run as an ultra-light node, use the following options:
 
@@ -4260,6 +4275,8 @@ Bee will start in ultra-light mode by default, but in order to explicitly config
 ---
 
 ## Staking
+
+Staking locks up xBZZ so your full node can join the **redistribution game** and earn a share of the network's storage-rent rewards. Staking requires a fully synced full node and a minimum of 10 xBZZ, and the stake is non-refundable.
 
 ## Quickstart Guide
 
@@ -4378,7 +4395,7 @@ Only stake your xBZZ if you intend to participate as a full node, as withdrawals
 
 ### Requirements
 
-- A [full node](./node-types.md) - see full node [recommend specs](./node-types.md#recommended-specifications).  
+- A [full node](./node-types.md) - see full node [recommend specs](./node-types.md#full-node-specifications).  
 - A [high-performance RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
 - A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](./staking.md#reserve-doubling) is used).
 
@@ -4654,7 +4671,7 @@ Copy the binary number returned from the API:
 Use the binary number you just copied and set it as a string value for the `target-neighborhood` option in your config. 
 
 ```bash
-## bee.yaml
+# bee.yaml
 target-neighborhood: "01100011110"
 ```
 
@@ -5092,7 +5109,11 @@ Confirm that `hasSufficientFunds` is `true`, and `isFullySynced` is `true` befor
 
 #### Run sampler process to benchmark performance
 
-One of the most common issues affecting staking is the `sampler` process failing. The sampler is a resource intensive process which is run by nodes which are selected to take part in redistribution. The process may fail or time out if the node's hardware specifications aren't high enough. To check a node's performance the `/rchash` endpoint of the API may be used. See the `/rchash` section of the [Bee API page for usage details](./bee-api.md). 
+One of the most common issues affecting staking is the `sampler` process failing. 
+The sampler is a CPU-intensive process which is run by nodes which are selected to take part in redistribution. 
+It does not need much memory, but on a slow processor or a slow disk it may fail or time out; 4 cores are sufficient. 
+To check a node's performance, run `swarm-cli utility rchash`, or call the `/rchash` endpoint of the API directly. 
+See the `/rchash` section of the [Bee API page for usage details](./bee-api.md#rchash). 
 
 If you are still experiencing problems, you can find more help in the [node-operators](https://discord.gg/kHRyMNpw7t) Discord channel (for your safety, do not accept advice from anyone sending a private message on Discord).
 
@@ -5209,7 +5230,7 @@ Nodes should not be shut down or updated in the middle of a round they are playi
 ## Version compatibility and upgrade path
 
 The Swarm network has a **minimum supported Bee version**.
-It is currently **v2.8.0**, the release which introduced a breaking p2p protocol change, so nodes running an older protocol can no longer connect to the network.
+The minimum supported version is currently **v2.8.0**, the release that introduced a breaking p2p protocol change, so nodes running an older protocol can no longer connect to the network.
 
 When upgrading across a breaking protocol change, do not skip the release that introduced it.
 Upgrade *through* that version so any one-time data migrations run while they still exist in the code, since Bee removes old migration and compatibility code once a version is no longer supported.

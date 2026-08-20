@@ -477,15 +477,40 @@ If your node is not operating in the correct mode, this can help you to diagnose
 
 ### _/rchash_
 
-Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash,
-which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game),
-and will report the amount of time it took to generate the hash. This is useful for
-getting a performance benchmark to ensure that your node's hardware is sufficient.
+Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. 
+This is useful for getting a performance benchmark to ensure that your node's processor and disk are fast enough.
+
+<Tabs
+defaultValue="swarm-cli"
+values={[
+{label: 'Swarm CLI', value: 'swarm-cli'},
+{label: 'API', value: 'api'},
+]}>
+<TabItem value="swarm-cli">
+
+The [`swarm-cli`](./swarm-cli.md) command doesn't require arguments.
+It reads the node's overlay address and committed depth, and derives the anchor and depth parameters from them.
+
+```bash
+swarm-cli utility rchash
+```
+
+Pass `--depth` to benchmark against a depth other than the node's current one.
+
+The command gives as a result the time it took to generate the reserve commitment hash. 
+
+```bash
+Reserve sampling duration: 360.37808911 seconds
+```
+
+</TabItem>
+
+<TabItem value="api">
 
 The `/rchash` endpoint has 3 parameters: `depth`, `anchor1`, and `anchor2`.
-For both anchor parameters, use the first 4 hex digits from your node's overlay
-address (which you can find from the `/addresses` endpoint). For depth, use the
-current storage depth of your node from the `/status` endpoint (`storageRadius` value):
+For both anchor parameters, use the first 4 hex digits from your node's overlay address (which you can find from the `/addresses` endpoint). 
+For depth, use your node's `committedDepth` from the `/status` endpoint. 
+For nodes which do not use [reserve doubling](./staking.md#reserve-doubling), `committedDepth` is equal to `storageRadius`:
 
 ```text
 /rchash/{depth}/{anchor1}/{anchor2}
@@ -519,15 +544,22 @@ successful result:
 }
 ```
 
+</TabItem>
+</Tabs>
+
 The `durationSeconds` value should not exceed roughly 6 minutes (360 seconds).
 
+:::caution A single measurement is not a guarantee
+Sampling time scales with how full the node's reserve is within its radius, since the sampler walks every chunk in radius. 
+Reserve occupancy depends on network conditions rather than on anything the operator sets, so a result measured against a half-full reserve says little about the same node once the reserve fills up. 
+A node holding around 2M chunks can complete a sample in roughly half the time of one at the full default reserve capacity of about 4M chunks. 
+Aim for a comfortable margin below 360 seconds; a marginal pass is not enough.
+:::
+
 :::warning Slow results
-If `durationSeconds` is much longer than 360 seconds (for example, 1191 seconds /
-~20 minutes), the node will likely fail to submit proofs in time during the
-redistribution game, resulting in missed rewards or freezing. SSD speed and RAM
-are typically the main bottlenecks, since the sampler does heavy random I/O
-across the reserve. Upgrade to a faster SSD first, then consider more RAM or a
-faster processor.
+If `durationSeconds` is much longer than 360 seconds (for example, 1191 seconds / ~20 minutes), the node will likely fail to submit proofs in time during the redistribution game, resulting in missed rewards or freezing. 
+The sampler reads every chunk in radius from local storage, so disk and processor speed are typically the bottlenecks. 
+Upgrade to a faster SSD first, then consider a faster processor or more cores.
 :::
 
 If while running the `/rchash` command there is an evictions related error such
@@ -570,7 +602,7 @@ This is guide contains a detailed explanation of how to use the ACT feature, but
 
 In this section we'll provide information on how to use the **swarm-cli** to upload, download data with ACT or update the grantee list. 
 
-### Upload
+## Upload
 
 Uploading data without ACT to the network remains unchanged.
 
@@ -585,7 +617,7 @@ If the provided **act-history-address** is invalid then the request will fail wi
 
 The response returns the newly created reference encrypted with ACT and the header contains history reference.
 
-### Download
+## Download
 
 Downloading data which was uploaded without ACT from the network remains unchanged.
 
@@ -598,11 +630,11 @@ Here **act** indicates that the **swarm_hash** shall be decrypted using the cont
 If the **act-history-address** or **act-publisher** flags are omitted then the request is treated as a "usual" download.
 If the data was uploaded with ACT and we try to download it without the ACT flags then the request will fail with a not found error.
 
-### Grantee management
+## Grantee management
 
 Updating a grantee list literally means patching a json file containing the list of grantee swarm public keys.
 
-#### Create
+### Create
 
 A brand new grantee list can be created using the following command:
 ```bash
@@ -620,7 +652,7 @@ where **grantees.json** shall contain the key **grantees** with the list of publ
 The response returns the newly created and encrypted grantee list and the history reference. Only the publisher can decrypt and therefore access the list.
 If **act-history-address** is provided then the grantee list is uploaded as the newest version under that history.
 
-#### Patch
+### Patch
 
 ```bash
 swarm-cli grantee patch grantees-patch.json --reference $grantee_reference --history $grantee_history_reference --stamp $stamp_id
@@ -639,7 +671,7 @@ The **grantee_history_reference** indicates the reference of historical version 
 
 **Limitation**: If an update is called again within a second from the latest upload/update of a grantee list, then mantaray save fails with an invalid input error, because the key (timestamp) already exists, hence a new fork is not created.
 
-#### Get
+### Get
 
 As stated above, only the publisher can decrypt and therefore access the list with the following command:
 ```bash
@@ -1161,7 +1193,6 @@ Key takeaways:
 ---
 
 ## Manage Files
-
 
 In the [Host a Webpage](/docs/develop/host-your-website) guide you uploaded a directory and got back a single Swarm reference that serves your site. That reference points to a **manifest** — a data structure that maps relative paths to content. This guide explores manifests directly: how to inspect them, add a file without re-uploading everything, and move a file by remapping a path.
 
@@ -1689,7 +1720,7 @@ Anyone with access to it can publish to your feed.
 *It is recommended to use a separate publishing key for each feed.*
 :::
 
-#### Example Script
+### Example Script
 
 :::tip
 The script below refers to some core feed concepts such as the feed "topic" and "writer". To learn more about these concepts and feeds in general, refer to the [bee-js documentation](https://bee-js.ethswarm.org/docs/soc-and-feeds/#feeds).
@@ -1766,7 +1797,7 @@ or through your own node:
 http://localhost:1633/bzz/yourname.eth/
 ```
 
-#### Using the Official ENS Guide
+### Using the Official ENS Guide
 
 ENS provides a clear walkthrough with screenshots showing how to add a content hash to your domain with their [easy to use app](https://app.ens.domains/):
 
@@ -1779,7 +1810,7 @@ The guide covers:
 * Adding a Content Hash
 * Confirming the transaction
 
-#### Swarm-Specific Step
+### Swarm-Specific Step
 
 When you reach Step 2 in the ENS guide (“Add content hash record”), enter your Swarm reference in the following format:
 
@@ -2532,8 +2563,6 @@ This architecture scales to hundreds of feeds and can represent complex data str
 
 ## Website Routing
 
-# Routing on Swarm
-
 In the [Manage Files](/docs/develop/files) guide you saw that a directory upload creates a manifest — a data structure mapping paths to content. Routing on Swarm is a direct consequence: every URL your site serves must correspond to an entry in that manifest. This guide covers the two main strategies for giving your site clean, navigable URLs.
 
 Swarm does not behave like a traditional web server — there is no server-side routing, and every route must correspond to a real file inside the site [manifest](./tools-and-features/manifests.md).
@@ -2573,7 +2602,7 @@ Swarm has no server backend running code and so can’t rewrite paths. One appro
 
 You can do this easily using a template from **create-swarm-app** and then adding your own pages.
 
-#### 1. Create a New Vite + React Project (with `create-swarm-app`)
+### 1. Create a New Vite + React Project (with `create-swarm-app`)
 
 Run:
 
@@ -2595,7 +2624,7 @@ package.json
 
 You now have a fully working Vite/React app ready for Swarm uploads.
 
-#### 2. Install React Router
+### 2. Install React Router
 
 Navigate to the project directory:
 
@@ -2611,7 +2640,7 @@ npm install react-router-dom
 
 This gives you client-side navigation capability.
 
-#### 3. Switch the App to Use Hash-Based Routing
+### 3. Switch the App to Use Hash-Based Routing
 
 Swarm only serves literal files, so `/#/about` is the only reliable way to have “pages.”
 
@@ -2645,7 +2674,7 @@ This gives you usable routes:
 /#/anything → React 404 page
 ```
 
-#### 4. Add Your Page Components
+### 4. Add Your Page Components
 
 Create your page components inside `./src`:
 
@@ -2688,7 +2717,7 @@ export function NotFound() {
 }
 ```
 
-#### 5. Add a Static `404.html` for Non-Hash URLs
+### 5. Add a Static `404.html` for Non-Hash URLs
 
 Swarm still needs a fallback for URLs like:
 
@@ -2728,7 +2757,7 @@ Vite will automatically include this in `dist/`.
 This file handles **non-hash** missing paths.
 React handles **hash** missing paths.
 
-#### 6. Build the Project
+### 6. Build the Project
 
 Before uploading, compile the Vite app into a static bundle:
 
@@ -2747,7 +2776,7 @@ dist/
 
 Everything inside `dist/` will be uploaded to your Swarm feed.
 
-#### 7. Deploy Site
+### 7. Deploy Site
 
 The project includes an `upload.js` script that uploads `./dist` to Swarm and publishes the result to a feed (so your URL stays stable across re-uploads). Set up your `.env` and run it:
 
@@ -3052,8 +3081,6 @@ values={[
 ]}>
 <TabItem value="api">
 
-#### API
-
 ```bash
 curl -s -X POST http://localhost:1633/stamps/100000000/20
 ```
@@ -3068,8 +3095,6 @@ curl -s -X POST http://localhost:1633/stamps/100000000/20
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 ```bash
 swarm-cli stamp buy --depth 20 --amount 100000000
@@ -3147,8 +3172,6 @@ values={[
 ]}>
 <TabItem value="api">
 
-#### API
-
 ```bash
 curl http://localhost:1633/stamps
 ```
@@ -3177,8 +3200,6 @@ curl http://localhost:1633/stamps
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 ```bash
 swarm-cli stamp list
@@ -3217,8 +3238,6 @@ values={[
 ]}>
 <TabItem value="api">
 
-#### API
-
 ```bash
 curl http://localhost:1633/stamps
 ```
@@ -3247,8 +3266,6 @@ curl http://localhost:1633/stamps
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 ```bash
 swarm-cli stamp list
@@ -3281,8 +3298,6 @@ values={[
 ]}>
 <TabItem value="api">
 
-#### API
-
 ```bash
 curl -X PATCH "http://localhost:1633/stamps/topup/6d32e6f1b724f8658830e51f8f57aa6029f82ee7a30e4fc0c1bfe23ab5632b27/10000000"
 ```
@@ -3290,8 +3305,6 @@ curl -X PATCH "http://localhost:1633/stamps/topup/6d32e6f1b724f8658830e51f8f57aa
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 List available stamps.
 
@@ -3337,8 +3350,6 @@ values={[
 {label: 'Swarm CLI', value: 'swarm-cli'},
 ]}>
 <TabItem value="api">
-
-#### API
 
 Here we call the `/stamps` endpoint and find a batch with `depth` 24 and a `batchTTL` of 2083223 which we wish to dilute:
 
@@ -3413,8 +3424,6 @@ We can see the new `depth` of 26 and a decreased `batchTTL` of 519265.
 </TabItem>
 
 <TabItem value="swarm-cli">
-
-#### Swarm CLI
 
 List available stamps, make sure to use the `--verbose` flag so that we can see the batch depth.
 
@@ -3607,7 +3616,7 @@ An example download request may look something like this:
 
 For this request, the redundancy strategy is set to 3 (RACE), which means that it will initiate a request for all data and parity chunks and continue to retrieve chunks until enough have been retrieved to reconstruct the source data. This is in contrast with the default strategy of DATA where only the data chunks will be retrieved.
 
-However, as noted above, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](./../upload-and-download.md) without any additional options set):
+However, it is recommended to not adjust the default settings for these options, so a typical request would actually look like this (which is the exact same as a [normal download](./../upload-and-download.md) without any additional options set):
 
 ```bash
     curl -OJL http://localhost:1633/bzz/c02e7d943fbc0e753540f377853b7181227a83e773870847765143681511c97d/
@@ -3639,11 +3648,11 @@ share your implementations in other languages in the
 [Discord Server](https://discord.gg/kHRyMNpw7t).
 :::
 
-### What are Feeds?
+## What are Feeds?
 
 A feed is a collection of Single Owner Chunks with predicatable addresses. This enables creators to upload pointers to data so that consumers of the feed are able to find the data in Swarm using only an _Ethereum address_ and _Topic ID_.
 
-### Creating and Updating a Feed
+## Creating and Updating a Feed
 
 In order to edit a feed, you will need to sign your chunks using an
 Ethereum keypair. For the intrepid, check out the [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) on precise details on how to do
@@ -3652,11 +3661,11 @@ and [swarm-cli](./../../bee/working-with-bee/swarm-cli.md) provide facilities
 to achieve this using JavaScript and a node-js powered command line
 tool respectively.
 
-### No More ENS Transaction Charges
+## No More ENS Transaction Charges
 
 Swarm's feeds provide the ability to update your immutable content in a mutable world. Simply reference your feed's `manifest address` as the `content hash` in your ENS domain's resolver, and Bee will automatically provide the latest version of your website.
 
-### Use Cases for Feeds
+## Use Cases for Feeds
 
 Feeds are a hugely versatile data structure. They allow you to host frequently updated content such as websites, RSS feeds (for podcasts, news, etc.), or even a DNS style architecture on top of Swarm's decentralized DISC.
 
@@ -3672,7 +3681,7 @@ Another tool which is currently popular for running Bee in gateway mode is [Gate
 
 It acts as a reverse proxy that runs in front of a Bee node, allowing you to expose your node publicly. It proxies the Bee HTTP API and content endpoints, while optionally adding access control, postage batch auto-buy, and other optional features.
 
-### Public Access to Swarm
+## Public Access to Swarm
 
 A gateway can be used to run a public endpoint that allows users to:
 
@@ -3682,7 +3691,7 @@ A gateway can be used to run a public endpoint that allows users to:
 
 This makes Swarm content accessible to any web client, even if the user is not running a Bee node locally.
 
-### Authentication, Access Control, and Policy
+## Authentication, Access Control, and Policy
 
 The Swarm Gateway also acts as an access control and content moderation layer in front of a Bee node.
 
@@ -3697,7 +3706,7 @@ This makes it possible to run public, private, or semi-public gateways while ret
 
 For production deployments, the gateway is typically run behind an HTTPS reverse proxy to ensure encrypted connections.
 
-### Stamp Management
+## Stamp Management
 
 The Swarm Gateway can optionally manage postage stamps on behalf of the operator, including:
 
@@ -4021,7 +4030,6 @@ Congratulations! You've just sent your first GSOC message.
 
 ## Manifests
 
-
 Manifests define how files and folders are organized in Swarm. Instead of a flat list of uploaded files, Bee encodes directory structure as a compact prefix [trie](https://en.wikipedia.org/wiki/Trie). This allows URLs like `/images/logo.png`, `/docs/readme.txt`, or `/` to resolve efficiently to the correct Swarm references. Whenever you upload a directory — via `/bzz`, `bee-js`, or `swarm-cli` — Bee automatically creates and uploads a manifest that enables a filesystem-like layer inside Swarm. The manifest reference itself is the root reference for your uploaded directory.
 
 Manifests provide:
@@ -4213,7 +4221,7 @@ Each time a chunk is accessed, it is moved back to the end of the deletion queue
 
 Bee nodes provide a facility to **pin** important content so that it is not deleted by the node's garbage collection routine. Chunks can be _pinned_ either during upload, or retrospectively using the Swarm reference.
 
-## Pin During Upload
+## How do I pin content during upload? {#pin-during-upload}
 
 To store content so that it will persist even when Bee's garbage collection routine is deleting old chunks, we simply pass the `Swarm-Pin` header set to `true` when uploading.
 
@@ -4227,7 +4235,7 @@ curl -H "Swarm-Pin: true" -H "Swarm-Postage-Batch-Id: 78a26be9b42317fe6f0cbea3e4
 }
 ```
 
-## Administer Pinned Content
+## How do I manage pinned content? {#administer-pinned-content}
 
 To check what content is currently pinned on your node, query the `pins` endpoint of your Bee API:
 
@@ -4251,7 +4259,7 @@ curl localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a8782740
 
 A `404` response indicates the content is not available.
 
-### Unpinning Content
+### How do I unpin content? {#unpinning-content}
 
 We can unpin content by sending a `DELETE` request to the pinning endpoint using the same reference:
 
@@ -4277,7 +4285,7 @@ curl localhost:1633/pins/1bfe7c3ce4100ae7f02b62e38d3e8d4c3a86ea368349614a8782740
 Pinning and unpinning is possible for files (as in the example) and also the chunks, directories, and bytes endpoints. See the [API](/api/) documentation for more details.
 :::
 
-### Pinning Already Uploaded Content
+### How do I pin already-uploaded content? {#pinning-already-uploaded-content}
 
 The previous example showed how we can pin content upon upload. It is also possible to pin content that is already uploaded and present in the Swarm.
 
@@ -4613,11 +4621,11 @@ Never use public gateways when requesting full encrypted references. The hash co
 When running without a blockchain connection, bandwidth incentive payments (SWAP) cannot be made so there is a risk of getting blocklisted by other peers for unpaid services.
 :::
 
-#### Configuration
+## Configuration
 
 To run Bee as an ultra-light node `full-node` and `swap-enable` must both be set to `false`, and the `blockchain-rpc-endpoint` value should be set to an empty string `""` or commented out in the [configuration](./../bee/working-with-bee/configuration.md).
 
-#### Mode of Operation
+## Mode of Operation
 
 The target audience for this mode of operations are users who want to try out running a node but don't
 want to go through the hassle of blockchain onboarding. Ultra-light nodes will be able to download data as long as the data consumed does not exceed the payment threshold (`payment-threshold` in [configuration](./../bee/working-with-bee/configuration.md)) set by peers they connect to.
@@ -4922,7 +4930,7 @@ The Bee API exposes three HTTP endpoints:
 - **`/bytes`** — upload & download raw data
 - **`/chunks`** — upload & download individual chunks
 
-#### Upload with **/bzz**
+### Upload with **/bzz**
 
 While `bee-js` allows postage stamp batches to be purchased by specifying storage duration and data size, the raw Bee API requires `amount` and `depth` parameters directly. The relationship between these parameters and the storage size and duration of the batch is complex, so `bee-js` is strongly encouraged for newcomers. [Learn more](./tools-and-features/buy-a-stamp-batch.md).
 
