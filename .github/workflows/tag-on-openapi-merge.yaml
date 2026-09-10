@@ -3,9 +3,9 @@ name: tag on openapi merge
 # When an openapi-auto-update PR (from update-openapi.yaml) is merged, tag the merge
 # commit with the matching Bee version (vX.Y.Z). That tag is what gh-pages.yaml deploys on.
 #
-# Requires the BOT_PAT secret (same token as update-openapi.yaml). It is used so the tag
-# push triggers gh-pages.yaml — a tag pushed with the default GITHUB_TOKEN does NOT trigger
-# other workflows. The job fails loudly if BOT_PAT is missing/expired.
+# Uses a short-lived bee-runner App token (same as update-openapi.yaml). It is used so the
+# tag push triggers gh-pages.yaml — a tag pushed with the default GITHUB_TOKEN does NOT
+# trigger other workflows. The job fails loudly if the App token cannot be minted.
 
 on:
   pull_request:
@@ -22,11 +22,21 @@ jobs:
       startsWith(github.event.pull_request.head.ref, 'bot/update-openapi-')
     runs-on: ubuntu-22.04
     steps:
+      - name: Generate App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.BEE_RUNNER_APP_ID }}
+          private-key: ${{ secrets.BEE_RUNNER_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: bee-docs
+          permission-contents: write
+
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.base.ref }}
           fetch-depth: 0
-          token: ${{ secrets.BOT_PAT }}
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Derive tag from branch
         id: tag
