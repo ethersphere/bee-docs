@@ -4,10 +4,11 @@ name: update openapi
 # openapi/, bumps the Bee version strings in the install docs, and opens (or updates)
 # a PR. Prereleases (-rc*, -beta, v2.7.1a, v2.5.0-v8, ...) are ignored.
 #
-# Requires the GHA_PAT_ADVANCED secret (a classic PAT with public_repo scope, or a fine-grained PAT
-# with contents + pull-requests write). It is used so the auto-PR triggers build.yaml CI —
-# PRs opened with the default GITHUB_TOKEN do NOT trigger other workflows. The job fails
-# loudly if GHA_PAT_ADVANCED is missing/expired rather than silently skipping CI.
+# Uses a short-lived bee-runner GitHub App token (BEE_RUNNER_APP_ID / BEE_RUNNER_KEY),
+# minted scoped to this repo with contents + pull-requests write and expiring in ~1h.
+# An App token is used so the auto-PR triggers build.yaml CI — PRs opened with the
+# default GITHUB_TOKEN do NOT trigger other workflows. The job fails loudly if the App
+# token cannot be minted rather than silently skipping CI.
 
 on:
   schedule:
@@ -113,11 +114,26 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Generate App token
+        id: app-token
+        if: ${{ steps.changes.outputs.changed == 'true' }}
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.BEE_RUNNER_APP_ID }}
+          private-key: ${{ secrets.BEE_RUNNER_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: bee-docs
+          permission-contents: write
+          permission-pull-requests: write
+          # labels: are applied via the issues API, and tag-on-openapi-merge.yaml
+          # gates on the openapi-auto-update label, so this is load-bearing.
+          permission-issues: write
+
       - name: Create or update PR
         if: ${{ steps.changes.outputs.changed == 'true' }}
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8.1.1
         with:
-          token: ${{ secrets.GHA_PAT_ADVANCED }}
+          token: ${{ steps.app-token.outputs.token }}
           branch: bot/update-openapi-${{ steps.resolve.outputs.new_tag }}
           commit-message: "chore: update OpenAPI specs and version refs to Bee ${{ steps.resolve.outputs.new_tag }}"
           title: "Update OpenAPI specs to Bee ${{ steps.resolve.outputs.new_tag }}"
