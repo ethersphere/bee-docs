@@ -30,17 +30,17 @@ Run the shell script using `curl` or `wget`:
 
 
 :::tip
-We specify `TAG=v2.8.1` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
+We specify `TAG=v2.8.2` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
 :::
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.1 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.2 bash
 ```
 
 OR
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.1 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.2 bash
 ```
 
 Verify installation:
@@ -109,7 +109,7 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.1-7cf53193"
+"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.2-7cf53193"
 "time"="2026-07-07 16:52:59.793257" "level"="info" "logger"="node" "msg"="swarm public key"
 "public_key"="02d8d7e1ca6b3b43653ae27e35a375dd74e3ce2f40587fd264bc7268ed918650ab"
 "time"="2026-07-07 16:53:00.087534" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02aaae4ede42f47f48aa5182df4b94039ca71254f44ebc5383d5a67f71fe7e6156"
@@ -181,7 +181,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.8.1-7cf53193
+Version: 2.8.2-7cf53193
 Mode: light
 
 Chainsync
@@ -211,7 +211,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.8.1-7cf53193
+Version: 2.8.2-7cf53193
 Mode: light
 
 Chainsync

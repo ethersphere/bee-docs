@@ -481,12 +481,12 @@ curl -s http://localhost:1633/health | jq
 
 To confirm a successful update, check that the value for the `"version"` field in the results corresponds to the version number of the [latest](https://github.com/ethersphere/bee/releases/latest) Bee release. 
 
-For example, if the latest version was 2.8.1, it would look like this:
+For example, if the latest version was 2.8.2, it would look like this:
 
 ```json
 {
   "status": "ok",
-  "version": "2.8.1-7cf53193",
+  "version": "2.8.2-7cf53193",
   "apiVersion": "8.1.0"
 }
 ```
