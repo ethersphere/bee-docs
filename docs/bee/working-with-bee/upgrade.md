@@ -23,11 +23,17 @@ The minimum supported version is currently **v2.8.0**, the release that introduc
 When upgrading across a breaking protocol change, do not skip the release that introduced it.
 Upgrade *through* that version so any one-time data migrations run while they still exist in the code, since Bee removes old migration and compatibility code once a version is no longer supported.
 
-Bee v2.8.1 is **non-disruptive for nodes already on v2.8.0**: it makes no breaking p2p protocol changes, so you can upgrade in place using the steps below.
+Bee v2.8.2 is **non-disruptive for nodes already on v2.8.0 or v2.8.1**: it makes no breaking p2p protocol changes, so you can upgrade in place using the steps below.
 
 :::warning
-**If you are running Bee v2.6.0 or older:** Bee v2.8.1 removes the last of the v2.6.0 backward-compatibility code, so you cannot upgrade to it directly.
-Either upgrade stepwise (**v2.6.0 → v2.8.0 → v2.8.1**) so the data migrations run, or reinstall the node fresh on v2.8.1.
+**If you are running Bee v2.6.0 or older:** Bee v2.8.1 removed the last of the v2.6.0 backward-compatibility code, so you cannot upgrade directly to v2.8.1 or later.
+Either upgrade stepwise (**v2.6.0 → v2.8.0 → v2.8.2**) so the data migrations run, or reinstall the node fresh on v2.8.2.
+:::
+
+:::info
+If you have tracing enabled, note that Bee v2.8.2 replaces Jaeger/OpenTracing with OpenTelemetry (OTLP export).
+Point `tracing-endpoint` at an OTLP-capable collector before upgrading, and review the new tracing options in the [v2.8.2 release notes](https://github.com/ethersphere/bee/releases/tag/v2.8.2).
+With tracing disabled, nothing changes.
 :::
 
 
@@ -46,26 +52,38 @@ sudo apt-get update
 sudo apt-get upgrade bee
 ```
 
-And will see output like this after a successful upgrade:
-```
-Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-Calculating upgrade... Done
+You will see output like this after a successful upgrade:
+
+```text
 The following packages will be upgraded:
   bee
 1 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
-Need to get 0 B/27.2 MB of archives.
-After this operation, 73.7 kB of additional disk space will be used.
-Do you want to continue? [Y/n] Y
-(Reading database ... 103686 files and directories currently installed.)
-Preparing to unpack .../archives/bee_2.0.0_amd64.deb ...
-Unpacking bee (2.0.0) over (1.17.3) ...
-Setting up bee (2.0.0) ...
-Installing new version of config file /etc/default/bee ...
+Need to get 57.1 MB of archives.
+After this operation, 3120 kB of additional disk space will be used.
+Preparing to unpack .../archives/bee_2.8.2_arm64.deb ...
+Unpacking bee (2.8.2) over (2.8.1) ...
+Setting up bee (2.8.2) ...
+Installing new version of config file /etc/bee/bee.yaml ...
 ```
 
-Make sure to pay attention to any prompts, read them carefully, and respond to them with your preference.
+If you have edited `/etc/bee/bee.yaml`, the upgrade stops and asks what to do with it:
+
+```text
+Configuration file '/etc/bee/bee.yaml'
+ ==> Modified (by you or by a script) since installation.
+ ==> Package distributor has shipped an updated version.
+   What would you like to do about it ?  Your options are:
+    Y or I  : install the package maintainer's version
+    N or O  : keep your currently-installed version
+      D     : show the differences between the versions
+      Z     : start a shell to examine the situation
+ The default action is to keep your current version.
+*** bee.yaml (Y/I/N/O/D/Z) [default=N] ?
+```
+
+Answer `N` to keep your configuration, including your password and RPC endpoint.
+The new default configuration is saved next to it as `/etc/bee/bee.yaml.dpkg-dist`, so you can compare the two afterwards.
+Answering `Y` replaces your configuration with the default one.
 
 You may now start your node again:
 
@@ -76,6 +94,7 @@ sudo systemctl start bee
 ### Manual Installations
 
 To upgrade your manual installation, simply stop Bee, replace the Bee binary and restart.
+If you installed Bee with the [shell script](../installation/shell-script.md), you can replace the binary by running the script again with the new version's `TAG`.
 
 ### Docker
 
