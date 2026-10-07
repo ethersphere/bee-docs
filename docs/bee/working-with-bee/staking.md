@@ -486,8 +486,8 @@ For example, if the latest version was 2.8.2, it would look like this:
 ```json
 {
   "status": "ok",
-  "version": "2.8.2-7cf53193",
-  "apiVersion": "8.1.0"
+  "version": "2.8.2-7e703f49",
+  "apiVersion": "8.1.1"
 }
 ```
 
