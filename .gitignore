@@ -9,6 +9,8 @@ resources
 .netlify
 /src/pages/awesome-swarm.mdx
 /static/openapi.yaml
+/static/SwarmCommon.yaml
+/static/.well-known/agent.json
 /static/cheatsheets
 test
 docs/references/awesome-list.mdx
