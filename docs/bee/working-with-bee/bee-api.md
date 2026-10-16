@@ -584,7 +584,7 @@ curl -s http://localhost:1633/health | jq
 ```json
 {
   "status": "ok",
-  "version": "2.8.2-7e703f49",
+  "version": "2.8.3-7e703f49",
   "apiVersion": "8.1.1"
 }
 ```
