@@ -305,7 +305,10 @@ curl -s http://localhost:1633/redistributionstate | jq
   "block": 32354719,
   "reward": "1804537795127017472",
   "fees": "592679945236926714",
-  "isHealthy": true
+  "isHealthy": true,
+  "enabled": true,
+  "hasCommittedThisRound": false,
+  "hasRevealedThisRound": false
 }
 ```
 
@@ -324,6 +327,9 @@ curl -s http://localhost:1633/redistributionstate | jq
 * `"reward"` - The total all-time reward in PLUR earned by your node.
 * `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
 * `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
+* `"enabled"` - Whether your node will commit in new rounds of the redistribution game. From Bee v2.8.3, you can pause and resume participation with a `PATCH` request to this endpoint (see [Pause Redistribution Participation](./staking.md#pause-redistribution-participation)).
+* `"hasCommittedThisRound"` - Whether your node has committed in the current round. If this is `false`, you can shut down your node without the risk of being frozen.
+* `"hasRevealedThisRound"` - Whether your node has revealed in the current round. After your node commits, it must reveal before it's safe to shut down.
 
 ### _/reservestate_
 
