@@ -12,6 +12,7 @@ Bee sure to [back up](./backups.md) your keys and [cash out your cheques](./cash
 
 :::warning
 Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get). See [staking section](./staking.md) for more information on staking and troubleshooting.
+From Bee v2.8.3, you can [pause redistribution participation](./staking.md#pause-redistribution-participation) to find a safe moment to shut down.
 :::
 
 
@@ -23,17 +24,29 @@ The minimum supported version is currently **v2.8.0**, the release that introduc
 When upgrading across a breaking protocol change, do not skip the release that introduced it.
 Upgrade *through* that version so any one-time data migrations run while they still exist in the code, since Bee removes old migration and compatibility code once a version is no longer supported.
 
-Bee v2.8.2 is **non-disruptive for nodes already on v2.8.0 or v2.8.1**: it makes no breaking p2p protocol changes, so you can upgrade in place using the steps below.
+Bee v2.8.3 is **non-disruptive for nodes already on v2.8.0, v2.8.1, or v2.8.2**: it makes no breaking p2p protocol changes, so you can upgrade in place using the steps below.
 
 :::warning
 **If you are running Bee v2.6.0 or older:** Bee v2.8.1 removed the last of the v2.6.0 backward-compatibility code, so you cannot upgrade directly to v2.8.1 or later.
-Either upgrade stepwise (**v2.6.0 → v2.8.0 → v2.8.2**) so the data migrations run, or reinstall the node fresh on v2.8.2.
+Either upgrade stepwise (**v2.6.0 → v2.8.0 → v2.8.3**) so the data migrations run, or reinstall the node fresh on v2.8.3.
 :::
 
 :::info
-If you have tracing enabled, note that Bee v2.8.2 replaces Jaeger/OpenTracing with OpenTelemetry (OTLP export).
+If you are upgrading from v2.8.1 or older with tracing enabled, note that Bee v2.8.2 replaced Jaeger/OpenTracing with OpenTelemetry (OTLP export).
 Point `tracing-endpoint` at an OTLP-capable collector before upgrading, and review the new tracing options in the [v2.8.2 release notes](https://github.com/ethersphere/bee/releases/tag/v2.8.2).
 With tracing disabled, nothing changes.
+:::
+
+:::info
+Bee v2.8.3 includes these changes that may affect your setup:
+
+- **One-time reserve migration:** On first start, full nodes re-verify stored chunks that are not content-addressed and remove any that are invalid.
+- **ACT on `/chunks` and `/soc`:** These endpoints no longer accept the `Swarm-Act` header. Use `/bzz` or `/bytes` for ACT uploads (see [Access Control](./../../develop/access-control.md)).
+- **Connection metrics:** `bee_libp2p_created_connection_count` and `bee_libp2p_handled_connection_count` now have `transport` and `public` labels. Update dashboards that use `count(...)` on these metrics to use `sum by (...)` instead.
+- **Gas limit fallback:** The `gas-limit-fallback` default has increased from 500000 to 900000.
+- **Postage sync:** The new [`postage-sync-block-range`](./configuration.md#postage-sync-block-range) option limits each postage log request to 1000 blocks by default.
+
+See the [v2.8.3 release notes](https://github.com/ethersphere/bee/releases/tag/v2.8.3) for the full list of changes.
 :::
 
 
