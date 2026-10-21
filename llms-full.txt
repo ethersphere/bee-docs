@@ -1259,7 +1259,7 @@ Prerequisites for installing directly from source are:
 3. Checkout the required version:
 
    ```bash
-   git checkout v2.8.2
+   git checkout v2.8.3
    ```
 
 4. Build the binary:
@@ -1275,7 +1275,7 @@ Prerequisites for installing directly from source are:
    ```
 
    ```
-   2.8.2
+   2.8.3
    ```
 
 6. (optional) Additionally, you may also like to move the Bee binary to somewhere in your `$PATH`
@@ -1746,9 +1746,9 @@ you connected. In Swarm, no Bee is left behind.
 The following is a guide for installing a Bee node using Docker. Docker images for Bee are hosted at [Docker Hub](https://hub.docker.com/r/ethersphere/bee). Using Docker to operate your Bee node offers many benefits, such as ease of deployment and consistency across environments. 
 
 :::caution
-In the examples below we specify the exact image version as 2.8.2. 
+In the examples below we specify the exact image version as 2.8.3. 
 It's recommended to only use the exact version number tags. 
-Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.8.2 in the commands below if there is a newer full release. 
+Make sure to check that you're on the latest version of Bee by reviewing the tags for Bee on [Docker Hub](https://hub.docker.com/r/ethersphere/bee/tags), and replace 2.8.3 in the commands below if there is a newer full release. 
 :::
 
 :::warning
@@ -1776,13 +1776,13 @@ docker run -d --name bee-1 \
   -e BEE_PASSWORD="flummoxedgranitecarrot" \
   -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" \
   -v bee-1:/home/bee/.bee \
-  ethersphere/bee:2.8.2 start
+  ethersphere/bee:2.8.3 start
 ```
 
 Here is the same command in a single line in case you run into issues with the line breaks in the command above:
 
 ```bash
-docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 -e BEE_API_ADDR=":1633" -e BEE_FULL_NODE="true" -e BEE_SWAP_ENABLE="true" -e BEE_PASSWORD="flummoxedgranitecarrot" -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" -v bee-1:/home/bee/.bee ethersphere/bee:2.8.2 start
+docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 -e BEE_API_ADDR=":1633" -e BEE_FULL_NODE="true" -e BEE_SWAP_ENABLE="true" -e BEE_PASSWORD="flummoxedgranitecarrot" -e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org" -v bee-1:/home/bee/.bee ethersphere/bee:2.8.3 start
 ```
 
 #### Command explained:
@@ -1798,7 +1798,7 @@ docker run -d --name bee-1 --restart always -p 127.0.0.1:1633:1633 -p 1634:1634 
 - **`-e BEE_PASSWORD="flummoxedgranitecarrot"`**: Sets the keystore password, make sure to replace with your own.
 - **`-e BEE_BLOCKCHAIN_RPC_ENDPOINT="https://xdai.fairdatasociety.org"`**: Connects to the Gnosis Chain.
 - **`-v bee-1:/home/bee/.bee`**: Persists node data in the `bee-1` volume.
-- **`ethersphere/bee:2.8.2 start`**: Runs Bee version 2.8.2 and starts the node.
+- **`ethersphere/bee:2.8.3 start`**: Runs Bee version 2.8.3 and starts the node.
 
 This setup runs the Bee node in a container, with full node functionality, SWAP enabled, and connections to the Gnosis blockchain for chequebook and postage stamp management, while persisting its data using a volume. 
 
@@ -1814,7 +1814,7 @@ If everything is set up correctly, you should see your Bee node listed:
 
 ```bash
 CONTAINER ID     IMAGE     COMMAND     CREATED     STATUS     PORTS     NAMES
-37f4ad8b4060   ethersphere/bee:2.8.2   "bee start"   6 seconds ago   Up 5 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-1
+37f4ad8b4060   ethersphere/bee:2.8.3   "bee start"   6 seconds ago   Up 5 seconds   127.0.0.1:1633->1633/tcp, 0.0.0.0:1634->1634/tcp, :::1634->1634/tcp   bee-1
 ```
 
 And check the logs:
@@ -1907,7 +1907,7 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.2-7e703f49"
+"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.3-8e9bb914"
 "time"="2026-07-07 16:52:59.793257" "level"="info" "logger"="node" "msg"="swarm public key"
 "public_key"="02d8d7e1ca6b3b43653ae27e35a375dd74e3ce2f40587fd264bc7268ed918650ab"
 "time"="2026-07-07 16:53:00.087534" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02aaae4ede42f47f48aa5182df4b94039ca71254f44ebc5383d5a67f71fe7e6156"
@@ -2842,17 +2842,17 @@ Although `BZZ` is the official symbol of the token on both Ethereum and Gnosis C
 Run the shell script using `curl` or `wget`:
 
 :::tip
-We specify `TAG=v2.8.2` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
+We specify `TAG=v2.8.3` to indicate which Bee version to install. You can find available versions in the ["releases" section](https://github.com/ethersphere/bee/releases) of the Bee GitHub repo.
 :::
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.2 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.3 bash
 ```
 
 OR
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.2 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.3 bash
 ```
 
 Verify installation:
@@ -2916,7 +2916,7 @@ damage to hardware or loss of funds associated with the Ethereum account connect
 No developers or entity involved will be liable for any claims and damages associated with your use,
 inability to use, or your interaction with other nodes or the software.
 
-"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.2-7e703f49"
+"time"="2026-07-07 16:52:59.641444" "level"="info" "logger"="node" "msg"="bee version" "version"="2.8.3-8e9bb914"
 "time"="2026-07-07 16:52:59.793257" "level"="info" "logger"="node" "msg"="swarm public key"
 "public_key"="02d8d7e1ca6b3b43653ae27e35a375dd74e3ce2f40587fd264bc7268ed918650ab"
 "time"="2026-07-07 16:53:00.087534" "level"="info" "logger"="node" "msg"="pss public key" "public_key"="02aaae4ede42f47f48aa5182df4b94039ca71254f44ebc5383d5a67f71fe7e6156"
@@ -2987,7 +2987,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.8.2-7e703f49
+Version: 2.8.3-8e9bb914
 Mode: light
 
 Chainsync
@@ -3017,7 +3017,7 @@ swarm-cli status
 ```bash
 Bee
 API: http://localhost:1633 [OK]
-Version: 2.8.2-7e703f49
+Version: 2.8.3-8e9bb914
 Mode: light
 
 Chainsync
@@ -3097,7 +3097,7 @@ Below is a step-by-step guide for installing and setting up your Bee node using 
 Run the install shell script using either `curl` or `wget`:
 
 :::caution
-In the example below, the version is specified using `TAG=v2.8.2`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
+In the example below, the version is specified using `TAG=v2.8.3`. Check the [latest Bee releases](https://github.com/ethersphere/bee/tags) and if needed, update the command to install the most recent version (note that in tags containing "rc," the abbreviation stands for "release candidate", and these versions should be used for testing purposes only). 
 :::
 
 :::info
@@ -3130,7 +3130,7 @@ values={[
 <TabItem value="curl">
 
 ```bash
-curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.2 bash
+curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.3 bash
 ```
 </TabItem>
 <TabItem value="wget">
@@ -3138,7 +3138,7 @@ curl -s https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TA
 **wget**
 
 ```bash
-wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.2 bash
+wget -q -O - https://raw.githubusercontent.com/ethersphere/bee/master/install.sh | TAG=v2.8.3 bash
 ```
 </TabItem>
 
@@ -4258,7 +4258,10 @@ curl -s http://localhost:1633/redistributionstate | jq
   "block": 32354719,
   "reward": "1804537795127017472",
   "fees": "592679945236926714",
-  "isHealthy": true
+  "isHealthy": true,
+  "enabled": true,
+  "hasCommittedThisRound": false,
+  "hasRevealedThisRound": false
 }
 ```
 
@@ -4277,6 +4280,9 @@ curl -s http://localhost:1633/redistributionstate | jq
 * `"reward"` - The total all-time reward in PLUR earned by your node.
 * `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
 * `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
+* `"enabled"` - Whether your node will commit in new rounds of the redistribution game. From Bee v2.8.3, you can pause and resume participation with a `PATCH` request to this endpoint (see [Pause Redistribution Participation](./staking.md#pause-redistribution-participation)).
+* `"hasCommittedThisRound"` - Whether your node has committed in the current round. If this is `false`, you can shut down your node without the risk of being frozen.
+* `"hasRevealedThisRound"` - Whether your node has revealed in the current round. After your node commits, it must reveal before it's safe to shut down.
 
 ### _/reservestate_
 
@@ -4536,8 +4542,8 @@ curl -s http://localhost:1633/health | jq
 ```json
 {
   "status": "ok",
-  "version": "2.8.2-7e703f49",
-  "apiVersion": "8.1.1"
+  "version": "2.8.3-8e9bb914",
+  "apiVersion": "8.2.1"
 }
 ```
 
@@ -4889,7 +4895,7 @@ Flags:
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
       --db-write-buffer-size uint                size of the database write buffer in bytes (default 33554432)
       --full-node                                cause the node to start in full mode
-      --gas-limit-fallback uint                  gas limit fallback when estimation fails for contract transactions (default 500000)
+      --gas-limit-fallback uint                  gas limit fallback when estimation fails for contract transactions (default 900000)
   -h, --help                                     help for printconfig
       --mainnet                                  triggers connect to main net bootnodes. (default true)
       --minimum-gas-tip-cap uint                 minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
@@ -4909,6 +4915,7 @@ Flags:
       --payment-tolerance-percent int            excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
       --postage-stamp-address string             postage stamp contract address
       --postage-stamp-start-block uint           postage stamp contract start block number
+      --postage-sync-block-range uint            maximum number of blocks per eth_getLogs request when syncing postage contract events (default 1000)
       --pprof-mutex                              enable pprof mutex profile
       --pprof-profile                            enable pprof block profile
       --price-oracle-address string              price oracle contract address
@@ -5025,7 +5032,7 @@ db-write-buffer-size: "33554432"
 # cause the node to start in full mode
 full-node: false
 # gas limit fallback when estimation fails for contract transactions
-gas-limit-fallback: "500000"
+gas-limit-fallback: "900000"
 # help for printconfig
 help: false
 # triggers connect to main net bootnodes.
@@ -5064,6 +5071,8 @@ payment-tolerance-percent: 25
 postage-stamp-address: ""
 # postage stamp contract start block number
 postage-stamp-start-block: "0"
+# maximum number of blocks per eth_getLogs request when syncing postage contract events
+postage-sync-block-range: "1000"
 # enable pprof mutex profile
 pprof-mutex: false
 # enable pprof block profile
@@ -5420,6 +5429,22 @@ block-sync-interval: 10
 
 The equivalent flag is `--block-sync-interval` and the environment variable is `BEE_BLOCK_SYNC_INTERVAL`. 
 This is especially useful for operators on paid or rate-limited RPC providers who want to lower request volume.
+
+### Postage sync block range
+
+Bee syncs postage stamp contract events by requesting logs from your RPC endpoint in fixed block ranges.
+Starting with Bee v2.8.3, the `postage-sync-block-range` option sets the maximum number of blocks in each `eth_getLogs` request:
+
+```yaml
+# bee.yaml
+postage-sync-block-range: 1000
+```
+
+- The default is `1000`, which works with RPC endpoints that limit log requests to 1000 blocks, such as Nethermind 2.0.0 and later with default settings.
+- If your RPC endpoint allows wider ranges, a higher value lets your node catch up with the chain in fewer requests.
+- `0` falls back to the default.
+
+The equivalent flag is `--postage-sync-block-range` and the environment variable is `BEE_POSTAGE_SYNC_BLOCK_RANGE`.
 
 ## SIMD hashing (Optional)
 
@@ -6088,6 +6113,35 @@ Only stake your xBZZ if you intend to participate as a full node, as withdrawals
 - A [high-performance RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
 - A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](./staking.md#reserve-doubling) is used).
 
+### Minimum Deposit
+
+Starting with Bee v2.8.3, the [`GET /stake`](/api/#tag/Staking/paths/~1stake/get) endpoint also returns `minimumDeposit`, the smallest amount in [PLUR](./../../references/glossary.md#plur) that your node can deposit as its next stake:
+
+```bash
+curl -s http://localhost:1633/stake | jq
+```
+
+```json
+{
+  "stakedAmount": "100000000000000000",
+  "minimumDeposit": "1"
+}
+```
+
+- For a node's first deposit, the minimum is 10 xBZZ, or 20 xBZZ with [reserve doubling](#reserve-doubling).
+- For later deposits, the minimum is 1 PLUR, unless your node needs more to keep its committed stake from decreasing after the storage price has increased, or to meet the 20 xBZZ total with reserve doubling.
+- `minimumDeposit` is `null` when Bee can't read the current storage price from the price oracle.
+
+If you try to stake less than the minimum, `POST /stake/{amount}` returns HTTP 400 with the required amount:
+
+```json
+{
+  "code": 400,
+  "message": "insufficient stake amount",
+  "minimumDeposit": "100000000000000000"
+}
+```
+
  
 
 ### Check Status
@@ -6111,7 +6165,10 @@ curl -X GET http://localhost:1633/redistributionstate | jq
   "lastFrozenRound": 0,
   "block": 26800488,
   "reward": "10479124611072000",
-  "fees": "30166618102500000"
+  "fees": "30166618102500000",
+  "enabled": true,
+  "hasCommittedThisRound": false,
+  "hasRevealedThisRound": false
 }
 ```
 * `"minimumFunds": <integer>` - The minimum xDAI needed to play a single round of the redistribution game (the unit is 1e-18 xDAI).
@@ -6126,9 +6183,13 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 * `"block": <integer>` - Gnosis block of the current redistribution game.
 * `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](./../../references/glossary.md#plur).
 * `"fees": <string (BigInt)>` - Record of total spent in 1E-18 xDAI on all redistribution related transactions.
+* `"enabled": <bool>` - Whether the node will commit in new rounds of the redistribution game. See [Pause Redistribution Participation](#pause-redistribution-participation).
+* `"hasCommittedThisRound": <bool>` - Whether the node has committed in the current round.
+* `"hasRevealedThisRound": <bool>` - Whether the node has revealed in the current round.
 
 :::warning
 Do not shut down or update your node during an active redistribution round as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get).
+From Bee v2.8.3, you can [pause participation](#pause-redistribution-participation) to find a safe moment to shut down.
 :::
 
 You should also check the [`/status`](/api/#tag/Node-Status/paths/~1status/get) endpoint: 
@@ -6160,6 +6221,43 @@ curl -s  http://localhost:1633/status | jq
 :::info
 If your node is not operating properly such as getting frozen or not participating in any rounds, see the [troubleshooting section](#troubleshooting).
 :::
+
+### Pause Redistribution Participation
+
+Starting with Bee v2.8.3, you can stop a full node from committing in new redistribution rounds without restarting it, for example before planned maintenance.
+Send a `PATCH` request to the [`/redistributionstate`](/api/#tag/RedistributionState) endpoint:
+
+```bash
+curl -s -X PATCH http://localhost:1633/redistributionstate \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": false}' | jq
+```
+
+```json
+{
+  "enabled": false
+}
+```
+
+While participation is paused:
+
+- The node doesn't commit in new rounds, but it keeps calculating samples so that it can commit in the next commit phase after you resume.
+- If the node already committed in the current round, it still reveals and claims for that round.
+- Resuming during a commit phase that the node already skipped doesn't retry that round.
+- Restarting the node resumes participation.
+
+To find a safe moment to shut down, pause participation, then check the `/redistributionstate` endpoint:
+
+- If `hasCommittedThisRound` is `false`, you can shut down without the risk of being frozen.
+- If `hasCommittedThisRound` is `true`, wait until `hasRevealedThisRound` is `true` before you shut down.
+
+To resume participation, set `enabled` back to `true`:
+
+```bash
+curl -s -X PATCH http://localhost:1633/redistributionstate \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": true}' | jq
+```
 
 ## Partial Stake Withdrawals
 
@@ -6226,7 +6324,8 @@ curl -s  http://localhost:1633/stake | jq
 
 ```bash
 {
-  "stakedAmount": "200000000000000000"
+  "stakedAmount": "200000000000000000",
+  "minimumDeposit": "1"
 }
 ```
 
@@ -6434,13 +6533,13 @@ curl -s http://localhost:1633/health | jq
 
 To confirm a successful update, check that the value for the `"version"` field in the results corresponds to the version number of the [latest](https://github.com/ethersphere/bee/releases/latest) Bee release. 
 
-For example, if the latest version was 2.8.2, it would look like this:
+For example, if the latest version was 2.8.3, it would look like this:
 
 ```json
 {
   "status": "ok",
-  "version": "2.8.2-7e703f49",
-  "apiVersion": "8.1.1"
+  "version": "2.8.3-8e9bb914",
+  "apiVersion": "8.2.1"
 }
 ```
 
@@ -6469,7 +6568,8 @@ The expected output after staking the minimum of 10 xBZZ:
 
 ```bash
 {
-  "stakedAmount": "100000000000000000"
+  "stakedAmount": "100000000000000000",
+  "minimumDeposit": "1"
 }
 ```
 
@@ -6947,6 +7047,7 @@ Bee sure to [back up](./backups.md) your keys and [cash out your cheques](./cash
 
 :::warning
 Nodes should not be shut down or updated in the middle of a round they are playing in as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get). See [staking section](./staking.md) for more information on staking and troubleshooting.
+From Bee v2.8.3, you can [pause redistribution participation](./staking.md#pause-redistribution-participation) to find a safe moment to shut down.
 :::
 
 ## Version compatibility and upgrade path
@@ -6957,17 +7058,29 @@ The minimum supported version is currently **v2.8.0**, the release that introduc
 When upgrading across a breaking protocol change, do not skip the release that introduced it.
 Upgrade *through* that version so any one-time data migrations run while they still exist in the code, since Bee removes old migration and compatibility code once a version is no longer supported.
 
-Bee v2.8.2 is **non-disruptive for nodes already on v2.8.0 or v2.8.1**: it makes no breaking p2p protocol changes, so you can upgrade in place using the steps below.
+Bee v2.8.3 is **non-disruptive for nodes already on v2.8.0, v2.8.1, or v2.8.2**: it makes no breaking p2p protocol changes, so you can upgrade in place using the steps below.
 
 :::warning
 **If you are running Bee v2.6.0 or older:** Bee v2.8.1 removed the last of the v2.6.0 backward-compatibility code, so you cannot upgrade directly to v2.8.1 or later.
-Either upgrade stepwise (**v2.6.0 → v2.8.0 → v2.8.2**) so the data migrations run, or reinstall the node fresh on v2.8.2.
+Either upgrade stepwise (**v2.6.0 → v2.8.0 → v2.8.3**) so the data migrations run, or reinstall the node fresh on v2.8.3.
 :::
 
 :::info
-If you have tracing enabled, note that Bee v2.8.2 replaces Jaeger/OpenTracing with OpenTelemetry (OTLP export).
+If you are upgrading from v2.8.1 or older with tracing enabled, note that Bee v2.8.2 replaced Jaeger/OpenTracing with OpenTelemetry (OTLP export).
 Point `tracing-endpoint` at an OTLP-capable collector before upgrading, and review the new tracing options in the [v2.8.2 release notes](https://github.com/ethersphere/bee/releases/tag/v2.8.2).
 With tracing disabled, nothing changes.
+:::
+
+:::info
+Bee v2.8.3 includes these changes that may affect your setup:
+
+- **One-time reserve migration:** On first start, full nodes re-verify stored chunks that are not content-addressed and remove any that are invalid.
+- **ACT on `/chunks` and `/soc`:** These endpoints no longer accept the `Swarm-Act` header. Use `/bzz` or `/bytes` for ACT uploads (see [Access Control](./../../develop/access-control.md)).
+- **Connection metrics:** `bee_libp2p_created_connection_count` and `bee_libp2p_handled_connection_count` now have `transport` and `public` labels. Update dashboards that use `count(...)` on these metrics to use `sum by (...)` instead.
+- **Gas limit fallback:** The `gas-limit-fallback` default has increased from 500000 to 900000.
+- **Postage sync:** The new [`postage-sync-block-range`](./configuration.md#postage-sync-block-range) option limits each postage log request to 1000 blocks by default.
+
+See the [v2.8.3 release notes](https://github.com/ethersphere/bee/releases/tag/v2.8.3) for the full list of changes.
 :::
 
 ### Ubuntu / Debian 
@@ -7210,6 +7323,13 @@ This is guide contains a detailed explanation of how to use the ACT feature, but
 :::
 
 In this section we'll provide information on how to use the **swarm-cli** to upload, download data with ACT or update the grantee list. 
+
+:::warning
+ACT is not supported on the `/chunks` and `/soc` endpoints.
+As of Bee v2.8.3, these endpoints no longer accept the `Swarm-Act` header, because ACT never protected data correctly on them.
+To upload content with ACT, use the `/bzz` or `/bytes` endpoint.
+If you uploaded data to `/chunks` or `/soc` with ACT on an earlier Bee version, don't rely on it being access-controlled, and re-upload it through `/bzz` or `/bytes`.
+:::
 
 ## Upload
 
@@ -10016,8 +10136,7 @@ This architecture scales to hundreds of feeds and can represent complex data str
 ### Developer Tools
 
 - [ethersphere/create-swarm-app ↗](https://github.com/ethersphere/create-swarm-app) — Boilerplate for building Swarm apps with JavaScript
-- [Cafe137/fdp-play ↗](https://github.com/Cafe137/fdp-play) — Docker-based local Bee cluster and FDP dev environment
-- [Cafe137/pss-gsoc-learning-material ↗](https://github.com/Cafe137/pss-gsoc-learning-material) — Learning material for PSS and GSOC primitives
+- [fairDataSociety/fdp-play ↗](https://github.com/fairDataSociety/fdp-play) — Docker-based local Bee cluster and FDP dev environment
 - [examples/dynamic-content ↗](https://github.com/ethersphere/examples/tree/main/dynamic-content) — Content addressing and feeds, introduction example
 - [examples/filesystem ↗](https://github.com/ethersphere/examples/tree/main/filesystem) — Filesystem-style operations using bee-js
 - [agazso/swarm-cid-converter ↗](https://github.com/agazso/swarm-cid-converter) — Convert Swarm hashes or links to CID and vice versa
@@ -11446,6 +11565,53 @@ The `Bee.gsocSubscribe` method is used by the service node to establish a WebSoc
 2. A WebSocket connection is opened to subscribe to update events for this GSOC address.
 3. Incoming messages are processed by the `handler` function.
 4. The function returns a `GsocSubscription` object with a `cancel` method to terminate the subscription.
+
+## Subscribe with the Bee API
+
+You can also subscribe to a GSOC address directly through the `/gsoc/subscribe/{address}` WebSocket endpoint.
+Bee sends each incoming GSOC message as one binary WebSocket message.
+
+Starting with Bee v2.8.3, two options control what each message contains.
+Set them as request headers, or as query parameters for clients that can't set headers, such as a browser `WebSocket`.
+If both are set, the query parameter takes precedence.
+
+| Option | Description |
+|---|---|
+| `swarm-soc-fields` | Comma-separated list of SOC fields to include in each message, in the given order. Defaults to `payload`. |
+| `swarm-cache-wrapped-chunk` | When `true`, Bee caches the chunk wrapped in each incoming SOC, so you can retrieve it through the `/bytes` endpoint by its `wrappedAddress`. This is useful when the wrapped chunk is the root chunk of content larger than 4 KB. |
+
+Bee concatenates the requested fields in the order you list them:
+
+| Field | Size (bytes) |
+|---|---|
+| `address` | 32 |
+| `recoveredPubKey` | 33 (compressed public key) |
+| `identifier` | 32 |
+| `signature` | 65 |
+| `wrappedAddress` | 32 |
+| `span` | 8 |
+| `payload` | Up to 4096 |
+
+`payload` is the only field with a variable length, so list it last to read the other fields at fixed offsets.
+For example, this browser subscription receives the identifier followed by the payload:
+
+```js
+const ws = new WebSocket(
+  "ws://localhost:1633/gsoc/subscribe/<GSOC_ADDRESS>?swarm-soc-fields=identifier,payload"
+)
+ws.binaryType = "arraybuffer"
+
+ws.onmessage = (event) => {
+  const bytes = new Uint8Array(event.data)
+  const identifier = bytes.slice(0, 32)
+  const payload = bytes.slice(32)
+}
+```
+
+:::info
+Bee buffers up to 256 pending messages per subscription.
+If your client reads messages more slowly than they arrive, Bee discards the oldest pending messages in favor of the newest ones.
+:::
 
 ## Example Scripts
 

@@ -305,7 +305,10 @@ curl -s http://localhost:1633/redistributionstate | jq
   "block": 32354719,
   "reward": "1804537795127017472",
   "fees": "592679945236926714",
-  "isHealthy": true
+  "isHealthy": true,
+  "enabled": true,
+  "hasCommittedThisRound": false,
+  "hasRevealedThisRound": false
 }
 ```
 
@@ -324,6 +327,9 @@ curl -s http://localhost:1633/redistributionstate | jq
 * `"reward"` - The total all-time reward in PLUR earned by your node.
 * `"fees"` - The total amount in fees paid by your node denominated in xDAI wei.
 * `"isHealthy"` - a check of whether your node’s storage radius is the same as the most common radius from among its peer nodes
+* `"enabled"` - Whether your node will commit in new rounds of the redistribution game. From Bee v2.8.3, you can pause and resume participation with a `PATCH` request to this endpoint (see [Pause Redistribution Participation](./staking.md#pause-redistribution-participation)).
+* `"hasCommittedThisRound"` - Whether your node has committed in the current round. If this is `false`, you can shut down your node without the risk of being frozen.
+* `"hasRevealedThisRound"` - Whether your node has revealed in the current round. After your node commits, it must reveal before it's safe to shut down.
 
 ### _/reservestate_
 
@@ -583,8 +589,8 @@ curl -s http://localhost:1633/health | jq
 ```json
 {
   "status": "ok",
-  "version": "2.8.2-7e703f49",
-  "apiVersion": "8.1.1"
+  "version": "2.8.3-8e9bb914",
+  "apiVersion": "8.2.1"
 }
 ```
 
@@ -601,6 +607,13 @@ This is guide contains a detailed explanation of how to use the ACT feature, but
 :::
 
 In this section we'll provide information on how to use the **swarm-cli** to upload, download data with ACT or update the grantee list. 
+
+:::warning
+ACT is not supported on the `/chunks` and `/soc` endpoints.
+As of Bee v2.8.3, these endpoints no longer accept the `Swarm-Act` header, because ACT never protected data correctly on them.
+To upload content with ACT, use the `/bzz` or `/bytes` endpoint.
+If you uploaded data to `/chunks` or `/soc` with ACT on an earlier Bee version, don't rely on it being access-controlled, and re-upload it through `/bzz` or `/bytes`.
+:::
 
 ## Upload
 
@@ -2523,8 +2536,7 @@ This architecture scales to hundreds of feeds and can represent complex data str
 ### Developer Tools
 
 - [ethersphere/create-swarm-app ↗](https://github.com/ethersphere/create-swarm-app) — Boilerplate for building Swarm apps with JavaScript
-- [Cafe137/fdp-play ↗](https://github.com/Cafe137/fdp-play) — Docker-based local Bee cluster and FDP dev environment
-- [Cafe137/pss-gsoc-learning-material ↗](https://github.com/Cafe137/pss-gsoc-learning-material) — Learning material for PSS and GSOC primitives
+- [fairDataSociety/fdp-play ↗](https://github.com/fairDataSociety/fdp-play) — Docker-based local Bee cluster and FDP dev environment
 - [examples/dynamic-content ↗](https://github.com/ethersphere/examples/tree/main/dynamic-content) — Content addressing and feeds, introduction example
 - [examples/filesystem ↗](https://github.com/ethersphere/examples/tree/main/filesystem) — Filesystem-style operations using bee-js
 - [agazso/swarm-cid-converter ↗](https://github.com/agazso/swarm-cid-converter) — Convert Swarm hashes or links to CID and vice versa
@@ -3797,6 +3809,53 @@ The `Bee.gsocSubscribe` method is used by the service node to establish a WebSoc
 2. A WebSocket connection is opened to subscribe to update events for this GSOC address.
 3. Incoming messages are processed by the `handler` function.
 4. The function returns a `GsocSubscription` object with a `cancel` method to terminate the subscription.
+
+## Subscribe with the Bee API
+
+You can also subscribe to a GSOC address directly through the `/gsoc/subscribe/{address}` WebSocket endpoint.
+Bee sends each incoming GSOC message as one binary WebSocket message.
+
+Starting with Bee v2.8.3, two options control what each message contains.
+Set them as request headers, or as query parameters for clients that can't set headers, such as a browser `WebSocket`.
+If both are set, the query parameter takes precedence.
+
+| Option | Description |
+|---|---|
+| `swarm-soc-fields` | Comma-separated list of SOC fields to include in each message, in the given order. Defaults to `payload`. |
+| `swarm-cache-wrapped-chunk` | When `true`, Bee caches the chunk wrapped in each incoming SOC, so you can retrieve it through the `/bytes` endpoint by its `wrappedAddress`. This is useful when the wrapped chunk is the root chunk of content larger than 4 KB. |
+
+Bee concatenates the requested fields in the order you list them:
+
+| Field | Size (bytes) |
+|---|---|
+| `address` | 32 |
+| `recoveredPubKey` | 33 (compressed public key) |
+| `identifier` | 32 |
+| `signature` | 65 |
+| `wrappedAddress` | 32 |
+| `span` | 8 |
+| `payload` | Up to 4096 |
+
+`payload` is the only field with a variable length, so list it last to read the other fields at fixed offsets.
+For example, this browser subscription receives the identifier followed by the payload:
+
+```js
+const ws = new WebSocket(
+  "ws://localhost:1633/gsoc/subscribe/<GSOC_ADDRESS>?swarm-soc-fields=identifier,payload"
+)
+ws.binaryType = "arraybuffer"
+
+ws.onmessage = (event) => {
+  const bytes = new Uint8Array(event.data)
+  const identifier = bytes.slice(0, 32)
+  const payload = bytes.slice(32)
+}
+```
+
+:::info
+Bee buffers up to 256 pending messages per subscription.
+If your client reads messages more slowly than they arrive, Bee discards the oldest pending messages in favor of the newest ones.
+:::
 
 ## Example Scripts
 
