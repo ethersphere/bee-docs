@@ -560,8 +560,8 @@ For example, if the latest version was 2.8.3, it would look like this:
 ```json
 {
   "status": "ok",
-  "version": "2.8.3-7e703f49",
-  "apiVersion": "8.1.1"
+  "version": "2.8.3-8e9bb914",
+  "apiVersion": "8.2.1"
 }
 ```
 
