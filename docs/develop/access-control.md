@@ -11,6 +11,13 @@ This is guide contains a detailed explanation of how to use the ACT feature, but
 
 In this section we'll provide information on how to use the **swarm-cli** to upload, download data with ACT or update the grantee list. 
 
+:::warning
+ACT is not supported on the `/chunks` and `/soc` endpoints.
+As of Bee v2.8.3, these endpoints no longer accept the `Swarm-Act` header, because ACT never protected data correctly on them.
+To upload content with ACT, use the `/bzz` or `/bytes` endpoint.
+If you uploaded data to `/chunks` or `/soc` with ACT on an earlier Bee version, don't rely on it being access-controlled, and re-upload it through `/bzz` or `/bytes`.
+:::
+
 ## Upload
 
 Uploading data without ACT to the network remains unchanged.

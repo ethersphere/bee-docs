@@ -98,8 +98,7 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 ### Developer Tools
 
 - [ethersphere/create-swarm-app ↗](https://github.com/ethersphere/create-swarm-app) — Boilerplate for building Swarm apps with JavaScript
-- [Cafe137/fdp-play ↗](https://github.com/Cafe137/fdp-play) — Docker-based local Bee cluster and FDP dev environment
-- [Cafe137/pss-gsoc-learning-material ↗](https://github.com/Cafe137/pss-gsoc-learning-material) — Learning material for PSS and GSOC primitives
+- [fairDataSociety/fdp-play ↗](https://github.com/fairDataSociety/fdp-play) — Docker-based local Bee cluster and FDP dev environment
 - [examples/dynamic-content ↗](https://github.com/ethersphere/examples/tree/main/dynamic-content) — Content addressing and feeds, introduction example
 - [examples/filesystem ↗](https://github.com/ethersphere/examples/tree/main/filesystem) — Filesystem-style operations using bee-js
 - [agazso/swarm-cid-converter ↗](https://github.com/agazso/swarm-cid-converter) — Convert Swarm hashes or links to CID and vice versa

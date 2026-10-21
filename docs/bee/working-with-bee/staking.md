@@ -129,6 +129,35 @@ Only stake your xBZZ if you intend to participate as a full node, as withdrawals
 - A [high-performance RPC endpoint](./configuration.md#setting-blockchain-rpc-endpoint) connection to Gnosis Chain.
 - A minimum of 10 xBZZ to be used as ***non-refundable*** stake (the requirement is increased if [reserve doubling](./staking.md#reserve-doubling) is used).
 
+### Minimum Deposit
+
+Starting with Bee v2.8.3, the [`GET /stake`](/api/#tag/Staking/paths/~1stake/get) endpoint also returns `minimumDeposit`, the smallest amount in [PLUR](./../../references/glossary.md#plur) that your node can deposit as its next stake:
+
+```bash
+curl -s http://localhost:1633/stake | jq
+```
+
+```json
+{
+  "stakedAmount": "100000000000000000",
+  "minimumDeposit": "1"
+}
+```
+
+- For a node's first deposit, the minimum is 10 xBZZ, or 20 xBZZ with [reserve doubling](#reserve-doubling).
+- For later deposits, the minimum is 1 PLUR, unless your node needs more to keep its committed stake from decreasing after the storage price has increased, or to meet the 20 xBZZ total with reserve doubling.
+- `minimumDeposit` is `null` when Bee can't read the current storage price from the price oracle.
+
+If you try to stake less than the minimum, `POST /stake/{amount}` returns HTTP 400 with the required amount:
+
+```json
+{
+  "code": 400,
+  "message": "insufficient stake amount",
+  "minimumDeposit": "100000000000000000"
+}
+```
+
  
 
 ### Check Status
@@ -152,7 +181,10 @@ curl -X GET http://localhost:1633/redistributionstate | jq
   "lastFrozenRound": 0,
   "block": 26800488,
   "reward": "10479124611072000",
-  "fees": "30166618102500000"
+  "fees": "30166618102500000",
+  "enabled": true,
+  "hasCommittedThisRound": false,
+  "hasRevealedThisRound": false
 }
 ```
 * `"minimumFunds": <integer>` - The minimum xDAI needed to play a single round of the redistribution game (the unit is 1e-18 xDAI).
@@ -167,10 +199,14 @@ curl -X GET http://localhost:1633/redistributionstate | jq
 * `"block": <integer>` - Gnosis block of the current redistribution game.
 * `"reward": <string (BigInt)>` - Record of total reward received in [PLUR](./../../references/glossary.md#plur).
 * `"fees": <string (BigInt)>` - Record of total spent in 1E-18 xDAI on all redistribution related transactions.
+* `"enabled": <bool>` - Whether the node will commit in new rounds of the redistribution game. See [Pause Redistribution Participation](#pause-redistribution-participation).
+* `"hasCommittedThisRound": <bool>` - Whether the node has committed in the current round.
+* `"hasRevealedThisRound": <bool>` - Whether the node has revealed in the current round.
 
 
 :::warning
 Do not shut down or update your node during an active redistribution round as it may cause them to lose out on winnings or become frozen. To see if your node is playing the current round, check if `lastPlayedRound` equals `round` in the output from the [`/redistributionstate` endpoint](/api/#tag/RedistributionState/paths/~1redistributionstate/get).
+From Bee v2.8.3, you can [pause participation](#pause-redistribution-participation) to find a safe moment to shut down.
 :::
 
 You should also check the [`/status`](/api/#tag/Node-Status/paths/~1status/get) endpoint: 
@@ -202,6 +238,43 @@ curl -s  http://localhost:1633/status | jq
 :::info
 If your node is not operating properly such as getting frozen or not participating in any rounds, see the [troubleshooting section](#troubleshooting).
 :::
+
+### Pause Redistribution Participation
+
+Starting with Bee v2.8.3, you can stop a full node from committing in new redistribution rounds without restarting it, for example before planned maintenance.
+Send a `PATCH` request to the [`/redistributionstate`](/api/#tag/RedistributionState) endpoint:
+
+```bash
+curl -s -X PATCH http://localhost:1633/redistributionstate \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": false}' | jq
+```
+
+```json
+{
+  "enabled": false
+}
+```
+
+While participation is paused:
+
+- The node doesn't commit in new rounds, but it keeps calculating samples so that it can commit in the next commit phase after you resume.
+- If the node already committed in the current round, it still reveals and claims for that round.
+- Resuming during a commit phase that the node already skipped doesn't retry that round.
+- Restarting the node resumes participation.
+
+To find a safe moment to shut down, pause participation, then check the `/redistributionstate` endpoint:
+
+- If `hasCommittedThisRound` is `false`, you can shut down without the risk of being frozen.
+- If `hasCommittedThisRound` is `true`, wait until `hasRevealedThisRound` is `true` before you shut down.
+
+To resume participation, set `enabled` back to `true`:
+
+```bash
+curl -s -X PATCH http://localhost:1633/redistributionstate \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": true}' | jq
+```
 
 
 ## Partial Stake Withdrawals
@@ -269,7 +342,8 @@ curl -s  http://localhost:1633/stake | jq
 
 ```bash
 {
-  "stakedAmount": "200000000000000000"
+  "stakedAmount": "200000000000000000",
+  "minimumDeposit": "1"
 }
 ```
 
@@ -481,13 +555,13 @@ curl -s http://localhost:1633/health | jq
 
 To confirm a successful update, check that the value for the `"version"` field in the results corresponds to the version number of the [latest](https://github.com/ethersphere/bee/releases/latest) Bee release. 
 
-For example, if the latest version was 2.8.2, it would look like this:
+For example, if the latest version was 2.8.3, it would look like this:
 
 ```json
 {
   "status": "ok",
-  "version": "2.8.2-7e703f49",
-  "apiVersion": "8.1.1"
+  "version": "2.8.3-8e9bb914",
+  "apiVersion": "8.2.1"
 }
 ```
 
@@ -517,7 +591,8 @@ The expected output after staking the minimum of 10 xBZZ:
 
 ```bash
 {
-  "stakedAmount": "100000000000000000"
+  "stakedAmount": "100000000000000000",
+  "minimumDeposit": "1"
 }
 ```
 

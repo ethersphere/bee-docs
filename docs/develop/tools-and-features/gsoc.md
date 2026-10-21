@@ -79,6 +79,53 @@ The `Bee.gsocSubscribe` method is used by the service node to establish a WebSoc
 3. Incoming messages are processed by the `handler` function.
 4. The function returns a `GsocSubscription` object with a `cancel` method to terminate the subscription.
 
+## Subscribe with the Bee API
+
+You can also subscribe to a GSOC address directly through the <a href="/api/#tag/GSOC" target="_blank" rel="noopener noreferrer">`/gsoc/subscribe/{address}`</a> WebSocket endpoint.
+Bee sends each incoming GSOC message as one binary WebSocket message.
+
+Starting with Bee v2.8.3, two options control what each message contains.
+Set them as request headers, or as query parameters for clients that can't set headers, such as a browser `WebSocket`.
+If both are set, the query parameter takes precedence.
+
+| Option | Description |
+|---|---|
+| `swarm-soc-fields` | Comma-separated list of SOC fields to include in each message, in the given order. Defaults to `payload`. |
+| `swarm-cache-wrapped-chunk` | When `true`, Bee caches the chunk wrapped in each incoming SOC, so you can retrieve it through the `/bytes` endpoint by its `wrappedAddress`. This is useful when the wrapped chunk is the root chunk of content larger than 4 KB. |
+
+Bee concatenates the requested fields in the order you list them:
+
+| Field | Size (bytes) |
+|---|---|
+| `address` | 32 |
+| `recoveredPubKey` | 33 (compressed public key) |
+| `identifier` | 32 |
+| `signature` | 65 |
+| `wrappedAddress` | 32 |
+| `span` | 8 |
+| `payload` | Up to 4096 |
+
+`payload` is the only field with a variable length, so list it last to read the other fields at fixed offsets.
+For example, this browser subscription receives the identifier followed by the payload:
+
+```js
+const ws = new WebSocket(
+  "ws://localhost:1633/gsoc/subscribe/<GSOC_ADDRESS>?swarm-soc-fields=identifier,payload"
+)
+ws.binaryType = "arraybuffer"
+
+ws.onmessage = (event) => {
+  const bytes = new Uint8Array(event.data)
+  const identifier = bytes.slice(0, 32)
+  const payload = bytes.slice(32)
+}
+```
+
+:::info
+Bee buffers up to 256 pending messages per subscription.
+If your client reads messages more slowly than they arrive, Bee discards the oldest pending messages in favor of the newest ones.
+:::
+
 ## Example Scripts
 
 The service node and writer node scripts below are a minimalistic example of how to use `bee-js` to set up a service node to listen for GSOC messages, and a writer node to send GSOC messages.

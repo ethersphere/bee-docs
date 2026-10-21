@@ -81,7 +81,7 @@ Flags:
       --db-open-files-limit uint                 number of open files allowed by database (default 200)
       --db-write-buffer-size uint                size of the database write buffer in bytes (default 33554432)
       --full-node                                cause the node to start in full mode
-      --gas-limit-fallback uint                  gas limit fallback when estimation fails for contract transactions (default 500000)
+      --gas-limit-fallback uint                  gas limit fallback when estimation fails for contract transactions (default 900000)
   -h, --help                                     help for printconfig
       --mainnet                                  triggers connect to main net bootnodes. (default true)
       --minimum-gas-tip-cap uint                 minimum gas tip cap in wei for transactions, 0 means use suggested gas tip cap
@@ -101,6 +101,7 @@ Flags:
       --payment-tolerance-percent int            excess debt above payment threshold in percentages where you disconnect from your peer (default 25)
       --postage-stamp-address string             postage stamp contract address
       --postage-stamp-start-block uint           postage stamp contract start block number
+      --postage-sync-block-range uint            maximum number of blocks per eth_getLogs request when syncing postage contract events (default 1000)
       --pprof-mutex                              enable pprof mutex profile
       --pprof-profile                            enable pprof block profile
       --price-oracle-address string              price oracle contract address
@@ -217,7 +218,7 @@ db-write-buffer-size: "33554432"
 # cause the node to start in full mode
 full-node: false
 # gas limit fallback when estimation fails for contract transactions
-gas-limit-fallback: "500000"
+gas-limit-fallback: "900000"
 # help for printconfig
 help: false
 # triggers connect to main net bootnodes.
@@ -256,6 +257,8 @@ payment-tolerance-percent: 25
 postage-stamp-address: ""
 # postage stamp contract start block number
 postage-stamp-start-block: "0"
+# maximum number of blocks per eth_getLogs request when syncing postage contract events
+postage-sync-block-range: "1000"
 # enable pprof mutex profile
 pprof-mutex: false
 # enable pprof block profile
@@ -617,6 +620,22 @@ block-sync-interval: 10
 
 The equivalent flag is `--block-sync-interval` and the environment variable is `BEE_BLOCK_SYNC_INTERVAL`. 
 This is especially useful for operators on paid or rate-limited RPC providers who want to lower request volume.
+
+### Postage sync block range
+
+Bee syncs postage stamp contract events by requesting logs from your RPC endpoint in fixed block ranges.
+Starting with Bee v2.8.3, the `postage-sync-block-range` option sets the maximum number of blocks in each `eth_getLogs` request:
+
+```yaml
+# bee.yaml
+postage-sync-block-range: 1000
+```
+
+- The default is `1000`, which works with RPC endpoints that limit log requests to 1000 blocks, such as Nethermind 2.0.0 and later with default settings.
+- If your RPC endpoint allows wider ranges, a higher value lets your node catch up with the chain in fewer requests.
+- `0` falls back to the default.
+
+The equivalent flag is `--postage-sync-block-range` and the environment variable is `BEE_POSTAGE_SYNC_BLOCK_RANGE`.
 
 ## SIMD hashing (Optional)
 
