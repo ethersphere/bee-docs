@@ -28,14 +28,16 @@ npm run check:links -- --mode live --site-domain docs.ethswarm.org
 
 Node >=20, npm >=9.6 (see `.nvmrc` / `package.json` engines).
 
-There is **no test suite and no linter** — validation is the build, the `llms.txt` validator (runs in `prebuild`), and the link checker.
+There is **no test suite and no linter** — validation is the build, the OpenAPI spec and `llms.txt` validators (run in `prebuild`), and the link checker.
 
 ## Build pipeline gotchas
 
-The `prebuild` npm hook runs automatically before `build` and does three things, in order:
-1. Copies `openapi/Swarm.yaml` → `static/openapi.yaml`.
-2. `scripts/fetch-awesome-swarm.mjs` — fetches external content at build time.
-3. `scripts/validate-llms-txt.mjs` — validates `static/llms.txt` coverage (informational, **always exit 0**, never blocks the build).
+The `prebuild` npm hook runs automatically before `build` and does these things, in order:
+1. `scripts/bundle-openapi.mjs` — bundles `openapi/Swarm.yaml` + `SwarmCommon.yaml` into a single self-contained `static/openapi.yaml`.
+2. `scripts/validate-openapi-spec.mjs` — checks every `$ref` in `static/openapi.yaml` resolves; **exits 1 and blocks the build** if not.
+3. Copies `static/.well-known/agent-card.json` → `static/.well-known/agent.json`.
+4. `scripts/fetch-awesome-swarm.mjs` and `scripts/fetch-cheatsheets.mjs` — fetch external content at build time.
+5. `scripts/validate-llms-txt.mjs` — validates `static/llms.txt` coverage (informational, **always exit 0**, never blocks the build).
 
 `onBrokenLinks: 'warn'` — broken internal links warn rather than fail the build. Use the link checker to catch them.
 

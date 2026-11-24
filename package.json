@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node -e \"require('fs').copyFileSync('openapi/Swarm.yaml', 'static/openapi.yaml')\" && node scripts/fetch-awesome-swarm.mjs && node scripts/fetch-cheatsheets.mjs && node scripts/validate-llms-txt.mjs",
+    "prebuild": "node scripts/bundle-openapi.mjs && node scripts/validate-openapi-spec.mjs && node -e \"require('fs').copyFileSync('static/.well-known/agent-card.json','static/.well-known/agent.json')\" && node scripts/fetch-awesome-swarm.mjs && node scripts/fetch-cheatsheets.mjs && node scripts/validate-llms-txt.mjs",
     "build": "docusaurus build",
     "build:quiet": "cross-env NODE_OPTIONS=\"--disable-warning=DEP0040 --disable-warning=DEP0169\" docusaurus build",
     "swizzle": "docusaurus swizzle",
@@ -21,6 +21,7 @@
     "@docusaurus/preset-classic": "^3.9.2",
     "@docusaurus/theme-mermaid": "^3.9.2",
     "@mdx-js/react": "^3.1.0",
+    "@redocly/openapi-core": "1.16.0",
     "@saucelabs/theme-github-codeblock": "^0.3.0",
     "babel-plugin-styled-components": "^2.1.4",
     "clsx": "^2.1.1",
@@ -32,7 +33,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.3",
-    "redocusaurus": "^2.2.1",
+    "redocusaurus": "^2.5.2",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "yaml": "^2.8.2"
