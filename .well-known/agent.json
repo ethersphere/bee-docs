@@ -1,0 +1,142 @@
+{
+  "name": "Ethereum Swarm Storage Agent",
+  "description": "Decentralized storage agent powered by Ethereum Swarm. Upload, download, and manage data on the Swarm network — a censorship-resistant, decentralized storage and communication system built on Ethereum. Supports raw data, files, folders, mutable feeds, and postage stamp lifecycle management via the swarm-mcp toolset.",
+  "url": "https://docs.ethswarm.org",
+  "provider": {
+    "organization": "Ethersphere",
+    "url": "https://www.ethswarm.org"
+  },
+  "version": "0.1.0",
+  "documentationUrl": "https://docs.ethswarm.org",
+  "mcpServerUrl": "https://github.com/ethersphere/swarm-mcp",
+  "llmsTxtUrl": "https://docs.ethswarm.org/llms.txt",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["application/json"],
+  "defaultOutputModes": ["application/json"],
+  "skills": [
+    {
+      "id": "upload-data",
+      "name": "Upload Data",
+      "description": "Upload text data to Swarm. Returns an immutable content-addressed reference hash. Optional: redundancyLevel (0-4) for fault tolerance, postageBatchId to specify a pre-purchased stamp.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "upload"],
+      "examples": [
+        "Store this text on Swarm",
+        "Upload data to decentralized storage"
+      ]
+    },
+    {
+      "id": "download-data",
+      "name": "Download Data",
+      "description": "Download immutable data from Swarm using a content-addressed reference hash. Returns the original text data stored at that address.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "download"],
+      "examples": [
+        "Retrieve data from Swarm by reference hash",
+        "Download content from decentralized storage"
+      ]
+    },
+    {
+      "id": "upload-file",
+      "name": "Upload File",
+      "description": "Upload a file to Swarm from base64-encoded content or a local file path. Optional: redundancyLevel (0-4) for fault tolerance, postageBatchId. Returns a Swarm reference hash.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "upload", "files"],
+      "examples": [
+        "Upload this file to Swarm",
+        "Store a file on decentralized storage"
+      ]
+    },
+    {
+      "id": "upload-folder",
+      "name": "Upload Folder",
+      "description": "Upload an entire folder to Swarm. Requires a local folder path. Optional: redundancyLevel (0-4), postageBatchId. Returns a Swarm reference hash for the folder manifest.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "upload", "files"],
+      "examples": [
+        "Upload this directory to Swarm",
+        "Store a folder on decentralized storage"
+      ]
+    },
+    {
+      "id": "download-files",
+      "name": "Download Files",
+      "description": "Download files or folders from Swarm using a reference hash. Prioritized over download-data for unknown data types. Optional: filePath for local destination.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "download", "files"],
+      "examples": [
+        "Download files from this Swarm reference",
+        "Retrieve a folder from decentralized storage"
+      ]
+    },
+    {
+      "id": "update-feed",
+      "name": "Update Feed",
+      "description": "Update a mutable Swarm feed with new data for a given topic. Feeds provide mutable pointers to immutable content, enabling updatable resources on Swarm. Requires data and memoryTopic. Optional: postageBatchId.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "feeds", "mutable"],
+      "examples": [
+        "Update my Swarm feed with new content",
+        "Write to a mutable feed topic"
+      ]
+    },
+    {
+      "id": "read-feed",
+      "name": "Read Feed",
+      "description": "Retrieve the latest data from a Swarm feed by topic. Optionally specify an owner Ethereum address to read another account's feed.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "feeds"],
+      "examples": [
+        "Read the latest data from my Swarm feed",
+        "Get the current value of a feed topic"
+      ]
+    },
+    {
+      "id": "create-postage-stamp",
+      "name": "Create Postage Stamp",
+      "description": "Buy a postage stamp (storage voucher) based on required storage size in MB and duration (e.g. '1d', '1w', '1month'). Postage stamps are required to upload data to Swarm. Optional: label for human-readable identification.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "postage", "payments"],
+      "examples": [
+        "Buy a postage stamp for 100 MB lasting 1 month",
+        "Create a storage voucher for Swarm uploads"
+      ]
+    },
+    {
+      "id": "get-postage-stamp",
+      "name": "Get Postage Stamp",
+      "description": "Retrieve details of a specific postage stamp by its batch ID, including remaining capacity and expiry information.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "postage"],
+      "examples": [
+        "Check the status of my postage stamp",
+        "Get details for this batch ID"
+      ]
+    },
+    {
+      "id": "list-postage-stamps",
+      "name": "List Postage Stamps",
+      "description": "List available postage stamps with optional filtering. Options: leastUsed (sort order), limit (max results), minUsage/maxUsage (percentage filters).",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "postage"],
+      "examples": [
+        "Show my available postage stamps",
+        "List stamps with less than 50% usage"
+      ]
+    },
+    {
+      "id": "extend-postage-stamp",
+      "name": "Extend Postage Stamp",
+      "description": "Increase the duration or storage capacity of an existing postage stamp by batch ID. Specify additional size in MB and/or additional duration.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "postage", "payments"],
+      "examples": [
+        "Extend my postage stamp by 1 week",
+        "Add 50 MB to this batch"
+      ]
+    },
+    {
+      "id": "query-upload-progress",
+      "name": "Query Upload Progress",
+      "description": "Check the upload progress of a deferred upload using a tag ID returned by upload_file or upload_folder operations. Used for monitoring large uploads that exceed the 5 MB sync threshold.",
+      "tags": ["decentralized-storage", "ethereum", "swarm", "upload", "monitoring"],
+      "examples": [
+        "Check the progress of my upload",
+        "Query upload status by tag ID"
+      ]
+    }
+  ],
+  "supportsAuthenticatedExtendedCard": false
+}
