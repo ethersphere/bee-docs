@@ -85,6 +85,7 @@
   --sw-accent-hover: #cf5304;
   --sw-accent-pressed: #b84a03;
   --sw-green-name: #4e6b23;
+  --sw-light-horizon: #636b65;
 
   /* Admonitions (docs only). */
   --sw-status-note: #636b65;
@@ -117,6 +118,7 @@ html[data-theme='dark'] {
   --sw-accent-hover: #f78b3d;
   --sw-accent-pressed: #f79c5a;
   --sw-green-name: #a5d367;
+  --sw-light-horizon: #d2d9d4;
 
   --sw-status-note: #6f7872;
   --sw-status-tip: #a5d367;
@@ -519,7 +521,13 @@ a:hover.navbar__link,
 code {
   border: 0;
   background-color: var(--sw-bg-surface-hover);
-  color: var(--sw-text-primary);
+  /* Green names things (flags, files, commands), as on the website. */
+  color: var(--sw-green-name);
+}
+
+pre code,
+.theme-code-block code {
+  color: inherit;
 }
 
 pre code {
@@ -632,33 +640,6 @@ table th {
 .theme-admonition a:hover,
 .theme-admonition a:focus {
   color: var(--ifm-link-hover-color);
-}
-
-/* ---- footer ---- */
-
-/* The footer is `style: 'dark'` in the config, which sets its own colours; point them at the tokens. */
-.footer,
-.footer--dark {
-  --ifm-footer-background-color: var(--sw-bg-chrome);
-  --ifm-footer-color: var(--sw-text-secondary);
-  --ifm-footer-link-color: var(--sw-text-secondary);
-  --ifm-footer-link-hover-color: var(--sw-text-primary);
-  --ifm-footer-title-color: var(--sw-text-muted);
-  border-top: 1px solid var(--sw-line-default);
-}
-
-.footer__title {
-  font-family: var(--sw-font-mono);
-  font-weight: 500;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.footer__copyright {
-  font-family: var(--sw-font-mono);
-  font-size: 0.85rem;
-  color: var(--sw-text-muted);
 }
 
 /* ---- search modal (Algolia DocSearch) ----
@@ -894,4 +875,30 @@ html[data-has-hydrated='true'] .redocusaurus {
 .menu__list-item-collapsible,
 .navbar-sidebar__back {
   border-radius: 0;
+}
+
+/* ---- green: eyebrows and the current place, as on the website ---- */
+
+/* Breadcrumbs are the page's eyebrow: mono, uppercase, the current page in green. */
+.breadcrumbs__link {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  padding-left: 0;
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  background: transparent;
+  color: var(--sw-green-name);
+}
+
+/* The current page in the sidebar and the current section in the table of contents. */
+.theme-doc-sidebar-item-link .menu__link--active {
+  box-shadow: inset 2px 0 0 var(--sw-green-name);
+}
+
+.table-of-contents__link--active {
+  box-shadow: -1px 0 0 var(--sw-green-name);
+  margin-left: -1rem;
+  padding-left: 1rem;
 }

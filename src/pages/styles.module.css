@@ -57,11 +57,31 @@
   padding: 28px 24px;
 }
 
+.eyebrow,
+.cardLabel {
+  font-family: var(--sw-font-mono);
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sw-green-name);
+}
+
+.eyebrow {
+  text-align: center;
+  margin: 0 0 1rem;
+}
+
+.cardLabel {
+  margin: 24px 0 0;
+}
+
 .buttonTitle {
   font-family: var(--sw-font-display);
   font-weight: 500;
   font-size: 1.5rem;
-  margin-top: 20px;
+  margin-top: 8px;
   color: var(--sw-text-primary);
 }
 

@@ -1,0 +1,172 @@
+/* Footer, after the ethswarm.org footer. Tokens (--sw-*) are defined in src/css/custom.css. */
+
+.footer {
+  background: var(--sw-bg-chrome);
+  color: var(--sw-text-secondary);
+  font-family: var(--sw-font-sans);
+}
+
+/* The tapering rule that sits above the footer on every page of the website. */
+.horizonRule {
+  height: 1.5px;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--sw-light-horizon) 35%, transparent) 50%,
+    color-mix(in srgb, var(--sw-light-horizon) 95%, transparent)
+  );
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+}
+
+.identity {
+  max-width: 26rem;
+}
+
+.logoLink {
+  display: inline-block;
+}
+
+.logo {
+  display: block;
+  height: 28px;
+  width: 108px;
+}
+
+.mission {
+  margin: 0.75rem 0 0;
+  line-height: 1.7;
+}
+
+.inline,
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 1.1rem 0 0;
+}
+
+.meta {
+  margin-top: 0.6rem;
+  gap: 12px;
+  font-family: var(--sw-font-mono);
+  font-size: 0.85rem;
+  color: var(--sw-text-muted);
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.columns {
+  display: flex;
+  gap: 5rem;
+}
+
+.columnTitle {
+  margin: 0;
+  font-family: var(--sw-font-mono);
+  font-weight: 400;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--sw-text-muted);
+}
+
+.list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.list li + li {
+  margin-top: 0.15rem;
+}
+
+.link,
+.metaLink {
+  display: inline-block;
+  padding: 0.25rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.link:hover,
+.metaLink:hover {
+  color: var(--sw-text-primary);
+  text-decoration: none;
+}
+
+.newsletter {
+  width: 15.5rem;
+}
+
+.signup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  height: 2.6rem;
+  margin-top: 1rem;
+  padding-right: 0.5rem;
+  border-bottom: 1px solid var(--sw-line-strong);
+  color: var(--sw-text-primary);
+  text-decoration: none;
+}
+
+.signup:hover {
+  color: var(--sw-text-primary);
+  text-decoration: none;
+  border-bottom-color: var(--sw-light-edge);
+}
+
+.arrow {
+  color: var(--sw-accent);
+}
+
+.signup:hover .arrow {
+  color: var(--sw-accent-hover);
+}
+
+.note {
+  margin: 0.4rem 0 0;
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: var(--sw-text-muted);
+}
+
+@media (max-width: 996px) {
+  .inner {
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 3.5rem 1.5rem 2.5rem;
+  }
+  .columns {
+    flex-wrap: wrap;
+    gap: 2.5rem 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .columns {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .newsletter {
+    width: 100%;
+    max-width: 15.5rem;
+  }
+}

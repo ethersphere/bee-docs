@@ -345,32 +345,7 @@ export default {
         { href: 'https://github.com/ethersphere/bee', position: 'right', className: 'header-github-link', 'aria-label': 'GitHub repository' },
       ],
     },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Swarm Foundation',
-          items: [{ label: 'Homepage', to: 'https://ethswarm.org' }],
-        },
-        {
-          title: 'Community',
-          items: [
-            { label: 'Discord', href: 'https://discord.gg/wdghaQsGq5' },
-            { label: 'Mattermost', href: 'https://beehive.ethswarm.org/' },
-            { label: 'Reddit', href: 'https://www.reddit.com/r/ethswarm' },
-            { label: 'Twitter', href: 'https://twitter.com/ethswarm' },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            { label: 'Blog', href: 'https://blog.ethswarm.org/' },
-            { label: 'GitHub', href: 'https://github.com/ethersphere/bee' },
-          ],
-        },
-      ],
-      copyright: `Copyleft © ${new Date().getFullYear()}.`,
-    },
+    // The footer is src/theme/Footer (it follows the ethswarm.org footer); no footer config here.
     algolia: {
       appId: "UAJRQL15I8",
       apiKey: "7660a0b9a0f5aff5abd6c285b57f1e45",

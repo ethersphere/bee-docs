@@ -24,6 +24,7 @@ function Home() {
         <meta name="twitter:card" content="summary_large_image" />      
       </Head>
       <div className={styles.titleContainer}>
+        <p className={styles.eyebrow}>Documentation</p>
         <h1 className={styles.mainTitle}>Swarm Documentation</h1>
         <p className={styles.subTitle}>Official documentation of the decentralised data storage and distribution protocol built to power the next generation of censorship-resistant, unstoppable, serverless dapps.</p>
       </div>
@@ -32,6 +33,7 @@ function Home() {
           <div className={styles.sectionButtonInner}>
             <img className={styles.sectionImageLearnDark} src="img/learn-dark.svg"></img>
             <img className={styles.sectionImageLearnLight} src="img/learn-light.svg"></img>
+            <p className={styles.cardLabel}>Concepts</p>
             <h3 className={styles.buttonTitle}>Learn about Swarm</h3>
             <p className={styles.description}>Get to know more about the Swarm's decentralised data storage and distribution technology.</p>
           </div>
@@ -40,6 +42,7 @@ function Home() {
           <div className={styles.sectionButtonInner}>
             <img className={styles.sectionImageDesktopDark} src="img/desktop-dark.svg"></img>
             <img className={styles.sectionImageDesktopLight} src="img/desktop-light.svg"></img>
+            <p className={styles.cardLabel}>Desktop app</p>
             <h3 className={styles.buttonTitle}>Use Swarm Desktop</h3>
             <p className={styles.description}>Install the Swarm Desktop client to quickly spin up a Bee node and start interacting with the Swarm network.</p>
           </div>
@@ -48,6 +51,7 @@ function Home() {
           <div className={styles.sectionButtonInner}>
             <img className={styles.sectionImageDevelopDark} src="img/bee-dark.svg"></img>
             <img className={styles.sectionImageDevelopLight} src="img/bee-light.svg"></img>            
+            <p className={styles.cardLabel}>Node operators</p>
             <h3 className={styles.buttonTitle}>Run a Bee Node</h3>
             <p className={styles.description}>Operate a Bee node to connect with other peers all over the world to become part of Swarm network.</p>
           </div>
@@ -56,6 +60,7 @@ function Home() {
           <div className={styles.sectionButtonInner}>
             <img className={styles.sectionImageDevelopDark} src="img/develop-dark.svg"></img>
             <img className={styles.sectionImageDevelopLight} src="img/develop-light.svg"></img>
+            <p className={styles.cardLabel}>Developers</p>
             <h3 className={styles.buttonTitle}>Develop on Swarm</h3>
             <p className={styles.description}>Swarm empowers developers to create and host decentralised dapps, NFT meta-data, media files, and much more!</p>
           </div>
