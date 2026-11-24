@@ -2,11 +2,12 @@
 // from https://docs.ethswarm.org/openapi.yaml.
 //
 // Why this exists: Swarm.yaml keeps every schema, parameter, header and response
-// in a sibling file (SwarmCommon.yaml) and references it with relative $refs. The
-// Redoc page at /api/ dereferences those at build time from the openapi/ directory,
-// so it renders correctly even when the *published* file cannot be dereferenced at
-// all. That failure is invisible over HTTP — the spec still returns 200 — so only a
-// build-time check catches it.
+// in a sibling file (SwarmCommon.yaml) and references it with relative $refs.
+// scripts/bundle-openapi.mjs inlines those so the published file is
+// self-contained. The Redoc page at /api/ resolves the refs on its own from the
+// openapi/ directory, so it renders correctly even when the *published* file
+// cannot be dereferenced at all. That failure is invisible over HTTP — the spec
+// still returns 200 — so only a build-time check catches it.
 //
 // Exits 1 on an unresolvable $ref. Unlike validate-llms-txt.mjs this blocks the
 // build, because a spec that no OpenAPI client can dereference is broken output,
@@ -67,7 +68,7 @@ function collectRefs(node, trail = '', found = []) {
 }
 
 if (!existsSync(SPEC)) {
-  console.error(`✗ ${SPEC} not found — the prebuild copy step did not run.`);
+  console.error(`✗ ${SPEC} not found — scripts/bundle-openapi.mjs did not run.`);
   process.exit(1);
 }
 
@@ -104,8 +105,8 @@ if (failures.length) {
   for (const f of unique.slice(0, 20)) console.error(`   ${f}`);
   if (unique.length > 20) console.error(`   … and ${unique.length - 20} more`);
   console.error(
-    `\nEvery file referenced by static/openapi.yaml must be copied into static/ ` +
-      `by the prebuild step, or the published spec cannot be dereferenced.`
+    `\nstatic/openapi.yaml must be self-contained: scripts/bundle-openapi.mjs ` +
+      `should inline every external $ref, or the published spec cannot be dereferenced.`
   );
   process.exit(1);
 }
