@@ -492,46 +492,46 @@ function FetchPriceComponent() {
           <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
             <thead>
               <tr>
-                <th style={{ textAlign: 'left', padding: '8px', border: '1px solid' }}>Field</th>
-                <th style={{ textAlign: 'left', padding: '8px', border: '1px solid' }}>Value</th>
+                <th style={{ textAlign: 'left', padding: '8px', border: '1px solid var(--sw-line-default)' }}>Field</th>
+                <th style={{ textAlign: 'left', padding: '8px', border: '1px solid var(--sw-line-default)' }}>Value</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Time</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{convertedTime} hours</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Time</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{convertedTime} hours</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Volume</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{`${volume} ${volumeUnit}`}</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Volume</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{`${volume} ${volumeUnit}`}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Encryption</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{isEncrypted ? 'Yes' : 'No'}</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Encryption</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{isEncrypted ? 'Yes' : 'No'}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Erasure Coding</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{erasureLevelLabels[erasureLevel]}</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Erasure Coding</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{erasureLevelLabels[erasureLevel]}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Suggested Minimum Amount</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{amount + 10} PLUR</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Suggested Minimum Amount</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{amount + 10} PLUR</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Suggested Safe Depth</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{`${depth} (for an `}<a href="/docs/concepts/incentives/postage-stamps#effective-utilisation-table">effective volume</a>{` of ${getEffectiveVolumeLabel(depth)})`}</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Suggested Safe Depth</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{`${depth} (for an `}<a href="/docs/concepts/incentives/postage-stamps#effective-utilisation-table">effective volume</a>{` of ${getEffectiveVolumeLabel(depth)})`}</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Suggested Minimum Depth</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{minimumDepth} (see <a href="/docs/concepts/incentives/postage-stamps#effective-utilisation-table">batch utilisation</a> - may require <a href="#dilute-your-batch">dilution</a>)</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Suggested Minimum Depth</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{minimumDepth} (see <a href="/docs/concepts/incentives/postage-stamps#effective-utilisation-table">batch utilisation</a> - may require <a href="#dilute-your-batch">dilution</a>)</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Batch Cost for Safe Depth</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{storageCost} xBZZ</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Batch Cost for Safe Depth</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{storageCost} xBZZ</td>
               </tr>
               <tr>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>Batch Cost for Minimum Depth</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{minimumDepthStorageCost} xBZZ</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>Batch Cost for Minimum Depth</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{minimumDepthStorageCost} xBZZ</td>
               </tr>
             </tbody>
           </table>

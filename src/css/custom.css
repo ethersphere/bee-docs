@@ -222,27 +222,6 @@ html[data-theme='dark'] {
   --ifm-footer-title-color: var(--sw-text-muted);
 
   --docusaurus-highlighted-code-line-bg: var(--sw-bg-surface-hover);
-
-  /* Algolia DocSearch (button and modal). */
-  --docsearch-primary-color: var(--sw-accent);
-  --docsearch-text-color: var(--sw-text-primary);
-  --docsearch-muted-color: var(--sw-text-muted);
-  --docsearch-container-background: rgba(0, 0, 0, 0.7);
-  --docsearch-modal-background: var(--sw-bg-page);
-  --docsearch-modal-shadow: none;
-  --docsearch-searchbox-background: var(--sw-bg-surface);
-  --docsearch-searchbox-focus-background: var(--sw-bg-surface);
-  --docsearch-searchbox-shadow: inset 0 0 0 1px var(--sw-line-strong);
-  --docsearch-hit-background: var(--sw-bg-surface);
-  --docsearch-hit-color: var(--sw-text-secondary);
-  --docsearch-hit-shadow: none;
-  --docsearch-hit-active-color: var(--sw-text-on-accent);
-  --docsearch-highlight-color: var(--sw-accent);
-  --docsearch-footer-background: var(--sw-bg-surface);
-  --docsearch-footer-shadow: none;
-  --docsearch-key-gradient: none;
-  --docsearch-key-shadow: none;
-  --docsearch-logo-color: var(--sw-text-muted);
 }
 
 /* The docs run denser than the website body (14px, not 16px). */
@@ -682,6 +661,94 @@ table th {
   color: var(--sw-text-muted);
 }
 
+/* ---- search modal (Algolia DocSearch) ----
+ * DocSearch sets its own dark palette on <html>; setting the variables on <body> wins
+ * because the modal is a child of <body>.
+ */
+
+html[data-theme] body {
+  --docsearch-primary-color: var(--sw-accent);
+  --docsearch-soft-primary-color: var(--sw-bg-surface-hover);
+  --docsearch-focus-color: var(--sw-line-strong);
+  --docsearch-highlight-color: var(--sw-accent);
+  --docsearch-hit-highlight-color: var(--sw-bg-surface-hover);
+  --docsearch-text-color: var(--sw-text-primary);
+  --docsearch-secondary-text-color: var(--sw-text-secondary);
+  --docsearch-muted-color: var(--sw-text-muted);
+  --docsearch-muted-color-darker: var(--sw-text-muted);
+  --docsearch-subtle-color: var(--sw-line-default);
+  --docsearch-icon-color: var(--sw-text-secondary);
+  --docsearch-background-color: var(--sw-bg-page);
+  --docsearch-container-background: rgba(0, 0, 0, 0.7);
+  --docsearch-modal-background: var(--sw-bg-page);
+  --docsearch-modal-shadow: none;
+  --docsearch-searchbox-background: var(--sw-bg-surface);
+  --docsearch-searchbox-focus-background: var(--sw-bg-surface);
+  --docsearch-hit-background: var(--sw-bg-surface);
+  --docsearch-hit-color: var(--sw-text-secondary);
+  --docsearch-hit-shadow: none;
+  --docsearch-dropdown-menu-background: var(--sw-bg-page);
+  --docsearch-dropdown-menu-item-hover-background: var(--sw-bg-surface-hover);
+  --docsearch-key-background: transparent;
+  --docsearch-key-color: var(--sw-text-muted);
+  --docsearch-key-pressed-shadow: none;
+  --docsearch-footer-background: var(--sw-bg-surface);
+  --docsearch-footer-shadow: none;
+  --docsearch-logo-color: var(--sw-text-muted);
+  --docsearch-search-button-background: var(--sw-bg-surface);
+  --docsearch-search-button-text-color: var(--sw-text-secondary);
+  --docsearch-border-radius: 0;
+}
+
+.DocSearch-Footer {
+  border-top: 1px solid var(--sw-line-default);
+}
+
+/* ---- form controls inside docs pages (the calculator widgets) ---- */
+
+.theme-doc-markdown :is(input:not([type='checkbox']):not([type='radio']), select) {
+  background: var(--sw-bg-surface);
+  border: 1px solid var(--sw-line-default);
+  border-radius: 0;
+  color: var(--sw-text-primary);
+  font-family: var(--sw-font-sans);
+  font-size: 1rem;
+}
+
+.theme-doc-markdown :is(input, select):focus-visible {
+  outline: 1px solid var(--sw-light-edge);
+  outline-offset: 0;
+}
+
+.theme-doc-markdown input::placeholder {
+  color: var(--sw-text-muted);
+}
+
+.theme-doc-markdown :is(input[type='checkbox'], input[type='radio']) {
+  accent-color: var(--sw-accent);
+}
+
+.theme-doc-markdown button:not([class]) {
+  background: var(--sw-accent);
+  border: 0;
+  border-radius: 0;
+  color: var(--sw-text-on-accent);
+  font-family: var(--sw-font-sans);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.theme-doc-markdown button:not([class]):hover {
+  background: var(--sw-accent-hover);
+}
+
+/* ---- API reference (Redoc): the menu sits on the page colour in both modes ---- */
+
+.redocusaurus .menu-content {
+  background: var(--sw-bg-page) !important;
+  border-right: 1px solid var(--sw-line-default);
+}
+
 /* ---- misc ---- */
 
 .disclaimer {
@@ -819,4 +886,12 @@ html[data-has-hydrated='true'] .redocusaurus {
 .docs-doc-page .hero {
   padding: 2rem 0 !important;
   background: transparent !important;
+}
+
+/* Square sidebar rows, also in the mobile drawer. */
+.menu__link,
+.menu__caret,
+.menu__list-item-collapsible,
+.navbar-sidebar__back {
+  border-radius: 0;
 }
