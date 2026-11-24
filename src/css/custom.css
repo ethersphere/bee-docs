@@ -521,8 +521,9 @@ a:hover.navbar__link,
 code {
   border: 0;
   background-color: var(--sw-bg-surface-hover);
-  /* Green names things (flags, files, commands), as on the website. */
-  color: var(--sw-green-name);
+  /* No hue: on the website emphasis is brightness and weight, and green is kept for
+     eyebrow labels and thin left rules. */
+  color: var(--sw-text-primary);
 }
 
 pre code,
