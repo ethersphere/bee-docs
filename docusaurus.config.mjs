@@ -2,6 +2,35 @@
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+// Code block colours. The ethswarm.org design system has no syntax palette, so these are built
+// from its tokens (see src/css/custom.css): greens and greys, no orange (orange marks actions).
+const prismDark = {
+  plain: { color: '#f2f2f2', backgroundColor: '#101411' },
+  styles: [
+    { types: ['comment', 'prolog', 'doctype', 'cdata'], style: { color: '#818c85', fontStyle: 'italic' } },
+    { types: ['punctuation', 'operator'], style: { color: '#b5b5b5' } },
+    { types: ['string', 'char', 'attr-value', 'inserted', 'url'], style: { color: '#a5d367' } },
+    { types: ['number', 'boolean', 'constant', 'symbol', 'variable'], style: { color: '#def4b6' } },
+    { types: ['keyword', 'tag', 'selector', 'atrule', 'builtin', 'important'], style: { color: '#979e7c' } },
+    { types: ['property', 'attr-name', 'class-name'], style: { color: '#d2d9d4' } },
+    { types: ['function'], style: { color: '#f2f2f2' } },
+    { types: ['deleted'], style: { color: '#e5484d' } },
+  ],
+};
+const prismLight = {
+  plain: { color: '#121613', backgroundColor: '#e6e9e5' },
+  styles: [
+    { types: ['comment', 'prolog', 'doctype', 'cdata'], style: { color: '#636b65', fontStyle: 'italic' } },
+    { types: ['punctuation', 'operator'], style: { color: '#454c47' } },
+    { types: ['string', 'char', 'attr-value', 'inserted', 'url'], style: { color: '#4e6b23' } },
+    { types: ['number', 'boolean', 'constant', 'symbol', 'variable'], style: { color: '#3d5a1a' } },
+    { types: ['keyword', 'tag', 'selector', 'atrule', 'builtin', 'important'], style: { color: '#636b65' } },
+    { types: ['property', 'attr-name', 'class-name'], style: { color: '#454c47' } },
+    { types: ['function'], style: { color: '#121613' } },
+    { types: ['deleted'], style: { color: '#b42318' } },
+  ],
+};
+
 /** @type {import('@docusaurus/types').Config} */
 export default {
   title: 'Swarm Documentation',
@@ -11,7 +40,7 @@ export default {
 
   onBrokenLinks: 'warn',
   onDuplicateRoutes: 'throw',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
   organizationName: 'Swarm',
   projectName: 'bee',
 
@@ -218,7 +247,10 @@ export default {
       {
         specs: [{ spec: 'openapi/Swarm.yaml', route: '/api/' }],
         theme: {
-          primaryColor: '#1890ff',
+          primaryColor: '#e85d04',
+          primaryColorDark: '#f47a20',
+          // The request/response samples panel, dark in both modes (bg/surface).
+          theme: { rightPanel: { backgroundColor: '#101411' } },
           options: {
             requiredPropsFirst: true,
             noAutoAuth: true,
@@ -233,9 +265,11 @@ export default {
 
   themeConfig: {
     colorMode: { defaultMode: 'dark', disableSwitch: false, respectPrefersColorScheme: false },
+    prism: { theme: prismLight, darkTheme: prismDark },
+    mermaid: { theme: { light: 'neutral', dark: 'dark' } },
     navbar: {
       title: '',
-      logo: { alt: 'Swarm Logo', src: 'img/logo.svg' },
+      logo: { alt: 'Swarm', src: 'img/swarm-logo-on-light.svg', srcDark: 'img/swarm-logo-on-dark.svg' },
       items: [
         { 
           type: 'dropdown',
