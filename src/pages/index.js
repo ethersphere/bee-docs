@@ -15,7 +15,7 @@ function Home() {
     <Layout title="Welcome" description="Hello and welcome to Swarm! 🐝">
       <Head>
         <meta property="og:image" content="https://docs.ethswarm.org/img/preview-image.png" />
-        <meta property="og:image:alt" content="Front page of the Bee client docs site" />
+        <meta property="og:image:alt" content="Swarm Docs, docs.ethswarm.org" />
         <meta property="og:title" content="Home of the official Bee client docs" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://docs.ethswarm.org/"/>
