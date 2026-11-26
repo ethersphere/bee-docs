@@ -78,4 +78,4 @@ Restart Swarm Desktop and check to see if the backup was restored successfully:
 
 ### Restore Gnosis Chain Account
 
-If you only wish to access your Gnosis Chain account, you can [follow these instructions](./../bee/working-with-bee/backups.md#metamask-import) for exporting to Metamask in order to access your account.
+If you only wish to access your Gnosis Chain account, you can [follow these instructions](../bee/operate/backups.md#metamask-import) for exporting to Metamask in order to access your account.

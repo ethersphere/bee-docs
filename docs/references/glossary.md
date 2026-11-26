@@ -37,7 +37,7 @@ Overlay addresses are a Keccak256 hash of a node’s Gnosis Chain address and th
 
 ## Neighborhood
 
-[Neighborhoods](./../concepts/DISC/neighborhoods.md) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
+[Neighborhoods](../bee/how-it-works/neighborhoods.md) are nodes which are grouped together based on their overlay addresses and are responsible for storing the same chunks of data. The chunks which each neighborhood are responsible for storing are defined by the proximity order of the nodes and the chunks. 
 
 ## Sister Neighborhood
 
@@ -210,7 +210,7 @@ Sepolia is an Ethereum testnet. It is an environment where smart contracts can b
 
 A cryptocurrency faucet supplies small amounts of cryptocurrency to requestors (typically for testing purposes).
 
-Check out the [Fund Your Node](./../bee/installation/fund-your-node.md) page for more information.
+Check out the [Fund Your Node](../bee/get-started/fund-your-node.md) page for more information.
 
 
 ## RPC Endpoint

@@ -16,7 +16,7 @@ import { globalVariables } from '/src/config/globalVariables'
 A postage batch is required to upload data to Swarm. Postage stamp batches represent _right to write_ data on Swarm's [DISC (Distributed Immutable Store of Chunks)](./../../concepts/DISC/DISC.mdx). The parameters which control the duration and quantity of data that can be stored by a postage batch are `depth` and `amount`, with `depth` determining data volume that can be uploaded by the batch and `amount` determining storage duration of data uploaded with the batch. 
 
 :::info
-      The storage volume and duration are both non-deterministic. Volume is non-deterministic due to the details of how [postage stamp batch utilization](./../../concepts/incentives/postage-stamps.md#batch-utilisation) works. While duration is non-deterministic due to price changes made by the [price oracle contract](./../../concepts/incentives/price-oracle.md).
+      The storage volume and duration are both non-deterministic. Volume is non-deterministic due to the details of how [postage stamp batch utilization](./../../concepts/incentives/postage-stamps.md#batch-utilisation) works. While duration is non-deterministic due to price changes made by the [price oracle contract](../../bee/how-it-works/price-oracle.md).
 
       **Storage volume and `depth`:**
 
@@ -24,7 +24,7 @@ A postage batch is required to upload data to Swarm. Postage stamp batches repre
 
       **Storage duration and `amount`:** 
 
-      The duration of time for which a batch can store data is also non-deterministic since the price of storage is automatically adjusted over time by the [price oracle contract](./../../concepts/incentives/price-oracle.md). However, limits have been placed on how swiftly the price of storage can change, so there is no danger of a rapid change in price causing postage batches to unexpectedly expire due to a rapid increase in price. You can view a history of price changes by inspecting <a href={`https://gnosisscan.io/address/${globalVariables.priceOracleContract}#events`} target="_blank">the events emitted by the oracle contract</a>, or also through the [Swarmscan API](https://api.swarmscan.io/v1/events/storage-price-oracle/price-update). As you can see, if and when postage batch prices are updated, the updates are quite small. Still, since it is not entirely deterministic, it is important to monitor your stamp batch TTL (time to live) as it will change along with price oracle changes. You can inspect your batch's TTL using the `/stamps` endpoint of the API:
+      The duration of time for which a batch can store data is also non-deterministic since the price of storage is automatically adjusted over time by the [price oracle contract](../../bee/how-it-works/price-oracle.md). However, limits have been placed on how swiftly the price of storage can change, so there is no danger of a rapid change in price causing postage batches to unexpectedly expire due to a rapid increase in price. You can view a history of price changes by inspecting <a href={`https://gnosisscan.io/address/${globalVariables.priceOracleContract}#events`} target="_blank">the events emitted by the oracle contract</a>, or also through the [Swarmscan API](https://api.swarmscan.io/v1/events/storage-price-oracle/price-update). As you can see, if and when postage batch prices are updated, the updates are quite small. Still, since it is not entirely deterministic, it is important to monitor your stamp batch TTL (time to live) as it will change along with price oracle changes. You can inspect your batch's TTL using the `/stamps` endpoint of the API:
 
       ```bash
       root@noah-bee:~# curl -s  localhost:1633/stamps | jq
@@ -60,7 +60,7 @@ xBZZ can be obtained from a variety of different centralized and decentralized e
 
 xDAI can be obtained from a wide range of centralized and decentralized exchanges. See [this list of exchanges](https://docs.gnosischain.com/about/tokens/xdai) from the Gnosis Chain documentation to get started.
 
-You can learn more details from the [Fund Your Node](./../../bee/installation/fund-your-node.md) section.
+You can learn more details from the [Fund Your Node](../../bee/get-started/fund-your-node.md) section.
 
 ## Buying a stamp batch
 

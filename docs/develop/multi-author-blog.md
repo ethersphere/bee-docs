@@ -12,7 +12,7 @@ The key insight is that a feed entry does not have to point to HTML content — 
 
 ## Prerequisites
 
-* A running Bee node ([install guide](/docs/bee/installation/quick-start))
+* A running Bee node ([install guide](/docs/bee/get-started/quick-start))
 * A valid postage stamp batch ([how to get one](/docs/develop/tools-and-features/buy-a-stamp-batch))
 * Node.js 18+ and `@ethersphere/bee-js` installed
 * Familiarity with the [Dynamic Content](/docs/develop/dynamic-content) guide and feeds

@@ -41,10 +41,10 @@ With tracing disabled, nothing changes.
 Bee v2.8.3 includes these changes that may affect your setup:
 
 - **One-time reserve migration:** On first start, full nodes re-verify stored chunks that are not content-addressed and remove any that are invalid.
-- **ACT on `/chunks` and `/soc`:** These endpoints no longer accept the `Swarm-Act` header. Use `/bzz` or `/bytes` for ACT uploads (see [Access Control](./../../develop/access-control.md)).
+- **ACT on `/chunks` and `/soc`:** These endpoints no longer accept the `Swarm-Act` header. Use `/bzz` or `/bytes` for ACT uploads (see [Access Control](../../develop/access-control.md)).
 - **Connection metrics:** `bee_libp2p_created_connection_count` and `bee_libp2p_handled_connection_count` now have `transport` and `public` labels. Update dashboards that use `count(...)` on these metrics to use `sum by (...)` instead.
 - **Gas limit fallback:** The `gas-limit-fallback` default has increased from 500000 to 900000.
-- **Postage sync:** The new [`postage-sync-block-range`](./configuration.md#postage-sync-block-range) option limits each postage log request to 1000 blocks by default.
+- **Postage sync:** The new [`postage-sync-block-range`](../configure/configuration.md#postage-sync-block-range) option limits each postage log request to 1000 blocks by default.
 
 See the [v2.8.3 release notes](https://github.com/ethersphere/bee/releases/tag/v2.8.3) for the full list of changes.
 :::
@@ -107,7 +107,7 @@ sudo systemctl start bee
 ### Manual Installations
 
 To upgrade your manual installation, simply stop Bee, replace the Bee binary and restart.
-If you installed Bee with the [shell script](../installation/shell-script.md), you can replace the binary by running the script again with the new version's `TAG`.
+If you installed Bee with the [shell script](../install/shell-script.md), you can replace the binary by running the script again with the new version's `TAG`.
 
 ### Docker
 

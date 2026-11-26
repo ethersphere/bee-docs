@@ -8,7 +8,7 @@ In this section we cover everything a node operator needs to know about working 
 
 ## Configuration
 
-Learn how to [configure your node](./configuration.md), and the details behind all the configuration options Bee provides.
+Learn how to [configure your node](../configure/configuration.md), and the details behind all the configuration options Bee provides.
 
 ## Bee API
 
@@ -20,7 +20,7 @@ Find out where Bee stores your [logs and files](./logs-and-files.md).
 
 ## Swarm CLI
 
-You can use the [`swarm-cli`command line tool](./swarm-cli.md) to monitor your Bee's status, cash out your cheques, upload data to the swarm and more!
+You can use the [`swarm-cli`command line tool](../../develop/reference/swarm-cli.md) to monitor your Bee's status, cash out your cheques, upload data to the swarm and more!
 
 ## Cashing Out
 

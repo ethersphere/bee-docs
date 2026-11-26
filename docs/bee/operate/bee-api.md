@@ -13,20 +13,20 @@ The Bee API provides full access to all core functionalities of a Bee node, incl
 :::danger
 Make sure that your api-addr (default 1633) is never exposed to the internet. If you do not have a firewall or other security measures in place, manually setting your Bee API address from the default `1633` to `127.0.0.1:1633` is strongly recommended to prevent unauthorized access.
 
-You may also consider using the [Gateway Proxy tool](./../../develop/tools-and-features/gateway-proxy.md) to protect your node's API endpoint.
+You may also consider using the [Gateway Proxy tool](../../develop/tools-and-features/gateway-proxy.md) to protect your node's API endpoint.
 :::
 
 Detailed information about Bee API endpoints can be found in the [API reference docs](/api/).
 
 ## Interacting With the API
 
-You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](./../../develop/tools-and-features/buy-a-stamp-batch.md), [uploading and downloading](./../../develop/upload-and-download.md), [staking](./staking.md), and more.
+You can interact with the Bee API using standard HTTP requests, allowing you to programmatically access all of your Bee node's various functions such as [purchasing stamp batches](../../develop/tools-and-features/buy-a-stamp-batch.md), [uploading and downloading](../../develop/upload-and-download.md), [staking](./staking.md), and more.
 
 ### Alternatives for Working with the API
 
-For developers, the [Bee JS library](./../../develop/tools-and-features/bee-js.md) offers a more convenient way to interact with the API in a NodeJS environment.
+For developers, the [Bee JS library](../../develop/tools-and-features/bee-js.md) offers a more convenient way to interact with the API in a NodeJS environment.
 
-For many other common use cases, you may prefer to make use of the [Swarm CLI](./swarm-cli.md) tool, as it offers a convenient command line based interface for interacting with your node's API.
+For many other common use cases, you may prefer to make use of the [Swarm CLI](../../develop/reference/swarm-cli.md) tool, as it offers a convenient command line based interface for interacting with your node's API.
 
 ## Exploring Node Status
 
@@ -483,7 +483,7 @@ If your node is not operating in the correct mode, this can help you to diagnose
 
 ### _/rchash_
 
-Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/concepts/incentives/redistribution-game), and will report the amount of time it took to generate the hash. 
+Calling the `/rchash` endpoint triggers the generation of a reserve commitment hash, which is used in the [redistribution game](/docs/bee/how-it-works/redistribution-game), and will report the amount of time it took to generate the hash. 
 This is useful for getting a performance benchmark to ensure that your node's processor and disk are fast enough.
 
 <Tabs
@@ -494,7 +494,7 @@ values={[
 ]}>
 <TabItem value="swarm-cli">
 
-The [`swarm-cli`](./swarm-cli.md) command doesn't require arguments.
+The [`swarm-cli`](../../develop/reference/swarm-cli.md) command doesn't require arguments.
 It reads the node's overlay address and committed depth, and derives the anchor and depth parameters from them.
 
 ```bash

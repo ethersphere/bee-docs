@@ -43,7 +43,7 @@ If you lose the decryption key portion of the reference, the encrypted data beco
 :::
 
 :::info
-Encryption is disabled by default on all Swarm gateways to protect your data. [Install Bee on your computer](./../../bee/installation/getting-started.md) to use the encryption feature.
+Encryption is disabled by default on all Swarm gateways to protect your data. [Install Bee on your computer](../../bee/get-started/getting-started.md) to use the encryption feature.
 :::
 
 ## Encrypt and Upload a Directory
@@ -72,5 +72,5 @@ curl -OJ http://localhost:1633/bzz/f7b1a45b70ee91d3dbfd98a2a692387f24db7279a9c96
 ```
 
 :::danger
-Never use public gateways when requesting full encrypted references. The hash contains sensitive key information which should be kept private. Run [your own node](./../../bee/installation/getting-started.md) to use Bee's encryption features.
+Never use public gateways when requesting full encrypted references. The hash contains sensitive key information which should be kept private. Run [your own node](../../bee/get-started/getting-started.md) to use Bee's encryption features.
 :::

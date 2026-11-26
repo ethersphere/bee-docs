@@ -41,7 +41,7 @@ As the [libp2p](https://libp2p.io/) library meets all these requirements it has 
 
 The second part of Swarm is an overlay network with protocols powering the [Distributed Immutable Store of Chunks (DISC)](./DISC/DISC.mdx). This layer is responsible for storing and retrieving data in a decentralised and secure manner.
 
-Swarm's overlay network is built on top of the underlay transport layer and uses [Kademlia](./DISC/kademlia.mdx) overlay routing to enable efficient and scalable communication between nodes. Kademlia is a distributed hash table (DHT) algorithm that allows nodes to locate each other in the network based on their unique identifier or hash.
+Swarm's overlay network is built on top of the underlay transport layer and uses [Kademlia](../bee/how-it-works/kademlia.mdx) overlay routing to enable efficient and scalable communication between nodes. Kademlia is a distributed hash table (DHT) algorithm that allows nodes to locate each other in the network based on their unique identifier or hash.
 
 Swarm's DISC is an implementation of a Kademlia DHT optimized for storage. While the use of DHTs in distributed data storage protocols is common, for many implementations DHTs are used only for indexing file references. Swarm's DISC distinguishes itself from other implementations by instead breaking files into chunks and storing the chunks themselves directly within the DHT.
 
@@ -49,7 +49,7 @@ Each chunk has a fixed size of 4kb and is distributed across the network using t
 
 Swarm's distributed immutable storage provides several benefits, including data redundancy, tamper-proofing, and fault tolerance. Because data is stored across multiple nodes in the network, it can be retrieved even if some nodes fail or go offline. 
 
-Built on top of the overlay network is also an [incentives layer](./incentives/overview.mdx) which guarantees that node operators which share their resources with the network are fairly rewarded for their services.
+Built on top of the overlay network is also an [incentives layer](../bee/how-it-works/incentives.mdx) which guarantees that node operators which share their resources with the network are fairly rewarded for their services.
 
 ### 3. Data Access Layer
 

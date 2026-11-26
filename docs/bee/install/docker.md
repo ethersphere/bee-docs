@@ -17,7 +17,7 @@ Note that in all the examples below we map the Bee API to 127.0.0.1 (localhost),
 :::
 
 :::info
-This guide sets options using environment variables as part of the Docker startup commands such as `-e BEE_API_ADDR=":1633"`, however there are [several other methods available for configuring options](./../working-with-bee/configuration.md). 
+This guide sets options using environment variables as part of the Docker startup commands such as `-e BEE_API_ADDR=":1633"`, however there are [several other methods available for configuring options](../configure/configuration.md). 
 :::
 
 
@@ -274,11 +274,11 @@ Congratulations! You have now installed your Bee node and successfully connected
 
 ### Set Target Neighborhood
 
-When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](./set-target-neighborhood.md).
+When installing your Bee node it will automatically be assigned a neighborhood. However, when running a full node with staking there are benefits to periodically updating your node's neighborhood. Learn more about why and how to set your node's target neighborhood [here](../configure/set-target-neighborhood.md).
 
 ### Logs and monitoring
 
-Docker provides convenient built-in tools for logging and monitoring your node, which you've already encountered if you've read through earlier sections of this guide. For a more detailed guide, [refer to the section on logging](./../working-with-bee/logs-and-files.md).
+Docker provides convenient built-in tools for logging and monitoring your node, which you've already encountered if you've read through earlier sections of this guide. For a more detailed guide, [refer to the section on logging](../operate/logs-and-files.md).
 
 **Viewing node logs:**
 
@@ -322,9 +322,9 @@ Below is the output for a node which has been running for several days:
 }
 ```
 
-For a complete breakdown of this output, check out [this section in the Bee docs](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api#redistributionstate).
+For a complete breakdown of this output, check out [this section in the Bee docs](https://docs.ethswarm.org/docs/bee/operate/bee-api#redistributionstate).
 
-You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](https://docs.ethswarm.org/docs/bee/working-with-bee/bee-api), and you can find complete information about all available endpoints in [the API reference docs](https://docs.ethswarm.org/api/).
+You can read more other important endpoints for monitoring your Bee node in the [official Bee docs](https://docs.ethswarm.org/docs/bee/operate/bee-api), and you can find complete information about all available endpoints in [the API reference docs](https://docs.ethswarm.org/api/).
 
 
 **Stopping Your Node**
@@ -341,26 +341,26 @@ Replace `bee-1` with the name of your node if you've given it a different name.
 
 ## Back Up Keys
 
-Once your node is up and running, make sure to [back up your keys](./../working-with-bee/backups.md). 
+Once your node is up and running, make sure to [back up your keys](../operate/backups.md). 
 
 ## Getting help
 
 The CLI has documentation built-in. Running `bee` gives you an entry point to the documentation. Running `bee start -h` from within your Docker container or `bee start --help` will tell you how you can configure your Bee node via the command line arguments.
 
-You may also check out the [configuration guide](./../working-with-bee/configuration.md), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
+You may also check out the [configuration guide](../configure/configuration.md), or simply run your Bee terminal command with the `--help` flag, eg. `bee start --help` or `bee --help`.
 
 
 ## Next Steps to Consider
 
 
 ### Access the Swarm
-If you'd like to start uploading or downloading files to Swarm, [start here](./../../develop/introduction.md).
+If you'd like to start uploading or downloading files to Swarm, [start here](../../develop/introduction.md).
 
 ### Explore the API
-The [Bee API](./../working-with-bee/bee-api.md) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
+The [Bee API](../operate/bee-api.md) is the primary method for interacting with Bee and getting information about Bee. After installing Bee and getting it up and running, it's a good idea to start getting familiar with the API.
 
 ### Run a hive! 
-If you would like to run a hive of many Bees, check out the [hive operators](./hive.md) section for information on how to operate and monitor many Bees at once.
+If you would like to run a hive of many Bees, check out the [hive operators](../configure/hive.md) section for information on how to operate and monitor many Bees at once.
 
 ### Start building DApps on Swarm
-If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](./../../develop/introduction.md).
+If you would like to start building decentralised applications on Swarm, check out our section for [developing with Bee](../../develop/introduction.md).

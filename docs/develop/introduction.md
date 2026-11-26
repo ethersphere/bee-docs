@@ -16,7 +16,7 @@ This is the go-to starting point for web3 developers who want to build with Swar
  <div class="container">
     <ul class="hub-grid">
       <li class="hub-card">
-        <a class="hub-card__link" href="/docs/bee/installation/quick-start">
+        <a class="hub-card__link" href="/docs/bee/get-started/quick-start">
           <h3 class="hub-card__title">Install Bee</h3>
           <p class="hub-card__desc">
             Install and run a Bee node — your entry point for development on the Swarm network.
