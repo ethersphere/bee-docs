@@ -270,15 +270,15 @@ export default function DepthCalc() {
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr>
-              <th style={{ textAlign: 'left', padding: '8px', border: '1px solid' }}>Field</th>
-              <th style={{ textAlign: 'left', padding: '8px', border: '1px solid' }}>Value</th>
+              <th style={{ textAlign: 'left', padding: '8px', border: '1px solid var(--sw-line-default)' }}>Field</th>
+              <th style={{ textAlign: 'left', padding: '8px', border: '1px solid var(--sw-line-default)' }}>Value</th>
             </tr>
           </thead>
           <tbody>
             {Object.entries(details).map(([key, value]) => (
               <tr key={key}>
-                <td style={{ fontWeight: 'bold', padding: '8px', border: '1px solid' }}>{key}</td>
-                <td style={{ padding: '8px', border: '1px solid' }}>{value}</td>
+                <td style={{ fontWeight: 500, padding: '8px', border: '1px solid var(--sw-line-default)' }}>{key}</td>
+                <td style={{ padding: '8px', border: '1px solid var(--sw-line-default)' }}>{value}</td>
               </tr>
             ))}
           </tbody>

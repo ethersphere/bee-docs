@@ -191,28 +191,28 @@ export default function UploadCostCalc() {
   
 
   const styles = {
-    container: { padding: '20px', fontFamily: 'Arial', maxWidth: '650px', margin: '0 auto' }, 
+    container: { padding: '20px', maxWidth: '650px', margin: '0 auto' }, 
     title: { margin: '10px 0' },
     input: { padding: '8px', margin: '5px 0', width: '50%' },
     select: { padding: '8px', margin: '5px 0', width: '50%' },
     button: { padding: '10px 15px', margin: '10px 0', cursor: 'pointer' },
-    result: { margin: '10px 0', fontWeight: 'bold' },
+    result: { margin: '10px 0', fontWeight: 500 },
     table: {
       width: '100%',
       borderCollapse: 'collapse',
     },
     tdName: {
-      border: '1px solid #ccc',
+      border: '1px solid var(--sw-line-default)',
       padding: '4px 8px', 
       textAlign: 'left',
     },
     tdValue: {
-      border: '1px solid #ccc',
+      border: '1px solid var(--sw-line-default)',
       padding: '4px 8px', 
       textAlign: 'right',
     },
     bold: { 
-      fontWeight: 'bold',
+      fontWeight: 500,
     }
   };
   
