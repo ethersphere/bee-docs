@@ -2,7 +2,7 @@
 
 > Swarm is a decentralised storage and communication system built on the Ethereum blockchain, providing censorship-resistant infrastructure for storing data, hosting websites, and building applications.
 
-This is the documentation for [Swarm](https://www.ethswarm.org/) and its reference node implementation, [Bee](https://github.com/ethersphere/bee). Swarm splits data into 4 KB chunks, distributes them across a Kademlia-based network (DISC), and uses postage stamps (paid in xBZZ on Gnosis Chain) for storage incentives. Bee nodes expose an HTTP API on port 1633 (gateway) and 1635 (debug/admin). For the full unabridged documentation, see [llms-full.txt](https://docs.ethswarm.org/llms-full.txt).
+This is the documentation for [Swarm](https://www.ethswarm.org/) and its reference node implementation, [Bee](https://github.com/ethersphere/bee). Swarm splits data into 4 KB chunks, distributes them across a Kademlia-based network (DISC), and uses postage stamps (paid in xBZZ on Gnosis Chain) for storage incentives. Bee nodes serve their HTTP API on port 1633 (keep it private) and connect to peers on port 1634. For the full unabridged documentation, see [llms-full.txt](https://docs.ethswarm.org/llms-full.txt).
 
 - [API Reference](https://docs.ethswarm.org/api/): Interactive OpenAPI documentation for all Bee endpoints
 - [OpenAPI spec (Swarm.yaml)](https://docs.ethswarm.org/openapi.yaml): Machine-readable API definition
