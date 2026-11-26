@@ -1,6 +1,7 @@
 examples
 .docusaurus
-.claude
+.claude/*
+!.claude/skills/
 node_modules
 .DS_Store
 build
