@@ -99,9 +99,11 @@ jobs:
           # Literal substring swap of the semver. This deliberately also rewrites the
           # vX.Y.Z, bee:X.Y.Z and X.Y.Z-<hash> forms (the version is a substring of each),
           # and is safe because the old version never appears inside an unrelated number
-          # in these files. ESC_OLD escapes the dots so they match literally.
-          ESC_OLD="${OLD_VER//./\\.}"
-          sed -i "s/${ESC_OLD}/${NEW_VER}/g" "${FILES[@]}"
+          # in these files. \Q...\E matches the version literally, dots included.
+          # Lines that say when a feature arrived ("Starting with Bee vX", "From Bee vX",
+          # "Since Bee vX") are skipped: they name the release that added the feature,
+          # which stays the same when a newer release comes out.
+          perl -pi -e 'next if /(?:Starting with|From|Since) Bee v\Q$ENV{OLD_VER}\E/; s/\Q$ENV{OLD_VER}\E/$ENV{NEW_VER}/g' "${FILES[@]}"
 
       - name: Detect changes
         id: changes

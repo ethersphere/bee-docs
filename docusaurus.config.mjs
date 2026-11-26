@@ -1,6 +1,7 @@
 // docusaurus.config.mjs
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import redirects from './redirects.mjs';
 
 // Code block colours. The ethswarm.org design system has no syntax palette, so these are built
 // from its tokens (see src/css/custom.css): greens and greys, no orange (orange marks actions).
@@ -197,33 +198,7 @@ export default {
     ],
     [
       '@docusaurus/plugin-client-redirects',
-      {
-        redirects: [
-           { to: '/', from: '/docs' },
-           { to: '/docs/bee/working-with-bee/bee-api', from: '/docs/api-reference/' },
-           { to: '/docs/develop/host-your-website', from: '/docs/access-the-swarm/host-your-website' },
-           { to: '/docs/bee/working-with-bee/configuration', from: '/docs/working-with-bee/configuration' },
-           { to: '/docs/develop/tools-and-features/buy-a-stamp-batch', from: '/docs/develop/access-the-swarm/keep-your-data-alive' },
-           { to: '/docs/develop/upload-and-download', from: '/docs/develop/access-the-swarm/upload-a-directory' },
-           { to: '/docs/bee/installation/fund-your-node', from: '/docs/installation/fund-your-node' },
-           { to: '/docs/develop/tools-and-features/introduction', from: '/docs/dapps-on-swarm/introduction' },
-           { to: '/docs/develop/tools-and-features/introduction', from: '/docs/develop/dapps-on-swarm/introduction' },
-           { to: '/docs/develop/tools-and-features/bee-js', from: '/docs/develop/dapps-on-swarm/bee-js' },
-           { to: '/docs/develop/tools-and-features/chunk-types', from: '/docs/develop/dapps-on-swarm/chunk-types' },
-           { to: '/docs/develop/tools-and-features/feeds', from: '/docs/develop/dapps-on-swarm/feeds' },
-           { to: '/docs/develop/tools-and-features/pss', from: '/docs/develop/dapps-on-swarm/pss' },
-           { to: '/docs/develop/tools-and-features/bee-dev-mode', from: '/docs/develop/dapps-on-swarm/bee-dev-mode' },
-           { to: '/docs/develop/tools-and-features/starting-a-test-network', from: '/docs/develop/dapps-on-swarm/starting-a-test-network' },
-           { to: '/docs/concepts/incentives/postage-stamps', from: '/docs/learn/technology/contracts/postage-stamp' },
-           { to: '/docs/develop/introduction', from: '/docs/develop/access-the-swarm/introduction' },
-           { to: '/docs/develop/upload-and-download', from: '/docs/develop/access-the-swarm/upload-and-download' },
-           { to: '/docs/develop/host-your-website', from: '/docs/develop/access-the-swarm/host-your-website' },
-           { to: '/docs/develop/act', from: '/docs/develop/access-the-swarm/act' },
-           { to: '/docs/develop/ultra-light-nodes', from: '/docs/develop/access-the-swarm/ultra-light-nodes' },
-           { to: '/docs/develop/introduction', from: '/docs/develop/access-the-swarm' },
-           { to: '/docs/concepts/DISC/erasure-coding', from: '/docs/develop/access-the-swarm/erasure-coding' },
-        ],
-      },
+      { redirects },
     ],
   ],
 
