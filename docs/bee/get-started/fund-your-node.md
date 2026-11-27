@@ -8,10 +8,10 @@ description: Outlines xDAI and xBZZ token requirements by use case and provides 
 Bee nodes require **xDAI** (for gas fees) and **xBZZ** (for storage and bandwidth) to function properly. The amount needed depends on your node type and use case.
 
 ### xDAI is Required For:
-- **Buying Postage Stamps** ([Uploading Data](./../../develop/tools-and-features/buy-a-stamp-batch.md))
-- **Stake Management Transactions** ([Staking](./../working-with-bee/staking.md))
-- **Storage Incentives Transactions** ([Redistribution Game](./../../concepts/incentives/redistribution-game.md))
-- **Chequebook Deployment** ([Bandwidth Payments](./../../concepts/incentives/bandwidth-incentives.md))
+- **Buying Postage Stamps** ([Uploading Data](../../develop/tools-and-features/buy-a-stamp-batch.md))
+- **Stake Management Transactions** ([Staking](../operate/staking.md))
+- **Storage Incentives Transactions** ([Redistribution Game](../how-it-works/redistribution-game.md))
+- **Chequebook Deployment** ([Bandwidth Payments](../how-it-works/bandwidth-incentives.md))
 
 ### xBZZ is Required For:
 - **Buying Postage Stamps** (scales with data size and duration)

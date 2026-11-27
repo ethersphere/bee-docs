@@ -15,16 +15,16 @@ Depending on your needs you can run an ultra-light, light or full node.
 ### What are the differences between Bee node types?
 
 A bee node can be configured to run in various modes based on specific use cases and requirements.
-[See here](./working-with-bee/node-types.md#node-types-overview) for an overview of the differences.
+[See here](../get-started/node-types.md#node-types-overview) for an overview of the differences.
 
 ### What are the requirements for running a Bee node?
 
-See the [getting started section](./installation/getting-started.md#requirements) for more information about running a Bee node.
+See the [getting started section](../get-started/getting-started.md#requirements) for more information about running a Bee node.
 
 #### Full node
 
 All three node types run on ordinary consumer hardware.
-Full nodes use more disk space and bandwidth than the lighter modes and additionally need a Gnosis Chain connection and funds — see [full node specifications](./working-with-bee/node-types.md#full-node-specifications) for the current list.
+Full nodes use more disk space and bandwidth than the lighter modes and additionally need a Gnosis Chain connection and funds — see [full node specifications](../get-started/node-types.md#full-node-specifications) for the current list.
 
 ### How much bandwidth is required for each node?
 
@@ -34,11 +34,11 @@ Typically, each node requires around 10 megabits per second (Mbps) of bandwidth 
 
 Bee is compatible with Windows and a Bee `.exe` file can be found on the [`releases` page](https://github.com/ethersphere/bee/releases) of the Bee repo.  
 
-It is also possible to [build from the source](./installation/build-from-source.md).
+It is also possible to [build from the source](../install/build-from-source.md).
 
 ### How do I get the node's wallet's private key (use-case for Desktop app)?
 
-See the [backup section](./working-with-bee/backups.md) for more info.
+See the [backup section](../operate/backups.md) for more info.
 
 ### How do I import my private key to Metamask?
 
@@ -46,13 +46,13 @@ You can import the `swarm.key` json file in MetaMask using your password file or
 
 ### Where can I find my password?
 
-You can find the password in the root of your data directory. See the [backup section](./working-with-bee/backups.md) for more info.
+You can find the password in the root of your data directory. See the [backup section](../operate/backups.md) for more info.
 
 ## Connectivity
 
 ### Which p2p port does Bee use and which should I open in my router?
 
-The default p2p port for Bee is 1634, please forward this using your router and allow traffic over your firewall as necessary. Bee also supports UPnP but it is recommended you do not use this protocol as it lacks security. For more detailed information see the connectivity section in the docs. https://docs.ethswarm.org/docs/bee/installation/connectivity
+The default p2p port for Bee is 1634, please forward this using your router and allow traffic over your firewall as necessary. Bee also supports UPnP but it is recommended you do not use this protocol as it lacks security. For more detailed information see the connectivity section in the docs. https://docs.ethswarm.org/docs/bee/configure/connectivity
 
 ### How do I know if I am connected to other peers?
 
@@ -87,11 +87,11 @@ We recommend you run your own [Gnosis Node using Nethermind](https://docs.gnosis
 
 ### How can I export my private keys?
 
-See the section on [backups](./working-with-bee/backups.md) for exporting your keys.
+See the section on [backups](../operate/backups.md) for exporting your keys.
 
 ### How to import bee node address to MetaMask?
 
-1. See the [backup section](./working-with-bee/backups.md) for info on exporting keys.
+1. See the [backup section](../operate/backups.md) for info on exporting keys.
 2. Go to Metamask and click "Account 1" --> "Import Account"
 3. Choose the "Select Type" dropdown menu and choose "JSON file"
 4. Paste the password (Make sure to do this first)
@@ -123,7 +123,7 @@ Get your chequebook contract address with: `curl http://localhost:1633/chequeboo
 
 ### Where can I find documents about the cashout commands?
 
-Learn how to cash out [here](./working-with-bee/cashing-out.md).
+Learn how to cash out [here](../operate/cashing-out.md).
 
 ### When I run http://localhost:1633/chequebook/balance I get "totalBalance" and "availableBalance" what is the difference?
 
@@ -133,7 +133,7 @@ It's like what the bank thinks your balance is vs what your chequebook knows is 
 
 ### What determines the number of peers and how to influence their number? Why are there sometimes 300+ peers and sometimes 30?
 
-The number of connected peers is determined by your node as it attempts to keep the distributed Kademlia well connected. As nodes come and go in the network your peer count will go up and down. If you watch bee's output logs for "successfully connected", there should be a mix of (inbound) and (outbound) at the end of those messages. If you only get (outbound) then you may need to get your p2p port opened through your firewall and/or forwarded by your router. Check out the connectivity section in the docs https://docs.ethswarm.org/docs/bee/installation/connectivity.
+The number of connected peers is determined by your node as it attempts to keep the distributed Kademlia well connected. As nodes come and go in the network your peer count will go up and down. If you watch bee's output logs for "successfully connected", there should be a mix of (inbound) and (outbound) at the end of those messages. If you only get (outbound) then you may need to get your p2p port opened through your firewall and/or forwarded by your router. Check out the connectivity section in the docs https://docs.ethswarm.org/docs/bee/configure/connectivity.
 
 ### What is the difference between "systemctl" and "bee start"?
 

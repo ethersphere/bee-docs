@@ -167,7 +167,7 @@ For those, and for anything else not in the table, record "no rendered feature a
 |---|---|
 | `redocusaurus`, `redoc`, `@redocly/*`, `styled-components` | `/api/` renders the endpoint list |
 | `@docsearch/js`, `@docusaurus/theme-search-algolia` | search box opens and returns results (swizzled `src/theme/SearchBar`) |
-| `@docusaurus/theme-mermaid`, `mermaid` | diagrams render on `/docs/develop/contribute/protocols` |
+| `@docusaurus/theme-mermaid`, `mermaid` | diagrams render on `/docs/bee/contribute/protocols` |
 | `katex`, `rehype-katex`, `remark-math` | formulas render on `/docs/concepts/incentives/postage-stamps` |
 | `react`, `react-dom`, `@docusaurus/*` | calculators work on `/docs/develop/tools-and-features/buy-a-stamp-batch` |
 

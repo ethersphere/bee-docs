@@ -1,6 +1,6 @@
 ---
 title: Incentives Overview
-id: overview
+id: incentives
 description: Describes dual incentive mechanisms combining storage incentives for data retention and bandwidth incentives for data relay.
 ---
 
@@ -19,13 +19,13 @@ Storage incentives reward node operators for providing disk space and reliably s
 - **Price Oracle Contract** – Uses network redundancy data to determine postage stamp prices.  
 
 If you want to dig into the code, check out the [incentives contracts repo](https://github.com/ethersphere/storage-incentives)
-You can find the on-chain address for each contract within the docs [here](./../../references/smart-contracts.mdx#storage-incentives-contracts), however since the contracts there are updated manually, they may at times fall slightly behind the most recent changes. For the most up to date address for each storage incentives contract refer to the [storage incentives ABI repo](https://github.com/ethersphere/go-storage-incentives-abi/commits/master/abi/abi_mainnet.go), and you can also find past addresses of older versions of the incentives contracts by reviewing previous commits.
+You can find the on-chain address for each contract within the docs [here](../../references/smart-contracts.mdx#storage-incentives-contracts), however since the contracts there are updated manually, they may at times fall slightly behind the most recent changes. For the most up to date address for each storage incentives contract refer to the [storage incentives ABI repo](https://github.com/ethersphere/go-storage-incentives-abi/commits/master/abi/abi_mainnet.go), and you can also find past addresses of older versions of the incentives contracts by reviewing previous commits.
 
 ### Postage Stamps  
 
 Postage stamps are required to upload data to Swarm, similar to how real-world postage stamps prepay for mail delivery. Instead of being purchased individually, they are bought in batches using xBZZ through the postage stamp smart contract.  
 
-The xBZZ used to buy postage stamps is later redistributed as storage incentives. The **price oracle contract** adjusts postage stamp pricing based on network redundancy to ensure a sustainable level of storage. You can find more details about postage stamps [here](./postage-stamps.md).  
+The xBZZ used to buy postage stamps is later redistributed as storage incentives. The **price oracle contract** adjusts postage stamp pricing based on network redundancy to ensure a sustainable level of storage. You can find more details about postage stamps [here](../../concepts/incentives/postage-stamps.md).  
 
 ### Redistribution Game  
 

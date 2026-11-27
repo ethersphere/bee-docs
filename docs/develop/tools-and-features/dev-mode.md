@@ -10,7 +10,7 @@ description: Documentation for bee-factory, the recommended local Swarm developm
 The `bee dev` command is no longer available. Please use `bee-factory` for local development instead.
 :::
 
-To test against a real public network instead of a local stack, you can also run a node against the [Sepolia testnet](../../bee/working-with-bee/configuration.md#sepolia-testnet-configuration).
+To test against a real public network instead of a local stack, you can also run a node against the [Sepolia testnet](../../bee/configure/configuration.md#sepolia-testnet-configuration).
 
 ## Requirements
 

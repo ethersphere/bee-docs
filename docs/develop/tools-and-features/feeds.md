@@ -14,7 +14,7 @@ other Bees, and then update it at will.
 Although it's possible to interact with feeds directly, it can involve
 a little data juggling and crypto magic. For the easiest route, see
 [the bee-js feeds functionality](./bee-js.md) and
-[swarm-cli](./../../bee/working-with-bee/swarm-cli.md), or for the super 1337,
+[swarm-cli](../reference/swarm-cli.md), or for the super 1337,
 share your implementations in other languages in the
 [#builders](https://discord.gg/8SMCfvm3kw) channel of our
 [Discord Server](https://discord.gg/kHRyMNpw7t).
@@ -29,7 +29,7 @@ A feed is a collection of Single Owner Chunks with predicatable addresses. This 
 In order to edit a feed, you will need to sign your chunks using an
 Ethereum keypair. For the intrepid, check out the [The Book of Swarm](https://www.ethswarm.org/the-book-of-swarm-2.pdf) on precise details on how to do
 this. For the rest of us, both [bee-js](./bee-js.md)
-and [swarm-cli](./../../bee/working-with-bee/swarm-cli.md) provide facilities
+and [swarm-cli](../reference/swarm-cli.md) provide facilities
 to achieve this using JavaScript and a node-js powered command line
 tool respectively.
 

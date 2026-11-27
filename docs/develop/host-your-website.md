@@ -16,7 +16,7 @@ The example website used in this guide is in [`examples/website`](https://github
 
 ## Prerequisites
 
-* A running Bee node (either a [standard installation](./../bee/installation/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
+* A running Bee node (either a [standard installation](../bee/get-started/quick-start.md) or [Swarm Desktop](./../desktop/install.md))
 * A valid postage stamp batch
 * Node.js (18+) and `@ethersphere/bee-js` installed in your project
 * Static website files (HTML, CSS, etc.) — feel free to use the [provided example site](https://github.com/ethersphere/examples/tree/main/website)

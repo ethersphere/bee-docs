@@ -12,8 +12,8 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 
 - [What is Swarm](/docs/concepts/what-is-swarm) — Introduction to the decentralised storage network
 - [Developer introduction](/docs/develop/introduction) — Overview of building on Swarm
-- [Bee node quickstart](/docs/bee/installation/quick-start) — Get a node running in minutes
-- [Full installation guide](/docs/bee/installation/getting-started) — Step-by-step setup for all platforms
+- [Bee node quickstart](/docs/bee/get-started/quick-start) — Get a node running in minutes
+- [Full installation guide](/docs/bee/get-started/getting-started) — Step-by-step setup for all platforms
 - [Swarm papers ↗](https://papers.ethswarm.org) — Technical whitepapers and research
 - [The Book of Swarm ↗](https://docs.ethswarm.org/the-book-of-swarm.pdf) — Full technical book on Swarm's architecture and design
 - [Swarm Protocol Specification ↗](https://papers.ethswarm.org/p/swarm-protocol-spec/) — Formal spec for developers building clients or integrations
@@ -21,12 +21,12 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 ### Key Concepts
 
 - [DISC](/docs/concepts/DISC/) — How data is stored and retrieved across the network
-- [Incentives & BZZ](/docs/concepts/incentives/overview) — Economic model and token mechanics
+- [Incentives & BZZ](/docs/bee/how-it-works/incentives) — Economic model and token mechanics
 - [Postage stamps](/docs/develop/tools-and-features/buy-a-stamp-batch) — Pay for storage with stamp batches
 - [Feeds](/docs/develop/tools-and-features/feeds) — Mutable content pointers for updatable data
 - [Manifests](/docs/develop/tools-and-features/manifests) — Directory and routing structure on Swarm
 - [Chunk types](/docs/develop/tools-and-features/chunk-types) — Content-addressed and single-owner chunks
-- [Node types](/docs/bee/working-with-bee/node-types) — Full, light, and ultra-light participation levels
+- [Node types](/docs/bee/get-started/node-types) — Full, light, and ultra-light participation levels
 
 ### Developer Guides
 
@@ -84,7 +84,7 @@ description: A curated list of Swarm developer resources — docs, SDKs, example
 - [bee-js ↗](https://bee-js.ethswarm.org/docs/) — Official JavaScript / TypeScript SDK
 - [bee-js getting started ↗](https://bee-js.ethswarm.org/docs/getting-started/) — Quickstart for bee-js integration
 - [Bee HTTP API reference ↗](https://docs.ethswarm.org/api/) — Full REST API documentation
-- [swarm-cli](/docs/bee/working-with-bee/swarm-cli/) — Command-line interface for uploads, feeds, and more
+- [swarm-cli](/docs/develop/reference/swarm-cli/) — Command-line interface for uploads, feeds, and more
 - [swarm-mcp ↗](https://github.com/ethersphere/swarm-mcp) — MCP server for AI agents to read and write Swarm
 - [Swarm Actions ↗](https://github.com/ethersphere/swarm-actions) — Deploy to Swarm from GitHub CI/CD workflows
 - [Swarm Quickstart Skills ↗](https://github.com/ethersphere/swarm-quickstart-skills) — Interactive Claude Code skills for guided Swarm onboarding

@@ -4,10 +4,10 @@ id: quick-start
 description: Accelerates Bee setup with shell script installation and swarm-cli tools enabling rapid node deployment and network interaction.
 ---
 
-This guide will help you install and run a Bee [light node](./../working-with-bee/node-types.md) using the [shell script](./shell-script.md) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](./../working-with-bee/swarm-cli.md) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.
+This guide will help you install and run a Bee [light node](./node-types.md) using the [shell script](../install/shell-script.md) install method. After explaining how to install and start the node, the guide then explains how to use the [`swarm-cli` command line tool](../../develop/reference/swarm-cli.md) to find your node's address, fund your node, and fully initialize it so that it is ready interact with the network.
 
 :::tip
-A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](./../working-with-bee/node-types.md). 
+A "light" node can download and upload data from Swarm but does not share its disk space with the network and does not earn rewards. [Learn more](./node-types.md). 
 :::
 
 
@@ -168,7 +168,7 @@ If you wait too long to fund your node it may shut itself down. In that case, si
 
 ## Wait to Sync (~5 Minutes)
 
-After starting and funding a Bee light node for the first time, the node will automatically issue a [transaction](https://gnosisscan.io/tx/0xf8048c4e8020ccef842c9a901e6262e9c06d6f5926ff31bdb7dd9d7274dcf19c) on Gnosis Chain to deploy the node's [chequebook contract](./../../concepts/incentives/bandwidth-incentives.md#chequebook-contract).
+After starting and funding a Bee light node for the first time, the node will automatically issue a [transaction](https://gnosisscan.io/tx/0xf8048c4e8020ccef842c9a901e6262e9c06d6f5926ff31bdb7dd9d7274dcf19c) on Gnosis Chain to deploy the node's [chequebook contract](../how-it-works/bandwidth-incentives.md#chequebook-contract).
 
 The node then needs to sync blockchain data before it can buy a postage stamp batch. The process may take **~5 minutes** depending on your RPC provider and network speed. 
 
@@ -233,4 +233,4 @@ Total xBZZ: 0.0000000000000000
 
 ## Next Steps
 
-With your node now fully synced, you're ready start start learning how to [develop on Swarm](./../../develop/introduction.md).
+With your node now fully synced, you're ready start start learning how to [develop on Swarm](../../develop/introduction.md).

@@ -21,7 +21,7 @@ node, buying a postage stamp, uploading files, or scaffolding a dApp.
   easiest way to install is to run `/swarm` in Claude Code, which installs and starts a
   light node for you. 
   - Alternatively, check out the
-  [quick start](./../../bee/installation/quick-start.md)
+  [quick start](../../bee/get-started/quick-start.md)
 
 ## Install
 

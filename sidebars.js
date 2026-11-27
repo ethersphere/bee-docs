@@ -7,8 +7,6 @@ module.exports = {
       label: 'DISC Storage',
       items: [
         'concepts/DISC/disc',
-        'concepts/DISC/kademlia',
-        'concepts/DISC/neighborhoods',
         'concepts/DISC/erasure-coding',
       ],
       collapsed: false
@@ -17,11 +15,7 @@ module.exports = {
       type: 'category',
       label: 'Incentives',
       items: [
-        'concepts/incentives/overview',
-        'concepts/incentives/redistribution-game',
         'concepts/incentives/postage-stamps',
-        'concepts/incentives/bandwidth-incentives',
-        'concepts/incentives/price-oracle',
         
       ],
       collapsed: false
@@ -45,42 +39,85 @@ module.exports = {
   bee: [
     {
       type: 'category',
-      label: 'Installation',
+      label: 'Get started',
       items: [
-        'bee/installation/getting-started',
-        'bee/installation/quick-start',
-        'bee/installation/shell-script-install',
-        'bee/installation/docker',
-        'bee/installation/package-manager-install',
-        'bee/installation/build-from-source',
-        'bee/installation/set-target-neighborhood',
-        'bee/installation/hive',
-        'bee/installation/connectivity',
-        'bee/installation/fund-your-node',
+        'bee/get-started/getting-started',
+        'bee/get-started/quick-start',
+        'bee/get-started/node-types',
+        'bee/get-started/fund-your-node',
       ],
       collapsed: false
     },
     {
       type: 'category',
-      label: 'Working With Bee',
+      label: 'Install',
       items: [
-        'bee/working-with-bee/introduction',
-        'bee/working-with-bee/configuration',
-        'bee/working-with-bee/node-types',
-        'bee/working-with-bee/bee-api',
-        'bee/working-with-bee/logs-and-files',
-        'bee/working-with-bee/swarm-cli',
-        'bee/working-with-bee/staking',
-        'bee/working-with-bee/cashing-out',
-        'bee/working-with-bee/monitoring',
-        'bee/working-with-bee/backups',
-        'bee/working-with-bee/upgrading-bee',
-        'bee/working-with-bee/uninstalling-bee',
-        
+        'bee/install/shell-script-install',
+        'bee/install/docker',
+        'bee/install/package-manager-install',
+        'bee/install/build-from-source',
       ],
       collapsed: false
     },
-    'bee/bee-faq',
+    {
+      type: 'category',
+      label: 'Configure',
+      items: [
+        'bee/configure/configuration',
+        'bee/configure/connectivity',
+        'bee/configure/set-target-neighborhood',
+        'bee/configure/hive',
+        'bee/configure/bcrypt',
+        'bee/configure/ultra-light-nodes',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Operate',
+      items: [
+        'bee/operate/introduction',
+        'bee/operate/bee-api',
+        'bee/operate/staking',
+        'bee/operate/cashing-out',
+        'bee/operate/monitoring',
+        'bee/operate/logs-and-files',
+        'bee/operate/backups',
+        'bee/operate/upgrading-bee',
+        'bee/operate/uninstalling-bee',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'How it works',
+      items: [
+        'bee/how-it-works/kademlia',
+        'bee/how-it-works/neighborhoods',
+        'bee/how-it-works/incentives',
+        'bee/how-it-works/redistribution-game',
+        'bee/how-it-works/bandwidth-incentives',
+        'bee/how-it-works/price-oracle',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Reference',
+      items: [
+        'bee/reference/bee-faq',
+      ],
+      collapsed: false
+    },
+    {
+      type: 'category',
+      label: 'Contribute',
+      items: [
+        'bee/contribute/introduction',
+        'bee/contribute/protocols',
+      ],
+      collapsed: false
+    },
   ],
   develop: [
     {
@@ -110,6 +147,7 @@ module.exports = {
         'develop/tools-and-features/cheatsheets',
         'develop/tools-and-features/buy-a-stamp-batch',
         'develop/tools-and-features/bee-js',
+        'develop/reference/swarm-cli',
         'develop/tools-and-features/gateway-proxy',
         'develop/tools-and-features/chunk-types',
         'develop/tools-and-features/feeds',
@@ -121,15 +159,6 @@ module.exports = {
         'develop/tools-and-features/store-with-encryption',
         'develop/tools-and-features/bee-dev-mode',
         'develop/tools-and-features/starting-a-test-network',
-      ],
-      collapsed: false
-    },
-    {
-      type: 'category',
-      label: 'Contribute',
-      items: [
-        'develop/contribute/introduction',
-        'develop/contribute/protocols',
       ],
       collapsed: false
     },

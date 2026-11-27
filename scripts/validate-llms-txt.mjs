@@ -38,8 +38,8 @@ function getFrontmatterId(filePath) {
 
 /**
  * Compute the URL path segment for a doc file.
- * e.g. docs/bee/installation/shell-script.md  with id "shell-script-install"
- *   → "bee/installation/shell-script-install"
+ * e.g. docs/bee/install/shell-script.md  with id "shell-script-install"
+ *   → "bee/install/shell-script-install"
  *
  * When a file's basename matches its parent directory (case-insensitive),
  * Docusaurus treats it as a category index and serves it at the directory

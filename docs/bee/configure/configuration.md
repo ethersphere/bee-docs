@@ -378,7 +378,7 @@ brew services restart swarm-bee
 
 ## Manually generating YAML config file for *bee start*
 
-No YAML file is generated during installation when using the [shell script install method](./../installation/shell-script.md), so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
+No YAML file is generated during installation when using the [shell script install method](../install/shell-script.md), so you must generate one if you wish to use a YAML file to specify your configuration options. To do this you can use the `bee printconfig` command to print out a set of default options and save it to a new file in the default location:
 
 ```bash
 bee printconfig &> $HOME/.bee.yaml
@@ -395,7 +395,7 @@ When using `bee.yaml` with the `bee start` command, make sure to use the `--conf
 
 There are three node types which each offer varying levels of functionality - ***full***, ***light***, and ***ultra-light***. You can configure your node to run as any of these three types by setting the related options within your configuration. 
 
-For a deeper dive into each node type and its features and limitations, refer to the [Node Types](./node-types.md) page.
+For a deeper dive into each node type and its features and limitations, refer to the [Node Types](../get-started/node-types.md) page.
 
 
 ### How to Set Node Type
@@ -698,7 +698,7 @@ It was introduced in Bee v2.8.0.
 
 Swarm is all about sharing and storing chunks of data. To enable other Bees (also known as _peers_) to connect to your Bee, you must
 broadcast your public IP address in order to ensure that Bee is reachable on the correct p2p port (default `1634`). We recommend that you [manually configure your external IP and check
-connectivity](/docs/bee/installation/connectivity) to ensure your Bee is able to receive connections from other peers.
+connectivity](/docs/bee/configure/connectivity) to ensure your Bee is able to receive connections from other peers.
 
 First, determine your public IP address:
 
